@@ -21,7 +21,7 @@ import icons from '@/constant/icons';
 
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
-import MainNavLanguage from '@/components/ui/MainNavLanguage';
+import { MainNavLanguage } from '@/components/ui/MainNavLanguage';
 import Modal from '@/components/ui/Modal';
 
 // import { UserState } from '../../../interface/user';

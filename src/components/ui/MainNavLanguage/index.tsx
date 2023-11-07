@@ -46,7 +46,7 @@ export const MainNavLanguage = () => {
 					</div>
 				</div>
 				<div className='flex items-center divide-x divide-solid'>
-					<LanguageSelector />
+					{/* <LanguageSelector /> */}
 				</div>
 			</div>
 		</div>

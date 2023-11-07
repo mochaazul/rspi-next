@@ -25,7 +25,7 @@ const languageItem = [
 	}
 ];
 
-export const LanguageSelector: React.FC = () => {
+export const LanguageSelector = () => {
 
 	const [currrentLang, setCurrentLang] = useState<string>();
 	const [showLanguagePicker, setShowLanguagePicker] = useState<boolean>(false);
@@ -53,43 +53,44 @@ export const LanguageSelector: React.FC = () => {
 		window.location.reload();
 	};
 
-	return <>
-		<div className='flex items-center gap-[20px]'>
-			{ languageItem.find(item => currrentLang === item.value)?.icon }
-		</div>
-		<div className='flex items-center pl-[20px] gap-[8px] cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
-			<Text fontSize='16px' fontWeight='900' color='white'>
-				{ languageItem.find(item => currrentLang === item.value)?.label }
-			</Text>
-			<icons.LightArrowDown />
-			<div className='absolute right-[-10px] top-7'>
-				<Picker show={ showLanguagePicker }>
-					{
-						languageItem.map((item, index) => (
-							<div
-								key={ index }
-								className={ `cursor-pointer border-gray block py-4 px-4 flex justify-between items-center ${ index < languageItem.length ? '' : 'border-b' } ${ item.value === currrentLang ? 'active' : '' }` }
-								onClick={ () => onChangeLanguage(item.value) }
-							>
-								<>
-									{ item.icon }
-									<Text
-										fontSize='16px'
-										fontWeight='700'
-										lineHeight='19px'
-										text={ item.label }
-										className='flex-1'
-									/>
-								</>
-								<Icons.Check className={ `check-icon ${ item.value === currrentLang ? '' : 'hidden' }` } size={ 20 } />
-							</div>
-						))
-					}
-				</Picker>
+	return (
+		<>
+			<div className='flex items-center gap-[20px]'>
+				{ languageItem.find(item => currrentLang === item.value)?.icon }
 			</div>
-		</div>
-
-	</>;
+			<div className='flex items-center pl-[20px] gap-[8px] cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
+				<Text fontSize='16px' fontWeight='900' color='white'>
+					{ languageItem.find(item => currrentLang === item.value)?.label }
+				</Text>
+				<icons.LightArrowDown />
+				<div className='absolute right-[-10px] top-7'>
+					<Picker show={ showLanguagePicker }>
+						{
+							languageItem.map((item, index) => (
+								<div
+									key={ index }
+									className={ `cursor-pointer border-gray block py-4 px-4 flex justify-between items-center ${ index < languageItem.length ? '' : 'border-b' } ${ item.value === currrentLang ? 'active' : '' }` }
+									onClick={ () => onChangeLanguage(item.value) }
+								>
+									<>
+										{ item.icon }
+										<Text
+											fontSize='16px'
+											fontWeight='700'
+											lineHeight='19px'
+											text={ item.label }
+											className='flex-1'
+										/>
+									</>
+									<Icons.Check className={ `check-icon ${ item.value === currrentLang ? '' : 'hidden' }` } size={ 20 } />
+								</div>
+							))
+						}
+					</Picker>
+				</div>
+			</div>
+		</>
+	);
 }
 
 export default LanguageSelector;
