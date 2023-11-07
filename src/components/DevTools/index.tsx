@@ -1,8 +1,11 @@
-import Button from 'components/Button';
-import Modal from 'components/Modal';
-import Text from 'components/Text';
+"use client";
+
 import { useCallback, useEffect, useState } from 'react';
-import { persistor } from 'stores';
+
+import Button from '@/components/Button';
+import Modal from '@/components/Modal';
+import Text from '@/components/Text';
+// import { persistor } from 'stores';
 
 const DevTools = () => {
 
@@ -23,7 +26,7 @@ const DevTools = () => {
 	}, [open]);
 
 	const flushReduxPersist = () => {
-		persistor.purge();
+		// persistor.purge();
 		setOpen(false);
 	};
 
