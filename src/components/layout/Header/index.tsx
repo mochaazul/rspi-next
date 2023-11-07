@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Link from "next/link";
 
-import colors from '../../../constant/colors';
+import colors from '@/constant/colors';
 import LogoRSPI from '/public/images/logo_rspi.svg';
 import ArrowDown from '/public/images/ic/arrow_down.svg';
 import ArrowRight from '/public/images/ic/ArrowRight.svg';
@@ -23,10 +23,10 @@ import Profile from '/public/images/profile.svg';
 import Notif from '/public/images/ic/notif.svg';
 import AestheticClinic from '/public/images/aestheticClinic.png';
 
-import Text from '../../../components/ui/Text';
-import Button from '../../../components/ui/Button';
-import MainNavLanguage from '../../../components/ui/MainNavLanguage';
-import Modal from '../../../components/ui/Modal';
+import Text from '@/components/ui/Text';
+import Button from '@/components/ui/Button';
+import MainNavLanguage from '@/components/ui/MainNavLanguage';
+import Modal from '@/components/ui/Modal';
 
 // import { UserState } from '../../../interface/user';
 // import HospitalState from '../../../interface/Hospital';
@@ -145,7 +145,7 @@ export const Header: React.FC = () => {
 	return (
 		<HeaderStyle>
 			<div className='w-full'>
-				{/* <MainNavLanguage /> */}
+				<MainNavLanguage />
 				<div className={ 'xl:!px-[40px] navbar animate-slideUpToDown transition-all duration-300' }>
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
