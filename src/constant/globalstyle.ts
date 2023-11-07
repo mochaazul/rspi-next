@@ -75,7 +75,6 @@ export default createGlobalStyle`
     line-height: 17px;
   }
 
-
   @media ${ Sizes.md }{
     .md-p-0 {
       padding: 0 !important;

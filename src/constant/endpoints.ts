@@ -8,7 +8,8 @@ export const endpoints = {
 	reVerifyEmail: '/auths/request-verify',
 	pin: '/patients/pin',
 	profile: '/patients/profile',
-	otp: '/auths/validate-otp',
+	otpOld: '/auths/validate-otp',
+	otp: '/auths/otp',
 	article: '/news',
 	registerOnboard: '/patients/on-boarding',
 	findDoctor: '/find/doctor',
@@ -44,5 +45,6 @@ export const endpoints = {
 	updateEmail: '/patients/update-email',
 	changeEmail: '/auths/request-verify',
 	clinics: '/clinics/clinic-category',
+	updateAvatar: '/patients/update-profile',
 };
 export default endpoints;
