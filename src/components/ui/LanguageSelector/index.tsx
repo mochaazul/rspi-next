@@ -4,25 +4,24 @@ import React, {
 } from 'react';
 import * as Icons from 'react-feather';
 
-import Text from '../../../components/ui/Text';
-import Picker from '../../../components/ui/Picker';
+import Text from '@/components/ui/Text';
+import Picker from '@/components/ui/Picker';
 
-import IDFlag from '/public/images/ic/flag.svg';
-import ENFlag from '/public/images/ic/eng-flag.svg';
-import LightArrowDown from '/public/images/ic/lightArrowDown.svg';
+import images from '@/constant/images';
+import icons from '@/constant/icons';
 
 const languageItem = [
 	{
 		key: 'id',
 		label: 'ID',
 		value: 'idn',
-		icon: <IDFlag className='mr-[20px] h-[20px]' />
+		icon: <icons.IDFlag className='mr-[20px] h-[20px]' />
 	},
 	{
 		key: 'en',
 		label: 'EN',
 		value: 'en',
-		icon: <ENFlag className='mr-[20px] h-[20px]' />
+		icon: <icons.ENFlag className='mr-[20px] h-[20px]' />
 	}
 ];
 
@@ -36,7 +35,7 @@ export const LanguageSelector: React.FC = () => {
 			// hasLanguageSet();
 		// get language config from local storage, if null we gave it default value
 		// (which is not necesarry since it was already handled by hasLanguageSet() function)
-			// const lang = getLanguage() ?? 'idn';
+		// const lang = getLanguage() ?? 'idn';
 		// set local state language to localstorage value
 		setCurrentLang('idn');
 	}, []);
@@ -62,7 +61,7 @@ export const LanguageSelector: React.FC = () => {
 			<Text fontSize='16px' fontWeight='900' color='white'>
 				{ languageItem.find(item => currrentLang === item.value)?.label }
 			</Text>
-			<LightArrowDown />
+			<icons.LightArrowDown />
 			<div className='absolute right-[-10px] top-7'>
 				<Picker show={ showLanguagePicker }>
 					{

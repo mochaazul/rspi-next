@@ -1,6 +1,6 @@
-import colors from '../../../constant/colors';
-import LanguageSelector from '../../../components/ui/LanguageSelector';
-import Text from '../../../components/ui/Text';
+import colors from '@/constant/colors';
+import LanguageSelector from '@/components/ui/LanguageSelector';
+import Text from '@/components/ui/Text';
 
 import WhiteInstagram from '/public/images/ic/whiteInstagram.svg';
 import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';

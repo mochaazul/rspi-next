@@ -1,3 +1,5 @@
+"use-client";
+
 export const clearToken = () => {
 	return localStorage.removeItem('token');
 };
