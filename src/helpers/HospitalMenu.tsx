@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { useAppDispatch } from 'hooks';
 import { getHospitals } from 'stores/actions';
+import { initDev, initStage } from 'utils/metaPixelTrack';
 
 const payload = {
 	page: 1,
@@ -19,6 +20,11 @@ const HospitalMenu = () => {
 	const hospitalDispatch = useAppDispatch(getHospitals);
 
 	useEffect(() => {
+		if (process.env.REACT_APP_STAGE === 'dev') {
+			initDev();
+		} else if (process.env.REACT_APP_STAGE === 'stage') {
+			initStage();
+		}
 		hospitalDispatch({ queryParam: payload });
 	}, []);
 

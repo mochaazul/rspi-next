@@ -9,6 +9,31 @@ export interface UserState {
 	customMessage?: string;
 	token: string;
 	stat_msg?: string;
+	familyProfiles: FamilyProfile[];
+	userAppointmentList?: [];
+	newPasswordLoading: boolean;
+}
+export interface FamilyProfile {
+	id: number;
+	patient_code: string;
+	name: string;
+	parent_email: string;
+	email: string;
+	phone: string;
+	birthdate: string;
+	gender: string;
+	no_mr: string;
+	created_date: string;
+	updated_date: string;
+}
+
+export interface FamilyProfilePayload {
+	email: string;
+	parent_email: string;
+	phone: string;
+	birthdate: string;
+	gender: string;
+	name: string;
 }
 
 export interface UserData {
@@ -17,6 +42,8 @@ export interface UserData {
 	email?: string;
 	expired_at?: string;
 	created_date?: string;
+	medical_record: string,
+	pin_status: boolean;
 }
 export interface UserDataDetail {
 	id?: number;
@@ -54,6 +81,10 @@ export type PinType = {
 	confirm_pin: string;
 };
 
+export type CheckPinType = {
+	pin: string;
+};
+
 export type OTPType = {
 	otp: string;
 };
@@ -74,6 +105,26 @@ export type UpdatePasswordType = {
 	confirm_password: string;
 };
 
+export type ChangeEmailPayload = {
+	email: string;
+};
+
+export type NewPasswordPayload = {
+	new_password: string;
+	confirm_password: string;
+};
+
 export type UpdateAvatarType = {
 	image_url: string;
+};
+
+export type UpdateProfileType = {
+	name: string;
+	birthdate: string;
+	gender: string;
+	phone: string;
+};
+
+export type UpdateEmailType = {
+	email: string;
 };

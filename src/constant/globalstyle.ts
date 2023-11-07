@@ -90,8 +90,12 @@ export const GlobalAllTransition5ms = css`
   transition: all .5s;
 `;
 
+export const GlobalAllTransition200ms = css`
+  transition: all 200ms;
+`;
+
 export const GlobalCardShadow = css`
-	box-shadow: 5px 5px 10px rgba(53, 136, 136, 0.12);
+	box-shadow: 5px 5px 100px rgba(53, 136, 136, 0.12);
 	border-radius: 16px;
 `;
 

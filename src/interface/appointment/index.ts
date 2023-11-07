@@ -1,19 +1,17 @@
 export interface I_AppointmentPayload{
-	'slot_id': string,
-	'location': string, // clinic code
-	'time_slot': string,
-	'date': string,
-	'user_name':string, // terserah
-	'type': string, // self or other
-	'doctor_code': string,
-	'gender': string,
-	'patient_name': string,
-	'date_of_birth':string,
-	'phone':string,
-	'email':string,
-	'main_complaint':string,
-	'necessity_action':string,
-	'payment_method':string,
-	'service': string, // TEL / APP
-	'hospital_code': string
+	patient_id:string
+	patient_name:string
+	patient_gender:string
+	patient_dob:string
+	patient_phone:string
+	patient_email:string
+	book_doctor:string
+	book_location:string
+	book_date:string
+	book_time:string
+	book_slot:string
+	book_note:string
+	book_service:string
+	UserName:string
+	IpAddress:string
 }

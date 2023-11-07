@@ -10,3 +10,6 @@ export * from './eventClasses';
 export * from './Awards';
 export * from './Hospital';
 export * from './contactUs';
+export * from './footer';
+export * from './Notification';
+export * from './rootAppState';

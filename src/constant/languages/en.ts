@@ -1,4 +1,31 @@
 const en = {
+	dayName: {
+		full: {
+			monday: 'Monday',
+			tuesday: 'Tuesday',
+			wednesday: 'Wednesday',
+			thursday: 'Thursday',
+			friday: 'Friday',
+			saturday: 'Saturday',
+			sunday: 'Sunday'
+		},
+		short: {
+			monday: 'Mon',
+			tuesday: 'Tue',
+			wednesday: 'Wed',
+			thursday: 'Thu',
+			friday: 'Fri',
+			saturday: 'Sat',
+			sunday: 'Sun'
+		}
+	},
+	modalDialog: {
+		pin: {
+			header: 'Enter PIN',
+			subHeader: 'Please enter your PIN to continue.',
+			submitBtnLabel: 'Confirm'
+		}
+	},
 	validation: {
 		emailFormat: 'Invalid email format',
 		tokenValidation: {
@@ -48,12 +75,16 @@ const en = {
 					subject: 'Subject',
 					notes: 'Enter your message here...'
 				},
-				submitBtnLabel: 'Send Message'
+				submitBtnLabel: 'Send Message',
+				form: {
+					allHospitalLabel: 'All RSPI Hospitals'
+				}
 			},
 			faq: {
 				heading: 'FAQ',
 				subHeading: 'Frequently Asked Questions about our services',
 				allFaqBtnLabel: 'View All FAQs',
+				readMoreLabel: 'Read more',
 				questions: {
 					doctorSchedule: 'Where do I find out the doctors schedule in Pondok Indah Hospital?',
 					assurance: 'Can my insurance be used in Pondok Indah Hospital?',
@@ -66,6 +97,176 @@ const en = {
 				answers: {
 					doctorSchedule: 'You can find all the RS Pondok Indah doctors schedule through (link) or you can also access the schedule through RSPI Mobile (our mobile apps).',
 					assurance: 'RS Pondok Indah Group is in cooperation with various leading national and international insurance companies to ensure the ease accessing our health services. Find out the partner insurance companies we collaborate with through this link (link: perusahaan asuransi mitra).',
+					visitHours: `Every unit has its own visiting hour policy. To ensure the quiet and comfort of patients and other patients, visits are permissible only during the visiting hours and conducted by turns.
+					<div className='mt-[15px]' />
+					Visiting Hours
+					<div className='mt-[15px]' />
+					General Ward & Baby Room
+					<div className='flex'>
+						<div className='grid grid-cols-2'>
+							<div>Noon: 11 AM - 1 PM</div>
+							<div>Afternoon: 6 PM - 8 PM</div>
+						</div>
+					</div>
+					<div className='mt-[15px]' />
+					ICU, ICCU, & NICU
+					<div className='flex'>
+						<div className='grid grid-cols-2'>
+							<div>Noon: 11 AM - 12 PM</div>
+							<div>Afternoon: 6 PM - 7 PM</div>
+						</div>
+					</div>
+					Only one visitor is permitted at a time
+					Children are not allowed to be in this unit
+					<div className='mt-[15px]' />
+					Baby Intermediate Room
+					<div className='flex'>
+						<div className='grid grid-cols-2'>
+							<div>Noon: 11 AM - 1 PM</div>
+							<div>Afternoon: 6 PM - 8 PM</div>
+						</div>
+					</div>
+					Only parents are allowed to visit
+					Maximum of 2 visitors for each patient are allowed to visit at the same time`,
+					checkUp: `A comprehensive medical check-up package is available at the three branches Executive Health Check-Up of Pondok Indah Hospital Group. Variety of medical check up packages are available including those for children. Please consult with our team for a package that suits your needs. 
+					<div className='mt-[15px]' />
+					<p>For more information and make an appointment, please contact: </p>
+					Executive Health Check Up RS Pondok Indah - Pondok Indah
+					<div className='flex'>
+						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
+							<div>Information & Appointment</div>
+							<div>:</div>
+							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
+							<div>WhatsApp</div>
+							<div>:</div>
+							<div>0812-8311-2725</div>
+							<div>E-mail</div>
+							<div>:</div>
+							<div>hcupondok@rspondokindah.co.id</div>
+						</div>
+					</div>
+					<a href='#'>[link paket EHCU]</a>
+					<div className='mt-[15px]' />
+					Executive Health Check Up RS Pondok Indah - Puri Indah
+					<div className='flex'>
+						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
+							<div>Information & Appointment</div>
+							<div>:</div>
+							<div>(62-21) 2569 5252, 2569 5200 Ext. 2100</div>
+							<div>WhatsApp</div>
+							<div>:</div>
+							<div>0821-8088-7838</div>
+							<div>E-mail</div>
+							<div>:</div>
+							<div>hcupuri@rspondokindah.co.id</div>
+						</div>
+					</div>
+					<a href='#'>[link paket EHCU]</a>
+					<div className='mt-[15px]' />
+					Executive Health Check Up RS Pondok Indah - Bintaro Jaya
+					<div className='flex'>
+						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
+							<div>Information & Appointment</div>
+							<div>:</div>
+							<div>(62-21) 8082 8888 Ext. 2301/2302</div>
+							<div>WhatsApp</div>
+							<div>:</div>
+							<div>0811-9227-982</div>
+							<div>E-mail</div>
+							<div>:</div>
+							<div>hcubintaro@rspondokindah.co.id</div>
+						</div>
+					</div>
+					<a href='#'>[link paket EHCU]</a>`,
+					travelVaccine: `Pondok Indah Hospital Group has travel vaccination service. We also provide the issue of International Vaccine Certification (ICV) or popularly known as yellow card.
+					<div className='mt-[15px]' />
+					<p>For more information, please contact:</p>
+					Executive Health Check Up RS Pondok Indah - Pondok Indah
+					<div className='flex'>
+						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
+							<div>Information & Appointment:</div>
+							<div>:</div>
+							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
+							<div>WhatsApp</div>
+							<div>:</div>
+							<div>0812-8311-2725</div>
+							<div>E-mail</div>
+							<div>:</div>
+							<div>hcupondok@rspondokindah.co.id</div>
+						</div>
+					</div>
+					<div className='mt-[15px]' />
+					Executive Health Check Up RS Pondok Indah - Puri Indah
+					<div className='flex'>
+						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
+							<div>Information & Appointment:</div>
+							<div>:</div>
+							<div>(62-21) 2569 5252, 2569 5200 Ext. 2100</div>
+							<div>WhatsApp</div>
+							<div>:</div>
+							<div>0821-8088-7838</div>
+							<div>E-mail</div>
+							<div>:</div>
+							<div>hcupuri@rspondokindah.co.id</div>
+						</div>
+					</div>
+					<div className='mt-[15px]' />
+					Executive Health Check Up RS Pondok Indah - Bintaro Jaya
+					<div className='flex'>
+						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
+							<div>Information & Appointment:</div>
+							<div>:</div>
+							<div>(62-21) 8082 8888 Ext. 2301/2302</div>
+							<div>WhatsApp</div>
+							<div>:</div>
+							<div>0811-9227-982</div>
+							<div>E-mail</div>
+							<div>:</div>
+							<div>hcubintaro@rspondokindah.co.id</div>
+						</div>
+					</div>`,
+					telemedicine: `RS Pondok Indah Group has Telemedicine or teleconsultation service. Now, you can consult with our doctors through video call anywhere you are. This service uses Zoom application in your gadget, so there is no longer a need to go outside to consult with our doctors.
+					<div className='mt-[15px]' />
+					Telemedicine Pondok Indah Hospital Group Mechanism
+					<ol className='list-decimal pl-4'>
+						<li>Please ensure that you are already Pondok Indah Hospital Group&apos;s patient with medical record number</li>
+						<li>Contact Pondok Indah Hospital Group Call Centre to make a Telemedicine appointment or to check our  doctors’ schedule that provides telemedicine services</li>
+						<li>Click the <a href='#'>link</a> we send to your WhatsApp number to start the consultation session at the agreed time</li>
+						<li>Finish the administration processes that we send to your <a href='#'>email</a></li>
+						<li>This telemedicine service can only be done with self-paid system through bank transfer. We have yet to accept payment through insurance or debit/credit card</li>
+						<li style={ { color: 'red' } }>In the case of doctors prescribing medicines or requesting blood check for you, you can retrieve the medicine and conduct blood sample extraction by taking advantage of our drive-thru service at the agreed time after you finish the administration processes.We also provide medicine delivery service to specific locations</li>
+					</ol>`,
+					maternity: `Expecting the birth of your bundle of joy is a precious and special moment in every couple’s life. Cherishing this life event, Pondok Indah Hospital Group presents Maternity First, a complete and integrated maternity service, to create the best experience for welcoming your bundle of joy, start from pregnancy, during the labor, and after birth, which includes:
+					<div className='mt-[15px]' />
+
+					<ul className='list-disc pl-5'>
+						<li>Professional medical services, including obstetrics and gynecology doctor, fetomaternal consultant obgyn doctor, pediatrician, and lactation consultant</li>
+						<li>Maternity Counselor that can be contacted 24 hours via WhatsApp to answer every expecting mother’s questions during the pregnancy</li>
+						<li>The latest medical technology and facilities, such as 4D USG</li>
+						<li>Five-stars facilities in the ward, delivery room, operating room, baby room that includes NICU facilities</li>
+						<li>100% support for exclusive breastfeeding and early initiation of breastfeeding (EIB)</li>
+						<li>Maternity Classes, including pregnancy exercise class, prenatal Yoga class, and parenting class</li>
+					</ul>
+
+					<div className='mt-[15px]' />
+					<p>For more information, please contact:</p>
+					<div className='mt-[15px]' />
+					<p>RS Pondok Indah – Pondok Indah</p>
+					<p>Obstetrics and Gynecology Clinic, 3rd Floor</p>
+					<p>(021) 765 7525 Ext. 2</p>
+					<p>Maternity Counselor (WhatsApp chat only): 081388887273</p>
+
+					<div className='mt-[15px]' />
+					<p>RS Pondok Indah - Puri Indah</p>
+					<p>Obstetrics and Gynecology Clinic, 7th Floor</p>
+					<p>(021) 2569 5200 Ext. 2</p>
+					<p>Maternity Counselor (WhatsApp chat only): 081388889096</p>
+
+					<div className='mt-[15px]' />
+					<p>RS Pondok Indah – Bintaro Jaya</p>
+					<p>Obstetrics and Gynecology Clinic, 6th Floor</p>
+					<p>(021) 8082 8888 Ext. 2/6012</p>
+					<p>Maternity Counselor (WhatsApp chat only): 081295998870</p>`
 				}
 			},
 			location: {
@@ -90,6 +291,7 @@ const en = {
 							doctorName: 'All doctors',
 							hospital: 'All RSPI Branches',
 							speciality: 'Specialty',
+							date: 'Choose Preferred Date',
 						}
 					}
 				},
@@ -207,12 +409,27 @@ const en = {
 				resetBtnLabel: 'Reset Password'
 			},
 		},
+		resetEmail: {
+			heading: 'Change Email',
+			subHeading: 'Please enter your registered account data in our system',
+			resetForm: {
+				oldEmailLabel: 'Old Email',
+				oldEmailPlaceHolder: 'Please enter your old Email',
+				newEmailLabel: 'New Email',
+				newEmailPlaceHolder: 'Please enter your new Email',
+				newEmailConfirmationLabel: 'Confirm Email',
+				newEmailConfirmationPlaceholder: 'Confirm your new Email',
+				resetBtnLabel: 'Reset Email'
+			},
+		},
 		pinPage: {
 			heading: 'Create New PIN',
+			headingReset: 'Change PIN',
 			subHeading: 'Please create your 6-digit PIN',
 			notification: {
 				onSuccessMsg: 'Successfully created PIN',
-				onErrorMsg: 'Error occurred'
+				onErrorMsg: 'Error occurred',
+				onSuccessMsgUpdatePin: 'Successfully update PIN',
 			},
 			form: {
 				pinFieldLabel: 'PIN',
@@ -220,12 +437,18 @@ const en = {
 				submitBtnLabel: {
 					loading: 'Loading',
 					default: 'Save PIN'
+				},
+				changeBtnLabel: {
+					loading: 'Loading',
+					default: 'Change PIN'
 				}
 			}
 		},
 		otpVerification: {
 			heading: 'Enter Verification Code',
 			subHeading: 'Enter the code sent via SMS to your mobile number',
+			resendOtp: 'Resend OTP',
+			resendWarn: 'You have 3 request OTP attempt.',
 			form: {
 				otpFieldLabel: 'OTP',
 				submitBtnLabel: 'Submit OTP',
@@ -288,6 +511,14 @@ const en = {
 				phonePlaceholder: 'Phone Number',
 				phoneHint: 'The phone number entered should be the registered phone number in RS Pondok Indah Group',
 				birthDateLabel: 'Date of Birth',
+
+			},
+			errors: {
+				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukan sudah terdaftar',
+				mrNotFound: 'Nomor rekam medis yang Anda masukkan belum terdaftar',
+				phoneNotMatch: 'No yang Anda masukkan tidak sesuai dengan yang terdaftar di RS Pondok Indah Group',
+				dobNotMatch: 'Data yang Anda masukkan tidak sesuai dengan yang terdaftar di database RS Pondok Indah',
+				fieldIsEmpty: 'Harap masukan seluruh data'
 			},
 			submitBtnLabel: 'Save and Continue',
 			mrNotAvailableBtnLabel: 'Skip'
@@ -301,6 +532,8 @@ const en = {
 			deletePhotoLabel: 'Delete Photo',
 			choosePhotoLabel: 'Choose Photo',
 			formatPhotoLabel: 'JPG or PNG, maks size 800k',
+			profileLabel: 'Profile',
+			securitySettingLabel: 'Security Setting',
 			profileDetail: {
 				patientIdLabel: 'Patient ID',
 				lastVisitedHospitalLabel: 'Last Visited Hospital',
@@ -315,6 +548,10 @@ const en = {
 				patientMedicalNumberPlaceholder: 'Medical Record Number',
 				patientPhoneNumber: 'Phone Number',
 				patientPhoneNumberPlaceholder: 'Phone Number',
+				patientOldEmail: 'Old Email',
+				patientOldEmailPlaceHolder: 'Old Email',
+				patientNewEmail: 'New Email',
+				patientNewEmailPlaceHolder: 'New Email',
 				patientEmail: 'Email',
 				patientEmailPlaceholder: 'Email',
 			},
@@ -327,7 +564,6 @@ const en = {
 				saveBtnLabel: 'Save',
 				cancelBtnLabel: 'Cancel'
 			},
-
 		},
 		patientPortal: {
 			tabMenuLabel: [
@@ -342,28 +578,39 @@ const en = {
 					vaccineType: 'Vaccine Type',
 					vaccineName: 'Vaccine Name',
 					vaccineDate: 'Vaccination Date'
-				}
+				},
+				empty: 'You do not have any vaccine histories yet.'
 			},
 			riwayatLab: {
 				warning: 'Notes: The default PIN used to open the report file is the patient\'s date of birth in the following format -> DD/MM/YYYY',
 				tableMenuLable: {
-					labResult: 'Laboratory Test History',
+					hospital: 'Hospital',
 					date: 'Date',
-					action: 'Result',
-					viewReport: 'View Report'
-				}
+					doctor: 'Doctor',
+					viewReport: 'Download'
+				},
+				empty: 'You do not have any lab histories yet.'
+
 			},
 			riwayatKunjungan: {
 				label: {
+					didNotCome: 'Patient did not come',
+					canceledAppointment: 'Canceled',
 					doneAppointment: 'Appointment Done',
-					seeDetail: 'See Details'
-				}
+					seeDetail: 'See Details',
+					recommendDoctor: 'Would you recommend your doctor?'
+				},
+				recommendDoctorModal: {
+					header: 'Would you recommmend your doctor to your friends or family ?'
+				},
+				empty: 'You do not have any visit histories yet.'
 			},
 			jadwalKunjungan: {
 				label: {
 					queueNo: 'Queue Number',
 					activeSchedule: 'Active Appointment',
 					cancelAppointment: 'Cancel Appointment',
+					empty: 'You do not have visit data at this time',
 				}
 			}
 		},
@@ -373,7 +620,7 @@ const en = {
 				doctorName: 'Doctor Name',
 				specialty: 'Specialty',
 				doctorFound: 'Doctors Found',
-				seeDetail: ' See Details'
+				seeDetail: 'Book Appointment'
 			},
 		},
 		doctorProfile: {
@@ -383,7 +630,21 @@ const en = {
 				hospitalLabel: 'Hospital',
 				clinicLabel: 'Clinic'
 			},
-			notAvailableSchedule: 'The doctor\'s schedule is not available on the date you selected because it has reached the maximum online reservations. Please choose another available date and time below or contact our call center for further information.'
+			slotEmptyState: 'Please select a date to display available time information.',
+			notAvailableSchedule: 'The doctor\'s schedule is not available on the date you selected because it has reached the maximum online reservations. Please choose another available date and time below or contact our call center for further information.',
+			callCenter: 'Contact Call Center',
+			chooseRs: 'Choose Hospital',
+			available: 'Available',
+			limitedSlot: 'Limited Slot',
+			noSchedule: 'Not Available',
+			successTitle: 'The form has been successfully submitted!',
+			successBody: 'Your Appointment with ',
+			in: 'in',
+			at: 'at',
+			hasSuccess: 'has been success',
+			asuransiCard: 'Insurance Card Photo (Optional)',
+			asuransiCardBack: 'Upload a rear view photo',
+			asuransiCardFront: 'Upload a photo of the front view',
 		},
 		footer: {
 			visitorInfo: {

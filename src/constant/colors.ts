@@ -23,7 +23,8 @@ const colors = {
 		placeholderColor: 'rgb(164,171,181)', // For text placeholder color
 		solid: 'rgba(166, 166, 166, 1)',
 		darkOpacity: 'rgba(106, 109, 129, 1)',
-		lighterOpacity: 'rgba(240, 242, 249, 1)'
+		lighterOpacity: 'rgba(240, 242, 249, 1)',
+		darked: 'rgba(118, 131, 131, 1)'
 	},
 	red: {
 		default: 'rgba(235, 87, 87, 1)',
@@ -31,14 +32,16 @@ const colors = {
 		light: 'rgb(255, 242, 243)',
 		accent: 'rgba(211, 32, 48, 1)',
 		accentOpacity90: 'rgba(211, 32, 48, 0.1)',
+		danger: 'rgba(176, 84, 116, 1)',
 	},
 	blue: {
 		default: 'rgb(122, 166, 237)',
 		light: 'rgb(232, 236, 242)',
 		dark: 'rgb(58, 91, 135)',
 		lighter: 'rgba(96, 195, 189, 0.05)',
+		neon: 'rgba(23, 92, 211, 1)',
 	},
-	yellow: { default: 'rgb(255, 255, 0)', },
+	yellow: { default: 'rgb(255, 255, 0)', warning: 'rgba(255, 156, 0, 1)' },
 	green: {
 		default: 'rgb(0, 128, 0)',
 		accent: 'rgba(234, 255, 246, 1)',

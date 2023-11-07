@@ -51,6 +51,7 @@ module.exports = {
 		'plugin:react/recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react/jsx-runtime',
+		'next/core-web-vitals',
 	], // for Reactjs
 	ignorePatterns: 'node_modules',
 	env: { browser: true },

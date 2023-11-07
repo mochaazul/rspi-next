@@ -1,4 +1,4 @@
-import { getLanguage } from 'helpers/localStorage';
+import { getLanguage } from '../../helpers/localStorage';
 
 import id from './id';
 import en from './en';
