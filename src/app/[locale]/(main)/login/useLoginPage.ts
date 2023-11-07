@@ -8,6 +8,7 @@ import {
 } from 'helpers';
 import { LoginType, ResendEmailVerificationType, UserDataDetail } from 'interface';
 import { Languages } from 'constant';
+import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
 
 const { emailLabel, passwordLabel } = Languages.page.loginPage.form;
 
@@ -38,8 +39,8 @@ export const loginField = {
 };
 
 const useLoginPage = () => {
-	const login = useAppDispatch<LoginType>(loginAction);
-	const userDetail = useAppDispatch<UserDataDetail>(userDetailAction);
+	const login = useAppAsyncDispatch<LoginType>(loginAction);
+	const userDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
 	const onClickLogin = async ({ email, password }: LoginType) => {
 		await login({
 			payload: {

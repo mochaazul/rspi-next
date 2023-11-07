@@ -56,7 +56,11 @@ const RegisterPage = () => {
 		<RegisterPageStyle>
 			<div className='grid max-sm:grid-cols-2 grid-cols-3 max-sm:gap-0 gap-3 w-full'>
 				<div className='col-span-2'>
-					<Form className='register min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto'
+					<Form className={ `
+					p-4
+					md:p-8
+					register min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
+					` }
 						onSubmit={ async e => {
 							const { email, password, confirmPassword } = onSubmit(e);
 							await onClickRegister({
@@ -68,8 +72,8 @@ const RegisterPage = () => {
 						} }
 						autoComplete='off'
 					>
-						<div className='w-full'>
-							<Link to='/'>
+						<div className='w-full '>
+							<Link to='/' className='max-sm:hidden'>
 								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
 							</Link>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
@@ -101,7 +105,7 @@ const RegisterPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='password'
-								placeholder={ form.emailPlaceholder }
+								placeholder={ form.pasaswordPlaceholder }
 								className='w-full'
 								iconName={ getCurrentForm().password.type === 'password' ? 'EyeClosed' : 'Eye' }
 								iconPosition='right'

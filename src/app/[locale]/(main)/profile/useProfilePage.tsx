@@ -3,6 +3,7 @@ import { useAppDispatch } from 'hooks';
 import {
 	requiredRule,
 	createFieldConfig,
+	emailRule,
 } from 'helpers';
 import { ContactUsSubmitType } from 'interface/contactUs';
 
@@ -46,6 +47,41 @@ export const profileFields = {
 			requiredRule('pin'),
 		],
 		placeholder: 'PIN'
+	},
+	name: {
+		...createFieldConfig({
+			name: 'name',
+			type: 'text'
+		}),
+		validationRules: [],
+		placeholder: 'Nama'
+	},
+	gender: {
+		...createFieldConfig({
+			name: 'gender',
+			type: 'text'
+		}),
+		validationRules: [],
+		placeholder: 'Gender'
+	},
+	dob: {
+		...createFieldConfig({
+			name: 'dob',
+			type: 'text'
+		}),
+		validationRules: [],
+		placeholder: 'Date of Birth'
+	},
+	new_email: {
+		...createFieldConfig({
+			name: 'new_email',
+			type: 'email'
+		}),
+		validationRules: [
+			requiredRule('email'),
+			emailRule(),
+		],
+		placeholder: 'New Email'
 	},
 };
 

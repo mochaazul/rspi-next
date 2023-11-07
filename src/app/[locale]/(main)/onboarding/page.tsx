@@ -6,86 +6,99 @@ import {
 	Button, Text, Form, NotificationPanel, Spinner, Checkbox
 } from 'components';
 import { UserState } from 'interface';
-import { useTypedSelector } from 'hooks';
+import { useAppDispatch, useTypedSelector } from 'hooks';
 import { PropsTypes as NotificationPanelTypes } from 'components/NotificationPanel';
 
 import useRegisterOnboard from './useRegisterOnboard';
 import { RegisterOnboardStyle, Box } from './style';
+import { clearError } from 'stores/actions';
+import PrivacyPolicyModal from 'components/PrivacyPolicyModal';
 
-const { heading, mrNotAvailableBtnLabel, subHeading, submitBtnLabel, form } = Languages.page.registerOnboard;
+const { heading, mrNotAvailableBtnLabel, subHeading, submitBtnLabel, form, errors } = Languages.page.registerOnboard;
 
 const RegisterOnboard = () => {
 	const navigate = useNavigate();
 	const {
 		onClickRegisterOnboard,
 		loadingOnBoarding,
-		registerOnboardField
+		registerOnboardField,
+		setModalVisible,
+		modalVisible
 	} = useRegisterOnboard();
 	const {
-		registeredValue, isFormValid, onSubmit
+		registeredValue, isFormValid, onSubmit, getCurrentForm
 	} = Form.useForm({ fields: registerOnboardField });
 	const { loading: loadingUser, error: errorUser } = useTypedSelector<UserState>('user');
-
-	const [notifVisible, setNotifVisible] = useState(false);
-	const [notifMode, setnotif] = useState<NotificationPanelTypes['mode']>('error');
+	const removeError = useAppDispatch(clearError);
 
 	useEffect(() => {
-		setnotif(!!errorUser.stat_msg ? 'error' : 'success');
-	}, [errorUser]);
+		removeError();
+	}, []);
 
-	const handleNotifError = () => {
-		return <Text
-			fontType={ null }
-			fontSize='14px'
-			fontWeight='500'
-			text={ errorUser.stat_msg ? errorUser.stat_msg : 'Berhasil' }
-			color={ colors.red.default }
-		/>;
-	};
+	const handleNotifError = (msg: string) => {
+		let mappedMsg = '';
+		switch (msg.toLowerCase()) {
+			case 'mr not found':
+				mappedMsg = errors.mrNotFound;
+				break;
+			case 'phone number not match':
+				mappedMsg = errors.phoneNotMatch;
+				break;
 
-	const handleNotifOnClose = () => {
-		setNotifVisible(false);
-	};
+			case 'sent otp failed':
+				mappedMsg = 'Sent OTP Failed';
+				break;
+			case 'field undefined':
+				mappedMsg = errors.fieldIsEmpty;
+				break;
+			case 'mr and dob not match':
+				mappedMsg = errors.dobNotMatch;
+				break;
+			case 'your medical records has been registered':
+				mappedMsg = errors.mrHasBeenRegistered;
+				break;
+			case 'your phone number has been registered. Please change with new phone number':
+				mappedMsg = errors.mrHasBeenRegistered;
+				break;
+		}
 
-	const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-		try {
-			const { nomorRekamMedis, phone, dateOfBirth } = onSubmit(e);
-			await onClickRegisterOnboard({
-				name: '',
-				medical_record: nomorRekamMedis.value,
-				phone: phone.value,
-				birth_date: dateOfBirth.value
-			});
-			if (errorUser.stat_msg) {
-				setNotifVisible(true);
-			} else {
-				// navigate('/otp-verification');
-			}
-		} catch (error) {
+		if (errorUser.stat_msg?.toLowerCase() === msg) {
+			return (
+				<div className='w-full mb-[24px] mt-[8px]'>
+					<NotificationPanel
+						showIconLeft={ false }
+						showIconRight={ false }
+						mode={ 'error' }
+						visible={ true }
+					>
+						<Text
+							fontType={ null }
+							fontSize='14px'
+							fontWeight='500'
+							text={ mappedMsg }
+							color={ colors.red.default }
+						/>
+					</NotificationPanel>
+				</div>
+			);
 		}
 	};
 
-	const renderDisclaimerText = () => {
-		return (
-			<div>
-				<Text
-					text={
-						<>
-							Mohon baca informasi <Link to='/' target='_blank' rel='noopener noreferrer' style={ { color: colors.green.default, fontWeight: 'bolder' } }>Privacy Policy</Link> Sebelum melanjutkan proses pendaftaran untuk mengakses riwayat medis pada portal pasien.
-						</>
-					}
-					fontSize='16px'
-					lineHeight='19px'
-					fontWeight='400'
-				/>
-			</div>);
+	const onSubmitHandler = async () => {
+		const { nomorRekamMedis, phone, dateOfBirth } = getCurrentForm();
+		await onClickRegisterOnboard({
+			name: '',
+			medical_record: nomorRekamMedis.value,
+			phone: phone.value,
+			birth_date: dateOfBirth.value
+		});
+
 	};
 
 	return (
 		<RegisterOnboardStyle>
 			<Box>
 				<Form
-					onSubmit={ onSubmitHandler }
 					autoComplete='off'
 				>
 					<div className='mb-[32px] logo-image'>
@@ -101,24 +114,22 @@ const RegisterOnboard = () => {
 						color={ colors.grey.pencil }
 						textAlign='center'
 					/>
-					{
-						notifVisible &&
-						<div className='w-full mb-[32px]'>
-							<NotificationPanel
-								mode={ notifMode }
-								visible={ notifVisible && errorUser && !loadingUser }
-								onClickRightIcon={ handleNotifOnClose }
-							>
-								{ handleNotifError() }
-							</NotificationPanel>
-						</div>
-					}
+
 					<Form.TextField
 						id='nomorRekamMedis'
 						className='input mb-[32px]'
 						placeholder={ form.mrPlaceholder }
+						mask='9999999999'
+						isNumber
 						{ ...registeredValue('nomorRekamMedis') }
 					/>
+					{
+						handleNotifError('mr not found')
+					}
+					{
+						handleNotifError('your medical records has been registered')
+					}
+
 					<Form.PhoneNumberInput
 						id='phone'
 						className='input'
@@ -133,6 +144,12 @@ const RegisterOnboard = () => {
 						fontWeight={ '400' }
 						textAlign={ 'left' }
 					/>
+					{
+						handleNotifError('phone number not match')
+					}
+					{
+						handleNotifError('your phone number has been registered. please change with new phone number')
+					}
 					<div className='mb-[32px]'>
 						<Form.DateField
 							id='dateOfBirth'
@@ -142,16 +159,19 @@ const RegisterOnboard = () => {
 							{ ...registeredValue('dateOfBirth', true) }
 
 						/>
+						{
+							handleNotifError('MR and DOB not match')
+						}
 					</div>
-					<div className='mb-[32px]'>
+					{ /* <div className='mb-[32px]'>
 						<Checkbox
 							label={ renderDisclaimerText() }
 						/>
-					</div>
+					</div> */ }
 					<Button
-						type='submit'
 						className='mt-[32px]'
 						disabled={ !isFormValid() || loadingUser }
+						onClick={ () => setModalVisible(true) }
 					>
 						{
 							loadingUser
@@ -160,7 +180,8 @@ const RegisterOnboard = () => {
 						}
 					</Button>
 					<Button theme='outline'
-						className='mt-[12px]'>
+						className='mt-[12px]'
+						onClick={ () => navigate('/pin-create') }>
 						<Text
 							text={ mrNotAvailableBtnLabel }
 							className='cursor-pointer'
@@ -171,9 +192,9 @@ const RegisterOnboard = () => {
 							color={ colors.green.default }
 						/>
 					</Button>
-					<Link to={ '/' } />
 				</Form>
 			</Box>
+			<PrivacyPolicyModal loading={ loadingOnBoarding } isOpen={ modalVisible } onFinish={ () => onSubmitHandler() } onClose={ () => setModalVisible(false) } />
 		</RegisterOnboardStyle>
 	);
 };

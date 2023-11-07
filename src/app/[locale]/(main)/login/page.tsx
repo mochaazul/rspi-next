@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { UserState } from 'interface';
 import { useTypedSelector } from 'hooks';
@@ -15,6 +15,7 @@ const { form, heading, subHeading, forgotPasswordLabel, loginBtnLabel, footer, n
 
 const LoginPage = () => {
 	const navigate = useNavigate();
+	const [searchParam] = useSearchParams();
 	const {
 		onClickLogin,
 		onClickResendEmailVerification,
@@ -29,14 +30,36 @@ const LoginPage = () => {
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
 
 	useEffect(() => {
+		refHandler();
+	}, []);
+
+	useEffect(() => {
 		setNotifMode(!!errorUser.stat_msg ? 'error' : 'success');
 	}, [errorUser]);
 
 	useEffect(() => {
-		if (!!errorUser.stat_msg === false && !loadingUser && notifVisible) {
+		const ref = searchParam.get('ref');
+		if (!!errorUser.stat_msg === false && !loadingUser && (notifVisible && !ref)) {
 			setTimeout(() => navigate('/'), 1500);
 		}
 	}, [errorUser, loadingUser, notifVisible]);
+
+	const refHandler = () => {
+		const ref = searchParam.get('ref');
+		const stat = searchParam.get('stat');
+		if (ref === 'reset' && stat === 'true') {
+			setNotifMode('success');
+			setNotifVisible(true);
+		}
+		if (ref === 'invalid-token') {
+			setNotifMode('error');
+			setNotifVisible(true);
+		}
+		if (ref === 'sso') {
+			setNotifMode('error');
+			setNotifVisible(true);
+		}
+	};
 
 	const togglePasswordShow = () => {
 		const currentType = getCurrentForm().password.type;
@@ -54,7 +77,19 @@ const LoginPage = () => {
 	};
 
 	const handleNotifError = () => {
-		let text = errorUser.stat_msg ? errorUser.stat_msg : user.token ? `Selamat datang ${ user.email }` : 'Terdapat Error';
+		const ref = searchParam.get('ref');
+		let text =
+			ref === 'invalid-token'
+				? 'Keluar, karena sesi anda telah berakhir, Silahkan login kembali'
+				: ref === 'sso'
+					? 'Akun anda terdeteksi telah masuk pada device lain. Silahkan login kembali'
+					: ref === 'reset'
+						? 'Kata sandi berhasil diubah'
+						: errorUser.stat_msg
+							? errorUser.stat_msg
+							: user.token
+								? `Selamat datang ${ user.email }`
+								: 'Terdapat Error';
 		text = customMessage ? customMessage : text;
 		if (text === 'email is not verified') {
 			return (
@@ -87,7 +122,11 @@ const LoginPage = () => {
 		<LoginPageStyle>
 			<div className='grid max-sm:grid-cols-2 grid-cols-3 max-sm:gap-0 gap-3 w-full'>
 				<div className='col-span-2'>
-					<Form className='login min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto'
+					<Form className={ `
+					p-4
+					md:p-8
+					login min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
+					` }
 						onSubmit={ e => {
 							setNotifVisible(true);
 							const { email, password } = onSubmit(e);
@@ -99,7 +138,7 @@ const LoginPage = () => {
 						autoComplete='off'
 					>
 						<div className='w-full'>
-							<Link to='/'>
+							<Link to='/' className='max-sm:hidden'>
 								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
 							</Link>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>

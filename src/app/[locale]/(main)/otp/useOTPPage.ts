@@ -1,13 +1,15 @@
 import { createOTP as otpAction } from 'stores/actions';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useTypedSelector } from 'hooks';
 import {
 	requiredRule,
 	minLengthRule,
 	maxLengthRule,
 	createFieldConfig
 } from 'helpers';
-import { OTPType } from 'interface';
+import { OTPType, UserState } from 'interface';
 import { Languages } from 'constant';
+import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
+import { useNavigate } from 'react-router-dom';
 
 const { form: { otpFieldLabel } } = Languages.page.otpVerification;
 
@@ -27,13 +29,25 @@ export const OTPField = {
 };
 
 const useOTPPage = () => {
-	const otpDispatch = useAppDispatch<OTPType>(otpAction);
-	const onClickOTP = ({ otp }: OTPType) => {
-		otpDispatch({
-			payload: {
-				otp
+	const otpDispatch = useAppAsyncDispatch<OTPType>(otpAction);
+	const { user } = useTypedSelector<UserState>('user');
+	const navigate = useNavigate();
+	const onClickOTP = async ({ otp }: OTPType) => {
+		try {
+			await otpDispatch({
+				payload: {
+					otp
+				}
+			});
+			if (user.pin_status) {
+				navigate('/');
+			} else {
+				navigate('/pin-create');
 			}
-		});
+		} catch (error) {
+
+		}
+
 	};
 
 	return {

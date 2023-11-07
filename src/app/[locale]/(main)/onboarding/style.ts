@@ -26,6 +26,8 @@ export const Box = styled.div`
 
   .input {
     width: 538px;
+		height: 50px;
+		outline: none;
   }
 
 	@media screen and (max-width: 600px) {
