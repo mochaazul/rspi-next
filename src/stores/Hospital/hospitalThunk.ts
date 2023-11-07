@@ -7,3 +7,9 @@ export const getHospitals = thunkUtils<HospitalDetail[], PayloadHospital>({
 	method: 'GET',
 	endpoint: endpoints.hospital,
 });
+
+export const getHospitalByHospitalCode = thunkUtils<HospitalDetail, PayloadHospital>({
+	type: 'hospital/getHospitalByHospitalCode',
+	method: 'GET',
+	endpoint: endpoints.hospital,
+});

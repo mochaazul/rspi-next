@@ -8,3 +8,5 @@ export * from './EventClasses';
 export * from './Awards';
 export * from './Hospital';
 export * from './ContactUs';
+export * from './Footer';
+export * from './Notification';

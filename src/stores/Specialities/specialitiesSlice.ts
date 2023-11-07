@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { I_SpecialitiesState, I_SubSpecialities } from 'interface/specialities';
-import { getSpecialities } from './specialitiesThunk';
+import { getSpecialities, getClinics } from './specialitiesThunk';
 import { ResponseStatus } from 'interface';
 
 const initialState: I_SpecialitiesState = {
 	specialities: [],
 	loading: false,
-	error: {}
+	error: {},
+	clinics: [],
 };
 
 export const specialitiesSlice = createSlice({
@@ -20,16 +21,24 @@ export const specialitiesSlice = createSlice({
 		});
 		builder.addCase(getSpecialities.fulfilled, (state, action) => {
 			state.loading = true;
-			const specialities = [...new Set(action.payload.data.map(sp => sp.name))];
-			state.specialities = specialities.map(speciality => {
-				return {
-					name: speciality,
-					sub_specialities: action.payload.data.filter(item => item.name === speciality)
-				};
-			});
-		
+			state.specialities = action.payload.data;
+
 		});
 		builder.addCase(getSpecialities.rejected, (state, action) => {
+			state.loading = false;
+			state.error = action.payload as ResponseStatus;
+		});
+
+		// clinics
+		builder.addCase(getClinics.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(getClinics.fulfilled, (state, action) => {
+			state.loading = true;
+			state.clinics = action.payload.data;
+
+		});
+		builder.addCase(getClinics.rejected, (state, action) => {
 			state.loading = false;
 			state.error = action.payload as ResponseStatus;
 		});

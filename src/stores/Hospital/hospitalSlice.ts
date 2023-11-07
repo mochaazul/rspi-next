@@ -2,10 +2,14 @@ import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
 
 import { HospitalState, ResponseStatus } from 'interface';
 
-import { getHospitals } from './hospitalThunk';
+import { getHospitalByHospitalCode, getHospitals } from './hospitalThunk';
 
 const initialState: HospitalState = {
 	hospitals: [],
+	detailHospital: {
+		hospital_code: '',
+		id: 0
+	},
 	loading: false,
 	error: {}
 };
@@ -37,6 +41,11 @@ export const hospitalSlice = createSlice({
 		builder.addCase(getHospitals.fulfilled, (state, action) => {
 			state.loading = false;
 			state.hospitals = action.payload.data;
+		});
+
+		builder.addCase(getHospitalByHospitalCode.fulfilled, (state, action) => {
+			state.loading = false;
+			state.detailHospital = action.payload.data;
 		});
 	}
 });
