@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { colors } from 'constant';
 
 export const CallForAmbulanceStyle = styled.div`
-  z-index: 999;
+  z-index: 800;
   bottom: 10px;
   right: 30px;
   transition: all .2s;

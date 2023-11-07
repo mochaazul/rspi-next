@@ -6,7 +6,7 @@ import { Text } from 'components';
 import { ItemType } from '.';
 import { ItemStyle } from './style';
 
-const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
+const Title = (props: { open: boolean; text: string; onClick: () => any; hideToggler?: boolean}) => (
 	<div className='flex cursor-pointer sm:mb-6 mb-3' onClick={ props.onClick }>
 		<div className='flex-1'>
 			<Text
@@ -19,9 +19,12 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
 				{ props.text }
 			</Text>
 		</div>
-		<div className='grow-0'>
-			<icons.ArrowDown className={ `chevron ${ props.open ? 'up' : '' }` } />
-		</div>
+		{
+			!props.hideToggler &&
+			<div className='grow-0'>
+				<icons.ArrowDown className={ `chevron ${ props.open ? 'up' : '' }` } />
+			</div>
+		}
 	</div>
 );
 
@@ -40,7 +43,7 @@ const ItemFilterMenu = (props: ItemType) => {
 
 	return (
 		<ItemStyle isOpen={ isOpen }>
-			<Title text={ props.title } open={ isOpen } onClick={ handleToggleOpen } />
+			<Title text={ props.title } open={ isOpen } onClick={ () => { !props.hideTogler && handleToggleOpen(); } } hideToggler={ props.hideTogler }/>
 			<div className='item-desc'>
 				{ props.desc_jsx }
 			</div>

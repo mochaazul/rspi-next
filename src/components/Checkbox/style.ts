@@ -11,6 +11,7 @@ interface CheckboxType {
 export interface InputType extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, CheckboxType {
 	ref?: React.Ref<HTMLInputElement>;
 	label: string | React.ReactNode;
+	labelBold?: string | React.ReactNode;
 }
 
 export const CheckboxStyle = styled.div<CheckboxType>`

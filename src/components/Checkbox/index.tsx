@@ -39,12 +39,21 @@ const Checkbox = (props: InputType) => {
 						<Icons.Check color={ colors.white.default } size={ 18 } />
 					</div>
 				</div>
-				<Text
-					text={ props.label }
-					fontSize='16px'
-					lineHeight='19px'
-					fontWeight='400'
-				/>
+				<div className='flex flex-row gap-x-1'>
+					<Text
+						text={ props.label }
+						fontSize='16px'
+						lineHeight='19px'
+						fontWeight='400'
+					/>
+					<Text
+						text={ props.labelBold }
+						fontSize='16px'
+						lineHeight='19px'
+						fontWeight='700'
+					/>
+				</div>
+
 			</label>
 		</CheckboxStyle>
 	);

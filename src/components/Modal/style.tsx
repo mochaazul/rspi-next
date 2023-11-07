@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 interface ModalStyleProps {
-  width?: string;
-  noPadding: boolean;
-  bgColor: string;
-  borderRadius?: string;
-  backdropColor?: string;
+	width?: string;
+	noPadding: boolean;
+	bgColor: string;
+	borderRadius?: string;
+	backdropColor?: string;
+	padding: string;
+	overflow?: string;
+  bottomSheet?: boolean;
 }
 
 const ModalStyle = styled.div<ModalStyleProps>`
@@ -26,6 +29,13 @@ const ModalStyle = styled.div<ModalStyleProps>`
     width: 100vw;
     height: 100vh;
   }
+ 
+
+  .modal-header{
+    padding: ${ props => props.noPadding ? '0px' : props => props.padding };
+    padding-top: 16px;
+    padding-bottom: 0px;
+  }
 
   .modal-backdrop {
     position: absolute;
@@ -33,7 +43,7 @@ const ModalStyle = styled.div<ModalStyleProps>`
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: ${ props => props.backdropColor || 'rgba(0, 0, 0, 0.1)' };
+    background: ${ props => props.backdropColor || 'rgba(0, 0, 0, 0.5)' };
     z-index: 0;
   }
 
@@ -49,10 +59,11 @@ const ModalStyle = styled.div<ModalStyleProps>`
     z-index: 1;
   }
   
+  
   .modal-content {
-    padding: ${ props => props.noPadding ? '0px' : ' 40px' };
+    padding: ${ props => props.noPadding ? '0px' : props => props.padding };
     max-height: 95vh;
-    overflow-y: scroll;
+    overflow-y: ${ props => props.overflow ?? 'scroll' };
 
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -62,7 +73,21 @@ const ModalStyle = styled.div<ModalStyleProps>`
     }
 
     @media screen and (max-width: 500px) {
-      padding: ${ props => props.noPadding ? '0px' : ' 20px' };
+      overflow: auto;
+      padding: ${ props => props.noPadding ? '0px' : '20px' };
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .modal-content-container.bottom-sheet{
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+    .modal-wrapper.bottom-sheet{
+      align-items: flex-end;
+    }
+    .modal-content.bottom-sheet{
+      max-height: 65vh;
+      padding-top: 0px;
     }
   }
 

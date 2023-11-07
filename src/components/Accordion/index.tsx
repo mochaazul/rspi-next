@@ -15,6 +15,7 @@ export interface ItemType {
 	isOpen?: boolean;
 	onOpen?: () => any;
 	isJSXDesc?: boolean;
+	hideTogler?: boolean
 }
 
 export interface AccordionType {
@@ -25,6 +26,7 @@ export interface AccordionType {
 	openedIndex?: number;
 	hideItemBorderBottom?: boolean;
 	itemWrapperClassname?: string;
+	hideTogler?: boolean
 }
 
 /**

@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as Icons from 'react-feather';
 
 import { useTypedSelector, useAppDispatch } from 'hooks';
 import { Images, icons, colors } from 'constant';
-import { Text, Button, MainNavLanguage } from 'components';
-import { navigation } from 'helpers';
+import { Text, Button, MainNavLanguage, Modal } from 'components';
+import { navigation, localStorage } from 'helpers';
 import { removeUser as removeUserData } from 'stores/User';
+import { getLanguage } from 'helpers/localStorage';
 import {
 	UserState,
 	HospitalState,
 	FacilityServicesState,
 	CenterOfExcellenceState,
+	NotificationState,
 } from 'interface';
 
 import HeaderStyle from './style';
+import images from 'constant/images';
+import { getNotification, readNotification } from 'stores/Notification';
+import moment from 'moment';
 
 const Header: React.FC = () => {
 	const [dropdownHide, setDropdownHide] = useState(true);
@@ -22,13 +27,18 @@ const Header: React.FC = () => {
 	const [isHover, setIsHover] = useState(false);
 	const [isHoverCOE, setIsHoverCOE] = useState(false);
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
+	const [showNotification, setShowNotification] = useState(false);
 
 	const userSelector = useTypedSelector<UserState>('user');
 	const { user, userDetail } = userSelector;
 	const { hospitals } = useTypedSelector<HospitalState>('hospital');
 	const { facilityServices } = useTypedSelector<FacilityServicesState>('facilityServices');
 	const { centerOfExcellence } = useTypedSelector<CenterOfExcellenceState>('centerOfExcellence');
+	const { notificationResponse } = useTypedSelector<NotificationState>('notification');
 	const removeUser = useAppDispatch(removeUserData);
+	const notificationDispatch = useAppDispatch(getNotification);
+	const readNotificationDispatch = useAppDispatch(readNotification);
+
 	const { navigate } = navigation();
 	const isLoggedIn = !!user.token;
 
@@ -50,6 +60,95 @@ const Header: React.FC = () => {
 	const handleNavigateSideBar = (path: string) => {
 		setShowSideBar(!showSideBar);
 		navigate(path);
+	};
+
+	useEffect(() => {
+		const data = localStorage?.getUserData();
+		if (data) {
+			const jsonData = JSON.parse(data);
+			const payloadNotification = {
+				medical_record: jsonData.medical_record,
+				email: jsonData.email
+			};
+			notificationDispatch({ queryParam: payloadNotification });
+		}
+	}, []);
+
+	const modalNotification = () => {
+		return (
+			<Modal
+				visible={ showNotification }
+				onClose={ () => setShowNotification(false) }
+				width='380px'
+				noPadding={ true }
+			>
+				<div className='relative flex flex-col'>
+					<div className='flex justify-between p-[20px]'>
+						<Text
+							fontSize='16px'
+							lineHeight='24px'
+							fontType='h3'
+							fontWeight='700'
+							textAlign='center'
+							color={ colors.black.default }
+							text='Notification'
+						/>
+						<Text
+							fontSize='12px'
+							lineHeight='20px'
+							fontWeight='400'
+							textAlign='center'
+							color={ colors.green.brandAccent }
+							text='Mark all as read'
+							onClick={ () => readNotificationDispatch({
+								queryParam: {
+									medical_record: '100154999',
+									email: 'riko.logwirno@rebelworks.co'
+								}
+							}) }
+						/>
+					</div>
+					{
+						notificationResponse?.notification?.map((item, idx) => (
+							<div key={ idx } className='pb-4'>
+								<div className='flex flex-col py-4 px-[20px]' style={ {
+									backgroundColor: item.flag === 0 ? 'rgba(0, 0, 0, 0)' : 'rgba(53, 136, 136, 0.1)'
+								} }>
+									<div className='flex justify-between'>
+										<Text
+											fontSize='12px'
+											fontWeight='400'
+											textAlign='center'
+											color={ colors.grey.pencil }
+											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
+										/>
+									</div>
+									<Text
+										fontSize='14px'
+										lineHeight='20px'
+										fontWeight='700'
+										textAlign='center'
+										color={ colors.black.default }
+										text={ getLanguage() == 'idn' ? item?.judul_idn : item?.judul_en }
+										className='flex justify-start'
+									/>
+									<Text
+										fontSize='12px'
+										lineHeight='20px'
+										fontWeight='400'
+										textAlign='center'
+										color={ colors.black.default }
+										text={ getLanguage() == 'idn' ? item?.isi_idn : item?.isi_en }
+										className='flex justify-start pt-2'
+									/>
+								</div>
+							</div>
+						))
+					}
+
+				</div>
+			</Modal>
+		);
 	};
 
 	return (
@@ -131,6 +230,15 @@ const Header: React.FC = () => {
 												</div>
 											</Link>
 										)) }
+										<Link to={ '/facilities/1234567890' } >
+											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
+												<img src={ images.AestheticClinic } width={ 60 } height={ 60 } />
+												<div className='ml-[10px] w-[310px]'>
+													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+												</div>
+												<icons.ArrowRight className='ml-[27px] mr-auto' />
+											</div>
+										</Link>
 									</ul>
 								</div>
 							</div>
@@ -147,18 +255,23 @@ const Header: React.FC = () => {
 					</div>
 					<div className='rightNav py-[22px] max-sm:py-[10px]'>
 						<div className='translate'>
-
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
-								<icons.Notif />
+								<icons.Notif onClick={ () => setShowNotification(true) } />
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
-
+							<div className='p-4'>
+								{ modalNotification() }
+							</div>
 							<div className='flex items-center gap-6 max-sm:hidden'>
 								<Button className='btn-main h-[44px] min-w-[190px]' onClick={ () => navigate('/find-a-doctor') }>Book Appointment</Button>
 								{
 									isLoggedIn ?
 										<>
-											<div className='mx-[24px] my-auto'><i><icons.Notif /></i></div>
+											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
+												<icons.Notif />
+												<span
+													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponse.total_unread }</span>
+											</a>
 											<div className='flex text-white items-center'>
 												<div>
 													{
@@ -203,9 +316,29 @@ const Header: React.FC = () => {
 						<div className='sider-nav-menu divide-y divide-solid'>
 							<div
 								className='nav-menu'
-								onClick={ () => handleNavigateSideBar('/') }>
+								onClick={ () => { handleNavigateSideBar('/'); } }>
 								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
 							</div>
+							{ isLoggedIn &&
+							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
+								<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
+							</div>
+							}
+							{ isLoggedIn &&
+							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
+								<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
+							</div>
+							}
+							{ isLoggedIn ? null :
+								<div className='nav-menu' onClick={ handleLoginClick }>
+									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
+								</div>
+							}
+							{ isLoggedIn ? null :
+								<div className='nav-menu' onClick={ handleLoginClick }>
+									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
+								</div>
+							}
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>
 									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />

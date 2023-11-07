@@ -5,7 +5,7 @@ const HeaderStyle = styled.div`
   position: fixed;
   display: flex;
   width: 100vw;
-  z-index: 999;
+  z-index: 1000;
   top: 0;
 
   .navbar {
@@ -73,12 +73,11 @@ const HeaderStyle = styled.div`
   }
 
   .mobile-sidebar {
-    position: fixed;
     display: flex;
     flex-direction: column;
     bottom: 0px;
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     max-width: 100%;
     background-color: #fff;
     z-index: 99;

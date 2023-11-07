@@ -58,7 +58,7 @@ const TextFieldPin = ({ digitLength, password, onChangeValue, ...props }: InputP
 		}
 	};
 
-	const handleOnFocus = (key:number) => {
+	const handleOnFocus = (key: number) => {
 		InputRefs.current[key]?.select();
 	};
 
@@ -70,7 +70,7 @@ const TextFieldPin = ({ digitLength, password, onChangeValue, ...props }: InputP
 						key={ key }
 						maxLength={ 1 }
 						ref={ elem => InputRefs.current[key] = elem }
-						type={ !!password ? 'password' : 'text' }
+						type={ password ? 'password' : 'text' }
 						pattern='[0-9]*'
 						onChange={ onChangeHandler }
 						onKeyDown={ event => handleOnKeyDown(event, key) }
