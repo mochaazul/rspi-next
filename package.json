@@ -22,6 +22,7 @@
     "react-input-mask": "^2.0.4",
     "react-tailwindcss-datepicker": "^1.6.6",
     "styled-components": "^6.1.0"
+
   },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.38.0",
