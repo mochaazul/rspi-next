@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { AnyAction, combineReducers } from 'redux';
 import {
 	persistStore,
 	persistReducer,
@@ -25,6 +25,10 @@ import { patientProfileSlice } from './PatientProfile';
 import { specialitiesSlice } from './Specialities';
 import { contactUsSlice } from './ContactUs';
 import { appointmentSlice } from './Appointment';
+import { footerSlice } from './Footer';
+import { medicalSpecialities } from './MedicalSpecialities';
+import { notificationSlice } from './Notification';
+import { rootSlice } from './Root';
 
 const persistConfig = {
 	key: 'root',
@@ -44,7 +48,11 @@ const reducers = combineReducers({
 	[patientProfileSlice.name]: patientProfileSlice.reducer,
 	[specialitiesSlice.name]: specialitiesSlice.reducer,
 	[contactUsSlice.name]: contactUsSlice.reducer,
-	[appointmentSlice.name]: appointmentSlice.reducer
+	[appointmentSlice.name]: appointmentSlice.reducer,
+	[footerSlice.name]: footerSlice.reducer,
+	[medicalSpecialities.name]: medicalSpecialities.reducer,
+	[notificationSlice.name]: notificationSlice.reducer,
+	[rootSlice.name]: rootSlice.reducer
 });
 
 const middlewares = [

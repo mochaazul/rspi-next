@@ -2,7 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { PatientState } from 'interface/PatientProfile';
 
-import { getLastVisitHospital, getProfileDetail, uploadPhotoProfile } from './patientProfileThunk';
+import {
+	getAppointmentList,
+	getLabResults, getLastVisitHospital, getProfileDetail, getVaccineHistory, getVisitHistories, giveDoctorRating, uploadPhotoProfile
+} from './patientProfileThunk';
 import { getLastVisitedHospitalHelper } from 'helpers/visitHelper';
 
 const initialState: PatientState = {
@@ -12,6 +15,10 @@ const initialState: PatientState = {
 	error: {},
 	customMessage: '',
 	patientPhotoProfile: {},
+	vacineHistory: [],
+	labResults: [],
+	appointments: [],
+	visitHistories: []
 };
 
 /* function that accepts an initial state, an object of reducer functions, and a
@@ -49,6 +56,92 @@ export const patientProfileSlice = createSlice({
 					stat_code: action.error.code,
 					stat_msg: action.error.message
 				};
+		});
+
+		builder.addCase(getVaccineHistory.fulfilled, (state, action) => {
+			state.loading = false;
+			state.vacineHistory = action.payload.data;
+		});
+		builder.addCase(getVaccineHistory.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(getVaccineHistory.rejected, (state, action) => {
+			state.loading = false;
+			state.error = {
+				stat_code: action.error.code,
+				stat_msg: action.error.message
+			};
+			state.vacineHistory = [];
+		});
+		builder.addCase(getLabResults.fulfilled, (state, action) => {
+			state.loading = false;
+			state.labResults = action.payload.data;
+		});
+		builder.addCase(getLabResults.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(getLabResults.rejected, (state, action) => {
+			state.loading = false;
+			state.error = {
+				stat_code: action.error.code,
+				stat_msg: action.error.message
+			};
+			state.labResults = [];
+		});
+
+		builder.addCase(getAppointmentList.fulfilled, (state, action) => {
+			state.loading = false;
+			state.appointments = action.payload.data;
+		});
+		builder.addCase(getAppointmentList.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(getAppointmentList.rejected, (state, action) => {
+			state.loading = false;
+			state.error = {
+				stat_code: action.error.code,
+				stat_msg: action.error.message
+			};
+		});
+
+		builder.addCase(getVisitHistories.fulfilled, (state, action) => {
+			state.loading = false;
+			state.visitHistories = action.payload.data;
+			state.error = {
+				stat_code: initialState.error.stat_code,
+				stat_msg: initialState.error.stat_msg
+			};
+		});
+		builder.addCase(getVisitHistories.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(getVisitHistories.rejected, (state, action) => {
+			state.loading = false;
+			state.error = {
+				stat_code: action.error.code,
+				stat_msg: action.error.message
+			};
+		});
+
+		builder.addCase(uploadPhotoProfile.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(uploadPhotoProfile.rejected, (state, action) => {
+			state.loading = false;
+		});
+		builder.addCase(uploadPhotoProfile.fulfilled, (state, action) => {
+			state.loading = false;
+		});
+
+		builder.addCase(giveDoctorRating.rejected, (state, action) => {
+			state.loading = false;
+			state.error = {
+				stat_code: action.error.code,
+				stat_msg: action.error.message
+			};
+		});
+		builder.addCase(giveDoctorRating.pending, (state, action) => {
+			state.loading = true;
 		});
 	}
 });

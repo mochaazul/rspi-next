@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigation, useOutlet, useParams } from 'react-router-dom';
+import { useOutlet } from 'react-router-dom';
 
 import { Footer, Header, CallForAmbulance } from 'components';
 
@@ -14,16 +14,9 @@ import {
 } from './style';
 import DevTools from 'components/DevTools';
 import { appStage } from 'config';
-import MedicalRecordReminder from 'components/MedicalRecordReminder';
-
-// we use this values to determine where shoul we display reminder component
-const blacklistedRoute = ['/patient-portal', '/doctor-detail', '/book-appointment'];
 
 const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean; }) => {
 	const Outlet = useOutlet();
-	const { pathname } = useLocation();
-
-	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
 
 	return (
 		<>
@@ -40,10 +33,6 @@ const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean;
 			{
 				appStage !== 'prod' &&
 				<DevTools />
-			}
-			{
-				shouldRenderReminder &&
-				<MedicalRecordReminder />
 			}
 		</>
 	);
