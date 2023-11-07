@@ -4,7 +4,7 @@ import {
 	CenterOfExcellenceState,
 	ResponseStatus,
 	CenterOfExcellenceNewsDetail
-} from 'interface';
+} from '@/interface';
 
 import { getCenterOfExcellence, getCenterOfExcellenceNewsByID } from './centerOfExcellenceThunk';
 

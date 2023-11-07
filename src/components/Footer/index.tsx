@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { appStage, config } from 'config';
-import { colors, Images, Languages as lang } from 'constant';
-import { useAppDispatch, useTypedSelector } from 'hooks';
-import { FooterDetail, FooterState, HospitalState } from 'interface';
-import { Button, Text, TextField, Socmed } from 'components';
+import { appStage, config } from '@/config';
+import { colors, Images, Languages as lang } from '@/constant';
+import { useAppDispatch, useTypedSelector } from '@/hooks';
+import { FooterDetail, FooterState, HospitalState } from '@/interface';
+import { Button, Text, TextField, Socmed } from '@/components';
 
 import FooterStyled, { FooterContainer } from './style';
-import { getFooterCategories, getFooterSlug } from 'stores/actions';
+import { getFooterCategories, getFooterSlug } from '@/stores/actions';
 
 const FooterLayout = () => {
 	const { loading, footerList } = useTypedSelector<FooterState>('footerSlice');

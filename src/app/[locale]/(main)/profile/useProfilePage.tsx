@@ -1,11 +1,11 @@
-import { registerOnboard as registerOnboardAction } from 'stores/actions';
-import { useAppDispatch } from 'hooks';
+import { registerOnboard as registerOnboardAction } from '@/stores/actions';
+import { useAppDispatch } from '@/hooks';
 import {
 	requiredRule,
 	createFieldConfig,
 	emailRule,
-} from 'helpers';
-import { ContactUsSubmitType } from 'interface/contactUs';
+} from '@/helpers';
+import { ContactUsSubmitType } from '@/interface/contactUs';
 
 export const profileFields = {
 	email: {

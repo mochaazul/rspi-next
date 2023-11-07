@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { colors } from 'constant';
-import { GlobalAllTransition5ms } from 'constant/globalstyle';
+import { colors } from '@/constant';
+import { GlobalAllTransition5ms } from '@/constant/globalstyle';
 
 export interface InputPinType extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  password?: boolean;
-  digitLength?: number;
-  onChangeValue?: (obj: { name?: string; value: string; }) => any;
-  semiSecure?: boolean;
+	password?: boolean;
+	digitLength?: number;
+	onChangeValue?: (obj: { name?: string; value: string; }) => any;
+	semiSecure?: boolean;
 }
 
 export const TextFieldPinWrapper = styled.div`

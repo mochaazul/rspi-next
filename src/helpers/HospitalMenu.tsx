@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import { useAppDispatch } from 'hooks';
-import { getHospitals } from 'stores/actions';
-import { initDev, initStage } from 'utils/metaPixelTrack';
+import { useAppDispatch } from '@/hooks';
+import { getHospitals } from '@/stores/actions';
+import { initDev, initStage } from '@/utils/metaPixelTrack';
 
 const payload = {
 	page: 1,

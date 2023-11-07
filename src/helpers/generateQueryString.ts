@@ -1,4 +1,4 @@
-import { Pagination } from 'interface';
+import { Pagination } from '@/interface';
 const generateQueryString = (obj: Pagination) => {
 	const str: string[] = [];
 	for (const p in obj) {

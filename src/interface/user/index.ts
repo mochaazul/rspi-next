@@ -1,4 +1,4 @@
-import { ResponseStatus } from 'interface';
+import { ResponseStatus } from '@/interface';
 
 export interface UserState {
 	user: UserData;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useOutlet } from 'react-router-dom';
 
-import { Footer, Header, CallForAmbulance } from 'components';
+import { Footer, Header, CallForAmbulance } from '@/components';
 
 import {
 	OutletStyle,
@@ -12,8 +12,8 @@ import {
 	PanelH4,
 	PanelV1
 } from './style';
-import DevTools from 'components/DevTools';
-import { appStage } from 'config';
+import DevTools from '@/components/DevTools';
+import { appStage } from '@/config';
 
 const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean; }) => {
 	const Outlet = useOutlet();

@@ -1,7 +1,7 @@
 import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
 
-import { ResponseStatus, UserState } from 'interface';
-import { localStorage } from 'helpers';
+import { ResponseStatus, UserState } from '@/interface';
+import { localStorage } from '@/helpers';
 
 import {
 	login,
@@ -20,7 +20,7 @@ import {
 	setNewPassword,
 	checkPin,
 } from './userThunk';
-import { setTokenUser } from 'helpers/localStorage';
+import { setTokenUser } from '@/helpers/localStorage';
 
 const initialState: UserState = {
 	user: {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
 
-import { icons } from 'constant';
-import { getLanguage, hasLanguageSet, setLanguage } from 'helpers/localStorage';
-import { Picker, Text } from 'components';
+import { icons } from '@/constant';
+import { getLanguage, hasLanguageSet, setLanguage } from '@/helpers/localStorage';
+import { Picker, Text } from '@/components';
 
 const languageItem = [
 	{

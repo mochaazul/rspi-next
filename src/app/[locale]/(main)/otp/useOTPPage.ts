@@ -1,14 +1,14 @@
-import { createOTP as otpAction } from 'stores/actions';
-import { useAppDispatch, useTypedSelector } from 'hooks';
+import { createOTP as otpAction } from '@/stores/actions';
+import { useAppDispatch, useTypedSelector } from '@/hooks';
 import {
 	requiredRule,
 	minLengthRule,
 	maxLengthRule,
 	createFieldConfig
-} from 'helpers';
-import { OTPType, UserState } from 'interface';
-import { Languages } from 'constant';
-import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
+} from '@/helpers';
+import { OTPType, UserState } from '@/interface';
+import { Languages } from '@/constant';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { useNavigate } from 'react-router-dom';
 
 const { form: { otpFieldLabel } } = Languages.page.otpVerification;

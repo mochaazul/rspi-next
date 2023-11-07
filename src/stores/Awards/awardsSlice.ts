@@ -1,6 +1,6 @@
 import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
 
-import { AwardsState, ResponseStatus } from 'interface';
+import { AwardsState, ResponseStatus } from '@/interface';
 
 import { getAwards } from './awardsThunk';
 

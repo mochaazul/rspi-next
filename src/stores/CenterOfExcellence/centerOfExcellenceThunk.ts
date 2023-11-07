@@ -1,6 +1,6 @@
-import { CenterOfExcellenceDetail, PayloadCenterCenterOfExcellence } from 'interface';
-import { endpoints } from 'constant';
-import { thunkUtils } from 'utils';
+import { CenterOfExcellenceDetail, PayloadCenterCenterOfExcellence } from '@/interface';
+import { endpoints } from '@/constant';
+import { thunkUtils } from '@/utils';
 
 export const getCenterOfExcellence = thunkUtils<CenterOfExcellenceDetail[], PayloadCenterCenterOfExcellence>({
 	type: 'centerOfExcellence/getCenterOfExcellence',

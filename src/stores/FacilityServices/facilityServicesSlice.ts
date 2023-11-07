@@ -1,6 +1,6 @@
 import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
 
-import { FacilityServicesState, ResponseStatus, FacilityServicesDetail, I_RelatedNews } from 'interface';
+import { FacilityServicesState, ResponseStatus, FacilityServicesDetail, I_RelatedNews } from '@/interface';
 
 import {
 	getFacilityServices,

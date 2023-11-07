@@ -1,15 +1,15 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { Button, Form, Text } from 'components';
-import { Languages, colors, icons } from 'constant';
-import Images from 'constant/images';
+import { Button, Form, Text } from '@/components';
+import { Languages, colors, icons } from '@/constant';
+import Images from '@/constant/images';
 
 import useOTPPage from './useOTPPage';
 import OTPPageStyle, { Box, WarningNote } from './style';
-import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
-import { RegisterOnboardType } from 'interface';
-import { registerOnboard } from 'stores/actions';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import { RegisterOnboardType } from '@/interface';
+import { registerOnboard } from '@/stores/actions';
 
 const { heading, subHeading, resendOtp, resendWarn, form: { backBtnlabel, submitBtnLabel } } = Languages.page.otpVerification;
 

@@ -1,5 +1,5 @@
-import { Text } from 'components';
-import { icons } from 'constant';
+import { Text } from '@/components';
+import { icons } from '@/constant';
 
 import { StyleProps, NotificationStyle } from './style';
 

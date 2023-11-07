@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { Text } from 'components';
-import { colors, icons } from 'constant';
-import LanguageSelector from 'components/LanguageSelector';
+import { Text } from '@/components';
+import { colors, icons } from '@/constant';
+import LanguageSelector from '@/components/LanguageSelector';
 
 const MainNavLanguage = () => {
 	const handleOpenSocmed = (link: string) => () => {

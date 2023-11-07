@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Datepicker from 'react-tailwindcss-datepicker';
 
-import { colors, icons } from 'constant';
+import { colors, icons } from '@/constant';
 
-interface DateFieldType extends Omit<typeof Datepicker, 'value'| 'onChange'> {
+interface DateFieldType extends Omit<typeof Datepicker, 'value' | 'onChange'> {
 	iconPosition?: 'left' | 'right';
 	iconName?: keyof typeof icons;
 }
@@ -14,9 +14,9 @@ export interface DatepickerProps extends DateFieldType {
 	value?: string;
 	placeholder?: string;
 	onChangeValue?: ({ name, value }: { name?: string; value?: string; }) => void;
-	popOverDirection?: 'up' | 'down'
+	popOverDirection?: 'up' | 'down';
 	onIconClick?: () => any;
-  dateFormat? : string
+	dateFormat?: string;
 }
 
 export interface InputType extends DatepickerProps, DateFieldType {

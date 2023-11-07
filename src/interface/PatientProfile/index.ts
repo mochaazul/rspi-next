@@ -1,4 +1,4 @@
-import { ResponseStatus } from 'interface/network';
+import { ResponseStatus } from '@/interface/network';
 
 export type PatientProfile = {
 	id: number,

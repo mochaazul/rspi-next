@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors } from 'constant';
+import { colors } from '@/constant';
 
 export const ItemCont = styled.div`
   transition: all .3s;

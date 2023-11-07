@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ContactUsState } from 'interface';
+import { ContactUsState } from '@/interface';
 
 import { addContactUs } from './contactUsThunk';
 

@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { registerOnboard as registerOnboardAction } from 'stores/actions';
-import { useAppDispatch } from 'hooks';
+import { registerOnboard as registerOnboardAction } from '@/stores/actions';
+import { useAppDispatch } from '@/hooks';
 import {
 	requiredRule,
 	createFieldConfig,
-} from 'helpers';
-import { RegisterOnboardType } from 'interface';
-import { Languages } from 'constant';
-import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
+} from '@/helpers';
+import { RegisterOnboardType } from '@/interface';
+import { Languages } from '@/constant';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { useNavigate } from 'react-router-dom';
 
 const { birthDateLabel, mrlabel, phoneLabel } = Languages.page.registerOnboard.form;

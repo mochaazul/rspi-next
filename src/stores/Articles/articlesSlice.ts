@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { ArticleState, ResponseStatus, ArticleDetail } from 'interface';
+import { ArticleState, ResponseStatus, ArticleDetail } from '@/interface';
 
 import {
 	getArticles,

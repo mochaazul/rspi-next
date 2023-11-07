@@ -1,5 +1,5 @@
-import { register as registerAction } from 'stores/actions';
-import { useAppDispatch } from 'hooks';
+import { register as registerAction } from '@/stores/actions';
+import { useAppDispatch } from '@/hooks';
 import {
 	requiredRule,
 	minLengthRule,
@@ -7,9 +7,9 @@ import {
 	emailRule,
 	passwordMatchRule,
 	checkCapitalExists
-} from 'helpers';
-import { RegisterType } from 'interface';
-import { Languages } from 'constant';
+} from '@/helpers';
+import { RegisterType } from '@/interface';
+import { Languages } from '@/constant';
 
 const { emailLabel, passwordConfirmationLabel, passwordLabel, passwordHint, } = Languages.page.registerPage.form;
 

@@ -1,10 +1,10 @@
 
-import { icons } from 'constant';
-import { Text, Button, Modal } from 'components';
-import { useAppDispatch, useTypedSelector } from 'hooks';
-import { RootAppState } from 'interface';
-import { clearErrorLogout } from 'stores/Root';
-import { removeUser as removeUserData } from 'stores/User';
+import { icons } from '@/constant';
+import { Text, Button, Modal } from '@/components';
+import { useAppDispatch, useTypedSelector } from '@/hooks';
+import { RootAppState } from '@/interface';
+import { clearErrorLogout } from '@/stores/Root';
+import { removeUser as removeUserData } from '@/stores/User';
 
 const LogoutModal = () => {
 

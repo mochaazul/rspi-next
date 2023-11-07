@@ -1,6 +1,6 @@
 import React from 'react';
 
-import withInputLabel from 'components/withInputLabel';
+import withInputLabel from '@/components/withInputLabel';
 
 import { StyledTextArea, TextAreaType } from './style';
 

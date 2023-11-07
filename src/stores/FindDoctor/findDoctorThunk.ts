@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
 	FindDoctorDetail, I_MasterDoctorParams, I_MasterDoctor, PayloadFindDoctor, I_DoctorListDropdown, DoctorTimeSlot, TimeSlot, DoctorCalendar, ResponseStatus
-} from 'interface';
-import { endpoints } from 'constant';
-import { thunkUtils } from 'utils';
+} from '@/interface';
+import { endpoints } from '@/constant';
+import { thunkUtils } from '@/utils';
 
 export const getDoctor = thunkUtils<FindDoctorDetail[], PayloadFindDoctor>({
 	type: 'findDoctor/getDoctor',

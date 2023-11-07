@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { GlobalCardShadow } from 'constant/globalstyle';
+import { GlobalCardShadow } from '@/constant/globalstyle';
 
 export const RegisterOnboardStyle = styled.div`
 	display: flex;

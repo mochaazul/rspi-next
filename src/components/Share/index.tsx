@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { icons, sosmedLink } from 'constant';
-import { Text } from 'components';
+import { icons, sosmedLink } from '@/constant';
+import { Text } from '@/components';
 
 interface PropsType {
 	id?: number;

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { FooterState } from 'interface';
+import { FooterState } from '@/interface';
 
 import {
 	getFooterCategories, getFooterSlug, getFooterDetail

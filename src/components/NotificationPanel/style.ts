@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { colors } from 'constant';
+import { colors } from '@/constant';
 
 export interface StyleProps {
 	mode: 'success' | 'error';

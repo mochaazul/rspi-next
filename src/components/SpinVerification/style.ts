@@ -1,4 +1,4 @@
-import { colors } from 'constant';
+import { colors } from '@/constant';
 import styled from 'styled-components';
 
 export const SpinContainer = styled.div`

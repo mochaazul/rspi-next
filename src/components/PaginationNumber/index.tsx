@@ -1,5 +1,5 @@
-import { colors, icons } from 'constant';
-import Text from 'components/Text';
+import { colors, icons } from '@/constant';
+import Text from '@/components/Text';
 
 import { ItemCont, Spacer } from './style';
 

@@ -1,14 +1,14 @@
-import { login as loginAction, userDetail as userDetailAction, requestVerifyEmail as requestVerifyEmailAction } from 'stores/actions';
-import { useAppDispatch } from 'hooks';
+import { login as loginAction, userDetail as userDetailAction, requestVerifyEmail as requestVerifyEmailAction } from '@/stores/actions';
+import { useAppDispatch } from '@/hooks';
 import {
 	requiredRule,
 	minLengthRule,
 	createFieldConfig,
 	emailRule
-} from 'helpers';
-import { LoginType, ResendEmailVerificationType, UserDataDetail } from 'interface';
-import { Languages } from 'constant';
-import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
+} from '@/helpers';
+import { LoginType, ResendEmailVerificationType, UserDataDetail } from '@/interface';
+import { Languages } from '@/constant';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 
 const { emailLabel, passwordLabel } = Languages.page.loginPage.form;
 

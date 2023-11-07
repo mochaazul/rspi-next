@@ -1,6 +1,6 @@
 import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
 
-import { HospitalState, ResponseStatus } from 'interface';
+import { HospitalState, ResponseStatus } from '@/interface';
 
 import { getHospitalByHospitalCode, getHospitals } from './hospitalThunk';
 

@@ -2,15 +2,15 @@ import ReactCalendar from 'react-calendar';
 import {
 	CalendarContainer, CalendarDot, CalendarFooter, CalendarFooterInfoItem, CalendarLoading,
 } from './style';
-import { colors, icons, Languages as lang } from 'constant';
-import Text from 'components/Text';
+import { colors, icons, Languages as lang } from '@/constant';
+import Text from '@/components/Text';
 import { useEffect, useState } from 'react';
 import { TileArgs, TileClassNameFunc, TileDisabledFunc, Value } from 'react-calendar/dist/cjs/shared/types';
-import { useTypedSelector } from 'hooks';
-import { FindDoctorState } from 'interface';
+import { useTypedSelector } from '@/hooks';
+import { FindDoctorState } from '@/interface';
 import dayjs, { UnitType } from 'dayjs';
-import languages from 'constant/languages';
-import Spinner from 'components/Spinner';
+import languages from '@/constant/languages';
+import Spinner from '@/components/Spinner';
 
 type Props = {
 	onChange: (value: Value) => void;
@@ -79,10 +79,10 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading }: Props
 		`;
 		return shouldDisbled ?
 			`
-			${defaultClass}
+			${ defaultClass }
 			pointer-events-none flex items-center justify-center
 			` :
-			`${defaultClass} 
+			`${ defaultClass } 
 			flex items-center justify-center`;
 	};
 

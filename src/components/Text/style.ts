@@ -1,16 +1,16 @@
-import { colors } from 'constant';
+import { colors } from '@/constant';
 import styled from 'styled-components';
 
 interface StyleProps {
-  fontFamily?: string;
-  fontSize?: string;
-  textAlign?: string;
-  fontStyle?: string;
-  fontDecoration?: string;
-  fontWeight?: string;
-  color?: string;
-  lineHeight?: string;
-  isGradient?: boolean;
+	fontFamily?: string;
+	fontSize?: string;
+	textAlign?: string;
+	fontStyle?: string;
+	fontDecoration?: string;
+	fontWeight?: string;
+	color?: string;
+	lineHeight?: string;
+	isGradient?: boolean;
 }
 
 const TextStyle = styled.div<StyleProps>`

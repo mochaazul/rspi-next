@@ -2,23 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as Icons from 'react-feather';
 
-import { useTypedSelector, useAppDispatch } from 'hooks';
-import { Images, icons, colors } from 'constant';
-import { Text, Button, MainNavLanguage, Modal } from 'components';
-import { navigation, localStorage } from 'helpers';
-import { removeUser as removeUserData } from 'stores/User';
-import { getLanguage } from 'helpers/localStorage';
+import { useTypedSelector, useAppDispatch } from '@/hooks';
+import { Images, icons, colors } from '@/constant';
+import { Text, Button, MainNavLanguage, Modal } from '@/components';
+import { navigation, localStorage } from '@/helpers';
+import { removeUser as removeUserData } from '@/stores/User';
+import { getLanguage } from '@/helpers/localStorage';
 import {
 	UserState,
 	HospitalState,
 	FacilityServicesState,
 	CenterOfExcellenceState,
 	NotificationState,
-} from 'interface';
+} from '@/interface';
 
 import HeaderStyle from './style';
-import images from 'constant/images';
-import { getNotification, readNotification } from 'stores/Notification';
+import images from '@/constant/images';
+import { getNotification, readNotification } from '@/stores/Notification';
 import moment from 'moment';
 
 const Header: React.FC = () => {
@@ -320,14 +320,14 @@ const Header: React.FC = () => {
 								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
 							</div>
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
-								<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
+									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
-								<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
+									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>

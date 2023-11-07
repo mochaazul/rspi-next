@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { configureStore } from '@reduxjs/toolkit';
-import errorHandlerMiddleware from 'middlewares/errorHandlerMiddleware';
+import errorHandlerMiddleware from '@/middlewares/errorHandlerMiddleware';
 import { userSlice } from './User';
 import { articleSlice } from './Articles';
 import { findDoctorSlice } from './FindDoctor';

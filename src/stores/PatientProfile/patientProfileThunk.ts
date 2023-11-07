@@ -1,8 +1,8 @@
-import { endpoints } from 'constant';
+import { endpoints } from '@/constant';
 import {
 	I_LabResults, I_VaccineHistory, I_VisitHistory, LastVisitedHospital, PatientProfile, PatientUploadPhoto
-} from 'interface/PatientProfile';
-import { thunkUtils } from 'utils';
+} from '@/interface/PatientProfile';
+import { thunkUtils } from '@/utils';
 
 // function that accepts a Redux action type string and a callback function that should return a promise
 

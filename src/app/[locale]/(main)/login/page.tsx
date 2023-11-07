@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { UserState } from 'interface';
-import { useTypedSelector } from 'hooks';
-import { Button, Form, NotificationPanel, Text } from 'components';
-import { PropsTypes as NotificationPanelTypes } from 'components/NotificationPanel';
-import { Languages, colors } from 'constant';
-import Images from 'constant/images';
+import { UserState } from '@/interface';
+import { useTypedSelector } from '@/hooks';
+import { Button, Form, NotificationPanel, Text } from '@/components';
+import { PropsTypes as NotificationPanelTypes } from '@/components/NotificationPanel';
+import { Languages, colors } from '@/constant';
+import Images from '@/constant/images';
 
 import useLoginPage from './useLoginPage';
 import LoginPageStyle from './style';

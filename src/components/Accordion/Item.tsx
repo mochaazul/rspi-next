@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { colors, icons } from 'constant';
-import { Text } from 'components';
+import { colors, icons } from '@/constant';
+import { Text } from '@/components';
 
 import { ItemType } from '.';
 import { ItemStyle } from './style';

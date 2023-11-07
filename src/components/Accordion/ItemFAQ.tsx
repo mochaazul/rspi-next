@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
 import { Link } from 'react-router-dom';
 
-import { colors } from 'constant';
-import { Text } from 'components';
+import { colors } from '@/constant';
+import { Text } from '@/components';
 
 import { ItemType } from '.';
 import { ItemStyle } from './style';
-import languages from 'constant/languages';
+import languages from '@/constant/languages';
 
 const { readMoreLabel } = languages.page.contactUs.faq;
 
