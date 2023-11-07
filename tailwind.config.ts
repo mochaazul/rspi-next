@@ -9,6 +9,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			screens: {
+				'ssm': '320px',
+			},
 			colors: {},
 			width: {
 				'920': '920px',
