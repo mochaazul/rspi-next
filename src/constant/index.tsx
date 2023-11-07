@@ -9,14 +9,5 @@ import icons from './icons';
 import fonts from './fonts';
 import sosmedLink from './sosmedLink';
 export {
-	Languages,
-	Images,
-	colors,
-	sizes,
-	Globalstyle,
-	endpoints,
-	regExp,
-	icons,
-	fonts,
-	sosmedLink
+	Languages, Images, colors, sizes, Globalstyle, endpoints, regExp, icons, fonts, sosmedLink
 };

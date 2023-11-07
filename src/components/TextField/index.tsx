@@ -3,12 +3,14 @@ import * as FeatherIcons from 'react-feather';
 import { icons } from 'constant';
 import withInputLabel from 'components/withInputLabel';
 
-import { IconWrapper, Input, InputType, TextFieldWrapper } from './style';
+import {
+	IconWrapper, Input, InputMaskedStyled, InputType, TextFieldWrapper
+} from './style';
 
-const TextField = ({ onIconClick, ...props }: InputType) => {
+const TextField = ({ onIconClick, isNumber, mask, ...props }: InputType) => {
+	const { ref, ...restProps } = props;
 	const Icons = props.iconName ? icons[props.iconName] : null;
 	const FeatherIconsJSX = props.featherIcon ? FeatherIcons[props.featherIcon] : null;
-
 	return (
 		<TextFieldWrapper
 			iconPosition={ props.iconPosition }
@@ -30,7 +32,11 @@ const TextField = ({ onIconClick, ...props }: InputType) => {
 					</IconWrapper> :
 					null
 			}
-			<Input { ...props } />
+			{
+				!isNumber
+					? <Input { ...props } />
+					: <InputMaskedStyled mask={ mask ?? '' } maskChar={ '' } { ...restProps }/>
+			}
 		</TextFieldWrapper>
 	);
 };

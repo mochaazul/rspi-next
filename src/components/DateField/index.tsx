@@ -29,13 +29,14 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 			}
 			<Datepicker
 				{ ...props }
-				inputClassName='rounded-[5px] tracking-normal focus:ring-0 focus:border-0 text-[16px]'
+				inputClassName='rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[16px]'
 				asSingle={ true }
 				useRange={ false }
 				primaryColor='green'
+				displayFormat={ props.dateFormat }
 				value={ { startDate: new Date(props.value ?? ''), endDate: new Date(props.value ?? '') } }
 				onChange={ onChange }
-				placeholder={ 'Choose Preferred Day' }
+				placeholder={ props?.placeholder ?? 'Choose Preferred Day' }
 			/>
 		</DateFieldWrapper>
 	);

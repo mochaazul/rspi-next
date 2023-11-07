@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 interface UseFormtype<T> {
 	fields: T,
@@ -22,6 +22,7 @@ interface UseFormReturnType<T> {
 
 const useForm = <T>({ fields }: UseFormtype<T>) => {
 	const [form, setForm] = useState<T | any>(fields);
+	const [error, setError] = useState<T | any>(fields);
 
 	const registeredValue = (fieldname: keyof typeof fields, isCustomChange?: boolean) => {
 		const inputObj = form[fieldname];

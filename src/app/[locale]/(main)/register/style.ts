@@ -10,7 +10,6 @@ const RegisterPageStyle = styled.div`
 
   .register {
     border: 3px solid var(--color-blue-100);
-    padding: 30px;
     border-radius: 15px;
   }
 
@@ -21,7 +20,6 @@ const RegisterPageStyle = styled.div`
     margin-bottom: 30px;
   }
   .group-wrapper {
-    min-height: 75px;
   }
 `;
 

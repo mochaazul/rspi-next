@@ -1,17 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Button, Form, Text } from 'components';
-import { Languages, colors } from 'constant';
+import { Languages, colors, icons } from 'constant';
 import Images from 'constant/images';
 
 import useOTPPage from './useOTPPage';
-import OTPPageStyle, { Box } from './style';
+import OTPPageStyle, { Box, WarningNote } from './style';
+import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
+import { RegisterOnboardType } from 'interface';
+import { registerOnboard } from 'stores/actions';
 
-const { heading, subHeading, form: { backBtnlabel, submitBtnLabel } } = Languages.page.otpVerification;
+const { heading, subHeading, resendOtp, resendWarn, form: { backBtnlabel, submitBtnLabel } } = Languages.page.otpVerification;
 
-const CountDownText = () => {
-	const [count, setCount] = useState(100);
+type Props = {
+	onZero?: () => void;
+	onResend?: () => void,
+	count: number,
+	setCount: Dispatch<SetStateAction<number>>;
+};
+
+const CountDownText = ({ onZero, onResend, count, setCount }: Props) => {
 
 	useEffect(() => {
 		if (count <= 0) return;
@@ -25,6 +34,31 @@ const CountDownText = () => {
 		const [minutes, seconds] = [jsDate.getMinutes(), jsDate.getSeconds()];
 		return `${ String(minutes).padStart(2, '0') }:${ String(seconds).padStart(2, '0') }`;
 	};
+	if (!count) return (
+		<>
+			<Text
+				onClick={ onResend }
+				text={ resendOtp }
+				fontSize={ '20px' }
+				lineHeight={ '24px' }
+				fontWeight={ '400' }
+				className='mt-[16px] mb-[16px] cursor-pointer'
+				color={ colors.paradiso.default }
+				textAlign='center'
+			/>
+			<WarningNote>
+				<icons.ExclamationGreen />
+				<Text
+					text={ resendWarn }
+					fontSize={ '14px' }
+					lineHeight={ '24px' }
+					fontWeight={ '600' }
+					color={ colors.paradiso.default }
+					textAlign='center'
+				/>
+			</WarningNote>
+		</>
+	);
 
 	return (
 		<Text
@@ -40,15 +74,41 @@ const CountDownText = () => {
 };
 
 const OTPPage = () => {
+	const registerOnboardAsync = useAppAsyncDispatch<RegisterOnboardType>(registerOnboard);
+	const [searchParams] = useSearchParams();
+	const [count, setCount] = useState(60);
+
 	const {
 		onClickOTP,
 		OTPField
 	} = useOTPPage();
 	const {
-		registeredValue, isFormValid, onSubmit
+		registeredValue, isFormValid, onSubmit, getCurrentForm
 	} = Form.useForm({ fields: OTPField });
 
+	const [otpCount, setOtpCount] = useState<number>(0);
+
 	const navigate = useNavigate();
+
+	const onSubmitHandler = () => {
+		const { otp } = getCurrentForm();
+		onClickOTP({
+			otp: otp.value
+		});
+	};
+
+	const resendOtpHandler = async () => {
+		setCount(60);
+		await registerOnboardAsync({
+			payload: {
+				birth_date: searchParams.get('bod') ?? '',
+				medical_record: searchParams.get('mr') ?? '',
+				name: '',
+				phone: searchParams.get('phone') ?? ''
+			}
+		});
+		setOtpCount(prev => prev + 1);
+	};
 
 	return (
 		<OTPPageStyle>
@@ -59,7 +119,7 @@ const OTPPage = () => {
 				<Text text={ heading } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
 				{ /* TODO : INI NOMOR HANDPHONE NYa masih hardcode ?? */ }
 				<Text
-					text={ `${ subHeading } (+62)987654321` }
+					text={ `${ subHeading }` }
 					fontSize={ '20px' }
 					lineHeight={ '24px' }
 					fontWeight={ '400' }
@@ -67,16 +127,9 @@ const OTPPage = () => {
 					color={ colors.grey.pencil }
 					textAlign='center'
 				/>
-				<CountDownText />
-				<Form
-					onSubmit={ e => {
-						const { otp } = onSubmit(e);
-						onClickOTP({
-							otp: otp.value
-						});
-					} }
-					autoComplete='off'
-				>
+				<CountDownText onResend={ resendOtpHandler } count={ count } setCount={ setCount } />
+
+				<Form autoComplete='off'>
 					<Form.FormGroup className='group-wrapper w-full'>
 						<Form.TextFieldPin
 							className='input'
@@ -85,7 +138,7 @@ const OTPPage = () => {
 						/>
 					</Form.FormGroup>
 				</Form>
-				<Button className='mt-[32px]' theme='primary' disabled={ !isFormValid() } type='submit'>{ submitBtnLabel }</Button>
+				<Button className='mt-[32px]' theme='primary' disabled={ !isFormValid() } onClick={ () => { onSubmitHandler(); } }>{ submitBtnLabel }</Button>
 				<Button className='mt-[32px]' theme='text' onClick={ () => navigate('/pin-create') }>{ backBtnlabel }</Button>
 			</Box>
 		</OTPPageStyle>

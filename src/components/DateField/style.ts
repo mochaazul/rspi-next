@@ -4,20 +4,24 @@ import Datepicker from 'react-tailwindcss-datepicker';
 
 import { colors, icons } from 'constant';
 
-interface DateFieldType {
-  iconPosition?: 'left' | 'right';
-  iconName?: keyof typeof icons;
+interface DateFieldType extends Omit<typeof Datepicker, 'value'| 'onChange'> {
+	iconPosition?: 'left' | 'right';
+	iconName?: keyof typeof icons;
 }
 
-export interface DatepickerProps {
-  name?: string;
-  value?: string;
-  onChangeValue?: ({ name, value }: { name?: string; value?: string; }) => void;
+export interface DatepickerProps extends DateFieldType {
+	name?: string;
+	value?: string;
+	placeholder?: string;
+	onChangeValue?: ({ name, value }: { name?: string; value?: string; }) => void;
+	popOverDirection?: 'up' | 'down'
+	onIconClick?: () => any;
+  dateFormat? : string
 }
 
 export interface InputType extends DatepickerProps, DateFieldType {
-  ref?: React.RefObject<HTMLInputElement>;
-  onIconClick?: () => any;
+	ref?: React.RefObject<HTMLInputElement>;
+	onIconClick?: () => any;
 }
 
 export const DateFieldWrapper = styled.div<DateFieldType>`
@@ -30,6 +34,10 @@ export const DateFieldWrapper = styled.div<DateFieldType>`
     left: ${ props => (props.iconPosition === 'left' || !(!!props.iconPosition)) && '10px' };
     right: ${ props => props.iconPosition === 'right' && '10px' };
     z-index: 1;
+  }
+
+  .bottom-full{
+    bottom: unset !important;
   }
 
   input {

@@ -26,14 +26,14 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 	}
 
 	return (
-		<div className='flex flex-row ml-[-0.25rem]'>
+		<div className='flex flex-row ml-[-0.25rem] max-sm:px-4'>
 			{
 				datas.map((data, index) => (
 					<div key={ index } className='flex flex-row items-center'>
 						<Link to={ data.url }>
 							<ItemStyle className='px-1 py-1 max-sm:px-0.5'>
 								<Text
-									className='item-text'
+									className='item-text text-ellipsis'
 									fontSize='14px'
 									lineHeight='17px'
 									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }

@@ -1,10 +1,12 @@
-const fonts = {
+export default {
 	poppinsBold: 'Poppins-Bold',
 	poppinsSemiBold: 'Poppins-SemiBold',
 	poppinsMedium: 'Poppins-Medium',
 	poppinsExtraBold: 'Poppins-ExtraBold',
 	poppinsRegular: 'Poppins-Regular',
+
 	lato: 'Lato',
+
 	sizes: {
 		xl: '56px',
 		l: '48px',
@@ -19,5 +21,3 @@ const fonts = {
 		xxs: '11px',
 	},
 };
-
-export default fonts;

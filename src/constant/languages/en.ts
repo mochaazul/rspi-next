@@ -276,7 +276,7 @@ const en = {
 		},
 		landingPage: {
 			services: {
-				tabsLabel: ['Find a Doctor', 'Telemedicine'],
+				tabsLabel: ['Find a Doctor'],
 				findDoctor: {
 					form: {
 						resetBtnLabel: 'Reset',

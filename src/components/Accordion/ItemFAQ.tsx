@@ -7,6 +7,9 @@ import { Text } from 'components';
 
 import { ItemType } from '.';
 import { ItemStyle } from './style';
+import languages from 'constant/languages';
+
+const { readMoreLabel } = languages.page.contactUs.faq;
 
 const ItemFAQ = (props: ItemType) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -62,7 +65,7 @@ const ItemFAQ = (props: ItemType) => {
 												color={ colors.paradiso.accent1 }
 												className='ml-1 inline-block'
 												subClassName='text-justify max-sm:leading-[18px]'
-												text='Baca Selengkapnya'
+												text={ readMoreLabel }
 											/>
 										</Link> :
 										null

@@ -16,22 +16,10 @@ const {
 	resetForm: {
 		newPasswordConfirmationLabel,
 		newPasswordLabel,
-		oldPasswordLabel,
 	}
 } = Languages.page.resetPassword;
 
 export const resetPasswordField = {
-	old_password: {
-		...createFieldConfig({
-			name: 'old_password',
-			type: 'password'
-		}),
-		validationRules: [
-			requiredRule('password'),
-			minLengthRule('password', 8)
-		],
-		label: oldPasswordLabel
-	},
 	new_password: {
 		...createFieldConfig({
 			name: 'new_password',

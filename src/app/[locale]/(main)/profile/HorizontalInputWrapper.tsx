@@ -12,11 +12,12 @@ interface HorizontalInputType {
 	label: string,
 	labelInfo?: string,
 	value?: string,
+	inputType?: string,
 }
 
 const HorizontalInputWrapper = (props: HorizontalInputType) => {
 	return (
-		<div className='grid grid-cols-[240px_1fr] items-center'>
+		<div className='grid min-[480px]:grid-cols-[240px_1fr] items-center max-[480px]:mb-4'>
 			<WithInputLabel.LabelText className='mb-0 flex gap-3 items-center'>
 				{ props.label }
 				{
@@ -40,9 +41,29 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 				}
 			</WithInputLabel.LabelText>
 			<div className='col-auto'>
-				<Form.TextField
-					value={ props.value }
-					{ ...props.inputProps } />
+				{
+					props.inputType === 'dropdown' ?
+						<Form.Dropdown
+							menuItems={ [
+								{
+									key: '1',
+									value: 'Male',
+									label: 'Male'
+								},
+								{
+									key: '2',
+									value: 'Female',
+									label: 'Female'
+								}
+							] }
+							{ ...props.inputProps } /> :
+						props.inputType === 'date' ?
+							<Form.DateField
+								{ ...props.inputProps } /> :
+							<Form.TextField
+								{ ...props.inputProps } />
+				}
+
 			</div>
 		</div>
 	);
