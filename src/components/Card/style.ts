@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { GlobalBoxShadow } from 'constant/globalstyle';
-import { colors } from 'constant';
+import { GlobalBoxShadow } from '@/constant/globalstyle';
+import { colors } from '@/constant';
 
 export interface CardStyleType {
-  hoverHeight?: string;
+	hoverHeight?: string;
 }
 
 export const CardWrapper = styled(Link)`

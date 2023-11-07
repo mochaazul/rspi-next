@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 
-import { Text } from 'components';
-import { colors } from 'constant';
+import { Text } from '@/components';
+import { colors } from '@/constant';
 
 import { ItemStyle, MenuItemStyle } from './style';
 

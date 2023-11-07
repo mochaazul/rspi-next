@@ -1,35 +1,35 @@
-import Modal from 'components/Modal';
+import Modal from '@/components/Modal';
 import {
 	Divider, FooterSection, HeaderItem, HeaderSection, NumberContainer, PrivacyPolicyContainer, ScrollableContentContainer
 } from './style';
-import Text from 'components/Text';
+import Text from '@/components/Text';
 import { ChangeEvent, ChangeEventHandler, useState } from 'react';
-import loremipsum from 'pages/RegisterOnboard/loremipsum';
-import Checkbox from 'components/Checkbox';
-import Button from 'components/Button';
+import loremipsum from '@/app/[locale]/[main]/RegisterOnboard/loremipsum';
+import Checkbox from '@/components/Checkbox';
+import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
-import Spinner from 'components/Spinner';
+import Spinner from '@/components/Spinner';
 
 type checkedValsType = {
-  pp: boolean,
-  toc: boolean
-}
+	pp: boolean,
+	toc: boolean;
+};
 
 type Props = {
-  isOpen: boolean
-  onFinish: () => void;
-  onClose: () => void,
-  loading: boolean
-}
+	isOpen: boolean;
+	onFinish: () => void;
+	onClose: () => void,
+	loading: boolean;
+};
 
 const PrivacyPolicyModal = ({
 	isOpen,
 	onFinish,
 	onClose,
 	loading
-}:Props) => {
+}: Props) => {
 	const navigate = useNavigate();
-	const [step, setStep] = useState<'pp'|'toc'>('pp');
+	const [step, setStep] = useState<'pp' | 'toc'>('pp');
 	const [checkVals, setCheckVals] = useState<checkedValsType>({
 		pp: false,
 		toc: false
@@ -58,11 +58,11 @@ const PrivacyPolicyModal = ({
 							fontWeight='400'
 							lineHeight='20px'
 						>
-              Saya <strong>menyetujui</strong> ketentuan Privacy Policy.
+							Saya <strong>menyetujui</strong> ketentuan Privacy Policy.
 						</Text>
-					}/>
+					} />
 					<Button label='Lanjut' disabled={ !checkVals['pp'] } onClick={ onNext }>
-						{ loading ? <Spinner/> : 'Lanjut' }
+						{ loading ? <Spinner /> : 'Lanjut' }
 					</Button>
 				</>
 			);
@@ -75,15 +75,15 @@ const PrivacyPolicyModal = ({
 						fontWeight='400'
 						lineHeight='20px'
 					>
-            Saya <strong>menyetujui</strong> ketentuan Terms and Condition.
+						Saya <strong>menyetujui</strong> ketentuan Terms and Condition.
 					</Text>
-				}/>
+				} />
 				<Button label='Lanjut' disabled={ !checkVals['toc'] || loading } onClick={ onNext }>
-					{ loading ? <Spinner/> : 'Lanjut' }
+					{ loading ? <Spinner /> : 'Lanjut' }
 				</Button>
 			</>
 		);
-   
+
 	};
 
 	return <Modal visible={ isOpen } width='678px' noPadding onClose={ onClose }>

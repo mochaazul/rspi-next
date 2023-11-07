@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GlobalCardShadow } from 'constant/globalstyle';
+import { GlobalCardShadow } from '@/constant/globalstyle';
 
 export const ResetPasswordStyle = styled.div`
     display: flex;

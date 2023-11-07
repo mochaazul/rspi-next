@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Images, Languages, colors } from 'constant';
+import { Images, Languages, colors } from '@/constant';
 import {
 	Button, Text, Form, NotificationPanel, Spinner, Checkbox
-} from 'components';
-import { UserState } from 'interface';
-import { useAppDispatch, useTypedSelector } from 'hooks';
-import { PropsTypes as NotificationPanelTypes } from 'components/NotificationPanel';
+} from '@/components';
+import { UserState } from '@/interface';
+import { useAppDispatch, useTypedSelector } from '@/hooks';
+import { PropsTypes as NotificationPanelTypes } from '@/components/NotificationPanel';
 
 import useRegisterOnboard from './useRegisterOnboard';
 import { RegisterOnboardStyle, Box } from './style';
-import { clearError } from 'stores/actions';
-import PrivacyPolicyModal from 'components/PrivacyPolicyModal';
+import { clearError } from '@/stores/actions';
+import PrivacyPolicyModal from '@/components/PrivacyPolicyModal';
 
 const { heading, mrNotAvailableBtnLabel, subHeading, submitBtnLabel, form, errors } = Languages.page.registerOnboard;
 

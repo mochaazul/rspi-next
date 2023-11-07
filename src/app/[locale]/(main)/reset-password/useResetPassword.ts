@@ -1,16 +1,16 @@
-import { updatePassword as updatePasswordAction } from 'stores/actions';
-import { useAppDispatch } from 'hooks';
+import { updatePassword as updatePasswordAction } from '@/stores/actions';
+import { useAppDispatch } from '@/hooks';
 import {
 	requiredRule,
 	minLengthRule,
 	createFieldConfig,
 	emailRule
-} from 'helpers';
-import { UpdatePasswordType } from 'interface';
-import { Languages } from 'constant';
-import { navigation } from 'helpers';
+} from '@/helpers';
+import { UpdatePasswordType } from '@/interface';
+import { Languages } from '@/constant';
+import { navigation } from '@/helpers';
 
-import { removeUser as removeUserData } from 'stores/User';
+import { removeUser as removeUserData } from '@/stores/User';
 
 const {
 	resetForm: {

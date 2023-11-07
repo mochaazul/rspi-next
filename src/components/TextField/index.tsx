@@ -1,7 +1,7 @@
 import * as FeatherIcons from 'react-feather';
 
-import { icons } from 'constant';
-import withInputLabel from 'components/withInputLabel';
+import { icons } from '@/constant';
+import withInputLabel from '@/components/withInputLabel';
 
 import {
 	IconWrapper, Input, InputMaskedStyled, InputType, TextFieldWrapper
@@ -35,7 +35,7 @@ const TextField = ({ onIconClick, isNumber, mask, ...props }: InputType) => {
 			{
 				!isNumber
 					? <Input { ...props } />
-					: <InputMaskedStyled mask={ mask ?? '' } maskChar={ '' } { ...restProps }/>
+					: <InputMaskedStyled mask={ mask ?? '' } maskChar={ '' } { ...restProps } />
 			}
 		</TextFieldWrapper>
 	);

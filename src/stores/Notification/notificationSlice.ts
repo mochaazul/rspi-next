@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { NotificationState } from 'interface';
+import { NotificationState } from '@/interface';
 
 import { getNotification, readNotification } from './notificationThunk';
 

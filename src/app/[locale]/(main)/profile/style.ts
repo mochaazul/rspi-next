@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { colors } from 'constant';
-import { GlobalCardShadow } from 'constant/globalstyle';
+import { colors } from '@/constant';
+import { GlobalCardShadow } from '@/constant/globalstyle';
 
 const ProfilePageStyle = styled.div`
   .card-shadow {

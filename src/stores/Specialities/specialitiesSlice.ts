@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { I_SpecialitiesState, I_SubSpecialities } from 'interface/specialities';
+import { I_SpecialitiesState, I_SubSpecialities } from '@/interface/specialities';
 import { getSpecialities, getClinics } from './specialitiesThunk';
-import { ResponseStatus } from 'interface';
+import { ResponseStatus } from '@/interface';
 
 const initialState: I_SpecialitiesState = {
 	specialities: [],

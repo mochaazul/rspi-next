@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { Images, colors } from 'constant';
-import { Button, Modal, Text } from 'components';
-import { useTypedSelector } from 'hooks';
-import { HospitalState, UserState } from 'interface';
+import { Images, colors } from '@/constant';
+import { Button, Modal, Text } from '@/components';
+import { useTypedSelector } from '@/hooks';
+import { HospitalState, UserState } from '@/interface';
 
 import { CallForAmbulanceStyle, ModalRSTelephoneStyle } from './style';
 
@@ -14,12 +14,12 @@ const CallForAmbulance = () => {
 	const [visible, setVisible] = useState(false);
 
 	const shouldGiveMargin = !user.medical_record && user.token;
-	
+
 	return (
 		<>
 			<CallForAmbulanceStyle className={ `
 				fixed cursor-pointer flex align-center justify-center 
-				max-sm:w-[72px] max-sm:h-[72px]  ${shouldGiveMargin ? 'bottom-24' : ''}
+				max-sm:w-[72px] max-sm:h-[72px]  ${ shouldGiveMargin ? 'bottom-24' : '' }
 			
 			` } onClick={ () => setVisible(true) }>
 				<div className='absolute w-[80%] h-[80%] mt-1 rounded-full hover:animate-ping z-20' style={ { backgroundColor: colors.red.accentOpacity90 } } />

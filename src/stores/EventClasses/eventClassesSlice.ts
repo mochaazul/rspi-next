@@ -1,6 +1,6 @@
 import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
 
-import { EventClassesState, ResponseStatus } from 'interface';
+import { EventClassesState, ResponseStatus } from '@/interface';
 
 import { getEvents, getEventsByID } from './eventClassesThunk';
 

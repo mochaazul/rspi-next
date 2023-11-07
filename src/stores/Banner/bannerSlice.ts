@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { BannerState } from 'interface';
+import { BannerState } from '@/interface';
 
 import { getBanner } from './bannerThunk';
 

@@ -1,5 +1,5 @@
-import { Modal, Text, Button } from 'components';
-import { icons, colors } from 'constant';
+import { Modal, Text, Button } from '@/components';
+import { icons, colors } from '@/constant';
 
 import { ModalStyle } from './style';
 

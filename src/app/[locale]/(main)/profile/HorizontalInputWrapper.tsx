@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { colors } from 'constant';
-import { icons } from 'constant';
-import { Form, Text } from 'components';
-import WithInputLabel from 'components/withInputLabel';
+import { colors } from '@/constant';
+import { icons } from '@/constant';
+import { Form, Text } from '@/components';
+import WithInputLabel from '@/components/withInputLabel';
 
 import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
 

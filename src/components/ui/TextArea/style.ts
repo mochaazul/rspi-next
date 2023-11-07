@@ -1,8 +1,8 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-import { colors } from 'constant';
-import { GlobalAllTransition5ms } from 'constant/globalstyle';
+import { colors } from '@/constant';
+import { GlobalAllTransition5ms } from '@/constant/globalstyle';
 
 export interface TextAreaType extends React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
 	label?: string;

@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as FeatherIcon from 'react-feather';
 
-import { Text } from 'components';
-import withInputLabel from 'components/withInputLabel';
-import { colors, icons } from 'constant';
+import { Text } from '@/components';
+import withInputLabel from '@/components/withInputLabel';
+import { colors, icons } from '@/constant';
 
 import { Option, OptionsWrapper, SelectStyled, SelectWrapper } from './style';
 

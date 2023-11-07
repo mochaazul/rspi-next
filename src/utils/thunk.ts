@@ -1,6 +1,6 @@
 import { createAsyncThunk, ThunkDispatch } from '@reduxjs/toolkit';
-import { generateQueryString } from 'helpers';
-import { Pagination, RequestOptionGenericType } from 'interface';
+import { generateQueryString } from '@/helpers';
+import { Pagination, RequestOptionGenericType } from '@/interface';
 import { apiCall } from './api';
 
 type ThunkUtilsType = {

@@ -1,8 +1,8 @@
 import React, { useRef, useCallback } from 'react';
 import * as Icons from 'react-feather';
 
-import { colors } from 'constant';
-import Text from 'components/Text';
+import { colors } from '@/constant';
+import Text from '@/components/Text';
 
 import { CheckboxStyle, InputType } from './style';
 

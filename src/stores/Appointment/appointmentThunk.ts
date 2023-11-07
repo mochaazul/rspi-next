@@ -1,7 +1,7 @@
-import { HospitalDetail, PayloadHospital } from 'interface';
-import { endpoints } from 'constant';
-import { thunkUtils } from 'utils';
-import { I_AppointmentPayload } from 'interface/appointment';
+import { HospitalDetail, PayloadHospital } from '@/interface';
+import { endpoints } from '@/constant';
+import { thunkUtils } from '@/utils';
+import { I_AppointmentPayload } from '@/interface/appointment';
 
 export const getHospitals = thunkUtils<HospitalDetail[], PayloadHospital>({
 	type: 'hospital/getHospitals',

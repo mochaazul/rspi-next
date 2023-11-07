@@ -1,7 +1,7 @@
-import Modal from 'components/Modal';
+import Modal from '@/components/Modal';
 import { PinModalContainer } from './style';
-import Text from 'components/Text';
-import Button from 'components/Button';
+import Text from '@/components/Text';
+import Button from '@/components/Button';
 
 type Props = {
 	visible: boolean,

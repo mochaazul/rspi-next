@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { EventClassesDetail, PayloadEventClasses } from 'interface';
-import { endpoints } from 'constant';
-import { thunkUtils } from 'utils';
+import { EventClassesDetail, PayloadEventClasses } from '@/interface';
+import { endpoints } from '@/constant';
+import { thunkUtils } from '@/utils';
 
 export const getEvents = thunkUtils<EventClassesDetail[], PayloadEventClasses>({
 	type: 'events/getEvents',

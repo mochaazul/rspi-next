@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { colors } from 'constant';
+import { colors } from '@/constant';
 
 type InputWrapperType = {
-  width?: string;
+	width?: string;
 };
 
 export const LabelText = styled.label`

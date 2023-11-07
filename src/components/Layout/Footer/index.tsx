@@ -19,8 +19,8 @@ import FooterStyled, { FooterContainer } from './style';
 import Image from 'next/image';
 
 const FooterLayout = () => {
-	
-	const router = useRouter()
+
+	const router = useRouter();
 
 	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice');
 	// const fetchFooter = useAppDispatch(getFooterSlug);
@@ -110,8 +110,8 @@ const FooterLayout = () => {
 						<div>
 							<Text fontSize='14px' color={ colors.paradiso.default } className='mt-2'>GET RSPI MOBILE</Text>
 							<div className='store-images-container'>
-								<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'><Image src={Images.GooglePlay} alt='google play icon' className='store-images' /></a>
-								<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'><Image src={Images.AppStore} alt='app store icon' className='store-images' /></a>
+								<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'><Image src={ Images.GooglePlay } alt='google play icon' className='store-images' /></a>
+								<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'><Image src={ Images.AppStore } alt='app store icon' className='store-images' /></a>
 							</div>
 						</div>
 					</div>

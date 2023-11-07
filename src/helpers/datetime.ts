@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { localStorage } from 'helpers';
-import { I_MasterDoctorClinicSchedule } from 'interface';
+import { localStorage } from '@/helpers';
+import { I_MasterDoctorClinicSchedule } from '@/interface';
 import moment from 'moment';
 
 type CalendarDayItem = {

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import Text from 'components/Text';
-import { colors, icons } from 'constant';
+import Text from '@/components/Text';
+import { colors, icons } from '@/constant';
 
 import { ItemStyle } from './style';
 

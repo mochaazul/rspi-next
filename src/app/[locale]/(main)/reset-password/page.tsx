@@ -1,15 +1,15 @@
-import { Images, Languages, colors } from 'constant';
-import { Button, Text, Form, NotificationPanel } from 'components';
+import { Images, Languages, colors } from '@/constant';
+import { Button, Text, Form, NotificationPanel } from '@/components';
 
 import { ResetPasswordStyle, Box } from './style';
 import useResetPassword from './useResetPassword';
-import SpinVerification from 'components/SpinVerification';
+import SpinVerification from '@/components/SpinVerification';
 import { FormEvent, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { useTypedSelector } from 'hooks';
-import { NewPasswordPayload, UserState } from 'interface';
-import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
-import { setNewPassword, verifyResetToken } from 'stores/actions';
+import { useTypedSelector } from '@/hooks';
+import { NewPasswordPayload, UserState } from '@/interface';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import { setNewPassword, verifyResetToken } from '@/stores/actions';
 import { isEmpty } from 'lodash';
 
 const {

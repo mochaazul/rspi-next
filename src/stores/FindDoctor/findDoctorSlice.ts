@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import { FindDoctorDetail, FindDoctorState, ResponseStatus } from 'interface';
+import { FindDoctorDetail, FindDoctorState, ResponseStatus } from '@/interface';
 
 import {
 	getAllDoctor, getDoctor, getDoctorCalendar, getDoctorDetail, getDoctorListDropdown, getDoctorTimeSlot, loadMoreDoctor
@@ -25,7 +25,7 @@ export const findDoctorSlice = createSlice({
 	initialState,
 	reducers: { findDoctor: () => initialState },
 	extraReducers: builder => {
-	
+
 		builder.addCase(getAllDoctor.pending, (state, action) => {
 			state.loading = true;
 		});
@@ -76,7 +76,7 @@ export const findDoctorSlice = createSlice({
 			state.loading = false;
 			state.detail = action.payload.data as FindDoctorDetail;
 		});
-	
+
 		builder.addCase(getDoctorCalendar.fulfilled, (state, action) => {
 			state.doctorCalendarLoading = false;
 			state.doctorCalendar = action.payload.data;

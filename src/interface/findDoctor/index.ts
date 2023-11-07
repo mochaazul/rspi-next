@@ -1,5 +1,5 @@
-import { PickerItem } from 'components/DropdownSearch';
-import { Pagination, ResponseStatus } from 'interface';
+import { PickerItem } from '@/components/DropdownSearch';
+import { Pagination, ResponseStatus } from '@/interface';
 
 export interface FindDoctorState {
 	doctor: FindDoctorDetail[];

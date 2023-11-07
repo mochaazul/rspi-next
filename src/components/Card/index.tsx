@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as Icons from 'react-feather';
 
-import { colors, icons } from 'constant';
-import { Text, Share } from 'components';
+import { colors, icons } from '@/constant';
+import { Text, Share } from '@/components';
 
 import {
 	CardWrapper,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigation, useOutlet, useParams } from 'react-router-dom';
 
-import { Footer, Header, CallForAmbulance } from 'components';
+import { Footer, Header, CallForAmbulance } from '@/components';
 
 import {
 	OutletStyle,
@@ -12,9 +12,9 @@ import {
 	PanelH4,
 	PanelV1
 } from './style';
-import DevTools from 'components/DevTools';
-import { appStage } from 'config';
-import MedicalRecordReminder from 'components/MedicalRecordReminder';
+import DevTools from '@/components/DevTools';
+import { appStage } from '@/config';
+import MedicalRecordReminder from '@/components/MedicalRecordReminder';
 
 // we use this values to determine where shoul we display reminder component
 const blacklistedRoute = ['/patient-portal', '/doctor-detail', '/book-appointment'];

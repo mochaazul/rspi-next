@@ -1,9 +1,9 @@
 import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
 
-import {  ResponseStatus } from 'interface';
+import { ResponseStatus } from '@/interface';
 
 import { bookAppointment, getHospitals } from './appointmentThunk';
-import { AppointmentState } from 'interface/Book';
+import { AppointmentState } from '@/interface/Book';
 
 const initialState: AppointmentState = {
 	timeSlot: [{
