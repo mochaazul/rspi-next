@@ -1,4 +1,4 @@
-import { Pagination, ResponseStatus } from 'interface/network';
+import { Pagination, ResponseStatus } from '@/interface/network';
 
 export interface I_SpecialitiesResponse {
 	id: number;

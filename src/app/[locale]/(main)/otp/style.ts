@@ -1,4 +1,4 @@
-import { GlobalCardShadow } from 'constant/globalstyle';
+import { GlobalCardShadow } from '@/constant/globalstyle';
 import styled from 'styled-components';
 
 const OTPPageStyle = styled.div`

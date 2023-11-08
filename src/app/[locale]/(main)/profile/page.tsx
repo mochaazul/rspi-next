@@ -13,28 +13,28 @@ import {
 	Form,
 	Modal,
 	NotificationPanel
-} from 'components';
-import { Images, Languages, colors } from 'constant';
+} from '@/components';
+import { Images, Languages, colors } from '@/constant';
 import {
 	navigation, localStorage, createFieldConfig, requiredRule, minLengthRule, maxLengthRule
-} from 'helpers';
+} from '@/helpers';
 import {
 	BreadcrumbsProps, CheckPinType, UpdateAvatarType, UpdateEmailType, UpdateProfileType, UserState
-} from 'interface';
-import { getAge } from 'helpers/getAge';
-import { useAppDispatch, useTypedSelector } from 'hooks';
-import { PatientState } from 'interface/PatientProfile';
-import { getLastVisitHospital, getProfileDetail, uploadPhotoProfile } from 'stores/PatientProfile';
+} from '@/interface';
+import { getAge } from '@/helpers/getAge';
+import { useAppDispatch, useTypedSelector } from '@/hooks';
+import { PatientState } from '@/interface/PatientProfile';
+import { getLastVisitHospital, getProfileDetail, uploadPhotoProfile } from '@/stores/PatientProfile';
 
 import ProfilePageStyle from './style';
 import HorizontalInputWrapper from './HorizontalInputWrapper';
 import useProfilePage from './useProfilePage';
-import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
-import { getAppointmentList, updateEmail, updateProfile } from 'stores/actions';
-import { checkPin, removeUser as removeUserData, updateUserInfo } from 'stores/User';
-import { splitDate } from 'helpers/datetime';
-import PinModal from 'components/PinModal';
-import { PinModalContainer } from 'components/PinModal/style';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import { getAppointmentList, updateEmail, updateProfile } from '@/stores/actions';
+import { checkPin, removeUser as removeUserData, updateUserInfo } from '@/stores/User';
+import { splitDate } from '@/helpers/datetime';
+import PinModal from '@/components/PinModal';
+import { PinModalContainer } from '@/components/PinModal/style';
 
 type DisabledInputs = {
 	email: boolean,

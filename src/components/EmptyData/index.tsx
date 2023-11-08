@@ -1,5 +1,5 @@
-import { Images, colors } from 'constant';
-import { Text } from 'components';
+import { Images, colors } from '@/constant';
+import { Text } from '@/components';
 
 interface PropsType {
 	menu: string;

@@ -19,10 +19,10 @@ import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
 
-import Text from '@/components/ui/Text';
-import Button from '@/components/ui/Button';
-import { MainNavLanguage } from '@/components/ui/MainNavLanguage';
-import Modal from '@/components/ui/Modal';
+import Text from '@/components/Text';
+import Button from '@/components/Button';
+import MainNavLanguage from '@/components/MainNavLanguage';
+import Modal from '@/components/Modal';
 
 // import { UserState } from '../../../interface/user';
 // import HospitalState from '../../../interface/Hospital';
@@ -291,7 +291,10 @@ export const Header: React.FC = () => {
 									isLoggedIn ?
 										<>
 											<a href='javascript:void(0)' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<icons.Notif />
+												<Image
+													src={icons.Notif}
+													alt=""
+												/>
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>0</span>
 											</a>

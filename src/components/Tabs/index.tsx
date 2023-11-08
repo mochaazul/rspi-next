@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { colors } from 'constant';
-import Text from 'components/Text';
+import { colors } from '@/constant';
+import Text from '@/components/Text';
 
 import { TabsDataStyle } from './style';
 

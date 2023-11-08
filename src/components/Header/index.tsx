@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import * as Icons from 'react-feather';
 
-import { useTypedSelector, useAppDispatch } from 'hooks';
-import { Images, icons, colors } from 'constant';
-import { Text, Button, MainNavLanguage, Modal } from 'components';
-import { navigation, localStorage } from 'helpers';
-import { removeUser as removeUserData } from 'stores/User';
-import { getLanguage } from 'helpers/localStorage';
+import { useTypedSelector, useAppDispatch } from '@/hooks';
+import { Images, icons, colors } from '@/constant';
+import { Text, Button, MainNavLanguage, Modal } from '@/components';
+import { navigation, localStorage } from '@/helpers';
+import { removeUser as removeUserData } from '@/stores/User';
+import { getLanguage } from '@/helpers/localStorage';
 import {
 	UserState,
 	HospitalState,
 	FacilityServicesState,
 	CenterOfExcellenceState,
 	NotificationState,
-} from 'interface';
+} from '@/interface';
 
 import HeaderStyle from './style';
-import images from 'constant/images';
-import { getNotification, readNotification } from 'stores/Notification';
+import images from '@/constant/images';
+import { getNotification, readNotification } from '@/stores/Notification';
 import moment from 'moment';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const Header: React.FC = () => {
 	const [dropdownHide, setDropdownHide] = useState(true);
@@ -158,13 +160,13 @@ const Header: React.FC = () => {
 				<div className={ 'xl:!px-[40px] navbar animate-slideUpToDown transition-all duration-300' }>
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
-							<Link to='/'>
+							<Link href='/'>
 								<Images.LogoRSPI />
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
 							<div id='home' className='py-[22px] max-sm:py-[10px]'>
-								<Link to='/'>
+								<Link href='/'>
 									<Text text={ 'Home' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 								</Link>
 							</div>
@@ -198,7 +200,7 @@ const Header: React.FC = () => {
 								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ centerOfExcellence.map((item, idx) => (
-											<Link to={ `/center-of-excellence/${ item.id }` } key={ idx }>
+											<Link href={ `/center-of-excellence/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 													<img src={ item?.img_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
@@ -220,7 +222,7 @@ const Header: React.FC = () => {
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ facilityServices?.map((item, idx) => (
-											<Link to={ `/facilities/${ item.id }` } key={ idx }>
+											<Link href={ `/facilities/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 													<img src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
@@ -230,9 +232,9 @@ const Header: React.FC = () => {
 												</div>
 											</Link>
 										)) }
-										<Link to={ '/facilities/1234567890' } >
+										<Link href={ '/facilities/1234567890' } >
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-												<img src={ images.AestheticClinic } width={ 60 } height={ 60 } />
+												<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 												<div className='ml-[10px] w-[310px]'>
 													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 												</div>
@@ -247,7 +249,7 @@ const Header: React.FC = () => {
 								<Text text={ 'Career' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 							</div>
 
-							<Link id='find-doctor' className='py-[22px] max-sm:py-[10px]' to='/find-a-doctor'>
+							<Link id='find-doctor' className='py-[22px] max-sm:py-[10px]' href='/find-a-doctor'>
 								<Text text={ 'Find a Doctor' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 							</Link>
 
@@ -320,14 +322,14 @@ const Header: React.FC = () => {
 								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
 							</div>
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
-								<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
+									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
-								<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
+									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>

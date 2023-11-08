@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 
 const ScrollToTopOnTransition = () => {
-	const { pathname } = useLocation();
+	// const { pathname } = useLocation();
 
 	useEffect(() => {
 		window.scrollTo({ top: 0 });
-	}, [pathname]);
+	}, []); //pathname
 
 	return null;
 };

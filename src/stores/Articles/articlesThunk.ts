@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ArticleDetail, PayloadArticle } from 'interface';
-import { endpoints } from 'constant';
-import { thunkUtils } from 'utils';
+import { ArticleDetail, PayloadArticle } from '@/interface';
+import { endpoints } from '@/constant';
+import { thunkUtils } from '@/utils';
 
 export const getArticles = thunkUtils<ArticleDetail[], PayloadArticle>({
 	type: 'articles/getArticles',

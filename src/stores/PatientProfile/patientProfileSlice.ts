@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { PatientState } from 'interface/PatientProfile';
+import { PatientState } from '@/interface/PatientProfile';
 
 import {
 	getAppointmentList,
 	getLabResults, getLastVisitHospital, getProfileDetail, getVaccineHistory, getVisitHistories, giveDoctorRating, uploadPhotoProfile
 } from './patientProfileThunk';
-import { getLastVisitedHospitalHelper } from 'helpers/visitHelper';
+import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
 
 const initialState: PatientState = {
 	patientProfile: {},

@@ -1,17 +1,17 @@
-import Modal from 'components/Modal';
+import Modal from '@/components/Modal';
 import { PinModalContainer } from './style';
-import Text from 'components/Text';
-import languages from 'constant/languages';
-import Form from 'components/Form';
-import Button from 'components/Button';
-import { colors } from 'constant';
-import { useAppDispatch } from 'hooks';
-import { CheckPinType, PinType } from 'interface';
-import { checkPin } from 'stores/User';
-import { createFieldConfig, requiredRule } from 'helpers';
-import NotificationPanel from 'components/NotificationPanel';
+import Text from '@/components/Text';
+import languages from '@/constant/languages';
+import Form from '@/components/Form';
+import Button from '@/components/Button';
+import { colors } from '@/constant';
+import { useAppDispatch } from '@/hooks';
+import { CheckPinType, PinType } from '@/interface';
+import { checkPin } from '@/stores/User';
+import { createFieldConfig, requiredRule } from '@/helpers';
+import NotificationPanel from '@/components/NotificationPanel';
 import { useState } from 'react';
-import Spinner from 'components/Spinner';
+import Spinner from '@/components/Spinner';
 
 type Props = {
 	visible: boolean,

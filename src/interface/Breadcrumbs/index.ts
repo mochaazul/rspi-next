@@ -1,5 +1,5 @@
-import { BreadcrumbsType } from 'components/Breadcrumbs';
+import { BreadcrumbsType } from '@/components/Breadcrumbs';
 
 export interface BreadcrumbsProps {
-  breadcrumbsPath: BreadcrumbsType['datas'];
+	breadcrumbsPath: BreadcrumbsType['datas'];
 }

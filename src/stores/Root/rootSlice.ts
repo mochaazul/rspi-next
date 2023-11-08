@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { localStorage } from 'helpers';
-import { RootAppState } from 'interface';
-import { persistor } from 'stores';
+import { localStorage } from '@/helpers';
+import { RootAppState } from '@/interface';
+import { persistor } from '@/stores';
 
 const initialState: RootAppState = {
 	tokenIsUsed: false,

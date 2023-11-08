@@ -1,5 +1,5 @@
 import { MiddlewareAPI, Middleware } from '@reduxjs/toolkit';
-import { rootSlice } from 'stores/Root';
+import { rootSlice } from '@/stores/Root';
 
 /**
  * It's a middleware that checks if the action is a rejected promise and if the user is offline or does not have internet connection,

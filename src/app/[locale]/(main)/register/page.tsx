@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useTypedSelector } from 'hooks';
-import { UserState } from 'interface';
-import { Button, Form, Text, NotificationPanel } from 'components';
-import { Languages, colors } from 'constant';
-import Images from 'constant/images';
+import { useTypedSelector } from '@/hooks';
+import { UserState } from '@/interface';
+import { Button, Form, Text, NotificationPanel } from '@/components';
+import { Languages, colors } from '@/constant';
+import Images from '@/constant/images';
 
 import useRegisterPage from './useRegisterPage';
 import RegisterPageStyle from './style';
-import InfoModal from './InfoModal';
+import InfoModal from './InfoModal/index';
 
 const { heading, subHeading, footer, form, registerBtnLabel, notificationMessage } = Languages.page.registerPage;
 

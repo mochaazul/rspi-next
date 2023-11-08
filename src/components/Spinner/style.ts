@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import { colors } from 'constant';
+import { colors } from '@/constant';
 
 export interface SpinnerStyleProps {
-  size: number;
-  borderWidth: number;
+	size: number;
+	borderWidth: number;
 }
 
 export const SpinnerStyle = styled.div<SpinnerStyleProps>`

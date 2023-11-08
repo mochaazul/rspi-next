@@ -1,23 +1,23 @@
 import React from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+// import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 const Navigation = () => {
-	const navigate = useNavigate();
-	const params = useParams();
+	// const navigate = useNavigate();
+	// const params = useParams();
 
-	const { state, pathname, search } = useLocation();
+	// const { state, pathname, search } = useLocation();
 
-	const useQuery = () => {
-		return React.useMemo(() => new URLSearchParams(search), [search]);
-	};
-	const query = useQuery();
+	// const useQuery = () => {
+	// 	return React.useMemo(() => new URLSearchParams(search), [search]);
+	// };
+	// const query = useQuery();
 
 	return {
-		navigate,
-		state,
-		pathname,
-		params,
-		query
+		// navigate,
+		// state,
+		// pathname,
+		// params,
+		// query
 	};
 };
 

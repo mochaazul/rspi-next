@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { FooterState } from 'interface';
+import { FooterState } from '@/interface';
 
 import { getMedicalSpecialitiesDispatch } from './medicalSpecialitiesThunk';
-import { MedicalSpecialitiesState } from 'interface/MedicalSpecialities';
+import { MedicalSpecialitiesState } from '@/interface/MedicalSpecialities';
 
 const initialState: MedicalSpecialitiesState = {
 	medicalSpecialities: [],

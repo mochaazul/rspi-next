@@ -1,8 +1,8 @@
 import Datepicker from 'react-tailwindcss-datepicker';
 import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
 
-import { icons } from 'constant';
-import withInputLabel from 'components/withInputLabel';
+import { icons } from '@/constant';
+import withInputLabel from '@/components/withInputLabel';
 
 import { IconWrapper, InputType, DateFieldWrapper } from './style';
 

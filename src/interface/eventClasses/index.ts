@@ -1,4 +1,4 @@
-import { Pagination, ResponseStatus } from 'interface';
+import { Pagination, ResponseStatus } from '@/interface';
 
 export interface EventClassesState {
 	events: EventClassesDetail[];

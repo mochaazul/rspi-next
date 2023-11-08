@@ -1,13 +1,13 @@
-import Button from 'components/Button';
-import Spinner from 'components/Spinner';
-import Text from 'components/Text';
-import { removeUser as removeUserData } from 'stores/User';
-import { icons } from 'constant';
-import languages from 'constant/languages';
+import Button from '@/components/Button';
+import Spinner from '@/components/Spinner';
+import Text from '@/components/Text';
+import { removeUser as removeUserData } from '@/stores/User';
+import { icons } from '@/constant';
+import languages from '@/constant/languages';
 import { useNavigate } from 'react-router-dom';
 import { SpinContainer } from './style';
-import { UserState } from 'interface';
-import { useAppDispatch, useTypedSelector } from 'hooks';
+import { UserState } from '@/interface';
+import { useAppDispatch, useTypedSelector } from '@/hooks';
 
 type Props = {
 	status?: 'loading' | 'success' | 'failed';

@@ -1,8 +1,10 @@
+'use client';
+
 import _, { isEmpty } from 'lodash';
 import { Tooltip } from 'react-tooltip';
 
 import { useRouter } from 'next/navigation';
-import { Image } from 'next/image';
+import Image from 'next/image';
 
 import { icons } from '@/constant';
 
@@ -61,7 +63,7 @@ const MedicalRecordReminder = () => {
 						// navigate('/register-onboard');
 						onClickOnboard();
 					} }
-					className='max-sm:p-[10px] max-sm:text-[12px]'
+						className='max-sm:p-[10px] max-sm:text-[12px]'
 					/>
 				</BodyContainer>
 			</FloatingContainer>

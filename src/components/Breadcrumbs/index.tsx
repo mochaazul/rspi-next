@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
-import Text from 'components/Text';
-import { colors, icons } from 'constant';
+import Text from '@/components/Text';
+import { colors, icons } from '@/constant';
 
 import { ItemStyle } from './style';
 
@@ -30,7 +30,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 			{
 				datas.map((data, index) => (
 					<div key={ index } className='flex flex-row items-center'>
-						<Link to={ data.url }>
+						<Link href={ data.url }>
 							<ItemStyle className='px-1 py-1 max-sm:px-0.5'>
 								<Text
 									className='item-text text-ellipsis'

@@ -1,4 +1,4 @@
-import { ResponseStatus, Pagination } from 'interface';
+import { ResponseStatus, Pagination } from '@/interface';
 
 export interface ArticleState {
 	articles: ArticleDetail[];

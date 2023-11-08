@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import { Breadcrumbs, Layout, Text } from 'components';
-import { AwardsDetail, AwardsState, BreadcrumbsProps } from 'interface';
+import { Breadcrumbs, Layout, Text } from '@/components';
+import { AwardsDetail, AwardsState, BreadcrumbsProps } from '@/interface';
 
-import { colors } from 'constant';
-import { useAppDispatch, useTypedSelector } from 'hooks';
-import { getAwards } from 'stores/actions';
-import { Languages as lang } from 'constant';
+import { colors } from '@/constant';
+import { useAppDispatch, useTypedSelector } from '@/hooks';
+import { getAwards } from '@/stores/actions';
+import { Languages as lang } from '@/constant';
 
 import { CentreOfExcellenceStyle } from './style';
 

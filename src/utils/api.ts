@@ -1,7 +1,7 @@
-import { baseUrl } from 'config';
-import { localStorage } from 'helpers';
-import { getLanguage } from 'helpers/localStorage';
-import { ResponseType } from 'interface';
+import { baseUrl } from '@/config';
+import { localStorage } from '@/helpers';
+import { getLanguage } from '@/helpers/localStorage';
+import { ResponseType } from '@/interface';
 
 type Option = {
 	endpoint: string,

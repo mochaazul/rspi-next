@@ -1,18 +1,18 @@
-import Modal from 'components/Modal';
+import Modal from '@/components/Modal';
 import { ModalHeader, ProfileModalContainer, WarningContainer } from './style';
-import Text from 'components/Text';
-import { colors, icons } from 'constant';
-import { FormRow } from 'pages/BookAppointment/style';
-import Form from 'components/Form';
-import { createFieldConfig } from 'helpers';
-import Button from 'components/Button';
-import { useAppDispatch, useTypedSelector } from 'hooks';
-import { addFamilyProfile, updateProfile } from 'stores/actions';
-import { FamilyProfile, FamilyProfilePayload, UpdateProfileType, UserDataDetail, UserState } from 'interface';
-import { useAppAsyncDispatch } from 'hooks/useAppDispatch';
-import NotificationPanel from 'components/NotificationPanel';
+import Text from '@/components/Text';
+import { colors, icons } from '@/constant';
+import { FormRow } from '@/app/[locale]/[main]/BookAppointment/style';
+import Form from '@/components/Form';
+import { createFieldConfig } from '@/helpers';
+import Button from '@/components/Button';
+import { useAppDispatch, useTypedSelector } from '@/hooks';
+import { addFamilyProfile, updateProfile } from '@/stores/actions';
+import { FamilyProfile, FamilyProfilePayload, UpdateProfileType, UserDataDetail, UserState } from '@/interface';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import NotificationPanel from '@/components/NotificationPanel';
 import { useEffect, useState } from 'react';
-import { userDetail as userDetailAction } from 'stores/actions';
+import { userDetail as userDetailAction } from '@/stores/actions';
 
 const addProfileFormFields = {
 	name: {

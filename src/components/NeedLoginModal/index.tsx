@@ -1,9 +1,9 @@
 
-import { icons } from 'constant';
-import { Text, Button, Modal } from 'components';
-import { useAppDispatch, useTypedSelector } from 'hooks';
-import { RootAppState } from 'interface';
-import { clearErrorNeedLogin } from 'stores/Root';
+import { icons } from '@/constant';
+import { Text, Button, Modal } from '@/components';
+import { useAppDispatch, useTypedSelector } from '@/hooks';
+import { RootAppState } from '@/interface';
+import { clearErrorNeedLogin } from '@/stores/Root';
 
 const NeedLoginModal = () => {
 

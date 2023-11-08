@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from 'constant';
+import { colors } from '@/constant';
 
 const HeaderStyle = styled.div`
   position: fixed;

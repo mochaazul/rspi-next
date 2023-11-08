@@ -20,7 +20,7 @@ const DevTools = () => {
 	}, [open]);
 
 	const handleKeyPress = useCallback((evt: KeyboardEvent) => {
-		if (evt.key  === '`') {
+		if (evt.key === '`') {
 			setOpen(!open);
 		}
 	}, [open]);
@@ -32,9 +32,9 @@ const DevTools = () => {
 
 	return <Modal
 		visible={ open }
-	 >
+	>
 		<div>
-			<Text className='mb-2' text='Dev Tools' fontType={ 'h4' }/>
+			<Text className='mb-2' text='Dev Tools' fontType={ 'h4' } />
 			<Button onClick={ flushReduxPersist } className='mb-2'>Reset Redux</Button>
 			<Button onClick={ () => setOpen(false) }>Close</Button>
 		</div>

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FacilityServicesDetail, PayloadFacilityServices } from 'interface';
-import { endpoints } from 'constant';
-import { thunkUtils } from 'utils';
+import { FacilityServicesDetail, PayloadFacilityServices } from '@/interface';
+import { endpoints } from '@/constant';
+import { thunkUtils } from '@/utils';
 
 export const getFacilityServices = thunkUtils<FacilityServicesDetail[], PayloadFacilityServices>({
 	type: 'facilityServices/facilityServices',

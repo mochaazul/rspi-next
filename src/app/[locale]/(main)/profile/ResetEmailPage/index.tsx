@@ -1,15 +1,15 @@
-import { Images, Languages, colors } from 'constant';
-import { Button, Text, Form, NotificationPanel } from 'components';
-
-import useResetEmail from './useResetEmail';
-import SpinVerification from 'components/SpinVerification';
 import { FormEvent, useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { useTypedSelector } from 'hooks';
-import { ChangeEmailPayload, UserState } from 'interface';
-import useAppDispatch, { useAppAsyncDispatch } from 'hooks/useAppDispatch';
-import { changeEmail, verifyEmailToken } from 'stores/actions';
-import { removeUser as removeUserData } from 'stores/User';
+
+import { Images, Languages, colors } from '@/constant';
+import { Button, Text, Form, NotificationPanel } from '@/components';
+import useResetEmail from './useResetEmail';
+import SpinVerification from '@/components/SpinVerification';
+import { useTypedSelector } from '@/hooks';
+import { ChangeEmailPayload, UserState } from '@/interface';
+import useAppDispatch, { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import { changeEmail, verifyEmailToken } from '@/stores/actions';
+import { removeUser as removeUserData } from '@/stores/User';
 import { isEmpty } from 'lodash';
 
 const {

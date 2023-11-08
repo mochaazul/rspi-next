@@ -1,6 +1,6 @@
-import { endpoints } from 'constant';
-import { NotificationResponse, PayloadNotification } from 'interface/Notification';
-import { thunkUtils } from 'utils';
+import { endpoints } from '@/constant';
+import { NotificationResponse, PayloadNotification } from '@/interface/Notification';
+import { thunkUtils } from '@/utils';
 
 // function that accepts a Redux action type string and a callback function that should return a promise
 

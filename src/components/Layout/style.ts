@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { colors } from 'constant';
+import { colors } from '@/constant';
 
 export interface OutletStyleType {
-  BGGrey?: boolean;
+	BGGrey?: boolean;
 }
 
 export const OutletStyle = styled.div<OutletStyleType>`

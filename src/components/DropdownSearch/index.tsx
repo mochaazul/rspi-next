@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { Text, TextField } from 'components';
-import Picker from 'components/Picker';
-import { PropsType } from 'components/withInputLabel';
+import { Text, TextField } from '@/components';
+import Picker from '@/components/Picker';
+import { PropsType } from '@/components/withInputLabel';
 
 import { DropdownSearchStyle } from './style';
 

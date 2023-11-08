@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-styled-components"
+  ],
+  "customSyntax": "@stylelint/postcss-css-in-js",
+  "rules": {
+    "function-comma-space-after": "always",
+    "function-parentheses-space-inside": "never",
+    "at-rule-semicolon-space-before": "never",
+    "at-rule-semicolon-newline-after": "always",
+    "at-rule-name-space-after": "always-single-line",
+    "value-list-comma-space-after": "always",
+    "annotation-no-unknown": null,
+    "function-no-unknown": null,
+    "no-descending-specificity": null
+  }
+}

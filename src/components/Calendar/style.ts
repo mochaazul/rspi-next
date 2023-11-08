@@ -1,4 +1,4 @@
-import { colors } from 'constant';
+import { colors } from '@/constant';
 import styled from 'styled-components';
 
 export const CalendarContainer = styled.div`
@@ -8,7 +8,7 @@ export const CalendarContainer = styled.div`
     margin-bottom: 8px;
   }
   // .react-calendar__tile--now {
-  //   background-color: ${colors.green.brandAccent};
+  //   background-color: ${ colors.green.brandAccent };
   //   border-radius: 50%;
   //   color: white;
   // }
@@ -16,7 +16,7 @@ export const CalendarContainer = styled.div`
     display: none;
   }
   .react-calendar__tile--active{
-    background-color: ${colors.green.brandAccent};
+    background-color: ${ colors.green.brandAccent };
     border-radius: 50%;
     color: white;
     p{
@@ -87,8 +87,8 @@ export const CalendarFooterInfoItem = styled.div`
 `;
 
 type CalendarDotProps = {
-  type?: 'primary' | 'warning' | 'dark'
-}
+	type?: 'primary' | 'warning' | 'dark';
+};
 
 export const CalendarDot = styled.div<CalendarDotProps>`
   display: block;
@@ -97,8 +97,8 @@ export const CalendarDot = styled.div<CalendarDotProps>`
   height: 10px;
   background-color: #000;
 
-  ${props => props.type === 'primary' && `background-color: ${colors.green.brandAccent};`}
-  ${props => props.type === 'warning' && `background-color: ${colors.yellow.warning};`}
+  ${ props => props.type === 'primary' && `background-color: ${ colors.green.brandAccent };` }
+  ${ props => props.type === 'warning' && `background-color: ${ colors.yellow.warning };` }
 
 
 `;

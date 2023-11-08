@@ -1,15 +1,15 @@
-import { changeEmail } from 'stores/actions';
-import { useAppDispatch } from 'hooks';
+import { changeEmail } from '@/stores/actions';
+import { useAppDispatch } from '@/hooks';
 import {
 	requiredRule,
 	createFieldConfig,
 	emailRule
-} from 'helpers';
-import { ChangeEmailPayload } from 'interface';
-import { Languages } from 'constant';
-import { navigation } from 'helpers';
+} from '@/helpers';
+import { ChangeEmailPayload } from '@/interface';
+import { Languages } from '@/constant';
+import { navigation } from '@/helpers';
 
-import { removeUser as removeUserData } from 'stores/User';
+import { removeUser as removeUserData } from '@/stores/User';
 
 const {
 	resetForm: {
