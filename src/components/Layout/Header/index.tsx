@@ -290,7 +290,7 @@ export const Header: React.FC = () => {
 								{
 									isLoggedIn ?
 										<>
-											<a href='javascript:void(0)' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
+											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
 												<Image
 													src={icons.Notif}
 													alt=""

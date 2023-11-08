@@ -58,10 +58,14 @@ export default function RootLayout({
         { props?.footerShow !== false &&
           <Footer />
         }
-        
-        {
-          shouldRenderReminder &&
-            <MedicalRecordReminder />
+        { props?.footerShow !== false &&
+          <CallForAmbulance />
+        }
+        { appStage !== 'prod' &&
+          <DevTools />
+        }
+        { shouldRenderReminder &&
+          <MedicalRecordReminder />
         }
       </body>
     </html>
