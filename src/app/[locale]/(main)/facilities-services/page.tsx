@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import { Breadcrumbs, Text, Button } from '@/components';
 import Card, { CardContentWithInner, CardFooter } from '@/components/Card';
@@ -24,7 +24,7 @@ const { relatedNewsHeading, readMoreLabel } = Languages.page.facilities;
 const FacilitiesServicesPage = () => {
 	const [activeMenuIndex, setActiveMenuIndex] = useState(0);
 
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const { params } = navigation();
 	const { facilityServices, relatedNews, hospital, error } = useTypedSelector<FacilityServicesState>('facilityServices');
 	const facilityServicesDispatch = useAppDispatch(getFacilityServices);
@@ -48,7 +48,7 @@ const FacilitiesServicesPage = () => {
 	const redirectIfNoFacilities = () => {
 		const facility = facilityServices.find(item => item.id == params.id);
 		if (!facility) {
-			navigate(`/facilities/${ facilityServices[0].id ?? 0 }`);
+			navigate.push(`/facilities/${ facilityServices[0].id ?? 0 }`);
 		}
 	};
 
@@ -61,7 +61,7 @@ const FacilitiesServicesPage = () => {
 				}
 			});
 		} else {
-			navigate(`/facilities/${ facilityServices[0].id ?? 0 }`);
+			navigate.push(`/facilities/${ facilityServices[0].id ?? 0 }`);
 		}
 	}, [params?.id]);
 

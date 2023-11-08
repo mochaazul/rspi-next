@@ -2,7 +2,7 @@ import Modal from '@/components/Modal';
 import { ModalHeader, ProfileModalContainer, WarningContainer } from './style';
 import Text from '@/components/Text';
 import { colors, icons } from '@/constant';
-import { FormRow } from '@/app/[locale]/[main]/BookAppointment/style';
+import { FormRow } from 'pages/BookAppointment/style';
 import Form from '@/components/Form';
 import { createFieldConfig } from '@/helpers';
 import Button from '@/components/Button';

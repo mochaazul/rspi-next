@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import {
 	Accordion,
@@ -21,7 +21,7 @@ import ContactUsForm from './ContactUsForm';
 const language = lang.page.contactUs;
 
 const ContactUsPage = (props: BreadcrumbsProps) => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const hospitalSelector = useTypedSelector<HospitalState>('hospital');
 
 	const handleRSLocationChange = (id: number) => {
@@ -63,7 +63,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 				</div>
 				<div className='flex flex-row gap-x-2'>
 					<Button theme='outline' hoverTheme='outline' label={ 'See Direction' } onClick={ handleOpenMapLink(data?.[0]?.share_link ?? '') } />
-					<Button theme='primary' hoverTheme='primary' label={ 'Find Doctor' } onClick={ () => navigate(`/find-a-doctor?hospital=${ data[0].hospital_code }`) } />
+					<Button theme='primary' hoverTheme='primary' label={ 'Find Doctor' } onClick={ () => navigate.push(`/find-a-doctor?hospital=${ data[0].hospital_code }`) } />
 				</div>
 
 			</div>
@@ -163,7 +163,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 								theme='outline'
 								hoverTheme='primary'
 								label={ language.faq.allFaqBtnLabel }
-								onClick={ () => navigate('/contact-us/faq') }
+								onClick={ () => navigate.push('/contact-us/faq') }
 							/>
 						</div>
 					</div>

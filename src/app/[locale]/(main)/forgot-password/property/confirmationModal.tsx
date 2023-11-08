@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import { Modal, Text, Button } from '@/components';
 import { icons, colors } from '@/constant';
@@ -30,7 +30,7 @@ const ConfirmationModal: React.FC<ModalProps> = ({
 					<Image src={icons.Confirmed} alt="" />
 					<Text text={ 'Link Ubah Kata Sandi Sudah Dikirim' } className={ 'mt-[16px] mb-[8px]' } fontSize={ '20px' } fontWeight={ '800' } />
 					<Text text={ `Periksa kembali email ${ email } untuk melanjutkan proses ubah kata sandi` } fontSize={ '16px' } fontWeight={ '400' } color={ colors.grey.pencil } textAlign={ 'center' } />
-					<Link to='/login'>
+					<Link href='/login'>
 						<Button className='mt-[16px]' theme='primary'>Okay</Button>
 					</Link>
 				</ModalStyle>

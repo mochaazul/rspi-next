@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import { appStage, config } from '@/config';
 import { colors, Images, Languages as lang } from '@/constant';
@@ -17,8 +17,7 @@ const FooterLayout = () => {
 	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
 	const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]);
 	const [pages, setPages] = useState<FooterDetail[]>([]);
-	
-	const router = useRouter()
+	const navigate = useRouter();
 
 	useEffect(() => {
 		fetchFooter({
@@ -61,7 +60,7 @@ const FooterLayout = () => {
 	const renderItems = (items: FooterDetail[]) => {
 		return items.map((item, index) => {
 			return (
-				<div key={ index } className='cursor-pointer' onClick={ () => { router.push(`/footer/${ item.slug }`); location.reload(); } }>
+				<div key={ index } className='cursor-pointer' onClick={ () => { navigate.push(`/footer/${ item.slug }`); location.reload(); } }>
 					<Text fontSize='14px' className='bold'>{ item.title }</Text>
 				</div>
 			);

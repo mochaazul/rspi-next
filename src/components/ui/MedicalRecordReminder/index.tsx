@@ -10,7 +10,7 @@ import {
 import Text from '@/components/Text';
 import Button from '@/components/Button';
 import { Tooltip } from 'react-tooltip';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { useTypedSelector } from '@/hooks';
 import { UserState } from '@/interface';
 import _, { isEmpty } from 'lodash';
@@ -18,11 +18,11 @@ import _, { isEmpty } from 'lodash';
 const MedicalRecordReminder = () => {
 	const { user } = useTypedSelector<UserState>('user');
 
-	const navigate = useNavigate();
+	const navigate = useRouter();
 
 	const onClickOnboard = () => {
 		setTimeout(() => {
-			navigate('/register-onboard');
+			navigate.push('/register-onboard');
 		}, 1000);
 	};
 

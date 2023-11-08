@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTypedSelector } from '@/hooks';
 import { FamilyProfile, FindDoctorState, UserDataDetail, UserState } from '@/interface';
+
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Images, colors, icons } from '@/constant';
 import { AppointmentState } from '@/interface/Book';
 import {
@@ -41,7 +43,7 @@ const BookAppointment = () => {
 	];
 
 	const { slotcode } = useParams();
-	const navigate = useNavigate();
+	const navigate = useRouter();
 
 	const bookAppointmentDispatch = useAppAsyncDispatch(bookAppointment);
 	const getFamilyProfilesDispatch = useAppAsyncDispatch(getFamilyProfiles);
@@ -313,8 +315,8 @@ const BookAppointment = () => {
 													/> : <></>
 											}
 											<div className='w-full h-full absolute flex items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiFrontFileRef.current?.click() }>
-												<Image 
-													src={icons.UploadCloud}
+												<Image
+													src={ icons.UploadCloud }
 													alt=""
 													color={ colors.grey.dark } />
 												<Text color={ colors.green.brandAccent } fontWeight='600'>Upload foto tampak depan</Text>
@@ -338,7 +340,7 @@ const BookAppointment = () => {
 											}
 											<div className='w-full h-full absolute flex items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiBackFileRef.current?.click() }>
 												<Image
-													src={icons.UploadCloud}
+													src={ icons.UploadCloud }
 													alt=""
 													color={ colors.grey.dark } />
 												<Text color={ colors.green.brandAccent } fontWeight='600'>Upload foto tampak belakang</Text>
@@ -359,7 +361,7 @@ const BookAppointment = () => {
 
 					}
 					<BottomBar >
-						<Button label='Back' theme='outline' className=' w-full md:w-auto' onClick={ () => { navigate(-1); } } />
+						<Button label='Back' theme='outline' className=' w-full md:w-auto' onClick={ () => { navigate.back(); } } />
 						<Button label='Book Visit Now' className=' w-full md:w-auto' disabled={ loading } onClick={ () => { onBookVisit(); } } />
 					</BottomBar>
 				</Form>

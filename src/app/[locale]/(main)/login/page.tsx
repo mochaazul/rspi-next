@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { UserState } from '@/interface';
 import { useTypedSelector } from '@/hooks';
@@ -14,7 +16,7 @@ import LoginPageStyle from './style';
 const { form, heading, subHeading, forgotPasswordLabel, loginBtnLabel, footer, notificationMessage } = Languages.page.loginPage;
 
 const LoginPage = () => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const [searchParam] = useSearchParams();
 	const {
 		onClickLogin,
@@ -40,7 +42,7 @@ const LoginPage = () => {
 	useEffect(() => {
 		const ref = searchParam.get('ref');
 		if (!!errorUser.stat_msg === false && !loadingUser && (notifVisible && !ref)) {
-			setTimeout(() => navigate('/'), 1500);
+			setTimeout(() => navigate.replace('/'), 1500);
 		}
 	}, [errorUser, loadingUser, notifVisible]);
 
@@ -138,7 +140,7 @@ const LoginPage = () => {
 						autoComplete='off'
 					>
 						<div className='w-full'>
-							<Link to='/' className='max-sm:hidden'>
+							<Link href='/' className='max-sm:hidden'>
 								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
 							</Link>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
@@ -179,7 +181,7 @@ const LoginPage = () => {
 								{ ...registeredValue('password') } />
 						</Form.FormGroup>
 						<div className='w-full'>
-							<Link to='/forgot-password'>
+							<Link href='/forgot-password'>
 								<Text
 									className='mt-2 max-2xl:mb-4 mb-10'
 									fontSize='14px'
@@ -199,7 +201,7 @@ const LoginPage = () => {
 						/>
 						<Text fontType={ null } fontWeight='400' color={ colors.grey.dark } className='max-2xl:mt-5 mt-8 max-lg:text-[14px] text-[20px]'>
 							{ footer.notRegisteredLabel }&nbsp;
-							<Link to='/register'>
+							<Link href='/register'>
 								<Text
 									className='inline-block max-lg:text-[14px] text-[20px]'
 									fontType={ null }

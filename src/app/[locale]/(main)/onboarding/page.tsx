@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import { Images, Languages, colors } from '@/constant';
 import {
@@ -17,7 +17,7 @@ import PrivacyPolicyModal from '@/components/PrivacyPolicyModal';
 const { heading, mrNotAvailableBtnLabel, subHeading, submitBtnLabel, form, errors } = Languages.page.registerOnboard;
 
 const RegisterOnboard = () => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const {
 		onClickRegisterOnboard,
 		loadingOnBoarding,
@@ -181,7 +181,7 @@ const RegisterOnboard = () => {
 					</Button>
 					<Button theme='outline'
 						className='mt-[12px]'
-						onClick={ () => navigate('/pin-create') }>
+						onClick={ () => navigate.replace('/pin-create') }>
 						<Text
 							text={ mrNotAvailableBtnLabel }
 							className='cursor-pointer'

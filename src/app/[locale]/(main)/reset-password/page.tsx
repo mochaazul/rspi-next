@@ -5,7 +5,10 @@ import { ResetPasswordStyle, Box } from './style';
 import useResetPassword from './useResetPassword';
 import SpinVerification from '@/components/SpinVerification';
 import { FormEvent, useEffect, useState } from 'react';
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 import { useTypedSelector } from '@/hooks';
 import { NewPasswordPayload, UserState } from '@/interface';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
@@ -25,7 +28,7 @@ const {
 } = Languages.page.resetPassword;
 
 const ResetPassword = () => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const { onClickResetPassword, resetPasswordField } = useResetPassword();
 	const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'failed'>('loading');
@@ -47,7 +50,7 @@ const ResetPassword = () => {
 
 	const hasToken = async () => {
 		try {
-			if (!searchParams.get('token')) return navigate('/login');
+			if (!searchParams.get('token')) return navigate.replace('/login');
 
 			// verify token if present
 			setVerificationStatus('loading');
@@ -103,7 +106,7 @@ const ResetPassword = () => {
 						confirm_password: confirm_password.value
 					}
 				});
-				navigate('/login?ref=reset&stat=true');
+				navigate.replace('/login?ref=reset&stat=true');
 			}
 		} catch (error) {
 
@@ -121,7 +124,7 @@ const ResetPassword = () => {
 							autoComplete='off'
 							onSubmit={ onSubmitForm }	>
 							<div className='w-full'>
-								<Link to='/'>
+								<Link href='/'>
 									<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
 								</Link>
 								<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
