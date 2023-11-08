@@ -8,6 +8,7 @@ import DoctorsType from '../DoctorsType';
 import { AccordionItemStyle, ItemChildrenStyle, TitleStyle } from './style';
 import { I_MasterDoctorClinic, I_MasterDoctorClinicSchedule, I_MasterDoctorSchedule } from '@/interface';
 import { formatTime, sortDays } from '@/helpers/datetime';
+import Image from 'next/image';
 
 const Title = (props: { open: boolean; text: string, clinics: I_MasterDoctorClinic[]; onClick: () => any; hideIconChevron?: boolean; }) => (
 	<TitleStyle className='flex cursor-pointer' onClick={ () => props.hideIconChevron ? null : props.onClick }>
@@ -44,7 +45,7 @@ const Title = (props: { open: boolean; text: string, clinics: I_MasterDoctorClin
 		</div>
 		{
 			props.hideIconChevron ? <></> : <div className='grow-0 mr-[-5px]'>
-				<icons.ArrowDown className={ `chevron w-[18px] h-[18px] sm:w-[25px] sm:h-[25px] ${ props.open ? 'up' : '' }` } />
+				<Image src={icons.ArrowDown} alt="" className={ `chevron w-[18px] h-[18px] sm:w-[25px] sm:h-[25px] ${ props.open ? 'up' : '' }` } />
 			</div>
 		}
 

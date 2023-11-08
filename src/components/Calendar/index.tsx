@@ -11,6 +11,7 @@ import { FindDoctorState } from '@/interface';
 import dayjs, { UnitType } from 'dayjs';
 import languages from '@/constant/languages';
 import Spinner from '@/components/Spinner';
+import Image from 'next/image';
 
 type Props = {
 	onChange: (value: Value) => void;
@@ -90,8 +91,8 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading }: Props
 		<div className='px-[12px] py-[20px] relative'>
 			<ReactCalendar
 				className='r-calendar'
-				nextLabel={ <icons.ArrowRight /> }
-				prevLabel={ <icons.ArrowLeft /> }
+				nextLabel={ <Image src={icons.ArrowRight} alt="" /> }
+				prevLabel={ <Image src={icons.ArrowLeft} alt="" /> }
 				next2Label={ null }
 				prev2Label={ null }
 				defaultView='month'

@@ -11,6 +11,7 @@ import { EmptyResultContainer } from 'pages/PatientPortal/style';
 import icons from '@/constant/icons';
 import { useNavigate } from 'react-router-dom';
 import languages from '@/constant/languages';
+import Image from 'next/image';
 
 const JadwalKunjungan = () => {
 	const navigate = useNavigate();
@@ -36,7 +37,7 @@ const JadwalKunjungan = () => {
 
 					? isEmpty(appointments) ?
 						<EmptyResultContainer>
-							<icons.NoAppointmentSchedule />
+							<Image src={icons.NoAppointmentSchedule} alt=""/>
 							<Text text={ languages.page.patientPortal.jadwalKunjungan.label.empty }
 								fontSize='20px'
 								fontWeight='700'

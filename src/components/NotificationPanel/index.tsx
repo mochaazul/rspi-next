@@ -2,6 +2,7 @@ import { Text } from '@/components';
 import { icons } from '@/constant';
 
 import { StyleProps, NotificationStyle } from './style';
+import Image from 'next/image';
 
 export interface PropsTypes extends StyleProps {
 	showIconLeft?: boolean;
@@ -49,7 +50,7 @@ const NotificationPanel = ({
 					{
 						!!showIconRightOverride ?
 							showIconRightOverride :
-							<icons.Close />
+							<Image src={icons.Close} alt="" />
 					}
 				</div>
 			</div>

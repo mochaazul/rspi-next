@@ -1,5 +1,4 @@
 import React from 'react';
-import { useOutlet } from 'react-router-dom';
 
 import { Footer, Header, CallForAmbulance } from '@/components';
 
@@ -16,13 +15,13 @@ import DevTools from '@/components/DevTools';
 import { appStage } from '@/config';
 
 const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean; }) => {
-	const Outlet = useOutlet();
+	// const Outlet = useOutlet();
 
 	return (
 		<>
 			<Header />
 			<OutletStyle { ...props.containerStyle }>
-				{ Outlet }
+				{/* { Outlet } */}
 			</OutletStyle>
 			{ props.footerShow !== false &&
 				<CallForAmbulance />

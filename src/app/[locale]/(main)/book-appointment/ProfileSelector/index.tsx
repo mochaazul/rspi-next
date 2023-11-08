@@ -16,6 +16,7 @@ import { deleteFamilyProfile, getFamilyProfiles } from '@/stores/actions';
 import { splitDate } from '@/helpers/datetime';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { ModalHeader, ProfileModalContainer } from '@/components/AddProfileModal/style';
+import Image from 'next/image';
 
 type ProfileCardProps = {
 	profile: FamilyProfile,
@@ -37,16 +38,22 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: Pr
 				<div onClick={ async () => {
 					showModalDelete(profile?.id, true);
 				} }>
-					<icons.Trash />
+					<Image 
+					src={icons.Trash}
+					alt="" />
 				</div>
 			}
 		</ProfileCardHeader>
 		<ProfileCardRow>
-			<icons.Calendar16 />
+			<Image 
+				src={icons.Calendar16}
+				alt="" />
 			<Text text={ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } fontSize='14px' color={ colors.grey.darkOpacity } />
 		</ProfileCardRow>
 		<ProfileCardRow>
-			<icons.PhoneOutline />
+			<Image 
+				src={icons.PhoneOutline}
+				alt="" />
 			<Text text={ profile.phone } fontSize='14px' color={ colors.grey.darkOpacity } />
 		</ProfileCardRow>
 	</ProfileSelectorCard>);
@@ -77,7 +84,9 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn }: Profil
 	const renderNoProfile = () => {
 		return (
 			<NoProfileContainer>
-				<icons.UserCircle />
+				<Image 
+					src={icons.UserCircle}
+					alt="" />
 				<div className='flex flex-row mb-2'>
 					<Text text='Belum ada data orang lain' />
 					<Text text='Tambahkan' className='ml-2 cursor-pointer' fontWeight='600' color={ colors.green.brandAccent } onClick={ () => onAddNewProfileBtn('other') } />
@@ -90,7 +99,9 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn }: Profil
 		return (
 			<NoProfileContainer>
 				<div className='flex flex-row mb-2 cursor-pointer items-center' onClick={ () => onAddNewProfileBtn('other') }>
-					<icons.AddButton />
+					<Image 
+					src={icons.AddButton}
+					alt="" />
 					<Text className='ml-2' fontWeight='600' color={ colors.green.brandAccent } text='Tambah Profil Baru' />
 				</div>
 			</NoProfileContainer>
@@ -111,7 +122,9 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn }: Profil
 	const renderNoProfileSelf = () => {
 		return (
 			<NoProfileContainer>
-				<icons.UserCircle />
+				<Image 
+					src={icons.UserCircle}
+					alt="" />
 				<div className='flex flex-row mb-2'>
 					<Text text='Data diri kosong.' />
 					<Text text='Tambahkan' className='ml-2 cursor-pointer' fontWeight='600' color={ colors.green.brandAccent } onClick={ () => onAddNewProfileBtn('self') } />
@@ -177,7 +190,9 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn }: Profil
 			>
 				<Text text='Orang Lain :' fontWeight='900' />
 				<span className='flex flex-row gap-[4px] items-center cursor:pointer md:hidden' onClick={ () => { () => onAddNewProfileBtn('other'); } }>
-					<icons.PlusCircle />
+					<Image 
+					src={icons.PlusCircle}
+					alt="" />
 					<Text text='Tambah orang baru' color={ colors.green.brandAccent } fontWeight='900' />
 				</span>
 			</section>

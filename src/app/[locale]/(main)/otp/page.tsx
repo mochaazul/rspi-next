@@ -10,6 +10,7 @@ import OTPPageStyle, { Box, WarningNote } from './style';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { RegisterOnboardType } from '@/interface';
 import { registerOnboard } from '@/stores/actions';
+import Image from 'next/image';
 
 const { heading, subHeading, resendOtp, resendWarn, form: { backBtnlabel, submitBtnLabel } } = Languages.page.otpVerification;
 
@@ -47,7 +48,7 @@ const CountDownText = ({ onZero, onResend, count, setCount }: Props) => {
 				textAlign='center'
 			/>
 			<WarningNote>
-				<icons.ExclamationGreen />
+				<Image src={icons.ExclamationGreen} alt="" />
 				<Text
 					text={ resendWarn }
 					fontSize={ '14px' }

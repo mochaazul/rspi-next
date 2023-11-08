@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import * as Icons from 'react-feather';
 
 import { useTypedSelector, useAppDispatch } from '@/hooks';
@@ -20,6 +20,8 @@ import HeaderStyle from './style';
 import images from '@/constant/images';
 import { getNotification, readNotification } from '@/stores/Notification';
 import moment from 'moment';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const Header: React.FC = () => {
 	const [dropdownHide, setDropdownHide] = useState(true);
@@ -158,13 +160,13 @@ const Header: React.FC = () => {
 				<div className={ 'xl:!px-[40px] navbar animate-slideUpToDown transition-all duration-300' }>
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
-							<Link to='/'>
+							<Link href='/'>
 								<Images.LogoRSPI />
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
 							<div id='home' className='py-[22px] max-sm:py-[10px]'>
-								<Link to='/'>
+								<Link href='/'>
 									<Text text={ 'Home' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 								</Link>
 							</div>
@@ -172,7 +174,7 @@ const Header: React.FC = () => {
 							<div id='our-hospital' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 								<Text text={ 'Our Hospitals' } className='cursor-pointer' color={ isHover === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
+									<Image src={icons.ArrowDown} alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -183,7 +185,7 @@ const Header: React.FC = () => {
 													<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
 												</div>
-												<icons.ArrowRight className='ml-[27px] mr-auto' />
+												<Image src={icons.ArrowRight} alt="" className='ml-[27px] mr-auto' />
 											</div>
 										)) }
 									</ul>
@@ -193,18 +195,18 @@ const Header: React.FC = () => {
 							<div id='centre-of-excellence' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverCOE(true) } onMouseLeave={ toggleMouseHoverCOE(false) }>
 								<Text text={ 'Centre of Excellence' } className='cursor-pointer' color={ isHoverCOE === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
+									<Image src={icons.ArrowDown} alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ centerOfExcellence.map((item, idx) => (
-											<Link to={ `/center-of-excellence/${ item.id }` } key={ idx }>
+											<Link href={ `/center-of-excellence/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 													<img src={ item?.img_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
-													<icons.ArrowRight className='ml-[27px] mr-auto' />
+													<Image src={icons.ArrowRight} alt="" className='ml-[27px] mr-auto' />
 												</div>
 											</Link>
 										)) }
@@ -215,28 +217,28 @@ const Header: React.FC = () => {
 							<div id='facilities' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverFacilities(true) } onMouseLeave={ toggleMouseHoverFacilities(false) }>
 								<Text text={ 'Facilities & Services' } className='cursor-pointer' color={ isHoverFacilities === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown className={ 'arrowdown xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
+									<Image src={icons.ArrowDown} alt="" className={ 'arrowdown xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ facilityServices?.map((item, idx) => (
-											<Link to={ `/facilities/${ item.id }` } key={ idx }>
+											<Link href={ `/facilities/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 													<img src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
-													<icons.ArrowRight className='ml-[27px] mr-auto' />
+													<Image alt="" src={icons.ArrowRight} className='ml-[27px] mr-auto' />
 												</div>
 											</Link>
 										)) }
-										<Link to={ '/facilities/1234567890' } >
+										<Link href={ '/facilities/1234567890' } >
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-												<img src={ images.AestheticClinic } width={ 60 } height={ 60 } />
+												<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 												<div className='ml-[10px] w-[310px]'>
 													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 												</div>
-												<icons.ArrowRight className='ml-[27px] mr-auto' />
+												<Image src={icons.ArrowRight} alt="" className='ml-[27px] mr-auto' />
 											</div>
 										</Link>
 									</ul>
@@ -247,7 +249,7 @@ const Header: React.FC = () => {
 								<Text text={ 'Career' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 							</div>
 
-							<Link id='find-doctor' className='py-[22px] max-sm:py-[10px]' to='/find-a-doctor'>
+							<Link id='find-doctor' className='py-[22px] max-sm:py-[10px]' href='/find-a-doctor'>
 								<Text text={ 'Find a Doctor' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 							</Link>
 
@@ -256,7 +258,7 @@ const Header: React.FC = () => {
 					<div className='rightNav py-[22px] max-sm:py-[10px]'>
 						<div className='translate'>
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
-								<icons.Notif onClick={ () => setShowNotification(true) } />
+								<Image src={icons.Notif} alt="" onClick={ () => setShowNotification(true) } />
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
 							<div className='p-4'>
@@ -268,7 +270,7 @@ const Header: React.FC = () => {
 									isLoggedIn ?
 										<>
 											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<icons.Notif />
+												<Image src={icons.Notif} alt="" />
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponse.total_unread }</span>
 											</a>
@@ -281,7 +283,7 @@ const Header: React.FC = () => {
 													}
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
-													<icons.ArrowDown className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
+													<Image src={icons.ArrowDown} alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
 												</div>
 											</div>
 										</> :

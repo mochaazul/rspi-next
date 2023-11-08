@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import { colors } from '@/constant';
 import { Text } from '@/components';
@@ -56,7 +56,7 @@ const ItemFAQ = (props: ItemType) => {
 								{ props.readMore ? props.desc.substring(0, 250) : props.desc }
 								{
 									props.readMore ?
-										<Link to={ `/contact-us/faq/${ props.index }` }>
+										<Link href={ `/contact-us/faq/${ props.index }` }>
 											<Text
 												fontSize='14px'
 												lineHeight='21px'

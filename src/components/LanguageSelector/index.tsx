@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
+import Image from 'next/image';
 
 import { icons } from '@/constant';
 import { getLanguage, hasLanguageSet, setLanguage } from '@/helpers/localStorage';
@@ -10,13 +11,13 @@ const languageItem = [
 		key: 'id',
 		label: 'ID',
 		value: 'idn',
-		icon: <icons.IDFlag className='mr-[20px] h-[20px]' />
+		icon: <Image src={icons.IDFlag} alt="" className='mr-[20px] h-[20px]'/>
 	},
 	{
 		key: 'en',
 		label: 'EN',
 		value: 'en',
-		icon: <icons.ENFlag className='mr-[20px] h-[20px]' />
+		icon: <Image src={icons.ENFlag} alt="" className='mr-[20px] h-[20px]'/>
 	}
 ];
 
@@ -56,7 +57,10 @@ const LanguageSelector = () => {
 			<Text fontSize='16px' fontWeight='900' color='white'>
 				{ languageItem.find(item => currrentLang === item.value)?.label }
 			</Text>
-			<icons.LightArrowDown />
+			<Image
+				src={icons.LightArrowDown}
+				alt=""
+			/>
 			<div className='absolute right-[-10px] top-7'>
 				<Picker show={ showLanguagePicker }>
 					{

@@ -13,6 +13,7 @@ import { navigation } from '@/helpers';
 import { getArticleByID, getRelatedNewsByID, getNewsSpecialtyByID } from '@/stores/Articles';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { ArticleState } from '@/interface';
+import Image from 'next/image';
 
 const language = lang.page.newsDetail;
 
@@ -78,16 +79,16 @@ const DetailNewsHealthPage = () => {
 								/>
 								<div className='flex gap-[15px]'>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window.location.href) }>
-										<icons.FacebookIcon width='16px' height='16px' />
+										<Image src={ icons.FacebookIcon } width={16} height={16} alt="" />
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window.location.href) }>
-										<icons.TwitterIcon width='16px' height='16px' />
+										<Image src={ icons.TwitterIcon } width={16} height={16} alt="" />
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window.location.href) }>
-										<icons.LinkedIn width='16px' height='16px' />
+										<Image src={ icons.LinkedIn } width={16} height={16} alt="" />
 									</div>
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
-										<Icons.Link width='16px' height='16px' />
+										<Image src={ icons.Link } width={16} height={16} alt="" />
 									</div>
 								</div>
 							</div>

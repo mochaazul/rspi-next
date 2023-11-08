@@ -5,6 +5,7 @@ import useTypedSelector from '@/hooks/useTypedSelector';
 import { UserState } from '@/interface';
 
 import { ModalStyle } from 'pages/PatientPortal/style';
+import Image from 'next/image';
 interface PropsType {
 	visible?: boolean;
 	onClose?: () => void;
@@ -36,7 +37,7 @@ const ModalCancelBook = (props: PropsType) => {
 					<div className='flex flex-row'>
 						<Text text={ 'Konfirmasi Pembatalan' } fontSize='24px' fontWeight='700' className='flex-1' />
 						<div onClick={ props.onClose } className='cursor-pointer'>
-							<icons.Close />
+							<Image src={icons.Close} alt=""/>
 						</div>
 					</div>
 					<Text text={ 'Apakah Anda yakin ingin membatalkan janji temu dengan dokter?' } fontSize='14px' fontWeight='400' className='mt-[10px]' color={ colors.grey.darkOpacity } />

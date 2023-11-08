@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Button from '@/components/Button';
 import Spinner from '@/components/Spinner';
 import Text from '@/components/Text';
@@ -36,12 +37,12 @@ const SpinVerification = ({ status }: Props) => {
 			</div>
 			<div className={ `status success ${ status === 'success' && 'active' }` }>
 				<div className='icon-cont'>
-					<icons.Check className='svg-white' />
+					<Image src={icons.Check} alt="" className='svg-white' />
 				</div>
 			</div>
 			<div className={ `status failed ${ status === 'failed' && 'active' }` }>
 				<div className='icon-cont'>
-					<icons.Close className='svg-white' />
+					<Image src={icons.Close} alt="" className='svg-white' />
 				</div>
 			</div>
 		</div>

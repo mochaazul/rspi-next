@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as FeatherIcon from 'react-feather';
-
+import Image from 'next/image';
 import { Text } from '@/components';
 import withInputLabel from '@/components/withInputLabel';
 import { colors, icons } from '@/constant';
@@ -175,7 +175,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 					</div>
 			}
 			<div className={ `arrow-down ${ arrowClassName }` } onClick={ openOptionDialog }>
-				<icons.ArrowDown />
+				<Image src={icons.ArrowDown} alt="" />
 			</div>
 			<OptionsWrapper isOpen={ isOpen } topOffset={ SelectWrapperRef.current?.offsetHeight ?? 0 } onClick={ closeOptionDialog }>
 				{

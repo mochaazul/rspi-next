@@ -1,8 +1,11 @@
+"use client";
+
+import { useCallback, useEffect, useState } from 'react';
+
 import Button from '@/components/Button';
 import Modal from '@/components/Modal';
 import Text from '@/components/Text';
-import { useCallback, useEffect, useState } from 'react';
-import { persistor } from '@/stores';
+// import { persistor } from 'stores'; // migrate
 
 const DevTools = () => {
 
@@ -23,7 +26,7 @@ const DevTools = () => {
 	}, [open]);
 
 	const flushReduxPersist = () => {
-		persistor.purge();
+		// persistor.purge(); // migrate
 		setOpen(false);
 	};
 

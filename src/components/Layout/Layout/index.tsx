@@ -1,9 +1,10 @@
 import React from 'react';
-import { 
-	useLocation,
-	useNavigation,
-	useOutlet,
-	useParams } from 'react-router-dom';
+// Migrate
+// import { 
+// 	useLocation,
+// 	useNavigation,
+// 	useOutlet,
+// 	useParams } from 'react-router-dom';
 
 import Footer from '../Footer';
 import Header from '../Header';
@@ -29,16 +30,19 @@ import CallForAmbulance from '@/components/ui/CallForAmbulance';
 const blacklistedRoute = ['/patient-portal', '/doctor-detail', '/book-appointment'];
 
 const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean; }) => {
-	const Outlet = useOutlet();
-	const { pathname } = useLocation();
+	// Migrate
+	// const Outlet = useOutlet();
+	// const { pathname } = useLocation();
 
-	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
+	// Migrate
+	// const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
 
 	return (
 		<>
 			<Header />
 			<OutletStyle { ...props.containerStyle }>
-				{ Outlet }
+				{/* Migrate */}
+				{/* { Outlet } */} 
 			</OutletStyle>
 			{ props.footerShow !== false &&
 				<CallForAmbulance />

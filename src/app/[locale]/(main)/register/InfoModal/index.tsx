@@ -2,6 +2,7 @@ import { Modal, Text, Button } from '@/components';
 import { icons, colors } from '@/constant';
 
 import { ModalStyle } from './style';
+import Image from 'next/image';
 
 interface ModalProps {
 	emailUser: string;
@@ -24,7 +25,7 @@ const InfoModal: React.FC<ModalProps> = ({
 			width='480px'
 		>
 			<ModalStyle>
-				<icons.Confirmed />
+				<Image src={icons.Confirmed} alt="" />
 				<Text text={ 'Link Verifikasi Email Tekirim' } className={ 'my-[16px]' } fontSize={ '20px' } fontWeight={ '800' } />
 				<Text text={ `Mohon periksa email ${ emailUser } untuk memverifikasi email Anda` } fontSize={ '16px' } fontWeight={ '400' } color={ colors.grey.pencil } textAlign={ 'center' } />
 				<Button className='mt-[16px]' theme='primary' onClick={ onOK }>Okay</Button>

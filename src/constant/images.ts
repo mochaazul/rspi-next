@@ -1,8 +1,8 @@
 import PokemonIllu from '/public/images/pokemon-logo.png';
 import Slider1 from '/public/images/slider1.png';
 import Form from '/public/images/form.png';
-import { ReactComponent as LogoRSPI } from '/public/images/logo_rspi.svg';
-import { ReactComponent as Profile } from '/public/images/profile.svg';
+import LogoRSPI from '/public/images/logo_rspi.svg';
+import Profile from '/public/images/profile.svg';
 import RSPIImage1 from '/public/images/RSPI_image_1.jpg';
 import GooglePlay from '/public/images/google-play.png';
 import AppStore from '/public/images/app-store.png';

@@ -14,6 +14,7 @@ import { getEventsByID } from '@/stores/EventClasses';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { EventClassesState } from '@/interface';
 import PromoPackages from 'pages/LandingPage/PromoPackages';
+import Image from 'next/image';
 
 const DetailEventClassesPromo = () => {
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
@@ -59,16 +60,16 @@ const DetailEventClassesPromo = () => {
 										text='Share now'
 									/>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window.location.href) }>
-										<icons.FacebookIcon width='16px' height='16px' />
+										<Image src={icons.FacebookIcon} width={16} height={16} />
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window.location.href) }>
-										<icons.TwitterIcon width='16px' height='16px' />
+										<Image src={icons.TwitterIcon} width={16} height={16} />
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window.location.href) }>
-										<icons.LinkedIn width='16px' height='16px' />
+										<Image src={icons.LinkedIn} width={16} height={16} />
 									</div>
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
-										<Icons.Link width='16px' height='16px' />
+										<Image src={icons.Link} width={16} height={16} />
 									</div>
 								</div>
 							</div>

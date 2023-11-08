@@ -8,6 +8,7 @@ import { MedicalSpecialitiesState } from '@/interface/MedicalSpecialities';
 import { useNavigate } from 'react-router-dom';
 import { CenterOfExcellenceDetail } from '@/interface';
 import CardMenu from '../CardMenu';
+import Image from 'next/image';
 
 type Specialities = {
 	title: string,
@@ -16,75 +17,75 @@ type Specialities = {
 const specialities: Specialities[] = [
 	{
 		title: 'Akupuntur',
-		icon: <icons.Specialities.Akupuntur />
+		icon: <Image src={icons.Specialities.Akupuntur} alt="" />
 	},
 	{
 		title: 'Anak',
-		icon: <icons.Specialities.Anak />
+		icon: <Image src={icons.Specialities.Anak} alt="" />
 	},
 	{
 		title: 'Gizi Klinik',
-		icon: <icons.Specialities.Gizi />
+		icon: <Image src={icons.Specialities.Gizi} alt="" />
 	},
 	{
 		title: 'Jantung & Pembuluh Darah',
-		icon: <icons.Specialities.Jantung />
+		icon: <Image src={icons.Specialities.Jantung} alt="" />
 	},
 	{
 		title: 'Rehabilitasi Medik & Fisioterapi',
-		icon: <icons.Specialities.Rehabilitiasi />
+		icon: <Image src={icons.Specialities.Rehabilitiasi} alt="" />
 	},
 	{
 		title: 'THT',
-		icon: <icons.Specialities.Tht />
+		icon: <Image src={icons.Specialities.Tht} alt="" />
 	},
 	{
 		title: 'Alergi & Imunologi',
-		icon: <icons.Specialities.Alergi />
+		icon: <Image src={icons.Specialities.Alergi} alt="" />
 	},
 	{
 		title: 'Bedah',
-		icon: <icons.Specialities.Bedah />
+		icon: <Image src={icons.Specialities.Bedah} alt="" />
 	},
 	{
 		title: 'Paru & Pernapasan',
-		icon: <icons.Specialities.Paru />
+		icon: <Image src={icons.Specialities.Paru} alt="" />
 	},
 	{
 		title: 'Psikiatri/Kesehatan Jiwa',
-		icon: <icons.Specialities.Psikiatri />
+		icon: <Image src={icons.Specialities.Psikiatri} alt="" />
 	},
 	{
 		title: 'Kesehatan Mata',
-		icon: <icons.Specialities.Mata />
+		icon: <Image src={icons.Specialities.Mata} alt="" />
 	},
 	{
 		title: 'Tumbuh Kembang & Edukasi Terpadu',
-		icon: <icons.Specialities.TumbuhKembang />
+		icon: <Image src={icons.Specialities.TumbuhKembang} alt="" />
 	},
 	{
 		title: 'Anestesi',
-		icon: <icons.Specialities.Anestesi />
+		icon: <Image src={icons.Specialities.Anestesi} alt="" />
 	},
 	{
 		title: 'Kulit & Kelamin',
-		icon: <icons.Specialities.Kelamin />
+		icon: <Image src={icons.Specialities.Kelamin} alt="" />
 	},
 	{
 		title: 'Penyakit Dalam',
-		icon: <icons.Specialities.PenyakitDalam />
+		icon: <Image src={icons.Specialities.PenyakitDalam} alt="" />
 	},
 	{
 		title: 'Psikologi',
-		icon: <icons.Specialities.Psikologi />
+		icon: <Image src={icons.Specialities.Psikologi} alt="" />
 	},
 	{
 		title: 'Klinik Laktasi',
-		icon: <icons.Specialities.Laktasi />
+		icon: <Image src={icons.Specialities.Laktasi} alt="" />
 	},
 	{
 		title: 'Klinik Saraf & Bedah Saraf',
-		icon: <icons.Specialities.Saraf />
+		icon: <Image src={icons.Specialities.Saraf} alt="" />
 	}
 ];
 

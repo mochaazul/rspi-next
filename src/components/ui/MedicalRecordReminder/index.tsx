@@ -1,6 +1,11 @@
 import { icons } from '@/constant';
+import Image from 'next/image';
 import {
-	BgContainer, BodyContainer, FloatingContainer, FloatingWrapper, LeftContent
+	BgContainer,
+	BodyContainer,
+	FloatingContainer,
+	FloatingWrapper,
+	LeftContent
 } from './style';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
@@ -27,7 +32,7 @@ const MedicalRecordReminder = () => {
 				className='flex'
 			>
 				<BgContainer>
-					<icons.Circle />
+					<Image src={icons.Circle} alt="" />
 				</BgContainer>
 				<BodyContainer
 					className='grid grid-cols-[auto_140px] md:grid-cols-[auto_1fr] md:gap-11 gap-4 items-center'
@@ -36,7 +41,7 @@ const MedicalRecordReminder = () => {
 						<Text fontSize='16px' fontWeight='700'>
 							Dapatkan Akses terhadap Informasi Kunjungan Medis Anda
 						</Text>
-						<icons.ExclamationMark data-tooltip-place='top-end' data-tooltip-id='booking-tooltip' style={ { width: '24px' } } />
+						<Image src={icons.ExclamationMark} alt="" data-tooltip-place='top-end' data-tooltip-id='booking-tooltip' style={ { width: '24px' } } />
 					</LeftContent>
 					<Button label='Isi Data Rekam Medis' onClick={ () => {
 						// navigate('/register-onboard');

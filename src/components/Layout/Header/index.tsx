@@ -19,16 +19,18 @@ import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
 
-import Text from '@/components/ui/Text';
-import Button from '@/components/ui/Button';
-import MainNavLanguage from '@/components/ui/MainNavLanguage';
-import Modal from '@/components/ui/Modal';
+import Text from '@/components/Text';
+import Button from '@/components/Button';
+import MainNavLanguage from '@/components/MainNavLanguage';
+import Modal from '@/components/Modal';
 
-// import { UserState } from '../../../interface/user';
-// import HospitalState from '../../../interface/Hospital';
-// import FacilityServicesState from '../../../interface/facilityServices';
-// import CenterOfExcellenceState from '../../../interface/CenterOfExcellence';
-// import NotificationState from '../../../interface/Notification';
+// Migrate
+// import { UserState } from '@/interface/user';
+// import HospitalState from '@/interface/Hospital';
+// import FacilityServicesState from '@/interface/facilityServices';
+// import CenterOfExcellenceState from '@/interface/CenterOfExcellence';
+// import NotificationState from '@/interface/Notification';
+// End Migrate
 
 import HeaderStyle from './style';
 
@@ -50,7 +52,7 @@ export const Header: React.FC = () => {
 
 	const handleClick = () => {
 		if (isLoggedIn) {
-			// removeUser();
+			// removeUser(); // migrate ( for function removeUser refer repo rspi-fe-web )
 		}
 		router.push('/');
 	};
@@ -90,12 +92,14 @@ export const Header: React.FC = () => {
 							textAlign='center'
 							color={colors.green.brandAccent}
 							text='Mark all as read'
+							// Migrate
 							// onClick={ () => readNotificationDispatch({
 							// 	queryParam: {
 							// 		medical_record: '100154999',
 							// 		email: 'riko.logwirno@rebelworks.co'
 							// 	}
 							// }) }
+							// End Migrate
 						/>
 					</div>
 					
@@ -146,7 +150,10 @@ export const Header: React.FC = () => {
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
-								<images.LogoRSPI />
+								<Image
+									src={images.LogoRSPI}
+									alt=""
+								/>
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
@@ -159,7 +166,11 @@ export const Header: React.FC = () => {
 							<div id='our-hospital' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 								<Text text={ 'Our Hospitals' } className='cursor-pointer' color={ isHover === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
+								<Image
+									src={icons.ArrowDown}
+									alt=""
+									className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
+								/>
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -174,7 +185,11 @@ export const Header: React.FC = () => {
 												<Text text={ 'Name' } fontSize='16px' fontWeight='900' color={colors.paradiso.default} />
 												<Text text={ 'Alamat'} fontSize='14px' fontWeight='400' className='mt-[5px]' />
 											</div>
-											<icons.ArrowRight className='ml-[27px] mr-auto' />
+											<Image
+												src={icons.ArrowRight}
+												alt=""
+												className='ml-[27px] mr-auto'
+											/>
 										</div>
 									</ul>
 								</div>
@@ -183,7 +198,11 @@ export const Header: React.FC = () => {
 							<div id='centre-of-excellence' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverCOE(true) } onMouseLeave={ toggleMouseHoverCOE(false) }>
 								<Text text={ 'Centre of Excellence' } className='cursor-pointer' color={ isHoverCOE === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
+									<Image
+										src={icons.ArrowDown}
+										alt=""
+										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
+									/>
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -193,7 +212,11 @@ export const Header: React.FC = () => {
 												<div className='ml-[10px] w-[310px]'>
 													<Text text={'Title'} fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 												</div>
-												<icons.ArrowRight className='ml-[27px] mr-auto' />
+												<Image
+													src={icons.ArrowRight}
+													alt=""
+													className='ml-[27px] mr-auto'
+												/>
 											</div>
 										</Link>
 									</ul>
@@ -203,7 +226,11 @@ export const Header: React.FC = () => {
 							<div id='facilities' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverFacilities(true) } onMouseLeave={ toggleMouseHoverFacilities(false) }>
 								<Text text={ 'Facilities & Services' } className='cursor-pointer' color={ isHoverFacilities === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown className={ 'arrowdown xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
+									<Image
+										src={icons.ArrowDown}
+										alt=""
+										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
+									/>
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -214,7 +241,11 @@ export const Header: React.FC = () => {
 												<div className='ml-[10px] w-[310px]'>
 													<Text text='Name' fontSize='16px' fontWeight='900' color={colors.paradiso.default} />
 												</div>
-												<icons.ArrowRight className='ml-[27px] mr-auto' />
+												<Image
+													src={icons.ArrowRight}
+													alt=""
+													className='ml-[27px] mr-auto'
+												/>
 											</div>
 										</Link>
 										
@@ -224,7 +255,11 @@ export const Header: React.FC = () => {
 												<div className='ml-[10px] w-[310px]'>
 													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={colors.paradiso.default} />
 												</div>
-												<icons.ArrowRight className='ml-[27px] mr-auto' />
+												<Image
+													src={icons.ArrowRight}
+													alt=""
+													className='ml-[27px] mr-auto'
+												/>
 											</div>
 										</Link>
 									</ul>
@@ -244,7 +279,11 @@ export const Header: React.FC = () => {
 					<div className='rightNav py-[22px] max-sm:py-[10px]'>
 						<div className='translate'>
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
-								<icons.Notif onClick={ () => setShowNotification(true) } />
+								<Image
+									src={icons.Notif}
+									alt=""
+									onClick={ () => setShowNotification(true) }
+								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
 							<div className='p-4'>
@@ -255,8 +294,11 @@ export const Header: React.FC = () => {
 								{
 									isLoggedIn ?
 										<>
-											<a href='javascript:void(0)' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<icons.Notif />
+											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
+												<Image
+													src={icons.Notif}
+													alt=""
+												/>
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>0</span>
 											</a>
@@ -264,11 +306,19 @@ export const Header: React.FC = () => {
 												<div>
 													
 													<Image src={''} alt={''} /> :
-													<images.Profile />
+													<Image
+														src={images.Profile}
+														alt=""
+													/>
 													
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
-													<icons.ArrowDown className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
+													<Image
+														src={icons.ArrowDown}
+														alt=""
+														className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
+														onClick={ () => setDropdownHide(!dropdownHide) }
+													/>
 												</div>
 											</div>
 										</> :

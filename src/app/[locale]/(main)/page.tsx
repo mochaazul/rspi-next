@@ -1,11 +1,32 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import type { Metadata } from 'next'
+import { headers } from "next/headers";
+import { Inter } from 'next/font/google'
 
-import '@/styles/globals.css';
+import { appStage } from '@/config';
 
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
+import MedicalRecordReminder from '@/components/MedicalRecordReminder';
+import CallForAmbulance from '@/components/CallForAmbulance';
+import DevTools from '@/components/DevTools';
+
+import '@/styles/globals.css'
+import {
+	OutletStyle,
+	OutletStyleType,
+	PanelH1,
+	PanelH2,
+	PanelH3,
+	PanelH4,
+	PanelV1
+} from './style';
+
+const blacklistedRoute = [
+  '/patient-portal',
+  '/doctor-detail',
+  '/book-appointment'
+];
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,17 +36,38 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-	children,
+  props,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode,
+  props: {
+    containerStyle?: OutletStyleType;
+    footerShow?: boolean;
+  }
 }) {
-	return (
-		<html lang="en">
-			<body className={ inter.className } suppressHydrationWarning={ true }>
-				<Header />
-				{ children }
-				<Footer />
-			</body>
-		</html>
-	);
+  const headersList = headers();
+  const pathname = headersList.get("x-invoke-path") || "";
+  const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
+
+  return (
+    <html lang="en">
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <Header />
+        {children}
+        
+        { props?.footerShow !== false &&
+          <Footer />
+        }
+        { props?.footerShow !== false &&
+          <CallForAmbulance />
+        }
+        { appStage !== 'prod' &&
+          <DevTools />
+        }
+        { shouldRenderReminder &&
+          <MedicalRecordReminder />
+        }
+      </body>
+    </html>
+  )
 }
