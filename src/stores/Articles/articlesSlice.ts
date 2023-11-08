@@ -1,4 +1,4 @@
-// import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+// import { createSlice, isAnyOf } from '@reduxjs/toolkit'; // migrate
 import { ArticleState, ResponseStatus, ArticleDetail } from '@/interface';
 
 import {
@@ -20,7 +20,7 @@ const initialState: ArticleState = {
 	error: {},
 	pagination: null
 };
-
+// Migrate
 // export const articleSlice = createSlice({
 // 	name: 'articles',
 // 	initialState,
@@ -64,5 +64,5 @@ export const articleSlice = () => {
 	return '';
 }
 
-// export const { example } = articleSlice.actions;
+// export const { example } = articleSlice.actions; // migrate
 export default articleSlice;

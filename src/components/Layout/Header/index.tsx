@@ -24,11 +24,13 @@ import Button from '@/components/Button';
 import MainNavLanguage from '@/components/MainNavLanguage';
 import Modal from '@/components/Modal';
 
-// import { UserState } from '../../../interface/user';
-// import HospitalState from '../../../interface/Hospital';
-// import FacilityServicesState from '../../../interface/facilityServices';
-// import CenterOfExcellenceState from '../../../interface/CenterOfExcellence';
-// import NotificationState from '../../../interface/Notification';
+// Migrate
+// import { UserState } from '@/interface/user';
+// import HospitalState from '@/interface/Hospital';
+// import FacilityServicesState from '@/interface/facilityServices';
+// import CenterOfExcellenceState from '@/interface/CenterOfExcellence';
+// import NotificationState from '@/interface/Notification';
+// End Migrate
 
 import HeaderStyle from './style';
 
@@ -50,7 +52,7 @@ export const Header: React.FC = () => {
 
 	const handleClick = () => {
 		if (isLoggedIn) {
-			// removeUser();
+			// removeUser(); // migrate ( for function removeUser refer repo rspi-fe-web )
 		}
 		router.push('/');
 	};
@@ -90,12 +92,14 @@ export const Header: React.FC = () => {
 							textAlign='center'
 							color={colors.green.brandAccent}
 							text='Mark all as read'
+							// Migrate
 							// onClick={ () => readNotificationDispatch({
 							// 	queryParam: {
 							// 		medical_record: '100154999',
 							// 		email: 'riko.logwirno@rebelworks.co'
 							// 	}
 							// }) }
+							// End Migrate
 						/>
 					</div>
 					

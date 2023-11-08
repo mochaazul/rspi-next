@@ -23,7 +23,7 @@ import {
 } from './style';
 
 const MedicalRecordReminder = () => {
-	// const { user } = useTypedSelector<UserState>('user');
+	// const { user } = useTypedSelector<UserState>('user'); // Migrate
 
 	const router = useRouter()
 
@@ -78,11 +78,9 @@ const MedicalRecordReminder = () => {
 		</FloatingWrapper>
 	);
   
-	// if (isEmpty(user.token)) return null;
+	// if (isEmpty(user.token)) return null; // migrate
   
-	// if (!user.medical_record) return renderFloating();
-
-	return renderFloating();
+	// if (!user.medical_record) return renderFloating(); // migrate
   
 	return null;
 };

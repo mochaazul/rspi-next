@@ -1,3 +1,4 @@
+// All Migrate
 // import { createSlice } from '@reduxjs/toolkit';
 
 // import { FooterState } from '@/interface';

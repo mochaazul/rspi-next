@@ -1,3 +1,4 @@
+// all migrate
 // import { createAsyncThunk, ThunkDispatch } from '@reduxjs/toolkit';
 // import { generateQueryString } from '@/helpers';
 // import { Pagination, RequestOptionGenericType } from '@/interface';
@@ -63,4 +64,4 @@
 export const thunkUtils = () => {
 	return '';
 }
-// export default userSlice
+// export default userSlice // migrate

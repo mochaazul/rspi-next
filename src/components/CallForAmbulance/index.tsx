@@ -12,16 +12,20 @@ import { HospitalState, UserState } from '@/interface';
 import { CallForAmbulanceStyle, ModalRSTelephoneStyle } from './style';
 
 const CallForAmbulance = () => {
-	// const hospitalSelector = useTypedSelector<HospitalState>('hospital');
-	// const { user } = useTypedSelector<UserState>('user');
+
+
+	// const hospitalSelector = useTypedSelector<HospitalState>('hospital'); // migrate
+	// const { user } = useTypedSelector<UserState>('user'); //migrate
 
 	const [visible, setVisible] = useState(false);
 
-	// const shouldGiveMargin = !user.medical_record && user.token;
+	// const shouldGiveMargin = !user.medical_record && user.token; // migrate
 
 	return (
 		<>
+			{/* Migrate  */}
 			{/*   ${ shouldGiveMargin ? 'bottom-24' : '' } additional classname for CallForAmbulanceStyle */}
+			{/* End Migrate */}
 			<CallForAmbulanceStyle className={ `
 				fixed cursor-pointer flex align-center justify-center 
 				max-sm:w-[72px] max-sm:h-[72px]
@@ -65,7 +69,8 @@ const CallForAmbulance = () => {
 						className='mt-2'
 					/>
 					<div className='flex flex-col gap-4 mt-8'>
-						{/* { */}
+						{/* Migrate */}
+						{/* { */} 
 							{/* hospitalSelector?.hospitals?.map(hospital => ( */}
 								<a href={ `tel:0341` } key={ 0 }>
 									<Button label='Hospital Name' theme='outline' hoverTheme='primary' />
@@ -75,6 +80,7 @@ const CallForAmbulance = () => {
 								</a> */}
 							{/* )) */}
 						{/* } */}
+						{/* End Migrate */}
 					</div>
 				</ModalRSTelephoneStyle>
 			</Modal>

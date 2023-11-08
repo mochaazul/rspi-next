@@ -1,3 +1,4 @@
+// Migrate all
 // import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
 
 // import { EventClassesState, ResponseStatus } from '@/interface';

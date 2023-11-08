@@ -1,3 +1,4 @@
+// All Migrate
 // import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
 
 // import { HospitalState, ResponseStatus } from '@/interface';

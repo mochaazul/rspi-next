@@ -1,4 +1,4 @@
-// import { createSlice } from '@reduxjs/toolkit';
+// import { createSlice } from '@reduxjs/toolkit'; // migrate
 
 import { BannerState } from '@/interface';
 
@@ -11,6 +11,7 @@ const initialState: BannerState = {
 	pagination: undefined,
 };
 
+// Migrate
 // export const bannerSlice = createSlice({
 // 	name: 'banner',
 // 	initialState,
@@ -25,6 +26,7 @@ const initialState: BannerState = {
 // });
 
 // export const { banner } = bannerSlice.actions;
+// End Migrate
 
 export const bannerSlice = () => {
 	return '';

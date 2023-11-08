@@ -1,3 +1,4 @@
+// All Migrate
 // import { createSelector } from '@reduxjs/toolkit';
 // import { TypedUseSelectorHook, useSelector } from 'react-redux';
 // import { RootState } from '@/stores';
@@ -6,10 +7,13 @@
 // const selectStore = createSelector([selectState], state => state);
 
 // const useTypedSelector = <T>(key: keyof RootState) => {
-const useTypedSelector = () => {
 	// const selector: TypedUseSelectorHook<RootState> = useSelector;
 	// const result = selector(state => selectStore(state, key));
 	// return result as unknown as T;
+// }
+
+const useTypedSelector = () => {
+
 };
 
 export default useTypedSelector;

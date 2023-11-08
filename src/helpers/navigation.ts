@@ -1,7 +1,8 @@
 import React from 'react';
-// import { useNavigate, useLocation, useParams } from 'react-router-dom';
+// import { useNavigate, useLocation, useParams } from 'react-router-dom'; // migrate
 
 const Navigation = () => {
+	// Migrate
 	// const navigate = useNavigate();
 	// const params = useParams();
 
@@ -11,8 +12,10 @@ const Navigation = () => {
 	// 	return React.useMemo(() => new URLSearchParams(search), [search]);
 	// };
 	// const query = useQuery();
+	// End Migrate
 
 	return {
+		// Migrate
 		// navigate,
 		// state,
 		// pathname,

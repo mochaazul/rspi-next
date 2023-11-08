@@ -1,3 +1,4 @@
+// All migrate
 // import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 // import { FindDoctorDetail, FindDoctorState, ResponseStatus } from '@/interface';

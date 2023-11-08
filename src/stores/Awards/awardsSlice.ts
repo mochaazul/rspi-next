@@ -1,4 +1,4 @@
-// import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit';
+// import { ActionReducerMapBuilder, createSlice } from '@reduxjs/toolkit'; // migrate
 
 import { AwardsState, ResponseStatus } from '@/interface';
 
@@ -15,6 +15,7 @@ const initialState: AwardsState = {
  * @param builder ActionReducerMapBuilder<T>
  * @returns void
  */
+// Migrate
 // const thunkDefaultPendingRejected = (builder: ActionReducerMapBuilder<AwardsState>) => {
 // 	[getAwards].map(thunk => {
 // 		builder.addCase(thunk.pending, state => {
@@ -42,6 +43,7 @@ const initialState: AwardsState = {
 // });
 
 // export const { awards } = awardsSlice.actions;
+// End Migrate
 
 export const awardsSlice = () => {
 	return '';
