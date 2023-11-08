@@ -2,7 +2,7 @@ import { Text } from '@/components';
 import { colors } from '@/constant';
 import { FacilityServicesDetail } from '@/interface';
 import { PropsWithChildren, PropsWithRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 type Props = PropsWithRef<PropsWithChildren<{
 	data: FacilityServicesDetail[],
@@ -10,7 +10,7 @@ type Props = PropsWithRef<PropsWithChildren<{
 }>>;
 
 const CardMenu = ({ children, data, activeMenuIndex }: Props) => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	return (
 		<div className='cardMenu px-[24px] pt-[24px] pb-[9px]'>
 			{ data.map((item, index) => {
@@ -22,7 +22,7 @@ const CardMenu = ({ children, data, activeMenuIndex }: Props) => {
 					fontWeight='700'
 					lineHeight='21px'
 					color={ activeMenuIndex === item.id ? colors.paradiso.default : colors.grey.dark }
-					onClick={ () => navigate(`/facilities/${ item.id }`) }
+					onClick={ () => navigate.push(`/facilities/${ item.id }`) }
 				/>;
 			}) }
 		</div>

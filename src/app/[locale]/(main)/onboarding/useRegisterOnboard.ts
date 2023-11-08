@@ -8,7 +8,7 @@ import {
 import { RegisterOnboardType } from '@/interface';
 import { Languages } from '@/constant';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const { birthDateLabel, mrlabel, phoneLabel } = Languages.page.registerOnboard.form;
 
@@ -46,7 +46,7 @@ export const registerOnboardField = {
 };
 
 const useRegisterOnboard = () => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const registerOnboardAsync = useAppAsyncDispatch<RegisterOnboardType>(registerOnboardAction);
 
 	const [loadingOnBoarding, setLoadingOnBoarding] = useState<boolean>(false);
@@ -63,7 +63,7 @@ const useRegisterOnboard = () => {
 					name,
 				}
 			});
-			navigate(`/otp-verification?mr=${ medical_record }&phone=${ phone }&bod=${ birth_date }&name=${ name }`);
+			navigate.push(`/otp-verification?mr=${ medical_record }&phone=${ phone }&bod=${ birth_date }&name=${ name }`);
 			// console.log(res);
 		} catch (error) {
 			setModalVisible(false);

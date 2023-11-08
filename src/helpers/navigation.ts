@@ -1,10 +1,9 @@
 import React from 'react';
-// import { useNavigate, useLocation, useParams } from 'react-router-dom'; // migrate
+import { useRouter, useParams } from 'next/navigation';
 
 const Navigation = () => {
-	// Migrate
-	// const navigate = useNavigate();
-	// const params = useParams();
+	const navigate = useRouter();
+	const params = useParams();
 
 	// const { state, pathname, search } = useLocation();
 

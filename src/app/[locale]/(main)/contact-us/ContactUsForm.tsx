@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import { regExp, Languages as lang, colors } from '@/constant';
@@ -17,7 +17,7 @@ interface PropsType {
 const language = lang.page.contactUs.contactForm;
 
 const ContactUsForm = ({ hospitalSelector }: PropsType) => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const {
 		onClickContactUs,
 		contactUsField
@@ -73,7 +73,7 @@ const ContactUsForm = ({ hospitalSelector }: PropsType) => {
 					content: content.value
 				});
 				setNotifVisible(true);
-				setTimeout(() => navigate('/contact-us/faq'), 1500);
+				setTimeout(() => navigate.push('/contact-us/faq'), 1500);
 			} }
 			autoComplete='off'
 		>
