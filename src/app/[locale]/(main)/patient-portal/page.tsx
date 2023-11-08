@@ -16,7 +16,7 @@ import { useAppDispatch } from '@/hooks';
 import { FindDoctorState, UserState } from '@/interface';
 import dayjs from 'dayjs';
 import { getLastVisitHospital, getVisitHistories } from '@/stores/PatientProfile';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 
 const { riwayatLab, riwayatVaksin } = Languages.page.patientPortal;
 

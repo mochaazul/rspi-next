@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { UserState } from '@/interface';
 import { useTypedSelector } from '@/hooks';
@@ -17,7 +16,7 @@ const { form, heading, subHeading, forgotPasswordLabel, loginBtnLabel, footer, n
 
 const LoginPage = () => {
 	const navigate = useRouter();
-	const [searchParam] = useSearchParams();
+	const searchParam = useSearchParams()!;
 	const {
 		onClickLogin,
 		onClickResendEmailVerification,

@@ -1,10 +1,9 @@
 import React from 'react';
-// Migrate
-// import { 
-// 	useLocation,
-// 	useNavigation,
-// 	useOutlet,
-// 	useParams } from 'react-router-dom';
+import {
+	useLocation,
+	useNavigation,
+	useOutlet,
+} from 'react-router-dom';
 
 import Footer from '../Footer';
 import Header from '../Header';
@@ -41,8 +40,8 @@ const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean;
 		<>
 			<Header />
 			<OutletStyle { ...props.containerStyle }>
-				{/* Migrate */}
-				{/* { Outlet } */} 
+				{/* Migrate */ }
+				{/* { Outlet } */ }
 			</OutletStyle>
 			{ props.footerShow !== false &&
 				<CallForAmbulance />

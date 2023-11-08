@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTypedSelector } from '@/hooks';
 import { FamilyProfile, FindDoctorState, UserDataDetail, UserState } from '@/interface';
 
-import { useParams, useSearchParams } from 'react-router-dom';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { Images, colors, icons } from '@/constant';
 import { AppointmentState } from '@/interface/Book';
@@ -52,7 +51,7 @@ const BookAppointment = () => {
 
 	const { familyProfiles, loading: familyProfileLoading, userDetail } = useTypedSelector<UserState>('user');
 	const { loading: uploadPhoto } = useTypedSelector<PatientState>('patient');
-	const [searchParams, setSearchParams] = useSearchParams();
+	const searchParams = useSearchParams()!;
 
 	const { bookAppointmentFields } = useBookAppointment();
 

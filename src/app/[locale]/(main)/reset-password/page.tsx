@@ -5,9 +5,8 @@ import { ResetPasswordStyle, Box } from './style';
 import useResetPassword from './useResetPassword';
 import SpinVerification from '@/components/SpinVerification';
 import { FormEvent, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks';
 import { NewPasswordPayload, UserState } from '@/interface';
@@ -29,7 +28,7 @@ const {
 
 const ResetPassword = () => {
 	const navigate = useRouter();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const searchParams = useSearchParams()!;
 	const { onClickResetPassword, resetPasswordField } = useResetPassword();
 	const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'failed'>('loading');
 	const [tokenVerified, setTokenVerified] = useState<boolean>(false);

@@ -14,8 +14,7 @@ import { getDoctorCalendar, getDoctorDetail, getDoctorTimeSlot } from '@/stores/
 
 import VisitSchedule from './sections/VisitSchedule';
 import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
-import { useParams } from 'react-router-dom';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import DoctorAvatar, { ShareDoctor } from './sections/DoctorAvatar';
 import Radio from '@/components/Radio';
 import Calendar from '@/components/Calendar';

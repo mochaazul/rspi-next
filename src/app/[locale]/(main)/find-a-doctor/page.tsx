@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
 import _, { debounce, isEqual } from 'lodash';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'next/navigation';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import {
@@ -54,7 +54,8 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
-	const [searchParams, setSearchParams] = useSearchParams();
+	const searchParams = useSearchParams()!;
+	const params = new URLSearchParams(searchParams);
 
 	const { onDeletePills } = useFindDoctor();
 
@@ -96,10 +97,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 	const doctorCount = () => pagination?.count || 0;
 
 	const onSearchDoctorByName = (value: string) => {
-		setSearchParams(prev => {
-			prev.set('keyword', value);
-			return prev;
-		});
+		params.set('keyword', value);
 	};
 
 	const getFilterValues = () => {
@@ -143,7 +141,9 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 	};
 
 	const clearSearchParams = () => {
-		setSearchParams({});
+		searchParams.forEach((value, key) => {
+			params.delete(value);
+		});
 	};
 
 	const hasSearchParams = () => {

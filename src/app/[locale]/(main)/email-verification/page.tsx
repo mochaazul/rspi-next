@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks';
 import { UserState } from '@/interface';
@@ -14,7 +13,7 @@ import Image from 'next/image';
 
 const EmailVerificationPage = () => {
 	const navigate = useRouter();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const searchParams = useSearchParams()!;
 	const { onEmailVerification } = useEmailVerificationPage();
 	const { loading, error } = useTypedSelector<UserState>('user');
 	const [isEmailVerified, setIsEmailVerified] = useState<boolean>(false);

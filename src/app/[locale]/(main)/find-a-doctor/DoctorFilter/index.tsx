@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'next/navigation';
 
 import { Button, Text, Form } from '@/components';
 import { colors, Languages as lang } from '@/constant';
@@ -33,7 +33,8 @@ const DoctorFilter = () => {
 	const getSpecialitiesDispatch = useAppDispatch(getSpecialities);
 	const getClinicsDispatch = useAppDispatch(getClinics);
 
-	const [searchParams, setSearchParams] = useSearchParams();
+	const searchParams = useSearchParams()!;
+	const params = new URLSearchParams(searchParams);
 
 	const { hospitalFilter, telemedicineFilter, clinicFilter } = useFindDoctor();
 
@@ -50,10 +51,7 @@ const DoctorFilter = () => {
 	const onChangeHospital = ({ hospital_code, id }: HospitalDetail, checked: boolean) => {
 		if (checked) {
 			const hospitals = [...hospitalFilter.getAll(), { hospital_code: hospital_code, id: id }].map(item => item.hospital_code).toString();
-			setSearchParams(prev => {
-				prev.set('hospital', hospitals);
-				return prev;
-			});
+			params.set('hospital', hospitals);
 		} else {
 			hospitalFilter.delete(hospital_code);
 		}
@@ -61,21 +59,15 @@ const DoctorFilter = () => {
 
 	const onCheckedAllHospitals = (checked: boolean) => {
 		if (checked) {
-			setSearchParams(prev => {
-				const hospitals = hospitalSelector.hospitals.map(hospital => hospital.hospital_code);
-				prev.set('hospital', hospitals.toString());
-				return prev;
-			});
+			const hospitals = hospitalSelector.hospitals.map(hospital => hospital.hospital_code);
+			params.set('hospital', hospitals.toString());
 		} else {
 			hospitalFilter.clear();
 		}
 	};
 
 	const onChangePreferedDay = (value: string) => {
-		setSearchParams(prev => {
-			prev.set('day', value);
-			return prev;
-		});
+		params.set('day', value);
 	};
 
 	const mapSpeciality = () => {
@@ -102,10 +94,7 @@ const DoctorFilter = () => {
 	};
 
 	const onToggleTelemedicine = ({ target: { checked } }: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchParams(prev => {
-			prev.set('telemedicine', String(checked));
-			return prev;
-		});
+		params.set('telemedicine', String(checked));
 	};
 
 	return <>

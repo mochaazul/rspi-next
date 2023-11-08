@@ -42,7 +42,7 @@ const useOTPPage = () => {
 			if (user.pin_status) {
 				navigate.replace('/');
 			} else {
-				navigate.push('/pin-create');
+				navigate.replace('/pin-create');
 			}
 		} catch (error) {
 

@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button, Form, Text } from '@/components';
 import { Languages, colors, icons } from '@/constant';
@@ -77,7 +76,7 @@ const CountDownText = ({ onZero, onResend, count, setCount }: Props) => {
 
 const OTPPage = () => {
 	const registerOnboardAsync = useAppAsyncDispatch<RegisterOnboardType>(registerOnboard);
-	const [searchParams] = useSearchParams();
+	const searchParams = useSearchParams()!;
 	const [count, setCount] = useState(60);
 
 	const {

@@ -1,6 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Images, Languages, colors } from '@/constant';
 import { Button, Text, Form, NotificationPanel } from '@/components';
@@ -25,7 +24,7 @@ const {
 
 const ResetEmailPage = () => {
 	const navigate = useRouter();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const searchParams = useSearchParams()!;
 	const { resetEmailField } = useResetEmail();
 	const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'failed'>('loading');
 	const [tokenVerified, setTokenVerified] = useState<boolean>(false);
