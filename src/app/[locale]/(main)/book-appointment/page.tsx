@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTypedSelector } from '@/hooks';
 import { FamilyProfile, FindDoctorState, UserDataDetail, UserState } from '@/interface';
-
+import Image from 'next/image';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Images, colors, icons } from '@/constant';
 import { AppointmentState } from '@/interface/Book';
@@ -313,7 +313,10 @@ const BookAppointment = () => {
 													/> : <></>
 											}
 											<div className='w-full h-full absolute flex items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiFrontFileRef.current?.click() }>
-												<icons.UploadCloud color={ colors.grey.dark } />
+												<Image 
+													src={icons.UploadCloud}
+													alt=""
+													color={ colors.grey.dark } />
 												<Text color={ colors.green.brandAccent } fontWeight='600'>Upload foto tampak depan</Text>
 											</div>
 											<input
@@ -334,7 +337,10 @@ const BookAppointment = () => {
 													/> : <></>
 											}
 											<div className='w-full h-full absolute flex items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiBackFileRef.current?.click() }>
-												<icons.UploadCloud color={ colors.grey.dark } />
+												<Image
+													src={icons.UploadCloud}
+													alt=""
+													color={ colors.grey.dark } />
 												<Text color={ colors.green.brandAccent } fontWeight='600'>Upload foto tampak belakang</Text>
 											</div>
 											<input

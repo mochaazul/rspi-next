@@ -19,6 +19,7 @@ import { cancelBooking } from '@/stores/actions';
 import { navigation } from '@/helpers';
 import { UserDataDetail } from '@/interface/user';
 import { userDetail as userDetailAction } from '@/stores/actions';
+import Image from 'next/image';
 
 
 interface PropsType {
@@ -217,7 +218,7 @@ const CardAppointment = (props: PropsType) => {
 			</div>
 			{ props.isTelemedicine
 				&& <div className='flex items-center mt-[12px] gap-[8px]' >
-					<icons.User size={ 12 } />
+					<Image src={icons.User} alt="" sizes={12} />
 					<Text text={ `Pasien: ${ props.patientName }` } fontSize='14px' fontWeight='700' color={ colors.blue.neon } />
 				</div>
 			}
@@ -248,7 +249,7 @@ const CardAppointment = (props: PropsType) => {
 					handleShowModal && handleShowModal();
 				} }>
 					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ props.isHistory ? riwayatKunjungan.label.recommendDoctor : riwayatKunjungan.label.seeDetail } />
-					<icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />
+					<Image src={icons.LongArrowRight} alt="" className='svg-green' style={ { width: '20px' } } />
 				</div>
 			}
 			< DetailKunjungan

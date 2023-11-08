@@ -1,6 +1,7 @@
 import { Text } from '@/components';
 import { Images, icons } from '@/constant';
 import { navigation } from '@/helpers';
+import Image from 'next/image';
 import React from 'react';
 import * as Icons from 'react-feather';
 
@@ -27,13 +28,25 @@ export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
 			/>
 			<div className='flex gap-[10px] mt-[20px] '>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.facebook.com/RumahSakitPondokIndah') }>
-					<icons.FacebookIcon width='16px' height='16px' />
+					<Image
+					src={icons.FacebookIcon}
+					width={16}
+					height={16}
+					alt="" />
 				</div>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://twitter.com/rspondokindah') }>
-					<icons.TwitterIcon width='16px' height='16px' />
+					<Image
+					src={icons.TwitterIcon}
+					width={16}
+					height={16}
+					alt="" />
 				</div>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.linkedin.com/company/rumah-sakit-pondok-indah/') }>
-					<icons.LinkedIn width='16px' height='16px' />
+					<Image
+					src={icons.LinkedIn}
+					width={16}
+					height={16}
+					alt="" />
 				</div>
 				<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
 					<Icons.Link width='16px' height='16px' />

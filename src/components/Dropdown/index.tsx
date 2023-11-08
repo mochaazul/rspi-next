@@ -6,6 +6,7 @@ import withInputLabel from '@/components/withInputLabel';
 import { colors, icons } from '@/constant';
 
 import { Option, OptionsWrapper, SelectStyled, SelectWrapper } from './style';
+import Image from 'next/image';
 
 export interface DropdownProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
 	menuItems?: {
@@ -175,7 +176,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 					</div>
 			}
 			<div className={ `arrow-down ${ arrowClassName }` } onClick={ openOptionDialog }>
-				<icons.ArrowDown />
+				<Image src={icons.ArrowDown} alt="" />
 			</div>
 			<OptionsWrapper isOpen={ isOpen } topOffset={ SelectWrapperRef.current?.offsetHeight ?? 0 } onClick={ closeOptionDialog }>
 				{

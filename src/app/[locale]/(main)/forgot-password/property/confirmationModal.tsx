@@ -4,6 +4,7 @@ import { Modal, Text, Button } from '@/components';
 import { icons, colors } from '@/constant';
 
 import { ModalStyle } from './style';
+import Image from 'next/image';
 
 interface ModalProps {
 	visible?: boolean;
@@ -26,7 +27,7 @@ const ConfirmationModal: React.FC<ModalProps> = ({
 		>
 			{ !errorMsg ?
 				<ModalStyle>
-					<icons.Confirmed />
+					<Image src={icons.Confirmed} alt="" />
 					<Text text={ 'Link Ubah Kata Sandi Sudah Dikirim' } className={ 'mt-[16px] mb-[8px]' } fontSize={ '20px' } fontWeight={ '800' } />
 					<Text text={ `Periksa kembali email ${ email } untuk melanjutkan proses ubah kata sandi` } fontSize={ '16px' } fontWeight={ '400' } color={ colors.grey.pencil } textAlign={ 'center' } />
 					<Link to='/login'>

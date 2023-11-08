@@ -9,6 +9,7 @@ import { EmptyResultContainer } from 'pages/PatientPortal/style';
 import { Languages, icons } from '@/constant';
 import { Button, Spinner, Text } from '@/components';
 import { Link } from 'react-router-dom';
+import Image from 'next/image';
 
 const { empty } = Languages.page.patientPortal.riwayatKunjungan;
 
@@ -37,7 +38,7 @@ const RiwayatKunjungan = () => {
 
 	if (isEmpty(visitHistories)) {
 		return (<EmptyResultContainer>
-			<icons.EmptyVisitHistories />
+			<Image src={icons.EmptyVisitHistories} alt="" />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'

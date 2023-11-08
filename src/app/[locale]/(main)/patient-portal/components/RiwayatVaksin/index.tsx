@@ -8,6 +8,7 @@ import { isEmpty } from 'lodash';
 import { CardPatientPortalStyle, EmptyResultContainer } from 'pages/PatientPortal/style';
 import { useEffect } from 'react';
 import { getVaccineHistory } from '@/stores/PatientProfile';
+import Image from 'next/image';
 
 const RiwayatVaksin = () => {
 	const { tableMenuLable, warning, empty } = Languages.page.patientPortal.riwayatVaksin;
@@ -24,7 +25,7 @@ const RiwayatVaksin = () => {
 
 	if (isEmpty(vacineHistory)) {
 		return (<EmptyResultContainer>
-			<icons.NoVaccineResult />
+			<Image src={icons.NoVaccineResult} alt="" />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'

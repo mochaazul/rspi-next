@@ -13,6 +13,7 @@ import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import NotificationPanel from '@/components/NotificationPanel';
 import { useEffect, useState } from 'react';
 import { userDetail as userDetailAction } from '@/stores/actions';
+import Image from 'next/image';
 
 const addProfileFormFields = {
 	name: {
@@ -203,7 +204,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					lineHeight='28px'
 					text={ `Tambah Profil ${ selfProfile ? 'Orang Lain' : 'Utama' }` } />
 				<div className='cursor-pointer' onClick={ closeHandler }>
-					<icons.Close />
+					<Image src={icons.Close} alt="" />
 				</div>
 			</ModalHeader>
 			<NotificationPanel

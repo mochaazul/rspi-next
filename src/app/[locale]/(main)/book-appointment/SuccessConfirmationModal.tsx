@@ -1,4 +1,5 @@
 import moment from 'moment';
+import Image from 'next/image';
 import { Button, Modal, Text } from '@/components';
 import { icons, Languages as lang } from '@/constant';
 import { SuccessConfModalContainer } from './style';
@@ -28,7 +29,9 @@ const SuccessConfirmationModal = ({
 		borderRadius='12px'
 	>
 		<SuccessConfModalContainer>
-			<icons.CheckShadowed />
+			<Image
+				src={icons.CheckShadowed}
+				alt="" />
 			<Text
 				className='mt-[24px]'
 				fontSize='24px'

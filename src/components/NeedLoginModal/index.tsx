@@ -4,6 +4,7 @@ import { Text, Button, Modal } from '@/components';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { RootAppState } from '@/interface';
 import { clearErrorNeedLogin } from '@/stores/Root';
+import Image from 'next/image';
 
 const NeedLoginModal = () => {
 
@@ -14,7 +15,7 @@ const NeedLoginModal = () => {
 		<Modal visible={ isNeedLogin } onClose={ () => console.log }>
 			<div className='flex flex-col items-center'>
 				<center>
-					<icons.WarningIcon />
+					<Image src={icons.WarningIcon} alt="" />
 				</center>
 				<Text
 					text='Silakan login'

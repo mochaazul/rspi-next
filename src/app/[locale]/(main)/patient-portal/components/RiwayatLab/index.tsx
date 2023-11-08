@@ -10,6 +10,7 @@ import { CardPatientPortalStyle, EmptyResultContainer } from 'pages/PatientPorta
 import { useEffect } from 'react';
 import { getLabResults } from '@/stores/PatientProfile';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 const LaporanBtn = styled.a`
 	background-color: ${ colors.green.brandAccent };
@@ -41,7 +42,7 @@ const RiwayatLab = () => {
 	);
 	if (isEmpty(labResults)) {
 		return (<EmptyResultContainer>
-			<icons.NoLabResult />
+			<Image src={icons.NoLabResult} alt="" />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'

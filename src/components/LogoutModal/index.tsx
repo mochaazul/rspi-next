@@ -5,6 +5,7 @@ import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { RootAppState } from '@/interface';
 import { clearErrorLogout } from '@/stores/Root';
 import { removeUser as removeUserData } from '@/stores/User';
+import Image from 'next/image';
 
 const LogoutModal = () => {
 
@@ -16,7 +17,7 @@ const LogoutModal = () => {
 		<Modal visible={ tokenIsUsed } onClose={ () => console.log }>
 			<div className='flex flex-col items-center'>
 				<center>
-					<icons.WarningIcon />
+					<Image src={icons.WarningIcon} alt="" />
 				</center>
 				<Text
 					text='Akses masuk terdeteksi!'

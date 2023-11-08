@@ -9,6 +9,7 @@ import { icons } from '@/constant';
 import useEmailVerificationPage from './useEmailVerificationPage';
 import { EmailVerificationStyle } from './style';
 import languages from '@/constant/languages';
+import Image from 'next/image';
 
 const EmailVerificationPage = () => {
 	const navigate = useNavigate();
@@ -58,12 +59,18 @@ const EmailVerificationPage = () => {
 				</div>
 				<div className={ `status success ${ status === 'success' ? 'active' : '' }` }>
 					<div className='icon-cont'>
-						<icons.Check className='svg-white' />
+						<Image
+						src={icons.Check}
+						className='svg-white'
+						alt="" />
 					</div>
 				</div>
 				<div className={ `status failed ${ status === 'failed' ? 'active' : '' }` }>
 					<div className='icon-cont'>
-						<icons.Close className='svg-white' />
+						<Image
+						src={icons.Close}
+						className='svg-white'
+						alt="" />
 					</div>
 				</div>
 			</div>

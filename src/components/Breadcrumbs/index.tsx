@@ -4,6 +4,7 @@ import Text from '@/components/Text';
 import { colors, icons } from '@/constant';
 
 import { ItemStyle } from './style';
+import Image from 'next/image';
 
 export interface BreadcrumbsType {
 	datas: {
@@ -43,7 +44,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 							</ItemStyle>
 						</Link>
 						{
-							(index + 1) < props.datas.length ? <icons.ArrowRight style={ { width: 15, height: 15 } } /> : null
+							(index + 1) < props.datas.length ? <Image src={icons.ArrowRight} style={ { width: 15, height: 15 } } alt="" /> : null
 						}
 					</div>
 				))

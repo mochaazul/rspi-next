@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { EmptyWarningContainer, TimeSlotPill } from './style';
 import { FindDoctorDetail, FindDoctorState, TimeSlot } from '@/interface';
 import { formatTimeslot } from '@/helpers/datetime';
+import Image from 'next/image';
 
 type Props = {
 	hospital?: string;
@@ -46,7 +47,10 @@ const VisitSchedule: React.FC<Props> = ({
 
 	const renderEmptyState = (
 		<div className='flex flex-col items-center justify-center h-full'>
-			<icons.EmptyCalendar />
+			
+			<Image
+				src={icons.EmptyCalendar}
+				alt="" />
 			<Text
 				fontSize='16px'
 				fontWeight='400'

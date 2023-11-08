@@ -10,6 +10,7 @@ import { ModalStyle } from 'pages/PatientPortal/style';
 import { useState } from 'react';
 import { giveDoctorRating } from '@/stores/PatientProfile';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 interface PropsType {
 	visible?: boolean;
@@ -143,7 +144,7 @@ const Feedback = ({ onChange, value }: { value: string[], onChange: (value: stri
 							color={ isChecked(opt) ? '#358888' : '#2A2536' }
 							text={ opt } />
 						{ isChecked(opt)
-							? <icons.CheckActive />
+							? <Image src={icons.CheckActive} alt="" />
 							: <FeedbackPillsCheck /> }
 					</FeedbackPills>
 				))
