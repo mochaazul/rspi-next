@@ -174,7 +174,7 @@ export const Header = ({
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										{ Object.values(hospitalData)?.map((item, idx) => (
+										{ Object.values(hospitalData || [])?.map((item, idx) => (
 											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<img
 													alt=""
@@ -208,7 +208,7 @@ export const Header = ({
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										{ Object.values(centerOfExcellenceData)?.map((item, idx) => (
+										{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
 											<Link href={ `/center-of-excellence/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 													<img src={ item?.img_url?.[0] } width={ 60 } height={ 60 } />
