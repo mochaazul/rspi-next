@@ -27,26 +27,27 @@ const LanguageSelector = () => {
 
 	useEffect(() => {
 		// check if the language is set in local storage
-		// hasLanguageSet();
+		// hasLanguageSet(); // TODO: migrate
 		// get language config from local storage, if null we gave it default value
 		// (which is not necesarry since it was already handled by hasLanguageSet() function)
-		// const lang = getLanguage() ?? 'idn';
+		// const lang = getLanguage() ?? 'idn'; // TODO: migrate
 		// set local state language to localstorage value
 		setCurrentLang('idn'); // TODO: migrate
 	}, []);
 
 	const onChangeLanguage = (value: string) => {
-		// setLanguage(value);
+		// setLanguage(value); // TODO: migrate
 		setCurrentLang(value);
 		setShowLanguagePicker(false);
 		// We need to reload the page to change all the content language since the header of the request is changed
 		// this is the common approach used by many sites for changing the language
-		reload();
+		// reload(); // TODO: migrate
 	};
 
-	const reload = () => {
-		window.location.reload();
-	};
+	// TODO: migrate
+	// const reload = () => {
+	// 	window.location.reload();
+	// };
 
 	return <>
 		<div className='flex items-center gap-[20px]'>

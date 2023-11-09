@@ -11,7 +11,7 @@ import { PropsTypes as NotificationPanelTypes } from '@/components/NotificationP
 import { Languages, colors } from '@/constant';
 import Images from '@/constant/images';
 
-// import useLoginPage from './useLoginPage';
+// import useLoginPage from './useLoginPage'; // TODO: migrate
 import LoginPageStyle from './style';
 
 const { form, heading, subHeading, forgotPasswordLabel, loginBtnLabel, footer, notificationMessage } = Languages.page.loginPage;
@@ -19,6 +19,7 @@ const { form, heading, subHeading, forgotPasswordLabel, loginBtnLabel, footer, n
 const LoginPage = () => {
 	const navigate = useRouter();
 	const searchParam = useSearchParams()!;
+	// TODO: migrate
 	// const {
 	// 	onClickLogin,
 	// 	onClickResendEmailVerification,
@@ -28,6 +29,7 @@ const LoginPage = () => {
 	// 	registeredValue, isFormValid, onSubmit, setFieldsProps, getCurrentForm
 	// } = Form.useForm({ fields: loginField });
 	// const { user, loading: loadingUser, error: errorUser, customMessage } = useTypedSelector<UserState>('user'); // TODO: migrate
+	// End migrate
 
 	const [notifVisible, setNotifVisible] = useState(false);
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
@@ -41,6 +43,7 @@ const LoginPage = () => {
 	// 	setNotifMode(!!errorUser.stat_msg ? 'error' : 'success');
 	// }, [errorUser]);
 
+	// TODO: migrate
 	// useEffect(() => {
 	// 	const ref = searchParam.get('ref');
 	// 	if (!!errorUser.stat_msg === false && !loadingUser && (notifVisible && !ref)) {
@@ -65,6 +68,7 @@ const LoginPage = () => {
 		}
 	};
 
+	// TODO: migrate
 	// const togglePasswordShow = () => {
 	// 	const currentType = getCurrentForm().password.type;
 	// 	setFieldsProps('type', { password: currentType === 'password' ? 'text' : 'password' });
@@ -74,6 +78,7 @@ const LoginPage = () => {
 		setNotifVisible(false);
 	};
 
+	{/** TODO: migrate */ }
 	// const handleResendEmailVerification = async () => {
 	// 	setNotifVisible(false);
 	// 	await onClickResendEmailVerification({ email: getCurrentForm().email.value });
@@ -122,6 +127,7 @@ const LoginPage = () => {
 	// 		color={ notifMode === 'error' ? colors.red.default : colors.black.default }
 	// 	/>;
 	// };
+	{/** End migrate */ }
 
 	return (
 		<LoginPageStyle>
@@ -134,6 +140,7 @@ const LoginPage = () => {
 					` }
 						onSubmit={ e => {
 							setNotifVisible(true);
+							// TODO: migrate
 							// const { email, password } = onSubmit(e);
 							// onClickLogin({
 							// 	email: email.value,
@@ -153,6 +160,7 @@ const LoginPage = () => {
 								{ subHeading }
 							</Text>
 						</div>
+						{/* TODO: migrate */ }
 						{/* {
 							notifVisible &&
 							<div className='w-full mb-[32px]'>
@@ -183,6 +191,7 @@ const LoginPage = () => {
 								onIconClick={ togglePasswordShow }
 								{ ...registeredValue('password') } />
 						</Form.FormGroup> */}
+						{/* End Migrate */ }
 						<div className='w-full'>
 							<Link href='/forgot-password'>
 								<Text
@@ -196,6 +205,7 @@ const LoginPage = () => {
 								</Text>
 							</Link>
 						</div>
+						{/** TODO: migrate */ }
 						{/* <Button
 							label={ loginBtnLabel }
 							type='submit'

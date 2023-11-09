@@ -87,6 +87,8 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	// const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
 
 	// const addFamilyProfileDispatch = useAppAsyncDispatch<FamilyProfilePayload>(addFamilyProfile);
+	// End migrate
+
 	const [error, setError] = useState<string>('');
 	const [disabledEmail, setDisabledEmail] = useState<boolean>(false);
 	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -104,6 +106,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					}, true);
 					return;
 				}
+				// TODO: migrate
 				// const res = await addFamilyProfileDispatch({
 				// 	payload: {
 				// 		birthdate: dob.value,
@@ -114,6 +117,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 				// 		gender: gender.value
 				// 	}
 				// });
+				// End migrate
 				setError('');
 				onClose({
 					dob: dob.value,
@@ -129,12 +133,14 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					gender: gender.value,
 					phone: cleanUpMask(phone.value)
 				};
+				// TODO: migrate
 				// await clikUpdateProfile({
 				// 	payload
 				// });
 				setError('');
 				setDisabledEmail(false);
 				// await getUserDetail();
+				// End migrate
 				onClose({
 					dob: dob.value,
 					email: email.value,
@@ -180,6 +186,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 
 	useEffect(() => {
 		if (type == 'self') {
+			// TODO: migrate
 			// setFieldsValue({
 			// 	email: userDetail.email
 			// });

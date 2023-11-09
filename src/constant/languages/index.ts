@@ -1,8 +1,9 @@
-// import { getLanguage } from '@/helpers/localStorage';
+// import { getLanguage } from '@/helpers/localStorage'; // TODO: migrate
 
 import id from './id';
 import en from './en';
 
+// TODO: migrate
 // const lang = () => ({
 // 	idn: id,
 // 	en

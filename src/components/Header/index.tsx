@@ -32,12 +32,14 @@ const Header: React.FC = () => {
 
 	// const isLoggedIn = !!user.token;
 	const isLoggedIn = false;
+	// End migrate
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
 	const handleClick = () => {
+		// TODO: migrate
 		// if (isLoggedIn) {
 		// 	removeUser();
 		// }
@@ -53,6 +55,7 @@ const Header: React.FC = () => {
 		navigate.push(path);
 	};
 
+	// TODO: migrate
 	// useEffect(() => {
 	// 	const data = localStorage?.getUserData();
 	// 	if (data) {
@@ -143,6 +146,7 @@ const Header: React.FC = () => {
 	// 		</Modal>
 	// 	);
 	// };
+	// End migrate
 
 	return (
 		<HeaderStyle>
@@ -168,6 +172,7 @@ const Header: React.FC = () => {
 									<Image src={ icons.ArrowDown } alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
+									{/* TODO: migrate */ }
 									{/* <ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ hospitals.map((item, idx) => (
 											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
@@ -180,6 +185,8 @@ const Header: React.FC = () => {
 											</div>
 										)) }
 									</ul> */}
+									{/* End migrate */ }
+
 								</div>
 							</div>
 
@@ -189,6 +196,7 @@ const Header: React.FC = () => {
 									<Image src={ icons.ArrowDown } alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
+									{/* TODO: migrate */ }
 									{/* <ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ centerOfExcellence.map((item, idx) => (
 											<Link href={ `/center-of-excellence/${ item.id }` } key={ idx }>
@@ -202,6 +210,8 @@ const Header: React.FC = () => {
 											</Link>
 										)) }
 									</ul> */}
+									{/* End migrate */ }
+
 								</div>
 							</div>
 
@@ -211,6 +221,7 @@ const Header: React.FC = () => {
 									<Image src={ icons.ArrowDown } alt="" className={ 'arrowdown xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
+									{/* TODO: migrate */ }
 									{/* <ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ facilityServices?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.id }` } key={ idx }>
@@ -233,6 +244,7 @@ const Header: React.FC = () => {
 											</div>
 										</Link>
 									</ul> */}
+									{/* End migrate */ }
 								</div>
 							</div>
 
@@ -253,11 +265,12 @@ const Header: React.FC = () => {
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
 							<div className='p-4'>
+								{/** TODO: migrate */ }
 								{/* { modalNotification() } */ }
 							</div>
 							<div className='flex items-center gap-6 max-sm:hidden'>
 								<Button className='btn-main h-[44px] min-w-[190px]' onClick={ () => navigate.push('/find-a-doctor') }>Book Appointment</Button>
-								{
+								{ // TODO: migrate
 									// isLoggedIn ?
 									// 	<>
 									// 		<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
@@ -282,7 +295,7 @@ const Header: React.FC = () => {
 								}
 							</div>
 
-							{/* {
+							{/* { // TODO: migrate
 								isLoggedIn &&
 								<div id='dropdown' className={ `${ dropdownHide === true ? 'hidden' : 'fixed' } z-10 w-[208px] mt-[10px] bg-white divide-y divide-gray-100 shadow dark:bg-gray-700` }>
 									<ul className='py-1 text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -312,6 +325,7 @@ const Header: React.FC = () => {
 								onClick={ () => { handleNavigateSideBar('/'); } }>
 								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
 							</div>
+							{/** TODO: migrate */ }
 							{/* { isLoggedIn &&
 								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
 									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
@@ -322,6 +336,7 @@ const Header: React.FC = () => {
 									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
 								</div>
 							} */}
+							{/** End migrate */ }
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>
 									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
@@ -377,12 +392,14 @@ const Header: React.FC = () => {
 								<Text text={ 'Our Hospital' } fontSize='16px' fontWeight='700' />
 							</div>
 						</div>
+						{/** TODO: migrate */ }
 						{/* { isLoggedIn ?
 							<div className='nav-menu'>
 								<Text text={ 'Logout' } fontSize='16px' fontWeight='700' color={ colors.red.default } onClick={ handleClick } />
 							</div>
 							: null
 						} */}
+						{/** End migrate */ }
 					</div> : null
 				}
 			</div>

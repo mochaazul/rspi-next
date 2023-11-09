@@ -63,7 +63,7 @@ const CallForAmbulance = () => {
 						className='mt-2'
 					/>
 					<div className='flex flex-col gap-4 mt-8'>
-						{/* Migrate */ }
+						{/* TODO: Migrate */ }
 						{/* { */ }
 						{/* hospitalSelector?.hospitals?.map(hospital => ( */ }
 						<a href={ `tel:0341` } key={ 0 }>

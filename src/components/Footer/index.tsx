@@ -3,19 +3,19 @@ import { useRouter } from 'next/navigation';
 
 import { appStage, config } from '@/config';
 import { colors, Images, Languages as lang } from '@/constant';
-// import { useAppDispatch, useTypedSelector } from '@/hooks';
+// import { useAppDispatch, useTypedSelector } from '@/hooks'; // TODO: migrate
 import { FooterDetail, FooterState, HospitalState } from '@/interface';
 import { Button, Text, TextField, Socmed } from '@/components';
 
 import FooterStyled, { FooterContainer } from './style';
-// import { getFooterCategories, getFooterSlug } from '@/stores/actions';
+// import { getFooterCategories, getFooterSlug } from '@/stores/actions'; // TODO: migrate
 
 const FooterLayout = () => {
-	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice');
-	// const fetchFooter = useAppDispatch(getFooterSlug);
+	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice'); // TODO: migrate
+	// const fetchFooter = useAppDispatch(getFooterSlug); // TODO: migrate
 	const [ourHospital, setOurHospital] = useState<FooterDetail[]>([]);
 	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
-	// const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]);
+	// const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]); // TODO: migrate
 	const [pages, setPages] = useState<FooterDetail[]>([]);
 	const navigate = useRouter();
 
@@ -55,6 +55,7 @@ const FooterLayout = () => {
 	// 		}
 	// 	});
 	// }, []);
+	// End migrate
 
 	const language = lang.page.footer;
 
