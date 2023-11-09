@@ -120,7 +120,7 @@ const FacilitiesServicesPage = () => {
 								className='related'
 								fontWeight='700'
 								fontSize='24px'
-								lineHeight='29px'
+								lineheight='29px'
 							/>
 							<div className='grid grid-cols-3 gap-3'>
 								{
@@ -139,7 +139,7 @@ const FacilitiesServicesPage = () => {
 														<Text
 															fontSize='14px'
 															fontWeight='400'
-															lineHeight='17px'
+															lineheight='17px'
 															color={ colors.grey.dark }
 															text={ moment(data?.posted_date_news).format('dddd, DD MMM YYYY') }
 														/>

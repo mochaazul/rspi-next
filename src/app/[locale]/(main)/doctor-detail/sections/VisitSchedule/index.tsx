@@ -54,7 +54,7 @@ const VisitSchedule: React.FC<Props> = ({
 			<Text
 				fontSize='16px'
 				fontWeight='400'
-				lineHeight='24px'
+				lineheight='24px'
 				color='#2A2536'
 				textAlign='center'
 				text={ language.slotEmptyState } />
@@ -76,7 +76,7 @@ const VisitSchedule: React.FC<Props> = ({
 			<Text
 				fontSize='14px'
 				fontWeight='400'
-				lineHeight='21px'
+				lineheight='21px'
 				color='#DC6803'
 				text={ language.notAvailableSchedule } />
 		</EmptyWarningContainer>

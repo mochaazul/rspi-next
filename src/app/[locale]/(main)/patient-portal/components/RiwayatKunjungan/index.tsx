@@ -42,7 +42,7 @@ const RiwayatKunjungan = () => {
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'
-				lineHeight='28px'
+				lineheight='28px'
 			/>
 			<Link to={ '/find-a-doctor' }>
 				<Button label='Jadwalkan Konsultasi' className='w-[200px]' />

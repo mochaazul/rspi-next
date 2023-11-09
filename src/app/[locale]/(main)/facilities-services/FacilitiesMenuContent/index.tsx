@@ -46,12 +46,12 @@ const FacilitiesMenuContent: React.FC<Props> = ({ facilitiesData, activeMenuInde
 			</div>
 			<div className='mt-[48px]'>
 				<div
-					style={ { lineHeight: '24px', fontSize: '16px' } }
+					style={ { lineheight: '24px', fontSize: '16px' } }
 					className='innerHTML'
 					dangerouslySetInnerHTML={ { __html: getContent()?.information || '' } }
 				/>
 			</div>
-			{ /* <Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineHeight='24px'>
+			{ /* <Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineheight='24px'>
 				{ getContent()?.available_at?.[0] }
 			</Text> */ }
 
@@ -62,7 +62,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({ facilitiesData, activeMenuInde
 							if (index !== 0)
 								return (
 									<div className='flex flex-col mt-[16px]' key={ index }>
-										<Text fontSize='18px' fontWeight='900' lineHeight='24px'>
+										<Text fontSize='18px' fontWeight='900' lineheight='24px'>
 											{ data?.split(':+split+:')[0] }
 										</Text>
 										<div className='innerHTML text-16 mt-[10px]' dangerouslySetInnerHTML={ { __html: data?.split(':+split+:')[1] } } />

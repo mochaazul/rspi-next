@@ -77,14 +77,14 @@ const Card = (props: PropsType) => {
 
 export const CardContent = ({ title, description }: { title: string, description: string; }) => (
 	<>
-		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-[20px]' />
-		<Text fontSize='16px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ description } className='mt-[10px]' lineHeight='23px' />
+		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineheight='28px' className='pt-[20px]' />
+		<Text fontSize='16px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ description } className='mt-[10px]' lineheight='23px' />
 	</>
 );
 
 export const CardContentWithInner = ({ title, description, author, RSLocation }: { title: string, description: string; author?: string; RSLocation?: string[]; }) => (
 	<CardContentHTML>
-		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-[10px]' />
+		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineheight='28px' className='pt-[10px]' />
 		{
 			!!RSLocation &&
 			<div className='flex gap-3 mt-3 items-center'>
@@ -95,7 +95,7 @@ export const CardContentWithInner = ({ title, description, author, RSLocation }:
 							<Text
 								key={ name }
 								fontSize='16px'
-								lineHeight='19px'
+								lineheight='19px'
 								fontWeight='900'
 								color={ colors.paradiso.default }
 								text={ name }
@@ -105,7 +105,7 @@ export const CardContentWithInner = ({ title, description, author, RSLocation }:
 				</div>
 			</div>
 		}
-		<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ author } className='mt-[5px] mb-[2px]' lineHeight='24px' />
+		<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ author } className='mt-[5px] mb-[2px]' lineheight='24px' />
 		<div className='innerHTML text-16 mt-[10px]' style={ { color: colors.grey.dark } } dangerouslySetInnerHTML={ { __html: description } } />
 	</CardContentHTML>
 );

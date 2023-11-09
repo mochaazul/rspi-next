@@ -22,7 +22,7 @@ const DoctorProfileWidget = ({ doctorData, timeSlot }: Props) => {
 	return <DoctorProfileWidgetContainer>
 		<DoctorProfileImage src={ doctorData?.img_url } />
 		<div>
-			<Text text={ doctorData?.doctor_name } fontWeight='800' fontSize='14px' lineHeight='21px' />
+			<Text text={ doctorData?.doctor_name } fontWeight='800' fontSize='14px' lineheight='21px' />
 			<Text text={ doctorData?.specialty } fontWeight='400' fontSize='12px' color={ colors.grey.dark } />
 			<hr className='mt-[12px]' />
 			<div className='grid grid-cols-2 mt-[12px] gap-[16px]'>

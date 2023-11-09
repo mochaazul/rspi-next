@@ -48,8 +48,8 @@ const PinModal = ({
 	return (
 		<Modal visible={ visible }>
 			<PinModalContainer>
-				<Text text={ header } fontWeight='900' fontSize='28px' lineHeight='48px' />
-				<Text text={ subHeader } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
+				<Text text={ header } fontWeight='900' fontSize='28px' lineheight='48px' />
+				<Text text={ subHeader } fontWeight='400' fontSize='16px' lineheight='normal' color={ colors.grey.default } />
 				<Form
 					onSubmit={ async e => {
 						const { pin } = onSubmit(e);
@@ -66,8 +66,8 @@ const PinModal = ({
 							setError(responseData.payload.stat_msg);
 						}
 					} }>
-					<Text text={ header } fontWeight='900' fontSize='28px' lineHeight='48px' />
-					<Text text={ subHeader } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
+					<Text text={ header } fontWeight='900' fontSize='28px' lineheight='48px' />
+					<Text text={ subHeader } fontWeight='400' fontSize='16px' lineheight='normal' color={ colors.grey.default } />
 					{
 						error &&
 						<div className='mt-[20px]'>

@@ -49,7 +49,7 @@ const FAQPage = () => {
 						<Text
 							fontType='h1'
 							fontSize='24px'
-							lineHeight='29px'
+							lineheight='29px'
 							fontWeight='900'
 							textAlign='center'
 							color={ colors.grey.darker }
@@ -58,7 +58,7 @@ const FAQPage = () => {
 						/>
 						<Text
 							fontSize='16px'
-							lineHeight='20px'
+							lineheight='20px'
 							fontWeight='400'
 							textAlign='center'
 							color={ colors.grey.dark }

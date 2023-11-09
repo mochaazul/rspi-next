@@ -173,8 +173,8 @@ const DetailDoctorProfile = () => {
 									<div className='flex gap-[16px]'>
 										<DoctorAvatar className='lg:hidden md:hidden' profile_url={ detail?.img_url ?? Images.DoctorProfile } />
 										<div className='flex flex-col'>
-											<Text text={ detail?.name } fontSize='24px' fontWeight='900' lineHeight='24px' />
-											<Text text={ detail?.specialty[0] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' />
+											<Text text={ detail?.name } fontSize='24px' fontWeight='900' lineheight='24px' />
+											<Text text={ detail?.specialty[0] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineheight='24px' className='max-sm:hidden mt-[8px]' />
 											<hr className='my-[8px] md:hidden ' />
 											<ShareDoctor className=' md:hidden' />
 										</div>

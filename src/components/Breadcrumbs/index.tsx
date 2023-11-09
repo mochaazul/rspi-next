@@ -36,7 +36,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 								<Text
 									className='item-text text-ellipsis'
 									fontSize='14px'
-									lineHeight='17px'
+									lineheight='17px'
 									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }
 									color={ (index + 1) < props.datas.length ? colors.grey.dark : colors.paradiso.default }
 									text={ data.name }

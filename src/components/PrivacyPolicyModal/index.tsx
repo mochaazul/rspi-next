@@ -56,7 +56,7 @@ const PrivacyPolicyModal = ({
 						<Text
 							fontSize='16px'
 							fontWeight='400'
-							lineHeight='20px'
+							lineheight='20px'
 						>
 							Saya <strong>menyetujui</strong> ketentuan Privacy Policy.
 						</Text>
@@ -73,7 +73,7 @@ const PrivacyPolicyModal = ({
 					<Text
 						fontSize='16px'
 						fontWeight='400'
-						lineHeight='20px'
+						lineheight='20px'
 					>
 						Saya <strong>menyetujui</strong> ketentuan Terms and Condition.
 					</Text>

@@ -92,7 +92,7 @@ const CentreOfExcellencePage = () => {
 								className='related'
 								fontWeight='700'
 								fontSize='24px'
-								lineHeight='29px'
+								lineheight='29px'
 							/>
 							<div className='grid grid-cols-3 gap-3'>
 								{
@@ -111,7 +111,7 @@ const CentreOfExcellencePage = () => {
 														<Text
 															fontSize='14px'
 															fontWeight='400'
-															lineHeight='17px'
+															lineheight='17px'
 															color={ colors.grey.dark }
 															text={ moment(article?.news?.posted_date).format('dddd, DD MMM YYYY') }
 														/>

@@ -31,7 +31,7 @@ const AwardsPage = (props: BreadcrumbsProps) => {
 			</div>
 			<Text
 				fontSize='20px'
-				lineHeight='30px'
+				lineheight='30px'
 				fontWeight='900'
 				color={ colors.grey.darker }
 				text={ data.title }
@@ -40,7 +40,7 @@ const AwardsPage = (props: BreadcrumbsProps) => {
 			/>
 			<Text
 				fontSize='20px'
-				lineHeight='30px'
+				lineheight='30px'
 				fontWeight='400'
 				color={ colors.grey.darker }
 				text={ data.description }
@@ -60,7 +60,7 @@ const AwardsPage = (props: BreadcrumbsProps) => {
 						<Text
 							fontType='h1'
 							fontSize='44px'
-							lineHeight='57px'
+							lineheight='57px'
 							fontWeight='900'
 							textAlign='center'
 							color={ colors.grey.darker }
@@ -69,7 +69,7 @@ const AwardsPage = (props: BreadcrumbsProps) => {
 						/>
 						<Text
 							fontSize='20px'
-							lineHeight='30px'
+							lineheight='30px'
 							fontWeight='400'
 							textAlign='center'
 							color={ colors.grey.dark }

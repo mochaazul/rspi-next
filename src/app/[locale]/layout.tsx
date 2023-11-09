@@ -7,7 +7,7 @@ import { I18nProviderClient } from '../../locales/client'
 export default function SubLayout({ params: { locale }, children }: { params: { locale: string }, children: ReactElement }) {
   return (
     <html lang={locale}>
-      <body>
+      <body cz-shortcut-listen="true">
         <I18nProviderClient locale={locale}>
           {children}
         </I18nProviderClient>

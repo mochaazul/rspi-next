@@ -20,7 +20,7 @@ const CardMenu = ({ data, activeMenuIndex }: Props) => {
 					className='pb-[15px] cursor-pointer'
 					fontSize='14px'
 					fontWeight='700'
-					lineHeight='21px'
+					lineheight='21px'
 					color={ activeMenuIndex === item.id ? colors.paradiso.default : colors.grey.dark }
 					onClick={ () => navigate(`/center-of-excellence/${ item.id }`) }
 				/>;

@@ -12,7 +12,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; hideTog
 		<div className='flex-1'>
 			<Text
 				fontSize='20px'
-				lineHeight='24px'
+				lineheight='24px'
 				fontWeight='700'
 				color={ colors.grey.darker }
 				subClassName='max-sm:text-[16px] max-sm:leading-[23px]'

@@ -64,7 +64,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 							fontSize='44px'
 							fontType='h1'
 							fontWeight='900'
-							lineHeight='57px'
+							lineheight='57px'
 							text='News and Health Articles'
 							className='sm:mt-[50px] mt-[25px]'
 							subClassName='max-sm:text-[24px]'
@@ -116,14 +116,14 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 												<Text
 													fontSize='14px'
 													fontWeight='400'
-													lineHeight='17px'
+													lineheight='17px'
 													color={ colors.grey.dark }
 													text={ moment(articles[0]?.posted_date).format('dddd, DD MMM YYYY') }
 												/>
 											</div>
 										</div>
-										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ articles[0]?.title } lineHeight='28px' />
-										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ articles[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
+										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ articles[0]?.title } lineheight='28px' />
+										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ articles[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineheight='24px' />
 										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px]' dangerouslySetInnerHTML={ { __html: articles[0]?.short_description } } />
 									</div>
 									<div className='divide-y divide-solid'>
@@ -163,7 +163,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 															<Text
 																fontSize='14px'
 																fontWeight='400'
-																lineHeight='17px'
+																lineheight='17px'
 																color={ colors.grey.dark }
 																text={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
 															/>
@@ -209,7 +209,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 													<Text
 														fontSize='14px'
 														fontWeight='400'
-														lineHeight='17px'
+														lineheight='17px'
 														color={ colors.grey.dark }
 														text={ moment(articles[0]?.posted_date).format('dddd, DD MMM YYYY') }
 													/>

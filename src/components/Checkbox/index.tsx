@@ -43,13 +43,13 @@ const Checkbox = (props: InputType) => {
 					<Text
 						text={ props.label }
 						fontSize='16px'
-						lineHeight='19px'
+						lineheight='19px'
 						fontWeight='400'
 					/>
 					<Text
 						text={ props.labelBold }
 						fontSize='16px'
-						lineHeight='19px'
+						lineheight='19px'
 						fontWeight='700'
 					/>
 				</div>

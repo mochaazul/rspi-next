@@ -12,7 +12,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
 		<div className='flex-1'>
 			<Text
 				fontSize='20px'
-				lineHeight='23px'
+				lineheight='23px'
 				fontType='h3'
 				fontWeight='900'
 				color={ props.open ? colors.paradiso.default : colors.grey.dark }
@@ -46,7 +46,7 @@ const Item = (props: ItemType) => {
 			<div className='item-desc'>
 				<Text
 					fontSize='18px'
-					lineHeight='23px'
+					lineheight='23px'
 					fontType='p'
 					fontWeight='400'
 					color={ colors.grey.dark }

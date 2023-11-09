@@ -67,7 +67,7 @@ const EventClassesPromo = (props: BreadcrumbsProps) => {
 						fontSize='44px'
 						fontType='h1'
 						fontWeight='900'
-						lineHeight='57px'
+						lineheight='57px'
 						text={ heading }
 						className='sm:mt-[50px] mt-[25px]'
 						subClassName='max-sm:text-[24px]'
@@ -76,7 +76,7 @@ const EventClassesPromo = (props: BreadcrumbsProps) => {
 						<Text
 							fontSize='20px'
 							fontWeight='700'
-							lineHeight='24px'
+							lineheight='24px'
 							text={ hospitalSelectionLabel }
 							subClassName='max-sm:font-black max-sm:text-[16px]'
 						/>

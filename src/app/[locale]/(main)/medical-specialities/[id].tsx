@@ -57,7 +57,7 @@ const FooterServicesPage = () => {
 			</div>
 			<div className='mt-[48px]'>
 				<div
-					style={ { lineHeight: '24px', fontSize: '16px' } }
+					style={ { lineheight: '24px', fontSize: '16px' } }
 					className='innerHTML'
 					dangerouslySetInnerHTML={ { __html: detail?.[0]?.content || '' } }
 				/>

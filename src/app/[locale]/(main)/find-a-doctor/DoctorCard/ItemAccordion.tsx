@@ -15,7 +15,7 @@ const Title = (props: { open: boolean; text: string, clinics: I_MasterDoctorClin
 		<div className='flex-1'>
 			<Text
 				fontSize='18px'
-				lineHeight='24px'
+				lineheight='24px'
 				fontWeight='700'
 				color={ colors.paradiso.default }
 				subClassName='max-sm:text-[14px] max-sm:leading-[23px]'
@@ -28,7 +28,7 @@ const Title = (props: { open: boolean; text: string, clinics: I_MasterDoctorClin
 						<div key={ index } className='flex items-center'>
 							<Text
 								fontSize='14px'
-								lineHeight='17px'
+								lineheight='17px'
 								fontWeight='500'
 								color={ colors.grey.darker }
 								subClassName='max-sm:text-[12px] max-sm:leading-[23px]'
@@ -97,7 +97,7 @@ const ItemChildren = ({ clinics }: { clinics: I_MasterDoctorClinic[]; }) => {
 						<Text
 							fontWeight='700'
 							fontSize='14px'
-							lineHeight='17px'
+							lineheight='17px'
 							color={ colors.grey.darker }
 							text={ clinic.clinic_name }
 							subClassName='max-sm:text-[12px]'
@@ -111,7 +111,7 @@ const ItemChildren = ({ clinics }: { clinics: I_MasterDoctorClinic[]; }) => {
 										<Text
 											fontWeight='700'
 											fontSize='12px'
-											lineHeight='14px'
+											lineheight='14px'
 											textAlign='center'
 											fontDecoration='underline'
 											className='inline-block'
@@ -126,7 +126,7 @@ const ItemChildren = ({ clinics }: { clinics: I_MasterDoctorClinic[]; }) => {
 												<Text
 													fontWeight='500'
 													fontSize='12px'
-													lineHeight='14px'
+													lineheight='14px'
 													textAlign='center'
 													className='mt-[-4px] sm:mt-1'
 													subClassName='max-sm:text-[12px]'

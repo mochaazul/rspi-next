@@ -79,7 +79,7 @@ const EmailVerificationPage = () => {
 					<Text
 						fontSize='32px'
 						fontWeight='900'
-						lineHeight='48px'
+						lineheight='48px'
 						text='Mohon Tunggu Sebentar...'
 						className={ `loading ${ status === 'loading' ? 'active' : '' }` }
 						subClassName='text-center'
@@ -87,7 +87,7 @@ const EmailVerificationPage = () => {
 					<Text
 						fontSize='32px'
 						fontWeight='900'
-						lineHeight='48px'
+						lineheight='48px'
 						text='Validation Succesfull'
 						className={ `success ${ status === 'success' ? 'active' : '' }` }
 						subClassName='text-center'
@@ -95,7 +95,7 @@ const EmailVerificationPage = () => {
 					<Text
 						fontSize='32px'
 						fontWeight='900'
-						lineHeight='48px'
+						lineheight='48px'
 						text={ languages.validation.tokenValidation.failed }
 						className={ `failed ${ status === 'failed' ? 'active' : '' }` }
 						subClassName='text-center'

@@ -31,7 +31,7 @@ const ItemFAQ = (props: ItemType) => {
 					<div className='flex-1'>
 						<Text
 							fontSize='16px'
-							lineHeight='24px'
+							lineheight='24px'
 							fontType='h4'
 							fontWeight='700'
 							color={ colors.grey.darker }
@@ -46,7 +46,7 @@ const ItemFAQ = (props: ItemType) => {
 						props.isJSXDesc ? props.desc_jsx :
 							<Text
 								fontSize='14px'
-								lineHeight='22px'
+								lineheight='22px'
 								fontType={ props.readMore ? null : 'p' }
 								fontWeight='400'
 								color={ colors.grey.darker }
@@ -59,7 +59,7 @@ const ItemFAQ = (props: ItemType) => {
 										<Link href={ `/contact-us/faq/${ props.index }` }>
 											<Text
 												fontSize='14px'
-												lineHeight='21px'
+												lineheight='21px'
 												fontType={ null }
 												fontWeight='700'
 												color={ colors.paradiso.accent1 }

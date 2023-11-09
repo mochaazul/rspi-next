@@ -51,7 +51,7 @@ const CallForAmbulance = () => {
 					</div>
 					<Text
 						fontSize='24px'
-						lineHeight='28px'
+						lineheight='28px'
 						fontType='h3'
 						fontWeight='700'
 						textAlign='center'
@@ -61,7 +61,7 @@ const CallForAmbulance = () => {
 					/>
 					<Text
 						fontSize='14px'
-						lineHeight='20px'
+						lineheight='20px'
 						fontWeight='400'
 						textAlign='center'
 						color={ colors.grey.dark }

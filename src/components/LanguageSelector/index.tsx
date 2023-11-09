@@ -75,7 +75,7 @@ const LanguageSelector = () => {
 									<Text
 										fontSize='16px'
 										fontWeight='700'
-										lineHeight='19px'
+										lineheight='19px'
 										text={ item.label }
 										className='flex-1'
 									/>

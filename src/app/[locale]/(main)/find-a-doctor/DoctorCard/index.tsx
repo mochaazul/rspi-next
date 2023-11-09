@@ -21,7 +21,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 				<div className='flex flex-col gap-1 sm:gap-2'>
 					<Text
 						fontSize='20px'
-						lineHeight='24px'
+						lineheight='24px'
 						fontWeight='700'
 						color={ colors.grey.darker }
 						text={ props.full_name_doctor }
@@ -29,7 +29,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 					<div className='flex gap-1 sm:gap-[10px]'>
 						<Text
 							fontSize='14px'
-							lineHeight='17px'
+							lineheight='17px'
 							fontWeight='400'
 							color={ colors.grey.dark }
 							text={ props.specialty }
@@ -38,7 +38,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 					<div className='flex gap-1 sm:gap-[10px]'>
 						<Text
 							fontSize='16px'
-							lineHeight='17px'
+							lineheight='17px'
 							fontWeight='700'
 							color={ colors.green.brandAccent }
 							text={ isOpened ? 'Tutup Jadwal' : 'Lihat Jadwal' }
@@ -53,7 +53,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 							<Icons.Video size={ 14 } color={ colors.white.default } />
 							<Text
 								fontSize='12px'
-								lineHeight='14px'
+								lineheight='14px'
 								fontWeight='700'
 								subClassName='max-sm:text-[12px]'
 								color={ colors.white.default }
@@ -88,7 +88,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 							<div className='flex gap-3 items-center justify-center'>
 								<Text
 									fontSize='14px'
-									lineHeight='17px'
+									lineheight='17px'
 									fontWeight='900'
 									color={ colors.paradiso.default }
 									text={ language.label.seeDetail }

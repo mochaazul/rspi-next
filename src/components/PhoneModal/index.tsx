@@ -18,8 +18,8 @@ const PhoneModal = ({
 	return (
 		<Modal visible={ visible }>
 			<PinModalContainer>
-				<Text text={ hospitalName } fontWeight='900' fontSize='20px' lineHeight='48px' />
-				<Text text={ hospitalPhone } fontWeight='900' fontSize='28px' lineHeight='normal' />
+				<Text text={ hospitalName } fontWeight='900' fontSize='20px' lineheight='48px' />
+				<Text text={ hospitalPhone } fontWeight='900' fontSize='28px' lineheight='normal' />
 				<Button type='submit' label='Tutup' className='mt-[32px]' onClick={ clickCloseContactHospital } />
 			</PinModalContainer>
 		</Modal>

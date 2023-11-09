@@ -21,7 +21,7 @@ interface TextProps {
 	fontDecoration?: FontDecoration;
 	fontWeight?: FontWeight;
 	color?: string;
-	lineHeight?: string;
+	lineheight?: string;
 	onClick?: () => void;
 	id?: any;
 }
@@ -39,7 +39,7 @@ const Text: React.FC<TextProps> = ({
 	fontDecoration,
 	fontWeight,
 	color,
-	lineHeight,
+	lineheight,
 	onClick,
 	id = 'custom-text'
 }) => {
@@ -61,7 +61,7 @@ const Text: React.FC<TextProps> = ({
 			fontDecoration={ fontDecoration }
 			fontWeight={ fontWeight }
 			color={ color }
-			lineHeight={ lineHeight }
+			lineheight={ lineheight }
 			onClick={ onClick }
 			id={ id }
 		>

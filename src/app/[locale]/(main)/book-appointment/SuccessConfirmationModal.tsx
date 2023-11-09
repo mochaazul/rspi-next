@@ -36,13 +36,13 @@ const SuccessConfirmationModal = ({
 				className='mt-[24px]'
 				fontSize='24px'
 				fontWeight='700'
-				lineHeight='28px'
+				lineheight='28px'
 				text={ language.successTitle } />
 			<Text
 				className='mt-[8px] mb-[32px]'
 				fontSize='14px'
 				fontWeight='400'
-				lineHeight='20px'
+				lineheight='20px'
 				textAlign='center'
 				text={ `${ language.successBody } Dr. ${ doctorName ?? '' } ${ language.in } ${ hospitalName } ${ language.at } ${ date && moment(date).locale(getLanguage() === 'idn' ? 'id' : 'en')
 					.format('dddd, DD MMM YYYY') } ${ language.hasSuccess }` } />

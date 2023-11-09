@@ -88,7 +88,7 @@ const Header: React.FC = () => {
 					<div className='flex justify-between p-[20px]'>
 						<Text
 							fontSize='16px'
-							lineHeight='24px'
+							lineheight='24px'
 							fontType='h3'
 							fontWeight='700'
 							textAlign='center'
@@ -97,7 +97,7 @@ const Header: React.FC = () => {
 						/>
 						<Text
 							fontSize='12px'
-							lineHeight='20px'
+							lineheight='20px'
 							fontWeight='400'
 							textAlign='center'
 							color={ colors.green.brandAccent }
@@ -127,7 +127,7 @@ const Header: React.FC = () => {
 									</div>
 									<Text
 										fontSize='14px'
-										lineHeight='20px'
+										lineheight='20px'
 										fontWeight='700'
 										textAlign='center'
 										color={ colors.black.default }
@@ -136,7 +136,7 @@ const Header: React.FC = () => {
 									/>
 									<Text
 										fontSize='12px'
-										lineHeight='20px'
+										lineheight='20px'
 										fontWeight='400'
 										textAlign='center'
 										color={ colors.black.default }

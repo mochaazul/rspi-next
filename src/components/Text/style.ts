@@ -9,7 +9,7 @@ interface StyleProps {
 	fontDecoration?: string;
 	fontWeight?: string;
 	color?: string;
-	lineHeight?: string;
+	lineheight?: string;
 	isGradient?: boolean;
 }
 
@@ -20,7 +20,7 @@ const TextStyle = styled.div<StyleProps>`
     font-size: ${ props.fontSize || '16px' };
     font-weight: ${ props.fontWeight || 'unset' };
     text-align: ${ props.textAlign || 'left' };
-    line-height: ${ props.lineHeight || 'unset' };
+    line-height: ${ props.lineheight || 'unset' };
     color: ${ props.color || colors.grey.darker };
     ${ !!props.fontDecoration && `border-bottom: 1px solid ${ props.color };` }
 
@@ -32,18 +32,18 @@ const TextStyle = styled.div<StyleProps>`
       font-size: ${ props.fontSize || '44px' };
       text-align: ${ props.textAlign || 'left' };
       font-weight: ${ props.fontWeight || '700' };
-      line-height: ${ props.lineHeight || '41px' };
+      line-height: ${ props.lineheight || '41px' };
     }
 
     h2 {
       font-size: ${ props.fontSize || '32px' };
       text-align: ${ props.textAlign || 'left' };
       font-weight: ${ props.fontWeight || '700' };
-      line-height: ${ props.lineHeight || '41px' };
+      line-height: ${ props.lineheight || '41px' };
       
       @media screen and (max-width: 500px) {
         font-size: ${ props.fontSize || '24px' };
-        line-height: ${ props.lineHeight || '31px' };
+        line-height: ${ props.lineheight || '31px' };
       }
     }
 
@@ -52,7 +52,7 @@ const TextStyle = styled.div<StyleProps>`
       text-align: ${ props.textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
       font-weight: ${ props.fontFamily };
-      line-height: ${ props.lineHeight || '36px' } ;
+      line-height: ${ props.lineheight || '36px' } ;
 
       span {
         font-size: ${ props.fontSize || '2rem' };
@@ -72,7 +72,7 @@ const TextStyle = styled.div<StyleProps>`
       font-size: ${ props.fontSize || '16px' };
       text-align: ${ props.textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
-			line-height: ${ props.lineHeight || '18px' } ;
+			line-height: ${ props.lineheight || '18px' } ;
     }
 
     @media screen and (max-width: 720px) {

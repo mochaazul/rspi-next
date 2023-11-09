@@ -201,7 +201,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					subClassName='max-sm:text-[16px]'
 					fontSize='24px'
 					fontWeight='700'
-					lineHeight='28px'
+					lineheight='28px'
 					text={ `Tambah Profil ${ selfProfile ? 'Orang Lain' : 'Utama' }` } />
 				<div className='cursor-pointer' onClick={ closeHandler }>
 					<Image src={icons.Close} alt="" />

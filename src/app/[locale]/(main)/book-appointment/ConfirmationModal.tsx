@@ -41,13 +41,13 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 					text='Konfirmasi Booking Appointment'
 					fontWeight='700'
 					fontSize='24px'
-					lineHeight='28px'
+					lineheight='28px'
 				/>
 				<Text
 					text='Silahkan periksa dan konfirmasi kebenaran informasi berikut:'
 					fontWeight='400'
 					fontSize='14px'
-					lineHeight='20px'
+					lineheight='20px'
 					color={ colors.grey.dark }
 				/>
 				<div className='mt-[24px] px-[16px] flex flex-col gap-[12px]' >
@@ -55,20 +55,20 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 						text='Data Pasien'
 						fontWeight='700'
 						fontSize='14px'
-						lineHeight='20px'
+						lineheight='20px'
 					/>
 					<div className='grid grid-cols-[150px_auto]'>
 						<Text
 							text='Nama : '
 							fontWeight='500'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 						<Text
 							text={ selectedProfile.name }
 							fontWeight='700'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 					</div>
 					<div className='grid grid-cols-[150px_auto]'>
@@ -76,13 +76,13 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							text='Tanggal Lahir : '
 							fontWeight='500'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 						<Text
 							text={ dayjs(splitDate(selectedProfile.birthdate)).format('DD MMMM YYYY') }
 							fontWeight='700'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 					</div>
 					<div className='grid grid-cols-[150px_auto]'>
@@ -90,13 +90,13 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							text='Nomor HP : '
 							fontWeight='500'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 						<Text
 							text={ selectedProfile.phone }
 							fontWeight='700'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 					</div>
 					<div className='grid grid-cols-[150px_auto]'>
@@ -104,13 +104,13 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							text='Email : '
 							fontWeight='500'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 						<Text
 							text={ selectedProfile.email }
 							fontWeight='700'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 					</div>
 					<div className='grid grid-cols-[150px_auto]'>
@@ -118,14 +118,14 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							text='Penjamin : '
 							fontWeight='500'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 						<Text
 							text={ penjamin ?? '-' }
 							className='capitalize'
 							fontWeight='700'
 							fontSize='14px'
-							lineHeight='20px'
+							lineheight='20px'
 						/>
 					</div>
 					<hr />
@@ -136,20 +136,20 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 								text='Data Asuransi'
 								fontWeight='700'
 								fontSize='14px'
-								lineHeight='20px'
+								lineheight='20px'
 							/>
 							<div className='grid grid-cols-[150px_auto]'>
 								<Text
 									text='Nama : '
 									fontWeight='500'
 									fontSize='14px'
-									lineHeight='20px'
+									lineheight='20px'
 								/>
 								<Text
 									text={ namaAsuransi ?? '-' }
 									fontWeight='700'
 									fontSize='14px'
-									lineHeight='20px'
+									lineheight='20px'
 								/>
 							</div>
 							<div className='grid grid-cols-[150px_auto]'>
@@ -157,13 +157,13 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 									text='Nomor : '
 									fontWeight='500'
 									fontSize='14px'
-									lineHeight='20px'
+									lineheight='20px'
 								/>
 								<Text
 									text={ noAsuransi ?? '-' }
 									fontWeight='700'
 									fontSize='14px'
-									lineHeight='20px'
+									lineheight='20px'
 								/>
 							</div>
 						</>
@@ -188,14 +188,14 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 					text='Terdapat Data Diri yang Belum Lengkap'
 					fontWeight='700'
 					fontSize='24px'
-					lineHeight='28px'
+					lineheight='28px'
 					className='pb-2'
 				/>
 				<Text
 					text='Silahkan klik tombol di bawah ini untuk diarahkan ke halaman profil'
 					fontWeight='400'
 					fontSize='14px'
-					lineHeight='20px'
+					lineheight='20px'
 					color={ colors.grey.dark }
 					className='pb-4'
 				/>

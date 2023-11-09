@@ -30,7 +30,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 									<Text
 										fontWeight='400'
 										fontSize='12px'
-										lineHeight='23px'
+										lineheight='23px'
 										color={ colors.white.default }
 										text={ props.labelInfo }
 										className={ '' }

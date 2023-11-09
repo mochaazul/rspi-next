@@ -88,7 +88,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							fontType='h1'
 							fontSize='24px'
 							fontWeight='900'
-							lineHeight='29px'
+							lineheight='29px'
 							color={ colors.grey.darker }
 							text={ language.heading }
 							subClassName='text-[24px]'
@@ -96,7 +96,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 						<Text
 							fontSize='16px'
 							fontWeight='400'
-							lineHeight='19px'
+							lineheight='19px'
 							color={ colors.grey.dark }
 							text={ language.subHeading }
 							className='mt-[10px]'
@@ -114,7 +114,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							<Text
 								fontSize='24px'
 								fontWeight='900'
-								lineHeight='29px'
+								lineheight='29px'
 								textAlign='center'
 								color={ colors.grey.darker }
 								text={ language.contactForm.heading }
@@ -123,7 +123,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							<Text
 								fontSize='16px'
 								fontWeight='400'
-								lineHeight='23px'
+								lineheight='23px'
 								textAlign='center'
 								color={ colors.grey.dark }
 								text={ language.contactForm.subHeading }
@@ -138,7 +138,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 								fontSize='24px'
 								fontType='h3'
 								fontWeight='900'
-								lineHeight='29px'
+								lineheight='29px'
 								textAlign='center'
 								color={ colors.grey.darker }
 								text={ language.faq.heading }
@@ -146,7 +146,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							<Text
 								fontSize='16px'
 								fontWeight='400'
-								lineHeight='23px'
+								lineheight='23px'
 								textAlign='center'
 								color={ colors.grey.dark }
 								text={ language.faq.subHeading }
@@ -175,7 +175,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							fontSize='24px'
 							fontType='h3'
 							fontWeight='900'
-							lineHeight='29px'
+							lineheight='29px'
 							textAlign='center'
 							color={ colors.grey.darker }
 							text={ language.location.heading }
@@ -184,7 +184,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 						<Text
 							fontSize='16px'
 							fontWeight='400'
-							lineHeight='23px'
+							lineheight='23px'
 							textAlign='center'
 							color={ colors.grey.dark }
 							text={ language.location.subHeading }

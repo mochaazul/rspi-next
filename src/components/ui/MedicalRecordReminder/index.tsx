@@ -55,7 +55,7 @@ const MedicalRecordReminder = () => {
 				<Text
 					fontSize='12px'
 					fontWeight='400'
-					lineHeight='23px'
+					lineheight='23px'
 					color='white'
 					text='Pastikan Anda telah booking appointment dan melakukan kunjungan ke RSPI terdekat.' />
 			</Tooltip>
