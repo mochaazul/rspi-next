@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import moment from 'moment';
+import { useRouter, usePathname } from 'next/navigation';
 
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { getArticles } from '@/stores/actions';
@@ -35,7 +36,8 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 	const [activeTab, setActiveTab] = useState(0);
 	const [keyArticle, setKeyArticle] = useState('');
 
-	const { navigate, pathname } = navigation();
+	const navigate = useRouter();
+	const pathname = usePathname();
 
 	const { articles, pagination, loading } = useTypedSelector<ArticleState>('articles');
 	const fetchArticle = useAppDispatch(getArticles);
@@ -101,7 +103,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 									<div
 										key={ articles[0]?.id }
 										className='w-[540px] mr-[32px] cursor-pointer magazine relative'
-										onClick={ () => navigate(`${ pathname }/${ articles[0]?.id }`) }
+										onClick={ () => navigate.push(`${ pathname }/${ articles[0]?.id }`) }
 									>
 										<div>
 											<Share />
@@ -131,7 +133,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 									<div className='divide-y divide-solid'>
 										{
 											articles?.slice(0, 3)?.map((data, index) => (
-												<div key={ index } onClick={ () => navigate(`${ pathname }/${ data?.id }`) }>
+												<div key={ index } onClick={ () => navigate.push(`${ pathname }/${ data?.id }`) }>
 													<CardNews
 														id={ data.id }
 														title={ data.title }

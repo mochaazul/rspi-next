@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation';
+
 import { updatePassword as updatePasswordAction } from '@/stores/actions';
 import { useAppDispatch } from '@/hooks';
 import {
@@ -46,7 +48,7 @@ export const resetPasswordField = {
 
 
 const useResetPassword = () => {
-	const { navigate } = navigation();
+	const navigate = useRouter();
 	const removeUser = useAppDispatch(removeUserData);
 	const resetPassword = useAppDispatch<UpdatePasswordType>(updatePasswordAction);
 	const onClickResetPassword = async ({ confirm_password, new_password }: UpdatePasswordType) => {
@@ -57,7 +59,7 @@ const useResetPassword = () => {
 			}
 		});
 		removeUser();
-		navigate('/');
+		navigate.replace('/');
 	};
 
 	return {

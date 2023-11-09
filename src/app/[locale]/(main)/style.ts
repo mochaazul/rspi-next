@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { colors } from '@/constants';
 
-const LandingPageStyle = styled.div`
+export const LandingPageStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,5 +1,17 @@
 import {
-	BannerDetail, CenterOfExcellenceDetail, ForgotPasswordPayload, LoginPayload, NewPasswordPayload, OTPPayload, RegisterOnboardPayload, RegisterPayload, ResendEmailVerificationPayload, UpdatePasswordPayload, UserData
+	BannerDetail,
+	CenterOfExcellenceDetail,
+	CenterOfExcellenceState,
+	ForgotPasswordPayload,
+	HospitalState,
+	LoginPayload,
+	NewPasswordPayload,
+	OTPPayload,
+	RegisterOnboardPayload,
+	RegisterPayload,
+	ResendEmailVerificationPayload,
+	UpdatePasswordPayload,
+	UserData
 } from '@/interface';
 import fetcher from './utils/fetcher';
 
@@ -56,4 +68,12 @@ export const getBanner = () => {
 
 export const getCoe = () => {
 	return fetcher<CenterOfExcellenceDetail[]>('centerOfExcellences');
+};
+
+export const getHospitals = () => {
+	return fetcher<HospitalState>('hospital');
+};
+
+export const getCenterOfExcellence = () => {
+	return fetcher<CenterOfExcellenceState>('centerOfExcellences');
 };

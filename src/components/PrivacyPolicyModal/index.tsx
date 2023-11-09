@@ -43,7 +43,7 @@ const PrivacyPolicyModal = ({
 		if (step === 'pp') {
 			setStep('toc');
 		} else {
-			// navigate('/otp-verification');
+			// navigate.replace('/otp-verification');
 			onFinish();
 		}
 	};
