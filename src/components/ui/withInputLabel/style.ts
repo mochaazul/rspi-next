@@ -1,6 +1,5 @@
+import { colors } from '@/constant';
 import styled from 'styled-components';
-
-import { colors } from '../../../constant';
 
 type InputWrapperType = {
   width?: string;

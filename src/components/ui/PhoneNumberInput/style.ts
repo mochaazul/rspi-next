@@ -38,7 +38,6 @@ export const PhoneNumberInputWrapper = styled.div<PhoneNumberInputType>`
     outline: 1px solid ${ colors.green.toscaLight }
   }
   ${ GlobalAllTransition5ms }
-
  
 `;
 

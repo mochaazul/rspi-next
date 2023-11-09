@@ -1,6 +1,5 @@
+import { colors } from '@/constants';
 import styled from 'styled-components';
-
-import colors from '../../../constant/colors';
 
 export const PickerStyle = styled.div`
 	position: absolute;

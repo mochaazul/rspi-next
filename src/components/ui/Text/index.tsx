@@ -61,7 +61,7 @@ const Text: React.FC<TextProps> = ({
 			fontDecoration={ fontDecoration }
 			fontWeight={ fontWeight }
 			color={ color }
-			lineHeight={ lineHeight }
+			$lineHeight={ lineHeight }
 			onClick={ onClick }
 			id={ id }
 		>

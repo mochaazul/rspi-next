@@ -1,6 +1,4 @@
-import colors from '../../../constant/colors';
-import fonts from '../../../constant/fonts';
-
+import { colors, fonts } from '@/constants';
 import React from 'react';
 import styled from 'styled-components';
 

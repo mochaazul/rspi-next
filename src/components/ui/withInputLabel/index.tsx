@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { InputType } from '../../../components/ui/TextField/style';
-import { TextAreaType } from '../../../components/ui/TextArea/style';
-import { InputPinType } from '../../../components/ui/TextFieldPin/style';
-import { DropdownProps } from '../../../components/ui/Dropdown';
-import { DatepickerProps } from '../../../components/ui/DateField/style';
-import { PhoneInputType } from '../../../components/ui/PhoneNumberInput/style';
+import { InputType } from '../TextField/style';
+import { TextAreaType } from '../TextArea/style';
+import { InputPinType } from '../TextFieldPin/style';
+import { DropdownProps } from '../Dropdown';
+import { DatepickerProps } from '../DateField/style';
+import { PhoneInputType } from '../PhoneNumberInput/style';
 
 import { ErrorText, InfoText, InputWrapper, LabelText } from './style';
 
