@@ -1,4 +1,5 @@
 import { I_ClinicsResponse } from '@/interface/specialities';
+import { FacilityServicesState } from '@/interface';
 import fetcher from './utils/fetcher';
 
 export const getClinics = () => {
@@ -6,5 +7,5 @@ export const getClinics = () => {
 };
 
 export const getFacilitiesAndServices = () => {
-	return fetcher('facilities');
+	return fetcher<FacilityServicesState>('facilities');
 };

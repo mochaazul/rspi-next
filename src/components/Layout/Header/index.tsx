@@ -15,7 +15,11 @@ import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Link from "next/link";
 
-import { CenterOfExcellenceState, HospitalState } from "@/interface";
+import {
+	CenterOfExcellenceState,
+	FacilityServicesState,
+	HospitalState
+} from "@/interface";
 
 import colors from '@/constant/colors';
 import images from '@/constant/images';
@@ -30,10 +34,12 @@ import HeaderStyle from './style';
 
 export const Header = ({ 
 		hospitalData,
-		centerOfExcellenceData
+		centerOfExcellenceData,
+		facilityServicesData
 	}:{
 		hospitalData: HospitalState,
-		centerOfExcellenceData: CenterOfExcellenceState
+		centerOfExcellenceData: CenterOfExcellenceState,
+		facilityServicesData: FacilityServicesState
 	}) => {
 	const router = useRouter()
 	
@@ -238,20 +244,21 @@ export const Header = ({
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										
-										<Link href={ `/facilities/0` } key={ 0 }>
-											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-												<Image src={''} alt='' width={ 60 } height={ 60 } />
-												<div className='ml-[10px] w-[310px]'>
-													<Text text='Name' fontSize='16px' fontWeight='900' color={colors.paradiso.default} />
+										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
+											<Link href={ `/facilities/${ item.id }` } key={ idx }>
+												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
+													<img src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
+													<div className='ml-[10px] w-[310px]'>
+														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+													</div>
+													<Image
+														src={icons.ArrowRight}
+														alt=""
+														className='ml-[27px] mr-auto'
+													/>
 												</div>
-												<Image
-													src={icons.ArrowRight}
-													alt=""
-													className='ml-[27px] mr-auto'
-												/>
-											</div>
-										</Link>
+											</Link>
+										)) }
 										
 										<Link href={ '/facilities/1234567890' } >
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
