@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as FeatherIcon from 'react-feather';
+import Image from 'next/image';
+import { Text } from '@/components';
+import withInputLabel from '@/components/withInputLabel';
+import { colors, icons } from '@/constant';
 
 import { Option, OptionsWrapper, SelectStyled, SelectWrapper } from './style';
-import Text from '../Text';
-import { colors } from '@/constants';
-import withInputLabel from '../withInputLabel';
 
 export interface DropdownProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
 	menuItems?: {
@@ -174,7 +175,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 					</div>
 			}
 			<div className={ `arrow-down ${ arrowClassName }` } onClick={ openOptionDialog }>
-				{ /* <icons.ArrowDown />  TODO: IMPLEMENT NEXT JS ICON HANDLER */ }
+				<Image src={ icons.ArrowDown } alt='' />
 			</div>
 			<OptionsWrapper isOpen={ isOpen } topOffset={ SelectWrapperRef.current?.offsetHeight ?? 0 } onClick={ closeOptionDialog }>
 				{

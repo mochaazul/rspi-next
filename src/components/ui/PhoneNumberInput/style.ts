@@ -1,19 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as FeatherIcons from 'react-feather';
-import { colors } from '@/constants';
-import { GlobalAllTransition5ms } from '@/constants/globalstyle';
+
+import { colors, icons } from '@/constant';
+import { GlobalAllTransition5ms } from '@/constant/globalstyle';
 
 interface PhoneNumberInputType {
-  iconPosition?: 'left' | 'right';
-  iconName?: any;
-  featherIcon?: keyof typeof FeatherIcons;
-  iconColor?: string;
+	iconPosition?: 'left' | 'right';
+	iconName?: keyof typeof icons;
+	featherIcon?: keyof typeof FeatherIcons;
+	iconColor?: string;
 }
 
 export interface PhoneInputType extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, PhoneNumberInputType {
-  ref?: React.RefObject<HTMLInputElement>;
-  onIconClick?: () => any;
+	ref?: React.RefObject<HTMLInputElement>;
+	onIconClick?: () => any;
 }
 
 export const PhoneNumberInputWrapper = styled.div<PhoneNumberInputType>`

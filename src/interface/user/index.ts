@@ -1,4 +1,4 @@
-import { ResponseStatus } from 'interface';
+import { ResponseStatus } from '@/interface';
 
 export interface UserState {
 	user: UserData;
@@ -61,16 +61,16 @@ export interface UserDataDetail {
 	deleted_date?: string;
 }
 
-export type ResendEmailVerificationPayload = {
+export type ResendEmailVerificationType = {
 	email: string;
 };
 
-export type LoginPayload = {
+export type LoginType = {
 	email: string;
 	password: string;
 };
 
-export type RegisterPayload = {
+export type RegisterType = {
 	email: string;
 	password: string;
 	confirm_password: string;
@@ -85,22 +85,22 @@ export type CheckPinType = {
 	pin: string;
 };
 
-export type OTPPayload = {
+export type OTPType = {
 	otp: string;
 };
 
-export type RegisterOnboardPayload = {
+export type RegisterOnboardType = {
 	medical_record: string;
 	phone: string;
 	birth_date: string;
 	name: string;
 };
 
-export type ForgotPasswordPayload = {
+export type ForgotPasswordType = {
 	email: string;
 };
 
-export type UpdatePasswordPayload = {
+export type UpdatePasswordType = {
 	new_password: string;
 	confirm_password: string;
 };

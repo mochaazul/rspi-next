@@ -1,4 +1,4 @@
-import { regExp } from '@/constants';
+import { regExp } from '@/constant';
 
 type CreateFieldConfig = {
 	name: string, type: string, defaultValue?: string;

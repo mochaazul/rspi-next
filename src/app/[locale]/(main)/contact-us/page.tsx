@@ -1,0 +1,256 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import {
+	Accordion,
+	Breadcrumbs,
+	Button,
+	CustomCarousel,
+	Layout,
+	Text
+} from '@/components';
+import { colors, Images, Languages as lang } from '@/constant';
+import { BreadcrumbsProps, HospitalDetail, HospitalState } from '@/interface';
+import { useTypedSelector } from '@/hooks';
+
+import { ContactUsPanel } from './style';
+import SelectRSLocation from './SelectRSLocation';
+import FAQDatas from './FAQDatas';
+import ContactUsForm from './ContactUsForm';
+
+const language = lang.page.contactUs;
+
+const ContactUsPage = (props: BreadcrumbsProps) => {
+	const navigate = useRouter();
+	const hospitalSelector = useTypedSelector<HospitalState>('hospital');
+
+	const handleRSLocationChange = (id: number) => {
+		setSelectedMapIndex(id);
+	};
+
+	const handleRSCarouselChange = (index: number) => {
+		handleRSLocationChange(hospitalSelector.hospitals[index]?.id ?? 0);
+	};
+
+	const [selectedMapIndex, setSelectedMapIndex] = useState<number>(0);
+
+	useEffect(() => {
+		if (hospitalSelector.hospitals.length > 0) {
+			setSelectedMapIndex(hospitalSelector.hospitals[0]?.id ?? 0);
+		}
+	}, [hospitalSelector.hospitals]);
+
+	const handleOpenMapLink = (link: string) => () => {
+		window.open(link, '_blank');
+	};
+
+	const renderTooltip = (data: HospitalDetail[]) => {
+		console.log(data);
+		return (
+			<div className='flex flex-col gap-y-4 absolute block max-w-sm p-4 m-2 bg-white rounded-lg shadow'>
+				<div className='flex flex-row gap-x-5'>
+					<img src={ data?.[0]?.img_url?.[0] ?? '' } alt={ data?.[0]?.name ?? '' } className='w-[80px] h-[80px] rounded-md object-cover' />
+					<div className='flex flex-col'>
+						<p
+							className='text-base font-black'>
+							{ data?.[0]?.name }
+						</p>
+						<p
+							className='text-sm font-normal'>
+							{ data?.[0]?.address }
+						</p>
+					</div>
+				</div>
+				<div className='flex flex-row gap-x-2'>
+					<Button theme='outline' hoverTheme='outline' label={ 'See Direction' } onClick={ handleOpenMapLink(data?.[0]?.share_link ?? '') } />
+					<Button theme='primary' hoverTheme='primary' label={ 'Find Doctor' } onClick={ () => navigate.push(`/find-a-doctor?hospital=${ data[0].hospital_code }`) } />
+				</div>
+
+			</div>
+		);
+	};
+
+	const getEmbedLink = () => {
+		const embedLink = hospitalSelector.hospitals.find(data => selectedMapIndex === data.id)?.embed_link;
+		if (!embedLink) {
+			return hospitalSelector.hospitals[0].embed_link ?? '';
+		}
+		return embedLink;
+	};
+
+	return (
+		<ContactUsPanel>
+			<Layout.PanelV1>
+				<Layout.PanelH2>
+					<Breadcrumbs datas={ props.breadcrumbsPath } />
+					<div className='sm:mt-12 mt-4'>
+						<Text
+							fontType='h1'
+							fontSize='24px'
+							fontWeight='900'
+							lineHeight='29px'
+							color={ colors.grey.darker }
+							text={ language.heading }
+							subClassName='text-[24px]'
+						/>
+						<Text
+							fontSize='16px'
+							fontWeight='400'
+							lineHeight='19px'
+							color={ colors.grey.dark }
+							text={ language.subHeading }
+							className='mt-[10px]'
+						/>
+					</div>
+				</Layout.PanelH2>
+
+				<div className='mt-[25px]'>
+					<img src={ Images.ContactUsBg } alt='Contact Us hero image' className='w-full' />
+				</div>
+
+				<Layout.PanelH2>
+					<div className='flex sm:flex-row flex-col sm:gap-20 gap-8 sm:mt-[50px] mt-[44px]'>
+						<div className='flex-1'>
+							<Text
+								fontSize='24px'
+								fontWeight='900'
+								lineHeight='29px'
+								textAlign='center'
+								color={ colors.grey.darker }
+								text={ language.contactForm.heading }
+								className='sm:block hidden'
+							/>
+							<Text
+								fontSize='16px'
+								fontWeight='400'
+								lineHeight='23px'
+								textAlign='center'
+								color={ colors.grey.dark }
+								text={ language.contactForm.subHeading }
+								className='mt-3'
+								subClassName='max-sm:text-left'
+							/>
+							<ContactUsForm hospitalSelector={ hospitalSelector } />
+						</div>
+						<div className='sm:border-r-[1px] border-b-[1px]' />
+						<div className='flex-1'>
+							<Text
+								fontSize='24px'
+								fontType='h3'
+								fontWeight='900'
+								lineHeight='29px'
+								textAlign='center'
+								color={ colors.grey.darker }
+								text={ language.faq.heading }
+							/>
+							<Text
+								fontSize='16px'
+								fontWeight='400'
+								lineHeight='23px'
+								textAlign='center'
+								color={ colors.grey.dark }
+								text={ language.faq.subHeading }
+								className='mt-3'
+							/>
+							<div className='mt-10'>
+								<Accordion
+									itemTheme={ props => <Accordion.ItemFAQ { ...props } readMore={ true } /> }
+									datas={ FAQDatas.filter((_faq, index) => index < 5) }
+								/>
+							</div>
+							<Button
+								className='mt-5 py-4'
+								theme='outline'
+								hoverTheme='primary'
+								label={ language.faq.allFaqBtnLabel }
+								onClick={ () => navigate.push('/contact-us/faq') }
+							/>
+						</div>
+					</div>
+				</Layout.PanelH2>
+
+				<Layout.PanelH2>
+					<div className='sm:mt-28 mt-12'>
+						<Text
+							fontSize='24px'
+							fontType='h3'
+							fontWeight='900'
+							lineHeight='29px'
+							textAlign='center'
+							color={ colors.grey.darker }
+							text={ language.location.heading }
+							className='text-center'
+						/>
+						<Text
+							fontSize='16px'
+							fontWeight='400'
+							lineHeight='23px'
+							textAlign='center'
+							color={ colors.grey.dark }
+							text={ language.location.subHeading }
+							className='mt-3 mx-auto text-center sm:w-[630px] w-full'
+						/>
+					</div>
+				</Layout.PanelH2>
+
+				<div className={ `sm:mt-20 sm:pb-5 pb-10 mt-8 flex sm:flex-row flex-col ${ hospitalSelector.loading ? 'hidden' : '' }` }>
+					<div className='max-sm:hidden'>
+						{
+							hospitalSelector?.hospitals?.map((data, index) => (
+								<SelectRSLocation
+									key={ index }
+									id={ data.id ?? 0 }
+									title={ data.name ?? '' }
+									mapString={ data.embed_link ?? '' }
+									imgThumb={ data.img_url?.[0] ?? '' }
+									address={ data.address ?? '' }
+									phone={ data.phone ?? '' }
+									isActive={ selectedMapIndex === data.id }
+									onClick={ handleRSLocationChange }
+								/>
+							))
+						}
+					</div>
+					<div className='flex-1 max-sm:mx-4 max-sm:rounded-[10px] max-sm:bg-white overflow-hidden min-h-[600px]'>
+						{ /* custom tooltip */ }
+						{
+							renderTooltip(hospitalSelector?.hospitals?.filter(data => data.id === selectedMapIndex))
+						}
+						<iframe
+							src={ getEmbedLink() }
+							className='border-0 w-full h-full max-sm:min-h-[500px]'
+							allowFullScreen={ false }
+							loading='lazy'
+							referrerPolicy='no-referrer-when-downgrade' />
+					</div>
+					<div className='sm:hidden relative mt-[-50px] mx-4'>
+						{ /* Slider container */ }
+						<div className='global-shadow relative'>
+							<CustomCarousel autoplay={ false } onChangeIndex={ handleRSCarouselChange }>
+								{
+									hospitalSelector?.hospitals?.map((data, index) => (
+										<div key={ index } className='rounded-[10px] bg-white overflow-hidden'>
+											<SelectRSLocation
+												id={ data.id ?? 0 }
+												title={ data.name ?? '' }
+												mapString={ data.embed_link ?? '' }
+												mapURL={ data.share_link ?? '' }
+												imgThumb={ data.img_url?.[0] ?? '' }
+												address={ data.address ?? '' }
+												phone={ data.phone ?? '' }
+												isActive={ selectedMapIndex === data.id }
+												onClick={ handleRSLocationChange }
+											/>
+										</div>
+									))
+								}
+							</CustomCarousel>
+						</div>
+					</div>
+				</div>
+			</Layout.PanelV1>
+		</ContactUsPanel>
+	);
+};
+
+export default ContactUsPage;

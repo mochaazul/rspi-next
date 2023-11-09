@@ -1,4 +1,4 @@
-import { colors } from '@/constants';
+import { colors } from '@/constant';
 import styled from 'styled-components';
 
 type InputWrapperType = {
