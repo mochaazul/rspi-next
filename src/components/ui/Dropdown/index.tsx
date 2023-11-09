@@ -175,7 +175,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 					</div>
 			}
 			<div className={ `arrow-down ${ arrowClassName }` } onClick={ openOptionDialog }>
-				<Image src={icons.ArrowDown} alt="" />
+				<Image src={ icons.ArrowDown } alt='' />
 			</div>
 			<OptionsWrapper isOpen={ isOpen } topOffset={ SelectWrapperRef.current?.offsetHeight ?? 0 } onClick={ closeOptionDialog }>
 				{

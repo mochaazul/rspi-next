@@ -14,7 +14,7 @@ import { getDoctorCalendar, getDoctorDetail, getDoctorTimeSlot } from '@/stores/
 
 import VisitSchedule from './sections/VisitSchedule';
 import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useRouter, useParams } from 'next/navigation';
 import DoctorAvatar, { ShareDoctor } from './sections/DoctorAvatar';
 import Radio from '@/components/Radio';
 import Calendar from '@/components/Calendar';
@@ -53,7 +53,7 @@ const DetailDoctorProfile = () => {
 	const [radioValue, setRadioValue] = useState('Appointment');
 	const [selectedDate, setSelectedDate] = useState<Date>();
 	const [selectedDateStatus, setSelectedDateStatus] = useState<string>('');
-	const navigate = useNavigate();
+	const navigate = useRouter();
 
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot>();
 
@@ -117,7 +117,7 @@ const DetailDoctorProfile = () => {
 
 	const onBookHandler = () => {
 		if (selectedTimeSlot?.slot_id) {
-			navigate('/book-appointment/' + selectedTimeSlot.slot_id + `?service=${ radioValue === 'Telemedicine' ? 'TEL' : 'APP' }`);
+			navigate.push('/book-appointment/' + selectedTimeSlot.slot_id + `?service=${ radioValue === 'Telemedicine' ? 'TEL' : 'APP' }`);
 		}
 	};
 
@@ -238,7 +238,7 @@ const DetailDoctorProfile = () => {
 									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
 									theme='outline'
 									onClick={ () => {
-										navigate(-1);
+										navigate.back();
 									} }
 								/>
 								<Button

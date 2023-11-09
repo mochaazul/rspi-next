@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks';
 import { UserState } from '@/interface';
@@ -14,7 +15,7 @@ import InfoModal from './InfoModal/index';
 const { heading, subHeading, footer, form, registerBtnLabel, notificationMessage } = Languages.page.registerPage;
 
 const RegisterPage = () => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const {
 		onClickRegister,
 		registerField
@@ -39,7 +40,7 @@ const RegisterPage = () => {
 
 	const toggleInfoBox = (open: boolean) => () => {
 		setInfoBoxVisible(open);
-		navigate('/');
+		navigate.replace('/');
 	};
 
 	const handleNotifOnClose = () => {
@@ -73,7 +74,7 @@ const RegisterPage = () => {
 						autoComplete='off'
 					>
 						<div className='w-full '>
-							<Link to='/' className='max-sm:hidden'>
+							<Link href='/' className='max-sm:hidden'>
 								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
 							</Link>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineheight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
@@ -132,7 +133,7 @@ const RegisterPage = () => {
 						/>
 						<Text fontType={ null } fontSize='24px' fontWeight='400' color={ colors.grey.dark } className='max-2xl:mt-5 mt-8 max-lg:text-[14px] text-[20px]'>
 							{ footer.hasAccountLabel }&nbsp;
-							<Link to='/login'>
+							<Link href='/login'>
 								<Text
 									className='inline-block max-lg:text-[14px] text-[20px]'
 									fontType={ null }

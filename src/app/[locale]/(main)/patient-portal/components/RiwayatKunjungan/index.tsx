@@ -8,7 +8,7 @@ import { isEmpty } from 'lodash';
 import { EmptyResultContainer } from 'pages/PatientPortal/style';
 import { Languages, icons } from '@/constant';
 import { Button, Spinner, Text } from '@/components';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import Image from 'next/image';
 
 const { empty } = Languages.page.patientPortal.riwayatKunjungan;
@@ -38,13 +38,13 @@ const RiwayatKunjungan = () => {
 
 	if (isEmpty(visitHistories)) {
 		return (<EmptyResultContainer>
-			<Image src={icons.EmptyVisitHistories} alt="" />
+			<Image src={ icons.EmptyVisitHistories } alt="" />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'
 				lineheight='28px'
 			/>
-			<Link to={ '/find-a-doctor' }>
+			<Link href={ '/find-a-doctor' }>
 				<Button label='Jadwalkan Konsultasi' className='w-[200px]' />
 			</Link>
 		</EmptyResultContainer>);

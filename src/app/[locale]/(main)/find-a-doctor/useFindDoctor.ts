@@ -3,7 +3,7 @@ import { createFieldConfig, maxLengthRule, minLengthRule, requiredRule } from '@
 import { useTypedSelector } from '@/hooks';
 import { HospitalState } from '@/interface';
 import { I_SpecialitiesState } from '@/interface/specialities';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'next/navigation';
 
 export const searchFilterField = {
 	day: {
@@ -28,7 +28,8 @@ const useFindDoctor = () => {
 	const hospitalSelector = useTypedSelector<HospitalState>('hospital');
 	const { specialities } = useTypedSelector<I_SpecialitiesState>('specialities');
 	const { clinics } = useTypedSelector<I_SpecialitiesState>('specialities');
-	const [searchParams, setSearchParams] = useSearchParams();
+	const searchParams = useSearchParams()!;
+	const params = new URLSearchParams(searchParams);
 
 	const filterHospital = () => {
 		const obj = searchParams.get('hospital')?.split(',') ?? [];
@@ -41,42 +42,26 @@ const useFindDoctor = () => {
 	const deleteHospitalFilter = (hospital_code: string) => {
 		const values = searchParams.get('hospital')?.split(',') ?? [];
 		const filteredValues = values.filter(item => item !== hospital_code);
-		setSearchParams(prev => {
-			prev.set('hospital', filteredValues.toString());
-			return prev;
-		});
+		params.set('hospital', filteredValues.toString());
 	};
 
 	const clearHospitalFilter = () => {
-		setSearchParams(prev => {
-			prev.delete('hospital');
-			return prev;
-		});
+		params.delete('hospital');
 	};
 
 	const addSpecialty = (item: PickerItem) => {
-		setSearchParams(prev => {
-			const prevSpecialty = prev.get('specialty_category');
-			prev.set('specialty_category', prevSpecialty ? prevSpecialty + ',' + item.speciality_code : item.speciality_code);
-			return prev;
-		});
-
+		const prevSpecialty = params.get('specialty_category');
+		params.set('specialty_category', prevSpecialty ? prevSpecialty + ',' + item.speciality_code : item.speciality_code);
 	};
 
 	const deleteSpecialty = (item: PickerItem) => {
 		const values = searchParams.get('specialty_category')?.split(',') ?? [];
 		if (values.length < 2) {
-			setSearchParams(prev => {
-				prev.delete('specialty_category');
-				return prev;
-			});
+			params.delete('specialty_category');
 			return;
 		}
 		const filteredSpecialty = values.filter(sp => sp !== item.label);
-		setSearchParams(prev => {
-			prev.set('specialty_category', filteredSpecialty.toString());
-			return prev;
-		});
+		params.set('specialty_category', filteredSpecialty.toString());
 	};
 
 	const getSpecialty = (): PickerItem[] => {
@@ -99,15 +84,9 @@ const useFindDoctor = () => {
 		const currentParams = Object.fromEntries(searchParams);
 		const removedParams = removeFromString(currentParams[pillValue.key], pillValue.id);
 		if (pillValue.key === 'telemedicine') {
-			setSearchParams(prev => {
-				prev.set('telemedicine', 'false');
-				return prev;
-			});
+			params.set('telemedicine', 'false');
 		} else {
-			setSearchParams(prev => {
-				prev.set(pillValue.key, removedParams);
-				return prev;
-			});
+			params.set(pillValue.key, removedParams);
 		}
 
 	};

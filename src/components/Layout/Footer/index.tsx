@@ -19,7 +19,6 @@ import FooterStyled, { FooterContainer } from './style';
 import Image from 'next/image';
 
 const FooterLayout = () => {
-
 	const router = useRouter();
 
 	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice');
@@ -29,8 +28,6 @@ const FooterLayout = () => {
 	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
 	const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]);
 	const [pages, setPages] = useState<FooterDetail[]>([]);
-
-	// const navigate = useNavigate();
 
 	// useEffect(() => {
 	// 	fetchFooter({

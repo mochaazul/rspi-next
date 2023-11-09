@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button, Form, Text } from '@/components';
 import { Languages, colors, icons } from '@/constant';
@@ -76,7 +76,7 @@ const CountDownText = ({ onZero, onResend, count, setCount }: Props) => {
 
 const OTPPage = () => {
 	const registerOnboardAsync = useAppAsyncDispatch<RegisterOnboardType>(registerOnboard);
-	const [searchParams] = useSearchParams();
+	const searchParams = useSearchParams()!;
 	const [count, setCount] = useState(60);
 
 	const {
@@ -89,7 +89,7 @@ const OTPPage = () => {
 
 	const [otpCount, setOtpCount] = useState<number>(0);
 
-	const navigate = useNavigate();
+	const navigate = useRouter();
 
 	const onSubmitHandler = () => {
 		const { otp } = getCurrentForm();
@@ -140,7 +140,7 @@ const OTPPage = () => {
 					</Form.FormGroup>
 				</Form>
 				<Button className='mt-[32px]' theme='primary' disabled={ !isFormValid() } onClick={ () => { onSubmitHandler(); } }>{ submitBtnLabel }</Button>
-				<Button className='mt-[32px]' theme='text' onClick={ () => navigate('/pin-create') }>{ backBtnlabel }</Button>
+				<Button className='mt-[32px]' theme='text' onClick={ () => navigate.replace('/pin-create') }>{ backBtnlabel }</Button>
 			</Box>
 		</OTPPageStyle>
 	);

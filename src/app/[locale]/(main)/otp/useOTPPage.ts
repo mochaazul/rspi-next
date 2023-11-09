@@ -9,7 +9,7 @@ import {
 import { OTPType, UserState } from '@/interface';
 import { Languages } from '@/constant';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const { form: { otpFieldLabel } } = Languages.page.otpVerification;
 
@@ -31,7 +31,7 @@ export const OTPField = {
 const useOTPPage = () => {
 	const otpDispatch = useAppAsyncDispatch<OTPType>(otpAction);
 	const { user } = useTypedSelector<UserState>('user');
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const onClickOTP = async ({ otp }: OTPType) => {
 		try {
 			await otpDispatch({
@@ -40,9 +40,9 @@ const useOTPPage = () => {
 				}
 			});
 			if (user.pin_status) {
-				navigate('/');
+				navigate.replace('/');
 			} else {
-				navigate('/pin-create');
+				navigate.replace('/pin-create');
 			}
 		} catch (error) {
 

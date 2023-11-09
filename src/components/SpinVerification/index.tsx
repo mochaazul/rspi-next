@@ -5,7 +5,7 @@ import Text from '@/components/Text';
 import { removeUser as removeUserData } from '@/stores/User';
 import { icons } from '@/constant';
 import languages from '@/constant/languages';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { SpinContainer } from './style';
 import { UserState } from '@/interface';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
@@ -15,8 +15,7 @@ type Props = {
 };
 
 const SpinVerification = ({ status }: Props) => {
-
-	const navigate = useNavigate();
+	const navigate = useRouter();
 
 	const userSelector = useTypedSelector<UserState>('user');
 	const { user, userDetail } = userSelector;
@@ -27,7 +26,7 @@ const SpinVerification = ({ status }: Props) => {
 		if (isLoggedIn) {
 			removeUser();
 		}
-		navigate('/login');
+		navigate.replace('/login');
 	};
 
 	return <SpinContainer>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as Icons from 'react-feather';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import { Images, colors, Languages as lang } from '@/constant';
 import { Accordion, Button, Text } from '@/components';
@@ -82,7 +82,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 			}
 			{ /* Button lihat detail */ }
 			<div className='mt-4 text-right sm:mt-6'>
-				<Link to={ `/doctor-detail/${ props.doctor_code }` }>
+				<Link href={ `/doctor-detail/${ props.doctor_code }` }>
 					<div className='md:inline-block'>
 						<Button theme='outline' className='h-[36px] py-0 grow-0'>
 							<div className='flex gap-3 items-center justify-center'>

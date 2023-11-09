@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import { Breadcrumbs, CustomCarousel, Text } from '@/components';
 import { Languages, colors } from '@/constant';

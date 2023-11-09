@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Images, Languages, colors } from '@/constant';
 import { Button, Text, Form, NotificationPanel } from '@/components';
@@ -23,8 +23,8 @@ const {
 } = Languages.page.resetEmail;
 
 const ResetEmailPage = () => {
-	const navigate = useNavigate();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const navigate = useRouter();
+	const searchParams = useSearchParams()!;
 	const { resetEmailField } = useResetEmail();
 	const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'failed'>('loading');
 	const [tokenVerified, setTokenVerified] = useState<boolean>(false);
@@ -49,7 +49,7 @@ const ResetEmailPage = () => {
 
 	const hasToken = async () => {
 		try {
-			if (!searchParams.get('token')) return navigate('/login');
+			if (!searchParams.get('token')) return navigate.replace('/login');
 
 			// verify token if present
 			setVerificationStatus('loading');
@@ -66,7 +66,7 @@ const ResetEmailPage = () => {
 				if (isLoggedIn) {
 					removeUser();
 				}
-				navigate('/login');
+				navigate.replace('/login');
 			}, 1200);
 
 		} catch (error) {

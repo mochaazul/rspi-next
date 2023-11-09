@@ -4,10 +4,10 @@ import {
 } from './style';
 import Text from '@/components/Text';
 import { ChangeEvent, ChangeEventHandler, useState } from 'react';
-import loremipsum from '@/app/[locale]/[main]/RegisterOnboard/loremipsum';
+import loremipsum from 'pages/RegisterOnboard/loremipsum';
 import Checkbox from '@/components/Checkbox';
 import Button from '@/components/Button';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import Spinner from '@/components/Spinner';
 
 type checkedValsType = {
@@ -28,7 +28,7 @@ const PrivacyPolicyModal = ({
 	onClose,
 	loading
 }: Props) => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const [step, setStep] = useState<'pp' | 'toc'>('pp');
 	const [checkVals, setCheckVals] = useState<checkedValsType>({
 		pp: false,

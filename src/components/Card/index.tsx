@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import * as Icons from 'react-feather';
 
 import { colors, icons } from '@/constant';
@@ -111,7 +111,7 @@ export const CardContentWithInner = ({ title, description, author, RSLocation }:
 );
 
 export const CardFooter = ({ content, to }: { content: string; to?: string; }) => (
-	<Link to={ to || '#' } className='flex flex-row gap-x-2 items-center'>
+	<Link href={ to || '#' } className='flex flex-row gap-x-2 items-center'>
 		<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ content } />
 		<icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />
 	</Link>

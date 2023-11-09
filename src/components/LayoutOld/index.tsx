@@ -1,5 +1,9 @@
 import React from 'react';
-import { useLocation, useNavigation, useOutlet, useParams } from 'react-router-dom';
+import {
+	useLocation,
+	useNavigation,
+	useOutlet
+} from 'react-router-dom';
 
 import { Footer, Header, CallForAmbulance } from '@/components';
 

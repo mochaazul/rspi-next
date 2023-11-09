@@ -1,8 +1,11 @@
 import React from 'react';
-// import { useNavigate, useLocation, useParams } from 'react-router-dom'; // migrate
+// import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
+/**
+ *
+ * @deprecated this helper will be replaced / removed since next js did not use react-router-dom
+ */
 const Navigation = () => {
-	// Migrate
 	// const navigate = useNavigate();
 	// const params = useParams();
 
@@ -12,16 +15,8 @@ const Navigation = () => {
 	// 	return React.useMemo(() => new URLSearchParams(search), [search]);
 	// };
 	// const query = useQuery();
-	// End Migrate
 
-	return {
-		// Migrate
-		// navigate,
-		// state,
-		// pathname,
-		// params,
-		// query
-	};
+	return null;
 };
 
 export default Navigation;

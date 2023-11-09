@@ -1,11 +1,10 @@
+import { colors } from '@/constants';
+import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constants/globalstyle';
 import styled from 'styled-components';
 
-import { colors } from '@/constant';
-import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constant/globalstyle';
-
 interface StatusType {
-	isOpen: boolean;
-	topOffset?: number;
+  isOpen: boolean;
+  topOffset?: number;
 }
 
 export const SelectWrapper = styled.div<StatusType>`

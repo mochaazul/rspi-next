@@ -1,5 +1,3 @@
-"use-client";
-
 export const clearToken = () => {
 	return localStorage.removeItem('token');
 };
@@ -77,7 +75,7 @@ export const clearStorage = () => {
 	return localStorage.clear();
 };
 
-export const clearPersistRoot = async (persistor: any) => {
+export const clearPersistRoot = async(persistor:any) => {
 	const dummy = Array(7).fill('');
 	await Promise.all(dummy.map(() => {
 		persistor.purge();

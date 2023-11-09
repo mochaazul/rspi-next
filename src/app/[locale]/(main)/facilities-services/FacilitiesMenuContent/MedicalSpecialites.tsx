@@ -5,7 +5,7 @@ import { MedicalSpecialitiesItemContainer } from './style';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { getMedicalSpecialitiesDispatch } from '@/stores/MedicalSpecialities';
 import { MedicalSpecialitiesState } from '@/interface/MedicalSpecialities';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { CenterOfExcellenceDetail } from '@/interface';
 import CardMenu from '../CardMenu';
 import Image from 'next/image';
@@ -97,7 +97,7 @@ type Props = PropsWithRef<PropsWithChildren<{
 const MedicalSpecialities = ({ facilityData, activeMenuIndex }: Props) => {
 	const medicalSpecialitiesDispatch = useAppDispatch(getMedicalSpecialitiesDispatch);
 	const { medicalSpecialities } = useTypedSelector<MedicalSpecialitiesState>('medicalSpecialities');
-	const navigate = useNavigate();
+	const navigate = useRouter();
 
 	useEffect(() => {
 		medicalSpecialitiesDispatch({
@@ -128,7 +128,7 @@ const MedicalSpecialities = ({ facilityData, activeMenuIndex }: Props) => {
 					<MedicalSpecialitiesItemContainer className='mt-[24px] max-[480px]:table-cell'>
 						{
 							medicalSpecialities?.map((item, key) => (
-								<div key={ key } className='flex justify-between specialities-item max-[480px]:mb-4' onClick={ () => navigate(`/medical-specialities/${ item.slug }`) }>
+								<div key={ key } className='flex justify-between specialities-item max-[480px]:mb-4' onClick={ () => navigate.push(`/medical-specialities/${ item.slug }`) }>
 									<Text text={ item.title } fontWeight='700' />
 									<div className='max-[480px]:w-16'></div>
 									<img src={ (item.img_url && item.img_url[0]) ?? '' } className='w-10 max-[480px]:w-12' />

@@ -25,7 +25,7 @@ const MainNavLanguage = () => {
 					<div className='flex gap-[30px]'>
 						<div className='flex items-center ml-[20px] cursor-pointer' onClick={ handleOpenSocmed('https://www.instagram.com/rspondokindah/') }>
 							<Image
-								src={icons.WhiteInstagram}
+								src={ icons.WhiteInstagram }
 								alt=""
 								className='mr-1'
 							/>
@@ -35,7 +35,7 @@ const MainNavLanguage = () => {
 						</div>
 						<div className='flex items-center cursor-pointer' onClick={ handleOpenSocmed('https://twitter.com/rspondokindah') }>
 							<Image
-								src={icons.WhiteTwitter}
+								src={ icons.WhiteTwitter }
 								alt=""
 								className='mr-1'
 							/>
@@ -45,7 +45,7 @@ const MainNavLanguage = () => {
 						</div>
 						<div className='flex items-center cursor-pointer' onClick={ handleOpenSocmed('https://www.facebook.com/RumahSakitPondokIndah') }>
 							<Image
-								src={icons.WhiteFacebook}
+								src={ icons.WhiteFacebook }
 								alt=""
 								className='mr-1'
 							/>

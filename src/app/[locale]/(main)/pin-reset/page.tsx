@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import { Button, Form, NotificationPanel, Text } from '@/components';
 import { Languages, colors } from '@/constant';
@@ -13,7 +13,7 @@ import PinPageStyle, { Box } from './style';
 const { headingReset, subHeading, notification: notificationWording, form } = Languages.page.pinPage;
 
 const ResetPinPage = () => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const {
 		onClickPin,
 		pinField
@@ -66,7 +66,7 @@ const ResetPinPage = () => {
 							confirmPin: confirmPin.value
 						});
 						setNotifVisible(true);
-						setTimeout(() => navigate('/'), 500);
+						setTimeout(() => navigate.replace('/'), 500);
 					} }
 					autoComplete='off'
 				>

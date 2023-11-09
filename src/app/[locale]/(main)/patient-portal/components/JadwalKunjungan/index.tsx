@@ -9,12 +9,12 @@ import { isEmpty } from 'lodash';
 import { Button, Spinner, Text } from '@/components';
 import { EmptyResultContainer } from 'pages/PatientPortal/style';
 import icons from '@/constant/icons';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import languages from '@/constant/languages';
 import Image from 'next/image';
 
 const JadwalKunjungan = () => {
-	const navigate = useNavigate();
+	const navigate = useRouter();
 
 	const [bookType, setBookType] = useState('self');
 
@@ -43,7 +43,7 @@ const JadwalKunjungan = () => {
 								fontWeight='700'
 								lineheight='28px'
 							/>
-							<Button className='w-52' onClick={ () => navigate('/find-a-doctor') }>Jadwalkan Kunjungan</Button>
+							<Button className='w-52' onClick={ () => navigate.push('/find-a-doctor') }>Jadwalkan Kunjungan</Button>
 						</EmptyResultContainer>
 						: appointments.map((data, index) => (
 							<div key={ index }>

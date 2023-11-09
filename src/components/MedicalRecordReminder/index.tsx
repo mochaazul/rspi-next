@@ -10,7 +10,7 @@ import { icons } from '@/constant';
 
 import Text from '@/components/Text';
 import Button from '@/components/Button';
-
+import { useRouter } from 'next/navigation';
 import { UserState } from '@/interface';
 
 
@@ -25,11 +25,11 @@ import {
 const MedicalRecordReminder = () => {
 	// const { user } = useTypedSelector<UserState>('user'); // Migrate
 
-	const router = useRouter()
+	const navigate = useRouter();
 
 	const onClickOnboard = () => {
 		setTimeout(() => {
-			router.push('/register-onboard');
+			navigate.push('/register-onboard');
 		}, 1000);
 	};
 
@@ -40,7 +40,7 @@ const MedicalRecordReminder = () => {
 			>
 				<BgContainer>
 					<Image
-						src={icons.Circle}
+						src={ icons.Circle }
 						alt=""
 					/>
 				</BgContainer>
@@ -52,7 +52,7 @@ const MedicalRecordReminder = () => {
 							Dapatkan Akses terhadap Informasi Kunjungan Medis Anda
 						</Text>
 						<Image
-							src={icons.ExclamationMark}
+							src={ icons.ExclamationMark }
 							alt=""
 							data-tooltip-place='top-end'
 							data-tooltip-id='booking-tooltip'
@@ -77,11 +77,11 @@ const MedicalRecordReminder = () => {
 			</Tooltip>
 		</FloatingWrapper>
 	);
-  
+
 	// if (isEmpty(user.token)) return null; // migrate
-  
+
 	// if (!user.medical_record) return renderFloating(); // migrate
-  
+
 	return null;
 };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks';
 import { UserState } from '@/interface';
@@ -12,8 +12,8 @@ import languages from '@/constant/languages';
 import Image from 'next/image';
 
 const EmailVerificationPage = () => {
-	const navigate = useNavigate();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const navigate = useRouter();
+	const searchParams = useSearchParams()!;
 	const { onEmailVerification } = useEmailVerificationPage();
 	const { loading, error } = useTypedSelector<UserState>('user');
 	const [isEmailVerified, setIsEmailVerified] = useState<boolean>(false);
@@ -21,11 +21,11 @@ const EmailVerificationPage = () => {
 	const [status, setStatus] = useState<'' | 'loading' | 'success' | 'failed'>('');
 
 	const handleBackLogin = () => {
-		navigate('/login');
+		navigate.replace('/login');
 	};
 
 	const handleNavigateSuccess = () => {
-		navigate('/register-onboard');
+		navigate.replace('/register-onboard');
 	};
 
 	useEffect(() => {

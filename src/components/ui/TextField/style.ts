@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import * as FeatherIcons from 'react-feather';
 import InputMask from 'react-input-mask';
 
-import { colors, icons } from '../../../constant';
-import { GlobalAllTransition5ms } from '../../../constant/globalstyle';
+import { colors, icons } from '@/constant';
+import { GlobalAllTransition5ms } from '@/constant/globalstyle';
 
 interface TextFieldType {
 	iconPosition?: 'left' | 'right';

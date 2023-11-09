@@ -4,7 +4,7 @@ import { Button, Modal, Text } from '@/components';
 import { icons, Languages as lang } from '@/constant';
 import { SuccessConfModalContainer } from './style';
 import 'moment/locale/id';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { getLanguage } from '@/helpers/localStorage';
 
 type Props = {
@@ -46,7 +46,7 @@ const SuccessConfirmationModal = ({
 				textalign='center'
 				text={ `${ language.successBody } Dr. ${ doctorName ?? '' } ${ language.in } ${ hospitalName } ${ language.at } ${ date && moment(date).locale(getLanguage() === 'idn' ? 'id' : 'en')
 					.format('dddd, DD MMM YYYY') } ${ language.hasSuccess }` } />
-			<Link to={ '/patient-portal' }>
+			<Link href={ '/patient-portal' }>
 				<Button label='Oke' />
 			</Link>
 		</SuccessConfModalContainer>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import { Breadcrumbs, Text, Button } from '@/components';
 import Card, { CardContentWithInner, CardFooter } from '@/components/Card';
@@ -21,7 +21,7 @@ const language = lang.page.centerOfExcellence.serviceLocation;
 const CentreOfExcellencePage = () => {
 	const [activeMenuIndex, setActiveMenuIndex] = useState(0);
 
-	const navigate = useNavigate();
+	const navigate = useRouter();
 	const { params } = navigation();
 	const { centerOfExcellence, relatedNews } = useTypedSelector<CenterOfExcellenceState>('centerOfExcellence');
 	const centerOfExcellenceDispatch = useAppDispatch(getCenterOfExcellence);
