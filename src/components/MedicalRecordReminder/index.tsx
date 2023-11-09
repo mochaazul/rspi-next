@@ -10,7 +10,6 @@ import { icons } from '@/constant';
 
 import Text from '@/components/Text';
 import Button from '@/components/Button';
-import { useRouter } from 'next/navigation';
 import { UserState } from '@/interface';
 
 

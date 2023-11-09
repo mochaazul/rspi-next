@@ -1,4 +1,5 @@
 import * as FeatherIcons from 'react-feather';
+import Image from 'next/image';
 
 import { icons } from '../../../constant';
 import withInputLabel from '../../../components/ui/withInputLabel';
@@ -25,7 +26,8 @@ const TextField = ({ onIconClick, isNumber, mask, ...props }: InputType) => {
 			{
 				props.iconName ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Icons />
+						{/* <Icons /> */}
+						<Image src={ icons[props.iconName] } alt="" />
 					</IconWrapper> :
 					null
 			}
