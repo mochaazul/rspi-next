@@ -66,14 +66,14 @@ const FindADoctor: React.FC<Props> = ({
 						<div className='mb-2'>
 							<label className='font-black text-sm'>{ 'Doctor name' }</label>
 						</div>
-					 <Form.TextField
+						<Form.TextField
 							id='doctorName'
 							className='input'
 							placeholder={ 'doctorname' }
 							iconName='Search'
 							iconPosition='left'
 							{
-								...isTelemedicine && { label: 'doctorname' }
+							...isTelemedicine && { label: 'doctorname' }
 							}
 						/>
 					</div>
@@ -81,7 +81,7 @@ const FindADoctor: React.FC<Props> = ({
 						<div className='mb-2'>
 							<label className='font-black text-sm'>{ 'Hospital' }</label>
 						</div>
-						 <Form.Dropdown
+						<Form.Dropdown
 							menuItems={ [{ key: '1', label: 'hospital1', value: 'h1' }] }
 						/>
 					</div>

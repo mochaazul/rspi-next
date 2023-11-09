@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';

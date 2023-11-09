@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 
@@ -60,17 +62,17 @@ const EmailVerificationPage = () => {
 				<div className={ `status success ${ status === 'success' ? 'active' : '' }` }>
 					<div className='icon-cont'>
 						<Image
-						src={icons.Check}
-						className='svg-white'
-						alt="" />
+							src={ icons.Check }
+							className='svg-white'
+							alt="" />
 					</div>
 				</div>
 				<div className={ `status failed ${ status === 'failed' ? 'active' : '' }` }>
 					<div className='icon-cont'>
 						<Image
-						src={icons.Close}
-						className='svg-white'
-						alt="" />
+							src={ icons.Close }
+							className='svg-white'
+							alt="" />
 					</div>
 				</div>
 			</div>

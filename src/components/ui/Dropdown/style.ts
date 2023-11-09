@@ -3,8 +3,8 @@ import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constants/globalstyle
 import styled from 'styled-components';
 
 interface StatusType {
-  isOpen: boolean;
-  topOffset?: number;
+  $isOpen: boolean;
+  $topOffset?: number;
 }
 
 export const SelectWrapper = styled.div<StatusType>`
@@ -22,7 +22,7 @@ export const SelectWrapper = styled.div<StatusType>`
     position: absolute;
     right: 10px;
     margin-top: 5px;
-    transform: rotate(${ props => props.isOpen ? '180deg' : '0deg' });
+    transform: rotate(${ props => props.$isOpen ? '180deg' : '0deg' });
     transform-origin: 50% 42%;
     z-index: 100;
     ${ GlobalAllTransition5ms }
@@ -52,10 +52,10 @@ export const SelectStyled = styled.select`
 
 export const OptionsWrapper = styled.div<StatusType>`
   ${ GlobalBoxShadow }
-  display: ${ props => props.isOpen ? 'block' : 'none' };
+  display: ${ props => props.$isOpen ? 'block' : 'none' };
   position: absolute;
   width: 100%;
-  top: calc(${ props => props.topOffset }px + 2px);
+  top: calc(${ props => props.$topOffset }px + 2px);
   background-color: ${ colors.white.default };
   border-radius: 5px;
   border: 1px solid ${ colors.grey.lighter };
@@ -92,7 +92,7 @@ export const Option = styled.div`
 `;
 
 export const DialogCloser = styled.div<StatusType>`
-  display: ${ props => props.isOpen ? 'block' : 'none' };
+  display: ${ props => props.$isOpen ? 'block' : 'none' };
   position: fixed;
   top: 0;
   left: 0;

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useTypedSelector } from '@/hooks';
 import { FamilyProfile, FindDoctorState, UserDataDetail, UserState } from '@/interface';

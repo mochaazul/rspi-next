@@ -45,7 +45,7 @@ const Title = (props: { open: boolean; text: string, clinics: I_MasterDoctorClin
 		</div>
 		{
 			props.hideIconChevron ? <></> : <div className='grow-0 mr-[-5px]'>
-				<Image src={icons.ArrowDown} alt="" className={ `chevron w-[18px] h-[18px] sm:w-[25px] sm:h-[25px] ${ props.open ? 'up' : '' }` } />
+				<Image src={ icons.ArrowDown } alt="" className={ `chevron w-[18px] h-[18px] sm:w-[25px] sm:h-[25px] ${ props.open ? 'up' : '' }` } />
 			</div>
 		}
 
@@ -66,7 +66,7 @@ const ItemAccordion = ({ hospitals, props }: { props: ItemType; hospitals: I_Mas
 	}, [props.isOpen, props.onlyOpenOne]);
 
 	return (
-		<AccordionItemStyle isOpen={ isOpen }>
+		<AccordionItemStyle $isOpen={ isOpen }>
 			<Title hideIconChevron={ true } text={ props.title } open={ isOpen } clinics={ hospitals.find(hospital => hospital.hospital === props.title)?.clinics ?? [] } onClick={ handleToggleOpen } />
 			<div className='item-desc'>
 				{ props.desc_jsx }

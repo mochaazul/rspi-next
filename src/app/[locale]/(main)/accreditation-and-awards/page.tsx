@@ -1,28 +1,28 @@
-import { useEffect } from 'react';
-
 import { Breadcrumbs, Layout, Text } from '@/components';
 import { AwardsDetail, AwardsState, BreadcrumbsProps } from '@/interface';
 
 import { colors } from '@/constant';
-import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { getAwards } from '@/stores/actions';
+// import { useAppDispatch, useTypedSelector } from '@/hooks'; // TODO: migrate
+// import { getAwards } from '@/stores/actions'; // TODO: migrate
 import { Languages as lang } from '@/constant';
 
 import { CentreOfExcellenceStyle } from './style';
 
 const AwardsPage = (props: BreadcrumbsProps) => {
-	const awardDispatch = useAppDispatch(getAwards);
-	const awardsSelector = useTypedSelector<AwardsState>('awards');
+	// TODO: migrate
+	// const awardDispatch = useAppDispatch(getAwards);
+	// const awardsSelector = useTypedSelector<AwardsState>('awards');
 
-	useEffect(() => {
-		awardDispatch({
-			queryParam: {
-				page: 1,
-				limit: 10,
-				is_publish: true
-			}
-		});
-	}, []);
+	// useEffect(() => {
+	// 	awardDispatch({
+	// 		queryParam: {
+	// 			page: 1,
+	// 			limit: 10,
+	// 			is_publish: true
+	// 		}
+	// 	});
+	// }, []);
+	// End migrate
 
 	const AwardItem = (data: AwardsDetail) => (
 		<div>
@@ -79,7 +79,7 @@ const AwardsPage = (props: BreadcrumbsProps) => {
 						/>
 					</div>
 					<div className='sm:pt-[50px] pt-7 pb-[84px] grid sm:grid-cols-2 grid-cols-1 sm:gap-[32px] gap-6'>
-						{
+						{/* { // TODO: migrate
 							awardsSelector?.awards?.map((data, index) => ((index + 1) % 2 === 0 && (index + 1) < awardsSelector.awards.length) ?
 								[
 									<AwardItem key={ data.id } { ...data } />,
@@ -87,7 +87,7 @@ const AwardsPage = (props: BreadcrumbsProps) => {
 								] :
 								<AwardItem key={ data.id } { ...data } />
 							)
-						}
+						} */}
 					</div>
 				</Layout.PanelH3>
 			</Layout.PanelV1>

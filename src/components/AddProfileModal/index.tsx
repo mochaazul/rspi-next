@@ -2,14 +2,14 @@ import Modal from '@/components/Modal';
 import { ModalHeader, ProfileModalContainer, WarningContainer } from './style';
 import Text from '@/components/Text';
 import { colors, icons } from '@/constant';
-import { FormRow } from 'pages/BookAppointment/style';
+import { FormRow } from '@/app/[locale]/(main)/book-appointment/style';
 import Form from '@/components/Form';
 import { createFieldConfig } from '@/helpers';
 import Button from '@/components/Button';
-import { useAppDispatch, useTypedSelector } from '@/hooks';
+// import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { addFamilyProfile, updateProfile } from '@/stores/actions';
 import { FamilyProfile, FamilyProfilePayload, UpdateProfileType, UserDataDetail, UserState } from '@/interface';
-import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+// import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import NotificationPanel from '@/components/NotificationPanel';
 import { useEffect, useState } from 'react';
 import { userDetail as userDetailAction } from '@/stores/actions';
@@ -81,11 +81,14 @@ export type ProfilePayload = {
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
 	const { registeredValue, onSubmit, getCurrentForm, setFieldsValue } = Form.useForm({ fields: addProfileFormFields });
 
-	const { userDetail } = useTypedSelector<UserState>('user');
-	const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
-	const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
+	// TODO: migrate
+	// const { userDetail } = useTypedSelector<UserState>('user');
+	// const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
+	// const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
 
-	const addFamilyProfileDispatch = useAppAsyncDispatch<FamilyProfilePayload>(addFamilyProfile);
+	// const addFamilyProfileDispatch = useAppAsyncDispatch<FamilyProfilePayload>(addFamilyProfile);
+	// End migrate
+
 	const [error, setError] = useState<string>('');
 	const [disabledEmail, setDisabledEmail] = useState<boolean>(false);
 	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -103,16 +106,18 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					}, true);
 					return;
 				}
-				const res = await addFamilyProfileDispatch({
-					payload: {
-						birthdate: dob.value,
-						parent_email: userDetail.email ?? '',
-						email: email.value,
-						name: name.value,
-						phone: cleanUpMask(phone.value),
-						gender: gender.value
-					}
-				});
+				// TODO: migrate
+				// const res = await addFamilyProfileDispatch({
+				// 	payload: {
+				// 		birthdate: dob.value,
+				// 		parent_email: userDetail.email ?? '',
+				// 		email: email.value,
+				// 		name: name.value,
+				// 		phone: cleanUpMask(phone.value),
+				// 		gender: gender.value
+				// 	}
+				// });
+				// End migrate
 				setError('');
 				onClose({
 					dob: dob.value,
@@ -128,12 +133,14 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					gender: gender.value,
 					phone: cleanUpMask(phone.value)
 				};
-				await clikUpdateProfile({
-					payload
-				});
+				// TODO: migrate
+				// await clikUpdateProfile({
+				// 	payload
+				// });
 				setError('');
 				setDisabledEmail(false);
-				await getUserDetail();
+				// await getUserDetail();
+				// End migrate
 				onClose({
 					dob: dob.value,
 					email: email.value,
@@ -179,9 +186,10 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 
 	useEffect(() => {
 		if (type == 'self') {
-			setFieldsValue({
-				email: userDetail.email
-			});
+			// TODO: migrate
+			// setFieldsValue({
+			// 	email: userDetail.email
+			// });
 			setDisabledEmail(true);
 		}
 	}, [type]);
@@ -204,7 +212,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					lineHeight='28px'
 					text={ `Tambah Profil ${ selfProfile ? 'Orang Lain' : 'Utama' }` } />
 				<div className='cursor-pointer' onClick={ closeHandler }>
-					<Image src={icons.Close} alt="" />
+					<Image src={ icons.Close } alt="" />
 				</div>
 			</ModalHeader>
 			<NotificationPanel

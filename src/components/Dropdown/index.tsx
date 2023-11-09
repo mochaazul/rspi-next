@@ -139,7 +139,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 	}, [isOpen]);
 
 	return (
-		<SelectWrapper isOpen={ isOpen } onClick={ () => isOpen ? closeOptionDialog() : openOptionDialog() } ref={ SelectWrapperRef }>
+		<SelectWrapper $isOpen={ isOpen } onClick={ () => isOpen ? closeOptionDialog() : openOptionDialog() } ref={ SelectWrapperRef }>
 			<SelectStyled
 				onMouseDown={ handlePreventDefaultOpen }
 				onKeyDown={ handlePreventDefaultOpen }
@@ -176,9 +176,9 @@ const Dropdown: React.FC<DropdownProps> = ({
 					</div>
 			}
 			<div className={ `arrow-down ${ arrowClassName }` } onClick={ openOptionDialog }>
-				<Image src={icons.ArrowDown} alt="" />
+				<Image src={ icons.ArrowDown } alt="" />
 			</div>
-			<OptionsWrapper isOpen={ isOpen } topOffset={ SelectWrapperRef.current?.offsetHeight ?? 0 } onClick={ closeOptionDialog }>
+			<OptionsWrapper $isOpen={ isOpen } $topOffset={ SelectWrapperRef.current?.offsetHeight ?? 0 } onClick={ closeOptionDialog }>
 				{
 					props.multiple ?
 						<Option className='select-none' onClick={ handleOptionToggleAll }>

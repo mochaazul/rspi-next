@@ -10,7 +10,6 @@ import { icons } from '@/constant';
 
 import Text from '@/components/Text';
 import Button from '@/components/Button';
-import { useRouter } from 'next/navigation';
 import { UserState } from '@/interface';
 
 
@@ -39,9 +38,11 @@ const MedicalRecordReminder = () => {
 				className='flex'
 			>
 				<BgContainer>
+					{/* <icons.Circle /> */ }
 					<Image
 						src={ icons.Circle }
 						alt=""
+						style={ { width: '24px' } }
 					/>
 				</BgContainer>
 				<BodyContainer
@@ -51,6 +52,7 @@ const MedicalRecordReminder = () => {
 						<Text fontSize='16px' fontWeight='700'>
 							Dapatkan Akses terhadap Informasi Kunjungan Medis Anda
 						</Text>
+						{/* <icons.ExclamationMark className='w-6' /> */ }
 						<Image
 							src={ icons.ExclamationMark }
 							alt=""

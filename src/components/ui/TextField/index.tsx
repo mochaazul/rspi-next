@@ -11,21 +11,21 @@ import {
 	TextFieldWrapper
 } from './style';
 
-const TextField = ({ onIconClick, isNumber, mask, ...props }: InputType) => {
+const TextField = ({ onIconClick, isNumber, mask, iconName, iconPosition, ...props }: InputType) => {
 	const { ref, ...restProps } = props;
-	const Icons = props.iconName ? icons[props.iconName] : null;
+	const Icons = iconName ? icons[iconName] : null;
 	const FeatherIconsJSX = props.featherIcon ? FeatherIcons[props.featherIcon] : null;
 	return (
 		<TextFieldWrapper
-			iconPosition={ props.iconPosition }
-			iconName={ props.iconName }
+			$iconPosition={ iconPosition }
+			$iconName={ iconName }
 			featherIcon={ props.featherIcon }
 			className='w-full'
 		>
 			{
-				props.iconName ?
+				iconName ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Icons />
+						{/* <Icons /> TODO: ganti */ }
 					</IconWrapper> :
 					null
 			}
@@ -39,7 +39,7 @@ const TextField = ({ onIconClick, isNumber, mask, ...props }: InputType) => {
 			{
 				!isNumber
 					? <Input { ...props } />
-					: <InputMaskedStyled mask={ mask ?? '' } maskChar={ '' } { ...restProps }/>
+					: <InputMaskedStyled mask={ mask ?? '' } maskChar={ '' } { ...restProps } />
 			}
 		</TextFieldWrapper>
 	);

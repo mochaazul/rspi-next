@@ -21,14 +21,15 @@ import Image from 'next/image';
 const FooterLayout = () => {
 	const router = useRouter();
 
-	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice');
-	// const fetchFooter = useAppDispatch(getFooterSlug);
+	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice'); // TODO: migrate
+	// const fetchFooter = useAppDispatch(getFooterSlug); // TODO: migrate
 
 	const [ourHospital, setOurHospital] = useState<FooterDetail[]>([]);
 	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
 	const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]);
 	const [pages, setPages] = useState<FooterDetail[]>([]);
 
+	// TODO: migrate
 	// useEffect(() => {
 	// 	fetchFooter({
 	// 		queryParam: {
@@ -66,6 +67,7 @@ const FooterLayout = () => {
 	// }, []);
 
 	// const language = lang.page.footer;
+	// End migrate
 
 	const renderItems = (items: FooterDetail[]) => {
 		return items.map((item, index) => {
@@ -124,10 +126,10 @@ const FooterLayout = () => {
 				<div className='flex justify-center'>
 					<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group.  All Rights Reserved.</Text>
 				</div>
-				{
+				{ /** todo: migrate */
 					// appStage !== 'prod' &&
 					<div className='flex justify-center'>
-						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version 0 - { appStage?.toUpperCase() }</Text>
+						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version 0 - development</Text>
 					</div>
 				}
 			</FooterStyled>

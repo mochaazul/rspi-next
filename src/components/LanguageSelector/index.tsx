@@ -3,7 +3,6 @@ import * as Icons from 'react-feather';
 import Image from 'next/image';
 
 import { icons } from '@/constant';
-import { getLanguage, hasLanguageSet, setLanguage } from '@/helpers/localStorage';
 import { Picker, Text } from '@/components';
 
 const languageItem = [
@@ -11,13 +10,13 @@ const languageItem = [
 		key: 'id',
 		label: 'ID',
 		value: 'idn',
-		icon: <Image src={icons.IDFlag} alt="" className='mr-[20px] h-[20px]'/>
+		icon: <Image src={ icons.IDFlag } alt="" className='mr-[20px] h-[20px]' />
 	},
 	{
 		key: 'en',
 		label: 'EN',
 		value: 'en',
-		icon: <Image src={icons.ENFlag} alt="" className='mr-[20px] h-[20px]'/>
+		icon: <Image src={ icons.ENFlag } alt="" className='mr-[20px] h-[20px]' />
 	}
 ];
 
@@ -28,26 +27,27 @@ const LanguageSelector = () => {
 
 	useEffect(() => {
 		// check if the language is set in local storage
-		hasLanguageSet();
+		// hasLanguageSet(); // TODO: migrate
 		// get language config from local storage, if null we gave it default value
 		// (which is not necesarry since it was already handled by hasLanguageSet() function)
-		const lang = getLanguage() ?? 'idn';
+		// const lang = getLanguage() ?? 'idn'; // TODO: migrate
 		// set local state language to localstorage value
-		setCurrentLang(lang);
+		setCurrentLang('idn'); // TODO: migrate
 	}, []);
 
 	const onChangeLanguage = (value: string) => {
-		setLanguage(value);
+		// setLanguage(value); // TODO: migrate
 		setCurrentLang(value);
 		setShowLanguagePicker(false);
 		// We need to reload the page to change all the content language since the header of the request is changed
 		// this is the common approach used by many sites for changing the language
-		reload();
+		// reload(); // TODO: migrate
 	};
 
-	const reload = () => {
-		window.location.reload();
-	};
+	// TODO: migrate
+	// const reload = () => {
+	// 	window.location.reload();
+	// };
 
 	return <>
 		<div className='flex items-center gap-[20px]'>
@@ -58,7 +58,7 @@ const LanguageSelector = () => {
 				{ languageItem.find(item => currrentLang === item.value)?.label }
 			</Text>
 			<Image
-				src={icons.LightArrowDown}
+				src={ icons.LightArrowDown }
 				alt=""
 			/>
 			<div className='absolute right-[-10px] top-7'>

@@ -13,15 +13,15 @@ const TextField = ({ onIconClick, isNumber, mask, ...props }: InputType) => {
 	const FeatherIconsJSX = props.featherIcon ? FeatherIcons[props.featherIcon] : null;
 	return (
 		<TextFieldWrapper
-			iconPosition={ props.iconPosition }
-			iconName={ props.iconName }
+			$iconPosition={ props.iconPosition }
+			$iconName={ props.iconName }
 			featherIcon={ props.featherIcon }
 			className='w-full'
 		>
 			{
 				props.iconName ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Icons />
+						{/* <Icons /> // TODO: ganti */ }
 					</IconWrapper> :
 					null
 			}
