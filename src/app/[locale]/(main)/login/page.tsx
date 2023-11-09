@@ -13,7 +13,6 @@ import Images from '@/constant/images';
 
 // import useLoginPage from './useLoginPage';
 import LoginPageStyle from './style';
-import Image from 'next/image';
 
 const { form, heading, subHeading, forgotPasswordLabel, loginBtnLabel, footer, notificationMessage } = Languages.page.loginPage;
 
@@ -145,7 +144,7 @@ const LoginPage = () => {
 					>
 						<div className='w-full'>
 							<Link href='/' className='max-sm:hidden'>
-								<Image src={ Images.LogoRSPI } alt='' className='max-2xl:mb-2 mb-8' />
+								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
 							</Link>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 								{ heading }

@@ -25,7 +25,7 @@ const ItemFAQ = (props: ItemType) => {
 	}, [props.isOpen]);
 
 	return (
-		<ItemStyle isOpen={ isOpen } className='flex flex-row'>
+		<ItemStyle $isOpen={ isOpen } className='flex flex-row'>
 			<div className='flex-1'>
 				<div className='flex cursor-pointer' onClick={ handleToggleOpen }>
 					<div className='flex-1'>

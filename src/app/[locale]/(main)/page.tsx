@@ -1,62 +1,27 @@
-import { headers } from "next/headers";
+import LandingPageStyle from './style';
+import CentreOfExcellence from '@/components/PageComponents/LandingPageSections/CenterOfExcelence';
+import { getBanner, getCoe } from '@/lib/api';
+import CustomCarousel from '@/components/ui/Carousel';
+import { getCurrentLocale } from '@/locales/server';
+import ServicesTabs from '@/components/PageComponents/LandingPageSections/Services';
 
-import { appStage } from '@/config';
-
-import Header from '@/components/Layout/Header';
-import Footer from '@/components/Layout/Footer';
-
-import MedicalRecordReminder from '@/components/MedicalRecordReminder';
-import CallForAmbulance from '@/components/CallForAmbulance';
-import DevTools from '@/components/DevTools';
-
-import {
-  OutletStyle,
-  OutletStyleType,
-  PanelH1,
-  PanelH2,
-  PanelH3,
-  PanelH4,
-  PanelV1
-} from './style';
-
-const blacklistedRoute = [
-  '/patient-portal',
-  '/doctor-detail',
-  '/book-appointment'
-];
-
-
-export default function Home({
-  props,
-  children,
-}: {
-  children: React.ReactNode,
-  props: {
-    containerStyle?: OutletStyleType;
-    footerShow?: boolean;
-  };
-}) {
-  const headersList = headers();
-  const pathname = headersList.get("x-invoke-path") || "";
-  const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
+export default async function Home() {
+  const coeRes = await getCoe();
+  const banner = await getBanner();
+  const currentLang = getCurrentLocale();
 
   return (
-    <>
-      <Header />
-      { children }
-
-      { props?.footerShow !== false &&
-        <Footer />
-      }
-      { props?.footerShow !== false &&
-        <CallForAmbulance />
-      }
-      { appStage !== 'prod' &&
-        <DevTools />
-      }
-      { shouldRenderReminder &&
-        <MedicalRecordReminder />
-      }
-    </>
+    <LandingPageStyle>
+      <CustomCarousel>
+        { banner.data.map((image: any, index: any) => {
+          return <a href={ currentLang === 'id' ? image.url_link_idn : image.url_link_en || '#' } key={ `banner-${ index }` }>
+            <img className='h-[85vh] max-sm:h-[360px] object-cover max-sm:hidden' src={ image.image_url } alt='slider' />
+            <img className='h-[85vh] max-sm:h-[360px] object-cover lg:hidden' src={ image.img_url_mobile } alt='slider' />
+          </a>;
+        }) }
+      </CustomCarousel>
+      <ServicesTabs />
+      <CentreOfExcellence data={ coeRes.data } />
+    </LandingPageStyle>
   );
 }

@@ -1,6 +1,5 @@
+import { colors } from '@/constants';
 import styled from 'styled-components';
-
-import colors from '../../../constant/colors';
 
 interface StyleProps {
   fontFamily?: string;
@@ -10,7 +9,7 @@ interface StyleProps {
   fontDecoration?: string;
   fontWeight?: string;
   color?: string;
-  lineHeight?: string;
+  $lineHeight?: string;
   isGradient?: boolean;
 }
 
@@ -21,7 +20,7 @@ const TextStyle = styled.div<StyleProps>`
     font-size: ${ props.fontSize || '16px' };
     font-weight: ${ props.fontWeight || 'unset' };
     text-align: ${ props.textAlign || 'left' };
-    line-height: ${ props.lineHeight || 'unset' };
+    line-height: ${ props.$lineHeight || 'unset' };
     color: ${ props.color || colors.grey.darker };
     ${ !!props.fontDecoration && `border-bottom: 1px solid ${ props.color };` }
 
@@ -33,18 +32,18 @@ const TextStyle = styled.div<StyleProps>`
       font-size: ${ props.fontSize || '44px' };
       text-align: ${ props.textAlign || 'left' };
       font-weight: ${ props.fontWeight || '700' };
-      line-height: ${ props.lineHeight || '41px' };
+      line-height: ${ props.$lineHeight || '41px' };
     }
 
     h2 {
       font-size: ${ props.fontSize || '32px' };
       text-align: ${ props.textAlign || 'left' };
       font-weight: ${ props.fontWeight || '700' };
-      line-height: ${ props.lineHeight || '41px' };
+      line-height: ${ props.$lineHeight || '41px' };
       
       @media screen and (max-width: 500px) {
         font-size: ${ props.fontSize || '24px' };
-        line-height: ${ props.lineHeight || '31px' };
+        line-height: ${ props.$lineHeight || '31px' };
       }
     }
 
@@ -53,7 +52,7 @@ const TextStyle = styled.div<StyleProps>`
       text-align: ${ props.textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
       font-weight: ${ props.fontFamily };
-      line-height: ${ props.lineHeight || '36px' } ;
+      line-height: ${ props.$lineHeight || '36px' } ;
 
       span {
         font-size: ${ props.fontSize || '2rem' };
@@ -73,7 +72,7 @@ const TextStyle = styled.div<StyleProps>`
       font-size: ${ props.fontSize || '16px' };
       text-align: ${ props.textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
-			line-height: ${ props.lineHeight || '18px' } ;
+			line-height: ${ props.$lineHeight || '18px' } ;
     }
 
     @media screen and (max-width: 720px) {

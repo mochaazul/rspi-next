@@ -22,7 +22,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
 			</Text>
 		</div>
 		<div className='grow-0'>
-			<Image src={icons.ArrowDown} className={ `svg-green chevron ${ props.open ? 'up' : '' }` } />
+			<Image src={ icons.ArrowDown } className={ `svg-green chevron ${ props.open ? 'up' : '' }` } />
 		</div>
 	</div>
 );
@@ -41,7 +41,7 @@ const Item = (props: ItemType) => {
 	}, [props.isOpen, props.onlyOpenOne]);
 
 	return (
-		<ItemStyle isOpen={ isOpen }>
+		<ItemStyle $isOpen={ isOpen }>
 			<Title text={ props.title } open={ isOpen } onClick={ handleToggleOpen } />
 			<div className='item-desc'>
 				<Text

@@ -124,10 +124,10 @@ const FooterLayout = () => {
 				<div className='flex justify-center'>
 					<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group.  All Rights Reserved.</Text>
 				</div>
-				{
+				{ /** todo: migrate */
 					// appStage !== 'prod' &&
 					<div className='flex justify-center'>
-						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version 0 - { appStage?.toUpperCase() }</Text>
+						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version 0 - development</Text>
 					</div>
 				}
 			</FooterStyled>

@@ -16,17 +16,19 @@ const payload = {
  * @description const hospitalSelector = useTypedSelector<HospitalState>('hospital');
  * @returns null
  */
+ 
+// TODO: NEED TO REFACTOR THIS SINCE WE HAVE DIFFERENT DATA FETCHING STRATEGY!!!! - MIGRATION
 const HospitalMenu = () => {
-	const hospitalDispatch = useAppDispatch(getHospitals);
+	// const hospitalDispatch = useAppDispatch(getHospitals);
 
-	useEffect(() => {
-		if (process.env.REACT_APP_STAGE === 'dev') {
-			initDev();
-		} else if (process.env.REACT_APP_STAGE === 'stage') {
-			initStage();
-		}
-		hospitalDispatch({ queryParam: payload });
-	}, []);
+	// useEffect(() => {
+	// 	if (process.env.REACT_APP_STAGE === 'dev') {
+	// 		initDev();
+	// 	} else if (process.env.REACT_APP_STAGE === 'stage') {
+	// 		initStage();
+	// 	}
+	// 	hospitalDispatch({ queryParam: payload });
+	// }, []);
 
 	return null;
 };

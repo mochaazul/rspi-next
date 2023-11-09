@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@svgr/webpack": "^8.1.0",
     "dayjs": "^1.11.10",
+    "formik": "^2.4.5",
     "html-react-parser": "^5.0.6",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
@@ -26,7 +28,8 @@
     "react-input-mask": "^2.0.4",
     "react-tailwindcss-datepicker": "^1.6.6",
     "react-tooltip": "^5.22.0",
-    "styled-components": "^6.1.0"
+    "styled-components": "^6.1.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.38.0",
@@ -35,8 +38,9 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-google-recaptcha": "^2.1.7",
-    "@types/react-input-mask": "^3.0.4",
+    "@types/react-input-mask": "^3.0.5",
     "@types/styled-components": "^5.1.29",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",

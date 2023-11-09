@@ -3,37 +3,42 @@ import styled from 'styled-components';
 import * as FeatherIcons from 'react-feather';
 import InputMask from 'react-input-mask';
 
-import { colors, icons } from '../../../constant';
-import { GlobalAllTransition5ms } from '../../../constant/globalstyle';
+import { colors, icons } from '@/constant';
+import { GlobalAllTransition5ms } from '@/constant/globalstyle';
 
 interface TextFieldType {
-	iconPosition?: 'left' | 'right';
-	iconName?: keyof typeof icons;
-	featherIcon?: keyof typeof FeatherIcons;
-	iconColor?: string;
+  iconPosition?: 'left' | 'right';
+  iconName?: keyof typeof icons;
+  featherIcon?: keyof typeof FeatherIcons;
+  iconColor?: string;
   isNumber?: boolean,
-  mask?: string | (string | RegExp) []
+  mask?: string | (string | RegExp)[];
 }
 
 export interface InputType extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, TextFieldType {
-	ref?: React.RefObject<HTMLInputElement>;
-	onIconClick?: () => any;
+  ref?: React.RefObject<HTMLInputElement>;
+  onIconClick?: () => any;
 }
 
-export const TextFieldWrapper = styled.div<TextFieldType>`
+export interface StyledTextFieldType extends Omit<TextFieldType, 'iconPosition' | 'iconName'> {
+  $iconPosition?: 'left' | 'right';
+  $iconName?: keyof typeof icons;
+}
+
+export const TextFieldWrapper = styled.div<StyledTextFieldType>`
   display: flex;
   align-items: center;
   position: relative;
 
   .iconWrapper {
-    display: ${ props => (!!props.iconName || !!props.featherIcon) ? 'block' : 'none' };
-    left: ${ props => (props.iconPosition === 'left' || !(!!props.iconPosition)) && '10px' };
-    right: ${ props => props.iconPosition === 'right' && '10px' };
+    display: ${ props => (!!props.$iconName || !!props.featherIcon) ? 'block' : 'none' };
+    left: ${ props => (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '10px' };
+    right: ${ props => props.$iconPosition === 'right' && '10px' };
   }
 
   input {
-    padding-left: ${ props => (!!props.iconName || !!props.featherIcon) && (props.iconPosition === 'left' || !(!!props.iconPosition)) && '43px' };
-    padding-right: ${ props => (!!props.iconName || !!props.featherIcon) && props.iconPosition === 'right' && '43px' };
+    padding-left: ${ props => (!!props.$iconName || !!props.featherIcon) && (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '43px' };
+    padding-right: ${ props => (!!props.$iconName || !!props.featherIcon) && props.$iconPosition === 'right' && '43px' };
   }
 `;
 
