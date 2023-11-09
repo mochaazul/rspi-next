@@ -1,22 +1,29 @@
-import React from 'react';
-// import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useRouter, useParams, usePathname } from 'next/navigation';
 
 /**
  *
  * @deprecated this helper will be replaced / removed since next js did not use react-router-dom
  */
 const Navigation = () => {
-	// const navigate = useNavigate();
-	// const params = useParams();
+	const navigate = useRouter();
+	const params = useParams();
+	const pathname = usePathname();
 
-	// const { state, pathname, search } = useLocation();
+	// Migrate
+	// const { state, search } = useLocation();
 
 	// const useQuery = () => {
 	// 	return React.useMemo(() => new URLSearchParams(search), [search]);
 	// };
 	// const query = useQuery();
 
-	return null;
+	return {
+		navigate,
+		// state,
+		pathname,
+		params,
+		// query
+	};
 };
 
 export default Navigation;

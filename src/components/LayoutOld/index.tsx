@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-	useLocation,
-	useNavigation,
-	useOutlet
-} from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 import { Footer, Header, CallForAmbulance } from '@/components';
 
@@ -23,9 +19,8 @@ import MedicalRecordReminder from '@/components/MedicalRecordReminder';
 // we use this values to determine where shoul we display reminder component
 const blacklistedRoute = ['/patient-portal', '/doctor-detail', '/book-appointment'];
 
-const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean; }) => {
-	const Outlet = useOutlet();
-	const { pathname } = useLocation();
+const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean; children?: any; }) => {
+	const pathname = usePathname();
 
 	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
 
@@ -33,7 +28,7 @@ const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean;
 		<>
 			<Header />
 			<OutletStyle { ...props.containerStyle }>
-				{ Outlet }
+				{ props.children }
 			</OutletStyle>
 			{ props.footerShow !== false &&
 				<CallForAmbulance />
