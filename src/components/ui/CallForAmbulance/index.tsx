@@ -39,7 +39,7 @@ const CallForAmbulance = () => {
 						lineheight='28px'
 						fontType='h3'
 						fontWeight='700'
-						textAlign='center'
+						textalign='center'
 						color={ colors.grey.darker }
 						text='Call an Ambulance'
 						className='mt-5'
@@ -48,7 +48,7 @@ const CallForAmbulance = () => {
 						fontSize='14px'
 						lineheight='20px'
 						fontWeight='400'
-						textAlign='center'
+						textalign='center'
 						color={ colors.grey.dark }
 						text='Please select hospital:'
 						className='mt-2'

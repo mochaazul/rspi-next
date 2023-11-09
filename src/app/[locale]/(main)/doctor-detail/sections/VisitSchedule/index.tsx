@@ -56,7 +56,7 @@ const VisitSchedule: React.FC<Props> = ({
 				fontWeight='400'
 				lineheight='24px'
 				color='#2A2536'
-				textAlign='center'
+				textalign='center'
 				text={ language.slotEmptyState } />
 		</div>
 	);

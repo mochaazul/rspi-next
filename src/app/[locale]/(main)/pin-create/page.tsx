@@ -45,7 +45,7 @@ const PinPage = () => {
 					fontWeight={ '400' }
 					className='mt-[16px] mb-[62px]'
 					color={ colors.grey.pencil }
-					textAlign='center'
+					textalign='center'
 				/>
 				{
 					notifVisible &&

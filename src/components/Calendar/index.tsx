@@ -45,14 +45,14 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading }: Props
 		const calendarNum = calendarItem
 			? <Text
 				text={ date.getDate() }
-				textAlign='center'
+				textalign='center'
 				fontSize='14px'
 				fontWeight='700'
 				lineheight='20px'
 				color={ isDisabled ? '#D4D2D8' : calendarDateColor(calendarItem.status) } />
 			: <Text
 				text={ date.getDate() }
-				textAlign='center'
+				textalign='center'
 				fontSize='14px'
 				fontWeight='400'
 				lineheight='20px'

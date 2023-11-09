@@ -45,7 +45,7 @@ const CountDownText = ({ onZero, onResend, count, setCount }: Props) => {
 				fontWeight={ '400' }
 				className='mt-[16px] mb-[16px] cursor-pointer'
 				color={ colors.paradiso.default }
-				textAlign='center'
+				textalign='center'
 			/>
 			<WarningNote>
 				<Image src={icons.ExclamationGreen} alt="" />
@@ -55,7 +55,7 @@ const CountDownText = ({ onZero, onResend, count, setCount }: Props) => {
 					lineheight={ '24px' }
 					fontWeight={ '600' }
 					color={ colors.paradiso.default }
-					textAlign='center'
+					textalign='center'
 				/>
 			</WarningNote>
 		</>
@@ -69,7 +69,7 @@ const CountDownText = ({ onZero, onResend, count, setCount }: Props) => {
 			fontWeight={ '400' }
 			className='mt-[16px] mb-[62px]'
 			color={ colors.paradiso.default }
-			textAlign='center'
+			textalign='center'
 		/>
 	);
 };
@@ -126,7 +126,7 @@ const OTPPage = () => {
 					fontWeight={ '400' }
 					className='mt-[16px]'
 					color={ colors.grey.pencil }
-					textAlign='center'
+					textalign='center'
 				/>
 				<CountDownText onResend={ resendOtpHandler } count={ count } setCount={ setCount } />
 

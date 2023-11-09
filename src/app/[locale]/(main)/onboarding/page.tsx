@@ -104,7 +104,7 @@ const RegisterOnboard = () => {
 					<div className='mb-[32px] logo-image'>
 						<Images.LogoRSPI />
 					</div>
-					<Text text={ heading } fontSize={ '32px' } lineheight={ '48px' } fontWeight={ '900' } textAlign='center' />
+					<Text text={ heading } fontSize={ '32px' } lineheight={ '48px' } fontWeight={ '900' } textalign='center' />
 					<Text
 						text={ subHeading }
 						fontSize={ '20px' }
@@ -112,7 +112,7 @@ const RegisterOnboard = () => {
 						fontWeight={ '400' }
 						className='mt-[16px] mb-[62px]'
 						color={ colors.grey.pencil }
-						textAlign='center'
+						textalign='center'
 					/>
 
 					<Form.TextField
@@ -142,7 +142,7 @@ const RegisterOnboard = () => {
 						fontSize={ '12px' }
 						lineheight={ '15px' }
 						fontWeight={ '400' }
-						textAlign={ 'left' }
+						textalign={ 'left' }
 					/>
 					{
 						handleNotifError('phone number not match')
@@ -188,7 +188,7 @@ const RegisterOnboard = () => {
 							fontSize={ '16px' }
 							lineheight={ '19px' }
 							fontWeight={ 'bold' }
-							textAlign='center'
+							textalign='center'
 							color={ colors.green.default }
 						/>
 					</Button>

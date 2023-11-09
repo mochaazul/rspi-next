@@ -125,12 +125,12 @@ const FooterLayout = () => {
 					</div>
 				</FooterContainer>
 				<div className='flex justify-center'>
-					<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group.  All Rights Reserved.</Text>
+					<Text textalign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group.  All Rights Reserved.</Text>
 				</div>
 				{
 					// appStage !== 'prod' &&
 					<div className='flex justify-center'>
-						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version 0 - { appStage?.toUpperCase() }</Text>
+						<Text textalign='center' fontSize='14px' color={ colors.grey.dark }> Version 0 - { appStage?.toUpperCase() }</Text>
 					</div>
 				}
 			</FooterStyled>

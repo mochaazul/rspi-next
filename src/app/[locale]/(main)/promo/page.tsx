@@ -125,7 +125,7 @@ const EventClassesPromo = (props: BreadcrumbsProps) => {
 						}
 						{
 							!eventsSelector.loading && eventsSelector?.events?.length == 0 ?
-								<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
+								<Text textalign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
 									<EmptyData menu='Promo and Packages' />
 								</Text> : <></>
 						}

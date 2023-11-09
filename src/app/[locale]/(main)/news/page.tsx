@@ -182,7 +182,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 							}
 						</div>
 						:
-						<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
+						<Text textalign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
 							{ loading ? 'loading ...' : <EmptyData menu='News and Health Articles' /> }
 						</Text>
 					}

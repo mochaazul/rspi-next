@@ -43,7 +43,7 @@ const SuccessConfirmationModal = ({
 				fontSize='14px'
 				fontWeight='400'
 				lineheight='20px'
-				textAlign='center'
+				textalign='center'
 				text={ `${ language.successBody } Dr. ${ doctorName ?? '' } ${ language.in } ${ hospitalName } ${ language.at } ${ date && moment(date).locale(getLanguage() === 'idn' ? 'id' : 'en')
 					.format('dddd, DD MMM YYYY') } ${ language.hasSuccess }` } />
 			<Link to={ '/patient-portal' }>

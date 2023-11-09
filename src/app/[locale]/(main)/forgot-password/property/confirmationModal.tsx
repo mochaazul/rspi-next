@@ -29,13 +29,13 @@ const ConfirmationModal: React.FC<ModalProps> = ({
 				<ModalStyle>
 					<Image src={icons.Confirmed} alt="" />
 					<Text text={ 'Link Ubah Kata Sandi Sudah Dikirim' } className={ 'mt-[16px] mb-[8px]' } fontSize={ '20px' } fontWeight={ '800' } />
-					<Text text={ `Periksa kembali email ${ email } untuk melanjutkan proses ubah kata sandi` } fontSize={ '16px' } fontWeight={ '400' } color={ colors.grey.pencil } textAlign={ 'center' } />
+					<Text text={ `Periksa kembali email ${ email } untuk melanjutkan proses ubah kata sandi` } fontSize={ '16px' } fontWeight={ '400' } color={ colors.grey.pencil } textalign={ 'center' } />
 					<Link to='/login'>
 						<Button className='mt-[16px]' theme='primary'>Okay</Button>
 					</Link>
 				</ModalStyle>
 				:
-				<Text text={ errorMsg || '' } color={ colors.red.default } textAlign='center' />
+				<Text text={ errorMsg || '' } color={ colors.red.default } textalign='center' />
 			}
 		</Modal>
 	);

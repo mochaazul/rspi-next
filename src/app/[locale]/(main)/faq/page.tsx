@@ -51,7 +51,7 @@ const FAQPage = () => {
 							fontSize='24px'
 							lineheight='29px'
 							fontWeight='900'
-							textAlign='center'
+							textalign='center'
 							color={ colors.grey.darker }
 							text='Frequently Asked Questions'
 							subClassName='max-sm:text-left text-[24px]'
@@ -60,7 +60,7 @@ const FAQPage = () => {
 							fontSize='16px'
 							lineheight='20px'
 							fontWeight='400'
-							textAlign='center'
+							textalign='center'
 							color={ colors.grey.dark }
 							text={ subHeading }
 							className='mt-2'

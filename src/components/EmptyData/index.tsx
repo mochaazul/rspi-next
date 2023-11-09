@@ -15,7 +15,7 @@ const EmptyData = (props: PropsType) => {
 				fontWeight='400'
 				fontSize='20px'
 				lineheight='30px'
-				textAlign='center'
+				textalign='center'
 				color={ colors.grey.solid }
 				className='mt-[16px]'
 			/>

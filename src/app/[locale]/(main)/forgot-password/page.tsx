@@ -46,7 +46,7 @@ const ForgotPassword = () => {
 					<div className='mb-[32px] flex flex-col items-center'>
 						<Images.LogoRSPI />
 					</div>
-					<Text text={ heading } fontSize={ '32px' } lineheight={ '48px' } fontWeight={ '900' } textAlign='center' subClassName='md:text-[32px] text-[20px]' />
+					<Text text={ heading } fontSize={ '32px' } lineheight={ '48px' } fontWeight={ '900' } textalign='center' subClassName='md:text-[32px] text-[20px]' />
 					<Text
 						text={ subHeading }
 						fontSize={ '20px' }
@@ -54,7 +54,7 @@ const ForgotPassword = () => {
 						fontWeight={ '400' }
 						className='mt-[8px] md:mt-[32px] mb-8 md:mb-[62px]'
 						color={ colors.grey.pencil }
-						textAlign='center'
+						textalign='center'
 					/>
 					<Form.FormGroup className='group-wrapper w-full'>
 						<Form.TextField

@@ -115,7 +115,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 								fontSize='24px'
 								fontWeight='900'
 								lineheight='29px'
-								textAlign='center'
+								textalign='center'
 								color={ colors.grey.darker }
 								text={ language.contactForm.heading }
 								className='sm:block hidden'
@@ -124,7 +124,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 								fontSize='16px'
 								fontWeight='400'
 								lineheight='23px'
-								textAlign='center'
+								textalign='center'
 								color={ colors.grey.dark }
 								text={ language.contactForm.subHeading }
 								className='mt-3'
@@ -139,7 +139,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 								fontType='h3'
 								fontWeight='900'
 								lineheight='29px'
-								textAlign='center'
+								textalign='center'
 								color={ colors.grey.darker }
 								text={ language.faq.heading }
 							/>
@@ -147,7 +147,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 								fontSize='16px'
 								fontWeight='400'
 								lineheight='23px'
-								textAlign='center'
+								textalign='center'
 								color={ colors.grey.dark }
 								text={ language.faq.subHeading }
 								className='mt-3'
@@ -176,7 +176,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							fontType='h3'
 							fontWeight='900'
 							lineheight='29px'
-							textAlign='center'
+							textalign='center'
 							color={ colors.grey.darker }
 							text={ language.location.heading }
 							className='text-center'
@@ -185,7 +185,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							fontSize='16px'
 							fontWeight='400'
 							lineheight='23px'
-							textAlign='center'
+							textalign='center'
 							color={ colors.grey.dark }
 							text={ language.location.subHeading }
 							className='mt-3 mx-auto text-center sm:w-[630px] w-full'

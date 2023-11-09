@@ -112,7 +112,7 @@ const ItemChildren = ({ clinics }: { clinics: I_MasterDoctorClinic[]; }) => {
 											fontWeight='700'
 											fontSize='12px'
 											lineheight='14px'
-											textAlign='center'
+											textalign='center'
 											fontDecoration='underline'
 											className='inline-block'
 											subClassName='max-sm:text-[12px]'
@@ -127,7 +127,7 @@ const ItemChildren = ({ clinics }: { clinics: I_MasterDoctorClinic[]; }) => {
 													fontWeight='500'
 													fontSize='12px'
 													lineheight='14px'
-													textAlign='center'
+													textalign='center'
 													className='mt-[-4px] sm:mt-1'
 													subClassName='max-sm:text-[12px]'
 													color={ colors.grey.dark }

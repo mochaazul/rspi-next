@@ -91,7 +91,7 @@ const Header: React.FC = () => {
 							lineheight='24px'
 							fontType='h3'
 							fontWeight='700'
-							textAlign='center'
+							textalign='center'
 							color={ colors.black.default }
 							text='Notification'
 						/>
@@ -99,7 +99,7 @@ const Header: React.FC = () => {
 							fontSize='12px'
 							lineheight='20px'
 							fontWeight='400'
-							textAlign='center'
+							textalign='center'
 							color={ colors.green.brandAccent }
 							text='Mark all as read'
 							onClick={ () => readNotificationDispatch({
@@ -120,7 +120,7 @@ const Header: React.FC = () => {
 										<Text
 											fontSize='12px'
 											fontWeight='400'
-											textAlign='center'
+											textalign='center'
 											color={ colors.grey.pencil }
 											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
 										/>
@@ -129,7 +129,7 @@ const Header: React.FC = () => {
 										fontSize='14px'
 										lineheight='20px'
 										fontWeight='700'
-										textAlign='center'
+										textalign='center'
 										color={ colors.black.default }
 										text={ getLanguage() == 'idn' ? item?.judul_idn : item?.judul_en }
 										className='flex justify-start'
@@ -138,7 +138,7 @@ const Header: React.FC = () => {
 										fontSize='12px'
 										lineheight='20px'
 										fontWeight='400'
-										textAlign='center'
+										textalign='center'
 										color={ colors.black.default }
 										text={ getLanguage() == 'idn' ? item?.isi_idn : item?.isi_en }
 										className='flex justify-start pt-2'

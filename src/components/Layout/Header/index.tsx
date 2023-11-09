@@ -81,7 +81,7 @@ export const Header: React.FC = () => {
 							lineheight='24px'
 							fontType='h3'
 							fontWeight='700'
-							textAlign='center'
+							textalign='center'
 							color={ colors.black.default }
 							text='Notification'
 						/>
@@ -89,7 +89,7 @@ export const Header: React.FC = () => {
 							fontSize='12px'
 							lineheight='20px'
 							fontWeight='400'
-							textAlign='center'
+							textalign='center'
 							color={colors.green.brandAccent}
 							text='Mark all as read'
 							// Migrate
@@ -111,7 +111,7 @@ export const Header: React.FC = () => {
 								<Text
 									fontSize='12px'
 									fontWeight='400'
-									textAlign='center'
+									textalign='center'
 									color={colors.grey.pencil}
 									text={ moment().format('DD MMM, hh:mm') }
 								/>
@@ -120,7 +120,7 @@ export const Header: React.FC = () => {
 								fontSize='14px'
 								lineheight='20px'
 								fontWeight='700'
-								textAlign='center'
+								textalign='center'
 								color='#000000'
 								text='Judul'
 								className='flex justify-start'
@@ -129,7 +129,7 @@ export const Header: React.FC = () => {
 								fontSize='12px'
 								lineheight='20px'
 								fontWeight='400'
-								textAlign='center'
+								textalign='center'
 								color='#000000'
 								text='Judul'
 								className='flex justify-start pt-2'

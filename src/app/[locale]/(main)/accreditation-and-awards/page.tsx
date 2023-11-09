@@ -62,7 +62,7 @@ const AwardsPage = (props: BreadcrumbsProps) => {
 							fontSize='44px'
 							lineheight='57px'
 							fontWeight='900'
-							textAlign='center'
+							textalign='center'
 							color={ colors.grey.darker }
 							text={ lang.page.awards.heading }
 							subClassName='max-sm:text-[24px] max-sm:text-left'
@@ -71,7 +71,7 @@ const AwardsPage = (props: BreadcrumbsProps) => {
 							fontSize='20px'
 							lineheight='30px'
 							fontWeight='400'
-							textAlign='center'
+							textalign='center'
 							color={ colors.grey.dark }
 							text={ lang.page.awards.subHeading }
 							className='sm:mt-4 mt-1'
