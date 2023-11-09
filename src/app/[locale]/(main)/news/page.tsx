@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 
@@ -64,7 +66,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 							fontSize='44px'
 							fontType='h1'
 							fontWeight='900'
-							lineheight='57px'
+							lineHeight='57px'
 							text='News and Health Articles'
 							className='sm:mt-[50px] mt-[25px]'
 							subClassName='max-sm:text-[24px]'
@@ -116,14 +118,14 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 												<Text
 													fontSize='14px'
 													fontWeight='400'
-													lineheight='17px'
+													lineHeight='17px'
 													color={ colors.grey.dark }
 													text={ moment(articles[0]?.posted_date).format('dddd, DD MMM YYYY') }
 												/>
 											</div>
 										</div>
-										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ articles[0]?.title } lineheight='28px' />
-										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ articles[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineheight='24px' />
+										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ articles[0]?.title } lineHeight='28px' />
+										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ articles[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
 										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px]' dangerouslySetInnerHTML={ { __html: articles[0]?.short_description } } />
 									</div>
 									<div className='divide-y divide-solid'>
@@ -163,7 +165,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 															<Text
 																fontSize='14px'
 																fontWeight='400'
-																lineheight='17px'
+																lineHeight='17px'
 																color={ colors.grey.dark }
 																text={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
 															/>
@@ -182,7 +184,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 							}
 						</div>
 						:
-						<Text textalign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
+						<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
 							{ loading ? 'loading ...' : <EmptyData menu='News and Health Articles' /> }
 						</Text>
 					}
@@ -209,7 +211,7 @@ const NewsHealthArticlesPage = (props: BreadcrumbsProps) => {
 													<Text
 														fontSize='14px'
 														fontWeight='400'
-														lineheight='17px'
+														lineHeight='17px'
 														color={ colors.grey.dark }
 														text={ moment(articles[0]?.posted_date).format('dddd, DD MMM YYYY') }
 													/>

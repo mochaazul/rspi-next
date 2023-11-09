@@ -29,7 +29,7 @@ const RiwayatVaksin = () => {
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'
-				lineheight='28px'
+				lineHeight='28px'
 			/>
 		</EmptyResultContainer>);
 	}

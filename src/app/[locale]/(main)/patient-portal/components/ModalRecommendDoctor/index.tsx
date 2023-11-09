@@ -133,7 +133,7 @@ const Feedback = ({ onChange, value }: { value: string[], onChange: (value: stri
 	};
 
 	return (<div className='mt-[32px]'>
-		<Text text={ 'What do you love about your doctor?' } fontSize='20px' fontWeight='700' lineheight='30px' color={ '#2A2536' } />
+		<Text text={ 'What do you love about your doctor?' } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
 		<div className='flex	flex-wrap gap-[11px] mt-[32px]'>
 			{
 				feedbackPills.map((opt, index) => (
@@ -160,11 +160,11 @@ const FeedbackNotes = ({ onChange, value }: { value: string, onChange: (value: s
 				<Text text='Tell us more'
 					fontSize='14px'
 					fontWeight='500'
-					lineheight='20px' />
+					lineHeight='20px' />
 				<Text text='(Optional)'
 					fontSize='14px'
 					fontWeight='500'
-					lineheight='20px'
+					lineHeight='20px'
 					color='#6A6D81'
 				/>
 			</div>
@@ -174,7 +174,7 @@ const FeedbackNotes = ({ onChange, value }: { value: string, onChange: (value: s
 			<Text text='This would help us to keep improving our service.'
 				fontSize='14px'
 				fontWeight='500'
-				lineheight='20px'
+				lineHeight='20px'
 				color='#6A6D81'
 			/>
 		</div>
@@ -219,7 +219,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 		>
 			<ModalStyle>
 				<div>
-					<Text text={ header } fontSize='20px' fontWeight='700' lineheight='30px' color={ '#2A2536' } />
+					<Text text={ header } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
 					<div className='flex my-[30px] p-[16px] rounded-md bg-[#FAFAFA]'>
 						<div><img className='rounded-full h-[48px] w-[48px]' src={ props.visitHistory?.doctor_photo || Images.Doctor1 } /></div>
 						<div className='ml-[15px]'>

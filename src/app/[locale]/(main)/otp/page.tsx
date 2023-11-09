@@ -41,21 +41,21 @@ const CountDownText = ({ onZero, onResend, count, setCount }: Props) => {
 				onClick={ onResend }
 				text={ resendOtp }
 				fontSize={ '20px' }
-				lineheight={ '24px' }
+				lineHeight={ '24px' }
 				fontWeight={ '400' }
 				className='mt-[16px] mb-[16px] cursor-pointer'
 				color={ colors.paradiso.default }
-				textalign='center'
+				textAlign='center'
 			/>
 			<WarningNote>
 				<Image src={icons.ExclamationGreen} alt="" />
 				<Text
 					text={ resendWarn }
 					fontSize={ '14px' }
-					lineheight={ '24px' }
+					lineHeight={ '24px' }
 					fontWeight={ '600' }
 					color={ colors.paradiso.default }
-					textalign='center'
+					textAlign='center'
 				/>
 			</WarningNote>
 		</>
@@ -65,11 +65,11 @@ const CountDownText = ({ onZero, onResend, count, setCount }: Props) => {
 		<Text
 			text={ getCountFormatted() }
 			fontSize={ '20px' }
-			lineheight={ '24px' }
+			lineHeight={ '24px' }
 			fontWeight={ '400' }
 			className='mt-[16px] mb-[62px]'
 			color={ colors.paradiso.default }
-			textalign='center'
+			textAlign='center'
 		/>
 	);
 };
@@ -117,16 +117,16 @@ const OTPPage = () => {
 				<div className='mb-[32px]'>
 					<Images.LogoRSPI />
 				</div>
-				<Text text={ heading } fontSize={ '32px' } lineheight={ '48px' } fontWeight={ '900' } />
+				<Text text={ heading } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
 				{ /* TODO : INI NOMOR HANDPHONE NYa masih hardcode ?? */ }
 				<Text
 					text={ `${ subHeading }` }
 					fontSize={ '20px' }
-					lineheight={ '24px' }
+					lineHeight={ '24px' }
 					fontWeight={ '400' }
 					className='mt-[16px]'
 					color={ colors.grey.pencil }
-					textalign='center'
+					textAlign='center'
 				/>
 				<CountDownText onResend={ resendOtpHandler } count={ count } setCount={ setCount } />
 

@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
-// import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 /**
  * @deprecated We need to refactor this, since we have differrent router now,
  * we need to implement scroll on top for next js
  */
 const ScrollToTopOnTransition = () => {
-	// const { pathname } = useLocation();
+	const pathname = usePathname();
 
-	// useEffect(() => {
-	// 	window.scrollTo({ top: 0 });
-	// }, [pathname]);
+	useEffect(() => {
+		window.scrollTo({ top: 0 });
+	}, [pathname]);
 
 	return null;
 };

@@ -48,13 +48,13 @@ const DetailEventClassesPromo = () => {
 					eventClassesSelector.loading ?
 						<Spinner size='m' className='sm:my-48 my-3' /> :
 						<div className='mt-[50px]'>
-							<Text fontWeight='900' fontSize='44px' lineheight='57px'>
+							<Text fontWeight='900' fontSize='44px' lineHeight='57px'>
 								{ selectedEvent?.title }
 							</Text>
 							<div className='flex items-center gap-[30px] mt-[10px]'>
 								<div className='flex gap-[15px] items-center'>
 									<Text
-										lineheight='24px'
+										lineHeight='24px'
 										fontSize='20px'
 										fontWeight='400'
 										text='Share now'
@@ -83,7 +83,7 @@ const DetailEventClassesPromo = () => {
 										/>
 										<div className='mt-[50px]'>
 											<Text
-												lineheight='30px'
+												lineHeight='30px'
 												fontSize='20px'
 												fontWeight='900'
 												color={ colors.paradiso.default }
@@ -92,7 +92,7 @@ const DetailEventClassesPromo = () => {
 											/>
 											<div>
 												<Text
-													lineheight='30px'
+													lineHeight='30px'
 													fontSize='20px'
 													fontWeight='900'
 													color={ colors.grey.darker }
@@ -104,7 +104,7 @@ const DetailEventClassesPromo = () => {
 														(selectedEvent?.hospitals ?? []).map((hospital, index) =>
 															<Text
 																key={ index }
-																lineheight='20px'
+																lineHeight='20px'
 																fontSize='16px'
 																fontWeight='900'
 																color={ colors.grey.dark }
@@ -116,7 +116,7 @@ const DetailEventClassesPromo = () => {
 												<div className='grid grid-cols-2 gap-4 mt-6'>
 													<div>
 														<Text
-															lineheight='18px'
+															lineHeight='18px'
 															fontSize='14px'
 															fontWeight='900'
 															color={ colors.grey.darker }
@@ -129,7 +129,7 @@ const DetailEventClassesPromo = () => {
 													</div>
 													<div>
 														<Text
-															lineheight='18px'
+															lineHeight='18px'
 															fontSize='14px'
 															fontWeight='900'
 															color={ colors.grey.darker }
@@ -143,7 +143,7 @@ const DetailEventClassesPromo = () => {
 													</div>
 													<div>
 														<Text
-															lineheight='18px'
+															lineHeight='18px'
 															fontSize='14px'
 															fontWeight='900'
 															color={ colors.grey.darker }

@@ -37,7 +37,7 @@ const CardNews = (props: PropsType) => {
 							<Text
 								fontSize='14px'
 								fontWeight='400'
-								lineheight='17px'
+								lineHeight='17px'
 								color={ colors.grey.dark }
 								text={ props.date }
 							/>
@@ -47,14 +47,14 @@ const CardNews = (props: PropsType) => {
 						<Text
 							fontSize='16px'
 							fontWeight='900'
-							lineheight='24px'
+							lineHeight='24px'
 							color={ colors.grey.darker }
 							text={ props.title }
 						/>
 						<Text
 							fontSize='14px'
 							fontWeight='400'
-							lineheight='24px'
+							lineHeight='24px'
 							color={ colors.grey.dark }
 							className='mt-[5px]'
 							text={ props.author }

@@ -115,7 +115,7 @@ const MedicalSpecialities = ({ facilityData, activeMenuIndex }: Props) => {
 
 			<div className='mt-[32px]'>
 				<div
-					style={ { lineheight: '24px', fontSize: '16px' } }
+					style={ { lineHeight: '24px', fontSize: '16px' } }
 					className='innerHTML'
 				>
 

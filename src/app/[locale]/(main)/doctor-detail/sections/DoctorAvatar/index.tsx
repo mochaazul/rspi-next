@@ -24,7 +24,7 @@ export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
 				className='related lg:mt-[30px]  '
 				fontWeight='900'
 				fontSize='12px'
-				lineheight='24px'
+				lineHeight='24px'
 			/>
 			<div className='flex gap-[10px] mt-[20px] '>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.facebook.com/RumahSakitPondokIndah') }>

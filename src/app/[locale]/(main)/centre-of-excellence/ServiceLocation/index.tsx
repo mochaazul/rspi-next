@@ -80,7 +80,7 @@ const Servicelocation: React.FC<NewsProps> = ({ content, activeMenuIndex }) => {
 						tabsData={ tabsData }
 					/>
 				</div>
-				<div style={ { color: colors.grey.darker, lineheight: '24px' } }>
+				<div style={ { color: colors.grey.darker, lineHeight: '24px' } }>
 					{ renderContent }
 				</div>
 			</div>
@@ -89,7 +89,7 @@ const Servicelocation: React.FC<NewsProps> = ({ content, activeMenuIndex }) => {
 					{ language.heading }
 				</Text>
 
-				<Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineheight='24px'>
+				<Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineHeight='24px'>
 					{ content.available_at[0] }
 				</Text>
 
@@ -100,7 +100,7 @@ const Servicelocation: React.FC<NewsProps> = ({ content, activeMenuIndex }) => {
 								if (index !== 0)
 									return (
 										<div className='flex flex-col mt-[16px]' key={ index }>
-											<Text fontSize='18px' fontWeight='900' lineheight='24px'>
+											<Text fontSize='18px' fontWeight='900' lineHeight='24px'>
 												{ data?.split(':+split+:')[0] }
 											</Text>
 											<div className='innerHTML text-16 mt-[10px]' dangerouslySetInnerHTML={ { __html: data?.split(':+split+:')[1] } } />

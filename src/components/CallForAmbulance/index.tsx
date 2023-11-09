@@ -23,19 +23,16 @@ const CallForAmbulance = () => {
 
 	return (
 		<>
-			{/* Migrate  */}
-			{/*   ${ shouldGiveMargin ? 'bottom-24' : '' } additional classname for CallForAmbulanceStyle */}
-			{/* End Migrate */}
+			{/* Migrate  */ }
+			{/*   ${ shouldGiveMargin ? 'bottom-24' : '' } additional classname for CallForAmbulanceStyle */ }
+			{/* End Migrate */ }
 			<CallForAmbulanceStyle className={ `
 				fixed cursor-pointer flex align-center justify-center 
 				max-sm:w-[72px] max-sm:h-[72px]
 			
 			` } onClick={ () => setVisible(true) }>
 				<div className='absolute w-[80%] h-[80%] mt-1 rounded-full hover:animate-ping z-20' style={ { backgroundColor: colors.red.accentOpacity90 } } />
-				<Image
-					src={ images.AmbulanceIcon }
-					alt='Call for Ambulance'
-					className='z-10 relative' />
+				<Image src={ images.AmbulanceIcon } className='z-10 relative' />
 			</CallForAmbulanceStyle>
 			<Modal
 				visible={ visible }
@@ -44,43 +41,40 @@ const CallForAmbulance = () => {
 			>
 				<ModalRSTelephoneStyle className='relative flex flex-col'>
 					<div className='flex justify-center'>
-						<Image
-							src={ images.AmbulanceIcon }
-							alt='Call for Ambulance'
-							className='z-10 relative' />
+						<Image src={ images.AmbulanceIcon } className='z-10 relative' />
 					</div>
 					<Text
 						fontSize='24px'
-						lineheight='28px'
+						lineHeight='28px'
 						fontType='h3'
 						fontWeight='700'
-						textalign='center'
+						textAlign='center'
 						color={ colors.grey.darker }
 						text='Call an Ambulance'
 						className='mt-5'
 					/>
 					<Text
 						fontSize='14px'
-						lineheight='20px'
+						lineHeight='20px'
 						fontWeight='400'
-						textalign='center'
+						textAlign='center'
 						color={ colors.grey.dark }
 						text='Please select hospital:'
 						className='mt-2'
 					/>
 					<div className='flex flex-col gap-4 mt-8'>
-						{/* Migrate */}
-						{/* { */} 
-							{/* hospitalSelector?.hospitals?.map(hospital => ( */}
-								<a href={ `tel:0341` } key={ 0 }>
-									<Button label='Hospital Name' theme='outline' hoverTheme='primary' />
-								</a>
-								{/* <a href={ `tel:${ hospital.phone }` } key={ hospital.id }>
+						{/* TODO: Migrate */ }
+						{/* { */ }
+						{/* hospitalSelector?.hospitals?.map(hospital => ( */ }
+						<a href={ `tel:0341` } key={ 0 }>
+							<Button label='Hospital Name' theme='outline' hoverTheme='primary' />
+						</a>
+						{/* <a href={ `tel:${ hospital.phone }` } key={ hospital.id }>
 									<Button label={ hospital.name } theme='outline' hoverTheme='primary' />
 								</a> */}
-							{/* )) */}
-						{/* } */}
-						{/* End Migrate */}
+						{/* )) */ }
+						{/* } */ }
+						{/* End Migrate */ }
 					</div>
 				</ModalRSTelephoneStyle>
 			</Modal>

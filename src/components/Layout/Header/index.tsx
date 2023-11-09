@@ -78,18 +78,18 @@ export const Header = ({
 					<div className='flex justify-between p-[20px]'>
 						<Text
 							fontSize='16px'
-							lineheight='24px'
+							lineHeight='24px'
 							fontType='h3'
 							fontWeight='700'
-							textalign='center'
+							textAlign='center'
 							color={ colors.black.default }
 							text='Notification'
 						/>
 						<Text
 							fontSize='12px'
-							lineheight='20px'
+							lineHeight='20px'
 							fontWeight='400'
-							textalign='center'
+							textAlign='center'
 							color={colors.green.brandAccent}
 							text='Mark all as read'
 							// Migrate
@@ -111,25 +111,25 @@ export const Header = ({
 								<Text
 									fontSize='12px'
 									fontWeight='400'
-									textalign='center'
+									textAlign='center'
 									color={colors.grey.pencil}
 									text={ moment().format('DD MMM, hh:mm') }
 								/>
 							</div>
 							<Text
 								fontSize='14px'
-								lineheight='20px'
+								lineHeight='20px'
 								fontWeight='700'
-								textalign='center'
+								textAlign='center'
 								color='#000000'
 								text='Judul'
 								className='flex justify-start'
 							/>
 							<Text
 								fontSize='12px'
-								lineheight='20px'
+								lineHeight='20px'
 								fontWeight='400'
-								textalign='center'
+								textAlign='center'
 								color='#000000'
 								text='Judul'
 								className='flex justify-start pt-2'

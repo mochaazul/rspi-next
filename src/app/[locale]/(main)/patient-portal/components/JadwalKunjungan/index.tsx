@@ -41,7 +41,7 @@ const JadwalKunjungan = () => {
 							<Text text={ languages.page.patientPortal.jadwalKunjungan.label.empty }
 								fontSize='20px'
 								fontWeight='700'
-								lineheight='28px'
+								lineHeight='28px'
 							/>
 							<Button className='w-52' onClick={ () => navigate.push('/find-a-doctor') }>Jadwalkan Kunjungan</Button>
 						</EmptyResultContainer>

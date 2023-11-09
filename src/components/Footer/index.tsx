@@ -3,64 +3,66 @@ import { useRouter } from 'next/navigation';
 
 import { appStage, config } from '@/config';
 import { colors, Images, Languages as lang } from '@/constant';
-import { useAppDispatch, useTypedSelector } from '@/hooks';
+// import { useAppDispatch, useTypedSelector } from '@/hooks'; // TODO: migrate
 import { FooterDetail, FooterState, HospitalState } from '@/interface';
 import { Button, Text, TextField, Socmed } from '@/components';
 
 import FooterStyled, { FooterContainer } from './style';
-import { getFooterCategories, getFooterSlug } from '@/stores/actions';
+// import { getFooterCategories, getFooterSlug } from '@/stores/actions'; // TODO: migrate
 
 const FooterLayout = () => {
-	const { loading, footerList } = useTypedSelector<FooterState>('footerSlice');
-	const fetchFooter = useAppDispatch(getFooterSlug);
+	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice'); // TODO: migrate
+	// const fetchFooter = useAppDispatch(getFooterSlug); // TODO: migrate
 	const [ourHospital, setOurHospital] = useState<FooterDetail[]>([]);
 	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
-	const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]);
+	// const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]); // TODO: migrate
 	const [pages, setPages] = useState<FooterDetail[]>([]);
 	const navigate = useRouter();
 
-	useEffect(() => {
-		fetchFooter({
-			queryParam: {
-				slug: '',
-				footer_category: '',
-				limit: 999,
-			}
-		});
-		// Clear state, prevent double item
-		setOurHospital([]);
-		setOurCompany([]);
-		setPrivacyPolicy([]);
-		setPages([]);
-		// Iterate over the footerList using the forEach method instead of map
-		footerList?.forEach(item => {
-			// Use a switch statement to check the footer_category of each item
-			switch (item?.footer_category) {
-				case 'our-hospital':
-					setOurHospital(ourHospital => [...ourHospital, item]);
-					break;
-				case 'our-company':
-					setOurCompany(ourCompany => [...ourCompany, item]);
-					break;
-				// case 'privacy-policy':
-				// 	setPrivacyPolicy(privacyPolicy => [...privacyPolicy, item]);
-				// 	break;
-				case 'pages':
-					setPages(pages => [...pages, item]);
-					break;
-				// Use a default case to handle items with unknown footer_category values
-				default:
-					break;
-			}
-		});
-	}, []);
+	// TODO: migrate
+	// useEffect(() => {
+	// 	fetchFooter({
+	// 		queryParam: {
+	// 			slug: '',
+	// 			footer_category: '',
+	// 			limit: 999,
+	// 		}
+	// 	});
+	// 	// Clear state, prevent double item
+	// 	setOurHospital([]);
+	// 	setOurCompany([]);
+	// 	setPrivacyPolicy([]);
+	// 	setPages([]);
+	// 	// Iterate over the footerList using the forEach method instead of map
+	// 	footerList?.forEach(item => {
+	// 		// Use a switch statement to check the footer_category of each item
+	// 		switch (item?.footer_category) {
+	// 			case 'our-hospital':
+	// 				setOurHospital(ourHospital => [...ourHospital, item]);
+	// 				break;
+	// 			case 'our-company':
+	// 				setOurCompany(ourCompany => [...ourCompany, item]);
+	// 				break;
+	// 			// case 'privacy-policy':
+	// 			// 	setPrivacyPolicy(privacyPolicy => [...privacyPolicy, item]);
+	// 			// 	break;
+	// 			case 'pages':
+	// 				setPages(pages => [...pages, item]);
+	// 				break;
+	// 			// Use a default case to handle items with unknown footer_category values
+	// 			default:
+	// 				break;
+	// 		}
+	// 	});
+	// }, []);
+	// End migrate
 
 	const language = lang.page.footer;
 
 	const renderItems = (items: FooterDetail[]) => {
 		return items.map((item, index) => {
 			return (
-				<div key={ index } className='cursor-pointer' onClick={ () => { navigate.push(`/footer/${ item.slug }`); location.reload(); } }>
+				<div key={ index } className='cursor-pointer' onClick={ () => { navigate.push(`/footer/${ item.slug }`); } }>
 					<Text fontSize='14px' className='bold'>{ item.title }</Text>
 				</div>
 			);
@@ -112,12 +114,12 @@ const FooterLayout = () => {
 					</div>
 				</FooterContainer>
 				<div className='flex justify-center'>
-					<Text textalign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group.  All Rights Reserved.</Text>
+					<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group.  All Rights Reserved.</Text>
 				</div>
 				{
 					appStage !== 'prod' &&
 					<div className='flex justify-center'>
-						<Text textalign='center' fontSize='14px' color={ colors.grey.dark }> Version { config.version } - { appStage.toUpperCase() }</Text>
+						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version { config.version } - { appStage.toUpperCase() }</Text>
 					</div>
 				}
 			</FooterStyled>

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 
@@ -10,7 +12,7 @@ import {
 } from '@/components';
 
 import { colors } from '@/constant';
-import FAQDatas from 'pages/ContactUsPage/FAQDatas';
+import FAQDatas from '../contact-us/FAQDatas';
 
 import { FAQStyle } from './style';
 import languages from '@/constant/languages';
@@ -49,18 +51,18 @@ const FAQPage = () => {
 						<Text
 							fontType='h1'
 							fontSize='24px'
-							lineheight='29px'
+							lineHeight='29px'
 							fontWeight='900'
-							textalign='center'
+							textAlign='center'
 							color={ colors.grey.darker }
 							text='Frequently Asked Questions'
 							subClassName='max-sm:text-left text-[24px]'
 						/>
 						<Text
 							fontSize='16px'
-							lineheight='20px'
+							lineHeight='20px'
 							fontWeight='400'
-							textalign='center'
+							textAlign='center'
 							color={ colors.grey.dark }
 							text={ subHeading }
 							className='mt-2'

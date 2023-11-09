@@ -13,8 +13,8 @@ const PhoneNumberInput = ({ onIconClick, ...props }: PhoneInputType) => {
 	const { ref, ...restProps } = props;
 	return (
 		<PhoneNumberInputWrapper
-			iconPosition={ props.iconPosition }
-			iconName={ props.iconName }
+			$iconPosition={ props.iconPosition }
+			$iconName={ props.iconName }
 			featherIcon={ props.featherIcon }
 			className='w-full'
 		>

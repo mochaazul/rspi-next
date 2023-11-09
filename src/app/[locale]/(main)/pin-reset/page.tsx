@@ -37,15 +37,15 @@ const ResetPinPage = () => {
 				<div className='mb-[32px]'>
 					<Images.LogoRSPI />
 				</div>
-				<Text text={ headingReset } fontSize={ '32px' } lineheight={ '48px' } fontWeight={ '900' } />
+				<Text text={ headingReset } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
 				<Text
 					text={ subHeading }
 					fontSize={ '20px' }
-					lineheight={ '24px' }
+					lineHeight={ '24px' }
 					fontWeight={ '400' }
 					className='mt-[16px] mb-[62px]'
 					color={ colors.grey.pencil }
-					textalign='center'
+					textAlign='center'
 				/>
 				{
 					notifVisible &&

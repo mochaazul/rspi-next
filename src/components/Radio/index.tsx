@@ -45,7 +45,7 @@ export const Option: React.FC<OptionProps> = ({
 				<RadioOptionContainer>
 					<RadioPill checked={ checked } />
 					{ /* <span className={ checked ? 'bg-blue-200' : '' }>{ label }</span> */ }
-					<Text text={ label } fontSize='14px' lineheight='20px' fontWeight='500' />
+					<Text text={ label } fontSize='14px' lineHeight='20px' fontWeight='500' />
 				</RadioOptionContainer>
 			</div>
 		) }

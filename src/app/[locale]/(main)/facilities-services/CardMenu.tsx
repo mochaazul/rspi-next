@@ -20,7 +20,7 @@ const CardMenu = ({ children, data, activeMenuIndex }: Props) => {
 					className='pb-[15px] cursor-pointer'
 					fontSize='14px'
 					fontWeight='700'
-					lineheight='21px'
+					lineHeight='21px'
 					color={ activeMenuIndex === item.id ? colors.paradiso.default : colors.grey.dark }
 					onClick={ () => navigate.push(`/facilities/${ item.id }`) }
 				/>;

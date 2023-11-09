@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 
@@ -60,17 +62,17 @@ const EmailVerificationPage = () => {
 				<div className={ `status success ${ status === 'success' ? 'active' : '' }` }>
 					<div className='icon-cont'>
 						<Image
-						src={icons.Check}
-						className='svg-white'
-						alt="" />
+							src={ icons.Check }
+							className='svg-white'
+							alt="" />
 					</div>
 				</div>
 				<div className={ `status failed ${ status === 'failed' ? 'active' : '' }` }>
 					<div className='icon-cont'>
 						<Image
-						src={icons.Close}
-						className='svg-white'
-						alt="" />
+							src={ icons.Close }
+							className='svg-white'
+							alt="" />
 					</div>
 				</div>
 			</div>
@@ -79,7 +81,7 @@ const EmailVerificationPage = () => {
 					<Text
 						fontSize='32px'
 						fontWeight='900'
-						lineheight='48px'
+						lineHeight='48px'
 						text='Mohon Tunggu Sebentar...'
 						className={ `loading ${ status === 'loading' ? 'active' : '' }` }
 						subClassName='text-center'
@@ -87,7 +89,7 @@ const EmailVerificationPage = () => {
 					<Text
 						fontSize='32px'
 						fontWeight='900'
-						lineheight='48px'
+						lineHeight='48px'
 						text='Validation Succesfull'
 						className={ `success ${ status === 'success' ? 'active' : '' }` }
 						subClassName='text-center'
@@ -95,7 +97,7 @@ const EmailVerificationPage = () => {
 					<Text
 						fontSize='32px'
 						fontWeight='900'
-						lineheight='48px'
+						lineHeight='48px'
 						text={ languages.validation.tokenValidation.failed }
 						className={ `failed ${ status === 'failed' ? 'active' : '' }` }
 						subClassName='text-center'

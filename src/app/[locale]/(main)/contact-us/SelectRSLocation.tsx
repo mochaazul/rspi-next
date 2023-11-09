@@ -40,7 +40,7 @@ const SelectRSLocation = (props: PropsType) => {
 						<Text
 							fontSize='20px'
 							fontWeight='900'
-							lineheight='24px'
+							lineHeight='24px'
 							color={ props.isActive ? colors.paradiso.default : colors.grey.darker }
 							text={ props.title }
 							className='map-title'
@@ -52,7 +52,7 @@ const SelectRSLocation = (props: PropsType) => {
 						<Text
 							fontSize='14px'
 							fontWeight='400'
-							lineheight='18px'
+							lineHeight='18px'
 							color={ colors.grey.darker }
 							text={ props.address }
 						/>
@@ -60,7 +60,7 @@ const SelectRSLocation = (props: PropsType) => {
 						<Text
 							fontSize='16px'
 							fontWeight='900'
-							lineheight='19px'
+							lineHeight='19px'
 							color={ colors.grey.darker }
 							className='max-sm:hidden'
 							text={ props.phone.replace(';', ' ext:') }

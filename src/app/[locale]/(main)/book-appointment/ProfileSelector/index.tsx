@@ -148,7 +148,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn }: Profil
 						subClassName='max-sm:text-[16px]'
 						fontSize='24px'
 						fontWeight='700'
-						lineheight='28px'
+						lineHeight='28px'
 						text={ `Yakin Menghapus Data Profil Ini ?` } />
 				</ModalHeader>
 				<div className='flex flex-row gap-x-5'>

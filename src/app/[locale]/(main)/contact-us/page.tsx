@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -88,7 +90,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							fontType='h1'
 							fontSize='24px'
 							fontWeight='900'
-							lineheight='29px'
+							lineHeight='29px'
 							color={ colors.grey.darker }
 							text={ language.heading }
 							subClassName='text-[24px]'
@@ -96,7 +98,7 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 						<Text
 							fontSize='16px'
 							fontWeight='400'
-							lineheight='19px'
+							lineHeight='19px'
 							color={ colors.grey.dark }
 							text={ language.subHeading }
 							className='mt-[10px]'
@@ -114,8 +116,8 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							<Text
 								fontSize='24px'
 								fontWeight='900'
-								lineheight='29px'
-								textalign='center'
+								lineHeight='29px'
+								textAlign='center'
 								color={ colors.grey.darker }
 								text={ language.contactForm.heading }
 								className='sm:block hidden'
@@ -123,8 +125,8 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							<Text
 								fontSize='16px'
 								fontWeight='400'
-								lineheight='23px'
-								textalign='center'
+								lineHeight='23px'
+								textAlign='center'
 								color={ colors.grey.dark }
 								text={ language.contactForm.subHeading }
 								className='mt-3'
@@ -138,16 +140,16 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 								fontSize='24px'
 								fontType='h3'
 								fontWeight='900'
-								lineheight='29px'
-								textalign='center'
+								lineHeight='29px'
+								textAlign='center'
 								color={ colors.grey.darker }
 								text={ language.faq.heading }
 							/>
 							<Text
 								fontSize='16px'
 								fontWeight='400'
-								lineheight='23px'
-								textalign='center'
+								lineHeight='23px'
+								textAlign='center'
 								color={ colors.grey.dark }
 								text={ language.faq.subHeading }
 								className='mt-3'
@@ -175,8 +177,8 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 							fontSize='24px'
 							fontType='h3'
 							fontWeight='900'
-							lineheight='29px'
-							textalign='center'
+							lineHeight='29px'
+							textAlign='center'
 							color={ colors.grey.darker }
 							text={ language.location.heading }
 							className='text-center'
@@ -184,8 +186,8 @@ const ContactUsPage = (props: BreadcrumbsProps) => {
 						<Text
 							fontSize='16px'
 							fontWeight='400'
-							lineheight='23px'
-							textalign='center'
+							lineHeight='23px'
+							textAlign='center'
 							color={ colors.grey.dark }
 							text={ language.location.subHeading }
 							className='mt-3 mx-auto text-center sm:w-[630px] w-full'

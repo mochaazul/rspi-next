@@ -12,7 +12,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
 		<div className='flex-1'>
 			<Text
 				fontSize='20px'
-				lineheight='23px'
+				lineHeight='23px'
 				fontType='h3'
 				fontWeight='900'
 				color={ props.open ? colors.paradiso.default : colors.grey.dark }
@@ -22,7 +22,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
 			</Text>
 		</div>
 		<div className='grow-0'>
-			<Image src={icons.ArrowDown} className={ `svg-green chevron ${ props.open ? 'up' : '' }` } />
+			<Image src={ icons.ArrowDown } className={ `svg-green chevron ${ props.open ? 'up' : '' }` } />
 		</div>
 	</div>
 );
@@ -41,12 +41,12 @@ const Item = (props: ItemType) => {
 	}, [props.isOpen, props.onlyOpenOne]);
 
 	return (
-		<ItemStyle isOpen={ isOpen }>
+		<ItemStyle $isOpen={ isOpen }>
 			<Title text={ props.title } open={ isOpen } onClick={ handleToggleOpen } />
 			<div className='item-desc'>
 				<Text
 					fontSize='18px'
-					lineheight='23px'
+					lineHeight='23px'
 					fontType='p'
 					fontWeight='400'
 					color={ colors.grey.dark }

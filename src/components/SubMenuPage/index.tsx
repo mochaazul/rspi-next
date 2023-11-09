@@ -27,7 +27,7 @@ const SubMenuPage = ({ menuList, children }: PropsTypes) => {
 						>
 							<Text
 								fontWeight='700'
-								lineheight='19px'
+								lineHeight='19px'
 								fontSize='16px'
 								color={ activeIndex === index ? colors.paradiso.default : colors.grey.darker }
 								text={ menu }
@@ -64,7 +64,7 @@ const SubMenuPage = ({ menuList, children }: PropsTypes) => {
 							>
 								<Text
 									fontWeight='700'
-									lineheight='19px'
+									lineHeight='19px'
 									fontSize='16px'
 									color={ activeIndex === index ? colors.paradiso.default : colors.grey.darker }
 									text={ menu }

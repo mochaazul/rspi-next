@@ -1,6 +1,6 @@
 import { baseUrl } from '@/config';
-import { localStorage } from '@/helpers';
-import { getLanguage } from '@/helpers/localStorage';
+// import { localStorage } from '@/helpers';
+// import { getLanguage } from '@/helpers/localStorage';
 import { ResponseType } from '@/interface';
 
 type Option = {
@@ -35,10 +35,11 @@ export const apiCall = async <T = unknown>({
 }: Option): Promise<ResponseType<T>> => {
 	try {
 		const url = generateBaseUrl(endpoint, baseUrl);
-		const Authorization = localStorage.getToken() ? `${ localStorage.getToken() }` : '';
+		// const Authorization = localStorage.getToken() ? `${ localStorage.getToken() }` : '';
 		const headers: Record<string, any> = {
-			'content-language': getLanguage() ?? 'idn',
-			Authorization,
+			// 'content-language': getLanguage() ?? 'idn',
+			'content-language': 'idn',
+			// Authorization,
 			'X-Channel': 'website',
 			...header
 		};

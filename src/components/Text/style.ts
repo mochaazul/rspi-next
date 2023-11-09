@@ -2,15 +2,15 @@ import { colors } from '@/constant';
 import styled from 'styled-components';
 
 interface StyleProps {
-	fontFamily?: string;
-	fontSize?: string;
-	textalign?: string;
-	fontStyle?: string;
-	fontDecoration?: string;
-	fontWeight?: string;
-	color?: string;
-	lineheight?: string;
-	isGradient?: boolean;
+  fontFamily?: string;
+  fontSize?: string;
+  $textAlign?: string;
+  fontStyle?: string;
+  fontDecoration?: string;
+  fontWeight?: string;
+  color?: string;
+  $lineHeight?: string;
+  isGradient?: boolean;
 }
 
 const TextStyle = styled.div<StyleProps>`
@@ -19,8 +19,8 @@ const TextStyle = styled.div<StyleProps>`
     font-style: ${ props.fontStyle || 'unset' };
     font-size: ${ props.fontSize || '16px' };
     font-weight: ${ props.fontWeight || 'unset' };
-    text-align: ${ props.textalign || 'left' };
-    line-height: ${ props.lineheight || 'unset' };
+    text-align: ${ props.$textAlign || 'left' };
+    line-height: ${ props.$lineHeight || 'unset' };
     color: ${ props.color || colors.grey.darker };
     ${ !!props.fontDecoration && `border-bottom: 1px solid ${ props.color };` }
 
@@ -30,49 +30,49 @@ const TextStyle = styled.div<StyleProps>`
 
     h1 {
       font-size: ${ props.fontSize || '44px' };
-      text-align: ${ props.textalign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || '700' };
-      line-height: ${ props.lineheight || '41px' };
+      line-height: ${ props.$lineHeight || '41px' };
     }
 
     h2 {
       font-size: ${ props.fontSize || '32px' };
-      text-align: ${ props.textalign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || '700' };
-      line-height: ${ props.lineheight || '41px' };
+      line-height: ${ props.$lineHeight || '41px' };
       
       @media screen and (max-width: 500px) {
         font-size: ${ props.fontSize || '24px' };
-        line-height: ${ props.lineheight || '31px' };
+        line-height: ${ props.$lineHeight || '31px' };
       }
     }
 
     h3 {
       font-size: ${ props.fontSize || '24px' };
-      text-align: ${ props.textalign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
       font-weight: ${ props.fontFamily };
-      line-height: ${ props.lineheight || '36px' } ;
+      line-height: ${ props.$lineHeight || '36px' } ;
 
       span {
         font-size: ${ props.fontSize || '2rem' };
-        text-align: ${ props.textalign || 'left' };
+        text-align: ${ props.$textAlign || 'left' };
         font-weight: ${ props.fontWeight || 'unset' };
       }
     }
     
     h4 {
       font-size: ${ props.fontSize || '1.7rem' };
-      text-align: ${ props.textalign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
     }
     
     p,
     pre {
       font-size: ${ props.fontSize || '16px' };
-      text-align: ${ props.textalign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
-			line-height: ${ props.lineheight || '18px' } ;
+			line-height: ${ props.$lineHeight || '18px' } ;
     }
 
     @media screen and (max-width: 720px) {

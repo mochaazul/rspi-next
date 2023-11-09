@@ -19,11 +19,11 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 	};
 
 	return (
-		<DateFieldWrapper iconPosition={ props.iconPosition } iconName={ props.iconName } className='w-full'>
+		<DateFieldWrapper $iconPosition={ props.iconPosition } $iconName={ props.iconName } className='w-full'>
 			{
 				props.iconName ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Icons />
+						{/* <Icons /> // TODO: ganti */ }
 					</IconWrapper> :
 					null
 			}

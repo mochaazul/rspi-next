@@ -59,14 +59,14 @@ const DetailNewsHealthPage = () => {
 							<Button label={ selectedArticle?.category } className='px-[8px] py-[6px]' />
 						</div>
 						<div className='sm:w-[729px]'>
-							<Text fontWeight='900' fontSize='32px' lineheight='48px' className='my-[20px]'>
+							<Text fontWeight='900' fontSize='32px' lineHeight='48px' className='my-[20px]'>
 								{ selectedArticle?.title }
 							</Text>
 							<Text
 								text={ `${ language.oleh } ${ selectedArticle?.news_author?.doctor_name }` }
 								fontWeight='400'
 								fontSize='18px'
-								lineheight='22px'
+								lineHeight='22px'
 								color={ colors.grey.dark }
 							/>
 							<div className='flex items-center gap-[30px] mt-[20px]'>
@@ -74,7 +74,7 @@ const DetailNewsHealthPage = () => {
 									text={ moment(selectedArticle?.posted_date).format('dddd, DD MMM YYYY') }
 									fontWeight='400'
 									fontSize='18px'
-									lineheight='22px'
+									lineHeight='22px'
 									color={ colors.grey.dark }
 								/>
 								<div className='flex gap-[15px]'>
@@ -95,7 +95,7 @@ const DetailNewsHealthPage = () => {
 						</div>
 						<div className='content-wrapper flex mt-[20px] mb-[100px]'>
 							<div className='leftSide mt-[30px] w-[729px]'>
-								<Text fontWeight='700' fontSize='20px' lineheight='30px'>
+								<Text fontWeight='700' fontSize='20px' lineHeight='30px'>
 									{ selectedArticle?.short_description }
 								</Text>
 								<img src={ selectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
@@ -119,7 +119,7 @@ const DetailNewsHealthPage = () => {
 														className='py-[10px]'
 														fontSize='12px'
 														fontWeight='400'
-														lineheight='14px'
+														lineHeight='14px'
 														color={ colors.grey.dark }
 													/>
 													<Text
@@ -127,7 +127,7 @@ const DetailNewsHealthPage = () => {
 														className='pb-[10px]'
 														fontSize='14px'
 														fontWeight='900'
-														lineheight='24px'
+														lineHeight='24px'
 														color={ colors.grey.darker }
 													/>
 												</div>
@@ -150,7 +150,7 @@ const DetailNewsHealthPage = () => {
 														className='py-[10px]'
 														fontSize='14px'
 														fontWeight='900'
-														lineheight='24px'
+														lineHeight='24px'
 														color={ colors.grey.darker }
 													/>
 													<Text
@@ -158,7 +158,7 @@ const DetailNewsHealthPage = () => {
 														className='pb-[10px]'
 														fontSize='12px'
 														fontWeight='400'
-														lineheight='14px'
+														lineHeight='14px'
 														color={ colors.grey.dark }
 													/>
 												</div>
@@ -183,7 +183,7 @@ const DetailNewsHealthPage = () => {
 														className='py-[10px]'
 														fontSize='12px'
 														fontWeight='400'
-														lineheight='14px'
+														lineHeight='14px'
 														color={ colors.grey.dark }
 													/>
 													<Text
@@ -191,7 +191,7 @@ const DetailNewsHealthPage = () => {
 														className='pb-[10px]'
 														fontSize='14px'
 														fontWeight='900'
-														lineheight='24px'
+														lineHeight='24px'
 														color={ colors.grey.darker }
 													/>
 												</div>
@@ -214,7 +214,7 @@ const DetailNewsHealthPage = () => {
 														className='py-[10px]'
 														fontSize='14px'
 														fontWeight='900'
-														lineheight='24px'
+														lineHeight='24px'
 														color={ colors.grey.darker }
 													/>
 													<Text
@@ -222,7 +222,7 @@ const DetailNewsHealthPage = () => {
 														className='pb-[10px]'
 														fontSize='12px'
 														fontWeight='400'
-														lineheight='14px'
+														lineHeight='14px'
 														color={ colors.grey.dark }
 													/>
 												</div>

@@ -36,19 +36,19 @@ const CallForAmbulance = () => {
 					</div>
 					<Text
 						fontSize='24px'
-						lineheight='28px'
+						lineHeight='28px'
 						fontType='h3'
 						fontWeight='700'
-						textalign='center'
+						textAlign='center'
 						color={ colors.grey.darker }
 						text='Call an Ambulance'
 						className='mt-5'
 					/>
 					<Text
 						fontSize='14px'
-						lineheight='20px'
+						lineHeight='20px'
 						fontWeight='400'
-						textalign='center'
+						textAlign='center'
 						color={ colors.grey.dark }
 						text='Please select hospital:'
 						className='mt-2'

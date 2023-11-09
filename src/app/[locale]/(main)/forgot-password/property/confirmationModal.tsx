@@ -35,7 +35,7 @@ const ConfirmationModal: React.FC<ModalProps> = ({
 					</Link>
 				</ModalStyle>
 				:
-				<Text text={ errorMsg || '' } color={ colors.red.default } textalign='center' />
+				<Text text={ errorMsg || '' } color={ colors.red.default } textAlign='center' />
 			}
 		</Modal>
 	);

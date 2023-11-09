@@ -28,7 +28,7 @@ export const DoctorCardStyle = styled.div`
 	}
 `;
 
-export const AccordionItemStyle = styled.div<{ isOpen: boolean; }>`
+export const AccordionItemStyle = styled.div<{ $isOpen: boolean; }>`
 	align-items: center;
 	gap: 2rem;
 	border: 1px solid ${ colors.grey.lighter };
@@ -47,7 +47,7 @@ export const AccordionItemStyle = styled.div<{ isOpen: boolean; }>`
 		transition: all .3s;
 	}
 
-	${ props => props.isOpen && `
+	${ props => props.$isOpen && `
 		background-color: ${ colors.white.body };
 		&::before {
 			width: 8px;
@@ -58,9 +58,9 @@ export const AccordionItemStyle = styled.div<{ isOpen: boolean; }>`
 	& .item-desc {
 		overflow: auto;
 		position: relative;
-		opacity: ${ props => props.isOpen ? '1' : '0' };
-		max-height: ${ props => props.isOpen ? '1000px' : '0px' };
-		margin-top: ${ props => props.isOpen ? '16px' : '0' };
+		opacity: ${ props => props.$isOpen ? '1' : '0' };
+		max-height: ${ props => props.$isOpen ? '1000px' : '0px' };
+		margin-top: ${ props => props.$isOpen ? '16px' : '0' };
 		transition: all .5s;
 	}
 

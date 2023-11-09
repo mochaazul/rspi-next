@@ -2,7 +2,7 @@ import React from 'react';
 import TextStyle from './style';
 
 type FontType = 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'pre' | null;
-type textalign = 'left' | 'center' | 'right';
+type textAlign = 'left' | 'center' | 'right';
 type FontStyle = 'italic' | 'normal';
 type FontDecoration = 'underline';
 type FontWeight = 'bold' | 'bolder' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
@@ -16,12 +16,12 @@ interface TextProps {
 	subClassName?: string;
 	text?: string | number | React.ReactNode;
 	fontSize?: string;
-	textalign?: textalign;
+	textAlign?: textAlign;
 	fontStyle?: FontStyle;
 	fontDecoration?: FontDecoration;
 	fontWeight?: FontWeight;
 	color?: string;
-	lineheight?: string;
+	lineHeight?: string;
 	onClick?: () => void;
 	id?: any;
 }
@@ -34,12 +34,12 @@ const Text: React.FC<TextProps> = ({
 	subClassName,
 	text,
 	fontSize,
-	textalign,
+	textAlign,
 	fontStyle,
 	fontDecoration,
 	fontWeight,
 	color,
-	lineheight,
+	lineHeight,
 	onClick,
 	id = 'custom-text'
 }) => {
@@ -56,12 +56,12 @@ const Text: React.FC<TextProps> = ({
 			className={ className }
 			fontFamily={ fontFamily }
 			fontSize={ fontSize }
-			textalign={ textalign }
+			textAlign={ textAlign }
 			fontStyle={ fontStyle }
 			fontDecoration={ fontDecoration }
 			fontWeight={ fontWeight }
 			color={ color }
-			$lineHeight={ lineheight }
+			$lineHeight={ lineHeight }
 			onClick={ onClick }
 			id={ id }
 		>

@@ -13,14 +13,14 @@ export const AccordionStyle = styled.div`
   }
 `;
 
-export const ItemStyle = styled.div<{ isOpen: boolean; }>`
+export const ItemStyle = styled.div<{ $isOpen: boolean; }>`
   align-items: center;
   gap: 2rem;
 
   & .item-desc {
     position: relative;
-    display: ${ props => props.isOpen ? 'block' : 'none' };
-    max-height: ${ props => props.isOpen ? '1000px' : '0px' };
+    display: ${ props => props.$isOpen ? 'block' : 'none' };
+    max-height: ${ props => props.$isOpen ? '1000px' : '0px' };
     animation: show_desc .5s ease-in-out both;
   }
   .chevron {

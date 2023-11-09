@@ -77,7 +77,7 @@ const RegisterPage = () => {
 							<Link href='/' className='max-sm:hidden'>
 								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
 							</Link>
-							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineheight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
+							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 								{ heading }
 							</Text>
 							<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-4 max-2xl:mb-6 mb-16' subClassName='max-lg:text-[16px] max-lg:leading-[24px]'>

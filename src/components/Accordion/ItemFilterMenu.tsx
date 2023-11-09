@@ -12,7 +12,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; hideTog
 		<div className='flex-1'>
 			<Text
 				fontSize='20px'
-				lineheight='24px'
+				lineHeight='24px'
 				fontWeight='700'
 				color={ colors.grey.darker }
 				subClassName='max-sm:text-[16px] max-sm:leading-[23px]'
@@ -23,7 +23,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; hideTog
 		{
 			!props.hideToggler &&
 			<div className='grow-0'>
-				<Image src={icons.ArrowDown} className={ `svg-green chevron ${ props.open ? 'up' : '' }` } alt="" />
+				<Image src={ icons.ArrowDown } className={ `svg-green chevron ${ props.open ? 'up' : '' }` } alt="" />
 			</div>
 		}
 	</div>
@@ -43,7 +43,7 @@ const ItemFilterMenu = (props: ItemType) => {
 	}, [props.isOpen, props.onlyOpenOne]);
 
 	return (
-		<ItemStyle isOpen={ isOpen }>
+		<ItemStyle $isOpen={ isOpen }>
 			<Title text={ props.title } open={ isOpen } onClick={ () => { !props.hideTogler && handleToggleOpen(); } } hideToggler={ props.hideTogler } />
 			<div className='item-desc'>
 				{ props.desc_jsx }

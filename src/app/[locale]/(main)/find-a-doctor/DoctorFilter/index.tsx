@@ -102,7 +102,7 @@ const DoctorFilter = () => {
 			{ /* Cari Dokter - title */ }
 			<Text
 				fontSize='20px'
-				lineheight='24px'
+				lineHeight='24px'
 				fontWeight='700'
 				className='mb-4 max-sm:hidden'
 				color={ colors.grey.darker }
@@ -170,7 +170,7 @@ const DoctorFilter = () => {
 										<Text
 											fontSize='16px'
 											fontWeight='400'
-											lineheight='19px'
+											lineHeight='19px'
 											text={ speciality.label }
 										/>
 									</Pills>

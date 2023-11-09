@@ -14,8 +14,8 @@ const EmptyData = (props: PropsType) => {
 				text={ `Yah! Belum ada ${ props.menu } saat ini` }
 				fontWeight='400'
 				fontSize='20px'
-				lineheight='30px'
-				textalign='center'
+				lineHeight='30px'
+				textAlign='center'
 				color={ colors.grey.solid }
 				className='mt-[16px]'
 			/>

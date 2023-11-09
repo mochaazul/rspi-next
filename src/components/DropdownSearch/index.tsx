@@ -44,7 +44,7 @@ const DropdownSearch = ({ textFieldProps, pickerItems, onItemClick, isForLanding
 								<Text
 									fontSize='16px'
 									fontWeight='700'
-									lineheight='19px'
+									lineHeight='19px'
 									text={ item.label }
 									className='flex-1'
 								/>

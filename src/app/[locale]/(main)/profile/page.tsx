@@ -215,14 +215,14 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 							<Text
 								fontWeight='900'
 								fontSize='24px'
-								lineheight='29px'
+								lineHeight='29px'
 								color={ colors.grey.darker }
 								text={ heading }
 							/>
 							<Text
 								fontWeight='400'
 								fontSize='16px'
-								lineheight='19px'
+								lineHeight='19px'
 								color={ colors.grey.dark }
 								className='mt-3'
 								text={ subHeading }
@@ -260,7 +260,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 											<Text
 												fontSize='16px'
 												fontWeight='700'
-												lineheight='19px'
+												lineHeight='19px'
 												text={ data.split(':')[0] }
 											/>
 											<Icons.Check className={ `check-icon ${ data.split(':')[0] === activeEmail ? '' : 'hidden' }` } size={ 20 } />
@@ -293,13 +293,13 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 								<Text
 									fontWeight='700'
 									fontSize='16px'
-									lineheight='19px'
+									lineHeight='19px'
 									text={ patientProfile.name }
 								/>
 								<Text
 									fontWeight='400'
 									fontSize='14px'
-									lineheight='17px'
+									lineHeight='17px'
 									className='capitalize'
 									text={ patientProfile.birthdate && patientProfile.gender && `${ getAge(splitDate(patientProfile?.birthdate)) }, ${ patientProfile.gender }` }
 								/>
@@ -308,13 +308,13 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 								<Text
 									fontWeight='400'
 									fontSize='14px'
-									lineheight='17px'
+									lineHeight='17px'
 									text={ profileDetail.patientIdLabel }
 								/>
 								<Text
 									fontWeight='700'
 									fontSize='16px'
-									lineheight='19px'
+									lineHeight='19px'
 									text={ userSelector.user.patient_code }
 								/>
 							</div>
@@ -322,13 +322,13 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 								<Text
 									fontWeight='400'
 									fontSize='14px'
-									lineheight='17px'
+									lineHeight='17px'
 									text={ profileDetail.lastVisitedHospitalLabel }
 								/>
 								<Text
 									fontWeight='700'
 									fontSize='16px'
-									lineheight='19px'
+									lineHeight='19px'
 									text={ lastVisitedHospital.hospital_desc ?? '-' }
 								/>
 							</div>
@@ -336,13 +336,13 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 								<Text
 									fontWeight='400'
 									fontSize='14px'
-									lineheight='17px'
+									lineHeight='17px'
 									text={ profileDetail.lastVisitedDateLabel }
 								/>
 								<Text
 									fontWeight='700'
 									fontSize='16px'
-									lineheight='19px'
+									lineHeight='19px'
 									text={ dayjs(lastVisitedHospital.adm_date).format('DD MMM YYYY') ?? '-' }
 								/>
 							</div>
@@ -352,13 +352,13 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 								<Text
 									fontWeight='400'
 									fontSize='14px'
-									lineheight='17px'
+									lineHeight='17px'
 									text={ profileDetail.lastVisitedHospitalLabel }
 								/>
 								<Text
 									fontWeight='700'
 									fontSize='16px'
-									lineheight='19px'
+									lineHeight='19px'
 									text={ lastVisitedHospital.hospital_desc ?? '-' }
 								/>
 							</div>
@@ -366,13 +366,13 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 								<Text
 									fontWeight='400'
 									fontSize='14px'
-									lineheight='17px'
+									lineHeight='17px'
 									text={ profileDetail.lastVisitedDateLabel }
 								/>
 								<Text
 									fontWeight='700'
 									fontSize='16px'
-									lineheight='19px'
+									lineHeight='19px'
 									text={ dayjs(lastVisitedHospital.adm_date).format('DD MMM YYYY') ?? '-' }
 								/>
 							</div>
@@ -403,7 +403,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 													/>
 													<Text
 														fontSize='16px'
-														lineheight='24px'
+														lineHeight='24px'
 														fontType='h4'
 														fontWeight='400'
 														color={ colors.paradiso.default }
@@ -414,7 +414,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 													</Text>
 													<Text
 														fontSize='14px'
-														lineheight='24px'
+														lineHeight='24px'
 														fontType='h4'
 														fontWeight='400'
 														color={ colors.grey.default }
@@ -545,8 +545,8 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 									setError(responseData.payload.stat_msg);
 								}
 							} }>
-							<Text text={ header } fontWeight='900' fontSize='28px' lineheight='48px' />
-							<Text text={ subHeader } fontWeight='400' fontSize='16px' lineheight='normal' color={ colors.grey.default } />
+							<Text text={ header } fontWeight='900' fontSize='28px' lineHeight='48px' />
+							<Text text={ subHeader } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
 							{
 								error &&
 								<div className='mt-[20px]'>
@@ -614,7 +614,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 					<div>
 						<Text
 							fontSize='16px'
-							lineheight='19px'
+							lineHeight='19px'
 							fontWeight='900'
 							color={ colors.paradiso.default }
 							text={ 'Berhasil Update Profile' }
@@ -625,7 +625,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 					<div>
 						<Text
 							fontSize='16px'
-							lineheight='19px'
+							lineHeight='19px'
 							fontWeight='900'
 							color={ colors.paradiso.default }
 							text={ 'Berhasil Mengirim Link Verifikasi Email, Silahkan Cek Kotak Masuk Email Anda' }

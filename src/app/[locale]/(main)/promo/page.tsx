@@ -67,7 +67,7 @@ const EventClassesPromo = (props: BreadcrumbsProps) => {
 						fontSize='44px'
 						fontType='h1'
 						fontWeight='900'
-						lineheight='57px'
+						lineHeight='57px'
 						text={ heading }
 						className='sm:mt-[50px] mt-[25px]'
 						subClassName='max-sm:text-[24px]'
@@ -76,7 +76,7 @@ const EventClassesPromo = (props: BreadcrumbsProps) => {
 						<Text
 							fontSize='20px'
 							fontWeight='700'
-							lineheight='24px'
+							lineHeight='24px'
 							text={ hospitalSelectionLabel }
 							subClassName='max-sm:font-black max-sm:text-[16px]'
 						/>
@@ -125,7 +125,7 @@ const EventClassesPromo = (props: BreadcrumbsProps) => {
 						}
 						{
 							!eventsSelector.loading && eventsSelector?.events?.length == 0 ?
-								<Text textalign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
+								<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
 									<EmptyData menu='Promo and Packages' />
 								</Text> : <></>
 						}

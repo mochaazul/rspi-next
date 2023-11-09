@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import { localStorage } from '@/helpers';
 import { I_MasterDoctorClinicSchedule } from '@/interface';
 import moment from 'moment';
 
@@ -25,7 +24,8 @@ export const splitDate = (time: string) => {
 };
 
 export const sortDays = (data: I_SerializedTimeSchedule[]) => {
-	const lang = localStorage.getLanguage() ?? 'idn';
+	// const lang = localStorage.getLanguage() ?? 'idn';
+	const lang = 'idn'; // ** TODO: migrate **
 	const dayOrder = lang === 'idn'
 		? ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 		: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];

@@ -47,20 +47,20 @@ const ModalCancelBook = (props: PropsType) => {
 							text='Data Pasien'
 							fontWeight='700'
 							fontSize='14px'
-							lineheight='20px'
+							lineHeight='20px'
 						/>
 						<div className='grid grid-cols-[150px_auto]'>
 							<Text
 								text='Nama : '
 								fontWeight='500'
 								fontSize='14px'
-								lineheight='20px'
+								lineHeight='20px'
 							/>
 							<Text
 								text={ userDetail.name }
 								fontWeight='700'
 								fontSize='14px'
-								lineheight='20px'
+								lineHeight='20px'
 							/>
 						</div>
 						<div className='grid grid-cols-[150px_auto]'>
@@ -68,13 +68,13 @@ const ModalCancelBook = (props: PropsType) => {
 								text='Tanggal Lahir : '
 								fontWeight='500'
 								fontSize='14px'
-								lineheight='20px'
+								lineHeight='20px'
 							/>
 							<Text
 								text={ props.birthDate ? dayjs(userDetail.birthdate).format('DD MMMM YYYY') : '-' }
 								fontWeight='700'
 								fontSize='14px'
-								lineheight='20px'
+								lineHeight='20px'
 							/>
 						</div>
 						<div className='grid grid-cols-[150px_auto]'>
@@ -82,13 +82,13 @@ const ModalCancelBook = (props: PropsType) => {
 								text='No HP : '
 								fontWeight='500'
 								fontSize='14px'
-								lineheight='20px'
+								lineHeight='20px'
 							/>
 							<Text
 								text={ userDetail.phone ?? '-' }
 								fontWeight='700'
 								fontSize='14px'
-								lineheight='20px'
+								lineHeight='20px'
 							/>
 						</div>
 					</div>

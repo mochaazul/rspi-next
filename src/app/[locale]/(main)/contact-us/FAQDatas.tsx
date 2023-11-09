@@ -10,7 +10,7 @@ export default [
 		desc_jsx:
 			<Text
 				fontSize='14px'
-				lineheight='22px'
+				lineHeight='22px'
 				fontType={ null }
 				fontWeight='400'
 				color={ colors.grey.darker }
@@ -27,7 +27,7 @@ export default [
 		desc_jsx:
 			<Text
 				fontSize='14px'
-				lineheight='22px'
+				lineHeight='22px'
 				fontType={ null }
 				fontWeight='400'
 				color={ colors.grey.darker }
@@ -45,7 +45,7 @@ export default [
 			<div>
 				<Text
 					fontSize='14px'
-					lineheight='22px'
+					lineHeight='22px'
 					fontType={ null }
 					fontWeight='400'
 					color={ colors.grey.darker }
@@ -64,7 +64,7 @@ export default [
 			<div>
 				<Text
 					fontSize='14px'
-					lineheight='22px'
+					lineHeight='22px'
 					fontType={ null }
 					fontWeight='400'
 					color={ colors.grey.darker }
@@ -83,7 +83,7 @@ export default [
 			<div>
 				<Text
 					fontSize='14px'
-					lineheight='22px'
+					lineHeight='22px'
 					fontType={ null }
 					fontWeight='400'
 					color={ colors.grey.darker }
@@ -102,7 +102,7 @@ export default [
 			<div>
 				<Text
 					fontSize='14px'
-					lineheight='22px'
+					lineHeight='22px'
 					fontType={ null }
 					fontWeight='400'
 					color={ colors.grey.darker }
@@ -121,7 +121,7 @@ export default [
 			<div>
 				<Text
 					fontSize='14px'
-					lineheight='22px'
+					lineHeight='22px'
 					fontType={ null }
 					fontWeight='400'
 					color={ colors.grey.darker }

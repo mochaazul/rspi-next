@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
 import _, { debounce, isEqual } from 'lodash';
@@ -169,7 +171,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 						<Text
 							fontSize='20px'
 							fontWeight='700'
-							lineheight='24px'
+							lineHeight='24px'
 							className='mb-6 max-sm:hidden'
 							text={ `${ doctorCount() } ${ language.label.doctorFound }` }
 						/>
@@ -177,7 +179,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 						<Text
 							fontType='h2'
 							fontSize='20px'
-							lineheight='24px'
+							lineHeight='24px'
 							fontWeight='700'
 							className='mb-6 sm:hidden'
 							color={ colors.grey.darker }
@@ -201,7 +203,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 										<Text
 											fontSize='16px'
 											fontWeight='400'
-											lineheight='19px'
+											lineHeight='19px'
 											color={ colors.paradiso.default }
 											text='Filter'
 										/>
@@ -214,7 +216,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 												<Text
 													fontSize='16px'
 													fontWeight='400'
-													lineheight='19px'
+													lineHeight='19px'
 													text={ filter.text }
 												/>
 											</Pills>
@@ -228,7 +230,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 									<Text
 										fontSize='16px'
 										fontWeight='400'
-										lineheight='19px'
+										lineHeight='19px'
 										color={ colors.red.default }
 										text='Clear All'
 										onClick={ clearSearchParams }
@@ -241,7 +243,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 							<Text
 								fontSize='14px'
 								fontWeight='700'
-								lineheight='17px'
+								lineHeight='17px'
 								className='mb-2 mt-6 sm:hidden'
 								text={ `${ DoctorDataSamples.length } ${ language.label.doctorFound }` }
 							/>
@@ -274,7 +276,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 							<div className='flex justify-between items-center'>
 								<Text
 									fontSize='16px'
-									lineheight='19px'
+									lineHeight='19px'
 									fontType='h4'
 									fontWeight='900'
 									color={ colors.grey.darker }
