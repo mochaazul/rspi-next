@@ -2,7 +2,7 @@ import React from 'react';
 import TextStyle from './style';
 
 type FontType = 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'pre' | null;
-type TextAlign = 'left' | 'center' | 'right';
+type textAlign = 'left' | 'center' | 'right';
 type FontStyle = 'italic' | 'normal';
 type FontDecoration = 'underline';
 type FontWeight = 'bold' | 'bolder' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
@@ -16,7 +16,7 @@ interface TextProps {
 	subClassName?: string;
 	text?: string | number | React.ReactNode;
 	fontSize?: string;
-	textAlign?: TextAlign;
+	textAlign?: textAlign;
 	fontStyle?: FontStyle;
 	fontDecoration?: FontDecoration;
 	fontWeight?: FontWeight;
