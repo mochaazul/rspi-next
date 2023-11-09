@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import {
 	Button, Form, Modal, NotificationPanel, Text
@@ -48,7 +49,7 @@ interface PropsType {
 }
 
 const CardAppointment = (props: PropsType) => {
-	const { navigate } = navigation();
+	const navigate = useRouter();
 
 	const [modalOpen, setModalOpen] = useState(false);
 	const [modalReccomend, setModalRecommed] = useState(false);
@@ -84,7 +85,7 @@ const CardAppointment = (props: PropsType) => {
 			id: appointmentId
 		});
 		setShowPinModal(false);
-		navigate('/patient-portal/3');
+		navigate.push('/patient-portal/3');
 	};
 
 	const isVisitActive = () => {
@@ -203,10 +204,10 @@ const CardAppointment = (props: PropsType) => {
 					</div>
 				} */ }
 				{ props.visit_status === 'C' &&
-					<div onClick={ () => navigate(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ `Jadwalkan Lagi` }</div>
+					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ `Jadwalkan Lagi` }</div>
 				}
 				{ props.visit_status === 'X' &&
-					<div onClick={ () => navigate(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ `Jadwalkan Ulang` }</div>
+					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ `Jadwalkan Ulang` }</div>
 				}
 				{ props.status !== 'Jadwal Selesai' &&
 					<div onClick={ async () => {
@@ -218,7 +219,7 @@ const CardAppointment = (props: PropsType) => {
 			</div>
 			{ props.isTelemedicine
 				&& <div className='flex items-center mt-[12px] gap-[8px]' >
-					<Image src={icons.User} alt="" sizes={12} />
+					<Image src={ icons.User } alt="" sizes={ 12 } />
 					<Text text={ `Pasien: ${ props.patientName }` } fontSize='14px' fontWeight='700' color={ colors.blue.neon } />
 				</div>
 			}
@@ -249,7 +250,7 @@ const CardAppointment = (props: PropsType) => {
 					handleShowModal && handleShowModal();
 				} }>
 					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ props.isHistory ? riwayatKunjungan.label.recommendDoctor : riwayatKunjungan.label.seeDetail } />
-					<Image src={icons.LongArrowRight} alt="" className='svg-green' style={ { width: '20px' } } />
+					<Image src={ icons.LongArrowRight } alt="" className='svg-green' style={ { width: '20px' } } />
 				</div>
 			}
 			< DetailKunjungan
