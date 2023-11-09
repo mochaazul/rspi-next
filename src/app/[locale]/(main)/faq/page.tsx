@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 
@@ -10,7 +12,7 @@ import {
 } from '@/components';
 
 import { colors } from '@/constant';
-import FAQDatas from 'pages/ContactUsPage/FAQDatas';
+import FAQDatas from '../contact-us/FAQDatas';
 
 import { FAQStyle } from './style';
 import languages from '@/constant/languages';

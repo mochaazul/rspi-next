@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
 import _, { debounce, isEqual } from 'lodash';

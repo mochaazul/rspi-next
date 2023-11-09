@@ -56,12 +56,12 @@ const Text: React.FC<TextProps> = ({
 			className={ className }
 			fontFamily={ fontFamily }
 			fontSize={ fontSize }
-			textAlign={ textAlign }
+			$textAlign={ textAlign }
 			fontStyle={ fontStyle }
 			fontDecoration={ fontDecoration }
 			fontWeight={ fontWeight }
 			color={ color }
-			lineHeight={ lineHeight }
+			$lineHeight={ lineHeight }
 			onClick={ onClick }
 			id={ id }
 		>

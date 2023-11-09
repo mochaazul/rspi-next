@@ -1,86 +1,88 @@
-"use-client";
+/** TODO: migrate */
 
-export const clearToken = () => {
-	return localStorage.removeItem('token');
-};
+// "use-client";
 
-export const getToken = () => {
-	return localStorage.getItem('token');
-};
+// export const clearToken = () => {
+// 	return localStorage.removeItem('token');
+// };
 
-export const setLanguage = (value: string) => {
-	localStorage.setItem('lang', value);
-};
+// export const getToken = () => {
+// 	return localStorage.getItem('token');
+// };
 
-export const hasLanguageSet = () => {
-	const currentLanguage = localStorage.getItem('lang');
-	if (!currentLanguage) {
-		setLanguage('idn');
-	}
-};
+// export const setLanguage = (value: string) => {
+// 	localStorage.setItem('lang', value);
+// };
 
-export const getLanguage = () => {
-	hasLanguageSet();
-	return localStorage.getItem('lang');
-};
+// export const hasLanguageSet = () => {
+// 	const currentLanguage = localStorage.getItem('lang');
+// 	if (!currentLanguage) {
+// 		setLanguage('idn');
+// 	}
+// };
 
-export const setTokenUser = (token: string) => {
-	return localStorage.setItem('token', token);
-};
+// export const getLanguage = () => {
+// 	hasLanguageSet();
+// 	return localStorage.getItem('lang');
+// };
 
-export const setUserLoginHistory = (user: string, token: string) => {
-	let loginHistory = localStorage?.getItem('loginHistory') ?? '';
+// export const setTokenUser = (token: string) => {
+// 	return localStorage.setItem('token', token);
+// };
 
-	setEmail(user);
-	if (loginHistory != null || loginHistory != '') {
-		let isAvail = false;
-		loginHistory?.split(',').map(data => {
-			if (data.split(':')[0] === user) {
-				loginHistory = loginHistory?.replace(data.split(':')[1], token);
-				isAvail = true;
-				return false;
-			}
-		});
-		if (!isAvail) {
-			const joinLoginHistory = loginHistory + user + ': ' + token + ',';
-			localStorage.setItem('loginHistory', joinLoginHistory);
-		} else {
-			localStorage.setItem('loginHistory', loginHistory);
-		}
-	} else {
-		const joinLoginHistory = user + ': ' + token + ',';
-		localStorage.setItem('loginHistory', joinLoginHistory);
-	}
-};
+// export const setUserLoginHistory = (user: string, token: string) => {
+// 	let loginHistory = localStorage?.getItem('loginHistory') ?? '';
 
-export const getUserLoginHistory = () => {
-	return localStorage.getItem('loginHistory');
-};
+// 	setEmail(user);
+// 	if (loginHistory != null || loginHistory != '') {
+// 		let isAvail = false;
+// 		loginHistory?.split(',').map(data => {
+// 			if (data.split(':')[0] === user) {
+// 				loginHistory = loginHistory?.replace(data.split(':')[1], token);
+// 				isAvail = true;
+// 				return false;
+// 			}
+// 		});
+// 		if (!isAvail) {
+// 			const joinLoginHistory = loginHistory + user + ': ' + token + ',';
+// 			localStorage.setItem('loginHistory', joinLoginHistory);
+// 		} else {
+// 			localStorage.setItem('loginHistory', loginHistory);
+// 		}
+// 	} else {
+// 		const joinLoginHistory = user + ': ' + token + ',';
+// 		localStorage.setItem('loginHistory', joinLoginHistory);
+// 	}
+// };
 
-export const setEmail = (email: string) => {
-	return localStorage.setItem('email', email);
-};
+// export const getUserLoginHistory = () => {
+// 	return localStorage.getItem('loginHistory');
+// };
 
-export const getEmail = () => {
-	return localStorage.getItem('email');
-};
+// export const setEmail = (email: string) => {
+// 	return localStorage.setItem('email', email);
+// };
 
-export const setUserData = (userData: string) => {
-	return localStorage.setItem('userData', userData);
-};
+// export const getEmail = () => {
+// 	return localStorage.getItem('email');
+// };
 
-export const getUserData = () => {
-	return localStorage.getItem('userData');
-};
+// export const setUserData = (userData: string) => {
+// 	return localStorage.setItem('userData', userData);
+// };
 
-export const clearStorage = () => {
-	return localStorage.clear();
-};
+// export const getUserData = () => {
+// 	return localStorage.getItem('userData');
+// };
 
-export const clearPersistRoot = async (persistor: any) => {
-	const dummy = Array(7).fill('');
-	await Promise.all(dummy.map(() => {
-		persistor.purge();
-	}));
-	localStorage.removeItem('persist:root');
-};
+// export const clearStorage = () => {
+// 	return localStorage.clear();
+// };
+
+// export const clearPersistRoot = async (persistor: any) => {
+// 	const dummy = Array(7).fill('');
+// 	await Promise.all(dummy.map(() => {
+// 		persistor.purge();
+// 	}));
+// 	localStorage.removeItem('persist:root');
+// };

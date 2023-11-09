@@ -1,28 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as Icons from 'react-feather';
+import { useRouter } from 'next/navigation';
 
-import { useTypedSelector, useAppDispatch } from '@/hooks';
 import { Images, icons, colors } from '@/constant';
-import { Text, Button, MainNavLanguage, Modal } from '@/components';
-import { navigation, localStorage } from '@/helpers';
-import { removeUser as removeUserData } from '@/stores/User';
-import { getLanguage } from '@/helpers/localStorage';
-import {
-	UserState,
-	HospitalState,
-	FacilityServicesState,
-	CenterOfExcellenceState,
-	NotificationState,
-} from '@/interface';
+import { Text, Button, MainNavLanguage } from '@/components';
 
 import HeaderStyle from './style';
-import images from '@/constant/images';
-import { getNotification, readNotification } from '@/stores/Notification';
-import moment from 'moment';
 import Link from 'next/link';
 import Image from 'next/image';
 
 const Header: React.FC = () => {
+	const navigate = useRouter();
+
 	const [dropdownHide, setDropdownHide] = useState(true);
 	const [showSideBar, setShowSideBar] = useState(false);
 	const [isHover, setIsHover] = useState(false);
@@ -30,127 +19,130 @@ const Header: React.FC = () => {
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
 
-	const userSelector = useTypedSelector<UserState>('user');
-	const { user, userDetail } = userSelector;
-	const { hospitals } = useTypedSelector<HospitalState>('hospital');
-	const { facilityServices } = useTypedSelector<FacilityServicesState>('facilityServices');
-	const { centerOfExcellence } = useTypedSelector<CenterOfExcellenceState>('centerOfExcellence');
-	const { notificationResponse } = useTypedSelector<NotificationState>('notification');
-	const removeUser = useAppDispatch(removeUserData);
-	const notificationDispatch = useAppDispatch(getNotification);
-	const readNotificationDispatch = useAppDispatch(readNotification);
+	// TODO: migrate
+	// const userSelector = useTypedSelector<UserState>('user');
+	// const { user, userDetail } = userSelector;
+	// const { hospitals } = useTypedSelector<HospitalState>('hospital');
+	// const { facilityServices } = useTypedSelector<FacilityServicesState>('facilityServices');
+	// const { centerOfExcellence } = useTypedSelector<CenterOfExcellenceState>('centerOfExcellence');
+	// const { notificationResponse } = useTypedSelector<NotificationState>('notification');
+	// const removeUser = useAppDispatch(removeUserData);
+	// const notificationDispatch = useAppDispatch(getNotification);
+	// const readNotificationDispatch = useAppDispatch(readNotification);
 
-	const { navigate } = navigation();
-	const isLoggedIn = !!user.token;
+	// const isLoggedIn = !!user.token;
+	const isLoggedIn = false;
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
 	const handleClick = () => {
-		if (isLoggedIn) {
-			removeUser();
-		}
-		navigate('/');
+		// if (isLoggedIn) {
+		// 	removeUser();
+		// }
+		navigate.replace('/');
 	};
 
 	const handleLoginClick = () => {
-		navigate('/login');
+		navigate.push('/login');
 	};
 
 	const handleNavigateSideBar = (path: string) => {
 		setShowSideBar(!showSideBar);
-		navigate(path);
+		navigate.push(path);
 	};
 
-	useEffect(() => {
-		const data = localStorage?.getUserData();
-		if (data) {
-			const jsonData = JSON.parse(data);
-			const payloadNotification = {
-				medical_record: jsonData.medical_record,
-				email: jsonData.email
-			};
-			notificationDispatch({ queryParam: payloadNotification });
-		}
-	}, []);
+	// useEffect(() => {
+	// 	const data = localStorage?.getUserData();
+	// 	if (data) {
+	// 		const jsonData = JSON.parse(data);
+	// 		const payloadNotification = {
+	// 			medical_record: jsonData.medical_record,
+	// 			email: jsonData.email
+	// 		};
+	// 		notificationDispatch({ queryParam: payloadNotification });
+	// 	}
+	// }, []);
 
-	const modalNotification = () => {
-		return (
-			<Modal
-				visible={ showNotification }
-				onClose={ () => setShowNotification(false) }
-				width='380px'
-				noPadding={ true }
-			>
-				<div className='relative flex flex-col'>
-					<div className='flex justify-between p-[20px]'>
-						<Text
-							fontSize='16px'
-							lineHeight='24px'
-							fontType='h3'
-							fontWeight='700'
-							textAlign='center'
-							color={ colors.black.default }
-							text='Notification'
-						/>
-						<Text
-							fontSize='12px'
-							lineHeight='20px'
-							fontWeight='400'
-							textAlign='center'
-							color={ colors.green.brandAccent }
-							text='Mark all as read'
-							onClick={ () => readNotificationDispatch({
-								queryParam: {
-									medical_record: '100154999',
-									email: 'riko.logwirno@rebelworks.co'
-								}
-							}) }
-						/>
-					</div>
-					{
-						notificationResponse?.notification?.map((item, idx) => (
-							<div key={ idx } className='pb-4'>
-								<div className='flex flex-col py-4 px-[20px]' style={ {
-									backgroundColor: item.flag === 0 ? 'rgba(0, 0, 0, 0)' : 'rgba(53, 136, 136, 0.1)'
-								} }>
-									<div className='flex justify-between'>
-										<Text
-											fontSize='12px'
-											fontWeight='400'
-											textAlign='center'
-											color={ colors.grey.pencil }
-											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
-										/>
-									</div>
-									<Text
-										fontSize='14px'
-										lineHeight='20px'
-										fontWeight='700'
-										textAlign='center'
-										color={ colors.black.default }
-										text={ getLanguage() == 'idn' ? item?.judul_idn : item?.judul_en }
-										className='flex justify-start'
-									/>
-									<Text
-										fontSize='12px'
-										lineHeight='20px'
-										fontWeight='400'
-										textAlign='center'
-										color={ colors.black.default }
-										text={ getLanguage() == 'idn' ? item?.isi_idn : item?.isi_en }
-										className='flex justify-start pt-2'
-									/>
-								</div>
-							</div>
-						))
-					}
+	// const modalNotification = () => {
+	// 	return (
+	// 		<Modal
+	// 			visible={ showNotification }
+	// 			onClose={ () => setShowNotification(false) }
+	// 			width='380px'
+	// 			noPadding={ true }
+	// 		>
+	// 			<div className='relative flex flex-col'>
+	// 				<div className='flex justify-between p-[20px]'>
+	// 					<Text
+	// 						fontSize='16px'
+	// 						lineHeight='24px'
+	// 						fontType='h3'
+	// 						fontWeight='700'
+	// 						textAlign='center'
+	// 						color={ colors.black.default }
+	// 						text='Notification'
+	// 					/>
+	// 					<Text
+	// 						fontSize='12px'
+	// 						lineHeight='20px'
+	// 						fontWeight='400'
+	// 						textAlign='center'
+	// 						color={ colors.green.brandAccent }
+	// 						text='Mark all as read'
+	// 						onClick={ () => readNotificationDispatch({
+	// 							queryParam: {
+	// 								medical_record: '100154999',
+	// 								email: 'riko.logwirno@rebelworks.co'
+	// 							}
+	// 						}) }
+	// 					/>
+	// 				</div>
+	// 				{
+	// 					notificationResponse?.notification?.map((item, idx) => (
+	// 						<div key={ idx } className='pb-4'>
+	// 							<div className='flex flex-col py-4 px-[20px]' style={ {
+	// 								backgroundColor: item.flag === 0 ? 'rgba(0, 0, 0, 0)' : 'rgba(53, 136, 136, 0.1)'
+	// 							} }>
+	// 								<div className='flex justify-between'>
+	// 									<Text
+	// 										fontSize='12px'
+	// 										fontWeight='400'
+	// 										textAlign='center'
+	// 										color={ colors.grey.pencil }
+	// 										text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
+	// 									/>
+	// 								</div>
+	// 								<Text
+	// 									fontSize='14px'
+	// 									lineHeight='20px'
+	// 									fontWeight='700'
+	// 									textAlign='center'
+	// 									color={ colors.black.default }
+	// 									text={item?.judul_en}
+	// 									// text={ getLanguage() == 'idn' ? item?.judul_idn : item?.judul_en }
+	// 									className='flex justify-start'
+	// 								/>
+	// 								<Text
+	// 									fontSize='12px'
+	// 									lineHeight='20px'
+	// 									fontWeight='400'
+	// 									textAlign='center'
+	// 									color={ colors.black.default }
+	// 									text={item?.isi_en}
+	// 									// text={ getLanguage() == 'idn' ? item?.isi_idn : item?.isi_en }
+	// 									className='flex justify-start pt-2'
+	// 								/>
+	// 							</div>
+	// 						</div>
+	// 					))
+	// 				}
 
-				</div>
-			</Modal>
-		);
-	};
+	// 			</div>
+	// 		</Modal>
+	// 	);
+	// };
 
 	return (
 		<HeaderStyle>
@@ -176,7 +168,7 @@ const Header: React.FC = () => {
 									<Image src={ icons.ArrowDown } alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
-									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
+									{/* <ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ hospitals.map((item, idx) => (
 											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<img src={ item?.img_url?.[0] } width={ 80 } height={ 80 } />
@@ -187,7 +179,7 @@ const Header: React.FC = () => {
 												<Image src={ icons.ArrowRight } alt="" className='ml-[27px] mr-auto' />
 											</div>
 										)) }
-									</ul>
+									</ul> */}
 								</div>
 							</div>
 
@@ -197,7 +189,7 @@ const Header: React.FC = () => {
 									<Image src={ icons.ArrowDown } alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
-									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
+									{/* <ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ centerOfExcellence.map((item, idx) => (
 											<Link href={ `/center-of-excellence/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
@@ -209,7 +201,7 @@ const Header: React.FC = () => {
 												</div>
 											</Link>
 										)) }
-									</ul>
+									</ul> */}
 								</div>
 							</div>
 
@@ -219,7 +211,7 @@ const Header: React.FC = () => {
 									<Image src={ icons.ArrowDown } alt="" className={ 'arrowdown xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
-									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
+									{/* <ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ facilityServices?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
@@ -240,7 +232,7 @@ const Header: React.FC = () => {
 												<Image src={ icons.ArrowRight } alt="" className='ml-[27px] mr-auto' />
 											</div>
 										</Link>
-									</ul>
+									</ul> */}
 								</div>
 							</div>
 
@@ -261,36 +253,36 @@ const Header: React.FC = () => {
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
 							<div className='p-4'>
-								{ modalNotification() }
+								{/* { modalNotification() } */ }
 							</div>
 							<div className='flex items-center gap-6 max-sm:hidden'>
-								<Button className='btn-main h-[44px] min-w-[190px]' onClick={ () => navigate('/find-a-doctor') }>Book Appointment</Button>
+								<Button className='btn-main h-[44px] min-w-[190px]' onClick={ () => navigate.push('/find-a-doctor') }>Book Appointment</Button>
 								{
-									isLoggedIn ?
-										<>
-											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<Image src={ icons.Notif } alt="" />
-												<span
-													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponse.total_unread }</span>
-											</a>
-											<div className='flex text-white items-center'>
-												<div>
-													{
-														!!userDetail?.img_url ?
-															<img src={ userDetail?.img_url } alt={ userDetail.name } /> :
-															<Images.Profile />
-													}
-												</div>
-												<div className='ml-[24px] cursor-pointer'>
-													<Image src={ icons.ArrowDown } alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
-												</div>
-											</div>
-										</> :
-										<Button className='btn-main h-[44px] min-w-[190px]' theme='outline' hoverTheme='primary' onClick={ handleLoginClick }>Login / Register</Button>
+									// isLoggedIn ?
+									// 	<>
+									// 		<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
+									// 			<Image src={ icons.Notif } alt="" />
+									// 			<span
+									// 				className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponse.total_unread }</span>
+									// 		</a>
+									// 		<div className='flex text-white items-center'>
+									// 			<div>
+									// 				{
+									// 					!!userDetail?.img_url ?
+									// 						<img src={ userDetail?.img_url } alt={ userDetail.name } /> :
+									// 						<Images.Profile />
+									// 				}
+									// 			</div>
+									// 			<div className='ml-[24px] cursor-pointer'>
+									// 				<Image src={ icons.ArrowDown } alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
+									// 			</div>
+									// 		</div>
+									// 	</> :
+									<Button className='btn-main h-[44px] min-w-[190px]' theme='outline' hoverTheme='primary' onClick={ handleLoginClick }>Login / Register</Button>
 								}
 							</div>
 
-							{
+							{/* {
 								isLoggedIn &&
 								<div id='dropdown' className={ `${ dropdownHide === true ? 'hidden' : 'fixed' } z-10 w-[208px] mt-[10px] bg-white divide-y divide-gray-100 shadow dark:bg-gray-700` }>
 									<ul className='py-1 text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -308,7 +300,7 @@ const Header: React.FC = () => {
 										</li>
 									</ul>
 								</div>
-							}
+							} */}
 						</div>
 					</div>
 				</div>
@@ -320,7 +312,7 @@ const Header: React.FC = () => {
 								onClick={ () => { handleNavigateSideBar('/'); } }>
 								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
 							</div>
-							{ isLoggedIn &&
+							{/* { isLoggedIn &&
 								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
 									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
 								</div>
@@ -329,7 +321,7 @@ const Header: React.FC = () => {
 								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
 									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
 								</div>
-							}
+							} */}
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>
 									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
@@ -385,12 +377,12 @@ const Header: React.FC = () => {
 								<Text text={ 'Our Hospital' } fontSize='16px' fontWeight='700' />
 							</div>
 						</div>
-						{ isLoggedIn ?
+						{/* { isLoggedIn ?
 							<div className='nav-menu'>
 								<Text text={ 'Logout' } fontSize='16px' fontWeight='700' color={ colors.red.default } onClick={ handleClick } />
 							</div>
 							: null
-						}
+						} */}
 					</div> : null
 				}
 			</div>

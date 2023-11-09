@@ -1,31 +1,34 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { UserState } from '@/interface';
-import { useTypedSelector } from '@/hooks';
+// import { useTypedSelector } from '@/hooks'; // TODO: migrate
 import { Button, Form, NotificationPanel, Text } from '@/components';
 import { PropsTypes as NotificationPanelTypes } from '@/components/NotificationPanel';
 import { Languages, colors } from '@/constant';
 import Images from '@/constant/images';
 
-import useLoginPage from './useLoginPage';
+// import useLoginPage from './useLoginPage';
 import LoginPageStyle from './style';
+import Image from 'next/image';
 
 const { form, heading, subHeading, forgotPasswordLabel, loginBtnLabel, footer, notificationMessage } = Languages.page.loginPage;
 
 const LoginPage = () => {
 	const navigate = useRouter();
 	const searchParam = useSearchParams()!;
-	const {
-		onClickLogin,
-		onClickResendEmailVerification,
-		loginField
-	} = useLoginPage();
-	const {
-		registeredValue, isFormValid, onSubmit, setFieldsProps, getCurrentForm
-	} = Form.useForm({ fields: loginField });
-	const { user, loading: loadingUser, error: errorUser, customMessage } = useTypedSelector<UserState>('user');
+	// const {
+	// 	onClickLogin,
+	// 	onClickResendEmailVerification,
+	// 	loginField
+	// } = useLoginPage();
+	// const {
+	// 	registeredValue, isFormValid, onSubmit, setFieldsProps, getCurrentForm
+	// } = Form.useForm({ fields: loginField });
+	// const { user, loading: loadingUser, error: errorUser, customMessage } = useTypedSelector<UserState>('user'); // TODO: migrate
 
 	const [notifVisible, setNotifVisible] = useState(false);
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
@@ -34,16 +37,17 @@ const LoginPage = () => {
 		refHandler();
 	}, []);
 
-	useEffect(() => {
-		setNotifMode(!!errorUser.stat_msg ? 'error' : 'success');
-	}, [errorUser]);
+	// TODO: migrate
+	// useEffect(() => {
+	// 	setNotifMode(!!errorUser.stat_msg ? 'error' : 'success');
+	// }, [errorUser]);
 
-	useEffect(() => {
-		const ref = searchParam.get('ref');
-		if (!!errorUser.stat_msg === false && !loadingUser && (notifVisible && !ref)) {
-			setTimeout(() => navigate.replace('/'), 1500);
-		}
-	}, [errorUser, loadingUser, notifVisible]);
+	// useEffect(() => {
+	// 	const ref = searchParam.get('ref');
+	// 	if (!!errorUser.stat_msg === false && !loadingUser && (notifVisible && !ref)) {
+	// 		setTimeout(() => navigate.replace('/'), 1500);
+	// 	}
+	// }, [errorUser, loadingUser, notifVisible]);
 
 	const refHandler = () => {
 		const ref = searchParam.get('ref');
@@ -62,62 +66,63 @@ const LoginPage = () => {
 		}
 	};
 
-	const togglePasswordShow = () => {
-		const currentType = getCurrentForm().password.type;
-		setFieldsProps('type', { password: currentType === 'password' ? 'text' : 'password' });
-	};
+	// const togglePasswordShow = () => {
+	// 	const currentType = getCurrentForm().password.type;
+	// 	setFieldsProps('type', { password: currentType === 'password' ? 'text' : 'password' });
+	// };
 
 	const handleNotifOnClose = () => {
 		setNotifVisible(false);
 	};
 
-	const handleResendEmailVerification = async () => {
-		setNotifVisible(false);
-		await onClickResendEmailVerification({ email: getCurrentForm().email.value });
-		setNotifVisible(true);
-	};
+	// const handleResendEmailVerification = async () => {
+	// 	setNotifVisible(false);
+	// 	await onClickResendEmailVerification({ email: getCurrentForm().email.value });
+	// 	setNotifVisible(true);
+	// };
 
-	const handleNotifError = () => {
-		const ref = searchParam.get('ref');
-		let text =
-			ref === 'invalid-token'
-				? 'Keluar, karena sesi anda telah berakhir, Silahkan login kembali'
-				: ref === 'sso'
-					? 'Akun anda terdeteksi telah masuk pada device lain. Silahkan login kembali'
-					: ref === 'reset'
-						? 'Kata sandi berhasil diubah'
-						: errorUser.stat_msg
-							? errorUser.stat_msg
-							: user.token
-								? `Selamat datang ${ user.email }`
-								: 'Terdapat Error';
-		text = customMessage ? customMessage : text;
-		if (text === 'email is not verified') {
-			return (
-				<Text fontType={ null } fontSize='14px' fontWeight='500' color={ colors.red.default }>
-					{ notificationMessage.emailNotVerified.heading }&nbsp;
-					<Text
-						fontType={ null }
-						fontSize='14px'
-						fontWeight='700'
-						className='inline-block underline cursor-pointer'
-						color={ colors.red.redder }
-						onClick={ handleResendEmailVerification }
-					>
-						{ notificationMessage.emailNotVerified.cta }
-					</Text>
-					&nbsp;{ notificationMessage.emailNotVerified.tail }
-				</Text>
-			);
-		}
-		return <Text
-			fontType={ null }
-			fontSize='14px'
-			fontWeight='500'
-			text={ text }
-			color={ notifMode === 'error' ? colors.red.default : colors.black.default }
-		/>;
-	};
+	// TODO: migrate
+	// const handleNotifError = () => {
+	// 	const ref = searchParam.get('ref');
+	// 	let text =
+	// 		ref === 'invalid-token'
+	// 			? 'Keluar, karena sesi anda telah berakhir, Silahkan login kembali'
+	// 			: ref === 'sso'
+	// 				? 'Akun anda terdeteksi telah masuk pada device lain. Silahkan login kembali'
+	// 				: ref === 'reset'
+	// 					? 'Kata sandi berhasil diubah'
+	// 					: errorUser.stat_msg
+	// 						? errorUser.stat_msg
+	// 						: user.token
+	// 							? `Selamat datang ${ user.email }`
+	// 							: 'Terdapat Error';
+	// 	text = customMessage ? customMessage : text;
+	// 	if (text === 'email is not verified') {
+	// 		return (
+	// 			<Text fontType={ null } fontSize='14px' fontWeight='500' color={ colors.red.default }>
+	// 				{ notificationMessage.emailNotVerified.heading }&nbsp;
+	// 				<Text
+	// 					fontType={ null }
+	// 					fontSize='14px'
+	// 					fontWeight='700'
+	// 					className='inline-block underline cursor-pointer'
+	// 					color={ colors.red.redder }
+	// 					onClick={ handleResendEmailVerification }
+	// 				>
+	// 					{ notificationMessage.emailNotVerified.cta }
+	// 				</Text>
+	// 				&nbsp;{ notificationMessage.emailNotVerified.tail }
+	// 			</Text>
+	// 		);
+	// 	}
+	// 	return <Text
+	// 		fontType={ null }
+	// 		fontSize='14px'
+	// 		fontWeight='500'
+	// 		text={ text }
+	// 		color={ notifMode === 'error' ? colors.red.default : colors.black.default }
+	// 	/>;
+	// };
 
 	return (
 		<LoginPageStyle>
@@ -130,17 +135,17 @@ const LoginPage = () => {
 					` }
 						onSubmit={ e => {
 							setNotifVisible(true);
-							const { email, password } = onSubmit(e);
-							onClickLogin({
-								email: email.value,
-								password: password.value
-							});
+							// const { email, password } = onSubmit(e);
+							// onClickLogin({
+							// 	email: email.value,
+							// 	password: password.value
+							// });
 						} }
 						autoComplete='off'
 					>
 						<div className='w-full'>
 							<Link href='/' className='max-sm:hidden'>
-								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
+								<Image src={ Images.LogoRSPI } alt='' className='max-2xl:mb-2 mb-8' />
 							</Link>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 								{ heading }
@@ -149,7 +154,7 @@ const LoginPage = () => {
 								{ subHeading }
 							</Text>
 						</div>
-						{
+						{/* {
 							notifVisible &&
 							<div className='w-full mb-[32px]'>
 								<NotificationPanel
@@ -160,8 +165,8 @@ const LoginPage = () => {
 									{ handleNotifError() }
 								</NotificationPanel>
 							</div>
-						}
-						<Form.FormGroup className='group-wrapper w-full'>
+						} */}
+						{/* <Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='email'
 								placeholder={ form.emailPlaceholder }
@@ -178,7 +183,7 @@ const LoginPage = () => {
 								iconPosition='right'
 								onIconClick={ togglePasswordShow }
 								{ ...registeredValue('password') } />
-						</Form.FormGroup>
+						</Form.FormGroup> */}
 						<div className='w-full'>
 							<Link href='/forgot-password'>
 								<Text
@@ -192,12 +197,12 @@ const LoginPage = () => {
 								</Text>
 							</Link>
 						</div>
-						<Button
+						{/* <Button
 							label={ loginBtnLabel }
 							type='submit'
 							className='w-full mt-2'
 							disabled={ !isFormValid() || loadingUser }
-						/>
+						/> */}
 						<Text fontType={ null } fontWeight='400' color={ colors.grey.dark } className='max-2xl:mt-5 mt-8 max-lg:text-[14px] text-[20px]'>
 							{ footer.notRegisteredLabel }&nbsp;
 							<Link href='/register'>
