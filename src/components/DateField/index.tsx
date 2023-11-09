@@ -23,7 +23,7 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 			{
 				props.iconName ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Icons />
+						{/* <Icons /> // TODO: ganti */ }
 					</IconWrapper> :
 					null
 			}

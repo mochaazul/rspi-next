@@ -38,7 +38,12 @@ const MedicalRecordReminder = () => {
 				className='flex'
 			>
 				<BgContainer>
-					<icons.Circle />
+					{/* <icons.Circle /> */ }
+					<Image
+						src={ icons.Circle }
+						alt=""
+						style={ { width: '24px' } }
+					/>
 				</BgContainer>
 				<BodyContainer
 					className='grid grid-cols-[auto_140px] md:grid-cols-[auto_1fr] md:gap-11 gap-4 items-center'
@@ -47,14 +52,14 @@ const MedicalRecordReminder = () => {
 						<Text fontSize='16px' fontWeight='700'>
 							Dapatkan Akses terhadap Informasi Kunjungan Medis Anda
 						</Text>
-						<icons.ExclamationMark className='w-6' />
-						{/* <Image
+						{/* <icons.ExclamationMark className='w-6' /> */ }
+						<Image
 							src={ icons.ExclamationMark }
 							alt=""
 							data-tooltip-place='top-end'
 							data-tooltip-id='booking-tooltip'
 							style={ { width: '24px' } }
-						/> */}
+						/>
 					</LeftContent>
 					<Button label='Isi Data Rekam Medis' onClick={ () => {
 						// navigate('/register-onboard');
