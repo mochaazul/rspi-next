@@ -2,6 +2,7 @@
 
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { ArticleState, Pagination, PayloadArticle } from '@/interface';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
@@ -50,7 +51,7 @@ export const addArticleField = {
 
 const useDashboard = () => {
 	const { articles, loading: loadingArticle } = useTypedSelector<ArticleState>('articles');
-	const { navigate } = navigation();
+	const navigate = useRouter();
 
 	const [offset, setOffset] = useState(0);
 	const [limit, setLimit] = useState(20);
@@ -87,11 +88,7 @@ const useDashboard = () => {
 	};
 
 	const handleNavigate = ({ tempOffset = offset, tempLimit = limit }: QueryParams) => {
-		navigate({
-			pathname: location.pathname,
-			search: `?page=${ tempOffset > 0 ? tempOffset : 0 }&limit=${ tempLimit }`
-
-		});
+		navigate.push(location.pathname + `?page=${ tempOffset > 0 ? tempOffset : 0 }&limit=${ tempLimit }`);
 	};
 
 	const onOk = (title: string, content: string) => {

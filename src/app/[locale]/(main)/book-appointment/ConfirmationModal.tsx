@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation';
+
 import { Button, Checkbox, Modal, Spinner, Text } from '@/components';
 import { ConfirmationModalContainer } from './style';
 import { colors } from '@/constant';
@@ -7,7 +9,6 @@ import dayjs from 'dayjs';
 import { useTypedSelector } from '@/hooks';
 import { useState } from 'react';
 import { splitDate } from '@/helpers/datetime';
-import navigation from '@/helpers/navigation';
 
 type Props = {
 	visible: boolean,
@@ -23,7 +24,7 @@ type Props = {
 };
 
 export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot, penjamin, namaAsuransi, noAsuransi, onConfirmed, loading, loadingUploadPhoto }: Props) => {
-	const { navigate } = navigation();
+	const navigate = useRouter();
 	const { selectedDoctorTimeSlot, masterDoctors } = useTypedSelector<FindDoctorState>('findDoctor');
 	const [checked, setChecked] = useState<boolean>(false);
 	const getDoctor = () => {
@@ -31,7 +32,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 	};
 
 	const toProfilPage = () => {
-		navigate('/user-information');
+		navigate.push('/user-information');
 	};
 
 	if (selectedProfile && selectedProfile.phone && timeSlot && getDoctor()) {
