@@ -1,5 +1,6 @@
 import { Images, colors } from '@/constant';
 import { Text } from '@/components';
+import Image from 'next/image';
 
 interface PropsType {
 	menu: string;
@@ -9,7 +10,7 @@ const EmptyData = (props: PropsType) => {
 
 	return (
 		<div className='flex flex-col items-center mt-[40px]'>
-			<img src={ Images.Empty } />
+			<Image src={ Images.Empty } alt='empty-placeholder'/>
 			<Text
 				text={ `Yah! Belum ada ${ props.menu } saat ini` }
 				fontWeight='400'

@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import * as Icons from 'react-feather';
 
-import { colors } from '@/constants';
+import { colors } from '@/constantsLegacy';
 import Text from '../Text';
 
 import {
@@ -14,6 +14,7 @@ import {
 	CardContentHTML
 } from './style';
 import Image from 'next/image';
+import { Share } from '@/components';
 
 interface PropsType {
 	image?: string;
@@ -47,15 +48,14 @@ const Card = (props: PropsType) => {
 				{
 					props.iconShare &&
 					<div>
-						{/* <Share id={ props.id } /> TODO implement assets handler NEXTJS */}
+						<Share id={ props.id } />
 					</div>
 				}
 				{
 					props.image &&
-					<div className={ `relative w-full ${ props.imageHeight ? `h-[${props.imageHeight}]` : 'h-fit'}`} >
-						<Image src={ props.image } alt={ '' } layout='cover'/>
+					<div className={ `relative w-full ${ props.imageHeight ? `h-[${props.imageHeight}]` : 'h-fit'}` } >
+						<Image src={ props.image } alt={ 'img-thumbnail' } layout='cover' fill/>
 					</div>
-					// <img src={ props.image } className='w-full object-cover' style={ { height: props.imageHeight ?? 'initial' } } />
 				}
 				{
 					props.header &&
@@ -118,7 +118,7 @@ export const CardContentWithInner = ({ title, description, author, RSLocation }:
 export const CardFooter = ({ content, to }: { content: string; to?: string; }) => (
 	<Link href={ to || '#' } className='flex flex-row gap-x-2 items-center'>
 		<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ content } />
-		{/* <icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />  TODO: USE ASSETS HANDLER NEXTJS*/}
+		{ /* <icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />  TODO: USE ASSETS HANDLER NEXTJS*/ }
 	</Link>
 );
 

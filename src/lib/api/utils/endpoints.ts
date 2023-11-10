@@ -42,13 +42,13 @@ const endpointData = {
 	appointmentList: { path: '/patients/patient-portal/appointments', method: 'GET' },
 	clinics: { path: '/clinics/clinic-category', method: 'GET' },
 	hospital: { path: '/hospital', method: 'GET' },
+	events: { path: '/events', method: 'GET' },
+	article: { path: '/news', method: 'GET' },
 
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },
-	// article: '/news',
 	// doctors: '/doctors' -> replaced by masterdoctor,
 	// findDoctor: { path: '/find/doctor', method: 'GET' }, -> Replaced by master doctor since master doctor enpoint accept filtering
-	// events: '/events',
 	// patients: '/patients',
 	// specialities: '/specialities',
 	// getFooter: '/footer-pages',

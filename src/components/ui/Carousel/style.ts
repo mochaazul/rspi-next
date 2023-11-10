@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '@/constants';
+import { colors } from '@/constantsLegacy';
 
 const CarouselWrapper = styled.div`
   .container__slider {

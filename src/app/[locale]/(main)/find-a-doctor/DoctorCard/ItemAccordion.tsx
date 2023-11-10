@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { colors, icons } from '@/constant';
 import { Text } from '@/components';
-import { ItemType } from '@/components/Accordion';
+import { ItemType } from '@/components/ui/Accordion';
 
 import DoctorsType from '../DoctorsType';
 import { AccordionItemStyle, ItemChildrenStyle, TitleStyle } from './style';

@@ -1,5 +1,5 @@
-import { colors } from '@/constants';
-import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constants/globalstyle';
+import { colors } from '@/constantsLegacy';
+import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constantsLegacy/globalstyle';
 import styled from 'styled-components';
 
 interface StatusType {

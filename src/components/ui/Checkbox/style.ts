@@ -1,4 +1,4 @@
-import { colors } from '@/constants';
+import { colors } from '@/constantsLegacy';
 import React from 'react';
 import styled from 'styled-components';
 

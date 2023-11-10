@@ -1,5 +1,5 @@
-import { colors } from '@/constants';
-import { GlobalAllTransition5ms } from '@/constants/globalstyle';
+import { colors } from '@/constantsLegacy';
+import { GlobalAllTransition5ms } from '@/constantsLegacy/globalstyle';
 import React from 'react';
 import Styled from 'styled-components';
 

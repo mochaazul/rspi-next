@@ -1,10 +1,11 @@
 import Datepicker from 'react-tailwindcss-datepicker';
 import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
 
-import { IconWrapper, InputType, DateFieldWrapper } from './style';
+import { InputType, DateFieldWrapper } from './style';
 import withInputLabel from '../withInputLabel';
 import { icons } from '@/constant';
 import Image from 'next/image';
+import { IconWrapper } from '../TextField/style';
 
 /**
  * @desc Untuk sekarang baru mengakomodir pemilihan single date, untuk range belum bisa
@@ -22,8 +23,8 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 		<DateFieldWrapper $iconPosition={ props.iconPosition } $iconName={ props.iconName } className='w-full'>
 			{
 				props.iconName ?
-					<IconWrapper className={ `relative w-16 h-5  iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Image src={ Icons } alt='date-field-icon' fill/>
+					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
+						<Icons />
 					</IconWrapper> :
 					null
 			}

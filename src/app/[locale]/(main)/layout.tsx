@@ -19,15 +19,7 @@ import CallForAmbulance from '@/components/CallForAmbulance';
 import DevTools from '@/components/DevTools';
 
 import '@/styles/globals.css';
-import {
-	OutletStyle,
-	OutletStyleType,
-	PanelH1,
-	PanelH2,
-	PanelH3,
-	PanelH4,
-	PanelV1
-} from './style';
+import { OutletStyleType, } from './style';
 
 const blacklistedRoute = [
 	'/patient-portal',

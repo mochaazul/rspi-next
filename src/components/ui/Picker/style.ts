@@ -1,4 +1,4 @@
-import { colors } from '@/constants';
+import { colors } from '@/constantsLegacy';
 import styled from 'styled-components';
 
 export const PickerStyle = styled.div`

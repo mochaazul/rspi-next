@@ -25,8 +25,8 @@ const TextField = ({ onIconClick, isNumber, mask, iconName, iconPosition, ...pro
 		>
 			{
 				iconName ?
-					<IconWrapper className={ `relative w-16 h-5 iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Image src={ Icons } alt='icon' fill/>
+					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
+						<Icons />
 					</IconWrapper> :
 					null
 			}

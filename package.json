@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.38.0",
+    "@svgr/webpack": "^8.1.0",
     "@types/lodash": "^4.14.200",
     "@types/node": "^20",
     "@types/react": "^18",

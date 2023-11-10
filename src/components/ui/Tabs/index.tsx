@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { colors } from '@/constants';
+import { colors } from '@/constantsLegacy';
 import Text from '@/components/ui/Text';
 
 import { TabsDataStyle } from './style';

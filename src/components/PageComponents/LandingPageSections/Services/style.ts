@@ -1,5 +1,5 @@
-import { colors } from '@/constants';
-import { GlobalCardShadow } from '@/constants/globalstyle';
+import { colors } from '@/constantsLegacy';
+import { GlobalCardShadow } from '@/constantsLegacy/globalstyle';
 import styled from 'styled-components';
 
 export const TabContainerStyle = styled.div`

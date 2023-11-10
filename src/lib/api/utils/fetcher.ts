@@ -1,12 +1,12 @@
-import { config } from '@/constants/config';
+import { config } from '@/constantsLegacy/config';
 import endpoints, { EndpointKey } from './endpoints';
 import { Pagination, ResponseType as SuccessResponse } from '@/interface';
 import { generateQueryString } from '@/helpers';
 
 export type ApiOptions = {
-  body?: any,
-  param?: any
-  query?: any,
+  body?: Record<string, any>,
+  param?: string
+  query?: Record<string, any>,
 	pagination?: Pagination
 }
 
@@ -25,7 +25,13 @@ export default async <Response>(endpointKey:EndpointKey, options?:ApiOptions):Pr
 			'X-Channel': 'website',
 		};
 
-		const url = baseUrl + endpoint.path + `/${options?.param}` + '?' + generateQueryString({
+		let url = baseUrl + endpoint.path;
+
+		if (options?.param) {
+			url += `/${options.param}`;
+		}
+
+		url += '?' + generateQueryString({
 			...safeQueryParam,
 			...safePagination
 		});

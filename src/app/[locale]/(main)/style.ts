@@ -1,7 +1,7 @@
 'use client';
 import styled from 'styled-components';
 
-import { colors } from '@/constants';
+import { colors } from '@/constantsLegacy';
 
 export const LandingPageStyle = styled.div`
   display: flex;
