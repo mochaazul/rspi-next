@@ -4,15 +4,27 @@ import { usePathname } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-import { facilitiesPageEvent } from '@/utils/metaPixelTrack';
+import {
+	facilitiesPageEvent,
+	findDoctorEvent,
+	landingPageEvent,
+	newsPageEvent,
+	promoPageEvent,
+	clinicPageEvent
+} from '@/utils/metaPixelTrack';
 
 const FacebookPixel = () => {
 	const pathname = usePathname();
 
 	useEffect(() => {
 		const customEvent = () => {
-			if (pathname.includes('facilities-services'))
-				return facilitiesPageEvent();
+			// TODO: adjust jika ada perubahan path dan hapus event dari useEffect di setiap page berikut.
+			if (['/', '/en', '/id'].includes(pathname)) return landingPageEvent();
+			if (pathname.includes('facilities-services')) return facilitiesPageEvent();
+			if (pathname === '/find-a-doctor') return findDoctorEvent();
+			if (pathname === '/news') return newsPageEvent();
+			if (pathname === '/promo') return promoPageEvent();
+			if (pathname === '/centre-of-excellence') return clinicPageEvent();
 		};
 
 		customEvent();

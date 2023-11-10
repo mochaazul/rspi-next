@@ -1,5 +1,5 @@
-import moment from 'moment';
 import { redirect } from 'next/navigation';
+import moment from 'moment';
 
 import { colors } from '@/constant';
 import { FacilityServicesDetail, I_RelatedNews } from '@/interface';

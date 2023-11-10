@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
 
 import StyledComponentsRegistry from '@/lib/registry';
-import '@/styles/globals.css';
 import FacebookPixel from '@/components/FacebookPixel';
+import '@/styles/globals.css';
 
 type Props = {
   children: ReactNode;
