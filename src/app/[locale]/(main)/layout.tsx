@@ -3,10 +3,15 @@ import { headers } from "next/headers";
 import { Inter } from 'next/font/google';
 
 import { appStage } from '@/config';
+
 import {
 	getHospitals,
   getCenterOfExcellence
 } from '@/lib/api';
+
+import {
+  getFacilitiesAndServices
+} from '@/lib/api/clinics';
 
 
 import Header from '@/components/Layout/Header';
@@ -56,12 +61,14 @@ export default async function RootLayout({
   
   const hospitals = await getHospitals();
   const centerOfExcellence = await getCenterOfExcellence();
+  const facilityServices = await getFacilitiesAndServices();
 
   return (
     <>
       <Header 
         hospitalData = { hospitals.data } 
         centerOfExcellenceData = {centerOfExcellence.data}
+        facilityServicesData = {facilityServices.data}
       />
       { children }
 

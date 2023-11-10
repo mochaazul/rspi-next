@@ -2,6 +2,7 @@ import {
 	BannerDetail,
 	CenterOfExcellenceDetail,
 	CenterOfExcellenceState,
+	FacilityServicesState,
 	ForgotPasswordPayload,
 	HospitalState,
 	LoginPayload,
