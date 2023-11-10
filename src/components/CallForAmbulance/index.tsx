@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import Image from 'next/image';
@@ -6,13 +6,10 @@ import Image from 'next/image';
 import { colors } from '@/constant';
 import images from '@/constant/images';
 import { Button, Modal, Text } from '@/components';
-import { useTypedSelector } from '@/hooks';
-import { HospitalState, UserState } from '@/interface';
 
 import { CallForAmbulanceStyle, ModalRSTelephoneStyle } from './style';
 
 const CallForAmbulance = () => {
-
 
 	// const hospitalSelector = useTypedSelector<HospitalState>('hospital'); // migrate
 	// const { user } = useTypedSelector<UserState>('user'); //migrate
@@ -23,9 +20,9 @@ const CallForAmbulance = () => {
 
 	return (
 		<>
-			{/* Migrate  */ }
-			{/*   ${ shouldGiveMargin ? 'bottom-24' : '' } additional classname for CallForAmbulanceStyle */ }
-			{/* End Migrate */ }
+			{ /* Migrate  */ }
+			{ /*   ${ shouldGiveMargin ? 'bottom-24' : '' } additional classname for CallForAmbulanceStyle */ }
+			{ /* End Migrate */ }
 			<CallForAmbulanceStyle className={ `
 				fixed cursor-pointer flex align-center justify-center 
 				max-sm:w-[72px] max-sm:h-[72px]
@@ -63,18 +60,18 @@ const CallForAmbulance = () => {
 						className='mt-2'
 					/>
 					<div className='flex flex-col gap-4 mt-8'>
-						{/* TODO: Migrate */ }
-						{/* { */ }
-						{/* hospitalSelector?.hospitals?.map(hospital => ( */ }
-						<a href={ `tel:0341` } key={ 0 }>
+						{ /* TODO: Migrate */ }
+						{ /* { */ }
+						{ /* hospitalSelector?.hospitals?.map(hospital => ( */ }
+						<a href={ 'tel:0341' } key={ 0 }>
 							<Button label='Hospital Name' theme='outline' hoverTheme='primary' />
 						</a>
-						{/* <a href={ `tel:${ hospital.phone }` } key={ hospital.id }>
+						{ /* <a href={ `tel:${ hospital.phone }` } key={ hospital.id }>
 									<Button label={ hospital.name } theme='outline' hoverTheme='primary' />
-								</a> */}
-						{/* )) */ }
-						{/* } */ }
-						{/* End Migrate */ }
+								</a> */ }
+						{ /* )) */ }
+						{ /* } */ }
+						{ /* End Migrate */ }
 					</div>
 				</ModalRSTelephoneStyle>
 			</Modal>

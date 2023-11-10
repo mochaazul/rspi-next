@@ -10,6 +10,7 @@ import {
 	InputType,
 	TextFieldWrapper
 } from './style';
+import Image from 'next/image';
 
 const TextField = ({ onIconClick, isNumber, mask, iconName, iconPosition, ...props }: InputType) => {
 	const { ref, ...restProps } = props;
@@ -24,8 +25,8 @@ const TextField = ({ onIconClick, isNumber, mask, iconName, iconPosition, ...pro
 		>
 			{
 				iconName ?
-					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						{/* <Icons /> TODO: ganti */ }
+					<IconWrapper className={ `relative w-16 h-5 iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
+						<Image src={ Icons } alt='icon' fill/>
 					</IconWrapper> :
 					null
 			}

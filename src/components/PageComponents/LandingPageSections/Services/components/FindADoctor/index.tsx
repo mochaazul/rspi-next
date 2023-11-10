@@ -3,11 +3,8 @@
 import useFindADoctor from './useFindADoctor';
 import FindDoctorStyle from './style';
 import React, { useEffect, useState } from 'react';
-import { getScopedI18n } from '@/locales/server';
 import { PickerItem } from '@/components/ui/DropdownSearch';
 import Button from '@/components/ui/Button';
-import { getClinics } from '@/lib/api/clinics';
-import { getHospital } from '@/lib/api/hospital';
 import Form from '@/components/ui/Form';
 
 type Props = {
@@ -73,7 +70,7 @@ const FindADoctor: React.FC<Props> = ({
 							iconName='Search'
 							iconPosition='left'
 							{
-							...isTelemedicine && { label: 'doctorname' }
+								...isTelemedicine && { label: 'doctorname' }
 							}
 						/>
 					</div>
