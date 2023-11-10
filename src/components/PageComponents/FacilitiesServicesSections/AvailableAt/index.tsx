@@ -1,17 +1,18 @@
-import { Text } from '@/components';
+
 import { Languages, colors } from '@/constant';
-import { useTypedSelector } from '@/hooks';
-import { FacilityServicesState } from '@/interface';
+import { FacilityServicesHospital } from '@/interface';
+
+import Text from '../../../Text';
 
 const { servicesLocationHeading, phoneHeading, informationHeading, emailHeading, operationalHourHeading } = Languages.page.facilities.facilitiesMenu;
 
-const AvailableAt = () => {
-	const { hospital } = useTypedSelector<FacilityServicesState>('facilityServices');
+type Props = {
+	hospital: FacilityServicesHospital[];
+};
 
-	if (hospital && !hospital.length) return null;
-
+const AvailableAt: React.FC<Props> = ({ hospital }) => {
 	return (
-		<div className='mt-[92px]'>
+		<div className='mt-8 md:mt-[92px]'>
 			{
 				hospital && hospital.length > 0 &&
 				<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default }>
@@ -57,7 +58,7 @@ const AvailableAt = () => {
 									</Text>
 									<Text fontSize='14px' fontWeight='400' lineHeight='24px'>
 										{
-											item.operational_hour?.map((operationalHour, index) => (<li key={ `op-hour-${ index }` }>{ operationalHour }</li>))
+											item.operational_hour?.map((operationalHour: string, index: number) => (<span key={ `op-hour-${ index }` }>{ operationalHour }</span>))
 										}
 									</Text>
 								</div>

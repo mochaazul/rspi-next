@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google';
 import { appStage } from '@/config';
 
 import {
-	getHospitals,
+  getHospitals,
   getCenterOfExcellence
 } from '@/lib/api';
 
@@ -58,17 +58,17 @@ export default async function RootLayout({
   const headersList = headers();
   const pathname = headersList.get("x-invoke-path") || "";
   const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
-  
+
   const hospitals = await getHospitals();
   const centerOfExcellence = await getCenterOfExcellence();
   const facilityServices = await getFacilitiesAndServices();
 
   return (
     <>
-      <Header 
-        hospitalData = { hospitals.data } 
-        centerOfExcellenceData = {centerOfExcellence.data}
-        facilityServicesData = {facilityServices.data}
+      <Header
+        hospitalData={ hospitals.data }
+        centerOfExcellenceData={ centerOfExcellence.data }
+        facilityServicesData={ facilityServices.data }
       />
       { children }
 

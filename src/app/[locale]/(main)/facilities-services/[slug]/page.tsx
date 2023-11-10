@@ -1,0 +1,152 @@
+import { redirect } from 'next/navigation';
+import moment from 'moment';
+
+import { colors } from '@/constant';
+import { FacilityServicesDetail, I_RelatedNews } from '@/interface';
+import { MedicalSpecialities } from '@/interface/MedicalSpecialities';
+import {
+	getFacilityRelatedNews,
+	getFacilityServices,
+	getMedicalSpecialities
+} from '@/lib/api/facilities';
+import MedicalSpecialitiesComponent from '@/components/PageComponents/FacilitiesServicesSections/MedicalSpecialities';
+import FacilitiesMenuContent from '@/components/PageComponents/FacilitiesServicesSections/FacilitiesMenuContent';
+import CardMenu from '@/components/PageComponents/FacilitiesServicesSections/CardMenu';
+import Card, { CardContentWithInner, CardFooter } from '@/components/ui/Card';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import Text from '@/components/ui/Text';
+import Button from '@/components/ui/Button';
+import { getScopedI18n } from '@/locales/server';
+
+import { FacilitiesServiceStyle } from './style';
+
+export default async function FacilitiesServicesPage({ params }: { params: { slug: string; }; }) {
+	const paramsSlug = params?.slug ?? '';
+
+	const facilitiyServicesRes = await getFacilityServices({ query: { is_publish: true } });
+	const facilityServices: FacilityServicesDetail[] = facilitiyServicesRes?.data;
+	const isFacilityExist = facilityServices.findIndex(item => item.slug === paramsSlug) > -1;
+
+	if (!isFacilityExist && paramsSlug !== 'medical-specialities') {
+		redirect(`/facilities-services/${ facilityServices?.[0]?.slug ?? '' }`);
+	}
+
+	let medicalSpecialities: MedicalSpecialities[] = [];
+	let relatedNews: I_RelatedNews[] = [];
+
+	if (paramsSlug === 'medical-specialities') {
+		const medicalSpecialitiesRes = await getMedicalSpecialities({ query: { footer_category: 'medical-specialities' } });
+		medicalSpecialities = medicalSpecialitiesRes?.data;
+	} else {
+		const relatedNewsRes = await getFacilityRelatedNews({
+			param: paramsSlug,
+			pagination: { limit: 9 }
+		});
+		relatedNews = relatedNewsRes?.data;
+	}
+
+	const languages = await getScopedI18n('page.facilities');
+
+	const facilitiesServiceData: FacilityServicesDetail[] = [...facilityServices, {
+		id: 1234567890,
+		floor: '35',
+		hospital_code: 'H1',
+		hospital_email: 'cr.pondokindah@rspondokindah.co.id',
+		hospital_name: 'RS Pondok Indah - Puri Indah',
+		hospital_phone: '+62212569 5200',
+		image_url: [''],
+		information: 'Patient Relations at RS Pondok Indah - Puri Indah',
+		is_home_page: false,
+		is_publish: true,
+		name: 'Medical Specialities',
+		operational_hour: [],
+		order_id: 2,
+		short_description: 'Lorem ipsum',
+		unit: 'Patient Relations RS Pondok Indah - Bintaro Jaya',
+		slug: 'medical-specialities'
+	}];
+	const breadcrumbsPath = [
+		{ name: 'Facilities & Services', url: '/facilities' },
+		{ url: '#', name: facilitiesServiceData?.find((facility: FacilityServicesDetail) => facility.slug === paramsSlug)?.name ?? '' }
+	];
+
+	const renderContent = () => {
+		if (paramsSlug === 'medical-specialities') {
+			return (
+				<MedicalSpecialitiesComponent
+					paramsSlug={ paramsSlug }
+					facilityData={ facilitiesServiceData }
+					medicalSpecialities={ medicalSpecialities }
+				/>
+			);
+		}
+
+		return (
+			<FacilitiesMenuContent facilitiesData={ facilitiesServiceData } paramsSlug={ paramsSlug } />
+		);
+	};
+
+	return (
+		<FacilitiesServiceStyle>
+			<div className='lg:w-[1110px] mx-auto max-lg:mx-4 pt-[121px] sm:pt-[162px] pb-[60px]'>
+				<div>
+					<Breadcrumbs datas={ breadcrumbsPath } />
+					<div className='content-wrapper mt-[25px] md:mt-16 flex md:gap-5 lg:gap-8'>
+						<div className='leftSide hidden md:block lg:w-[349px]'>
+							<CardMenu paramsSlug={ paramsSlug } data={ facilitiesServiceData } />
+						</div>
+						<div className='rightSide w-full'>
+							{ renderContent() }
+						</div>
+					</div>
+					{
+						relatedNews && relatedNews.length > 0 &&
+						<div className='mt-8'>
+							<Text
+								text={ languages('relatedNewsHeading') }
+								className='related'
+								fontWeight='700'
+								fontSize='24px'
+								lineHeight='29px'
+							/>
+							<div className='flex max-md:flex-no-wrap max-md:overflow-x-auto scrolling-touch scroll-smooth md:grid md:grid-cols-3 gap-4 md:gap-3'>
+								{
+									relatedNews.map((data, index) => (
+										<Card
+											key={ index }
+											id={ data?.id }
+											image={ data.image_url }
+											imageHeight='200px'
+											header={
+												<div className='flex items-center'>
+													<div>
+														<Button theme='primary' label={ 'News' } className='btn-category max-sm:!px-2 max-sm:!py-1.5 max-sm:!font-normal max-sm:!text-xs' />
+													</div>
+													<div className='ml-[10px]'>
+														<Text
+															fontSize='14px'
+															fontWeight='400'
+															lineHeight='17px'
+															color={ colors.grey.dark }
+															subClassName='max-sm:text-xs'
+															text={ moment(data?.posted_date_news).format('dddd, DD MMM YYYY') }
+														/>
+													</div>
+												</div>
+											}
+											content={ <CardContentWithInner title={ data.title_news } description={ data.short_description } author={ data.author } /> }
+											footer={ <CardFooter content={ languages('readMoreLabel') } /> }
+											className='mb-0 w-[304px] md:w-full'
+											iconShare={ true }
+											to={ `/news/${ data.news_id }` }
+										/>
+									))
+								}
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</FacilitiesServiceStyle>
+	);
+}

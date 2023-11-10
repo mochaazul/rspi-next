@@ -1,3 +1,5 @@
+'use client';
+
 import { colors, fonts } from '@/constants';
 import React from 'react';
 import styled from 'styled-components';

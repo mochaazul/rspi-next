@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
 
 import StyledComponentsRegistry from '@/lib/registry';
+import FacebookPixel from '@/components/FacebookPixel';
 import '@/styles/globals.css';
 
 type Props = {
@@ -21,6 +22,8 @@ export default function RootLayout({ children }: Props) {
     <html lang='en'>
       <body className={ inter.className } suppressHydrationWarning>
         <StyledComponentsRegistry>{ children }</StyledComponentsRegistry>
+
+        <FacebookPixel />
       </body>
     </html>
   );

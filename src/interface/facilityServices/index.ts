@@ -20,6 +20,19 @@ export interface I_RelatedNews {
 	image_url: string;
 }
 
+export interface FacilityServicesHospital {
+	id: number;
+	facility_id?: number;
+	hospital_code?: string;
+	hospital_name?: string;
+	hospital_phone?: string;
+	hospital_email?: string;
+	unit?: string;
+	floor?: string;
+	information?: string;
+	operational_hour: string[];
+}
+
 export interface FacilityServicesDetail {
 	id?: number;
 	name?: string;
@@ -37,6 +50,8 @@ export interface FacilityServicesDetail {
 	hospital_code?: string;
 	operational_hour?: string[];
 	available_at?: string[];
+	slug: string;
+	facilities_hospitals?: FacilityServicesHospital[];
 }
 
 export interface PayloadFacilityServices {
