@@ -12,9 +12,13 @@ export interface BannerDetail {
 	id?: number;
 	title?: string;
 	description?: string;
-	img_url?: string;
+	img_url_idn?: string;
+	img_url_en?: string;
+	img_url_mobile_en?: string;
+	img_url_mobile_idn?: string;
 	is_publish?: boolean;
-	url_link?: string;
+	url_link_idn?: string;
+	url_link_en?: string;
 	created_date?: string;
 	updated_date?: string;
 }
