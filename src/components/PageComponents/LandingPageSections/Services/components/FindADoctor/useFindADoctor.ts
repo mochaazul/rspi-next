@@ -66,7 +66,7 @@ const useFindADoctor = () => {
 	// const getSpecialitiesDispatch = useAppDispatch(getSpecialities);
 	// const getClinicsDispatch = useAppDispatch(getClinics);
 
-	// const { navigate } = navigation();
+	// const navigate = useRouter();
 	const onSubmitHandler = (doctorName: string, hospital: string, speciality: string, preferredDay: string, isTelemedicine: boolean) => {
 		const search: Record<string, string> = {};
 
@@ -77,10 +77,7 @@ const useFindADoctor = () => {
 		if (isTelemedicine) search['telemedicine'] = 'true';
 		search['ref'] = 'landing';
 
-		// navigate({
-		// 	pathname: '/find-a-doctor',
-		// 	search: `?${ createSearchParams(search) }`
-		// });
+		// navigate.push('/find-a-doctor' + `?${ createSearchParams(search) }`);
 	};
 
 	return {

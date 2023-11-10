@@ -301,7 +301,7 @@ const Header: React.FC = () => {
 									<ul className='py-1 text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										<li onClick={ () => {
 											setDropdownHide(true);
-											navigate('/patient-portal');
+											navigate.push('/patient-portal');
 										} }>
 											<a href='#' className='border-b border-gray block py-4 px-4'>Patient Portal</a>
 										</li>

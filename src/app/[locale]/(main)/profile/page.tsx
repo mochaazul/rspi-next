@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as Icons from 'react-feather';
 import moment from 'moment';
+import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 
 import {
@@ -51,7 +52,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	const { patientProfile, lastVisitedHospital } = useTypedSelector<PatientState>('patient');
 
 	const { profileFields } = useProfilePage();
-	const { navigate } = navigation();
+	const navigate = useRouter();
 
 	const {
 		setFieldsValue,
@@ -134,7 +135,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 
 	const removeUserDatas = () => {
 		removeUser();
-		navigate('/login');
+		navigate.replace('/login');
 	};
 
 	const createListOfHistoryUsers = () => {
@@ -502,7 +503,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 										placeholder: securitySetting.passwordLabel,
 										disabled: true,
 										type: 'password',
-										onIconClick: () => navigate('/reset-password')
+										onIconClick: () => navigate.push('/reset-password')
 									} }
 								/>
 								<HorizontalInputWrapper
@@ -513,7 +514,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 										placeholder: securitySetting.pinLabel,
 										disabled: true,
 										type: 'password',
-										onIconClick: () => navigate('/pin-reset')
+										onIconClick: () => navigate.replace('/pin-reset')
 									} }
 								/>
 								<div className='flex justify-end align-center gap-5 mt-[50px]'>

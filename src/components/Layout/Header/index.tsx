@@ -15,6 +15,12 @@ import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Link from "next/link";
 
+import {
+	CenterOfExcellenceState,
+	FacilityServicesState,
+	HospitalState
+} from "@/interface";
+
 import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
@@ -24,19 +30,19 @@ import Button from '@/components/Button';
 import MainNavLanguage from '@/components/MainNavLanguage';
 import Modal from '@/components/Modal';
 
-// Migrate
-// import { UserState } from '@/interface/user';
-// import HospitalState from '@/interface/Hospital';
-// import FacilityServicesState from '@/interface/facilityServices';
-// import CenterOfExcellenceState from '@/interface/CenterOfExcellence';
-// import NotificationState from '@/interface/Notification';
-// End Migrate
-
 import HeaderStyle from './style';
 
-export const Header: React.FC = () => {
+export const Header = ({ 
+		hospitalData,
+		centerOfExcellenceData,
+		facilityServicesData
+	}:{
+		hospitalData: HospitalState,
+		centerOfExcellenceData: CenterOfExcellenceState,
+		facilityServicesData: FacilityServicesState
+	}) => {
 	const router = useRouter()
-
+	
 	const [dropdownHide, setDropdownHide] = useState(true);
 	const [showSideBar, setShowSideBar] = useState(false);
 	const [isHover, setIsHover] = useState(false);
@@ -174,23 +180,25 @@ export const Header: React.FC = () => {
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										<div key={ 0 } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-											<Image
-												alt=""
-												src="/vercel.svg"
-												width={80}
-												height={80}
-											/>
-											<div className='ml-[10px] w-[310px]'>
-												<Text text={ 'Name' } fontSize='16px' fontWeight='900' color={colors.paradiso.default} />
-												<Text text={ 'Alamat'} fontSize='14px' fontWeight='400' className='mt-[5px]' />
+										{ Object.values(hospitalData || [])?.map((item, idx) => (
+											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
+												<img
+													alt=""
+													src={item?.img_url?.[0] || ''}
+													width={80}
+													height={80}
+												/>
+												<div className='ml-[10px] w-[310px]'>
+													<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+													<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
+												</div>
+												<Image
+													src={icons.ArrowRight}
+													alt=""
+													className='ml-[27px] mr-auto'
+												/>
 											</div>
-											<Image
-												src={icons.ArrowRight}
-												alt=""
-												className='ml-[27px] mr-auto'
-											/>
-										</div>
+										)) }
 									</ul>
 								</div>
 							</div>
@@ -206,19 +214,21 @@ export const Header: React.FC = () => {
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										<Link href={ `/center-of-excellence/0` } key={ 0 }>
-											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-												<Image src={''} alt='' width={ 60 } height={ 60 } />
-												<div className='ml-[10px] w-[310px]'>
-													<Text text={'Title'} fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+										{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
+											<Link href={ `/center-of-excellence/${ item.id }` } key={ idx }>
+												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
+													<img src={ item?.img_url?.[0] } width={ 60 } height={ 60 } />
+													<div className='ml-[10px] w-[310px]'>
+														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+													</div>
+													<Image
+														src={icons.ArrowRight}
+														alt=""
+														className='ml-[27px] mr-auto'
+													/>
 												</div>
-												<Image
-													src={icons.ArrowRight}
-													alt=""
-													className='ml-[27px] mr-auto'
-												/>
-											</div>
-										</Link>
+											</Link>
+										)) }
 									</ul>
 								</div>
 							</div>
@@ -234,20 +244,21 @@ export const Header: React.FC = () => {
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										
-										<Link href={ `/facilities/0` } key={ 0 }>
-											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-												<Image src={''} alt='' width={ 60 } height={ 60 } />
-												<div className='ml-[10px] w-[310px]'>
-													<Text text='Name' fontSize='16px' fontWeight='900' color={colors.paradiso.default} />
+										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
+											<Link href={ `/facilities/${ item.id }` } key={ idx }>
+												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
+													<img src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
+													<div className='ml-[10px] w-[310px]'>
+														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+													</div>
+													<Image
+														src={icons.ArrowRight}
+														alt=""
+														className='ml-[27px] mr-auto'
+													/>
 												</div>
-												<Image
-													src={icons.ArrowRight}
-													alt=""
-													className='ml-[27px] mr-auto'
-												/>
-											</div>
-										</Link>
+											</Link>
+										)) }
 										
 										<Link href={ '/facilities/1234567890' } >
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>

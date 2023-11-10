@@ -62,7 +62,7 @@ const MedicalRecordReminder = () => {
 						/>
 					</LeftContent>
 					<Button label='Isi Data Rekam Medis' onClick={ () => {
-						// navigate('/register-onboard');
+						// navigate.push('/register-onboard');
 						onClickOnboard();
 					} }
 						className='max-sm:p-[10px] max-sm:text-[12px]'
