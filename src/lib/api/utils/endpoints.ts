@@ -42,6 +42,7 @@ const endpointData = {
 	appointmentList: { path: '/patients/patient-portal/appointments', method: 'GET' },
 	clinics: { path: '/clinics/clinic-category', method: 'GET' },
 	hospital: { path: '/hospital', method: 'GET' },
+	getFooter: { path: '/footer-pages', method: 'GET' },
 
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },
@@ -51,20 +52,19 @@ const endpointData = {
 	// events: '/events',
 	// patients: '/patients',
 	// specialities: '/specialities',
-	// getFooter: '/footer-pages',
 	// familyProfile: '/patients/family',
 
-}as const;
+} as const;
 
 // Typing schema, do not modify if not necessary
 
 type EndpointDefinition<T extends string> = {
-  [ key in T ]: {
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    path: string;
-    payload?: any;
-    params?: any
-  };
+	[key in T]: {
+		method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+		path: string;
+		payload?: any;
+		params?: any;
+	};
 };
 export type EndpointKey = keyof typeof endpointData;
 

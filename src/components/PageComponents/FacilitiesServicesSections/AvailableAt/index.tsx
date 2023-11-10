@@ -1,15 +1,16 @@
-import { Text } from '@/components';
+
 import { Languages, colors } from '@/constant';
-import { useTypedSelector } from '@/hooks';
-import { FacilityServicesState } from '@/interface';
+import { FacilityServicesDetail } from '@/interface';
+
+import Text from '../../../Text';
 
 const { servicesLocationHeading, phoneHeading, informationHeading, emailHeading, operationalHourHeading } = Languages.page.facilities.facilitiesMenu;
 
-const AvailableAt = () => {
-	const { hospital } = useTypedSelector<FacilityServicesState>('facilityServices');
+type Props = {
+	hospital: FacilityServicesDetail[];
+};
 
-	if (hospital && !hospital.length) return null;
-
+const AvailableAt: React.FC<Props> = ({ hospital }) => {
 	return (
 		<div className='mt-[92px]'>
 			{

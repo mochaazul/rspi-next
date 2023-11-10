@@ -19,7 +19,7 @@ export const clinicPageEvent = () => {
 };
 
 export const facilitiesPageEvent = () => {
-  fbq("track", "facilities page");
+  window.fbq("track", "facilities page");
 };
 
 export const promoPageEvent = () => {

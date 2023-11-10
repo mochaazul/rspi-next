@@ -1,15 +1,19 @@
-import { Text } from '@/components';
-import { colors } from '@/constant';
-import { FacilityServicesDetail } from '@/interface';
+'use client';
+
 import { PropsWithChildren, PropsWithRef } from 'react';
 import { useRouter } from 'next/navigation';
+
+import { colors } from '@/constant';
+import { FacilityServicesDetail } from '@/interface';
+
+import Text from '../../../Text';
 
 type Props = PropsWithRef<PropsWithChildren<{
 	data: FacilityServicesDetail[],
 	activeMenuIndex: number;
 }>>;
 
-const CardMenu = ({ children, data, activeMenuIndex }: Props) => {
+const CardMenu = ({ data, activeMenuIndex }: Props) => {
 	const navigate = useRouter();
 	return (
 		<div className='cardMenu px-[24px] pt-[24px] pb-[9px]'>
@@ -22,7 +26,7 @@ const CardMenu = ({ children, data, activeMenuIndex }: Props) => {
 					fontWeight='700'
 					lineHeight='21px'
 					color={ activeMenuIndex === item.id ? colors.paradiso.default : colors.grey.dark }
-					onClick={ () => navigate.push(`/facilities/${ item.id }`) }
+					onClick={ () => navigate.push(`/facilities-services/${ item.id }`) }
 				/>;
 			}) }
 		</div>

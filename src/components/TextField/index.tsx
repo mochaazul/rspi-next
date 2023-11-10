@@ -1,3 +1,5 @@
+'use client';
+
 import * as FeatherIcons from 'react-feather';
 
 import { icons } from '@/constant';

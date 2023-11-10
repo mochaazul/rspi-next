@@ -1,14 +1,17 @@
-import { Text } from '@/components';
-import { colors, icons } from '@/constant';
-import React, { PropsWithChildren, PropsWithRef, useEffect } from 'react';
-import { MedicalSpecialitiesItemContainer } from './style';
-import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { getMedicalSpecialitiesDispatch } from '@/stores/MedicalSpecialities';
-import { MedicalSpecialitiesState } from '@/interface/MedicalSpecialities';
-import { useRouter } from 'next/navigation';
-import { CenterOfExcellenceDetail } from '@/interface';
-import CardMenu from '../CardMenu';
+'use client';
+
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import React, { PropsWithChildren, PropsWithRef } from 'react';
+
+import { colors, icons } from '@/constant';
+import { MedicalSpecialities } from '@/interface/MedicalSpecialities';
+import { CenterOfExcellenceDetail } from '@/interface';
+
+import { MedicalSpecialitiesItemContainer } from './style';
+
+import CardMenu from '../CardMenu';
+import Text from '../../../Text';
 
 type Specialities = {
 	title: string,
@@ -17,95 +20,86 @@ type Specialities = {
 const specialities: Specialities[] = [
 	{
 		title: 'Akupuntur',
-		icon: <Image src={icons.Specialities.Akupuntur} alt="" />
+		icon: <Image src={ icons.Specialities.Akupuntur } alt="" />
 	},
 	{
 		title: 'Anak',
-		icon: <Image src={icons.Specialities.Anak} alt="" />
+		icon: <Image src={ icons.Specialities.Anak } alt="" />
 	},
 	{
 		title: 'Gizi Klinik',
-		icon: <Image src={icons.Specialities.Gizi} alt="" />
+		icon: <Image src={ icons.Specialities.Gizi } alt="" />
 	},
 	{
 		title: 'Jantung & Pembuluh Darah',
-		icon: <Image src={icons.Specialities.Jantung} alt="" />
+		icon: <Image src={ icons.Specialities.Jantung } alt="" />
 	},
 	{
 		title: 'Rehabilitasi Medik & Fisioterapi',
-		icon: <Image src={icons.Specialities.Rehabilitiasi} alt="" />
+		icon: <Image src={ icons.Specialities.Rehabilitiasi } alt="" />
 	},
 	{
 		title: 'THT',
-		icon: <Image src={icons.Specialities.Tht} alt="" />
+		icon: <Image src={ icons.Specialities.Tht } alt="" />
 	},
 	{
 		title: 'Alergi & Imunologi',
-		icon: <Image src={icons.Specialities.Alergi} alt="" />
+		icon: <Image src={ icons.Specialities.Alergi } alt="" />
 	},
 	{
 		title: 'Bedah',
-		icon: <Image src={icons.Specialities.Bedah} alt="" />
+		icon: <Image src={ icons.Specialities.Bedah } alt="" />
 	},
 	{
 		title: 'Paru & Pernapasan',
-		icon: <Image src={icons.Specialities.Paru} alt="" />
+		icon: <Image src={ icons.Specialities.Paru } alt="" />
 	},
 	{
 		title: 'Psikiatri/Kesehatan Jiwa',
-		icon: <Image src={icons.Specialities.Psikiatri} alt="" />
+		icon: <Image src={ icons.Specialities.Psikiatri } alt="" />
 	},
 	{
 		title: 'Kesehatan Mata',
-		icon: <Image src={icons.Specialities.Mata} alt="" />
+		icon: <Image src={ icons.Specialities.Mata } alt="" />
 	},
 	{
 		title: 'Tumbuh Kembang & Edukasi Terpadu',
-		icon: <Image src={icons.Specialities.TumbuhKembang} alt="" />
+		icon: <Image src={ icons.Specialities.TumbuhKembang } alt="" />
 	},
 	{
 		title: 'Anestesi',
-		icon: <Image src={icons.Specialities.Anestesi} alt="" />
+		icon: <Image src={ icons.Specialities.Anestesi } alt="" />
 	},
 	{
 		title: 'Kulit & Kelamin',
-		icon: <Image src={icons.Specialities.Kelamin} alt="" />
+		icon: <Image src={ icons.Specialities.Kelamin } alt="" />
 	},
 	{
 		title: 'Penyakit Dalam',
-		icon: <Image src={icons.Specialities.PenyakitDalam} alt="" />
+		icon: <Image src={ icons.Specialities.PenyakitDalam } alt="" />
 	},
 	{
 		title: 'Psikologi',
-		icon: <Image src={icons.Specialities.Psikologi} alt="" />
+		icon: <Image src={ icons.Specialities.Psikologi } alt="" />
 	},
 	{
 		title: 'Klinik Laktasi',
-		icon: <Image src={icons.Specialities.Laktasi} alt="" />
+		icon: <Image src={ icons.Specialities.Laktasi } alt="" />
 	},
 	{
 		title: 'Klinik Saraf & Bedah Saraf',
-		icon: <Image src={icons.Specialities.Saraf} alt="" />
+		icon: <Image src={ icons.Specialities.Saraf } alt="" />
 	}
 ];
 
 type Props = PropsWithRef<PropsWithChildren<{
 	facilityData: CenterOfExcellenceDetail[],
 	activeMenuIndex: number;
+	medicalSpecialities?: MedicalSpecialities[];
 }>>;
 
-const MedicalSpecialities = ({ facilityData, activeMenuIndex }: Props) => {
-	const medicalSpecialitiesDispatch = useAppDispatch(getMedicalSpecialitiesDispatch);
-	const { medicalSpecialities } = useTypedSelector<MedicalSpecialitiesState>('medicalSpecialities');
+const MedicalSpecialitiesComponent = ({ facilityData, activeMenuIndex, medicalSpecialities }: Props) => {
 	const navigate = useRouter();
-
-	useEffect(() => {
-		medicalSpecialitiesDispatch({
-			queryParam: {
-				footer_category: 'medical-specialities',
-			}
-		});
-	}, []);
 
 	return (
 		<div>
@@ -143,4 +137,4 @@ const MedicalSpecialities = ({ facilityData, activeMenuIndex }: Props) => {
 	);
 };
 
-export default MedicalSpecialities;
+export default MedicalSpecialitiesComponent;

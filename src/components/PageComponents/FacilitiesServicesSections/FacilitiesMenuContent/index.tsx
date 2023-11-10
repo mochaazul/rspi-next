@@ -1,27 +1,30 @@
-import { Languages, colors } from '@/constant';
-import { CustomCarousel, Text } from '@/components';
-import { FacilityServicesDetail, FacilityServicesState } from '@/interface';
-import { useTypedSelector } from '@/hooks';
-import { navigation } from '@/helpers';
-import AvailableAt from './AvailableAt';
-import MedicalSpecialities from './MedicalSpecialites';
+import Image from 'next/image';
+
+import { colors } from '@/constant';
+import { FacilityServicesDetail } from '@/interface';
+
+import AvailableAt from '../AvailableAt';
+// import MedicalSpecialities from '../MedicalSpecialities';
 import CardMenu from '../CardMenu';
+import Text from '../../../Text';
+import CustomCarousel from '../../../Carousel';
 
 type Props = {
 	facilitiesData: FacilityServicesDetail[];
-	activeMenuIndex: number;
+	paramsId: number;
+	hospital: FacilityServicesDetail[];
 };
 
-const FacilitiesMenuContent: React.FC<Props> = ({ facilitiesData, activeMenuIndex }) => {
-	const { params } = navigation();
-
-	const { facilityServices } = useTypedSelector<FacilityServicesState>('facilityServices');
-
+const FacilitiesMenuContent: React.FC<Props> = ({
+	facilitiesData,
+	paramsId,
+	hospital
+}) => {
 	const getContent = () => {
-		return facilityServices.find(item => item.id === Number(params.id));
+		return facilitiesData.find(item => item.id === Number(paramsId));
 	};
 
-	if (!getContent()) return <MedicalSpecialities activeMenuIndex={ activeMenuIndex } facilityData={ facilitiesData } />;
+	// if (!getContent()) return <MedicalSpecialities activeMenuIndex={ activeMenuIndex } facilityData={ facilitiesData } />;
 
 	return (
 		<div>
@@ -31,18 +34,23 @@ const FacilitiesMenuContent: React.FC<Props> = ({ facilitiesData, activeMenuInde
 
 			<div className='mt-[32px]'>
 				<CustomCarousel arrowButton={ true }>
-					{ getContent()?.image_url?.map((image, index) => {
-						return <img
-							key={ `carousel-nav-${ index }` }
-							src={ image }
-							alt='slider'
-							className='bg-white h-[220px] sm:h-[420px] sm:w-[729px] rounded-[5px] object-cover'
-						/>;
-					}) ?? [] }
+					{ (getContent()?.image_url ?? [])?.map((image, index) => {
+						return (
+							<div key={ index } className='relative overflow-hidden rounded-[5px] h-[220px] sm:h-[420px] sm:w-[729px]'>
+								<Image
+									key={ `carousel-nav-${ index }` }
+									src={ image }
+									alt='slider'
+									className='bg-white object-cover'
+									fill
+								/>
+							</div>
+						);
+					}) }
 				</CustomCarousel>
 			</div>
 			<div className='mt-[16px] md:hidden'>
-				<CardMenu activeMenuIndex={ activeMenuIndex } data={ facilitiesData } />
+				<CardMenu activeMenuIndex={ paramsId } data={ facilitiesData } />
 			</div>
 			<div className='mt-[48px]'>
 				<div
@@ -72,7 +80,9 @@ const FacilitiesMenuContent: React.FC<Props> = ({ facilitiesData, activeMenuInde
 					}
 				</div>
 			</div>
-			<AvailableAt />
+			{ hospital && hospital?.length
+				? <AvailableAt hospital={ hospital } />
+				: null }
 		</div>
 	);
 };
