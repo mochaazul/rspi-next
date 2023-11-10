@@ -1,4 +1,4 @@
-import { FacilityServicesDetail, I_RelatedNews } from '@/interface';
+import { FacilityServicesDetail, FacilityServicesHospital, I_RelatedNews } from '@/interface';
 import { MedicalSpecialities } from '@/interface/MedicalSpecialities';
 
 import fetcher, { ApiOptions } from './utils/fetcher';
@@ -8,7 +8,7 @@ export const getFacilityServices = (options: ApiOptions) => {
 };
 
 export const getFacilityHospital = (options: ApiOptions) => {
-	return fetcher<FacilityServicesDetail[]>('facilityHospital', options);
+	return fetcher<FacilityServicesHospital[]>('facilityHospital', options);
 };
 
 export const getFacilityRelatedNews = (options: ApiOptions) => {

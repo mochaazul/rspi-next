@@ -4,58 +4,61 @@ import { colors } from '@/constant';
 import { FacilityServicesDetail } from '@/interface';
 
 import AvailableAt from '../AvailableAt';
-// import MedicalSpecialities from '../MedicalSpecialities';
 import CardMenu from '../CardMenu';
+
 import Text from '../../../Text';
 import CustomCarousel from '../../../Carousel';
 
 type Props = {
 	facilitiesData: FacilityServicesDetail[];
-	paramsId: number;
-	hospital: FacilityServicesDetail[];
+	paramsSlug: string;
 };
 
 const FacilitiesMenuContent: React.FC<Props> = ({
 	facilitiesData,
-	paramsId,
-	hospital
+	paramsSlug
 }) => {
 	const getContent = () => {
-		return facilitiesData.find(item => item.id === Number(paramsId));
+		return facilitiesData.find(item => item.slug === paramsSlug);
 	};
 
-	// if (!getContent()) return <MedicalSpecialities activeMenuIndex={ activeMenuIndex } facilityData={ facilitiesData } />;
-
 	return (
-		<div>
-			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
+		<div className='flex flex-col w-full'>
+			<Text
+				fontSize='24px'
+				fontWeight='900'
+				color={ colors.paradiso.default }
+				subClassName='max-md:!text-base'
+			>
 				{ getContent()?.name }
 			</Text>
 
-			<div className='mt-[32px]'>
-				<CustomCarousel arrowButton={ true }>
+			<div className='mt-4 md:mt-8 w-full'>
+				<CustomCarousel arrowButton dotsContainerClassName='bottom-1 lg:bottom-6'>
 					{ (getContent()?.image_url ?? [])?.map((image, index) => {
 						return (
-							<div key={ index } className='relative overflow-hidden rounded-[5px] h-[220px] sm:h-[420px] sm:w-[729px]'>
-								<Image
-									key={ `carousel-nav-${ index }` }
-									src={ image }
-									alt='slider'
-									className='bg-white object-cover'
-									fill
-								/>
+							<div key={ index } className='relative overflow-hidden bg-white rounded-[5px] h-[220px] sm:h-[420px] sm:w-full'>
+								{ image && (
+									<Image
+										key={ `carousel-nav-${ index }` }
+										src={ image }
+										alt='slider'
+										className='object-cover'
+										sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+										fill
+									/>
+								) }
 							</div>
 						);
 					}) }
 				</CustomCarousel>
 			</div>
-			<div className='mt-[16px] md:hidden'>
-				<CardMenu activeMenuIndex={ paramsId } data={ facilitiesData } />
+			<div className='mt-4 md:hidden w-full'>
+				<CardMenu paramsSlug={ paramsSlug } data={ facilitiesData } />
 			</div>
-			<div className='mt-[48px]'>
+			<div className='mt-[50px] md:mt-12'>
 				<div
-					style={ { lineHeight: '24px', fontSize: '16px' } }
-					className='innerHTML'
+					className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 					dangerouslySetInnerHTML={ { __html: getContent()?.information || '' } }
 				/>
 			</div>
@@ -80,8 +83,8 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 					}
 				</div>
 			</div>
-			{ hospital && hospital?.length
-				? <AvailableAt hospital={ hospital } />
+			{ getContent()?.facilities_hospitals && getContent()?.facilities_hospitals?.length
+				? <AvailableAt hospital={ getContent()?.facilities_hospitals ?? [] } />
 				: null }
 		</div>
 	);

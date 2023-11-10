@@ -6,7 +6,7 @@ import React, { PropsWithChildren, PropsWithRef } from 'react';
 
 import { colors, icons } from '@/constant';
 import { MedicalSpecialities } from '@/interface/MedicalSpecialities';
-import { CenterOfExcellenceDetail } from '@/interface';
+import { FacilityServicesDetail } from '@/interface';
 
 import { MedicalSpecialitiesItemContainer } from './style';
 
@@ -93,12 +93,16 @@ const specialities: Specialities[] = [
 ];
 
 type Props = PropsWithRef<PropsWithChildren<{
-	facilityData: CenterOfExcellenceDetail[],
-	activeMenuIndex: number;
+	facilityData: FacilityServicesDetail[],
+	paramsSlug: string;
 	medicalSpecialities?: MedicalSpecialities[];
 }>>;
 
-const MedicalSpecialitiesComponent = ({ facilityData, activeMenuIndex, medicalSpecialities }: Props) => {
+const MedicalSpecialitiesComponent = ({
+	facilityData,
+	paramsSlug,
+	medicalSpecialities
+}: Props) => {
 	const navigate = useRouter();
 
 	return (
@@ -117,17 +121,31 @@ const MedicalSpecialitiesComponent = ({ facilityData, activeMenuIndex, medicalSp
 						Kebutuhan kesehatan yang spesifik membutuhkan penanganan yang spesifik pula sesuai dengan kondisi yang Anda alami. Layanan klinik rawat jalan kami didukung oleh dokter dari berbagai spesialisasi dan subspesialisasi serta tenaga medis profesional dalam menjamin pelayanan terbaik untuk Anda.
 					</p>
 					<div className='mt-[16px] mb-4 md:hidden'>
-						<CardMenu activeMenuIndex={ activeMenuIndex } data={ facilityData } />
+						<CardMenu paramsSlug={ paramsSlug } data={ facilityData } />
 					</div>
 					<MedicalSpecialitiesItemContainer className='mt-[24px] max-[480px]:table-cell'>
 						{
-							medicalSpecialities?.map((item, key) => (
-								<div key={ key } className='flex justify-between specialities-item max-[480px]:mb-4' onClick={ () => navigate.push(`/medical-specialities/${ item.slug }`) }>
-									<Text text={ item.title } fontWeight='700' />
-									<div className='max-[480px]:w-16'></div>
-									<img src={ (item.img_url && item.img_url[0]) ?? '' } className='w-10 max-[480px]:w-12' />
-								</div>
-							))
+							medicalSpecialities?.map((item, key) => {
+								const imageSrc = item.img_url?.length
+									? item.img_url[0]
+									: '';
+								return (
+									<div key={ key } className='flex justify-between specialities-item max-[480px]:mb-4' onClick={ () => navigate.push(`/medical-specialities/${ item.slug }`) }>
+										<Text text={ item.title } fontWeight='700' />
+										<div className='max-[480px]:w-16'></div>
+										{ imageSrc && (
+											<div className='relative overflow-hidden w-10 max-[480px]:w-12'>
+												<Image
+													src={ imageSrc }
+													alt={ item.title ?? '' }
+													sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+													fill
+												/>
+											</div>
+										) }
+									</div>
+								);
+							})
 						}
 					</MedicalSpecialitiesItemContainer>
 

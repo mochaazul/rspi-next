@@ -11,6 +11,7 @@ interface CarouselProps {
 	timeout?: number;
 	autoplay?: boolean;
 	arrowButton?: boolean;
+	dotsContainerClassName?: string;
 }
 
 const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
@@ -90,7 +91,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
 				</div>
 				<div className='shadow-custom' />
 
-				<div className='container__slider__links'>
+				<div className={ `container__slider__links ${ props.dotsContainerClassName ?? '' }` }>
 					{ children.map((item, index) => {
 						return (
 							<button
