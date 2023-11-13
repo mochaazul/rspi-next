@@ -13,12 +13,19 @@ import TextField from '@/components/TextField';
 import Text from '@/components/Text';
 import Socmed from '@/components/Socmed';
 
-import { FooterDetail, FooterState } from '@/interface/footer';
+import {
+	FooterDetail,
+	FooterState
+} from '@/interface/footer';
 
 import FooterStyled, { FooterContainer } from './style';
 import Image from 'next/image';
 
-const FooterLayout = () => {
+const FooterLayout = ({ 
+	footerData,
+}:{
+	footerData: FooterState,
+}) => {
 	const router = useRouter();
 
 	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice'); // TODO: migrate
@@ -30,7 +37,7 @@ const FooterLayout = () => {
 	const [pages, setPages] = useState<FooterDetail[]>([]);
 
 	// TODO: migrate
-	// useEffect(() => {
+	useEffect(() => {
 	// 	fetchFooter({
 	// 		queryParam: {
 	// 			slug: '',
@@ -39,32 +46,32 @@ const FooterLayout = () => {
 	// 		}
 	// 	});
 	// 	// Clear state, prevent double item
-	// 	setOurHospital([]);
-	// 	setOurCompany([]);
-	// 	setPrivacyPolicy([]);
-	// 	setPages([]);
+		setOurHospital([]);
+		setOurCompany([]);
+		setPrivacyPolicy([]);
+		setPages([]);
 	// 	// Iterate over the footerList using the forEach method instead of map
-	// 	footerList?.forEach(item => {
-	// 		// Use a switch statement to check the footer_category of each item
-	// 		switch (item?.footer_category) {
-	// 			case 'our-hospital':
-	// 				setOurHospital(ourHospital => [...ourHospital, item]);
-	// 				break;
-	// 			case 'our-company':
-	// 				setOurCompany(ourCompany => [...ourCompany, item]);
-	// 				break;
-	// 			// case 'privacy-policy':
-	// 			// 	setPrivacyPolicy(privacyPolicy => [...privacyPolicy, item]);
-	// 			// 	break;
-	// 			case 'pages':
-	// 				setPages(pages => [...pages, item]);
-	// 				break;
-	// 			// Use a default case to handle items with unknown footer_category values
-	// 			default:
-	// 				break;
-	// 		}
-	// 	});
-	// }, []);
+		Object.values(footerData || [])?.forEach(item => {
+			// Use a switch statement to check the footer_category of each item
+			switch (item?.footer_category) {
+				case 'our-hospital':
+					setOurHospital(ourHospital => [...ourHospital, item]);
+					break;
+				case 'our-company':
+					setOurCompany(ourCompany => [...ourCompany, item]);
+					break;
+				// case 'privacy-policy':
+				// 	setPrivacyPolicy(privacyPolicy => [...privacyPolicy, item]);
+				// 	break;
+				case 'pages':
+					setPages(pages => [...pages, item]);
+					break;
+				// Use a default case to handle items with unknown footer_category values
+				default:
+					break;
+			}
+		});
+	}, []);
 
 	// const language = lang.page.footer;
 	// End migrate

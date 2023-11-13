@@ -14,7 +14,7 @@ export default async <Response>(endpointKey:EndpointKey, options?:ApiOptions):Pr
 	try {
 		const endpoint = endpoints[endpointKey];
 		const fetchOpt:Record<string, any> = {};
-		const Authorization = 'TODO IMPLEMENTED USING COOKIEES';
+		const Authorization = process.env.NEXT_PUBLIC_TOKEN;
 		const headers: Record<string, any> = {
 			'content-language': 'idn',
 			Authorization,
@@ -24,7 +24,7 @@ export default async <Response>(endpointKey:EndpointKey, options?:ApiOptions):Pr
 		const url = baseUrl + endpoint.path + `${options?.query ? `?${options?.query}` : ''}`;
 
 		if (options && options.body) fetchOpt['body'] = JSON.stringify(options.body);
-
+		
 		const res = await fetch(url, {
 			method: endpoint.method,
 			headers,

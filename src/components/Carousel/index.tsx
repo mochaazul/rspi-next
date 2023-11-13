@@ -75,7 +75,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
 				onMouseLeave={ AutoPlayStart }
 			>
 				<div className='children'>
-					{ children.map((item, index) => {
+					{ children?.map((item, index) => {
 						return (
 							<div
 								className={ 'slider__item slider__item-active-' + (activeIndex + 1) }
@@ -89,7 +89,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
 				<div className='shadow-custom' />
 
 				<div className='container__slider__links'>
-					{ children.map((item, index) => {
+					{ children?.map((item, index) => {
 						return (
 							<button
 								key={ index }

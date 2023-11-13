@@ -24,8 +24,7 @@ const NotificationPanel = ({
 	onClickRightIcon,
 	...props
 }: PropsTypes) => {
-	const LeftIcon = props.mode === 'success' ? icons.Check : icons.Close;
-
+	
 	return (
 		<NotificationStyle mode={ props.mode } visible={ props.visible } className='flex items-center justify-center rounded-[4px] min-w-full'>
 			<div className={ `grow-0 mr-[8px] ${ showIconLeft === false && 'hidden' }` }>
@@ -33,7 +32,7 @@ const NotificationPanel = ({
 					{
 						!!showIconLeftOverride ?
 							showIconLeftOverride :
-							<LeftIcon className='svg-white' />
+							<Image src={ props.mode === 'success' ? icons.Check : icons.Close } className='svg-white' alt="" />
 					}
 				</div>
 			</div>

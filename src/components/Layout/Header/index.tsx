@@ -2,12 +2,6 @@
 
 import React, { useState } from "react";
 
-import type { 
-	GetStaticPaths,
-	GetStaticProps,
-	NextPage
-} from 'next'
-
 import * as Icons from 'react-feather';
 import moment from 'moment';
 
@@ -18,7 +12,8 @@ import Link from "next/link";
 import {
 	CenterOfExcellenceState,
 	FacilityServicesState,
-	HospitalState
+	HospitalState,
+	NotificationResponse,
 } from "@/interface";
 
 import colors from '@/constant/colors';
@@ -32,17 +27,26 @@ import Modal from '@/components/Modal';
 
 import HeaderStyle from './style';
 
+import { useCurrentLocale } from '@/locales/client'
+
 export const Header = ({ 
 		hospitalData,
 		centerOfExcellenceData,
-		facilityServicesData
+		facilityServicesData,
+		notificationResponseData,
+		marAllReadNotifFunc
 	}:{
 		hospitalData: HospitalState,
 		centerOfExcellenceData: CenterOfExcellenceState,
-		facilityServicesData: FacilityServicesState
+		facilityServicesData: FacilityServicesState,
+		notificationResponseData: NotificationResponse,
+		marAllReadNotifFunc: (params: any) => void,
 	}) => {
-	const router = useRouter()
 	
+	const router = useRouter()
+
+	const currentLang = useCurrentLocale();
+
 	const [dropdownHide, setDropdownHide] = useState(true);
 	const [showSideBar, setShowSideBar] = useState(false);
 	const [isHover, setIsHover] = useState(false);
@@ -51,6 +55,7 @@ export const Header = ({
 	const [showNotification, setShowNotification] = useState(false);
 	
 	const isLoggedIn = true;
+	// const isLoggedIn = !!user.token; // migrate
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
@@ -99,49 +104,52 @@ export const Header = ({
 							color={colors.green.brandAccent}
 							text='Mark all as read'
 							// Migrate
-							// onClick={ () => readNotificationDispatch({
-							// 	queryParam: {
-							// 		medical_record: '100154999',
-							// 		email: 'riko.logwirno@rebelworks.co'
-							// 	}
-							// }) }
+							onClick={ () => marAllReadNotifFunc({
+								medical_record: 100154999,
+								email: 'riko.logwirno@rebelworks.co'
+							}) }
 							// End Migrate
 						/>
 					</div>
 					
-					<div className='pb-4'>
-						<div className='flex flex-col py-4 px-[20px]' style={ {
-							backgroundColor: 'rgba(0, 0, 0, 0)'
-						} }>
-							<div className='flex justify-between'>
-								<Text
-									fontSize='12px'
-									fontWeight='400'
-									textAlign='center'
-									color={colors.grey.pencil}
-									text={ moment().format('DD MMM, hh:mm') }
-								/>
+					{
+						notificationResponseData?.notification?.map((item, idx) => (
+							<div key={ idx } className='pb-4'>
+								<div className='flex flex-col py-4 px-[20px]' style={ {
+									backgroundColor: item.flag === 0 ? 'rgba(0, 0, 0, 0)' : 'rgba(53, 136, 136, 0.1)'
+								} }>
+									<div className='flex justify-between'>
+										<Text
+											fontSize='12px'
+											fontWeight='400'
+											textAlign='center'
+											color={ colors.grey.pencil }
+											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
+										/>
+									</div>
+									<Text
+										fontSize='14px'
+										lineHeight='20px'
+										fontWeight='700'
+										textAlign='center'
+										color={ colors.black.default }
+										text={ currentLang == 'id' ? item?.judul_idn : item?.judul_en }
+										text={ item?.judul_idn }
+										className='flex justify-start'
+									/>
+									<Text
+										fontSize='12px'
+										lineHeight='20px'
+										fontWeight='400'
+										textAlign='center'
+										color={ colors.black.default }
+										text={ currentLang == 'id' ? item?.isi_idn : item?.isi_en }
+										className='flex justify-start pt-2'
+									/>
+								</div>
 							</div>
-							<Text
-								fontSize='14px'
-								lineHeight='20px'
-								fontWeight='700'
-								textAlign='center'
-								color='#000000'
-								text='Judul'
-								className='flex justify-start'
-							/>
-							<Text
-								fontSize='12px'
-								lineHeight='20px'
-								fontWeight='400'
-								textAlign='center'
-								color='#000000'
-								text='Judul'
-								className='flex justify-start pt-2'
-							/>
-						</div>
-					</div>
+						))
+					}
 
 				</div>
 			</Modal>
@@ -281,9 +289,9 @@ export const Header = ({
 								<Text text={ 'Career' } className='cursor-pointer' color={colors.grey.darker} fontSize='14px' fontWeight='900' />
 							</div>
 
-							<a id='find-doctor' className='py-[22px] max-sm:py-[10px]' href='/find-a-doctor'>
+							<Link id='find-doctor' className='py-[22px] max-sm:py-[10px]' href='/find-a-doctor'>
 								<Text text={ 'Find a Doctor' } className='cursor-pointer' color={colors.grey.darker} fontSize='14px' fontWeight='900' />
-							</a>
+							</Link>
 
 						</div>
 					</div>

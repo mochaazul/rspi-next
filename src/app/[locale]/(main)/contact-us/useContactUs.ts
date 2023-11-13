@@ -1,3 +1,7 @@
+import {
+	postContactUs
+} from '@/lib/api';
+
 import { addContactUs as contactUsAction } from '@/stores/actions';
 import { useAppDispatch } from '@/hooks';
 import {
@@ -98,7 +102,8 @@ export const contactUsField = {
  * @returns
  */
 const useContactUs = () => {
-	const contactUsSubmit = useAppDispatch<ContactUsSubmitType>(contactUsAction);
+	// const contactUsSubmit = useAppDispatch<ContactUsSubmitType>(contactUsAction); migrate
+	
 	const onClickContactUs = ({
 		hospital_code,
 		full_name,
@@ -108,8 +113,10 @@ const useContactUs = () => {
 		title,
 		content
 	}: ContactUsSubmitType) => {
-		contactUsSubmit({
-			payload: {
+		const params = {
+			param: null,
+			query: null,
+			body: {
 				hospital_code,
 				full_name,
 				gender,
@@ -117,8 +124,11 @@ const useContactUs = () => {
 				phone,
 				title,
 				content
-			}
-		});
+			},
+		}
+
+		const res = postContactUs(params);
+		return res;
 	};
 
 	return {

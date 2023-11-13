@@ -13,13 +13,12 @@ const endpointData = {
 	otp: { path: '/auths/validate-otp', method: 'POST' },
 	cancelBooking: { path: '/books/cancel-booking', method: 'POST' },
 	bookAppointment: { path: '/books', method: 'POST' },
-	contactUs: { path: '/contact-us', method: 'POST' },
 	generalUploads: { path: '/uploads', method: 'POST' },
 	footerCategories: { path: '/footer-categories', method: 'POST' },
 	notification: { path: '/notification', method: 'POST' },
-	readNotification: { path: '/notification/seen', method: 'POST' },
 	familyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
+	contactUs: { path: '/contact-us', method: 'POST' },
 
 	// PUT
 	updatePassword: { path: '/patients/update-password', method: 'PUT' },
@@ -42,6 +41,8 @@ const endpointData = {
 	appointmentList: { path: '/patients/patient-portal/appointments', method: 'GET' },
 	clinics: { path: '/clinics/clinic-category', method: 'GET' },
 	hospital: { path: '/hospital', method: 'GET' },
+	getNotification: { path: '/notification', method: 'GET' },
+	readNotification: { path: '/notification/seen', method: 'GET' },
 
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },
@@ -51,7 +52,7 @@ const endpointData = {
 	// events: '/events',
 	// patients: '/patients',
 	// specialities: '/specialities',
-	// getFooter: '/footer-pages',
+	getFooter: { path: '/footer-pages', method: 'GET' },
 	// familyProfile: '/patients/family',
 
 }as const;

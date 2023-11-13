@@ -22,9 +22,9 @@ const HospitalMenu = () => {
 	// const hospitalDispatch = useAppDispatch(getHospitals);
 
 	// useEffect(() => {
-	// 	if (process.env.REACT_APP_STAGE === 'dev') {
+	// 	if (process.env.NEXT_PUBLIC_STAGE === 'dev') {
 	// 		initDev();
-	// 	} else if (process.env.REACT_APP_STAGE === 'stage') {
+	// 	} else if (process.env.NEXT_PUBLIC_STAGE === 'stage') {
 	// 		initStage();
 	// 	}
 	// 	hospitalDispatch({ queryParam: payload });

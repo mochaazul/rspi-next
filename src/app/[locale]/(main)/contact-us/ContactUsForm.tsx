@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+	useState,
+	useEffect,
+	useRef
+} from 'react';
 import { useRouter } from 'next/navigation';
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -10,35 +14,49 @@ import { useTypedSelector } from '@/hooks';
 
 import useContactUs from './useContactUs';
 
-interface PropsType {
-	hospitalSelector: HospitalState;
-}
-
 const language = lang.page.contactUs.contactForm;
 
-const ContactUsForm = ({ hospitalSelector }: PropsType) => {
+const ContactUsForm = ({
+    hospitalSelector
+}:{
+    hospitalSelector: HospitalState
+}) => {
 	const navigate = useRouter();
 	const {
 		onClickContactUs,
 		contactUsField
 	} = useContactUs();
 	const {
-		registeredValue, isFormValid, onSubmit
+		registeredValue,
+		isFormValid,
+		onSubmit
 	} = Form.useForm({ fields: contactUsField });
-	const { loading: loadingUser, error: errorUser } = useTypedSelector<ContactUsState>('contactUs');
+	
+	const [notifResponse, setNotifResponse] = useState<ContactUsState>(
+		{
+			loading: false,
+			error: {
+				stat_code: '',
+				stat_msg: '',
+			},
+			customMessage:'',
+		}
+	);
 
+	const { loading: loadingUser, error: errorUser } = notifResponse;
+	
 	const [notifVisible, setNotifVisible] = useState(false);
 	const [captchaStatus, setCaptchaStatus] = useState(false);
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
 
 	const recaptchaRef = useRef(null);
-	const SITE_KEY = process.env.REACT_APP_reCAPTCHA_SITE_KEY;
+	const SITE_KEY = process.env.NEXT_PUBLIC_reCAPTCHA_SITE_KEY;
 
-	const hospitalArr = hospitalSelector?.hospitals?.map(hospital => ({ key: hospital?.name, value: hospital?.hospital_code, label: hospital?.name }));
+	const hospitalArr = Object.values(hospitalSelector || [])?.map(hospital => ({ key: hospital?.name, value: hospital?.hospital_code, label: hospital?.name }));
 
 	useEffect(() => {
-		setNotifMode(!!errorUser?.stat_msg ? 'error' : 'success');
-	}, [errorUser]);
+		
+	}, [notifMode]);
 
 	const handleNotifOnClose = () => {
 		setNotifVisible(false);
@@ -53,8 +71,8 @@ const ContactUsForm = ({ hospitalSelector }: PropsType) => {
 			fontType={ null }
 			fontSize='14px'
 			fontWeight='500'
-			text={ errorUser.stat_msg ? errorUser.stat_msg : 'Berhasil' }
-			color={ errorUser.stat_msg ? colors.red.default : colors.black.default }
+			text={ errorUser?.stat_msg ? errorUser?.stat_msg : 'Berhasil' }
+			color={ errorUser?.stat_msg ? colors.red.default : colors.black.default }
 		/>;
 	};
 
@@ -71,24 +89,24 @@ const ContactUsForm = ({ hospitalSelector }: PropsType) => {
 					phone: phone.value,
 					title: title.value,
 					content: content.value
-				});
-				setNotifVisible(true);
-				setTimeout(() => navigate.push('/contact-us/faq'), 1500);
+				}).then(
+					function(response) {
+						setNotifResponse({
+							loading: false,
+							error: {
+								stat_code: response?.stat_code,
+								stat_msg: response?.stat_msg,
+							},
+							customMessage: response?.stat_msg + '-' + response?.stat_code,
+						});
+						setNotifMode(response.stat_msg === 'Success' ? 'success' : 'error');
+						setNotifVisible(true);
+						setTimeout(() => response.stat_msg === 'Success' ? navigate.push('/contact-us/faq') : null, 1500);
+					}
+				);
 			} }
 			autoComplete='off'
 		>
-			{
-				notifVisible &&
-				<div className='w-full mb-[32px]'>
-					<NotificationPanel
-						mode={ notifMode }
-						visible={ notifVisible && !!errorUser && !loadingUser }
-						onClickRightIcon={ handleNotifOnClose }
-					>
-						{ handleNotifError() }
-					</NotificationPanel>
-				</div>
-			}
 			<Form.Dropdown
 				menuItems={ [{ key: 'all-hospital', value: 'all-hospital', label: language.form.allHospitalLabel }, ...hospitalArr] }
 				{ ...registeredValue('hospital_code') }
@@ -147,6 +165,18 @@ const ContactUsForm = ({ hospitalSelector }: PropsType) => {
 				rows={ 7 }
 				{ ...registeredValue('content') }
 			/>
+			{
+				notifVisible && errorUser.stat_msg &&
+				<div className='w-full mb-[32px]'>
+					<NotificationPanel
+						mode={ notifMode }
+						visible={ notifVisible && !!errorUser && !loadingUser }
+						onClickRightIcon={ handleNotifOnClose }
+					>
+						{ handleNotifError() }
+					</NotificationPanel>
+				</div>
+			}
 			<div className='flex sm:flex-row flex-col justify-between items-center max-sm:gap-6'>
 				<ReCAPTCHA
 					ref={ recaptchaRef }

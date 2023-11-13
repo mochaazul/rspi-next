@@ -1,9 +1,16 @@
-import LandingPageStyle from './style';
-import CentreOfExcellence from '@/components/PageComponents/LandingPageSections/CenterOfExcelence';
-import { getBanner, getCoe } from '@/lib/api';
-import CustomCarousel from '@/components/ui/Carousel';
+import {
+	getBanner,
+	getCoe,
+	getHospitals
+} from '@/lib/api';
+
 import { getCurrentLocale } from '@/locales/server';
+
+import CentreOfExcellence from '@/components/PageComponents/LandingPageSections/CenterOfExcelence';
 import ServicesTabs from '@/components/PageComponents/LandingPageSections/Services';
+import CustomCarousel from '@/components/ui/Carousel';
+
+import LandingPageStyle from './style';
 
 export default async function Home() {
 

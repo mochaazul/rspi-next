@@ -2,11 +2,16 @@ import {
 	BannerDetail,
 	CenterOfExcellenceDetail,
 	CenterOfExcellenceState,
+	ContactUsState,
+	ContactUsSubmitType,
 	FacilityServicesState,
+	FooterState,
 	ForgotPasswordPayload,
 	HospitalState,
 	LoginPayload,
 	NewPasswordPayload,
+	NotificationResponse,
+	NotificationState,
 	OTPPayload,
 	RegisterOnboardPayload,
 	RegisterPayload,
@@ -78,3 +83,21 @@ export const getHospitals = () => {
 export const getCenterOfExcellence = () => {
 	return fetcher<CenterOfExcellenceState>('centerOfExcellences');
 };
+
+export const getNotificationResponse = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<NotificationResponse>('getNotification', param);
+};
+
+export const postMarkNotifAllRead = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher('readNotification', param);
+};
+
+// Footer
+export const getFooterSlug = () => {
+	return fetcher<FooterState>('getFooter');
+};
+// Contact
+export const postContactUs = (param: { param: null; query: null; body: ContactUsSubmitType; }) => {
+	return fetcher<ContactUsState>('contactUs', param);
+};
+
