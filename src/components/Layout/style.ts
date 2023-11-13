@@ -1,9 +1,11 @@
+'use client';
+
 import styled from 'styled-components';
 
 import { colors } from '@/constant';
 
 export interface OutletStyleType {
-	BGGrey?: boolean;
+  BGGrey?: boolean;
 }
 
 export const OutletStyle = styled.div<OutletStyleType>`
@@ -52,9 +54,9 @@ export const PanelH4 = styled.div`
 `;
 
 export const PanelV1 = styled.div`
-  padding-top: 60px;
+  padding-top: 121px;
   
-  @media not all and (min-width: 640px) {
-    padding-top: 0px;
+  @media screen and (min-width: 640px) {
+    padding-top: 162px;
   }
 `;

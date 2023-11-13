@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Footer, Header, CallForAmbulance } from '@/components';
-
 import {
 	OutletStyle,
 	OutletStyleType,
@@ -11,29 +9,17 @@ import {
 	PanelH4,
 	PanelV1
 } from './style';
-import DevTools from '@/components/DevTools';
-import { appStage } from '@/config';
 
-const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean; }) => {
-	// const Outlet = useOutlet();
+type LayoutProps = {
+	containerStyle?: OutletStyleType;
+	children?: React.ReactNode;
+};
 
+const Layout = ({ containerStyle, children }: LayoutProps) => {
 	return (
-		<>
-			<Header />
-			<OutletStyle { ...props.containerStyle }>
-				{/* { Outlet } */}
-			</OutletStyle>
-			{ props.footerShow !== false &&
-				<CallForAmbulance />
-			}
-			{ props.footerShow !== false &&
-				<Footer />
-			}
-			{
-				appStage !== 'prod' &&
-				<DevTools />
-			}
-		</>
+		<OutletStyle { ...containerStyle }>
+			{ children }
+		</OutletStyle>
 	);
 };
 

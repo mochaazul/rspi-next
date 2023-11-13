@@ -66,7 +66,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 		slug: 'medical-specialities'
 	}];
 	const breadcrumbsPath = [
-		{ name: 'Facilities & Services', url: '/facilities' },
+		{ name: 'Facilities & Services', url: '#' },
 		{ url: '#', name: facilitiesServiceData?.find((facility: FacilityServicesDetail) => facility.slug === paramsSlug)?.name ?? '' }
 	];
 
