@@ -1,5 +1,5 @@
 import { I_ClinicsResponse } from '@/interface/specialities';
-import { FacilityServicesDetail, FacilityServicesState, Pagination, PayloadFacilityServices } from '@/interface';
+import { FacilityServicesDetail,  Pagination, PayloadFacilityServices } from '@/interface';
 import fetcher from './utils/fetcher';
 import { ClinicResponse } from '@/interface/clinic';
 

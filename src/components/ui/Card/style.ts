@@ -2,8 +2,8 @@
 
 import styled from 'styled-components';
 
-import { GlobalBoxShadow } from '@/constantsLegacy/globalstyle';
-import { colors } from '@/constantsLegacy';
+import { GlobalBoxShadow } from '@/constant/globalstyle';
+import { colors } from '@/constant';
 import Link from 'next/link';
 
 export interface CardStyleType {

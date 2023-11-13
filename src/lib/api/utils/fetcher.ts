@@ -1,7 +1,7 @@
-import { config } from '@/constantsLegacy/config';
 import endpoints, { EndpointKey } from './endpoints';
 import { Pagination, ResponseType as SuccessResponse } from '@/interface';
 import { generateQueryString } from '@/helpers';
+import { config } from '@/constant/config';
 
 export type ApiOptions = {
 	body?: Record<string, any>,

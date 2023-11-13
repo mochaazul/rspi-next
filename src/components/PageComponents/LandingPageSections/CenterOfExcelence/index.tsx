@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 
 import Card, { CardContent, CardFooter, CardsScrollHorizontal } from '@/components/ui/Card';
-import { colors } from '@/constantsLegacy';
+import { colors } from '@/constant';
 import { CenterOfExcellenceDetail, CenterOfExcellenceState } from '@/interface';
 
 import { WrapperCentreOfExcellence } from './style';

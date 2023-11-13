@@ -3,7 +3,7 @@ import * as Icons from 'react-feather';
 
 import { CheckboxStyle, InputType } from './style';
 import Text from '../Text';
-import { colors } from '@/constantsLegacy';
+import { colors } from '@/constant';
 
 const Checkbox = (props: InputType) => {
 	const checkBoxRef = useRef<HTMLInputElement | null>(null);

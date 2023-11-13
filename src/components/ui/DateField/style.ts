@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Datepicker from 'react-tailwindcss-datepicker';
-import { colors } from '@/constantsLegacy';
-import { icons } from '@/constant';
+import { icons, colors } from '@/constant';
 
 interface DateFieldType extends Omit<typeof Datepicker, 'value' | 'onChange'> {
   iconPosition?: 'left' | 'right';

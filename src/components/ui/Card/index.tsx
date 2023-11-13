@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import * as Icons from 'react-feather';
 
-import { colors } from '@/constantsLegacy';
+import { colors } from '@/constant';
 import Text from '../Text';
 
 import {
