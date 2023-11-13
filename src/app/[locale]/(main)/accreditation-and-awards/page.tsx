@@ -11,13 +11,7 @@ import { getScopedI18n } from '@/locales/server';
 import { CentreOfExcellenceStyle } from './style';
 
 export default async function AwardsPage() {
-	const awardsRes = await getAwards({
-		query: {
-			page: 1,
-			limit: 10,
-			is_publish: true
-		}
-	});
+	const awardsRes = await getAwards({ is_publish: true }, { page: 1, limit: 10 });
 	const awards: AwardsDetail[] = awardsRes?.data;
 
 	const languages = await getScopedI18n('page.awards');

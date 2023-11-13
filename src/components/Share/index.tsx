@@ -13,19 +13,19 @@ const buttonSocmed = [
 		action: 'link',
 		url: sosmedLink.twitter,
 		label: 'Twitter',
-		icon: <Image src={icons.TwitterIcon} width={16} height={13} />
+		icon: <Image src={ icons.TwitterIcon } width={ 16 } height={ 13 } />
 	},
 	{
 		action: 'link',
 		url: sosmedLink.facebook,
 		label: 'Facebook',
-		icon: <Image src={icons.FacebookIcon} width={16} height={16} />
+		icon: <Image src={ icons.FacebookIcon } width={ 16 } height={ 16 } />
 	},
 	{
 		action: 'link',
 		url: sosmedLink.linkedin,
 		label: 'LinkedIn',
-		icon: <Image src={icons.LinkedIn} width={16} height={16} />
+		icon: <Image src={ icons.LinkedIn } width={ 16 } height={ 16 } />
 	},
 ];
 
@@ -46,7 +46,7 @@ const Share = (props: PropsType) => {
 	return (
 		<div onMouseEnter={ toggleMouseHoverShare(true) } onMouseLeave={ toggleMouseHoverShare(false) } className='w-full'>
 			<div className='absolute right-0 mr-[10px] mt-[10px]'>
-				<Image src={icons.SocialShare} alt="" />
+				<Image src={ icons.SocialShare } alt='' />
 			</div>
 			<div
 				className={ `${ isHoverShare === false ? 'hidden' : 'fixed right-0 mr-[10px] mt-[50px] rounded-[10px]' } mt-[15px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }
@@ -70,7 +70,7 @@ const Share = (props: PropsType) => {
 						className='border-b border-gray flex py-4 px-4 items-center'
 						onClick={ copy }
 					>
-						<Image src={icons.ShareNetwork} width={16} height={16} alt="" />
+						<Image src={ icons.ShareNetwork } width={ 16 } height={ 16 } alt='' />
 						
 						<div className='ml-[10px]'>
 							<Text text={ 'Share Link' } fontSize='16px' fontWeight='400' />

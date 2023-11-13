@@ -1,6 +1,6 @@
 'use client';
 
-import { colors } from '@/constants';
+import { colors } from '@/constant';
 import styled from 'styled-components';
 
 interface StyleProps {

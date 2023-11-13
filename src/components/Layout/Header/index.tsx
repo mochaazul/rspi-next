@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 import type {
 	GetStaticPaths,
@@ -12,14 +12,15 @@ import * as Icons from 'react-feather';
 import moment from 'moment';
 
 import { useRouter } from 'next/navigation';
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 import {
 	CenterOfExcellenceState,
+	FacilityServicesDetail,
 	FacilityServicesState,
 	HospitalState
-} from "@/interface";
+} from '@/interface';
 
 import colors from '@/constant/colors';
 import images from '@/constant/images';
@@ -36,13 +37,13 @@ export const Header = ({
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData
-}: {
-	hospitalData: HospitalState,
-	centerOfExcellenceData: CenterOfExcellenceState,
-	facilityServicesData: FacilityServicesState;
-}) => {
+}:{
+		hospitalData: HospitalState,
+		centerOfExcellenceData: CenterOfExcellenceState,
+		facilityServicesData: FacilityServicesDetail[]
+	}) => {
 	const router = useRouter();
-
+	
 	const [dropdownHide, setDropdownHide] = useState(true);
 	const [showSideBar, setShowSideBar] = useState(false);
 	const [isHover, setIsHover] = useState(false);
@@ -158,7 +159,7 @@ export const Header = ({
 							<Link href='/'>
 								<Image
 									src={ images.LogoRSPI }
-									alt=""
+									alt=''
 								/>
 							</Link>
 						</div>
@@ -174,7 +175,7 @@ export const Header = ({
 								<div className='ml-[9px] cursor-pointer'>
 									<Image
 										src={ icons.ArrowDown }
-										alt=""
+										alt=''
 										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
 								</div>
@@ -183,7 +184,7 @@ export const Header = ({
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
 											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<img
-													alt=""
+													alt=''
 													src={ item?.img_url?.[0] || '' }
 													width={ 80 }
 													height={ 80 }
@@ -194,7 +195,7 @@ export const Header = ({
 												</div>
 												<Image
 													src={ icons.ArrowRight }
-													alt=""
+													alt=''
 													className='ml-[27px] mr-auto'
 												/>
 											</div>
@@ -208,7 +209,7 @@ export const Header = ({
 								<div className='ml-[9px] cursor-pointer'>
 									<Image
 										src={ icons.ArrowDown }
-										alt=""
+										alt=''
 										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
 								</div>
@@ -223,7 +224,7 @@ export const Header = ({
 													</div>
 													<Image
 														src={ icons.ArrowRight }
-														alt=""
+														alt=''
 														className='ml-[27px] mr-auto'
 													/>
 												</div>
@@ -238,7 +239,7 @@ export const Header = ({
 								<div className='ml-[9px] cursor-pointer'>
 									<Image
 										src={ icons.ArrowDown }
-										alt=""
+										alt=''
 										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
 								</div>
@@ -253,7 +254,7 @@ export const Header = ({
 													</div>
 													<Image
 														src={ icons.ArrowRight }
-														alt=""
+														alt=''
 														className='ml-[27px] mr-auto'
 													/>
 												</div>
@@ -268,7 +269,7 @@ export const Header = ({
 												</div>
 												<Image
 													src={ icons.ArrowRight }
-													alt=""
+													alt=''
 													className='ml-[27px] mr-auto'
 												/>
 											</div>
@@ -292,7 +293,7 @@ export const Header = ({
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
 								<Image
 									src={ icons.Notif }
-									alt=""
+									alt=''
 									onClick={ () => setShowNotification(true) }
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
@@ -308,25 +309,25 @@ export const Header = ({
 											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
 												<Image
 													src={ icons.Notif }
-													alt=""
+													alt=''
 												/>
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>0</span>
 											</a>
 											<div className='flex text-white items-center'>
 												<div>
-
+													
 													<Image src={ '' } alt={ '' } /> :
 													<Image
 														src={ images.Profile }
-														alt=""
+														alt=''
 													/>
 
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
 													<Image
 														src={ icons.ArrowDown }
-														alt=""
+														alt=''
 														className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 														onClick={ () => setDropdownHide(!dropdownHide) }
 													/>

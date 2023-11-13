@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors } from '@/constants';
+import { colors } from '@/constant';
 
 export const WrapperCentreOfExcellence = styled.div`
   .slider-title {

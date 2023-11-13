@@ -15,7 +15,7 @@ import Dropdown from './Dropdown';
 import Checkbox from './Checkbox';
 import NotificationPanel from './NotificationPanel';
 import Tabs from './Tabs';
-import Accordion from './Accordion';
+import Accordion from './ui/Accordion';
 import Breadcrumbs from './Breadcrumbs';
 import PaginationNumber from './PaginationNumber';
 import MainNavLanguage from './MainNavLanguage';

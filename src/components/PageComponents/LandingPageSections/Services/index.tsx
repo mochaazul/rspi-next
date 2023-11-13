@@ -5,11 +5,14 @@ import Tabs from '@/components/ui/Tabs';
 
 import { TabContainerStyle, TabsStyle } from './style';
 import { FindADoctor } from './components';
+import { useScopedI18n } from '@/locales/client';
+import { HospitalDetail } from '@/interface';
+import { ClinicResponse } from '@/interface/clinic';
 // import { useScopedI18n } from '@/locales/client';
 
-const ServicesTabs = () => {
-	// const t = useScopedI18n('page.landingPage.services');
-	const tabsData = ['label1'];
+const ServicesTabs = ({ hospitals, clinics }:{hospitals: HospitalDetail[], clinics: ClinicResponse[]}) => {
+	const t = useScopedI18n('page.landingPage.services');
+	const tabsData = [t('tabsLabel.0')];
 	const [activeTabIndex, setActiveTabIndex] = useState(0);
 	const [isActive, setIsActive] = useState(false);
 
@@ -29,7 +32,7 @@ const ServicesTabs = () => {
 					className='rounded-t-[10px] overflow-hidden'
 				/>
 				<div className='mt-[30px]'>
-					<FindADoctor isTelemedicine={ activeTabIndex === 1 } />
+					<FindADoctor isTelemedicine={ activeTabIndex === 1 } hospitals={ hospitals } clinics={ clinics }/>
 				</div>
 			</TabsStyle>
 		</TabContainerStyle>
