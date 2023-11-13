@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 
 import { colors } from '@/constant';
@@ -11,7 +13,15 @@ export const FacilitiesServiceStyle = styled.div`
     background: #FAFAFA;
     border: 1px solid ${ colors.grey.light };
     border-radius: 5px;
-    width: 349px;
+    width: 100%;
+    
+    @media (min-width: 768px) {
+      max-width: 349px;
+    }
+
+    @media (min-width: 1024px) {
+      width: 349px;
+    }
   }
 
   .related {

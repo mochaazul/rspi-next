@@ -44,6 +44,7 @@ const endpointData = {
 	hospital: { path: '/hospital', method: 'GET' },
 	events: { path: '/events', method: 'GET' },
 	article: { path: '/news', method: 'GET' },
+	getFooter: { path: '/footer-pages', method: 'GET' },
 
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },
@@ -51,20 +52,19 @@ const endpointData = {
 	// findDoctor: { path: '/find/doctor', method: 'GET' }, -> Replaced by master doctor since master doctor enpoint accept filtering
 	// patients: '/patients',
 	// specialities: '/specialities',
-	// getFooter: '/footer-pages',
 	// familyProfile: '/patients/family',
 
-}as const;
+} as const;
 
 // Typing schema, do not modify if not necessary
 
 type EndpointDefinition<T extends string> = {
-  [ key in T ]: {
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    path: string;
-    payload?: any;
-    params?: any
-  };
+	[key in T]: {
+		method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+		path: string;
+		payload?: any;
+		params?: any;
+	};
 };
 export type EndpointKey = keyof typeof endpointData;
 

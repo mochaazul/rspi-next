@@ -50,7 +50,7 @@ export const Header = ({
 	const [isHoverCOE, setIsHoverCOE] = useState(false);
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
-	
+
 	const isLoggedIn = true;
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
@@ -99,17 +99,17 @@ export const Header = ({
 							textAlign='center'
 							color={ colors.green.brandAccent }
 							text='Mark all as read'
-							// Migrate
-							// onClick={ () => readNotificationDispatch({
-							// 	queryParam: {
-							// 		medical_record: '100154999',
-							// 		email: 'riko.logwirno@rebelworks.co'
-							// 	}
-							// }) }
-							// End Migrate
+						// Migrate
+						// onClick={ () => readNotificationDispatch({
+						// 	queryParam: {
+						// 		medical_record: '100154999',
+						// 		email: 'riko.logwirno@rebelworks.co'
+						// 	}
+						// }) }
+						// End Migrate
 						/>
 					</div>
-					
+
 					<div className='pb-4'>
 						<div className='flex flex-col py-4 px-[20px]' style={ {
 							backgroundColor: 'rgba(0, 0, 0, 0)'
@@ -246,7 +246,7 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
-											<Link href={ `/facilities/${ item.id }` } key={ idx }>
+											<Link href={ `/facilities-services/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 													<img src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
@@ -260,8 +260,8 @@ export const Header = ({
 												</div>
 											</Link>
 										)) }
-										
-										<Link href={ '/facilities/1234567890' } >
+
+										<Link href={ '/facilities-services/medical-specialities' } >
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 												<div className='ml-[10px] w-[310px]'>
@@ -322,7 +322,7 @@ export const Header = ({
 														src={ images.Profile }
 														alt=''
 													/>
-													
+
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
 													<Image
@@ -369,14 +369,14 @@ export const Header = ({
 								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
 							</div>
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
-								<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
+									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
-								<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
+									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>

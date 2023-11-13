@@ -1,4 +1,6 @@
-import { colors, fonts } from '@/constantsLegacy';
+'use client';
+
+import { colors, fonts } from '@/constant';
 import React from 'react';
 import styled from 'styled-components';
 

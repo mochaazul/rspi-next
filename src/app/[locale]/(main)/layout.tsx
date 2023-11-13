@@ -47,7 +47,7 @@ export default async function RootLayout({
 	const headersList = headers();
 	const pathname = headersList.get('x-invoke-path') || '';
 	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
-  
+
 	const hospitals = await getHospitals();
 	const centerOfExcellence = await getCenterOfExcellence();
 	const facilityServices = await getFacilitiesAndServices();
@@ -55,9 +55,9 @@ export default async function RootLayout({
 	return (
 		<>
 			<Header
-				hospitalData = { hospitals.data }
-				centerOfExcellenceData = { centerOfExcellence.data }
-				facilityServicesData = { facilityServices.data }
+				hospitalData={ hospitals.data }
+				centerOfExcellenceData={ centerOfExcellence.data }
+				facilityServicesData={ facilityServices.data }
 			/>
 			{ children }
 

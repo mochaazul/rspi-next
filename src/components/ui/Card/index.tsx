@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -15,6 +17,7 @@ import {
 } from './style';
 import Image from 'next/image';
 import { Share } from '@/components';
+import { icons } from '@/constant';
 
 interface PropsType {
 	image?: string;
@@ -89,7 +92,7 @@ export const CardContent = ({ title, description }: { title: string, description
 
 export const CardContentWithInner = ({ title, description, author, RSLocation }: { title: string, description: string; author?: string; RSLocation?: string[]; }) => (
 	<CardContentHTML>
-		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-[10px]' />
+		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-[10px]' subClassName='max-sm:text-base' />
 		{
 			!!RSLocation &&
 			<div className='flex gap-3 mt-3 items-center'>
@@ -110,16 +113,16 @@ export const CardContentWithInner = ({ title, description, author, RSLocation }:
 				</div>
 			</div>
 		}
-		<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ author } className='mt-[5px] mb-[2px]' lineHeight='24px' />
-		<div className='innerHTML text-16 mt-[10px]' style={ { color: colors.grey.dark } } dangerouslySetInnerHTML={ { __html: description } } />
+		<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ author } className='mt-[5px] mb-[2px] max-sm:!text-xs' lineHeight='24px' />
+		<div className='innerHTML text-xs max-sm:leading-[18px] sm:text-sm md:text-base mt-[10px]' style={ { color: colors.grey.dark } } dangerouslySetInnerHTML={ { __html: description } } />
 	</CardContentHTML>
 );
 
 export const CardFooter = ({ content, to }: { content: string; to?: string; }) => (
-	<Link href={ to || '#' } className='flex flex-row gap-x-2 items-center'>
+	<div className='flex flex-row gap-x-2 items-center'> { /* TODO: if use a Link it will cause an error <a> cannot appear as a descendant of <a> because CardWrapper = styled(Link) */ }
 		<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ content } />
-		{ /* <icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />  TODO: USE ASSETS HANDLER NEXTJS*/ }
-	</Link>
+		<icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />
+	</div>
 );
 
 export const CardsScrollHorizontal = ({ children, customRef, noHorizontalPadding }: CardsScrollHorizontalType) => (
