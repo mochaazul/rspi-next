@@ -1,25 +1,26 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import type { 
+import type {
 	GetStaticPaths,
 	GetStaticProps,
 	NextPage
-} from 'next'
+} from 'next';
 
 import * as Icons from 'react-feather';
 import moment from 'moment';
 
 import { useRouter } from 'next/navigation';
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 import {
 	CenterOfExcellenceState,
+	FacilityServicesDetail,
 	FacilityServicesState,
 	HospitalState
-} from "@/interface";
+} from '@/interface';
 
 import colors from '@/constant/colors';
 import images from '@/constant/images';
@@ -32,16 +33,16 @@ import Modal from '@/components/Modal';
 
 import HeaderStyle from './style';
 
-export const Header = ({ 
-		hospitalData,
-		centerOfExcellenceData,
-		facilityServicesData
-	}:{
+export const Header = ({
+	hospitalData,
+	centerOfExcellenceData,
+	facilityServicesData
+}:{
 		hospitalData: HospitalState,
 		centerOfExcellenceData: CenterOfExcellenceState,
-		facilityServicesData: FacilityServicesState
+		facilityServicesData: FacilityServicesDetail[]
 	}) => {
-	const router = useRouter()
+	const router = useRouter();
 	
 	const [dropdownHide, setDropdownHide] = useState(true);
 	const [showSideBar, setShowSideBar] = useState(false);
@@ -96,7 +97,7 @@ export const Header = ({
 							lineHeight='20px'
 							fontWeight='400'
 							textAlign='center'
-							color={colors.green.brandAccent}
+							color={ colors.green.brandAccent }
 							text='Mark all as read'
 							// Migrate
 							// onClick={ () => readNotificationDispatch({
@@ -118,7 +119,7 @@ export const Header = ({
 									fontSize='12px'
 									fontWeight='400'
 									textAlign='center'
-									color={colors.grey.pencil}
+									color={ colors.grey.pencil }
 									text={ moment().format('DD MMM, hh:mm') }
 								/>
 							</div>
@@ -157,44 +158,44 @@ export const Header = ({
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
 								<Image
-									src={images.LogoRSPI}
-									alt=""
+									src={ images.LogoRSPI }
+									alt=''
 								/>
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
 							<div id='home' className='py-[22px] max-sm:py-[10px]'>
 								<Link href='/'>
-									<Text text={ 'Home' } className='cursor-pointer' color={colors.grey.darker} fontSize='14px' fontWeight='900' />
+									<Text text={ 'Home' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 								</Link>
 							</div>
 
 							<div id='our-hospital' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 								<Text text={ 'Our Hospitals' } className='cursor-pointer' color={ isHover === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-								<Image
-									src={icons.ArrowDown}
-									alt=""
-									className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
-								/>
+									<Image
+										src={ icons.ArrowDown }
+										alt=''
+										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
+									/>
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
 											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<img
-													alt=""
-													src={item?.img_url?.[0] || ''}
-													width={80}
-													height={80}
+													alt=''
+													src={ item?.img_url?.[0] || '' }
+													width={ 80 }
+													height={ 80 }
 												/>
 												<div className='ml-[10px] w-[310px]'>
 													<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
 												</div>
 												<Image
-													src={icons.ArrowRight}
-													alt=""
+													src={ icons.ArrowRight }
+													alt=''
 													className='ml-[27px] mr-auto'
 												/>
 											</div>
@@ -207,8 +208,8 @@ export const Header = ({
 								<Text text={ 'Centre of Excellence' } className='cursor-pointer' color={ isHoverCOE === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
 									<Image
-										src={icons.ArrowDown}
-										alt=""
+										src={ icons.ArrowDown }
+										alt=''
 										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
 								</div>
@@ -222,8 +223,8 @@ export const Header = ({
 														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
 													<Image
-														src={icons.ArrowRight}
-														alt=""
+														src={ icons.ArrowRight }
+														alt=''
 														className='ml-[27px] mr-auto'
 													/>
 												</div>
@@ -237,8 +238,8 @@ export const Header = ({
 								<Text text={ 'Facilities & Services' } className='cursor-pointer' color={ isHoverFacilities === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
 									<Image
-										src={icons.ArrowDown}
-										alt=""
+										src={ icons.ArrowDown }
+										alt=''
 										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
 								</div>
@@ -252,8 +253,8 @@ export const Header = ({
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
 													<Image
-														src={icons.ArrowRight}
-														alt=""
+														src={ icons.ArrowRight }
+														alt=''
 														className='ml-[27px] mr-auto'
 													/>
 												</div>
@@ -264,11 +265,11 @@ export const Header = ({
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 												<div className='ml-[10px] w-[310px]'>
-													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={colors.paradiso.default} />
+													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 												</div>
 												<Image
-													src={icons.ArrowRight}
-													alt=""
+													src={ icons.ArrowRight }
+													alt=''
 													className='ml-[27px] mr-auto'
 												/>
 											</div>
@@ -278,11 +279,11 @@ export const Header = ({
 							</div>
 
 							<div id='career' className='py-[22px] max-sm:py-[10px]'>
-								<Text text={ 'Career' } className='cursor-pointer' color={colors.grey.darker} fontSize='14px' fontWeight='900' />
+								<Text text={ 'Career' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 							</div>
 
 							<a id='find-doctor' className='py-[22px] max-sm:py-[10px]' href='/find-a-doctor'>
-								<Text text={ 'Find a Doctor' } className='cursor-pointer' color={colors.grey.darker} fontSize='14px' fontWeight='900' />
+								<Text text={ 'Find a Doctor' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 							</a>
 
 						</div>
@@ -291,8 +292,8 @@ export const Header = ({
 						<div className='translate'>
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
 								<Image
-									src={icons.Notif}
-									alt=""
+									src={ icons.Notif }
+									alt=''
 									onClick={ () => setShowNotification(true) }
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
@@ -307,8 +308,8 @@ export const Header = ({
 										<>
 											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
 												<Image
-													src={icons.Notif}
-													alt=""
+													src={ icons.Notif }
+													alt=''
 												/>
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>0</span>
@@ -316,17 +317,17 @@ export const Header = ({
 											<div className='flex text-white items-center'>
 												<div>
 													
-													<Image src={''} alt={''} /> :
+													<Image src={ '' } alt={ '' } /> :
 													<Image
-														src={images.Profile}
-														alt=""
+														src={ images.Profile }
+														alt=''
 													/>
 													
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
 													<Image
-														src={icons.ArrowDown}
-														alt=""
+														src={ icons.ArrowDown }
+														alt=''
 														className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 														onClick={ () => setDropdownHide(!dropdownHide) }
 													/>
