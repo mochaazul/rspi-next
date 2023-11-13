@@ -44,7 +44,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 							</ItemStyle>
 						</Link>
 						{
-							(index + 1) < props.datas.length ? <Image src={ icons.ArrowRight } style={ { width: 15, height: 15 } } alt="" /> : null
+							(index + 1) < props.datas.length ? <icons.ArrowRight className='w-[15px] h-[15px]' /> : null
 						}
 					</div>
 				))

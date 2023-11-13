@@ -6,7 +6,7 @@ import styled from 'styled-components';
 interface StyleProps {
   fontFamily?: string;
   fontSize?: string;
-  textAlign?: string;
+  $textAlign?: string;
   fontStyle?: string;
   fontDecoration?: string;
   fontWeight?: string;
@@ -21,7 +21,7 @@ const TextStyle = styled.div<StyleProps>`
     font-style: ${ props.fontStyle || 'unset' };
     font-size: ${ props.fontSize || '16px' };
     font-weight: ${ props.fontWeight || 'unset' };
-    text-align: ${ props.textAlign || 'left' };
+    text-align: ${ props.$textAlign || 'left' };
     line-height: ${ props.$lineHeight || 'unset' };
     color: ${ props.color || colors.grey.darker };
     ${ !!props.fontDecoration && `border-bottom: 1px solid ${ props.color };` }
@@ -32,14 +32,14 @@ const TextStyle = styled.div<StyleProps>`
 
     h1 {
       font-size: ${ props.fontSize || '44px' };
-      text-align: ${ props.textAlign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || '700' };
       line-height: ${ props.$lineHeight || '41px' };
     }
 
     h2 {
       font-size: ${ props.fontSize || '32px' };
-      text-align: ${ props.textAlign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || '700' };
       line-height: ${ props.$lineHeight || '41px' };
       
@@ -51,28 +51,28 @@ const TextStyle = styled.div<StyleProps>`
 
     h3 {
       font-size: ${ props.fontSize || '24px' };
-      text-align: ${ props.textAlign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
       font-weight: ${ props.fontFamily };
       line-height: ${ props.$lineHeight || '36px' } ;
 
       span {
         font-size: ${ props.fontSize || '2rem' };
-        text-align: ${ props.textAlign || 'left' };
+        text-align: ${ props.$textAlign || 'left' };
         font-weight: ${ props.fontWeight || 'unset' };
       }
     }
     
     h4 {
       font-size: ${ props.fontSize || '1.7rem' };
-      text-align: ${ props.textAlign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
     }
     
     p,
     pre {
       font-size: ${ props.fontSize || '16px' };
-      text-align: ${ props.textAlign || 'left' };
+      text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
 			line-height: ${ props.$lineHeight || '18px' } ;
     }
