@@ -53,3 +53,7 @@ export interface PayloadEventClasses {
 	title: string;
 	updated_date: string;
 }
+
+export interface EventClassesQuery {
+	is_publish?: boolean;
+}
