@@ -659,12 +659,22 @@ export default {
 			patientInfo: {
 				visitHoursPolicy: 'Visiting Hours & Policies',
 				ourEffort: 'Our Efforts to Keep You Safe'
-			}
+			},
+			ourHospitalsLabel: 'OUR HOSPITALS',
+			ourCompanyLabel: 'OUR COMPANY',
+			visitorPatientLabel: 'VISITOR & PATIENT INFORMATION',
+			followUsLabel: 'FOLLOW US',
+			getRSPIMobileLabel: 'GET RSPI MOBILE',
+			subscribeLabel: 'Stay Updated With Us',
+			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.'
 		},
 		medicalRecordReminder: {
 			heading: 'Get Access to Your Medical Visit Information',
 			btnLabel: 'Fill in Medical Record Data',
 			tooltipLabel: 'Make sure you have booked an appointment and visited the nearest RSPI.'
+		},
+		topNav: {
+			welcome: 'Welcome'
 		}
 	}
 } as const;

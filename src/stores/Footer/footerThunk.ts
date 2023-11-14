@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-	FooterCategories, GetFooterParams
-} from '@/interface';
+import { FooterCategories, FooterDetail, GetFooterParams } from '@/interface';
 import { endpoints } from '@/constant';
 import { thunkUtils } from '@/utils';
 
@@ -11,7 +9,7 @@ export const getFooterCategories = thunkUtils<FooterCategories[]>({
 	endpoint: endpoints.footerCategories,
 });
 
-export const getFooterSlug = thunkUtils<FooterCategories[], GetFooterParams>({
+export const getFooterSlug = thunkUtils<FooterDetail[], GetFooterParams>({
 	type: 'footer/footerSlug',
 	method: 'GET',
 	endpoint: endpoints.getFooter,

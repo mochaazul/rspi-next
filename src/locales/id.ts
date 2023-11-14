@@ -662,12 +662,22 @@ export default {
 			patientInfo: {
 				visitHoursPolicy: 'Tata Tertib & Waktu Berkunjung',
 				ourEffort: 'Upaya Kami Menjaga Anda Tetap Aman'
-			}
+			},
+			ourHospitalsLabel: 'OUR HOSPITALS',
+			ourCompanyLabel: 'OUR COMPANY',
+			visitorPatientLabel: 'VISITOR & PATIENT INFORMATION',
+			followUsLabel: 'FOLLOW US',
+			getRSPIMobileLabel: 'GET RSPI MOBILE',
+			subscribeLabel: 'Stay Updated With Us',
+			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.'
 		},
 		medicalRecordReminder: {
 			heading: 'Dapatkan Akses terhadap Informasi Kunjungan Medis Anda',
 			btnLabel: 'Isi Data Rekam Medis',
 			tooltipLabel: 'Pastikan Anda telah booking appointment dan melakukan kunjungan ke RSPI terdekat.'
+		},
+		topNav: {
+			welcome: 'Selamat datang'
 		}
 	},
 } as const;
