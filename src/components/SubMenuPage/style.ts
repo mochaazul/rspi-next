@@ -7,9 +7,13 @@ export const ItemStyle = styled.div`
   top: 0;
   opacity: 0;
   position: absolute;
-  left: 20px;
   z-index: 0;
   transition: all .3s;
+	left: 0;
+  
+  @media (min-width: 1024px) {
+    left: 20px;
+  }
 
   &.active {
     z-index: 1;
@@ -27,5 +31,9 @@ export const MenuItemStyle = styled.div`
   &.active, &:hover {
     background-color: ${ colors.paradiso.opacity10 };
     transition: all .2s;
+  }
+
+	&.active-mobile {
+    border-color: ${ colors.green.brandAccent };
   }
 `;

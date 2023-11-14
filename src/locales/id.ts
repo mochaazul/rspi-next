@@ -546,14 +546,16 @@ export default {
 				patientGenderPlaceholder: 'Jenis Kelamin ',
 				patientMedicalNumber: 'Nomor Rekam Medis',
 				patientMedicalNumberPlaceholder: 'Nomor Rekam Medis',
-				patientPhoneNumber: 'Nomor Telp',
-				patientPhoneNumberPlaceholder: 'Nomor Telp',
+				patientPhoneNumber: 'No. Telepon',
+				patientPhoneNumberPlaceholder: 'No. Telepon',
+				patientPhoneNumberLabelInfo: 'Jika ingin melakukan penggantian data terkait, silahkan mengunjungi RS Pondok Indah terdekat',
 				patientEmail: 'Email',
 				patientEmailPlaceholder: 'Email',
 				patientOldEmail: 'Email Lama',
 				patientOldEmailPlaceHolder: 'Email Lama',
 				patientNewEmail: 'Email Baru',
 				patientNewEmailPlaceHolder: 'Email Baru',
+				patientEmailLabelInfo: 'Anda belum bisa melakukan perubahan alamat email jika belum mempunyai nomor rekam medis'
 			},
 			securitySetting: {
 				heading: 'Pengaturan Keamanan',
@@ -563,8 +565,10 @@ export default {
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Simpan',
-				cancelBtnLabel: 'Pembatalan'
+				cancelBtnLabel: 'Batal'
 			},
+			medicalRecordLabel: 'Informasi Rekam Medis',
+			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)'
 		},
 		patientPortal: {
 			tabMenuLabel: [
@@ -659,6 +663,11 @@ export default {
 				visitHoursPolicy: 'Tata Tertib & Waktu Berkunjung',
 				ourEffort: 'Upaya Kami Menjaga Anda Tetap Aman'
 			}
+		},
+		medicalRecordReminder: {
+			heading: 'Dapatkan Akses terhadap Informasi Kunjungan Medis Anda',
+			btnLabel: 'Isi Data Rekam Medis',
+			tooltipLabel: 'Pastikan Anda telah booking appointment dan melakukan kunjungan ke RSPI terdekat.'
 		}
 	},
-} as const
+} as const;

@@ -548,12 +548,14 @@ export default {
 				patientMedicalNumberPlaceholder: 'Medical Record Number',
 				patientPhoneNumber: 'Phone Number',
 				patientPhoneNumberPlaceholder: 'Phone Number',
+				patientPhoneNumberLabelInfo: 'If you want to change your data, please visit the nearest Pondok Indah Hospital',
 				patientOldEmail: 'Old Email',
 				patientOldEmailPlaceHolder: 'Old Email',
 				patientNewEmail: 'New Email',
 				patientNewEmailPlaceHolder: 'New Email',
-				patientEmail: 'Email',
+				patientEmail: 'Email Address',
 				patientEmailPlaceholder: 'Email',
+				patientEmailLabelInfo: 'You can\'t change your email address if you don\'t have a medical record number'
 			},
 			securitySetting: {
 				emailLabel: 'Email',
@@ -564,6 +566,8 @@ export default {
 				saveBtnLabel: 'Save',
 				cancelBtnLabel: 'Cancel'
 			},
+			medicalRecordLabel: 'Medical Record Information',
+			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)'
 		},
 		patientPortal: {
 			tabMenuLabel: [
@@ -656,6 +660,11 @@ export default {
 				visitHoursPolicy: 'Visiting Hours & Policies',
 				ourEffort: 'Our Efforts to Keep You Safe'
 			}
+		},
+		medicalRecordReminder: {
+			heading: 'Get Access to Your Medical Visit Information',
+			btnLabel: 'Fill in Medical Record Data',
+			tooltipLabel: 'Make sure you have booked an appointment and visited the nearest RSPI.'
 		}
 	}
-} as const
+} as const;
