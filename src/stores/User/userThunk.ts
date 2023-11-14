@@ -89,6 +89,12 @@ export const updateProfile = thunkUtils<UserData, UpdateAvatarType>({
 	method: 'PUT',
 });
 
+export const updateAvatar = thunkUtils<UserData, UpdateAvatarType>({
+	type: 'auth/update-avatar',
+	endpoint: endpoints.updateAvatar,
+	method: 'PUT',
+});
+
 export const updateEmail = thunkUtils<UserData, UpdateAvatarType>({
 	type: 'auth/update-email',
 	endpoint: endpoints.updateEmail,

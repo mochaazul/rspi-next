@@ -36,7 +36,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 	};
 
 	if (selectedProfile && selectedProfile.phone && timeSlot && getDoctor()) {
-		return <Modal borderRadius='12px' visible={ visible } onClose={ onClose }>
+		return <Modal borderRadius='12px' visible={ visible } onClose={ onClose } width='w-full' containerClassName='m-4'>
 			<ConfirmationModalContainer >
 				<Text
 					text='Konfirmasi Booking Appointment'

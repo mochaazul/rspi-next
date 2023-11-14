@@ -115,7 +115,7 @@ export type NewPasswordPayload = {
 };
 
 export type UpdateAvatarType = {
-	image_url: string;
+	img_url: string;
 };
 
 export type UpdateProfileType = {

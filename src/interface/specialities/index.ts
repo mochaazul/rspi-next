@@ -46,3 +46,7 @@ export interface I_ClinicsResponse {
 	created_date: string;
 	updated_date: string;
 }
+
+export interface PayloadClinic {
+	hospital_code?: string;
+}

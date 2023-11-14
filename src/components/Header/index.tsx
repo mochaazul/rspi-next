@@ -21,6 +21,7 @@ const Header: React.FC = () => {
 
 	// TODO: migrate
 	// const userSelector = useTypedSelector<UserState>('user');
+	// const { patientProfile } = useTypedSelector<PatientState>('patient');
 	// const { user, userDetail } = userSelector;
 	// const { hospitals } = useTypedSelector<HospitalState>('hospital');
 	// const { facilityServices } = useTypedSelector<FacilityServicesState>('facilityServices');
@@ -279,7 +280,7 @@ const Header: React.FC = () => {
 									// 				className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponse.total_unread }</span>
 									// 		</a>
 									// 		<div className='flex text-white items-center'>
-									// 			<div>
+									// 			<div className='w-[50px] h-[50px] rounded-full mr-3 relative overflow-hidden cursor-pointer'>
 									// 				{
 									// 					!!userDetail?.img_url ?
 									// 						<img src={ userDetail?.img_url } alt={ userDetail.name } /> :

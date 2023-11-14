@@ -29,7 +29,7 @@ import { PatientState } from '@/interface/PatientProfile';
 import { getLastVisitHospital, getProfileDetail, uploadPhotoProfile } from '@/stores/PatientProfile';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { getAppointmentList, updateEmail, updateProfile } from '@/stores/actions';
-import { checkPin, removeUser as removeUserData, updateUserInfo } from '@/stores/User';
+import { checkPin, removeUser as removeUserData, updateAvatar, updateUserInfo } from '@/stores/User';
 import { splitDate } from '@/helpers/datetime';
 import PinModal from '@/components/PinModal';
 import { PinModalContainer } from '@/components/PinModal/style';
@@ -64,7 +64,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	const getProfile = useAppDispatch(getProfileDetail);
 	const getLastVisitedHospital = useAppDispatch(getLastVisitHospital);
 	const uploadPhotoPatient = useAppAsyncDispatch(uploadPhotoProfile);
-	const clikUpdateAvatar = useAppDispatch<UpdateAvatarType>(updateProfile);
+	const clikUpdateAvatar = useAppDispatch<UpdateAvatarType>(updateAvatar);
 	const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
 	const clikUpdateEmail = useAppDispatch<UpdateEmailType>(updateEmail);
 	const pinDispatch = useAppDispatch(checkPin);
@@ -151,9 +151,8 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 		formImg.append('upload', tempImage ?? '');
 		const responseData = await uploadPhotoPatient({ payload: formImg });
 		if (responseData.stat_msg === 'Success') {
-			const urlImage = 'https://rebel-env.s3.us-west-2.amazonaws.com/rspi/dev/rspi-api/uploads/';
 			await clikUpdateAvatar({
-				payload: { image_url: urlImage + responseData.data }
+				payload: { img_url: responseData.data }
 			});
 		}
 	};
@@ -280,8 +279,8 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 									<div className='flex items-center'>
 										<div className='flex-shrink-0 w-12 h-12 lg:w-[60px] lg:h-[60px] rounded-full mr-4 lg:mr-[18px] relative overflow-hidden cursor-pointer'>
 											<img
-												src={ tempImage ? URL.createObjectURL(tempImage) : Images.CustomerReviewCustAvatar }
-												alt={ tempImage ? 'Temp Image' : Images.CustomerReviewCustAvatar }
+												src={ tempImage ? URL.createObjectURL(tempImage) : patientProfile.img_url }
+												alt={ tempImage ? 'Temp Image' : patientProfile.img_url }
 												className='w-full h-full object-cover'
 											/>
 											<div className='w-full h-full absolute flex items-center justify-center upload-mask top-0' onClick={ () => uploadFileRef.current?.click() }>
@@ -402,8 +401,8 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 									<div className='flex flex-row gap-x-4 items-center w-full'>
 										<div className='w-[82px] md:w-[100px] h-[82px] md:h-[100px] rounded-full overflow-hidden flex-shrink-0'>
 											<img
-												src={ tempImage ? URL.createObjectURL(tempImage) : Images.CustomerReviewCustAvatar }
-												alt={ tempImage ? 'Temp Image' : Images.CustomerReviewCustAvatar }
+												src={ tempImage ? URL.createObjectURL(tempImage) : patientProfile.img_url }
+												alt={ tempImage ? 'Temp Image' : patientProfile.img_url }
 												className='w-full h-full object-cover'
 											/>
 										</div>
