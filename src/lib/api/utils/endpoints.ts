@@ -32,7 +32,7 @@ const endpointData = {
 	profile: { path: '/patients/profile', method: 'GET' },
 	facilities: { path: '/facilities', method: 'GET' },
 	centerOfExcellences: { path: '/center-of-excellences', method: 'GET' },
-	awards: { path: '/awards/awards', method: 'GET' }, // TODO: ketika BE sudah deploy perbaikannya, ganti path menjadi /awards
+	awards: { path: '/awards', method: 'GET' },
 	newsFacilities: { path: '/news-facilities', method: 'GET' },
 	facilityHospital: { path: '/facilities-hospitals/facility', method: 'GET' },
 	newsCenterOfExcellence: { path: '/center-of-excellences-news/news', method: 'GET' },
