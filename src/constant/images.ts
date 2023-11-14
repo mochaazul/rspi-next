@@ -3,7 +3,6 @@ import Slider1 from '/public/images/slider1.png';
 import Form from '/public/images/form.png';
 import LogoRSPI from '/public/images/logo_rspi.svg';
 import Profile from '/public/images/profile.svg';
-import RSPIImage1 from '/public/images/RSPI_image_1.jpg';
 import GooglePlay from '/public/images/google-play.png';
 import AppStore from '/public/images/app-store.png';
 import FacebookLogo from '/public/svg/facebook.svg';
@@ -59,7 +58,7 @@ export default {
 	Slider1,
 	LogoRSPI,
 	Form,
-	AuthRightBG: RSPIImage1,
+	AuthRightBG: '/images/RSPI_image_1.jpg',
 	Profile,
 	GooglePlay,
 	AppStore,

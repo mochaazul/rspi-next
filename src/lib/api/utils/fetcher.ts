@@ -1,6 +1,6 @@
 import endpoints, { EndpointKey } from './endpoints';
 import { Pagination, ResponseType as SuccessResponse } from '@/interface';
-import { generateQueryString } from '@/helpers';
+import { cookiesHelper, generateQueryString } from '@/helpers';
 import { config } from '@/constant/config';
 
 export type ApiOptions = {
@@ -18,10 +18,11 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		const fetchOpt: Record<string, any> = {};
 		const safeQueryParam = options?.query ?? {};
 		const safePagination = options?.pagination ?? {};
-		const Authorization = 'TODO IMPLEMENTED USING COOKIEES';
+		const Authorization = await cookiesHelper.getToken();
+
 		const headers: Record<string, any> = {
 			'content-language': 'idn',
-			Authorization,
+			...Authorization ? { Authorization } : {},
 			'X-Channel': 'website',
 		};
 
