@@ -29,7 +29,7 @@ const errorHandlerMiddleware: Middleware =
 		}
 		if (!navigator.onLine && action.type.includes('rejected')) {
 			// your cool toast
-			alert('check your internet connection');
+			// alert('check your internet connection');
 		}
 
 		return next(action);

@@ -91,7 +91,7 @@ const groupTimeFrame = (schedules: I_MasterDoctorClinicSchedule[]) => {
 const ItemChildren = ({ clinics }: { clinics: I_MasterDoctorClinic[]; }) => {
 	return (
 		<ItemChildrenStyle>
-			{ clinics.map((clinic, index) => (
+			{ clinics?.map((clinic, index) => (
 				<div key={ index } className={ index < clinics.length - 1 ? 'border-bottom' : '' }>
 					<div>
 						<Text

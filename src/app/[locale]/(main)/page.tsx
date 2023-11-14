@@ -17,6 +17,8 @@ import AccreditationAwards from '@/components/PageComponents/LandingPageSections
 import { getAwards } from '@/lib/api/awards';
 import MobileAppBanner from '@/components/PageComponents/LandingPageSections/MobileAppBanner';
 
+import { isMobile } from 'react-device-detect';
+
 export default async function Home() {
 	const coeRes = await getCoe();
 	const banner = await getBanner({ is_publish: true });
@@ -28,20 +30,56 @@ export default async function Home() {
 	const awards = await getAwards({ is_publish: true }, { page: 1, limit: 8 });
 
 	const currentLang = getCurrentLocale();
+
+	const arrayBanner = () => {
+		if (currentLang === 'id') {
+			if (isMobile) {
+				return banner.data.filter(img => img.img_url_mobile_idn !== '').map((image: any, index: any) => {
+					return <>
+						<a href={ image.url_link_idn } >
+							<img className='h-[85vh] max-sm:h-[360px] object-cover' key={ index } src={ image.img_url_mobile_idn } alt='slider' />
+						</a>;
+					</>;
+				});
+			} else {
+				return banner.data.filter(img => img.img_url_idn !== '').map((image: any, index: any) => {
+					return <>
+						<a href={ image.url_link_idn } >
+							<img className='h-[85vh] max-sm:h-[360px] object-cover' key={ index } src={ image.img_url_idn } alt='slider' />
+						</a>;
+					</>;
+				});
+			}
+		} else {
+			if (isMobile) {
+				return banner.data.filter(img => img.img_url_mobile_en !== '').map((image: any, index: any) => {
+					return <>
+						<a href={ image.url_link_en } >
+							<img className='h-[85vh] max-sm:h-[360px] object-cover' key={ index } src={ image.img_url_mobile_en } alt='slider' />
+						</a>;
+					</>;
+				});
+			} else {
+				return banner.data.filter(img => img.img_url_en !== '').map((image: any, index: any) => {
+					return <>
+						<a href={ image.url_link_en } >
+							<img className='h-[85vh] max-sm:h-[360px] object-cover' key={ index } src={ image.img_url_en } alt='slider' />
+						</a>;
+					</>;
+				});
+			}
+		}
+	};
+
 	return (
 		<LandingPageStyle>
 			<CustomCarousel>
-				{ banner.data.map((image: any, index: any) => {
-					return <a href={ currentLang === 'id' ? image.url_link_idn : image.url_link_en || '#' } key={ `banner-${ index }` } >
-						<img className='h-[85vh] max-sm:h-[360px] object-cover max-sm:hidden' src={  currentLang === 'id' ? image.image_url_idn : image.image_url_en } alt='slider' />
-						<img className='h-[85vh] max-sm:h-[360px] object-cover lg:hidden' src={  currentLang === 'id' ? image.image_url_mobile_idn : image.img_url_mobile_en } alt='slider' />
-					</a>;
-				}) }
+				{ arrayBanner() }
 			</CustomCarousel>
 			<LangWrapper>
-				<ServicesTabs hospitals={ hospitals.data } clinics={ clinics.data }/>
+				<ServicesTabs hospitals={ hospitals.data } clinics={ clinics.data } />
 				<CentreOfExcellence data={ coeRes.data } />
-				<FacilitiesServices facilityServices={ facilitiesServices.data }/>
+				<FacilitiesServices facilityServices={ facilitiesServices.data } />
 				<PromoPackages events={ events.data } />
 				<NewsHealthArticles articles={ articles.data } />
 				<CustomerReview />

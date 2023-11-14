@@ -9,6 +9,8 @@ import dayjs from 'dayjs';
 import { useTypedSelector } from '@/hooks';
 import { useState } from 'react';
 import { splitDate } from '@/helpers/datetime';
+import navigation from '@/helpers/navigation';
+import { isMobile } from 'react-device-detect';
 
 type Props = {
 	visible: boolean,
@@ -58,7 +60,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 						fontSize='14px'
 						lineHeight='20px'
 					/>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Nama : '
 							fontWeight='500'
@@ -72,7 +74,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							lineHeight='20px'
 						/>
 					</div>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Tanggal Lahir : '
 							fontWeight='500'
@@ -86,7 +88,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							lineHeight='20px'
 						/>
 					</div>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Nomor HP : '
 							fontWeight='500'
@@ -100,7 +102,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							lineHeight='20px'
 						/>
 					</div>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Email : '
 							fontWeight='500'
@@ -114,7 +116,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							lineHeight='20px'
 						/>
 					</div>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Penjamin : '
 							fontWeight='500'
@@ -139,7 +141,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 								fontSize='14px'
 								lineHeight='20px'
 							/>
-							<div className='grid grid-cols-[150px_auto]'>
+							<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 								<Text
 									text='Nama : '
 									fontWeight='500'
@@ -153,7 +155,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 									lineHeight='20px'
 								/>
 							</div>
-							<div className='grid grid-cols-[150px_auto]'>
+							<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 								<Text
 									text='Nomor : '
 									fontWeight='500'

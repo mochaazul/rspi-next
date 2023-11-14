@@ -1,4 +1,4 @@
-import { colors } from '@/constant';
+import { colors } from 'constant';
 import styled from 'styled-components';
 
 export const CalendarContainer = styled.div`
@@ -15,12 +15,29 @@ export const CalendarContainer = styled.div`
   .react-calendar__tile abbr {
     display: none;
   }
-  .react-calendar__tile--active{
-    background-color: ${ colors.green.brandAccent };
-    border-radius: 50%;
-    color: white;
+ 
+.react-calendar__tile--active{
+    .calendar-item-label{
+      background-color: ${ colors.green.brandAccent };
+      border-radius: 50%;
+      width:  40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
     p{
       color: white;
+    }
+  }
+ .react-calendar__tile{
+    height: 44px;
+    width: 44px;
+    abbr{
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
     }
   }
   .react-calendar__month-view__days__day--neighboringMonth{
@@ -30,17 +47,6 @@ export const CalendarContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .react-calendar__tile{
-    padding: 10px;
-    height: 44px;
-    width: 44px;
-    abbr{
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-    }
   }
 
   .react-calendar__month-view__weekdays{

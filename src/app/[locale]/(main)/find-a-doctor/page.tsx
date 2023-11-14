@@ -49,7 +49,7 @@ export const AccordionFilterWrapper = ({ title, children, hideToggler }: { title
 const FindADoctor = (props: BreadcrumbsProps) => {
 	const hospitalSelector = useTypedSelector<HospitalState>('hospital');
 	const { masterDoctors, pagination, loading } = useTypedSelector<FindDoctorState>('findDoctor');
-	const { specialities } = useTypedSelector<I_SpecialitiesState>('specialities');
+	const { specialities, clinics } = useTypedSelector<I_SpecialitiesState>('specialities');
 
 	const getMasterDoctor = useAppDispatch<I_MasterDoctorParams>(getAllDoctor);
 	const loadMoreMasterDoctor = useAppDispatch<I_MasterDoctorParams>(loadMoreDoctor);
@@ -130,11 +130,11 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 					// we need this condition since the value stored in params was string boolean "true"|"false" and we want to render it as "Telemedicine" text
 					JSON.parse(values) && mapped.push({ id: 'Telemedicine', text: 'Telemedicine', key: entry });
 				} else
-					if (entry === 'specialty_category' && values) {
+					if (entry === 'clinic_code' && values) {
 						// we need this condition to cover the rest of params but not keyword params (search doctor by name)
 						const vals = values.split(',').map(item => {
-							const sp = specialities.find(sp => sp.specialty_code === item);
-							return { id: sp?.specialty_code ?? '-', text: sp?.speciality ?? '-', key: entry };
+							const sp = clinics.find(sp => sp.clinic_code === item);
+							return { id: sp?.clinic_code ?? '-', text: sp?.clinic_name ?? '-', key: entry };
 						});
 						mapped.push(...vals);
 					}
@@ -150,7 +150,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 
 	const hasSearchParams = () => {
 		const searchParamObj = Object.fromEntries(searchParams);
-		const paramFound = !_.isEmpty(searchParamObj['specialty_category']) || !_.isEmpty(searchParamObj['hospital']) || searchParamObj['telemedicine'] === 'true';
+		const paramFound = !_.isEmpty(searchParamObj['clinic_code']) || !_.isEmpty(searchParamObj['hospital']) || searchParamObj['telemedicine'] === 'true';
 		return paramFound;
 	};
 
@@ -245,7 +245,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 								fontWeight='700'
 								lineHeight='17px'
 								className='mb-2 mt-6 sm:hidden'
-								text={ `${ DoctorDataSamples.length } ${ language.label.doctorFound }` }
+								text={ `${ doctorCount() } ${ language.label.doctorFound }` }
 							/>
 						</div>
 						{ /* Doctors result card */ }
@@ -273,7 +273,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 						backdropColor={ colors.black.opacity64 }
 					>
 						<div className='relative flex flex-col'>
-							<div className='flex justify-between items-center'>
+							<div className='flex justify-between items-center mb-4'>
 								<Text
 									fontSize='16px'
 									lineHeight='19px'
@@ -285,7 +285,6 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 								/>
 								<Icons.X color={ colors.grey.darker } size={ 20 } className='cursor-pointer' onClick={ () => setFilterModalVisible(false) } />
 							</div>
-							<div className='x-spacer my-4' />
 
 							{ /* Filter form */ }
 							<div>

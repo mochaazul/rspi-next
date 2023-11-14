@@ -134,13 +134,12 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					phone: cleanUpMask(phone.value)
 				};
 				// TODO: migrate
-				// await clikUpdateProfile({
+				// const response = await clikUpdateProfile({
 				// 	payload
 				// });
-				setError('');
+				// if (response.payload.stat_msg === 'Success') {
 				setDisabledEmail(false);
 				// await getUserDetail();
-				// End migrate
 				onClose({
 					dob: dob.value,
 					email: email.value,
@@ -148,6 +147,9 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					name: name.value,
 					phone: phone.value
 				});
+				// TODO: migrate
+				// }
+				// setError(response.payload.stat_msg);
 			}
 			setFieldsValue({
 				email: '',

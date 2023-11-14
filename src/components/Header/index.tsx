@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { Images, icons, colors } from '@/constant';
 import { Text, Button, MainNavLanguage } from '@/components';
+import { PatientState } from '@/interface/PatientProfile';
 
 import HeaderStyle from './style';
 import Link from 'next/link';
@@ -280,13 +281,13 @@ const Header: React.FC = () => {
 									// 				className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponse.total_unread }</span>
 									// 		</a>
 									// 		<div className='flex text-white items-center'>
-									// 			<div className='w-[50px] h-[50px] rounded-full mr-3 relative overflow-hidden cursor-pointer'>
-									// 				{
-									// 					!!userDetail?.img_url ?
-									// 						<img src={ userDetail?.img_url } alt={ userDetail.name } /> :
-									// 						<Images.Profile />
-									// 				}
-									// 			</div>
+									// <div className='w-[50px] h-[50px] rounded-full mr-3 relative overflow-hidden cursor-pointer'>
+									// 	{
+									// 		!!patientProfile?.img_url ?
+									// 			<img src={ patientProfile?.img_url } alt={ patientProfile.name } /> :
+									// 			<Images.Profile />
+									// 	}
+									// </div>
 									// 			<div className='ml-[24px] cursor-pointer'>
 									// 				<Image src={ icons.ArrowDown } alt="" className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
 									// 			</div>
@@ -344,16 +345,16 @@ const Header: React.FC = () => {
 								</div>
 							}
 							{ isLoggedIn ? null :
-								<div className='nav-menu' onClick={ handleLoginClick }>
-									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
-								</div>
-							}
-							{ isLoggedIn ? null :
-								<div className='nav-menu' onClick={ handleLoginClick }>
-									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
-								</div>
-							}
-							{ isLoggedIn ? null :
+								// 	<div className='nav-menu' onClick={ handleLoginClick }>
+								// 		<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
+								// 	</div>
+								// }
+								// { isLoggedIn ? null :
+								// 	<div className='nav-menu' onClick={ handleLoginClick }>
+								// 		<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
+								// 	</div>
+								// }
+								// { isLoggedIn ? null :
 								<div
 									className='nav-menu'
 									onClick={ () => handleNavigateSideBar('/register') }>
