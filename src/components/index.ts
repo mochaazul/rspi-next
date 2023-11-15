@@ -1,9 +1,7 @@
 import Header from './Header';
 import Button from './Button';
 import Text from './Text';
-import Form from './Form';
 import Label from './Label';
-import TextField from './TextField';
 import TextFieldPin from './TextFieldPin';
 import TextArea from './TextArea';
 import CustomCarousel from './Carousel';
@@ -35,9 +33,7 @@ export {
 	Header,
 	Button,
 	Text,
-	Form,
 	Label,
-	TextField,
 	TextFieldPin,
 	TextArea,
 	CustomCarousel,

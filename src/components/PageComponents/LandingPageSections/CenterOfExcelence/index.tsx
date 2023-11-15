@@ -5,13 +5,12 @@ import Link from 'next/link';
 
 import Card, { CardContent, CardFooter, CardsScrollHorizontal } from '@/components/ui/Card';
 import { colors } from '@/constant';
-import { CenterOfExcellenceDetail, CenterOfExcellenceState } from '@/interface';
+import { CenterOfExcellenceDetail } from '@/interface';
 
 import { WrapperCentreOfExcellence } from './style';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import { useScopedI18n } from '@/locales/client';
-import Image from 'next/image';
 import { icons } from '@/constant';
 
 const CentreOfExcellence = ({ data }:{ data: CenterOfExcellenceDetail[] }) => {
@@ -39,7 +38,7 @@ const CentreOfExcellence = ({ data }:{ data: CenterOfExcellenceDetail[] }) => {
 							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default }>
 								{ t('allItemBtnLabel') }
 							</Text>
-							<icons.LongArrowRight alt='arrow-right' className='svg-green ml-2' fill/>
+							<icons.LongArrowRight alt='arrow-right' className='svg-green ml-2'/>
 						</div>
 					</Link>
 				</div>

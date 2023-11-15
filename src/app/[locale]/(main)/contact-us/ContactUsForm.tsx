@@ -32,7 +32,7 @@ const ContactUsForm = ({ hospitalSelector }: PropsType) => {
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
 
 	const recaptchaRef = useRef(null);
-	const SITE_KEY = process.env.REACT_APP_reCAPTCHA_SITE_KEY;
+	const SITE_KEY = process.env.NEXT_PUBLIC_reCAPTCHA_SITE_KEY;
 
 	const hospitalArr = hospitalSelector?.hospitals?.map(hospital => ({ key: hospital?.name, value: hospital?.hospital_code, label: hospital?.name }));
 

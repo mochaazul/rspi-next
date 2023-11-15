@@ -45,6 +45,7 @@ const endpointData = {
 	events: { path: '/events', method: 'GET' },
 	article: { path: '/news', method: 'GET' },
 	getFooter: { path: '/footer-pages', method: 'GET' },
+	masterDoctor: { path: '/doctors/master', method: 'GET' }
 
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },

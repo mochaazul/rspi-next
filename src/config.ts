@@ -8,20 +8,20 @@
 
 const environment = {
 	dev: {
-		baseUrl: process.env.REACT_APP_BASE_URL_DEV,
+		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_DEV,
 		version: '1.0.81'
 	},
 	staging: {
-		baseUrl: process.env.REACT_APP_BASE_URL_STAGING,
+		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_STAGING,
 		version: '1.0.60'
 	},
 	prod: {
-		baseUrl: process.env.REACT_APP_BASE_URL_PROD,
+		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_PROD,
 		version: 'n/a'
 	}
 };
 
-export const appStage = process.env.REACT_APP_STAGE as keyof typeof environment;
+export const appStage = process.env.NEXT_PUBLIC_STAGE as keyof typeof environment;
 
 export const config = environment[appStage];
 

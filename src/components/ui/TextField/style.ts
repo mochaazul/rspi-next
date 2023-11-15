@@ -10,7 +10,7 @@ interface TextFieldType {
   iconPosition?: 'left' | 'right';
   iconName?: keyof typeof icons;
   featherIcon?: keyof typeof FeatherIcons;
-  iconColor?: string;
+  $iconColor?: string;
   isNumber?: boolean,
   mask?: string | (string | RegExp)[];
 }
@@ -37,6 +37,14 @@ export const TextFieldWrapper = styled.div<StyledTextFieldType>`
   &:focus {
     outline: 1px solid ${ colors.green.toscaLight }
   }
+
+  input{
+    padding: 12px 0px;
+    
+    // we only need to worry about the padding when the icon is on the right, since the padding on the left was provided by element spacing 
+    // when icon is on the left
+    ${props => props.$iconName || props.featherIcon && props.$iconPosition === 'right'  && 'padding-left: 18px;'}
+  }
   
   input {
     padding-left: ${ props => (!!props.$iconName || !!props.featherIcon) && (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '43px' };
@@ -46,7 +54,6 @@ export const TextFieldWrapper = styled.div<StyledTextFieldType>`
 
 export const Input = styled.input<InputType>`
   width: 100%;
-  padding: 12px 18px;
   font-family: var(--font-family);
   ${ GlobalAllTransition5ms }
   &:focus {
