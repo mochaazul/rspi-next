@@ -17,7 +17,8 @@ export interface BannerDetail {
 	img_url_mobile_en?: string;
 	img_url_mobile_idn?: string;
 	is_publish?: boolean;
-	url_link?: string;
+	url_link_idn?: string;
+	url_link_en?: string;
 	created_date?: string;
 	updated_date?: string;
 	image_url?: string;

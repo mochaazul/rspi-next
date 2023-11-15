@@ -79,6 +79,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	const [showModalSuccessUpdateEmail, setShowModalSuccessUpdateEmail] = useState<boolean>(false);
 	const [showModalNewEmail, setShowModalNewEmail] = useState<boolean>(false);
 	const [pinModalVisible, setPinModalVisible] = useState<boolean>(false);
+	const [isLoadingUploadAvatar, setIsLoadingUploadAvatar] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 
 	const removeUser = useAppDispatch(removeUserData);
@@ -147,6 +148,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	};
 
 	const clickUploadPhotoPatient = async () => {
+		setIsLoadingUploadAvatar(true);
 		const formImg = new FormData();
 		formImg.append('upload', tempImage ?? '');
 		const responseData = await uploadPhotoPatient({ payload: formImg });
@@ -155,6 +157,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 				payload: { img_url: responseData.data }
 			});
 		}
+		setIsLoadingUploadAvatar(false);
 	};
 
 	const clickUpdateProfile = async (evt: React.FormEvent<HTMLFormElement>) => {
@@ -466,6 +469,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 														hoverTheme='primary'
 														label={ uploadPhotoLabel }
 														onClick={ clickUploadPhotoPatient }
+														disabled={ isLoadingUploadAvatar }
 													/>
 												</div>
 											</div>

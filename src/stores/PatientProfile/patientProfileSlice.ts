@@ -39,7 +39,7 @@ export const patientProfileSlice = createSlice({
 		});
 		builder.addCase(getLastVisitHospital.fulfilled, (state, action) => {
 			state.loading = false;
-			const lastVisit = getLastVisitedHospitalHelper(action.payload.data);
+			const lastVisit = getLastVisitedHospitalHelper(action.payload.data || []);
 			state.lastVisitedHospital = lastVisit;
 			state.error = initialState.error;
 		});
