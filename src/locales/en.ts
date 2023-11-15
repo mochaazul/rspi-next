@@ -31,7 +31,8 @@ export default {
 		tokenValidation: {
 			failed: 'Validation Failed',
 			success: 'Validation Success',
-			loading: 'Please Wait'
+			loading: 'Please Wait',
+			backToLogin: 'Back to Login'
 		}
 	},
 	page: {
@@ -394,7 +395,17 @@ export default {
 		forgotPassword: {
 			heading: 'Forgot Password',
 			subHeading: 'Please enter your registered email, we will send a password reset link to your registered email',
-			resetBtnlabel: 'Send Request'
+			resetBtnlabel: 'Send Request',
+			successMessage: {
+				heading: 'Change Password Link Has Been Sent',
+				subHeading: 'Check your email again',
+				subHeadingTail: 'to continue the password change process',
+				buttonLabel: 'Okay'
+			},
+			form: {
+				emailLabel: 'Email',
+				emailPlaceholder: 'Email'
+			}
 		},
 		resetPassword: {
 			heading: 'Change Password',
@@ -658,4 +669,4 @@ export default {
 			}
 		}
 	}
-} as const
+} as const;

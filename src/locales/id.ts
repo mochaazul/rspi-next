@@ -31,7 +31,8 @@ export default {
 		tokenValidation: {
 			failed: 'Validasi Gagal',
 			success: 'Validasi Berhasil',
-			loading: 'Mohon Tunggu Sebentar'
+			loading: 'Mohon Tunggu Sebentar',
+			backToLogin: 'Kembali ke halaman login'
 		}
 	},
 	page: {
@@ -395,7 +396,17 @@ export default {
 		forgotPassword: {
 			heading: 'Lupa Password',
 			subHeading: 'Silahkan masukan email terdaftar Anda, kami akan kirimkan tautan melalui email terdaftar untuk me-reset password Anda',
-			resetBtnlabel: 'Kirim Permintaan'
+			resetBtnlabel: 'Kirim Permintaan',
+			successMessage: {
+				heading: 'Link Ubah Kata Sandi Sudah Dikirim',
+				subHeading: 'Periksa kembali email Anda',
+				subHeadingTail: 'untuk melanjutkan proses ubah kata sandi',
+				buttonLabel: 'Okay'
+			},
+			form: {
+				emailLabel: 'Email',
+				emailPlaceholder: 'Email'
+			}
 		},
 		resetPassword: {
 			heading: 'Ubah Kata Sandi',
@@ -661,4 +672,4 @@ export default {
 			}
 		}
 	},
-} as const
+} as const;
