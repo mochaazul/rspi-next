@@ -5,19 +5,19 @@ import { useRouter } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
 
 import { Images, colors } from '@/constant';
-import { PinType, ResponseStatus } from '@/interface';
-import { useScopedI18n } from '@/locales/client';
 import Button from '@/components/ui/Button';
 import Form from '@/components/ui/Form';
 import NotificationPanel from '@/components/ui/NotificationPanel';
 import Text from '@/components/ui/Text';
-import useSession from '@/session/client';
-import { createPin } from '@/lib/api/auth';
+import { PinType, ResponseStatus } from '@/interface';
+import { useScopedI18n } from '@/locales/client';
+import { updatePin } from '@/lib/api/auth';
 import { PinSchema } from '@/validator/auth';
+import useSession from '@/session/client';
 
 import PinPageStyle, { Box } from './style';
 
-const PinPage = () => {
+const ResetPinPage = () => {
 	const navigate = useRouter();
 
 	const [notifVisible, setNotifVisible] = useState<boolean>(false);
@@ -36,7 +36,7 @@ const PinPage = () => {
 		onSubmit: async (formPin: PinType) => {
 			setLoadingUser(true);
 
-			const response = await createPin(formPin);
+			const response = await updatePin(formPin);
 
 			setNotifVisible(true);
 
@@ -72,9 +72,9 @@ const PinPage = () => {
 				<div className='mb-[32px]'>
 					<Images.LogoRSPI />
 				</div>
-				<Text text={ languages('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
+				<Text text={ languages('headingReset') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
 				<Text
-					text={ languages('subHeading') }
+					text={ languages('subHeadingReset') }
 					fontSize={ '20px' }
 					lineHeight={ '24px' }
 					fontWeight={ '400' }
@@ -88,7 +88,7 @@ const PinPage = () => {
 						<NotificationPanel
 							mode={ errorUser?.stat_msg ? 'error' : 'success' }
 							visible={ notifVisible && !loadingUser }
-							text={ errorUser?.stat_msg ? errorUser?.stat_msg : session?.token ? languages('notification.onSuccessMsg') : languages('notification.onErrorMsg') }
+							text={ errorUser?.stat_msg ? errorUser?.stat_msg : session?.token ? languages('notification.onSuccessMsgUpdatePin') : languages('notification.onErrorMsg') }
 							onClickRightIcon={ handleNotifOnClose }
 						/>
 					</div>
@@ -111,13 +111,13 @@ const PinPage = () => {
 							className='input'
 							digitLength={ 6 }
 							semiSecure={ false }
-							password={ true }
+							onChangeValue={ onChangeInput }
 							label={ languages('form.pinFieldLabel') }
 							errorMessage={ formikPin.errors.pin }
 							isError={ !!formikPin.errors.pin }
 							value={ formikPin.values.pin }
 							type='password'
-							onChangeValue={ onChangeInput }
+							password
 						/>
 					</Form.FormGroup>
 					<Form.FormGroup className='group-wrapper w-full'>
@@ -127,13 +127,13 @@ const PinPage = () => {
 							className='input'
 							digitLength={ 6 }
 							semiSecure={ false }
-							password={ true }
+							onChangeValue={ onChangeInput }
 							label={ languages('form.pinConfirmLabel') }
 							errorMessage={ formikPin.errors.confirm_pin }
 							isError={ !!formikPin.errors.confirm_pin }
 							value={ formikPin.values.confirm_pin }
 							type='password'
-							onChangeValue={ onChangeInput }
+							password
 						/>
 					</Form.FormGroup>
 					<Button
@@ -142,7 +142,7 @@ const PinPage = () => {
 						disabled={ loadingUser }
 						type='submit'
 					>
-						{ loadingUser ? languages('form.submitBtnLabel.loading') : languages('form.submitBtnLabel.default') }
+						{ loadingUser ? languages('form.changeBtnLabel.loading') : languages('form.changeBtnLabel.default') }
 					</Button>
 				</Form>
 			</Box>
@@ -150,4 +150,4 @@ const PinPage = () => {
 	);
 };
 
-export default PinPage;
+export default ResetPinPage;

@@ -439,6 +439,7 @@ export default {
 			heading: 'Buat PIN Baru',
 			headingReset: 'Ubah PIN',
 			subHeading: 'Silahkan buat 6 digit PIN Anda',
+			subHeadingReset: 'Masukkan 6 digit angka PIN Anda',
 			notification: {
 				onSuccessMsg: 'Berhasil membuat PIN',
 				onErrorMsg: 'Terdapat Error',

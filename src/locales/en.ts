@@ -438,6 +438,7 @@ export default {
 			heading: 'Create New PIN',
 			headingReset: 'Change PIN',
 			subHeading: 'Please create your 6-digit PIN',
+			subHeadingReset: 'Enter your 6-digit PIN',
 			notification: {
 				onSuccessMsg: 'Successfully created PIN',
 				onErrorMsg: 'Error occurred',

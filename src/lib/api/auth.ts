@@ -68,3 +68,7 @@ export const verifyEmail = async (token: string) => {
 export const createPin = async (formPin: PinType) => {
 	return fetcher<any>('createPin', { body: formPin });
 };
+
+export const updatePin = async (formPin: PinType) => {
+	return fetcher<any>('updatePin', { body: formPin });
+};

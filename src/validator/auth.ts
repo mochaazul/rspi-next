@@ -48,7 +48,7 @@ export const RegisterSchema = yup.object().shape({
 });
 
 export const PinSchema = yup.object().shape({
-	pin: DefaultPinYup.label('Pin'),
-	confirm_pin: DefaultPinYup.label('Confirmation pin')
-		.oneOf([yup.ref('pin')], 'Pin do not match')
+	pin: DefaultPinYup.label('PIN'),
+	confirm_pin: DefaultPinYup.label('Confirmation PIN')
+		.oneOf([yup.ref('pin')], 'PIN do not match')
 });
