@@ -7,18 +7,6 @@ export const verifyChangeEmailToken = (token: string) => {
 	return fetcher<any>('verifyChangeEmailToken', { query: { token } });
 };
 
-export const newPassword = (payload: NewPasswordPayload, token: string) => {
-	return fetcher<any>('newPassword', { body: payload, query: { token } });
-};
-
-export const register = (payload: RegisterType) => {
-	return fetcher<UserData>('register', { body: payload });
-};
-
-export const verifyEmail = (token: string) => {
-	return fetcher<any>('verifyEmail', { query: { token } });
-};
-
 export const getUserProfile = () => {
 	return fetcher<UserData>('profile');
 };

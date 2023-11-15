@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useFormik, FormikProps } from 'formik';
@@ -111,6 +111,10 @@ const ResetPassword = () => {
 		}));
 	};
 
+	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+		formikResetPassword.setFieldValue(e.target.id, e.target.value);
+	}, []);
+
 	if (tokenVerified)
 		return (
 			<ResetPasswordStyle>
@@ -150,7 +154,7 @@ const ResetPassword = () => {
 										id='new_password'
 										placeholder={ languages('resetForm.newPasswordPlaceHolder') }
 										value={ formikResetPassword.values.new_password }
-										onChange={ e => formikResetPassword.setFieldValue(e.target.id, e.target.value) }
+										onChange={ onChangeInput }
 										errorMessage={ formikResetPassword.errors.new_password }
 										isError={ !!formikResetPassword.errors.new_password }
 										label={ languages('resetForm.newPasswordLabel') }
@@ -166,7 +170,7 @@ const ResetPassword = () => {
 										placeholder={ languages('resetForm.newPasswordConfirmationPlaceholder') }
 										label={ languages('resetForm.newPasswordConfirmationLabel') }
 										value={ formikResetPassword.values.confirm_password }
-										onChange={ e => formikResetPassword.setFieldValue(e.target.id, e.target.value) }
+										onChange={ onChangeInput }
 										type={ inputPasswordType.confirm_password }
 										iconName={ inputPasswordType.confirm_password === 'password' ? 'EyeClosed' : 'Eye' }
 										iconPosition='right'

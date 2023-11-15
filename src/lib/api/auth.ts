@@ -5,7 +5,8 @@ import {
 	NewPasswordPayload,
 	LoginType,
 	ResendEmailVerificationType,
-	UserData
+	UserData,
+	RegisterType
 } from '@/interface';
 import { cookiesHelper } from '@/helpers';
 
@@ -40,4 +41,32 @@ export const verifyResetToken = (token: string) => {
 
 export const setNewPassword = (token: string, formNewPassword: NewPasswordPayload) => {
 	return fetcher<any>('newPassword', { body: formNewPassword, query: { token } });
+};
+
+export const register = async (formRegister: RegisterType) => {
+	// builder.addCase(register.fulfilled, (state, action) => {
+	// 			state.loading = false;
+	// 			state.user = action.payload.data;
+	// 			state.error = initialState.error;
+	// 			state.registerOnboard = true;
+	// 			localStorage.setTokenUser(action.payload.data.token || '');
+	// 		});
+	const registerRes = await fetcher<UserData>('register', { body: formRegister });
+
+	if (registerRes?.stat_code === 'APP:SUCCESS') {
+		// cookiesHelper.setTokenUser(registerRes?.data?.token || ''); // notes: token is empty, get token after verify-email
+		cookiesHelper.setUserData(JSON.stringify(registerRes?.data));
+	}
+
+	return registerRes;
+};
+
+export const verifyEmail = async (token: string) => {
+	const verifyRes = await fetcher<string>('verifyEmail', { query: { token } });
+
+	if (verifyRes?.stat_code === 'APP:SUCCESS') {
+		cookiesHelper.setTokenUser(verifyRes?.data || '');
+	}
+
+	return verifyRes;
 };

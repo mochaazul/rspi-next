@@ -1,34 +1,44 @@
 import * as yup from 'yup';
 
+const EmailYup = yup.string().email()
+	.required()
+	.label('Email');
+
+const DefaultPasswordYup = yup.string().required()
+	.min(8, 'Password should contain at least 8 characters');
+
 export const LoginSchema = yup.object().shape({
-	email: yup
-		.string()
-		.email()
-		.required()
-		.label('Email'),
-	password: yup
-		.string()
-		.min(8, 'Password should contain at least 8 characters')
-		.required()
-		.label('Password'),
+	email: EmailYup,
+	password: DefaultPasswordYup.label('Password'),
 });
 
 export const ForgotPasswordSchema = yup.object().shape({
-	email: yup.string().email()
-		.required()
-		.label('Email')
+	email: EmailYup
 });
 
-export const ResetPasswordSchema = yup.object({
-	new_password: yup
-		.string()
-		.required()
-		.label('Password')
-		.min(8, 'Password should contain at least 8 characters'),
-	confirm_password: yup
-		.string()
-		.required()
-		.label('Confimation password')
-		.min(8, 'Confirmation Password should contain at least 8 characters')
+export const ResetPasswordSchema = yup.object().shape({
+	new_password: DefaultPasswordYup.label('Password'),
+	confirm_password: DefaultPasswordYup
+		.label('Confirmation password')
 		.oneOf([yup.ref('new_password')], 'Passwords do not match')
+});
+
+export const RegisterSchema = yup.object().shape({
+	email: EmailYup,
+	password: DefaultPasswordYup
+		.label('Password')
+		.test(
+			'isValidPass',
+			'Password must have at least 1 capitalized character',
+			(value: any) => /[A-Z]/.test(value)
+		)
+	,
+	confirm_password: DefaultPasswordYup
+		.label('Confirmation password')
+		.test(
+			'isValidPass',
+			'Password must have at least 1 capitalized character',
+			(value: any) => /[A-Z]/.test(value)
+		)
+		.oneOf([yup.ref('password')], 'Passwords do not match')
 });

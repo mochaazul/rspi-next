@@ -1,29 +1,28 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useParams, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-import { useTypedSelector } from '@/hooks';
-import { UserState } from '@/interface';
-import { Button, Spinner, Text } from '@/components';
 import { icons } from '@/constant';
 
-import useEmailVerificationPage from './useEmailVerificationPage';
+import Button from '@/components/ui/Button';
+import Spinner from '@/components/ui/Spinner';
+import Text from '@/components/ui/Text';
+import { verifyEmail } from '@/lib/api/auth';
+import { useScopedI18n } from '@/locales/client';
+
 import { EmailVerificationStyle } from './style';
-import languages from '@/constant/languages';
-import Image from 'next/image';
 
 const EmailVerificationPage = () => {
 	const navigate = useRouter();
 	const searchParams = useSearchParams()!;
-	const { onEmailVerification } = useEmailVerificationPage();
-	const { loading, error } = useTypedSelector<UserState>('user');
-	const [isEmailVerified, setIsEmailVerified] = useState<boolean>(false);
 
 	const [status, setStatus] = useState<'' | 'loading' | 'success' | 'failed'>('');
 
-	const handleBackLogin = () => {
-		navigate.replace('/login');
+	const languages = useScopedI18n('validation.tokenValidation');
+
+	const handleBackRegister = () => {
+		navigate.replace('/register');
 	};
 
 	const handleNavigateSuccess = () => {
@@ -36,22 +35,21 @@ const EmailVerificationPage = () => {
 
 	useEffect(() => {
 		if (status === 'loading') {
-			const token: string = searchParams.get('token') ?? '';
-			onEmailVerification({ token });
+			const onEmailVerification = async () => {
+				const token: string = searchParams.get('token') ?? '';
+				const response = await verifyEmail(token);
+
+				if (response?.stat_code !== 'APP:SUCCESS') {
+					setStatus('failed');
+				} else {
+					setStatus('success');
+					setTimeout(handleNavigateSuccess, 2000);
+				}
+			};
+
+			onEmailVerification();
 		}
 	}, [status]);
-
-	useEffect(() => {
-		if (!loading && status === 'loading') {
-			if (error.stat_msg) {
-				setStatus('failed');
-				return;
-			}
-			setStatus('success');
-			setIsEmailVerified(true);
-			setTimeout(handleNavigateSuccess, 2000);
-		}
-	}, [loading, error]);
 
 	return (
 		<EmailVerificationStyle>
@@ -61,18 +59,12 @@ const EmailVerificationPage = () => {
 				</div>
 				<div className={ `status success ${ status === 'success' ? 'active' : '' }` }>
 					<div className='icon-cont'>
-						<Image
-							src={ icons.Check }
-							className='svg-white'
-							alt="" />
+						<icons.Check className='svg-white' />
 					</div>
 				</div>
 				<div className={ `status failed ${ status === 'failed' ? 'active' : '' }` }>
 					<div className='icon-cont'>
-						<Image
-							src={ icons.Close }
-							className='svg-white'
-							alt="" />
+						<icons.Close className='svg-white' />
 					</div>
 				</div>
 			</div>
@@ -82,7 +74,7 @@ const EmailVerificationPage = () => {
 						fontSize='32px'
 						fontWeight='900'
 						lineHeight='48px'
-						text='Mohon Tunggu Sebentar...'
+						text={ `${ languages('loading') }...` }
 						className={ `loading ${ status === 'loading' ? 'active' : '' }` }
 						subClassName='text-center'
 					/>
@@ -90,7 +82,7 @@ const EmailVerificationPage = () => {
 						fontSize='32px'
 						fontWeight='900'
 						lineHeight='48px'
-						text='Validation Succesfull'
+						text={ languages('success') }
 						className={ `success ${ status === 'success' ? 'active' : '' }` }
 						subClassName='text-center'
 					/>
@@ -98,7 +90,7 @@ const EmailVerificationPage = () => {
 						fontSize='32px'
 						fontWeight='900'
 						lineHeight='48px'
-						text={ languages.validation.tokenValidation.failed }
+						text={ languages('failed') }
 						className={ `failed ${ status === 'failed' ? 'active' : '' }` }
 						subClassName='text-center'
 					/>
@@ -107,8 +99,8 @@ const EmailVerificationPage = () => {
 					<Button
 						theme='primary'
 						hoverTheme='outline'
-						label='Back to Login'
-						onClick={ handleBackLogin }
+						label={ languages('backToRegister') }
+						onClick={ handleBackRegister }
 					/>
 				</div>
 			</div>

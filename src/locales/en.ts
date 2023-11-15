@@ -32,7 +32,8 @@ export default {
 			failed: 'Validation Failed',
 			success: 'Validation Success',
 			loading: 'Please Wait',
-			backToLogin: 'Back to Login'
+			backToLogin: 'Back to Login',
+			backToRegister: 'Back to Register'
 		}
 	},
 	page: {
@@ -503,7 +504,7 @@ export default {
 				emailLabel: 'Email',
 				emailPlaceholder: 'Email',
 				passwordLabel: 'Password',
-				pasaswordPlaceholder: 'Enter Password',
+				passwordPlaceholder: 'Enter Password',
 				passwordConfirmationLabel: 'Confirm Password',
 				passwordConfirmationPlaceholder: 'Confirm Password',
 				passwordHint: 'Minimum password length is 8 characters and should contain at least 1 capital letter'
@@ -515,6 +516,12 @@ export default {
 			},
 			buttonPrivacy: 'Next',
 			buttonTnC: 'Send',
+			infoModal: {
+				heading: 'Email Verification Link Has Been Sent',
+				subHeading: 'Please check email',
+				subHeadingTail: 'to verify your email',
+				buttonLabel: 'Okay'
+			}
 		},
 		registerOnboard: {
 			heading: 'Welcome to RS. Pondok Indah',

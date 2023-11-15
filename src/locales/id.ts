@@ -32,7 +32,8 @@ export default {
 			failed: 'Validasi Gagal',
 			success: 'Validasi Berhasil',
 			loading: 'Mohon Tunggu Sebentar',
-			backToLogin: 'Kembali ke halaman login'
+			backToLogin: 'Kembali ke halaman login',
+			backToRegister: 'Kembali ke halaman register'
 		}
 	},
 	page: {
@@ -504,7 +505,7 @@ export default {
 				emailLabel: 'Email',
 				emailPlaceholder: 'Email',
 				passwordLabel: 'Password',
-				pasaswordPlaceholder: 'Masukan Password',
+				passwordPlaceholder: 'Masukan Password',
 				passwordConfirmationLabel: 'Masukan ulang password',
 				passwordConfirmationPlaceholder: 'Masukan ulang password',
 				passwordHint: 'Panjang password minimal 8 karakter dan terdapat minimal 1 huruf kapital'
@@ -516,6 +517,12 @@ export default {
 			},
 			buttonPrivacy: 'Lanjut',
 			buttonTnC: 'Kirim',
+			infoModal: {
+				heading: 'Link Verifikasi Email Tekirim',
+				subHeading: 'Mohon periksa email',
+				subHeadingTail: 'untuk memverifikasi email Anda',
+				buttonLabel: 'Okay'
+			}
 		},
 		registerOnboard: {
 			heading: 'Selamat datang di RS. Pondok Indah',

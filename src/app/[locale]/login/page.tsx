@@ -1,13 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
 
 import { LoginType, ResponseStatus } from '@/interface';
-import { colors } from '@/constant';
-import Images from '@/constant/images';
+import { colors, Images } from '@/constant';
 
 import { login, requestVerifyEmail } from '@/lib/api/auth';
 import { LoginSchema } from '@/validator/auth';
@@ -158,6 +157,10 @@ const LoginPage = () => {
 		/>;
 	};
 
+	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+		formik.setFieldValue(e.target.id, e.target.value);
+	}, []);
+
 	return (
 		<LoginPageStyle>
 			<div className='grid max-sm:grid-cols-2 grid-cols-3 max-sm:gap-0 gap-3 w-full'>
@@ -207,7 +210,7 @@ const LoginPage = () => {
 								name='email'
 								label={ languages('form.emailLabel') }
 								value={ formik.values.email }
-								onChange={ e => formik.setFieldValue('email', e.target.value) }
+								onChange={ onChangeInput }
 								errorMessage={ formik.errors.email }
 								isError={ !!formik.errors.email }
 							/>
@@ -223,7 +226,7 @@ const LoginPage = () => {
 								onIconClick={ togglePasswordShow }
 								value={ formik.values.password }
 								label={ languages('form.passwordLabel') }
-								onChange={ e => formik.setFieldValue(e.target.id, e.target.value) }
+								onChange={ onChangeInput }
 								errorMessage={ formik.errors.password }
 								isError={ !!formik.errors.password }
 							/>
