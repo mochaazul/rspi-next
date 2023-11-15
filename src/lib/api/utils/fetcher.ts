@@ -12,6 +12,7 @@ const baseUrl = config.baseUrl ?? 'localhost:3000/v1';
 
 export default async <Response>(endpointKey:EndpointKey, options?:ApiOptions):Promise<SuccessResponse<Response>> =>  {
 	try {
+
 		const endpoint = endpoints[endpointKey];
 		const fetchOpt:Record<string, any> = {};
 		const Authorization = process.env.NEXT_PUBLIC_TOKEN;
@@ -21,8 +22,8 @@ export default async <Response>(endpointKey:EndpointKey, options?:ApiOptions):Pr
 			'X-Channel': 'website',
 		};
 
-		const url = baseUrl + endpoint.path + `${options?.query ? `?${options?.query}` : ''}`;
-
+		const url = baseUrl + endpoint.path + `${options?.param ? '/' + options?.param : ''}` + `${options?.query ? `?${options?.query}` : ''}`;
+		
 		if (options && options.body) fetchOpt['body'] = JSON.stringify(options.body);
 		
 		const res = await fetch(url, {

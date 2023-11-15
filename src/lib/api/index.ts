@@ -1,4 +1,6 @@
 import {
+	ArticleDetail,
+	ArticleState,
 	BannerDetail,
 	CenterOfExcellenceDetail,
 	CenterOfExcellenceState,
@@ -101,3 +103,15 @@ export const postContactUs = (param: { param: null; query: null; body: ContactUs
 	return fetcher<ContactUsState>('contactUs', param);
 };
 
+// Article
+export const getArticle = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<ArticleState>('getNews', param);
+};
+
+export const getNewsSpecialtyByID = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<ArticleState['specialty']>('getNewsSpecialtyByID', param);
+};
+
+export const getArticleById = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<ArticleState['selectedArticle']>('getNews', param);
+};

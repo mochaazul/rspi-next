@@ -52,6 +52,8 @@ const endpointData = {
 	// events: '/events',
 	// patients: '/patients',
 	// specialities: '/specialities',
+	getNews: { path: '/news', method: 'GET' },
+	getNewsSpecialtyByID: { path: '/specialities/related-specialities', method: 'GET' },
 	getFooter: { path: '/footer-pages', method: 'GET' },
 	// familyProfile: '/patients/family',
 

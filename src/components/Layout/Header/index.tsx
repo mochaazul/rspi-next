@@ -28,6 +28,7 @@ import Modal from '@/components/Modal';
 import HeaderStyle from './style';
 
 import { useCurrentLocale } from '@/locales/client'
+import { notificationResponseFetch } from "@/app/[locale]/(main)/helpers";
 
 export const Header = ({ 
 		hospitalData,
@@ -40,7 +41,7 @@ export const Header = ({
 		centerOfExcellenceData: CenterOfExcellenceState,
 		facilityServicesData: FacilityServicesState,
 		notificationResponseData: NotificationResponse,
-		marAllReadNotifFunc: (params: any) => void,
+		marAllReadNotifFunc: (params: any) => any,
 	}) => {
 	
 	const router = useRouter()
@@ -107,7 +108,10 @@ export const Header = ({
 							onClick={ () => marAllReadNotifFunc({
 								medical_record: 100154999,
 								email: 'riko.logwirno@rebelworks.co'
-							}) }
+							}).then(function(response: any) {
+									notificationResponseFetch();
+								}) 
+							}
 							// End Migrate
 						/>
 					</div>
@@ -134,7 +138,6 @@ export const Header = ({
 										textAlign='center'
 										color={ colors.black.default }
 										text={ currentLang == 'id' ? item?.judul_idn : item?.judul_en }
-										text={ item?.judul_idn }
 										className='flex justify-start'
 									/>
 									<Text
@@ -319,7 +322,7 @@ export const Header = ({
 													alt=""
 												/>
 												<span
-													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>0</span>
+													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponseData?.total_unread }</span>
 											</a>
 											<div className='flex text-white items-center'>
 												<div>

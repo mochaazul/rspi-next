@@ -2,10 +2,10 @@
 
 import {
 	getHospitals,
-    getCenterOfExcellence,
-    getNotificationResponse,
-    postMarkNotifAllRead,
-    getFooterSlug,
+  getCenterOfExcellence,
+  getNotificationResponse,
+  postMarkNotifAllRead,
+  getFooterSlug,
 } from '@/lib/api';
 
 import {
@@ -25,8 +25,8 @@ export async function marAllReadNotif(params: any) {
       query: null,
       body: null,
     }
-    const posting = await postMarkNotifAllRead(paramMarkAllReadNotif);
-    console.log(posting);
+    return postMarkNotifAllRead(paramMarkAllReadNotif);
+    
     
 };
 

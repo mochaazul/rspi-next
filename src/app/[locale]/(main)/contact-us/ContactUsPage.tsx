@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {PanelH1, PanelH2, PanelH3, PanelH4, PanelV1} from '@/app/[locale]/(main)/layout';
+import {
+	PanelH1,
+	PanelH2,
+	PanelH3,
+	PanelH4,
+	PanelV1
+} from '@/app/[locale]/(main)/layout';
 
 import { BreadcrumbsType } from '@/components/Breadcrumbs';
 

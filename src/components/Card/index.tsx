@@ -38,9 +38,13 @@ const Card = (props: PropsType) => {
 	const toggleMouseHover = (hovered: boolean) => () => {
 		setIsHover(hovered);
 	};
-
+	
 	return (
-		<CardWrapper to={ props.to || '#' } className={ `shrink-0 ${ props.className }` } onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
+		<CardWrapper
+			href={ props.to || '#' }
+			className={ `shrink-0 ${ props.className }` }
+			onMouseEnter={ toggleMouseHover(true) }
+			onMouseLeave={ toggleMouseHover(false) }>
 			<CardStyle { ...props.cardStyle }>
 				{
 					props.iconShare &&

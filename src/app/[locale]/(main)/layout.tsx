@@ -1,5 +1,7 @@
 
-// import { usePathname } from 'next/navigation'
+// import { usePathname } from 'next/navigation';
+import { headers } from 'next/headers';
+
 import { appStage } from '@/config';
 
 import Header from '@/components/Layout/Header';
@@ -28,7 +30,6 @@ import {
   footersFetch,
   hospitalsFetch
 } from './helpers';
-import { usePathname } from 'next/navigation';
 
 const blacklistedRoute = [
   '/patient-portal',
@@ -46,31 +47,32 @@ export default async function RootLayout({
     footerShow?: boolean;
   };
 }) {
-  // const pathname = usePathname();
-  // const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
-  const shouldRenderReminder = true;
-  const hospitals = hospitalsFetch();
-  const footers = footersFetch();
-  const centerOfExcellence = centerOfExcellenceFetch();
-  const facilityServices = facilityServicesFetch();
-  const notificationResponse = notificationResponseFetch();
+  
+  const pathname = children?.props?.childProp?.segment;
+  const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
+
+  const hospitals = await hospitalsFetch();
+  const footers = await footersFetch();
+  const centerOfExcellence = await centerOfExcellenceFetch();
+  const facilityServices = await facilityServicesFetch();
+  const notificationResponse = await notificationResponseFetch();
   
   return (
     <>
       <Header 
-        hospitalData = { (await hospitals).data }
-        centerOfExcellenceData = {(await centerOfExcellence).data}
-        facilityServicesData = {(await facilityServices).data}
-        notificationResponseData = {(await notificationResponse).data}
+        hospitalData = { hospitals.data }
+        centerOfExcellenceData = {centerOfExcellence.data}
+        facilityServicesData = {facilityServices.data}
+        notificationResponseData = {notificationResponse.data}
         marAllReadNotifFunc = { marAllReadNotif }
       />
       { children }
 
       { props?.footerShow !== false &&
-        <Footer footerData = { (await footers).data } />
+        <Footer footerData = { footers.data } />
       }
       { props?.footerShow !== false &&
-        <CallForAmbulance hospitalData = { (await hospitals).data } />
+        <CallForAmbulance hospitalData = { hospitals.data } />
       }
       { appStage !== 'prod' &&
         <DevTools />

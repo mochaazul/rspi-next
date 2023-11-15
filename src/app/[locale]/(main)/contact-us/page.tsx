@@ -6,11 +6,11 @@ import ContactUsPage from './ContactUsPage';
 import { ContactUsSubmitType } from '@/interface';
 
 const ContactUs = async () => {
-	const hospitals = getHospitals();
+	const hospitals = await getHospitals();
 
 	return (
 		<ContactUsPage
-			hospitalSelector = {(await hospitals).data}
+			hospitalSelector = { hospitals.data }
 			breadcrumbsPath={[{ name: 'Contact Us', url: '/contact-us' }]}
 		/>
 	);
