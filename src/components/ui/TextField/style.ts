@@ -23,20 +23,23 @@ export interface InputType extends React.DetailedHTMLProps<React.InputHTMLAttrib
 export interface StyledTextFieldType extends Omit<TextFieldType, 'iconPosition' | 'iconName'> {
   $iconPosition?: 'left' | 'right';
   $iconName?: keyof typeof icons;
+  $isNumber?: boolean;
 }
 
 export const TextFieldWrapper = styled.div<StyledTextFieldType>`
   display: flex;
   align-items: center;
   position: relative;
-  outline: 1px solid ${ colors.grey.lighter };
   border-radius: 5px;
-
+  
   flex-direction: ${ props => (props.$iconPosition === 'left' || !(!!props.$iconPosition)) ? 'row' : 'row-reverse' };
-
+  
+  ${ props => !props.$isNumber ? `
+  outline: 1px solid ${ colors.grey.lighter };
   &:focus {
     outline: 1px solid ${ colors.green.toscaLight }
   }
+  `: '' }
   
   input {
     padding-left: ${ props => (!!props.$iconName || !!props.featherIcon) && (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '43px' };
@@ -60,8 +63,7 @@ export const InputMaskedStyled = styled(InputMask)`
   padding: 12px 18px;
   border-radius: 5px;
   font-family: var(--font-family);
-  border: 1px solid ${ colors.grey.lighter };
-  outline: none;
+  outline: 1px solid ${ colors.grey.lighter };
   ${ GlobalAllTransition5ms }
 
   &:focus-within {

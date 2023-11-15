@@ -55,8 +55,8 @@ const RegisterPage = () => {
 			password: '',
 			confirm_password: ''
 		},
-		onSubmit: (formRegisterState: RegisterType) => {
-			setFormRegister(formRegisterState);
+		onSubmit: (formRegisterValues: RegisterType) => {
+			setFormRegister(formRegisterValues);
 			setShowModalPrivacyTnc(true);
 		}
 	});
@@ -102,12 +102,6 @@ const RegisterPage = () => {
 		setNotifVisible(true);
 		setLoadingUser(false);
 	};
-
-	// useEffect(() => {
-	// 	if (!!errorUser.stat_msg === false && !loadingUser && notifVisible) {
-	// 		setInfoBoxVisible(true);
-	// 	}
-	// }, [errorUser, loadingUser, notifVisible]);
 
 	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		formikRegister.setFieldValue(e.target.id, e.target.value);

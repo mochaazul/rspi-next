@@ -536,11 +536,12 @@ export default {
 
 			},
 			errors: {
-				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukan sudah terdaftar',
-				mrNotFound: 'Nomor rekam medis yang Anda masukkan belum terdaftar',
-				phoneNotMatch: 'No yang Anda masukkan tidak sesuai dengan yang terdaftar di RS Pondok Indah Group',
-				dobNotMatch: 'Data yang Anda masukkan tidak sesuai dengan yang terdaftar di database RS Pondok Indah',
-				fieldIsEmpty: 'Harap masukan seluruh data'
+				mrHasBeenRegistered: 'The medical record number you entered is already registered',
+				mrNotFound: 'The medical record number you entered is not yet registered',
+				phoneNotMatch: 'The number you entered does not match the registered data at RS Pondok Indah Group',
+				dobNotMatch: 'The data you entered does not match with the RS Pondok Indah database',
+				fieldIsEmpty: 'Please fill in all data',
+				sendOtpFailed: 'Send OTP failed'
 			},
 			submitBtnLabel: 'Save and Continue',
 			mrNotAvailableBtnLabel: 'Skip'

@@ -60,7 +60,7 @@ const ResetPinPage = () => {
 		setNotifVisible(false);
 	};
 
-	const onChangeInput = useCallback((data: { name?: string; value?: string; }) => {
+	const onChangeInputValue = useCallback((data: { name?: string; value?: string; }) => {
 		if (data?.name) {
 			formikPin.setFieldValue(data?.name, data?.value ?? '');
 		}
@@ -111,7 +111,7 @@ const ResetPinPage = () => {
 							className='input'
 							digitLength={ 6 }
 							semiSecure={ false }
-							onChangeValue={ onChangeInput }
+							onChangeValue={ onChangeInputValue }
 							label={ languages('form.pinFieldLabel') }
 							errorMessage={ formikPin.errors.pin }
 							isError={ !!formikPin.errors.pin }
@@ -127,7 +127,7 @@ const ResetPinPage = () => {
 							className='input'
 							digitLength={ 6 }
 							semiSecure={ false }
-							onChangeValue={ onChangeInput }
+							onChangeValue={ onChangeInputValue }
 							label={ languages('form.pinConfirmLabel') }
 							errorMessage={ formikPin.errors.confirm_pin }
 							isError={ !!formikPin.errors.confirm_pin }

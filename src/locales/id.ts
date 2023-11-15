@@ -540,7 +540,8 @@ export default {
 				mrNotFound: 'Nomor rekam medis yang Anda masukkan belum terdaftar',
 				phoneNotMatch: 'No yang Anda masukkan tidak sesuai dengan yang terdaftar di RS Pondok Indah Group',
 				dobNotMatch: 'Data yang Anda masukkan tidak sesuai dengan yang terdaftar di database RS Pondok Indah',
-				fieldIsEmpty: 'Harap masukan seluruh data'
+				fieldIsEmpty: 'Harap masukan seluruh data',
+				sendOtpFailed: 'OTP gagal terkirim'
 			},
 			submitBtnLabel: 'Simpan dan Lanjutkan',
 			mrNotAvailableBtnLabel: 'Lewati'

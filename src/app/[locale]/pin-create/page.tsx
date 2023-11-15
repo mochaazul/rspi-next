@@ -60,7 +60,7 @@ const PinPage = () => {
 		setNotifVisible(false);
 	};
 
-	const onChangeInput = useCallback((data: { name?: string; value?: string; }) => {
+	const onChangeInputValue = useCallback((data: { name?: string; value?: string; }) => {
 		if (data?.name) {
 			formikPin.setFieldValue(data?.name, data?.value ?? '');
 		}
@@ -117,7 +117,7 @@ const PinPage = () => {
 							isError={ !!formikPin.errors.pin }
 							value={ formikPin.values.pin }
 							type='password'
-							onChangeValue={ onChangeInput }
+							onChangeValue={ onChangeInputValue }
 						/>
 					</Form.FormGroup>
 					<Form.FormGroup className='group-wrapper w-full'>
@@ -133,7 +133,7 @@ const PinPage = () => {
 							isError={ !!formikPin.errors.confirm_pin }
 							value={ formikPin.values.confirm_pin }
 							type='password'
-							onChangeValue={ onChangeInput }
+							onChangeValue={ onChangeInputValue }
 						/>
 					</Form.FormGroup>
 					<Button

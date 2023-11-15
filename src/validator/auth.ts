@@ -59,3 +59,12 @@ export const OTPSchema = yup.object().shape({
 		.min(6, 'OTP should contain 6 characters')
 		.max(6, 'OTP should contain 6 characters')
 });
+
+export const RegisterOnboardSchema = yup.object().shape({
+	medical_record: yup.string().required()
+		.label('Medical record number'),
+	phone: yup.string().required()
+		.label('Phone number'),
+	birth_date: yup.string().required()
+		.label('Date of birth'),
+});

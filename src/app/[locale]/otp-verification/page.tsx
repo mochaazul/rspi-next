@@ -135,13 +135,11 @@ const OTPPage = () => {
 		});
 	};
 
-	const onChangeInput = useCallback((data: { name?: string; value?: string; }) => {
+	const onChangeInputValue = useCallback((data: { name?: string; value?: string; }) => {
 		if (data?.name) {
 			formikOtp.setFieldValue(data?.name, data?.value ?? '');
 		}
 	}, []);
-
-	console.log(formikOtp.errors);
 
 	return (
 		<OTPPageStyle>
@@ -180,7 +178,7 @@ const OTPPage = () => {
 							value={ formikOtp.values.otp }
 							errorMessage={ formikOtp.errors.otp }
 							isError={ !!formikOtp.errors.otp }
-							onChangeValue={ onChangeInput }
+							onChangeValue={ onChangeInputValue }
 						/>
 					</Form.FormGroup>
 					<Button className='mt-8' theme='primary' type='submit' disabled={ loadingSubmit }>{ languages('form.submitBtnLabel') }</Button>
