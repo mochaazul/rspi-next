@@ -34,6 +34,7 @@ const colors = {
 		accent: 'rgba(211, 32, 48, 1)',
 		accentOpacity90: 'rgba(211, 32, 48, 0.1)',
 		danger: 'rgba(176, 84, 116, 1)',
+		text: 'rgba(215, 31, 40, 1)'
 	},
 	blue: {
 		default: 'rgb(122, 166, 237)',

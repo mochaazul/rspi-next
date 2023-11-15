@@ -128,3 +128,9 @@ export type UpdateProfileType = {
 export type UpdateEmailType = {
 	email: string;
 };
+
+export type UserSessionData = {
+	user: UserDataDetail | null;
+	token: string;
+	isAuthenticated: boolean;
+};

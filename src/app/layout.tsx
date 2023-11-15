@@ -4,6 +4,8 @@ import { Lato } from 'next/font/google';
 
 import StyledComponentsRegistry from '@/lib/registry';
 import FacebookPixel from '@/components/FacebookPixel';
+import ProgressBar from '@/components/ui/ProgressBar';
+
 import '@/styles/globals.css';
 
 type Props = {
@@ -25,7 +27,10 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang='en'>
       <body className={ lato.className } suppressHydrationWarning>
-        <StyledComponentsRegistry>{ children }</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          { children }
+          <ProgressBar />
+        </StyledComponentsRegistry>
 
         <FacebookPixel />
       </body>

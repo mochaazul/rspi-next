@@ -476,12 +476,14 @@ export default {
 				emailNotVerified: {
 					heading: 'Email Anda belum diverifikasi. SIlahkan',
 					cta: 'Klik disini',
-					tail: 'untuk melakukan verifikasi email'
+					tail: 'untuk melakukan verifikasi email',
+					successMessage: 'Berhasil mengirim ulang verifikasi email'
 				}
-			}
+			},
+			welcome: 'Selamat datang'
 		},
 		registerPage: {
-			heading: 'Selamat Datang',
+			heading: 'Buat Akun Pasien',
 			subHeading: 'Silahkan masukan data akun untuk melakukan pendaftaran',
 			notificationMessage: {
 				onSuccess: 'Berhasil',

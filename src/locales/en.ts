@@ -475,9 +475,11 @@ export default {
 				emailNotVerified: {
 					heading: 'Your email is not verified. Please',
 					cta: 'Click here',
-					tail: 'to verify your email'
+					tail: 'to verify your email',
+					successMessage: 'Successfully resent email verification'
 				}
-			}
+			},
+			welcome: 'Welcome'
 		},
 		registerPage: {
 			heading: 'Welcome',

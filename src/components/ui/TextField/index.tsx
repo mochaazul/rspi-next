@@ -2,7 +2,7 @@ import * as FeatherIcons from 'react-feather';
 import Image from 'next/image';
 
 import { icons } from '../../../constant';
-import withInputLabel from '../../../components/ui/withInputLabel';
+import withInputLabel from '../withInputLabel';
 
 import {
 	IconWrapper,
