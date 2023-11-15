@@ -11,119 +11,147 @@ import FooterStyled, { FooterContainer } from './style';
 // import { getFooterCategories, getFooterSlug } from '@/stores/actions'; // TODO: migrate
 
 const FooterLayout = () => {
-	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice'); // TODO: migrate
+	// const { loading, footerListByCategory } = useTypedSelector<FooterState>('footerSlice'); // TODO: migrate
 	// const fetchFooter = useAppDispatch(getFooterSlug); // TODO: migrate
-	const [ourHospital, setOurHospital] = useState<FooterDetail[]>([]);
-	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
-	// const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]); // TODO: migrate
-	const [pages, setPages] = useState<FooterDetail[]>([]);
 	const navigate = useRouter();
 
-	// TODO: migrate
-	// useEffect(() => {
-	// 	fetchFooter({
-	// 		queryParam: {
-	// 			slug: '',
-	// 			footer_category: '',
-	// 			limit: 999,
-	// 		}
-	// 	});
-	// 	// Clear state, prevent double item
-	// 	setOurHospital([]);
-	// 	setOurCompany([]);
-	// 	setPrivacyPolicy([]);
-	// 	setPages([]);
-	// 	// Iterate over the footerList using the forEach method instead of map
-	// 	footerList?.forEach(item => {
-	// 		// Use a switch statement to check the footer_category of each item
-	// 		switch (item?.footer_category) {
-	// 			case 'our-hospital':
-	// 				setOurHospital(ourHospital => [...ourHospital, item]);
-	// 				break;
-	// 			case 'our-company':
-	// 				setOurCompany(ourCompany => [...ourCompany, item]);
-	// 				break;
-	// 			// case 'privacy-policy':
-	// 			// 	setPrivacyPolicy(privacyPolicy => [...privacyPolicy, item]);
-	// 			// 	break;
-	// 			case 'pages':
-	// 				setPages(pages => [...pages, item]);
-	// 				break;
-	// 			// Use a default case to handle items with unknown footer_category values
-	// 			default:
-	// 				break;
-	// 		}
-	// 	});
-	// }, []);
-	// End migrate
-
+	const date = new Date();
 	const language = lang.page.footer;
 
-	const renderItems = (items: FooterDetail[]) => {
-		return items.map((item, index) => {
-			return (
-				<div key={ index } className='cursor-pointer' onClick={ () => { navigate.push(`/footer/${ item.slug }`); } }>
-					<Text fontSize='14px' className='bold'>{ item.title }</Text>
-				</div>
-			);
+	useEffect(() => {
+		fetchFooter({
+			queryParam: {
+				slug: '',
+				footer_category: '',
+				limit: 999,
+			}
 		});
+	}, []);
+
+	const renderItems = (items: FooterDetail[]) => {
+		return (
+			<div className='flex flex-col gap-y-3 sm:gap-y-4'>
+				{
+					items.map((item, index) => {
+						return (
+							<Text
+								key={ index }
+								fontSize='14px'
+								fontWeight='700'
+								className='flex'
+								subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer'
+								onClick={ () => navigate(`/footer/${ item.slug }`) }
+							>{ item.title }</Text>
+						);
+					})
+				}
+			</div>
+		);
 	};
 
-	const date = new Date();
+	const renderCategoryItems = (items: FooterDetail[]) => {
+		if (items.length > 4) {
+			const leftItems = items.slice(0, Math.ceil(items.length / 2));
+			const rightItems = items.slice(Math.ceil(items.length / 2));
+
+			return (
+				<div className='grid md:grid-cols-2 md:gap-x-4 gap-y-3 sm:gap-y-4'>
+					{ renderItems(leftItems) }
+					{ renderItems(rightItems) }
+				</div>
+			);
+		}
+
+		return renderItems(items);
+	};
+
+	const renderCategoryTitle = (text: string) => {
+		return (
+			<Text
+				fontSize='14px'
+				color={ colors.paradiso.default }
+				className='mb-4 max-sm:text-xs font-bold sm:font-normal'
+			>{ text }</Text>
+		);
+	};
+
+	const renderFooterCategory = (data: FooterDetail[], title: string) => {
+		if (loading && !data?.length) {
+			return (
+				<div className='w-2/5 sm:w-[200px] lg:w-1/6'>
+					<div className='animate-pulse flex w-full'>
+						<div className='flex-1 space-y-6 py-1'>
+							<div className='h-2 bg-slate-200 rounded' />
+							<div className='space-y-3'>
+								{ Array.from(Array(4).keys()).map(idx => (
+									<div key={ idx } className='h-2 bg-slate-200 rounded' />
+								)) }
+							</div>
+						</div>
+					</div>
+				</div>
+			);
+		}
+
+		if (data?.length) {
+			return (
+				<div>
+					{ renderCategoryTitle(title) }
+					{ renderCategoryItems(data) }
+				</div>
+			);
+		}
+
+		return null;
+	};
 
 	return (
-		<>
-			<FooterStyled className='max-sm:pb-32'>
-				<FooterContainer>
-					<div className='mb-3'>
-						<Text fontSize='14px' color={ colors.paradiso.default } className='mb-4'>OUR HOSPITALS</Text>
-						{ renderItems(ourHospital) }
+		<FooterStyled className='px-4 xl:px-10 py-8 sm:py-16'>
+			<FooterContainer>
+				{ renderFooterCategory(footerListByCategory?.['our-hospital'] ?? [], language.ourHospitalsLabel) }
+				{ renderFooterCategory(footerListByCategory?.['our-company'] ?? [], language.ourCompanyLabel) }
+				{ renderFooterCategory(footerListByCategory?.['pages'] ?? [], language.visitorPatientLabel) }
+
+				<div className='follow-section flex flex-col max-sm:flex-row-reverse gap-4 sm:gap-8'>
+					<div className='follow-icon-section'>
+						{ renderCategoryTitle(language.followUsLabel) }
+						<Socmed />
 					</div>
 					<div>
-						<Text fontSize='14px' color={ colors.paradiso.default } className='mb-4'>OUR COMPANY</Text>
-						{ renderItems(ourCompany) }
-					</div>
-					<div className='visitor-patient-container mb-3'>
-						<Text fontSize='14px' color={ colors.paradiso.default } className='mb-4'>VISITOR & PATIENT INFORMATION</Text>
-						<div className='visitor-items'>
-							<div className='mr-4'>
-								{ renderItems(pages) }
-							</div>
+						{ renderCategoryTitle(language.getRSPIMobileLabel) }
+						<div className='store-images-container'>
+							<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'><img src={ Images.GooglePlay } alt='google play icon' className='store-images' /></a>
+							<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'><img src={ Images.AppStore } alt='app store icon' className='store-images' /></a>
 						</div>
 					</div>
-					<div className='follow-section flex flex-col max-sm:flex-row-reverse'>
-						<div className='follow-icon-section'>
-							<Text fontSize='14px' color={ colors.paradiso.default } className='mb-4'>Follow Us</Text>
-							<Socmed />
-						</div>
-						<div>
-							<Text fontSize='14px' color={ colors.paradiso.default } className='mt-2'>GET RSPI MOBILE</Text>
-							<div className='store-images-container'>
-								<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'><img src={ Images.GooglePlay } alt='google play icon' className='store-images' /></a>
-								<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'><img src={ Images.AppStore } alt='app store icon' className='store-images' /></a>
-							</div>
-						</div>
-					</div>
-					<div className='email-sub-container'>
-						<Text fontSize='14px' color={ colors.paradiso.default } className='mb-4'>Stay Updated With Us</Text>
-						<Text fontSize='14px' className='sub-text'>Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.</Text>
-						<div className='email-sub-form-container'>
-							<TextField width='100%' placeholder='Enter your email address' />
-							<Button className='sub-button color-default' theme='secondary' label='Subscribe' />
-						</div>
-					</div>
-				</FooterContainer>
-				<div className='flex justify-center'>
-					<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group.  All Rights Reserved.</Text>
 				</div>
+				<div className='email-sub-container'>
+					{ renderCategoryTitle(language.subscribeLabel) }
+					<Text fontSize='14px' className='sub-text'>{ language.subscribeDescription }</Text>
+					<div className='email-sub-form-container mt-4 lg:mt-6'>
+						<TextField
+							width='100%'
+							placeholder='Enter your email address'
+							className='text-sm sm:text-base'
+						/>
+						<Button
+							className='sub-button color-default text-sm sm:text-base font-black sm:font-bold'
+							theme='secondary'
+							label='Subscribe'
+						/>
+					</div>
+				</div>
+			</FooterContainer>
+			<div className='flex flex-col items-center max-sm:pb-8 pt-8 sm:pt-16'>
+				<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group. <span className='sm:hidden'><br /></span>All Rights Reserved.</Text>
 				{
 					appStage !== 'prod' &&
 					<div className='flex justify-center'>
 						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version { config.version } - { appStage.toUpperCase() }</Text>
 					</div>
 				}
-			</FooterStyled>
-		</>
+			</div>
+		</FooterStyled>
 	);
 
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import { Button, Text, Form } from '@/components';
@@ -6,7 +6,7 @@ import { colors, Languages as lang } from '@/constant';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { HospitalDetail, HospitalState } from '@/interface';
 import { getClinics, getSpecialities } from '@/stores/Specialities';
-import { I_SpecialitiesState } from '@/interface/specialities';
+import { I_SpecialitiesState, PayloadClinic } from '@/interface/specialities';
 import { PickerItem } from '@/components/DropdownSearch';
 
 import Pills from '../Pills';
@@ -31,16 +31,22 @@ const DoctorFilter = () => {
 	const hospitalSelector = useTypedSelector<HospitalState>('hospital');
 	const { specialities, clinics } = useTypedSelector<I_SpecialitiesState>('specialities');
 	const getSpecialitiesDispatch = useAppDispatch(getSpecialities);
-	const getClinicsDispatch = useAppDispatch(getClinics);
+	const getClinicsDispatch = useAppDispatch<PayloadClinic>(getClinics);
 
 	const searchParams = useSearchParams()!;
 	const params = new URLSearchParams(searchParams);
 
 	const { hospitalFilter, telemedicineFilter, clinicFilter } = useFindDoctor();
 
+	const [selectedHospital, setselectedHospital] = useState<string>('');
+
 	useEffect(() => {
-		getClinicsDispatch();
-	}, []);
+		getClinicsDispatch({
+			queryParam: {
+				hospital_code: selectedHospital,
+			}
+		});
+	}, [selectedHospital]);
 
 	// Tidak menggunakan helper form karena
 	// Helper form pada skeleton tidak support untuk ekstrak value onChange
@@ -52,6 +58,7 @@ const DoctorFilter = () => {
 		if (checked) {
 			const hospitals = [...hospitalFilter.getAll(), { hospital_code: hospital_code, id: id }].map(item => item.hospital_code).toString();
 			params.set('hospital', hospitals);
+			setselectedHospital(hospitals);
 		} else {
 			hospitalFilter.delete(hospital_code);
 		}

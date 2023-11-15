@@ -18,15 +18,15 @@ interface HorizontalInputType {
 
 const HorizontalInputWrapper = (props: HorizontalInputType) => {
 	return (
-		<div className='grid min-[480px]:grid-cols-[240px_1fr] items-center max-[480px]:mb-4'>
-			<WithInputLabel.LabelText className='mb-0 flex gap-3 items-center'>
+		<div className='flex max-sm:flex-col sm:grid sm:grid-cols-[240px_1fr] sm:items-center max-sm:mb-4 mb-5'>
+			<WithInputLabel.LabelText className='mb-2.5 sm:mb-0 flex gap-3 items-center'>
 				{ props.label }
 				{
 					!!props.labelInfo ?
 						<PopupInfoContainerStyle>
-							<Image src={icons.ExclamationMark} alt="" className='cursor-pointer'/>
-							<BalloonPopupStyle className='balloon-popup min-w-[400px]'>
-								<div className='rounded-[10px] px-[10px] py-[5px] h-full'>
+							<Image src={ icons.ExclamationMark } alt="" className='cursor-pointer' />
+							<BalloonPopupStyle className='balloon-popup min-[300px]:min-w-[250px] min-[480px]:min-w-[400px]'>
+								<div className='rounded-[10px] px-[10px] py-[5px] h-full relative z-10'>
 									<Text
 										fontWeight='400'
 										fontSize='12px'

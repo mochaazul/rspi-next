@@ -22,7 +22,7 @@ import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import CallForAmbulance from '@/components/ui/CallForAmbulance';
 
 // we use this values to determine where shoul we display reminder component
-const blacklistedRoute = ['/patient-portal', '/doctor-detail', '/book-appointment'];
+const blacklistedRoute = ['/patient-portal', '/doctor-detail', '/book-appointment', '/user-information'];
 
 const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean; children?: any; }) => {
 	const pathname = usePathname();

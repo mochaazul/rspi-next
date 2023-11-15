@@ -21,11 +21,10 @@ const CallForAmbulance = () => {
 	return (
 		<>
 			{ /* Migrate  */ }
-			{ /*   ${ shouldGiveMargin ? 'bottom-24' : '' } additional classname for CallForAmbulanceStyle */ }
-			{ /* End Migrate */ }
+			{/* TBD max-sm:w-[60px] max-sm:h-[60px]  ${ shouldGiveMargin ? 'bottom-24' : '' } */ }
 			<CallForAmbulanceStyle className={ `
 				fixed cursor-pointer flex align-center justify-center 
-				max-sm:w-[72px] max-sm:h-[72px]
+				max-sm:w-[60px] max-sm:h-[60px] }
 			
 			` } onClick={ () => setVisible(true) }>
 				<div className='absolute w-[80%] h-[80%] mt-1 rounded-full hover:animate-ping z-20' style={ { backgroundColor: colors.red.accentOpacity90 } } />

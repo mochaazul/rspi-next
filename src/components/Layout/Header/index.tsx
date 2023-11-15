@@ -26,10 +26,12 @@ import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
 
-import Text from '@/components/Text';
-import Button from '@/components/Button';
+import Text from '@/components/ui/Text';
+import Button from '@/components/ui/Button';
 import MainNavLanguage from '@/components/MainNavLanguage';
 import Modal from '@/components/Modal';
+import useSession from '@/session/client';
+import { cookiesHelper } from '@/helpers';
 
 import HeaderStyle from './style';
 
@@ -37,13 +39,13 @@ export const Header = ({
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData
-}:{
-		hospitalData: HospitalState,
-		centerOfExcellenceData: CenterOfExcellenceState,
-		facilityServicesData: FacilityServicesDetail[]
-	}) => {
+}: {
+	hospitalData: HospitalState,
+	centerOfExcellenceData: CenterOfExcellenceState,
+	facilityServicesData: FacilityServicesDetail[];
+}) => {
 	const router = useRouter();
-	
+
 	const [dropdownHide, setDropdownHide] = useState(true);
 	const [showSideBar, setShowSideBar] = useState(false);
 	const [isHover, setIsHover] = useState(false);
@@ -51,17 +53,20 @@ export const Header = ({
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
 
-	const isLoggedIn = true;
+	// Notes: CSR. Jika ada kebutuhan u/ SSR, pakai getSession dari @/session/server dan props ke Header component
+	const session = useSession();
+	const isLoggedIn = session.isAuthenticated;
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const handleClick = () => {
+	const handleClick = async () => {
+		// TODO: karena async, butuh loading state ketika logout. need enhancement
 		if (isLoggedIn) {
-			// removeUser(); // migrate ( for function removeUser refer repo rspi-fe-web )
+			await cookiesHelper.clearStorage();
+			router.replace('/');
 		}
-		router.push('/');
 	};
 
 	const handleLoginClick = () => {
@@ -157,10 +162,7 @@ export const Header = ({
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
-								<Image
-									src={ images.LogoRSPI }
-									alt=''
-								/>
+								<images.LogoRSPI />
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
@@ -173,11 +175,7 @@ export const Header = ({
 							<div id='our-hospital' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 								<Text text={ 'Our Hospitals' } className='cursor-pointer' color={ isHover === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<Image
-										src={ icons.ArrowDown }
-										alt=''
-										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
-									/>
+									<icons.ArrowDown className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -207,9 +205,7 @@ export const Header = ({
 							<div id='centre-of-excellence' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverCOE(true) } onMouseLeave={ toggleMouseHoverCOE(false) }>
 								<Text text={ 'Centre of Excellence' } className='cursor-pointer' color={ isHoverCOE === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<Image
-										src={ icons.ArrowDown }
-										alt=''
+									<icons.ArrowDown
 										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
 								</div>
@@ -267,9 +263,7 @@ export const Header = ({
 												<div className='ml-[10px] w-[310px]'>
 													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 												</div>
-												<Image
-													src={ icons.ArrowRight }
-													alt=''
+												<icons.ArrowRight
 													className='ml-[27px] mr-auto'
 												/>
 											</div>
@@ -291,11 +285,7 @@ export const Header = ({
 					<div className='rightNav py-[22px] max-sm:py-[10px]'>
 						<div className='translate'>
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
-								<Image
-									src={ icons.Notif }
-									alt=''
-									onClick={ () => setShowNotification(true) }
-								/>
+								<icons.Notif onClick={ () => setShowNotification(true) } />
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
 							<div className='p-4'>
@@ -307,27 +297,33 @@ export const Header = ({
 									isLoggedIn ?
 										<>
 											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<Image
-													src={ icons.Notif }
-													alt=''
-												/>
+												<icons.Notif />
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>0</span>
 											</a>
 											<div className='flex text-white items-center'>
 												<div>
-													
-													<Image src={ '' } alt={ '' } /> :
+
+													{ session.user?.img_url
+														? (
+															<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
+																<Image
+																	src={ session.user?.img_url }
+																	alt=''
+																	fill
+																/>
+															</div>
+														)
+														: <images.Profile className='w-[50px] h-[50px]' /> }
+													{/* <Image src={ '' } alt={ '' } /> :
 													<Image
 														src={ images.Profile }
 														alt=''
-													/>
+													/> */}
 
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
-													<Image
-														src={ icons.ArrowDown }
-														alt=''
+													<icons.ArrowDown
 														className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 														onClick={ () => setDropdownHide(!dropdownHide) }
 													/>
@@ -352,7 +348,7 @@ export const Header = ({
 											<Link href='/user-information' className='border-b border-gray block py-4 px-4'>User Information</Link>
 										</li>
 										<li>
-											<a href='#' className='block py-4 px-4 text-red-600' onClick={ handleClick }>Logout</a>
+											<Text color={ colors.red.text } className='block py-4 px-4 cursor-pointer' onClick={ handleClick }>Logout</Text>
 										</li>
 									</ul>
 								</div>

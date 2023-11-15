@@ -37,7 +37,7 @@ const JadwalKunjungan = () => {
 
 					? isEmpty(appointments) ?
 						<EmptyResultContainer>
-							<Image src={icons.NoAppointmentSchedule} alt=""/>
+							<Image src={ icons.NoAppointmentSchedule } alt="" />
 							<Text text={ languages.page.patientPortal.jadwalKunjungan.label.empty }
 								fontSize='20px'
 								fontWeight='700'
@@ -45,7 +45,7 @@ const JadwalKunjungan = () => {
 							/>
 							<Button className='w-52' onClick={ () => navigate.push('/find-a-doctor') }>Jadwalkan Kunjungan</Button>
 						</EmptyResultContainer>
-						: appointments.map((data, index) => (
+						: appointments?.map((data, index) => (
 							<div key={ index }>
 								<CardAppointment
 									id={ data.appointment_id }

@@ -205,11 +205,11 @@ const PatientPortal = () => {
 					<hr className='my-[24px] md:hidden w-full' />
 					<div className='sm:w-1/2 md:w-1/4'>
 						<Text text={ 'Last Visited Hospital' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						<Text text={ lastVisitedHospital.hospital_name } className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
+						<Text text={ lastVisitedHospital?.hospital_name } className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
 					</div>
 					<div className='sm:w-1/2 md:w-1/4'>
 						<Text text={ 'Last Visited Date' } subClassName='max-sm:text-right' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						<Text text={ dayjs(lastVisitedHospital.visit_date || dayjs()).format('dddd, DD MMMM YYYY') } subClassName='max-sm:text-right' className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
+						<Text text={ dayjs(lastVisitedHospital?.visit_date || dayjs()).format('dddd, DD MMMM YYYY') } subClassName='max-sm:text-right' className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
 					</div>
 					{ /* */ }
 				</div>

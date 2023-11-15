@@ -165,7 +165,12 @@ const BookAppointment = () => {
 	};
 
 	const onBookVisit = () => {
-		setConfirmationModalVisible(true);
+		const { keluhan } = getCurrentForm();
+		if (keluhan.value.length && penjamin?.length) {
+			setConfirmationModalVisible(true);
+		} else {
+			alert('Pastikan Data Keluhan dan Penjamin Terisi');
+		}
 	};
 
 	const uploadAsuransiPhotoFront = async () => {
@@ -271,6 +276,7 @@ const BookAppointment = () => {
 								width='100%'
 								{ ...registeredValue('keluhan') }
 								label='Keluhan utama saat ini'
+								required={ true }
 							/>
 						</FormCol>
 						<FormCol>

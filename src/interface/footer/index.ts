@@ -1,6 +1,7 @@
 export interface FooterState {
 	footerCategories: FooterCategories[];
 	footerList: FooterDetail[];
+	footerListByCategory: { [key: string]: FooterDetail[]; };
 	detail: FooterDetail[];
 	loading: boolean;
 }

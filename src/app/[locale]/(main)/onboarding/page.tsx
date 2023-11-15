@@ -9,7 +9,7 @@ import {
 } from '@/components';
 import { UserState } from '@/interface';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { PropsTypes as NotificationPanelTypes } from '@/components/NotificationPanel';
+import { localStorage } from 'helpers';
 
 import useRegisterOnboard from './useRegisterOnboard';
 import { RegisterOnboardStyle, Box } from './style';
@@ -183,7 +183,15 @@ const RegisterOnboard = () => {
 					</Button>
 					<Button theme='outline'
 						className='mt-[12px]'
-						onClick={ () => navigate.replace('/pin-create') }>
+						onClick={ () => {
+							// check if logged user or register user
+							const data = localStorage?.getUserData();
+							if (data) {
+								navigate.replace('/');
+							} else {
+								navigate.replace('/pin-create');
+							}
+						} }>
 						<Text
 							text={ mrNotAvailableBtnLabel }
 							className='cursor-pointer'

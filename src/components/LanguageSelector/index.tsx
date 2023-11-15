@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
 import Image from 'next/image';
 
-import { icons } from '@/constant';
+import { colors, icons } from '@/constant';
+import { getLanguage, hasLanguageSet, setLanguage } from '@/helpers/localStorage';
 import { Picker, Text } from '@/components';
 
 const languageItem = [
@@ -10,13 +11,15 @@ const languageItem = [
 		key: 'id',
 		label: 'ID',
 		value: 'idn',
-		icon: <Image src={ icons.IDFlag } alt="" className='mr-[20px] h-[20px]' />
+		longLabel: 'Bahasa Indonesia',
+		icon: <icons.IDFlag className='w-5 h-5 flex-shrink-0 mr-3' />
 	},
 	{
 		key: 'en',
 		label: 'EN',
 		value: 'en',
-		icon: <Image src={ icons.ENFlag } alt="" className='mr-[20px] h-[20px]' />
+		longLabel: 'English',
+		icon: <icons.ENFlag className='w-5 h-5 flex-shrink-0 mr-3' />
 	}
 ];
 
@@ -50,44 +53,36 @@ const LanguageSelector = () => {
 	// };
 
 	return <>
-		<div className='flex items-center gap-[20px]'>
+		<div className='flex h-[21px]'>
 			{ languageItem.find(item => currrentLang === item.value)?.icon }
 		</div>
-		<div className='flex items-center pl-[20px] gap-[8px] cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
+		<div className='flex items-center gap-[5px] cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
 			<Text fontSize='16px' fontWeight='900' color='white'>
 				{ languageItem.find(item => currrentLang === item.value)?.label }
 			</Text>
-			<Image
-				src={ icons.LightArrowDown }
-				alt=""
-			/>
-			<div className='absolute right-[-10px] top-7'>
-				<Picker show={ showLanguagePicker }>
+			<icons.LightArrowDown />
+			<div className='absolute right-0 top-10'>
+				<Picker show={ showLanguagePicker } className='!mt-0 !shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)]'>
 					{
 						languageItem.map((item, index) => (
 							<div
 								key={ index }
-								className={ `cursor-pointer border-gray block py-4 px-4 flex justify-between items-center ${ index < languageItem.length ? '' : 'border-b' } ${ item.value === currrentLang ? 'active' : '' }` }
+								className={ `cursor-pointer p-5 ${ index > 0 ? 'border-t border-[#F0F2F9]' : '' }` }
 								onClick={ () => onChangeLanguage(item.value) }
 							>
-								<>
-									{ item.icon }
-									<Text
-										fontSize='16px'
-										fontWeight='700'
-										lineHeight='19px'
-										text={ item.label }
-										className='flex-1'
-									/>
-								</>
-								<Icons.Check className={ `check-icon ${ item.value === currrentLang ? '' : 'hidden' }` } size={ 20 } />
+								<Text
+									fontSize='16px'
+									fontWeight='700'
+									lineHeight='19px'
+									color={ item.value === currrentLang ? colors.green.brandAccent : colors.black.general }
+									text={ item.longLabel }
+								/>
 							</div>
 						))
 					}
 				</Picker>
 			</div>
 		</div>
-
 	</>;
 };
 

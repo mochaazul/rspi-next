@@ -487,12 +487,14 @@ export default {
 				emailNotVerified: {
 					heading: 'Email Anda belum diverifikasi. SIlahkan',
 					cta: 'Klik disini',
-					tail: 'untuk melakukan verifikasi email'
+					tail: 'untuk melakukan verifikasi email',
+					successMessage: 'Berhasil mengirim ulang verifikasi email'
 				}
-			}
+			},
+			welcome: 'Selamat datang'
 		},
 		registerPage: {
-			heading: 'Selamat Datang',
+			heading: 'Buat Akun Pasien',
 			subHeading: 'Silahkan masukan data akun untuk melakukan pendaftaran',
 			notificationMessage: {
 				onSuccess: 'Berhasil',
@@ -511,7 +513,9 @@ export default {
 			footer: {
 				hasAccountLabel: 'Sudah mempunyai akun? Silahkan masuk',
 				cta: 'disini'
-			}
+			},
+			buttonPrivacy: 'Lanjut',
+			buttonTnC: 'Kirim',
 		},
 		registerOnboard: {
 			heading: 'Selamat datang di RS. Pondok Indah',
@@ -557,14 +561,16 @@ export default {
 				patientGenderPlaceholder: 'Jenis Kelamin ',
 				patientMedicalNumber: 'Nomor Rekam Medis',
 				patientMedicalNumberPlaceholder: 'Nomor Rekam Medis',
-				patientPhoneNumber: 'Nomor Telp',
-				patientPhoneNumberPlaceholder: 'Nomor Telp',
+				patientPhoneNumber: 'No. Telepon',
+				patientPhoneNumberPlaceholder: 'No. Telepon',
+				patientPhoneNumberLabelInfo: 'Jika ingin melakukan penggantian data terkait, silahkan mengunjungi RS Pondok Indah terdekat',
 				patientEmail: 'Email',
 				patientEmailPlaceholder: 'Email',
 				patientOldEmail: 'Email Lama',
 				patientOldEmailPlaceHolder: 'Email Lama',
 				patientNewEmail: 'Email Baru',
 				patientNewEmailPlaceHolder: 'Email Baru',
+				patientEmailLabelInfo: 'Anda belum bisa melakukan perubahan alamat email jika belum mempunyai nomor rekam medis'
 			},
 			securitySetting: {
 				heading: 'Pengaturan Keamanan',
@@ -574,8 +580,10 @@ export default {
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Simpan',
-				cancelBtnLabel: 'Pembatalan'
+				cancelBtnLabel: 'Batal'
 			},
+			medicalRecordLabel: 'Informasi Rekam Medis',
+			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)'
 		},
 		patientPortal: {
 			tabMenuLabel: [
@@ -669,7 +677,22 @@ export default {
 			patientInfo: {
 				visitHoursPolicy: 'Tata Tertib & Waktu Berkunjung',
 				ourEffort: 'Upaya Kami Menjaga Anda Tetap Aman'
-			}
+			},
+			ourHospitalsLabel: 'OUR HOSPITALS',
+			ourCompanyLabel: 'OUR COMPANY',
+			visitorPatientLabel: 'VISITOR & PATIENT INFORMATION',
+			followUsLabel: 'FOLLOW US',
+			getRSPIMobileLabel: 'GET RSPI MOBILE',
+			subscribeLabel: 'Stay Updated With Us',
+			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.'
+		},
+		medicalRecordReminder: {
+			heading: 'Dapatkan Akses terhadap Informasi Kunjungan Medis Anda',
+			btnLabel: 'Isi Data Rekam Medis',
+			tooltipLabel: 'Pastikan Anda telah booking appointment dan melakukan kunjungan ke RSPI terdekat.'
+		},
+		topNav: {
+			welcome: 'Selamat datang'
 		}
 	},
 } as const;

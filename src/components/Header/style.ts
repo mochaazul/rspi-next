@@ -26,9 +26,6 @@ const HeaderStyle = styled.div`
 
   .rightNav {
     display: flex;
-    .translate {
-      margin: auto;
-    }
   }
 
   .menu {

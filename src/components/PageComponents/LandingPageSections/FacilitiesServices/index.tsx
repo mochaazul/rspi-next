@@ -48,7 +48,7 @@ const FacilitiesServices = ({ facilityServices }: { facilityServices: FacilitySe
 						<Image
 							src={ facilityServices[accordionOpenIndex]?.image_url?.[0] ?? '' }
 							alt={ facilityServices[accordionOpenIndex]?.short_description ?? 'placeholder image' }
-							layout='cover'
+							className='object-cover'
 							fill
 						/>
 					</div>

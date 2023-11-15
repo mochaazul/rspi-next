@@ -13,11 +13,12 @@ import {
 	Picker,
 	Form,
 	Modal,
-	NotificationPanel
+	NotificationPanel,
+	MedicalRecordReminder
 } from '@/components';
-import { Images, Languages, colors } from '@/constant';
+import { Images, Languages, colors, regExp } from '@/constant';
 import {
-	navigation, localStorage, createFieldConfig, requiredRule, minLengthRule, maxLengthRule
+	localStorage, createFieldConfig, requiredRule, minLengthRule, maxLengthRule
 } from '@/helpers';
 import {
 	BreadcrumbsProps, CheckPinType, UpdateAvatarType, UpdateEmailType, UpdateProfileType, UserState
@@ -26,16 +27,16 @@ import { getAge } from '@/helpers/getAge';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { PatientState } from '@/interface/PatientProfile';
 import { getLastVisitHospital, getProfileDetail, uploadPhotoProfile } from '@/stores/PatientProfile';
-
-import ProfilePageStyle from './style';
-import HorizontalInputWrapper from './HorizontalInputWrapper';
-import useProfilePage from './useProfilePage';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { getAppointmentList, updateEmail, updateProfile } from '@/stores/actions';
-import { checkPin, removeUser as removeUserData, updateUserInfo } from '@/stores/User';
+import { checkPin, removeUser as removeUserData, updateAvatar, updateUserInfo } from '@/stores/User';
 import { splitDate } from '@/helpers/datetime';
 import PinModal from '@/components/PinModal';
 import { PinModalContainer } from '@/components/PinModal/style';
+
+import ProfilePageStyle, { Divider } from './style';
+import HorizontalInputWrapper from './HorizontalInputWrapper';
+import useProfilePage from './useProfilePage';
 
 type DisabledInputs = {
 	email: boolean,
@@ -43,7 +44,7 @@ type DisabledInputs = {
 	pin: boolean;
 };
 
-const { heading, loginAsLabel, profileDetail, securitySetting, subHeading, updatePhotoLabel, uploadPhotoLabel, deletePhotoLabel, choosePhotoLabel, formatPhotoLabel, profileLabel, securitySettingLabel } = Languages.page.profilePage;
+const { heading, loginAsLabel, profileDetail, securitySetting, subHeading, updatePhotoLabel, uploadPhotoLabel, deletePhotoLabel, choosePhotoLabel, formatPhotoLabel, profileLabel, securitySettingLabel, medicalRecordLabel, medicalRecordEmptyInfo } = Languages.page.profilePage;
 const { header, subHeader, submitBtnLabel } = Languages.modalDialog.pin;
 const ProfilePage = (props: BreadcrumbsProps) => {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
@@ -63,7 +64,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	const getProfile = useAppDispatch(getProfileDetail);
 	const getLastVisitedHospital = useAppDispatch(getLastVisitHospital);
 	const uploadPhotoPatient = useAppAsyncDispatch(uploadPhotoProfile);
-	const clikUpdateAvatar = useAppDispatch<UpdateAvatarType>(updateProfile);
+	const clikUpdateAvatar = useAppDispatch<UpdateAvatarType>(updateAvatar);
 	const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
 	const clikUpdateEmail = useAppDispatch<UpdateEmailType>(updateEmail);
 	const pinDispatch = useAppDispatch(checkPin);
@@ -78,6 +79,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	const [showModalSuccessUpdateEmail, setShowModalSuccessUpdateEmail] = useState<boolean>(false);
 	const [showModalNewEmail, setShowModalNewEmail] = useState<boolean>(false);
 	const [pinModalVisible, setPinModalVisible] = useState<boolean>(false);
+	const [isLoadingUploadAvatar, setIsLoadingUploadAvatar] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 
 	const removeUser = useAppDispatch(removeUserData);
@@ -146,15 +148,16 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	};
 
 	const clickUploadPhotoPatient = async () => {
+		setIsLoadingUploadAvatar(true);
 		const formImg = new FormData();
 		formImg.append('upload', tempImage ?? '');
 		const responseData = await uploadPhotoPatient({ payload: formImg });
 		if (responseData.stat_msg === 'Success') {
-			const urlImage = 'https://rebel-env.s3.us-west-2.amazonaws.com/rspi/dev/rspi-api/uploads/';
 			await clikUpdateAvatar({
-				payload: { image_url: urlImage + responseData.data }
+				payload: { img_url: responseData.data }
 			});
 		}
+		setIsLoadingUploadAvatar(false);
 	};
 
 	const clickUpdateProfile = async (evt: React.FormEvent<HTMLFormElement>) => {
@@ -210,8 +213,8 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 		<Layout.PanelV1>
 			<Layout.PanelH2>
 				<Breadcrumbs datas={ props.breadcrumbsPath } />
-				<ProfilePageStyle className='mt-[50px]'>
-					<div className='flex justify-between max-[480px]:flex-col'>
+				<ProfilePageStyle className='mt-[25px] sm:mt-[50px]'>
+					<div className='flex items-end lg:items-start justify-between max-lg:flex-col'>
 						<div>
 							<Text
 								fontWeight='900'
@@ -229,18 +232,18 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 								text={ subHeading }
 							/>
 						</div>
-						<div className='flex relative max-[480px]:mt-4 max-[480px]:justify-end'>
+						<div className='relative inline-block max-lg:mt-4 max-lg:justify-end'>
 							<Button
 								theme='outline'
 								hoverTheme='primary'
-								className='px-[25px] py-[10px] max-[480px]:w-[150px]'
+								className='px-[25px] py-2.5 !w-auto max-sm:text-sm'
 								onClick={ () => setSwitchAccountPickerShow(!switchAccountPickerShow) }
 							>
 								<div className='flex items-center gap-3'>
 									{ loginAsLabel }<Icons.ChevronDown size={ 22 } />
 								</div>
 							</Button>
-							<Picker show={ switchAccountPickerShow }>
+							<Picker show={ switchAccountPickerShow } className='z-40'>
 								{
 									switchAccountUsers?.map((data: any, index: number) => (
 										<div
@@ -271,124 +274,138 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 							</Picker>
 						</div>
 					</div>
-					<div className='user-panel card-shadow'>
-						<div className='flex justify-center items-center'>
-							<div className='w-[60px] h-[60px] rounded-full mr-3 relative overflow-hidden cursor-pointer'>
-								<img
-									src={ tempImage ? URL.createObjectURL(tempImage) : Images.CustomerReviewCustAvatar }
-									alt={ tempImage ? 'Temp Image' : Images.CustomerReviewCustAvatar }
-									className='w-full h-full object-cover'
-								/>
-								<div className='w-full h-full absolute flex items-center justify-center upload-mask top-0' onClick={ () => uploadFileRef.current?.click() }>
-									<Icons.Camera color={ colors.grey.dark } />
-								</div>
-								<input
-									type='file'
-									ref={ uploadFileRef }
-									onChange={ () => setTempImage(uploadFileRef.current?.files?.[0] ? uploadFileRef.current?.files[0] : null) }
-									className='hidden'
-									accept='image/*'
-								/>
-							</div>
-							<div className='flex-1'>
-								<Text
-									fontWeight='700'
-									fontSize='16px'
-									lineHeight='19px'
-									text={ patientProfile.name }
-								/>
-								<Text
-									fontWeight='400'
-									fontSize='14px'
-									lineHeight='17px'
-									className='capitalize'
-									text={ patientProfile.birthdate && patientProfile.gender && `${ getAge(splitDate(patientProfile?.birthdate)) }, ${ patientProfile.gender }` }
-								/>
-							</div>
-							<div className='flex-1'>
-								<Text
-									fontWeight='400'
-									fontSize='14px'
-									lineHeight='17px'
-									text={ profileDetail.patientIdLabel }
-								/>
-								<Text
-									fontWeight='700'
-									fontSize='16px'
-									lineHeight='19px'
-									text={ userSelector.user.patient_code }
-								/>
-							</div>
-							<div className='max-[480px]:hidden flex-1'>
-								<Text
-									fontWeight='400'
-									fontSize='14px'
-									lineHeight='17px'
-									text={ profileDetail.lastVisitedHospitalLabel }
-								/>
-								<Text
-									fontWeight='700'
-									fontSize='16px'
-									lineHeight='19px'
-									text={ lastVisitedHospital.hospital_desc ?? '-' }
-								/>
-							</div>
-							<div className='max-[480px]:hidden flex-1'>
-								<Text
-									fontWeight='400'
-									fontSize='14px'
-									lineHeight='17px'
-									text={ profileDetail.lastVisitedDateLabel }
-								/>
-								<Text
-									fontWeight='700'
-									fontSize='16px'
-									lineHeight='19px'
-									text={ dayjs(lastVisitedHospital.adm_date).format('DD MMM YYYY') ?? '-' }
-								/>
-							</div>
-						</div>
-						<div className='flex justify-center items-center hidden mt-2 max-[480px]:block'>
-							<div className='flex-1 mt-6'>
-								<Text
-									fontWeight='400'
-									fontSize='14px'
-									lineHeight='17px'
-									text={ profileDetail.lastVisitedHospitalLabel }
-								/>
-								<Text
-									fontWeight='700'
-									fontSize='16px'
-									lineHeight='19px'
-									text={ lastVisitedHospital.hospital_desc ?? '-' }
-								/>
-							</div>
-							<div className='flex-1'>
-								<Text
-									fontWeight='400'
-									fontSize='14px'
-									lineHeight='17px'
-									text={ profileDetail.lastVisitedDateLabel }
-								/>
-								<Text
-									fontWeight='700'
-									fontSize='16px'
-									lineHeight='19px'
-									text={ dayjs(lastVisitedHospital.adm_date).format('DD MMM YYYY') ?? '-' }
-								/>
-							</div>
-						</div>
 
-					</div>
-					<div className='flex mt-12 mb-[200px]'>
+					{
+						isDisableFormProfile ?
+							<div className='user-panel card-shadow p-4 lg:p-5'>
+								<div className='flex justify-between lg:justify-center lg:grid lg:grid-cols-4 lg:gap-4 lg:items-center'>
+									<div className='flex items-center'>
+										<div className='flex-shrink-0 w-12 h-12 lg:w-[60px] lg:h-[60px] rounded-full mr-4 lg:mr-[18px] relative overflow-hidden cursor-pointer'>
+											<img
+												src={ tempImage ? URL.createObjectURL(tempImage) : patientProfile.img_url }
+												alt={ tempImage ? 'Temp Image' : patientProfile.img_url }
+												className='w-full h-full object-cover'
+											/>
+											<div className='w-full h-full absolute flex items-center justify-center upload-mask top-0' onClick={ () => uploadFileRef.current?.click() }>
+												<Icons.Camera color={ colors.grey.dark } />
+											</div>
+											<input
+												type='file'
+												ref={ uploadFileRef }
+												onChange={ () => setTempImage(uploadFileRef.current?.files?.[0] ? uploadFileRef.current?.files[0] : null) }
+												className='hidden'
+												accept='image/*'
+											/>
+										</div>
+										<div className='flex flex-col gap-1 lg:gap-y-2.5'>
+											<Text
+												fontWeight='700'
+												fontSize='16px'
+												lineHeight='19px'
+												text={ patientProfile.name }
+											/>
+											<Text
+												fontWeight='400'
+												fontSize='14px'
+												lineHeight='17px'
+												className='capitalize'
+												text={ patientProfile.birthdate && patientProfile.gender && `${ getAge(splitDate(patientProfile?.birthdate)) }, ${ patientProfile.gender }` }
+											/>
+										</div>
+									</div>
+									<div className='flex flex-col gap-1 lg:gap-y-2.5'>
+										<Text
+											fontWeight='400'
+											fontSize='14px'
+											lineHeight='17px'
+											subClassName='max-lg:text-center'
+											text={ profileDetail.patientIdLabel }
+										/>
+										<Text
+											fontWeight='700'
+											fontSize='16px'
+											lineHeight='19px'
+											subClassName='max-lg:text-center'
+											text={ userSelector.user.patient_code }
+										/>
+									</div>
+									<div className='max-lg:hidden flex flex-col gap-y-2.5'>
+										<Text
+											fontWeight='400'
+											fontSize='14px'
+											lineHeight='17px'
+											text={ profileDetail.lastVisitedHospitalLabel }
+										/>
+										<Text
+											fontWeight='700'
+											fontSize='16px'
+											lineHeight='19px'
+											text={ lastVisitedHospital.hospital_desc ?? '-' }
+										/>
+									</div>
+									<div className='max-lg:hidden flex flex-col gap-y-2.5'>
+										<Text
+											fontWeight='400'
+											fontSize='14px'
+											lineHeight='17px'
+											text={ profileDetail.lastVisitedDateLabel }
+										/>
+										<Text
+											fontWeight='700'
+											fontSize='16px'
+											lineHeight='19px'
+											text={ dayjs(lastVisitedHospital.adm_date).format('DD MMM YYYY') ?? '-' }
+										/>
+									</div>
+								</div>
+								<div className='hidden pt-6 mt-6 border-t border-[#F0F2F9] max-lg:flex justify-between'>
+									<div className='flex flex-col gap-1'>
+										<Text
+											fontWeight='400'
+											fontSize='14px'
+											lineHeight='17px'
+											text={ profileDetail.lastVisitedHospitalLabel }
+											textAlign='center'
+										/>
+										<Text
+											fontWeight='700'
+											fontSize='16px'
+											lineHeight='19px'
+											text={ lastVisitedHospital.hospital_desc ?? '-' }
+											textAlign='center'
+										/>
+									</div>
+									<div className='flex flex-col gap-1'>
+										<Text
+											fontWeight='400'
+											fontSize='14px'
+											lineHeight='17px'
+											text={ profileDetail.lastVisitedDateLabel }
+											textAlign='center'
+										/>
+										<Text
+											fontWeight='700'
+											fontSize='16px'
+											lineHeight='19px'
+											text={ dayjs(lastVisitedHospital.adm_date).format('DD MMM YYYY') ?? '-' }
+											textAlign='center'
+										/>
+									</div>
+								</div>
+							</div> :
+							<div className='mt-[30px] lg:px-[60px]'>
+								<MedicalRecordReminder isFloating={ false } />
+							</div>
+					}
+					<div className='flex mt-5 sm:mt-12 mb-[200px]'>
 						<SubMenuPage menuList={ [profileLabel, securitySettingLabel] }>
 							<div className='flex flex-col gap-[10px]'>
-								<div className='flex flex-row items-center justify-between max-[480px]:mb-4'>
+								<div className='flex max-md:mb-4 max-md:flex-col md:items-center md:justify-between md:w-full'>
 									<div className='flex flex-row gap-x-4 items-center w-full'>
-										<div className='w-[100px] h-[100px] rounded-full overflow-hidden'>
+										<div className='w-[82px] md:w-[100px] h-[82px] md:h-[100px] rounded-full overflow-hidden flex-shrink-0'>
 											<img
-												src={ tempImage ? URL.createObjectURL(tempImage) : Images.CustomerReviewCustAvatar }
-												alt={ tempImage ? 'Temp Image' : Images.CustomerReviewCustAvatar }
+												src={ tempImage ? URL.createObjectURL(tempImage) : patientProfile.img_url }
+												alt={ tempImage ? 'Temp Image' : patientProfile.img_url }
 												className='w-full h-full object-cover'
 											/>
 										</div>
@@ -408,7 +425,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 														fontType='h4'
 														fontWeight='400'
 														color={ colors.paradiso.default }
-														subClassName='max-sm:text-[16px] max-sm:leading-[23px]'
+														subClassName='max-sm:text-sm'
 														onClick={ () => uploadFileRef.current?.click() }
 													>
 														{ choosePhotoLabel }
@@ -419,61 +436,50 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 														fontType='h4'
 														fontWeight='400'
 														color={ colors.grey.default }
-														subClassName='max-sm:text-[16px] max-sm:leading-[23px]'
+														subClassName='max-sm:text-xs'
 													>
 														{ formatPhotoLabel }
 													</Text>
 												</div> :
-												<Button theme='outline' hoverTheme='primary' className='w-[200px]' label={ updatePhotoLabel } onClick={ () => setClickUpdatePhoto(true) } />
+												<Button
+													theme='outline'
+													hoverTheme='primary'
+													themeColor='rgba(173, 181, 189, 1)'
+													className='px-[15px] sm:px-5 py-2.5 !w-auto text-sm lg:text-base text-[#2A2536]'
+													label={ updatePhotoLabel }
+													onClick={ () => setClickUpdatePhoto(true) }
+												/>
 										}
 									</div>
-									<div>
-										{
-											clickUpdatePhoto ?
-												<div className='flex gap-5 justify-end align-center'>
-													<div>
-														<Button theme='primary' className='w-[200px]' hoverTheme='primary' label={ uploadPhotoLabel } onClick={ clickUploadPhotoPatient } />
-													</div>
-													<div>
-														<Button theme='outline' className='w-[200px]' hoverTheme='outline' label={ deletePhotoLabel } />
-													</div>
+									{
+										clickUpdatePhoto ?
+											<div className='flex max-md:mt-4 gap-4 md:gap-5 lg:gap-8 justify-end items-center'>
+												<div>
+													<Button
+														theme='primary'
+														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base text-[#2A2536] sm:whitespace-nowrap'
+														themeColor={ colors.grey.lightest }
+														label={ deletePhotoLabel }
+													/>
 												</div>
-												: null
-										}
-
-									</div>
+												<div>
+													<Button
+														theme='primary'
+														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base sm:whitespace-nowrap'
+														hoverTheme='primary'
+														label={ uploadPhotoLabel }
+														onClick={ clickUploadPhotoPatient }
+														disabled={ isLoadingUploadAvatar }
+													/>
+												</div>
+											</div>
+											: null
+									}
 								</div>
 								<Form onSubmit={ clickUpdateProfile }>
 									<HorizontalInputWrapper
-										label={ profileDetail.patientNameLabel }
-										inputProps={ { ...registeredValue('name'), placeholder: profileDetail.patientNamePlaceholder, disabled: isDisableFormProfile } }
-									/>
-									<HorizontalInputWrapper
-										label={ profileDetail.patientGenderLabel }
-										inputType='dropdown'
-										inputProps={ { ...registeredValue('gender'), placeholder: profileDetail.patientGenderPlaceholder, disabled: isDisableFormProfile, className: 'capitalize' } }
-									/>
-									<HorizontalInputWrapper
-										label={ profileDetail.patientMedicalNumber }
-										inputProps={ { placeholder: profileDetail.patientMedicalNumberPlaceholder, disabled: true, value: patientProfile.no_mr } }
-									/>
-									<HorizontalInputWrapper
-										label={ profileDetail.patientBirthDateLabel }
-										inputType='date'
-										inputProps={ { ...registeredValue('dob', true), placeholder: profileDetail.patientBirthDatePlaceholder, disabled: isDisableFormProfile } }
-									/>
-									<HorizontalInputWrapper
-										label={ profileDetail.patientPhoneNumber }
-										inputProps={ {
-											...registeredValue('phone'),
-											placeholder: profileDetail.patientPhoneNumberPlaceholder,
-											disabled: isDisableFormProfile,
-											value: parsePhoneNumber()
-										} }
-
-									/>
-									<HorizontalInputWrapper
 										label={ profileDetail.patientEmail }
+										labelInfo={ !isDisableFormProfile ? profileDetail.patientPhoneNumberLabelInfo : undefined }
 										inputProps={ {
 											...registeredValue('email'),
 											...editableInputProps,
@@ -485,14 +491,83 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 											}
 										} }
 									/>
+									<Divider />
+									<div className='mb-[25px] flex max-sm:flex-col sm:items-baseline sm:gap-4'>
+										<Text
+											fontSize='20px'
+											fontWeight='900'
+											color={ colors.grey.dark }
+											text={ medicalRecordLabel }
+										/>
 
-									<div className='flex justify-end align-center gap-5 mt-[50px]'>
-										<div>
-											<Button type='submit' theme='primary' hoverTheme='outline' label={ securitySetting.saveBtnLabel } />
-										</div>
+										{
+											!isDisableFormProfile &&
+											<Text
+												fontSize='16px'
+												fontWeight='400'
+												fontStyle='italic'
+												color={ colors.red.default }
+												text={ medicalRecordEmptyInfo }
+											/>
+										}
 									</div>
-								</Form>
+									<HorizontalInputWrapper
+										label={ profileDetail.patientNameLabel }
+										inputProps={ { ...registeredValue('name'), placeholder: profileDetail.patientNamePlaceholder, disabled: isDisableFormProfile } }
+									/>
+									<HorizontalInputWrapper
+										label={ profileDetail.patientGenderLabel }
+										inputType='dropdown'
+										inputProps={ { ...registeredValue('gender'), placeholder: profileDetail.patientGenderPlaceholder, disabled: isDisableFormProfile, className: 'capitalize' } }
+									/>
+									{
+										isDisableFormProfile &&
+										<HorizontalInputWrapper
+											label={ profileDetail.patientMedicalNumber }
+											inputProps={ { placeholder: profileDetail.patientMedicalNumberPlaceholder, disabled: true, value: patientProfile.no_mr } }
+										/>
+									}
+									<HorizontalInputWrapper
+										label={ profileDetail.patientBirthDateLabel }
+										inputType='date'
+										inputProps={ { ...registeredValue('dob', true), placeholder: profileDetail.patientBirthDatePlaceholder, disabled: isDisableFormProfile } }
+									/>
+									<HorizontalInputWrapper
+										label={ profileDetail.patientPhoneNumber }
+										labelInfo={ isDisableFormProfile ? profileDetail.patientPhoneNumberLabelInfo : undefined }
+										inputProps={ {
+											...registeredValue('phone'),
+											placeholder: profileDetail.patientPhoneNumberPlaceholder,
+											disabled: isDisableFormProfile,
+											onKeyDown: (ev: React.KeyboardEvent<HTMLInputElement>) => {
+												if (regExp.phone_allowed_char_list.indexOf(ev.key) < 0) {
+													ev.preventDefault();
+												}
+											}
+										} }
+									/>
 
+									{
+										!isDisableFormProfile &&
+										<div className='flex justify-end align-center gap-5 mt-[50px]'>
+											<div>
+												<Button
+													theme='outline'
+													hoverTheme='primary'
+													label={ securitySetting.cancelBtnLabel }
+												/>
+											</div>
+											<div>
+												<Button
+													type='submit'
+													theme='primary'
+													hoverTheme='outline'
+													label={ securitySetting.saveBtnLabel }
+												/>
+											</div>
+										</div>
+									}
+								</Form>
 							</div>
 							<div className='flex flex-col gap-[10px]'>
 								<HorizontalInputWrapper
@@ -517,14 +592,6 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 										onIconClick: () => navigate.replace('/pin-reset')
 									} }
 								/>
-								<div className='flex justify-end align-center gap-5 mt-[50px]'>
-									<div>
-										<Button theme='outline' hoverTheme='primary' label={ securitySetting.cancelBtnLabel } />
-									</div>
-									<div>
-										<Button theme='primary' hoverTheme='outline' label={ securitySetting.saveBtnLabel } />
-									</div>
-								</div>
 							</div>
 						</SubMenuPage>
 					</div>

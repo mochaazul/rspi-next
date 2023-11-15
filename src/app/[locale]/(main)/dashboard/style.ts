@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type ModalType = {
-  modalVisible?: boolean;
+	modalVisible?: boolean;
 };
 
 const DashoardStyle = styled.div`
@@ -67,4 +67,11 @@ const ContentModal = styled.div`
       padding: 10px;
     `;
 
-export { DashoardStyle, FloatingButton, Modal, ContentModal };
+const TnCModal = styled.div`
+      width: 700px;
+      background: white ;
+      position:relative;
+      z-index: 9999;
+      padding: 4px;
+    `;
+export { DashoardStyle, FloatingButton, Modal, ContentModal, TnCModal };

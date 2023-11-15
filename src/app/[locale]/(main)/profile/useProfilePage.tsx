@@ -21,7 +21,7 @@ export const profileFields = {
 	phone: {
 		...createFieldConfig({
 			name: 'phone',
-			type: 'number'
+			type: 'text'
 		}),
 		validationRules: [
 			requiredRule('phone'),
