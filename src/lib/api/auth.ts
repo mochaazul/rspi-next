@@ -7,7 +7,9 @@ import {
 	ResendEmailVerificationType,
 	UserData,
 	RegisterType,
-	PinType
+	PinType,
+	OTPType,
+	RegisterOnboardType
 } from '@/interface';
 import { cookiesHelper } from '@/helpers';
 
@@ -23,7 +25,10 @@ export const login = async (loginPayload: LoginType) => {
 		cookiesHelper.setTokenUser(userLogin.token || '');
 
 		const userDetail = await getProfile();
-		cookiesHelper.setUserData(JSON.stringify(userDetail?.data));
+		cookiesHelper.setUserData(JSON.stringify({
+			...userDetail?.data,
+			...userLogin
+		}));
 	}
 
 	return loginRes;
@@ -69,6 +74,14 @@ export const createPin = async (formPin: PinType) => {
 	return fetcher<any>('createPin', { body: formPin });
 };
 
-export const updatePin = async (formPin: PinType) => {
+export const updatePin = (formPin: PinType) => {
 	return fetcher<any>('updatePin', { body: formPin });
+};
+
+export const createOTP = (formOtp: OTPType) => {
+	return fetcher<any>('otp', { body: formOtp });
+};
+
+export const registerOnboard = (formRegisterOnboard: RegisterOnboardType) => {
+	return fetcher<any>('registerOnboard', { body: formRegisterOnboard });
 };

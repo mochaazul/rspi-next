@@ -32,8 +32,7 @@ export default {
 			failed: 'Validasi Gagal',
 			success: 'Validasi Berhasil',
 			loading: 'Mohon Tunggu Sebentar',
-			backToLogin: 'Kembali ke halaman login',
-			backToRegister: 'Kembali ke halaman register'
+			backToLogin: 'Kembali ke halaman login'
 		}
 	},
 	page: {

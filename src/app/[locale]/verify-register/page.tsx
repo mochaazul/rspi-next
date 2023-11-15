@@ -21,8 +21,8 @@ const EmailVerificationPage = () => {
 
 	const languages = useScopedI18n('validation.tokenValidation');
 
-	const handleBackRegister = () => {
-		navigate.replace('/register');
+	const handleBackLogin = () => {
+		navigate.replace('/login');
 	};
 
 	const handleNavigateSuccess = () => {
@@ -99,8 +99,8 @@ const EmailVerificationPage = () => {
 					<Button
 						theme='primary'
 						hoverTheme='outline'
-						label={ languages('backToRegister') }
-						onClick={ handleBackRegister }
+						label={ languages('backToLogin') }
+						onClick={ handleBackLogin }
 					/>
 				</div>
 			</div>

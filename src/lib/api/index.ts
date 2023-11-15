@@ -1,5 +1,5 @@
 import {
-	BannerDetail, CenterOfExcellenceDetail, CenterOfExcellenceState, ForgotPasswordType, HospitalState, LoginType, NewPasswordPayload, OTPType, Pagination, PayloadBanner, RegisterOnboardType, RegisterType, ResendEmailVerificationType, UpdatePasswordType, UserData
+	BannerDetail, CenterOfExcellenceDetail, CenterOfExcellenceState, ForgotPasswordType, HospitalState, OTPType, Pagination, PayloadBanner, UpdatePasswordType, UserData
 } from '@/interface';
 import fetcher from './utils/fetcher';
 
@@ -13,10 +13,6 @@ export const getUserProfile = () => {
 
 export const validateOtp = (payload: OTPType) => {
 	return fetcher<any>('otp', { body: payload });
-};
-
-export const registerOnboarding = (payload: RegisterOnboardType) => {
-	return fetcher<any>('registerOnboard', { body: payload });
 };
 
 export const forgotPassword = (payload: ForgotPasswordType) => {

@@ -32,8 +32,7 @@ export default {
 			failed: 'Validation Failed',
 			success: 'Validation Success',
 			loading: 'Please Wait',
-			backToLogin: 'Back to Login',
-			backToRegister: 'Back to Register'
+			backToLogin: 'Back to Login'
 		}
 	},
 	page: {
