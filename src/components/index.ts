@@ -19,7 +19,6 @@ import PaginationNumber from './PaginationNumber';
 import MainNavLanguage from './MainNavLanguage';
 import CallForAmbulance from './CallForAmbulance';
 import Share from './Share';
-import Spinner from './Spinner';
 import EmptyData from './EmptyData';
 import SubMenuPage from './SubMenuPage';
 import Picker from './Picker';
@@ -52,7 +51,6 @@ export {
 	MainNavLanguage,
 	CallForAmbulance,
 	Share,
-	Spinner,
 	EmptyData,
 	SubMenuPage,
 	Picker,

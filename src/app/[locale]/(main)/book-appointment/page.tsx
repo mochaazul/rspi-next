@@ -22,7 +22,7 @@ import ProfileSelector from './ProfileSelector';
 import AddProfileModal, { ProfilePayload } from '@/components/AddProfileModal';
 import { getFamilyProfiles } from '@/stores/actions';
 import { Languages as lang } from '@/constant';
-import Radio from '@/components/Radio';
+import Radio from '@/components/ui/Radio';
 import { isEqual } from 'lodash';
 import SuccessConfirmationModal from './SuccessConfirmationModal';
 import { formatTimeslot, splitDate } from '@/helpers/datetime';

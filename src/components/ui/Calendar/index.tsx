@@ -10,7 +10,7 @@ import { useTypedSelector } from '@/hooks';
 import { FindDoctorState } from '@/interface';
 import dayjs, { UnitType } from 'dayjs';
 import languages from '@/constant/languages';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/components/ui/Spinner';
 import Image from 'next/image';
 
 type Props = {
