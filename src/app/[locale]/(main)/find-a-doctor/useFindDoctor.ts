@@ -1,9 +1,7 @@
 import { PickerItem } from '@/components/DropdownSearch';
-import { createFieldConfig, maxLengthRule, minLengthRule, requiredRule } from '@/helpers';
-import { useTypedSelector } from '@/hooks';
-import { HospitalDetail, HospitalState } from '@/interface';
+import { createFieldConfig } from '@/helpers';
+import { HospitalDetail } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';
-import { I_Specialities, I_SpecialitiesState } from '@/interface/specialities';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const searchFilterField = {
@@ -155,6 +153,10 @@ const useFindDoctor = ({ hospitals, clinics }:Props) => {
 		telemedicineFilter: {
 			get: getTelemedicineFIlter,
 			shouldRender: shouldRenderTelemedicine
+		},
+		doctorNameFilter: {
+			set: setDoctorName,
+			get: getDoctorName
 		},
 		onDeletePills,
 		createQueryString,

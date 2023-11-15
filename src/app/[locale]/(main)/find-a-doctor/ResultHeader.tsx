@@ -4,24 +4,23 @@ import Text from '@/components/ui/Text';
 import { colors } from '@/constant';
 import { I_MasterDoctor, ResponseType } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
+import { debounce } from 'lodash';
 import { useSearchParams } from 'next/navigation';
-import { PropsWithChildren, PropsWithRef } from 'react';
+import { PropsWithChildren, PropsWithRef, useCallback } from 'react';
 
 type Props = {
-  doctors?: ResponseType<I_MasterDoctor[]>
+  doctorCount:number
+	setter: (value: string) => void,
+	getter: () => string | null,
 }
-const ResultHeader = ({ doctors }:Props) => {
+const ResultHeader = ({ doctorCount, setter, getter }:Props) => {
   
 	const t = useScopedI18n('page.findDoctor');
 
-	const searchParams = useSearchParams()!;
-	const params = new URLSearchParams(searchParams);
-
 	const onSearchDoctorByName = (value: string) => {
-		params.set('keyword', value);
+		setter(value);
 	};
-
-	const doctorCount = () => doctors?.pagination.count || 0;
+	const debounceFilter = debounce(onSearchDoctorByName, 500);
 
 	return (
 		<>
@@ -31,7 +30,7 @@ const ResultHeader = ({ doctors }:Props) => {
 				fontWeight='700'
 				lineHeight='24px'
 				className='mb-6 max-sm:hidden'
-				text={ `${doctorCount()} ${t('label.doctorFound')}` }
+				text={ `${doctorCount} ${t('label.doctorFound')}` }
 			/>
 			{ /* Cari Dokter - title - Mobile */ }
 			<Text
@@ -48,7 +47,7 @@ const ResultHeader = ({ doctors }:Props) => {
 				placeholder={ t('label.doctorName') }
 				featherIcon='Search'
 				iconPosition='right'
-				onChange={ ({ target }) => onSearchDoctorByName(target.value) }
+				onChange={ ({ target }) => debounceFilter(target.value) }
 				$iconColor={ colors.grey.light }
 			/>
       

@@ -30,6 +30,7 @@ import useFindDoctor from './useFindDoctor';
 import { useEffect, useState } from 'react';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
+import { findDoctorEvent } from '@/utils/metaPixelTrack';
 
 const breadCrumbs = [{ name: 'Find a Doctor', url: '#' }];
 
@@ -52,40 +53,21 @@ export const AccordionFilterWrapper = ({ title, children, hideToggler }: { title
 export default function Page(props: BreadcrumbsProps) {
 
 	const searchParams = useSearchParams();
-	const params = new URLSearchParams(searchParams);
 	const [currentPage, setCurrentPage] = useState<number>(1);
+	const hasKeyword = searchParams.get('keyword');
 
-	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate } = useGetDoctors({
-		query: Object.fromEntries(searchParams),
-		pagination: {
-			page: currentPage
-		}
-	});
+	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
+
 	const { data: hospitalResponse, error: hospitalError, isLoading: hospitalLoading } = useGetHospital();
 	const { data: clinicsResponse, error: clinicsError, isLoading: clinicsLoading } = useGetClinics();
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
-	const { onDeletePills, clearSearchParams } = useFindDoctor({ clinics: clinicsResponse?.data || [], hospitals: hospitalResponse?.data || [] });
+	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinicsResponse?.data || [], hospitals: hospitalResponse?.data || [] });
 
 	// useEffect(() => {
 	// 	findDoctorEvent();
 	// }, []);
-
-	useEffect(() => {
-		// debounceFilter(searchParams);
-		if (doctorResponse) {
-			mutate(doctorResponse);
-		}
-	}, [searchParams]);
-
-	const onChangeParam = (params: URLSearchParams) => {
-		// getMasterDoctor({
-		// 	queryParam: Object.fromEntries(params)
-		// });
-	};
-
-	// const debounceFilter = useCallback(debounce(onChangeParam, 1000, { leading: true }), []);
 
 	const RenderFilterPane = (
 		<div className='filter-pane' >
@@ -94,7 +76,7 @@ export default function Page(props: BreadcrumbsProps) {
 	);
 
 	const loadMore = () => {
-		setCurrentPage(currentPage + 1);
+		setSize(size + 1);
 	};
 
 	const getFilterValues = () => {
@@ -106,7 +88,7 @@ export default function Page(props: BreadcrumbsProps) {
 		}[] = [];
 		for (const entry in entries) {
 			const values = searchParams.get(entry);
-			if (entry === 'hospital' && values && hospitalResponse) {
+			if (entry === 'hospital_code' && values && hospitalResponse) {
 				// We need this condition since we need to map hospital name based on hospital code
 				const obj = searchParams.get(entry)?.split(',');
 				mapped.push(
@@ -139,9 +121,28 @@ export default function Page(props: BreadcrumbsProps) {
 
 	const hasSearchParams = () => {
 		const searchParamObj = Object.fromEntries(searchParams);
-		const paramFound = !_.isEmpty(searchParamObj[ 'specialty_category' ]) || !_.isEmpty(searchParamObj[ 'hospital' ]) || searchParamObj[ 'telemedicine' ] === 'true';
+		const paramFound = !_.isEmpty(searchParamObj[ 'specialty_category' ]) || !_.isEmpty(searchParamObj[ 'hospital_code' ]) || searchParamObj[ 'telemedicine' ] === 'true';
 		return paramFound;
 	};
+
+	const doctorData = () => {
+		if (doctorResponse) {
+			return doctorResponse.flatMap(res => res.data);
+		}
+		return [];
+	};
+
+	const doctorCount = () => {
+		if (doctorResponse) {
+			return doctorResponse[0].pagination.count || 0;
+		}
+		return 0;
+	};
+
+	const hasMore = () => {
+		return doctorCount() > size;
+	};
+
 	return (
 		<PanelV1>
 			<PanelH1>
@@ -156,7 +157,7 @@ export default function Page(props: BreadcrumbsProps) {
 
 						{ /* Doctors Pane */ }
 						<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
-							<ResultHeader doctors={ doctorResponse } />
+							<ResultHeader doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } />
 							{ /* Search used filters - pills with remove icon */ }
 							<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
 								{ /* Applied dilter pills */ }
@@ -203,27 +204,27 @@ export default function Page(props: BreadcrumbsProps) {
 								</div>
 							</div>
 							{ /* Doctor found counter - Mobile */ }
-							{ /* <div>
-							<Text
-								fontSize='14px'
-								fontWeight='700'
-								lineHeight='17px'
-								className='mb-2 mt-6 sm:hidden'
-								text={ `${ doctorCount() } ${ language.label.doctorFound }` }
-							/>
-						</div> */ }
+							<div>
+								<Text
+									fontSize='14px'
+									fontWeight='700'
+									lineHeight='17px'
+									className='mb-2 mt-6 sm:hidden'
+									text={ `${ doctorCount() } Doctor Found` }
+								/>
+							</div>
 							{ /* Doctors result card */ }
 							<InfiniteScroll
 								style={ { overflow: 'unset' } }
 								className='flex flex-col gap-6 sm:mt-[47px]'
-								dataLength={ doctorResponse?.data.length || 0 }
+								dataLength={ doctorData().length || 0 }
 								next={ loadMore }
-								hasMore={ (doctorResponse?.pagination !== doctorResponse?.pagination.total_page) || false }
+								hasMore={  hasMore() }
 								loader={ <div className='loader' key={ 0 }>Loading ...</div> }
 								scrollThreshold={ '100px' }
 							>
 								{
-									doctorResponse && doctorResponse.data.map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
+									doctorData().map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
 								}
 							</InfiniteScroll>
 						</div>

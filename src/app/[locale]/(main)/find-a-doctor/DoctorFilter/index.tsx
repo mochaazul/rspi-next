@@ -44,12 +44,6 @@ const DoctorFilter = ({ hospitals, clinics }:Props) => {
 		hospitals,
 		clinics
 	});
-	
-	// Tidak menggunakan helper form karena
-	// Helper form pada skeleton tidak support untuk ekstrak value onChange
-	// Value form pada helper form hanya dapat di ambil ketika trigger onSubmit
-	// TODO : Add support for onChange values on form Component
-	// TODO : Add checkbox support on useForm
 	const onChangeHospital = ({ hospital_code, id }: HospitalDetail, checked: boolean) => {
 		if (checked) {
 			const hospitals = [...hospitalFilter.getAll(), { hospital_code: hospital_code, id: id }].map(item => item.hospital_code).toString();
@@ -62,7 +56,7 @@ const DoctorFilter = ({ hospitals, clinics }:Props) => {
 	const onCheckedAllHospitals = (checked: boolean) => {
 		if (checked) {
 			const hospitalCodes = hospitals.map(hospital => hospital.hospital_code);
-			createQueryString('hospital', hospitalCodes.toString());
+			createQueryString('hospital_code', hospitalCodes.toString());
 		} else {
 			hospitalFilter.clear();
 		}
@@ -161,7 +155,7 @@ const DoctorFilter = ({ hospitals, clinics }:Props) => {
 				lineHeight='24px'
 				fontType='p'
 				fontWeight='700'
-				subClassName='max-sm:text-[16px] max-sm:leading-[23px] mb-6'
+				subClassName='max-sm:text-[16px] max-sm:leading-[23px] mb-6 max-sm:mt-8'
 			>
 				Speciality
 			</Text>
