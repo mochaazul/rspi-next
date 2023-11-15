@@ -500,7 +500,9 @@ export default {
 			footer: {
 				hasAccountLabel: 'Sudah mempunyai akun? Silahkan masuk',
 				cta: 'disini'
-			}
+			},
+			buttonPrivacy: 'Lanjut',
+			buttonTnC: 'Kirim',
 		},
 		registerOnboard: {
 			heading: 'Selamat datang di RS. Pondok Indah',

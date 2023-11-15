@@ -43,7 +43,7 @@ const MainNavLanguage = () => {
 		>
 			<div className='flex justify-between w-full mx-10'>
 				<div className='flex divide-x divide-white/20 gap-5'>
-					<Link to='/contact-us'>
+					<Link href='/contact-us'>
 						<Text fontSize='14px' fontWeight='400' color='white'>
 							Contact Us
 						</Text>

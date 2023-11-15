@@ -499,7 +499,9 @@ export default {
 			footer: {
 				hasAccountLabel: 'Already have an account? Please log in',
 				cta: 'here'
-			}
+			},
+			buttonPrivacy: 'Next',
+			buttonTnC: 'Send',
 		},
 		registerOnboard: {
 			heading: 'Welcome to RS. Pondok Indah',
