@@ -7,6 +7,7 @@ const colors = {
 	black: {
 		default: 'rgb(38, 38, 38)',
 		opacity64: 'rgba(0, 0, 0, 0.64)',
+		general: 'rgba(42, 37, 54, 1)'
 	},
 	grey: {
 		default: 'rgb(128, 128, 128)',
@@ -33,6 +34,7 @@ const colors = {
 		accent: 'rgba(211, 32, 48, 1)',
 		accentOpacity90: 'rgba(211, 32, 48, 0.1)',
 		danger: 'rgba(176, 84, 116, 1)',
+		text: 'rgba(215, 31, 40, 1)'
 	},
 	blue: {
 		default: 'rgb(122, 166, 237)',

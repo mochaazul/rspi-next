@@ -34,6 +34,7 @@ export const endpoints = {
 	generalUploads: '/uploads',
 	updatePassword: '/patients/update-password',
 	updateProfile: '/patients/update-profile',
+	updateAvatar: '/patients/update-avatar',
 	footerCategories: '/footer-categories',
 	getFooter: '/footer-pages',
 	updatePin: '/patients/update-pin',

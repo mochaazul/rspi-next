@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
 const FooterStyled = styled.footer`
-  padding: 1em;
-  p {
-    padding: .4em 0;
-  }
   .bold {
     font-weight: 600;
   }
@@ -25,15 +21,14 @@ const FooterStyled = styled.footer`
     display:flex;
     flex-wrap:wrap;
     flex-direction:column;
+    gap: 16px;
   }
   .store-images {
     width: 7em;
-    padding: 1em 0;
   }
   .email-sub-form-container {
     display: flex;
     align-items: center;
-    margin-bottom: 2em;
   }
   .follow-section {
     display: flex;
@@ -43,7 +38,6 @@ const FooterStyled = styled.footer`
   }
   .follow-icon-section {
     min-width: 9em;
-    padding-top: .5rem;
   }
   .email-sub-form-container input {
     border-radius: 5px 0px 0px 5px;
@@ -52,7 +46,7 @@ const FooterStyled = styled.footer`
   }
   .sub-button {
     padding: 0.95em;
-    max-width: 10em;
+    max-width: 7em;
     &, > .bg-overlay {
       border-radius: 0px 5px 5px 0px;
     }
@@ -73,7 +67,6 @@ const FooterStyled = styled.footer`
     }
     .sub-text {
       max-width: 20vw;
-      margin-bottom: 1rem;
     }
     .ambulance-icon {
       display: flex;
@@ -101,5 +94,7 @@ const FooterStyled = styled.footer`
 export const FooterContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;`;
+  justify-content: space-between;
+  row-gap: 24px;
+`;
 export default FooterStyled;

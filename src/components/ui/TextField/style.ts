@@ -29,13 +29,15 @@ export const TextFieldWrapper = styled.div<StyledTextFieldType>`
   display: flex;
   align-items: center;
   position: relative;
+  outline: 1px solid ${ colors.grey.lighter };
+  border-radius: 5px;
 
-  .iconWrapper {
-    display: ${ props => (!!props.$iconName || !!props.featherIcon) ? 'block' : 'none' };
-    left: ${ props => (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '10px' };
-    right: ${ props => props.$iconPosition === 'right' && '10px' };
+  flex-direction: ${ props => (props.$iconPosition === 'left' || !(!!props.$iconPosition)) ? 'row' : 'row-reverse' };
+
+  &:focus {
+    outline: 1px solid ${ colors.green.toscaLight }
   }
-
+  
   input {
     padding-left: ${ props => (!!props.$iconName || !!props.featherIcon) && (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '43px' };
     padding-right: ${ props => (!!props.$iconName || !!props.featherIcon) && props.$iconPosition === 'right' && '43px' };
@@ -45,14 +47,12 @@ export const TextFieldWrapper = styled.div<StyledTextFieldType>`
 export const Input = styled.input<InputType>`
   width: 100%;
   padding: 12px 18px;
-  border-radius: 5px;
   font-family: var(--font-family);
-  outline: 1px solid ${ colors.grey.lighter };
   ${ GlobalAllTransition5ms }
-
   &:focus {
-    outline: 1px solid ${ colors.green.toscaLight }
-  }
+      outline: none;
+    }
+  
 `;
 
 export const InputMaskedStyled = styled(InputMask)`
@@ -64,12 +64,14 @@ export const InputMaskedStyled = styled(InputMask)`
   outline: none;
   ${ GlobalAllTransition5ms }
 
-  &:focus {
+  &:focus-within {
     outline: 1px solid ${ colors.green.toscaLight }
   }
 `;
 
 export const IconWrapper = styled.div`
-  position: absolute;
-  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
 `;

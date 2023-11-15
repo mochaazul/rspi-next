@@ -1,3 +1,5 @@
+'use client';
+
 import * as FeatherIcons from 'react-feather';
 
 import { icons } from '@/constant';
@@ -6,6 +8,7 @@ import withInputLabel from '@/components/withInputLabel';
 import {
 	IconWrapper, Input, InputMaskedStyled, InputType, TextFieldWrapper
 } from './style';
+import Image from 'next/image';
 
 const TextField = ({ onIconClick, isNumber, mask, ...props }: InputType) => {
 	const { ref, ...restProps } = props;
@@ -16,12 +19,12 @@ const TextField = ({ onIconClick, isNumber, mask, ...props }: InputType) => {
 			$iconPosition={ props.iconPosition }
 			$iconName={ props.iconName }
 			featherIcon={ props.featherIcon }
-			className='w-full'
+			className={ `w-full ${props.iconPosition === 'right' ? 'flex-row-reverse' : 'row'}` }
 		>
 			{
 				props.iconName ?
-					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						{/* <Icons /> // TODO: ganti */ }
+					<IconWrapper className={ `iconWrapper relative ${ onIconClick && 'cursor-pointer' } ` } onClick={ onIconClick }>
+						<Image src={ icons[props.iconName] } fill alt='icon'/>
 					</IconWrapper> :
 					null
 			}

@@ -115,7 +115,7 @@ export type NewPasswordPayload = {
 };
 
 export type UpdateAvatarType = {
-	image_url: string;
+	img_url: string;
 };
 
 export type UpdateProfileType = {
@@ -127,4 +127,10 @@ export type UpdateProfileType = {
 
 export type UpdateEmailType = {
 	email: string;
+};
+
+export type UserSessionData = {
+	user: UserDataDetail | null;
+	token: string;
+	isAuthenticated: boolean;
 };

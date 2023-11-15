@@ -4,6 +4,7 @@ import Text from '@/components/Text';
 import { colors, icons } from '@/constant';
 
 import { ItemStyle } from './style';
+import { isMobile } from 'react-device-detect';
 import Image from 'next/image';
 
 export interface BreadcrumbsType {
@@ -33,18 +34,13 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 					<div key={ index } className='flex flex-row items-center'>
 						<Link href={ data.url }>
 							<ItemStyle className='px-1 py-1 max-sm:px-0.5'>
-								<Text
-									className='item-text text-ellipsis'
-									fontSize='14px'
-									lineHeight='17px'
-									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }
-									color={ (index + 1) < props.datas.length ? colors.grey.dark : colors.paradiso.default }
-									text={ data.name }
-								/>
+								<p className={ `item-text text-ellipsis ${ isMobile ? 'text-[10px]' : 'text-sm' } ${ (index + 1) < props.datas.length ? 'font-normal text-[#6a6d81]' : 'font-black text-[#358888]' }` }>
+									{ data.name }
+								</p>
 							</ItemStyle>
 						</Link>
 						{
-							(index + 1) < props.datas.length ? <Image src={icons.ArrowRight} style={ { width: 15, height: 15 } } alt="" /> : null
+							(index + 1) < props.datas.length ? <Image src={ icons.ArrowRight } style={ { width: 15, height: 15 } } alt="" /> : null
 						}
 					</div>
 				))

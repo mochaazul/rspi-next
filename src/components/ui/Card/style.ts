@@ -1,7 +1,9 @@
+'use client';
+
 import styled from 'styled-components';
 
-import { GlobalBoxShadow } from '@/constants/globalstyle';
-import { colors } from '@/constants';
+import { GlobalBoxShadow } from '@/constant/globalstyle';
+import { colors } from '@/constant';
 import Link from 'next/link';
 
 export interface CardStyleType {
@@ -20,10 +22,6 @@ export const CardStyle = styled.div<CardStyleType>`
     0% { 
       transform: translateZ(0); 
       transform-origin: center 0%;
-    }
-    50% {
-      transform: rotateX(2deg) rotateY(.5deg) translateZ(15px);
-      transform-origin: center 50%;
     }
     100% { 
       transform: translateZ(${ props => props.hoverHeight ?? '18px' }); 
@@ -66,7 +64,7 @@ export const CardStyle = styled.div<CardStyleType>`
   flex-direction: column;
 
   animation-name: zoom-in-out;
-  animation-duration: .5s;
+  animation-duration: .1s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 
@@ -74,7 +72,7 @@ export const CardStyle = styled.div<CardStyleType>`
     transition: all .5s;
     ${ GlobalBoxShadow }
     animation-name: zoom-in-enter;
-    animation-duration: .5s;
+    animation-duration: .1s;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
   }

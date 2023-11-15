@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation';
+
 import { changeEmail } from '@/stores/actions';
 import { useAppDispatch } from '@/hooks';
 import {
@@ -33,7 +35,7 @@ export const resetEmailField = {
 
 
 const useResetEmail = () => {
-	const { navigate } = navigation();
+	const navigate = useRouter();
 	const removeUser = useAppDispatch(removeUserData);
 	const userChangeEmail = useAppDispatch<ChangeEmailPayload>(changeEmail);
 	const onClickChangeEmail = async ({ email }: ChangeEmailPayload) => {
@@ -43,7 +45,7 @@ const useResetEmail = () => {
 			}
 		});
 		removeUser();
-		navigate('/');
+		navigate.replace('/');
 	};
 
 	return {

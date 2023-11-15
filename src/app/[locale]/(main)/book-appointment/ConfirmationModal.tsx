@@ -1,13 +1,28 @@
-import { Button, Checkbox, Modal, Spinner, Text } from '@/components';
-import { ConfirmationModalContainer } from './style';
-import { colors } from '@/constant';
-import DoctorProfileWidget from './DoctorProfileWidget';
-import { FamilyProfile, FindDoctorState, TimeSlot } from '@/interface';
 import dayjs from 'dayjs';
-import { useTypedSelector } from '@/hooks';
 import { useState } from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { useRouter } from 'next/navigation';
+
 import { splitDate } from '@/helpers/datetime';
-import navigation from '@/helpers/navigation';
+import {
+	Button,
+	Checkbox,
+	Modal,
+	Spinner,
+	Text
+} from '@/components';
+
+import { colors } from '@/constant';
+import { useTypedSelector } from '@/hooks';
+import {
+	FamilyProfile,
+	FindDoctorState,
+	TimeSlot
+} from '@/interface';
+
+import { ConfirmationModalContainer } from './style';
+import DoctorProfileWidget from './DoctorProfileWidget';
 
 type Props = {
 	visible: boolean,
@@ -23,7 +38,7 @@ type Props = {
 };
 
 export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot, penjamin, namaAsuransi, noAsuransi, onConfirmed, loading, loadingUploadPhoto }: Props) => {
-	const { navigate } = navigation();
+	const navigate = useRouter();
 	const { selectedDoctorTimeSlot, masterDoctors } = useTypedSelector<FindDoctorState>('findDoctor');
 	const [checked, setChecked] = useState<boolean>(false);
 	const getDoctor = () => {
@@ -31,11 +46,11 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 	};
 
 	const toProfilPage = () => {
-		navigate('/user-information');
+		navigate.push('/user-information');
 	};
 
 	if (selectedProfile && selectedProfile.phone && timeSlot && getDoctor()) {
-		return <Modal borderRadius='12px' visible={ visible } onClose={ onClose }>
+		return <Modal borderRadius='12px' visible={ visible } onClose={ onClose } width='w-full' containerClassName='m-4'>
 			<ConfirmationModalContainer >
 				<Text
 					text='Konfirmasi Booking Appointment'
@@ -57,7 +72,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 						fontSize='14px'
 						lineHeight='20px'
 					/>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Nama : '
 							fontWeight='500'
@@ -71,7 +86,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							lineHeight='20px'
 						/>
 					</div>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Tanggal Lahir : '
 							fontWeight='500'
@@ -85,7 +100,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							lineHeight='20px'
 						/>
 					</div>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Nomor HP : '
 							fontWeight='500'
@@ -99,7 +114,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							lineHeight='20px'
 						/>
 					</div>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Email : '
 							fontWeight='500'
@@ -113,7 +128,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							lineHeight='20px'
 						/>
 					</div>
-					<div className='grid grid-cols-[150px_auto]'>
+					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
 							text='Penjamin : '
 							fontWeight='500'
@@ -138,7 +153,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 								fontSize='14px'
 								lineHeight='20px'
 							/>
-							<div className='grid grid-cols-[150px_auto]'>
+							<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 								<Text
 									text='Nama : '
 									fontWeight='500'
@@ -152,7 +167,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 									lineHeight='20px'
 								/>
 							</div>
-							<div className='grid grid-cols-[150px_auto]'>
+							<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 								<Text
 									text='Nomor : '
 									fontWeight='500'

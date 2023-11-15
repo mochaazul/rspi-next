@@ -1,5 +1,5 @@
-import { colors } from '@/constants';
-import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constants/globalstyle';
+import { colors } from '@/constant';
+import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constant/globalstyle';
 import styled from 'styled-components';
 
 interface StatusType {
@@ -14,7 +14,7 @@ export const SelectWrapper = styled.div<StatusType>`
   padding: 12px 36px 12px 0px;
   border-radius: 5px;
   outline: 1px solid ${ colors.grey.lighter };
-  min-height: 43px;
+  min-height: 48px;
   background-color: ${ colors.white.default };
   cursor: pointer;
   

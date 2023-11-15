@@ -13,12 +13,13 @@ const endpointData = {
 	otp: { path: '/auths/validate-otp', method: 'POST' },
 	cancelBooking: { path: '/books/cancel-booking', method: 'POST' },
 	bookAppointment: { path: '/books', method: 'POST' },
+	contactUs: { path: '/contact-us', method: 'POST' },
 	generalUploads: { path: '/uploads', method: 'POST' },
 	footerCategories: { path: '/footer-categories', method: 'POST' },
 	notification: { path: '/notification', method: 'POST' },
+	readNotification: { path: '/notification/seen', method: 'POST' },
 	familyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
-	contactUs: { path: '/contact-us', method: 'POST' },
 
 	// PUT
 	updatePassword: { path: '/patients/update-password', method: 'PUT' },
@@ -41,33 +42,32 @@ const endpointData = {
 	appointmentList: { path: '/patients/patient-portal/appointments', method: 'GET' },
 	clinics: { path: '/clinics/clinic-category', method: 'GET' },
 	hospital: { path: '/hospital', method: 'GET' },
+	events: { path: '/events', method: 'GET' },
+	article: { path: '/news', method: 'GET' },
+	getFooter: { path: '/footer-pages', method: 'GET' },
 	getNotification: { path: '/notification', method: 'GET' },
-	readNotification: { path: '/notification/seen', method: 'GET' },
+	getNews: { path: '/news', method: 'GET' },
+	getNewsSpecialtyByID: { path: '/specialities/related-specialities', method: 'GET' },
 
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },
-	// article: '/news',
 	// doctors: '/doctors' -> replaced by masterdoctor,
 	// findDoctor: { path: '/find/doctor', method: 'GET' }, -> Replaced by master doctor since master doctor enpoint accept filtering
-	// events: '/events',
 	// patients: '/patients',
 	// specialities: '/specialities',
-	getNews: { path: '/news', method: 'GET' },
-	getNewsSpecialtyByID: { path: '/specialities/related-specialities', method: 'GET' },
-	getFooter: { path: '/footer-pages', method: 'GET' },
 	// familyProfile: '/patients/family',
 
-}as const;
+} as const;
 
 // Typing schema, do not modify if not necessary
 
 type EndpointDefinition<T extends string> = {
-  [ key in T ]: {
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    path: string;
-    payload?: any;
-    params?: any
-  };
+	[key in T]: {
+		method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+		path: string;
+		payload?: any;
+		params?: any;
+	};
 };
 export type EndpointKey = keyof typeof endpointData;
 

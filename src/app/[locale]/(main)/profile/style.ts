@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 
 import { colors } from '@/constant';
-import { GlobalCardShadow } from '@/constant/globalstyle';
 
 const ProfilePageStyle = styled.div`
   .card-shadow {
-    ${ GlobalCardShadow };
+    box-shadow: 5px 5px 10px 0px rgba(53, 136, 136, 0.12);
+    border-radius: 10px;
   }
 
   .user-panel {
-    padding: 20px;
     border-radius: 10px;
     margin-top: 30px;
     .flex-1 > div:first-child {
@@ -59,6 +58,15 @@ export const BalloonPopupStyle = styled.div`
 
   > div {
     background-color: ${ colors.grey.darker };
+  }
+`;
+
+export const Divider = styled.div`
+  border-top-width: 1px;
+  border-color: ${ colors.grey.lighter };
+  margin: 25px 0;
+  @media screen and (max-width: 480px) {
+    margin: 16px 0;
   }
 `;
 

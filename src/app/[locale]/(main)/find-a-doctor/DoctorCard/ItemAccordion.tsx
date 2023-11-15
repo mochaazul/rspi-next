@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { colors, icons } from '@/constant';
 import { Text } from '@/components';
-import { ItemType } from '@/components/Accordion';
+import { ItemType } from '@/components/ui/Accordion';
 
 import DoctorsType from '../DoctorsType';
 import { AccordionItemStyle, ItemChildrenStyle, TitleStyle } from './style';
@@ -91,7 +91,7 @@ const groupTimeFrame = (schedules: I_MasterDoctorClinicSchedule[]) => {
 const ItemChildren = ({ clinics }: { clinics: I_MasterDoctorClinic[]; }) => {
 	return (
 		<ItemChildrenStyle>
-			{ clinics.map((clinic, index) => (
+			{ clinics?.map((clinic, index) => (
 				<div key={ index } className={ index < clinics.length - 1 ? 'border-bottom' : '' }>
 					<div>
 						<Text

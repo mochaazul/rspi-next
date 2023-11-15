@@ -475,9 +475,11 @@ export default {
 				emailNotVerified: {
 					heading: 'Your email is not verified. Please',
 					cta: 'Click here',
-					tail: 'to verify your email'
+					tail: 'to verify your email',
+					successMessage: 'Successfully resent email verification'
 				}
-			}
+			},
+			welcome: 'Welcome'
 		},
 		registerPage: {
 			heading: 'Welcome',
@@ -499,7 +501,9 @@ export default {
 			footer: {
 				hasAccountLabel: 'Already have an account? Please log in',
 				cta: 'here'
-			}
+			},
+			buttonPrivacy: 'Next',
+			buttonTnC: 'Send',
 		},
 		registerOnboard: {
 			heading: 'Welcome to RS. Pondok Indah',
@@ -548,12 +552,14 @@ export default {
 				patientMedicalNumberPlaceholder: 'Medical Record Number',
 				patientPhoneNumber: 'Phone Number',
 				patientPhoneNumberPlaceholder: 'Phone Number',
+				patientPhoneNumberLabelInfo: 'If you want to change your data, please visit the nearest Pondok Indah Hospital',
 				patientOldEmail: 'Old Email',
 				patientOldEmailPlaceHolder: 'Old Email',
 				patientNewEmail: 'New Email',
 				patientNewEmailPlaceHolder: 'New Email',
-				patientEmail: 'Email',
+				patientEmail: 'Email Address',
 				patientEmailPlaceholder: 'Email',
+				patientEmailLabelInfo: 'You can\'t change your email address if you don\'t have a medical record number'
 			},
 			securitySetting: {
 				emailLabel: 'Email',
@@ -564,6 +570,8 @@ export default {
 				saveBtnLabel: 'Save',
 				cancelBtnLabel: 'Cancel'
 			},
+			medicalRecordLabel: 'Medical Record Information',
+			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)'
 		},
 		patientPortal: {
 			tabMenuLabel: [
@@ -655,7 +663,22 @@ export default {
 			patientInfo: {
 				visitHoursPolicy: 'Visiting Hours & Policies',
 				ourEffort: 'Our Efforts to Keep You Safe'
-			}
+			},
+			ourHospitalsLabel: 'OUR HOSPITALS',
+			ourCompanyLabel: 'OUR COMPANY',
+			visitorPatientLabel: 'VISITOR & PATIENT INFORMATION',
+			followUsLabel: 'FOLLOW US',
+			getRSPIMobileLabel: 'GET RSPI MOBILE',
+			subscribeLabel: 'Stay Updated With Us',
+			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.'
+		},
+		medicalRecordReminder: {
+			heading: 'Get Access to Your Medical Visit Information',
+			btnLabel: 'Fill in Medical Record Data',
+			tooltipLabel: 'Make sure you have booked an appointment and visited the nearest RSPI.'
+		},
+		topNav: {
+			welcome: 'Welcome'
 		}
 	}
-} as const
+} as const;

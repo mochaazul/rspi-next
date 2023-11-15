@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import styled from 'styled-components';
 import * as FeatherIcons from 'react-feather';
@@ -7,22 +9,22 @@ import { colors, icons } from '@/constant';
 import { GlobalAllTransition5ms } from '@/constant/globalstyle';
 
 interface TextFieldType {
-  iconPosition?: 'left' | 'right';
-  iconName?: keyof typeof icons;
-  featherIcon?: keyof typeof FeatherIcons;
-  iconColor?: string;
-  isNumber?: boolean,
-  mask?: string | (string | RegExp)[];
+	iconPosition?: 'left' | 'right';
+	iconName?: keyof typeof icons;
+	featherIcon?: keyof typeof FeatherIcons;
+	iconColor?: string;
+	isNumber?: boolean,
+	mask?: string | (string | RegExp)[];
 }
 
 export interface InputType extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, TextFieldType {
-  ref?: React.RefObject<HTMLInputElement>;
-  onIconClick?: () => any;
+	ref?: React.RefObject<HTMLInputElement>;
+	onIconClick?: () => any;
 }
 
 export interface StyledTextFieldType extends Omit<TextFieldType, 'iconPosition' | 'iconName'> {
-  $iconPosition?: 'left' | 'right';
-  $iconName?: keyof typeof icons;
+	$iconPosition?: 'left' | 'right';
+	$iconName?: keyof typeof icons;
 }
 
 export const TextFieldWrapper = styled.div<StyledTextFieldType>`
@@ -52,6 +54,10 @@ export const Input = styled.input<InputType>`
 
   &:focus {
     outline: 1px solid ${ colors.green.toscaLight }
+  }
+
+	&:disabled {
+    background-color: ${ colors.grey.lighterOpacity };
   }
 `;
 
