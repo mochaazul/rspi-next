@@ -8,6 +8,7 @@ import { Accordion, Button, Text } from '@/components';
 import { DoctorCardStyle } from './style';
 import ItemAccordion from './ItemAccordion';
 import { I_MasterDoctor } from '@/interface';
+import { isMobile } from 'react-device-detect';
 
 const language = lang.page.findDoctor;
 
@@ -64,7 +65,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 				</div>
 			</div>
 			{ /* List accordion RS */ }
-			{ isOpened && <div className='mt-12'>
+			{ isOpened && <div className={ `${ isMobile ? 'mt-6' : 'mt-12' }` }>
 				<Accordion
 					onlyOpenOne={ false }
 					itemTheme={ itemProps => <ItemAccordion props={ itemProps } hospitals={ props?.doctor_schedule } /> }

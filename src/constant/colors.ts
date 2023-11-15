@@ -7,6 +7,7 @@ const colors = {
 	black: {
 		default: 'rgb(38, 38, 38)',
 		opacity64: 'rgba(0, 0, 0, 0.64)',
+		general: 'rgba(42, 37, 54, 1)'
 	},
 	grey: {
 		default: 'rgb(128, 128, 128)',

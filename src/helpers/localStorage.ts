@@ -76,7 +76,9 @@
 // };
 
 // export const clearStorage = () => {
-// 	return localStorage.clear();
+// 	const currentLang = getLanguage() ?? 'idn';
+// 	localStorage.clear();
+// 	setLanguage(currentLang);
 // };
 
 // export const clearPersistRoot = async (persistor: any) => {

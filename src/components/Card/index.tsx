@@ -12,6 +12,7 @@ import {
 	CardStyleType,
 	CardContentHTML
 } from './style';
+import { isMobile } from 'react-device-detect';
 
 interface PropsType {
 	image?: string;
@@ -44,7 +45,7 @@ const Card = (props: PropsType) => {
 			<CardStyle { ...props.cardStyle }>
 				{
 					props.iconShare &&
-					<div>
+					<div className={ `${ isMobile ? 'hidden' : 'block' }` }>
 						<Share id={ props.id } />
 					</div>
 				}

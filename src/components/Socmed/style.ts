@@ -7,7 +7,7 @@ const SocmedStyle = styled.div`
 .socmed-bg-content {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: 4px;
 	
  	.dark-content {
 		min-width: 40px;

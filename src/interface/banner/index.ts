@@ -21,6 +21,7 @@ export interface BannerDetail {
 	url_link_en?: string;
 	created_date?: string;
 	updated_date?: string;
+	image_url?: string;
 }
 
 export interface PayloadBanner {

@@ -50,22 +50,22 @@ const useFindDoctor = () => {
 	};
 
 	const addSpecialty = (item: PickerItem) => {
-		const prevSpecialty = params.get('specialty_category');
-		params.set('specialty_category', prevSpecialty ? prevSpecialty + ',' + item.speciality_code : item.speciality_code);
+		const prevSpecialty = params.get('clinic_code');
+		params.set('clinic_code', prevSpecialty ? prevSpecialty + ',' + item.speciality_code : item.speciality_code);
 	};
 
 	const deleteSpecialty = (item: PickerItem) => {
-		const values = searchParams.get('specialty_category')?.split(',') ?? [];
+		const values = searchParams.get('clinic_code')?.split(',') ?? [];
 		if (values.length < 2) {
-			params.delete('specialty_category');
+			params.delete('clinic_code');
 			return;
 		}
 		const filteredSpecialty = values.filter(sp => sp !== item.label);
-		params.set('specialty_category', filteredSpecialty.toString());
+		params.set('clinic_code', filteredSpecialty.toString());
 	};
 
 	const getSpecialty = (): PickerItem[] => {
-		const values = searchParams.get('specialty_category')?.split(',') ?? [];
+		const values = searchParams.get('clinic_code')?.split(',') ?? [];
 		return specialities.filter(sp => values.includes(sp?.speciality ?? '')).map((sp, index) => ({
 			id: sp.id,
 			label: sp?.speciality ?? ''
@@ -73,7 +73,7 @@ const useFindDoctor = () => {
 	};
 
 	const getClinic = (): PickerItem[] => {
-		const values = searchParams.get('specialty_category')?.split(',') ?? [];
+		const values = searchParams.get('clinic_code')?.split(',') ?? [];
 		return clinics.filter(sp => values.includes(sp?.clinic_code ?? '')).map((sp, index) => ({
 			id: sp.id,
 			label: sp?.clinic_name ?? ''

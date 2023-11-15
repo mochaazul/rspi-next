@@ -26,6 +26,7 @@ import EmptyData from './EmptyData';
 import SubMenuPage from './SubMenuPage';
 import Picker from './Picker';
 import DropdownSearch from './DropdownSearch';
+import MedicalRecordReminder from './MedicalRecordReminder';
 
 // Disabled, for some unknown reason if this component indexed here will caused error `Uncaught TypeError: Cannot read properties of undefined (reading 'default')`
 // import withInputLabel from './withInputLabel';
@@ -59,5 +60,6 @@ export {
 	EmptyData,
 	SubMenuPage,
 	Picker,
-	DropdownSearch
+	DropdownSearch,
+	MedicalRecordReminder
 };

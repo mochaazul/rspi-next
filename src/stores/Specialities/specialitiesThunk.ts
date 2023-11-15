@@ -2,7 +2,7 @@
 import { FindDoctorDetail, I_MasterDoctorParams, I_MasterDoctor, PayloadFindDoctor } from '@/interface';
 import { endpoints } from '@/constant';
 import { thunkUtils } from '@/utils';
-import { I_ClinicsResponse, I_SpecialitiesResponse } from '@/interface/specialities';
+import { I_ClinicsResponse, I_SpecialitiesResponse, PayloadClinic } from '@/interface/specialities';
 
 export const getSpecialities = thunkUtils<I_SpecialitiesResponse[]>({
 	type: 'specialities/getAll',
@@ -10,7 +10,7 @@ export const getSpecialities = thunkUtils<I_SpecialitiesResponse[]>({
 	endpoint: endpoints.specialities + '/list',
 });
 
-export const getClinics = thunkUtils<I_ClinicsResponse[]>({
+export const getClinics = thunkUtils<I_ClinicsResponse[], PayloadClinic>({
 	type: 'clinics/getAll',
 	method: 'GET',
 	endpoint: endpoints.clinics,

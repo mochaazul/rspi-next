@@ -4,15 +4,16 @@ import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks';
 import { UserState } from '@/interface';
-import { Button, Form, Text, NotificationPanel } from '@/components';
-import { Languages, colors } from '@/constant';
+import { Button, Form, Text, NotificationPanel, Modal, Checkbox } from '@/components';
+import { Languages, colors, icons } from '@/constant';
 import Images from '@/constant/images';
 
 import useRegisterPage from './useRegisterPage';
 import RegisterPageStyle from './style';
-import InfoModal from './InfoModal/index';
+import InfoModal from './InfoModal';
+import { TnCModal } from '@/pages/Dashboard/style';
 
-const { heading, subHeading, footer, form, registerBtnLabel, notificationMessage } = Languages.page.registerPage;
+const { heading, subHeading, footer, form, registerBtnLabel, notificationMessage, buttonTnC, buttonPrivacy } = Languages.page.registerPage;
 
 const RegisterPage = () => {
 	const navigate = useRouter();
@@ -27,6 +28,15 @@ const RegisterPage = () => {
 
 	const [infoBoxVisible, setInfoBoxVisible] = useState<boolean>(false);
 	const [notifVisible, setNotifVisible] = useState<boolean>(false);
+	const [checkedTnc, setCheckedTnc] = useState<boolean>(false);
+	const [checkedPrivacy, setCheckedPrivacy] = useState<boolean>(false);
+	const [tncActive, setTncActive] = useState<boolean>(false);
+	const [privacyActive, setPrivacyActive] = useState<boolean>(true);
+	const [showModalPrivacyTnc, setShowModalPrivacyTnc] = useState<boolean>(false);
+	// form
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [confirmPassword, setConfirmPassword] = useState<string>('');
 
 	const togglePasswordShow = () => {
 		const currentType = getCurrentForm().password.type;
@@ -47,11 +57,45 @@ const RegisterPage = () => {
 		setNotifVisible(false);
 	};
 
+	const resetStateModal = () => {
+		setShowModalPrivacyTnc(false);
+		setCheckedPrivacy(false);
+		setCheckedTnc(false);
+		setPrivacyActive(true);
+		setTncActive(false);
+	};
+
 	useEffect(() => {
 		if (!!errorUser.stat_msg === false && !loadingUser && notifVisible) {
 			setInfoBoxVisible(true);
 		}
 	}, [errorUser, loadingUser, notifVisible]);
+
+	const tncContent = () => {
+		return (<div className="w-content max-h-[300px] overflow-y-auto px-[10px]">
+			<Text
+				text={ 'Lorem ipsum dolor sit amet consectetur. Aenean nisl sollicitudin volutpat tellus facilisis dictum laoreet. Sit pellentesque eu facilisis accumsan cursus diam. Nisi velit lectus natoque lorem duis etiam. Iaculis mi eu ullamcorper dui et eleifend faucibus bibendum id. Lorem velit ornare gravida sit sem quis mattis consectetur in. Molestie in semper vulputate eu quisque nullam dapibus sed eget. Ac volutpat suscipit consectetur quis. Sit vitae mi est tellus enim et elementum lobortis.' }
+				color='#2A2536'
+				fontSize='16px'
+				fontWeight='400'
+				className='pb-6'
+			/>
+			<Text
+				text={ 'Lorem ipsum dolor sit amet consectetur. Aenean nisl sollicitudin volutpat tellus facilisis dictum laoreet. Sit pellentesque eu facilisis accumsan cursus diam. Nisi velit lectus natoque lorem duis etiam. Iaculis mi eu ullamcorper dui et eleifend faucibus bibendum id. Lorem velit ornare gravida sit sem quis mattis consectetur in. Molestie in semper vulputate eu quisque nullam dapibus sed eget. Ac volutpat suscipit consectetur quis. Sit vitae mi est tellus enim et elementum lobortis.' }
+				color='#2A2536'
+				fontSize='16px'
+				fontWeight='400'
+				className='pb-6'
+			/>
+			<Text
+				text={ 'Lorem ipsum dolor sit amet consectetur. Aenean nisl sollicitudin volutpat tellus facilisis dictum laoreet. Sit pellentesque eu facilisis accumsan cursus diam. Nisi velit lectus natoque lorem duis etiam. Iaculis mi eu ullamcorper dui et eleifend faucibus bibendum id. Lorem velit ornare gravida sit sem quis mattis consectetur in. Molestie in semper vulputate eu quisque nullam dapibus sed eget. Ac volutpat suscipit consectetur quis. Sit vitae mi est tellus enim et elementum lobortis.' }
+				color='#2A2536'
+				fontSize='16px'
+				fontWeight='400'
+				className='pb-6'
+			/>
+		</div>);
+	};
 
 	return (
 		<RegisterPageStyle>
@@ -64,12 +108,10 @@ const RegisterPage = () => {
 					` }
 						onSubmit={ async e => {
 							const { email, password, confirmPassword } = onSubmit(e);
-							await onClickRegister({
-								email: email.value,
-								password: password.value,
-								confirmPassword: confirmPassword.value
-							});
-							setNotifVisible(true);
+							setEmail(email.value);
+							setPassword(password.value);
+							setConfirmPassword(confirmPassword.value);
+							setShowModalPrivacyTnc(true);
 						} }
 						autoComplete='off'
 					>
@@ -154,6 +196,90 @@ const RegisterPage = () => {
 				onClose={ toggleInfoBox(false) }
 				onOK={ toggleInfoBox(false) }
 			/>
+			<Modal visible={ showModalPrivacyTnc } padding='0px'>
+				<TnCModal>
+					{/* tab title */ }
+					<div className='flex flex-row items-center gap-x-2 p-[10px]'>
+						<div className='flex flex-row items-center gap-x-2 cursor-pointer'
+							onClick={ () => { setTncActive(false); setPrivacyActive(true); } }>
+							<div className={ `w-[32px] h-[32px] rounded-full flex justify-center items-center ${ privacyActive ? 'bg-[#2A2536]' : 'bg-[#D4D2D8]' }` }>
+								<Text
+									text='1'
+									color='white'
+									fontWeight='900'
+									fontSize='20px'
+								/>
+							</div>
+							<Text
+								text={ 'Privacy Policy' }
+								fontWeight='900'
+								fontSize='20px'
+								color={ privacyActive ? 'black' : '#6A6D81' }
+							/>
+						</div>
+						<div className="divide-dashed w-max">
+							-- -- -- -- -- --
+						</div>
+						<div className='flex flex-row items-center gap-x-2 cursor-pointer' onClick={ () => { setTncActive(true); setPrivacyActive(false); } }>
+							<div className={ `w-[32px] h-[32px] rounded-full flex justify-center items-center ${ tncActive ? 'bg-[#2A2536]' : 'bg-[#D4D2D8]' }` }>
+								<Text
+									text='2'
+									color='white'
+									fontWeight='900'
+									fontSize='20px'
+								/>
+							</div>
+							<Text
+								text={ 'Terms and Conditions' }
+								fontWeight='900'
+								fontSize='20px'
+								color={ tncActive ? 'black' : '#6A6D81' }
+							/>
+						</div>
+					</div>
+
+					<Text
+						text='Updated 25 July 2019'
+						color='#6A6D81'
+						fontSize='14px'
+						fontWeight='400'
+						className='pt-4 pb-6 px-[10px]'
+					/>
+
+					{/* tab content */ }
+					{
+						tncContent()
+					}
+
+					{/* tab footer */ }
+					<div className='pt-8 pb-4 bg-[#FAFAFA]'>
+						<div className='flex flex-row items-center justify-between px-[10px]'>
+							<Checkbox checked={ tncActive ? checkedTnc : checkedPrivacy } label={ tncActive ? 'Saya menyetujui ketentuan Terms and Conditions.' : 'Saya menyetujui ketentuan Privacy.' } onChange={ evt => {
+								if (tncActive) {
+									setCheckedTnc(evt.target.checked);
+								} else {
+									setCheckedPrivacy(evt.target.checked);
+								}
+							} } />
+							<Button type='submit' label={ tncActive ? buttonTnC : buttonPrivacy } disabled={ tncActive ? !checkedTnc : !checkedPrivacy } className='w-[200px]'
+								onClick={ async () => {
+									if (tncActive) {
+										resetStateModal();
+										await onClickRegister({
+											email: email,
+											password: password,
+											confirmPassword: confirmPassword
+										});
+										setNotifVisible(true);
+									} else {
+										setTncActive(true);
+									}
+								} }
+							/>
+						</div>
+					</div>
+				</TnCModal>
+			</Modal>
 		</RegisterPageStyle>
 	);
 };

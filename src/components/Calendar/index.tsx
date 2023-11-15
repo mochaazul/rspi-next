@@ -76,8 +76,12 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading }: Props
 		// max-sm:h-[48px] max-sm:w-[44px]
 		// max-h-[40px] max-w-[40px]
 		const defaultClass = `
-		
-		`;
+		max-[320px]:h-[34px] max-[320px]:w-[41px]
+		max-[360px]:h-[40px] max-[360px]:w-[40px]
+		max-[375px]:h-[42px] max-[375px]:w-[40px]
+		max-[393px]:h-[42px] max-[393px]:w-[42px]
+		max-[414px]:h-[46px] max-[414px]:w-[46px]
+		max-sm:h-[48px] max-sm:w-[44px]`;
 		return shouldDisbled ?
 			`
 			${ defaultClass }
@@ -91,8 +95,8 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading }: Props
 		<div className='px-[12px] py-[20px] relative'>
 			<ReactCalendar
 				className='r-calendar'
-				nextLabel={ <Image src={icons.ArrowRight} alt="" /> }
-				prevLabel={ <Image src={icons.ArrowLeft} alt="" /> }
+				nextLabel={ <Image src={ icons.ArrowRight } alt="" /> }
+				prevLabel={ <Image src={ icons.ArrowLeft } alt="" /> }
 				next2Label={ null }
 				prev2Label={ null }
 				defaultView='month'
