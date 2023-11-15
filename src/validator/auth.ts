@@ -7,6 +7,10 @@ const EmailYup = yup.string().email()
 const DefaultPasswordYup = yup.string().required()
 	.min(8, 'Password should contain at least 8 characters');
 
+const DefaultPinYup = yup.string().required()
+	.min(6, 'Pin should contain 6 characters')
+	.max(6, 'Pin should contain 6 characters');
+
 export const LoginSchema = yup.object().shape({
 	email: EmailYup,
 	password: DefaultPasswordYup.label('Password'),
@@ -41,4 +45,10 @@ export const RegisterSchema = yup.object().shape({
 			(value: any) => /[A-Z]/.test(value)
 		)
 		.oneOf([yup.ref('password')], 'Passwords do not match')
+});
+
+export const PinSchema = yup.object().shape({
+	pin: DefaultPinYup.label('Pin'),
+	confirm_pin: DefaultPinYup.label('Confirmation pin')
+		.oneOf([yup.ref('pin')], 'Pin do not match')
 });

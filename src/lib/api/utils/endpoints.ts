@@ -26,6 +26,7 @@ const endpointData = {
 	updateProfile: { path: '/patients/update-profile', method: 'PUT' },
 	updatePin: { path: '/patients/update-pin', method: 'PUT' },
 	updateEmail: { path: '/patients/update-email', method: 'PUT' },
+	createPin: { path: '/patients/pin', method: 'PUT' },
 
 	// GET
 	banner: { path: '/banners', method: 'GET' },

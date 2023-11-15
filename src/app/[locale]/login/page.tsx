@@ -30,9 +30,9 @@ const LoginPage = () => {
 		stat_msg: ''
 	});
 	const [successMessage, setSuccessMessage] = useState<string>('');
-
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
+
 	const formik: FormikProps<LoginType> = useFormik<LoginType>({
 		validateOnBlur: enableValidation,
 		validateOnChange: enableValidation,

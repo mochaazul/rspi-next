@@ -6,7 +6,8 @@ import {
 	LoginType,
 	ResendEmailVerificationType,
 	UserData,
-	RegisterType
+	RegisterType,
+	PinType
 } from '@/interface';
 import { cookiesHelper } from '@/helpers';
 
@@ -62,4 +63,8 @@ export const verifyEmail = async (token: string) => {
 	}
 
 	return verifyRes;
+};
+
+export const createPin = async (formPin: PinType) => {
+	return fetcher<any>('createPin', { body: formPin });
 };
