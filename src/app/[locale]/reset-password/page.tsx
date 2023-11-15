@@ -9,7 +9,7 @@ import { Images, colors } from '@/constant';
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
-// import NotificationPanel from '@/components/ui/NotificationPanel';
+import NotificationPanel from '@/components/ui/NotificationPanel';
 import SpinVerification from '@/components/ui/SpinVerification';
 import { useScopedI18n } from '@/locales/client';
 import { ResetPasswordSchema } from '@/validator/auth';
@@ -29,6 +29,10 @@ const ResetPassword = () => {
 	const [error, setError] = useState<ResponseStatus>({
 		stat_code: '',
 		stat_msg: ''
+	});
+	const [inputPasswordType, setInputPasswordType] = useState<Record<string, string>>({
+		new_password: 'password',
+		confirm_password: 'password'
 	});
 	const formikResetPassword: FormikProps<NewPasswordPayload> = useFormik<NewPasswordPayload>({
 		validateOnBlur: enableValidation,
@@ -100,6 +104,13 @@ const ResetPassword = () => {
 		formikResetPassword.handleSubmit();
 	};
 
+	const togglePasswordShow = (inputKey: string) => {
+		setInputPasswordType(prevType => ({
+			...prevType,
+			[inputKey]: prevType[inputKey] === 'password' ? 'text' : 'password'
+		}));
+	};
+
 	if (tokenVerified)
 		return (
 			<ResetPasswordStyle>
@@ -123,15 +134,14 @@ const ResetPassword = () => {
 							{
 								error.stat_code &&
 								<div className='w-full mb-[16px]'>
-									{/** TODO: setelah merge migration/login uncomment: */ }
-									{/* <NotificationPanel
+									<NotificationPanel
 										mode={ 'error' }
 										visible={ true }
 										showIconRight={ false }
 									// onClickRightIcon={ handleNotifOnClose }
-									> */}
-									{ error && <span>{ error.stat_msg }</span> }
-									{/* </NotificationPanel> */ }
+									>
+										{ error && <span>{ error.stat_msg }</span> }
+									</NotificationPanel>
 								</div>
 							}
 							<section className='mt-[32px] w-full'>
@@ -141,10 +151,13 @@ const ResetPassword = () => {
 										placeholder={ languages('resetForm.newPasswordPlaceHolder') }
 										value={ formikResetPassword.values.new_password }
 										onChange={ e => formikResetPassword.setFieldValue(e.target.id, e.target.value) }
-										type='password'
 										errorMessage={ formikResetPassword.errors.new_password }
 										isError={ !!formikResetPassword.errors.new_password }
 										label={ languages('resetForm.newPasswordLabel') }
+										iconName={ inputPasswordType.new_password === 'password' ? 'EyeClosed' : 'Eye' }
+										iconPosition='right'
+										type={ inputPasswordType.new_password }
+										onIconClick={ () => togglePasswordShow('new_password') }
 									/>
 								</Form.FormGroup>
 								<Form.FormGroup className='group-wrapper w-full'>
@@ -154,9 +167,12 @@ const ResetPassword = () => {
 										label={ languages('resetForm.newPasswordConfirmationLabel') }
 										value={ formikResetPassword.values.confirm_password }
 										onChange={ e => formikResetPassword.setFieldValue(e.target.id, e.target.value) }
-										type='password'
+										type={ inputPasswordType.confirm_password }
+										iconName={ inputPasswordType.confirm_password === 'password' ? 'EyeClosed' : 'Eye' }
+										iconPosition='right'
 										errorMessage={ formikResetPassword.errors.confirm_password }
 										isError={ !!formikResetPassword.errors.confirm_password }
+										onIconClick={ () => togglePasswordShow('confirm_password') }
 									/>
 								</Form.FormGroup>
 							</section>

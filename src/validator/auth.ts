@@ -1,5 +1,18 @@
 import * as yup from 'yup';
 
+export const LoginSchema = yup.object().shape({
+	email: yup
+		.string()
+		.email()
+		.required()
+		.label('Email'),
+	password: yup
+		.string()
+		.min(8, 'Password should contain at least 8 characters')
+		.required()
+		.label('Password'),
+});
+
 export const ForgotPasswordSchema = yup.object().shape({
 	email: yup.string().email()
 		.required()
