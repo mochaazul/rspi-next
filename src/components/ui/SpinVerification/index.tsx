@@ -1,14 +1,15 @@
 import { useRouter } from 'next/navigation';
 
 import { icons } from '@/constant';
-import languages from '@/constant/languages';
+import { useScopedI18n } from '@/locales/client';
+import { cookiesHelper } from '@/helpers';
+import useSession from '@/session/client';
 
 import Button from '../Button';
 import Spinner from '../Spinner';
 import Text from '../Text';
 
 import { SpinContainer } from './style';
-import { useScopedI18n } from '@/locales/client';
 
 type Props = {
 	status?: 'loading' | 'success' | 'failed';
@@ -18,13 +19,13 @@ const SpinVerification = ({ status }: Props) => {
 	const navigate = useRouter();
 	const languages = useScopedI18n('validation.tokenValidation');
 
-	// const session = useSession(); // TODO: uncomment after merge migration/login
+	const session = useSession();
 
 	const handleBackLogin = async () => {
-		// if (session.isAuthenticated) { // TODO: uncomment after merge migration/login
-		// await cookiesHelper.clearStorage(); // TODO: uncomment after merge migration/login
-		navigate.replace('/login');
-		// }
+		if (session.isAuthenticated) {
+			await cookiesHelper.clearStorage();
+			navigate.replace('/login');
+		}
 	};
 
 	return <SpinContainer>

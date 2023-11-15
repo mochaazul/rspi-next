@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-
 import { useFormik, FormikProps } from 'formik';
+
 import { ForgotPasswordSchema } from '@/validator/auth';
 import { Images, colors } from '@/constant';
 import { ForgotPasswordType } from '@/interface';

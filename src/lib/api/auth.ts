@@ -17,6 +17,7 @@ export const login = async (loginPayload: LoginType) => {
 	const loginRes = await fetcher<UserData>('auth', { body: loginPayload });
 
 	if (loginRes.stat_code === 'APP:SUCCESS') {
+		// TODO: setUserLoginHistory
 		const userLogin = loginRes?.data;
 		cookiesHelper.setTokenUser(userLogin.token || '');
 
@@ -44,17 +45,9 @@ export const setNewPassword = (token: string, formNewPassword: NewPasswordPayloa
 };
 
 export const register = async (formRegister: RegisterType) => {
-	// builder.addCase(register.fulfilled, (state, action) => {
-	// 			state.loading = false;
-	// 			state.user = action.payload.data;
-	// 			state.error = initialState.error;
-	// 			state.registerOnboard = true;
-	// 			localStorage.setTokenUser(action.payload.data.token || '');
-	// 		});
 	const registerRes = await fetcher<UserData>('register', { body: formRegister });
 
 	if (registerRes?.stat_code === 'APP:SUCCESS') {
-		// cookiesHelper.setTokenUser(registerRes?.data?.token || ''); // notes: token is empty, get token after verify-email
 		cookiesHelper.setUserData(JSON.stringify(registerRes?.data));
 	}
 
