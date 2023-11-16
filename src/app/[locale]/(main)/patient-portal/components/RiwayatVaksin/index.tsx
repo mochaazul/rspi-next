@@ -1,14 +1,16 @@
+import { useEffect } from 'react';
+import { isEmpty } from 'lodash';
+import dayjs from 'dayjs';
+import Image from 'next/image';
+
 import { Spinner, Text } from '@/components';
 import { Languages, colors, icons } from '@/constant';
-import dayjs from 'dayjs';
 import { useTypedSelector } from '@/hooks';
-import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { PatientState } from '@/interface/PatientProfile';
-import { isEmpty } from 'lodash';
-import { CardPatientPortalStyle, EmptyResultContainer } from 'pages/PatientPortal/style';
-import { useEffect } from 'react';
 import { getVaccineHistory } from '@/stores/PatientProfile';
-import Image from 'next/image';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+
+import { CardPatientPortalStyle, EmptyResultContainer } from '../../style';
 
 const RiwayatVaksin = () => {
 	const { tableMenuLable, warning, empty } = Languages.page.patientPortal.riwayatVaksin;
@@ -25,7 +27,7 @@ const RiwayatVaksin = () => {
 
 	if (isEmpty(vacineHistory)) {
 		return (<EmptyResultContainer>
-			<Image src={icons.NoVaccineResult} alt="" />
+			<Image src={ icons.NoVaccineResult } alt="" />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'

@@ -1,11 +1,13 @@
-import { Modal, Text, Button } from '@/components';
-import { Images, colors, icons } from '@/constant';
-import dayjs from 'dayjs';
-import useTypedSelector from '@/hooks/useTypedSelector';
-import { UserState } from '@/interface';
+'use client';
 
-import { ModalStyle } from 'pages/PatientPortal/style';
+import dayjs from 'dayjs';
 import Image from 'next/image';
+
+import { Modal, Text, Button } from '@/components';
+import { colors, icons } from '@/constant';
+import useSession from '@/session/client';
+
+import { ModalStyle } from '../../style';
 interface PropsType {
 	visible?: boolean;
 	onClose?: () => void;
@@ -23,8 +25,7 @@ interface PropsType {
 }
 
 const ModalCancelBook = (props: PropsType) => {
-
-	const { userDetail } = useTypedSelector<UserState>('user');
+	const session = useSession();
 
 	return (
 		<Modal
@@ -37,7 +38,7 @@ const ModalCancelBook = (props: PropsType) => {
 					<div className='flex flex-row'>
 						<Text text={ 'Konfirmasi Pembatalan' } fontSize='24px' fontWeight='700' className='flex-1' />
 						<div onClick={ props.onClose } className='cursor-pointer'>
-							<Image src={icons.Close} alt=""/>
+							<Image src={ icons.Close } alt="" />
 						</div>
 					</div>
 					<Text text={ 'Apakah Anda yakin ingin membatalkan janji temu dengan dokter?' } fontSize='14px' fontWeight='400' className='mt-[10px]' color={ colors.grey.darkOpacity } />
@@ -57,7 +58,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ userDetail.name }
+								text={ session.user?.name }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
@@ -71,7 +72,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ props.birthDate ? dayjs(userDetail.birthdate).format('DD MMMM YYYY') : '-' }
+								text={ props.birthDate ? dayjs(session.user?.birthdate).format('DD MMMM YYYY') : '-' }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
@@ -85,7 +86,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ userDetail.phone ?? '-' }
+								text={ session.user?.phone ?? '-' }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'

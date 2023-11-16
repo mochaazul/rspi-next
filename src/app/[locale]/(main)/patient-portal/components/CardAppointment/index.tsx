@@ -1,27 +1,26 @@
+'use client';
+
 import { useState } from 'react';
+import * as Icons from 'react-feather';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import dayjs from 'dayjs';
 
 import {
 	Button, Form, Modal, NotificationPanel, Text
 } from '@/components';
 import { colors, Images, icons, Languages } from '@/constant';
-import { CardPatientPortalStyle } from 'pages/PatientPortal/style';
-
-import DetailKunjungan from '../ModalDetailKunjungan';
-import * as Icons from 'react-feather';
-import dayjs from 'dayjs';
-import { I_VisitHistory } from '@/interface/PatientProfile';
-import RecommendDoctorModal from '../ModalRecommendDoctor';
 import images from '@/constant/images';
-import ModalCancelBook from '../ModalCancelBook';
 import PinModal from '@/components/PinModal';
-import useAppDispatch, { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
-import { cancelBooking } from '@/stores/actions';
-import { navigation } from '@/helpers';
+import { cancelBooking, userDetail as userDetailAction } from '@/stores/actions';
 import { UserDataDetail } from '@/interface/user';
-import { userDetail as userDetailAction } from '@/stores/actions';
-import Image from 'next/image';
+import { I_VisitHistory } from '@/interface/PatientProfile';
+import useAppDispatch, { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 
+import { CardPatientPortalStyle } from '../../style';
+import RecommendDoctorModal from '../ModalRecommendDoctor';
+import ModalCancelBook from '../ModalCancelBook';
+import DetailKunjungan from '../ModalDetailKunjungan';
 
 interface PropsType {
 	status?: string;
@@ -52,7 +51,7 @@ const CardAppointment = (props: PropsType) => {
 	const navigate = useRouter();
 
 	const [modalOpen, setModalOpen] = useState(false);
-	const [modalReccomend, setModalRecommed] = useState(false);
+	const [modalRecommend, setModalRecommend] = useState(false);
 	const [showModalCancelBook, setShowModalCancelBook] = useState(false);
 	const [showPinModal, setShowPinModal] = useState(false);
 	const userDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
@@ -63,7 +62,7 @@ const CardAppointment = (props: PropsType) => {
 		if (!props.isHistory) {
 			setModalOpen(!modalOpen);
 		} else {
-			setModalRecommed(true);
+			setModalRecommend(true);
 		}
 	};
 
@@ -219,7 +218,7 @@ const CardAppointment = (props: PropsType) => {
 			</div>
 			{ props.isTelemedicine
 				&& <div className='flex items-center mt-[12px] gap-[8px]' >
-					<Image src={ icons.User } alt="" sizes={ 12 } />
+					<icons.User className={ 'w-3 h-3' } />
 					<Text text={ `Pasien: ${ props.patientName }` } fontSize='14px' fontWeight='700' color={ colors.blue.neon } />
 				</div>
 			}
@@ -259,8 +258,8 @@ const CardAppointment = (props: PropsType) => {
 				id={ props.id }
 			/>
 			<RecommendDoctorModal
-				visible={ modalReccomend }
-				onClose={ () => { setModalRecommed(false); } }
+				visible={ modalRecommend }
+				onClose={ () => { setModalRecommend(false); } }
 				visitHistory={ props.data }
 			/>
 			{
