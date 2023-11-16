@@ -45,7 +45,7 @@ export const LanguageSelector = () => {
 			<div className='flex h-[21px]'>
 				{ languageItem.find(item => currentLang === item.value)?.icon }
 			</div>
-			<div className='flex items-center gap-[5px] cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
+			<div className='flex items-center pl-[20px] gap-[5px] cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
 				<Text fontSize='16px' fontWeight='900' color='white'>
 					{ languageItem.find(item => currentLang === item.value)?.label }
 				</Text>
@@ -56,7 +56,7 @@ export const LanguageSelector = () => {
 							languageItem.map((item, index) => (
 								<div
 									key={ index }
-									className={ `cursor-pointer p-5 ${ index > 0 ? 'border-t border-[#F0F2F9]' : '' }` }
+									className={ `flex cursor-pointer p-5 ${ index > 0 ? 'border-t border-[#F0F2F9]' : '' }` }
 									onClick={ () => onChangeLanguage(item.value) }
 								>
 									<>
