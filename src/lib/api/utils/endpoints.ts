@@ -18,7 +18,7 @@ const endpointData = {
 	footerCategories: { path: '/footer-categories', method: 'POST' },
 	notification: { path: '/notification', method: 'POST' },
 	readNotification: { path: '/notification/seen', method: 'POST' },
-	familyProfile: { path: '/patients/family', method: 'POST' },
+	createFamilyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
 	checkPatientPhone: { path: '/patients/check-patient-phone', method: 'POST' },
 
@@ -47,6 +47,10 @@ const endpointData = {
 	events: { path: '/events', method: 'GET' },
 	article: { path: '/news', method: 'GET' },
 	getFooter: { path: '/footer-pages', method: 'GET' },
+	masterDoctor: { path: '/doctors/master', method: 'GET' },
+	familyProfile: { path: '/patients/family', method: 'GET' },
+
+	deleteFamilyProfile: { path: '/patients/family', method: 'DELETE' },
 
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },
@@ -54,7 +58,6 @@ const endpointData = {
 	// findDoctor: { path: '/find/doctor', method: 'GET' }, -> Replaced by master doctor since master doctor enpoint accept filtering
 	// patients: '/patients',
 	// specialities: '/specialities',
-	// familyProfile: '/patients/family',
 
 } as const;
 

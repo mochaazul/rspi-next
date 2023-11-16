@@ -8,7 +8,7 @@ import loremipsum from 'pages/RegisterOnboard/loremipsum';
 import Checkbox from '@/components/Checkbox';
 import Button from '@/components/Button';
 import { useRouter } from 'next/navigation';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/components/ui/Spinner';
 
 type checkedValsType = {
 	pp: boolean,

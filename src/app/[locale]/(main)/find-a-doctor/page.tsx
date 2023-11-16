@@ -1,34 +1,38 @@
 'use client';
-
-import { useCallback, useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
-import _, { debounce, isEqual } from 'lodash';
+import _, { debounce } from 'lodash';
 import { useSearchParams } from 'next/navigation';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import {
-	Accordion,
-	Breadcrumbs,
-	Button,
-	Form,
-	Layout,
-	Modal,
-	Text,
-} from '@/components';
-import { colors, Languages as lang } from '@/constant';
-import { BreadcrumbsProps, FindDoctorState, HospitalState, I_MasterDoctorParams } from '@/interface';
-import { useAppDispatch, useTypedSelector } from '@/hooks';
-
-import { getAllDoctor, loadMoreDoctor } from '@/stores/FindDoctor';
+import { colors } from '@/constant';
+import { BreadcrumbsProps, I_MasterDoctor } from '@/interface';
 
 import FindADoctorStyle from './style';
 import Pills from './Pills';
 import DoctorCard from './DoctorCard';
-import { DoctorDataSamples } from './DoctorsDataSample';
-import useFindDoctor from './useFindDoctor';
+import { getI18n, getScopedI18n } from '@/locales/server';
+import useSWR from 'swr';
+import fetcher from '@/lib/api/utils/fetcher';
+import Text from '@/components/ui/Text';
+import Layout from '@/components/Layout/Layout';
+import { PanelH1, PanelV1 } from '../style';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import DoctorFilter from './DoctorFilter';
+import { Accordion } from '@/components';
+import Form from '@/components/ui/Form';
+import { useScopedI18n } from '@/locales/client';
+import ResultHeader from './ResultHeader';
+import LangWrapper from '@/components/ui/LangWrapper';
+import useFindDoctor from './useFindDoctor';
+import { useEffect, useState } from 'react';
+import Modal from '@/components/ui/Modal';
+import Button from '@/components/ui/Button';
 import { findDoctorEvent } from '@/utils/metaPixelTrack';
-import { I_SpecialitiesState } from '@/interface/specialities';
+import { useGetDoctors } from '@/lib/api/client/doctors';
+import { useGetHospital } from '@/lib/api/client/hospital';
+import { useGetClinics } from '@/lib/api/client/clinics';
+
+const breadCrumbs = [{ name: 'Find a Doctor', url: '#' }];
 
 export const AccordionFilterWrapper = ({ title, children, hideToggler }: { title: string; children: React.ReactElement; hideToggler?: boolean; }) => (
 	<div className='mt-4 sm:mt-12'>
@@ -46,60 +50,33 @@ export const AccordionFilterWrapper = ({ title, children, hideToggler }: { title
 	</div>
 );
 
-const FindADoctor = (props: BreadcrumbsProps) => {
-	const hospitalSelector = useTypedSelector<HospitalState>('hospital');
-	const { masterDoctors, pagination, loading } = useTypedSelector<FindDoctorState>('findDoctor');
-	const { specialities, clinics } = useTypedSelector<I_SpecialitiesState>('specialities');
+export default function Page(props: BreadcrumbsProps) {
 
-	const getMasterDoctor = useAppDispatch<I_MasterDoctorParams>(getAllDoctor);
-	const loadMoreMasterDoctor = useAppDispatch<I_MasterDoctorParams>(loadMoreDoctor);
+	const searchParams = useSearchParams();
+	const [currentPage, setCurrentPage] = useState<number>(1);
+	const hasKeyword = searchParams.get('keyword');
+
+	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
+
+	const { data: hospitalResponse, error: hospitalError, isLoading: hospitalLoading } = useGetHospital();
+	const { data: clinicsResponse, error: clinicsError, isLoading: clinicsLoading } = useGetClinics();
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
-	const searchParams = useSearchParams()!;
-	const params = new URLSearchParams(searchParams);
+	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinicsResponse?.data || [], hospitals: hospitalResponse?.data || [] });
 
-	const { onDeletePills } = useFindDoctor();
-
-	const language = lang.page.findDoctor;
-
-	useEffect(() => {
-		findDoctorEvent();
-	}, []);
-
-	useEffect(() => {
-		debounceFilter(searchParams);
-	}, [searchParams]);
-
-	const onChangeParam = (params: URLSearchParams) => {
-		getMasterDoctor({
-			queryParam: Object.fromEntries(params)
-		});
-	};
-
-	const debounceFilter = useCallback(debounce(onChangeParam, 1000, { leading: true }), []);
+	// useEffect(() => {
+	// 	findDoctorEvent();
+	// }, []);
 
 	const RenderFilterPane = (
 		<div className='filter-pane' >
-			<DoctorFilter />
+			<DoctorFilter hospitals={ hospitalResponse?.data || [] } clinics={ clinicsResponse?.data || [] } />
 		</div>
 	);
 
 	const loadMore = () => {
-		if (!loading) {
-			loadMoreMasterDoctor({
-				queryParam: Object.fromEntries(searchParams),
-				pagination: {
-					page: pagination.page ? pagination.page + 1 : 1
-				}
-			});
-		}
-	};
-
-	const doctorCount = () => pagination?.count || 0;
-
-	const onSearchDoctorByName = (value: string) => {
-		params.set('keyword', value);
+		setSize(size + 1);
 	};
 
 	const getFilterValues = () => {
@@ -111,18 +88,18 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 		}[] = [];
 		for (const entry in entries) {
 			const values = searchParams.get(entry);
-			if (entry === 'hospital' && values) {
+			if (entry === 'hospital_code' && values && hospitalResponse) {
 				// We need this condition since we need to map hospital name based on hospital code
 				const obj = searchParams.get(entry)?.split(',');
 				mapped.push(
-					...hospitalSelector.hospitals
+					...hospitalResponse.data
 						.filter(hospital => obj?.includes(hospital.hospital_code))
 						.map(item =>
-						({
-							id: item.hospital_code,
-							text: item.name ?? '',
-							key: entry
-						})
+							({
+								id: item.hospital_code,
+								text: item.name ?? '',
+								key: entry
+							})
 						)
 				);
 			} else
@@ -133,7 +110,7 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 					if (entry === 'clinic_code' && values) {
 						// we need this condition to cover the rest of params but not keyword params (search doctor by name)
 						const vals = values.split(',').map(item => {
-							const sp = clinics.find(sp => sp.clinic_code === item);
+							const sp = clinicsResponse?.data.find(sp => sp.clinic_code === item);
 							return { id: sp?.clinic_code ?? '-', text: sp?.clinic_name ?? '-', key: entry };
 						});
 						mapped.push(...vals);
@@ -142,169 +119,157 @@ const FindADoctor = (props: BreadcrumbsProps) => {
 		return mapped;
 	};
 
-	const clearSearchParams = () => {
-		searchParams.forEach((value, key) => {
-			params.delete(value);
-		});
-	};
-
 	const hasSearchParams = () => {
 		const searchParamObj = Object.fromEntries(searchParams);
-		const paramFound = !_.isEmpty(searchParamObj['clinic_code']) || !_.isEmpty(searchParamObj['hospital']) || searchParamObj['telemedicine'] === 'true';
+		const paramFound = !_.isEmpty(searchParamObj[ 'specialty_category' ]) || !_.isEmpty(searchParamObj[ 'hospital_code' ]) || searchParamObj[ 'telemedicine' ] === 'true';
 		return paramFound;
 	};
 
+	const doctorData = () => {
+		if (doctorResponse) {
+			return doctorResponse.flatMap(res => res.data);
+		}
+		return [];
+	};
+
+	const doctorCount = () => {
+		if (doctorResponse) {
+			return doctorResponse[0].pagination.count || 0;
+		}
+		return 0;
+	};
+
+	const hasMore = () => {
+		return doctorCount() > size;
+	};
+
 	return (
-		<Layout.PanelV1>
-			<Layout.PanelH1>
-				<Breadcrumbs datas={ props.breadcrumbsPath } />
-				<FindADoctorStyle className='mt-[25px] sm:mt-[50px]'>
+		<PanelV1>
+			<PanelH1>
+				<LangWrapper>
+					<Breadcrumbs datas={ breadCrumbs } />
+					<FindADoctorStyle className='mt-[25px] sm:mt-[50px]'>
 
-					{ /* Filter Pane */ }
-					<div className='max-sm:hidden'>
-						{ RenderFilterPane }
-					</div>
+						{ /* Filter Pane */ }
+						<div className='max-sm:hidden'>
+							{ RenderFilterPane }
+						</div>
 
-					{ /* Doctors Pane */ }
-					<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
-						{ /* Doctor found counter */ }
-						<Text
-							fontSize='20px'
-							fontWeight='700'
-							lineHeight='24px'
-							className='mb-6 max-sm:hidden'
-							text={ `${ doctorCount() } ${ language.label.doctorFound }` }
-						/>
-						{ /* Cari Dokter - title - Mobile */ }
-						<Text
-							fontType='h2'
-							fontSize='20px'
-							lineHeight='24px'
-							fontWeight='700'
-							className='mb-6 sm:hidden'
-							color={ colors.grey.darker }
-							text={ language.heading }
-						/>
-						{ /* Input nama  dokter */ }
-						<Form.TextField
-							placeholder={ language.label.doctorName }
-							featherIcon='Search'
-							iconPosition='right'
-							onChange={ ({ target }) => onSearchDoctorByName(target.value) }
-							iconColor={ colors.grey.light }
-						/>
-						{ /* Search used filters - pills with remove icon */ }
-						<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
-							{ /* Applied dilter pills */ }
-							<div className='flex gap-2 sm:flex-wrap max-sm:flex-nowrap max-sm:pb-2'>
-								<div className='filter-pill min-w-fit sm:hidden'>
-									<div onClick={ () => setFilterModalVisible(true) }>
-										<Icons.Filter size={ 18 } color={ colors.paradiso.default } />
+						{ /* Doctors Pane */ }
+						<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
+							<ResultHeader doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } />
+							{ /* Search used filters - pills with remove icon */ }
+							<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
+								{ /* Applied dilter pills */ }
+								<div className='flex gap-2 sm:flex-wrap max-sm:flex-nowrap max-sm:pb-2'>
+									<div className='filter-pill min-w-fit sm:hidden'>
+										<div onClick={ () => setFilterModalVisible(true) }>
+											<Icons.Filter size={ 18 } color={ colors.paradiso.default } />
+											<Text
+												fontSize='16px'
+												fontWeight='400'
+												lineHeight='19px'
+												color={ colors.paradiso.default }
+												text='Filter'
+											/>
+										</div>
+									</div>
+									{
+										getFilterValues().map((filter, index) => (
+											<div className='min-w-fit' key={ `filter-pills-${index}` }>
+												<Pills onRemove={ () => onDeletePills(filter) }>
+													<Text
+														fontSize='16px'
+														fontWeight='400'
+														lineHeight='19px'
+														text={ filter.text }
+													/>
+												</Pills>
+											</div>
+										))
+									}
+								</div>
+								<div className='cursor-pointer max-sm:hidden min-w-fit'>
+									{
+										hasSearchParams() &&
 										<Text
 											fontSize='16px'
 											fontWeight='400'
 											lineHeight='19px'
-											color={ colors.paradiso.default }
-											text='Filter'
+											color={ colors.red.default }
+											text='Clear All'
+											onClick={ clearSearchParams }
 										/>
-									</div>
+									}
 								</div>
-								{
-									getFilterValues().map((filter, index) => (
-										<div className='min-w-fit' key={ `filter-pills-${ index }` }>
-											<Pills onRemove={ () => onDeletePills(filter) }>
-												<Text
-													fontSize='16px'
-													fontWeight='400'
-													lineHeight='19px'
-													text={ filter.text }
-												/>
-											</Pills>
-										</div>
-									))
-								}
 							</div>
-							<div className='cursor-pointer max-sm:hidden min-w-fit'>
+							{ /* Doctor found counter - Mobile */ }
+							<div>
+								<Text
+									fontSize='14px'
+									fontWeight='700'
+									lineHeight='17px'
+									className='mb-2 mt-6 sm:hidden'
+									text={ `${ doctorCount() } Doctor Found` }
+								/>
+							</div>
+							{ /* Doctors result card */ }
+							<InfiniteScroll
+								style={ { overflow: 'unset' } }
+								className='flex flex-col gap-6 sm:mt-[47px]'
+								dataLength={ doctorData().length || 0 }
+								next={ loadMore }
+								hasMore={  hasMore() }
+								loader={ <div className='loader' key={ 0 }>Loading ...</div> }
+								scrollThreshold={ '100px' }
+							>
 								{
-									hasSearchParams() &&
+									doctorData().map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
+								}
+							</InfiniteScroll>
+						</div>
+
+						{ /* Popup Filter - Mobile only */ }
+						<Modal
+							visible={ filterModalVisible }
+							onClose={ () => setFilterModalVisible(false) }
+							width='90%'
+							borderRadius='16px'
+							backdropColor={ colors.black.opacity64 }
+						>
+							<div className='relative flex flex-col'>
+								<div className='flex justify-between items-center'>
 									<Text
 										fontSize='16px'
-										fontWeight='400'
 										lineHeight='19px'
-										color={ colors.red.default }
-										text='Clear All'
-										onClick={ clearSearchParams }
+										fontType='h4'
+										fontWeight='900'
+										color={ colors.grey.darker }
+										text='Filter'
+										className=''
 									/>
-								}
-							</div>
-						</div>
-						{ /* Doctor found counter - Mobile */ }
-						<div>
-							<Text
-								fontSize='14px'
-								fontWeight='700'
-								lineHeight='17px'
-								className='mb-2 mt-6 sm:hidden'
-								text={ `${ doctorCount() } ${ language.label.doctorFound }` }
-							/>
-						</div>
-						{ /* Doctors result card */ }
-						<InfiniteScroll
-							style={ { overflow: 'unset' } }
-							className='flex flex-col gap-6 sm:mt-[47px]'
-							dataLength={ masterDoctors.length }
-							next={ loadMore }
-							hasMore={ pagination.page !== pagination.total_page }
-							loader={ <div className='loader' key={ 0 }>Loading ...</div> }
-							scrollThreshold={ '100px' }
-						>
-							{
-								masterDoctors && masterDoctors.map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
-							}
-						</InfiniteScroll>
-					</div>
+									<Icons.X color={ colors.grey.darker } size={ 20 } className='cursor-pointer' onClick={ () => setFilterModalVisible(false) } />
+								</div>
+								<div className='x-spacer my-4' />
 
-					{ /* Popup Filter - Mobile only */ }
-					<Modal
-						visible={ filterModalVisible }
-						onClose={ () => setFilterModalVisible(false) }
-						width='90%'
-						borderRadius='16px'
-						backdropColor={ colors.black.opacity64 }
-					>
-						<div className='relative flex flex-col'>
-							<div className='flex justify-between items-center mb-4'>
-								<Text
-									fontSize='16px'
-									lineHeight='19px'
-									fontType='h4'
-									fontWeight='900'
-									color={ colors.grey.darker }
-									text='Filter'
-									className=''
-								/>
-								<Icons.X color={ colors.grey.darker } size={ 20 } className='cursor-pointer' onClick={ () => setFilterModalVisible(false) } />
-							</div>
+								{ /* Filter form */ }
+								<div>
+									{ RenderFilterPane }
+								</div>
 
-							{ /* Filter form */ }
-							<div>
-								{ RenderFilterPane }
+								<div className='mt-4'>
+									<Button
+										theme='primary'
+										themeColor={ colors.green.brandAccent }
+										label='Terapkan'
+										onClick={ () => setFilterModalVisible(false) }
+									/>
+								</div>
 							</div>
-
-							<div className='mt-4'>
-								<Button
-									theme='primary'
-									themeColor={ colors.green.brandAccent }
-									label='Terapkan'
-									onClick={ () => setFilterModalVisible(false) }
-								/>
-							</div>
-						</div>
-					</Modal>
-				</FindADoctorStyle>
-			</Layout.PanelH1>
-		</Layout.PanelV1>
+						</Modal>
+					</FindADoctorStyle>
+				</LangWrapper>
+			</PanelH1>
+		</PanelV1>
 	);
 };
-
-export default FindADoctor;

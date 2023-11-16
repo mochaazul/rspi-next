@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useEffect, useState } from 'react';
 
@@ -8,15 +8,14 @@ import Link from 'next/link';
 import { appStage } from '@/config';
 import { Images, colors } from '@/constant';
 
-import Button from '@/components/Button';
-import TextField from '@/components/TextField';
-import Text from '@/components/Text';
-import Socmed from '@/components/Socmed';
-
 import { FooterDetail, FooterState } from '@/interface/footer';
 
 import FooterStyled, { FooterContainer } from './style';
 import Image from 'next/image';
+import Text from '@/components/ui/Text';
+import Socmed from '@/components/ui/Socmed';
+import TextField from '@/components/ui/TextField';
+import Button from '@/components/ui/Button';
 
 const FooterLayout = () => {
 	const router = useRouter();

@@ -1,9 +1,7 @@
 import Header from './Header';
 import Button from './Button';
 import Text from './Text';
-import Form from './Form';
 import Label from './Label';
-import TextField from './TextField';
 import TextFieldPin from './TextFieldPin';
 import TextArea from './TextArea';
 import CustomCarousel from './Carousel';
@@ -21,7 +19,6 @@ import PaginationNumber from './PaginationNumber';
 import MainNavLanguage from './MainNavLanguage';
 import CallForAmbulance from './CallForAmbulance';
 import Share from './Share';
-import Spinner from './Spinner';
 import EmptyData from './EmptyData';
 import SubMenuPage from './SubMenuPage';
 import Picker from './Picker';
@@ -35,9 +32,7 @@ export {
 	Header,
 	Button,
 	Text,
-	Form,
 	Label,
-	TextField,
 	TextFieldPin,
 	TextArea,
 	CustomCarousel,
@@ -56,7 +51,6 @@ export {
 	MainNavLanguage,
 	CallForAmbulance,
 	Share,
-	Spinner,
 	EmptyData,
 	SubMenuPage,
 	Picker,

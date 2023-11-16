@@ -11,7 +11,7 @@ import { checkPin } from '@/stores/User';
 import { createFieldConfig, requiredRule } from '@/helpers';
 import NotificationPanel from '@/components/NotificationPanel';
 import { useState } from 'react';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/components/ui/Spinner';
 
 type Props = {
 	visible: boolean,

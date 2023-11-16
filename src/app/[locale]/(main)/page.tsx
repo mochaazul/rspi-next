@@ -1,20 +1,15 @@
-import LandingPageStyle from './style';
-import CentreOfExcellence from '@/components/PageComponents/LandingPageSections/CenterOfExcelence';
-import { getBanner, getCoe } from '@/lib/api';
-import CustomCarousel from '@/components/ui/Carousel';
 import { getCurrentLocale } from '@/locales/server';
-import ServicesTabs from '@/components/PageComponents/LandingPageSections/Services';
+
+import CustomCarousel from '@/components/ui/Carousel';
 import LangWrapper from '@/components/ui/LangWrapper';
-import { getHospital } from '@/lib/api/hospital';
-import { getClinics, getFacilitiesAndServices } from '@/lib/api/clinics';
+
+import CentreOfExcellence from '@/components/PageComponents/LandingPageSections/CenterOfExcelence';
+import ServicesTabs from '@/components/PageComponents/LandingPageSections/Services';
 import FacilitiesServices from '@/components/PageComponents/LandingPageSections/FacilitiesServices';
 import PromoPackages from '@/components/PageComponents/LandingPageSections/PromoPackages';
-import { getEvents } from '@/lib/api/events';
 import NewsHealthArticles from '@/components/PageComponents/LandingPageSections/NewsHealthArticles';
-import { getNews } from '@/lib/api/news';
 import CustomerReview from '@/components/PageComponents/LandingPageSections/CustomerReview';
 import AccreditationAwards from '@/components/PageComponents/LandingPageSections/AccreditationsAwards';
-import { getAwards } from '@/lib/api/awards';
 import MobileAppBanner from '@/components/PageComponents/LandingPageSections/MobileAppBanner';
 
 import { isMobile } from 'react-device-detect';

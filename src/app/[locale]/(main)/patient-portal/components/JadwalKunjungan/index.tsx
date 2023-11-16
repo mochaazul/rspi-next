@@ -1,4 +1,4 @@
-import Radio from '@/components/Radio';
+import Radio from '@/components/ui/Radio';
 import CardAppointment from '../CardAppointment';
 import { useEffect, useState } from 'react';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';

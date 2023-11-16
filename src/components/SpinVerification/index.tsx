@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Button from '@/components/Button';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/components/ui/Spinner';
 import Text from '@/components/Text';
 import { removeUser as removeUserData } from '@/stores/User';
 import { icons } from '@/constant';

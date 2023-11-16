@@ -37,5 +37,9 @@ export const sortDays = (data: I_SerializedTimeSchedule[]) => {
 };
 
 export const formatTimeslot = (timeSlot: string) => {
-	return dayjs(timeSlot, 'HH:mm:ss').format('HH:mm');
+	// expected input HH:mm:ss
+	// expected output HH:mm
+	// we can ignore the seconds
+	return timeSlot.split(':').slice(0, 2)
+		.join(':');
 };
