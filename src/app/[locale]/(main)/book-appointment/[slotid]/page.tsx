@@ -1,32 +1,27 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { FamilyProfile, FindDoctorState, UserDataDetail, UserState } from '@/interface';
+import {  useRef, useState } from 'react';
+import { FamilyProfile } from '@/interface';
 
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import { Images, colors, icons } from '@/constant';
-import { AppointmentState } from '@/interface/Book';
+import {  colors, icons } from '@/constant';
 import {
 	BookAppointmentContainer, BottomBar, DisclaimerAlert, FormCol, FormRow
 } from './style';
 import useBookAppointment from './useBookAppointment';
 import ConfirmationModal from './ConfirmationModal';
-import { getFamilyProfiles } from '@/stores/actions';
 import { Languages as lang } from '@/constant';
 import Radio from '@/components/ui/Radio';
-import { isEqual } from 'lodash';
 import SuccessConfirmationModal from './SuccessConfirmationModal';
-import { formatTimeslot, splitDate } from '@/helpers/datetime';
-import { PatientState } from '@/interface/PatientProfile';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import ProfileSelector from './ProfileSelector';
 import NotificationPanel from '@/components/ui/NotificationPanel';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
 import Button from '@/components/ui/Button';
-import { getProfile, useGetFamilyProfile, useGetProfile } from '@/lib/api/profile';
 import AddProfileModal from './AddProfileModal';
+import { useGetFamilyProfile, useGetProfile } from '@/lib/api/client/profile';
 
 const genderMenuItems = [
 	{ key: 'M', value: 'W', label: 'Male' },
@@ -130,38 +125,38 @@ const BookAppointment = () => {
 	// 	const docSchedule = doctor?.doctor_schedule.find(schedule => schedule.hospital_code === timeSlot?.hospital_code);
 	// 	return docSchedule?.clinics[0];
 	// };
-	const onCloseProfileModal = (profile: ProfilePayload, isMain?: boolean) => {
-		getFamilyProfilesDispatch();
-		setAddProfileModal(false);
-		if (isMain) {
-			setSelfProfile({
-				birthdate: profile.dob,
-				email: profile.email,
-				gender: profile.gender,
-				name: profile.name,
-				phone: profile.phone,
-				id: 0,
-				created_date: '',
-				updated_date: '',
-				no_mr: '',
-				parent_email: '',
-				patient_code: ''
-			});
-		}
-		setSelectedProfile({
-			birthdate: profile.dob,
-			email: profile.email,
-			gender: profile.gender,
-			name: profile.name,
-			phone: profile.phone,
-			id: 0,
-			created_date: '',
-			updated_date: '',
-			no_mr: '',
-			parent_email: '',
-			patient_code: ''
-		});
-	};
+	// const onCloseProfileModal = (profile: ProfilePayload, isMain?: boolean) => {
+	// 	getFamilyProfilesDispatch();
+	// 	setAddProfileModal(false);
+	// 	if (isMain) {
+	// 		setSelfProfile({
+	// 			birthdate: profile.dob,
+	// 			email: profile.email,
+	// 			gender: profile.gender,
+	// 			name: profile.name,
+	// 			phone: profile.phone,
+	// 			id: 0,
+	// 			created_date: '',
+	// 			updated_date: '',
+	// 			no_mr: '',
+	// 			parent_email: '',
+	// 			patient_code: ''
+	// 		});
+	// 	}
+	// 	setSelectedProfile({
+	// 		birthdate: profile.dob,
+	// 		email: profile.email,
+	// 		gender: profile.gender,
+	// 		name: profile.name,
+	// 		phone: profile.phone,
+	// 		id: 0,
+	// 		created_date: '',
+	// 		updated_date: '',
+	// 		no_mr: '',
+	// 		parent_email: '',
+	// 		patient_code: ''
+	// 	});
+	// };
 
 	const onAddNewProfile = (type: string) => {
 		setSelectedType(type);
@@ -383,12 +378,12 @@ const BookAppointment = () => {
 			</div>
 			<AddProfileModal
 				visible={ addProfileModal }
-				onClose={ onCloseProfileModal }
+				// onClose={ onCloseProfileModal }
 				onClose={ () => { setAddProfileModal(false); } }
 				selfProfile={ userProfile?.data }
 				type={ selectedType }
 			/>
-			 <ConfirmationModal
+			 { /* <ConfirmationModal
 				timeSlot={ getTimeSlot() }
 				visible={ confirmationModal }
 				onClose={ () => { setConfirmationModalVisible(false); } }
@@ -406,7 +401,7 @@ const BookAppointment = () => {
 				doctorName={ getDoctor()?.doctor_name }
 				date={ getTimeSlot()?.date }
 				visible={ successModal }
-			/>
+			/> */ }
 		</BookAppointmentContainer>
 	);
 };

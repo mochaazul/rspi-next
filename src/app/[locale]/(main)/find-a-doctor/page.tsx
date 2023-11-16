@@ -10,12 +10,9 @@ import { BreadcrumbsProps, I_MasterDoctor } from '@/interface';
 import FindADoctorStyle from './style';
 import Pills from './Pills';
 import DoctorCard from './DoctorCard';
-import { getHospital, useGetHospital } from '@/lib/api/hospital';
 import { getI18n, getScopedI18n } from '@/locales/server';
-import { getDoctors, useGetDoctors } from '@/lib/api/doctors';
 import useSWR from 'swr';
 import fetcher from '@/lib/api/utils/fetcher';
-import { useGetClinics } from '@/lib/api/clinics';
 import Text from '@/components/ui/Text';
 import Layout from '@/components/Layout/Layout';
 import { PanelH1, PanelV1 } from '../style';
@@ -31,6 +28,9 @@ import { useEffect, useState } from 'react';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import { findDoctorEvent } from '@/utils/metaPixelTrack';
+import { useGetDoctors } from '@/lib/api/client/doctors';
+import { useGetHospital } from '@/lib/api/client/hospital';
+import { useGetClinics } from '@/lib/api/client/clinics';
 
 const breadCrumbs = [{ name: 'Find a Doctor', url: '#' }];
 

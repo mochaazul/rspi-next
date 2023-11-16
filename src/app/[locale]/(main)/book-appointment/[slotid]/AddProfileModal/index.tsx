@@ -1,14 +1,10 @@
 import { ModalHeader, ProfileModalContainer, WarningContainer } from './style';
 import { colors, icons } from '@/constant';
 // import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { addFamilyProfile, updateProfile } from '@/stores/actions';
-import {
-	FamilyProfile, FamilyProfilePayload, UpdateProfileType, UserDataDetail, UserState
-} from '@/interface';
+import { UserDataDetail } from '@/interface';
 // import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import NotificationPanel from '@/components/NotificationPanel';
 import { useEffect, useState } from 'react';
-import { userDetail as userDetailAction } from '@/stores/actions';
 import Image from 'next/image';
 import Form from '@/components/ui/Form';
 import { createFieldConfig } from '@/helpers';
@@ -16,7 +12,8 @@ import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import { FormRow } from '../style';
-import { useFamilyProfileMutation } from '@/lib/api/profile';
+import { useFamilyProfileMutation } from '@/lib/api/client/profile';
+
 const addProfileFormFields = {
 	name: {
 		...createFieldConfig({
@@ -90,6 +87,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 
 	// const addFamilyProfileDispatch = useAppAsyncDispatch<FamilyProfilePayload>(addFamilyProfile);
 	// End migrate
+
 	const { data, trigger: createFamilyProfile, isMutating, error: createFamilyMutationError, reset: resetMutation } = useFamilyProfileMutation();
 	const [error, setError] = useState<string>('');
 	const [disabledEmail, setDisabledEmail] = useState<boolean>(false);
@@ -97,43 +95,44 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	useEffect(() => {
 		resetMutation(); // we need this to clear errors
 	}, []);
+	
 	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
 		const { dob, email, gender, name, phone } = onSubmit(event);
-		if (type === 'other') {
-			await createFamilyProfile({
-				birthdate: dob.value,
-				parent_email: selfProfile?.email ?? '',
-				email: email.value,
-				name: name.value,
-				phone: cleanUpMask(phone.value),
-				gender: gender.value
-			});
-			closeHandler();
-		} else {
-			const payload = {
-				name: name.value,
-				birthdate: dob.value,
-				gender: gender.value,
-				phone: cleanUpMask(phone.value)
-			};
-			TODO: migrate;
-			const response = await clikUpdateProfile({
-				payload
-			});
-			if (response.payload.stat_msg === 'Success') {
-				setDisabledEmail(false);
-				await getUserDetail();
-				onClose({
-					dob: dob.value,
-					email: email.value,
-					gender: gender.value,
-					name: name.value,
-					phone: phone.value
-				});
-				TODO: migrate;
-			}
-			setError(response.payload.stat_msg);
-		}
+		// if (type === 'other') {
+		await createFamilyProfile({
+			birthdate: dob.value,
+			parent_email: selfProfile?.email ?? '',
+			email: email.value,
+			name: name.value,
+			phone: cleanUpMask(phone.value),
+			gender: gender.value
+		});
+		// 	closeHandler();
+		// } else {
+		// 	const payload = {
+		// 		name: name.value,
+		// 		birthdate: dob.value,
+		// 		gender: gender.value,
+		// 		phone: cleanUpMask(phone.value)
+		// 	};
+		// 	TODO: migrate;
+		// 	const response = await clikUpdateProfile({
+		// 		payload
+		// 	});
+		// 	if (response.payload.stat_msg === 'Success') {
+		// 		setDisabledEmail(false);
+		// 		await getUserDetail();
+		// 		onClose({
+		// 			dob: dob.value,
+		// 			email: email.value,
+		// 			gender: gender.value,
+		// 			name: name.value,
+		// 			phone: phone.value
+		// 		});
+		// 		// TODO: migrate;
+		// 	}
+		// 	setError(response.payload.stat_msg);
+		// }
 		// setFieldsValue({
 		// 	email: '',
 		// 	name: '',
@@ -167,7 +166,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	};
 
 	useEffect(() => {
-		if (type == 'self') {
+		if (type === 'self') {
 			// TODO: migrate
 			// setFieldsValue({
 			// 	email: userDetail.email

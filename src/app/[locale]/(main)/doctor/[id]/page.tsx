@@ -12,14 +12,14 @@ import Text from '@/components/ui/Text';
 import Radio from '@/components/ui/Radio';
 import Calendar from '@/components/ui/Calendar';
 import Button from '@/components/ui/Button';
-import { useGetDoctorCalendar, useGetDoctorDetail, useGetDoctorSlot } from '@/lib/api/doctors';
 import { Images, colors } from '@/constant';
 import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
-import { useGetHospital } from '@/lib/api/hospital';
 import { useScopedI18n } from '@/locales/client';
 import { usePathname, useRouter } from 'next/navigation';
 import VisitSchedule from './sections/VisitSchedule';
 import { TimeSlot } from '@/interface';
+import { useGetHospital } from '@/lib/api/client/hospital';
+import { useGetDoctorCalendar, useGetDoctorDetail, useGetDoctorSlot } from '@/lib/api/client/doctors';
 
 type FormAppointment = {
 	clinic: string,
@@ -80,15 +80,6 @@ export default function Page({ params }: Props) {
 		{ name: doctor?.data.name || '', url: '#' }
 	];
 
-	const onChangeForm = () => {
-		// if (selectedHospital) {
-		// 	getCalendar();
-		// }
-		// hospitalDetailDispatch({ id: selectedHospital + '/hospital-code' }).then(e => {
-		// 	setSelectedHospitalPhoneNumber(e.data.phone);
-		// });
-	};
-
 	const getCalendar = (month: number, year: number) => {
 		const inputDate = dayjs(`${year}-${month}-01`, 'YYYY-MM-DD');
 		const todayDate = dayjs();
@@ -123,10 +114,6 @@ export default function Page({ params }: Props) {
 			setSelectedDate(val as Date);
 			setSelectedDateStatus(isDateSelectable.status);
 		}
-	};
-
-	const getDoctorHospital = () => {
-		return doctor?.data.hospital;
 	};
 
 	const clickContactHospital = () => {

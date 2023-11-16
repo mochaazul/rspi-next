@@ -15,7 +15,7 @@ import Text from '@/components/ui/Text';
 import Modal from '@/components/ui/Modal';
 import { ProfileModalContainer } from '../AddProfileModal/style';
 import Button from '@/components/ui/Button';
-import { useDeleteFamilyProfileMutation } from '@/lib/api/profile';
+import { useDeleteFamilyProfileMutation } from '@/lib/api/client/profile';
 
 type ProfileCardProps = {
 	profile: UserDataDetail,
