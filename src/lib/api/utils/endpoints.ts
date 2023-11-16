@@ -30,6 +30,8 @@ const endpointData = {
 	createPin: { path: '/patients/pin', method: 'PUT' },
 
 	// GET
+	patients: { path: '/patients', method: 'GET' },
+	visitHistory: { path: '/patients/patient-portal/visit-histories', method: 'GET' },
 	banner: { path: '/banners', method: 'GET' },
 	profile: { path: '/patients/profile', method: 'GET' },
 	facilities: { path: '/facilities', method: 'GET' },
@@ -56,7 +58,6 @@ const endpointData = {
 	// pin: { path: '/patients/pin', method: 'POST' },
 	// doctors: '/doctors' -> replaced by masterdoctor,
 	// findDoctor: { path: '/find/doctor', method: 'GET' }, -> Replaced by master doctor since master doctor enpoint accept filtering
-	// patients: '/patients',
 	// specialities: '/specialities',
 
 } as const;

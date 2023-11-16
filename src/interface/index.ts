@@ -13,3 +13,5 @@ export * from './contactUs';
 export * from './footer';
 export * from './Notification';
 export * from './rootAppState';
+export * from './appointment';
+export * from './PatientProfile';
