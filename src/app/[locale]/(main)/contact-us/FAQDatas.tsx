@@ -1,4 +1,4 @@
-import { Text } from '@/components';
+import { Text } from '@/components/ui';
 import { colors, Languages as lang } from '@/constant';
 import parse from 'html-react-parser';
 

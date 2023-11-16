@@ -1,4 +1,4 @@
-import { PickerItem } from '@/components/DropdownSearch';
+import { PickerItem } from '@/components/ui/DropdownSearch';
 import { createFieldConfig } from '@/helpers';
 import { HospitalDetail } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';

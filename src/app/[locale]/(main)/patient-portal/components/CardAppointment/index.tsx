@@ -8,10 +8,10 @@ import dayjs from 'dayjs';
 
 import {
 	Button, Form, Modal, NotificationPanel, Text
-} from '@/components';
+} from '@/components/ui';
 import { colors, Images, icons, Languages } from '@/constant';
 import images from '@/constant/images';
-import PinModal from '@/components/PinModal';
+import PinModal from '@/components/ui/PinModal';
 import { cancelBooking, userDetail as userDetailAction } from '@/stores/actions';
 import { UserDataDetail } from '@/interface/user';
 import { I_VisitHistory } from '@/interface/PatientProfile';
@@ -223,7 +223,7 @@ const CardAppointment = (props: PropsType) => {
 				</div>
 			}
 			<div className='grid grid-cols-[auto_repeat(3,minmax(0,1fr))] mt-[24px] gap-[24px] cursor-pointer'>
-				<img src={ props.doctorImgUrl } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
+				<Image src={ props.doctorImgUrl } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
 				<div className='flex-1'>
 					<Text text={ props.doctorName || '-' } fontSize='16px' fontWeight='700' />
 					<Text text={ props.doctorSpeciality || '-' } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
@@ -249,7 +249,7 @@ const CardAppointment = (props: PropsType) => {
 					handleShowModal && handleShowModal();
 				} }>
 					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ props.isHistory ? riwayatKunjungan.label.recommendDoctor : riwayatKunjungan.label.seeDetail } />
-					<Image src={ icons.LongArrowRight } alt="" className='svg-green' style={ { width: '20px' } } />
+					<icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />
 				</div>
 			}
 			< DetailKunjungan

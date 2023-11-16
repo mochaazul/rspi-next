@@ -2,9 +2,9 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Images, Languages, colors } from '@/constant';
-import { Button, Text, Form, NotificationPanel } from '@/components';
+import { Button, Text, Form, NotificationPanel } from '@/components/ui';
 import useResetEmail from './useResetEmail';
-import SpinVerification from '@/components/SpinVerification';
+import SpinVerification from '@/components/ui/SpinVerification';
 import { useTypedSelector } from '@/hooks';
 import { ChangeEmailPayload, UserState } from '@/interface';
 import useAppDispatch, { useAppAsyncDispatch } from '@/hooks/useAppDispatch';

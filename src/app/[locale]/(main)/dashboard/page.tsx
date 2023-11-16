@@ -1,7 +1,7 @@
 import React from 'react';
 import useDashboard from './useDashboard';
 import { ContentModal, DashoardStyle, FloatingButton, Modal } from './style';
-import { Button, Form } from '@/components';
+import { Button, Form } from '@/components/ui';
 
 const Dashboard: React.FC = () => {
 

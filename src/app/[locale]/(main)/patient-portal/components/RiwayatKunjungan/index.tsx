@@ -8,7 +8,7 @@ import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { getVisitHistories } from '@/stores/PatientProfile';
 import { PatientState } from '@/interface/PatientProfile';
 import { Languages, icons } from '@/constant';
-import { Button, Spinner, Text } from '@/components';
+import { Button, Spinner, Text } from '@/components/ui';
 
 import CardAppointment from '../CardAppointment';
 import { EmptyResultContainer } from '../../style';
@@ -39,7 +39,7 @@ const RiwayatKunjungan = () => {
 
 	if (isEmpty(visitHistories)) {
 		return (<EmptyResultContainer>
-			<Image src={ icons.EmptyVisitHistories } alt="" />
+			<icons.EmptyVisitHistories />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'

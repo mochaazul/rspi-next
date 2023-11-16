@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
 
-import { Breadcrumbs, Text, Button } from '@/components';
-import Card, { CardContentWithInner, CardFooter, CardsScrollHorizontal } from '@/components/Card';
+import { Breadcrumbs, Text, Button } from '@/components/ui';
+import Card, { CardContentWithInner, CardFooter, CardsScrollHorizontal } from '@/components/ui/Card';
 import { colors, Languages as lang } from '@/constant';
 import { CenterOfExcellenceState } from '@/interface';
 import { getCenterOfExcellence, getCenterOfExcellenceNewsByID } from '@/stores/CenterOfExcellence';

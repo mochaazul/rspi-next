@@ -1,9 +1,11 @@
 import React, { useRef, useCallback } from 'react';
 import * as Icons from 'react-feather';
 
-import { CheckboxStyle, InputType } from './style';
-import Text from '../Text';
 import { colors } from '@/constant';
+import Text from '@/components/ui/Text';
+
+import { CheckboxStyle, InputType } from './style';
+import { isMobile } from 'react-device-detect';
 
 const Checkbox = (props: InputType) => {
 	const checkBoxRef = useRef<HTMLInputElement | null>(null);
@@ -38,7 +40,7 @@ const Checkbox = (props: InputType) => {
 						<Icons.Check color={ colors.white.default } size={ 18 } />
 					</div>
 				</div>
-				<div className='flex flex-row gap-x-1'>
+				<div className={ `${ isMobile ? '' : 'flex flex-row gap-x-1' }` }>
 					<Text
 						text={ props.label }
 						fontSize='16px'

@@ -5,48 +5,75 @@ import Text from '@/components/ui/Text';
 import WhiteInstagram from '/public/images/ic/whiteInstagram.svg';
 import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';
 import WhiteTwitter from '/public/images/ic/whiteTwitter.svg';
+import { Languages } from '@/constant';
 
 export const MainNavLanguage = () => {
+	// const { welcome } = Languages.topNav;
+	// const userSelector = useTypedSelector<UserState>('user');
+	// const isLoggedIn = !!userSelector?.user?.token;
 
 	const handleOpenSocmed = (links: string) => () => {
 		window.open(links, '_blank');
 	};
 
+	const renderWelcomeText = () => {
+		// Migrate
+		// const userIdentity = userSelector?.userDetail?.no_mr
+		// 	? userSelector?.userDetail?.name
+		// 	: userSelector?.userDetail?.email;
+		// const welcomeText = isLoggedIn
+		// 	? `${ welcome }, ${ userIdentity }`
+		// 	: welcome;
+
+		return (
+			<Text
+				fontSize='14px'
+				fontWeight='700'
+				color={ colors.white.default }
+				// text={ welcomeText } Migrate
+				text='Welcome'
+			/>
+		);
+	};
+
 	return (
 		<div
-			className='hidden sm:flex items-center h-[40px] animate-slideUpToDown transition-all duration-300'
+			className='hidden lg:flex items-center h-10 animate-slideUpToDown transition-all duration-300'
 			style={ { background: colors.paradiso.default } }
 		>
-			<div className='flex justify-between w-full mx-[40px]'>
-				<div className='flex divide-x divide-solid gap-[20px]'>
+			<div className='flex justify-between w-full mx-10'>
+				<div className='flex divide-x divide-white/20 gap-5'>
 					<a href='/contact-us'>
 						<Text fontSize='14px' fontWeight='400' color='white'>
 							Contact Us
 						</Text>
 					</a>
-					<div className='flex gap-[30px]'>
-						<div className='flex items-center ml-[20px] cursor-pointer' onClick={ handleOpenSocmed('https://www.instagram.com/rspondokindah/') }>
-							<WhiteInstagram className='mr-1' />
+					<div className='flex gap-[30px] pl-5'>
+						<div className='flex items-center cursor-pointer' onClick={ handleOpenSocmed('https://www.instagram.com/rspondokindah/') }>
+							<WhiteInstagram className='mr-[5px]' />
 							<Text color='white' fontSize='12px' fontWeight='400'>
 								@rspondokindah
 							</Text>
 						</div>
 						<div className='flex items-center cursor-pointer' onClick={ handleOpenSocmed('https://twitter.com/rspondokindah') }>
-							<WhiteTwitter className='mr-1' />
+							<WhiteTwitter className='mr-[5px]' />
 							<Text color='white' fontSize='12px' fontWeight='400'>
 								@rspondokindah
 							</Text>
 						</div>
 						<div className='flex items-center cursor-pointer' onClick={ handleOpenSocmed('https://www.facebook.com/RumahSakitPondokIndah') }>
-							<WhiteFacebook className='mr-1' />
+							<WhiteFacebook className='mr-[5px]' />
 							<Text color='white' fontSize='12px' fontWeight='400'>
 								@rspondokindah
 							</Text>
 						</div>
 					</div>
 				</div>
-				<div className='flex items-center divide-x divide-solid'>
-					<LanguageSelector />
+				<div className='flex items-center divide-x divide-white/20 gap-5'>
+					{ renderWelcomeText() }
+					<div className='flex items-center pl-5'>
+						<LanguageSelector />
+					</div>
 				</div>
 			</div>
 		</div>

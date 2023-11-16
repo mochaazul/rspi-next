@@ -7,7 +7,7 @@ import {
 	Tabs,
 	Layout,
 	Spinner
-} from '@/components';
+} from '@/components/ui';
 import { colors, icons, sosmedLink } from '@/constant';
 import { navigation } from '@/helpers';
 import { getEventsByID } from '@/stores/EventClasses';
@@ -60,22 +60,22 @@ const DetailEventClassesPromo = () => {
 										text='Share now'
 									/>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window.location.href) }>
-										<Image src={icons.FacebookIcon} width={16} height={16} />
+										<icons.FacebookIcon width='16px' height='16px'/>
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window.location.href) }>
-										<Image src={icons.TwitterIcon} width={16} height={16} />
+										<icons.TwitterIcon width='16px' height='16px'/>
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window.location.href) }>
-										<Image src={icons.LinkedIn} width={16} height={16} />
+										<icons.LinkedIn width='16px' height='16px'/>
 									</div>
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
-										<Image src={icons.Link} width={16} height={16} />
+										<icons.Link width='16px' height='16px'/>
 									</div>
 								</div>
 							</div>
 							<div className='content-wrapper mt-[20px] mb-[100px]'>
 								<div className='mt-[30px] w-full flex gap-8'>
-									<img src={ selectedEvent?.img_url_detail } className='mx-auto object-cover max-w-[450px] max-h-[624px]' />
+									<Image src={ selectedEvent?.img_url_detail } className='mx-auto object-cover max-w-[450px] max-h-[624px]' />
 									<div>
 										<div
 											className='innerHTML'

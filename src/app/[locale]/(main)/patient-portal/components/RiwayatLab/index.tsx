@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { isEmpty } from 'lodash';
 
-import { Button, Spinner, Text } from '@/components';
+import { Button, Spinner, Text } from '@/components/ui';
 import { baseUrl } from '@/config';
 import { Languages, colors, icons } from '@/constant';
 import { useTypedSelector } from '@/hooks';
@@ -44,7 +44,7 @@ const RiwayatLab = () => {
 	);
 	if (isEmpty(labResults)) {
 		return (<EmptyResultContainer>
-			<Image src={ icons.NoLabResult } alt="" />
+			<icons.NoLabResult />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'

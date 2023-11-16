@@ -1,14 +1,14 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 
 import { colors, Images, Languages } from '@/constant';
-import { Accordion, Modal, Text } from '@/components';
+import { Accordion, Modal, Text } from '@/components/ui';
 
-import JadwalKunjungan from './components/JadwalKunjungan';
-import RiwayatKunjungan from './components/RiwayatKunjungan';
-import RiwayatVaksin from './components/RiwayatVaksin';
-import RiwayatLab from './components/RiwayatLab';
+import JadwalKunjungan from './components/ui/JadwalKunjungan';
+import RiwayatKunjungan from './components/ui/RiwayatKunjungan';
+import RiwayatVaksin from './components/ui/RiwayatVaksin';
+import RiwayatLab from './components/ui/RiwayatLab';
 import { VisitHistoryStyle } from './style';
-import PinModal from '@/components/PinModal';
+import PinModal from '@/components/ui/PinModal';
 import { getAppointmentList } from '@/stores/actions';
 import { useTypedSelector } from '@/hooks';
 import { PatientState } from '@/interface/PatientProfile';
@@ -17,6 +17,7 @@ import { FindDoctorState, UserState } from '@/interface';
 import dayjs from 'dayjs';
 import { getLastVisitHospital, getVisitHistories } from '@/stores/PatientProfile';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 
 const { riwayatLab, riwayatVaksin } = Languages.page.patientPortal;
 
@@ -192,7 +193,7 @@ const PatientPortal = () => {
 					<section id='user-info'
 						className='flex flex-row sm:w-1/2 md:w-1/4'
 					>
-						<img src={ userDetail.img_url || Images.ProfilePatient } />
+						<Image src={ userDetail.img_url || Images.ProfilePatient } />
 						<div className='ml-[15px]'>
 							<Text text={ userDetail.name } fontSize='16px' fontWeight='700' />
 							<Text text={ `${ parseBod(userDetail.birthdate) }` } className='md:mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />

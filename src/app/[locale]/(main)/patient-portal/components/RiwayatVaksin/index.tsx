@@ -3,7 +3,7 @@ import { isEmpty } from 'lodash';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 
-import { Spinner, Text } from '@/components';
+import { Spinner, Text } from '@/components/ui';
 import { Languages, colors, icons } from '@/constant';
 import { useTypedSelector } from '@/hooks';
 import { PatientState } from '@/interface/PatientProfile';
@@ -27,7 +27,7 @@ const RiwayatVaksin = () => {
 
 	if (isEmpty(vacineHistory)) {
 		return (<EmptyResultContainer>
-			<Image src={ icons.NoVaccineResult } alt="" />
+			<icons.NoVaccineResult />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'

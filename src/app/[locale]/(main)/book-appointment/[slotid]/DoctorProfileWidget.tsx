@@ -1,6 +1,6 @@
 import { colors } from '@/constant';
 import { DoctorProfileImage, DoctorProfileWidgetContainer } from './style';
-import { Text } from '@/components';
+import { Text } from '@/components/ui';
 import { I_MasterDoctor, TimeSlot } from '@/interface';
 import dayjs from 'dayjs';
 import { formatTimeslot } from '@/helpers/datetime';

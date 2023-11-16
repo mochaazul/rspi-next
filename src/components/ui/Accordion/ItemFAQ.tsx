@@ -3,7 +3,7 @@ import * as Icons from 'react-feather';
 import Link from 'next/link';
 
 import { colors } from '@/constant';
-import { Text } from '@/components';
+import { Text } from '@/components/ui';
 
 import { ItemType } from '.';
 import { ItemStyle } from './style';

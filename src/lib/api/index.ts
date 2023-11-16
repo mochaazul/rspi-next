@@ -1,5 +1,18 @@
 import {
-	BannerDetail, CenterOfExcellenceDetail, CenterOfExcellenceState, ForgotPasswordType, HospitalState, OTPType, Pagination, PayloadBanner, UpdatePasswordType, UserData
+	ArticleState,
+	BannerDetail,
+	CenterOfExcellenceDetail,
+	CenterOfExcellenceState,
+	ContactUsState,
+	FooterState,
+	ForgotPasswordType,
+	HospitalState,
+	NotificationResponse,
+	OTPType,
+	Pagination,
+	PayloadBanner,
+	UpdatePasswordType,
+	UserData
 } from '@/interface';
 import fetcher from './utils/fetcher';
 
@@ -37,4 +50,37 @@ export const getHospitals = () => {
 
 export const getCenterOfExcellence = () => {
 	return fetcher<CenterOfExcellenceState>('centerOfExcellences');
+};
+export const getNotificationResponse = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<NotificationResponse>('getNotification', param);
+};
+
+export const postMarkNotifAllRead = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher('readNotification', param);
+};
+
+// Footer
+export const getFooterSlug = () => {
+	return fetcher<FooterState>('getFooter');
+};
+// Contact
+export const postContactUs = (param: { param: null; query: null; body: ContactUsSubmitType; }) => {
+	return fetcher<ContactUsState>('contactUs', param);
+};
+
+// Article
+export const getArticle = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<ArticleState>('getNews', param);
+};
+
+export const getNewsSpecialtyByID = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<ArticleState['specialty']>('getNewsSpecialtyByID', param);
+};
+
+export const getArticleById = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<ArticleState['selectedArticle']>('getNews', param);
+};
+
+export const getRelatedNews = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<ArticleState['relatedNews']>('getRelatedNews', param);
 };

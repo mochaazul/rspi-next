@@ -18,7 +18,7 @@ import Layout from '@/components/Layout/Layout';
 import { PanelH1, PanelV1 } from '../style';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import DoctorFilter from './DoctorFilter';
-import { Accordion } from '@/components';
+import { Accordion } from '@/components/ui';
 import Form from '@/components/ui/Form';
 import { useScopedI18n } from '@/locales/client';
 import ResultHeader from './ResultHeader';

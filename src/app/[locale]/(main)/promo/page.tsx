@@ -10,8 +10,8 @@ import {
 	Layout,
 	Spinner,
 	EmptyData
-} from '@/components';
-import Card, { CardContent } from '@/components/Card';
+} from '@/components/ui';
+import Card, { CardContent } from '@/components/ui/Card';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { getEvents } from '@/stores/EventClasses';
 import { Languages, colors } from '@/constant';

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { isEmpty } from 'lodash';
 
-import { Modal, Text, Button, Spinner } from '@/components';
+import { Modal, Text, Button, Spinner } from '@/components/ui';
 import { Images, Languages, colors, icons } from '@/constant';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { GiveRatingDoctorPayload, I_VisitHistory, PatientProfile, PatientState } from '@/interface/PatientProfile';
@@ -145,7 +145,7 @@ const Feedback = ({ onChange, value }: { value: string[], onChange: (value: stri
 							color={ isChecked(opt) ? '#358888' : '#2A2536' }
 							text={ opt } />
 						{ isChecked(opt)
-							? <Image src={ icons.CheckActive } alt="" />
+							? <icons.CheckActive />
 							: <FeedbackPillsCheck /> }
 					</FeedbackPills>
 				))

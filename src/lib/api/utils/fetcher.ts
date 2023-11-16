@@ -26,7 +26,7 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 	};
 
 	let url = baseUrl + endpoint.path;
-
+	
 	if (options?.param) {
 		url += `/${ options.param }`;
 	}
@@ -37,7 +37,7 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 	});
 
 	if (options && options.body) fetchOpt['body'] = JSON.stringify(options.body);
-
+	
 	const res = await fetch(url, {
 		method: endpoint.method,
 		headers,

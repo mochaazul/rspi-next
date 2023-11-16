@@ -53,7 +53,11 @@ const endpointData = {
 	familyProfile: { path: '/patients/family', method: 'GET' },
 
 	deleteFamilyProfile: { path: '/patients/family', method: 'DELETE' },
-
+	
+	getNotification: { path: '/notification', method: 'GET' },
+	getNews: { path: '/news', method: 'GET' },
+	getNewsSpecialtyByID: { path: '/specialities/related-specialities', method: 'GET' },
+	getRelatedNews: { path: '/news/related-news', method: 'GET' },
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },
 	// doctors: '/doctors' -> replaced by masterdoctor,
