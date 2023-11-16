@@ -1,7 +1,6 @@
 import { Modal, Text, Button } from '@/components';
 import { Images, colors } from '@/constant';
-
-import { ModalStyle } from 'pages/PatientPortal/style';
+import { ModalStyle } from '../../style';
 
 interface PropsType {
 	visible?: boolean;
