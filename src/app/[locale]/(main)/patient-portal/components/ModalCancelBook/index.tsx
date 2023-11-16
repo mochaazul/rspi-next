@@ -5,9 +5,10 @@ import Image from 'next/image';
 
 import { Modal, Text, Button } from '@/components/ui';
 import { colors, icons } from '@/constant';
-import useSession from '@/session/client';
+import { useGetProfile } from '@/lib/api/client/profile';
 
 import { ModalStyle } from '../../style';
+
 interface PropsType {
 	visible?: boolean;
 	onClose?: () => void;
@@ -25,7 +26,7 @@ interface PropsType {
 }
 
 const ModalCancelBook = (props: PropsType) => {
-	const session = useSession();
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile();
 
 	return (
 		<Modal
@@ -58,7 +59,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ session.user?.name }
+								text={ getProfileResponse?.data?.name }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
@@ -72,7 +73,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ props.birthDate ? dayjs(session.user?.birthdate).format('DD MMMM YYYY') : '-' }
+								text={ props.birthDate ? dayjs(getProfileResponse?.data?.birthdate).format('DD MMMM YYYY') : '-' }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
@@ -86,7 +87,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ session.user?.phone ?? '-' }
+								text={ getProfileResponse?.data?.phone ?? '-' }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
@@ -95,7 +96,7 @@ const ModalCancelBook = (props: PropsType) => {
 					</div>
 
 					<div className='flex my-[30px]'>
-						<Image src={ props.doctorImg } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
+						<Image alt="" src={ props.doctorImg || '' } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
 						<div className='ml-[15px]'>
 							<Text text={ props.doctorName } fontSize='16px' fontWeight='700' />
 							<Text text={ props.doctorSpec } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
