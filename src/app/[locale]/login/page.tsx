@@ -1,16 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
 
 import { LoginType, ResponseStatus } from '@/interface';
-import { colors } from '@/constant';
-import Images from '@/constant/images';
+import { colors, Images } from '@/constant';
 
 import { login, requestVerifyEmail } from '@/lib/api/auth';
-import { LoginSchema } from '@/validator/login';
+import { LoginSchema } from '@/validator/auth';
 import { useScopedI18n } from '@/locales/client';
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
@@ -31,9 +30,9 @@ const LoginPage = () => {
 		stat_msg: ''
 	});
 	const [successMessage, setSuccessMessage] = useState<string>('');
-
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
+
 	const formik: FormikProps<LoginType> = useFormik<LoginType>({
 		validateOnBlur: enableValidation,
 		validateOnChange: enableValidation,
@@ -82,6 +81,7 @@ const LoginPage = () => {
 		const stat = searchParam.get('stat');
 		if (ref === 'reset' && stat === 'true') {
 			setNotifMode('success');
+			setSuccessMessage('Kata sandi berhasil diubah');
 			setNotifVisible(true);
 		}
 		if (ref === 'invalid-token') {
@@ -126,11 +126,9 @@ const LoginPage = () => {
 				? 'Keluar, karena sesi anda telah berakhir, Silahkan login kembali'
 				: ref === 'sso'
 					? 'Akun anda terdeteksi telah masuk pada device lain. Silahkan login kembali'
-					: ref === 'reset'
-						? 'Kata sandi berhasil diubah'
-						: errorUser.stat_msg
-							? errorUser.stat_msg
-							: successMessage;
+					: errorUser.stat_msg
+						? errorUser.stat_msg
+						: successMessage;
 
 		if (text === 'email is not verified') {
 			return (
@@ -158,6 +156,10 @@ const LoginPage = () => {
 			color={ notifMode === 'error' ? colors.red.default : colors.black.default }
 		/>;
 	};
+
+	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+		formik.setFieldValue(e.target.id, e.target.value);
+	}, []);
 
 	return (
 		<LoginPageStyle>
@@ -208,7 +210,7 @@ const LoginPage = () => {
 								name='email'
 								label={ languages('form.emailLabel') }
 								value={ formik.values.email }
-								onChange={ e => formik.setFieldValue('email', e.target.value) }
+								onChange={ onChangeInput }
 								errorMessage={ formik.errors.email }
 								isError={ !!formik.errors.email }
 							/>
@@ -224,7 +226,7 @@ const LoginPage = () => {
 								onIconClick={ togglePasswordShow }
 								value={ formik.values.password }
 								label={ languages('form.passwordLabel') }
-								onChange={ e => formik.setFieldValue(e.target.id, e.target.value) }
+								onChange={ onChangeInput }
 								errorMessage={ formik.errors.password }
 								isError={ !!formik.errors.password }
 							/>

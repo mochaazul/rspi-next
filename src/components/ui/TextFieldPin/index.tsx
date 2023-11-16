@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import withInputLabel from '@/components/ui/withInputLabel';
+import withInputLabel from '../withInputLabel';
 
 import { Input, InputPinType, TextFieldPinWrapper } from './style';
 

@@ -31,7 +31,8 @@ export default {
 		tokenValidation: {
 			failed: 'Validation Failed',
 			success: 'Validation Success',
-			loading: 'Please Wait'
+			loading: 'Please Wait',
+			backToLogin: 'Back to Login'
 		}
 	},
 	page: {
@@ -394,7 +395,17 @@ export default {
 		forgotPassword: {
 			heading: 'Forgot Password',
 			subHeading: 'Please enter your registered email, we will send a password reset link to your registered email',
-			resetBtnlabel: 'Send Request'
+			resetBtnlabel: 'Send Request',
+			successMessage: {
+				heading: 'Change Password Link Has Been Sent',
+				subHeading: 'Check your email again',
+				subHeadingTail: 'to continue the password change process',
+				buttonLabel: 'Okay'
+			},
+			form: {
+				emailLabel: 'Email',
+				emailPlaceholder: 'Email'
+			}
 		},
 		resetPassword: {
 			heading: 'Change Password',
@@ -426,6 +437,7 @@ export default {
 			heading: 'Create New PIN',
 			headingReset: 'Change PIN',
 			subHeading: 'Please create your 6-digit PIN',
+			subHeadingReset: 'Enter your 6-digit PIN',
 			notification: {
 				onSuccessMsg: 'Successfully created PIN',
 				onErrorMsg: 'Error occurred',
@@ -492,7 +504,7 @@ export default {
 				emailLabel: 'Email',
 				emailPlaceholder: 'Email',
 				passwordLabel: 'Password',
-				pasaswordPlaceholder: 'Enter Password',
+				passwordPlaceholder: 'Enter Password',
 				passwordConfirmationLabel: 'Confirm Password',
 				passwordConfirmationPlaceholder: 'Confirm Password',
 				passwordHint: 'Minimum password length is 8 characters and should contain at least 1 capital letter'
@@ -504,6 +516,12 @@ export default {
 			},
 			buttonPrivacy: 'Next',
 			buttonTnC: 'Send',
+			infoModal: {
+				heading: 'Email Verification Link Has Been Sent',
+				subHeading: 'Please check email',
+				subHeadingTail: 'to verify your email',
+				buttonLabel: 'Okay'
+			}
 		},
 		registerOnboard: {
 			heading: 'Welcome to RS. Pondok Indah',
@@ -518,11 +536,13 @@ export default {
 
 			},
 			errors: {
-				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukan sudah terdaftar',
-				mrNotFound: 'Nomor rekam medis yang Anda masukkan belum terdaftar',
-				phoneNotMatch: 'No yang Anda masukkan tidak sesuai dengan yang terdaftar di RS Pondok Indah Group',
-				dobNotMatch: 'Data yang Anda masukkan tidak sesuai dengan yang terdaftar di database RS Pondok Indah',
-				fieldIsEmpty: 'Harap masukan seluruh data'
+				mrHasBeenRegistered: 'The medical record number you entered is already registered',
+				mrNotFound: 'The medical record number you entered is not yet registered',
+				phoneNotMatch: 'The number you entered does not match the registered data at RS Pondok Indah Group',
+				phoneHasBeenRegistered: 'Your phone number has been registered. Please change with new phone number',
+				dobNotMatch: 'The data you entered does not match with the RS Pondok Indah database',
+				fieldIsEmpty: 'Please fill in all data',
+				sendOtpFailed: 'Send OTP failed'
 			},
 			submitBtnLabel: 'Save and Continue',
 			mrNotAvailableBtnLabel: 'Skip'
@@ -679,6 +699,15 @@ export default {
 		},
 		topNav: {
 			welcome: 'Welcome'
+		},
+		privacyPolicy: {
+			agreementStatement: {
+				preText: 'I',
+				boldText: 'agree',
+				tailText: 'to the terms and conditions.'
+			},
+			buttonPrivacy: 'Next',
+			buttonTnC: 'Send',
 		}
 	}
 } as const;

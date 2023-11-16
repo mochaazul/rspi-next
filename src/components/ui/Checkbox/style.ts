@@ -1,6 +1,7 @@
-import { colors } from '@/constant';
 import React from 'react';
 import styled from 'styled-components';
+
+import { colors } from '@/constant';
 
 interface CheckboxType {
 	isslider?: boolean;

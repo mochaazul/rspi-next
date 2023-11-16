@@ -3,14 +3,16 @@ import { ModalHeader, ProfileModalContainer, WarningContainer } from './style';
 import Text from '@/components/ui/Text';
 import { colors, icons } from '@/constant';
 import { FormRow } from '@/app/[locale]/(main)/book-appointment/style';
-import Form from '@/components/Form';
+import Form from '@/components/ui/Form';
 import { createFieldConfig } from '@/helpers';
-import Button from '@/components/Button';
+import Button from '@/components/ui/Button';
 // import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { addFamilyProfile, updateProfile } from '@/stores/actions';
-import { FamilyProfile, FamilyProfilePayload, UpdateProfileType, UserDataDetail, UserState } from '@/interface';
+import {
+	FamilyProfile, FamilyProfilePayload, UpdateProfileType, UserDataDetail, UserState
+} from '@/interface';
 // import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
-import NotificationPanel from '@/components/NotificationPanel';
+import NotificationPanel from '@/components/ui/NotificationPanel';
 import { useEffect, useState } from 'react';
 import { userDetail as userDetailAction } from '@/stores/actions';
 import Image from 'next/image';
@@ -91,7 +93,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 
 	const [error, setError] = useState<string>('');
 	const [disabledEmail, setDisabledEmail] = useState<boolean>(false);
-	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
 		try {
 			const { dob, email, gender, name, phone } = onSubmit(event);
 
@@ -214,7 +216,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					lineHeight='28px'
 					text={ `Tambah Profil ${ selfProfile ? 'Orang Lain' : 'Utama' }` } />
 				<div className='cursor-pointer' onClick={ closeHandler }>
-					<icons.Close alt="" />
+					<icons.Close alt='' />
 				</div>
 			</ModalHeader>
 			<NotificationPanel

@@ -1,10 +1,12 @@
-import { colors } from '@/constant';
-import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constant/globalstyle';
 import styled from 'styled-components';
 
+import { colors } from '@/constant';
+import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constant/globalstyle';
+
 interface StatusType {
-  $isOpen: boolean;
-  $topOffset?: number;
+	$isOpen: boolean;
+	$topOffset?: number;
+	disabled?: boolean;
 }
 
 export const SelectWrapper = styled.div<StatusType>`
@@ -14,9 +16,9 @@ export const SelectWrapper = styled.div<StatusType>`
   padding: 12px 36px 12px 0px;
   border-radius: 5px;
   outline: 1px solid ${ colors.grey.lighter };
-  min-height: 48px;
-  background-color: ${ colors.white.default };
-  cursor: pointer;
+  min-height: 43px;
+  background-color: ${ props => props.disabled ? colors.grey.lighterOpacity : colors.white.default };
+  cursor: ${ props => props.disabled ? 'default' : 'pointer' };
   
   .arrow-down {
     position: absolute;
@@ -31,7 +33,6 @@ export const SelectWrapper = styled.div<StatusType>`
   .placeholder {
     position: absolute;
     z-index: 99;
-    background-color: white;
     padding: 0 28px 0 18px;
     user-select: none;
     width: 100%;

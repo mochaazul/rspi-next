@@ -15,6 +15,7 @@ import Tabs from './Tabs';
 import Accordion from './Accordion';
 import Breadcrumbs from './Breadcrumbs';
 import PaginationNumber from './PaginationNumber';
+import ProgressBar from './ProgressBar';
 import MainNavLanguage from './MainNavLanguage';
 import CallForAmbulance from './CallForAmbulance';
 import Share from './Share';
@@ -43,6 +44,7 @@ export {
 	Accordion,
 	Breadcrumbs,
 	PaginationNumber,
+	ProgressBar,
 	MainNavLanguage,
 	CallForAmbulance,
 	Share,

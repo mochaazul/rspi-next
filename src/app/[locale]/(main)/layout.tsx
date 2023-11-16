@@ -1,10 +1,7 @@
 
-import { headers } from 'next/headers';
-
 import { appStage } from '@/config';
 
-import Header from '@/components/Layout/Header';
-import Footer from '@/components/Layout/Footer';
+import { Footer, Header } from '@/components';
 
 import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import CallForAmbulance from '@/components/ui/CallForAmbulance';

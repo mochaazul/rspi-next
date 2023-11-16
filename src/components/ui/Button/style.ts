@@ -1,16 +1,11 @@
-'use client';
-
+import { colors, fonts } from '@/constant';
 import React from 'react';
 import styled from 'styled-components';
 
-import { colors, fonts } from '@/constant';
-
-type ThemeType = 'primary' | 'secondary' | 'outline' | 'text';
-
 export type ButtonType = {
-	theme?: ThemeType;
+	theme?: 'primary' | 'secondary' | 'outline' | 'text';
 	themeColor?: string;
-	hoverTheme?: ThemeType;
+	hoverTheme?: 'primary' | 'secondary' | 'outline' | 'text';
 	label?: string;
 	type?: 'button' | 'submit' | 'reset';
 	width?: string;
@@ -19,10 +14,6 @@ export type ButtonType = {
 	className?: string;
 	children?: React.ReactNode;
 	onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
-};
-
-export type ButtonStyleType = ButtonType & {
-	$hoverTheme?: ThemeType;
 };
 
 const buttonTheme = ({
@@ -94,7 +85,7 @@ const buttonTheme = ({
 	return style;
 };
 
-const ButtonStyle = styled.button<ButtonStyleType>`
+const ButtonStyle = styled.button<ButtonType>`
 	transition: all .3s;
 	font-family: ${ fonts.lato }, Arial, sans-serif;
   background-color: white;
@@ -152,7 +143,7 @@ const ButtonStyle = styled.button<ButtonStyleType>`
 	${ props => buttonTheme(props) }
 
 	&:hover {
-		${ props => !props.disabled && buttonTheme({ ...props, theme: props.$hoverTheme ?? props.theme }) }
+		${ props => !props.disabled && buttonTheme({ ...props, theme: props.hoverTheme ?? props.theme }) }
 	}
 `;
 

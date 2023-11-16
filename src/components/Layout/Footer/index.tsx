@@ -8,10 +8,12 @@ import Link from 'next/link';
 import { appStage, config } from '@/config';
 import { Images, colors, Languages as lang } from '@/constant';
 
-import Button from '@/components/ui/Button';
-import TextField from '@/components/ui/TextField';
-import Text from '@/components/ui/Text';
-import Socmed from '@/components/ui/Socmed';
+import {
+	TextField,
+	Button,
+	Text,
+	Socmed
+} from '@/components/ui';
 
 import {
 	FooterDetail,
