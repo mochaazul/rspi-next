@@ -214,7 +214,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					lineHeight='28px'
 					text={ `Tambah Profil ${ selfProfile ? 'Orang Lain' : 'Utama' }` } />
 				<div className='cursor-pointer' onClick={ closeHandler }>
-					<Image src={ icons.Close } alt="" />
+					<icons.Close alt="" />
 				</div>
 			</ModalHeader>
 			<NotificationPanel

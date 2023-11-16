@@ -23,7 +23,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; hideTog
 		{
 			!props.hideToggler &&
 			<div className='grow-0'>
-				<Image src={ icons.ArrowDown } className={ `svg-green chevron ${ props.open ? 'up' : '' }` } alt="" />
+				<icons.ArrowDown className={ `svg-green chevron ${ props.open ? 'up' : '' }` } alt="" />
 			</div>
 		}
 	</div>

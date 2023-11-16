@@ -22,7 +22,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
 			</Text>
 		</div>
 		<div className='grow-0'>
-			<Image src={ icons.ArrowDown } className={ `svg-green chevron ${ props.open ? 'up' : '' }` } />
+			<icons.ArrowDown className={ `svg-green chevron ${ props.open ? 'up' : '' }` } />
 		</div>
 	</div>
 );

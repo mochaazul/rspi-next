@@ -125,7 +125,7 @@ const useContactUs = () => {
 				title,
 				content
 			},
-		}
+		};
 
 		const res = postContactUs(params);
 		return res;

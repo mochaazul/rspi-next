@@ -33,7 +33,7 @@ const PaginationNumber = (props: PaginationNumberType) => {
 	return (
 		<div className='flex flex-row sm:gap-10 gap-4'>
 			<ItemCont className={ `arrow ${ props.currentPage === 1 ? 'disabled' : '' }` } onClick={ handleOnItemClick(props.currentPage - 1) }>
-				<Image src={icons.ArrowLeft} alt="" className='svg-white' />
+				<icons.ArrowLeft alt="" className='svg-white' />
 			</ItemCont>
 			<div className='flex flex-row gap-4'>
 				{
@@ -112,7 +112,7 @@ const PaginationNumber = (props: PaginationNumberType) => {
 				}
 			</div>
 			<ItemCont className={ `arrow ${ props.currentPage === props.totalPage ? 'disabled' : '' }` } onClick={ handleOnItemClick(props.currentPage + 1) }>
-				<Image src={icons.ArrowRight} alt="" className='svg-white' />
+				<icons.ArrowRight alt="" className='svg-white' />
 			</ItemCont>
 		</div>
 	);

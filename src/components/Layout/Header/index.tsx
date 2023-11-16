@@ -183,10 +183,7 @@ export const Header = ({
 							<div id='our-hospital' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 								<Text text={ 'Our Hospitals' } className='cursor-pointer' color={ isHover === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<Image
-										src={ icons.ArrowDown }
-										alt=''
-										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
+									<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
@@ -203,11 +200,7 @@ export const Header = ({
 													<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
 												</div>
-												<Image
-													src={ icons.ArrowRight }
-													alt=''
-													className='ml-[27px] mr-auto'
-												/>
+												<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
 											</div>
 										)) }
 									</ul>
@@ -217,11 +210,7 @@ export const Header = ({
 							<div id='centre-of-excellence' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverCOE(true) } onMouseLeave={ toggleMouseHoverCOE(false) }>
 								<Text text={ 'Centre of Excellence' } className='cursor-pointer' color={ isHoverCOE === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<Image
-										src={ icons.ArrowDown }
-										alt=''
-										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
-									/>
+									<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -232,11 +221,7 @@ export const Header = ({
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
-													<Image
-														src={ icons.ArrowRight }
-														alt=''
-														className='ml-[27px] mr-auto'
-													/>
+													<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
 												</div>
 											</Link>
 										)) }
@@ -247,11 +232,7 @@ export const Header = ({
 							<div id='facilities' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverFacilities(true) } onMouseLeave={ toggleMouseHoverFacilities(false) }>
 								<Text text={ 'Facilities & Services' } className='cursor-pointer' color={ isHoverFacilities === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<Image
-										src={ icons.ArrowDown }
-										alt=''
-										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
-									/>
+									<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -262,11 +243,7 @@ export const Header = ({
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
-													<Image
-														src={ icons.ArrowRight }
-														alt=''
-														className='ml-[27px] mr-auto'
-													/>
+													<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
 												</div>
 											</Link>
 										)) }
@@ -277,11 +254,7 @@ export const Header = ({
 												<div className='ml-[10px] w-[310px]'>
 													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 												</div>
-												<Image
-													src={ icons.ArrowRight }
-													alt=''
-													className='ml-[27px] mr-auto'
-												/>
+												<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
 											</div>
 										</Link>
 									</ul>
@@ -327,7 +300,7 @@ export const Header = ({
 											<div className='flex text-white items-center'>
 												<div>
 													
-													<Image src={ '' } alt={ '' } /> :
+													<Image src={ '' } alt={ '' } />  :
 													<Image
 														src={ images.Profile }
 														alt=''
@@ -335,12 +308,7 @@ export const Header = ({
 													
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
-													<Image
-														src={ icons.ArrowDown }
-														alt=''
-														className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
-														onClick={ () => setDropdownHide(!dropdownHide) }
-													/>
+													<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
 												</div>
 											</div>
 										</> :

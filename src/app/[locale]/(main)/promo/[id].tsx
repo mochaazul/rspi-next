@@ -60,16 +60,16 @@ const DetailEventClassesPromo = () => {
 										text='Share now'
 									/>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window.location.href) }>
-										<Image src={icons.FacebookIcon} width={16} height={16} />
+										<icons.FacebookIcon width='16px' height='16px'/>
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window.location.href) }>
-										<Image src={icons.TwitterIcon} width={16} height={16} />
+										<icons.TwitterIcon width='16px' height='16px'/>
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window.location.href) }>
-										<Image src={icons.LinkedIn} width={16} height={16} />
+										<icons.LinkedIn width='16px' height='16px'/>
 									</div>
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
-										<Image src={icons.Link} width={16} height={16} />
+										<icons.Link width='16px' height='16px'/>
 									</div>
 								</div>
 							</div>
