@@ -39,7 +39,7 @@ const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 					datas?.map((data, index) => (
 						<div key={ index } className='md:flex-1 sm:px-5 sm:py-3 card-shadow'>
 							<div className='image'>
-								<Image src={ data.img_url } alt={ data.title } />
+								<img src={ data.img_url } alt={ data.title } />
 							</div>
 							<div>
 								<Text

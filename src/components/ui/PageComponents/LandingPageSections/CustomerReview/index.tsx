@@ -78,7 +78,7 @@ const CustomerReview = () => {
 	return (
 		<CustomerReviewStyle>
 			<div className='opacity-10 top-0 left-5 sm:left-[5%] absolute'>
-				<Image src={ images.CustomerQuoteImg } alt='Quote' />
+				<img src={ images.CustomerQuoteImg } alt='Quote' />
 			</div>
 			<div className='sm:mx-32 mx-3 flex flex-row space-between items-center max-sm:px-5'>
 				<Text
