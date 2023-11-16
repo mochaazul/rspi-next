@@ -28,7 +28,7 @@ import icons from '@/constant/icons';
 
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
-import MainNavLanguage from '@/components/ui/MainNavLanguage';
+import MainNavLanguage from '@/components/MainNavLanguage';
 import Modal from '@/components/Modal';
 import useSession from '@/session/client';
 import { cookiesHelper } from '@/helpers';

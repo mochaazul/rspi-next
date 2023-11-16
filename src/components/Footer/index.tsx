@@ -115,9 +115,7 @@ const FooterLayout = () => {
 				<div className='follow-section flex flex-col max-sm:flex-row-reverse gap-4 sm:gap-8'>
 					<div className='follow-icon-section'>
 						{ renderCategoryTitle(language.followUsLabel) }
-						<div>
-							<Socmed />
-						</div>
+						<Socmed />
 					</div>
 					<div>
 						{ renderCategoryTitle(language.getRSPIMobileLabel) }
