@@ -14,7 +14,7 @@ import Spinner from '@/components/ui/Spinner';
 import useSession from '@/session/client';
 import { useScopedI18n } from '@/locales/client';
 import { RegisterOnboardSchema } from '@/validator/auth';
-import { checkPhonePatient, registerOnboard } from '@/lib/api/auth';
+import { useCheckPhonePatient, useRegisterOnboard } from '@/lib/api/client/auth';
 
 import { RegisterOnboardStyle, Box } from './style';
 
@@ -35,6 +35,8 @@ const RegisterOnboard = () => {
 	const navigate = useRouter();
 	const session = useSession();
 	const languages = useScopedI18n('page.registerOnboard');
+	const { trigger: checkPhonePatient } = useCheckPhonePatient();
+	const { trigger: registerOnboard } = useRegisterOnboard();
 
 	const [loadingUser, setLoadingUser] = useState<boolean>(false);
 	const [errorUser, setErrorUser] = useState<ResponseStatus>({
@@ -43,6 +45,17 @@ const RegisterOnboard = () => {
 	});
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [isDuplicatePhoneNumber, setIsDuplicatePhoneNumber] = useState<boolean>(false);
+
+	const onCheckPhonePatient = async (phone: string) => {
+		try {
+			const responseCheckPhone = await checkPhonePatient({ phone: regexPhone(phone) });
+
+			return responseCheckPhone;
+		} catch (error: any) {
+			setErrorUser({ stat_msg: error?.message ?? '' });
+			setLoadingUser(false);
+		}
+	};
 
 	const formikRegister: FormikProps<RegisterOnboardType> = useFormik<RegisterOnboardType>({
 		validateOnBlur: enableValidation,
@@ -58,26 +71,12 @@ const RegisterOnboard = () => {
 			try {
 				setLoadingUser(true);
 
-				const responseCheckPhone = await checkPhonePatient({ phone: regexPhone(formRegister.phone) });
-
-				if (responseCheckPhone?.stat_code !== 'APP:SUCCESS') {
-					return setErrorUser({
-						stat_code: responseCheckPhone?.stat_code,
-						stat_msg: responseCheckPhone?.stat_msg
-					});
-				}
+				const responseCheckPhone = await onCheckPhonePatient(formRegister.phone);
 
 				if (!responseCheckPhone?.data) {
 					setIsDuplicatePhoneNumber(false);
 
-					const responseOnboard = await registerOnboard(formRegister);
-
-					if (responseOnboard?.stat_code !== 'APP:SUCCESS') {
-						return setErrorUser({
-							stat_code: responseOnboard?.stat_code,
-							stat_msg: responseOnboard?.stat_msg
-						});
-					}
+					await registerOnboard(formRegister);
 
 					const {
 						medical_record,
@@ -93,8 +92,8 @@ const RegisterOnboard = () => {
 						stat_msg: 'your phone number has been registered. please change with new phone number'
 					});
 				}
-			} catch (error) {
-				setLoadingUser(false);
+			} catch (error: any) {
+				setErrorUser({ stat_msg: error?.message ?? '' });
 			} finally {
 				setLoadingUser(false);
 			}

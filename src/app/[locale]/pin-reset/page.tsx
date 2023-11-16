@@ -11,7 +11,7 @@ import NotificationPanel from '@/components/ui/NotificationPanel';
 import Text from '@/components/ui/Text';
 import { PinType, ResponseStatus } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
-import { updatePin } from '@/lib/api/auth';
+import { useUpdatePin } from '@/lib/api/client/auth';
 import { PinSchema } from '@/validator/auth';
 import useSession from '@/session/client';
 
@@ -19,10 +19,10 @@ import PinPageStyle, { Box } from './style';
 
 const ResetPinPage = () => {
 	const navigate = useRouter();
+	const { trigger: updatePin, isMutating: loadingUser } = useUpdatePin();
 
 	const [notifVisible, setNotifVisible] = useState<boolean>(false);
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
-	const [loadingUser, setLoadingUser] = useState<boolean>(false);
 	const [errorUser, setErrorUser] = useState<ResponseStatus | null>(null);
 
 	const formikPin: FormikProps<PinType> = useFormik<PinType>({
@@ -34,22 +34,15 @@ const ResetPinPage = () => {
 			confirm_pin: ''
 		},
 		onSubmit: async (formPin: PinType) => {
-			setLoadingUser(true);
+			try {
+				await updatePin(formPin);
 
-			const response = await updatePin(formPin);
-
-			setNotifVisible(true);
-
-			if (response?.stat_code === 'APP:SUCCESS') {
 				navigate.replace('/');
-			} else {
-				setErrorUser({
-					stat_code: response?.stat_code,
-					stat_msg: response?.stat_msg
-				});
+			} catch (error: any) {
+				setErrorUser({ stat_msg: error?.message ?? '' });
+			} finally {
+				setNotifVisible(true);
 			}
-
-			setLoadingUser(false);
 		}
 	});
 

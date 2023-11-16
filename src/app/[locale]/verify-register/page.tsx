@@ -36,14 +36,14 @@ const EmailVerificationPage = () => {
 	useEffect(() => {
 		if (status === 'loading') {
 			const onEmailVerification = async () => {
-				const token: string = searchParams.get('token') ?? '';
-				const response = await verifyEmail(token);
+				try {
+					const token: string = searchParams.get('token') ?? '';
+					await verifyEmail(token);
 
-				if (response?.stat_code !== 'APP:SUCCESS') {
-					setStatus('failed');
-				} else {
 					setStatus('success');
 					setTimeout(handleNavigateSuccess, 2000);
+				} catch (error) {
+					setStatus('failed');
 				}
 			};
 

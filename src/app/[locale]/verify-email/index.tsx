@@ -1,20 +1,21 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import SpinVerification from '@/components/ui/SpinVerification';
-import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
-import { verifyEmailToken } from '@/stores/actions';
-
 import { cookiesHelper } from '@/helpers';
 import useSession from '@/session/client';
+import { useVerifyChangeEmailToken } from '@/lib/api/client/auth';
 
 const ResetEmailPage = () => {
 	const navigate = useRouter();
 	const searchParams = useSearchParams()!;
+
 	const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'failed'>('loading');
 	const [tokenVerified, setTokenVerified] = useState<boolean>(false);
 
-	const verifyEmailTokenDispatch = useAppAsyncDispatch(verifyEmailToken);
+	const { trigger: verifyChangeEmail } = useVerifyChangeEmailToken();
 
 	const session = useSession();
 
@@ -28,11 +29,10 @@ const ResetEmailPage = () => {
 
 			// verify token if present
 			setVerificationStatus('loading');
-			await verifyEmailTokenDispatch({
-				queryParam: {
-					token: searchParams.get('token')
-				}
+			await verifyChangeEmail({
+				token: searchParams.get('token') ?? ''
 			});
+
 			setVerificationStatus('success');
 
 			if (session?.isAuthenticated) {

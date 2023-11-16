@@ -11,34 +11,33 @@ import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
 import { useScopedI18n } from '@/locales/client';
-import { forgotPassword } from '@/lib/api/auth';
+import { useForgotPassword } from '@/lib/api/client/auth';
 
 import { ForgotPasswordStyle, Box } from './style';
 
 const ForgotPassword = () => {
-	const [loading, setLoading] = useState<boolean>(false);
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [errorMessageApi, setErrorMessageApi] = useState<string>('');
+	const [notifVisible, setNotifVisible] = useState<boolean>(false);
+
+	const { trigger: forgotPassword, isMutating: loading } = useForgotPassword();
+
 	const formikForgotPassword: FormikProps<ForgotPasswordType> = useFormik<ForgotPasswordType>({
 		validateOnBlur: enableValidation,
 		validateOnChange: enableValidation,
 		validationSchema: ForgotPasswordSchema,
 		initialValues: { email: '' },
 		onSubmit: async (formForgotPassword: ForgotPasswordType) => {
-			setLoading(true);
-
-			const response = await forgotPassword(formForgotPassword);
-
-			if (response?.stat_code !== 'APP:SUCCESS') {
-				setErrorMessageApi(response?.stat_msg ?? '');
+			try {
+				await forgotPassword(formForgotPassword);
+			} catch (error: any) {
+				setErrorMessageApi(error?.message ?? '');
+			} finally {
+				setEnableValidation(false);
+				setNotifVisible(true);
 			}
-
-			setNotifVisible(true);
-			setLoading(false);
-			setEnableValidation(false);
 		}
 	});
-	const [notifVisible, setNotifVisible] = useState<boolean>(false);
 
 	const languages = useScopedI18n('page.forgotPassword');
 

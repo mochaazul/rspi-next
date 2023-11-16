@@ -13,7 +13,7 @@ import NotificationPanel from '@/components/ui/NotificationPanel';
 import SpinVerification from '@/components/ui/SpinVerification';
 import { useScopedI18n } from '@/locales/client';
 import { ResetPasswordSchema } from '@/validator/auth';
-import { verifyResetToken, setNewPassword } from '@/lib/api/auth';
+import { useSetNewPassword, useVerifyResetToken } from '@/lib/api/client/auth';
 import { NewPasswordPayload, ResponseStatus } from '@/interface';
 
 import { ResetPasswordStyle } from './style';
@@ -21,10 +21,13 @@ import { ResetPasswordStyle } from './style';
 const ResetPassword = () => {
 	const navigate = useRouter();
 	const searchParams = useSearchParams()!;
+
+	const { trigger: setNewPassword, isMutating: loadingSubmit } = useSetNewPassword();
+	const { trigger: verifyResetToken } = useVerifyResetToken();
+
 	const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'failed'>('loading');
 	const [tokenVerified, setTokenVerified] = useState<boolean>(false);
 
-	const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [error, setError] = useState<ResponseStatus>({
 		stat_code: '',
@@ -43,21 +46,18 @@ const ResetPassword = () => {
 			confirm_password: ''
 		},
 		onSubmit: async (formResetPassword: NewPasswordPayload) => {
-			setLoadingSubmit(true);
-
-			const response = await setNewPassword(searchParams.get('token') ?? '', formResetPassword);
-
-			if (response?.stat_code !== 'APP:SUCCESS') {
-				setError({
-					stat_code: response?.stat_code,
-					stat_msg: response?.stat_msg
+			try {
+				await setNewPassword({
+					query: { token: searchParams.get('token') ?? '' },
+					body: formResetPassword
 				});
-			} else {
-				navigate.replace('/login?ref=reset&stat=true');
-			}
 
-			setLoadingSubmit(false);
-			setEnableValidation(false);
+				navigate.replace('/login?ref=reset&stat=true');
+			} catch (error: any) {
+				setError({ stat_msg: error?.message });
+			} finally {
+				setEnableValidation(false);
+			}
 		}
 	});
 
@@ -73,18 +73,14 @@ const ResetPassword = () => {
 
 			// verify token if present
 			setVerificationStatus('loading');
-			const response = await verifyResetToken(searchParams.get('token') ?? '');
+			await verifyResetToken({ token: searchParams.get('token') ?? '' });
 
-			if (response?.stat_code === 'APP:SUCCESS') {
-				setVerificationStatus('success');
+			setVerificationStatus('success');
 
-				// need timeout to wait for animation
-				setTimeout(() => {
-					setTokenVerified(true);
-				}, 1200);
-			} else {
-				setVerificationStatus('failed');
-			}
+			// need timeout to wait for animation
+			setTimeout(() => {
+				setTokenVerified(true);
+			}, 1200);
 		} catch (error) {
 			setVerificationStatus('failed');
 		}
@@ -136,7 +132,7 @@ const ResetPassword = () => {
 								</Text>
 							</div>
 							{
-								error.stat_code &&
+								error?.stat_msg &&
 								<div className='w-full mb-[16px]'>
 									<NotificationPanel
 										mode={ 'error' }

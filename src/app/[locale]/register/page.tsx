@@ -79,50 +79,24 @@ const RegisterPage = () => {
 	};
 
 	const onClickRegister = async () => {
-		setLoadingUser(true);
+		try {
+			setLoadingUser(true);
 
-		const response = await register(formRegister);
+			const response = await register(formRegister);
 
-		if (response?.stat_code === 'APP:SUCCESS') {
 			setInfoBoxVisible(true);
 			setUserData(response?.data);
-		} else {
-			setErrorMessage(response?.stat_msg ?? '');
+		} catch (error: any) {
+			setErrorMessage(error?.message ?? '');
+		} finally {
+			setNotifVisible(true);
+			setLoadingUser(false);
 		}
-
-		setNotifVisible(true);
-		setLoadingUser(false);
 	};
 
 	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		formikRegister.setFieldValue(e.target.id, e.target.value);
 	}, []);
-
-	const tncContent = () => {
-		return (<div className='w-content max-h-[300px] overflow-y-auto px-[10px]'>
-			<Text
-				text={ 'Lorem ipsum dolor sit amet consectetur. Aenean nisl sollicitudin volutpat tellus facilisis dictum laoreet. Sit pellentesque eu facilisis accumsan cursus diam. Nisi velit lectus natoque lorem duis etiam. Iaculis mi eu ullamcorper dui et eleifend faucibus bibendum id. Lorem velit ornare gravida sit sem quis mattis consectetur in. Molestie in semper vulputate eu quisque nullam dapibus sed eget. Ac volutpat suscipit consectetur quis. Sit vitae mi est tellus enim et elementum lobortis.' }
-				color='#2A2536'
-				fontSize='16px'
-				fontWeight='400'
-				className='pb-6'
-			/>
-			<Text
-				text={ 'Lorem ipsum dolor sit amet consectetur. Aenean nisl sollicitudin volutpat tellus facilisis dictum laoreet. Sit pellentesque eu facilisis accumsan cursus diam. Nisi velit lectus natoque lorem duis etiam. Iaculis mi eu ullamcorper dui et eleifend faucibus bibendum id. Lorem velit ornare gravida sit sem quis mattis consectetur in. Molestie in semper vulputate eu quisque nullam dapibus sed eget. Ac volutpat suscipit consectetur quis. Sit vitae mi est tellus enim et elementum lobortis.' }
-				color='#2A2536'
-				fontSize='16px'
-				fontWeight='400'
-				className='pb-6'
-			/>
-			<Text
-				text={ 'Lorem ipsum dolor sit amet consectetur. Aenean nisl sollicitudin volutpat tellus facilisis dictum laoreet. Sit pellentesque eu facilisis accumsan cursus diam. Nisi velit lectus natoque lorem duis etiam. Iaculis mi eu ullamcorper dui et eleifend faucibus bibendum id. Lorem velit ornare gravida sit sem quis mattis consectetur in. Molestie in semper vulputate eu quisque nullam dapibus sed eget. Ac volutpat suscipit consectetur quis. Sit vitae mi est tellus enim et elementum lobortis.' }
-				color='#2A2536'
-				fontSize='16px'
-				fontWeight='400'
-				className='pb-6'
-			/>
-		</div>);
-	};
 
 	return (
 		<RegisterPageStyle>

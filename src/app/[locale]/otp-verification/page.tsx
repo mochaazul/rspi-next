@@ -10,10 +10,11 @@ import { OTPType } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
 import { OTPSchema } from '@/validator/auth';
 import useSession from '@/session/client';
-import { createOTP, registerOnboard } from '@/lib/api/auth';
+import { useCreateOTP, useRegisterOnboard } from '@/lib/api/client/auth';
 import Button from '@/components/ui/Button';
 import Form from '@/components/ui/Form';
 import Text from '@/components/ui/Text';
+import NotificationPanel from '@/components/ui/NotificationPanel';
 
 import OTPPageStyle, { Box, WarningNote } from './style';
 
@@ -89,9 +90,13 @@ const OTPPage = () => {
 	const navigate = useRouter();
 	const searchParams = useSearchParams()!;
 
+	const { trigger: createOTP } = useCreateOTP();
+	const { trigger: registerOnboard } = useRegisterOnboard();
+
 	const [count, setCount] = useState(60);
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
+	const [errorMessageApi, setErrorMessageApi] = useState<string>('');
 
 	const languages = useScopedI18n('page.otpVerification');
 	const session = useSession();
@@ -102,32 +107,35 @@ const OTPPage = () => {
 		validationSchema: OTPSchema,
 		initialValues: { otp: '' },
 		onSubmit: async (formOtp: OTPType) => {
-			setLoadingSubmit(true);
+			try {
+				setLoadingSubmit(true);
 
-			const response = await createOTP(formOtp);
+				await createOTP(formOtp);
 
-			if (response?.stat_code === 'APP:SUCCESS') {
 				if (session?.user?.pin_status) {
 					navigate.replace('/');
 				} else {
 					navigate.replace('/pin-create');
 				}
+			} catch (error: any) {
+				setErrorMessageApi(error?.message ?? '');
+			} finally {
+				setLoadingSubmit(false);
+				setEnableValidation(false);
 			}
-
-			setLoadingSubmit(false);
 		},
 	});
-
 
 	const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setEnableValidation(true);
+		setErrorMessageApi('');
 		formikOtp.handleSubmit();
 	};
 
 	const resendOtpHandler = async () => {
 		setCount(60);
-		const response = await registerOnboard({
+		await registerOnboard({
 			birth_date: searchParams.get('bod') ?? '',
 			medical_record: searchParams.get('mr') ?? '',
 			name: '',
@@ -165,6 +173,18 @@ const OTPPage = () => {
 					resendOtpText={ languages('resendOtp') }
 					resendWarnText={ languages('resendWarn') }
 				/>
+
+				{
+					errorMessageApi &&
+					<div className='w-full mb-[32px]'>
+						<NotificationPanel
+							mode='error'
+							visible={ !!errorMessageApi && !loadingSubmit }
+							text={ errorMessageApi }
+							onClickRightIcon={ () => setErrorMessageApi('') }
+						/>
+					</div>
+				}
 
 				<Form onSubmit={ onSubmitHandler } autoComplete='off'>
 					<Form.FormGroup className='group-wrapper w-full'>
