@@ -39,7 +39,7 @@ const CallForAmbulance = ({
 			
 			` } onClick={ () => setVisible(true) }>
 				<div className='absolute w-[80%] h-[80%] mt-1 rounded-full hover:animate-ping z-20' style={ { backgroundColor: colors.red.accentOpacity90 } } />
-				<Image src={ images.AmbulanceIcon } alt="" className='z-10 relative' />
+				<img src={ images.AmbulanceIcon } alt="" className='z-10 relative' />
 			</CallForAmbulanceStyle>
 			<Modal
 				visible={ visible }
@@ -48,7 +48,7 @@ const CallForAmbulance = ({
 			>
 				<ModalRSTelephoneStyle className='relative flex flex-col'>
 					<div className='flex justify-center'>
-						<Image src={ images.AmbulanceIcon } alt="" className='z-10 relative' />
+						<img src={ images.AmbulanceIcon } alt="" className='z-10 relative' />
 					</div>
 					<Text
 						fontSize='24px'
