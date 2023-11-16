@@ -1,23 +1,23 @@
+'use client';
+
 import { useState, useMemo, useRef, useEffect } from 'react';
+import { useParams } from 'next/navigation';
+import Image from 'next/image';
+import dayjs from 'dayjs';
 
 import { colors, Images, Languages } from '@/constant';
 import { Accordion, Modal, Text } from '@/components/ui';
-
-import JadwalKunjungan from './components/ui/JadwalKunjungan';
-import RiwayatKunjungan from './components/ui/RiwayatKunjungan';
-import RiwayatVaksin from './components/ui/RiwayatVaksin';
-import RiwayatLab from './components/ui/RiwayatLab';
-import { VisitHistoryStyle } from './style';
 import PinModal from '@/components/ui/PinModal';
-import { getAppointmentList } from '@/stores/actions';
-import { useTypedSelector } from '@/hooks';
-import { PatientState } from '@/interface/PatientProfile';
-import { useAppDispatch } from '@/hooks';
-import { FindDoctorState, UserState } from '@/interface';
-import dayjs from 'dayjs';
-import { getLastVisitHospital, getVisitHistories } from '@/stores/PatientProfile';
-import { useParams } from 'next/navigation';
-import Image from 'next/image';
+import { useGetVisitHistory } from '@/lib/api/client/hospital';
+import { useGetProfile } from '@/lib/api/client/profile';
+import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
+
+import JadwalKunjungan from './components/JadwalKunjungan';
+import RiwayatKunjungan from './components/RiwayatKunjungan';
+import RiwayatVaksin from './components/RiwayatVaksin';
+import RiwayatLab from './components/RiwayatLab';
+
+import { VisitHistoryStyle } from './style';
 
 const { riwayatLab, riwayatVaksin } = Languages.page.patientPortal;
 
@@ -63,31 +63,25 @@ const tabMenuLabel: MenuType[] = [
 ];
 
 const PatientPortal = () => {
-	const params = useParams();
-
-	useEffect(() => {
-		if (params.id) {
-			setHeaderOpened(true);
-			setActiveTabIndex(parseInt(params.id));
-		}
-	}, [params]);
-
 	const [activeTabIndex, setActiveTabIndex] = useState(1);
 	const [headerOpened, setHeaderOpened] = useState<boolean>(false);
 	const [shouldEnterPin, setShouldEnterPin] = useState<boolean>(false);
 	const [pinModalVisible, setPinModalVisible] = useState<boolean>(false);
 
-	const { lastVisitedHospital } = useTypedSelector<PatientState>('patient');
-	const { userDetail } = useTypedSelector<UserState>('user');
-
-	const getAppointment = useAppDispatch(getAppointmentList);
-	const getLastVisitedHospital = useAppDispatch(getLastVisitHospital);
-
+	const params = useParams();
 	const tabsRef = useRef<any>([]);
 
+	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory();
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile();
+
+	const lastVisitedHospital = getLastVisitedHospitalHelper(visitHistoryResponse?.data || []);
+
 	useEffect(() => {
-		getLastVisitedHospital();
-	}, []);
+		if (params.id) {
+			setHeaderOpened(true);
+			setActiveTabIndex(parseInt(params.id as string));
+		}
+	}, [params]);
 
 	const renderContent = useMemo(() => {
 		switch (activeTabIndex) {
@@ -178,9 +172,9 @@ const PatientPortal = () => {
 		const years = dayjs().diff(dateParsed, 'years');
 		const month = dayjs().diff(dateParsed, 'months');
 		if (years < 0 && month > 0) {
-			return `${ month } Month${ month > 1 && 's' }, ${ userDetail.gender }`;
+			return `${ month } Month${ month > 1 && 's' }, ${ getProfileResponse?.data.gender }`;
 		}
-		return `${ years } Yrs, ${ userDetail.gender }`;
+		return `${ years } Yrs, ${ getProfileResponse?.data.gender }`;
 	};
 
 	return (
@@ -193,15 +187,15 @@ const PatientPortal = () => {
 					<section id='user-info'
 						className='flex flex-row sm:w-1/2 md:w-1/4'
 					>
-						<Image src={ userDetail.img_url || Images.ProfilePatient } />
+						<Image alt="" src={ getProfileResponse?.data.img_url || Images.ProfilePatient } />
 						<div className='ml-[15px]'>
-							<Text text={ userDetail.name } fontSize='16px' fontWeight='700' />
-							<Text text={ `${ parseBod(userDetail.birthdate) }` } className='md:mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
+							<Text text={ getProfileResponse?.data.name } fontSize='16px' fontWeight='700' />
+							<Text text={ `${ parseBod(getProfileResponse?.data.birthdate) }` } className='md:mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
 						</div>
 					</section>
 					<section id='patient-ids' className='sm:w-1/2 md:w-1/4'>
 						<Text text={ 'Patient ID' } subClassName='max-sm:text-right' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						<Text text={ userDetail.patient_code || '-' } subClassName='max-sm:text-right' className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
+						<Text text={ getProfileResponse?.data.patient_code || '-' } subClassName='max-sm:text-right' className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
 					</section>
 					<hr className='my-[24px] md:hidden w-full' />
 					<div className='sm:w-1/2 md:w-1/4'>

@@ -1,4 +1,4 @@
-import { FamilyProfilePayload, UserDataDetail } from '@/interface';
+import { FamilyProfilePayload, UserDataDetail, PatientProfile } from '@/interface';
 
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
@@ -13,9 +13,9 @@ export const useGetFamilyProfile = (options?: ApiOptions) => {
 };
 
 export const useFamilyProfileMutation = (options?: ApiOptions) => {
-	return useSWRMutation('familyProfile', (key, { arg }: {arg: FamilyProfilePayload}) => fetcher<UserDataDetail[]>('createFamilyProfile', { ...options, body: arg }));
+	return useSWRMutation('familyProfile', (key, { arg }: { arg: FamilyProfilePayload; }) => fetcher<UserDataDetail[]>('createFamilyProfile', { ...options, body: arg }));
 };
 
-export const useDeleteFamilyProfileMutation = (options?:ApiOptions) => {
-	return useSWRMutation('familyProfile', (key, { arg }: {arg: {id: number}}) => fetcher<UserDataDetail[]>('deleteFamilyProfile', { ...options, param: `${arg.id}` }));
+export const useDeleteFamilyProfileMutation = (options?: ApiOptions) => {
+	return useSWRMutation('familyProfile', (key, { arg }: { arg: { id: number; }; }) => fetcher<UserDataDetail[]>('deleteFamilyProfile', { ...options, param: `${ arg.id }` }));
 };

@@ -7,15 +7,13 @@ import Image from 'next/image';
 import dayjs from 'dayjs';
 
 import {
-	Button, Form, Modal, NotificationPanel, Text
+	Text
 } from '@/components/ui';
-import { colors, Images, icons, Languages } from '@/constant';
+import { colors, icons, Languages } from '@/constant';
 import images from '@/constant/images';
 import PinModal from '@/components/ui/PinModal';
-import { cancelBooking, userDetail as userDetailAction } from '@/stores/actions';
-import { UserDataDetail } from '@/interface/user';
 import { I_VisitHistory } from '@/interface/PatientProfile';
-import useAppDispatch, { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import { usePostCancelBookingMutation } from '@/lib/api/client/appointments';
 
 import { CardPatientPortalStyle } from '../../style';
 import RecommendDoctorModal from '../ModalRecommendDoctor';
@@ -54,7 +52,8 @@ const CardAppointment = (props: PropsType) => {
 	const [modalRecommend, setModalRecommend] = useState(false);
 	const [showModalCancelBook, setShowModalCancelBook] = useState(false);
 	const [showPinModal, setShowPinModal] = useState(false);
-	const userDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
+
+	const { data: cancelBookingResponse, trigger: cancelBookingTrigger, error: cancelBookingError } = usePostCancelBookingMutation();
 
 	const { jadwalKunjungan, riwayatKunjungan } = Languages.page.patientPortal;
 
@@ -77,10 +76,8 @@ const CardAppointment = (props: PropsType) => {
 		);
 	};
 
-	const userCancelBooking = useAppDispatch(cancelBooking);
-
 	const userClickCancelBook = async (appointmentId: string) => {
-		await userCancelBooking({
+		await cancelBookingTrigger({
 			id: appointmentId
 		});
 		setShowPinModal(false);
@@ -210,7 +207,6 @@ const CardAppointment = (props: PropsType) => {
 				}
 				{ props.status !== 'Jadwal Selesai' &&
 					<div onClick={ async () => {
-						await userDetail();
 						setShowModalCancelBook(true);
 					} } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ jadwalKunjungan.label.cancelAppointment }` }</div>
 				}
@@ -223,7 +219,7 @@ const CardAppointment = (props: PropsType) => {
 				</div>
 			}
 			<div className='grid grid-cols-[auto_repeat(3,minmax(0,1fr))] mt-[24px] gap-[24px] cursor-pointer'>
-				<Image src={ props.doctorImgUrl } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
+				<Image alt="" src={ props.doctorImgUrl || '' } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
 				<div className='flex-1'>
 					<Text text={ props.doctorName || '-' } fontSize='16px' fontWeight='700' />
 					<Text text={ props.doctorSpeciality || '-' } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
