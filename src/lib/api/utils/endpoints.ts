@@ -20,12 +20,14 @@ const endpointData = {
 	readNotification: { path: '/notification/seen', method: 'POST' },
 	familyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
+	checkPatientPhone: { path: '/patients/check-patient-phone', method: 'POST' },
 
 	// PUT
 	updatePassword: { path: '/patients/update-password', method: 'PUT' },
 	updateProfile: { path: '/patients/update-profile', method: 'PUT' },
 	updatePin: { path: '/patients/update-pin', method: 'PUT' },
 	updateEmail: { path: '/patients/update-email', method: 'PUT' },
+	createPin: { path: '/patients/pin', method: 'PUT' },
 
 	// GET
 	banner: { path: '/banners', method: 'GET' },

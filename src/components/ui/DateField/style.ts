@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Datepicker from 'react-tailwindcss-datepicker';
-import { icons, colors } from '@/constant';
+
+import { colors, icons } from '@/constant';
 
 interface DateFieldType extends Omit<typeof Datepicker, 'value' | 'onChange'> {
   iconPosition?: 'left' | 'right';
@@ -25,27 +26,31 @@ export interface InputType extends DatepickerProps, DateFieldType {
 
 export interface StyledDateFieldType extends Omit<DateFieldType, 'iconPosition' | 'iconName'> {
   $iconPosition?: 'left' | 'right';
-  $iconName?: any;
+  $iconName?: keyof typeof icons;
 }
 
 export const DateFieldWrapper = styled.div<StyledDateFieldType>`
   display: flex;
   align-items: center;
   position: relative;
-  
-  border-radius: 5px;
-  outline: 1px solid ${ colors.grey.lighter };
+
+  .iconWrapper {
+    display: ${ props => !!props.$iconName ? 'block' : 'none' };
+    left: ${ props => (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '10px' };
+    right: ${ props => props.$iconPosition === 'right' && '10px' };
+    z-index: 1;
+  }
 
   .bottom-full{
     bottom: unset !important;
   }
-  &:focus-within{
-    outline: 1px solid ${ colors.green.toscaLight };
-  }
 
   input {
+    padding-left: ${ props => !!props.$iconName && (props.$iconPosition === 'left' || !(!!props.$iconPosition)) ? '43px !important' : '18px !important' };
+    padding-right: ${ props => !!props.$iconName && props.$iconPosition === 'right' ? '43px !important' : '18px !important' };
     padding-top: 12px !important;
     padding-bottom: 12px !important;
+    outline: 1px solid ${ colors.grey.lighter };
     font-family: var(--font-family) !important;
 
     + button {
@@ -55,11 +60,13 @@ export const DateFieldWrapper = styled.div<StyledDateFieldType>`
       z-index: 110 !important;
     }
     &:focus {
-      outline: none;
+      outline: 1px solid ${ colors.green.toscaLight };
     }
-
     &.focus {
       box-shadow: 0 !important;
+    }
+		&:disabled {
+      background-color: ${ colors.grey.lighterOpacity };
     }
   }
 `;
@@ -74,4 +81,6 @@ export const DatepickerStyle = styled(Datepicker)`
 `;
 
 export const IconWrapper = styled.div`
+  position: absolute;
+  margin-top: 2px;
 `;

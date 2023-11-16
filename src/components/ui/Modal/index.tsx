@@ -18,9 +18,9 @@ interface ModalProps {
 	onClose?: () => void;
 	padding?: string;
 	overflow?: string;
-	containerClassName? :string
+	containerClassName?: string;
 	bottomSheet?: boolean,
-	header?: JSX.Element
+	header?: JSX.Element;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -60,17 +60,17 @@ const Modal: React.FC<ModalProps> = ({
 		return (
 			<ModalStyle
 				width={ width }
-				noPadding={ noPadding }
-				bgColor={ bgColor }
+				$noPadding={ noPadding }
+				$bgColor={ bgColor }
 				borderRadius={ borderRadius }
 				backdropColor={ backdropColor }
-				padding={ padding }
+				$padding={ padding }
 				overflow={ overflow }
 			>
-				<div className={ `modal-wrapper ${bottomSheet && 'bottom-sheet'} ` }>
+				<div className={ `modal-wrapper ${ bottomSheet && 'bottom-sheet' } ` }>
 					<div className={ `modal-backdrop ${ visible ? 'backdrop-open-animation' : 'backdrop-close-animation' }` } onClick={ onClose } />
 
-					<div id='modal-content' className={ ` ${bottomSheet && 'bottom-sheet'} modal-content-container ${ visible ? 'open-animation' : 'close-animation' } ${containerClassName}` }>
+					<div id='modal-content' className={ ` ${ bottomSheet && 'bottom-sheet' } modal-content-container ${ visible ? 'open-animation' : 'close-animation' } ${ containerClassName }` }>
 						{
 							header && <div className='modal-header'>{ header }</div>
 						}

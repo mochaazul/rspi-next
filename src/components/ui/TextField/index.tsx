@@ -21,6 +21,7 @@ const TextField = ({ onIconClick, isNumber, mask, iconName, iconPosition, ...pro
 			$iconPosition={ iconPosition }
 			$iconName={ iconName }
 			featherIcon={ props.featherIcon }
+			$isNumber={ isNumber }
 			className='w-full'
 		>
 			{

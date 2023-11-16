@@ -7,7 +7,7 @@ import withInputLabel from '@/components/withInputLabel';
 import { IconWrapper, InputType, DateFieldWrapper } from './style';
 
 import 'moment/locale/id';
-import { getLanguage } from 'helpers/localStorage';
+// import { getLanguage } from 'helpers/localStorage'; // TODO: migrate
 
 /**
  * @desc Untuk sekarang baru mengakomodir pemilihan single date, untuk range belum bisa
@@ -35,7 +35,8 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 				inputClassName='rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[16px]'
 				asSingle={ true }
 				useRange={ false }
-				i18n={ getLanguage() === 'idn' ? 'id' : 'en' }
+				i18n='en' // TODO: migrate
+				// i18n={ getLanguage() === 'idn' ? 'id' : 'en' }
 				primaryColor='green'
 				displayFormat={ props.dateFormat }
 				value={ { startDate: new Date(props.value ?? ''), endDate: new Date(props.value ?? '') } }
