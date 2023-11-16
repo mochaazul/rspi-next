@@ -539,6 +539,7 @@ export default {
 				mrHasBeenRegistered: 'The medical record number you entered is already registered',
 				mrNotFound: 'The medical record number you entered is not yet registered',
 				phoneNotMatch: 'The number you entered does not match the registered data at RS Pondok Indah Group',
+				phoneHasBeenRegistered: 'Your phone number has been registered. Please change with new phone number',
 				dobNotMatch: 'The data you entered does not match with the RS Pondok Indah database',
 				fieldIsEmpty: 'Please fill in all data',
 				sendOtpFailed: 'Send OTP failed'
@@ -698,6 +699,15 @@ export default {
 		},
 		topNav: {
 			welcome: 'Welcome'
+		},
+		privacyPolicy: {
+			agreementStatement: {
+				preText: 'I',
+				boldText: 'agree',
+				tailText: 'to the terms and conditions.'
+			},
+			buttonPrivacy: 'Next',
+			buttonTnC: 'Send',
 		}
 	}
 } as const;

@@ -134,3 +134,7 @@ export type UserSessionData = {
 	token: string;
 	isAuthenticated: boolean;
 };
+
+export type CheckPhoneType = {
+	phone: string;
+};

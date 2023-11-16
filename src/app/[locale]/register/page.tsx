@@ -13,24 +13,18 @@ import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
 import NotificationPanel from '@/components/ui/NotificationPanel';
-import Modal from '@/components/ui/Modal';
-import Checkbox from '@/components/ui/Checkbox';
+import PrivacyPolicyModal from '@/components/ui/PrivacyPolicyModal';
 import { useScopedI18n } from '@/locales/client';
 import { RegisterSchema } from '@/validator/auth';
 import { register } from '@/lib/api/auth';
 
 import RegisterPageStyle from './style';
-import { TnCModal } from '../(main)/dashboard/style';
 
 const RegisterPage = () => {
 	const navigate = useRouter();
 
 	const [infoBoxVisible, setInfoBoxVisible] = useState<boolean>(false);
 	const [notifVisible, setNotifVisible] = useState<boolean>(false);
-	const [checkedTnc, setCheckedTnc] = useState<boolean>(false);
-	const [checkedPrivacy, setCheckedPrivacy] = useState<boolean>(false);
-	const [tncActive, setTncActive] = useState<boolean>(false);
-	const [privacyActive, setPrivacyActive] = useState<boolean>(true);
 	const [showModalPrivacyTnc, setShowModalPrivacyTnc] = useState<boolean>(false);
 	const [formRegister, setFormRegister] = useState<RegisterType>({
 		email: '',
@@ -45,6 +39,7 @@ const RegisterPage = () => {
 	const [userData, setUserData] = useState<UserData | null>(null);
 	const [errorMessage, setErrorMessage] = useState<string>('');
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
+	const [loadingOnBoarding, setLoadingOnBoarding] = useState<boolean>(false);
 
 	const formikRegister: FormikProps<RegisterType> = useFormik<RegisterType>({
 		validateOnBlur: enableValidation,
@@ -81,10 +76,6 @@ const RegisterPage = () => {
 
 	const resetStateModal = () => {
 		setShowModalPrivacyTnc(false);
-		setCheckedPrivacy(false);
-		setCheckedTnc(false);
-		setPrivacyActive(true);
-		setTncActive(false);
 	};
 
 	const onClickRegister = async () => {
@@ -254,85 +245,17 @@ const RegisterPage = () => {
 				/>
 			) }
 			{ showModalPrivacyTnc && (
-				<Modal visible={ showModalPrivacyTnc } padding='0px'>
-					<TnCModal>
-						{/* tab title */ }
-						<div className='flex flex-row items-center gap-x-2 p-[10px]'>
-							<div className='flex flex-row items-center gap-x-2 cursor-pointer'
-								onClick={ () => { setTncActive(false); setPrivacyActive(true); } }>
-								<div className={ `w-[32px] h-[32px] rounded-full flex justify-center items-center ${ privacyActive ? 'bg-[#2A2536]' : 'bg-[#D4D2D8]' }` }>
-									<Text
-										text='1'
-										color='white'
-										fontWeight='900'
-										fontSize='20px'
-									/>
-								</div>
-								<Text
-									text={ 'Privacy Policy' }
-									fontWeight='900'
-									fontSize='20px'
-									color={ privacyActive ? 'black' : '#6A6D81' }
-								/>
-							</div>
-							<div className='divide-dashed w-max'>
-								-- -- -- -- -- --
-							</div>
-							<div className='flex flex-row items-center gap-x-2 cursor-pointer' onClick={ () => { setTncActive(true); setPrivacyActive(false); } }>
-								<div className={ `w-[32px] h-[32px] rounded-full flex justify-center items-center ${ tncActive ? 'bg-[#2A2536]' : 'bg-[#D4D2D8]' }` }>
-									<Text
-										text='2'
-										color='white'
-										fontWeight='900'
-										fontSize='20px'
-									/>
-								</div>
-								<Text
-									text={ 'Terms and Conditions' }
-									fontWeight='900'
-									fontSize='20px'
-									color={ tncActive ? 'black' : '#6A6D81' }
-								/>
-							</div>
-						</div>
-
-						<Text
-							text='Updated 25 July 2019'
-							color='#6A6D81'
-							fontSize='14px'
-							fontWeight='400'
-							className='pt-4 pb-6 px-[10px]'
-						/>
-
-						{/* tab content */ }
-						{
-							tncContent()
-						}
-
-						{/* tab footer */ }
-						<div className='pt-8 pb-4 bg-[#FAFAFA]'>
-							<div className='flex flex-row items-center justify-between px-[10px]'>
-								<Checkbox checked={ tncActive ? checkedTnc : checkedPrivacy } label={ tncActive ? 'Saya menyetujui ketentuan Terms and Conditions.' : 'Saya menyetujui ketentuan Privacy.' } onChange={ evt => {
-									if (tncActive) {
-										setCheckedTnc(evt.target.checked);
-									} else {
-										setCheckedPrivacy(evt.target.checked);
-									}
-								} } />
-								<Button label={ tncActive ? languages('buttonTnC') : languages('buttonPrivacy') } disabled={ tncActive ? !checkedTnc : !checkedPrivacy } className='w-[200px]'
-									onClick={ async () => {
-										if (tncActive) {
-											resetStateModal();
-											onClickRegister();
-										} else {
-											setTncActive(true);
-										}
-									} }
-								/>
-							</div>
-						</div>
-					</TnCModal>
-				</Modal>
+				<PrivacyPolicyModal
+					loading={ loadingOnBoarding || loadingUser }
+					isOpen={ showModalPrivacyTnc }
+					onFinish={ async () => {
+						setLoadingOnBoarding(true);
+						await onClickRegister();
+						resetStateModal();
+						setLoadingOnBoarding(false);
+					} }
+					onClose={ () => setShowModalPrivacyTnc(false) }
+				/>
 			) }
 		</RegisterPageStyle>
 	);

@@ -1,7 +1,6 @@
 'use client';
 
 import { ChangeEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import {
 	Divider,
@@ -19,6 +18,7 @@ import Checkbox from '../Checkbox';
 import Button from '../Button';
 import Spinner from '../Spinner';
 import Modal from '../Modal';
+import { useScopedI18n } from '@/locales/client';
 
 type checkedValsType = {
 	pp: boolean,
@@ -38,7 +38,8 @@ const PrivacyPolicyModal = ({
 	onClose,
 	loading
 }: Props) => {
-	const navigate = useRouter();
+	const languages = useScopedI18n('page.privacyPolicy');
+
 	const [step, setStep] = useState<'pp' | 'toc'>('pp');
 	const [checkVals, setCheckVals] = useState<checkedValsType>({
 		pp: false,
@@ -53,7 +54,6 @@ const PrivacyPolicyModal = ({
 		if (step === 'pp') {
 			setStep('toc');
 		} else {
-			// navigate.replace('/otp-verification');
 			onFinish();
 		}
 	};
@@ -68,11 +68,11 @@ const PrivacyPolicyModal = ({
 							fontWeight='400'
 							lineHeight='20px'
 						>
-							Saya <strong>menyetujui</strong> ketentuan Privacy Policy.
+							{ languages('agreementStatement.preText') } <strong>{ languages('agreementStatement.boldText') }</strong> { languages('agreementStatement.tailText') }
 						</Text>
 					} />
-					<Button label='Lanjut' disabled={ !checkVals['pp'] } onClick={ onNext }>
-						{ loading ? <Spinner /> : 'Lanjut' }
+					<Button label={ languages('buttonPrivacy') } disabled={ !checkVals['pp'] } onClick={ onNext }>
+						{ loading ? <Spinner /> : languages('buttonPrivacy') }
 					</Button>
 				</>
 			);
@@ -85,11 +85,11 @@ const PrivacyPolicyModal = ({
 						fontWeight='400'
 						lineHeight='20px'
 					>
-						Saya <strong>menyetujui</strong> ketentuan Terms and Condition.
+						{ languages('agreementStatement.preText') } <strong>{ languages('agreementStatement.boldText') }</strong> { languages('agreementStatement.tailText') }
 					</Text>
 				} />
-				<Button label='Lanjut' disabled={ !checkVals['toc'] || loading } onClick={ onNext }>
-					{ loading ? <Spinner /> : 'Lanjut' }
+				<Button label={ languages('buttonTnC') } disabled={ !checkVals['toc'] || loading } onClick={ onNext }>
+					{ loading ? <Spinner /> : languages('buttonTnC') }
 				</Button>
 			</>
 		);

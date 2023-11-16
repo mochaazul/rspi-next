@@ -6,7 +6,6 @@ import { FormikProps, useFormik } from 'formik';
 
 import { Images, colors } from '@/constant';
 import { RegisterOnboardType, ResponseStatus } from '@/interface';
-import PrivacyPolicyModal from '@/components/ui/PrivacyPolicyModal';
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
@@ -15,9 +14,22 @@ import Spinner from '@/components/ui/Spinner';
 import useSession from '@/session/client';
 import { useScopedI18n } from '@/locales/client';
 import { RegisterOnboardSchema } from '@/validator/auth';
-import { registerOnboard } from '@/lib/api/auth';
+import { checkPhonePatient, registerOnboard } from '@/lib/api/auth';
 
 import { RegisterOnboardStyle, Box } from './style';
+
+const regexPhone = (phone: string) => {
+	let phoneNumber;
+	if (phone.trim().substring(0, 2) ==
+		'62') {
+		phoneNumber = phone;
+	} else {
+		phoneNumber = '62' +
+			phone
+				.replace(/^0/, '');
+	}
+	return phoneNumber;
+};
 
 const RegisterOnboard = () => {
 	const navigate = useRouter();
@@ -25,19 +37,12 @@ const RegisterOnboard = () => {
 	const languages = useScopedI18n('page.registerOnboard');
 
 	const [loadingUser, setLoadingUser] = useState<boolean>(false);
-	const [loadingOnBoarding, setLoadingOnBoarding] = useState<boolean>(false);
-	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const [errorUser, setErrorUser] = useState<ResponseStatus>({
 		stat_code: '',
 		stat_msg: ''
 	});
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
-	const [formRegister, setFormRegister] = useState<RegisterOnboardType>({
-		birth_date: '',
-		medical_record: '',
-		phone: '',
-		name: ''
-	});
+	const [isDuplicatePhoneNumber, setIsDuplicatePhoneNumber] = useState<boolean>(false);
 
 	const formikRegister: FormikProps<RegisterOnboardType> = useFormik<RegisterOnboardType>({
 		validateOnBlur: enableValidation,
@@ -49,9 +54,50 @@ const RegisterOnboard = () => {
 			phone: '',
 			name: ''
 		},
-		onSubmit: (formRegisterValues: RegisterOnboardType) => {
-			setFormRegister(formRegisterValues);
-			setModalVisible(true);
+		onSubmit: async (formRegister: RegisterOnboardType) => {
+			try {
+				setLoadingUser(true);
+
+				const responseCheckPhone = await checkPhonePatient({ phone: regexPhone(formRegister.phone) });
+
+				if (responseCheckPhone?.stat_code !== 'APP:SUCCESS') {
+					return setErrorUser({
+						stat_code: responseCheckPhone?.stat_code,
+						stat_msg: responseCheckPhone?.stat_msg
+					});
+				}
+
+				if (!responseCheckPhone?.data) {
+					setIsDuplicatePhoneNumber(false);
+
+					const responseOnboard = await registerOnboard(formRegister);
+
+					if (responseOnboard?.stat_code !== 'APP:SUCCESS') {
+						return setErrorUser({
+							stat_code: responseOnboard?.stat_code,
+							stat_msg: responseOnboard?.stat_msg
+						});
+					}
+
+					const {
+						medical_record,
+						phone,
+						birth_date,
+						name
+					} = formRegister;
+
+					navigate.push(`/otp-verification?mr=${ medical_record }&phone=${ phone }&bod=${ birth_date }&name=${ name }`);
+				} else {
+					setIsDuplicatePhoneNumber(true);
+					setErrorUser({
+						stat_msg: 'your phone number has been registered. please change with new phone number'
+					});
+				}
+			} catch (error) {
+				setLoadingUser(false);
+			} finally {
+				setLoadingUser(false);
+			}
 		}
 	});
 
@@ -77,7 +123,7 @@ const RegisterOnboard = () => {
 				mappedMsg = languages('errors.mrHasBeenRegistered');
 				break;
 			case 'your phone number has been registered. please change with new phone number':
-				mappedMsg = languages('errors.mrHasBeenRegistered');
+				mappedMsg = languages('errors.phoneHasBeenRegistered');
 				break;
 		}
 
@@ -86,7 +132,7 @@ const RegisterOnboard = () => {
 
 	const handleNotifError = (msg: string) => {
 		if (errorUser.stat_msg?.toLowerCase() === msg) {
-			const mappedMsg = getMappedErrorMessage(msg) || msg;
+			const mappedMsg = getMappedErrorMessage(msg) || errorUser?.stat_msg;
 
 			return (
 				<div className='w-full mb-[24px] mt-[8px]'>
@@ -106,39 +152,6 @@ const RegisterOnboard = () => {
 					</NotificationPanel>
 				</div>
 			);
-		}
-	};
-
-	const onSubmitHandler = async () => {
-		try {
-			setLoadingOnBoarding(true);
-
-			const {
-				medical_record,
-				phone,
-				birth_date,
-				name
-			} = formRegister;
-			const response = await registerOnboard({
-				medical_record,
-				phone,
-				birth_date,
-				name
-			});
-
-			if (response?.stat_code === 'APP:SUCCESS') {
-				navigate.push(`/otp-verification?mr=${ medical_record }&phone=${ phone }&bod=${ birth_date }&name=${ name }`);
-			} else {
-				setErrorUser({
-					stat_code: response?.stat_code,
-					stat_msg: response?.stat_msg
-				});
-				setModalVisible(false);
-			}
-		} catch (error) {
-			setModalVisible(false);
-		} finally {
-			setLoadingOnBoarding(false);
 		}
 	};
 
@@ -219,7 +232,7 @@ const RegisterOnboard = () => {
 						handleNotifError('phone number not match')
 					}
 					{
-						handleNotifError('your phone number has been registered. please change with new phone number')
+						isDuplicatePhoneNumber && handleNotifError('your phone number has been registered. please change with new phone number')
 					}
 					<div className='mb-8'>
 						<Form.DateField
@@ -285,10 +298,6 @@ const RegisterOnboard = () => {
 					</Button>
 				</Form>
 			</Box>
-			{
-				modalVisible &&
-				<PrivacyPolicyModal loading={ loadingOnBoarding } isOpen={ modalVisible } onFinish={ onSubmitHandler } onClose={ () => setModalVisible(false) } />
-			}
 		</RegisterOnboardStyle>
 	);
 };

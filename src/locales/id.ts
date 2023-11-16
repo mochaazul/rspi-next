@@ -539,6 +539,7 @@ export default {
 				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukan sudah terdaftar',
 				mrNotFound: 'Nomor rekam medis yang Anda masukkan belum terdaftar',
 				phoneNotMatch: 'No yang Anda masukkan tidak sesuai dengan yang terdaftar di RS Pondok Indah Group',
+				phoneHasBeenRegistered: 'No yang Anda masukkan telah terdaftar. Silakan ubah dengan no telepon baru',
 				dobNotMatch: 'Data yang Anda masukkan tidak sesuai dengan yang terdaftar di database RS Pondok Indah',
 				fieldIsEmpty: 'Harap masukan seluruh data',
 				sendOtpFailed: 'OTP gagal terkirim'
@@ -701,6 +702,15 @@ export default {
 		},
 		topNav: {
 			welcome: 'Selamat datang'
+		},
+		privacyPolicy: {
+			agreementStatement: {
+				preText: 'Saya',
+				boldText: 'menyetujui',
+				tailText: 'ketentuan Terms and Conditions'
+			},
+			buttonPrivacy: 'Lanjut',
+			buttonTnC: 'Kirim',
 		}
 	},
 } as const;

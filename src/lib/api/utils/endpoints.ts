@@ -20,6 +20,7 @@ const endpointData = {
 	readNotification: { path: '/notification/seen', method: 'POST' },
 	familyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
+	checkPatientPhone: { path: '/patients/check-patient-phone', method: 'POST' },
 
 	// PUT
 	updatePassword: { path: '/patients/update-password', method: 'PUT' },

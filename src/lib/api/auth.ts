@@ -9,7 +9,8 @@ import {
 	RegisterType,
 	PinType,
 	OTPType,
-	RegisterOnboardType
+	RegisterOnboardType,
+	CheckPhoneType
 } from '@/interface';
 import { cookiesHelper } from '@/helpers';
 
@@ -84,4 +85,8 @@ export const createOTP = (formOtp: OTPType) => {
 
 export const registerOnboard = (formRegisterOnboard: RegisterOnboardType) => {
 	return fetcher<any>('registerOnboard', { body: formRegisterOnboard });
+};
+
+export const checkPhonePatient = (formPhone: CheckPhoneType) => {
+	return fetcher<any>('checkPatientPhone', { body: formPhone });
 };
