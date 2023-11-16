@@ -24,7 +24,7 @@ const Socmed: React.FC<Props> = ({ withBackground, isDark }: any) => {
 					<icons.TwitterIcon />
 				</div>
 				<div onClick={ handleOpenSocmed('https://www.youtube.com/channel/UC4h7C4VVkb7B4Q_ogHxt7fw') } className={ isDark ? 'dark-content' : 'content' }>
-					<icons.YoutubeIcon />
+					<icons.YoutubeIcon className='w-5 h-5' />
 				</div>
 				<div onClick={ handleOpenSocmed('https://www.instagram.com/rspondokindah/') } className={ isDark ? 'dark-content' : 'content' }>
 					<icons.InstagramIcon />

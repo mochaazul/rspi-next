@@ -1,15 +1,15 @@
-import Modal from '@/components/Modal';
+import Modal from '@/components/ui/Modal';
 import { PinModalContainer } from './style';
-import Text from '@/components/Text';
+import Text from '@/components/ui/Text';
 import languages from '@/constant/languages';
-import Form from '@/components/Form';
-import Button from '@/components/Button';
+import Form from '@/components/ui/Form';
+import Button from '@/components/ui/Button';
 import { colors } from '@/constant';
 import { useAppDispatch } from '@/hooks';
 import { CheckPinType, PinType } from '@/interface';
 import { checkPin } from '@/stores/User';
 import { createFieldConfig, requiredRule } from '@/helpers';
-import NotificationPanel from '@/components/NotificationPanel';
+import NotificationPanel from '@/components/ui/NotificationPanel';
 import { useState } from 'react';
 import Spinner from '@/components/ui/Spinner';
 

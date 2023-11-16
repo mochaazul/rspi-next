@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
 const FooterStyled = styled.footer`
-  padding: 1em;
-  p {
-    padding: .4em 0;
-  }
+  
   .bold {
     font-weight: 600;
   }

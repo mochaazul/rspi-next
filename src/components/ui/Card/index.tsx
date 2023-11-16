@@ -15,6 +15,9 @@ import {
 	CardStyleType,
 	CardContentHTML
 } from './style';
+
+import { isMobile } from 'react-device-detect';
+
 import Image from 'next/image';
 import { Share } from '@/components/ui';
 import { icons } from '@/constant';
@@ -50,7 +53,7 @@ const Card = (props: PropsType) => {
 			<CardStyle { ...props.cardStyle }>
 				{
 					props.iconShare &&
-					<div>
+					<div className={ `${ isMobile ? 'hidden' : 'block' }` }>
 						<Share id={ props.id } />
 					</div>
 				}

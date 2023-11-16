@@ -15,7 +15,7 @@ import {
 	HospitalState,
 	NotificationResponse,
 } from '@/interface';
-
+import { PatientState } from '@/interface/PatientProfile';
 import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';

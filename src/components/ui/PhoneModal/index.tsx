@@ -1,7 +1,7 @@
-import Modal from '@/components/Modal';
+import Modal from '@/components/ui/Modal';
 import { PinModalContainer } from './style';
-import Text from '@/components/Text';
-import Button from '@/components/Button';
+import Text from '@/components/ui/Text';
+import Button from '@/components/ui/Button';
 import { HospitalDetail } from '@/interface';
 
 type Props = {
