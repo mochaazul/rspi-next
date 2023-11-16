@@ -46,6 +46,7 @@ export const DateFieldWrapper = styled.div<StyledDateFieldType>`
   }
 
   input {
+    padding-left: 18px;
     padding-left: ${ props => !!props.$iconName && (props.$iconPosition === 'left' || !(!!props.$iconPosition)) ? '43px !important' : '18px !important' };
     padding-right: ${ props => !!props.$iconName && props.$iconPosition === 'right' ? '43px !important' : '18px !important' };
     padding-top: 12px !important;

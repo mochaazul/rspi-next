@@ -20,7 +20,6 @@ const FindADoctorPageStyle = styled.div`
       padding: 0;
     }
   }
-
   .doctors-pane {
     flex: 1;
     border-left: 1px solid ${ colors.grey.light };

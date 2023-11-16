@@ -41,7 +41,7 @@ const LoginPage = () => {
 			email: '',
 			password: ''
 		},
-		onSubmit: async (formLogin: LoginType) => {
+		onSubmit: async(formLogin: LoginType) => {
 			setLoadingSubmit(true);
 
 			const response = await login(formLogin);
@@ -102,7 +102,7 @@ const LoginPage = () => {
 		setNotifVisible(false);
 	};
 
-	const handleResendEmailVerification = async () => {
+	const handleResendEmailVerification = async() => {
 		initErrorNotif();
 		const requestResponse = await requestVerifyEmail({ email: formik.values.email });
 
@@ -121,7 +121,7 @@ const LoginPage = () => {
 
 	const handleNotifError = () => {
 		const ref = searchParam.get('ref');
-		let text =
+		const text =
 			ref === 'invalid-token'
 				? 'Keluar, karena sesi anda telah berakhir, Silahkan login kembali'
 				: ref === 'sso'
@@ -170,13 +170,13 @@ const LoginPage = () => {
 					md:p-8
 					login min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
 					` }
-						onSubmit={ (e: React.SyntheticEvent) => {
-							e.preventDefault();
-							initErrorNotif();
-							setEnableValidation(true);
-							formik.handleSubmit();
-						} }
-						autoComplete='off'
+					onSubmit={ (e: React.SyntheticEvent) => {
+						e.preventDefault();
+						initErrorNotif();
+						setEnableValidation(true);
+						formik.handleSubmit();
+					} }
+					autoComplete='off'
 					>
 						<div className='w-full'>
 							<Link href='/' className='max-sm:hidden'>

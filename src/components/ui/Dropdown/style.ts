@@ -39,7 +39,7 @@ export const SelectWrapper = styled.div<StatusType>`
 `;
 
 export const SelectStyled = styled.select`
-  display: none;
+  display: none !important;
   width: 100%;
   font-family: var(--font-family);
   appearance: none;

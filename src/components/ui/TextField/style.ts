@@ -10,7 +10,7 @@ interface TextFieldType {
   iconPosition?: 'left' | 'right';
   iconName?: keyof typeof icons;
   featherIcon?: keyof typeof FeatherIcons;
-  iconColor?: string;
+  $iconColor?: string;
   isNumber?: boolean,
   mask?: string | (string | RegExp)[];
 }
@@ -37,19 +37,19 @@ export const TextFieldWrapper = styled.div<StyledTextFieldType>`
   ${ props => !props.$isNumber ? `
   outline: 1px solid ${ colors.grey.lighter };
   &:focus {
-    outline: 1px solid ${ colors.green.toscaLight }
-  }
-  `: '' }
-  
-  input {
-    padding-left: ${ props => (!!props.$iconName || !!props.featherIcon) && (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '43px' };
-    padding-right: ${ props => (!!props.$iconName || !!props.featherIcon) && props.$iconPosition === 'right' && '43px' };
+    outline: 1px solid ${ colors.green.toscaLight };
+  } ` : '' }
+
+  input{
+    padding: 12px 18px;
+    
+    // we only need to worry about the padding when the icon is on the left, since the padding on the left was offested by the icon wrapper
+    ${props => props.$iconName || props.featherIcon && props.$iconPosition === 'left'  && 'padding-left: 0px;'}
   }
 `;
 
 export const Input = styled.input<InputType>`
   width: 100%;
-  padding: 12px 18px;
   font-family: var(--font-family);
   ${ GlobalAllTransition5ms }
   &:focus {

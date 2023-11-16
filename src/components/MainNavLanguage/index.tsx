@@ -48,21 +48,30 @@ const MainNavLanguage = () => {
 							Contact Us
 						</Text>
 					</Link>
-					<div className='flex gap-[30px] pl-5'>
-						<div className='flex items-center cursor-pointer' onClick={ handleOpenSocmed('https://www.instagram.com/rspondokindah/') }>
-							<icons.WhiteInstagram className='mr-[5px]' />
+					<div className='flex gap-[30px]'>
+						<div className='flex items-center ml-[20px] cursor-pointer' onClick={ handleOpenSocmed('https://www.instagram.com/rspondokindah/') }>
+							<icons.WhiteInstagram
+								alt=''
+								className='mr-1'
+							/>
 							<Text color='white' fontSize='12px' fontWeight='400'>
 								@rspondokindah
 							</Text>
 						</div>
 						<div className='flex items-center cursor-pointer' onClick={ handleOpenSocmed('https://twitter.com/rspondokindah') }>
-							<icons.WhiteTwitter className='mr-[5px]' />
+							<icons.WhiteTwitter
+								alt=''
+								className='mr-1'
+							/>
 							<Text color='white' fontSize='12px' fontWeight='400'>
 								@rspondokindah
 							</Text>
 						</div>
 						<div className='flex items-center cursor-pointer' onClick={ handleOpenSocmed('https://www.facebook.com/RumahSakitPondokIndah') }>
-							<icons.WhiteFacebook className='mr-[5px]' />
+							<icons.WhiteFacebook
+								alt=''
+								className='mr-1'
+							/>
 							<Text color='white' fontSize='12px' fontWeight='400'>
 								@rspondokindah
 							</Text>

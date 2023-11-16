@@ -5,9 +5,11 @@ import Image from 'next/image';
 
 import { colors } from '@/constant';
 import images from '@/constant/images';
-import { Button, Modal, Text } from '@/components';
 
 import { CallForAmbulanceStyle, ModalRSTelephoneStyle } from './style';
+import Modal from '../ui/Modal';
+import Text from '../ui/Text';
+import Button from '../ui/Button';
 
 const CallForAmbulance = () => {
 
@@ -28,7 +30,7 @@ const CallForAmbulance = () => {
 			
 			` } onClick={ () => setVisible(true) }>
 				<div className='absolute w-[80%] h-[80%] mt-1 rounded-full hover:animate-ping z-20' style={ { backgroundColor: colors.red.accentOpacity90 } } />
-				<Image src={ images.AmbulanceIcon } className='z-10 relative' />
+				<images.AmbulanceIcon className='z-10 relative' />
 			</CallForAmbulanceStyle>
 			<Modal
 				visible={ visible }
@@ -37,7 +39,7 @@ const CallForAmbulance = () => {
 			>
 				<ModalRSTelephoneStyle className='relative flex flex-col'>
 					<div className='flex justify-center'>
-						<Image src={ images.AmbulanceIcon } className='z-10 relative' />
+						<images.AmbulanceIcon className='z-10 relative' />
 					</div>
 					<Text
 						fontSize='24px'

@@ -61,7 +61,7 @@ export const Header = ({
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const handleClick = async () => {
+	const handleClick = async() => {
 		// TODO: karena async, butuh loading state ketika logout. need enhancement
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
@@ -157,7 +157,7 @@ export const Header = ({
 	return (
 		<HeaderStyle>
 			<div className='w-full'>
-				<MainNavLanguage />
+				{ /* <MainNavLanguage /> */ }
 				<div className={ 'xl:!px-[40px] navbar animate-slideUpToDown transition-all duration-300' }>
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
@@ -191,8 +191,7 @@ export const Header = ({
 													<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
 												</div>
-												<Image
-													src={ icons.ArrowRight }
+												<icons.ArrowRight
 													alt=''
 													className='ml-[27px] mr-auto'
 												/>
@@ -218,9 +217,7 @@ export const Header = ({
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
-													<Image
-														src={ icons.ArrowRight }
-														alt=''
+													<icons.ArrowRight
 														className='ml-[27px] mr-auto'
 													/>
 												</div>
@@ -233,9 +230,7 @@ export const Header = ({
 							<div id='facilities' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverFacilities(true) } onMouseLeave={ toggleMouseHoverFacilities(false) }>
 								<Text text={ 'Facilities & Services' } className='cursor-pointer' color={ isHoverFacilities === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<Image
-										src={ icons.ArrowDown }
-										alt=''
+									<icons.ArrowDown
 										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
 								</div>
@@ -248,8 +243,7 @@ export const Header = ({
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
-													<Image
-														src={ icons.ArrowRight }
+													<icons.ArrowRight
 														alt=''
 														className='ml-[27px] mr-auto'
 													/>
@@ -315,11 +309,11 @@ export const Header = ({
 															</div>
 														)
 														: <images.Profile className='w-[50px] h-[50px]' /> }
-													{/* <Image src={ '' } alt={ '' } /> :
+													{ /* <Image src={ '' } alt={ '' } /> :
 													<Image
 														src={ images.Profile }
 														alt=''
-													/> */}
+													/> */ }
 
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
