@@ -5,30 +5,30 @@ import {
 import { colors, icons, Languages as lang } from '@/constant';
 import Text from '@/components/Text';
 import { useEffect, useState } from 'react';
-import { TileArgs, TileClassNameFunc, TileDisabledFunc, Value } from 'react-calendar/dist/cjs/shared/types';
+import { TileArgs, TileClassNameFunc, TileDisabledFunc } from 'react-calendar';
 import { useTypedSelector } from '@/hooks';
-import { FindDoctorState } from '@/interface';
+import { DoctorCalendar, FindDoctorState } from '@/interface';
 import dayjs, { UnitType } from 'dayjs';
 import languages from '@/constant/languages';
 import Spinner from '@/components/ui/Spinner';
 import Image from 'next/image';
 
 type Props = {
-	onChange: (value: Value) => void;
+	onChange: (value: any) => void;
 	onChangeMonth: (month: number, year: number) => void;
 	loading?: boolean;
 	value?: Date;
+	calendarData: DoctorCalendar[]
 };
 
-const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading }: Props) => {
-	const { doctorCalendar } = useTypedSelector<FindDoctorState>('findDoctor');
+const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calendarData }: Props) => {
 
 	const renderTile = ({ activeStartDate, date, view }: TileArgs) => {
 		const formatedDate = dayjs(date).format('YYYY-MM-DD');
 
-		const calendarItem = doctorCalendar?.find(calendar => calendar.date_schedule === formatedDate && calendar.status !== 'Slot not available');
+		const calendarItem = calendarData?.find((calendar:any) => calendar.date_schedule === formatedDate && calendar.status !== 'Slot not available');
 		const isDisabled = disabledTile({ activeStartDate, date, view });
-
+	
 		const calendarDateColor = (type: string) => {
 			switch (type) {
 				case 'Available':
@@ -64,7 +64,7 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading }: Props
 	};
 
 	const isBeforeDate = (date: Date, unit: UnitType = 'D') => dayjs(date).isBefore(dayjs(), unit);
-	const isFoundOnCalendar = (date: Date) => doctorCalendar?.find(calendar => calendar.date_schedule === dayjs(date).format('YYYY-MM-DD'));
+	const isFoundOnCalendar = (date: Date) => calendarData?.find((calendar:any) => calendar.date_schedule === dayjs(date).format('YYYY-MM-DD'));
 
 	const disabledTile = ({ activeStartDate, date, view }: TileArgs) => isBeforeDate(date);
 	const language = lang.page.doctorProfile;
@@ -95,8 +95,8 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading }: Props
 		<div className='px-[12px] py-[20px] relative'>
 			<ReactCalendar
 				className='r-calendar'
-				nextLabel={ <Image src={ icons.ArrowRight } alt="" /> }
-				prevLabel={ <Image src={ icons.ArrowLeft } alt="" /> }
+				nextLabel={ <icons.ArrowRight /> }
+				prevLabel={ <icons.ArrowLeft /> }
 				next2Label={ null }
 				prev2Label={ null }
 				defaultView='month'

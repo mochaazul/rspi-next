@@ -1,6 +1,5 @@
-import styled from 'styled-components';
-
 import { colors } from '@/constant';
+import styled from 'styled-components';
 
 export const DoctorProfileStyle = styled.div`
 

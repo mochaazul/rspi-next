@@ -26,10 +26,7 @@ export const ProfileSelectorCard = styled.div<{ isActive: boolean; }>`
   ${ props => props.isActive && `
   background-color: #E5F5F5; 
   border-color: ${ colors.green.brandAccent }; ` }
-  :hover{
-    border: 1px solid ${ colors.green.brandAccent };
-    transition: all 150ms;
-  }
+
 `;
 
 export const ProfileCardHeader = styled.div`
@@ -99,4 +96,5 @@ export const NoProfileContainer = styled.div`
   border: 1px solid #F0F2F9;
   border-radius: 10px;
   padding: 16px;
+  gap: 8px;
 `;

@@ -153,7 +153,7 @@ const Header: React.FC = () => {
 	return (
 		<HeaderStyle>
 			<div className='w-full'>
-				<MainNavLanguage />
+				{ /* <MainNavLanguage /> */ }
 				<div className={ 'xl:!px-[40px] navbar animate-slideUpToDown transition-all duration-300' }>
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>

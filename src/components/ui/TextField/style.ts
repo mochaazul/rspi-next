@@ -39,11 +39,10 @@ export const TextFieldWrapper = styled.div<StyledTextFieldType>`
   }
 
   input{
-    padding: 12px 0px;
+    padding: 12px 18px;
     
-    // we only need to worry about the padding when the icon is on the right, since the padding on the left was provided by element spacing 
-    // when icon is on the left
-    ${props => props.$iconName || props.featherIcon && props.$iconPosition === 'right'  && 'padding-left: 18px;'}
+    // we only need to worry about the padding when the icon is on the left, since the padding on the left was offested by the icon wrapper
+    ${props => props.$iconName || props.featherIcon && props.$iconPosition === 'left'  && 'padding-left: 0px;'}
   }
   
   input {

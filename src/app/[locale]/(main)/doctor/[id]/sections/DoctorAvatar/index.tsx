@@ -28,25 +28,20 @@ export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
 			/>
 			<div className='flex gap-[10px] mt-[20px] '>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.facebook.com/RumahSakitPondokIndah') }>
-					<Image
-					src={icons.FacebookIcon}
-					width={16}
-					height={16}
-					alt="" />
+					<Icons.Facebook
+						width='16px'
+						height='16px' />
 				</div>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://twitter.com/rspondokindah') }>
-					<Image
-					src={icons.TwitterIcon}
-					width={16}
-					height={16}
-					alt="" />
+					<Icons.Twitter
+						width='16px'
+						height='16px'/>
 				</div>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.linkedin.com/company/rumah-sakit-pondok-indah/') }>
-					<Image
-					src={icons.LinkedIn}
-					width={16}
-					height={16}
-					alt="" />
+					<Icons.Linkedin
+						width='16px'
+						height='16px'
+					/>
 				</div>
 				<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
 					<Icons.Link width='16px' height='16px' />

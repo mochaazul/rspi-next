@@ -1,14 +1,17 @@
-import { Button, Spinner, Text } from '@/components';
-import { colors, icons, Languages as lang } from '@/constant';
 import dayjs from 'dayjs';
 import { useTypedSelector } from '@/hooks';
 import _, { isEmpty } from 'lodash';
-import { VisitScheduleStyle } from 'pages/DetailDoctorProfile/style';
 import { useState } from 'react';
 import { EmptyWarningContainer, TimeSlotPill } from './style';
 import { FindDoctorDetail, FindDoctorState, TimeSlot } from '@/interface';
 import { formatTimeslot } from '@/helpers/datetime';
 import Image from 'next/image';
+import { VisitScheduleStyle } from '../../style';
+import { colors, icons } from '@/constant';
+import Text from '@/components/ui/Text';
+import Spinner from '@/components/ui/Spinner';
+import Button from '@/components/ui/Button';
+import { useScopedI18n } from '@/locales/client';
 
 type Props = {
 	hospital?: string;
@@ -18,6 +21,8 @@ type Props = {
 	onClickContactHospital: () => void;
 	selectedDate?: Date;
 	dateStatus?: string;
+	timeslot: TimeSlot[],
+	isLoading: boolean
 };
 
 const VisitSchedule: React.FC<Props> = ({
@@ -27,16 +32,18 @@ const VisitSchedule: React.FC<Props> = ({
 	clinic,
 	selectedDate,
 	onClickContactHospital,
-	dateStatus
+	dateStatus,
+	timeslot,
+	isLoading
 }) => {
-	const { selectedDoctorTimeSlot, timeSlotLoading } = useTypedSelector<FindDoctorState>('findDoctor');
-
+	// const { selectedDoctorTimeSlot, timeSlotLoading } = useTypedSelector<FindDoctorState>('findDoctor');
+	const t = useScopedI18n('page.doctorProfile');
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('');
 
-	const language = lang.page.doctorProfile;
+	// const language = lang.page.doctorProfile;
 
 	const getTimeSlot = () => {
-		const filteredTimeSlot = selectedDoctorTimeSlot?.filter(item => item.hospital_code === hospital) ?? [];
+		const filteredTimeSlot = timeslot?.filter(item => item.hospital_code === hospital) ?? [];
 		const grouped = _.groupBy(filteredTimeSlot, item => item.clinic_code);
 		return grouped;
 	};
@@ -48,28 +55,26 @@ const VisitSchedule: React.FC<Props> = ({
 	const renderEmptyState = (
 		<div className='flex flex-col items-center justify-center h-full'>
 			
-			<Image
-				src={icons.EmptyCalendar}
-				alt="" />
+			<icons.EmptyCalendar />
 			<Text
 				fontSize='16px'
 				fontWeight='400'
 				lineHeight='24px'
 				color='#2A2536'
 				textAlign='center'
-				text={ language.slotEmptyState } />
+				text={ t('slotEmptyState') } />
 		</div>
 	);
 
 	const selectTimeSlotHandler = (slotId: string) => {
-		const timeSlotItem = selectedDoctorTimeSlot?.find(item => item.slot_id === slotId);
+		const timeSlotItem = timeslot?.find((item:any) => item.slot_id === slotId);
 		if (timeSlotItem) {
 			onSelect(timeSlotItem);
 		}
 		setSelectedTimeSlot(slotId);
 	};
 
-	if (timeSlotLoading) return <div className='flex align-center justify-center h-full'><Spinner /></div>;
+	if (isLoading) return <div className='flex align-center justify-center h-full'><Spinner /></div>;
 	if (!selectedDate) return renderEmptyState;
 	if (dateStatus === 'Limited') return <>
 		<EmptyWarningContainer>
@@ -78,9 +83,9 @@ const VisitSchedule: React.FC<Props> = ({
 				fontWeight='400'
 				lineHeight='21px'
 				color='#DC6803'
-				text={ language.notAvailableSchedule } />
+				text={ t('notAvailableSchedule') } />
 		</EmptyWarningContainer>
-		<Button onClick={ onClickContactHospital } className='mt-[16px]' label={ language.callCenter } theme='outline' />
+		<Button onClick={ onClickContactHospital } className='mt-[16px]' label={ t('callCenter') } theme='outline' />
 	</>;
 	return (
 		<VisitScheduleStyle>

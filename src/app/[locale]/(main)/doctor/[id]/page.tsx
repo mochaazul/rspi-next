@@ -1,8 +1,8 @@
 'use client';
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { debounce } from 'lodash';
 import Spinner from '@/components/ui/Spinner';
 import PhoneModal from '@/components/ui/PhoneModal';
@@ -11,11 +11,15 @@ import DoctorAvatar, { ShareDoctor } from './sections/DoctorAvatar';
 import Text from '@/components/ui/Text';
 import Radio from '@/components/ui/Radio';
 import Calendar from '@/components/ui/Calendar';
-import VisitSchedule from './sections/VisitSchedule';
 import Button from '@/components/ui/Button';
-import { useGetDoctorDetail } from '@/lib/api/doctors';
+import { useGetDoctorCalendar, useGetDoctorDetail, useGetDoctorSlot } from '@/lib/api/doctors';
 import { Images, colors } from '@/constant';
 import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
+import { useGetHospital } from '@/lib/api/hospital';
+import { useScopedI18n } from '@/locales/client';
+import { usePathname, useRouter } from 'next/navigation';
+import VisitSchedule from './sections/VisitSchedule';
+import { TimeSlot } from '@/interface';
 
 type FormAppointment = {
 	clinic: string,
@@ -24,30 +28,15 @@ type FormAppointment = {
 };
 
 type Props = {
-  params:{
-    id: string
-  }
-}
+	params: {
+		id: string;
+	};
+};
 
 export default function Page({ params }: Props) {
-	const [activeTabIndex, setActiveTabIndex] = useState(0);
+	const t = useScopedI18n('page.doctorProfile');
 
-	const { data: doctor, isLoading } = useGetDoctorDetail({ param: params.id });
-
-	console.log(doctor);
-
-	// const doctorDetailDispatch = useAppDispatch(getDoctorDetail);
-	// const getDoctorTimeSlotDispatch = useAppDispatch<DoctorTimeSlotParam>(getDoctorTimeSlot);
-	// const getDoctorCalendarDisptach = useAppDispatch(getDoctorCalendar);
-	// const hospitalDetailDispatch = useAppAsyncDispatch(getHospitalByHospitalCode);
-
-	// const { id } = useParams();
-
-	// const { detail, loading, doctorCalendar, doctorCalendarLoading } = useTypedSelector<FindDoctorState>('findDoctor');
-
-	// const { hospitals } = useTypedSelector<HospitalState>('hospital');
-
-	// const hospitalArr = detail?.hospital.map(hospital => ({ key: hospital?.hospital_name, value: hospital?.hospital_code, label: hospital?.hospital_name }));
+	const router = useRouter();
 
 	const [selectedHospital, setSelectedHospital] = useState<string>('');
 	const [selectedHospitalPhoneNumber, setSelectedHospitalPhoneNumber] = useState<string>('');
@@ -56,103 +45,93 @@ export default function Page({ params }: Props) {
 	const [radioValue, setRadioValue] = useState('Appointment');
 	const [selectedDate, setSelectedDate] = useState<Date>();
 	const [selectedDateStatus, setSelectedDateStatus] = useState<string>('');
-	// const navigate = useNavigate();
 
-	// const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot>();
+	const [calendarMonth, setCalendarMonth] = useState<Dayjs>(dayjs());
+	
+	const { data: hospital, isLoading: hospitalLoading } = useGetHospital();
+	const { data: doctor, isLoading } = useGetDoctorDetail({ param: params.id });
+	const { data: doctorCalendar, isLoading: doctorCalendarLoading } = useGetDoctorCalendar(
+		calendarMonth.format('YYYY-MM-DD'),
+		selectedHospital,
+		{
+			query: {
+				start_date: calendarMonth.format('YYYY-MM-DD'),
+				hospital_code: selectedHospital,
+				doctor_code: params.id,
+				service: radioValue
+			}
+		});
 
-	// const language = lang.page.doctorProfile;
+	const { data: doctorSlot, isLoading: doctorSlotLoading } = useGetDoctorSlot({
+		param: params.id,
+		query: {
+			hospital_code: selectedHospital,
+			preferred_day: dayjs(selectedDate).format('YYYY-MM-DD'),
+			service: radioValue
+		}
+	});
+
+	const hospitalArr = doctor?.data.hospital.map(hospital => ({ key: hospital?.hospital_code, value: hospital?.hospital_code, label: hospital?.hospital_name }));
+
+	const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot>();
 
 	const breadcrumbsPath = [
 		{ name: 'Book Appointment', url: '/find-a-doctor' },
-		// { name: detail?.name || '', url: '#' }
+		{ name: doctor?.data.name || '', url: '#' }
 	];
 
-	// useEffect(() => {
-	// 	doctorDetailDispatch({ id });
-	// }, []);
-
-	useEffect(() => {
-		onChangeForm();
-	}, [radioValue, selectedHospital]);
-
-	// useEffect(() => {
-	// 	if (hospitalArr?.length === 1)
-	// 		setSelectedHospital(hospitalArr?.[0].value ?? '');
-	// 	if (hospitals.length > 0) {
-	// 		hospitalDetailDispatch({ id: selectedHospital + '/hospital-code' }).then(e => {
-	// 			setSelectedHospitalPhoneNumber(e.data.phone);
-	// 			setSelectedHospitalName(e.data.name);
-	// 		});
-	// 	}
-	// }, [detail, hospitals]);
-
 	const onChangeForm = () => {
-
-		if (selectedHospital) {
-			getCalendar();
-		}
-
+		// if (selectedHospital) {
+		// 	getCalendar();
+		// }
 		// hospitalDetailDispatch({ id: selectedHospital + '/hospital-code' }).then(e => {
 		// 	setSelectedHospitalPhoneNumber(e.data.phone);
 		// });
-
 	};
 
-	const getCalendar = (month?: number, year?: number) => {
+	const getCalendar = (month: number, year: number) => {
+		const inputDate = dayjs(`${year}-${month}-01`, 'YYYY-MM-DD');
 		const todayDate = dayjs();
-		const futureDate = month && month > todayDate.month() + 1
-			? dayjs().add(1, 'month')
-				.startOf('month')
-				.format('YYYY-MM-DD')
-			: null;
-		// getDoctorCalendarDisptach({
-		// 	queryParam: {
-		// 		hospital_code: selectedHospital,
-		// 		service: radioValue,
-		// 		// TODO REMOVED SINCE NO LONGER PRESENT ON REQUEST PARAM
-		// 		// month: month ?? dayjs(selectedDate).get('M') + 1,
-		// 		// year: year ?? dayjs(selectedDate).get('year'),
-		// 		start_date: futureDate ?? todayDate.format('YYYY-MM-DD'),
-		// 		doctor_code: id
-		// 	}
-		// });
+		// get input date based on start day of the month
+		// compare it with today date
+		// check if the month and year is the same as today then, use today instead
+		// else use input date with start day of the month to 1
+		const sameMonth =  month === dayjs().month() + 1; // month will be 0 based so we need to add 1
+		const sameYear = year === dayjs().year();
+
+		if (sameMonth && sameYear) {
+			setCalendarMonth(todayDate);
+		} else {
+			setCalendarMonth(inputDate);
+		}
+	
 	};
 
-	// const onBookHandler = () => {
-	// 	if (selectedTimeSlot?.slot_id) {
-	// 		navigate('/book-appointment/' + selectedTimeSlot.slot_id + `?service=${ radioValue === 'Telemedicine' ? 'TEL' : 'APP' }`);
-	// 	}
-	// };
-
-	// const onChangeDate = (val: Value) => {
-	// 	const isDateSelectable = doctorCalendar.find(dc => dc.date_schedule === dayjs(val?.toString()).format('YYYY-MM-DD') && dc.status !== 'Slot not available');
-	// 	if (val && isDateSelectable) {
-	// 		setSelectedDate(val as Date);
-	// 		setSelectedDateStatus(isDateSelectable.status);
-	// 		onChangeDateDebounced(selectedHospital, val as Date, radioValue);
-	// 	}
-	// };
-
-	const getDoctorSlot = (hospital: string, date: Date, service: string) => {
-		// getDoctorTimeSlotDispatch({
-		// 	id: id,
-		// 	queryParam: {
-		// 		'hospital_code': hospital,
-		// 		'preferred_day': dayjs(date).format('YYYY-MM-DD'),
-		// 		'service': service
-		// 	}
-		// });
+	const onBookHandler = () => {
+		
+		if (selectedTimeSlot?.slot_id) {
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			const { available, ...safeParams } = selectedTimeSlot;
+			const bookParam = new URLSearchParams(safeParams);
+			router.push('/book-appointment/' + selectedTimeSlot.slot_id + `?${bookParam.toString()}`);
+		}
 	};
 
-	const onChangeDateDebounced = useCallback(debounce(getDoctorSlot, 300, { leading: false }), []);
+	const onChangeDate = (val: any) => {
+		const isDateSelectable = doctorCalendar?.data.find(dc => dc.date_schedule === dayjs(val?.toString()).format('YYYY-MM-DD') && dc.status !== 'Slot not available');
+		if (val && isDateSelectable) {
+			setSelectedDate(val as Date);
+			setSelectedDateStatus(isDateSelectable.status);
+		}
+	};
 
 	const getDoctorHospital = () => {
-		// return detail?.hospital;
+		return doctor?.data.hospital;
 	};
 
 	const clickContactHospital = () => {
 		if (isMobile) {
-			window.open(`tel:${ selectedHospitalPhoneNumber }`);
+			window.open(`tel:${selectedHospitalPhoneNumber}`);
 		} else {
 			setShowModalTelp(true);
 		}
@@ -161,13 +140,22 @@ export default function Page({ params }: Props) {
 	const closeContactHospital = () => {
 		setShowModalTelp(false);
 	};
+
+	const selectedHospitalDetails = () => {
+		return hospital?.data.find(hospital => hospital.hospital_code === selectedHospital);
+	};
+
 	return (
 		<DoctorProfileStyle className='lg:mt-[50px]'>
 			{
 				isLoading
 					? <Spinner />
 					: <>
-						<PhoneModal visible={ showModalTelp } hospitalName={ selectedHospitalName } hospitalPhone={ selectedHospitalPhoneNumber } clickCloseContactHospital={ closeContactHospital } />
+						<PhoneModal
+							visible={ showModalTelp }
+							hospitalDetail={ selectedHospitalDetails() }
+						 	clickCloseContactHospital={ closeContactHospital }
+						/>
 						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] md:pt-[60px] pb-[120px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
 							<div className='content-wrapper sm:flex w-full'>
@@ -176,15 +164,15 @@ export default function Page({ params }: Props) {
 									<div className='flex gap-[16px]'>
 										<DoctorAvatar className='lg:hidden md:hidden' profile_url={ doctor?.data?.img_url ?? Images.DoctorProfile.src } />
 										<div className='flex flex-col'>
-											<Text text={ doctor?.data?.doctor_name } fontSize='24px' fontWeight='900' lineHeight='24px' />
-											{ /* <Text text={ doctor?.data?.specialty[0] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' /> */ }
+											<Text text={ doctor?.data?.name } fontSize='24px' fontWeight='900' lineHeight='24px' />
+											<Text text={ doctor?.data?.specialty[ 0 ] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' />
 											<hr className='my-[8px] md:hidden ' />
 											<ShareDoctor className=' md:hidden' />
 										</div>
 									</div>
 									<hr className='mt-[24px] max-sm:hidden' />
 									<div className='mt-[30px]'>
-										{ /* <Radio groupLabel={ language.chooseRs } onChange={ setSelectedHospital } value={ selectedHospital }
+										<Radio groupLabel={ t('chooseRs') } onChange={ setSelectedHospital } value={ selectedHospital }
 											groupContainerClassname='flex flex-col md:flex-row'
 										>
 											{
@@ -196,7 +184,7 @@ export default function Page({ params }: Props) {
 													);
 												})
 											}
-										</Radio> */ }
+										</Radio>
 									</div>
 
 									<div className='mt-[30px]'>
@@ -214,19 +202,19 @@ export default function Page({ params }: Props) {
 										className='flex flex-col md:flex-row'
 									>
 										<TimeSlotCard className='md:w-[calc(100%/2)]'>
-											{ /* <Calendar value={ selectedDate } onChange={ onChangeDate } onChangeMonth={ (month, year) => {
+											<Calendar calendarData={ doctorCalendar?.data || [] } value={ selectedDate } onChange={ onChangeDate } onChangeMonth={ (month, year) => {
 												getCalendar(month, year);
-											} } loading={ doctorCalendarLoading } /> */ }
+											} } loading={ doctorCalendarLoading } />
 										</TimeSlotCard>
 										<TimeSlotCard className='px-[24px] py-[20px] md:w-[calc(100%/2)]'>
-											{ /* <VisitSchedule hospital={ selectedHospital } onSelect={ timeSlot => {
+											<VisitSchedule isLoading={ doctorSlotLoading } timeslot={ doctorSlot?.data || [] } hospital={ selectedHospital } onSelect={ timeSlot => {
 												setSelectedTimeSlot(timeSlot);
 											} }
 											selectedDate={ selectedDate }
-											clinic={ detail?.clinic }
+											clinic={ doctor?.data?.clinic }
 											onClickContactHospital={ clickContactHospital }
 											dateStatus={ selectedDateStatus }
-											/> */ }
+											/>
 										</TimeSlotCard>
 									</TimeSlotContainer>
 								</div>
@@ -241,7 +229,7 @@ export default function Page({ params }: Props) {
 									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
 									theme='outline'
 									onClick={ () => {
-										// navigate(-1);
+										router.back();
 									} }
 								/>
 								<Button
@@ -249,8 +237,8 @@ export default function Page({ params }: Props) {
 									label={ 'Next' }
 									noPadding={ true }
 									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
-									// onClick={ onBookHandler }
-									// disabled={ !selectedTimeSlot }
+									onClick={ onBookHandler }
+									disabled={ !selectedTimeSlot }
 								/>
 							</div>
 						</div>

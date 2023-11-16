@@ -46,19 +46,20 @@ export interface UserData {
 	pin_status: boolean;
 }
 export interface UserDataDetail {
-	id?: number;
-	patient_code?: string;
-	name?: string;
-	email?: string;
-	phone?: string;
-	birthdate?: string;
-	gender?: string;
-	no_mr?: string;
-	img_url?: string;
-	is_verified?: boolean;
-	created_date?: string;
-	updated_date?: string;
-	deleted_date?: string;
+	birthdate: string;
+	created_date: string;
+	deleted_date: string;
+	email: string;
+	gender: string;
+	id: number;
+	img_url: string;
+	is_verified: boolean;
+	name: string;
+	no_mr: string;
+	patient_code: string;
+	patient_id_rspi: string
+	phone: string;
+	updated_date: string
 }
 
 export type ResendEmailVerificationType = {

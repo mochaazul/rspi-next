@@ -13,14 +13,6 @@ import AccreditationAwards from '@/components/PageComponents/LandingPageSections
 import MobileAppBanner from '@/components/PageComponents/LandingPageSections/MobileAppBanner';
 
 import { isMobile } from 'react-device-detect';
-import { getClinics, getFacilitiesAndServices } from '@/lib/api/clinics';
-import { getBanner, getCoe } from '@/lib/api';
-import { getHospital } from '@/lib/api/hospital';
-import { getNews } from '@/lib/api/news';
-import { getAwards } from '@/lib/api/awards';
-import { getEvents } from '@/lib/api/events';
-
-import LandingPageStyle from './style';
 
 export default async function Home() {
 	const coeRes = await getCoe();

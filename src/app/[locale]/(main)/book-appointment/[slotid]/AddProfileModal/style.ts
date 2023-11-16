@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 export const ProfileModalContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   padding: 24px;
+  gap: 16px;
 `;
 
 export const ModalHeader = styled.div`

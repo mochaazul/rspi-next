@@ -44,6 +44,7 @@ export const DateFieldWrapper = styled.div<StyledDateFieldType>`
   }
 
   input {
+    padding-left: 18px;
     padding-top: 12px !important;
     padding-bottom: 12px !important;
     font-family: var(--font-family) !important;
