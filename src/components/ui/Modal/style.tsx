@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 interface ModalStyleProps {
-	width?: string;
-	noPadding: boolean;
-	bgColor: string;
-	borderRadius?: string;
-	backdropColor?: string;
-	padding: string;
-	overflow?: string;
+  width?: string;
+  $noPadding: boolean;
+  $bgColor: string;
+  borderRadius?: string;
+  backdropColor?: string;
+  $padding: string;
+  overflow?: string;
   bottomSheet?: boolean;
 }
 
@@ -32,7 +32,7 @@ const ModalStyle = styled.div<ModalStyleProps>`
  
 
   .modal-header{
-    padding: ${ props => props.noPadding ? '0px' : props => props.padding };
+    padding: ${ props => props.$noPadding ? '0px' : props => props.$padding };
     padding-top: 16px;
     padding-bottom: 0px;
   }
@@ -61,20 +61,20 @@ const ModalStyle = styled.div<ModalStyleProps>`
   
   
   .modal-content {
-    padding: ${ props => props.noPadding ? '0px' : props => props.padding };
+    padding: ${ props => props.$noPadding ? '0px' : props => props.$padding };
     max-height: 95vh;
     overflow-y: ${ props => props.overflow ?? 'scroll' };
 
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
       display: none;
     }
 
     @media screen and (max-width: 500px) {
       overflow: auto;
-      padding: ${ props => props.noPadding ? '0px' : '20px' };
+      padding: ${ props => props.$noPadding ? '0px' : '20px' };
     }
   }
   @media screen and (max-width: 500px) {

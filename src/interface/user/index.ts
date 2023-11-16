@@ -42,8 +42,8 @@ export interface UserData {
 	email?: string;
 	expired_at?: string;
 	created_date?: string;
-	medical_record: string,
-	pin_status: boolean;
+	medical_record?: string,
+	pin_status?: boolean;
 }
 export interface UserDataDetail {
 	birthdate: string;
@@ -131,7 +131,11 @@ export type UpdateEmailType = {
 };
 
 export type UserSessionData = {
-	user: UserDataDetail | null;
+	user: (UserDataDetail & UserData) | null;
 	token: string;
 	isAuthenticated: boolean;
+};
+
+export type CheckPhoneType = {
+	phone: string;
 };
