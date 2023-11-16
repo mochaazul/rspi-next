@@ -130,7 +130,7 @@ export type UpdateEmailType = {
 };
 
 export type UserSessionData = {
-	user: UserDataDetail | null;
+	user: (UserDataDetail & UserData) | null;
 	token: string;
 	isAuthenticated: boolean;
 };

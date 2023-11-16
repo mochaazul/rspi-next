@@ -1,5 +1,13 @@
+'use client';
+
+import { Tooltip } from 'react-tooltip';
+import { useRouter } from 'next/navigation';
+import isEmpty from 'lodash/isEmpty';
+
 import { icons } from '@/constant';
-import Image from 'next/image';
+import { useScopedI18n } from '@/locales/client';
+import useSession from '@/session/client';
+
 import {
 	BgContainer,
 	BodyContainer,
@@ -7,17 +15,17 @@ import {
 	FloatingWrapper,
 	LeftContent
 } from './style';
-import Text from '@/components/Text';
-import Button from '@/components/Button';
-import { Tooltip } from 'react-tooltip';
-import { useRouter } from 'next/navigation';
-import { useTypedSelector } from '@/hooks';
-import { UserState } from '@/interface';
-import _, { isEmpty } from 'lodash';
 
-const MedicalRecordReminder = () => {
-	const { user } = useTypedSelector<UserState>('user');
+import Text from '../Text';
+import Button from '../Button';
 
+interface PropsType {
+	isFloating?: boolean;
+}
+
+const MedicalRecordReminder = ({ isFloating = true }: PropsType) => {
+	const session = useSession();
+	const languages = useScopedI18n('page.medicalRecordReminder');
 	const navigate = useRouter();
 
 	const onClickOnboard = () => {
@@ -26,45 +34,75 @@ const MedicalRecordReminder = () => {
 		}, 1000);
 	};
 
+	const renderContent = () => {
+		return (
+			<>
+				<BgContainer>
+					<div className='relative overflow-hidden rounded-tl-[10px]'>
+						<icons.Circle />
+					</div>
+				</BgContainer>
+				<BodyContainer
+					className={ isFloating
+						? 'grid grid-cols-[auto_140px] md:grid-cols-[auto_1fr] items-center gap-4 md:gap-11'
+						: 'flex max-lg:flex-col lg:items-center lg:justify-between w-full gap-6 lg:gap-11' }
+				>
+					<LeftContent className={ isFloating ? 'items-end sm:items-center' : 'lg:items-center' }>
+						<Text
+							fontType={ null }
+							fontWeight='700'
+							className={ isFloating
+								? 'max-sm:leading-[18px] !text-xs sm:text-sm md:text-base'
+								: 'text-sm md:text-base' }
+						>
+							{ languages('heading') }
+						</Text>
+						<div className={ isFloating ? 'max-sm:mb-1' : 'max-lg:mt-1' }>
+							<icons.ExclamationMark data-tooltip-place='top-end' data-tooltip-id='booking-tooltip' style={ { width: '24px' } } />
+						</div>
+					</LeftContent>
+					<Button
+						label={ languages('btnLabel') }
+						onClick={ onClickOnboard }
+						className={ `max-sm:p-[10px] ${ isFloating ? '!w-auto max-sm:text-[12px] max-md:text-sm' : 'w-full lg:w-auto max-md:text-sm' }` }
+					/>
+				</BodyContainer>
+				<Tooltip id='booking-tooltip' offset={ 24 } style={ { width: 300, padding: '12px', borderRadius: '5px' } }>
+					<Text
+						fontSize='12px'
+						fontWeight='400'
+						lineHeight='23px'
+						color='white'
+						text={ languages('tooltipLabel') }
+					/>
+				</Tooltip>
+			</>
+		);
+	};
+
 	const renderFloating = () => (
 		<FloatingWrapper className='md:ml-5'>
 			<FloatingContainer
 				className='flex'
 			>
-				<BgContainer>
-					<Image src={ icons.Circle } alt="" />
-				</BgContainer>
-				<BodyContainer
-					className='grid grid-cols-[auto_140px] md:grid-cols-[auto_1fr] md:gap-11 gap-4 items-center'
-				>
-					<LeftContent>
-						<Text fontSize='16px' fontWeight='700'>
-							Dapatkan Akses terhadap Informasi Kunjungan Medis Anda
-						</Text>
-						<Image src={ icons.ExclamationMark } alt="" data-tooltip-place='top-end' data-tooltip-id='booking-tooltip' style={ { width: '24px' } } />
-					</LeftContent>
-					<Button label='Isi Data Rekam Medis' onClick={ () => {
-						// navigate.push('/register-onboard');
-						onClickOnboard();
-					} }
-						className='max-sm:p-[10px] max-sm:text-[12px]'
-					/>
-				</BodyContainer>
+				{ renderContent() }
 			</FloatingContainer>
-			<Tooltip id='booking-tooltip' offset={ 24 } style={ { width: 300, padding: '12px', borderRadius: '5px' } }>
-				<Text
-					fontSize='12px'
-					fontWeight='400'
-					lineHeight='23px'
-					color='white'
-					text='Pastikan Anda telah booking appointment dan melakukan kunjungan ke RSPI terdekat.' />
-			</Tooltip>
 		</FloatingWrapper>
 	);
 
-	if (isEmpty(user.token)) return null;
+	const renderMedicalRecordReminder = () => {
+		if (isFloating) return renderFloating();
 
-	if (!user.medical_record) return renderFloating();
+		return (
+			<div className='relative flex bg-white shadow-[5px_5px_10px_0px_rgba(53,136,136,0.12)] rounded-[10px]'>
+				{ renderContent() }
+			</div>
+		);
+	};
+
+	if (isEmpty(session?.token)) return null;
+
+	if (!session?.user?.medical_record || !session?.user?.no_mr) return renderMedicalRecordReminder();
 
 	return null;
 };

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import * as Icons from 'react-feather';
 import moment from 'moment';
@@ -16,7 +18,7 @@ import {
 	NotificationPanel,
 	MedicalRecordReminder
 } from '@/components';
-import { Images, Languages, colors, regExp } from '@/constant';
+import { Languages, colors, regExp } from '@/constant';
 import {
 	localStorage, createFieldConfig, requiredRule, minLengthRule, maxLengthRule
 } from '@/helpers';
@@ -31,11 +33,9 @@ import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { getAppointmentList, updateEmail, updateProfile } from '@/stores/actions';
 import { checkPin, removeUser as removeUserData, updateAvatar, updateUserInfo } from '@/stores/User';
 import { splitDate } from '@/helpers/datetime';
-import PinModal from '@/components/PinModal';
-import { PinModalContainer } from '@/components/PinModal/style';
+import HorizontalInputWrapper from '@/components/PageComponents/UserInformationSections/HorizontalInputWrapper';
 
 import ProfilePageStyle, { Divider } from './style';
-import HorizontalInputWrapper from './HorizontalInputWrapper';
 import useProfilePage from './useProfilePage';
 
 type DisabledInputs = {
@@ -597,7 +597,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 					</div>
 				</ProfilePageStyle>
 				<Modal visible={ pinModalVisible } onClose={ () => setPinModalVisible(false) }>
-					<PinModalContainer>
+					<div className='flex flex-col items-center gap-4'>
 						<Form
 							onSubmit={ async e => {
 								const { pin } = onSubmit(e);
@@ -648,7 +648,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 							<Button type='submit' label={ submitBtnLabel } />
 						</Form>
 
-					</PinModalContainer>
+					</div>
 				</Modal>
 				<Modal visible={ showModalNewEmail } onClose={ () => setShowModalNewEmail(false) }>
 					<div>

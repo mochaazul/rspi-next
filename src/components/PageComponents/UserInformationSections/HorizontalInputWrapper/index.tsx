@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { colors } from '@/constant';
-import { icons } from '@/constant';
-import { Form, Text } from '@/components';
-import WithInputLabel from '@/components/withInputLabel';
+import { colors, icons } from '@/constant';
 
 import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
-import Image from 'next/image';
+
+import Form from '../../../Form';
+import Text from '../../../Text';
+import WithInputLabel from '../../../withInputLabel';
 
 interface HorizontalInputType {
 	inputProps: Partial<typeof Form.TextField>,
@@ -24,7 +24,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 				{
 					!!props.labelInfo ?
 						<PopupInfoContainerStyle>
-							<Image src={ icons.ExclamationMark } alt="" className='cursor-pointer' />
+							<icons.ExclamationMark className='cursor-pointer' />
 							<BalloonPopupStyle className='balloon-popup min-[300px]:min-w-[250px] min-[480px]:min-w-[400px]'>
 								<div className='rounded-[10px] px-[10px] py-[5px] h-full relative z-10'>
 									<Text

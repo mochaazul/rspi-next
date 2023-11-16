@@ -33,15 +33,10 @@ const ResetEmailPage = () => {
 	const verifyEmailTokenDispatch = useAppAsyncDispatch(verifyEmailToken);
 	const changeEmailDispatch = useAppAsyncDispatch<ChangeEmailPayload>(changeEmail);
 
-	const { error } = useTypedSelector<UserState>('user');
 	const userSelector = useTypedSelector<UserState>('user');
 	const { user, userDetail } = userSelector;
 	const isLoggedIn = !!user.token;
 	const removeUser = useAppDispatch(removeUserData);
-
-	const {
-		onSubmit, registeredValue, isFormValid
-	} = Form.useForm({ fields: resetEmailField });
 
 	useEffect(() => {
 		hasToken();
