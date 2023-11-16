@@ -34,7 +34,7 @@ const TextField = ({ onIconClick, isNumber, mask, iconName, iconPosition, ...pro
 			{
 				props.featherIcon && FeatherIconsJSX !== null ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<FeatherIconsJSX color={ props.iconColor } />
+						<FeatherIconsJSX color={ props.$iconColor } />
 					</IconWrapper> :
 					null
 			}

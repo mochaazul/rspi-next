@@ -9,6 +9,7 @@ import { DoctorCardStyle } from './style';
 import ItemAccordion from './ItemAccordion';
 import { I_MasterDoctor } from '@/interface';
 import { isMobile } from 'react-device-detect';
+import Image from 'next/image';
 
 const language = lang.page.findDoctor;
 
@@ -18,7 +19,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 		<DoctorCardStyle>
 			{ /* Foto & nama dokter */ }
 			<div className='flex gap-4'>
-				<img src={ props.img_url || Images.Doctor2 } alt={ props.full_name_doctor } srcSet='' className='rounded-[10px] w-[80px] h-[80px] object-cover' />
+				<Image src={ props.img_url || Images.Doctor2 } alt={ props.full_name_doctor } width={ 80 } height={ 80 } className='rounded-[10px] w-[80px] h-[80px] object-cover' />
 				<div className='flex flex-col gap-1 sm:gap-2'>
 					<Text
 						fontSize='20px'
@@ -83,7 +84,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 			}
 			{ /* Button lihat detail */ }
 			<div className='mt-4 text-right sm:mt-6'>
-				<Link href={ `/doctor-detail/${ props.doctor_code }` }>
+				<Link href={ `/doctor/${ props.doctor_code }` }>
 					<div className='md:inline-block'>
 						<Button theme='outline' className='h-[36px] py-0 grow-0'>
 							<div className='flex gap-3 items-center justify-center'>

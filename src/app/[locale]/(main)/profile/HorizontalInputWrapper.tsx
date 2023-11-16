@@ -24,7 +24,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 				{
 					!!props.labelInfo ?
 						<PopupInfoContainerStyle>
-							<Image src={ icons.ExclamationMark } alt="" className='cursor-pointer' />
+							<icons.ExclamationMark className='cursor-pointer' />
 							<BalloonPopupStyle className='balloon-popup min-[300px]:min-w-[250px] min-[480px]:min-w-[400px]'>
 								<div className='rounded-[10px] px-[10px] py-[5px] h-full relative z-10'>
 									<Text

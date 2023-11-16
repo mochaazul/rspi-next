@@ -17,6 +17,7 @@ import { FindDoctorState, UserState } from '@/interface';
 import dayjs from 'dayjs';
 import { getLastVisitHospital, getVisitHistories } from '@/stores/PatientProfile';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 
 const { riwayatLab, riwayatVaksin } = Languages.page.patientPortal;
 
@@ -192,7 +193,7 @@ const PatientPortal = () => {
 					<section id='user-info'
 						className='flex flex-row sm:w-1/2 md:w-1/4'
 					>
-						<img src={ userDetail.img_url || Images.ProfilePatient } />
+						<Image src={ userDetail.img_url || Images.ProfilePatient } />
 						<div className='ml-[15px]'>
 							<Text text={ userDetail.name } fontSize='16px' fontWeight='700' />
 							<Text text={ `${ parseBod(userDetail.birthdate) }` } className='md:mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />

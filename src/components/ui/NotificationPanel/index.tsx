@@ -1,4 +1,4 @@
-import { Text } from '@/components';
+import { Text } from '@/components/ui';
 import { icons } from '@/constant';
 
 import { StyleProps, NotificationStyle } from './style';
@@ -49,7 +49,7 @@ const NotificationPanel = ({
 					{
 						!!showIconRightOverride ?
 							showIconRightOverride :
-							<Image src={icons.Close} alt="" />
+							<icons.Close />
 					}
 				</div>
 			</div>

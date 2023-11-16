@@ -10,14 +10,15 @@ import { getClinics, getFacilitiesAndServices } from '@/lib/api/clinics';
 
 import CustomCarousel from '@/components/ui/Carousel';
 import LangWrapper from '@/components/ui/LangWrapper';
-import ServicesTabs from '@/components/ui/PageComponents/LandingPageSections/Services';
-import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
-import CustomerReview from '@/components/ui/PageComponents/LandingPageSections/CustomerReview';
-import MobileAppBanner from '@/components/ui/PageComponents/LandingPageSections/MobileAppBanner';
+
 import CentreOfExcellence from '@/components/ui/PageComponents/LandingPageSections/CenterOfExcelence';
+import ServicesTabs from '@/components/ui/PageComponents/LandingPageSections/Services';
 import FacilitiesServices from '@/components/ui/PageComponents/LandingPageSections/FacilitiesServices';
+import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
 import NewsHealthArticles from '@/components/ui/PageComponents/LandingPageSections/NewsHealthArticles';
+import CustomerReview from '@/components/ui/PageComponents/LandingPageSections/CustomerReview';
 import AccreditationAwards from '@/components/ui/PageComponents/LandingPageSections/AccreditationsAwards';
+import MobileAppBanner from '@/components/ui/PageComponents/LandingPageSections/MobileAppBanner';
 
 import { isMobile } from 'react-device-detect';
 

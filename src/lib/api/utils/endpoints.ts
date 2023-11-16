@@ -18,7 +18,7 @@ const endpointData = {
 	footerCategories: { path: '/footer-categories', method: 'POST' },
 	notification: { path: '/notification', method: 'POST' },
 	readNotification: { path: '/notification/seen', method: 'POST' },
-	familyProfile: { path: '/patients/family', method: 'POST' },
+	createFamilyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
 	checkPatientPhone: { path: '/patients/check-patient-phone', method: 'POST' },
 
@@ -30,6 +30,8 @@ const endpointData = {
 	createPin: { path: '/patients/pin', method: 'PUT' },
 
 	// GET
+	patients: { path: '/patients', method: 'GET' },
+	visitHistory: { path: '/patients/patient-portal/visit-histories', method: 'GET' },
 	banner: { path: '/banners', method: 'GET' },
 	profile: { path: '/patients/profile', method: 'GET' },
 	facilities: { path: '/facilities', method: 'GET' },
@@ -47,19 +49,20 @@ const endpointData = {
 	events: { path: '/events', method: 'GET' },
 	article: { path: '/news', method: 'GET' },
 	getFooter: { path: '/footer-pages', method: 'GET' },
+	masterDoctor: { path: '/doctors/master', method: 'GET' },
+	familyProfile: { path: '/patients/family', method: 'GET' },
+
+	deleteFamilyProfile: { path: '/patients/family', method: 'DELETE' },
+	
 	getNotification: { path: '/notification', method: 'GET' },
 	getNews: { path: '/news', method: 'GET' },
 	getNewsSpecialtyByID: { path: '/specialities/related-specialities', method: 'GET' },
 	getRelatedNews: { path: '/news/related-news', method: 'GET' },
-
-
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },
 	// doctors: '/doctors' -> replaced by masterdoctor,
 	// findDoctor: { path: '/find/doctor', method: 'GET' }, -> Replaced by master doctor since master doctor enpoint accept filtering
-	// patients: '/patients',
 	// specialities: '/specialities',
-	// familyProfile: '/patients/family',
 
 } as const;
 

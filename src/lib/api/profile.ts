@@ -1,6 +1,6 @@
-import { UserDataDetail } from '@/interface';
+import { FamilyProfilePayload, UserDataDetail } from '@/interface';
 
-import fetcher from './utils/fetcher';
+import fetcher, { ApiOptions } from './utils/fetcher';
 
 export const getProfile = () => {
 	return fetcher<UserDataDetail>('profile');

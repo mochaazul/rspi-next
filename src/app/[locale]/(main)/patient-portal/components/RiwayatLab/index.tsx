@@ -1,16 +1,18 @@
+import { useEffect } from 'react';
+import dayjs from 'dayjs';
+import styled from 'styled-components';
+import Image from 'next/image';
+import { isEmpty } from 'lodash';
+
 import { Button, Spinner, Text } from '@/components/ui';
 import { baseUrl } from '@/config';
 import { Languages, colors, icons } from '@/constant';
-import dayjs from 'dayjs';
 import { useTypedSelector } from '@/hooks';
-import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { PatientState } from '@/interface/PatientProfile';
-import { isEmpty } from 'lodash';
-import { CardPatientPortalStyle, EmptyResultContainer } from 'pages/PatientPortal/style';
-import { useEffect } from 'react';
 import { getLabResults } from '@/stores/PatientProfile';
-import styled from 'styled-components';
-import Image from 'next/image';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+
+import { CardPatientPortalStyle, EmptyResultContainer } from '../../style';
 
 const LaporanBtn = styled.a`
 	background-color: ${ colors.green.brandAccent };
@@ -42,7 +44,7 @@ const RiwayatLab = () => {
 	);
 	if (isEmpty(labResults)) {
 		return (<EmptyResultContainer>
-			<Image src={icons.NoLabResult} alt="" />
+			<icons.NoLabResult />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'

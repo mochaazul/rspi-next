@@ -2,6 +2,7 @@ import { Button, Text, Share } from '@/components/ui';
 import { colors } from '@/constant';
 
 import { CardNewsStyle } from './styles';
+import Image from 'next/image';
 
 interface PropsType {
 	id: number;
@@ -61,7 +62,7 @@ const CardNews = (props: PropsType) => {
 						/>
 					</div>
 				</div>
-				<img src={ props.imgThumb } alt={ props.title } className='w-[254px] h-[145px] rounded-md object-cover' />
+				<Image src={ props.imgThumb } alt={ props.title } className='w-[254px] h-[145px] rounded-md object-cover' />
 			</div>
 		</CardNewsStyle>
 	);

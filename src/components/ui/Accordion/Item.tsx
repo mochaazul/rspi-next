@@ -5,9 +5,8 @@ import { Text } from '@/components/ui';
 
 import { ItemType } from '.';
 import { ItemStyle } from './style';
-import Image from 'next/image';
 
-const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
+export const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
 	<div className='flex cursor-pointer' onClick={ props.onClick }>
 		<div className='flex-1'>
 			<Text
@@ -22,7 +21,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; }) => (
 			</Text>
 		</div>
 		<div className='grow-0'>
-			<icons.ArrowDown className={ `svg-green chevron ${ props.open ? 'up' : '' }` } />
+			< icons.ArrowDown className={ `svg-green chevron ${ props.open ? 'up' : '' }` } />
 		</div>
 	</div>
 );

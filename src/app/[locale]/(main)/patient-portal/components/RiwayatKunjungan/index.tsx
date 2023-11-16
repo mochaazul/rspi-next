@@ -1,20 +1,21 @@
-import { useAppDispatch, useTypedSelector } from '@/hooks';
-import CardAppointment from '../CardAppointment';
-import { getVisitHistories } from '@/stores/PatientProfile';
 import { useEffect } from 'react';
-import { PatientState } from '@/interface/PatientProfile';
 import dayjs from 'dayjs';
 import { isEmpty } from 'lodash';
-import { EmptyResultContainer } from 'pages/PatientPortal/style';
-import { Languages, icons } from '@/constant';
-import { Button, Spinner, Text } from '@/components/ui';
 import Link from 'next/link';
 import Image from 'next/image';
+
+import { useAppDispatch, useTypedSelector } from '@/hooks';
+import { getVisitHistories } from '@/stores/PatientProfile';
+import { PatientState } from '@/interface/PatientProfile';
+import { Languages, icons } from '@/constant';
+import { Button, Spinner, Text } from '@/components/ui';
+
+import CardAppointment from '../CardAppointment';
+import { EmptyResultContainer } from '../../style';
 
 const { empty } = Languages.page.patientPortal.riwayatKunjungan;
 
 const RiwayatKunjungan = () => {
-
 	const getVisitHistoriesDispatch = useAppDispatch(getVisitHistories);
 	const { visitHistories, loading } = useTypedSelector<PatientState>('patient');
 
@@ -38,7 +39,7 @@ const RiwayatKunjungan = () => {
 
 	if (isEmpty(visitHistories)) {
 		return (<EmptyResultContainer>
-			<Image src={ icons.EmptyVisitHistories } alt="" />
+			<icons.EmptyVisitHistories />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'

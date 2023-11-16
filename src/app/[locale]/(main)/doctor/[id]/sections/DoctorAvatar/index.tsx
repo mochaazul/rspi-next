@@ -28,25 +28,20 @@ export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
 			/>
 			<div className='flex gap-[10px] mt-[20px] '>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.facebook.com/RumahSakitPondokIndah') }>
-					<Image
-					src={icons.FacebookIcon}
-					width={16}
-					height={16}
-					alt="" />
+					<Icons.Facebook
+						width='16px'
+						height='16px' />
 				</div>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://twitter.com/rspondokindah') }>
-					<Image
-					src={icons.TwitterIcon}
-					width={16}
-					height={16}
-					alt="" />
+					<Icons.Twitter
+						width='16px'
+						height='16px'/>
 				</div>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.linkedin.com/company/rumah-sakit-pondok-indah/') }>
-					<Image
-					src={icons.LinkedIn}
-					width={16}
-					height={16}
-					alt="" />
+					<Icons.Linkedin
+						width='16px'
+						height='16px'
+					/>
 				</div>
 				<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
 					<Icons.Link width='16px' height='16px' />
@@ -60,7 +55,7 @@ const DoctorAvatar: React.FC<Props> = ({ profile_url, className }) => {
 
 	return <>
 		<div className={ `mb-[30px] max-sm:flex max-sm:justify-center ${ className }` }>
-			<img src={ profile_url ?? Images.DoctorProfile } className='object-cover rounded lg:w-[254px] lg:h-[304px] w-[118px] h-[118px]' />
+			<Image src={ profile_url ?? Images.DoctorProfile } className='object-cover rounded lg:w-[254px] lg:h-[304px] w-[118px] h-[118px]' />
 			<ShareDoctor className='max-sm:hidden' />
 		</div>
 	</>;

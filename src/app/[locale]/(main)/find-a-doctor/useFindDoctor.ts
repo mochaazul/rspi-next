@@ -1,9 +1,8 @@
 import { PickerItem } from '@/components/ui/DropdownSearch';
-import { createFieldConfig, maxLengthRule, minLengthRule, requiredRule } from '@/helpers';
-import { useTypedSelector } from '@/hooks';
-import { HospitalState } from '@/interface';
-import { I_SpecialitiesState } from '@/interface/specialities';
-import { useSearchParams } from 'next/navigation';
+import { createFieldConfig } from '@/helpers';
+import { HospitalDetail } from '@/interface';
+import { ClinicResponse } from '@/interface/clinic';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const searchFilterField = {
 	day: {
@@ -24,51 +23,67 @@ export const searchFilterField = {
 	}
 };
 
-const useFindDoctor = () => {
-	const hospitalSelector = useTypedSelector<HospitalState>('hospital');
-	const { specialities } = useTypedSelector<I_SpecialitiesState>('specialities');
-	const { clinics } = useTypedSelector<I_SpecialitiesState>('specialities');
-	const searchParams = useSearchParams()!;
-	const params = new URLSearchParams(searchParams);
+type Props = {
+	hospitals: HospitalDetail[],
+	clinics: ClinicResponse[]
+}
+
+const useFindDoctor = ({ hospitals, clinics }:Props) => {
+
+	const router = useRouter();
+	const pathName = usePathname();
+	const searchParams = useSearchParams();
+	const createQueryString = (name: string, value: string): void => {
+		const params = new URLSearchParams(searchParams);
+		params.set(name, value);
+		router.push(`${pathName}?${params.toString()}`, { scroll: false });
+	};
+
+	const deleteQueryString = (name: string): void => {
+		const params = new URLSearchParams(searchParams);
+		params.delete(name);
+		router.push(`${pathName}?${params.toString()}`);
+	};
 
 	const filterHospital = () => {
-		const obj = searchParams.get('hospital')?.split(',') ?? [];
-		return hospitalSelector.hospitals.filter(hospital => obj?.includes(hospital.hospital_code)).map(item => ({
+		const obj = searchParams.get('hospital_code')?.split(',') ?? [];
+		return hospitals.filter(hospital => obj?.includes(hospital.hospital_code)).map(item => ({
 			hospital_code: item.hospital_code,
 			id: item.id
 		}));
 	};
 
 	const deleteHospitalFilter = (hospital_code: string) => {
-		const values = searchParams.get('hospital')?.split(',') ?? [];
+		const values = searchParams.get('hospital_code')?.split(',') ?? [];
 		const filteredValues = values.filter(item => item !== hospital_code);
-		params.set('hospital', filteredValues.toString());
+		createQueryString('hospital_code', filteredValues.toString());
 	};
 
 	const clearHospitalFilter = () => {
-		params.delete('hospital');
+		deleteQueryString('hospital_code');
 	};
 
 	const addSpecialty = (item: PickerItem) => {
-		const prevSpecialty = params.get('clinic_code');
-		params.set('clinic_code', prevSpecialty ? prevSpecialty + ',' + item.speciality_code : item.speciality_code);
+		const prevSpecialty = searchParams.get('specialty_category');
+		createQueryString('specialty_category', prevSpecialty ? prevSpecialty + ',' + item.speciality_code : item.speciality_code);
 	};
 
 	const deleteSpecialty = (item: PickerItem) => {
 		const values = searchParams.get('clinic_code')?.split(',') ?? [];
 		if (values.length < 2) {
-			params.delete('clinic_code');
+			deleteQueryString('specialty_category');
 			return;
 		}
-		const filteredSpecialty = values.filter(sp => sp !== item.label);
-		params.set('clinic_code', filteredSpecialty.toString());
+		const filteredSpecialty = values.filter(sp => sp !== item.specialty_code);
+		createQueryString('specialty_category', filteredSpecialty.toString());
 	};
 
 	const getSpecialty = (): PickerItem[] => {
-		const values = searchParams.get('clinic_code')?.split(',') ?? [];
-		return specialities.filter(sp => values.includes(sp?.speciality ?? '')).map((sp, index) => ({
+		const values = searchParams.get('specialty_category')?.split(',') ?? [];
+		return clinics.filter(sp => values.includes(sp.clinic_code ?? '')).map((sp, index) => ({
 			id: sp.id,
-			label: sp?.speciality ?? ''
+			label: sp?.clinic_name ?? '',
+			specialty_code: sp.clinic_code
 		}));
 	};
 
@@ -76,7 +91,8 @@ const useFindDoctor = () => {
 		const values = searchParams.get('clinic_code')?.split(',') ?? [];
 		return clinics.filter(sp => values.includes(sp?.clinic_code ?? '')).map((sp, index) => ({
 			id: sp.id,
-			label: sp?.clinic_name ?? ''
+			label: sp?.clinic_name ?? '',
+			specialty_code: sp.clinic_code
 		}));
 	};
 
@@ -84,9 +100,9 @@ const useFindDoctor = () => {
 		const currentParams = Object.fromEntries(searchParams);
 		const removedParams = removeFromString(currentParams[pillValue.key], pillValue.id);
 		if (pillValue.key === 'telemedicine') {
-			params.set('telemedicine', 'false');
+			createQueryString('telemedicine', 'false');
 		} else {
-			params.set(pillValue.key, removedParams);
+			createQueryString(pillValue.key, removedParams);
 		}
 
 	};
@@ -109,7 +125,15 @@ const useFindDoctor = () => {
 		if (pageRef && pageRef === 'landing' && JSON.parse(isTelemedicine)) return false;
 		return true;
 	};
-
+	const clearSearchParams = () => {
+		router.push(pathName);
+	};
+	const setDoctorName = (value: string) => {
+		createQueryString('keyword', value);
+	};
+	const getDoctorName = () => {
+		return searchParams.get('keyword');
+	};
 	return {
 		hospitalFilter: {
 			delete: deleteHospitalFilter,
@@ -130,7 +154,13 @@ const useFindDoctor = () => {
 			get: getTelemedicineFIlter,
 			shouldRender: shouldRenderTelemedicine
 		},
-		onDeletePills
+		doctorNameFilter: {
+			set: setDoctorName,
+			get: getDoctorName
+		},
+		onDeletePills,
+		createQueryString,
+		clearSearchParams
 	};
 };
 

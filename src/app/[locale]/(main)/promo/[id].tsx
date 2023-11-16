@@ -75,7 +75,7 @@ const DetailEventClassesPromo = () => {
 							</div>
 							<div className='content-wrapper mt-[20px] mb-[100px]'>
 								<div className='mt-[30px] w-full flex gap-8'>
-									<img src={ selectedEvent?.img_url_detail } className='mx-auto object-cover max-w-[450px] max-h-[624px]' />
+									<Image src={ selectedEvent?.img_url_detail } className='mx-auto object-cover max-w-[450px] max-h-[624px]' />
 									<div>
 										<div
 											className='innerHTML'

@@ -217,7 +217,7 @@ export const Header = ({
 										{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
 											<Link href={ `/center-of-excellence/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-													<img src={ item?.img_url?.[0] } width={ 60 } height={ 60 } />
+													<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
@@ -239,7 +239,7 @@ export const Header = ({
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-													<img src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
+													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>

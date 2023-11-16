@@ -45,7 +45,7 @@ const Title = (props: { open: boolean; text: string, clinics: I_MasterDoctorClin
 		</div>
 		{
 			props.hideIconChevron ? <></> : <div className='grow-0 mr-[-5px]'>
-				<Image src={ icons.ArrowDown } alt="" className={ `chevron w-[18px] h-[18px] sm:w-[25px] sm:h-[25px] ${ props.open ? 'up' : '' }` } />
+				<icons.ArrowDown className={ `chevron w-[18px] h-[18px] sm:w-[25px] sm:h-[25px] ${ props.open ? 'up' : '' }` } />
 			</div>
 		}
 

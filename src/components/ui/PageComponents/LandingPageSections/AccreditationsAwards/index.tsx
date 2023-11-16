@@ -6,6 +6,7 @@ import { colors } from '@/constant';
 import Button from '@/components/ui/Button';
 import { useScopedI18n } from '@/locales/client';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 	const t = useScopedI18n('page.landingPage.accreditationsAndAwards');
@@ -38,7 +39,7 @@ const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 					datas?.map((data, index) => (
 						<div key={ index } className='md:flex-1 sm:px-5 sm:py-3 card-shadow'>
 							<div className='image'>
-								<img src={ data.img_url } alt={ data.title } />
+								<Image src={ data.img_url } alt={ data.title } />
 							</div>
 							<div>
 								<Text

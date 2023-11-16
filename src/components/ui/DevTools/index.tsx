@@ -6,7 +6,7 @@ import {
 	useState
 } from 'react';
 
-import { persistor } from '@/stores';
+// import { persistor } from '@/stores'; Migrate
 
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
@@ -31,7 +31,7 @@ const DevTools = () => {
 	}, [open]);
 
 	const flushReduxPersist = () => {
-		persistor.purge();
+		// persistor.purge(); Migrate
 		setOpen(false);
 	};
 

@@ -37,7 +37,7 @@ const BalloonSlider = (props: PropTypes) => {
 			</BalloonItemStyle>
 			<div className='flex flex-row gap-4 items-center'>
 				<div className='grow-0 w-14 h-14 rounded-full overflow-hidden'>
-					<img src={ props.customer_avatar } alt={ props.customer_name } className='w-full h-full' />
+					<Image src={ props.customer_avatar } alt={ props.customer_name } className='w-full h-full' />
 				</div>
 				<div className='flex-1'>
 					<Text

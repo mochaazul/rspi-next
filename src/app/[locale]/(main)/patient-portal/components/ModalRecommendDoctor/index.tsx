@@ -1,16 +1,17 @@
+import { useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
+import Image from 'next/image';
+import styled from 'styled-components';
+import { isEmpty } from 'lodash';
+
 import { Modal, Text, Button, Spinner } from '@/components/ui';
 import { Images, Languages, colors, icons } from '@/constant';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { GiveRatingDoctorPayload, I_VisitHistory, PatientProfile, PatientState } from '@/interface/PatientProfile';
-import { isEmpty } from 'lodash';
-
-import { ModalStyle } from 'pages/PatientPortal/style';
-import { useState } from 'react';
 import { giveDoctorRating } from '@/stores/PatientProfile';
-import styled from 'styled-components';
-import Image from 'next/image';
+import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+
+import { ModalStyle } from '../../style';
 
 interface PropsType {
 	visible?: boolean;
@@ -144,7 +145,7 @@ const Feedback = ({ onChange, value }: { value: string[], onChange: (value: stri
 							color={ isChecked(opt) ? '#358888' : '#2A2536' }
 							text={ opt } />
 						{ isChecked(opt)
-							? <Image src={icons.CheckActive} alt="" />
+							? <icons.CheckActive />
 							: <FeedbackPillsCheck /> }
 					</FeedbackPills>
 				))
@@ -182,7 +183,6 @@ const FeedbackNotes = ({ onChange, value }: { value: string, onChange: (value: s
 };
 
 const RecommendDoctorModal = (props: PropsType) => {
-
 	const giveRatingDispatch = useAppAsyncDispatch<GiveRatingDoctorPayload>(giveDoctorRating);
 	const { loading, error } = useTypedSelector<PatientState>('patient');
 

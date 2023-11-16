@@ -1,8 +1,7 @@
 import { Modal, Text, Button } from '@/components/ui';
 import { Images, colors } from '@/constant';
+import { ModalStyle } from '../../style';
 import Image from 'next/image';
-
-import { ModalStyle } from 'pages/PatientPortal/style';
 
 interface PropsType {
 	visible?: boolean;

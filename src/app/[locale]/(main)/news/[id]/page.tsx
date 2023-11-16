@@ -27,6 +27,7 @@ import {
 } from './helpers';
 
 import { ArticleState } from '@/interface';
+import Image from 'next/image';
 
 const language = lang.page.newsDetail;
 
@@ -127,7 +128,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 								<Text fontWeight='700' fontSize='20px' lineHeight='30px'>
 									{ selectedArticle?.short_description }
 								</Text>
-								<img src={ selectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
+								<Image src={ selectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
 								<div
 									style={ { color: colors.grey.dark } }
 									className='innerHTML mt-[10px]'

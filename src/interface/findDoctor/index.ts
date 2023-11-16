@@ -1,4 +1,4 @@
-import { PickerItem } from '@/components/ui/DropdownSearch';
+import { PickerItem } from '@/components/DropdownSearch';
 import { Pagination, ResponseStatus } from '@/interface';
 
 export interface FindDoctorState {
@@ -54,20 +54,18 @@ export interface TimeSlot {
 	session_app_start: string;
 }
 export interface FindDoctorDetail {
-	id: number;
-	name: string;
-	speciality: string;
-	schedule: number;
-	img_url: string;
-	specialty: string[];
 	clinic: [{
 		clinic_code: string;
 		clinic_name: string;
 	}];
+	doctor_code: string
 	hospital: [{
 		hospital_code: string;
 		hospital_name: string;
 	}];
+	img_url: string;
+	name: string;
+	specialty: string[];
 }
 
 export interface I_MasterDoctorParams {
