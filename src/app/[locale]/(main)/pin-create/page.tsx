@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Button, Form, NotificationPanel, Text } from '@/components';
+import { Button, Form, NotificationPanel, Text } from '@/components/ui';
 import { Languages, colors } from '@/constant';
 import Images from '@/constant/images';
 import { useTypedSelector } from '@/hooks';

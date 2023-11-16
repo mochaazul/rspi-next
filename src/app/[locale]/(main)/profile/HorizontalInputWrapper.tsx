@@ -2,8 +2,8 @@ import React from 'react';
 
 import { colors } from '@/constant';
 import { icons } from '@/constant';
-import { Form, Text } from '@/components';
-import WithInputLabel from '@/components/withInputLabel';
+import { Form, Text } from '@/components/ui';
+import WithInputLabel from '@/components/ui/withInputLabel';
 
 import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
 import Image from 'next/image';

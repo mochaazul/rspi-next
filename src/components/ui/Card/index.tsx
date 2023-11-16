@@ -16,7 +16,7 @@ import {
 	CardContentHTML
 } from './style';
 import Image from 'next/image';
-import { Share } from '@/components';
+import { Share } from '@/components/ui';
 import { icons } from '@/constant';
 
 interface PropsType {

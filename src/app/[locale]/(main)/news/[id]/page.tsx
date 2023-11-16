@@ -1,8 +1,10 @@
 'use client';
 import { usePathname } from 'next/navigation';
-import { SetStateAction, useEffect, useState } from 'react';
+import {
+	useEffect,
+	useState
+} from 'react';
 
-import * as Icons from 'react-feather';
 import moment from 'moment';
 
 import {
@@ -10,33 +12,29 @@ import {
 	Text,
 	Tabs,
 	Button
-} from '@/components';
-import { colors, icons, Languages as lang, sosmedLink } from '@/constant';
-// import { navigation } from '@/helpers';
-// import { getArticleByID, getRelatedNewsByID, getNewsSpecialtyByID } from '@/stores/Articles';
-// import { useAppDispatch, useTypedSelector } from '@/hooks';
-// import { ArticleDetail, ArticleState } from '@/interface';
-// import Image from 'next/image';
-import { fetchNewsSpecialtyByID, fetchDetail } from './helpers';
+} from '@/components/ui';
+import {
+	colors,
+	icons,
+	Languages as lang,
+	sosmedLink
+} from '@/constant';
+
+import {
+	fetchNewsSpecialtyByID,
+	fetchDetail,
+	fetchRelatedNews
+} from './helpers';
+
+import { ArticleState } from '@/interface';
 
 const language = lang.page.newsDetail;
-
-const relatedNews = [
-	{
-		date: 'Rabu, 20 Apr 2022',
-		title: 'RS Pondok Indah Group Raih Validasi HIMSS EMRAM Tingkat 6, Pertama di Indonesia'
-	},
-	{
-		date: 'Rabu, 20 Apr 2022',
-		title: 'RS Pondok Indah Group Raih Validasi HIMSS EMRAM Tingkat 6, Pertama di Indonesia'
-	}
-];
 
 const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 	const pathname = usePathname();
 
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
-
+	const [relatedNews, setRelatedNews] = useState<ArticleState['relatedNews']>([]);
 	const [specialty, setSpecialty] = useState<ArticleState['specialty']>([]);
 	const [selectedArticle, setSelectedArticle] = useState<ArticleState['selectedArticle']>({
 		id: 0,
@@ -62,25 +60,16 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 		speciality: '',
 	});
 
-	// const { selectedArticle, specialty } = useTypedSelector<ArticleState>('articles');
-
-	// const detailArticleDispatch = useAppDispatch(getArticleByID);
-	// const relatedNewsArticleDispatch = useAppDispatch(getRelatedNewsByID);
-	// const specialityNewsArticleDispatch = useAppDispatch(getNewsSpecialtyByID);
-
-	
 	useEffect(() => {
+		fetchRelatedNews(props.params.id).then(function(response) {
+			setRelatedNews(response?.data);
+		});
 		fetchNewsSpecialtyByID(props.params.id).then(function(response) {
 			setSpecialty(response?.data);
 		});
 		fetchDetail(props.params.id).then(function(response) {
 			setSelectedArticle(response?.data);
 		});
-
-		console.log(selectedArticle);
-		// detailArticleDispatch({ id: params?.id });
-		// relatedNewsArticleDispatch({ id: params?.id, queryParam: { limit: 2 } });
-		// specialityNewsArticleDispatch({ id: params?.id, queryParam: { limit: 2 } });
 	}, []);
 
 	const breadcrumbsPath = [{ name: 'News & Health Articles', url: '/news' }, { url: '#', name: 'Title Selected Article' || '' }]; // selectedArticle?.title
@@ -117,7 +106,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 									lineHeight='22px'
 									color={ colors.grey.dark }
 								/>
-								{/* <div className='flex gap-[15px]'>
+								<div className='flex gap-[15px]'>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window.location.href) }>
 										<icons.FacebookIcon width='16px' height='16px'/>
 									</div>
@@ -130,7 +119,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
 										<icons.Link width='16px' height='16px' />
 									</div>
-								</div> */}
+								</div>
 							</div>
 						</div>
 						<div className='content-wrapper flex mt-[20px] mb-[100px]'>
@@ -151,11 +140,11 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 										tabsData={ ['Related News'] }
 									/>
 									<div className='divide-y divide-solid pt-[10px]'>
-										{ relatedNews.map((a, index) => {
+										{ Object.values(relatedNews || []).map((a, index) => {
 											return (
 												<div key={ index }>
 													<Text
-														text={ a.date }
+														text={ a.posted_date }
 														className='py-[10px]'
 														fontSize='12px'
 														fontWeight='400'
@@ -215,11 +204,11 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 										tabsData={ ['Related News'] }
 									/>
 									<div className='divide-y divide-solid pt-[10px]'>
-										{ relatedNews?.map((a, index) => {
+										{ Object.values(relatedNews || [])?.map((a, index) => {
 											return (
 												<div key={ index }>
 													<Text
-														text={ a.date }
+														text={ a.posted_date }
 														className='py-[10px]'
 														fontSize='12px'
 														fontWeight='400'

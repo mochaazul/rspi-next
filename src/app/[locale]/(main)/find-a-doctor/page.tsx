@@ -14,7 +14,7 @@ import {
 	Layout,
 	Modal,
 	Text,
-} from '@/components';
+} from '@/components/ui';
 import { colors, Languages as lang } from '@/constant';
 import { BreadcrumbsProps, FindDoctorState, HospitalState, I_MasterDoctorParams } from '@/interface';
 import { useAppDispatch, useTypedSelector } from '@/hooks';

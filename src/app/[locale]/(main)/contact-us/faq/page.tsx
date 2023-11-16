@@ -2,14 +2,20 @@
 
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
-
+import {
+	PanelH1,
+	PanelH2,
+	PanelH3,
+	PanelH4,
+	PanelV1
+} from '@/app/[locale]/(main)/layout';
 import {
 	Accordion,
 	Breadcrumbs,
 	Form,
 	Layout,
 	Text
-} from '@/components';
+} from '@/components/ui';
 
 import { colors } from '@/constant';
 import FAQDatas from '../FAQDatas';
@@ -42,11 +48,11 @@ const FAQPage = () => {
 
 	return (
 		<FAQStyle>
-			<Layout.PanelV1>
-				<Layout.PanelH1>
+			<PanelV1>
+				<PanelH1>
 					<Breadcrumbs datas={ breadCrumbsPath } />
-				</Layout.PanelH1>
-				<Layout.PanelH4>
+				</PanelH1>
+				<PanelH4>
 					<div className='sm:mt-[50px] mt-[25px]'>
 						<Text
 							fontType='h1'
@@ -85,8 +91,8 @@ const FAQPage = () => {
 							datas={ searchValue !== '' ? handleSearchFAQ() : FAQDatas }
 						/>
 					</div>
-				</Layout.PanelH4>
-			</Layout.PanelV1>
+				</PanelH4>
+			</PanelV1>
 		</FAQStyle>
 	);
 };

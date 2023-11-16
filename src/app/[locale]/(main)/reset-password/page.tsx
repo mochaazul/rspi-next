@@ -1,9 +1,9 @@
 import { Images, Languages, colors } from '@/constant';
-import { Button, Text, Form, NotificationPanel } from '@/components';
+import { Button, Text, Form, NotificationPanel } from '@/components/ui';
 
 import { ResetPasswordStyle, Box } from './style';
 import useResetPassword from './useResetPassword';
-import SpinVerification from '@/components/SpinVerification';
+import SpinVerification from '@/components/ui/SpinVerification';
 import { FormEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';

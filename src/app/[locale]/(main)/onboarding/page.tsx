@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Images, Languages, colors } from '@/constant';
 import {
 	Button, Text, Form, NotificationPanel, Spinner, Checkbox
-} from '@/components';
+} from '@/components/ui';
 import { UserState } from '@/interface';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { localStorage } from 'helpers';
@@ -14,7 +14,7 @@ import { localStorage } from 'helpers';
 import useRegisterOnboard from './useRegisterOnboard';
 import { RegisterOnboardStyle, Box } from './style';
 import { clearError } from '@/stores/actions';
-import PrivacyPolicyModal from '@/components/PrivacyPolicyModal';
+import PrivacyPolicyModal from '@/components/ui/PrivacyPolicyModal';
 
 const { heading, mrNotAvailableBtnLabel, subHeading, submitBtnLabel, form, errors } = Languages.page.registerOnboard;
 

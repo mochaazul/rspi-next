@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Footer, Header, CallForAmbulance } from '@/components';
+import { Footer, Header, CallForAmbulance } from '@/components/ui';
 
 import {
 	OutletStyle,
@@ -11,7 +11,7 @@ import {
 	PanelH4,
 	PanelV1
 } from './style';
-import DevTools from '@/components/DevTools';
+import DevTools from '@/components/ui/DevTools';
 import { appStage } from '@/config';
 
 const Layout = (props: { containerStyle?: OutletStyleType; footerShow?: boolean; }) => {

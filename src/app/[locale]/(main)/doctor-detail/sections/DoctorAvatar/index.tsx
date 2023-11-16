@@ -1,4 +1,4 @@
-import { Text } from '@/components';
+import { Text } from '@/components/ui';
 import { Images, icons } from '@/constant';
 import { navigation } from '@/helpers';
 import Image from 'next/image';

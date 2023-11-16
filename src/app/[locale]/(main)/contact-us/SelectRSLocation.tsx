@@ -1,6 +1,6 @@
 import * as Icons from 'react-feather';
 
-import { Button, Text } from '@/components';
+import { Button, Text } from '@/components/ui';
 import { colors } from '@/constant';
 
 import { SelectRSLocationStyle } from './style';

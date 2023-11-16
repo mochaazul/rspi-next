@@ -1,5 +1,5 @@
 import { RadioGroup } from '@headlessui/react';
-import { Modal, Text, Button, Spinner } from '@/components';
+import { Modal, Text, Button, Spinner } from '@/components/ui';
 import { Images, Languages, colors, icons } from '@/constant';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';

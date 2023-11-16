@@ -1,4 +1,4 @@
-import { PickerItem } from '@/components/DropdownSearch';
+import { PickerItem } from '@/components/ui/DropdownSearch';
 import { createFieldConfig, maxLengthRule, minLengthRule, requiredRule } from '@/helpers';
 import { useTypedSelector } from '@/hooks';
 import { HospitalState } from '@/interface';

@@ -48,6 +48,8 @@ const endpointData = {
 	getNotification: { path: '/notification', method: 'GET' },
 	getNews: { path: '/news', method: 'GET' },
 	getNewsSpecialtyByID: { path: '/specialities/related-specialities', method: 'GET' },
+	getRelatedNews: { path: '/news/related-news', method: 'GET' },
+
 
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },

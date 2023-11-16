@@ -115,3 +115,7 @@ export const getNewsSpecialtyByID = (param: { body?: any; param?: any; query?: a
 export const getArticleById = (param: { body?: any; param?: any; query?: any; } | undefined) => {
 	return fetcher<ArticleState['selectedArticle']>('getNews', param);
 };
+
+export const getRelatedNews = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+	return fetcher<ArticleState['relatedNews']>('getRelatedNews', param);
+};

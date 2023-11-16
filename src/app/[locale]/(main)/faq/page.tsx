@@ -9,7 +9,7 @@ import {
 	Form,
 	Layout,
 	Text
-} from '@/components';
+} from '@/components/ui';
 
 import { colors } from '@/constant';
 import FAQDatas from '../contact-us/FAQDatas';

@@ -1,4 +1,4 @@
-import { Button, Text, Share } from '@/components';
+import { Button, Text, Share } from '@/components/ui';
 import { colors } from '@/constant';
 
 import { CardNewsStyle } from './styles';

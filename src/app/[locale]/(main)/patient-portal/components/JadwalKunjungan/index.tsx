@@ -1,4 +1,4 @@
-import Radio from '@/components/Radio';
+import Radio from '@/components/ui/Radio';
 import CardAppointment from '../CardAppointment';
 import { useEffect, useState } from 'react';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
@@ -6,7 +6,7 @@ import { getAppointmentList } from '@/stores/PatientProfile';
 import { useTypedSelector } from '@/hooks';
 import { PatientState } from '@/interface/PatientProfile';
 import { isEmpty } from 'lodash';
-import { Button, Spinner, Text } from '@/components';
+import { Button, Spinner, Text } from '@/components/ui';
 import { EmptyResultContainer } from 'pages/PatientPortal/style';
 import icons from '@/constant/icons';
 import { useRouter } from 'next/navigation';

@@ -10,7 +10,7 @@ import {
 	PanelV1
 } from '@/app/[locale]/(main)/layout';
 
-import { BreadcrumbsType } from '@/components/Breadcrumbs';
+import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 
 import {
 	Accordion,
@@ -18,7 +18,7 @@ import {
 	Button,
 	CustomCarousel,
 	Text
-} from '@/components';
+} from '@/components/ui';
 import {
 	colors,
 	Images,

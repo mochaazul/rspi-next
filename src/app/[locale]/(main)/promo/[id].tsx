@@ -7,7 +7,7 @@ import {
 	Tabs,
 	Layout,
 	Spinner
-} from '@/components';
+} from '@/components/ui';
 import { colors, icons, sosmedLink } from '@/constant';
 import { navigation } from '@/helpers';
 import { getEventsByID } from '@/stores/EventClasses';

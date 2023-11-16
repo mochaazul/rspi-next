@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 
 const usePrevious = <T>(value: T): T | undefined => {

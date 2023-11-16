@@ -11,7 +11,7 @@ import {
 	Modal,
 	Spinner,
 	Text
-} from '@/components';
+} from '@/components/ui';
 
 import { colors } from '@/constant';
 import { useTypedSelector } from '@/hooks';

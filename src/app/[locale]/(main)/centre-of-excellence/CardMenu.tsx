@@ -1,4 +1,4 @@
-import { Text } from '@/components';
+import { Text } from '@/components/ui';
 import { colors } from '@/constant';
 import { CenterOfExcellenceDetail } from '@/interface';
 import { PropsWithChildren, PropsWithRef } from 'react';

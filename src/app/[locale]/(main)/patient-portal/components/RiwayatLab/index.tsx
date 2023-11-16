@@ -1,4 +1,4 @@
-import { Button, Spinner, Text } from '@/components';
+import { Button, Spinner, Text } from '@/components/ui';
 import { baseUrl } from '@/config';
 import { Languages, colors, icons } from '@/constant';
 import dayjs from 'dayjs';

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks';
 import { UserState } from '@/interface';
-import { Button, Form, Text, NotificationPanel, Modal, Checkbox } from '@/components';
+import { Button, Form, Text, NotificationPanel, Modal, Checkbox } from '@/components/ui';
 import { Languages, colors, icons } from '@/constant';
 import Images from '@/constant/images';
 

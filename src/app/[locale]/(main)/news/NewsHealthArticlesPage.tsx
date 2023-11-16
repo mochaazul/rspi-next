@@ -17,13 +17,13 @@ import {
 	Share,
 	EmptyData,
 	Form
-} from '@/components';
-import Card, { CardContentWithInner, CardsScrollHorizontal } from '@/components/Card';
+} from '@/components/ui';
+import Card, { CardContentWithInner, CardsScrollHorizontal } from '@/components/ui/Card';
 
 import CardNews from './CardNews';
 import { NewsHealthArticlesStyle } from './styles';
 import { newsPageEvent } from '@/utils/metaPixelTrack';
-import { BreadcrumbsType } from '@/components/Breadcrumbs';
+import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import { fetchArticle } from './helpers';
 
 const tabData = [

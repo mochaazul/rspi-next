@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { Images, Languages, colors } from '@/constant';
-import { Button, Text, Form } from '@/components';
+import { Button, Text, Form } from '@/components/ui';
 import { UserState } from '@/interface';
 import { useTypedSelector } from '@/hooks';
 

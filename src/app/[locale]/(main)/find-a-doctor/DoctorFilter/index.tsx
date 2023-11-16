@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-import { Button, Text, Form } from '@/components';
+import { Button, Text, Form } from '@/components/ui';
 import { colors, Languages as lang } from '@/constant';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { HospitalDetail, HospitalState } from '@/interface';
 import { getClinics, getSpecialities } from '@/stores/Specialities';
 import { I_SpecialitiesState, PayloadClinic } from '@/interface/specialities';
-import { PickerItem } from '@/components/DropdownSearch';
+import { PickerItem } from '@/components/ui/DropdownSearch';
 
 import Pills from '../Pills';
 import { AccordionFilterWrapper } from '../page';

@@ -10,14 +10,14 @@ import { getClinics, getFacilitiesAndServices } from '@/lib/api/clinics';
 
 import CustomCarousel from '@/components/ui/Carousel';
 import LangWrapper from '@/components/ui/LangWrapper';
-import ServicesTabs from '@/components/PageComponents/LandingPageSections/Services';
-import PromoPackages from '@/components/PageComponents/LandingPageSections/PromoPackages';
-import CustomerReview from '@/components/PageComponents/LandingPageSections/CustomerReview';
-import MobileAppBanner from '@/components/PageComponents/LandingPageSections/MobileAppBanner';
-import CentreOfExcellence from '@/components/PageComponents/LandingPageSections/CenterOfExcelence';
-import FacilitiesServices from '@/components/PageComponents/LandingPageSections/FacilitiesServices';
-import NewsHealthArticles from '@/components/PageComponents/LandingPageSections/NewsHealthArticles';
-import AccreditationAwards from '@/components/PageComponents/LandingPageSections/AccreditationsAwards';
+import ServicesTabs from '@/components/ui/PageComponents/LandingPageSections/Services';
+import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
+import CustomerReview from '@/components/ui/PageComponents/LandingPageSections/CustomerReview';
+import MobileAppBanner from '@/components/ui/PageComponents/LandingPageSections/MobileAppBanner';
+import CentreOfExcellence from '@/components/ui/PageComponents/LandingPageSections/CenterOfExcelence';
+import FacilitiesServices from '@/components/ui/PageComponents/LandingPageSections/FacilitiesServices';
+import NewsHealthArticles from '@/components/ui/PageComponents/LandingPageSections/NewsHealthArticles';
+import AccreditationAwards from '@/components/ui/PageComponents/LandingPageSections/AccreditationsAwards';
 
 import { isMobile } from 'react-device-detect';
 

@@ -5,7 +5,7 @@ import { useRouter, useParams, useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks';
 import { UserState } from '@/interface';
-import { Button, Spinner, Text } from '@/components';
+import { Button, Spinner, Text } from '@/components/ui';
 import { icons } from '@/constant';
 
 import useEmailVerificationPage from './useEmailVerificationPage';

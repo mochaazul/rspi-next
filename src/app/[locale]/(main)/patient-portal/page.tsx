@@ -1,14 +1,14 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 
 import { colors, Images, Languages } from '@/constant';
-import { Accordion, Modal, Text } from '@/components';
+import { Accordion, Modal, Text } from '@/components/ui';
 
-import JadwalKunjungan from './components/JadwalKunjungan';
-import RiwayatKunjungan from './components/RiwayatKunjungan';
-import RiwayatVaksin from './components/RiwayatVaksin';
-import RiwayatLab from './components/RiwayatLab';
+import JadwalKunjungan from './components/ui/JadwalKunjungan';
+import RiwayatKunjungan from './components/ui/RiwayatKunjungan';
+import RiwayatVaksin from './components/ui/RiwayatVaksin';
+import RiwayatLab from './components/ui/RiwayatLab';
 import { VisitHistoryStyle } from './style';
-import PinModal from '@/components/PinModal';
+import PinModal from '@/components/ui/PinModal';
 import { getAppointmentList } from '@/stores/actions';
 import { useTypedSelector } from '@/hooks';
 import { PatientState } from '@/interface/PatientProfile';

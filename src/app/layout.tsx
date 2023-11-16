@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Lato } from 'next/font/google';
 
 import StyledComponentsRegistry from '@/lib/registry';
-import FacebookPixel from '@/components/FacebookPixel';
+import FacebookPixel from '@/components/ui/FacebookPixel';
 import ProgressBar from '@/components/ui/ProgressBar';
 
 import '@/styles/globals.css';

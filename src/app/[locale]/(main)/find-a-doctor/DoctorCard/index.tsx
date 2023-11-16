@@ -3,7 +3,7 @@ import * as Icons from 'react-feather';
 import Link from 'next/link';
 
 import { Images, colors, Languages as lang } from '@/constant';
-import { Accordion, Button, Text } from '@/components';
+import { Accordion, Button, Text } from '@/components/ui';
 
 import { DoctorCardStyle } from './style';
 import ItemAccordion from './ItemAccordion';

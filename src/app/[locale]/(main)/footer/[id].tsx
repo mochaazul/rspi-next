@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Breadcrumbs, CustomCarousel, Spinner, Text } from '@/components';
+import { Breadcrumbs, CustomCarousel, Spinner, Text } from '@/components/ui';
 import { Languages, colors } from '@/constant';
 import { FooterState } from '@/interface';
 import { useAppDispatch, useTypedSelector } from '@/hooks';

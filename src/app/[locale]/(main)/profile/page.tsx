@@ -15,7 +15,7 @@ import {
 	Modal,
 	NotificationPanel,
 	MedicalRecordReminder
-} from '@/components';
+} from '@/components/ui';
 import { Images, Languages, colors, regExp } from '@/constant';
 import {
 	localStorage, createFieldConfig, requiredRule, minLengthRule, maxLengthRule
@@ -31,8 +31,8 @@ import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { getAppointmentList, updateEmail, updateProfile } from '@/stores/actions';
 import { checkPin, removeUser as removeUserData, updateAvatar, updateUserInfo } from '@/stores/User';
 import { splitDate } from '@/helpers/datetime';
-import PinModal from '@/components/PinModal';
-import { PinModalContainer } from '@/components/PinModal/style';
+import PinModal from '@/components/ui/PinModal';
+import { PinModalContainer } from '@/components/ui/PinModal/style';
 
 import ProfilePageStyle, { Divider } from './style';
 import HorizontalInputWrapper from './HorizontalInputWrapper';

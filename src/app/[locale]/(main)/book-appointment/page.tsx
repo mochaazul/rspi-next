@@ -10,7 +10,7 @@ import { Images, colors, icons } from '@/constant';
 import { AppointmentState } from '@/interface/Book';
 import {
 	Breadcrumbs, Button, Form, NotificationPanel, Text
-} from '@/components';
+} from '@/components/ui';
 import {
 	BookAppointmentContainer, BottomBar, DisclaimerAlert, FormCol, FormRow
 } from './style';
@@ -19,10 +19,10 @@ import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { bookAppointment } from '@/stores/Appointment';
 import ConfirmationModal from './ConfirmationModal';
 import ProfileSelector from './ProfileSelector';
-import AddProfileModal, { ProfilePayload } from '@/components/AddProfileModal';
+import AddProfileModal, { ProfilePayload } from '@/components/ui/AddProfileModal';
 import { getFamilyProfiles } from '@/stores/actions';
 import { Languages as lang } from '@/constant';
-import Radio from '@/components/Radio';
+import Radio from '@/components/ui/Radio';
 import { isEqual } from 'lodash';
 import SuccessConfirmationModal from './SuccessConfirmationModal';
 import { formatTimeslot, splitDate } from '@/helpers/datetime';

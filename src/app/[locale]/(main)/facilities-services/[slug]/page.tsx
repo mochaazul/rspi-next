@@ -9,9 +9,9 @@ import {
 	getFacilityServices,
 	getMedicalSpecialities
 } from '@/lib/api/facilities';
-import MedicalSpecialitiesComponent from '@/components/PageComponents/FacilitiesServicesSections/MedicalSpecialities';
-import FacilitiesMenuContent from '@/components/PageComponents/FacilitiesServicesSections/FacilitiesMenuContent';
-import CardMenu from '@/components/PageComponents/FacilitiesServicesSections/CardMenu';
+import MedicalSpecialitiesComponent from '@/components/ui/PageComponents/FacilitiesServicesSections/MedicalSpecialities';
+import FacilitiesMenuContent from '@/components/ui/PageComponents/FacilitiesServicesSections/FacilitiesMenuContent';
+import CardMenu from '@/components/ui/PageComponents/FacilitiesServicesSections/CardMenu';
 import Card, { CardContentWithInner, CardFooter } from '@/components/ui/Card';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';

@@ -2,12 +2,6 @@
 
 import React, { useState } from 'react';
 
-import type {
-	GetStaticPaths,
-	GetStaticProps,
-	NextPage
-} from 'next';
-
 import * as Icons from 'react-feather';
 import moment from 'moment';
 
@@ -17,9 +11,9 @@ import Link from 'next/link';
 
 import {
 	CenterOfExcellenceState,
-	FacilityServicesDetail,
 	FacilityServicesState,
-	HospitalState
+	HospitalState,
+	NotificationResponse,
 } from '@/interface';
 
 import colors from '@/constant/colors';
@@ -28,23 +22,31 @@ import icons from '@/constant/icons';
 
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
-import MainNavLanguage from '@/components/MainNavLanguage';
-import Modal from '@/components/Modal';
-import useSession from '@/session/client';
-import { cookiesHelper } from '@/helpers';
+import MainNavLanguage from '@/components/ui/MainNavLanguage';
+import Modal from '@/components/ui/Modal';
 
 import HeaderStyle from './style';
+
+import { useCurrentLocale } from '@/locales/client';
+import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
 
 export const Header = ({
 	hospitalData,
 	centerOfExcellenceData,
-	facilityServicesData
-}: {
-	hospitalData: HospitalState,
-	centerOfExcellenceData: CenterOfExcellenceState,
-	facilityServicesData: FacilityServicesDetail[];
-}) => {
+	facilityServicesData,
+	notificationResponseData,
+	marAllReadNotifFunc
+}:{
+		hospitalData: HospitalState,
+		centerOfExcellenceData: CenterOfExcellenceState,
+		facilityServicesData: FacilityServicesState,
+		notificationResponseData: NotificationResponse,
+		marAllReadNotifFunc: (params: any) => any,
+	}) => {
+	
 	const router = useRouter();
+
+	const currentLang = useCurrentLocale();
 
 	const [dropdownHide, setDropdownHide] = useState(true);
 	const [showSideBar, setShowSideBar] = useState(false);
@@ -52,21 +54,19 @@ export const Header = ({
 	const [isHoverCOE, setIsHoverCOE] = useState(false);
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
-
-	// Notes: CSR. Jika ada kebutuhan u/ SSR, pakai getSession dari @/session/server dan props ke Header component
-	const session = useSession();
-	const isLoggedIn = session.isAuthenticated;
+	
+	const isLoggedIn = true;
+	// const isLoggedIn = !!user.token; // migrate
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const handleClick = async () => {
-		// TODO: karena async, butuh loading state ketika logout. need enhancement
+	const handleClick = () => {
 		if (isLoggedIn) {
-			await cookiesHelper.clearStorage();
-			router.replace('/');
+			// removeUser(); // migrate ( for function removeUser refer repo rspi-fe-web )
 		}
+		router.push('/');
 	};
 
 	const handleLoginClick = () => {
@@ -104,50 +104,55 @@ export const Header = ({
 							textAlign='center'
 							color={ colors.green.brandAccent }
 							text='Mark all as read'
-						// Migrate
-						// onClick={ () => readNotificationDispatch({
-						// 	queryParam: {
-						// 		medical_record: '100154999',
-						// 		email: 'riko.logwirno@rebelworks.co'
-						// 	}
-						// }) }
-						// End Migrate
+							// Migrate
+							onClick={ () => marAllReadNotifFunc({
+								medical_record: 100154999,
+								email: 'riko.logwirno@rebelworks.co'
+							}).then(function(response: any) {
+								notificationResponseFetch();
+							})
+							}
+							// End Migrate
 						/>
 					</div>
-
-					<div className='pb-4'>
-						<div className='flex flex-col py-4 px-[20px]' style={ {
-							backgroundColor: 'rgba(0, 0, 0, 0)'
-						} }>
-							<div className='flex justify-between'>
-								<Text
-									fontSize='12px'
-									fontWeight='400'
-									textAlign='center'
-									color={ colors.grey.pencil }
-									text={ moment().format('DD MMM, hh:mm') }
-								/>
+					
+					{
+						notificationResponseData?.notification?.map((item, idx) => (
+							<div key={ idx } className='pb-4'>
+								<div className='flex flex-col py-4 px-[20px]' style={ {
+									backgroundColor: item.flag === 0 ? 'rgba(0, 0, 0, 0)' : 'rgba(53, 136, 136, 0.1)'
+								} }>
+									<div className='flex justify-between'>
+										<Text
+											fontSize='12px'
+											fontWeight='400'
+											textAlign='center'
+											color={ colors.grey.pencil }
+											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
+										/>
+									</div>
+									<Text
+										fontSize='14px'
+										lineHeight='20px'
+										fontWeight='700'
+										textAlign='center'
+										color={ colors.black.default }
+										text={ currentLang === 'id' ? item?.judul_idn : item?.judul_en }
+										className='flex justify-start'
+									/>
+									<Text
+										fontSize='12px'
+										lineHeight='20px'
+										fontWeight='400'
+										textAlign='center'
+										color={ colors.black.default }
+										text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
+										className='flex justify-start pt-2'
+									/>
+								</div>
 							</div>
-							<Text
-								fontSize='14px'
-								lineHeight='20px'
-								fontWeight='700'
-								textAlign='center'
-								color='#000000'
-								text='Judul'
-								className='flex justify-start'
-							/>
-							<Text
-								fontSize='12px'
-								lineHeight='20px'
-								fontWeight='400'
-								textAlign='center'
-								color='#000000'
-								text='Judul'
-								className='flex justify-start pt-2'
-							/>
-						</div>
-					</div>
+						))
+					}
 
 				</div>
 			</Modal>
@@ -162,7 +167,10 @@ export const Header = ({
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
-								<images.LogoRSPI />
+								<Image
+									src={ images.LogoRSPI }
+									alt=''
+								/>
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
@@ -175,7 +183,11 @@ export const Header = ({
 							<div id='our-hospital' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 								<Text text={ 'Our Hospitals' } className='cursor-pointer' color={ isHover === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
+									<Image
+										src={ icons.ArrowDown }
+										alt=''
+										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
+									/>
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
@@ -205,7 +217,9 @@ export const Header = ({
 							<div id='centre-of-excellence' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverCOE(true) } onMouseLeave={ toggleMouseHoverCOE(false) }>
 								<Text text={ 'Centre of Excellence' } className='cursor-pointer' color={ isHoverCOE === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown
+									<Image
+										src={ icons.ArrowDown }
+										alt=''
 										className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
 								</div>
@@ -242,7 +256,7 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
-											<Link href={ `/facilities-services/${ item.slug }` } key={ idx }>
+											<Link href={ `/facilities/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 													<img src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
@@ -256,14 +270,16 @@ export const Header = ({
 												</div>
 											</Link>
 										)) }
-
-										<Link href={ '/facilities-services/medical-specialities' } >
+										
+										<Link href={ '/facilities/1234567890' } >
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 												<div className='ml-[10px] w-[310px]'>
 													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 												</div>
-												<icons.ArrowRight
+												<Image
+													src={ icons.ArrowRight }
+													alt=''
 													className='ml-[27px] mr-auto'
 												/>
 											</div>
@@ -276,16 +292,20 @@ export const Header = ({
 								<Text text={ 'Career' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 							</div>
 
-							<a id='find-doctor' className='py-[22px] max-sm:py-[10px]' href='/find-a-doctor'>
+							<Link id='find-doctor' className='py-[22px] max-sm:py-[10px]' href='/find-a-doctor'>
 								<Text text={ 'Find a Doctor' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
-							</a>
+							</Link>
 
 						</div>
 					</div>
 					<div className='rightNav py-[22px] max-sm:py-[10px]'>
 						<div className='translate'>
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
-								<icons.Notif onClick={ () => setShowNotification(true) } />
+								<Image
+									src={ icons.Notif }
+									alt=''
+									onClick={ () => setShowNotification(true) }
+								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
 							<div className='p-4'>
@@ -297,33 +317,27 @@ export const Header = ({
 									isLoggedIn ?
 										<>
 											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<icons.Notif />
+												<Image
+													src={ icons.Notif }
+													alt=''
+												/>
 												<span
-													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>0</span>
+													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponseData?.total_unread }</span>
 											</a>
 											<div className='flex text-white items-center'>
 												<div>
-
-													{ session.user?.img_url
-														? (
-															<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
-																<Image
-																	src={ session.user?.img_url }
-																	alt=''
-																	fill
-																/>
-															</div>
-														)
-														: <images.Profile className='w-[50px] h-[50px]' /> }
-													{/* <Image src={ '' } alt={ '' } /> :
+													
+													<Image src={ '' } alt={ '' } /> :
 													<Image
 														src={ images.Profile }
 														alt=''
-													/> */}
-
+													/>
+													
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
-													<icons.ArrowDown
+													<Image
+														src={ icons.ArrowDown }
+														alt=''
 														className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 														onClick={ () => setDropdownHide(!dropdownHide) }
 													/>
@@ -348,7 +362,7 @@ export const Header = ({
 											<Link href='/user-information' className='border-b border-gray block py-4 px-4'>User Information</Link>
 										</li>
 										<li>
-											<Text color={ colors.red.text } className='block py-4 px-4 cursor-pointer' onClick={ handleClick }>Logout</Text>
+											<a href='#' className='block py-4 px-4 text-red-600' onClick={ handleClick }>Logout</a>
 										</li>
 									</ul>
 								</div>
@@ -365,14 +379,14 @@ export const Header = ({
 								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
 							</div>
 							{ isLoggedIn &&
-								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
-									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
-								</div>
+							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
+								<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
+							</div>
 							}
 							{ isLoggedIn &&
-								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
-									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
-								</div>
+							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
+								<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
+							</div>
 							}
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>

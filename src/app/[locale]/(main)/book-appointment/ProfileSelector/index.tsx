@@ -1,4 +1,4 @@
-import { Button, Modal, Text } from '@/components';
+import { Button, Modal, Text } from '@/components/ui';
 import {
 	CardListsContainer,
 	NoProfileContainer,
@@ -15,7 +15,7 @@ import { localStorage } from '@/helpers';
 import { deleteFamilyProfile, getFamilyProfiles } from '@/stores/actions';
 import { splitDate } from '@/helpers/datetime';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
-import { ModalHeader, ProfileModalContainer } from '@/components/AddProfileModal/style';
+import { ModalHeader, ProfileModalContainer } from '@/components/ui/AddProfileModal/style';
 import Image from 'next/image';
 
 type ProfileCardProps = {

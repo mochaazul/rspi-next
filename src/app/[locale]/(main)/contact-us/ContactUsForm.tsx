@@ -7,9 +7,9 @@ import { useRouter } from 'next/navigation';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import { regExp, Languages as lang, colors } from '@/constant';
-import { Button, Form, NotificationPanel, Text } from '@/components';
+import { Button, Form, NotificationPanel, Text } from '@/components/ui';
 import { HospitalState, ContactUsState } from '@/interface';
-import { PropsTypes as NotificationPanelTypes } from '@/components/NotificationPanel';
+import { PropsTypes as NotificationPanelTypes } from '@/components/ui/NotificationPanel';
 import { useTypedSelector } from '@/hooks';
 
 import useContactUs from './useContactUs';

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { Button, Form, Text } from '@/components';
+import { Button, Form, Text } from '@/components/ui';
 import { Languages, colors, icons } from '@/constant';
 import Images from '@/constant/images';
 

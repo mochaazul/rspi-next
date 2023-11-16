@@ -7,7 +7,7 @@ import {
 	Text,
 	Button,
 	Spinner
-} from '@/components';
+} from '@/components/ui';
 import { Images, colors, Languages as lang } from '@/constant';
 import { DoctorTimeSlotParam, FindDoctorState, HospitalState, TimeSlot } from '@/interface';
 import { getDoctorCalendar, getDoctorDetail, getDoctorTimeSlot } from '@/stores/FindDoctor';
@@ -16,13 +16,13 @@ import VisitSchedule from './sections/VisitSchedule';
 import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
 import { useRouter, useParams } from 'next/navigation';
 import DoctorAvatar, { ShareDoctor } from './sections/DoctorAvatar';
-import Radio from '@/components/Radio';
-import Calendar from '@/components/Calendar';
+import Radio from '@/components/ui/Radio';
+import Calendar from '@/components/ui/Calendar';
 import { Value } from 'react-calendar/dist/cjs/shared/types';
 import dayjs from 'dayjs';
 import { getHospitalByHospitalCode } from '@/stores/Hospital';
 import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
-import PhoneModal from '@/components/PhoneModal';
+import PhoneModal from '@/components/ui/PhoneModal';
 import { debounce } from 'lodash';
 
 type FormAppointment = {

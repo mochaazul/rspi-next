@@ -1,6 +1,10 @@
 
 
-import { getNewsSpecialtyByID, getArticleById } from '@/lib/api';
+import {
+	getNewsSpecialtyByID,
+	getRelatedNews,
+	getArticleById
+} from '@/lib/api';
 
 export const fetchNewsSpecialtyByID = (id: any) => {
 	
@@ -12,6 +16,18 @@ export const fetchNewsSpecialtyByID = (id: any) => {
 
 	return getNewsSpecialtyByID(paramFetch);
 };
+
+export const fetchRelatedNews = (id: any) => {
+	
+	const paramFetch = {
+		param: id,
+		query: 'limit=2',
+		body: null,
+	};
+
+	return getRelatedNews(paramFetch);
+};
+
 
 export const fetchDetail = (articleId: string | null) => {
 

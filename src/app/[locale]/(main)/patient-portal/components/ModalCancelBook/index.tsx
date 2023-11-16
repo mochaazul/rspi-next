@@ -1,4 +1,4 @@
-import { Modal, Text, Button } from '@/components';
+import { Modal, Text, Button } from '@/components/ui';
 import { Images, colors, icons } from '@/constant';
 import dayjs from 'dayjs';
 import useTypedSelector from '@/hooks/useTypedSelector';

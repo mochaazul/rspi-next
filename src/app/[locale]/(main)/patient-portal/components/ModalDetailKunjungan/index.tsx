@@ -1,4 +1,4 @@
-import { Modal, Text, Button } from '@/components';
+import { Modal, Text, Button } from '@/components/ui';
 import { Images, colors } from '@/constant';
 
 import { ModalStyle } from 'pages/PatientPortal/style';

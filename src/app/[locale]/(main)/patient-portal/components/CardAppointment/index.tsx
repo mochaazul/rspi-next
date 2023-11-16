@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 
 import {
 	Button, Form, Modal, NotificationPanel, Text
-} from '@/components';
+} from '@/components/ui';
 import { colors, Images, icons, Languages } from '@/constant';
 import { CardPatientPortalStyle } from 'pages/PatientPortal/style';
 
@@ -14,7 +14,7 @@ import { I_VisitHistory } from '@/interface/PatientProfile';
 import RecommendDoctorModal from '../ModalRecommendDoctor';
 import images from '@/constant/images';
 import ModalCancelBook from '../ModalCancelBook';
-import PinModal from '@/components/PinModal';
+import PinModal from '@/components/ui/PinModal';
 import useAppDispatch, { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
 import { cancelBooking } from '@/stores/actions';
 import { navigation } from '@/helpers';

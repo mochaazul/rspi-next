@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import { isEmpty } from 'lodash';
 import { EmptyResultContainer } from 'pages/PatientPortal/style';
 import { Languages, icons } from '@/constant';
-import { Button, Spinner, Text } from '@/components';
+import { Button, Spinner, Text } from '@/components/ui';
 import Link from 'next/link';
 import Image from 'next/image';
 
