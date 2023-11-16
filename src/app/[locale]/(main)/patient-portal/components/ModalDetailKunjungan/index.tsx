@@ -1,5 +1,6 @@
 import { Modal, Text, Button } from '@/components/ui';
 import { Images, colors } from '@/constant';
+import Image from 'next/image';
 
 import { ModalStyle } from 'pages/PatientPortal/style';
 
@@ -33,7 +34,7 @@ const DetailKunjungan = (props: PropsType) => {
 					<Text text={ `Apointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='mr-[15px]' />
 					<Text text={ 'Konsultasi' } fontSize='20px' fontWeight='700' className='mt-[10px]' />
 					<div className='flex my-[30px]'>
-						<div><img src={ Images.ProfilePatient } /></div>
+						<div><Image src={ Images.ProfilePatient } alt="" /></div>
 						<div className='ml-[15px]'>
 							<Text text={ 'Prof. Dr. dr. Aman Bhakti Pulungan, Sp.A, (K), FAAP, FRCPI (Hon.)' } fontSize='16px' fontWeight='700' />
 							<Text text={ 'Spesialis Akupunktur Klinik Konsultan' } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
