@@ -10,7 +10,7 @@ import useSession from '@/session/client';
 
 export const MainNavLanguage = () => {
 	const session = useSession();
-	const { welcome } = Languages?.topNav;
+	const { welcome } = Languages?.page?.topNav;
 	// const userSelector = useTypedSelector<UserState>('user');
 	const isLoggedIn = !!session?.token;
 

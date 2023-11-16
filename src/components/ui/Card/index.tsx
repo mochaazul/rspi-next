@@ -60,7 +60,7 @@ const Card = (props: PropsType) => {
 				{
 					props.image &&
 					<div className={ `relative w-full ${ props.imageHeight ? `h-[${ props.imageHeight }]` : 'h-fit' }` } >
-						<img src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
+						<Image src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
 					</div>
 				}
 				{

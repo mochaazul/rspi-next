@@ -9,8 +9,8 @@ import en from './en';
 // 	en
 // }[getLanguage() ?? 'idn']) ?? id;
 const lang = () => ({
-	idn: id,
+	id: id,
 	en
-}['idn']) ?? id; // TODO: migrate
+}['id']) ?? id; // TODO: migrate
 
 export default lang();
