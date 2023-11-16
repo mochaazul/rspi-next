@@ -267,7 +267,7 @@ const CardAppointment = (props: PropsType) => {
 				visible={ showModalCancelBook }
 				onClose={ () => { setShowModalCancelBook(false); } }
 				nama={ props.patientName }
-				doctorImg={ props.doctorImgUrl || images.Doctor1 }
+				doctorImg={ props.doctorImgUrl || images.Doctor1.src }
 				doctorName={ props.doctorName || '-' }
 				doctorSpec={ props.doctorSpeciality || '-' }
 				bookDate={ dayjs(`${ props.date } ${ props.time }`).format('DD MMMM YYYY hh:mm A') ?? '-' }

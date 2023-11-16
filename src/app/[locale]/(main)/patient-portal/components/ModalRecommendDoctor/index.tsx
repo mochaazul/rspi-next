@@ -155,7 +155,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 				<div>
 					<Text text={ header } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
 					<div className='flex my-[30px] p-[16px] rounded-md bg-[#FAFAFA]'>
-						<div><img className='rounded-full h-[48px] w-[48px]' src={ props.visitHistory?.doctor_photo || Images.Doctor1 } /></div>
+						<div><img className='rounded-full h-[48px] w-[48px]' src={ props.visitHistory?.doctor_photo || Images.Doctor1.src } /></div>
 						<div className='ml-[15px]'>
 							<Text text={ props.visitHistory?.doctor_name ?? '-' } fontSize='16px' fontWeight='700' />
 							<Text text={ props.visitHistory?.doctor_specialty } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />

@@ -9,8 +9,6 @@ import { useGetProfile } from '@/lib/api/client/profile';
 
 import { ModalStyle } from '../../style';
 
-type StaticImageData = { src: string; height: number; width: number; blurDataURL?: string; };
-
 interface PropsType {
 	visible?: boolean;
 	onClose?: () => void;
@@ -18,7 +16,7 @@ interface PropsType {
 	nama?: string;
 	birthDate?: string;
 	noHp?: string;
-	doctorImg?: string | StaticImageData;
+	doctorImg?: string;
 	doctorName?: string;
 	doctorSpec?: string;
 	bookDate?: string;
