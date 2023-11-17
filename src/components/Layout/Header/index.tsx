@@ -29,6 +29,8 @@ import HeaderStyle from './style';
 
 import { useCurrentLocale } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
+import useSession from '@/session/client';
+import { cookiesHelper } from '@/helpers';
 
 export const Header = ({
 	hospitalData,
@@ -54,9 +56,9 @@ export const Header = ({
 	const [isHoverCOE, setIsHoverCOE] = useState(false);
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
+	const session = useSession();
 	
-	const isLoggedIn = true;
-	// const isLoggedIn = !!user.token; // migrate
+	const isLoggedIn = !!session?.token;
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
@@ -64,7 +66,7 @@ export const Header = ({
 
 	const handleClick = () => {
 		if (isLoggedIn) {
-			// removeUser(); // migrate ( for function removeUser refer repo rspi-fe-web )
+			cookiesHelper.clearStorage(); // migrate ( for function removeUser refer repo rspi-fe-web )
 		}
 		router.push('/');
 	};

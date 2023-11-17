@@ -1,51 +1,88 @@
-import { useEffect, useState } from 'react';
+'use client';
+
+import { SetStateAction, useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
 
 import {
 	Breadcrumbs,
 	Text,
 	Tabs,
-	Layout,
 	Spinner
 } from '@/components/ui';
+import {
+	PanelH1,
+	PanelV1
+} from '@/app/[locale]/(main)/layout';
 import { colors, icons, sosmedLink } from '@/constant';
 import { navigation } from '@/helpers';
 import { getEventsByID } from '@/stores/EventClasses';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { EventClassesState } from '@/interface';
-import PromoPackages from 'pages/LandingPage/PromoPackages';
+import { EventClassesDetail, EventClassesState } from '@/interface';
+import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
 import Image from 'next/image';
+import { fetchPromoByID, fetchEvents } from './helpers';
+import { usePathname } from 'next/navigation';
 
-const DetailEventClassesPromo = () => {
+const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
+
+	const pathname = usePathname();
+	const [loading, setLoading] = useState(false);
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
-	const { params, pathname } = navigation();
-	const eventClassesSelector = useTypedSelector<EventClassesState>('events');
-	const { selectedEvent } = eventClassesSelector;
-
-	const detailArticleDispatch = useAppDispatch(getEventsByID);
+	const [eventsData, setEventsData] = useState<EventClassesState['events']>();
+	const [selectedEvent, setSelectedEvent] = useState<EventClassesState['selectedEvent']>({
+		category: '',
+		content: '',
+		created_date: '',
+		hospitals: [],
+		id: 0,
+		img_url_card: '',
+		img_url_detail: '',
+		information: '',
+		is_publish: false,
+		operational_hour: '',
+		phone: '',
+		short_description: '',
+		title: '',
+		updated_date: '',
+	});
 
 	const breadcrumbsPath = [{ name: 'Promo & Packages', url: '/promo' }, { url: '#', name: selectedEvent?.title || '' }];
 
 	useEffect(() => {
-		detailArticleDispatch({ id: params?.id });
+		fetchPromoByID(props?.params?.id).then(function(response) {
+			setLoading(true);
+			setSelectedEvent(response?.data);
+			setLoading(false);
+		});
+		fetchEvents().then(function(response) {
+			setEventsData(response.data);
+		});
 	}, []);
 
 	useEffect(() => {
-		if (params?.id !== eventClassesSelector.selectedEvent?.id) {
-			detailArticleDispatch({ id: params?.id });
+		if (props.params.id !== selectedEvent?.id) {
+			setLoading(true);
+			fetchPromoByID(props.params.id).then(function(response) {
+				setSelectedEvent(response?.data);
+				setLoading(false);
+			});
+			fetchEvents().then(function(response) {
+				setEventsData(response.data);
+			});
+			setLoading(false);
 		}
-	}, [params]);
+	}, [props.params.id]);
 
 	const handleOpenSocmed = (link: string) => () => {
-		window.open(link, '_blank');
+		window?.open(link, '_blank')
 	};
-
+	
 	return (
-		<Layout.PanelV1>
-			<Layout.PanelH1>
+		<PanelV1>
+			<PanelH1>
 				<Breadcrumbs datas={ breadcrumbsPath } />
 				{
-					eventClassesSelector.loading ?
+					loading ?
 						<Spinner size='m' className='sm:my-48 my-3' /> :
 						<div className='mt-[50px]'>
 							<Text fontWeight='900' fontSize='44px' lineHeight='57px'>
@@ -75,7 +112,7 @@ const DetailEventClassesPromo = () => {
 							</div>
 							<div className='content-wrapper mt-[20px] mb-[100px]'>
 								<div className='mt-[30px] w-full flex gap-8'>
-									<Image src={ selectedEvent?.img_url_detail } className='mx-auto object-cover max-w-[450px] max-h-[624px]' />
+									<img src={ selectedEvent?.img_url_detail || '' } className='mx-auto object-cover max-w-[450px] max-h-[624px]' alt='' />
 									<div>
 										<div
 											className='innerHTML'
@@ -167,15 +204,15 @@ const DetailEventClassesPromo = () => {
 											tabsData={ ['More From Promo & Packages'] }
 										/>
 										<div className='pt-[10px]' />
-										<PromoPackages showAsRelated={ true } events={ eventClassesSelector } />
+										<PromoPackages showAsRelated={ true } events={ eventsData! } />
 									</div>
 								</div>
 							</div>
 						</div>
 
 				}
-			</Layout.PanelH1>
-		</Layout.PanelV1>
+			</PanelH1>
+		</PanelV1>
 	);
 };
 
