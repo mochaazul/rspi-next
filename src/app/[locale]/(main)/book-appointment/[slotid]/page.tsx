@@ -360,7 +360,7 @@ const BookAppointment = () => {
 				hospitalName={ doctorResponse?.data.hospital[0].hospital_name }
 				doctorName={ doctorResponse?.data.name ?? '' }
 				date={ timeSlot?.date }
-				visible={ true }
+				visible={ successModal }
 			/>
 		</BookAppointmentContainer>
 	);
