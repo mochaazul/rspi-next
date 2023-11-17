@@ -96,13 +96,13 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 										fontWeight='400'
 										text='Share now'
 									/>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window.location.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window?.location?.href) }>
 										<icons.FacebookIcon width='16px' height='16px'/>
 									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window.location.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window?.location?.href) }>
 										<icons.TwitterIcon width='16px' height='16px'/>
 									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window.location.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window?.location?.href) }>
 										<icons.LinkedIn width='16px' height='16px'/>
 									</div>
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
