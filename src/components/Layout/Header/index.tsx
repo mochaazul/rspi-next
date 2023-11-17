@@ -31,6 +31,7 @@ import { useCurrentLocale } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
 import useSession from '@/session/client';
 import { cookiesHelper } from '@/helpers';
+import Images from '@/constant/images';
 
 export const Header = ({
 	hospitalData,
@@ -169,10 +170,7 @@ export const Header = ({
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
-								<Image
-									src={ images.LogoRSPI }
-									alt=''
-								/>
+								<Images.LogoRSPI alt=''/>
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
@@ -241,7 +239,7 @@ export const Header = ({
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
+													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt='' />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
@@ -280,6 +278,7 @@ export const Header = ({
 									src={ icons.Notif }
 									alt=''
 									onClick={ () => setShowNotification(true) }
+									fill
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
