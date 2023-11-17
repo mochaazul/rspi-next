@@ -138,7 +138,14 @@ const Dropdown: React.FC<DropdownProps> = ({
 	}, [isOpen]);
 
 	return (
-		<SelectWrapper $isOpen={ isOpen } onClick={ () => isOpen ? closeOptionDialog() : openOptionDialog() } ref={ SelectWrapperRef }>
+		<SelectWrapper
+			$isOpen={ isOpen }
+			onClick={ !props.disabled
+				? () => isOpen ? closeOptionDialog() : openOptionDialog()
+				: undefined }
+			disabled={ props.disabled }
+			ref={ SelectWrapperRef }
+		>
 			<SelectStyled
 				onMouseDown={ handlePreventDefaultOpen }
 				onKeyDown={ handlePreventDefaultOpen }

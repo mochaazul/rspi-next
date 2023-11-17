@@ -31,7 +31,8 @@ import { headers } from 'next/headers';
 const blacklistedRoute = [
 	'/patient-portal',
 	'/doctor-detail',
-	'/book-appointment'
+	'/book-appointment',
+	'/user-information'
 ];
 
 export default async function RootLayout({

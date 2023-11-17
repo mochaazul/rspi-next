@@ -35,7 +35,7 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		...safeQueryParam,
 		...safePagination
 	});
-
+	
 	if (options && options.body) fetchOpt['body'] = JSON.stringify(options.body);
 	
 	const res = await fetch(url, {

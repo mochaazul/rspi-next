@@ -3,6 +3,7 @@ import { colors, icons } from '@/constant';
 // import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { UserDataDetail } from '@/interface';
 // import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import NotificationPanel from '@/components/ui/NotificationPanel';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Form from '@/components/ui/Form';
@@ -11,7 +12,6 @@ import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import { useFamilyProfileMutation } from '@/lib/api/client/profile';
-import { NotificationPanel } from '../../../../../../components/ui';
 import { useScopedI18n } from '@/locales/client';
 
 const addProfileFormFields = {
