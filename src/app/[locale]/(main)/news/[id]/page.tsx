@@ -76,7 +76,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 	const breadcrumbsPath = [{ name: 'News & Health Articles', url: '/news' }, { url: '#', name: 'Title Selected Article' || '' }]; // selectedArticle?.title
 
 	const handleOpenSocmed = (link: string) => () => {
-		window.open(link, '_blank');
+		window?.open(link, '_blank');
 	};
 
 	return (
