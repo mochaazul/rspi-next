@@ -13,7 +13,7 @@ import Button from '@/components/ui/Button';
 import { useScopedI18n } from '@/locales/client';
 import { icons } from '@/constant';
 
-const CentreOfExcellence = ({ data }:{ data: CenterOfExcellenceDetail[] }) => {
+const CentreOfExcellence = ({ data }: { data: CenterOfExcellenceDetail[]; }) => {
 	const t = useScopedI18n('page.landingPage.centerOfExcelence');
 	const CardWrapperRef = useRef<HTMLDivElement>(null);
 	const handleArrowClick = (direction: 'left' | 'right') => () => {
@@ -33,12 +33,12 @@ const CentreOfExcellence = ({ data }:{ data: CenterOfExcellenceDetail[] }) => {
 					<Text fontSize='20px' fontType='p' fontWeight='400' color={ colors.grey.dark }>
 						{ t('subHeading') }
 					</Text>
-					<Link href='/center-of-excellence' className='max-sm:hidden'>
+					<Link href='/centre-of-excellence' className='max-sm:hidden'>
 						<div className='see-all flex row items-center'>
 							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default }>
 								{ t('allItemBtnLabel') }
 							</Text>
-							<icons.LongArrowRight alt='arrow-right' className='svg-green ml-2'/>
+							<icons.LongArrowRight alt='arrow-right' className='svg-green ml-2' />
 						</div>
 					</Link>
 				</div>
@@ -53,7 +53,7 @@ const CentreOfExcellence = ({ data }:{ data: CenterOfExcellenceDetail[] }) => {
 								imageHeight='200px'
 								content={ <CardContent title={ data.title ?? '' } description={ data.short_description ?? '' } /> }
 								footer={ <CardFooter content={ t('cardItem.readMoreLabel') } /> }
-								to={ `center-of-excellence/${ data.id }` }
+								to={ `centre-of-excellence/${ data.slug }` }
 							/>
 						))
 					}

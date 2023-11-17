@@ -1,10 +1,11 @@
 'use client';
 
+import { PropsWithChildren, PropsWithRef } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { Text } from '@/components/ui';
 import { colors } from '@/constant';
 import { CenterOfExcellenceDetail } from '@/interface';
-import { PropsWithChildren, PropsWithRef } from 'react';
-import { useRouter } from 'next/navigation';
 
 type Props = PropsWithRef<PropsWithChildren<{
 	data: CenterOfExcellenceDetail[],
@@ -24,8 +25,8 @@ const CardMenu = ({ data, activeMenuIndex }: Props) => {
 					fontSize='14px'
 					fontWeight='700'
 					lineHeight='21px'
-					color={ activeMenuIndex === `${ item.id }` ? colors.paradiso.default : colors.grey.dark }
-					onClick={ () => navigate.push(`/center-of-excellence/${ item.id }`) }
+					color={ activeMenuIndex === `${ item.slug }` ? colors.paradiso.default : colors.grey.dark }
+					onClick={ () => navigate.push(`/centre-of-excellence/${ item.slug }`) }
 				/>;
 			}) }
 		</div>

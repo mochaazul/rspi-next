@@ -3,7 +3,9 @@ import moment from 'moment';
 import _ from 'lodash';
 import { isMobile } from 'react-device-detect';
 
-import { Breadcrumbs, Text, Button } from '@/components/ui';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import Text from '@/components/ui/Text';
+import Button from '@/components/ui/Button';
 import Card, { CardContentWithInner, CardFooter } from '@/components/ui/Card';
 import { colors, Languages as lang } from '@/constant';
 import { getCoe, getCenterOfExcellenceNewsByID } from '@/lib/api';
@@ -16,52 +18,26 @@ import { CentreOfExcellenceStyle } from './style';
 const language = lang.page.centerOfExcellence.serviceLocation;
 
 const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
-	const responseCenterOfExcellenceNewsByID = await getCenterOfExcellenceNewsByID({
-		param: `${ params?.slug }`,
-		query: {
-			limit: 9,
-		}
-	});
-
 	const responseCenterOfExcellence = await getCoe({
 		query: {
 			is_publish: true,
 		}
 	});
 
-	// MIGRATED
-	// const params = useParams();
+	const filteredResponseCenterOfExcellence = responseCenterOfExcellence?.data?.find((coe) => {
+		return coe?.slug === params?.slug;
+	});
 
-	// useEffect(() => {
-	// 	getCoe({
-	// 		query: {
-	// 			is_publish: true,
-	// 		}
-	// 	});
-	// 	getCenterOfExcellenceNewsByID({
-	// 		param: `${ activeMenuIndex }`,
-	// 		query: {
-	// 			limit: 9,
-	// 		}
-	// 	});
-	// }, [activeMenuIndex]);
-
-	// useEffect(() => {
-	// 	if (activeMenuIndex === 0) {
-	// 		setActiveMenuIndex(responseCenterOfExcellence?.data[0].id ?? 0);
-	// 	}
-	// }, [responseCenterOfExcellence?.data]);
-
-	// useEffect(() => {
-	// 	if (+ (params?.slug ?? 0) !== activeMenuIndex) {
-	// 		setActiveMenuIndex(+ (params?.slug ?? 0));
-	// 	}
-	// }, [params]);
-	// END MIGRATED
+	const responseCenterOfExcellenceNewsByID = await getCenterOfExcellenceNewsByID({
+		param: `${ filteredResponseCenterOfExcellence?.id }`,
+		query: {
+			limit: 9,
+		}
+	});
 
 	const breadcrumbsPath = [
-		{ name: 'Centre Of Excellence', url: '/center-of-excellence' },
-		{ url: '#', name: responseCenterOfExcellence?.data?.find((coe) => `${ coe.id }` === params?.slug)?.title ?? '' }
+		{ name: 'Centre Of Excellence', url: '/centre-of-excellence' },
+		{ url: '#', name: responseCenterOfExcellence?.data?.find((coe) => `${ coe.slug }` === params?.slug)?.title ?? '' }
 	];
 
 	const renderRelatedNewsDesktop = () => {
@@ -114,10 +90,10 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 						<div className='rightSide sm:ml-[32px]'>
 							<div>
 								{
-									responseCenterOfExcellence?.data?.filter((coe) => `${ coe.id }` === params?.slug).length > 0
+									responseCenterOfExcellence?.data?.filter((coe) => `${ coe.slug }` === params?.slug).length > 0
 										?
 										<ServiceLocation
-											content={ responseCenterOfExcellence?.data?.find((coe) => `${ coe.id }` === params?.slug) }
+											content={ responseCenterOfExcellence?.data?.find((coe) => `${ coe.slug }` === params?.slug) }
 											activeMenuIndex={ params?.slug }
 											centerOfExcellence={ responseCenterOfExcellence?.data }
 										/> : null

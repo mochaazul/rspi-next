@@ -64,7 +64,7 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 			</div>
 
 			<div className='mt-[16px] md:hidden'>
-				<CardMenu data={ centerOfExcellence } activeMenuIndex={ activeMenuIndex ?? '0' } />
+				<CardMenu data={ centerOfExcellence } activeMenuIndex={ activeMenuIndex ?? '' } />
 			</div>
 
 			<div className='mt-[48px]'>

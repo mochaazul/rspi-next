@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef, useCallback } from 'react';
 import * as Icons from 'react-feather';
 

@@ -1,3 +1,5 @@
+'use client';
+
 import React, {
 	useEffect,
 	useState
@@ -39,7 +41,7 @@ export const LanguageSelector = () => {
 		setLanguage(value);
 		setShowLanguagePicker(false);
 	};
-	
+
 	return (
 		<>
 			<div className='flex h-[21px]'>
@@ -78,6 +80,6 @@ export const LanguageSelector = () => {
 			</div>
 		</>
 	);
-}
+};
 
 export default LanguageSelector;
