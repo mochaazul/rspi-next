@@ -31,7 +31,6 @@ import { useCurrentLocale } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
 import useSession from '@/session/client';
 import { cookiesHelper } from '@/helpers';
-import Images from '@/constant/images';
 
 export const Header = ({
 	hospitalData,
@@ -170,7 +169,7 @@ export const Header = ({
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
-								<Images.LogoRSPI alt=''/>
+								<images.LogoRSPI alt=''/>
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
