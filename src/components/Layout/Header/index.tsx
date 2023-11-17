@@ -292,21 +292,15 @@ export const Header = ({
 									isLoggedIn ?
 										<>
 											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<Image
-													src={ icons.Notif }
-													alt=''
-												/>
+												<icons.Notif />
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponseData?.total_unread }</span>
 											</a>
 											<div className='flex text-white items-center'>
 												<div>
 													
-													<Image src={ '' } alt={ '' } />  :
-													<Image
-														src={ images.Profile }
-														alt=''
-													/>
+													<img src={ '' } alt={ '' } />  :
+													<images.Profile alt='' />
 													
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
