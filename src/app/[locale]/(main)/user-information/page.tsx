@@ -27,9 +27,8 @@ import SubMenuPage from '@/components/ui/SubMenuPage';
 import Form from '@/components/ui/Form';
 import HorizontalInputWrapper from '@/components/PageComponents/UserInformationSections/HorizontalInputWrapper';
 import { useScopedI18n } from '@/locales/client';
-import { useGetLastVisitHospital } from '@/lib/api/client/hospital';
+import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import {
-	useCheckPin,
 	useGeneralUploads,
 	useGetProfile,
 	useUpdateAvatar,
@@ -41,6 +40,7 @@ import { CheckPinSchema, UpdateEmailSchema, UpdateProfileSchema } from '@/valida
 import ProfilePageStyle, { Divider } from './style';
 // import useProfilePage from './useProfilePage';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
+import { usePostCheckPinMutation } from '@/lib/api/client/auth';
 
 // Notes: tidak digunakan
 // type DisabledInputs = {
@@ -58,13 +58,13 @@ const editableInputProps = {
 const ProfilePage = (props: BreadcrumbsProps) => {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
-	const { data: visitHospitalHistory } = useGetLastVisitHospital();
+	const { data: visitHospitalHistory } = useGetVisitHistory();
 	const { data: patientProfile, error: errorGetProfile } = useGetProfile();
 	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: updateEmail } = useUpdateEmail();
 	const { trigger: updateProfile } = useUpdateProfile();
-	const { trigger: checkPin } = useCheckPin();
+	const { trigger: checkPin } = usePostCheckPinMutation();
 
 	// const { profileFields } = useProfilePage();
 	const navigate = useRouter();
@@ -245,6 +245,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 			formImg.append('upload', tempImage ?? '');
 
 			const responseData = await uploadPhotoPatient({ payload: formImg });
+			console.log({ responseData });
 			if (responseData.stat_msg === 'Success') {
 				await updateAvatar({
 					img_url: responseData.data

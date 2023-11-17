@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-import { FamilyProfilePayload, UserDataDetail, PatientProfile } from '@/interface';
-
->>>>>>> main
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
