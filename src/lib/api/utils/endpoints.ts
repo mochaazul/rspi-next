@@ -20,7 +20,9 @@ const endpointData = {
 	readNotification: { path: '/notification/seen', method: 'POST' },
 	createFamilyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
+	checkPin: { path: '/patients/pin', method: 'POST' },
 	checkPatientPhone: { path: '/patients/check-patient-phone', method: 'POST' },
+	doctorRating: { path: '/patients/patient-portal/visit-histories', method: 'POST' },
 
 	// PUT
 	updatePassword: { path: '/patients/update-password', method: 'PUT' },
@@ -32,6 +34,8 @@ const endpointData = {
 	// GET
 	patients: { path: '/patients', method: 'GET' },
 	visitHistory: { path: '/patients/patient-portal/visit-histories', method: 'GET' },
+	labHistory: { path: '/patients/patient-portal/lab-histories', method: 'GET' },
+	vaccineHistory: { path: '/patients/patient-portal/vaccine-histories', method: 'GET' },
 	banner: { path: '/banners', method: 'GET' },
 	profile: { path: '/patients/profile', method: 'GET' },
 	facilities: { path: '/facilities', method: 'GET' },

@@ -1,14 +1,14 @@
+'use client';
+
 import { useEffect } from 'react';
 import dayjs from 'dayjs';
 import { isEmpty } from 'lodash';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { getVisitHistories } from '@/stores/PatientProfile';
-import { PatientState } from '@/interface/PatientProfile';
 import { Languages, icons } from '@/constant';
 import { Button, Spinner, Text } from '@/components/ui';
+import { useGetVisitHistory } from '@/lib/api/client/hospital';
 
 import CardAppointment from '../CardAppointment';
 import { EmptyResultContainer } from '../../style';
@@ -16,28 +16,23 @@ import { EmptyResultContainer } from '../../style';
 const { empty } = Languages.page.patientPortal.riwayatKunjungan;
 
 const RiwayatKunjungan = () => {
-	const getVisitHistoriesDispatch = useAppDispatch(getVisitHistories);
-	const { visitHistories, loading } = useTypedSelector<PatientState>('patient');
-
-	useEffect(() => {
-		getVisitHistoriesDispatch();
-	}, []);
+	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory();
 
 	const sortVisitHistories = () => {
-		return visitHistories.slice().sort((a, b) => {
+		return visitHistoryResponse?.data.slice().sort((a, b) => {
 			const dateTimeA = dayjs(`${ a.visit_date } ${ a.visit_time }`).unix();
 			const dateTimeB = dayjs(`${ b.visit_date } ${ b.visit_time }`).unix();
 			return dateTimeB - dateTimeA;
 		});
 	};
 
-	if (loading) {
+	if (visitHistoryLoading) {
 		return <div className='min-h-[250px] flex item-center'>
 			<Spinner size='m' />
 		</div>;
 	}
 
-	if (isEmpty(visitHistories)) {
+	if (isEmpty(visitHistoryResponse?.data)) {
 		return (<EmptyResultContainer>
 			<icons.EmptyVisitHistories />
 			<Text text={ empty }
@@ -53,7 +48,7 @@ const RiwayatKunjungan = () => {
 
 	return (
 		<>
-			{ sortVisitHistories().map(visitHistory => {
+			{ sortVisitHistories()?.map(visitHistory => {
 
 				return (
 					<CardAppointment
