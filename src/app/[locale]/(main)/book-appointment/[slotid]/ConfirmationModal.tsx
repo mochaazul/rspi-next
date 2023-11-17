@@ -1,16 +1,28 @@
+import dayjs from 'dayjs';
+import { useState } from 'react';
+import { isMobile } from 'react-device-detect';
+
 import { useRouter } from 'next/navigation';
 
-import { Button, Checkbox, Modal, Spinner, Text } from '@/components';
-import { ConfirmationModalContainer } from './style';
-import { colors } from '@/constant';
-import DoctorProfileWidget from './DoctorProfileWidget';
-import { FamilyProfile, FindDoctorState, TimeSlot } from '@/interface';
-import dayjs from 'dayjs';
-import { useTypedSelector } from '@/hooks';
-import { useState } from 'react';
 import { splitDate } from '@/helpers/datetime';
-import navigation from '@/helpers/navigation';
-import { isMobile } from 'react-device-detect';
+import {
+	Button,
+	Checkbox,
+	Modal,
+	Spinner,
+	Text
+} from '@/components/ui';
+
+import { colors } from '@/constant';
+import { useTypedSelector } from '@/hooks';
+import {
+	FamilyProfile,
+	FindDoctorState,
+	TimeSlot
+} from '@/interface';
+
+import { ConfirmationModalContainer } from './style';
+import DoctorProfileWidget from './DoctorProfileWidget';
 
 type Props = {
 	visible: boolean,

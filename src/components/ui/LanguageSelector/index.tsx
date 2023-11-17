@@ -6,70 +6,57 @@ import * as Icons from 'react-feather';
 import Image from 'next/image';
 import Text from '@/components/ui/Text';
 import Picker from '@/components/ui/Picker';
-
+import { useChangeLocale, useCurrentLocale } from '@/locales/client';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
+import { colors } from '@/constant';
 
 const languageItem = [
 	{
 		key: 'id',
 		label: 'ID',
-		value: 'idn',
-		icon: <icons.IDFlag className='mr-[20px] h-[20px]' />
+		value: 'id',
+		longLabel: 'Bahasa Indonesia',
+		icon: <icons.IDFlag alt='' className='w-5 h-5 flex-shrink-0 mr-3' />
 	},
 	{
 		key: 'en',
 		label: 'EN',
 		value: 'en',
-		icon: <icons.ENFlag className='mr-[20px] h-[20px]' />
+		longLabel: 'English',
+		icon: <icons.ENFlag alt='' className='w-5 h-5 flex-shrink-0 mr-3' />
 	}
 ];
 
 export const LanguageSelector = () => {
 
-	const [currrentLang, setCurrentLang] = useState<string>();
+	const setLanguage = useChangeLocale();
+	const currentLang = useCurrentLocale();
+
 	const [showLanguagePicker, setShowLanguagePicker] = useState<boolean>(false);
 
-	useEffect(() => {
-		// check if the language is set in local storage
-		// hasLanguageSet();
-		// get language config from local storage, if null we gave it default value
-		// (which is not necesarry since it was already handled by hasLanguageSet() function)
-		// const lang = getLanguage() ?? 'idn';
-		// set local state language to localstorage value
-		setCurrentLang('idn');
-	}, []);
-
-	const onChangeLanguage = (value: string) => {
-		// setLanguage(value);
-		setCurrentLang(value);
+	const onChangeLanguage = (value: any) => {
+		setLanguage(value);
 		setShowLanguagePicker(false);
-		// We need to reload the page to change all the content language since the header of the request is changed
-		// this is the common approach used by many sites for changing the language
-		reload();
 	};
-
-	const reload = () => {
-		window.location.reload();
-	};
-
+	
 	return (
 		<>
-			<div className='flex items-center gap-[20px]'>
-				{ languageItem.find(item => currrentLang === item.value)?.icon }
+			<div className='flex h-[21px]'>
+				{ languageItem.find(item => currentLang === item.value)?.icon }
 			</div>
-			<div className='flex items-center pl-[20px] gap-[8px] cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
+			<div className='flex items-center pl-[20px] gap-[5px] cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
 				<Text fontSize='16px' fontWeight='900' color='white'>
-					{ languageItem.find(item => currrentLang === item.value)?.label }
+					{ languageItem.find(item => currentLang === item.value)?.label }
 				</Text>
-				<Image src={ icons.LightArrowDown } alt='' />
-				<div className='absolute right-[-10px] top-7'>
-					<Picker show={ showLanguagePicker }>
+				<icons.LightArrowDown alt='' />
+				<div className='absolute right-0 top-10'>
+					<Picker show={ showLanguagePicker } className='!mt-0 !shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)]'>
 						{
 							languageItem.map((item, index) => (
 								<div
 									key={ index }
-									className={ `cursor-pointer border-gray block py-4 px-4 flex justify-between items-center ${ index < languageItem.length ? '' : 'border-b' } ${ item.value === currrentLang ? 'active' : '' }` }
+									className={ `flex cursor-pointer p-5 ${ index > 0 ? 'border-t border-[#F0F2F9]' : '' }` }
 									onClick={ () => onChangeLanguage(item.value) }
 								>
 									<>
@@ -78,11 +65,11 @@ export const LanguageSelector = () => {
 											fontSize='16px'
 											fontWeight='700'
 											lineHeight='19px'
-											text={ item.label }
-											className='flex-1'
+											color={ item.value === currentLang ? colors.green.brandAccent : colors.black.general }
+											text={ item.longLabel }
 										/>
 									</>
-									<Icons.Check className={ `check-icon ${ item.value === currrentLang ? '' : 'hidden' }` } size={ 20 } />
+									<Icons.Check className={ `check-icon ${ item.value === currentLang ? '' : 'hidden' }` } size={ 20 } />
 								</div>
 							))
 						}
@@ -91,6 +78,6 @@ export const LanguageSelector = () => {
 			</div>
 		</>
 	);
-};
+}
 
 export default LanguageSelector;

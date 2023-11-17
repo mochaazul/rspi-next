@@ -1,16 +1,15 @@
+'use client';
+
 import { useEffect } from 'react';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { isEmpty } from 'lodash';
 
-import { Button, Spinner, Text } from '@/components';
+import { Button, Spinner, Text } from '@/components/ui';
 import { baseUrl } from '@/config';
 import { Languages, colors, icons } from '@/constant';
-import { useTypedSelector } from '@/hooks';
-import { PatientState } from '@/interface/PatientProfile';
-import { getLabResults } from '@/stores/PatientProfile';
-import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import { useGetLabHistory } from '@/lib/api/client/hospital';
 
 import { CardPatientPortalStyle, EmptyResultContainer } from '../../style';
 
@@ -32,19 +31,15 @@ const LaporanBtn = styled.a`
 
 const RiwayatLab = () => {
 	const { tableMenuLable, warning, empty } = Languages.page.patientPortal.riwayatLab;
-	const { labResults, loading } = useTypedSelector<PatientState>('patient');
-	const getLabResultDispatch = useAppAsyncDispatch(getLabResults);
 
-	useEffect(() => {
-		getLabResultDispatch();
-	}, []);
+	const { data: labHistoryResponse, error: labHistoryError, isLoading: labHistoryLoading } = useGetLabHistory();
 
-	if (loading) return (
+	if (labHistoryLoading) return (
 		<Spinner />
 	);
-	if (isEmpty(labResults)) {
+	if (isEmpty(labHistoryResponse?.data)) {
 		return (<EmptyResultContainer>
-			<Image src={ icons.NoLabResult } alt="" />
+			<icons.NoLabResult />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'
@@ -66,7 +61,7 @@ const RiwayatLab = () => {
 							<th />
 						</tr>
 						{
-							labResults.map((labResult, index) => (
+							labHistoryResponse?.data.map((labResult, index) => (
 								<tr key={ index }>
 									<td>{ index + 1 }</td>
 									<td>{ labResult.date ? dayjs(labResult.date).format('dddd D MMMM YYYY') : '-' }</td>

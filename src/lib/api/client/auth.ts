@@ -9,7 +9,8 @@ import {
 	RegisterType,
 	ResendEmailVerificationType,
 	UpdatePasswordType,
-	UserData
+	UserData,
+	CheckPinType
 } from '@/interface';
 
 import fetcher, { ApiOptions } from '../utils/fetcher';
@@ -60,4 +61,8 @@ export const useRegisterOnboard = (options?: ApiOptions) => {
 
 export const useCheckPhonePatient = (options?: ApiOptions) => {
 	return useSWRMutation('checkPatientPhone', (key, { arg }: { arg: CheckPhoneType; }) => fetcher<any>('checkPatientPhone', { ...options, body: arg }));
+};
+
+export const usePostCheckPinMutation = (options?: ApiOptions) => {
+	return useSWRMutation('checkPin', (key, { arg }: { arg: CheckPinType; }) => fetcher<UserData[]>('checkPin', { ...options, body: arg }));
 };

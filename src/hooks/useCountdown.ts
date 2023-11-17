@@ -1,4 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+'use client';
+
+import {
+	useState,
+	useEffect,
+	useRef
+} from 'react';
 
 const initialValues = {
 	days: '0',

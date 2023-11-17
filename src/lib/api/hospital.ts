@@ -7,4 +7,3 @@ export const getHospital = () => {
 export const getLastVisitHospital = () => {
 	return fetcher<I_VisitHistory[]>('visitHistory');
 };
-

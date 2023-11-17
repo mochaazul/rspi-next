@@ -16,7 +16,7 @@ import {
 } from '@/interface';
 import { getAge } from '@/helpers/getAge';
 import { splitDate } from '@/helpers/datetime';
-import Layout from '@/components/Layout';
+import Layout from '@/components/ui/Layout';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';

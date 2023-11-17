@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 
-import { CustomCarousel, Text, Tabs } from '@/components';
+import { CustomCarousel, Text, Tabs } from '@/components/ui';
 import { colors, Languages as lang } from '@/constant';
 import { useTypedSelector } from '@/hooks';
 import { CenterOfExcellenceState } from '@/interface';

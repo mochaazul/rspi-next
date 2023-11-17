@@ -1,16 +1,24 @@
+import LandingPageStyle from './style';
+
+import { getNews } from '@/lib/api/news';
+import { getEvents } from '@/lib/api/events';
+import { getAwards } from '@/lib/api/awards';
+import { getBanner, getCoe } from '@/lib/api';
+import { getHospital } from '@/lib/api/hospital';
 import { getCurrentLocale } from '@/locales/server';
+import { getClinics, getFacilitiesAndServices } from '@/lib/api/clinics';
 
 import CustomCarousel from '@/components/ui/Carousel';
 import LangWrapper from '@/components/ui/LangWrapper';
 
-import CentreOfExcellence from '@/components/PageComponents/LandingPageSections/CenterOfExcelence';
-import ServicesTabs from '@/components/PageComponents/LandingPageSections/Services';
-import FacilitiesServices from '@/components/PageComponents/LandingPageSections/FacilitiesServices';
-import PromoPackages from '@/components/PageComponents/LandingPageSections/PromoPackages';
-import NewsHealthArticles from '@/components/PageComponents/LandingPageSections/NewsHealthArticles';
-import CustomerReview from '@/components/PageComponents/LandingPageSections/CustomerReview';
-import AccreditationAwards from '@/components/PageComponents/LandingPageSections/AccreditationsAwards';
-import MobileAppBanner from '@/components/PageComponents/LandingPageSections/MobileAppBanner';
+import CentreOfExcellence from '@/components/ui/PageComponents/LandingPageSections/CenterOfExcelence';
+import ServicesTabs from '@/components/ui/PageComponents/LandingPageSections/Services';
+import FacilitiesServices from '@/components/ui/PageComponents/LandingPageSections/FacilitiesServices';
+import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
+import NewsHealthArticles from '@/components/ui/PageComponents/LandingPageSections/NewsHealthArticles';
+import CustomerReview from '@/components/ui/PageComponents/LandingPageSections/CustomerReview';
+import AccreditationAwards from '@/components/ui/PageComponents/LandingPageSections/AccreditationsAwards';
+import MobileAppBanner from '@/components/ui/PageComponents/LandingPageSections/MobileAppBanner';
 
 import { isMobile } from 'react-device-detect';
 import { getBanner, getCoe } from '@/lib/api';

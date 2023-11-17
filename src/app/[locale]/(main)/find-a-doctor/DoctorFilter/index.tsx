@@ -7,7 +7,7 @@ import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { HospitalDetail, HospitalState } from '@/interface';
 import { getClinics, getSpecialities } from '@/stores/Specialities';
 import { I_SpecialitiesState, PayloadClinic } from '@/interface/specialities';
-import { PickerItem } from '@/components/DropdownSearch';
+import { PickerItem } from '@/components/ui/DropdownSearch';
 
 import Pills from '../Pills';
 import { AccordionFilterWrapper } from '../page';

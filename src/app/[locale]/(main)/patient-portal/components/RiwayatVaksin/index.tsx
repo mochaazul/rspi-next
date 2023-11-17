@@ -1,33 +1,28 @@
+'use client';
+
 import { useEffect } from 'react';
 import { isEmpty } from 'lodash';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 
-import { Spinner, Text } from '@/components';
+import { Spinner, Text } from '@/components/ui';
 import { Languages, colors, icons } from '@/constant';
-import { useTypedSelector } from '@/hooks';
-import { PatientState } from '@/interface/PatientProfile';
-import { getVaccineHistory } from '@/stores/PatientProfile';
-import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import { useGetVaccineHistory } from '@/lib/api/client/hospital';
 
 import { CardPatientPortalStyle, EmptyResultContainer } from '../../style';
 
 const RiwayatVaksin = () => {
 	const { tableMenuLable, warning, empty } = Languages.page.patientPortal.riwayatVaksin;
-	const { vacineHistory, loading } = useTypedSelector<PatientState>('patient');
-	const getVaccineDispatch = useAppAsyncDispatch(getVaccineHistory);
 
-	useEffect(() => {
-		getVaccineDispatch();
-	}, []);
+	const { data: vaccineHistoryResponse, error: vaccineHistoryError, isLoading: vaccineHistoryLoading } = useGetVaccineHistory();
 
-	if (loading) return (
+	if (vaccineHistoryLoading) return (
 		<Spinner />
 	);
 
-	if (isEmpty(vacineHistory)) {
+	if (isEmpty(vaccineHistoryResponse?.data)) {
 		return (<EmptyResultContainer>
-			<Image src={ icons.NoVaccineResult } alt="" />
+			<icons.NoVaccineResult />
 			<Text text={ empty }
 				fontSize='20px'
 				fontWeight='700'
@@ -48,7 +43,7 @@ const RiwayatVaksin = () => {
 							<th>{ tableMenuLable.vaccineDate }</th>
 						</tr>
 						{
-							vacineHistory.map((history, index) => (
+							vaccineHistoryResponse?.data.map((history, index) => (
 								<tr key={ index }>
 									<td>{ index + 1 }</td>
 									<td>{ history.vaccination_disease }</td>

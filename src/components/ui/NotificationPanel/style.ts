@@ -4,14 +4,14 @@ import { colors } from '@/constant';
 
 export interface StyleProps {
 	mode: 'success' | 'error';
-	$visible?: boolean;
+	visible?: boolean;
 }
 
 export const NotificationStyle = styled.div<StyleProps>`
 	transition: all .5s;
-	max-height: ${ props => props.$visible ? '900vh' : '0' };
-	padding: ${ props => props.$visible ? '16px' : '0' };
-	opacity: ${ props => props.$visible ? '1' : '0' };
+	max-height: ${ props => props.visible ? '900vh' : '0' };
+	padding: ${ props => props.visible ? '16px' : '0' };
+	opacity: ${ props => props.visible ? '1' : '0' };
 	overflow: hidden;
 
 	svg.svg-white path {

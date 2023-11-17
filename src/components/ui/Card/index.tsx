@@ -16,7 +16,7 @@ import {
 	CardContentHTML
 } from './style';
 import Image from 'next/image';
-import { Share } from '@/components';
+import { Share } from '@/components/ui';
 import { icons } from '@/constant';
 
 interface PropsType {
@@ -57,7 +57,7 @@ const Card = (props: PropsType) => {
 				{
 					props.image &&
 					<div className={ `relative w-full ${ props.imageHeight ? `h-[${ props.imageHeight }]` : 'h-fit' }` } >
-						<Image src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
+						<img src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
 					</div>
 				}
 				{

@@ -6,7 +6,7 @@ import { useFormik, FormikProps } from 'formik';
 import { ForgotPasswordSchema } from '@/validator/auth';
 import { Images, colors } from '@/constant';
 import { ForgotPasswordType } from '@/interface';
-import ConfirmationModal from '@/components/PageComponents/ForgotPasswordSections/ConfirmationModal';
+import ConfirmationModal from '@/components/ui/PageComponents/ForgotPasswordSections/ConfirmationModal';
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';

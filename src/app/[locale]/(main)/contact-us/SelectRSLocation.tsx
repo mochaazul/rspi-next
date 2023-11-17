@@ -1,9 +1,10 @@
 import * as Icons from 'react-feather';
 
-import { Button, Text } from '@/components';
+import { Button, Text } from '@/components/ui';
 import { colors } from '@/constant';
 
 import { SelectRSLocationStyle } from './style';
+import Image from 'next/image';
 
 interface PropsType {
 	id: number;
@@ -34,7 +35,7 @@ const SelectRSLocation = (props: PropsType) => {
 				className={ `max-w-[545px] p-10 max-sm:px-3 max-sm:py-5 max-sm cursor-pointer flex items-center gap-5 ${ props.isActive ? 'active' : '' }` }
 				onClick={ handleOnClick(props.id) }
 			>
-				<img src={ props.imgThumb } alt={ props.title } className='w-[120px] h-[120px] rounded-md object-cover' />
+				<Image src={ props.imgThumb } alt={ props.title } className='w-[120px] h-[120px] rounded-md object-cover' />
 				<div>
 					<div className='flex justify-between'>
 						<Text

@@ -4,7 +4,11 @@ import { AwardsDetail } from '@/interface';
 import { colors } from '@/constant';
 import { getAwards } from '@/lib/api/awards';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
-import Layout from '@/components/Layout';
+import {
+	PanelH1,
+	PanelH3,
+	PanelV1
+} from '@/app/[locale]/(main)/layout';
 import Text from '@/components/ui/Text';
 import { getScopedI18n } from '@/locales/server';
 
@@ -53,11 +57,11 @@ export default async function AwardsPage() {
 
 	return (
 		<CentreOfExcellenceStyle>
-			<Layout.PanelV1>
-				<Layout.PanelH1>
+			<PanelV1>
+				<PanelH1>
 					<Breadcrumbs datas={ breadcrumbsPath } />
-				</Layout.PanelH1>
-				<Layout.PanelH3>
+				</PanelH1>
+				<PanelH3>
 					<div className='mt-[25px] sm:mt-[50px]'>
 						<Text
 							fontType='h1'
@@ -91,8 +95,8 @@ export default async function AwardsPage() {
 							)
 						}
 					</div>
-				</Layout.PanelH3>
-			</Layout.PanelV1>
+				</PanelH3>
+			</PanelV1>
 		</CentreOfExcellenceStyle>
 	);
 };

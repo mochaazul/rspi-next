@@ -8,7 +8,7 @@ import { FormikProps, useFormik } from 'formik';
 import { RegisterType, UserData } from '@/interface';
 import { colors, Images } from '@/constant';
 
-import InfoModal from '@/components/PageComponents/RegisterSections/InfoModal';
+import InfoModal from '@/components/ui/PageComponents/RegisterSections/InfoModal';
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
