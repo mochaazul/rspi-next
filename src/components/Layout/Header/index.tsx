@@ -239,7 +239,7 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
-											<Link href={ `/facilities/${ item.id }` } key={ idx }>
+											<Link href={ `/facilities/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
@@ -250,7 +250,7 @@ export const Header = ({
 											</Link>
 										)) }
 
-										<Link href={ '/facilities/1234567890' } >
+										<Link href={ '/facilities/medical-specialities' } >
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 												<div className='ml-[10px] w-[310px]'>

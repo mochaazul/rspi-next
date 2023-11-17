@@ -20,7 +20,7 @@ const FacebookPixel = () => {
 		const customEvent = () => {
 			// TODO: adjust jika ada perubahan path dan hapus event dari useEffect di setiap page berikut.
 			if (['/', '/en', '/id'].includes(pathname)) return landingPageEvent();
-			if (pathname.includes('facilities-services')) return facilitiesPageEvent();
+			if (pathname.includes('/facilities')) return facilitiesPageEvent();
 			if (pathname === '/find-a-doctor') return findDoctorEvent();
 			if (pathname === '/news') return newsPageEvent();
 			if (pathname === '/promo') return promoPageEvent();

@@ -29,7 +29,7 @@ const CardMenu = ({ data, paramsSlug }: Props) => {
 							lineHeight='21px'
 							subClassName='max-sm:text-xs'
 							color={ paramsSlug === item.slug ? colors.paradiso.default : colors.grey.dark }
-							onClick={ () => navigate.push(`/facilities-services/${ item.slug }`) }
+							onClick={ () => navigate.push(`/facilities/${ item.slug }`) }
 						/>
 					</div>
 				);

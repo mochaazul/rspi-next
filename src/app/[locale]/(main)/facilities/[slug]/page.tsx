@@ -28,7 +28,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 	const facility = facilityServices.find(item => item.slug === paramsSlug);
 
 	if (!facility && paramsSlug !== 'medical-specialities') {
-		redirect(`/facilities-services/${ facilityServices?.[0]?.slug ?? '' }`);
+		redirect(`/facilities/${ facilityServices?.[0]?.slug ?? '' }`);
 	}
 
 	let medicalSpecialities: MedicalSpecialities[] = [];
