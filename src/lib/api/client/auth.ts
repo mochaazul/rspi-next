@@ -8,6 +8,7 @@ import {
 	RegisterOnboardType,
 	RegisterType,
 	ResendEmailVerificationType,
+	UpdatePasswordType,
 	UserData
 } from '@/interface';
 
@@ -19,6 +20,10 @@ export const useVerifyChangeEmailToken = (options?: ApiOptions) => {
 
 export const useSetNewPassword = (options?: ApiOptions) => {
 	return useSWRMutation('newPassword', (key, { arg }: { arg: ApiOptions; }) => fetcher<any>('newPassword', { ...options, ...arg }));
+};
+
+export const useUpdatePassword = (options?: ApiOptions) => {
+	return useSWRMutation('updatePassword', (key, { arg }: { arg: UpdatePasswordType; }) => fetcher<any>('updatePassword', { ...options, body: arg }));
 };
 
 export const useVerifyResetToken = (options?: ApiOptions) => {

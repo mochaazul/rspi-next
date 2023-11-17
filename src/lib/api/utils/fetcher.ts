@@ -8,6 +8,7 @@ export type ApiOptions = {
 	param?: string;
 	query?: Record<string, any>,
 	pagination?: Pagination;
+	isUpload?: boolean;
 };
 
 const baseUrl = config.baseUrl ?? 'localhost:3000/v1';
@@ -36,7 +37,9 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		...safePagination
 	});
 
-	if (options && options.body) fetchOpt['body'] = JSON.stringify(options.body);
+	if (options && options.body) {
+		fetchOpt['body'] = options.isUpload ? options.body : JSON.stringify(options.body);
+	}
 
 	const res = await fetch(url, {
 		method: endpoint.method,

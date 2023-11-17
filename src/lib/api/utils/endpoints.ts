@@ -21,6 +21,7 @@ const endpointData = {
 	createFamilyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
 	checkPatientPhone: { path: '/patients/check-patient-phone', method: 'POST' },
+	checkPin: { path: '/patients/pin', method: 'POST' },
 
 	// PUT
 	updatePassword: { path: '/patients/update-password', method: 'PUT' },
@@ -28,6 +29,7 @@ const endpointData = {
 	updatePin: { path: '/patients/update-pin', method: 'PUT' },
 	updateEmail: { path: '/patients/update-email', method: 'PUT' },
 	createPin: { path: '/patients/pin', method: 'PUT' },
+	updateAvatar: { path: '/patients/update-avatar', method: 'PUT' },
 
 	// GET
 	patients: { path: '/patients', method: 'GET' },

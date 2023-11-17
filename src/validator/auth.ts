@@ -7,7 +7,7 @@ const EmailYup = yup.string().email()
 const DefaultPasswordYup = yup.string().required()
 	.min(8, 'Password should contain at least 8 characters');
 
-const DefaultPinYup = yup.string().required()
+export const DefaultPinYup = yup.string().required()
 	.min(6, 'PIN should contain 6 characters')
 	.max(6, 'PIN should contain 6 characters');
 
@@ -67,4 +67,12 @@ export const RegisterOnboardSchema = yup.object().shape({
 		.label('Phone number'),
 	birth_date: yup.string().required()
 		.label('Date of birth'),
+});
+
+export const UpdatePasswordSchema = yup.object().shape({
+	old_password: DefaultPasswordYup.label('Password'),
+	new_password: DefaultPasswordYup.label('Password'),
+	confirm_password: DefaultPasswordYup
+		.label('Confirmation password')
+		.oneOf([yup.ref('new_password')], 'Passwords do not match')
 });

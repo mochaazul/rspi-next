@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
@@ -77,7 +77,7 @@ const LoginPage = () => {
 		const stat = searchParam.get('stat');
 		if (ref === 'reset' && stat === 'true') {
 			setNotifMode('success');
-			setSuccessMessage('Kata sandi berhasil diubah');
+			setSuccessMessage(languages('resetPasswordSuccess'));
 			setNotifVisible(true);
 		}
 		if (ref === 'invalid-token') {
@@ -86,6 +86,12 @@ const LoginPage = () => {
 		}
 		if (ref === 'sso') {
 			setNotifMode('error');
+			setNotifVisible(true);
+		}
+
+		if (ref === 'reset' && stat === 'email') {
+			setNotifMode('success');
+			setSuccessMessage(languages('resetEmailSuccess'));
 			setNotifVisible(true);
 		}
 	};
@@ -150,9 +156,9 @@ const LoginPage = () => {
 		/>;
 	};
 
-	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		formik.setFieldValue(e.target.id, e.target.value);
-	}, []);
+	};
 
 	return (
 		<LoginPageStyle>
@@ -172,9 +178,11 @@ const LoginPage = () => {
 						autoComplete='off'
 					>
 						<div className='w-full'>
-							<Link href='/' className='max-sm:hidden'>
-								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
-							</Link>
+							<div className='hidden sm:flex max-2xl:mb-2 mb-8'>
+								<Link href='/' className='flex'>
+									<Images.LogoRSPI />
+								</Link>
+							</div>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 								{ languages('heading') }
 							</Text>
@@ -187,7 +195,7 @@ const LoginPage = () => {
 							<div className='w-full mb-[32px]'>
 								<NotificationPanel
 									mode={ notifMode }
-									visible={ notifVisible && !!errorUser?.stat_msg && !loadingSubmit }
+									visible={ notifVisible && !loadingSubmit }
 									onClickRightIcon={ handleNotifOnClose }
 								>
 									{ handleNotifError() }

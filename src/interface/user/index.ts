@@ -57,9 +57,9 @@ export interface UserDataDetail {
 	name: string;
 	no_mr: string;
 	patient_code: string;
-	patient_id_rspi: string
+	patient_id_rspi: string;
 	phone: string;
-	updated_date: string
+	updated_date: string;
 }
 
 export type ResendEmailVerificationType = {
@@ -102,6 +102,7 @@ export type ForgotPasswordType = {
 };
 
 export type UpdatePasswordType = {
+	old_password: string;
 	new_password: string;
 	confirm_password: string;
 };

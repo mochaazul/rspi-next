@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useFormik, FormikProps } from 'formik';
@@ -107,9 +107,9 @@ const ResetPassword = () => {
 		}));
 	};
 
-	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		formikResetPassword.setFieldValue(e.target.id, e.target.value);
-	}, []);
+	};
 
 	if (tokenVerified)
 		return (

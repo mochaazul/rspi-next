@@ -491,7 +491,9 @@ export default {
 					successMessage: 'Successfully resent email verification'
 				}
 			},
-			welcome: 'Welcome'
+			welcome: 'Welcome',
+			resetEmailSuccess: 'Email address changed successfully',
+			resetPasswordSuccess: 'Password changed successfully'
 		},
 		registerPage: {
 			heading: 'Welcome',
@@ -708,6 +710,19 @@ export default {
 			},
 			buttonPrivacy: 'Next',
 			buttonTnC: 'Send',
-		}
+		},
+		updatePassword: {
+			heading: 'Change Password',
+			subHeading: 'Please enter your new password',
+			resetForm: {
+				oldPasswordLabel: 'Old Password',
+				oldPasswordPlaceHolder: 'Please enter your old password',
+				newPasswordLabel: 'New Password',
+				newPasswordPlaceHolder: 'Please enter your new password',
+				newPasswordConfirmationLabel: 'Confirm Password',
+				newPasswordConfirmationPlaceholder: 'Confirm your new password',
+				resetBtnLabel: 'Change Password'
+			},
+		},
 	}
 } as const;

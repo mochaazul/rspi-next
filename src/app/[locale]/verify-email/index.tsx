@@ -41,7 +41,7 @@ const ResetEmailPage = () => {
 			// need timeout to wait for animation
 			setTimeout(() => {
 				setTokenVerified(true);
-				navigate.replace('/login');
+				navigate.replace('/login?ref=reset&stat=email');
 			}, 1200);
 
 		} catch (error) {

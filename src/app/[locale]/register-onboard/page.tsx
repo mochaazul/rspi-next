@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
 
@@ -70,20 +70,24 @@ const RegisterOnboard = () => {
 		onSubmit: async (formRegister: RegisterOnboardType) => {
 			try {
 				setLoadingUser(true);
+				const formRegisterPayload = {
+					...formRegister,
+					phone: regexPhone(formRegister.phone)
+				};
 
-				const responseCheckPhone = await onCheckPhonePatient(formRegister.phone);
+				const responseCheckPhone = await onCheckPhonePatient(formRegisterPayload.phone);
 
 				if (!responseCheckPhone?.data) {
 					setIsDuplicatePhoneNumber(false);
 
-					await registerOnboard(formRegister);
+					await registerOnboard(formRegisterPayload);
 
 					const {
 						medical_record,
 						phone,
 						birth_date,
 						name
-					} = formRegister;
+					} = formRegisterPayload;
 
 					navigate.push(`/otp-verification?mr=${ medical_record }&phone=${ phone }&bod=${ birth_date }&name=${ name }`);
 				} else {
@@ -154,15 +158,15 @@ const RegisterOnboard = () => {
 		}
 	};
 
-	const onChangeInputValue = useCallback((data: { name?: string; value?: string; }) => {
+	const onChangeInputValue = (data: { name?: string; value?: string; }) => {
 		if (data?.name) {
 			formikRegister.setFieldValue(data?.name, data?.value ?? '');
 		}
-	}, []);
+	};
 
-	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		formikRegister.setFieldValue(e.target.id, e.target.value);
-	}, []);
+	};
 
 	return (
 		<RegisterOnboardStyle>

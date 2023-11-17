@@ -11,7 +11,7 @@ import { FacilityServicesDetail } from '@/interface';
 import { MedicalSpecialitiesItemContainer } from './style';
 
 import CardMenu from '../CardMenu';
-import Text from '../../../Text';
+import Text from '../../../ui/Text';
 
 type Specialities = {
 	title: string,

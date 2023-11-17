@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FormikProps, useFormik } from 'formik';
@@ -94,9 +94,9 @@ const RegisterPage = () => {
 		}
 	};
 
-	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		formikRegister.setFieldValue(e.target.id, e.target.value);
-	}, []);
+	};
 
 	return (
 		<RegisterPageStyle>
@@ -117,9 +117,11 @@ const RegisterPage = () => {
 						autoComplete='off'
 					>
 						<div className='w-full '>
-							<Link href='/' className='max-sm:hidden'>
-								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
-							</Link>
+							<div className='hidden sm:flex max-2xl:mb-2 mb-8'>
+								<Link href='/' className='flex'>
+									<Images.LogoRSPI />
+								</Link>
+							</div>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 								{ languages('heading') }
 							</Text>

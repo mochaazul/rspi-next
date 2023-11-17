@@ -20,7 +20,6 @@ import MainNavLanguage from './MainNavLanguage';
 import CallForAmbulance from './CallForAmbulance';
 import Share from './Share';
 import EmptyData from './EmptyData';
-import SubMenuPage from './SubMenuPage';
 import Picker from './Picker';
 import DropdownSearch from './DropdownSearch';
 import MedicalRecordReminder from './MedicalRecordReminder';
@@ -52,7 +51,6 @@ export {
 	CallForAmbulance,
 	Share,
 	EmptyData,
-	SubMenuPage,
 	Picker,
 	DropdownSearch,
 	MedicalRecordReminder

@@ -1,23 +1,35 @@
 import styled from 'styled-components';
-import { GlobalCardShadow } from '@/constant/globalstyle';
+import { GlobalCardShadowSmall } from '@/constant/globalstyle';
 
 export const ForgotPasswordStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+	min-height: 100vh;
+
+	@media screen and (min-width: 768px) {
+		padding: 32px 0;
+	}
 `;
 
 export const Box = styled.div`
-	${ GlobalCardShadow }
-  	display: flex;
-  	flex-direction: column;
-  	align-items: center;
-  	justify-content: center;
-		width: 666px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 696px;
 
-  	.input {
-    	width: 538px;
-  	}
+	.input {
+		width: 100%;
+	}
+
+	@media screen and (max-width: 768px) {
+		width: 100%;
+		padding: 32px 16px;
+	}
+
+	@media screen and (min-width: 768px) {
+		${ GlobalCardShadowSmall }
+	}
 `;
