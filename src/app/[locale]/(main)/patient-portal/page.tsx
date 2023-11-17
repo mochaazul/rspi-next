@@ -187,7 +187,7 @@ const PatientPortal = () => {
 					<section id='user-info'
 						className='flex flex-row sm:w-1/2 md:w-1/4'
 					>
-						<Image alt="" src={ getProfileResponse?.data.img_url || Images.ProfilePatient } />
+						<img alt="" src={ getProfileResponse?.data.img_url || Images.ProfilePatient } />
 						<div className='ml-[15px]'>
 							<Text text={ getProfileResponse?.data.name } fontSize='16px' fontWeight='700' />
 							<Text text={ `${ parseBod(getProfileResponse?.data.birthdate) }` } className='md:mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />

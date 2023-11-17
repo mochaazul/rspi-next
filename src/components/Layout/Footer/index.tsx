@@ -165,8 +165,8 @@ const FooterLayout = ({
 					<div>
 						{ renderCategoryTitle(language.getRSPIMobileLabel) }
 						<div className='store-images-container'>
-							<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'><Image src={ Images.GooglePlay } alt='google play icon' className='store-images' /></a>
-							<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'><Image src={ Images.AppStore } alt='app store icon' className='store-images' /></a>
+							<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'><img src={ Images.GooglePlay } alt='google play icon' className='store-images' /></a>
+							<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'><img src={ Images.AppStore } alt='app store icon' className='store-images' /></a>
 						</div>
 					</div>
 				</div>

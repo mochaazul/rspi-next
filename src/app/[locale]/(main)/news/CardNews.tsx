@@ -62,7 +62,7 @@ const CardNews = (props: PropsType) => {
 						/>
 					</div>
 				</div>
-				<Image src={ props.imgThumb } alt={ props.title } className='w-[254px] h-[145px] rounded-md object-cover' />
+				<img src={ props.imgThumb || '' } alt={ props.title } className='w-[254px] h-[145px] rounded-md object-cover' />
 			</div>
 		</CardNewsStyle>
 	);

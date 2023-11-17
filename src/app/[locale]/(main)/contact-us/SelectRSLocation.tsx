@@ -35,7 +35,7 @@ const SelectRSLocation = (props: PropsType) => {
 				className={ `max-w-[545px] p-10 max-sm:px-3 max-sm:py-5 max-sm cursor-pointer flex items-center gap-5 ${ props.isActive ? 'active' : '' }` }
 				onClick={ handleOnClick(props.id) }
 			>
-				<Image src={ props.imgThumb } alt={ props.title } className='w-[120px] h-[120px] rounded-md object-cover' />
+				<img src={ props.imgThumb } alt={ props.title } className='w-[120px] h-[120px] rounded-md object-cover' />
 				<div>
 					<div className='flex justify-between'>
 						<Text
