@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as FeatherIcon from 'react-feather';
 import Image from 'next/image';

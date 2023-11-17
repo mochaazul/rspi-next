@@ -4,10 +4,7 @@ import { useState, useEffect } from 'react';
 import moment from 'moment';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { getArticles } from '@/stores/actions';
 import { BreadcrumbsProps, ArticleState, Pagination } from '@/interface';
-import { navigation } from '@/helpers';
 import { colors } from '@/constant';
 import {
 	Breadcrumbs,
@@ -37,9 +34,9 @@ const NewsHealthArticlesPage = ({
 	articles,
 	pagination,
 	breadcrumbsPath,
-}:{
+}: {
 	breadcrumbsPath: BreadcrumbsType['datas'],
-    articles: ArticleState,
+	articles: ArticleState,
 	pagination: Pagination | null,
 }) => {
 	const [pageNumber, setPageNumber] = useState(pagination?.page || 1);
@@ -62,11 +59,11 @@ const NewsHealthArticlesPage = ({
 			is_publish: true,
 			category: tabData[activeTab]?.value,
 			keyword: keyArticle
-		}).then(function(response: any) {
+		}).then(function (response: any) {
 			setArticlesData(response.data);
 			setLoading(false);
 		});
-		
+
 	}, [
 		pageNumber,
 		activeTab,

@@ -8,7 +8,8 @@ import {
 	UpdateAvatarType,
 	UpdateEmailType,
 	UpdateProfileType,
-	UserDataDetail
+	UserDataDetail,
+	PatientProfile
 } from '@/interface';
 
 import fetcher, { ApiOptions } from '../utils/fetcher';

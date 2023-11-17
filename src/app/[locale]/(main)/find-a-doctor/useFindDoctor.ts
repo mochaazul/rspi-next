@@ -25,24 +25,23 @@ export const searchFilterField = {
 
 type Props = {
 	hospitals: HospitalDetail[],
-	clinics: ClinicResponse[]
-}
+	clinics: ClinicResponse[];
+};
 
-const useFindDoctor = ({ hospitals, clinics }:Props) => {
-
+const useFindDoctor = ({ hospitals, clinics }: Props) => {
 	const router = useRouter();
 	const pathName = usePathname();
 	const searchParams = useSearchParams();
 	const createQueryString = (name: string, value: string): void => {
 		const params = new URLSearchParams(searchParams);
 		params.set(name, value);
-		router.push(`${pathName}?${params.toString()}`, { scroll: false });
+		router.push(`${ pathName }?${ params.toString() }`, { scroll: false });
 	};
 
 	const deleteQueryString = (name: string): void => {
 		const params = new URLSearchParams(searchParams);
 		params.delete(name);
-		router.push(`${pathName}?${params.toString()}`);
+		router.push(`${ pathName }?${ params.toString() }`);
 	};
 
 	const filterHospital = () => {
