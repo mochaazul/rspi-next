@@ -32,7 +32,7 @@ const NotificationPanel = ({
 					{
 						!!showIconLeftOverride ?
 							showIconLeftOverride :
-							<Image src={ props.mode === 'success' ? icons.Check : icons.Close } className='svg-white' alt="" />
+							<img src={ props.mode === 'success' ? icons.Check : icons.Close } className='svg-white' alt="" />
 					}
 				</div>
 			</div>

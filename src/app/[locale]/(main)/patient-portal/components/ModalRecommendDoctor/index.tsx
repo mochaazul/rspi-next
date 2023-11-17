@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import Image from 'next/image';
@@ -6,10 +8,8 @@ import { isEmpty } from 'lodash';
 
 import { Modal, Text, Button, Spinner } from '@/components/ui';
 import { Images, Languages, colors, icons } from '@/constant';
-import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { GiveRatingDoctorPayload, I_VisitHistory, PatientProfile, PatientState } from '@/interface/PatientProfile';
-import { giveDoctorRating } from '@/stores/PatientProfile';
-import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
+import { I_VisitHistory, } from '@/interface/PatientProfile';
+import { usePostDoctorRatingMutation } from '@/lib/api/client/doctors';
 
 import { ModalStyle } from '../../style';
 
@@ -20,74 +20,10 @@ interface PropsType {
 	visitHistory?: I_VisitHistory;
 }
 const { jadwalKunjungan, riwayatKunjungan: {
-	recommendDoctorModal: {
-		header
-	}
+	recommendDoctorModal: { header }
 } } = Languages.page.patientPortal;
 
-const feedbackPills = ['Communication', 'Proffesionalism', 'Attitude', 'Skill', 'Timely', 'Knowledge'];
-
-const RatingOptionLabel = styled.div<{ checked: boolean; }>`
-  border-radius: 5px;
-  border: 1px solid #EAEAEA;
-  display: flex;
-  padding: 7px 13px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  cursor: pointer;
-  ${ props => props.checked && `
-    background-color: #358888;
-    color: white;
-  `}
-`;
-
-const FeedbackPillsCheck = styled.div`
-  width: 20px;
-  height: 20px;
-  border: 2px solid #D4D2D8;
-  border-radius: 99999px;
-`;
-
-const FeedbackPills = styled.div<{ checked: boolean; }>`
-  user-select: none;
-  border-radius: 100px;
-  background: #F2F2F2;
-  display: flex;
-  padding: 8px 16px;
-  align-items: center;
-  gap: 16px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  cursor: pointer;
-  ${ props => props.checked && `
-    border: 1px solid var(--Secondary-Green, #358888);
-    background: #E5F5F5;
-  `}
-  transition: 100ms all;
-`;
-
-const StyledTextArea = styled.textarea`
-  width: 100%;
-  min-height: 150px;
-  border: 1px solid #D0D5DD;
-  border-radius: 8px;
-  padding: 10px 14px;
-  outline: none;
-  font-size: 16px;
-  margin-bottom: 6px;
-  line-height: 24px;
-  :active{
-  }
-
-`;
+const feedbackPills = ['Communication', 'Professionalism', 'Attitude', 'Skill', 'Timely', 'Knowledge'];
 
 const Rating = ({ onChange, value }: { value: string, onChange: (value: string) => void; }) => {
 	const options = Array.from({ length: 10 }, (_, i) => i + 1);
@@ -119,7 +55,6 @@ const Rating = ({ onChange, value }: { value: string, onChange: (value: string) 
 };
 
 const Feedback = ({ onChange, value }: { value: string[], onChange: (value: string[]) => void; }) => {
-
 	const onChecked = (optValue: string) => {
 		const isChecked = value.includes(optValue);
 		if (isChecked) {
@@ -183,8 +118,7 @@ const FeedbackNotes = ({ onChange, value }: { value: string, onChange: (value: s
 };
 
 const RecommendDoctorModal = (props: PropsType) => {
-	const giveRatingDispatch = useAppAsyncDispatch<GiveRatingDoctorPayload>(giveDoctorRating);
-	const { loading, error } = useTypedSelector<PatientState>('patient');
+	const { data: giveDoctorRatingResponse, trigger: giveDoctorRating, error: giveDoctorRatingError, isMutating: giveDoctorRatingLoading } = usePostDoctorRatingMutation();
 
 	const [ratingValue, setRatingValue] = useState<string>('');
 	const [feedbackValue, setFeedbackValue] = useState<string[]>([]);
@@ -192,7 +126,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 
 	const onSubmit = async () => {
 		if (props.visitHistory) {
-			await giveRatingDispatch({
+			await giveDoctorRating({
 				id: props.visitHistory.appointment_id,
 				payload: {
 					doctor_code: props.visitHistory.doctor_code,
@@ -207,7 +141,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 	};
 
 	const shouldDisable = () => {
-		return isEmpty(feedbackValue) || !ratingValue || loading;
+		return isEmpty(feedbackValue) || !ratingValue || giveDoctorRatingLoading;
 	};
 
 	return (
@@ -221,7 +155,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 				<div>
 					<Text text={ header } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
 					<div className='flex my-[30px] p-[16px] rounded-md bg-[#FAFAFA]'>
-						<div><img className='rounded-full h-[48px] w-[48px]' src={ props.visitHistory?.doctor_photo || Images.Doctor1 } /></div>
+						<div><img className='rounded-full h-[48px] w-[48px]' src={ props.visitHistory?.doctor_photo || Images.Doctor1.src } /></div>
 						<div className='ml-[15px]'>
 							<Text text={ props.visitHistory?.doctor_name ?? '-' } fontSize='16px' fontWeight='700' />
 							<Text text={ props.visitHistory?.doctor_specialty } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
@@ -232,7 +166,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 					<FeedbackNotes value={ feedbackNotes } onChange={ setFeedbackNotes } />
 					<Button label='Submit' className='mt-[32px]' onClick={ onSubmit } disabled={ shouldDisable() }>
 						{
-							loading && <Spinner />
+							giveDoctorRatingLoading && <Spinner />
 						}
 					</Button>
 				</div>
@@ -240,5 +174,68 @@ const RecommendDoctorModal = (props: PropsType) => {
 		</Modal>
 	);
 };
+
+
+const RatingOptionLabel = styled.div<{ checked: boolean; }>`
+  border-radius: 5px;
+  border: 1px solid #EAEAEA;
+  display: flex;
+  padding: 7px 13px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+  ${ props => props.checked && `
+    background-color: #358888;
+    color: white;
+  `}
+`;
+
+const FeedbackPillsCheck = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 2px solid #D4D2D8;
+  border-radius: 99999px;
+`;
+
+const FeedbackPills = styled.div<{ checked: boolean; }>`
+  user-select: none;
+  border-radius: 100px;
+  background: #F2F2F2;
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  ${ props => props.checked && `
+    border: 1px solid var(--Secondary-Green, #358888);
+    background: #E5F5F5;
+  `}
+  transition: 100ms all;
+`;
+
+const StyledTextArea = styled.textarea`
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid #D0D5DD;
+  border-radius: 8px;
+  padding: 10px 14px;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 6px;
+  line-height: 24px;
+  :active{
+  }
+
+`;
 
 export default RecommendDoctorModal;

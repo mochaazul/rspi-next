@@ -10,7 +10,7 @@ const EmptyData = (props: PropsType) => {
 
 	return (
 		<div className='flex flex-col items-center mt-[40px]'>
-			<Image src={ Images.Empty } alt='empty-placeholder'/>
+			<img src={ Images.Empty } alt='empty-placeholder'/>
 			<Text
 				text={ `Yah! Belum ada ${ props.menu } saat ini` }
 				fontWeight='400'

@@ -5,11 +5,11 @@ import { isEmpty } from 'lodash';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
-import Radio from '@/components/Radio';
+import Radio from '@/components/ui/Radio';
 import { Button, Spinner, Text } from '@/components/ui';
 import icons from '@/constant/icons';
 import languages from '@/constant/languages';
-import { useGetAppointmentList } from '@/lib/api/appointments';
+import { useGetAppointmentList } from '@/lib/api/client/appointments';
 
 import CardAppointment from '../CardAppointment';
 import { EmptyResultContainer } from '../../style';
