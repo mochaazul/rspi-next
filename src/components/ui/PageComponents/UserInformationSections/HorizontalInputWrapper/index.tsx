@@ -6,9 +6,9 @@ import { colors, icons } from '@/constant';
 
 import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
 
-import Form from '../../../ui/Form';
-import Text from '../../../ui/Text';
-import WithInputLabel from '../../../ui/withInputLabel';
+import Form from '../../../Form';
+import Text from '../../../Text';
+import WithInputLabel from '../../../withInputLabel';
 
 interface HorizontalInputType {
 	inputProps: Partial<typeof Form.TextField>,

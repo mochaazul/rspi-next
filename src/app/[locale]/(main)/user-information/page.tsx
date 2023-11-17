@@ -24,7 +24,7 @@ import NotificationPanel from '@/components/ui/NotificationPanel';
 import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import SubMenuPage from '@/components/ui/SubMenuPage';
 import Form from '@/components/ui/Form';
-import HorizontalInputWrapper from '@/components/PageComponents/UserInformationSections/HorizontalInputWrapper';
+import HorizontalInputWrapper from '@/components/ui/PageComponents/UserInformationSections/HorizontalInputWrapper';
 import { useScopedI18n } from '@/locales/client';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import {

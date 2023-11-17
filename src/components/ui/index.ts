@@ -25,7 +25,6 @@ import SubMenuPage from './SubMenuPage';
 import Picker from './Picker';
 import DropdownSearch from './DropdownSearch';
 import MedicalRecordReminder from './MedicalRecordReminder';
-import Layout from './Layout';
 
 export {
 	Button,
@@ -54,6 +53,5 @@ export {
 	SubMenuPage,
 	Picker,
 	DropdownSearch,
-	MedicalRecordReminder,
-	Layout
+	MedicalRecordReminder
 };
