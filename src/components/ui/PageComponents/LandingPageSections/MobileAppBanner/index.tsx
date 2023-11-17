@@ -30,8 +30,8 @@ const MobileAppBanner = () => {
 						<div className='mt-[40px]'>
 							<Text text='Get the App' fontSize='20px' fontWeight='900' lineHeight='28px' />
 							<div className='flex gap-[13px] mt-[10px]'>
-								<img src={ images.GooglePlay.src } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
-								<img src={ images.AppStore.src } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
+								<Image src={ images.GooglePlay.src } alt='store-badge' width={ 158 } height={ 48 } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
+								<Image src={ images.AppStore.src } alt='store-badge' width={ 158 } height={ 48 } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
 							</div>
 						</div>
 					</div>

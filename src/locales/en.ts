@@ -35,7 +35,80 @@ export default {
 			backToLogin: 'Back to Login'
 		}
 	},
+	gender: {
+		male: 'Male',
+		female: 'Female'
+	},
 	page: {
+		bookingAppointment: {
+			validationError: 'Please fill all the data.',
+			profileSelector: {
+				deleteModal: {
+					heading: 'Are you sure you want to delete profile',
+					yesLabel: 'Yes',
+					noLabel: 'No'
+				},
+				selfLabel: 'Your Profile :',
+				other: 'Other\'s Profile:',
+				form: {
+					selfHeading: 'Add "Self" profile',
+					otherHeading: 'Add other\'s profile',
+					name: 'Name',
+					email: 'E-Mail',
+					phone: 'Phone',
+					gender: 'Gender',
+					submit: 'Submit',
+					dob: 'Birth Date'
+				},
+				emptyOther: 'There is no other\'s profile.',
+				emptySelf: 'Your profile is empty',
+				addProfileLabelOnEmpty: 'Add',
+				addNewProfile: 'Add new profile'
+			},
+			form: {
+				selfInsurance: 'Self',
+				thirdPartyInsurance: 'Third Party',
+				complaintLabel: 'What\'s your concern?',
+				guarantor: 'Guarantor',
+				insuranceName: 'Insurance Name',
+				insuranceNumber: 'Insurance Number',
+				insuranceCard: {
+					label: 'Insurance Card Photo (Optional)',
+					front: 'Upload face side of your insurance card',
+					back: 'Upload back side of your insurance card',
+				},
+				disclaimer: 'The provided data is correct. Registration is done for oneself. If the registration is done for someone else, consent has been obtained from the relevant party.'
+			},
+			confirmationModal: {
+				heading: 'Booking Confirmation',
+				subHeading: 'Please check and confirm the accuracy of the following information: ',
+				insuranceDataLabel: 'Insurance Data',
+				insuranceNumber: 'Insurance Number',
+				patientDetail: {
+					heading: 'Patient Data',
+					name: 'Name',
+					birthDate: 'Date of birth',
+					phone: 'Phone Number',
+					email: 'E-Mail',
+					guarantor: 'Guarantor'
+				},
+				toc: 'I confirm that all the above data is correct.',
+				confirmBtnLabel: 'Confirm',
+				profileIncompleteMsg: 'Your personal data is incomplete',
+				redirectLabel: 'Please click the button below to be redirected to the profile page',
+				redirectBtnLabel: 'Go to Profile Page'
+			},
+			success: {
+				heading: 'Form has been successfully sent!',
+				subHeading: {
+					main: 'Your appointment with',
+					at: 'at',
+					on: 'on',
+					done: 'has been successfully created.'
+				},
+				btnLabel: 'Ok'
+			}
+		},
 		awards: {
 			heading: 'Accreditations & Awards',
 			subHeading: 'We are committed to being a world-class healthcare organization. We strongly believe that operational excellence and patient safety are integral parts of meeting and exceeding our customers\' expectations.'

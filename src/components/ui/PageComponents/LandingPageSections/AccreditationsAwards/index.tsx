@@ -1,5 +1,5 @@
 'use client';
-import { AwardsDetail, AwardsState } from '@/interface';
+import { AwardsDetail } from '@/interface';
 import { AccreditationsAwardsWrapper } from './style';
 import Text from '@/components/ui/Text';
 import { colors } from '@/constant';
@@ -39,7 +39,9 @@ const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 					datas?.map((data, index) => (
 						<div key={ index } className='md:flex-1 sm:px-5 sm:py-3 card-shadow'>
 							<div className='image'>
-								<img src={ data.img_url } alt={ data.title } />
+								{ data.img_url && (
+									<Image src={ data.img_url } alt={ data.title ?? 'rspi-awards' } width={ 120 } height={ 120 } />
+								) }
 							</div>
 							<div>
 								<Text

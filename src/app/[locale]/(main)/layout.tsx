@@ -26,6 +26,7 @@ import {
 	footersFetch,
 	hospitalsFetch
 } from './helpers';
+import { headers } from 'next/headers';
 
 const blacklistedRoute = [
 	'/patient-portal',
@@ -44,8 +45,9 @@ export default async function RootLayout({
     footerShow?: boolean;
   };
 }) {
+	const headersList = headers();
+	const pathname = headersList.get('x-invoke-path') || '';
   
-	const pathname = children?.props?.childProp?.segment;
 	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
 
 	const hospitals = await hospitalsFetch();
