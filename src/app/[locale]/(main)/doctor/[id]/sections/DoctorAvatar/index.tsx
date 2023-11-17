@@ -55,7 +55,7 @@ const DoctorAvatar: React.FC<Props> = ({ profile_url, className }) => {
 
 	return <>
 		<div className={ `mb-[30px] max-sm:flex max-sm:justify-center ${ className }` }>
-			<Image src={ profile_url ?? Images.DoctorProfile } className='object-cover rounded lg:w-[254px] lg:h-[304px] w-[118px] h-[118px]' />
+			<img src={ profile_url ?? Images.DoctorProfile.src } className='object-cover rounded lg:w-[254px] lg:h-[304px] w-[118px] h-[118px]' />
 			<ShareDoctor className='max-sm:hidden' />
 		</div>
 	</>;

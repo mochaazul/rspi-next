@@ -42,7 +42,7 @@ const CarouselWrapper = styled.div`
     margin: auto;
     left: 0;
     right: 0;
-    bottom: 60px;
+    bottom: 0px;
     text-align: center;
     transform: translateY(-50%);
   }

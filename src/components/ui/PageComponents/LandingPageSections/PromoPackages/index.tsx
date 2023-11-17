@@ -25,12 +25,12 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 	const t = useScopedI18n('page.landingPage.promoPackages');
 	const [activeTab, setActiveTab] = useState(0);
 
-	const promo = activeTab === 0 ? events : events.filter((item: any) => item?.category === tabData?.[activeTab]?.value);
-
+	const promo = activeTab === 0 ? events : events?.filter((item: any) => item?.category === tabData?.[activeTab]?.value);
+	
 	if (showAsRelated) {
 		return (
 			<div className='w-full'>
-				{ promo.length !== 0 ?
+				{ promo?.length !== 0 ?
 					<CardsScrollHorizontal noHorizontalPadding={ true }>
 						{ promo?.map((item, index) => (
 							<Card
@@ -42,7 +42,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 									<Text
 										color={ colors.grey.dark }
 										fontSize='16px'
-										text={ item.category.charAt(0).toUpperCase() + item.category.slice(1) }
+										text={ item?.category?.charAt(0).toUpperCase() + item?.category?.slice(1) }
 										fontWeight='400'
 									/>
 								}
@@ -50,7 +50,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 									<CardContentWithInner
 										title={ item.title || '' }
 										description={ item.short_description || '' }
-										RSLocation={ (item.hospitals ?? []).map(hospital => hospital.hospital_name) }
+										RSLocation={ (item.hospitals ?? []).map((hospital: { hospital_name: any; }) => hospital.hospital_name) }
 									/>
 								}
 								footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetailsBtnLabel') } /> }
@@ -124,7 +124,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 									<Text
 										color={ colors.grey.dark }
 										fontSize='16px'
-										text={ item.category.charAt(0).toUpperCase() + item.category.slice(1) }
+										text={ item?.category?.charAt(0).toUpperCase() + item?.category?.slice(1) }
 										fontWeight='400'
 									/>
 								}
@@ -132,7 +132,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 									<CardContentWithInner
 										title={ item.title || '' }
 										description={ item.short_description || '' }
-										RSLocation={ (item?.hospitals ?? [])?.map(hospital => hospital.hospital_name) }
+										RSLocation={ (item?.hospitals ?? [])?.map((hospital: { hospital_name: any; }) => hospital.hospital_name) }
 									/>
 								}
 								footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetailsBtnLabel') } /> }
