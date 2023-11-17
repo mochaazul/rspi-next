@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FormikProps, useFormik } from 'formik';
@@ -79,49 +79,23 @@ const RegisterPage = () => {
 	};
 
 	const onClickRegister = async () => {
-		setLoadingUser(true);
+		try {
+			setLoadingUser(true);
 
-		const response = await register(formRegister);
+			const response = await register(formRegister);
 
-		if (response?.stat_code === 'APP:SUCCESS') {
 			setInfoBoxVisible(true);
 			setUserData(response?.data);
-		} else {
-			setErrorMessage(response?.stat_msg ?? '');
+		} catch (error: any) {
+			setErrorMessage(error?.message ?? '');
+		} finally {
+			setNotifVisible(true);
+			setLoadingUser(false);
 		}
-
-		setNotifVisible(true);
-		setLoadingUser(false);
 	};
 
-	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		formikRegister.setFieldValue(e.target.id, e.target.value);
-	}, []);
-
-	const tncContent = () => {
-		return (<div className='w-content max-h-[300px] overflow-y-auto px-[10px]'>
-			<Text
-				text={ 'Lorem ipsum dolor sit amet consectetur. Aenean nisl sollicitudin volutpat tellus facilisis dictum laoreet. Sit pellentesque eu facilisis accumsan cursus diam. Nisi velit lectus natoque lorem duis etiam. Iaculis mi eu ullamcorper dui et eleifend faucibus bibendum id. Lorem velit ornare gravida sit sem quis mattis consectetur in. Molestie in semper vulputate eu quisque nullam dapibus sed eget. Ac volutpat suscipit consectetur quis. Sit vitae mi est tellus enim et elementum lobortis.' }
-				color='#2A2536'
-				fontSize='16px'
-				fontWeight='400'
-				className='pb-6'
-			/>
-			<Text
-				text={ 'Lorem ipsum dolor sit amet consectetur. Aenean nisl sollicitudin volutpat tellus facilisis dictum laoreet. Sit pellentesque eu facilisis accumsan cursus diam. Nisi velit lectus natoque lorem duis etiam. Iaculis mi eu ullamcorper dui et eleifend faucibus bibendum id. Lorem velit ornare gravida sit sem quis mattis consectetur in. Molestie in semper vulputate eu quisque nullam dapibus sed eget. Ac volutpat suscipit consectetur quis. Sit vitae mi est tellus enim et elementum lobortis.' }
-				color='#2A2536'
-				fontSize='16px'
-				fontWeight='400'
-				className='pb-6'
-			/>
-			<Text
-				text={ 'Lorem ipsum dolor sit amet consectetur. Aenean nisl sollicitudin volutpat tellus facilisis dictum laoreet. Sit pellentesque eu facilisis accumsan cursus diam. Nisi velit lectus natoque lorem duis etiam. Iaculis mi eu ullamcorper dui et eleifend faucibus bibendum id. Lorem velit ornare gravida sit sem quis mattis consectetur in. Molestie in semper vulputate eu quisque nullam dapibus sed eget. Ac volutpat suscipit consectetur quis. Sit vitae mi est tellus enim et elementum lobortis.' }
-				color='#2A2536'
-				fontSize='16px'
-				fontWeight='400'
-				className='pb-6'
-			/>
-		</div>);
 	};
 
 	return (
@@ -143,9 +117,11 @@ const RegisterPage = () => {
 						autoComplete='off'
 					>
 						<div className='w-full '>
-							<Link href='/' className='max-sm:hidden'>
-								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
-							</Link>
+							<div className='hidden sm:flex max-2xl:mb-2 mb-8'>
+								<Link href='/' className='flex'>
+									<Images.LogoRSPI />
+								</Link>
+							</div>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 								{ languages('heading') }
 							</Text>

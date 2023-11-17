@@ -2,7 +2,6 @@ import { Text } from '@/components/ui';
 import { icons } from '@/constant';
 
 import { StyleProps, NotificationStyle } from './style';
-import Image from 'next/image';
 
 export interface PropsTypes extends StyleProps {
 	showIconLeft?: boolean;
@@ -24,7 +23,8 @@ const NotificationPanel = ({
 	onClickRightIcon,
 	...props
 }: PropsTypes) => {
-	
+	const IconStatus = props.mode === 'success' ? icons.Check : icons.Close;
+
 	return (
 		<NotificationStyle mode={ props.mode } visible={ props.visible } className='flex items-center justify-center rounded-[4px] min-w-full'>
 			<div className={ `grow-0 mr-[8px] ${ showIconLeft === false && 'hidden' }` }>
@@ -32,7 +32,7 @@ const NotificationPanel = ({
 					{
 						!!showIconLeftOverride ?
 							showIconLeftOverride :
-							<Image src={ props.mode === 'success' ? icons.Check : icons.Close } className='svg-white' alt='' fill />
+							<IconStatus className='svg-white' />
 					}
 				</div>
 			</div>

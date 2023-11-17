@@ -1,12 +1,14 @@
+'use client';
+
 import React from 'react';
 
-import { colors } from '@/constant';
-import { icons } from '@/constant';
-import { Form, Text } from '@/components/ui';
-import WithInputLabel from '@/components/ui/withInputLabel';
+import { colors, icons } from '@/constant';
 
 import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
-import Image from 'next/image';
+
+import Form from '../../../Form';
+import Text from '../../../Text';
+import WithInputLabel from '../../../withInputLabel';
 
 interface HorizontalInputType {
 	inputProps: Partial<typeof Form.TextField>,

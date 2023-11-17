@@ -1,5 +1,4 @@
 import * as FeatherIcons from 'react-feather';
-import Image from 'next/image';
 
 import { icons } from '../../../constant';
 import withInputLabel from '../withInputLabel';
@@ -12,15 +11,24 @@ import {
 	TextFieldWrapper
 } from './style';
 
-const TextField = ({ onIconClick, isNumber, mask, iconName, iconPosition, ...props }: InputType) => {
+const TextField = ({
+	onIconClick,
+	isNumber,
+	mask,
+	iconName,
+	iconPosition,
+	$iconColor,
+	featherIcon,
+	...props
+}: InputType) => {
 	const { ref, ...restProps } = props;
 	const Icons = iconName ? icons[iconName] : null;
-	const FeatherIconsJSX = props.featherIcon ? FeatherIcons[props.featherIcon] : null;
+	const FeatherIconsJSX = featherIcon ? FeatherIcons[featherIcon] : null;
 	return (
 		<TextFieldWrapper
 			$iconPosition={ iconPosition }
 			$iconName={ iconName }
-			featherIcon={ props.featherIcon }
+			$featherIcon={ featherIcon }
 			$isNumber={ isNumber }
 			className='w-full'
 		>
@@ -32,9 +40,9 @@ const TextField = ({ onIconClick, isNumber, mask, iconName, iconPosition, ...pro
 					null
 			}
 			{
-				props.featherIcon && FeatherIconsJSX !== null ?
+				featherIcon && FeatherIconsJSX !== null ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<FeatherIconsJSX color={ props.$iconColor } />
+						<FeatherIconsJSX color={ $iconColor } />
 					</IconWrapper> :
 					null
 			}

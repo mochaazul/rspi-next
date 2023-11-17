@@ -105,3 +105,8 @@ export const GlobalCardShadow2 = css`
 	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 `;
+
+export const GlobalCardShadowSmall = css`
+  box-shadow: 5px 5px 10px 0px rgba(53, 136, 136, 0.12);
+  border-radius: 16px;
+`;

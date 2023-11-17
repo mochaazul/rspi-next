@@ -25,10 +25,10 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 
 	const facilitiyServicesRes = await getFacilityServices({ query: { is_publish: true } });
 	const facilityServices: FacilityServicesDetail[] = facilitiyServicesRes?.data;
-	const isFacilityExist = facilityServices.findIndex(item => item.slug === paramsSlug) > -1;
+	const facility = facilityServices.find(item => item.slug === paramsSlug);
 
-	if (!isFacilityExist && paramsSlug !== 'medical-specialities') {
-		redirect(`/facilities-services/${ facilityServices?.[0]?.slug ?? '' }`);
+	if (!facility && paramsSlug !== 'medical-specialities') {
+		redirect(`/facilities/${ facilityServices?.[0]?.slug ?? '' }`);
 	}
 
 	let medicalSpecialities: MedicalSpecialities[] = [];
@@ -39,7 +39,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 		medicalSpecialities = medicalSpecialitiesRes?.data;
 	} else {
 		const relatedNewsRes = await getFacilityRelatedNews({
-			param: paramsSlug,
+			param: `${ facility?.id ?? '' }`,
 			pagination: { limit: 9 }
 		});
 		relatedNews = relatedNewsRes?.data;

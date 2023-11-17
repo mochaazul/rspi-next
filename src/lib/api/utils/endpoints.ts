@@ -30,6 +30,7 @@ const endpointData = {
 	updatePin: { path: '/patients/update-pin', method: 'PUT' },
 	updateEmail: { path: '/patients/update-email', method: 'PUT' },
 	createPin: { path: '/patients/pin', method: 'PUT' },
+	updateAvatar: { path: '/patients/update-avatar', method: 'PUT' },
 
 	// GET
 	patients: { path: '/patients', method: 'GET' },
@@ -57,7 +58,7 @@ const endpointData = {
 	familyProfile: { path: '/patients/family', method: 'GET' },
 
 	deleteFamilyProfile: { path: '/patients/family', method: 'DELETE' },
-	
+
 	getNotification: { path: '/notification', method: 'GET' },
 	getNews: { path: '/news', method: 'GET' },
 	getNewsSpecialtyByID: { path: '/specialities/related-specialities', method: 'GET' },

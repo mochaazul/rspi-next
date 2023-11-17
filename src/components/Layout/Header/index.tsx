@@ -38,14 +38,14 @@ export const Header = ({
 	facilityServicesData,
 	notificationResponseData,
 	marAllReadNotifFunc
-}:{
-		hospitalData: HospitalState,
-		centerOfExcellenceData: CenterOfExcellenceState,
-		facilityServicesData: FacilityServicesState,
-		notificationResponseData: NotificationResponse,
-		marAllReadNotifFunc: (params: any) => any,
-	}) => {
-	
+}: {
+	hospitalData: HospitalState,
+	centerOfExcellenceData: CenterOfExcellenceState,
+	facilityServicesData: FacilityServicesState,
+	notificationResponseData: NotificationResponse,
+	marAllReadNotifFunc: (params: any) => any,
+}) => {
+
 	const router = useRouter();
 
 	const currentLang = useCurrentLocale();
@@ -57,18 +57,18 @@ export const Header = ({
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
 	const session = useSession();
-	
+
 	const isLoggedIn = !!session?.token;
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const handleClick = () => {
+	const handleClick = async () => {
 		if (isLoggedIn) {
-			cookiesHelper.clearStorage(); // migrate ( for function removeUser refer repo rspi-fe-web )
+			await cookiesHelper.clearStorage(); // migrate ( for function removeUser refer repo rspi-fe-web )
+			router.push('/');
 		}
-		router.push('/');
 	};
 
 	const handleLoginClick = () => {
@@ -110,14 +110,14 @@ export const Header = ({
 							onClick={ () => marAllReadNotifFunc({
 								medical_record: 100154999,
 								email: 'riko.logwirno@rebelworks.co'
-							}).then(function(response: any) {
+							}).then(function (response: any) {
 								notificationResponseFetch();
 							})
 							}
-							// End Migrate
+						// End Migrate
 						/>
 					</div>
-					
+
 					{
 						notificationResponseData?.notification?.map((item, idx) => (
 							<div key={ idx } className='pb-4'>
@@ -169,7 +169,7 @@ export const Header = ({
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
-								<images.LogoRSPI alt=''/>
+								<images.LogoRSPI alt='' />
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
@@ -236,7 +236,7 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
-											<Link href={ `/facilities/${ item.id }` } key={ idx }>
+											<Link href={ `/facilities/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt='' />
 													<div className='ml-[10px] w-[310px]'>
@@ -246,8 +246,8 @@ export const Header = ({
 												</div>
 											</Link>
 										)) }
-										
-										<Link href={ '/facilities/1234567890' } >
+
+										<Link href={ '/facilities/medical-specialities' } >
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 												<div className='ml-[10px] w-[310px]'>
@@ -296,10 +296,18 @@ export const Header = ({
 											</a>
 											<div className='flex text-white items-center'>
 												<div>
-													
-													<img src={ '' } alt={ '' } />  :
-													<images.Profile alt='' />
-													
+
+													{ session.user?.img_url
+														? (
+															<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
+																<Image
+																	src={ session.user?.img_url }
+																	alt=''
+																	fill
+																/>
+															</div>
+														)
+														: <icons.EmptyProfile className='w-[50px] h-[50px]' /> }
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
 													<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
@@ -341,14 +349,14 @@ export const Header = ({
 								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
 							</div>
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
-								<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
+									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
-								<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
+									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>

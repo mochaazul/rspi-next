@@ -16,8 +16,8 @@ const Button = ({
 	return (
 		<ButtonStyle
 			theme={ theme }
-			hoverTheme={ hoverTheme }
-			themeColor={ themeColor }
+			$hoverTheme={ hoverTheme }
+			$themeColor={ themeColor }
 			className={ className }
 			type={ type }
 			onClick={ onClick && onClick }

@@ -10,12 +10,12 @@ import {
 import React, { ReactNode } from 'react';
 
 const PhoneNumberInput = ({ onIconClick, ...props }: PhoneInputType) => {
-	const { ref, ...restProps } = props;
+	const { ref, featherIcon, ...restProps } = props;
 	return (
 		<PhoneNumberInputWrapper
 			$iconPosition={ props.iconPosition }
 			$iconName={ props.iconName }
-			featherIcon={ props.featherIcon }
+			featherIcon={ featherIcon }
 			className='w-full'
 		>
 			<CountrySelector >

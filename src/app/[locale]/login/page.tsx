@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
@@ -8,7 +8,8 @@ import { FormikProps, useFormik } from 'formik';
 import { LoginType, ResponseStatus } from '@/interface';
 import { colors, Images } from '@/constant';
 
-import { login, requestVerifyEmail } from '@/lib/api/auth';
+import { login } from '@/lib/api/auth';
+import { useRequestVerifyEmail } from '@/lib/api/client/auth';
 import { LoginSchema } from '@/validator/auth';
 import { useScopedI18n } from '@/locales/client';
 import Button from '@/components/ui/Button';
@@ -21,6 +22,7 @@ import LoginPageStyle from './style';
 const LoginPage = () => {
 	const navigate = useRouter();
 	const searchParam = useSearchParams()!;
+	const { trigger: requestVerifyEmail } = useRequestVerifyEmail();
 
 	const [notifVisible, setNotifVisible] = useState(false);
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
@@ -41,28 +43,22 @@ const LoginPage = () => {
 			email: '',
 			password: ''
 		},
-		onSubmit: async(formLogin: LoginType) => {
-			setLoadingSubmit(true);
+		onSubmit: async (formLogin: LoginType) => {
+			try {
+				setLoadingSubmit(true);
 
-			const response = await login(formLogin);
+				const response = await login(formLogin);
 
-			if (response?.stat_msg) {
-				if (response?.stat_code === 'APP:SUCCESS') {
-					setSuccessMessage(`${ languages('welcome') } ${ response?.data?.email }`);
-
-					navigate.replace('/');
-				} else {
-					setErrorUser({
-						stat_msg: response?.stat_msg,
-						stat_code: response?.stat_code
-					});
-				}
-
-				setNotifMode(response?.stat_code !== 'APP:SUCCESS' ? 'error' : 'success');
+				setSuccessMessage(`${ languages('welcome') } ${ response?.data?.email }`);
+				setNotifMode('success');
+				navigate.replace('/');
+			} catch (error: any) {
+				setErrorUser({ stat_msg: error?.message ?? '' });
+				setNotifMode('error');
+			} finally {
+				setLoadingSubmit(false);
 				setNotifVisible(true);
 			}
-
-			setLoadingSubmit(false);
 		}
 	});
 	const languages = useScopedI18n('page.loginPage');
@@ -81,7 +77,7 @@ const LoginPage = () => {
 		const stat = searchParam.get('stat');
 		if (ref === 'reset' && stat === 'true') {
 			setNotifMode('success');
-			setSuccessMessage('Kata sandi berhasil diubah');
+			setSuccessMessage(languages('resetPasswordSuccess'));
 			setNotifVisible(true);
 		}
 		if (ref === 'invalid-token') {
@@ -90,6 +86,12 @@ const LoginPage = () => {
 		}
 		if (ref === 'sso') {
 			setNotifMode('error');
+			setNotifVisible(true);
+		}
+
+		if (ref === 'reset' && stat === 'email') {
+			setNotifMode('success');
+			setSuccessMessage(languages('resetEmailSuccess'));
 			setNotifVisible(true);
 		}
 	};
@@ -102,21 +104,18 @@ const LoginPage = () => {
 		setNotifVisible(false);
 	};
 
-	const handleResendEmailVerification = async() => {
-		initErrorNotif();
-		const requestResponse = await requestVerifyEmail({ email: formik.values.email });
-
-		if (requestResponse?.stat_code === 'APP:SUCCESS') {
+	const handleResendEmailVerification = async () => {
+		try {
+			initErrorNotif();
+			await requestVerifyEmail({ email: formik.values.email });
 			setSuccessMessage(languages('notificationMessage.emailNotVerified.successMessage'));
-		} else {
-			setErrorUser({
-				stat_msg: requestResponse?.stat_msg,
-				stat_code: requestResponse?.stat_code
-			});
+			setNotifMode('success');
+		} catch (error: any) {
+			setErrorUser({ stat_msg: error?.message ?? '' });
+			setNotifMode('error');
+		} finally {
+			setNotifVisible(true);
 		}
-
-		setNotifMode(requestResponse?.stat_code !== 'APP:SUCCESS' ? 'error' : 'success');
-		setNotifVisible(true);
 	};
 
 	const handleNotifError = () => {
@@ -126,8 +125,8 @@ const LoginPage = () => {
 				? 'Keluar, karena sesi anda telah berakhir, Silahkan login kembali'
 				: ref === 'sso'
 					? 'Akun anda terdeteksi telah masuk pada device lain. Silahkan login kembali'
-					: errorUser.stat_msg
-						? errorUser.stat_msg
+					: errorUser?.stat_msg
+						? errorUser?.stat_msg
 						: successMessage;
 
 		if (text === 'email is not verified') {
@@ -157,9 +156,9 @@ const LoginPage = () => {
 		/>;
 	};
 
-	const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		formik.setFieldValue(e.target.id, e.target.value);
-	}, []);
+	};
 
 	return (
 		<LoginPageStyle>
@@ -170,18 +169,20 @@ const LoginPage = () => {
 					md:p-8
 					login min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
 					` }
-					onSubmit={ (e: React.SyntheticEvent) => {
-						e.preventDefault();
-						initErrorNotif();
-						setEnableValidation(true);
-						formik.handleSubmit();
-					} }
-					autoComplete='off'
+						onSubmit={ (e: React.SyntheticEvent) => {
+							e.preventDefault();
+							initErrorNotif();
+							setEnableValidation(true);
+							formik.handleSubmit();
+						} }
+						autoComplete='off'
 					>
 						<div className='w-full'>
-							<Link href='/' className='max-sm:hidden'>
-								<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
-							</Link>
+							<div className='hidden sm:flex max-2xl:mb-2 mb-8'>
+								<Link href='/' className='flex'>
+									<Images.LogoRSPI />
+								</Link>
+							</div>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 								{ languages('heading') }
 							</Text>
@@ -194,7 +195,7 @@ const LoginPage = () => {
 							<div className='w-full mb-[32px]'>
 								<NotificationPanel
 									mode={ notifMode }
-									visible={ notifVisible && !!errorUser && !loadingSubmit }
+									visible={ notifVisible && !loadingSubmit }
 									onClickRightIcon={ handleNotifOnClose }
 								>
 									{ handleNotifError() }

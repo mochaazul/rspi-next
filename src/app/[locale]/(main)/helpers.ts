@@ -18,15 +18,15 @@ export async function marAllReadNotif(params: any) {
 		body: null,
 	};
 	return postMarkNotifAllRead(paramMarkAllReadNotif);
-    
+
 };
 
-export const footersFetch = async() => await getFooterSlug();
-export const hospitalsFetch = async() => await getHospitals();
-export const centerOfExcellenceFetch = async() => await getCenterOfExcellence();
-export const facilityServicesFetch = async() => await getFAS();
-export const notificationResponseFetch = async() => {
-	
+export const footersFetch = async () => await getFooterSlug();
+export const hospitalsFetch = async () => await getHospitals();
+export const centerOfExcellenceFetch = async () => await getCenterOfExcellence();
+export const facilityServicesFetch = async () => await getFAS();
+export const notificationResponseFetch = async () => {
+
 	const session = await getSession();
 
 	// TO DO : ambil mr & email ambil dari session

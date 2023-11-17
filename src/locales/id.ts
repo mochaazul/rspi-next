@@ -483,13 +483,13 @@ export default {
 		},
 		resetPassword: {
 			heading: 'Ubah Kata Sandi',
-			subHeading: 'Silahkan masukan Kata Sandi baru anda',
+			subHeading: 'Masukkan data akun yang terdaftar dalam sistem kami',
 			resetForm: {
 				oldPasswordLabel: 'Kata Sandi Lama',
 				oldPasswordPlaceHolder: 'Silahkan masukan kata sandi lama anda',
-				newPasswordLabel: 'Kata sandi baru',
+				newPasswordLabel: 'Kata Sandi Baru',
 				newPasswordPlaceHolder: 'Silahkan masukan kata sandi baru anda',
-				newPasswordConfirmationLabel: 'Konfirmasi kata sandi',
+				newPasswordConfirmationLabel: 'Konfirmasi Kata Sandi',
 				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru anda',
 				resetBtnLabel: 'Reset Kata Sandi'
 			},
@@ -565,7 +565,9 @@ export default {
 					successMessage: 'Berhasil mengirim ulang verifikasi email'
 				}
 			},
-			welcome: 'Selamat datang'
+			welcome: 'Selamat datang',
+			resetEmailSuccess: 'Alamat email berhasil diubah',
+			resetPasswordSuccess: 'Kata sandi berhasil diubah'
 		},
 		registerPage: {
 			heading: 'Buat Akun Pasien',
@@ -784,6 +786,19 @@ export default {
 			},
 			buttonPrivacy: 'Lanjut',
 			buttonTnC: 'Kirim',
-		}
+		},
+		updatePassword: {
+			heading: 'Ubah Password',
+			subHeading: 'Silahkan masukkan password baru anda',
+			resetForm: {
+				oldPasswordLabel: 'Kata Sandi Lama',
+				oldPasswordPlaceHolder: 'Silahkan masukan kata sandi lama anda',
+				newPasswordLabel: 'Kata Sandi Baru',
+				newPasswordPlaceHolder: 'Silahkan masukan kata sandi baru anda',
+				newPasswordConfirmationLabel: 'Konfirmasi Kata Sandi',
+				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru anda',
+				resetBtnLabel: 'Ubah Password'
+			},
+		},
 	},
 } as const;

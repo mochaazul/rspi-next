@@ -4,10 +4,11 @@ import { cookiesHelper, generateQueryString } from '@/helpers';
 import { config } from '@/constant/config';
 
 export type ApiOptions = {
-	body?: Record<string, any>,
+	body?: any,
 	param?: string;
 	query?: Record<string, any>,
 	pagination?: Pagination;
+	isUpload?: boolean;
 };
 
 const baseUrl = config.baseUrl ?? 'localhost:3000/v1';
@@ -22,11 +23,12 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 	const headers: Record<string, any> = {
 		'content-language': 'idn',
 		...Authorization ? { Authorization } : {},
-		'X-Channel': 'website',
+		'X-Channel': 'website'
+		// 'Content-Type': options?.isUpload ? 'multipart/form-data' : 'application/json'
 	};
 
 	let url = baseUrl + endpoint.path;
-	
+
 	if (options?.param) {
 		url += `/${ options.param }`;
 	}
@@ -35,9 +37,11 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		...safeQueryParam,
 		...safePagination
 	});
-	
-	if (options && options.body) fetchOpt['body'] = JSON.stringify(options.body);
-	
+
+	if (options && options.body) {
+		fetchOpt['body'] = options.isUpload ? options.body : JSON.stringify(options.body);
+	}
+
 	const res = await fetch(url, {
 		method: endpoint.method,
 		headers,
