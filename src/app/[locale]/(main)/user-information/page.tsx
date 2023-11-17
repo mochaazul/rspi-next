@@ -40,7 +40,7 @@ import { usePostCheckPinMutation } from '@/lib/api/client/auth';
 import { getProfile } from '@/lib/api/profile';
 
 import ProfilePageStyle, { Divider } from './style';
-import { PanelH2, PanelV1 } from '../layout';
+import { PanelH2, PanelV1 } from '../style';
 
 const editableInputProps = {
 	iconPosition: 'right',
