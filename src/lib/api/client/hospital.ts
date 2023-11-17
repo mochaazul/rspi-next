@@ -1,6 +1,8 @@
-import { HospitalDetail, I_VisitHistory, I_LabResults, I_VaccineHistory } from '@/interface';
-import fetcher from '../utils/fetcher';
 import useSWR from 'swr';
+
+import { HospitalDetail, I_VisitHistory, I_LabResults, I_VaccineHistory } from '@/interface';
+
+import fetcher from '../utils/fetcher';
 
 export const useGetHospital = () => {
 	return useSWR('hospital', () => fetcher<HospitalDetail[]>('hospital'));

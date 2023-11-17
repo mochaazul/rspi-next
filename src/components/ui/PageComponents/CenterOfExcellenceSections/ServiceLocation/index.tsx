@@ -1,24 +1,23 @@
+'use client';
+
 import React, { useState, useMemo } from 'react';
 
 import { CustomCarousel, Text, Tabs } from '@/components/ui';
 import { colors, Languages as lang } from '@/constant';
-import { useTypedSelector } from '@/hooks';
-import { CenterOfExcellenceState } from '@/interface';
+
 import CardMenu from '../CardMenu';
 
 interface NewsProps {
 	content?: any;
-	activeMenuIndex?: number;
+	activeMenuIndex?: string;
+	centerOfExcellence?: any;
 }
 
 const tabsData = ['Conditions', 'Treatments We Offer', 'Medical Technology', 'Our Doctors'];
 
 const language = lang.page.centerOfExcellence.serviceLocation;
 
-const Servicelocation: React.FC<NewsProps> = ({ content, activeMenuIndex }) => {
-
-	const { centerOfExcellence } = useTypedSelector<CenterOfExcellenceState>('centerOfExcellence');
-
+const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, centerOfExcellence }) => {
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 
 	const renderContent = useMemo(() => {
@@ -65,7 +64,7 @@ const Servicelocation: React.FC<NewsProps> = ({ content, activeMenuIndex }) => {
 			</div>
 
 			<div className='mt-[16px] md:hidden'>
-				<CardMenu data={ centerOfExcellence } activeMenuIndex={ activeMenuIndex ?? 0 } />
+				<CardMenu data={ centerOfExcellence } activeMenuIndex={ activeMenuIndex ?? '' } />
 			</div>
 
 			<div className='mt-[48px]'>
@@ -115,4 +114,4 @@ const Servicelocation: React.FC<NewsProps> = ({ content, activeMenuIndex }) => {
 	);
 };
 
-export default Servicelocation;
+export default ServiceLocation;

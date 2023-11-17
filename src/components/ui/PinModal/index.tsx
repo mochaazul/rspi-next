@@ -21,10 +21,7 @@ type Props = {
 };
 const { header, subHeader, submitBtnLabel } = languages.modalDialog.pin;
 
-const PinModal = ({
-	visible,
-	onSuccess
-}: Props) => {
+const PinModal = ({ visible, onSuccess }: Props) => {
 	const { data: checkPinResponse, trigger: checkPinTrigger, error: checkPinError, isMutating: checkPinLoading } = usePostCheckPinMutation();
 
 	const pinField = {
@@ -80,7 +77,6 @@ const PinModal = ({
 								/>
 							</NotificationPanel>
 						</div>
-
 					}
 					<div className='mt-[48px] mb-[20px]'>
 						<Text text={ 'PIN' } fontWeight='700' />

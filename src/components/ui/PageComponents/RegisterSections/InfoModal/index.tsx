@@ -1,11 +1,8 @@
 import { icons, colors } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
+import { Button, Modal, Text } from '@/components/ui';
 
 import { ModalStyle } from './style';
-
-import Modal from '../../../Modal';
-import Text from '../../../Text';
-import Button from '../../../Button';
 
 interface ModalProps {
 	emailUser: string;

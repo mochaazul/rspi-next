@@ -214,9 +214,9 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
-											<Link href={ `/center-of-excellence/${ item.id }` } key={ idx }>
+											<Link href={ `/centre-of-excellence/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-													<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } />
+													<Image alt="" src={ item?.img_url?.[0] } width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
@@ -401,7 +401,7 @@ export const Header = ({
 							}
 							<div
 								className='nav-menu'
-								onClick={ () => handleNavigateSideBar('/center-of-excellence') }>
+								onClick={ () => handleNavigateSideBar('/centre-of-excellence') }>
 								<Text text={ 'Center Of Excellence' } fontSize='16px' fontWeight='700' />
 							</div>
 							<div

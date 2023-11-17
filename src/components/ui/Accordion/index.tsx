@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 
 import Item from './Item';
@@ -15,7 +17,7 @@ export interface ItemType {
 	isOpen?: boolean;
 	onOpen?: () => any;
 	isJSXDesc?: boolean;
-	hideTogler?: boolean
+	hideTogler?: boolean;
 }
 
 export interface AccordionType {
@@ -26,7 +28,7 @@ export interface AccordionType {
 	openedIndex?: number;
 	hideItemBorderBottom?: boolean;
 	itemWrapperClassname?: string;
-	hideTogler?: boolean
+	hideTogler?: boolean;
 }
 
 /**

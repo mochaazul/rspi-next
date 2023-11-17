@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import { icons, sosmedLink } from '@/constant';
@@ -19,7 +21,7 @@ const buttonSocmed = [
 		action: 'link',
 		url: sosmedLink.facebook,
 		label: 'Facebook',
-		icon: <icons.FacebookIcon width='16px' height='16px'/>
+		icon: <icons.FacebookIcon width='16px' height='16px' />
 	},
 	{
 		action: 'link',
@@ -71,7 +73,7 @@ const Share = (props: PropsType) => {
 						onClick={ copy }
 					>
 						<icons.ShareNetwork />
-						
+
 						<div className='ml-[10px]'>
 							<Text text={ 'Share Link' } fontSize='16px' fontWeight='400' />
 						</div>

@@ -1,17 +1,17 @@
-import { Text } from '@/components/ui';
-import { Images, icons } from '@/constant';
-import { navigation } from '@/helpers';
 import Image from 'next/image';
 import React from 'react';
 import * as Icons from 'react-feather';
+import { usePathname } from 'next/navigation';
+
+import { Text } from '@/components/ui';
+import { Images } from '@/constant';
 
 type Props = {
 	profile_url: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
-
-	const { pathname } = navigation();
+	const pathName = usePathname();
 
 	const handleOpenSocmed = (link: string) => () => {
 		window.open(link, '_blank');
@@ -35,7 +35,7 @@ export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://twitter.com/rspondokindah') }>
 					<Icons.Twitter
 						width='16px'
-						height='16px'/>
+						height='16px' />
 				</div>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.linkedin.com/company/rumah-sakit-pondok-indah/') }>
 					<Icons.Linkedin
@@ -43,7 +43,7 @@ export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
 						height='16px'
 					/>
 				</div>
-				<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
+				<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathName); } }>
 					<Icons.Link width='16px' height='16px' />
 				</div>
 			</div>

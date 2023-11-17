@@ -1,7 +1,9 @@
-import { DoctorCalendar, FindDoctorDetail, I_MasterDoctor, TimeSlot, I_VisitHistory } from '@/interface';
 import useSWRInfinite from 'swr/infinite';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
+
+import { DoctorCalendar, FindDoctorDetail, I_MasterDoctor, TimeSlot, I_VisitHistory } from '@/interface';
+
 import fetcher, { ApiOptions } from '../utils/fetcher';
 
 export const useGetDoctors = (options?: ApiOptions) => {
@@ -30,5 +32,5 @@ export const useGetDoctorSlot = (options?: ApiOptions) => {
 };
 
 export const usePostDoctorRatingMutation = (options?: ApiOptions) => {
-	return useSWRMutation('doctorRating', (key, { arg }: { arg: any; }) => fetcher<any[]>('doctorRating', { ...options, body: arg }));
+	return useSWRMutation('doctorRating', (key, { arg }: { arg: any; }) => fetcher<any>('doctorRating', { ...options, body: arg }));
 };

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 
 import { DropdownSearchStyle } from './style';
@@ -30,7 +32,7 @@ const DropdownSearch = ({ textFieldProps, pickerItems, onItemClick, isForLanding
 			onFocus={ () => setPickerShow(true) }
 			onBlur={ () => setTimeout(() => setPickerShow(false), 250) }
 		>
-			<TextField { ...textFieldProps } value={ searchKey } onChange={ (val:any) => setSearchKey(val.currentTarget.value) } />
+			<TextField { ...textFieldProps } value={ searchKey } onChange={ (val: any) => setSearchKey(val.currentTarget.value) } />
 			<Picker show={ pickerShow } className={ stylePicker }>
 				{
 					(pickerItems ?? [])

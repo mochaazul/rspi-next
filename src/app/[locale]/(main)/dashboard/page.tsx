@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
 	const renderPostList = () => {
 		if (!articles?.length) return null;
 
-		return articles?.map((article, index) => (
+		return articles?.map((article: any, index: React.Key) => (
 			<div key={ index } className='posts'>
 				<div>
 					<h2>{ article.title }</h2>
