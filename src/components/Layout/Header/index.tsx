@@ -283,7 +283,7 @@ export const Header = ({
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
-							<div className='p-4'>
+							<div>
 								{ modalNotification() }
 							</div>
 							<div className='flex items-center gap-6 max-sm:hidden'>
