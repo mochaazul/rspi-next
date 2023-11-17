@@ -22,7 +22,6 @@ const endpointData = {
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
 	checkPin: { path: '/patients/pin', method: 'POST' },
 	checkPatientPhone: { path: '/patients/check-patient-phone', method: 'POST' },
-	checkPin: { path: '/patients/pin', method: 'POST' },
 	doctorRating: { path: '/patients/patient-portal/visit-histories', method: 'POST' },
 
 	// PUT

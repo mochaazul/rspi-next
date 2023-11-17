@@ -1,11 +1,16 @@
-import { colors, fonts } from '@/constant';
+'use client';
+
 import React from 'react';
 import styled from 'styled-components';
 
+import { colors, fonts } from '@/constant';
+
+type ThemeType = 'primary' | 'secondary' | 'outline' | 'text';
+
 export type ButtonType = {
-	theme?: 'primary' | 'secondary' | 'outline' | 'text';
+	theme?: ThemeType;
 	themeColor?: string;
-	hoverTheme?: 'primary' | 'secondary' | 'outline' | 'text';
+	hoverTheme?: ThemeType;
 	label?: string;
 	type?: 'button' | 'submit' | 'reset';
 	width?: string;
@@ -16,13 +21,18 @@ export type ButtonType = {
 	onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
+export type ButtonStyleType = ButtonType & {
+	$hoverTheme?: ThemeType;
+	$themeColor?: string;
+};
+
 const buttonTheme = ({
 	theme,
 	disabled,
-	themeColor = colors.paradiso.default
-}: ButtonType) => {
+	$themeColor = colors.paradiso.default
+}: ButtonStyleType) => {
 	let style = `
-		color: ${ themeColor };
+		color: ${ $themeColor };
 			> div.bg-overlay {
 				opacity: 1;
 				border-radius: 5px;
@@ -33,18 +43,18 @@ const buttonTheme = ({
 		style += `
 			color: ${ colors.white.default };
 			> div.bg-overlay {
-				background-color: ${ themeColor };
-				border: 1px solid ${ themeColor };
+				background-color: ${ $themeColor };
+				border: 1px solid ${ $themeColor };
 			}
     `;
 	}
 
 	if (theme === 'secondary') {
 		style += `
-			color: ${ themeColor };
+			color: ${ $themeColor };
 			> div.bg-overlay {
 				opacity: .1;
-				background-color: ${ themeColor };
+				background-color: ${ $themeColor };
 				border: 1px solid transparent;
 			}
     `;
@@ -52,17 +62,17 @@ const buttonTheme = ({
 
 	if (theme === 'outline') {
 		style += `
-			color: ${ themeColor };
+			color: ${ $themeColor };
 			> div.bg-overlay {
 				background-color: transparent;
-				border: 1px solid ${ themeColor };
+				border: 1px solid ${ $themeColor };
 			}
     `;
 	}
 
 	if (theme === 'text') {
 		style += `
-			color: ${ themeColor };
+			color: ${ $themeColor };
 			> div.bg-overlay {
 				background-color: transparent;
 				border: 0;
@@ -85,7 +95,7 @@ const buttonTheme = ({
 	return style;
 };
 
-const ButtonStyle = styled.button<ButtonType>`
+const ButtonStyle = styled.button<ButtonStyleType>`
 	transition: all .3s;
 	font-family: ${ fonts.lato }, Arial, sans-serif;
   background-color: white;
@@ -143,7 +153,7 @@ const ButtonStyle = styled.button<ButtonType>`
 	${ props => buttonTheme(props) }
 
 	&:hover {
-		${ props => !props.disabled && buttonTheme({ ...props, theme: props.hoverTheme ?? props.theme }) }
+		${ props => !props.disabled && buttonTheme({ ...props, theme: props.$hoverTheme ?? props.theme }) }
 	}
 `;
 

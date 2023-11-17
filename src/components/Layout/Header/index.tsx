@@ -29,6 +29,7 @@ import HeaderStyle from './style';
 
 import { useCurrentLocale } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
+import useSession from '@/session/client';
 
 export const Header = ({
 	hospitalData,
@@ -36,14 +37,14 @@ export const Header = ({
 	facilityServicesData,
 	notificationResponseData,
 	marAllReadNotifFunc
-}:{
-		hospitalData: HospitalState,
-		centerOfExcellenceData: CenterOfExcellenceState,
-		facilityServicesData: FacilityServicesState,
-		notificationResponseData: NotificationResponse,
-		marAllReadNotifFunc: (params: any) => any,
-	}) => {
-	
+}: {
+	hospitalData: HospitalState,
+	centerOfExcellenceData: CenterOfExcellenceState,
+	facilityServicesData: FacilityServicesState,
+	notificationResponseData: NotificationResponse,
+	marAllReadNotifFunc: (params: any) => any,
+}) => {
+
 	const router = useRouter();
 
 	const currentLang = useCurrentLocale();
@@ -54,8 +55,9 @@ export const Header = ({
 	const [isHoverCOE, setIsHoverCOE] = useState(false);
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
-	
-	const isLoggedIn = true;
+
+	const session = useSession();
+	const isLoggedIn = session?.isAuthenticated;
 	// const isLoggedIn = !!user.token; // migrate
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
@@ -108,14 +110,14 @@ export const Header = ({
 							onClick={ () => marAllReadNotifFunc({
 								medical_record: 100154999,
 								email: 'riko.logwirno@rebelworks.co'
-							}).then(function(response: any) {
+							}).then(function (response: any) {
 								notificationResponseFetch();
 							})
 							}
-							// End Migrate
+						// End Migrate
 						/>
 					</div>
-					
+
 					{
 						notificationResponseData?.notification?.map((item, idx) => (
 							<div key={ idx } className='pb-4'>
@@ -247,7 +249,7 @@ export const Header = ({
 												</div>
 											</Link>
 										)) }
-										
+
 										<Link href={ '/facilities/1234567890' } >
 											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
 												<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
@@ -299,13 +301,18 @@ export const Header = ({
 											</a>
 											<div className='flex text-white items-center'>
 												<div>
-													
-													<Image src={ '' } alt={ '' } />  :
-													<Image
-														src={ images.Profile }
-														alt=''
-													/>
-													
+
+													{ session.user?.img_url
+														? (
+															<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
+																<Image
+																	src={ session.user?.img_url }
+																	alt=''
+																	fill
+																/>
+															</div>
+														)
+														: <icons.EmptyProfile className='w-[50px] h-[50px]' /> }
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
 													<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
@@ -347,14 +354,14 @@ export const Header = ({
 								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
 							</div>
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
-								<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
+									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn &&
-							<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
-								<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
-							</div>
+								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
+									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
+								</div>
 							}
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>

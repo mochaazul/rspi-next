@@ -4,9 +4,9 @@ import { colors } from '@/constant';
 import { GlobalAllTransition5ms, GlobalBoxShadow } from '@/constant/globalstyle';
 
 interface StatusType {
-	$isOpen: boolean;
-	$topOffset?: number;
-	disabled?: boolean;
+  $isOpen: boolean;
+  $topOffset?: number;
+  disabled?: boolean;
 }
 
 export const SelectWrapper = styled.div<StatusType>`
@@ -40,7 +40,7 @@ export const SelectWrapper = styled.div<StatusType>`
 `;
 
 export const SelectStyled = styled.select`
-  display: none !important;
+  display: none;
   width: 100%;
   font-family: var(--font-family);
   appearance: none;

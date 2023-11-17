@@ -4,7 +4,7 @@ import { cookiesHelper, generateQueryString } from '@/helpers';
 import { config } from '@/constant/config';
 
 export type ApiOptions = {
-	body?: Record<string, any>,
+	body?: any,
 	param?: string;
 	query?: Record<string, any>,
 	pagination?: Pagination;
@@ -23,7 +23,8 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 	const headers: Record<string, any> = {
 		'content-language': 'idn',
 		...Authorization ? { Authorization } : {},
-		'X-Channel': 'website',
+		'X-Channel': 'website'
+		// 'Content-Type': options?.isUpload ? 'multipart/form-data' : 'application/json'
 	};
 
 	let url = baseUrl + endpoint.path;

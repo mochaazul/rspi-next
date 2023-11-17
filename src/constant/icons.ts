@@ -84,6 +84,7 @@ import UploadCloud from '/public/svg/upload-cloud.svg';
 import WarningIcon from '/public/svg/warning-icon.svg';
 import EmptyCalendar from '/public/svg/calendar_empty_state.svg';
 import AddButton from '/public/svg/btn_add.svg';
+import EmptyProfile from '/public/images/ic/empty_profile.svg';
 
 const icons = {
 	EmptyCalendar,
@@ -169,7 +170,8 @@ const icons = {
 	Trash,
 	UploadCloud,
 	WarningIcon,
-	AddButton
+	AddButton,
+	EmptyProfile
 };
 
 export default icons;

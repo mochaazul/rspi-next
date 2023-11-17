@@ -30,7 +30,12 @@ export const useDeleteFamilyProfileMutation = (options?: ApiOptions) => {
 };
 
 export const useGeneralUploads = (options?: ApiOptions) => {
-	return useSWRMutation('generalUploads', (key, { arg }: { arg: { payload: FormData; }; }) => fetcher<string>('generalUploads', { ...options, body: arg }));
+	return useSWRMutation('generalUploads', (key, { arg }: { arg: { payload: File; }; }) => {
+		const body = new FormData();
+		body.append('upload', arg.payload);
+
+		return fetcher<string>('generalUploads', { ...options, body: body, isUpload: true });
+	});
 };
 
 export const useUpdateAvatar = (options?: ApiOptions) => {

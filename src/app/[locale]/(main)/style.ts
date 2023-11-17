@@ -89,9 +89,9 @@ export const PanelH4 = styled.div`
 `;
 
 export const PanelV1 = styled.div`
-  padding-top: 60px;
+  padding-top: 121px;
   
-  @media not all and (min-width: 640px) {
-    padding-top: 0px;
+  @media screen and (min-width: 640px) {
+    padding-top: 162px;
   }
 `;

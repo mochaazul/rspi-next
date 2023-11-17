@@ -24,6 +24,7 @@ export interface StyledTextFieldType extends Omit<TextFieldType, 'iconPosition' 
   $iconPosition?: 'left' | 'right';
   $iconName?: keyof typeof icons;
   $isNumber?: boolean;
+  $featherIcon?: keyof typeof FeatherIcons;
 }
 
 export const TextFieldWrapper = styled.div<StyledTextFieldType>`
@@ -44,7 +45,7 @@ export const TextFieldWrapper = styled.div<StyledTextFieldType>`
     padding: 12px 18px;
     
     // we only need to worry about the padding when the icon is on the left, since the padding on the left was offested by the icon wrapper
-    ${props => props.$iconName || props.featherIcon && props.$iconPosition === 'left'  && 'padding-left: 0px;'}
+    ${ props => props.$iconName || props.$featherIcon && props.$iconPosition === 'left' && 'padding-left: 0px;' }
   }
 `;
 
@@ -53,9 +54,12 @@ export const Input = styled.input<InputType>`
   font-family: var(--font-family);
   ${ GlobalAllTransition5ms }
   &:focus {
-      outline: none;
-    }
-  
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: ${ colors.grey.lighterOpacity };
+  }
 `;
 
 export const InputMaskedStyled = styled(InputMask)`

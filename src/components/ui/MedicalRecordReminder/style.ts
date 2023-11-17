@@ -1,5 +1,3 @@
-'use client';
-
 import styled from 'styled-components';
 
 export const FloatingWrapper = styled.div`
@@ -21,13 +19,15 @@ export const BgContainer = styled.div`
 `;
 
 export const BodyContainer = styled.div`
-  padding: 20px;
-  z-index: 9994;
+  z-index: 1;
+  padding: 15px;
 
+  @media (min-width: 780px) {
+    padding: 20px;
+  }
 `;
 
 export const LeftContent = styled.div`
   display: flex;
-  align-items:center;
   gap: 4px;
 `;

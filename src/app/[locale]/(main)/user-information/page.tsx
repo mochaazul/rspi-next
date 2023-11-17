@@ -1,22 +1,21 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import * as Icons from 'react-feather';
+import * as FeatherIcons from 'react-feather';
 import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import { FormikProps, useFormik } from 'formik';
+import Image from 'next/image';
 
-import { colors, regExp } from '@/constant';
+import { icons, colors, regExp } from '@/constant';
 import { cookiesHelper } from '@/helpers';
 import {
-	BreadcrumbsProps,
 	CheckPinType,
 	UpdateEmailType,
 	UpdateProfileType
 } from '@/interface';
 import { getAge } from '@/helpers/getAge';
 import { splitDate } from '@/helpers/datetime';
-import Layout from '@/components/ui/Layout';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
@@ -36,52 +35,51 @@ import {
 	useUpdateProfile
 } from '@/lib/api/client/profile';
 import { CheckPinSchema, UpdateEmailSchema, UpdateProfileSchema } from '@/validator/profile';
-
-import ProfilePageStyle, { Divider } from './style';
-// import useProfilePage from './useProfilePage';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
 import { usePostCheckPinMutation } from '@/lib/api/client/auth';
+import { getProfile } from '@/lib/api/profile';
 
-// Notes: tidak digunakan
-// type DisabledInputs = {
-// 	email: boolean,
-// 	password: boolean,
-// 	pin: boolean;
-// };
+import ProfilePageStyle, { Divider } from './style';
+import { PanelH2, PanelV1 } from '../layout';
 
 const editableInputProps = {
 	iconPosition: 'right',
 	featherIcon: 'Edit3',
-	iconColor: colors.paradiso.default,
+	$iconColor: colors.paradiso.default,
+};
+const breadcrumbsPath = [{ name: 'Family Account', url: '#' }, { name: 'User Information', url: '#' }];
+
+export const getBase64 = (file: File | null) => {
+	return new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+		if (file) {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = error => reject(error);
+		} else {
+			resolve('');
+		}
+	});
 };
 
-const ProfilePage = (props: BreadcrumbsProps) => {
+const ProfilePage = () => {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
 	const { data: visitHospitalHistory } = useGetVisitHistory();
-	const { data: patientProfile, error: errorGetProfile } = useGetProfile();
+	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile();
 	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: updateEmail } = useUpdateEmail();
-	const { trigger: updateProfile } = useUpdateProfile();
+	const { trigger: updateProfile, isMutating: loadingUpdateProfile } = useUpdateProfile();
 	const { trigger: checkPin } = usePostCheckPinMutation();
 
-	// const { profileFields } = useProfilePage();
 	const navigate = useRouter();
 	const languages = useScopedI18n('page.profilePage');
 	const languagesPin = useScopedI18n('modalDialog.pin');
 
-	// const {
-	// 	setFieldsValue,
-	// 	registeredValue,
-	// 	onSubmit
-	// } = Form.useForm({ fields: profileFields });
-
-	// const updateUserDetailState = useAppDispatch(updateUserInfo);
-
-	const [tempImage, setTempImage] = useState<Blob | null>(null);
+	const [tempImage, setTempImage] = useState<File | null>(null);
+	const [tempImageSrc, setTempImageSrc] = useState<string>('');
 	const [clickUpdatePhoto, setClickUpdatePhoto] = useState<boolean>(false);
-	// const [isDisableFormProfile, setIsDisableFormProfile] = useState<boolean>(false);
 	const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
 	const [showModalSuccessUpdateEmail, setShowModalSuccessUpdateEmail] = useState<boolean>(false);
 	const [showModalNewEmail, setShowModalNewEmail] = useState<boolean>(false);
@@ -103,16 +101,13 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 		return getLastVisitedHospitalHelper(visitHospitalHistory?.data);
 	}, [visitHospitalHistory?.data]);
 
-	console.log({ patientProfile, visitHospitalHistory });
-	console.log({ lastVisitedHospital });
-
 	const formikProfile: FormikProps<UpdateProfileType> = useFormik<UpdateProfileType>({
 		validateOnBlur: enableValidation.profile,
 		validateOnChange: enableValidation.profile,
 		validationSchema: UpdateProfileSchema,
 		initialValues: {
 			name: patientProfile?.data?.name ?? '',
-			birthdate: patientProfile?.data?.birthdate ?? '',
+			birthdate: patientProfile?.data?.birthdate ? dayjs(patientProfile?.data?.birthdate).format('YYYY-MM-DD') : '',
 			gender: patientProfile?.data?.gender ?? '',
 			phone: patientProfile?.data?.phone ?? ''
 		},
@@ -120,12 +115,10 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 		onSubmit: async (formProfile: UpdateProfileType) => {
 			try {
 				await updateProfile(formProfile);
-				// updateUserDetailState({
-				// 	...payload
-				// }); // TODO: refetch getProfile & save to cookies
 				setShowModalSuccess(true);
-			} catch (error) {
-				console.log(error); // TODO: show error message
+				getProfileMutation();
+			} catch (error: any) {
+				setError(error?.message ?? '');
 			} finally {
 				setEnableValidation(prevToggle => ({ ...prevToggle, profile: false }));
 			}
@@ -141,8 +134,8 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 			try {
 				await updateEmail(formEmail);
 				setShowModalSuccessUpdateEmail(true);
-			} catch (error) {
-				console.log(error); // TODO: show error message
+			} catch (error: any) {
+				setError(error?.message ?? '');
 			} finally {
 				setEnableValidation(prevToggle => ({ ...prevToggle, email: false }));
 			}
@@ -167,13 +160,6 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 		},
 	});
 
-	// Notes: tidak digunakan
-	// const [disabledInputs, setDisabledInputs] = useState<DisabledInputs>({
-	// 	email: true,
-	// 	password: true,
-	// 	pin: true
-	// });
-
 	// const activeEmail = localStorage.getEmail(); // Notes: pending
 
 	// Notes: pending
@@ -185,32 +171,11 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	// 	window.location.reload();
 	// };
 
-	// Notes: sepertinya tidak digunakan
-	// const toggleInput = (key: keyof DisabledInputs) => {
-	// 	setDisabledInputs({
-	// 		...disabledInputs,
-	// 		[key]: !disabledInputs[key]
-	// 	});
-	// };
-
 	// useEffect(() => {
 	// createListOfHistoryUsers(); // Notes: pending
-	// 	getDataProfile();
 	// }, []);
 
-	// useEffect(() => {
-	// 	if (patientProfile?.data) {
-	// 		setIsDisableFormProfile(patientProfile?.data?.no_mr !== '');
-	// 		setFieldsValue({
-	// 			pin: '*****',
-	// 			password: '*****',
-	// 			dob: splitDate(patientProfile?.data?.birthdate),
-	// 			...patientProfile
-	// 		});
-	// 	}
-	// }, [patientProfile?.data]);
-
-	// TODO: bagaimana caranya jika pakai useSWR?
+	// TODO: bagaimana cara yg baik jika pakai useSWR?
 	// const getDataProfile = async () => {
 	// 	const responseData = await getProfile();
 	// 	if (responseData.payload.stat_msg !== 'Success') {
@@ -240,19 +205,17 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 
 	const clickUploadPhotoPatient = async () => {
 		try {
-			setIsLoadingUploadAvatar(true);
-			const formImg = new FormData();
-			formImg.append('upload', tempImage ?? '');
+			if (tempImage) {
+				setIsLoadingUploadAvatar(true);
 
-			const responseData = await uploadPhotoPatient({ payload: formImg });
-			console.log({ responseData });
-			if (responseData.stat_msg === 'Success') {
-				await updateAvatar({
-					img_url: responseData.data
-				});
+				const formImg = new FormData();
+				formImg.append('upload', tempImage ?? '');
+				const responseData = await uploadPhotoPatient({ payload: tempImage });
+				await updateAvatar({ img_url: responseData?.data });
+				getProfile(true);
 			}
-		} catch (error) {
-			console.log(error); // TODO: show error message
+		} catch (error: any) {
+			setError(error?.message ?? '');
 		} finally {
 			setIsLoadingUploadAvatar(false);
 		}
@@ -261,12 +224,14 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	const clickUpdateProfile = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		setEnableValidation(prevToggle => ({ ...prevToggle, profile: true }));
+		setError('');
 		formikProfile.handleSubmit();
 	};
 
 	const userClickUpdateEmail = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		setEnableValidation(prevToggle => ({ ...prevToggle, email: true }));
+		setError('');
 		formikEmail.handleSubmit();
 	};
 
@@ -290,6 +255,20 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 		}
 	};
 
+	const onHandleTempProfileImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+		try {
+			const selectedFile: File | null = event.target.files && event.target.files.length
+				? event.target.files[0]
+				: null;
+			const imageBase64: string | ArrayBuffer | null = await getBase64(selectedFile);
+			if (imageBase64 && typeof imageBase64 === 'string') setTempImageSrc(imageBase64);
+
+			if (selectedFile) setTempImage(selectedFile);
+		} catch (error) {
+			setError('Upload image failed');
+		}
+	};
+
 	// Notes: sepertinya tidak digunakan. tapi untuk jaga-jaga
 	// const parsePhoneNumber = () => {
 	// 	if (patientProfile?.data?.phone) {
@@ -298,26 +277,35 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 	// 	}
 	// };
 
-	// Notes: sepertinya tidak digunakan
-	// const pinField = {
-	// 	pin: {
-	// 		...createFieldConfig({
-	// 			name: 'pin',
-	// 			type: 'password'
-	// 		}),
-	// 		validationRules: [
-	// 			requiredRule('pin'),
-	// 			minLengthRule('pin', 6),
-	// 			maxLengthRule('pin', 6),
-	// 		],
-	// 		label: 'PIN'
-	// 	}
-	// };
+	const renderErrorNotif = () => {
+		if (error) {
+			return (
+				<div className='mt-[20px]'>
+					<NotificationPanel
+						showIconLeft={ false }
+						showIconRight={ false }
+						mode={ 'error' }
+						visible={ !!error }
+					>
+						<Text
+							fontType={ null }
+							fontSize='14px'
+							fontWeight='500'
+							text={ error }
+							color={ colors.red.default }
+						/>
+					</NotificationPanel>
+				</div>
+			);
+		}
+
+		return null;
+	};
 
 	return (
-		<Layout.PanelV1>
-			<Layout.PanelH2>
-				<Breadcrumbs datas={ props.breadcrumbsPath } />
+		<PanelV1>
+			<PanelH2>
+				<Breadcrumbs datas={ breadcrumbsPath } />
 				<ProfilePageStyle className='mt-[25px] sm:mt-[50px]'>
 					<div className='flex items-end lg:items-start justify-between max-lg:flex-col'>
 						<div>
@@ -346,7 +334,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 								onClick={ () => setSwitchAccountPickerShow(!switchAccountPickerShow) }
 							>
 								<div className='flex items-center gap-3'>
-									{ loginAsLabel }<Icons.ChevronDown size={ 22 } />
+									{ loginAsLabel }<FeatherIcons.ChevronDown size={ 22 } />
 								</div>
 							</Button>
 							<Picker show={ switchAccountPickerShow } className='z-40'>
@@ -373,7 +361,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 												lineHeight='19px'
 												text={ data.split(':')[0] }
 											/>
-											<Icons.Check className={ `check-icon ${ data.split(':')[0] === activeEmail ? '' : 'hidden' }` } size={ 20 } />
+											<FeatherIcons.Check className={ `check-icon ${ data.split(':')[0] === activeEmail ? '' : 'hidden' }` } size={ 20 } />
 										</div>
 									))
 								}
@@ -387,18 +375,25 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 								<div className='flex justify-between lg:justify-center lg:grid lg:grid-cols-4 lg:gap-4 lg:items-center'>
 									<div className='flex items-center'>
 										<div className='flex-shrink-0 w-12 h-12 lg:w-[60px] lg:h-[60px] rounded-full mr-4 lg:mr-[18px] relative overflow-hidden cursor-pointer'>
-											<img
-												src={ tempImage ? URL.createObjectURL(tempImage) : patientProfile?.data?.img_url }
-												alt={ tempImage ? 'Temp Image' : patientProfile?.data?.img_url }
-												className='w-full h-full object-cover'
-											/>
+											{ (tempImageSrc || patientProfile?.data?.img_url)
+												? (
+													<Image
+														src={ tempImageSrc ? tempImageSrc : (patientProfile?.data?.img_url ?? '') }
+														alt=''
+														sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+														className='w-full h-full object-cover'
+														fill
+													/>
+												)
+												: <icons.EmptyProfile />
+											}
 											<div className='w-full h-full absolute flex items-center justify-center upload-mask top-0' onClick={ () => uploadFileRef.current?.click() }>
-												<Icons.Camera color={ colors.grey.dark } />
+												<FeatherIcons.Camera color={ colors.grey.dark } />
 											</div>
 											<input
 												type='file'
 												ref={ uploadFileRef }
-												onChange={ () => setTempImage(uploadFileRef.current?.files?.[0] ? uploadFileRef.current?.files[0] : null) }
+												onChange={ onHandleTempProfileImage }
 												className='hidden'
 												accept='image/*'
 											/>
@@ -446,7 +441,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 											fontWeight='700'
 											fontSize='16px'
 											lineHeight='19px'
-											text={ lastVisitedHospital?.hospital_desc ?? '-' }
+											text={ lastVisitedHospital?.hospital_name ?? '-' }
 										/>
 									</div>
 									<div className='max-lg:hidden flex flex-col gap-y-2.5'>
@@ -460,7 +455,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 											fontWeight='700'
 											fontSize='16px'
 											lineHeight='19px'
-											text={ dayjs(lastVisitedHospital?.adm_date).format('DD MMM YYYY') ?? '-' }
+											text={ lastVisitedHospital?.visit_date ? dayjs(lastVisitedHospital?.visit_date).format('DD MMM YYYY') : '-' }
 										/>
 									</div>
 								</div>
@@ -477,7 +472,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 											fontWeight='700'
 											fontSize='16px'
 											lineHeight='19px'
-											text={ lastVisitedHospital?.hospital_desc ?? '-' }
+											text={ lastVisitedHospital?.hospital_name ?? '-' }
 											textAlign='center'
 										/>
 									</div>
@@ -493,7 +488,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 											fontWeight='700'
 											fontSize='16px'
 											lineHeight='19px'
-											text={ dayjs(lastVisitedHospital?.adm_date).format('DD MMM YYYY') ?? '-' }
+											text={ lastVisitedHospital?.visit_date ? dayjs(lastVisitedHospital?.visit_date).format('DD MMM YYYY') : '-' }
 											textAlign='center'
 										/>
 									</div>
@@ -508,20 +503,28 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 							<div className='flex flex-col gap-[10px]'>
 								<div className='flex max-md:mb-4 max-md:flex-col md:items-center md:justify-between md:w-full'>
 									<div className='flex flex-row gap-x-4 items-center w-full'>
-										<div className='w-[82px] md:w-[100px] h-[82px] md:h-[100px] rounded-full overflow-hidden flex-shrink-0'>
-											<img
-												src={ tempImage ? URL.createObjectURL(tempImage) : patientProfile?.data?.img_url }
-												alt={ tempImage ? 'Temp Image' : patientProfile?.data?.img_url }
-												className='w-full h-full object-cover'
-											/>
-										</div>
+										{ (tempImageSrc || patientProfile?.data?.img_url)
+											? (
+												<div className='w-[82px] md:w-[100px] h-[82px] md:h-[100px] rounded-full relative overflow-hidden flex-shrink-0'>
+													<Image
+														src={ tempImageSrc ? tempImageSrc : (patientProfile?.data?.img_url ?? '') }
+														alt=''
+														fill
+														sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+														className='w-full h-full object-cover'
+													/>
+												</div>
+											)
+											: <icons.EmptyProfile className='w-[82px] md:w-[100px] h-[82px] md:h-[100px]' />
+										}
 										{
 											clickUpdatePhoto ?
 												<div className='flex flex-col gap-y-2'>
 													<input
 														type='file'
 														ref={ uploadFileRef }
-														onChange={ () => setTempImage(uploadFileRef.current?.files?.[0] ? uploadFileRef.current?.files[0] : null) }
+														onChange={ onHandleTempProfileImage }
+														// onChange={ () => setTempImage(uploadFileRef.current?.files?.[0] ? uploadFileRef.current?.files[0] : null) }
 														className='hidden'
 														accept='image/*'
 													/>
@@ -531,7 +534,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 														fontType='h4'
 														fontWeight='400'
 														color={ colors.paradiso.default }
-														subClassName='max-sm:text-sm'
+														subClassName='max-sm:text-sm cursor-pointer'
 														onClick={ () => uploadFileRef.current?.click() }
 													>
 														{ languages('choosePhotoLabel') }
@@ -566,6 +569,10 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base text-[#2A2536] sm:whitespace-nowrap'
 														themeColor={ colors.grey.lightest }
 														label={ languages('deletePhotoLabel') }
+														onClick={ () => {
+															setTempImage(null);
+															setTempImageSrc('');
+														} }
 													/>
 												</div>
 												<div>
@@ -582,21 +589,26 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 											: null
 									}
 								</div>
+								{ !showModalNewEmail
+									&& !pinModalVisible
+									&& renderErrorNotif() }
 								<Form onSubmit={ clickUpdateProfile }>
 									<HorizontalInputWrapper
 										label={ languages('profileDetail.patientEmail') }
 										labelInfo={ !isDisableFormProfile ? languages('profileDetail.patientPhoneNumberLabelInfo') : undefined }
 										inputProps={ {
-											// ...registeredValue('email'),
-											...editableInputProps,
+											...!isDisableFormProfile
+												? {
+													...editableInputProps,
+													onIconClick: () => {
+														setPinModalVisible(true);
+														setError('');
+													}
+												} : {},
 											type: 'email',
-											value: formikEmail.values.email,
+											value: patientProfile?.data?.email ?? '',
 											placeholder: languages('profileDetail.patientEmailPlaceholder'),
 											disabled: true,
-											onIconClick: () => {
-												setPinModalVisible(true);
-												setError('');
-											}
 										} }
 									/>
 									<Divider />
@@ -622,13 +634,14 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 									<HorizontalInputWrapper
 										label={ languages('profileDetail.patientNameLabel') }
 										inputProps={ {
-											// ...registeredValue('name'),
 											id: 'name',
 											name: 'name',
 											type: 'text',
 											value: formikProfile.values.name,
 											onChange: onChangeInputProfile,
 											placeholder: languages('profileDetail.patientNamePlaceholder'),
+											errorMessage: formikProfile.errors.name,
+											isError: !!formikProfile.errors.name,
 											disabled: isDisableFormProfile
 										} }
 									/>
@@ -636,14 +649,15 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 										label={ languages('profileDetail.patientGenderLabel') }
 										inputType='dropdown'
 										inputProps={ {
-											// ...registeredValue('gender'),
 											id: 'gender',
 											name: 'gender',
 											value: formikProfile.values.gender,
 											onChange: onChangeInputProfile,
 											placeholder: languages('profileDetail.patientGenderPlaceholder'),
 											disabled: isDisableFormProfile,
-											className: 'capitalize'
+											errorMessage: formikProfile.errors.gender,
+											isError: !!formikProfile.errors.gender,
+											// className: 'capitalize'
 										} }
 									/>
 									{
@@ -661,26 +675,28 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 										label={ languages('profileDetail.patientBirthDateLabel') }
 										inputType='date'
 										inputProps={ {
-											// ...registeredValue('dob', true),
 											id: 'birthdate',
 											name: 'birthdate',
 											value: formikProfile.values.birthdate,
 											onChangeValue: onChangeValueProfile,
 											placeholder: languages('profileDetail.patientBirthDatePlaceholder'),
-											disabled: isDisableFormProfile
+											disabled: isDisableFormProfile,
+											errorMessage: formikProfile.errors.birthdate,
+											isError: !!formikProfile.errors.birthdate,
 										} }
 									/>
 									<HorizontalInputWrapper
 										label={ languages('profileDetail.patientPhoneNumber') }
 										labelInfo={ isDisableFormProfile ? languages('profileDetail.patientPhoneNumberLabelInfo') : undefined }
 										inputProps={ {
-											// ...registeredValue('phone'),
 											id: 'phone',
 											name: 'phone',
 											value: formikProfile.values.phone,
 											onChange: onChangeInputProfile,
 											placeholder: languages('profileDetail.patientPhoneNumberPlaceholder'),
 											disabled: isDisableFormProfile,
+											errorMessage: formikProfile.errors.phone,
+											isError: !!formikProfile.errors.phone,
 											onKeyDown: (ev: React.KeyboardEvent<HTMLInputElement>) => {
 												if (regExp.phone_allowed_char_list.indexOf(ev.key) < 0) {
 													ev.preventDefault();
@@ -697,6 +713,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 													theme='outline'
 													hoverTheme='primary'
 													label={ languages('securitySetting.cancelBtnLabel') }
+													onClick={ () => formikProfile.resetForm() }
 												/>
 											</div>
 											<div>
@@ -705,6 +722,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 													theme='primary'
 													hoverTheme='outline'
 													label={ languages('securitySetting.saveBtnLabel') }
+													disabled={ loadingUpdateProfile || loadingGetProfile }
 												/>
 											</div>
 										</div>
@@ -731,7 +749,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 										placeholder: languages('securitySetting.pinLabel'),
 										disabled: true,
 										type: 'password',
-										onIconClick: () => navigate.replace('/pin-reset')
+										onIconClick: () => navigate.push('/pin-reset')
 									} }
 								/>
 							</div>
@@ -744,40 +762,12 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 							onSubmit={ e => {
 								e.preventDefault();
 								setEnableValidation(prevToggle => ({ ...prevToggle, pin: true }));
+								setError('');
 								formikPin.handleSubmit();
-								// const { pin } = onSubmit(e);
-								// const responseData = await checkPin({
-								// 	pin: pin.value
-								// });
-								// if (responseData.payload.stat_msg === 'Success') {
-								// 	setPinModalVisible(false);
-								// 	setShowModalNewEmail(true);
-								// } else {
-								// 	setError(responseData.payload.stat_msg);
-								// }
 							} }>
 							<Text text={ languagesPin('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
 							<Text text={ languagesPin('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
-							{
-								error &&
-								<div className='mt-[20px]'>
-									<NotificationPanel
-										showIconLeft={ false }
-										showIconRight={ false }
-										mode={ 'error' }
-										visible={ true }
-									>
-										<Text
-											fontType={ null }
-											fontSize='14px'
-											fontWeight='500'
-											text={ error }
-											color={ colors.red.default }
-										/>
-									</NotificationPanel>
-								</div>
-
-							}
+							{ renderErrorNotif() }
 							<div className='mt-[48px] mb-[20px]'>
 								<Text text={ 'PIN' } fontWeight='700' />
 								<Form.TextFieldPin
@@ -792,7 +782,6 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 									type='password'
 									errorMessage={ formikPin.errors.pin }
 									isError={ !!formikPin.errors.pin }
-								// { ...registeredValue('pin', true) }
 								/>
 							</div>
 							<Button type='submit' label={ languagesPin('submitBtnLabel') } />
@@ -800,21 +789,23 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 
 					</div>
 				</Modal>
-				<Modal visible={ showModalNewEmail } onClose={ () => setShowModalNewEmail(false) }>
+				<Modal visible={ showModalNewEmail } onClose={ () => { setShowModalNewEmail(false); setError(''); } }>
 					<div>
+						{ renderErrorNotif() }
+
 						<Form onSubmit={ userClickUpdateEmail }>
 							<HorizontalInputWrapper
 								label={ languages('profileDetail.patientOldEmail') }
 								inputProps={ {
+									value: patientProfile?.data?.email ?? '',
 									placeholder: languages('profileDetail.patientOldEmailPlaceHolder'),
-									disabled: false,
+									disabled: true,
 									type: 'text',
 								} }
 							/>
 							<HorizontalInputWrapper
 								label={ languages('profileDetail.patientNewEmail') }
 								inputProps={ {
-									// ...registeredValue('new_email'),
 									id: 'email',
 									name: 'email',
 									value: formikEmail.values.email,
@@ -832,7 +823,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 						</Form>
 					</div>
 				</Modal>
-				<Modal visible={ showModalSuccess } onClose={ () => setShowModalSuccess(false) }>
+				<Modal visible={ showModalSuccess } onClose={ () => { setShowModalSuccess(false); setError(''); } }>
 					<div>
 						<Text
 							fontSize='16px'
@@ -843,7 +834,7 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 						/>
 					</div>
 				</Modal>
-				<Modal visible={ showModalSuccessUpdateEmail } onClose={ () => setShowModalSuccessUpdateEmail(false) }>
+				<Modal visible={ showModalSuccessUpdateEmail } onClose={ () => { setShowModalSuccessUpdateEmail(false); setError(''); } }>
 					<div>
 						<Text
 							fontSize='16px'
@@ -855,8 +846,8 @@ const ProfilePage = (props: BreadcrumbsProps) => {
 					</div>
 				</Modal>
 
-			</Layout.PanelH2>
-		</Layout.PanelV1 >
+			</PanelH2>
+		</PanelV1 >
 	);
 };
 
