@@ -6,11 +6,13 @@ import WhiteInstagram from '/public/images/ic/whiteInstagram.svg';
 import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';
 import WhiteTwitter from '/public/images/ic/whiteTwitter.svg';
 import { Languages } from '@/constant';
+import useSession from '@/session/client';
 
 export const MainNavLanguage = () => {
-	// const { welcome } = Languages.topNav;
+	const session = useSession();
+	const { welcome } = Languages?.page?.topNav;
 	// const userSelector = useTypedSelector<UserState>('user');
-	// const isLoggedIn = !!userSelector?.user?.token;
+	const isLoggedIn = !!session?.token;
 
 	const handleOpenSocmed = (links: string) => () => {
 		window.open(links, '_blank');
@@ -18,20 +20,20 @@ export const MainNavLanguage = () => {
 
 	const renderWelcomeText = () => {
 		// Migrate
-		// const userIdentity = userSelector?.userDetail?.no_mr
-		// 	? userSelector?.userDetail?.name
-		// 	: userSelector?.userDetail?.email;
-		// const welcomeText = isLoggedIn
-		// 	? `${ welcome }, ${ userIdentity }`
-		// 	: welcome;
+		const userIdentity = session?.user?.no_mr
+			? session?.user?.name
+			: session?.user?.email;
+			
+		const welcomeText = isLoggedIn
+			? `${ welcome }, ${ userIdentity }`
+			: welcome;
 
 		return (
 			<Text
 				fontSize='14px'
 				fontWeight='700'
 				color={ colors.white.default }
-				// text={ welcomeText } Migrate
-				text='Welcome'
+				text={ welcomeText }
 			/>
 		);
 	};

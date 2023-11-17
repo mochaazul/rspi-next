@@ -76,7 +76,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 	const breadcrumbsPath = [{ name: 'News & Health Articles', url: '/news' }, { url: '#', name: 'Title Selected Article' || '' }]; // selectedArticle?.title
 
 	const handleOpenSocmed = (link: string) => () => {
-		window.open(link, '_blank');
+		window?.open(link, '_blank');
 	};
 
 	return (
@@ -108,13 +108,13 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 									color={ colors.grey.dark }
 								/>
 								<div className='flex gap-[15px]'>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window.location.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window?.location?.href) }>
 										<icons.FacebookIcon width='16px' height='16px'/>
 									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window.location.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window?.location?.href) }>
 										<icons.TwitterIcon width='16px' height='13px' />
 									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window.location.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window?.location?.href) }>
 										<icons.LinkedIn width='16px' height='16px' />
 									</div>
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
@@ -128,7 +128,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 								<Text fontWeight='700' fontSize='20px' lineHeight='30px'>
 									{ selectedArticle?.short_description }
 								</Text>
-								<Image src={ selectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
+								<img src={ selectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
 								<div
 									style={ { color: colors.grey.dark } }
 									className='innerHTML mt-[10px]'

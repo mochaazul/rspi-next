@@ -21,8 +21,8 @@ export const BgContainer = styled.div`
 `;
 
 export const BodyContainer = styled.div`
-  padding: 20px;
-  z-index: 9994;
+  z-index: 1;
+  padding: 15px;
 
 `;
 

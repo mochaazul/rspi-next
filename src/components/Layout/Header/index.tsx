@@ -15,7 +15,7 @@ import {
 	HospitalState,
 	NotificationResponse,
 } from '@/interface';
-
+import { PatientState } from '@/interface/PatientProfile';
 import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
@@ -29,6 +29,8 @@ import HeaderStyle from './style';
 
 import { useCurrentLocale } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
+import useSession from '@/session/client';
+import { cookiesHelper } from '@/helpers';
 
 export const Header = ({
 	hospitalData,
@@ -54,9 +56,9 @@ export const Header = ({
 	const [isHoverCOE, setIsHoverCOE] = useState(false);
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
+	const session = useSession();
 	
-	const isLoggedIn = true;
-	// const isLoggedIn = !!user.token; // migrate
+	const isLoggedIn = !!session?.token;
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
@@ -64,7 +66,7 @@ export const Header = ({
 
 	const handleClick = () => {
 		if (isLoggedIn) {
-			// removeUser(); // migrate ( for function removeUser refer repo rspi-fe-web )
+			cookiesHelper.clearStorage(); // migrate ( for function removeUser refer repo rspi-fe-web )
 		}
 		router.push('/');
 	};
@@ -167,10 +169,7 @@ export const Header = ({
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
-								<Image
-									src={ images.LogoRSPI }
-									alt=''
-								/>
+								<images.LogoRSPI alt=''/>
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
@@ -239,7 +238,7 @@ export const Header = ({
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.id }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } />
+													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt='' />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
@@ -278,10 +277,11 @@ export const Header = ({
 									src={ icons.Notif }
 									alt=''
 									onClick={ () => setShowNotification(true) }
+									fill
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
-							<div className='p-4'>
+							<div>
 								{ modalNotification() }
 							</div>
 							<div className='flex items-center gap-6 max-sm:hidden'>
@@ -290,21 +290,15 @@ export const Header = ({
 									isLoggedIn ?
 										<>
 											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<Image
-													src={ icons.Notif }
-													alt=''
-												/>
+												<icons.Notif />
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponseData?.total_unread }</span>
 											</a>
 											<div className='flex text-white items-center'>
 												<div>
 													
-													<Image src={ '' } alt={ '' } />  :
-													<Image
-														src={ images.Profile }
-														alt=''
-													/>
+													<img src={ '' } alt={ '' } />  :
+													<images.Profile alt='' />
 													
 												</div>
 												<div className='ml-[24px] cursor-pointer'>
