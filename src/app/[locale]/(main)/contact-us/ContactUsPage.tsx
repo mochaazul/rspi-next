@@ -133,8 +133,7 @@ const ContactUsPage = ({
 				</PanelH2>
 
 				<div className='mt-[25px]'>
-					<img 
-						src={ images.ContactUsBg }
+					<img src={ images.ContactUsBg || '' }
 						alt='Contact Us hero image'
 						className='w-full' />
 				</div>
