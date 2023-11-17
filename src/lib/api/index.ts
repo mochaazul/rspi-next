@@ -14,7 +14,7 @@ import {
 	UpdatePasswordType,
 	UserData
 } from '@/interface';
-import fetcher from './utils/fetcher';
+import fetcher, { ApiOptions } from './utils/fetcher';
 
 export const verifyChangeEmailToken = (token: string) => {
 	return fetcher<any>('verifyChangeEmailToken', { query: { token } });
@@ -51,11 +51,11 @@ export const getHospitals = () => {
 export const getCenterOfExcellence = () => {
 	return fetcher<CenterOfExcellenceState>('centerOfExcellences');
 };
-export const getNotificationResponse = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+export const getNotificationResponse = (param: ApiOptions| undefined) => {
 	return fetcher<NotificationResponse>('getNotification', param);
 };
 
-export const postMarkNotifAllRead = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+export const postMarkNotifAllRead = (param: ApiOptions| undefined) => {
 	return fetcher('readNotification', param);
 };
 
@@ -64,23 +64,23 @@ export const getFooterSlug = () => {
 	return fetcher<FooterState>('getFooter');
 };
 // Contact
-export const postContactUs = (param: { param: null; query: null; body: ContactUsSubmitType; }) => {
+export const postContactUs = (param: ApiOptions | undefined) => {
 	return fetcher<ContactUsState>('contactUs', param);
 };
 
 // Article
-export const getArticle = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+export const getArticle = (param: ApiOptions| undefined) => {
 	return fetcher<ArticleState>('getNews', param);
 };
 
-export const getNewsSpecialtyByID = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+export const getNewsSpecialtyByID = (param: ApiOptions| undefined) => {
 	return fetcher<ArticleState['specialty']>('getNewsSpecialtyByID', param);
 };
 
-export const getArticleById = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+export const getArticleById = (param: ApiOptions| undefined) => {
 	return fetcher<ArticleState['selectedArticle']>('getNews', param);
 };
 
-export const getRelatedNews = (param: { body?: any; param?: any; query?: any; } | undefined) => {
+export const getRelatedNews = (param: ApiOptions| undefined) => {
 	return fetcher<ArticleState['relatedNews']>('getRelatedNews', param);
 };

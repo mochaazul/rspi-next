@@ -1,5 +1,6 @@
 'use server';
 
+import { NotificationResponse } from '@/interface';
 import {
 	getHospitals,
 	getCenterOfExcellence,
@@ -29,7 +30,6 @@ export const notificationResponseFetch = async () => {
 
 	const session = await getSession();
 
-	// TO DO : ambil mr & email ambil dari session
 	const paramNotification = {
 		param: null,
 		query: {
@@ -39,5 +39,5 @@ export const notificationResponseFetch = async () => {
 		body: null,
 	};
 
-	return session.user?.medical_record ? await getNotificationResponse(paramNotification) : [];
+	return await getNotificationResponse(paramNotification);
 };

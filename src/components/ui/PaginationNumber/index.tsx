@@ -11,7 +11,7 @@ interface PaginationNumberType {
 }
 
 const PaginationNumber = (props: PaginationNumberType) => {
-	let shownNumber = window.innerWidth <= 768 ? 3 : 5;
+	let shownNumber = window?.innerWidth <= 768 ? 3 : 5;
 	shownNumber = shownNumber > props.totalPage ? props.totalPage : shownNumber;
 	const shownNumberCalc = {
 		min: Math.floor(shownNumber / 2),
