@@ -2,6 +2,8 @@
 
 import { SetStateAction, useEffect, useState } from 'react';
 import * as Icons from 'react-feather';
+import { useRouter, useParams, usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 import {
 	Breadcrumbs,
@@ -14,18 +16,13 @@ import {
 	PanelV1
 } from '@/app/[locale]/(main)/layout';
 import { colors, icons, sosmedLink } from '@/constant';
-import { navigation } from '@/helpers';
-import { getEventsByID } from '@/stores/EventClasses';
-import { useAppDispatch, useTypedSelector } from '@/hooks';
 import { EventClassesDetail, EventClassesState } from '@/interface';
 import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
-import Image from 'next/image';
 import { fetchPromoByID, fetchEvents } from './helpers';
-import { usePathname } from 'next/navigation';
 
 const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
-
-	const pathname = usePathname();
+	const pathName = usePathname();
+	const params = useParams();
 	const [loading, setLoading] = useState(false);
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 	const [eventsData, setEventsData] = useState<EventClassesState['events']>();
@@ -49,12 +46,12 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 	const breadcrumbsPath = [{ name: 'Promo & Packages', url: '/promo' }, { url: '#', name: selectedEvent?.title || '' }];
 
 	useEffect(() => {
-		fetchPromoByID(props?.params?.id).then(function(response) {
+		fetchPromoByID(props?.params?.id).then(function (response) {
 			setLoading(true);
 			setSelectedEvent(response?.data);
 			setLoading(false);
 		});
-		fetchEvents().then(function(response) {
+		fetchEvents().then(function (response) {
 			setEventsData(response.data);
 		});
 	}, []);
@@ -62,11 +59,11 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 	useEffect(() => {
 		if (props.params.id !== selectedEvent?.id) {
 			setLoading(true);
-			fetchPromoByID(props.params.id).then(function(response) {
+			fetchPromoByID(props.params.id).then(function (response) {
 				setSelectedEvent(response?.data);
 				setLoading(false);
 			});
-			fetchEvents().then(function(response) {
+			fetchEvents().then(function (response) {
 				setEventsData(response.data);
 			});
 			setLoading(false);
@@ -74,9 +71,9 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 	}, [props.params.id]);
 
 	const handleOpenSocmed = (link: string) => () => {
-		window?.open(link, '_blank')
+		window?.open(link, '_blank');
 	};
-	
+
 	return (
 		<PanelV1>
 			<PanelH1>
@@ -97,16 +94,16 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 										text='Share now'
 									/>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window?.location?.href) }>
-										<icons.FacebookIcon width='16px' height='16px'/>
+										<icons.FacebookIcon width='16px' height='16px' />
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window?.location?.href) }>
-										<icons.TwitterIcon width='16px' height='16px'/>
+										<icons.TwitterIcon width='16px' height='16px' />
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window?.location?.href) }>
-										<icons.LinkedIn width='16px' height='16px'/>
+										<icons.LinkedIn width='16px' height='16px' />
 									</div>
-									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
-										<icons.Link width='16px' height='16px'/>
+									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathName); } }>
+										<icons.Link width='16px' height='16px' />
 									</div>
 								</div>
 							</div>

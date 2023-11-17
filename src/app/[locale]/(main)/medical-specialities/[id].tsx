@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
 import { Breadcrumbs, CustomCarousel, Text } from '@/components/ui';
 import { Languages, colors } from '@/constant';
 import { FooterState } from '@/interface';
 import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { navigation } from '@/helpers';
 
 import { FooterServiceStyle } from './style';
 import { getFooterDetail } from '@/stores/Footer';
 
 const FooterServicesPage = () => {
-
-	const { params } = navigation();
+	const params = useParams();
 	const { detail } = useTypedSelector<FooterState>('footerSlice');
 	const isMedSpec = location.pathname.includes('medical-specialities');
 	const fetchFooterDetail = useAppDispatch(getFooterDetail);
