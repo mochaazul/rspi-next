@@ -1,11 +1,11 @@
-import moment from 'moment';
 import Image from 'next/image';
 import { Button, Modal, Text } from '@/components/ui';
 import { icons, Languages as lang } from '@/constant';
 import { SuccessConfModalContainer } from './style';
 import 'moment/locale/id';
 import Link from 'next/link';
-import { getLanguage } from '@/helpers/localStorage';
+import { useScopedI18n } from '@/locales/client';
+import dayjs from 'dayjs';
 
 type Props = {
 	doctorName?: string;
@@ -22,6 +22,11 @@ const SuccessConfirmationModal = ({
 	hospitalName,
 	visible
 }: Props) => {
+	const t = useScopedI18n('page.bookingAppointment.success');
+	const subHeadingText = () => {
+		return `${t('subHeading.main')} ${doctorName} ${t('subHeading.at')} ${hospitalName} ${t('subHeading.on')} ${dayjs(date).format('dddd, DD MMMM YYYY')} ${t('subHeading.done')}`;
+	};
+	
 	return <Modal visible={ visible }
 		noPadding
 		width='526px'
@@ -29,25 +34,22 @@ const SuccessConfirmationModal = ({
 		borderRadius='12px'
 	>
 		<SuccessConfModalContainer>
-			<Image
-				src={icons.CheckShadowed}
-				alt="" />
+			<icons.CheckShadowed />
 			<Text
 				className='mt-[24px]'
 				fontSize='24px'
 				fontWeight='700'
 				lineHeight='28px'
-				text={ language.successTitle } />
-			<Text
+				text={ t('heading') } />
+		 <Text
 				className='mt-[8px] mb-[32px]'
 				fontSize='14px'
 				fontWeight='400'
 				lineHeight='20px'
 				textAlign='center'
-				text={ `${ language.successBody } Dr. ${ doctorName ?? '' } ${ language.in } ${ hospitalName } ${ language.at } ${ date && moment(date).locale(getLanguage() === 'idn' ? 'id' : 'en')
-					.format('dddd, DD MMM YYYY') } ${ language.hasSuccess }` } />
+				text={ subHeadingText() } />
 			<Link href={ '/patient-portal' }>
-				<Button label='Oke' />
+				<Button label={ t('btnLabel') } />
 			</Link>
 		</SuccessConfModalContainer>
 	</Modal>;

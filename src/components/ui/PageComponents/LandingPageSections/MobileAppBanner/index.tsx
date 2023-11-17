@@ -30,8 +30,8 @@ const MobileAppBanner = () => {
 						<div className='mt-[40px]'>
 							<Text text='Get the App' fontSize='20px' fontWeight='900' lineHeight='28px' />
 							<div className='flex gap-[13px] mt-[10px]'>
-								<Image src={ images.GooglePlay.src } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
-								<Image src={ images.AppStore.src } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
+								<Image src={ images.GooglePlay.src } alt='store-badge' width={ 158 } height={ 48 } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
+								<Image src={ images.AppStore.src } alt='store-badge' width={ 158 } height={ 48 } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
 							</div>
 						</div>
 					</div>
@@ -39,8 +39,8 @@ const MobileAppBanner = () => {
 			</div>
 			<div className='max-sm:hidden sm:flex-1 ml-[15px]'>
 				<div className='relative h-[546px] max-w-[580px] ml-auto'>
-					<Image src={ images.PhoneMockup1.src } className='absolute top-0 mr-[32px]' />
-					<Image src={ images.PhoneMockup2.src } className='absolute bottom-0 right-0' />
+					<img src={ images.PhoneMockup1.src } alt='icons' className='absolute top-0 mr-[32px]' />
+					<img src={ images.PhoneMockup2.src } alt='icons' className='absolute bottom-0 right-0' />
 				</div>
 			</div>
 		</WrapperMobileAppBanner>

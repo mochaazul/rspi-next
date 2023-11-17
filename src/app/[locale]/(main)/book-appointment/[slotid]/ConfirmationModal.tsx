@@ -17,49 +17,58 @@ import { colors } from '@/constant';
 import { useTypedSelector } from '@/hooks';
 import {
 	FamilyProfile,
+	FindDoctorDetail,
 	FindDoctorState,
-	TimeSlot
+	ResponseType,
+	TimeSlot,
+	UserDataDetail
 } from '@/interface';
 
 import { ConfirmationModalContainer } from './style';
 import DoctorProfileWidget from './DoctorProfileWidget';
+import { useGetDoctorDetail } from '@/lib/api/client/doctors';
+import { useScopedI18n } from '@/locales/client';
 
 type Props = {
 	visible: boolean,
 	onClose: () => void;
-	selectedProfile?: FamilyProfile;
-	timeSlot?: TimeSlot,
+	selectedProfile?: UserDataDetail;
+	timeSlot?: any,
 	penjamin?: string,
 	namaAsuransi?: string;
 	noAsuransi?: string;
 	onConfirmed: () => void;
 	loading?: boolean;
 	loadingUploadPhoto?: boolean;
+	doctorResponse?: ResponseType<FindDoctorDetail>;
 };
 
-export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot, penjamin, namaAsuransi, noAsuransi, onConfirmed, loading, loadingUploadPhoto }: Props) => {
+export const ConfirmationModal = ({ doctorResponse, visible, onClose, selectedProfile, timeSlot, penjamin, namaAsuransi, noAsuransi, onConfirmed, loading, loadingUploadPhoto }: Props) => {
+	
 	const navigate = useRouter();
-	const { selectedDoctorTimeSlot, masterDoctors } = useTypedSelector<FindDoctorState>('findDoctor');
+	const t = useScopedI18n('page.bookingAppointment.confirmationModal');
+	// const { selectedDoctorTimeSlot, masterDoctors } = useTypedSelector<FindDoctorState>('findDoctor');
 	const [checked, setChecked] = useState<boolean>(false);
-	const getDoctor = () => {
-		return masterDoctors.find(doctor => doctor.doctor_code === timeSlot?.doctor_code);
-	};
+	// const getDoctor = () => {
+	// 	return masterDoctors.find(doctor => doctor.doctor_code === timeSlot?.doctor_code);
+	// };
 
 	const toProfilPage = () => {
 		navigate.push('/user-information');
 	};
 
-	if (selectedProfile && selectedProfile.phone && timeSlot && getDoctor()) {
+	// if (selectedProfile && selectedProfile.phone && timeSlot && getDoctor()) {
+	if (selectedProfile && selectedProfile.phone && timeSlot) {
 		return <Modal borderRadius='12px' visible={ visible } onClose={ onClose } width='w-full' containerClassName='m-4'>
 			<ConfirmationModalContainer >
 				<Text
-					text='Konfirmasi Booking Appointment'
+					text={ t('heading') }
 					fontWeight='700'
 					fontSize='24px'
 					lineHeight='28px'
 				/>
 				<Text
-					text='Silahkan periksa dan konfirmasi kebenaran informasi berikut:'
+					text={ t('subHeading') }
 					fontWeight='400'
 					fontSize='14px'
 					lineHeight='20px'
@@ -67,14 +76,14 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 				/>
 				<div className='mt-[24px] px-[16px] flex flex-col gap-[12px]' >
 					<Text
-						text='Data Pasien'
+						text={ t('patientDetail.heading') }
 						fontWeight='700'
 						fontSize='14px'
 						lineHeight='20px'
 					/>
 					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
-							text='Nama : '
+							text={ t('patientDetail.name') }
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
@@ -88,7 +97,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 					</div>
 					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
-							text='Tanggal Lahir : '
+							text={ t('patientDetail.birthDate') }
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
@@ -102,7 +111,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 					</div>
 					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
-							text='Nomor HP : '
+							text={ t('patientDetail.phone') }
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
@@ -116,7 +125,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 					</div>
 					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
-							text='Email : '
+							text={ t('patientDetail.email') }
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
@@ -130,7 +139,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 					</div>
 					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 						<Text
-							text='Penjamin : '
+							text={ t('patientDetail.guarantor') }
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
@@ -148,14 +157,14 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 						penjamin === 'asuransi'
 						&& <>
 							<Text
-								text='Data Asuransi'
+								text={ t('insuranceDataLabel') }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
 							/>
 							<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 								<Text
-									text='Nama : '
+									text={ t('patientDetail.name') }
 									fontWeight='500'
 									fontSize='14px'
 									lineHeight='20px'
@@ -169,7 +178,7 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 							</div>
 							<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
 								<Text
-									text='Nomor : '
+									text={ t('insuranceNumber') }
 									fontWeight='500'
 									fontSize='14px'
 									lineHeight='20px'
@@ -184,37 +193,38 @@ export const ConfirmationModal = ({ visible, onClose, selectedProfile, timeSlot,
 						</>
 					}
 				</div>
-				<DoctorProfileWidget doctorData={ getDoctor() } timeSlot={ timeSlot } />
+				{ /* <DoctorProfileWidget doctorData={ getDoctor() } timeSlot={ timeSlot } /> */ }
+				<DoctorProfileWidget doctorData={ doctorResponse?.data } timeSlot={ timeSlot } />
+
 				<div className='my-[32px] flex items-center'>
-					<Checkbox label='Saya menyatakan bahwa seluruh data diatas ' labelBold=' sudah benar.' onChange={ evt => {
+					<Checkbox label={ t('toc') } onChange={ evt => {
 						setChecked(evt.target.checked);
 					} } />
 				</div>
 				<Button onClick={ onConfirmed } disabled={ !checked } >
-					{ loading || loadingUploadPhoto ? <Spinner /> : 'Konfirmasi' }
+					{ loading || loadingUploadPhoto ? <Spinner /> : t('confirmBtnLabel') }
 				</Button>
 			</ConfirmationModalContainer>
 		</Modal>;
-	}
-	else {
+	} else {
 		return <Modal borderRadius='12px' visible={ visible } onClose={ onClose }>
 			<ConfirmationModalContainer >
 				<Text
-					text='Terdapat Data Diri yang Belum Lengkap'
+					text={ t('profileIncompleteMsg') }
 					fontWeight='700'
 					fontSize='24px'
 					lineHeight='28px'
 					className='pb-2'
 				/>
 				<Text
-					text='Silahkan klik tombol di bawah ini untuk diarahkan ke halaman profil'
+					text={ t('redirectLabel') }
 					fontWeight='400'
 					fontSize='14px'
 					lineHeight='20px'
 					color={ colors.grey.dark }
 					className='pb-4'
 				/>
-				<Button label='Menuju Halaman Profil' onClick={ toProfilPage } />
+				<Button label={ t('redirectBtnLabel') } onClick={ toProfilPage } />
 			</ConfirmationModalContainer>
 		</Modal>;
 	}

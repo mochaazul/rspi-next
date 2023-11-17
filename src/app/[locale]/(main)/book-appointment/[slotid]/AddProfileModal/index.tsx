@@ -1,19 +1,18 @@
-import Modal from '@/components/Modal';
-import { ModalHeader, ProfileModalContainer, WarningContainer } from './style';
-import Text from '@/components/Text';
+import { FormRow, ModalHeader, ProfileModalContainer, WarningContainer } from './style';
 import { colors, icons } from '@/constant';
-import { FormRow } from '@/app/[locale]/(main)/book-appointment/style';
-import Form from '@/components/Form';
-import { createFieldConfig } from '@/helpers';
-import Button from '@/components/Button';
 // import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { addFamilyProfile, updateProfile } from '@/stores/actions';
-import { FamilyProfile, FamilyProfilePayload, UpdateProfileType, UserDataDetail, UserState } from '@/interface';
+import { UserDataDetail } from '@/interface';
 // import { useAppAsyncDispatch } from '@/hooks/useAppDispatch';
-import NotificationPanel from '@/components/NotificationPanel';
 import { useEffect, useState } from 'react';
-import { userDetail as userDetailAction } from '@/stores/actions';
 import Image from 'next/image';
+import Form from '@/components/ui/Form';
+import { createFieldConfig } from '@/helpers';
+import Modal from '@/components/ui/Modal';
+import Text from '@/components/ui/Text';
+import Button from '@/components/ui/Button';
+import { useFamilyProfileMutation } from '@/lib/api/client/profile';
+import { NotificationPanel } from '../../../../../../components/ui';
+import { useScopedI18n } from '@/locales/client';
 
 const addProfileFormFields = {
 	name: {
@@ -66,7 +65,7 @@ type Props = {
 	onClose: (profile: ProfilePayload, isMain?: boolean) => void;
 	visible: boolean;
 	isMain?: boolean,
-	selfProfile?: FamilyProfile;
+	selfProfile?: UserDataDetail;
 	type: string;
 };
 
@@ -79,6 +78,9 @@ export type ProfilePayload = {
 };
 
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
+
+	const t = useScopedI18n('page.bookingAppointment');
+
 	const { registeredValue, onSubmit, getCurrentForm, setFieldsValue } = Form.useForm({ fields: addProfileFormFields });
 
 	// TODO: migrate
@@ -89,78 +91,58 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	// const addFamilyProfileDispatch = useAppAsyncDispatch<FamilyProfilePayload>(addFamilyProfile);
 	// End migrate
 
+	const { data, trigger: createFamilyProfile, isMutating, error: createFamilyMutationError, reset: resetMutation } = useFamilyProfileMutation();
 	const [error, setError] = useState<string>('');
 	const [disabledEmail, setDisabledEmail] = useState<boolean>(false);
-	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-		try {
-			const { dob, email, gender, name, phone } = onSubmit(event);
 
-			if (type == 'other') {
-				if (!selfProfile) {
-					onClose({
-						dob: dob.value,
-						email: email.value,
-						gender: gender.value,
-						name: name.value,
-						phone: cleanUpMask(phone.value)
-					}, true);
-					return;
-				}
-				// TODO: migrate
-				// const res = await addFamilyProfileDispatch({
-				// 	payload: {
-				// 		birthdate: dob.value,
-				// 		parent_email: userDetail.email ?? '',
-				// 		email: email.value,
-				// 		name: name.value,
-				// 		phone: cleanUpMask(phone.value),
-				// 		gender: gender.value
-				// 	}
-				// });
-				// End migrate
-				setError('');
-				onClose({
-					dob: dob.value,
-					email: email.value,
-					gender: gender.value,
-					name: name.value,
-					phone: phone.value
-				});
-			} else {
-				const payload = {
-					name: name.value,
-					birthdate: dob.value,
-					gender: gender.value,
-					phone: cleanUpMask(phone.value)
-				};
-				// TODO: migrate
-				// const response = await clikUpdateProfile({
-				// 	payload
-				// });
-				// if (response.payload.stat_msg === 'Success') {
-				setDisabledEmail(false);
-				// await getUserDetail();
-				onClose({
-					dob: dob.value,
-					email: email.value,
-					gender: gender.value,
-					name: name.value,
-					phone: phone.value
-				});
-				// TODO: migrate
-				// }
-				// setError(response.payload.stat_msg);
-			}
-			setFieldsValue({
-				email: '',
-				name: '',
-				birthdate: '',
-				gender: '',
-				phone: ''
-			});
-		} catch (error: any) {
-			setError(error.stat_msg);
-		}
+	useEffect(() => {
+		resetMutation(); // we need this to clear errors
+	}, []);
+	
+	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
+		const { dob, email, gender, name, phone } = onSubmit(event);
+		// if (type === 'other') {
+		await createFamilyProfile({
+			birthdate: dob.value,
+			parent_email: selfProfile?.email ?? '',
+			email: email.value,
+			name: name.value,
+			phone: cleanUpMask(phone.value),
+			gender: gender.value
+		});
+		closeHandler();
+		// } else {
+		// 	const payload = {
+		// 		name: name.value,
+		// 		birthdate: dob.value,
+		// 		gender: gender.value,
+		// 		phone: cleanUpMask(phone.value)
+		// 	};
+		// 	TODO: migrate;
+		// 	const response = await clikUpdateProfile({
+		// 		payload
+		// 	});
+		// 	if (response.payload.stat_msg === 'Success') {
+		// 		setDisabledEmail(false);
+		// 		await getUserDetail();
+		// 		onClose({
+		// 			dob: dob.value,
+		// 			email: email.value,
+		// 			gender: gender.value,
+		// 			name: name.value,
+		// 			phone: phone.value
+		// 		});
+		// 		// TODO: migrate;
+		// 	}
+		// 	setError(response.payload.stat_msg);
+		// }
+		// setFieldsValue({
+		// 	email: '',
+		// 	name: '',
+		// 	birthdate: '',
+		// 	gender: '',
+		// 	phone: ''
+		// });
 	};
 
 	const cleanUpMask = (value: string) => {
@@ -172,8 +154,8 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	};
 
 	const mapError = () => {
-		if (error && error.toLowerCase() === 'validation error') return 'Mohon isi semua data.';
-		return error;
+		if (createFamilyMutationError && createFamilyMutationError.message.toLowerCase() === 'validation error') return t('validationError');
+		return  createFamilyMutationError && createFamilyMutationError.message;
 	};
 
 	const closeHandler = () => {
@@ -187,7 +169,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	};
 
 	useEffect(() => {
-		if (type == 'self') {
+		if (type === 'self') {
 			// TODO: migrate
 			// setFieldsValue({
 			// 	email: userDetail.email
@@ -212,16 +194,16 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					fontSize='24px'
 					fontWeight='700'
 					lineHeight='28px'
-					text={ `Tambah Profil ${ selfProfile ? 'Orang Lain' : 'Utama' }` } />
+					text={ selfProfile ? t('profileSelector.selfLabel') : t('profileSelector.other') } />
 				<div className='cursor-pointer' onClick={ closeHandler }>
-					<icons.Close />
+					<icons.Close alt='' />
 				</div>
 			</ModalHeader>
 			<NotificationPanel
 				showIconLeft={ false }
 				showIconRight={ false }
 				mode={ 'error' }
-				visible={ !!error }
+				visible={ !!createFamilyMutationError }
 			>
 				<Text
 					fontType={ null }
@@ -233,50 +215,55 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			</NotificationPanel>
 			<Form onSubmit={ onSubmitHandler } className='mt-[8px]'>
 				<FormRow
-					className='flex-col md:flex-row gap-[16px] md:gap-[24px]'
+					className='grid grid-cols-2 gap-[16px] md:gap-[24px]'
 				>
 					<Form.TextField
 						labelClassName='font-normal'
 						labelGap={ 8 }
 						{ ...registeredValue('name') }
-						label='Nama'
+						label={ t('profileSelector.form.name') }
+						placeholder={ t('profileSelector.form.name') }
 					/>
 					<Form.DateField
 						labelClassName='font-normal'
 						labelGap={ 8 }
 						{ ...registeredValue('dob', true) }
 						dateFormat='DD MMMM YYYY'
-						label='Tanggal Lahir'
+						label={ t('profileSelector.form.dob') }
+						placeholder={ t('profileSelector.form.dob') }
 					/>
 				</FormRow>
-				<FormRow className='flex-col md:flex-row gap-[16px] md:gap-[24px]'>
+				<FormRow className='grid grid-cols-2 gap-[16px] md:gap-[24px]'>
 					<Form.TextField
 						labelClassName='font-normal'
 						labelGap={ 8 }
 						{ ...registeredValue('phone') }
 						mask={ '+62 999-9999-99999' }
-						label='No Hp'
+						label={ t('profileSelector.form.phone') }
+						placeholder={ t('profileSelector.form.phone') }
 						isNumber
 					/>
 					<Form.TextField
 						labelClassName='font-normal'
 						labelGap={ 8 }
 						{ ...registeredValue('email') }
-						label='E-Mail'
+						label={ t('profileSelector.form.email') }
+						placeholder={ t('profileSelector.form.email') }
 						disabled={ disabledEmail }
 					/>
 				</FormRow>
-				<FormRow className='flex-col md:flex-row gap-[16px] md:gap-[24px]'>
+				<FormRow className='grid grid-cols-2 gap-[16px] md:gap-[24px]'>
 					<Form.Dropdown
 						labelClassName='font-normal'
 						labelGap={ 8 }
 						menuItems={ genderMenuItems }
 						{ ...registeredValue('gender') }
-						label='Gender'
+						label={ t('profileSelector.form.gender') }
+						placeholder={ t('profileSelector.form.gender') }
 						className='w-[174px] block'
 					/>
 				</FormRow>
-				<Button type='submit' label='Submit' className='mt-[32px]' />
+				<Button type='submit' label={ t('profileSelector.form.submit') } className='mt-[32px]' />
 			</Form>
 		</ProfileModalContainer>
 	</Modal>;

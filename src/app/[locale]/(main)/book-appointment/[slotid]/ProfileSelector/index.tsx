@@ -5,7 +5,7 @@ import {
 	ProfileCardHeader, ProfileCardRow, ProfilePills, ProfileSelectorCard, ProfileSelectorContainer, SelfProfileSection
 } from './style';
 import { colors, icons } from '@/constant';
-import {  UserDataDetail, UserState } from '@/interface';
+import {  UserData, UserDataDetail, UserState } from '@/interface';
 import { isEmpty } from 'lodash';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -16,6 +16,7 @@ import Modal from '@/components/ui/Modal';
 import { ProfileModalContainer } from '../AddProfileModal/style';
 import Button from '@/components/ui/Button';
 import { useDeleteFamilyProfileMutation } from '@/lib/api/client/profile';
+import { useScopedI18n } from '@/locales/client';
 
 type ProfileCardProps = {
 	profile: UserDataDetail,
@@ -62,13 +63,16 @@ type ProfileSelectorProps = {
 };
 
 const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyProfiles }: ProfileSelectorProps) => {
+	
+	const t = useScopedI18n('page.bookingAppointment.profileSelector');
 
 	const { data: deleteResponse, trigger: deleteFamilyProfileTrigger, error: deleteError } = useDeleteFamilyProfileMutation();
 
-	// const userData = localStorage?.getUserData();
 	const [selectedProfile, setSelectedProfile] = useState<number>();
 	const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 	const [selectedIdFamilyProfile, setSelectedIdFamilyProfile] = useState<number>();
+	const [selectedProfileOnDelete, setSelectedProfileOnDelete] = useState<UserDataDetail>();
+
 	useEffect(() => {
 		if (selfProfile) {
 			setSelectedProfile(selfProfile.id);
@@ -81,8 +85,8 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 			<NoProfileContainer>
 				<icons.UserCircle />
 				<div className='flex flex-row mb-2'>
-					<Text text='Belum ada data orang lain' />
-					<Text text='Tambahkan' className='ml-2 cursor-pointer' fontWeight='600' color={ colors.green.brandAccent } onClick={ () => onAddNewProfileBtn('other') } />
+					<Text text={ t('emptyOther') } />
+					<Text text={ t('addProfileLabelOnEmpty') } className='ml-2 cursor-pointer' fontWeight='600' color={ colors.green.brandAccent } onClick={ () => onAddNewProfileBtn('other') } />
 				</div>
 			</NoProfileContainer>
 		);
@@ -93,7 +97,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 			<NoProfileContainer>
 				<div className='flex flex-row mb-2 cursor-pointer items-center' onClick={ () => onAddNewProfileBtn('other') }>
 					<icons.AddButton />
-					<Text className='ml-2' fontWeight='600' color={ colors.green.brandAccent } text='Tambah Profil Baru' />
+					<Text className='ml-2' fontWeight='600' color={ colors.green.brandAccent } text={ t('addNewProfile') }/>
 				</div>
 			</NoProfileContainer>
 		);
@@ -115,8 +119,8 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 			<NoProfileContainer>
 				<icons.UserCircle />
 				<div className='flex flex-row mb-2'>
-					<Text text='Data diri kosong.' />
-					<Text text='Tambahkan' className='ml-2 cursor-pointer' fontWeight='600' color={ colors.green.brandAccent } onClick={ () => onAddNewProfileBtn('self') } />
+					<Text text={ t('emptySelf') } />
+					<Text text={ t('addProfileLabelOnEmpty') } className='ml-2 cursor-pointer' fontWeight='600' color={ colors.green.brandAccent } onClick={ () => onAddNewProfileBtn('self') } />
 				</div>
 			</NoProfileContainer>
 		);
@@ -137,12 +141,11 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 					fontSize='24px'
 					fontWeight='700'
 					lineHeight='38px'
-					text={ 'Apakah Anda yakin ingin menghapus data orang lain “Agung Hartono” ?' } />
+					text={ `${t('deleteModal.heading')} "${selectedProfileOnDelete?.name}" ?` } />
 				<div className='flex flex-row gap-x-5 w-full'>
 					<Button className='sub-button color-default' theme='primary' label='Ya' onClick={ async() => {
 						setShowDeleteModal(false);
 						await deleteFamilyProfileTrigger({ id: selectedIdFamilyProfile ?? -1 });
-						// await getFamilyProfilesDispatch();
 					} } />
 					<Button className='sub-button color-red' theme='outline' label='Tidak' onClick={ () => setShowDeleteModal(false) } />
 				</div>
@@ -154,7 +157,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 		className='max-sm:flex flex-col'
 	>
 		<SelfProfileSection>
-			<Text text='Diri Sendiri :' fontWeight='900' />
+			<Text text={ t('selfLabel') } fontWeight='900' />
 			{
 				selfProfile
 					? <ProfileCard profile={ selfProfile }
@@ -175,12 +178,12 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 			<section id='header-other-people-selector'
 				className='flex justify-between'
 			>
-				<Text text='Orang Lain :' fontWeight='900' />
+				<Text text={ t('other') } fontWeight='900' />
 				<span className='flex flex-row gap-[4px] items-center cursor:pointer md:hidden' onClick={ () => { () => onAddNewProfileBtn('other'); } }>
 					<Image
 						src={ icons.PlusCircle }
 						alt='' />
-					<Text text='Tambah orang baru' color={ colors.green.brandAccent } fontWeight='900' />
+					<Text text={ t('addNewProfile') } color={ colors.green.brandAccent } fontWeight='900' />
 				</span>
 			</section>
 			<CardListsContainer
@@ -193,6 +196,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 					<>
 						{ familyProfiles && familyProfiles.map(profile => (<ProfileCard showModalDelete={ (id, visible) => {
 							setSelectedIdFamilyProfile(id);
+							setSelectedProfileOnDelete(profile);
 							setShowDeleteModal(true);
 						} } key={ profile.id } profile={ profile } onClick={ id => { onSelectProfile(id, false); } } isActive={ selectedProfile === profile.id } isSelf={ false } />)) }
 						{ renderAddProfileFamily() }

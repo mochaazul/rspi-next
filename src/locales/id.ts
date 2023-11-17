@@ -19,6 +19,10 @@ export default {
 			sunday: 'Min'
 		}
 	},
+	gender: {
+		male: 'Laki-laki',
+		female: 'Perempuan'
+	},
 	modalDialog: {
 		pin: {
 			header: 'Masukkan PIN',
@@ -36,6 +40,75 @@ export default {
 		}
 	},
 	page: {
+		bookingAppointment: {
+			validationError: 'Mohon isi semua data.',
+			profileSelector: {
+				deleteModal: {
+					heading: 'Apakah anda yakin ingin menghapus profil',
+					yesLabel: 'Ya',
+					noLabel: 'Tidak'
+				},
+				selfLabel: 'Diri sendiri :',
+				other: 'Orang lain :',
+				form: {
+					selfHeading: 'Tambah profil diri sendiri',
+					otherHeading: 'Tambah profil orang lain',
+					name: 'Nama',
+					email: 'E-Mail',
+					phone: 'No Hp',
+					gender: 'Jenis Kelamin',
+					submit: 'Simpan',
+					dob: 'Tanggal Lahir'
+				},
+				emptyOther: 'Belum ada data orang lain',
+				emptySelf: 'Data diri Kosong',
+				addProfileLabelOnEmpty: 'Tambahkan',
+				addNewProfile: 'Tambahkan Profile baru'
+			},
+			form: {
+				selfInsurance: 'Pribadi',
+				thirdPartyInsurance: 'Asuransi',
+				complaintLabel: 'Keluhan utama saat ini?',
+				guarantor: 'Pilih Penjamin',
+				insuranceName: 'Nama Asuransi',
+				insuranceNumber: 'Nomor Asuransi',
+				insuranceCard: {
+					label: 'Foto Kartu Asuransi (Opsional)',
+					front: 'Upload foto tampak depan',
+					back: 'Upload foto tampak belakang',
+				},
+				disclaimer: 'Disclaimer : Data yang diberikan adalah benar. Pendaftaran dilakukan untuk diri sendiri. Jika pendaftaran dilakukan untuk orang lain, sudah mendapatkan persetujuan dari pihak terkait'
+			},
+			confirmationModal: {
+				heading: 'Konfirmasi Booking Appointment',
+				subHeading: 'Silahkan periksa dan konfirmasi kebenaran informasi berikut: ',
+				insuranceDataLabel: 'Data Asuransi',
+				insuranceNumber: 'Nomor Asuransi',
+				patientDetail: {
+					heading: 'Data Pasien',
+					name: 'Nama',
+					birthDate: 'Tanggal lahir',
+					phone: 'Nomor HP',
+					email: 'E-Mail',
+					guarantor: 'Penjamin'
+				},
+				toc: 'Saya menyatakan bahwa seluruh data diatas sudah benar.',
+				confirmBtnLabel: 'Konfirmasi',
+				profileIncompleteMsg: 'Terdapat Data Diri yang Belum Lengkap',
+				redirectLabel: 'Silahkan klik tombol di bawah ini untuk diarahkan ke halaman profil',
+				redirectBtnLabel: 'Menuju Halaman Profil'
+			},
+			success: {
+				heading: 'Form telah berhasil dikirim!',
+				subHeading: {
+					main: 'Pembuatan janji temu anda dengan',
+					at: 'di',
+					on: 'pada',
+					done: 'telah berhasil.'
+				},
+				btnLabel: 'Oke'
+			}
+		},
 		awards: {
 			heading: 'Accreditations & Awards',
 			subHeading: 'Kami berkomitmen untuk menjadi organisasi perawatan kesehatan pilihan kelas dunia. Kami sangat percaya bahwa keunggulan operasional dan keselamatan pasien merupakan bagian integral dalam memenuhi dan melampaui harapan pelanggan kami.'

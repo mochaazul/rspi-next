@@ -3,7 +3,6 @@ import {
 	CalendarContainer, CalendarDot, CalendarFooter, CalendarFooterInfoItem, CalendarLoading,
 } from './style';
 import { colors, icons, Languages as lang } from '@/constant';
-import Text from '@/components/Text';
 import { useEffect, useState } from 'react';
 import { TileArgs, TileClassNameFunc, TileDisabledFunc } from 'react-calendar';
 import { useTypedSelector } from '@/hooks';
@@ -12,6 +11,7 @@ import dayjs, { UnitType } from 'dayjs';
 import languages from '@/constant/languages';
 import Spinner from '@/components/ui/Spinner';
 import Image from 'next/image';
+import { Text } from '..';
 
 type Props = {
 	onChange: (value: any) => void;
