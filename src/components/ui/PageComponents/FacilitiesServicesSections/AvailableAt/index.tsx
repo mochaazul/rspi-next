@@ -1,9 +1,10 @@
+'use client';
 
 import { colors } from '@/constant';
 import { FacilityServicesHospital } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
 
-import Text from '../../../ui/Text';
+import Text from '../../../Text';
 
 type Props = {
 	hospital: FacilityServicesHospital[];

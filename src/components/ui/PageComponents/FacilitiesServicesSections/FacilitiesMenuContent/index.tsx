@@ -6,8 +6,8 @@ import { FacilityServicesDetail } from '@/interface';
 import AvailableAt from '../AvailableAt';
 import CardMenu from '../CardMenu';
 
-import Text from '../../../ui/Text';
-import CustomCarousel from '../../../ui/Carousel';
+import Text from '../../../Text';
+import CustomCarousel from '../../../Carousel';
 
 type Props = {
 	facilitiesData: FacilityServicesDetail[];

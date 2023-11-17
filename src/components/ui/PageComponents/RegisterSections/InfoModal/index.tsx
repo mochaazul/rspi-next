@@ -3,9 +3,9 @@ import { useScopedI18n } from '@/locales/client';
 
 import { ModalStyle } from './style';
 
-import Modal from '../../Modal';
-import Text from '../../../ui/Text';
-import Button from '../../Button';
+import Modal from '../../../Modal';
+import Text from '../../../Text';
+import Button from '../../../Button';
 
 interface ModalProps {
 	emailUser: string;
