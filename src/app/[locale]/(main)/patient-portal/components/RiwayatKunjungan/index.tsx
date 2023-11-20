@@ -1,10 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
 import dayjs from 'dayjs';
 import { isEmpty } from 'lodash';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { Languages, icons } from '@/constant';
 import { Button, Spinner, Text } from '@/components/ui';

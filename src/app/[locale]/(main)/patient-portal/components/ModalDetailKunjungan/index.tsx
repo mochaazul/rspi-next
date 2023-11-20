@@ -4,7 +4,6 @@ import { Modal, Text, Button } from '@/components/ui';
 import { Images, colors } from '@/constant';
 
 import { ModalStyle } from '../../style';
-import Image from 'next/image';
 
 interface PropsType {
 	visible?: boolean;
@@ -36,7 +35,7 @@ const DetailKunjungan = (props: PropsType) => {
 					<Text text={ `Apointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='mr-[15px]' />
 					<Text text={ 'Konsultasi' } fontSize='20px' fontWeight='700' className='mt-[10px]' />
 					<div className='flex my-[30px]'>
-						<div><img src={ Images.ProfilePatient.src } alt="" /></div>
+						<div><img src={ Images.ProfilePatient.src } alt='' /></div>
 						<div className='ml-[15px]'>
 							<Text text={ 'Prof. Dr. dr. Aman Bhakti Pulungan, Sp.A, (K), FAAP, FRCPI (Hon.)' } fontSize='16px' fontWeight='700' />
 							<Text text={ 'Spesialis Akupunktur Klinik Konsultan' } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
@@ -61,14 +60,14 @@ const DetailKunjungan = (props: PropsType) => {
 									<div>
 										<Button
 											theme={ 'outline' }
-											hoverTheme={ 'secondary' }
+											$hoverTheme={ 'secondary' }
 											label={ 'Download' }
 											noPadding={ true }
 											className='px-[8px] py-[10px] rounded-sm'
 										/>
 									</div>
 									<div>
-										<Button hoverTheme='secondary' label={ 'Lihat Laporan' } noPadding={ true } className='px-[8px] py-[10px] rounded-sm' />
+										<Button $hoverTheme='secondary' label={ 'Lihat Laporan' } noPadding={ true } className='px-[8px] py-[10px] rounded-sm' />
 									</div>
 								</div>
 							</div>

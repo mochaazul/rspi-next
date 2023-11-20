@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { I_VisitHistory, LastVisitedHospital } from '@/interface/PatientProfile';
+import { I_VisitHistory } from '@/interface/PatientProfile';
 
 export const getLastVisitedHospitalHelper = (data: I_VisitHistory[]) => {
 	return data.sort((a, b) => {

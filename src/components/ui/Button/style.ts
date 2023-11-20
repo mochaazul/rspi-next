@@ -10,7 +10,7 @@ type ThemeType = 'primary' | 'secondary' | 'outline' | 'text';
 export type ButtonType = {
 	theme?: ThemeType;
 	themeColor?: string;
-	hoverTheme?: ThemeType;
+	$hoverTheme?: ThemeType;
 	label?: string;
 	type?: 'button' | 'submit' | 'reset';
 	width?: string;

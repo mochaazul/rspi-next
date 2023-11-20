@@ -40,7 +40,6 @@ import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';
 import WhiteTwitter from '/public/images/ic/whiteTwitter.svg';
 import IDFlag from '/public/images/ic/flag.svg';
 import ENFlag from '/public/images/ic/eng-flag.svg';
-import UploadIcon from '/public/images/ic/upload-cloud.png';
 
 import LightArrowDown from '/public/images/ic/lightArrowDown.svg';
 import SocialShare from '/public/images/ic/SocialShare.svg';

@@ -10,14 +10,13 @@ import { regExp, Languages as lang, colors } from '@/constant';
 import { Button, Form, NotificationPanel, Text } from '@/components/ui';
 import { HospitalState, ContactUsState } from '@/interface';
 import { PropsTypes as NotificationPanelTypes } from '@/components/ui/NotificationPanel';
-import { useTypedSelector } from '@/hooks';
 
 import useContactUs from './useContactUs';
 
 const language = lang.page.contactUs.contactForm;
 
 const ContactUsForm = ({
-    hospitalSelector
+	hospitalSelector
 }:{
     hospitalSelector: HospitalState
 }) => {
@@ -39,7 +38,7 @@ const ContactUsForm = ({
 				stat_code: '',
 				stat_msg: '',
 			},
-			customMessage:'',
+			customMessage: '',
 		}
 	);
 
@@ -186,7 +185,7 @@ const ContactUsForm = ({
 				<div className='max-sm:w-full'>
 					<Button
 						theme='primary'
-						hoverTheme='outline'
+						$hoverTheme='outline'
 						label={ language.submitBtnLabel }
 						type='submit'
 						disabled={ !isFormValid() || captchaStatus === false }

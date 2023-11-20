@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { cookiesHelper } from "@/helpers";
-import { UserSessionData } from "@/interface";
+import { cookiesHelper } from '@/helpers';
+import { UserSessionData } from '@/interface';
 
 const useSession = (): UserSessionData => {
 	const [session, setSession] = useState<UserSessionData>({
@@ -13,7 +13,7 @@ const useSession = (): UserSessionData => {
 	});
 
 	useEffect(() => {
-		const getCookiesData = async () => {
+		const getCookiesData = async() => {
 			const userData = await cookiesHelper.getUserData();
 			const token = await cookiesHelper.getToken();
 

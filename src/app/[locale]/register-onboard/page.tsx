@@ -46,7 +46,7 @@ const RegisterOnboard = () => {
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [isDuplicatePhoneNumber, setIsDuplicatePhoneNumber] = useState<boolean>(false);
 
-	const onCheckPhonePatient = async (phone: string) => {
+	const onCheckPhonePatient = async(phone: string) => {
 		try {
 			const responseCheckPhone = await checkPhonePatient({ phone: regexPhone(phone) });
 
@@ -67,7 +67,7 @@ const RegisterOnboard = () => {
 			phone: '',
 			name: ''
 		},
-		onSubmit: async (formRegister: RegisterOnboardType) => {
+		onSubmit: async(formRegister: RegisterOnboardType) => {
 			try {
 				setLoadingUser(true);
 				const formRegisterPayload = {

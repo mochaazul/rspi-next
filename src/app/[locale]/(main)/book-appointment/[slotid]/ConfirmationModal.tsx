@@ -14,19 +14,14 @@ import {
 } from '@/components/ui';
 
 import { colors } from '@/constant';
-import { useTypedSelector } from '@/hooks';
 import {
-	FamilyProfile,
 	FindDoctorDetail,
-	FindDoctorState,
 	ResponseType,
-	TimeSlot,
 	UserDataDetail
 } from '@/interface';
 
 import { ConfirmationModalContainer } from './style';
 import DoctorProfileWidget from './DoctorProfileWidget';
-import { useGetDoctorDetail } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 
 type Props = {

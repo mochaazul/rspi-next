@@ -1,6 +1,5 @@
 import { Images, colors } from '@/constant';
 import { Text } from '@/components/ui';
-import Image from 'next/image';
 
 interface PropsType {
 	menu: string;

@@ -84,11 +84,6 @@ const BookAppointment = () => {
 	const uploadAsuransiFrontFileRef = useRef<HTMLInputElement>(null);
 	const uploadAsuransiBackFileRef = useRef<HTMLInputElement>(null);
 
-	const getDoctor = () => {
-		const timeSlot = getTimeSlot();
-		return masterDoctors.find(doctor => doctor.doctor_code === timeSlot?.doctor_code);
-	};
-
 	// const getClinic = () => {
 	// 	const timeSlot = getTimeSlot();
 	// 	const doctor = getDoctor();

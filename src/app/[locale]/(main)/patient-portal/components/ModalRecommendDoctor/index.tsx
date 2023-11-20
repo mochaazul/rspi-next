@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
-import Image from 'next/image';
 import styled from 'styled-components';
 import { isEmpty } from 'lodash';
 
@@ -124,7 +123,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 	const [feedbackValue, setFeedbackValue] = useState<string[]>([]);
 	const [feedbackNotes, setFeedbackNotes] = useState<string>('');
 
-	const onSubmit = async () => {
+	const onSubmit = async() => {
 		if (props.visitHistory) {
 			await giveDoctorRating({
 				id: props.visitHistory.appointment_id,
@@ -174,7 +173,6 @@ const RecommendDoctorModal = (props: PropsType) => {
 		</Modal>
 	);
 };
-
 
 const RatingOptionLabel = styled.div<{ checked: boolean; }>`
   border-radius: 5px;

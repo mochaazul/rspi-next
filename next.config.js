@@ -35,7 +35,8 @@ const nextConfig = {
 				hostname: '**',
 			},
 		],
-	}
+	},
+	output: 'standalone'
 };
 
 module.exports = nextConfig;

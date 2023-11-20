@@ -27,7 +27,6 @@ import {
 } from './helpers';
 
 import { ArticleState } from '@/interface';
-import Image from 'next/image';
 
 const language = lang.page.newsDetail;
 

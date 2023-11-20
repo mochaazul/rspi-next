@@ -23,7 +23,7 @@ const ResetEmailPage = () => {
 		hasToken();
 	}, []);
 
-	const hasToken = async () => {
+	const hasToken = async() => {
 		try {
 			if (!searchParams.get('token')) return navigate.replace('/login');
 

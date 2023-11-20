@@ -1,10 +1,8 @@
 'use client';
-
 import { useState } from 'react';
 
 import { icons, sosmedLink } from '@/constant';
-import { Text } from '@/components/ui';
-import Image from 'next/image';
+import Text from '@/components/ui/Text';
 
 interface PropsType {
 	id?: number;

@@ -1,9 +1,7 @@
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
-import {
-	ResponseStatus
-} from '@/interface';
+import { ResponseStatus } from '@/interface';
 
 import fetcher, { ApiOptions } from '../utils/fetcher';
 

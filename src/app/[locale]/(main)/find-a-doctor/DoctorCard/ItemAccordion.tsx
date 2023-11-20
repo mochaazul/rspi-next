@@ -4,11 +4,9 @@ import { colors, icons } from '@/constant';
 import { Text } from '@/components/ui';
 import { ItemType } from '@/components/ui/Accordion';
 
-import DoctorsType from '../DoctorsType';
 import { AccordionItemStyle, ItemChildrenStyle, TitleStyle } from './style';
 import { I_MasterDoctorClinic, I_MasterDoctorClinicSchedule, I_MasterDoctorSchedule } from '@/interface';
 import { formatTime, sortDays } from '@/helpers/datetime';
-import Image from 'next/image';
 
 const Title = (props: { open: boolean; text: string, clinics: I_MasterDoctorClinic[]; onClick: () => any; hideIconChevron?: boolean; }) => (
 	<TitleStyle className='flex cursor-pointer' onClick={ () => props.hideIconChevron ? null : props.onClick }>
@@ -76,7 +74,6 @@ const ItemAccordion = ({ hospitals, props }: { props: ItemType; hospitals: I_Mas
 };
 
 const groupTimeFrame = (schedules: I_MasterDoctorClinicSchedule[]) => {
-
 	const uniqueDay = [...new Set(schedules.map(schedule => schedule.day))];
 	const serializedSchedules = uniqueDay.map(day => {
 		return {

@@ -20,7 +20,7 @@ import {
 	footersFetch,
 	hospitalsFetch
 } from './helpers';
-import getSession from '@/session/server';
+
 const blacklistedRoute = [
 	'/patient-portal',
 	'/doctor-detail',

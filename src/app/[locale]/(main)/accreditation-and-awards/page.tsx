@@ -4,15 +4,11 @@ import { AwardsDetail } from '@/interface';
 import { colors } from '@/constant';
 import { getAwards } from '@/lib/api/awards';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
-import {
-	PanelH1,
-	PanelH3,
-	PanelV1
-} from '@/app/[locale]/(main)/layout';
 import Text from '@/components/ui/Text';
 import { getScopedI18n } from '@/locales/server';
 
 import { CentreOfExcellenceStyle } from './style';
+import { PanelH1, PanelH3, PanelV1 } from '../style';
 
 export default async function AwardsPage() {
 	const awardsRes = await getAwards({ is_publish: true }, { page: 1, limit: 10 });

@@ -4,8 +4,8 @@ import moment from 'moment';
 import { useRef, Key } from 'react';
 
 import { colors } from '@/constant';
-import { Button, Text } from "@/components/ui";
-import Card, { CardContentWithInner, CardFooter, CardsScrollHorizontal } from "@/components/ui/Card";
+import { Button, Text } from '@/components/ui';
+import Card, { CardContentWithInner, CardFooter, CardsScrollHorizontal } from '@/components/ui/Card';
 
 const renderRelatedNewsMobile = (props: any) => {
 	const CardWrapperRef = useRef<HTMLDivElement>(null);

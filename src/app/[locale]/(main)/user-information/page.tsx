@@ -49,7 +49,8 @@ const editableInputProps = {
 };
 const breadcrumbsPath = [{ name: 'Family Account', url: '#' }, { name: 'User Information', url: '#' }];
 
-export const getBase64 = (file: File | null) => {
+// NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
+const getBase64 = (file: File | null) => {
 	return new Promise<string | ArrayBuffer | null>((resolve, reject) => {
 		if (file) {
 			const reader = new FileReader();
@@ -62,7 +63,7 @@ export const getBase64 = (file: File | null) => {
 	});
 };
 
-const ProfilePage = () => {
+export default function Page() {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
 	const { data: visitHospitalHistory } = useGetVisitHistory();
@@ -112,7 +113,7 @@ const ProfilePage = () => {
 			phone: patientProfile?.data?.phone ?? ''
 		},
 		enableReinitialize: true,
-		onSubmit: async (formProfile: UpdateProfileType) => {
+		onSubmit: async(formProfile: UpdateProfileType) => {
 			try {
 				await updateProfile(formProfile);
 				setShowModalSuccess(true);
@@ -130,7 +131,7 @@ const ProfilePage = () => {
 		validateOnChange: enableValidation.email,
 		validationSchema: UpdateEmailSchema,
 		initialValues: { email: '' },
-		onSubmit: async (formEmail: UpdateEmailType) => {
+		onSubmit: async(formEmail: UpdateEmailType) => {
 			try {
 				await updateEmail(formEmail);
 				setShowModalSuccessUpdateEmail(true);
@@ -147,7 +148,7 @@ const ProfilePage = () => {
 		validateOnChange: enableValidation.pin,
 		initialValues: { pin: '' },
 		validationSchema: CheckPinSchema,
-		onSubmit: async (formPin: CheckPinType) => {
+		onSubmit: async(formPin: CheckPinType) => {
 			try {
 				await checkPin(formPin);
 				setPinModalVisible(false);
@@ -162,7 +163,7 @@ const ProfilePage = () => {
 
 	// const activeEmail = localStorage.getEmail(); // Notes: pending
 
-	// Notes: pending
+	// TODO: PENDING FEATURE
 	// const handleSwitchAccount = (id: number) => async () => {
 	// 	const selectedAccount: string = switchAccountUsers[id];
 	// 	await localStorage.setEmail(selectedAccount?.split(':')[0]);
@@ -171,8 +172,9 @@ const ProfilePage = () => {
 	// 	window.location.reload();
 	// };
 
+	// TODO: PENDING FEATURE
 	// useEffect(() => {
-	// createListOfHistoryUsers(); // Notes: pending
+	// createListOfHistoryUsers();
 	// }, []);
 
 	// TODO: bagaimana cara yg baik jika pakai useSWR?
@@ -183,7 +185,7 @@ const ProfilePage = () => {
 	// 	}
 	// };
 
-	const removeUserDatas = async () => {
+	const removeUserDatas = async() => {
 		await cookiesHelper.clearStorage();
 		navigate.replace('/login');
 	};
@@ -195,7 +197,7 @@ const ProfilePage = () => {
 		}
 	}, [errorGetProfile]);
 
-	// Notes: pending
+	// TODO: PENDING FEATURE
 	// const createListOfHistoryUsers = () => {
 	// 	let tempSwitchAccountUsers: Array<any> = localStorage.getUserLoginHistory()?.split(',') ?? [];
 	// 	tempSwitchAccountUsers = tempSwitchAccountUsers.filter(e => e !== '');
@@ -203,7 +205,7 @@ const ProfilePage = () => {
 	// 	setSwitchAccountUsers(tempSwitchAccountUsers);
 	// };
 
-	const clickUploadPhotoPatient = async () => {
+	const clickUploadPhotoPatient = async() => {
 		try {
 			if (tempImage) {
 				setIsLoadingUploadAvatar(true);
@@ -255,7 +257,7 @@ const ProfilePage = () => {
 		}
 	};
 
-	const onHandleTempProfileImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+	const onHandleTempProfileImage = async(event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
 			const selectedFile: File | null = event.target.files && event.target.files.length
 				? event.target.files[0]
@@ -325,8 +327,8 @@ const ProfilePage = () => {
 								text={ languages('subHeading') }
 							/>
 						</div>
-						{/* Notes: Login As dipending */ }
-						{/* <div className='relative inline-block max-lg:mt-4 max-lg:justify-end'>
+						{ /* Notes: Login As dipending */ }
+						{ /* <div className='relative inline-block max-lg:mt-4 max-lg:justify-end'>
 							<Button
 								theme='outline'
 								hoverTheme='primary'
@@ -366,7 +368,7 @@ const ProfilePage = () => {
 									))
 								}
 							</Picker>
-						</div> */}
+						</div> */ }
 					</div>
 
 					{
@@ -552,7 +554,7 @@ const ProfilePage = () => {
 												</div> :
 												<Button
 													theme='outline'
-													hoverTheme='primary'
+													$hoverTheme='primary'
 													themeColor='rgba(173, 181, 189, 1)'
 													className='px-[15px] sm:px-5 py-2.5 !w-auto text-sm lg:text-base text-[#2A2536]'
 													label={ languages('updatePhotoLabel') }
@@ -579,7 +581,7 @@ const ProfilePage = () => {
 													<Button
 														theme='primary'
 														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base sm:whitespace-nowrap'
-														hoverTheme='primary'
+														$hoverTheme='primary'
 														label={ languages('uploadPhotoLabel') }
 														onClick={ clickUploadPhotoPatient }
 														disabled={ isLoadingUploadAvatar }
@@ -711,7 +713,7 @@ const ProfilePage = () => {
 											<div>
 												<Button
 													theme='outline'
-													hoverTheme='primary'
+													$hoverTheme='primary'
 													label={ languages('securitySetting.cancelBtnLabel') }
 													onClick={ () => formikProfile.resetForm() }
 												/>
@@ -720,7 +722,7 @@ const ProfilePage = () => {
 												<Button
 													type='submit'
 													theme='primary'
-													hoverTheme='outline'
+													$hoverTheme='outline'
 													label={ languages('securitySetting.saveBtnLabel') }
 													disabled={ loadingUpdateProfile || loadingGetProfile }
 												/>
@@ -817,7 +819,7 @@ const ProfilePage = () => {
 							/>
 							<div className='flex justify-end align-center gap-5 mt-[50px]'>
 								<div>
-									<Button type='submit' theme='primary' hoverTheme='outline' label={ languages('securitySetting.saveBtnLabel') } />
+									<Button type='submit' theme='primary' $hoverTheme='outline' label={ languages('securitySetting.saveBtnLabel') } />
 								</div>
 							</div>
 						</Form>
@@ -850,5 +852,3 @@ const ProfilePage = () => {
 		</PanelV1 >
 	);
 };
-
-export default ProfilePage;

@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-import { I_MasterDoctorClinicSchedule } from '@/interface';
 import moment from 'moment';
 
 type CalendarDayItem = {

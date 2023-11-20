@@ -41,7 +41,7 @@ const UpdatePasswordPage = () => {
 			new_password: '',
 			confirm_password: ''
 		},
-		onSubmit: async (formUpdatePassword: UpdatePasswordType) => {
+		onSubmit: async(formUpdatePassword: UpdatePasswordType) => {
 			try {
 				await updatePassword(formUpdatePassword);
 
@@ -56,7 +56,7 @@ const UpdatePasswordPage = () => {
 
 	const languages = useScopedI18n('page.updatePassword');
 
-	const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
+	const onSubmitForm = async(evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		setEnableValidation(true);
 		setError({
@@ -172,7 +172,7 @@ const UpdatePasswordPage = () => {
 					<Button
 						label={ languages('resetForm.resetBtnLabel') }
 						theme='primary'
-						hoverTheme='outline'
+						$hoverTheme='outline'
 						type='submit'
 						className='w-full mt-8 sm:mt-12'
 						disabled={ loadingSubmit }

@@ -1,4 +1,4 @@
-import { createFieldConfig, requiredRule } from '@/helpers';
+import { createFieldConfig } from '@/helpers';
 
 export const bookAppointmentFields = {
 	name: {

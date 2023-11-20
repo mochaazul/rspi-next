@@ -1,12 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
-import Image from 'next/image';
 import { isEmpty } from 'lodash';
 
-import { Button, Spinner, Text } from '@/components/ui';
+import { Spinner, Text } from '@/components/ui';
 import { baseUrl } from '@/config';
 import { Languages, colors, icons } from '@/constant';
 import { useGetLabHistory } from '@/lib/api/client/hospital';

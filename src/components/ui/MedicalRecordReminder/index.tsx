@@ -67,7 +67,7 @@ const MedicalRecordReminder = ({ isFloating = true }: PropsType) => {
 						className={ `max-sm:p-[10px] ${ isFloating ? '!w-auto max-sm:text-[12px] max-md:text-sm' : 'w-full lg:w-auto max-md:text-sm' }` }
 					/>
 				</BodyContainer>
-				{/* <Tooltip id='booking-tooltip' offset={ 24 } style={ { width: 300, padding: '12px', borderRadius: '5px' } }>
+				{ /* <Tooltip id='booking-tooltip' offset={ 24 } style={ { width: 300, padding: '12px', borderRadius: '5px' } }>
 					<Text
 						fontSize='12px'
 						fontWeight='400'
@@ -75,7 +75,7 @@ const MedicalRecordReminder = ({ isFloating = true }: PropsType) => {
 						color='white'
 						text={ languages('tooltipLabel') }
 					/>
-				</Tooltip> */}
+				</Tooltip> */ }
 			</>
 		);
 	};

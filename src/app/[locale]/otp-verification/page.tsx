@@ -106,7 +106,7 @@ const OTPPage = () => {
 		validateOnChange: enableValidation,
 		validationSchema: OTPSchema,
 		initialValues: { otp: '' },
-		onSubmit: async (formOtp: OTPType) => {
+		onSubmit: async(formOtp: OTPType) => {
 			try {
 				setLoadingSubmit(true);
 
@@ -133,7 +133,7 @@ const OTPPage = () => {
 		formikOtp.handleSubmit();
 	};
 
-	const resendOtpHandler = async () => {
+	const resendOtpHandler = async() => {
 		setCount(60);
 		await registerOnboard({
 			birth_date: searchParams.get('bod') ?? '',

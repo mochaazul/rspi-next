@@ -1,15 +1,9 @@
 'use client';
-
-import React, {
-	useEffect,
-	useState
-} from 'react';
+import { useState } from 'react';
 import * as Icons from 'react-feather';
-import Image from 'next/image';
 import Text from '@/components/ui/Text';
 import Picker from '@/components/ui/Picker';
 import { useChangeLocale, useCurrentLocale } from '@/locales/client';
-import images from '@/constant/images';
 import icons from '@/constant/icons';
 import { colors } from '@/constant';
 

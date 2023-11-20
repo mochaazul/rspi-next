@@ -57,7 +57,7 @@ const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 				}
 			</div>
 			<div className='sm:mt-16 mt-6 sm:max-w-fit max-w-full m-auto'>
-				<Button theme='secondary' hoverTheme='primary' className='px-[40px] max-sm:text-[14px]' onClick={ () => router.push('/accreditation-and-awards') }>
+				<Button theme='secondary' $hoverTheme='primary' className='px-[40px] max-sm:text-[14px]' onClick={ () => router.push('/accreditation-and-awards') }>
 					{ t('readMoreBtnLabel') }
 				</Button>
 			</div>

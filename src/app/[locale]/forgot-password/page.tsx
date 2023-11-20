@@ -27,7 +27,7 @@ const ForgotPassword = () => {
 		validateOnChange: enableValidation,
 		validationSchema: ForgotPasswordSchema,
 		initialValues: { email: '' },
-		onSubmit: async (formForgotPassword: ForgotPasswordType) => {
+		onSubmit: async(formForgotPassword: ForgotPasswordType) => {
 			try {
 				await forgotPassword(formForgotPassword);
 			} catch (error: any) {

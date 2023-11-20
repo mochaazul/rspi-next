@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { colors } from '@/constant';
-import { BreadcrumbsProps } from '@/interface';
 
 import FindADoctorStyle from './style';
 import Pills from './Pills';
@@ -14,11 +13,10 @@ import Text from '@/components/ui/Text';
 import { PanelH1, PanelV1 } from '../style';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import DoctorFilter from './DoctorFilter';
-import { Accordion } from '@/components/ui';
 import ResultHeader from './ResultHeader';
 import LangWrapper from '@/components/ui/LangWrapper';
 import useFindDoctor from './useFindDoctor';
-import {  useState } from 'react';
+import { useState } from 'react';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import { useGetDoctors } from '@/lib/api/client/doctors';
@@ -27,25 +25,10 @@ import { useGetClinics } from '@/lib/api/client/clinics';
 
 const breadCrumbs = [{ name: 'Find a Doctor', url: '#' }];
 
-export const AccordionFilterWrapper = ({ title, children, hideToggler }: { title: string; children: React.ReactElement; hideToggler?: boolean; }) => (
-	<div className='mt-4 sm:mt-12'>
-		<Accordion
-			openedIndex={ 0 }
-			onlyOpenOne={ true }
-			itemTheme={ itemType => <Accordion.ItemFilterMenu { ...itemType } hideTogler={ hideToggler } /> }
-			datas={ [{
-				title: title,
-				desc: '',
-				isJSXDesc: true,
-				desc_jsx: children
-			}] }
-		/>
-	</div>
-);
-
-export default function Page(props: BreadcrumbsProps) {
+export default function Page() {
 
 	const searchParams = useSearchParams();
+	const [currentPage, setCurrentPage] = useState<number>(1);
 	const hasKeyword = searchParams.get('keyword');
 
 	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});

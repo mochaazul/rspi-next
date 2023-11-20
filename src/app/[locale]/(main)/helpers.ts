@@ -1,6 +1,5 @@
 'use server';
 
-import { NotificationResponse } from '@/interface';
 import {
 	getHospitals,
 	getCenterOfExcellence,
@@ -11,33 +10,28 @@ import {
 
 import { getFAS } from '@/lib/api/clinics';
 import getSession from '@/session/server';
+// import getSession from '@/session/server';
 
 export async function marAllReadNotif(params: any) {
-	const paramMarkAllReadNotif = {
-		param: params,
-		query: null,
-		body: null,
-	};
-	return postMarkNotifAllRead(paramMarkAllReadNotif);
-
+	return postMarkNotifAllRead({
+		param: params
+	});
 };
 
-export const footersFetch = async () => await getFooterSlug();
-export const hospitalsFetch = async () => await getHospitals();
-export const centerOfExcellenceFetch = async () => await getCenterOfExcellence();
-export const facilityServicesFetch = async () => await getFAS();
-export const notificationResponseFetch = async () => {
+export const footersFetch = async() => await getFooterSlug();
+export const hospitalsFetch = async() => await getHospitals();
+export const centerOfExcellenceFetch = async() => await getCenterOfExcellence();
+export const facilityServicesFetch = async() => await getFAS();
+export const notificationResponseFetch = async() => {
 
 	const session = await getSession();
 
-	const paramNotification = {
-		param: null,
+	// TO DO : ambil mr & email ambil dari session
+
+	return session.user?.medical_record ? await getNotificationResponse({
 		query: {
 			medical_record: session.user?.medical_record,
 			email: session.user?.email,
 		},
-		body: null,
-	};
-
-	return await getNotificationResponse(paramNotification);
+	}) : null;
 };

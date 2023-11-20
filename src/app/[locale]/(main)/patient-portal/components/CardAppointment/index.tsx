@@ -6,9 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 
-import {
-	Text
-} from '@/components/ui';
+import { Text } from '@/components/ui';
 import { colors, icons, Languages } from '@/constant';
 import images from '@/constant/images';
 import PinModal from '@/components/ui/PinModal';
@@ -76,7 +74,7 @@ const CardAppointment = (props: PropsType) => {
 		);
 	};
 
-	const userClickCancelBook = async (appointmentId: string) => {
+	const userClickCancelBook = async(appointmentId: string) => {
 		await cancelBookingTrigger({
 			id: appointmentId
 		});
@@ -200,13 +198,13 @@ const CardAppointment = (props: PropsType) => {
 					</div>
 				} */ }
 				{ props.visit_status === 'C' &&
-					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ `Jadwalkan Lagi` }</div>
+					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Lagi' }</div>
 				}
 				{ props.visit_status === 'X' &&
-					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ `Jadwalkan Ulang` }</div>
+					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
 				}
 				{ props.status !== 'Jadwal Selesai' &&
-					<div onClick={ async () => {
+					<div onClick={ async() => {
 						setShowModalCancelBook(true);
 					} } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ jadwalKunjungan.label.cancelAppointment }` }</div>
 				}
@@ -219,7 +217,7 @@ const CardAppointment = (props: PropsType) => {
 				</div>
 			}
 			<div className='grid grid-cols-[auto_repeat(3,minmax(0,1fr))] mt-[24px] gap-[24px] cursor-pointer'>
-				<Image alt="" src={ props.doctorImgUrl || '' } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
+				<Image alt='' src={ props.doctorImgUrl || '' } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
 				<div className='flex-1'>
 					<Text text={ props.doctorName || '-' } fontSize='16px' fontWeight='700' />
 					<Text text={ props.doctorSpeciality || '-' } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />

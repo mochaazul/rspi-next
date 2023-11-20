@@ -25,7 +25,7 @@ const FacilitiesServices = ({ facilityServices }: { facilityServices: FacilitySe
 					<Text fontSize='20px' lineHeight='30px' fontType='p' fontWeight='400' color={ colors.grey.dark } className='flex-1 md:pr-32'>
 						{ t('subHeading') }
 					</Text>
-					<Link href={ `/facilities/${ facilityServices[0]?.slug }` } className='max-sm:hidden'>
+					<Link href='/facilities' className='max-sm:hidden'>
 						<div className='see-all flex row items-center'>
 							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default }>
 								{ t('allItemlabel') }
@@ -55,7 +55,7 @@ const FacilitiesServices = ({ facilityServices }: { facilityServices: FacilitySe
 				</div>
 			</div>
 			<div className='sm:hidden flex mt-[26px]'>
-				<Link href={ `/facilities/${ facilityServices[0]?.slug }` } className='m-auto'>
+				<Link href='/facilities' className='m-auto'>
 					<div className='see-all flex row items-center'>
 						<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default }>
 							{ t('allItemlabel') }

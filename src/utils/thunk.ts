@@ -63,5 +63,5 @@
 
 export const thunkUtils = () => {
 	return '';
-}
+};
 // export default userSlice // migrate

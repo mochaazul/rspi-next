@@ -11,4 +11,4 @@ export const getAllEvents = (param: ApiOptions | undefined) => {
 
 export const getPromoById = (param: ApiOptions | undefined) => {
 	return fetcher<EventClassesState['selectedEvent']>('events', param);
-}
+};

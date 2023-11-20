@@ -45,7 +45,7 @@ const ResetPassword = () => {
 			new_password: '',
 			confirm_password: ''
 		},
-		onSubmit: async (formResetPassword: NewPasswordPayload) => {
+		onSubmit: async(formResetPassword: NewPasswordPayload) => {
 			try {
 				await setNewPassword({
 					query: { token: searchParams.get('token') ?? '' },
@@ -67,7 +67,7 @@ const ResetPassword = () => {
 		hasToken();
 	}, []);
 
-	const hasToken = async () => {
+	const hasToken = async() => {
 		try {
 			if (!searchParams.get('token')) return navigate.replace('/login');
 
@@ -90,7 +90,7 @@ const ResetPassword = () => {
 	if (!tokenVerified)
 		return <SpinVerification status={ verificationStatus } />;
 
-	const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
+	const onSubmitForm = async(evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		setEnableValidation(true);
 		setError({
@@ -179,7 +179,7 @@ const ResetPassword = () => {
 							<Button
 								label={ languages('resetForm.resetBtnLabel') }
 								theme='primary'
-								hoverTheme='outline'
+								$hoverTheme='outline'
 								type='submit'
 								className='w-full mt-[64px]'
 								disabled={ loadingSubmit }

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-	icons,
-} from '@/constant';
+import { icons, } from '@/constant';
 import SocmedStyle from './style';
 
 interface Props {

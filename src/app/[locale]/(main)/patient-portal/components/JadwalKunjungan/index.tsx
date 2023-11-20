@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { isEmpty } from 'lodash';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
 import Radio from '@/components/ui/Radio';
 import { Button, Spinner, Text } from '@/components/ui';

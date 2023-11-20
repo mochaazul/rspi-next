@@ -1,13 +1,8 @@
-import * as FeatherIcons from 'react-feather';
 import InputMask from 'react-input-mask';
 
-import { icons } from '@/constant';
 import withInputLabel from '@/components/ui/withInputLabel';
 
-import {
-	CountrySelector, IconWrapper, Input, PhoneInputType, PhoneNumberInputWrapper
-} from './style';
-import React, { ReactNode } from 'react';
+import { CountrySelector, PhoneInputType, PhoneNumberInputWrapper } from './style';
 
 const PhoneNumberInput = ({ onIconClick, ...props }: PhoneInputType) => {
 	const { ref, featherIcon, ...restProps } = props;

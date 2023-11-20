@@ -1,9 +1,7 @@
 'use client';
 
-import { SetStateAction, useEffect, useState } from 'react';
-import * as Icons from 'react-feather';
-import { useRouter, useParams, usePathname } from 'next/navigation';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useParams, usePathname } from 'next/navigation';
 
 import {
 	Breadcrumbs,
@@ -11,14 +9,12 @@ import {
 	Tabs,
 	Spinner
 } from '@/components/ui';
-import {
-	PanelH1,
-	PanelV1
-} from '@/app/[locale]/(main)/layout';
+
 import { colors, icons, sosmedLink } from '@/constant';
-import { EventClassesDetail, EventClassesState } from '@/interface';
+import { EventClassesState } from '@/interface';
 import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
 import { fetchPromoByID, fetchEvents } from './helpers';
+import { PanelH1, PanelV1 } from '../../style';
 
 const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 	const pathName = usePathname();
@@ -46,12 +42,12 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 	const breadcrumbsPath = [{ name: 'Promo & Packages', url: '/promo' }, { url: '#', name: selectedEvent?.title || '' }];
 
 	useEffect(() => {
-		fetchPromoByID(props?.params?.id).then(function (response) {
+		fetchPromoByID(props?.params?.id).then(function(response) {
 			setLoading(true);
 			setSelectedEvent(response?.data);
 			setLoading(false);
 		});
-		fetchEvents().then(function (response) {
+		fetchEvents().then(function(response) {
 			setEventsData(response.data);
 		});
 	}, []);
@@ -59,11 +55,11 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 	useEffect(() => {
 		if (props.params.id !== selectedEvent?.id) {
 			setLoading(true);
-			fetchPromoByID(props.params.id).then(function (response) {
+			fetchPromoByID(props.params.id).then(function(response) {
 				setSelectedEvent(response?.data);
 				setLoading(false);
 			});
-			fetchEvents().then(function (response) {
+			fetchEvents().then(function(response) {
 				setEventsData(response.data);
 			});
 			setLoading(false);

@@ -1,9 +1,5 @@
-import {
-	postContactUs
-} from '@/lib/api';
+import { postContactUs } from '@/lib/api';
 
-import { addContactUs as contactUsAction } from '@/stores/actions';
-import { useAppDispatch } from '@/hooks';
 import {
 	requiredRule,
 	createFieldConfig,

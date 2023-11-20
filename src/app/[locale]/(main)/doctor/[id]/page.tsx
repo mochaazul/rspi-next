@@ -1,9 +1,8 @@
 'use client';
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import dayjs, { Dayjs } from 'dayjs';
-import { debounce } from 'lodash';
 import Spinner from '@/components/ui/Spinner';
 import PhoneModal from '@/components/ui/PhoneModal';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
@@ -15,7 +14,7 @@ import Button from '@/components/ui/Button';
 import { Images, colors } from '@/constant';
 import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
 import { useScopedI18n } from '@/locales/client';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import VisitSchedule from './sections/VisitSchedule';
 import { TimeSlot } from '@/interface';
 import { useGetHospital } from '@/lib/api/client/hospital';
@@ -210,7 +209,7 @@ export default function Page({ params }: Props) {
 						<div className='bg-white pt-[26px] pb-[30px] footer'>
 							<div className='lg:w-[1110px] w-full mx-auto max-sm:mx-[15px] md:flex md:justify-end gap-[12px] flex justify-between'>
 								<Button
-									hoverTheme='secondary'
+									$hoverTheme='secondary'
 									label={ 'Back' }
 									noPadding={ true }
 									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
@@ -220,7 +219,7 @@ export default function Page({ params }: Props) {
 									} }
 								/>
 								<Button
-									hoverTheme='secondary'
+									$hoverTheme='secondary'
 									label={ 'Next' }
 									noPadding={ true }
 									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'

@@ -46,11 +46,12 @@
 module.exports = {
 	root: true,
 	parser: '@typescript-eslint/parser',
-	plugins: ['@typescript-eslint'],
+	plugins: ['@typescript-eslint', 'unused-imports'],
 	extends: [
 		'plugin:react/recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react/jsx-runtime',
+		'plugin:@next/next/recommended'
 	], // for Reactjs
 	ignorePatterns: 'node_modules',
 	env: { browser: true },
@@ -153,5 +154,6 @@ module.exports = {
 		indent: [1, 'tab', { SwitchCase: 1 }],
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': ['warn'],
+		
 	},
 };

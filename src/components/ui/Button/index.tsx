@@ -5,7 +5,7 @@ const Button = ({
 	label = 'Submit',
 	theme = 'primary',
 	themeColor,
-	hoverTheme,
+	$hoverTheme: hoverTheme,
 	type = 'button',
 	width,
 	className,

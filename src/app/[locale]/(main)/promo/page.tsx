@@ -1,5 +1,5 @@
 
-import { getHospitals, postContactUs, } from '@/lib/api';
+import { getHospitals, } from '@/lib/api';
 import EventClassesPromo from './Promo';
 import { fetchEvents } from './helpers';
 

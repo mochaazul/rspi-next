@@ -2,7 +2,7 @@ import useSWRInfinite from 'swr/infinite';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
-import { DoctorCalendar, FindDoctorDetail, I_MasterDoctor, TimeSlot, I_VisitHistory } from '@/interface';
+import { DoctorCalendar, FindDoctorDetail, I_MasterDoctor, TimeSlot } from '@/interface';
 
 import fetcher, { ApiOptions } from '../utils/fetcher';
 

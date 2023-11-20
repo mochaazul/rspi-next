@@ -17,14 +17,14 @@ import { CentreOfExcellenceStyle } from './style';
 
 const language = lang.page.centerOfExcellence.serviceLocation;
 
-const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
+const CentreOfExcellencePage = async({ params }: { params: { slug: string; }; }) => {
 	const responseCenterOfExcellence = await getCoe({
 		query: {
 			is_publish: true,
 		}
 	});
 
-	const filteredResponseCenterOfExcellence = responseCenterOfExcellence?.data?.find((coe) => {
+	const filteredResponseCenterOfExcellence = responseCenterOfExcellence?.data?.find(coe => {
 		return coe?.slug === params?.slug;
 	});
 
@@ -37,7 +37,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 
 	const breadcrumbsPath = [
 		{ name: 'Centre Of Excellence', url: '/centre-of-excellence' },
-		{ url: '#', name: responseCenterOfExcellence?.data?.find((coe) => `${ coe.slug }` === params?.slug)?.title ?? '' }
+		{ url: '#', name: responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === params?.slug)?.title ?? '' }
 	];
 
 	const renderRelatedNewsDesktop = () => {
@@ -90,10 +90,10 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 						<div className='rightSide sm:ml-[32px]'>
 							<div>
 								{
-									responseCenterOfExcellence?.data?.filter((coe) => `${ coe.slug }` === params?.slug).length > 0
+									responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === params?.slug).length > 0
 										?
 										<ServiceLocation
-											content={ responseCenterOfExcellence?.data?.find((coe) => `${ coe.slug }` === params?.slug) }
+											content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === params?.slug) }
 											activeMenuIndex={ params?.slug }
 											centerOfExcellence={ responseCenterOfExcellence?.data }
 										/> : null

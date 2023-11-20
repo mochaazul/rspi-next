@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { colors } from '@/constant';
@@ -32,14 +31,14 @@ const CallForAmbulance = ({
 	return (
 		<>
 			{ /* Migrate  */ }
-			{/* TBD max-sm:w-[60px] max-sm:h-[60px]  ${ shouldGiveMargin ? 'bottom-24' : '' } */ }
+			{ /* TBD max-sm:w-[60px] max-sm:h-[60px]  ${ shouldGiveMargin ? 'bottom-24' : '' } */ }
 			<CallForAmbulanceStyle className={ `
 				fixed cursor-pointer flex align-center justify-center 
 				max-sm:w-[60px] max-sm:h-[60px] }
 			
 			` } onClick={ () => setVisible(true) }>
 				<div className='absolute w-[80%] h-[80%] mt-1 rounded-full hover:animate-ping z-20' style={ { backgroundColor: colors.red.accentOpacity90 } } />
-				<img src={ images.AmbulanceIcon } alt="" className='z-10 relative' />
+				< images.AmbulanceIcon className='z-10 relative' />
 			</CallForAmbulanceStyle>
 			<Modal
 				visible={ visible }
@@ -48,7 +47,7 @@ const CallForAmbulance = ({
 			>
 				<ModalRSTelephoneStyle className='relative flex flex-col'>
 					<div className='flex justify-center'>
-						<img src={ images.AmbulanceIcon } alt="" className='z-10 relative' />
+						<img src={ images.AmbulanceIcon } alt='' className='z-10 relative' />
 					</div>
 					<Text
 						fontSize='24px'
@@ -73,7 +72,7 @@ const CallForAmbulance = ({
 						{
 							Object.values(hospitalData || [])?.map(hospital => (
 								<Link href={ `tel:${ hospital.phone }` } key={ hospital.id }>
-									<Button label={ hospital.name } theme='outline' hoverTheme='primary' />
+									<Button label={ hospital.name } theme='outline' $hoverTheme='primary' />
 								</Link>
 							))
 						}

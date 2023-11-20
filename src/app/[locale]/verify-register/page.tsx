@@ -35,7 +35,7 @@ const EmailVerificationPage = () => {
 
 	useEffect(() => {
 		if (status === 'loading') {
-			const onEmailVerification = async () => {
+			const onEmailVerification = async() => {
 				try {
 					const token: string = searchParams.get('token') ?? '';
 					await verifyEmail(token);
@@ -98,7 +98,7 @@ const EmailVerificationPage = () => {
 				<div className={ `back-login ${ status !== 'failed' ? 'invisible' : '' }` }>
 					<Button
 						theme='primary'
-						hoverTheme='outline'
+						$hoverTheme='outline'
 						label={ languages('backToLogin') }
 						onClick={ handleBackLogin }
 					/>

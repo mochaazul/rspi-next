@@ -1,3 +1,4 @@
+'use server';
 import LandingPageStyle from './style';
 
 import { getNews } from '@/lib/api/news';
@@ -22,7 +23,7 @@ import MobileAppBanner from '@/components/ui/PageComponents/LandingPageSections/
 
 import { isMobile } from 'react-device-detect';
 
-export default async function Home() {
+export default async function Page() {
 	const coeRes = await getCoe();
 	const banner = await getBanner({ is_publish: true });
 	const hospitals = await getHospital();
@@ -33,7 +34,6 @@ export default async function Home() {
 	const awards = await getAwards({ is_publish: true }, { page: 1, limit: 8 });
 
 	const currentLang = getCurrentLocale();
-
 	const arrayBanner = () => {
 		if (currentLang === 'id') {
 			if (isMobile) {

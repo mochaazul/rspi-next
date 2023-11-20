@@ -1,8 +1,6 @@
 'use client';
-
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as FeatherIcon from 'react-feather';
-import Image from 'next/image';
 import { Text } from '@/components/ui';
 import withInputLabel from '@/components/ui/withInputLabel';
 import { colors, icons } from '@/constant';

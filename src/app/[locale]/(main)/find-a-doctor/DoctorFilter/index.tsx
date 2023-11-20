@@ -1,18 +1,13 @@
 'use client';
-import React, { useCallback, useEffect } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React from 'react';
+import {  useSearchParams } from 'next/navigation';
 
 import { colors, Languages as lang } from '@/constant';
-import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { HospitalDetail, HospitalState } from '@/interface';
-import { getClinics, getSpecialities } from '@/stores/Specialities';
-import { I_SpecialitiesState, PayloadClinic } from '@/interface/specialities';
+import { HospitalDetail } from '@/interface';
 import { PickerItem } from '@/components/ui/DropdownSearch';
 
 import Pills from '../Pills';
-import { AccordionFilterWrapper } from '../page';
 import useFindDoctor from '../useFindDoctor';
-import { useGetHospital } from '@/lib/api/hospital';
 import { ClinicResponse } from '@/interface/clinic';
 import Form from '@/components/ui/Form';
 import Text from '@/components/ui/Text';

@@ -5,7 +5,6 @@ import { Text } from '@/components/ui';
 
 import { ItemType } from '.';
 import { ItemStyle } from './style';
-import Image from 'next/image';
 
 const Title = (props: { open: boolean; text: string; onClick: () => any; hideToggler?: boolean; }) => (
 	<div className='flex cursor-pointer sm:mb-6 mb-3' onClick={ props.onClick }>
@@ -23,7 +22,7 @@ const Title = (props: { open: boolean; text: string; onClick: () => any; hideTog
 		{
 			!props.hideToggler &&
 			<div className='grow-0'>
-				<icons.ArrowDown className={ `svg-green chevron ${ props.open ? 'up' : '' }` } alt="" />
+				<icons.ArrowDown className={ `svg-green chevron ${ props.open ? 'up' : '' }` } alt='' />
 			</div>
 		}
 	</div>

@@ -2,7 +2,6 @@ import { colors, icons } from '@/constant';
 import Text from '@/components/ui/Text';
 
 import { ItemCont, Spacer } from './style';
-import Image from 'next/image';
 
 interface PaginationNumberType {
 	totalPage: number;
@@ -33,7 +32,7 @@ const PaginationNumber = (props: PaginationNumberType) => {
 	return (
 		<div className='flex flex-row sm:gap-10 gap-4'>
 			<ItemCont className={ `arrow ${ props.currentPage === 1 ? 'disabled' : '' }` } onClick={ handleOnItemClick(props.currentPage - 1) }>
-				<icons.ArrowLeft alt="" className='svg-white' />
+				<icons.ArrowLeft alt='' className='svg-white' />
 			</ItemCont>
 			<div className='flex flex-row gap-4'>
 				{
@@ -112,7 +111,7 @@ const PaginationNumber = (props: PaginationNumberType) => {
 				}
 			</div>
 			<ItemCont className={ `arrow ${ props.currentPage === props.totalPage ? 'disabled' : '' }` } onClick={ handleOnItemClick(props.currentPage + 1) }>
-				<icons.ArrowRight alt="" className='svg-white' />
+				<icons.ArrowRight alt='' className='svg-white' />
 			</ItemCont>
 		</div>
 	);

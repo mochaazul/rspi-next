@@ -5,7 +5,7 @@ import { cookiesHelper } from '@/helpers';
 
 import fetcher from './utils/fetcher';
 
-export const getProfile = async (setCookies?: boolean) => {
+export const getProfile = async(setCookies?: boolean) => {
 	const response = await fetcher<UserDataDetail>('profile');
 	if (response?.stat_code === 'APP:SUCCESS' && setCookies) {
 		const currentUser = await cookiesHelper.getUserData();

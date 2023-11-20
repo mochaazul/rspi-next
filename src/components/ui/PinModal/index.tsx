@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import languages from '@/constant/languages';

@@ -1,8 +1,7 @@
 'use client';
-import useSWR from 'swr';
 import { useEffect, useState } from 'react';
 
-import { BreadcrumbsProps, EventClassesState, HospitalState, Pagination } from '@/interface';
+import { EventClassesState, HospitalState, Pagination } from '@/interface';
 import {
 	Breadcrumbs,
 	Button,
@@ -12,15 +11,13 @@ import {
 	Spinner,
 	EmptyData
 } from '@/components/ui';
-import { PanelH1, } from '@/app/[locale]/(main)/layout';
 import Card, { CardContent } from '@/components/ui/Card';
-import { useAppDispatch, useTypedSelector } from '@/hooks';
-import { getEvents } from '@/stores/EventClasses';
 import { Languages, colors } from '@/constant';
-import { EventClassesPromoStyle } from './style';
 import { promoPageEvent } from '@/utils/metaPixelTrack';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import { fetchEvents } from './helpers';
+import { EventClassesPromoStyle } from './style';
+import { PanelH1 } from '../style';
 
 const { heading, hospitalSelectionLabel, allHospitalLabel, tabPillsLabel, promoItem } = Languages.page.promoPage;
 
@@ -98,16 +95,16 @@ const EventClassesPromo = ({
 					</div>
 					<div className='flex flex-row mt-[50px] gap-4 items-center max-sm:justify-between'>
 						<div>
-							<Button className='mb-4' theme={ category === '' ? 'primary' : 'secondary' } hoverTheme='primary' onClick={ () => setCategory('') }>{ tabPillsLabel.allLabel }</Button>
+							<Button className='mb-4' theme={ category === '' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('') }>{ tabPillsLabel.allLabel }</Button>
 						</div>
 						<div>
-							<Button className='mb-4' theme={ category === 'event' ? 'primary' : 'secondary' } hoverTheme='primary' onClick={ () => setCategory('event') }>{ tabPillsLabel.eventLabel }</Button>
+							<Button className='mb-4' theme={ category === 'event' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('event') }>{ tabPillsLabel.eventLabel }</Button>
 						</div>
 						<div>
-							<Button className='mb-4' theme={ category === 'class' ? 'primary' : 'secondary' } hoverTheme='primary' onClick={ () => setCategory('class') }>{ tabPillsLabel.classesLabel }</Button>
+							<Button className='mb-4' theme={ category === 'class' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('class') }>{ tabPillsLabel.classesLabel }</Button>
 						</div>
 						<div>
-							<Button className='mb-4' theme={ category === 'promo' ? 'primary' : 'secondary' } hoverTheme='primary' onClick={ () => setCategory('promo') }>{ tabPillsLabel.promoLabel }</Button>
+							<Button className='mb-4' theme={ category === 'promo' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('promo') }>{ tabPillsLabel.promoLabel }</Button>
 						</div>
 					</div>
 				</div>

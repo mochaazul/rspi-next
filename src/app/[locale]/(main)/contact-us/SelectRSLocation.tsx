@@ -4,7 +4,6 @@ import { Button, Text } from '@/components/ui';
 import { colors } from '@/constant';
 
 import { SelectRSLocationStyle } from './style';
-import Image from 'next/image';
 
 interface PropsType {
 	id: number;
@@ -70,8 +69,8 @@ const SelectRSLocation = (props: PropsType) => {
 				</div>
 			</div>
 			<div className='p-3 pt-2 gap-3 flex sm:hidden'>
-				<Button theme='outline' hoverTheme='primary' label='See Direction' onClick={ openGMaps } />
-				<Button theme='primary' hoverTheme='outline' label='Find a Doctor' />
+				<Button theme='outline' $hoverTheme='primary' label='See Direction' onClick={ openGMaps } />
+				<Button theme='primary' $hoverTheme='outline' label='Find a Doctor' />
 			</div>
 		</SelectRSLocationStyle>
 	);

@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { CustomerReviewStyle } from './CustomerReviewStyle';
 import BalloonSlider from './BalloonSlider';
 import images from '@/constant/images';
-import Image from 'next/image';
 import Text from '@/components/ui/Text';
 import { colors, icons } from '@/constant';
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';

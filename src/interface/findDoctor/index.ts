@@ -1,4 +1,4 @@
-import { PickerItem } from '@/components/DropdownSearch';
+import { PickerItem } from '@/components/ui/DropdownSearch';
 import { Pagination, ResponseStatus } from '@/interface';
 
 export interface FindDoctorState {

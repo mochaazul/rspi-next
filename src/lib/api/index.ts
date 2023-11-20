@@ -4,6 +4,7 @@ import {
 	CenterOfExcellenceDetail,
 	CenterOfExcellenceState,
 	ContactUsState,
+	ContactUsSubmitType,
 	FooterState,
 	ForgotPasswordType,
 	HospitalState,
@@ -68,12 +69,12 @@ export const getFooterSlug = () => {
 	return fetcher<FooterState>('getFooter');
 };
 // Contact
-export const postContactUs = (param: ApiOptions | undefined) => {
-	return fetcher<ContactUsState>('contactUs', param);
+export const postContactUs = (param: { param: null; query: null; body: ContactUsSubmitType; }) => {
+	return fetcher<ContactUsState>('contactUs', { body: param.body });
 };
 
 // Article
-export const getArticle = (param: ApiOptions) => {
+export const getArticle = (param?: ApiOptions) => {
 	return fetcher<ArticleState>('getNews', param);
 };
 

@@ -1,8 +1,7 @@
 
 'use client';
-import useFindADoctor from './useFindADoctor';
 import FindDoctorStyle from './style';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { PickerItem } from '@/components/ui/DropdownSearch';
 import Button from '@/components/ui/Button';
 import Form from '@/components/ui/Form';

@@ -1,6 +1,8 @@
 import { icons, colors } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
-import { Button, Modal, Text } from '@/components/ui';
+import Button from '@/components/ui/Button';
+import Modal from '@/components/ui/Modal';
+import Text from '@/components/ui/Text';
 
 import { ModalStyle } from './style';
 
@@ -18,7 +20,6 @@ const InfoModal: React.FC<ModalProps> = ({
 	onOK
 }) => {
 	const languages = useScopedI18n('page.registerPage.infoModal');
-
 	return (
 		<Modal
 			visible={ visible }
@@ -36,7 +37,7 @@ const InfoModal: React.FC<ModalProps> = ({
 					lineHeight='32px'
 				/>
 				<Text
-					text={ `${ languages('subHeading') } ${ emailUser } ${ languages('subHeadingTail') }` }
+					text={ `${languages('subHeading')} ${emailUser} ${languages('subHeadingTail')}` }
 					fontSize='16px'
 					fontWeight='400'
 					color={ colors.grey.pencil }

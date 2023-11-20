@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 export default interface DoctorsType {
   doctorName: string;
   specialty: string;
@@ -5,7 +6,7 @@ export default interface DoctorsType {
   isTelemedicine: boolean;
   photo: any;
   hospitals: HospitalsType[];
-};
+}
 
 export interface HospitalsType {
   title: string;

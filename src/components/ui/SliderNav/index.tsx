@@ -1,7 +1,6 @@
 import { icons } from '@/constant';
 import React from 'react';
 import { ArrowContainer, SliderNavContainer } from './style';
-import Image from 'next/image';
 
 type Props = {
 	onNext: () => void;

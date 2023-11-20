@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import { RadioGroupContainer, RadioOptionContainer, RadioPill } from './style';
 import Text from '@/components/ui/Text';

@@ -2,7 +2,6 @@ import { Button, Text, Share } from '@/components/ui';
 import { colors } from '@/constant';
 
 import { CardNewsStyle } from './styles';
-import Image from 'next/image';
 
 interface PropsType {
 	id: number;

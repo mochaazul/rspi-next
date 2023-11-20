@@ -2,13 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-	PanelH1,
-	PanelH2,
-	PanelH3,
-	PanelH4,
-	PanelV1
-} from '@/app/[locale]/(main)/layout';
 
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 
@@ -21,29 +14,24 @@ import {
 } from '@/components/ui';
 import {
 	colors,
-	Images,
 	Languages as lang
 } from '@/constant';
 import images from '@/constant/images';
 import {
-	BreadcrumbsProps,
-	ContactUsState,
-	ContactUsSubmitType,
 	HospitalDetail,
 	HospitalState
 } from '@/interface';
-import { useTypedSelector } from '@/hooks';
 
 import { ContactUsPanel } from './style';
 import SelectRSLocation from './SelectRSLocation';
 import FAQDatas from './FAQDatas';
 import ContactUsForm from './ContactUsForm';
-import Image from 'next/image';
+import { PanelH2, PanelV1 } from '../style';
 
 const language = lang.page.contactUs;
 
 const ContactUsPage = ({
-    hospitalSelector,
+	hospitalSelector,
 	breadcrumbsPath,
 }:{
 	breadcrumbsPath: BreadcrumbsType['datas'],
@@ -90,8 +78,8 @@ const ContactUsPage = ({
 					</div>
 				</div>
 				<div className='flex flex-row gap-x-2'>
-					<Button theme='outline' hoverTheme='outline' label={ 'See Direction' } onClick={ handleOpenMapLink(data?.[0]?.share_link ?? '') } />
-					<Button theme='primary' hoverTheme='primary' label={ 'Find Doctor' } onClick={ () => navigate.push(`/find-a-doctor?hospital=${ data[0].hospital_code }`) } />
+					<Button theme='outline' $hoverTheme='outline' label={ 'See Direction' } onClick={ handleOpenMapLink(data?.[0]?.share_link ?? '') } />
+					<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } onClick={ () => navigate.push(`/find-a-doctor?hospital=${ data[0].hospital_code }`) } />
 				</div>
 
 			</div>
@@ -193,7 +181,7 @@ const ContactUsPage = ({
 							<Button
 								className='mt-5 py-4'
 								theme='outline'
-								hoverTheme='primary'
+								$hoverTheme='primary'
 								label={ language.faq.allFaqBtnLabel }
 								onClick={ () => navigate.push('/contact-us/faq') }
 							/>
@@ -224,9 +212,8 @@ const ContactUsPage = ({
 						/>
 					</div>
 				</PanelH2>
-
 				
-				<div className={ `sm:mt-20 sm:pb-5 pb-10 mt-8 flex sm:flex-row flex-col` }>
+				<div className={ 'sm:mt-20 sm:pb-5 pb-10 mt-8 flex sm:flex-row flex-col' }>
 					<div className='max-sm:hidden'>
 						{
 							Object.values(hospitalSelector || [])?.map((data, index) => (

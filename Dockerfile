@@ -1,18 +1,24 @@
-# Build environment
-FROM --platform=linux/amd64 node:16.15-alpine as build
+# Use Node.js image as the base image
+FROM node:18-alpine
 
-RUN apk update && apk add --no-cache git
-ARG stage=dev
-WORKDIR /app
-COPY package.json ./
-COPY node_modules ./
-COPY . ./
-RUN yarn build:${stage}
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# docker environment
-FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
-COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
+# Copy package.json and package-lock.json to the container
+COPY package.json .
+COPY yarn.lock .
 
-EXPOSE 3001
-CMD ["nginx", "-g", "daemon off;"]
+# Install dependencies
+RUN yarn install
+
+# Copy the entire Next.js application to the container
+COPY . .
+
+# Build the Next.js application
+RUN yarn build
+
+# Expose the port used by your Next.js app
+EXPOSE 4000
+
+# Command to run your Next.js app when the container starts
+CMD ["yarn", "start"]

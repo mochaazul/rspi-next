@@ -33,7 +33,7 @@ const ResetPinPage = () => {
 			pin: '',
 			confirm_pin: ''
 		},
-		onSubmit: async (formPin: PinType) => {
+		onSubmit: async(formPin: PinType) => {
 			try {
 				await updatePin(formPin);
 

@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 import { appStage, config } from '@/config';
 import { Images, colors, Languages as lang } from '@/constant';
@@ -21,7 +20,6 @@ import {
 } from '@/interface/footer';
 
 import FooterStyled, { FooterContainer } from './style';
-import Image from 'next/image';
 
 const FooterLayout = ({
 	footerData,

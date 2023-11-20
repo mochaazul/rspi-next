@@ -1,5 +1,4 @@
-import { colors } from '@/constant';
-import { GlobalAllTransition200ms, GlobalAllTransition5ms } from '@/constant/globalstyle';
+import { GlobalAllTransition200ms } from '@/constant/globalstyle';
 import styled from 'styled-components';
 
 export const MedicalSpecialitiesItemContainer = styled.div`

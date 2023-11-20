@@ -3,17 +3,9 @@
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import {
-	PanelH1,
-	PanelH2,
-	PanelH3,
-	PanelH4,
-	PanelV1
-} from '@/app/[locale]/(main)/layout';
-import {
 	Accordion,
 	Breadcrumbs,
 	Form,
-	Layout,
 	Text
 } from '@/components/ui';
 
@@ -22,6 +14,7 @@ import FAQDatas from '../FAQDatas';
 
 import { FAQStyle } from './style';
 import languages from '@/constant/languages';
+import { PanelH1, PanelH4, PanelV1 } from '../../style';
 
 const { heading, subHeading } = languages.page.contactUs.faq;
 
@@ -33,7 +26,7 @@ const FAQPage = () => {
 	];
 
 	if (params.id) {
-		breadCrumbsPath.push({ name: FAQDatas[parseInt(params.id)].title, url: '#' });
+		breadCrumbsPath.push({ name: FAQDatas[parseInt(params.id as string)].title, url: '#' });
 	}
 
 	const [searchValue, setSearchValue] = useState<string>('');
@@ -86,7 +79,7 @@ const FAQPage = () => {
 					</div>
 					<div className='sm:pt-[50px] pt-7 pb-[84px] sm:gap-[32px] gap-6'>
 						<Accordion
-							openedIndex={ parseInt(params.id ?? '0') }
+							openedIndex={ parseInt(params.id as string ?? '0') }
 							itemTheme={ props => <Accordion.ItemFAQ isJSXDesc={ true } { ...props } /> }
 							datas={ searchValue !== '' ? handleSearchFAQ() : FAQDatas }
 						/>

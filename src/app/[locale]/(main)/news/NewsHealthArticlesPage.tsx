@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import moment from 'moment';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { BreadcrumbsProps, ArticleState, Pagination } from '@/interface';
+import { ArticleState, Pagination } from '@/interface';
 import { colors } from '@/constant';
 import {
 	Breadcrumbs,
@@ -19,7 +19,6 @@ import Card, { CardContentWithInner, CardsScrollHorizontal } from '@/components/
 
 import CardNews from './CardNews';
 import { NewsHealthArticlesStyle } from './styles';
-import { newsPageEvent } from '@/utils/metaPixelTrack';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import { fetchArticle } from './helpers';
 

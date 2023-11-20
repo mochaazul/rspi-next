@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Button, Modal, Text } from '@/components/ui';
 import { icons, Languages as lang } from '@/constant';
 import { SuccessConfModalContainer } from './style';

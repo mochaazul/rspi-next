@@ -15,7 +15,6 @@ import {
 	HospitalState,
 	NotificationResponse,
 } from '@/interface';
-import { PatientState } from '@/interface/PatientProfile';
 import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
@@ -38,14 +37,14 @@ export const Header = ({
 	facilityServicesData,
 	notificationResponseData,
 	marAllReadNotifFunc
-}: {
-	hospitalData: HospitalState,
-	centerOfExcellenceData: CenterOfExcellenceState,
-	facilityServicesData: FacilityServicesState,
-	notificationResponseData: NotificationResponse,
-	marAllReadNotifFunc: (params: any) => any,
-}) => {
-
+}:{
+		hospitalData: HospitalState,
+		centerOfExcellenceData: CenterOfExcellenceState,
+		facilityServicesData: FacilityServicesState,
+		notificationResponseData?: NotificationResponse,
+		marAllReadNotifFunc: (params: any) => any,
+	}) => {
+	
 	const router = useRouter();
 
 	const currentLang = useCurrentLocale();
@@ -64,10 +63,10 @@ export const Header = ({
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const handleClick = async () => {
+	const handleClick = async() => {
 		if (isLoggedIn) {
-			await cookiesHelper.clearStorage(); // migrate ( for function removeUser refer repo rspi-fe-web )
-			router.push('/');
+			await cookiesHelper.clearStorage();
+			router.refresh();
 		}
 	};
 
@@ -110,7 +109,7 @@ export const Header = ({
 							onClick={ () => marAllReadNotifFunc({
 								medical_record: 100154999,
 								email: 'riko.logwirno@rebelworks.co'
-							}).then(function (response: any) {
+							}).then(function(response: any) {
 								notificationResponseFetch();
 							})
 							}
@@ -169,7 +168,7 @@ export const Header = ({
 					<div className='leftNav'>
 						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
-								<images.LogoRSPI alt='' />
+								<Image src={ '/images/logo_rspi.svg' } alt='rspi-logo' width={ 150 } height={ 80 } />
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
@@ -189,8 +188,8 @@ export const Header = ({
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
 											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-												<img
-													alt=''
+												<Image
+													alt='hospital image'
 													src={ item?.img_url?.[0] || '' }
 													width={ 80 }
 													height={ 80 }
@@ -216,7 +215,7 @@ export const Header = ({
 										{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
 											<Link href={ `/centre-of-excellence/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-													<Image alt="" src={ item?.img_url?.[0] } width={ 60 } height={ 60 } />
+													<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } alt='center-of-excellence-image' />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
@@ -238,7 +237,7 @@ export const Header = ({
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt='' />
+													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' }/>
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
@@ -314,7 +313,7 @@ export const Header = ({
 												</div>
 											</div>
 										</> :
-										<Button className='btn-main h-[44px] min-w-[190px]' theme='outline' hoverTheme='primary' onClick={ handleLoginClick }>Login / Register</Button>
+										<Button className='btn-main h-[44px] min-w-[190px]' theme='outline' $hoverTheme='primary' onClick={ handleLoginClick }>Login / Register</Button>
 								}
 							</div>
 

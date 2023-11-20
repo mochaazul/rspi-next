@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 import * as Icons from 'react-feather';
 import { usePathname } from 'next/navigation';

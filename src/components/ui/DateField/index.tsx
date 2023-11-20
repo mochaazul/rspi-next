@@ -1,3 +1,4 @@
+'use client';
 import Datepicker from 'react-tailwindcss-datepicker';
 import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
 

@@ -132,7 +132,7 @@ const MedicalSpecialitiesComponent = ({
 								return (
 									<div key={ key } className='flex justify-between specialities-item max-[480px]:mb-4' onClick={ () => navigate.push(`/medical-specialities/${ item.slug }`) }>
 										<Text text={ item.title } fontWeight='700' />
-										<div className='max-[480px]:w-16'></div>
+										<div className='max-[480px]:w-16' />
 										{ imageSrc && (
 											<div className='relative overflow-hidden w-10 max-[480px]:w-12'>
 												<Image

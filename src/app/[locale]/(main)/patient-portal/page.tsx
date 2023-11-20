@@ -2,11 +2,10 @@
 
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import Image from 'next/image';
 import dayjs from 'dayjs';
 
 import { colors, Images, Languages } from '@/constant';
-import { Accordion, Modal, Text } from '@/components/ui';
+import { Text } from '@/components/ui';
 import PinModal from '@/components/ui/PinModal';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import { useGetProfile } from '@/lib/api/client/profile';
@@ -187,7 +186,7 @@ const PatientPortal = () => {
 					<section id='user-info'
 						className='flex flex-row sm:w-1/2 md:w-1/4'
 					>
-						<img alt="" src={ getProfileResponse?.data.img_url || Images.ProfilePatient } />
+						<img alt='' src={ getProfileResponse?.data.img_url || Images.ProfilePatient.src } />
 						<div className='ml-[15px]'>
 							<Text text={ getProfileResponse?.data.name } fontSize='16px' fontWeight='700' />
 							<Text text={ `${ parseBod(getProfileResponse?.data.birthdate) }` } className='md:mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />

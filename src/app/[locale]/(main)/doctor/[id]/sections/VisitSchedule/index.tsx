@@ -1,11 +1,8 @@
-import dayjs from 'dayjs';
-import { useTypedSelector } from '@/hooks';
-import _, { isEmpty } from 'lodash';
+import _ from 'lodash';
 import { useState } from 'react';
 import { EmptyWarningContainer, TimeSlotPill } from './style';
-import { FindDoctorDetail, FindDoctorState, TimeSlot } from '@/interface';
+import { FindDoctorDetail, TimeSlot } from '@/interface';
 import { formatTimeslot } from '@/helpers/datetime';
-import Image from 'next/image';
 import { VisitScheduleStyle } from '../../style';
 import { colors, icons } from '@/constant';
 import Text from '@/components/ui/Text';

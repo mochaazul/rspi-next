@@ -5,7 +5,7 @@ import {
 	ProfileCardHeader, ProfileCardRow, ProfilePills, ProfileSelectorCard, ProfileSelectorContainer, SelfProfileSection
 } from './style';
 import { colors, icons } from '@/constant';
-import {  UserData, UserDataDetail, UserState } from '@/interface';
+import { UserDataDetail } from '@/interface';
 import { isEmpty } from 'lodash';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
