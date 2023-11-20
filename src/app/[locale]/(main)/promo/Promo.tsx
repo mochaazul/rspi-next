@@ -46,6 +46,16 @@ const EventClassesPromo = ({
 
 	useEffect(() => {
 		setLoading(true);
+		fetchEvents({
+			page: pageNumber,
+			limit: 10,
+			is_publish: true,
+			category: category,
+			hospital_id: hospitalID
+		}).then(function(response: any) {
+			setEventsData(response.data);
+			setLoading(false);
+		});
 		promoPageEvent();
 	}, []);
 
