@@ -19,7 +19,7 @@ type Props = {
 	calendarData: DoctorCalendar[];
 };
 
-const Calendar = async ({ onChange: onClickDay, value, onChangeMonth, loading, calendarData }: Props) => {
+const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calendarData }: Props) => {
 	const t = useScopedI18n('page.doctorProfile');
 
 	const renderTile = ({ activeStartDate, date, view }: TileArgs) => {
