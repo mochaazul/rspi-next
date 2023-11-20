@@ -1,10 +1,7 @@
 import { getArticle } from '@/lib/api';
+import { ApiOptions } from '@/lib/api/utils/fetcher';
 
-export const fetchArticle = (params: any) => {
-	const paramFetch = {
-		param: null,
-		query: params,
-		body: null,
-	};
-	return getArticle(paramFetch);
+export const fetchArticle = (params: ApiOptions) => {
+	
+	return getArticle(params);
 };

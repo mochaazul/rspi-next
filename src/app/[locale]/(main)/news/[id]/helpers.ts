@@ -1,5 +1,3 @@
-
-
 import {
 	getNewsSpecialtyByID,
 	getRelatedNews,
@@ -8,34 +6,27 @@ import {
 
 export const fetchNewsSpecialtyByID = (id: any) => {
 	
-	const paramFetch = {
+	return getNewsSpecialtyByID({
 		param: id,
-		query: 'limit=2',
-		body: null,
-	};
-
-	return getNewsSpecialtyByID(paramFetch);
+		query: {
+			limit: '2'
+		}
+	});
 };
 
 export const fetchRelatedNews = (id: any) => {
-	
-	const paramFetch = {
+
+	return getRelatedNews({
 		param: id,
-		query: 'limit=2',
-		body: null,
-	};
-
-	return getRelatedNews(paramFetch);
+		query: {
+			limit: '2'
+		}
+	});
 };
-
 
 export const fetchDetail = (articleId: string | null) => {
 
-	const paramFetch = {
-		param: articleId,
-		query: null,
-		body: null,
-	};
-
-	return getArticleById(paramFetch);
-}
+	return getArticleById({
+		param: articleId ?? ''
+	});
+};

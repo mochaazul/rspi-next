@@ -54,12 +54,14 @@ const NewsHealthArticlesPage = ({
 	useEffect(() => {
 		setLoading(true);
 		fetchArticle({
-			limit: 10,
-			page: pageNumber,
-			is_publish: true,
-			category: tabData[activeTab]?.value,
-			keyword: keyArticle
-		}).then(function (response: any) {
+			query: {
+				limit: '10',
+				page: `${pageNumber}`,
+				is_publish: 'true',
+				category: tabData[activeTab]?.value,
+				keyword: keyArticle
+			}
+		}).then(function(response: any) {
 			setArticlesData(response.data);
 			setLoading(false);
 		});
@@ -91,7 +93,7 @@ const NewsHealthArticlesPage = ({
 									<div key={ idx }>
 										<Button
 											theme={ activeTab === idx ? 'primary' : 'secondary' }
-											hoverTheme={ activeTab === idx ? 'secondary' : 'primary' }
+											$hoverTheme={ activeTab === idx ? 'secondary' : 'primary' }
 											label={ tab.label }
 											onClick={ () => setActiveTab(idx) }
 										/>
@@ -103,7 +105,7 @@ const NewsHealthArticlesPage = ({
 									placeholder='Cari Artikel'
 									iconName='Search'
 									iconPosition='left'
-									iconColor={ colors.grey.light }
+									$iconColor={ colors.grey.light }
 									onChange={ e => setKeyArticle(e.target.value) } />
 							</div>
 						</div>
@@ -220,7 +222,7 @@ const NewsHealthArticlesPage = ({
 												<div>
 													<Button
 														theme='primary'
-														hoverTheme='outline'
+														$hoverTheme='outline'
 														label={ data?.category?.charAt(0).toUpperCase() + data.category.slice(1) }
 														className='btn-category'
 													/>

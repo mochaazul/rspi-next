@@ -1,33 +1,26 @@
 'use client';
 import * as Icons from 'react-feather';
-import _, { debounce } from 'lodash';
+import _ from 'lodash';
 import { useSearchParams } from 'next/navigation';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { colors } from '@/constant';
-import { BreadcrumbsProps, I_MasterDoctor } from '@/interface';
+import { BreadcrumbsProps } from '@/interface';
 
 import FindADoctorStyle from './style';
 import Pills from './Pills';
 import DoctorCard from './DoctorCard';
-import { getI18n, getScopedI18n } from '@/locales/server';
-import useSWR from 'swr';
-import fetcher from '@/lib/api/utils/fetcher';
 import Text from '@/components/ui/Text';
-import Layout from '@/components/Layout/Layout';
 import { PanelH1, PanelV1 } from '../style';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import DoctorFilter from './DoctorFilter';
 import { Accordion } from '@/components/ui';
-import Form from '@/components/ui/Form';
-import { useScopedI18n } from '@/locales/client';
 import ResultHeader from './ResultHeader';
 import LangWrapper from '@/components/ui/LangWrapper';
 import useFindDoctor from './useFindDoctor';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
-import { findDoctorEvent } from '@/utils/metaPixelTrack';
 import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useGetHospital } from '@/lib/api/client/hospital';
 import { useGetClinics } from '@/lib/api/client/clinics';
@@ -53,7 +46,6 @@ export const AccordionFilterWrapper = ({ title, children, hideToggler }: { title
 export default function Page(props: BreadcrumbsProps) {
 
 	const searchParams = useSearchParams();
-	const [currentPage, setCurrentPage] = useState<number>(1);
 	const hasKeyword = searchParams.get('keyword');
 
 	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});

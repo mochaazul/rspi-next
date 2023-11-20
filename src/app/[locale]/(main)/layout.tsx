@@ -1,3 +1,5 @@
+'use server';
+import { headers } from 'next/headers';
 
 import { appStage } from '@/config';
 
@@ -8,15 +10,7 @@ import CallForAmbulance from '@/components/ui/CallForAmbulance';
 import DevTools from '@/components/ui/DevTools';
 
 import '@/styles/globals.css';
-import {
-	OutletStyle,
-	OutletStyleType,
-	PanelH1,
-	PanelH2,
-	PanelH3,
-	PanelH4,
-	PanelV1
-} from './style';
+import { OutletStyleType, } from './style';
 
 import {
 	centerOfExcellenceFetch,
@@ -27,7 +21,6 @@ import {
 	hospitalsFetch
 } from './helpers';
 import getSession from '@/session/server';
-
 const blacklistedRoute = [
 	'/patient-portal',
 	'/doctor-detail',
@@ -45,15 +38,17 @@ export default async function RootLayout({
   };
 }) {
   
-	const pathname = children?.props?.childProp?.segment;
+	const headersList = headers();
+	
+	const pathname = headersList.get('x-invoke-path') || '';
+
 	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
 	
-	const session = await getSession();
 	const hospitals = await hospitalsFetch();
 	const footers = await footersFetch();
 	const centerOfExcellence = await centerOfExcellenceFetch();
 	const facilityServices = await facilityServicesFetch();
-	const notificationResponse = session.user?.medical_record ? await notificationResponseFetch() : [];
+	const notificationResponse = await notificationResponseFetch();
   
 	return (
 		<>
@@ -61,7 +56,7 @@ export default async function RootLayout({
 				hospitalData = { hospitals.data }
 				centerOfExcellenceData = { centerOfExcellence.data }
 				facilityServicesData = { facilityServices.data }
-				notificationResponseData = { session.user?.medical_record ? notificationResponse.data : []}
+				notificationResponseData = { notificationResponse?.data }
 				marAllReadNotifFunc = { marAllReadNotif }
 			/>
 			{ children }
@@ -81,11 +76,3 @@ export default async function RootLayout({
 		</>
 	);
 }
-
-export {
-	PanelH1,
-	PanelH2,
-	PanelH3,
-	PanelH4,
-	PanelV1,
-};
