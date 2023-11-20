@@ -6,8 +6,9 @@ import { isEmpty } from 'lodash';
 
 import { Spinner, Text } from '@/components/ui';
 import { baseUrl } from '@/config';
-import { Languages, colors, icons } from '@/constant';
+import { colors, icons } from '@/constant';
 import { useGetLabHistory } from '@/lib/api/client/hospital';
+import { useScopedI18n } from '@/locales/client';
 
 import { CardPatientPortalStyle, EmptyResultContainer } from '../../style';
 
@@ -28,7 +29,7 @@ const LaporanBtn = styled.a`
 `;
 
 const RiwayatLab = () => {
-	const { tableMenuLable, warning, empty } = Languages.page.patientPortal.riwayatLab;
+	const t = useScopedI18n('page.patientPortal.riwayatLab');
 
 	const { data: labHistoryResponse, error: labHistoryError, isLoading: labHistoryLoading } = useGetLabHistory();
 
@@ -38,7 +39,7 @@ const RiwayatLab = () => {
 	if (isEmpty(labHistoryResponse?.data)) {
 		return (<EmptyResultContainer>
 			<icons.NoLabResult />
-			<Text text={ empty }
+			<Text text={ t('empty') }
 				fontSize='20px'
 				fontWeight='700'
 				lineHeight='28px'
@@ -53,9 +54,9 @@ const RiwayatLab = () => {
 					<table>
 						<tr>
 							<th>No</th>
-							<th>{ tableMenuLable.date }</th>
-							<th>{ tableMenuLable.hospital }</th>
-							<th>{ tableMenuLable.doctor }</th>
+							<th>{ t('tableMenuLable.date') }</th>
+							<th>{ t('tableMenuLable.hospital') }</th>
+							<th>{ t('tableMenuLable.doctor') }</th>
 							<th />
 						</tr>
 						{
@@ -66,7 +67,7 @@ const RiwayatLab = () => {
 									<td>{ labResult.hospital || '-' }</td>
 									<td>{ labResult.doctor || '-' }</td>
 									<td>{
-										<LaporanBtn href={ `${ baseUrl }/patients/patient-portal/lab-histories/pdf?$episode=${ labResult.episode }&lab_episode=${ labResult.lab_episode }` } target='_blank' rel='noreferrer' >{ tableMenuLable.viewReport }</LaporanBtn>
+										<LaporanBtn href={ `${ baseUrl }/patients/patient-portal/lab-histories/pdf?$episode=${ labResult.episode }&lab_episode=${ labResult.lab_episode }` } target='_blank' rel='noreferrer' >{ t('tableMenuLable.viewReport') }</LaporanBtn>
 									}</td>
 								</tr>
 							))
@@ -76,7 +77,7 @@ const RiwayatLab = () => {
 			</CardPatientPortalStyle>
 			<div className='warning-text mt-[20px]'>
 				<Text
-					text={ warning }
+					text={ t('warning') }
 					fontSize='16px'
 					fontWeight='400'
 					color={ colors.paradiso.default }
