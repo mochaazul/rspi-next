@@ -1,12 +1,14 @@
-import { Text } from '@/components/ui';
-import { colors, Languages as lang } from '@/constant';
 import parse from 'html-react-parser';
 
-const language = lang.page.contactUs.faq;
+import { Text } from '@/components/ui';
+import { colors } from '@/constant';
+import { useScopedI18n } from '@/locales/client';
+
+const t = useScopedI18n('page.contactUs');
 
 export default [
 	{
-		title: language.questions.doctorSchedule,
+		title: t('faq.questions.doctorSchedule'),
 		desc_jsx:
 			<Text
 				fontSize='14px'
@@ -17,13 +19,13 @@ export default [
 				className='mt-[15px]'
 				subClassName='text-justify'
 			>
-				{ language.answers.doctorSchedule }
+				{ t('faq.answers.doctorSchedule') }
 			</Text>,
 		// For text search and short description
-		desc: language.answers.doctorSchedule,
+		desc: t('faq.answers.doctorSchedule'),
 	},
 	{
-		title: language.questions.assurance,
+		title: t('faq.questions.assurance'),
 		desc_jsx:
 			<Text
 				fontSize='14px'
@@ -34,13 +36,13 @@ export default [
 				className='mt-[15px]'
 				subClassName='text-justify'
 			>
-				{ language.answers.assurance }
+				{ t('faq.answers.assurance') }
 			</Text>,
 		// For text search and short description
-		desc: language.answers.assurance,
+		desc: t('faq.answers.assurance'),
 	},
 	{
-		title: language.questions.visitHours,
+		title: t('faq.questions.visitHours'),
 		desc_jsx:
 			<div>
 				<Text
@@ -52,14 +54,14 @@ export default [
 					className='mt-[15px]'
 					subClassName='text-justify'
 				>
-					{ parse(language.answers.visitHours) }
+					{ parse(t('faq.answers.visitHours')) }
 				</Text>
 			</div>,
 		// For text search and short description
-		desc: language.answers.visitHours.slice(1, 153),
+		desc: t('faq.answers.visitHours').slice(1, 153),
 	},
 	{
-		title: language.questions.checkUp,
+		title: t('faq.questions.checkUp'),
 		desc_jsx:
 			<div>
 				<Text
@@ -71,14 +73,14 @@ export default [
 					className='mt-[15px]'
 					subClassName='text-justify'
 				>
-					{ parse(language.answers.checkUp) }
+					{ parse(t('faq.answers.checkUp')) }
 				</Text>
 			</div>,
 		// For text search and short description
-		desc: language.answers.checkUp,
+		desc: t('faq.answers.checkUp'),
 	},
 	{
-		title: language.questions.travelVaccine,
+		title: t('faq.questions.travelVaccine'),
 		desc_jsx:
 			<div>
 				<Text
@@ -90,14 +92,14 @@ export default [
 					className='mt-[15px]'
 					subClassName='text-justify'
 				>
-					{ parse(language.answers.travelVaccine) }
+					{ parse(t('faq.answers.travelVaccine')) }
 				</Text>
 			</div>,
 		// For text search and short description
-		desc: language.answers.travelVaccine.slice(1, 100),
+		desc: t('faq.answers.travelVaccine').slice(1, 100),
 	},
 	{
-		title: language.questions.telemedicine,
+		title: t('faq.questions.telemedicine'),
 		desc_jsx:
 			<div>
 				<Text
@@ -109,14 +111,14 @@ export default [
 					className='mt-[15px]'
 					subClassName='text-justify'
 				>
-					{ parse(language.answers.telemedicine) }
+					{ parse(t('faq.answers.telemedicine')) }
 				</Text>
 			</div>,
 		// For text search and short description
-		desc: language.answers.telemedicine.slice(1, 100),
+		desc: t('faq.answers.telemedicine').slice(1, 100),
 	},
 	{
-		title: language.questions.maternity,
+		title: t('faq.questions.maternity'),
 		desc_jsx:
 			<div>
 				<Text
@@ -128,10 +130,10 @@ export default [
 					className='mt-[15px]'
 					subClassName='text-justify'
 				>
-					{ parse(language.answers.maternity) }
+					{ parse(t('faq.answers.maternity')) }
 				</Text>
 			</div>,
 		// For text search and short description
-		desc: language.answers.maternity,
+		desc: t('faq.answers.maternity'),
 	}
 ];

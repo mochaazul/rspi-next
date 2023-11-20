@@ -1,17 +1,18 @@
 import colors from '@/constant/colors';
 import LanguageSelector from '@/components/ui/LanguageSelector';
 import Text from '@/components/ui/Text';
+import useSession from '@/session/client';
+import { useScopedI18n } from '@/locales/client';
 
 import WhiteInstagram from '/public/images/ic/whiteInstagram.svg';
 import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';
 import WhiteTwitter from '/public/images/ic/whiteTwitter.svg';
-import { Languages } from '@/constant';
-import useSession from '@/session/client';
+
 
 export const MainNavLanguage = () => {
 	const session = useSession();
-	const { welcome } = Languages?.page?.topNav;
-	// const userSelector = useTypedSelector<UserState>('user');
+	const t = useScopedI18n('page.topNav');
+
 	const isLoggedIn = !!session?.token;
 
 	const handleOpenSocmed = (links: string) => () => {
@@ -23,10 +24,10 @@ export const MainNavLanguage = () => {
 		const userIdentity = session?.user?.no_mr
 			? session?.user?.name
 			: session?.user?.email;
-			
+
 		const welcomeText = isLoggedIn
-			? `${ welcome }, ${ userIdentity }`
-			: welcome;
+			? `${ t('welcome') }, ${ userIdentity }`
+			: t('welcome');
 
 		return (
 			<Text

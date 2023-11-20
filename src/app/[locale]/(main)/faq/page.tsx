@@ -9,18 +9,18 @@ import {
 	Form,
 	Text
 } from '@/components/ui';
-
 import { colors } from '@/constant';
+import { useScopedI18n } from '@/locales/client';
+
 import FAQDatas from '../contact-us/FAQDatas';
-
 import { FAQStyle } from './style';
-import languages from '@/constant/languages';
 import { PanelH1, PanelH4, PanelV1 } from '../style';
-
-const { heading, subHeading } = languages.page.contactUs.faq;
 
 const FAQPage = () => {
 	const params = useParams();
+
+	const t = useScopedI18n('page.contactUs.faq');
+
 	const breadCrumbsPath = [
 		{ name: 'Contact Us', url: '/contact-us' },
 		{ name: 'Frequently Asked Questions', url: '/contact-us/faq' }
@@ -64,7 +64,7 @@ const FAQPage = () => {
 							fontWeight='400'
 							textAlign='center'
 							color={ colors.grey.dark }
-							text={ subHeading }
+							text={ t('subHeading') }
 							className='mt-2'
 							subClassName='max-sm:text-left'
 						/>

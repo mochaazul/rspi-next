@@ -1,12 +1,14 @@
-import ReactCalendar from 'react-calendar';
+import ReactCalendar, { TileArgs, TileClassNameFunc } from 'react-calendar';
+import dayjs, { UnitType } from 'dayjs';
+
+import { colors, icons } from '@/constant';
+import { DoctorCalendar } from '@/interface';
+import Spinner from '@/components/ui/Spinner';
+import { useScopedI18n } from '@/locales/client';
+
 import {
 	CalendarContainer, CalendarDot, CalendarFooter, CalendarFooterInfoItem, CalendarLoading,
 } from './style';
-import { colors, icons, Languages as lang } from '@/constant';
-import { TileArgs, TileClassNameFunc } from 'react-calendar';
-import { DoctorCalendar } from '@/interface';
-import dayjs, { UnitType } from 'dayjs';
-import Spinner from '@/components/ui/Spinner';
 import { Text } from '..';
 
 type Props = {
@@ -14,17 +16,18 @@ type Props = {
 	onChangeMonth: (month: number, year: number) => void;
 	loading?: boolean;
 	value?: Date;
-	calendarData: DoctorCalendar[]
+	calendarData: DoctorCalendar[];
 };
 
-const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calendarData }: Props) => {
+const Calendar = async ({ onChange: onClickDay, value, onChangeMonth, loading, calendarData }: Props) => {
+	const t = useScopedI18n('page.doctorProfile');
 
 	const renderTile = ({ activeStartDate, date, view }: TileArgs) => {
-		const formatedDate = dayjs(date).format('YYYY-MM-DD');
+		const formattedDate = dayjs(date).format('YYYY-MM-DD');
 
-		const calendarItem = calendarData?.find((calendar:any) => calendar.date_schedule === formatedDate && calendar.status !== 'Slot not available');
+		const calendarItem = calendarData?.find((calendar: any) => calendar.date_schedule === formattedDate && calendar.status !== 'Slot not available');
 		const isDisabled = disabledTile({ activeStartDate, date, view });
-	
+
 		const calendarDateColor = (type: string) => {
 			switch (type) {
 				case 'Available':
@@ -60,10 +63,9 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calenda
 	};
 
 	const isBeforeDate = (date: Date, unit: UnitType = 'D') => dayjs(date).isBefore(dayjs(), unit);
-	const isFoundOnCalendar = (date: Date) => calendarData?.find((calendar:any) => calendar.date_schedule === dayjs(date).format('YYYY-MM-DD'));
+	const isFoundOnCalendar = (date: Date) => calendarData?.find((calendar: any) => calendar.date_schedule === dayjs(date).format('YYYY-MM-DD'));
 
 	const disabledTile = ({ activeStartDate, date, view }: TileArgs) => isBeforeDate(date);
-	const language = lang.page.doctorProfile;
 	// max-sm:w-[44px] max-sm:h-[46px]
 	const mapTileClassName: TileClassNameFunc = ({ activeStartDate, date, view }) => {
 		const shouldDisbled = !isFoundOnCalendar(date);
@@ -116,15 +118,15 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calenda
 		<CalendarFooter className='max-sm:flex-wrap items-start'>
 			<CalendarFooterInfoItem>
 				<CalendarDot type='primary' />
-				<Text text={ language.available } fontSize='12px' fontWeight='500' color={ colors.green.brandAccent } />
+				<Text text={ t('available') } fontSize='12px' fontWeight='500' color={ colors.green.brandAccent } />
 			</CalendarFooterInfoItem>
 			<CalendarFooterInfoItem>
 				<CalendarDot type='warning' />
-				<Text text={ language.limitedSlot } fontSize='12px' fontWeight='500' color={ colors.yellow.warning } />
+				<Text text={ t('limitedSlot') } fontSize='12px' fontWeight='500' color={ colors.yellow.warning } />
 			</CalendarFooterInfoItem>
 			<CalendarFooterInfoItem>
 				<CalendarDot />
-				<Text text={ language.noSchedule } fontSize='12px' fontWeight='500' />
+				<Text text={ t('noSchedule') } fontSize='12px' fontWeight='500' />
 			</CalendarFooterInfoItem>
 		</CalendarFooter>
 	</CalendarContainer>;

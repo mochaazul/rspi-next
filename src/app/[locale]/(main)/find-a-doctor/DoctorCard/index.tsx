@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import * as Icons from 'react-feather';
 import Link from 'next/link';
+import Image from 'next/image';
+import { isMobile } from 'react-device-detect';
 
-import { Images, colors, Languages as lang } from '@/constant';
+import { Images, colors } from '@/constant';
 import { Accordion, Button, Text } from '@/components/ui';
+import { I_MasterDoctor } from '@/interface';
+import { useScopedI18n } from '@/locales/client';
 
 import { DoctorCardStyle } from './style';
 import ItemAccordion from './ItemAccordion';
-import { I_MasterDoctor } from '@/interface';
-import { isMobile } from 'react-device-detect';
-import Image from 'next/image';
-
-const language = lang.page.findDoctor;
 
 const DoctorCard = (props: I_MasterDoctor) => {
+	const t = useScopedI18n('page.findDoctor');
+
 	const [isOpened, setOpened] = useState<boolean>(false);
+
 	return (
 		<DoctorCardStyle>
 			{ /* Foto & nama dokter */ }
@@ -93,7 +95,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 									lineHeight='17px'
 									fontWeight='900'
 									color={ colors.paradiso.default }
-									text={ language.label.seeDetail }
+									text={ t('label.seeDetail') }
 								/>
 								<Icons.ArrowRight size={ 18 } color={ colors.paradiso.default } />
 							</div>

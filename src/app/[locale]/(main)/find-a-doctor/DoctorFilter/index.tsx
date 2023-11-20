@@ -1,38 +1,41 @@
 'use client';
 import React from 'react';
-import {  useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
-import { colors, Languages as lang } from '@/constant';
+import { colors } from '@/constant';
 import { HospitalDetail } from '@/interface';
 import { PickerItem } from '@/components/ui/DropdownSearch';
 
-import Pills from '../Pills';
-import useFindDoctor from '../useFindDoctor';
 import { ClinicResponse } from '@/interface/clinic';
 import Form from '@/components/ui/Form';
 import Text from '@/components/ui/Text';
+import { useScopedI18n } from '@/locales/client';
 
-const language = lang.page.findDoctor;
-const dayLang = lang.dayName.full;
+import Pills from '../Pills';
+import useFindDoctor from '../useFindDoctor';
+
+const d = useScopedI18n('dayName.full');
 
 const Days = [
-	{ key: '1', label: dayLang.sunday, value: 'Sunday' },
-	{ key: '2', label: dayLang.monday, value: 'Monday' },
-	{ key: '3', label: dayLang.tuesday, value: 'Tuesday' },
-	{ key: '4', label: dayLang.wednesday, value: 'Wednesday' },
-	{ key: '5', label: dayLang.thursday, value: 'Thursday' },
-	{ key: '6', label: dayLang.friday, value: 'Friday' },
-	{ key: '7', label: dayLang.saturday, value: 'Saturday' },
+	{ key: '1', label: d('sunday'), value: 'Sunday' },
+	{ key: '2', label: d('monday'), value: 'Monday' },
+	{ key: '3', label: d('tuesday'), value: 'Tuesday' },
+	{ key: '4', label: d('wednesday'), value: 'Wednesday' },
+	{ key: '5', label: d('thursday'), value: 'Thursday' },
+	{ key: '6', label: d('friday'), value: 'Friday' },
+	{ key: '7', label: d('saturday'), value: 'Saturday' },
 ];
 
 type Props = {
 	hospitals: HospitalDetail[],
-	clinics: ClinicResponse[]
-}
+	clinics: ClinicResponse[];
+};
 
-const DoctorFilter = ({ hospitals, clinics }:Props) => {
+const DoctorFilter = ({ hospitals, clinics }: Props) => {
+	const t = useScopedI18n('page.findDoctor');
 
 	const searchParams = useSearchParams();
+
 	const params = new URLSearchParams(searchParams);
 
 	const { hospitalFilter, telemedicineFilter, clinicFilter, createQueryString } = useFindDoctor({
@@ -97,7 +100,7 @@ const DoctorFilter = ({ hospitals, clinics }:Props) => {
 				fontWeight='700'
 				className='mb-4 max-sm:hidden'
 				color={ colors.grey.darker }
-				text={ language.heading }
+				text={ t('heading') }
 			/>
 			{ /* Dropdown Hari */ }
 			<div className='mb-8'>
@@ -143,7 +146,7 @@ const DoctorFilter = ({ hospitals, clinics }:Props) => {
 				}
 			</div>
 			{ /* Horizontal spacer */ }
-			<div className='x-spacer mb-8 max-sm:hidden mt-8'  />
+			<div className='x-spacer mb-8 max-sm:hidden mt-8' />
 			{ /* Specialty search with accordion */ }
 			<Text
 				fontSize='20px'
@@ -171,14 +174,14 @@ const DoctorFilter = ({ hospitals, clinics }:Props) => {
 					clinicFilter?.getAll()?.map((speciality, index) => {
 						return (
 							speciality.label &&
-									<Pills key={ index } onRemove={ () => handleRemoveSpecialty(speciality) }>
-										<Text
-											fontSize='16px'
-											fontWeight='400'
-											lineHeight='19px'
-											text={ speciality.label }
-										/>
-									</Pills>
+							<Pills key={ index } onRemove={ () => handleRemoveSpecialty(speciality) }>
+								<Text
+									fontSize='16px'
+									fontWeight='400'
+									lineHeight='19px'
+									text={ speciality.label }
+								/>
+							</Pills>
 						);
 					})
 				}
