@@ -16,9 +16,10 @@ import {
 import {
 	colors,
 	icons,
-	Languages as lang,
 	sosmedLink
 } from '@/constant';
+import { ArticleState } from '@/interface';
+import { useScopedI18n } from '@/locales/client';
 
 import {
 	fetchNewsSpecialtyByID,
@@ -26,11 +27,9 @@ import {
 	fetchRelatedNews
 } from './helpers';
 
-import { ArticleState } from '@/interface';
-
-const language = lang.page.newsDetail;
-
 const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
+	const t = useScopedI18n('page.newsDetail');
+
 	const pathname = usePathname();
 
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
@@ -61,13 +60,13 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 	});
 
 	useEffect(() => {
-		fetchRelatedNews(props.params.id).then(function(response) {
+		fetchRelatedNews(props.params.id).then(function (response) {
 			setRelatedNews(response?.data);
 		});
-		fetchNewsSpecialtyByID(props.params.id).then(function(response) {
+		fetchNewsSpecialtyByID(props.params.id).then(function (response) {
 			setSpecialty(response?.data);
 		});
-		fetchDetail(props.params.id).then(function(response) {
+		fetchDetail(props.params.id).then(function (response) {
 			setSelectedArticle(response?.data);
 		});
 	}, []);
@@ -92,7 +91,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 								{ selectedArticle?.title }
 							</Text>
 							<Text
-								text={ `${ language.oleh } ${ selectedArticle?.news_author?.doctor_name }` }
+								text={ `${ t('oleh') } ${ selectedArticle?.news_author?.doctor_name }` }
 								fontWeight='400'
 								fontSize='18px'
 								lineHeight='22px'
@@ -108,7 +107,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 								/>
 								<div className='flex gap-[15px]'>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window?.location?.href) }>
-										<icons.FacebookIcon width='16px' height='16px'/>
+										<icons.FacebookIcon width='16px' height='16px' />
 									</div>
 									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window?.location?.href) }>
 										<icons.TwitterIcon width='16px' height='13px' />

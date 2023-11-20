@@ -1,10 +1,12 @@
-import { Button, Modal, Text } from '@/components/ui';
-import { icons, Languages as lang } from '@/constant';
-import { SuccessConfModalContainer } from './style';
 import 'moment/locale/id';
 import Link from 'next/link';
-import { useScopedI18n } from '@/locales/client';
 import dayjs from 'dayjs';
+
+import { useScopedI18n } from '@/locales/client';
+import { Button, Modal, Text } from '@/components/ui';
+import { icons } from '@/constant';
+
+import { SuccessConfModalContainer } from './style';
 
 type Props = {
 	doctorName?: string;
@@ -13,8 +15,6 @@ type Props = {
 	visible: boolean;
 };
 
-const language = lang.page.doctorProfile;
-
 const SuccessConfirmationModal = ({
 	date,
 	doctorName,
@@ -22,10 +22,11 @@ const SuccessConfirmationModal = ({
 	visible
 }: Props) => {
 	const t = useScopedI18n('page.bookingAppointment.success');
+
 	const subHeadingText = () => {
-		return `${t('subHeading.main')} ${doctorName} ${t('subHeading.at')} ${hospitalName} ${t('subHeading.on')} ${dayjs(date).format('dddd, DD MMMM YYYY')} ${t('subHeading.done')}`;
+		return `${ t('subHeading.main') } ${ doctorName } ${ t('subHeading.at') } ${ hospitalName } ${ t('subHeading.on') } ${ dayjs(date).format('dddd, DD MMMM YYYY') } ${ t('subHeading.done') }`;
 	};
-	
+
 	return <Modal visible={ visible }
 		noPadding
 		width='526px'
@@ -40,7 +41,7 @@ const SuccessConfirmationModal = ({
 				fontWeight='700'
 				lineHeight='28px'
 				text={ t('heading') } />
-		 <Text
+			<Text
 				className='mt-[8px] mb-[32px]'
 				fontSize='14px'
 				fontWeight='400'

@@ -6,12 +6,13 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 
-import { Text } from '@/components/ui';
-import { colors, icons, Languages } from '@/constant';
+import { colors, icons } from '@/constant';
 import images from '@/constant/images';
 import PinModal from '@/components/ui/PinModal';
+import Text from '@/components/ui/Text';
 import { I_VisitHistory } from '@/interface/PatientProfile';
 import { usePostCancelBookingMutation } from '@/lib/api/client/appointments';
+import { useScopedI18n } from '@/locales/client';
 
 import { CardPatientPortalStyle } from '../../style';
 import RecommendDoctorModal from '../ModalRecommendDoctor';
@@ -44,6 +45,8 @@ interface PropsType {
 }
 
 const CardAppointment = (props: PropsType) => {
+	const t = useScopedI18n('page.patientPortal');
+
 	const navigate = useRouter();
 
 	const [modalOpen, setModalOpen] = useState(false);
@@ -52,8 +55,6 @@ const CardAppointment = (props: PropsType) => {
 	const [showPinModal, setShowPinModal] = useState(false);
 
 	const { data: cancelBookingResponse, trigger: cancelBookingTrigger, error: cancelBookingError } = usePostCancelBookingMutation();
-
-	const { jadwalKunjungan, riwayatKunjungan } = Languages.page.patientPortal;
 
 	const handleShowModal = () => {
 		if (!props.isHistory) {
@@ -74,7 +75,7 @@ const CardAppointment = (props: PropsType) => {
 		);
 	};
 
-	const userClickCancelBook = async(appointmentId: string) => {
+	const userClickCancelBook = async (appointmentId: string) => {
 		await cancelBookingTrigger({
 			id: appointmentId
 		});
@@ -204,9 +205,7 @@ const CardAppointment = (props: PropsType) => {
 					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
 				}
 				{ props.status !== 'Jadwal Selesai' &&
-					<div onClick={ async() => {
-						setShowModalCancelBook(true);
-					} } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ jadwalKunjungan.label.cancelAppointment }` }</div>
+					<div onClick={ async () => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
 				}
 
 			</div>
@@ -233,7 +232,7 @@ const CardAppointment = (props: PropsType) => {
 					<Text text={ props.hospital_name || '-' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
 				</div >
 				{ props.status !== 'Jadwal Selesai' &&
-					<div className='btn-cancel md:hidden'>{ `X ${ jadwalKunjungan.label.cancelAppointment }` }</div>
+					<div className='btn-cancel md:hidden'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
 				}
 			</div >
 
@@ -242,7 +241,7 @@ const CardAppointment = (props: PropsType) => {
 				<div className='flex flex-row gap-x-2 items-center justify-end cursor-pointer mt-[20px]' onClick={ () => {
 					handleShowModal && handleShowModal();
 				} }>
-					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ props.isHistory ? riwayatKunjungan.label.recommendDoctor : riwayatKunjungan.label.seeDetail } />
+					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ props.isHistory ? t('riwayatKunjungan.label.recommendDoctor') : t('riwayatKunjungan.label.seeDetail') } />
 					<icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />
 				</div>
 			}

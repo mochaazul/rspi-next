@@ -7,13 +7,15 @@ import { useRouter } from 'next/navigation';
 import Radio from '@/components/ui/Radio';
 import { Button, Spinner, Text } from '@/components/ui';
 import icons from '@/constant/icons';
-import languages from '@/constant/languages';
 import { useGetAppointmentList } from '@/lib/api/client/appointments';
+import { useScopedI18n } from '@/locales/client';
 
 import CardAppointment from '../CardAppointment';
 import { EmptyResultContainer } from '../../style';
 
 const JadwalKunjungan = () => {
+	const t = useScopedI18n('page.patientPortal');
+
 	const navigate = useRouter();
 
 	const [bookType, setBookType] = useState('self');
@@ -33,7 +35,7 @@ const JadwalKunjungan = () => {
 					? isEmpty(appointmentResponse?.data) ?
 						<EmptyResultContainer>
 							<icons.NoAppointmentSchedule />
-							<Text text={ languages.page.patientPortal.jadwalKunjungan.label.empty }
+							<Text text={ t('jadwalKunjungan.label.empty') }
 								fontSize='20px'
 								fontWeight='700'
 								lineHeight='28px'
