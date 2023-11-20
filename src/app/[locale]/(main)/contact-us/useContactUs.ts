@@ -7,9 +7,9 @@ import {
 	phoneRule,
 } from '@/helpers';
 import { ContactUsSubmitType } from '@/interface/contactUs';
-import lang from '@/constant/languages';
+import { useScopedI18n } from '@/locales/client';
 
-const language = lang.page.contactUs.contactForm;
+const t = useScopedI18n('page.contactUs.contactForm');
 
 export const contactUsField = {
 	hospital_code: {
@@ -20,8 +20,8 @@ export const contactUsField = {
 		validationRules: [
 			requiredRule('hospital_code'),
 		],
-		label: language.labels.hospital,
-		placeholder: language.placeholder.hospital
+		label: t('labels.hospital'),
+		placeholder: t('placeholder.hospital')
 	},
 	full_name: {
 		...createFieldConfig({
@@ -31,8 +31,8 @@ export const contactUsField = {
 		validationRules: [
 			requiredRule('full_name'),
 		],
-		label: language.labels.fullName,
-		placeholder: language.placeholder.fullName
+		label: t('labels.fullName'),
+		placeholder: t('placeholder.fullName')
 	},
 	gender: {
 		...createFieldConfig({
@@ -42,8 +42,8 @@ export const contactUsField = {
 		validationRules: [
 			requiredRule('gender'),
 		],
-		label: language.labels.gender,
-		placeholder: language.placeholder.gender
+		label: t('labels.gender'),
+		placeholder: t('placeholder.gender')
 	},
 	email: {
 		...createFieldConfig({
@@ -54,8 +54,8 @@ export const contactUsField = {
 			requiredRule('email'),
 			emailRule()
 		],
-		label: language.labels.email,
-		placeholder: language.placeholder.email
+		label: t('labels.email'),
+		placeholder: t('placeholder.email')
 	},
 	phone: {
 		...createFieldConfig({
@@ -66,8 +66,8 @@ export const contactUsField = {
 			requiredRule('phone'),
 			phoneRule()
 		],
-		label: language.labels.phone,
-		placeholder: language.placeholder.phone
+		label: t('labels.phone'),
+		placeholder: t('placeholder.phone')
 	},
 	title: {
 		...createFieldConfig({
@@ -77,8 +77,8 @@ export const contactUsField = {
 		validationRules: [
 			requiredRule('title'),
 		],
-		label: language.labels.subject,
-		placeholder: language.placeholder.subject
+		label: t('labels.subject'),
+		placeholder: t('placeholder.subject')
 	},
 	content: {
 		...createFieldConfig({
@@ -88,8 +88,8 @@ export const contactUsField = {
 		validationRules: [
 			requiredRule('content'),
 		],
-		label: language.labels.notes,
-		placeholder: language.placeholder.notes
+		label: t('labels.notes'),
+		placeholder: t('placeholder.notes')
 	},
 };
 
@@ -99,7 +99,7 @@ export const contactUsField = {
  */
 const useContactUs = () => {
 	// const contactUsSubmit = useAppDispatch<ContactUsSubmitType>(contactUsAction); migrate
-	
+
 	const onClickContactUs = ({
 		hospital_code,
 		full_name,

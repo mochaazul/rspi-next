@@ -6,21 +6,23 @@ import React, {
 import { useRouter } from 'next/navigation';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { regExp, Languages as lang, colors } from '@/constant';
+import { regExp, colors } from '@/constant';
 import { Button, Form, NotificationPanel, Text } from '@/components/ui';
 import { HospitalState, ContactUsState } from '@/interface';
 import { PropsTypes as NotificationPanelTypes } from '@/components/ui/NotificationPanel';
+import { useScopedI18n } from '@/locales/client';
 
 import useContactUs from './useContactUs';
 
-const language = lang.page.contactUs.contactForm;
-
 const ContactUsForm = ({
 	hospitalSelector
-}:{
-    hospitalSelector: HospitalState
+}: {
+	hospitalSelector: HospitalState;
 }) => {
+	const t = useScopedI18n('page.contactUs');
+
 	const navigate = useRouter();
+
 	const {
 		onClickContactUs,
 		contactUsField
@@ -30,7 +32,7 @@ const ContactUsForm = ({
 		isFormValid,
 		onSubmit
 	} = Form.useForm({ fields: contactUsField });
-	
+
 	const [notifResponse, setNotifResponse] = useState<ContactUsState>(
 		{
 			loading: false,
@@ -43,7 +45,7 @@ const ContactUsForm = ({
 	);
 
 	const { loading: loadingUser, error: errorUser } = notifResponse;
-	
+
 	const [notifVisible, setNotifVisible] = useState(false);
 	const [captchaStatus, setCaptchaStatus] = useState(false);
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
@@ -54,7 +56,7 @@ const ContactUsForm = ({
 	const hospitalArr = Object.values(hospitalSelector || [])?.map(hospital => ({ key: hospital?.name, value: hospital?.hospital_code, label: hospital?.name }));
 
 	useEffect(() => {
-		
+
 	}, [notifMode]);
 
 	const handleNotifOnClose = () => {
@@ -89,7 +91,7 @@ const ContactUsForm = ({
 					title: title.value,
 					content: content.value
 				}).then(
-					function(response) {
+					function (response) {
 						setNotifResponse({
 							loading: false,
 							error: {
@@ -107,7 +109,7 @@ const ContactUsForm = ({
 			autoComplete='off'
 		>
 			<Form.Dropdown
-				menuItems={ [{ key: 'all-hospital', value: 'all-hospital', label: language.form.allHospitalLabel }, ...hospitalArr] }
+				menuItems={ [{ key: 'all-hospital', value: 'all-hospital', label: t('contactForm.form.allHospitalLabel') }, ...hospitalArr] }
 				{ ...registeredValue('hospital_code') }
 			/>
 			<div className='flex sm:flex-row flex-col sm:gap-8 gap-4'>
@@ -186,7 +188,7 @@ const ContactUsForm = ({
 					<Button
 						theme='primary'
 						$hoverTheme='outline'
-						label={ language.submitBtnLabel }
+						label={ t('contactForm.submitBtnLabel') }
 						type='submit'
 						disabled={ !isFormValid() || captchaStatus === false }
 					/>

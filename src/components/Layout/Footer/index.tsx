@@ -1,32 +1,27 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-
 import { useRouter } from 'next/navigation';
 
 import { appStage, config } from '@/config';
-import { Images, colors, Languages as lang } from '@/constant';
-
+import { Images, colors } from '@/constant';
 import {
 	TextField,
 	Button,
 	Text,
 	Socmed
 } from '@/components/ui';
-
 import {
 	FooterDetail
 } from '@/interface/footer';
+import { useScopedI18n } from '@/locales/client';
 
 import FooterStyled, { FooterContainer } from './style';
 
-const FooterLayout = ({
-	footerData,
-}: {
-	footerData: FooterDetail[],
-}) => {
+const FooterLayout = ({ footerData }: { footerData: FooterDetail; }) => {
 	const navigate = useRouter();
-	const language = lang.page.footer;
+
+	const t = useScopedI18n('page.footer');
 
 	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice'); // TODO: migrate
 	// const fetchFooter = useAppDispatch(getFooterSlug); // TODO: migrate
@@ -38,7 +33,6 @@ const FooterLayout = ({
 	const [pages, setPages] = useState<FooterDetail[]>([]);
 
 	useEffect(() => {
-
 		setOurHospital([]);
 		setOurCompany([]);
 		setPrivacyPolicy([]);
@@ -150,17 +144,17 @@ const FooterLayout = ({
 	return (
 		<FooterStyled className='px-4 xl:px-10 py-8 sm:py-16'>
 			<FooterContainer>
-				{ renderFooterCategory(ourHospital ?? [], language.ourHospitalsLabel) }
-				{ renderFooterCategory(ourCompany ?? [], language.ourCompanyLabel) }
-				{ renderFooterCategory(pages ?? [], language.visitorPatientLabel) }
+				{ renderFooterCategory(ourHospital ?? [], t('ourHospitalsLabel')) }
+				{ renderFooterCategory(ourCompany ?? [], t('ourCompanyLabel')) }
+				{ renderFooterCategory(pages ?? [], t('visitorPatientLabel')) }
 
 				<div className='follow-section flex flex-col max-sm:flex-row-reverse gap-4 sm:gap-8'>
 					<div className='follow-icon-section'>
-						{ renderCategoryTitle(language.followUsLabel) }
+						{ renderCategoryTitle(t('followUsLabel')) }
 						<Socmed />
 					</div>
 					<div>
-						{ renderCategoryTitle(language.getRSPIMobileLabel) }
+						{ renderCategoryTitle(t('getRSPIMobileLabel')) }
 						<div className='store-images-container'>
 							<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'><img src={ Images.GooglePlay.src } alt='google play icon' className='store-images' /></a>
 							<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'><img src={ Images.AppStore.src } alt='app store icon' className='store-images' /></a>
@@ -168,8 +162,8 @@ const FooterLayout = ({
 					</div>
 				</div>
 				<div className='email-sub-container'>
-					{ renderCategoryTitle(language.subscribeLabel) }
-					<Text fontSize='14px' className='sub-text'>{ language.subscribeDescription }</Text>
+					{ renderCategoryTitle(t('subscribeLabel')) }
+					<Text fontSize='14px' className='sub-text'>{ t('subscribeDescription') }</Text>
 					<div className='email-sub-form-container mt-4 lg:mt-6'>
 						<TextField
 							width='100%'

@@ -2,7 +2,6 @@
 
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
-import languages from '@/constant/languages';
 import Form from '@/components/ui/Form';
 import Button from '@/components/ui/Button';
 import { colors } from '@/constant';
@@ -10,6 +9,7 @@ import { createFieldConfig, requiredRule } from '@/helpers';
 import NotificationPanel from '@/components/ui/NotificationPanel';
 import Spinner from '@/components/ui/Spinner';
 import { usePostCheckPinMutation } from '@/lib/api/client/auth';
+import { useScopedI18n } from '@/locales/client';
 
 import { PinModalContainer } from './style';
 
@@ -17,7 +17,7 @@ type Props = {
 	visible: boolean,
 	onSuccess: () => void;
 };
-const { header, subHeader, submitBtnLabel } = languages.modalDialog.pin;
+const t = useScopedI18n('modalDialog.pin');
 
 const PinModal = ({ visible, onSuccess }: Props) => {
 	const { data: checkPinResponse, trigger: checkPinTrigger, error: checkPinError, isMutating: checkPinLoading } = usePostCheckPinMutation();
@@ -43,8 +43,8 @@ const PinModal = ({ visible, onSuccess }: Props) => {
 	return (
 		<Modal visible={ visible }>
 			<PinModalContainer>
-				<Text text={ header } fontWeight='900' fontSize='28px' lineHeight='48px' />
-				<Text text={ subHeader } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
+				<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
+				<Text text={ t('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
 				<Form
 					onSubmit={ async e => {
 						const { pin } = onSubmit(e);
@@ -55,8 +55,8 @@ const PinModal = ({ visible, onSuccess }: Props) => {
 							await onSuccess();
 						}
 					} }>
-					<Text text={ header } fontWeight='900' fontSize='28px' lineHeight='48px' />
-					<Text text={ subHeader } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
+					<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
+					<Text text={ t('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
 					{
 						checkPinError &&
 						<div className='mt-[20px]'>
@@ -87,7 +87,7 @@ const PinModal = ({ visible, onSuccess }: Props) => {
 						/>
 					</div>
 					<Button type='submit' disabled={ checkPinLoading } >
-						{ checkPinLoading ? <Spinner /> : submitBtnLabel }
+						{ checkPinLoading ? <Spinner /> : t('submitBtnLabel') }
 					</Button>
 				</Form>
 			</PinModalContainer>
