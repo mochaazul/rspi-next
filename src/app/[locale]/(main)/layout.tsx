@@ -7,6 +7,7 @@ import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import CallForAmbulance from '@/components/ui/CallForAmbulance';
 import DevTools from '@/components/ui/DevTools';
 
+import '@/styles/globals.css';
 import {
 	OutletStyle,
 	OutletStyleType,
@@ -25,58 +26,57 @@ import {
 	footersFetch,
 	hospitalsFetch
 } from './helpers';
-import { headers } from 'next/headers';
+import getSession from '@/session/server';
 
 const blacklistedRoute = [
 	'/patient-portal',
 	'/doctor-detail',
-	'/book-appointment',
-	'/user-information'
+	'/book-appointment'
 ];
 
 export default async function RootLayout({
 	props,
 	children,
 }: {
-	children: React.ReactNode,
-	props: {
-		containerStyle?: OutletStyleType;
-		footerShow?: boolean;
-	};
+  children: React.ReactNode,
+  props: {
+    containerStyle?: OutletStyleType;
+    footerShow?: boolean;
+  };
 }) {
-	const headersList = headers();
-	const pathname = headersList.get('x-invoke-path') || '';
-
+  
+	const pathname = children?.props?.childProp?.segment;
 	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
-
+	
+	const session = await getSession();
 	const hospitals = await hospitalsFetch();
 	const footers = await footersFetch();
 	const centerOfExcellence = await centerOfExcellenceFetch();
 	const facilityServices = await facilityServicesFetch();
-	const notificationResponse = await notificationResponseFetch();
-
+	const notificationResponse = session.user?.medical_record ? await notificationResponseFetch() : [];
+  
 	return (
 		<>
 			<Header
-				hospitalData={ hospitals.data }
-				centerOfExcellenceData={ centerOfExcellence.data }
-				facilityServicesData={ facilityServices.data }
-				notificationResponseData={ notificationResponse.data }
-				marAllReadNotifFunc={ marAllReadNotif }
+				hospitalData = { hospitals.data }
+				centerOfExcellenceData = { centerOfExcellence.data }
+				facilityServicesData = { facilityServices.data }
+				notificationResponseData = { session.user?.medical_record ? notificationResponse.data : []}
+				marAllReadNotifFunc = { marAllReadNotif }
 			/>
 			{ children }
 
 			{ props?.footerShow !== false &&
-				<Footer footerData={ footers.data } />
+        <Footer footerData = { footers.data } />
 			}
 			{ props?.footerShow !== false &&
-				<CallForAmbulance hospitalData={ hospitals.data } />
+        <CallForAmbulance hospitalData = { hospitals.data } />
 			}
 			{ appStage !== 'prod' &&
-				<DevTools />
+        <DevTools />
 			}
 			{ shouldRenderReminder &&
-				<MedicalRecordReminder />
+        <MedicalRecordReminder />
 			}
 		</>
 	);
