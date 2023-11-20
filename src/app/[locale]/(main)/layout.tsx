@@ -1,5 +1,4 @@
 'use server';
-import { headers } from 'next/headers';
 
 import { appStage } from '@/config';
 
@@ -20,59 +19,47 @@ import {
 	footersFetch,
 	hospitalsFetch
 } from './helpers';
-
-const blacklistedRoute = [
-	'/patient-portal',
-	'/doctor-detail',
-	'/book-appointment'
-];
+import getSession from '@/session/server';
 
 export default async function RootLayout({
 	props,
 	children,
 }: {
-  children: React.ReactNode,
-  props: {
-    containerStyle?: OutletStyleType;
-    footerShow?: boolean;
-  };
+	children: React.ReactNode,
+	props: {
+		containerStyle?: OutletStyleType;
+		footerShow?: boolean;
+	};
 }) {
-  
-	const headersList = headers();
-	
-	const pathname = headersList.get('x-invoke-path') || '';
-
-	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
-	
+	const session = await getSession();
 	const hospitals = await hospitalsFetch();
 	const footers = await footersFetch();
 	const centerOfExcellence = await centerOfExcellenceFetch();
 	const facilityServices = await facilityServicesFetch();
 	const notificationResponse = await notificationResponseFetch();
-  
+
 	return (
 		<>
 			<Header
-				hospitalData = { hospitals.data }
-				centerOfExcellenceData = { centerOfExcellence.data }
-				facilityServicesData = { facilityServices.data }
-				notificationResponseData = { notificationResponse?.data }
-				marAllReadNotifFunc = { marAllReadNotif }
+				hospitalData={ hospitals.data }
+				centerOfExcellenceData={ centerOfExcellence.data }
+				facilityServicesData={ facilityServices.data }
+				notificationResponseData={ notificationResponse?.data }
+				marAllReadNotifFunc={ marAllReadNotif }
 			/>
 			{ children }
 
 			{ props?.footerShow !== false &&
-        <Footer footerData = { footers.data } />
+				<Footer footerData={ footers.data } />
 			}
 			{ props?.footerShow !== false &&
-        <CallForAmbulance hospitalData = { hospitals.data } />
+				<CallForAmbulance hospitalData={ hospitals.data } />
 			}
 			{ appStage !== 'prod' &&
-        <DevTools />
+				<DevTools />
 			}
-			{ shouldRenderReminder &&
-        <MedicalRecordReminder />
-			}
+
+			<MedicalRecordReminder session={ session } />
 		</>
 	);
 }

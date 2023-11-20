@@ -15,16 +15,15 @@ import {
 } from '@/components/ui';
 
 import {
-	FooterDetail,
-	FooterState
+	FooterDetail
 } from '@/interface/footer';
 
 import FooterStyled, { FooterContainer } from './style';
 
 const FooterLayout = ({
 	footerData,
-}:{
-	footerData: FooterState,
+}: {
+	footerData: FooterDetail[],
 }) => {
 	const navigate = useRouter();
 	const language = lang.page.footer;
