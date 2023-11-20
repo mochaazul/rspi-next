@@ -42,3 +42,4 @@ env.js
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+bun.lockb
