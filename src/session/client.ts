@@ -13,7 +13,7 @@ const useSession = (): UserSessionData => {
 	});
 
 	useEffect(() => {
-		const getCookiesData = async() => {
+		const getCookiesData = async () => {
 			const userData = await cookiesHelper.getUserData();
 			const token = await cookiesHelper.getToken();
 

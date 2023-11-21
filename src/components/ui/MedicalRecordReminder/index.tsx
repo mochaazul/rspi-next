@@ -1,12 +1,13 @@
 'use client';
 
-// import { Tooltip } from 'react-tooltip';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Tooltip } from 'react-tooltip';
 import isEmpty from 'lodash/isEmpty';
 
 import { icons } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
-import useSession from '@/session/client';
+import { UserSessionData } from '@/interface';
 
 import {
 	BgContainer,
@@ -19,19 +20,32 @@ import {
 import Text from '../Text';
 import Button from '../Button';
 
-interface PropsType {
+type PropsType = {
 	isFloating?: boolean;
-}
+	session?: UserSessionData;
+};
 
-const MedicalRecordReminder = ({ isFloating = true }: PropsType) => {
-	const session = useSession();
+const blacklistedRoute = [
+	'/patient-portal',
+	'/doctor-detail',
+	'/book-appointment',
+	'/user-information'
+];
+
+const MedicalRecordReminder = ({ isFloating = true, session }: PropsType) => {
 	const languages = useScopedI18n('page.medicalRecordReminder');
 	const navigate = useRouter();
+	const pathname = usePathname();
+	const [isMounted, setIsMounted] = useState<boolean>(false);
+
+	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
+
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
 
 	const onClickOnboard = () => {
-		setTimeout(() => {
-			// navigate.push('/register-onboard'); Migrate
-		}, 1000);
+		navigate.push('/register-onboard');
 	};
 
 	const renderContent = () => {
@@ -67,15 +81,17 @@ const MedicalRecordReminder = ({ isFloating = true }: PropsType) => {
 						className={ `max-sm:p-[10px] ${ isFloating ? '!w-auto max-sm:text-[12px] max-md:text-sm' : 'w-full lg:w-auto max-md:text-sm' }` }
 					/>
 				</BodyContainer>
-				{ /* <Tooltip id='booking-tooltip' offset={ 24 } style={ { width: 300, padding: '12px', borderRadius: '5px' } }>
-					<Text
-						fontSize='12px'
-						fontWeight='400'
-						lineHeight='23px'
-						color='white'
-						text={ languages('tooltipLabel') }
-					/>
-				</Tooltip> */ }
+				{ isMounted && (
+					<Tooltip id='booking-tooltip' offset={ 24 } style={ { width: 300, padding: '12px', borderRadius: '5px' } }>
+						<Text
+							fontSize='12px'
+							fontWeight='400'
+							lineHeight='23px'
+							color='white'
+							text={ languages('tooltipLabel') }
+						/>
+					</Tooltip>
+				) }
 			</>
 		);
 	};
@@ -91,7 +107,16 @@ const MedicalRecordReminder = ({ isFloating = true }: PropsType) => {
 	);
 
 	const renderMedicalRecordReminder = () => {
-		if (isFloating) return renderFloating();
+		if (isFloating) {
+			const isHideFloatingComponent = isEmpty(session?.token)
+				|| session?.user?.medical_record
+				|| session?.user?.no_mr
+				|| !shouldRenderReminder;
+
+			if (isHideFloatingComponent) return null;
+
+			return renderFloating();
+		}
 
 		return (
 			<div className='relative flex bg-white shadow-[5px_5px_10px_0px_rgba(53,136,136,0.12)] rounded-[10px]'>
@@ -100,11 +125,7 @@ const MedicalRecordReminder = ({ isFloating = true }: PropsType) => {
 		);
 	};
 
-	if (isEmpty(session?.token)) return null;
-
-	if (!session?.user?.medical_record || !session?.user?.no_mr) return renderMedicalRecordReminder();
-
-	return null;
+	return renderMedicalRecordReminder();
 };
 
 export default MedicalRecordReminder;
