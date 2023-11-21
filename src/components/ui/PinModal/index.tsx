@@ -17,10 +17,11 @@ type Props = {
 	visible: boolean,
 	onSuccess: () => void;
 };
-const t = useScopedI18n('modalDialog.pin');
 
 const PinModal = ({ visible, onSuccess }: Props) => {
 	const { data: checkPinResponse, trigger: checkPinTrigger, error: checkPinError, isMutating: checkPinLoading } = usePostCheckPinMutation();
+
+	const t = useScopedI18n('modalDialog.pin');
 
 	const pinField = {
 		pin: {
