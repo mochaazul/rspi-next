@@ -7,7 +7,7 @@ read -p "Enter Version : " VERSION
 read -p "Enter Stage (staging / dev / prod) : " STAGE
 
 aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 011876906689.dkr.ecr.us-west-2.amazonaws.com
-docker buildx build --platform linux/amd64 -f ./Dockerfile --build-arg stage=$STAGE --no-cache -t rebelworks/rspi:latest .
+docker buildx build --platform linux/amd64 -f ./Dockerfile --build-arg stage=$STAGE --no-cache -t rebelworks/rspi-next:latest .
 docker tag rebelworks/rspi-next:latest 011876906689.dkr.ecr.us-west-2.amazonaws.com/rebelworks/rspi:1.0.$VERSION-next-dev
 docker push 011876906689.dkr.ecr.us-west-2.amazonaws.com/rebelworks/rspi:1.0.$VERSION-next-dev
 

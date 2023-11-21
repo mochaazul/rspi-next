@@ -26,7 +26,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 	const [activeTab, setActiveTab] = useState(0);
 
 	const promo = activeTab === 0 ? events : events?.filter((item: any) => item?.category === tabData?.[activeTab]?.value);
-	
+	console.log(promo, 'promo');
 	if (showAsRelated) {
 		return (
 			<div className='w-full'>
@@ -54,7 +54,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 									/>
 								}
 								footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetailsBtnLabel') } /> }
-								to={ `/promo/${ item.id }` }
+								to={ `/promo/${ item?.slug }` }
 								iconShare={ false }
 							/>
 						)) }
@@ -117,7 +117,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 						{ promo?.map((item, index) => (
 							<Card
 								key={ index }
-								id={ item.id }
+								id={ item?.id }
 								image={ item.img_url_card }
 								imageHeight='200px'
 								header={
@@ -136,7 +136,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 									/>
 								}
 								footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetailsBtnLabel') } /> }
-								to={ `/promo/${ item.id }` }
+								to={ `/promo/${ item?.slug }` }
 								iconShare={ true }
 							/>
 						)) }

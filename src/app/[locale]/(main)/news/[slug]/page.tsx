@@ -16,9 +16,10 @@ import {
 import {
 	colors,
 	icons,
-	Languages as lang,
 	sosmedLink
 } from '@/constant';
+import { ArticleState } from '@/interface';
+import { useScopedI18n } from '@/locales/client';
 
 import {
 	fetchNewsSpecialtyByID,
@@ -26,11 +27,9 @@ import {
 	fetchRelatedNews
 } from './helpers';
 
-import { ArticleState } from '@/interface';
+const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
+	const t = useScopedI18n('page.newsDetail');
 
-const language = lang.page.newsDetail;
-
-const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 	const pathname = usePathname();
 
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
@@ -48,6 +47,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 		posted_date: '',
 		category: '',
 		author: '',
+		slug: '',
 		short_description: '',
 		news_author: {
 			doctor_name: '',
@@ -61,21 +61,25 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 	});
 
 	useEffect(() => {
-		fetchRelatedNews(props.params.id).then(function(response) {
-			setRelatedNews(response?.data);
-		});
-		fetchNewsSpecialtyByID(props.params.id).then(function(response) {
-			setSpecialty(response?.data);
-		});
-		fetchDetail(props.params.id).then(function(response) {
+		fetchDetail(props.params.slug).then(function (response) {
 			setSelectedArticle(response?.data);
+
+			fetchNewsSpecialtyByID(response?.data?.id).then(function (response) {
+				setSpecialty(response?.data);
+			});
+			fetchRelatedNews(response?.data?.id).then(function (response) {
+				setRelatedNews(response?.data);
+			});
+			
 		});
 	}, []);
 
 	const breadcrumbsPath = [{ name: 'News & Health Articles', url: '/news' }, { url: '#', name: 'Title Selected Article' || '' }]; // selectedArticle?.title
 
 	const handleOpenSocmed = (link: string) => () => {
-		window?.open(link, '_blank');
+		if (typeof window !== 'undefined') {
+			window?.open(link + window?.location?.href, '_blank');
+		}
 	};
 
 	return (
@@ -92,7 +96,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 								{ selectedArticle?.title }
 							</Text>
 							<Text
-								text={ `${ language.oleh } ${ selectedArticle?.news_author?.doctor_name }` }
+								text={ `${ t('oleh') } ${ selectedArticle?.news_author?.doctor_name }` }
 								fontWeight='400'
 								fontSize='18px'
 								lineHeight='22px'
@@ -107,13 +111,13 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 									color={ colors.grey.dark }
 								/>
 								<div className='flex gap-[15px]'>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window?.location?.href) }>
-										<icons.FacebookIcon width='16px' height='16px'/>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook) }>
+										<icons.FacebookIcon width='16px' height='16px' />
 									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window?.location?.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter) }>
 										<icons.TwitterIcon width='16px' height='13px' />
 									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window?.location?.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin) }>
 										<icons.LinkedIn width='16px' height='16px' />
 									</div>
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>

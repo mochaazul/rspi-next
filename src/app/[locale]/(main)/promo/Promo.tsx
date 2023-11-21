@@ -12,35 +12,33 @@ import {
 	EmptyData
 } from '@/components/ui';
 import Card, { CardContent } from '@/components/ui/Card';
-import { Languages, colors } from '@/constant';
+import { colors } from '@/constant';
 import { promoPageEvent } from '@/utils/metaPixelTrack';
+import { useScopedI18n } from '@/locales/client';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
+
 import { fetchEvents } from './helpers';
 import { EventClassesPromoStyle } from './style';
 import { PanelH1 } from '../style';
-
-const { heading, hospitalSelectionLabel, allHospitalLabel, tabPillsLabel, promoItem } = Languages.page.promoPage;
 
 const EventClassesPromo = ({
 	hospitalSelector,
 	breadcrumbsPath,
 	events,
 	pagination
-}:{
+}: {
 	breadcrumbsPath: BreadcrumbsType['datas'],
-    hospitalSelector: HospitalState,
+	hospitalSelector: HospitalState,
 	events: EventClassesState['events'],
 	pagination: Pagination,
 }) => {
-	// const eventsData = useTypedSelector<EventClassesState>('events');
-	// const eventsDispatch = useAppDispatch(getEvents);
+	const t = useScopedI18n('page.promoPage');
 
 	const [pageNumber, setPageNumber] = useState(1);
 	const [hospitalID, setHospitalID] = useState<number | string>('');
 	const [category, setCategory] = useState<'' | 'event' | 'class' | 'promo'>('');
 	const [eventsData, setEventsData] = useState(events);
 	const [loading, setLoading] = useState(false);
-	// const { hospitals } = useTypedSelector<HospitalState>('hospital');
 
 	const hospitalArr = Object.values(hospitalSelector || [])?.map(hospital => ({ key: hospital?.id?.toString(), value: hospital?.id?.toString(), label: hospital?.name }));
 
@@ -67,7 +65,7 @@ const EventClassesPromo = ({
 			is_publish: true,
 			category: category,
 			hospital_id: hospitalID
-		}).then(function(response: any) {
+		}).then(function (response: any) {
 			setEventsData(response.data);
 			setLoading(false);
 		});
@@ -83,7 +81,7 @@ const EventClassesPromo = ({
 						fontType='h1'
 						fontWeight='900'
 						lineHeight='57px'
-						text={ heading }
+						text={ t('heading') }
 						className='sm:mt-[50px] mt-[25px]'
 						subClassName='max-sm:text-[24px]'
 					/>
@@ -92,29 +90,29 @@ const EventClassesPromo = ({
 							fontSize='20px'
 							fontWeight='700'
 							lineHeight='24px'
-							text={ hospitalSelectionLabel }
+							text={ t('hospitalSelectionLabel') }
 							subClassName='max-sm:font-black max-sm:text-[16px]'
 						/>
 						<div className='min-w-[300px]'>
 							<Form.Dropdown
-								placeholder={ allHospitalLabel }
-								menuItems={ [{ key: '', value: '', label: allHospitalLabel }, ...hospitalArr] }
+								placeholder={ t('allHospitalLabel') }
+								menuItems={ [{ key: '', value: '', label: t('allHospitalLabel') }, ...hospitalArr] }
 								onChange={ event => setHospitalID(event.currentTarget.value === '' ? '' : parseInt(event.currentTarget.value)) }
 							/>
 						</div>
 					</div>
 					<div className='flex flex-row mt-[50px] gap-4 items-center max-sm:justify-between'>
 						<div>
-							<Button className='mb-4' theme={ category === '' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('') }>{ tabPillsLabel.allLabel }</Button>
+							<Button className='mb-4' theme={ category === '' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('') }>{ t('tabPillsLabel.allLabel') }</Button>
 						</div>
 						<div>
-							<Button className='mb-4' theme={ category === 'event' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('event') }>{ tabPillsLabel.eventLabel }</Button>
+							<Button className='mb-4' theme={ category === 'event' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('event') }>{ t('tabPillsLabel.eventLabel') }</Button>
 						</div>
 						<div>
-							<Button className='mb-4' theme={ category === 'class' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('class') }>{ tabPillsLabel.classesLabel }</Button>
+							<Button className='mb-4' theme={ category === 'class' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('class') }>{ t('tabPillsLabel.classesLabel') }</Button>
 						</div>
 						<div>
-							<Button className='mb-4' theme={ category === 'promo' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('promo') }>{ tabPillsLabel.promoLabel }</Button>
+							<Button className='mb-4' theme={ category === 'promo' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('promo') }>{ t('tabPillsLabel.promoLabel') }</Button>
 						</div>
 					</div>
 				</div>
@@ -131,7 +129,7 @@ const EventClassesPromo = ({
 									image={ data.img_url_card }
 									imageHeight='200px'
 									content={ <CardContent title={ data.title } description={ data.short_description } /> }
-									footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ promoItem.detailsBtnLabel } /> }
+									footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
 									className='mb-0'
 									to={ `/promo/${ data.id }` }
 									iconShare={ true }

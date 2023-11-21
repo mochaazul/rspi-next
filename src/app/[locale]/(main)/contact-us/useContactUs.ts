@@ -7,99 +7,94 @@ import {
 	phoneRule,
 } from '@/helpers';
 import { ContactUsSubmitType } from '@/interface/contactUs';
-import lang from '@/constant/languages';
+import { useScopedI18n } from '@/locales/client';
 
-const language = lang.page.contactUs.contactForm;
-
-export const contactUsField = {
-	hospital_code: {
-		...createFieldConfig({
-			name: 'hospital_code',
-			type: 'dropdown'
-		}),
-		validationRules: [
-			requiredRule('hospital_code'),
-		],
-		label: language.labels.hospital,
-		placeholder: language.placeholder.hospital
-	},
-	full_name: {
-		...createFieldConfig({
-			name: 'full_name',
-			type: 'text'
-		}),
-		validationRules: [
-			requiredRule('full_name'),
-		],
-		label: language.labels.fullName,
-		placeholder: language.placeholder.fullName
-	},
-	gender: {
-		...createFieldConfig({
-			name: 'gender',
-			type: 'dropdown'
-		}),
-		validationRules: [
-			requiredRule('gender'),
-		],
-		label: language.labels.gender,
-		placeholder: language.placeholder.gender
-	},
-	email: {
-		...createFieldConfig({
-			name: 'email',
-			type: 'text'
-		}),
-		validationRules: [
-			requiredRule('email'),
-			emailRule()
-		],
-		label: language.labels.email,
-		placeholder: language.placeholder.email
-	},
-	phone: {
-		...createFieldConfig({
-			name: 'phone',
-			type: 'tel'
-		}),
-		validationRules: [
-			requiredRule('phone'),
-			phoneRule()
-		],
-		label: language.labels.phone,
-		placeholder: language.placeholder.phone
-	},
-	title: {
-		...createFieldConfig({
-			name: 'title',
-			type: 'dropdown'
-		}),
-		validationRules: [
-			requiredRule('title'),
-		],
-		label: language.labels.subject,
-		placeholder: language.placeholder.subject
-	},
-	content: {
-		...createFieldConfig({
-			name: 'content',
-			type: 'textarea'
-		}),
-		validationRules: [
-			requiredRule('content'),
-		],
-		label: language.labels.notes,
-		placeholder: language.placeholder.notes
-	},
-};
-
-/**
- * @desc The action endpoint is not yet decided
- * @returns
- */
 const useContactUs = () => {
-	// const contactUsSubmit = useAppDispatch<ContactUsSubmitType>(contactUsAction); migrate
-	
+
+	const t = useScopedI18n('page.contactUs.contactForm');
+
+	const contactUsField = {
+		hospital_code: {
+			...createFieldConfig({
+				name: 'hospital_code',
+				type: 'dropdown'
+			}),
+			validationRules: [
+				requiredRule('hospital_code'),
+			],
+			label: t('labels.hospital'),
+			placeholder: t('placeholder.hospital')
+		},
+		full_name: {
+			...createFieldConfig({
+				name: 'full_name',
+				type: 'text'
+			}),
+			validationRules: [
+				requiredRule('full_name'),
+			],
+			label: t('labels.fullName'),
+			placeholder: t('placeholder.fullName')
+		},
+		gender: {
+			...createFieldConfig({
+				name: 'gender',
+				type: 'dropdown'
+			}),
+			validationRules: [
+				requiredRule('gender'),
+			],
+			label: t('labels.gender'),
+			placeholder: t('placeholder.gender')
+		},
+		email: {
+			...createFieldConfig({
+				name: 'email',
+				type: 'text'
+			}),
+			validationRules: [
+				requiredRule('email'),
+				emailRule()
+			],
+			label: t('labels.email'),
+			placeholder: t('placeholder.email')
+		},
+		phone: {
+			...createFieldConfig({
+				name: 'phone',
+				type: 'tel'
+			}),
+			validationRules: [
+				requiredRule('phone'),
+				phoneRule()
+			],
+			label: t('labels.phone'),
+			placeholder: t('placeholder.phone')
+		},
+		title: {
+			...createFieldConfig({
+				name: 'title',
+				type: 'dropdown'
+			}),
+			validationRules: [
+				requiredRule('title'),
+			],
+			label: t('labels.subject'),
+			placeholder: t('placeholder.subject')
+		},
+		content: {
+			...createFieldConfig({
+				name: 'content',
+				type: 'textarea'
+			}),
+			validationRules: [
+				requiredRule('content'),
+			],
+			label: t('labels.notes'),
+			placeholder: t('placeholder.notes')
+		},
+	};
+
 	const onClickContactUs = ({
 		hospital_code,
 		full_name,

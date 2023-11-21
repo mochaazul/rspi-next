@@ -4,13 +4,14 @@ import { isEmpty } from 'lodash';
 import dayjs from 'dayjs';
 
 import { Spinner, Text } from '@/components/ui';
-import { Languages, colors, icons } from '@/constant';
+import { colors, icons } from '@/constant';
 import { useGetVaccineHistory } from '@/lib/api/client/hospital';
+import { useScopedI18n } from '@/locales/client';
 
 import { CardPatientPortalStyle, EmptyResultContainer } from '../../style';
 
 const RiwayatVaksin = () => {
-	const { tableMenuLable, warning, empty } = Languages.page.patientPortal.riwayatVaksin;
+	const t = useScopedI18n('page.patientPortal.riwayatVaksin');
 
 	const { data: vaccineHistoryResponse, error: vaccineHistoryError, isLoading: vaccineHistoryLoading } = useGetVaccineHistory();
 
@@ -21,7 +22,7 @@ const RiwayatVaksin = () => {
 	if (isEmpty(vaccineHistoryResponse?.data)) {
 		return (<EmptyResultContainer>
 			<icons.NoVaccineResult />
-			<Text text={ empty }
+			<Text text={ t('empty') }
 				fontSize='20px'
 				fontWeight='700'
 				lineHeight='28px'
@@ -36,9 +37,9 @@ const RiwayatVaksin = () => {
 					<table>
 						<tr>
 							<th>No</th>
-							<th>{ tableMenuLable.vaccineType }</th>
-							<th>{ tableMenuLable.vaccineName }</th>
-							<th>{ tableMenuLable.vaccineDate }</th>
+							<th>{ t('tableMenuLable.vaccineType') }</th>
+							<th>{ t('tableMenuLable.vaccineName') }</th>
+							<th>{ t('tableMenuLable.vaccineDate') }</th>
 						</tr>
 						{
 							vaccineHistoryResponse?.data.map((history, index) => (
@@ -56,7 +57,7 @@ const RiwayatVaksin = () => {
 			</CardPatientPortalStyle>
 			<div className='warning-text mt-[20px]'>
 				<Text
-					text={ warning }
+					text={ t('warning') }
 					fontSize='16px'
 					fontWeight='400'
 					color={ colors.paradiso.default }
