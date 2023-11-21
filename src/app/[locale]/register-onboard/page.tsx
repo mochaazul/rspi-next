@@ -19,15 +19,9 @@ import { useCheckPhonePatient, useRegisterOnboard } from '@/lib/api/client/auth'
 import { RegisterOnboardStyle, Box } from './style';
 
 const regexPhone = (phone: string) => {
-	let phoneNumber;
-	if (phone.trim().substring(0, 2) ==
-		'62') {
-		phoneNumber = phone;
-	} else {
-		phoneNumber = '62' +
-			phone
-				.replace(/^0/, '');
-	}
+	let phoneNumber =
+		phone
+			.replace(/^0/, '').replace(/^62/, '');
 	return phoneNumber;
 };
 
@@ -46,9 +40,9 @@ const RegisterOnboard = () => {
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [isDuplicatePhoneNumber, setIsDuplicatePhoneNumber] = useState<boolean>(false);
 
-	const onCheckPhonePatient = async(phone: string) => {
+	const onCheckPhonePatient = async (phone: string) => {
 		try {
-			const responseCheckPhone = await checkPhonePatient({ phone: regexPhone(phone) });
+			const responseCheckPhone = await checkPhonePatient({ phone: '62' + phone });
 
 			return responseCheckPhone;
 		} catch (error: any) {
@@ -67,12 +61,12 @@ const RegisterOnboard = () => {
 			phone: '',
 			name: ''
 		},
-		onSubmit: async(formRegister: RegisterOnboardType) => {
+		onSubmit: async (formRegister: RegisterOnboardType) => {
 			try {
 				setLoadingUser(true);
 				const formRegisterPayload = {
 					...formRegister,
-					phone: regexPhone(formRegister.phone)
+					phone: formRegister.phone
 				};
 
 				const responseCheckPhone = await onCheckPhonePatient(formRegisterPayload.phone);
@@ -165,6 +159,10 @@ const RegisterOnboard = () => {
 	};
 
 	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+		if (e.target.id === 'phone') {
+			formikRegister.setFieldValue(e.target.id, regexPhone(e.target.value));
+			return;
+		}
 		formikRegister.setFieldValue(e.target.id, e.target.value);
 	};
 
@@ -222,6 +220,7 @@ const RegisterOnboard = () => {
 						onChange={ onChangeInput }
 						errorMessage={ formikRegister.errors?.phone }
 						isError={ !!formikRegister.errors?.phone }
+					// onInput={(e) => }
 					/>
 					<Text
 						text={ languages('form.phoneHint') }
