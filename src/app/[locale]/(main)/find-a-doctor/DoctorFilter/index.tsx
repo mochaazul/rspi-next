@@ -14,17 +14,7 @@ import { useScopedI18n } from '@/locales/client';
 import Pills from '../Pills';
 import useFindDoctor from '../useFindDoctor';
 
-const d = useScopedI18n('dayName.full');
 
-const Days = [
-	{ key: '1', label: d('sunday'), value: 'Sunday' },
-	{ key: '2', label: d('monday'), value: 'Monday' },
-	{ key: '3', label: d('tuesday'), value: 'Tuesday' },
-	{ key: '4', label: d('wednesday'), value: 'Wednesday' },
-	{ key: '5', label: d('thursday'), value: 'Thursday' },
-	{ key: '6', label: d('friday'), value: 'Friday' },
-	{ key: '7', label: d('saturday'), value: 'Saturday' },
-];
 
 type Props = {
 	hospitals: HospitalDetail[],
@@ -33,6 +23,17 @@ type Props = {
 
 const DoctorFilter = ({ hospitals, clinics }: Props) => {
 	const t = useScopedI18n('page.findDoctor');
+	const d = useScopedI18n('dayName.full');
+
+	const Days = [
+		{ key: '1', label: d('sunday'), value: 'Sunday' },
+		{ key: '2', label: d('monday'), value: 'Monday' },
+		{ key: '3', label: d('tuesday'), value: 'Tuesday' },
+		{ key: '4', label: d('wednesday'), value: 'Wednesday' },
+		{ key: '5', label: d('thursday'), value: 'Thursday' },
+		{ key: '6', label: d('friday'), value: 'Friday' },
+		{ key: '7', label: d('saturday'), value: 'Saturday' },
+	];
 
 	const searchParams = useSearchParams();
 
