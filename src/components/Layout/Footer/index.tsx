@@ -18,7 +18,7 @@ import { useScopedI18n } from '@/locales/client';
 
 import FooterStyled, { FooterContainer } from './style';
 
-const FooterLayout = ({ footerData }: { footerData: FooterDetail; }) => {
+const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 	const navigate = useRouter();
 
 	const t = useScopedI18n('page.footer');
