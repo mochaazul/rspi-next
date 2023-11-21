@@ -1,8 +1,8 @@
 'use client';
 
+import React, { PropsWithChildren, PropsWithRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { PropsWithChildren, PropsWithRef } from 'react';
 
 import { colors, icons } from '@/constant';
 import { MedicalSpecialities } from '@/interface/MedicalSpecialities';
@@ -130,19 +130,26 @@ const MedicalSpecialitiesComponent = ({
 									? item.img_url[0]
 									: '';
 								return (
-									<div key={ key } className='flex justify-between specialities-item max-[480px]:mb-4' onClick={ () => navigate.push(`/medical-specialities/${ item.slug }`) }>
-										<Text text={ item.title } fontWeight='700' />
-										<div className='max-[480px]:w-16' />
-										{ imageSrc && (
-											<div className='relative overflow-hidden w-10 max-[480px]:w-12'>
-												<Image
-													src={ imageSrc }
-													alt={ item.title ?? '' }
-													sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-													fill
-												/>
-											</div>
-										) }
+									<div key={ key } className='specialities-item-container max-[480px]:mb-4' onClick={ () => navigate.push(`/medical-specialities/${ item.slug }`) }>
+										<div className='flex justify-between specialities-item w-full'>
+											<Text
+												text={ item.title }
+												fontWeight='700'
+												className='hover:!bg-transparent'
+												subClassName='hover:!bg-transparent'
+											/>
+											<div className='max-[480px]:w-16' />
+											{ imageSrc && (
+												<div className='relative overflow-hidden w-10 max-[480px]:w-12'>
+													<Image
+														src={ imageSrc }
+														alt={ item.title ?? '' }
+														sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+														fill
+													/>
+												</div>
+											) }
+										</div>
 									</div>
 								);
 							})

@@ -599,7 +599,7 @@ export default function Page() {
 										label={ languages('profileDetail.patientEmail') }
 										labelInfo={ !isDisableFormProfile ? languages('profileDetail.patientPhoneNumberLabelInfo') : undefined }
 										inputProps={ {
-											...!isDisableFormProfile
+											...isDisableFormProfile
 												? {
 													...editableInputProps,
 													onIconClick: () => {

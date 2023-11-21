@@ -6,13 +6,13 @@ const I18nMiddleware = createI18nMiddleware({
 	defaultLocale: 'id'
 });
 
-// TODO: add routes
-const protectedRoutes = ['/patient-portal'];
+// TODO: add private routes
+const protectedRoutes = ['/patient-portal', '/user-information'];
 
 export function middleware(request: NextRequest) {
 	const pathname = request.nextUrl.pathname;
 
-	if (protectedRoutes?.some(path => pathname.startsWith(path))) {
+	if (protectedRoutes?.some(path => pathname.includes(path))) {
 		const token = request.cookies.get('token');
 		if (!token) {
 			const url = new URL('/login', request.url);
