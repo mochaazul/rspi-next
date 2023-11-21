@@ -6,7 +6,6 @@ import { Footer, Header } from '@/components';
 import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import CallForAmbulance from '@/components/ui/CallForAmbulance';
 import DevTools from '@/components/ui/DevTools';
-import '@/styles/globals.css';
 
 import { OutletStyleType, } from './style';
 import {
