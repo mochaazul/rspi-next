@@ -1,10 +1,17 @@
 import { icons } from '@/constant';
 import { Button, Modal, Text } from '..';
+import { useRouter } from 'next/navigation';
 
-const LogoutModal = () => {
+type Props = {
+	visible: boolean,
+	toggler: (arg0: boolean) => void
+}
+const LogoutModal = ({ visible, toggler }:Props) => {
+	
+	const router = useRouter();
 
 	return (
-		<Modal onClose={ () => console.log }>
+		<Modal visible={ visible } onClose={ () => console.log }>
 			<div className='flex flex-col items-center'>
 				<center>
 					<icons.WarningIcon />
@@ -30,6 +37,8 @@ const LogoutModal = () => {
 					className='pt-1 pb-4'
 				/>
 				<Button className='max-w-full' theme='primary' onClick={ () => {
+					toggler(false);
+					router.push('/login');
 				} }>Log Out</Button>
 			</div>
 		</Modal>
