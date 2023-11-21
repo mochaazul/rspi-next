@@ -1,6 +1,7 @@
 'use client';
 import dayjs from 'dayjs';
 import { requiredRule, createFieldConfig } from '@/helpers';
+import { useRouter } from 'next/navigation';
 
 const Days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -12,6 +13,7 @@ type I_OnSubmitParam = {
 };
 
 const useFindADoctor = () => {
+	const router = useRouter();
 	const findADoctorField = {
 		doctorName: {
 			...createFieldConfig({
@@ -21,7 +23,6 @@ const useFindADoctor = () => {
 			validationRules: [
 				requiredRule('doctorName'),
 			],
-			label: 'doctorname'
 		},
 		hospital: {
 			...createFieldConfig({
@@ -31,8 +32,6 @@ const useFindADoctor = () => {
 			validationRules: [
 				requiredRule('hospital'),
 			],
-			placeholder: 'hospital',
-			label: 'hospital'
 		},
 		speciality: {
 			...createFieldConfig({
@@ -43,7 +42,6 @@ const useFindADoctor = () => {
 				requiredRule('speciality'),
 			],
 			placeholder: 'speciality',
-			label: 'speciality'
 		},
 		preferredDay: {
 			...createFieldConfig({
@@ -53,49 +51,24 @@ const useFindADoctor = () => {
 			validationRules: [
 				requiredRule('preferredDay'),
 			],
-			label: 'date'
 		}
 	};
-	// const { hospitals } = useTypedSelector<HospitalState>('hospital');
-	// const { specialities } = useTypedSelector<I_SpecialitiesState>('specialities');
-	// const { clinics } = useTypedSelector<I_SpecialitiesState>('specialities');
 
-	// const { masterDoctors, pagination } = useTypedSelector<FindDoctorState>('findDoctor');
-
-	// const getDoctorList = useAppDispatch(getDoctorListDropdown);
-	// const getSpecialitiesDispatch = useAppDispatch(getSpecialities);
-	// const getClinicsDispatch = useAppDispatch(getClinics);
-
-	// const navigate = useRouter();
 	const onSubmitHandler = (doctorName: string, hospital: string, speciality: string, preferredDay: string, isTelemedicine: boolean) => {
 		const search: Record<string, string> = {};
-
 		if (preferredDay) search['day'] = Days[dayjs(preferredDay).get('day') ?? 0];
-		if (hospital) search['hospital'] = hospital;
+		if (hospital) search['hospital_code'] = hospital;
 		if (doctorName) search['keyword'] = doctorName;
-		if (speciality) search['specialty'] = speciality;
+		if (speciality) search['clinic_code'] = speciality;
 		if (isTelemedicine) search['telemedicine'] = 'true';
 		search['ref'] = 'landing';
+		const searchParam = new URLSearchParams(search);
 
-		// navigate.push('/find-a-doctor' + `?${ createSearchParams(search) }`);
+		router.push('/find-a-doctor' + `?${ searchParam.toString() }`);
 	};
 
 	return {
-		doctors: {
-			// data: masterDoctors,
-			// get: getDoctorList,
-			// pagination
-		},
-		specialities: {
-			// data: specialities,
-			// get: getSpecialitiesDispatch
-		},
-		clinics: {
-			// data: clinics,
-			// get: getClinicsDispatch
-		},
 		findADoctorField,
-		// hospitals,
 		dayConfig: Days,
 		onSubmitHandler,
 	};
