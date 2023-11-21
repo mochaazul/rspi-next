@@ -43,15 +43,20 @@ const LoginPage = () => {
 			email: '',
 			password: ''
 		},
-		onSubmit: async(formLogin: LoginType) => {
+		onSubmit: async (formLogin: LoginType) => {
 			try {
 				setLoadingSubmit(true);
 
 				const response = await login(formLogin);
 
-				setSuccessMessage(`${ languages('welcome') } ${ response?.data?.email }`);
-				setNotifMode('success');
-				navigate.replace('/');
+				if (response?.stat_code === 'APP:SUCCESS') {
+					setSuccessMessage(`${ languages('welcome') } ${ response?.data?.email }`);
+					setNotifMode('success');
+					navigate.replace('/');
+				} else {
+					setErrorUser({ stat_msg: response?.stat_msg ?? '' });
+					setNotifMode('error');
+				}
 			} catch (error: any) {
 				setErrorUser({ stat_msg: error?.message ?? '' });
 				setNotifMode('error');
@@ -104,7 +109,7 @@ const LoginPage = () => {
 		setNotifVisible(false);
 	};
 
-	const handleResendEmailVerification = async() => {
+	const handleResendEmailVerification = async () => {
 		try {
 			initErrorNotif();
 			await requestVerifyEmail({ email: formik.values.email });
@@ -169,13 +174,13 @@ const LoginPage = () => {
 					md:p-8
 					login min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
 					` }
-					onSubmit={ (e: React.SyntheticEvent) => {
-						e.preventDefault();
-						initErrorNotif();
-						setEnableValidation(true);
-						formik.handleSubmit();
-					} }
-					autoComplete='off'
+						onSubmit={ (e: React.SyntheticEvent) => {
+							e.preventDefault();
+							initErrorNotif();
+							setEnableValidation(true);
+							formik.handleSubmit();
+						} }
+						autoComplete='off'
 					>
 						<div className='w-full'>
 							<div className='hidden sm:flex max-2xl:mb-2 mb-8'>
@@ -232,7 +237,7 @@ const LoginPage = () => {
 								isError={ !!formik.errors.password }
 							/>
 						</Form.FormGroup>
-						<div className='w-full'>
+						<div className='flex w-full'>
 							<Link href='/forgot-password'>
 								<Text
 									className='mt-2 max-2xl:mb-4 mb-10'

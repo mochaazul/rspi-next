@@ -78,14 +78,18 @@ const RegisterPage = () => {
 		setShowModalPrivacyTnc(false);
 	};
 
-	const onClickRegister = async() => {
+	const onClickRegister = async () => {
 		try {
 			setLoadingUser(true);
 
 			const response = await register(formRegister);
 
-			setInfoBoxVisible(true);
-			setUserData(response?.data);
+			if (response?.stat_code === 'APP:SUCCESS') {
+				setInfoBoxVisible(true);
+				setUserData(response?.data);
+			} else {
+				setErrorMessage(response?.stat_msg ?? '');
+			}
 		} catch (error: any) {
 			setErrorMessage(error?.message ?? '');
 		} finally {
@@ -107,14 +111,14 @@ const RegisterPage = () => {
 					md:p-8
 					register min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
 					` }
-					onSubmit={ e => {
-						e.preventDefault();
-						setEnableValidation(true);
-						setErrorMessage('');
-						setNotifVisible(false);
-						formikRegister.handleSubmit();
-					} }
-					autoComplete='off'
+						onSubmit={ e => {
+							e.preventDefault();
+							setEnableValidation(true);
+							setErrorMessage('');
+							setNotifVisible(false);
+							formikRegister.handleSubmit();
+						} }
+						autoComplete='off'
 					>
 						<div className='w-full '>
 							<div className='hidden sm:flex max-2xl:mb-2 mb-8'>
@@ -224,7 +228,7 @@ const RegisterPage = () => {
 				<PrivacyPolicyModal
 					loading={ loadingOnBoarding || loadingUser }
 					isOpen={ showModalPrivacyTnc }
-					onFinish={ async() => {
+					onFinish={ async () => {
 						setLoadingOnBoarding(true);
 						await onClickRegister();
 						resetStateModal();

@@ -47,7 +47,7 @@ const editableInputProps = {
 	featherIcon: 'Edit3',
 	$iconColor: colors.paradiso.default,
 };
-const breadcrumbsPath = [{ name: 'Family Account', url: '#' }, { name: 'User Information', url: '#' }];
+const breadcrumbsPath = [{ name: 'User Information', url: '#' }];
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -113,7 +113,7 @@ export default function Page() {
 			phone: patientProfile?.data?.phone ?? ''
 		},
 		enableReinitialize: true,
-		onSubmit: async(formProfile: UpdateProfileType) => {
+		onSubmit: async (formProfile: UpdateProfileType) => {
 			try {
 				await updateProfile(formProfile);
 				setShowModalSuccess(true);
@@ -131,7 +131,7 @@ export default function Page() {
 		validateOnChange: enableValidation.email,
 		validationSchema: UpdateEmailSchema,
 		initialValues: { email: '' },
-		onSubmit: async(formEmail: UpdateEmailType) => {
+		onSubmit: async (formEmail: UpdateEmailType) => {
 			try {
 				await updateEmail(formEmail);
 				setShowModalSuccessUpdateEmail(true);
@@ -148,7 +148,7 @@ export default function Page() {
 		validateOnChange: enableValidation.pin,
 		initialValues: { pin: '' },
 		validationSchema: CheckPinSchema,
-		onSubmit: async(formPin: CheckPinType) => {
+		onSubmit: async (formPin: CheckPinType) => {
 			try {
 				await checkPin(formPin);
 				setPinModalVisible(false);
@@ -185,7 +185,7 @@ export default function Page() {
 	// 	}
 	// };
 
-	const removeUserDatas = async() => {
+	const removeUserDatas = async () => {
 		await cookiesHelper.clearStorage();
 		navigate.replace('/login');
 	};
@@ -205,7 +205,7 @@ export default function Page() {
 	// 	setSwitchAccountUsers(tempSwitchAccountUsers);
 	// };
 
-	const clickUploadPhotoPatient = async() => {
+	const clickUploadPhotoPatient = async () => {
 		try {
 			if (tempImage) {
 				setIsLoadingUploadAvatar(true);
@@ -257,7 +257,7 @@ export default function Page() {
 		}
 	};
 
-	const onHandleTempProfileImage = async(event: React.ChangeEvent<HTMLInputElement>) => {
+	const onHandleTempProfileImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
 			const selectedFile: File | null = event.target.files && event.target.files.length
 				? event.target.files[0]
@@ -599,7 +599,7 @@ export default function Page() {
 										label={ languages('profileDetail.patientEmail') }
 										labelInfo={ !isDisableFormProfile ? languages('profileDetail.patientPhoneNumberLabelInfo') : undefined }
 										inputProps={ {
-											...!isDisableFormProfile
+											...isDisableFormProfile
 												? {
 													...editableInputProps,
 													onIconClick: () => {

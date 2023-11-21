@@ -20,7 +20,9 @@ type Props = {
 };
 
 const DoctorFilter = ({ hospitals, clinics }: Props) => {
+
 	const d = useScopedI18n('dayName.full');
+	const t = useScopedI18n('page.findDoctor');
 
 	const Days = [
 		{ key: '1', label: d('sunday'), value: 'Sunday' },
@@ -31,8 +33,6 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 		{ key: '6', label: d('friday'), value: 'Friday' },
 		{ key: '7', label: d('saturday'), value: 'Saturday' },
 	];
-
-	const t = useScopedI18n('page.findDoctor');
 
 	const searchParams = useSearchParams();
 

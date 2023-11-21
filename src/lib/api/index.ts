@@ -5,7 +5,7 @@ import {
 	CenterOfExcellenceState,
 	ContactUsState,
 	ContactUsSubmitType,
-	FooterState,
+	FooterDetail,
 	ForgotPasswordType,
 	HospitalState,
 	NotificationResponse,
@@ -65,8 +65,8 @@ export const postMarkNotifAllRead = (param: ApiOptions) => {
 };
 
 // Footer
-export const getFooterSlug = () => {
-	return fetcher<FooterState>('getFooter');
+export const getFooterSlug = (params?: ApiOptions) => {
+	return fetcher<FooterDetail[]>('getFooter', params);
 };
 // Contact
 export const postContactUs = (param: { param: null; query: null; body: ContactUsSubmitType; }) => {

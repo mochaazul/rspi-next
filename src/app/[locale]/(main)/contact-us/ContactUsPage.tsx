@@ -73,7 +73,7 @@ const ContactUsPage = ({
 				</div>
 				<div className='flex flex-row gap-x-2'>
 					<Button theme='outline' $hoverTheme='outline' label={ 'See Direction' } onClick={ handleOpenMapLink(data?.[0]?.share_link ?? '') } />
-					<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } onClick={ () => navigate.push(`/find-a-doctor?hospital=${ data[0].hospital_code }`) } />
+					<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } onClick={ () => navigate.push(`/find-a-doctor?hospital_code=${ data[0].hospital_code }`) } />
 				</div>
 
 			</div>
@@ -169,7 +169,7 @@ const ContactUsPage = ({
 							<div className='mt-10'>
 								<Accordion
 									itemTheme={ props => <Accordion.ItemFAQ { ...props } readMore={ true } /> }
-									datas={ FAQDatas.filter((_faq, index) => index < 5) }
+									datas={ FAQDatas().filter((_faq, index) => index < 5) }
 								/>
 							</div>
 							<Button
