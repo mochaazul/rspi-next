@@ -10,7 +10,7 @@ import { cookiesHelper } from '@/helpers';
 import fetcher from './utils/fetcher';
 import { getProfile } from './profile';
 
-export const login = async(loginPayload: LoginType) => {
+export const login = async (loginPayload: LoginType) => {
 	const loginRes = await fetcher<UserData>('auth', { body: loginPayload });
 
 	if (loginRes.stat_code === 'APP:SUCCESS') {
@@ -27,17 +27,18 @@ export const login = async(loginPayload: LoginType) => {
 	return loginRes;
 };
 
-export const register = async(formRegister: RegisterType) => {
+export const register = async (formRegister: RegisterType) => {
 	const registerRes = await fetcher<UserData>('register', { body: formRegister });
 
 	if (registerRes?.stat_code === 'APP:SUCCESS') {
+		await cookiesHelper.clearToken();
 		cookiesHelper.setUserData(JSON.stringify(registerRes?.data));
 	}
 
 	return registerRes;
 };
 
-export const verifyEmail = async(token: string) => {
+export const verifyEmail = async (token: string) => {
 	const verifyRes = await fetcher<string>('verifyEmail', { query: { token } });
 
 	if (verifyRes?.stat_code === 'APP:SUCCESS') {

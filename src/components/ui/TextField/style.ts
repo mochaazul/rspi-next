@@ -36,9 +36,9 @@ export const TextFieldWrapper = styled.div<StyledTextFieldType>`
   flex-direction: ${ props => (props.$iconPosition === 'left' || !(!!props.$iconPosition)) ? 'row' : 'row-reverse' };
   
   ${ props => !props.$isNumber ? `
-  outline: 1px solid ${ colors.grey.lighter };
-  &:focus {
-    outline: 1px solid ${ colors.green.toscaLight };
+  outline: 1px solid ${ colors.grey.lighterOpacity };
+  &:focus-within {
+    outline: 1px solid ${ colors.green.brandAccent };
   } ` : '' }
 
   input{
@@ -67,11 +67,11 @@ export const InputMaskedStyled = styled(InputMask)`
   padding: 12px 18px;
   border-radius: 5px;
   font-family: var(--font-family);
-  outline: 1px solid ${ colors.grey.lighter };
+  outline: 1px solid ${ colors.grey.lighterOpacity };
   ${ GlobalAllTransition5ms }
 
   &:focus-within {
-    outline: 1px solid ${ colors.green.toscaLight }
+    outline: 1px solid ${ colors.green.brandAccent }
   }
 `;
 
