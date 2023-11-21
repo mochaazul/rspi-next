@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "serve": "node ./.next/standalone/server.js",
-    "start:service": "pm2 start yarn --interpreter bash --name web_rspi_next -- start",
+    "start:service": "pm2 start yarn --interpreter bash --name web_rspi_next -- start -p 3001",
     "lint": "next lint"
   },
   "dependencies": {
