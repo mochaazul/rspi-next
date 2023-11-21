@@ -36,6 +36,7 @@ export const endpoints = {
 	updateProfile: '/patients/update-profile',
 	updateAvatar: '/patients/update-avatar',
 	footerCategories: '/footer-categories',
+	footerPages: '/footer-pages',
 	getFooter: '/footer-pages',
 	updatePin: '/patients/update-pin',
 	notification: '/notification',

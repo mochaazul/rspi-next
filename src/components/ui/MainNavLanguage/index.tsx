@@ -7,6 +7,7 @@ import { useScopedI18n } from '@/locales/client';
 import WhiteInstagram from '/public/images/ic/whiteInstagram.svg';
 import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';
 import WhiteTwitter from '/public/images/ic/whiteTwitter.svg';
+import Link from 'next/link';
 
 
 export const MainNavLanguage = () => {
@@ -46,11 +47,11 @@ export const MainNavLanguage = () => {
 		>
 			<div className='flex justify-between w-full mx-10'>
 				<div className='flex divide-x divide-white/20 gap-5'>
-					<a href='/contact-us'>
+					<Link href='/contact-us'>
 						<Text fontSize='14px' fontWeight='400' color='white'>
 							Contact Us
 						</Text>
-					</a>
+					</Link>
 					<div className='flex gap-[30px] pl-5'>
 						<div className='flex items-center cursor-pointer' onClick={ handleOpenSocmed('https://www.instagram.com/rspondokindah/') }>
 							<WhiteInstagram className='mr-[5px]' />

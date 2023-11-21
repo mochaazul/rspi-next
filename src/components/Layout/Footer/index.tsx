@@ -12,14 +12,13 @@ import {
 	Socmed
 } from '@/components/ui';
 import {
-	FooterDetail,
-	FooterState
+	FooterDetail
 } from '@/interface/footer';
 import { useScopedI18n } from '@/locales/client';
 
 import FooterStyled, { FooterContainer } from './style';
 
-const FooterLayout = ({ footerData }: { footerData: FooterState; }) => {
+const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 	const navigate = useRouter();
 
 	const t = useScopedI18n('page.footer');

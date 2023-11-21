@@ -27,7 +27,7 @@ import {
 	fetchRelatedNews
 } from './helpers';
 
-const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
+const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 	const t = useScopedI18n('page.newsDetail');
 
 	const pathname = usePathname();
@@ -47,6 +47,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 		posted_date: '',
 		category: '',
 		author: '',
+		slug: '',
 		short_description: '',
 		news_author: {
 			doctor_name: '',
@@ -60,21 +61,25 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 	});
 
 	useEffect(() => {
-		fetchRelatedNews(props.params.id).then(function (response) {
-			setRelatedNews(response?.data);
-		});
-		fetchNewsSpecialtyByID(props.params.id).then(function (response) {
-			setSpecialty(response?.data);
-		});
-		fetchDetail(props.params.id).then(function (response) {
+		fetchDetail(props.params.slug).then(function (response) {
 			setSelectedArticle(response?.data);
+
+			fetchNewsSpecialtyByID(response?.data?.id).then(function (response) {
+				setSpecialty(response?.data);
+			});
+			fetchRelatedNews(response?.data?.id).then(function (response) {
+				setRelatedNews(response?.data);
+			});
+			
 		});
 	}, []);
 
 	const breadcrumbsPath = [{ name: 'News & Health Articles', url: '/news' }, { url: '#', name: 'Title Selected Article' || '' }]; // selectedArticle?.title
 
 	const handleOpenSocmed = (link: string) => () => {
-		window?.open(link, '_blank');
+		if (typeof window !== 'undefined') {
+			window?.open(link + window?.location?.href, '_blank');
+		}
 	};
 
 	return (
@@ -82,7 +87,7 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className='mt-[50px]'>
+					<div className='mt-[70px]'>
 						<div className='w-[81px]'>
 							<Button label={ selectedArticle?.category } className='px-[8px] py-[6px]' />
 						</div>
@@ -106,13 +111,13 @@ const DetailNewsHealthPage = (props: { params: { id: any; }; }) => {
 									color={ colors.grey.dark }
 								/>
 								<div className='flex gap-[15px]'>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window?.location?.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook) }>
 										<icons.FacebookIcon width='16px' height='16px' />
 									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window?.location?.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter) }>
 										<icons.TwitterIcon width='16px' height='13px' />
 									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window?.location?.href) }>
+									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin) }>
 										<icons.LinkedIn width='16px' height='16px' />
 									</div>
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>

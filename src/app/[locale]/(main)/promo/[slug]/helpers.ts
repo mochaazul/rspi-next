@@ -2,10 +2,10 @@
 import { getPromoById } from '@/lib/api/events';
 import { getEvents } from '@/lib/api/events';
 
-export const fetchPromoByID = (id: any) => {
+export const fetchPromoByID = (slug: any) => {
 	
 	const paramFetch = {
-		param: id,
+		param: slug,
 	};
 
 	return getPromoById(paramFetch);

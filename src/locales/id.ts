@@ -589,7 +589,7 @@ export default {
 				emailPlaceholder: 'Email',
 				passwordLabel: 'Password',
 				passwordPlaceholder: 'Masukan Password',
-				passwordConfirmationLabel: 'Masukan ulang password',
+				passwordConfirmationLabel: 'Konfirmasi Password',
 				passwordConfirmationPlaceholder: 'Masukan ulang password',
 				passwordHint: 'Panjang password minimal 8 karakter dan terdapat minimal 1 huruf kapital'
 			},

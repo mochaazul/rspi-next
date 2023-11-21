@@ -52,9 +52,14 @@ const LoginPage = () => {
 
 				const response = await login(formLogin);
 
-				setSuccessMessage(`${ t('welcome') } ${ response?.data?.email }`);
-				setNotifMode('success');
-				navigate.replace('/');
+				if (response?.stat_code === 'APP:SUCCESS') {
+					setSuccessMessage(`${ t('welcome') } ${ response?.data?.email }`);
+					setNotifMode('success');
+					navigate.replace('/');
+				} else {
+					setErrorUser({ stat_msg: response?.stat_msg ?? '' });
+					setNotifMode('error');
+				}
 			} catch (error: any) {
 				setErrorUser({ stat_msg: error?.message ?? '' });
 				setNotifMode('error');
@@ -242,7 +247,7 @@ const LoginPage = () => {
 								isError={ !!formik.errors.password }
 							/>
 						</Form.FormGroup>
-						<div className='w-full'>
+						<div className='flex w-full'>
 							<Link href='/forgot-password'>
 								<Text
 									className='mt-2 max-2xl:mb-4 mb-10'

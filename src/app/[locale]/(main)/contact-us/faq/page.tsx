@@ -27,12 +27,12 @@ const FAQPage = () => {
 	];
 
 	if (params.id) {
-		breadCrumbsPath.push({ name: FAQDatas[parseInt(params.id as string)].title, url: '#' });
+		breadCrumbsPath.push({ name: FAQDatas()[parseInt(params.id as string)].title, url: '#' });
 	}
 
 	const [searchValue, setSearchValue] = useState<string>('');
 
-	const handleSearchFAQ = () => FAQDatas.filter(faq => {
+	const handleSearchFAQ = () => FAQDatas().filter(faq => {
 		const regex = new RegExp(`(.*?(${ searchValue })[^$]*)`, 'gim');
 		return [
 			regex.test(faq.title),
@@ -82,7 +82,7 @@ const FAQPage = () => {
 						<Accordion
 							openedIndex={ parseInt(params.id as string ?? '0') }
 							itemTheme={ props => <Accordion.ItemFAQ isJSXDesc={ true } { ...props } /> }
-							datas={ searchValue !== '' ? handleSearchFAQ() : FAQDatas }
+							datas={ searchValue !== '' ? handleSearchFAQ() : FAQDatas() }
 						/>
 					</div>
 				</PanelH4>
