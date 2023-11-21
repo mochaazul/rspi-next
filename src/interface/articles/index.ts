@@ -21,6 +21,7 @@ export interface ArticleDetail {
 	img_url: string;
 	posted_date: string;
 	category: string;
+	slug: string;
 	author: string;
 	short_description: string;
 	news_author: NewsAuthorDetail;

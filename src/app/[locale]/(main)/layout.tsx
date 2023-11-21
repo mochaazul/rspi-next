@@ -1,12 +1,10 @@
 'use server';
-import { headers } from 'next/headers';
 
 import { appStage } from '@/config';
 import { Footer, Header } from '@/components';
 import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import CallForAmbulance from '@/components/ui/CallForAmbulance';
 import DevTools from '@/components/ui/DevTools';
-import '@/styles/globals.css';
 
 import { OutletStyleType, } from './style';
 import {
@@ -17,12 +15,7 @@ import {
 	footersFetch,
 	hospitalsFetch
 } from './helpers';
-
-const blacklistedRoute = [
-	'/patient-portal',
-	'/doctor-detail',
-	'/book-appointment'
-];
+import getSession from '@/session/server';
 
 export default async function RootLayout({
 	props,
@@ -34,12 +27,7 @@ export default async function RootLayout({
 		footerShow?: boolean;
 	};
 }) {
-	const headersList = headers();
-
-	const pathname = headersList.get('x-invoke-path') || '';
-
-	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
-
+	const session = await getSession();
 	const hospitals = await hospitalsFetch();
 	const footers = await footersFetch();
 	const centerOfExcellence = await centerOfExcellenceFetch();
@@ -67,9 +55,8 @@ export default async function RootLayout({
 			{ appStage !== 'prod' &&
 				<DevTools />
 			}
-			{ shouldRenderReminder &&
-				<MedicalRecordReminder />
-			}
+
+			<MedicalRecordReminder session={ session } />
 		</>
 	);
 }

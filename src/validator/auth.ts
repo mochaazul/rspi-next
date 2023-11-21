@@ -5,7 +5,12 @@ const EmailYup = yup.string().email()
 	.label('Email');
 
 const DefaultPasswordYup = yup.string().required()
-	.min(8, 'Password should contain at least 8 characters');
+	.min(8, 'Password should contain at least 8 characters')
+	.test(
+		'isValidPass',
+		'Password must have at least 1 capitalized character',
+		(value: any) => /[A-Z]/.test(value)
+	);
 
 export const DefaultPinYup = yup.string().required()
 	.min(6, 'PIN should contain 6 characters')
@@ -29,21 +34,10 @@ export const ResetPasswordSchema = yup.object().shape({
 
 export const RegisterSchema = yup.object().shape({
 	email: EmailYup,
-	password: DefaultPasswordYup
-		.label('Password')
-		.test(
-			'isValidPass',
-			'Password must have at least 1 capitalized character',
-			(value: any) => /[A-Z]/.test(value)
-		)
+	password: DefaultPasswordYup.label('Password')
 	,
 	confirm_password: DefaultPasswordYup
 		.label('Confirmation password')
-		.test(
-			'isValidPass',
-			'Password must have at least 1 capitalized character',
-			(value: any) => /[A-Z]/.test(value)
-		)
 		.oneOf([yup.ref('password')], 'Passwords do not match')
 });
 

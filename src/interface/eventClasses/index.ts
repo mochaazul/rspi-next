@@ -28,6 +28,7 @@ export interface EventClassesDetail {
 	phone: string;
 	short_description: string;
 	title: string;
+	slug: string;
 	updated_date: string;
 }
 

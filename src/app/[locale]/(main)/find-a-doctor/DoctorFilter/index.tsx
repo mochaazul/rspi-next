@@ -15,15 +15,15 @@ import Pills from '../Pills';
 import useFindDoctor from '../useFindDoctor';
 
 
-
 type Props = {
 	hospitals: HospitalDetail[],
 	clinics: ClinicResponse[];
 };
 
 const DoctorFilter = ({ hospitals, clinics }: Props) => {
-	const t = useScopedI18n('page.findDoctor');
+
 	const d = useScopedI18n('dayName.full');
+	const t = useScopedI18n('page.findDoctor');
 
 	const Days = [
 		{ key: '1', label: d('sunday'), value: 'Sunday' },
