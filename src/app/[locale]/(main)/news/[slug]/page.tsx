@@ -87,7 +87,7 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className='mt-[50px]'>
+					<div className='mt-[70px]'>
 						<div className='w-[81px]'>
 							<Button label={ selectedArticle?.category } className='px-[8px] py-[6px]' />
 						</div>

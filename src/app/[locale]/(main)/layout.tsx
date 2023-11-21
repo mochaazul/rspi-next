@@ -23,14 +23,17 @@ const blacklistedRoute = [
 	'/doctor-detail',
 	'/book-appointment'
 ];
-interface RootLayoutProps {
+
+export default async function RootLayout({
+	props,
+	children,
+}: {
 	children: React.ReactNode,
 	props: {
 		containerStyle?: OutletStyleType;
 		footerShow?: boolean;
 	};
-  }
-export default async function RootLayout({ props, children, }: RootLayoutProps) {
+}) {
 	const headersList = headers();
 
 	const pathname = headersList.get('x-invoke-path') || '';
