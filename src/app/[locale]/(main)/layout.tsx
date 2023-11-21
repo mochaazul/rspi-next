@@ -2,16 +2,13 @@
 import { headers } from 'next/headers';
 
 import { appStage } from '@/config';
-
 import { Footer, Header } from '@/components';
-
 import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import CallForAmbulance from '@/components/ui/CallForAmbulance';
 import DevTools from '@/components/ui/DevTools';
-
 import '@/styles/globals.css';
-import { OutletStyleType, } from './style';
 
+import { OutletStyleType, } from './style';
 import {
 	centerOfExcellenceFetch,
 	facilityServicesFetch,
@@ -37,7 +34,6 @@ export default async function RootLayout({
 		footerShow?: boolean;
 	};
 }) {
-
 	const headersList = headers();
 
 	const pathname = headersList.get('x-invoke-path') || '';

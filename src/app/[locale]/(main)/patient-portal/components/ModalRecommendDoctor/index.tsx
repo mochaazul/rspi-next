@@ -6,9 +6,10 @@ import styled from 'styled-components';
 import { isEmpty } from 'lodash';
 
 import { Modal, Text, Button, Spinner } from '@/components/ui';
-import { Images, Languages, colors, icons } from '@/constant';
+import { Images, colors, icons } from '@/constant';
 import { I_VisitHistory, } from '@/interface/PatientProfile';
 import { usePostDoctorRatingMutation } from '@/lib/api/client/doctors';
+import { useScopedI18n } from '@/locales/client';
 
 import { ModalStyle } from '../../style';
 
@@ -18,14 +19,12 @@ interface PropsType {
 	id?: string;
 	visitHistory?: I_VisitHistory;
 }
-const { jadwalKunjungan, riwayatKunjungan: {
-	recommendDoctorModal: { header }
-} } = Languages.page.patientPortal;
 
 const feedbackPills = ['Communication', 'Professionalism', 'Attitude', 'Skill', 'Timely', 'Knowledge'];
 
 const Rating = ({ onChange, value }: { value: string, onChange: (value: string) => void; }) => {
 	const options = Array.from({ length: 10 }, (_, i) => i + 1);
+
 	return (<div>
 		<RadioGroup className='flex justify-between' value={ value } onChange={ onChange }>
 			{
@@ -117,13 +116,15 @@ const FeedbackNotes = ({ onChange, value }: { value: string, onChange: (value: s
 };
 
 const RecommendDoctorModal = (props: PropsType) => {
+	const t = useScopedI18n('page.patientPortal');
+
 	const { data: giveDoctorRatingResponse, trigger: giveDoctorRating, error: giveDoctorRatingError, isMutating: giveDoctorRatingLoading } = usePostDoctorRatingMutation();
 
 	const [ratingValue, setRatingValue] = useState<string>('');
 	const [feedbackValue, setFeedbackValue] = useState<string[]>([]);
 	const [feedbackNotes, setFeedbackNotes] = useState<string>('');
 
-	const onSubmit = async() => {
+	const onSubmit = async () => {
 		if (props.visitHistory) {
 			await giveDoctorRating({
 				id: props.visitHistory.appointment_id,
@@ -152,7 +153,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 		>
 			<ModalStyle>
 				<div>
-					<Text text={ header } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
+					<Text text={ t('riwayatKunjungan.recommendDoctorModal.header') } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
 					<div className='flex my-[30px] p-[16px] rounded-md bg-[#FAFAFA]'>
 						<div><img className='rounded-full h-[48px] w-[48px]' src={ props.visitHistory?.doctor_photo || Images.Doctor1.src } /></div>
 						<div className='ml-[15px]'>

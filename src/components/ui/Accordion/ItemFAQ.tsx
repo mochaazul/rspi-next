@@ -4,14 +4,14 @@ import Link from 'next/link';
 
 import { colors } from '@/constant';
 import { Text } from '@/components/ui';
+import { useScopedI18n } from '@/locales/client';
 
 import { ItemType } from '.';
 import { ItemStyle } from './style';
-import languages from '@/constant/languages';
-
-const { readMoreLabel } = languages.page.contactUs.faq;
 
 const ItemFAQ = (props: ItemType) => {
+	const t = useScopedI18n('page.contactUs.faq');
+
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	const handleToggleOpen = () => {
@@ -65,7 +65,7 @@ const ItemFAQ = (props: ItemType) => {
 												color={ colors.paradiso.accent1 }
 												className='ml-1 inline-block'
 												subClassName='text-justify max-sm:leading-[18px]'
-												text={ readMoreLabel }
+												text={ t('readMoreLabel') }
 											/>
 										</Link> :
 										null

@@ -12,15 +12,10 @@ import {
 	CustomCarousel,
 	Text
 } from '@/components/ui';
-import {
-	colors,
-	Languages as lang
-} from '@/constant';
+import { colors } from '@/constant';
 import images from '@/constant/images';
-import {
-	HospitalDetail,
-	HospitalState
-} from '@/interface';
+import { HospitalDetail, HospitalState } from '@/interface';
+import { useScopedI18n } from '@/locales/client';
 
 import { ContactUsPanel } from './style';
 import SelectRSLocation from './SelectRSLocation';
@@ -28,15 +23,14 @@ import FAQDatas from './FAQDatas';
 import ContactUsForm from './ContactUsForm';
 import { PanelH2, PanelV1 } from '../style';
 
-const language = lang.page.contactUs;
-
 const ContactUsPage = ({
 	hospitalSelector,
 	breadcrumbsPath,
-}:{
+}: {
 	breadcrumbsPath: BreadcrumbsType['datas'],
-    hospitalSelector: HospitalState,
+	hospitalSelector: HospitalState,
 }) => {
+	const t = useScopedI18n('page.contactUs');
 
 	const navigate = useRouter();
 	// const hospitalSelector = useTypedSelector<HospitalState>('hospital');
@@ -50,7 +44,7 @@ const ContactUsPage = ({
 	};
 
 	const [selectedMapIndex, setSelectedMapIndex] = useState<number>(0);
-	
+
 	useEffect(() => {
 		if (Object.values(hospitalSelector || []).length > 0) {
 			setSelectedMapIndex(Object.values(hospitalSelector || [])[0]?.id ?? 0);
@@ -106,7 +100,7 @@ const ContactUsPage = ({
 							fontWeight='900'
 							lineHeight='29px'
 							color={ colors.grey.darker }
-							text={ language.heading }
+							text={ t('heading') }
 							subClassName='text-[24px]'
 						/>
 						<Text
@@ -114,7 +108,7 @@ const ContactUsPage = ({
 							fontWeight='400'
 							lineHeight='19px'
 							color={ colors.grey.dark }
-							text={ language.subHeading }
+							text={ t('subHeading') }
 							className='mt-[10px]'
 						/>
 					</div>
@@ -135,7 +129,7 @@ const ContactUsPage = ({
 								lineHeight='29px'
 								textAlign='center'
 								color={ colors.grey.darker }
-								text={ language.contactForm.heading }
+								text={ t('contactForm.heading') }
 								className='sm:block hidden'
 							/>
 							<Text
@@ -144,7 +138,7 @@ const ContactUsPage = ({
 								lineHeight='23px'
 								textAlign='center'
 								color={ colors.grey.dark }
-								text={ language.contactForm.subHeading }
+								text={ t('contactForm.subHeading') }
 								className='mt-3'
 								subClassName='max-sm:text-left'
 							/>
@@ -161,7 +155,7 @@ const ContactUsPage = ({
 								lineHeight='29px'
 								textAlign='center'
 								color={ colors.grey.darker }
-								text={ language.faq.heading }
+								text={ t('faq.heading') }
 							/>
 							<Text
 								fontSize='16px'
@@ -169,7 +163,7 @@ const ContactUsPage = ({
 								lineHeight='23px'
 								textAlign='center'
 								color={ colors.grey.dark }
-								text={ language.faq.subHeading }
+								text={ t('faq.subHeading') }
 								className='mt-3'
 							/>
 							<div className='mt-10'>
@@ -182,7 +176,7 @@ const ContactUsPage = ({
 								className='mt-5 py-4'
 								theme='outline'
 								$hoverTheme='primary'
-								label={ language.faq.allFaqBtnLabel }
+								label={ t('faq.allFaqBtnLabel') }
 								onClick={ () => navigate.push('/contact-us/faq') }
 							/>
 						</div>
@@ -198,7 +192,7 @@ const ContactUsPage = ({
 							lineHeight='29px'
 							textAlign='center'
 							color={ colors.grey.darker }
-							text={ language.location.heading }
+							text={ t('location.heading') }
 							className='text-center'
 						/>
 						<Text
@@ -207,12 +201,12 @@ const ContactUsPage = ({
 							lineHeight='23px'
 							textAlign='center'
 							color={ colors.grey.dark }
-							text={ language.location.subHeading }
+							text={ t('location.subHeading') }
 							className='mt-3 mx-auto text-center sm:w-[630px] w-full'
 						/>
 					</div>
 				</PanelH2>
-				
+
 				<div className={ 'sm:mt-20 sm:pb-5 pb-10 mt-8 flex sm:flex-row flex-col' }>
 					<div className='max-sm:hidden'>
 						{

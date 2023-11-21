@@ -4,7 +4,7 @@ import { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import dayjs from 'dayjs';
 
-import { colors, Images, Languages } from '@/constant';
+import { colors, Images } from '@/constant';
 import { Text } from '@/components/ui';
 import PinModal from '@/components/ui/PinModal';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
@@ -17,8 +17,6 @@ import RiwayatVaksin from './components/RiwayatVaksin';
 import RiwayatLab from './components/RiwayatLab';
 
 import { VisitHistoryStyle } from './style';
-
-const { riwayatLab, riwayatVaksin } = Languages.page.patientPortal;
 
 type MenuType = {
 	id: number;

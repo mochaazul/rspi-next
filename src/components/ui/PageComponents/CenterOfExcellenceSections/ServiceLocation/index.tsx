@@ -3,7 +3,8 @@
 import React, { useState, useMemo } from 'react';
 
 import { CustomCarousel, Text, Tabs } from '@/components/ui';
-import { colors, Languages as lang } from '@/constant';
+import { useScopedI18n } from '@/locales/client';
+import { colors } from '@/constant';
 
 import CardMenu from '../CardMenu';
 
@@ -15,9 +16,9 @@ interface NewsProps {
 
 const tabsData = ['Conditions', 'Treatments We Offer', 'Medical Technology', 'Our Doctors'];
 
-const language = lang.page.centerOfExcellence.serviceLocation;
-
 const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, centerOfExcellence }) => {
+	const t = useScopedI18n('page.centerOfExcellence');
+
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 
 	const renderContent = useMemo(() => {
@@ -85,7 +86,7 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 			</div>
 			<div className='mt-[92px]'>
 				<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default }>
-					{ language.heading }
+					{ t('serviceLocation.heading') }
 				</Text>
 
 				<Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineHeight='24px'>

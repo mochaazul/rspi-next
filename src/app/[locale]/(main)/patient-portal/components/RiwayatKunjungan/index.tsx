@@ -4,16 +4,17 @@ import dayjs from 'dayjs';
 import { isEmpty } from 'lodash';
 import Link from 'next/link';
 
-import { Languages, icons } from '@/constant';
+import { icons } from '@/constant';
 import { Button, Spinner, Text } from '@/components/ui';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
+import { useScopedI18n } from '@/locales/client';
 
 import CardAppointment from '../CardAppointment';
 import { EmptyResultContainer } from '../../style';
 
-const { empty } = Languages.page.patientPortal.riwayatKunjungan;
-
 const RiwayatKunjungan = () => {
+	const t = useScopedI18n('page.patientPortal');
+
 	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory();
 
 	const sortVisitHistories = () => {
@@ -33,7 +34,7 @@ const RiwayatKunjungan = () => {
 	if (isEmpty(visitHistoryResponse?.data)) {
 		return (<EmptyResultContainer>
 			<icons.EmptyVisitHistories />
-			<Text text={ empty }
+			<Text text={ t('riwayatKunjungan.empty') }
 				fontSize='20px'
 				fontWeight='700'
 				lineHeight='28px'

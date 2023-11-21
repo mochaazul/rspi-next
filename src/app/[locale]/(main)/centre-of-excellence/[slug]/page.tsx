@@ -7,17 +7,18 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import Card, { CardContentWithInner, CardFooter } from '@/components/ui/Card';
-import { colors, Languages as lang } from '@/constant';
+import { colors } from '@/constant';
 import { getCoe, getCenterOfExcellenceNewsByID } from '@/lib/api';
 import CardMenu from '@/components/ui/PageComponents/CenterOfExcellenceSections/CardMenu';
 import ServiceLocation from '@/components/ui/PageComponents/CenterOfExcellenceSections/ServiceLocation';
 import RelatedNewsMobile from '@/components/ui/PageComponents/CenterOfExcellenceSections/RelatedNewsMobile';
+import { getScopedI18n } from '@/locales/server';
 
 import { CentreOfExcellenceStyle } from './style';
 
-const language = lang.page.centerOfExcellence.serviceLocation;
+const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
+	const t = await getScopedI18n('page.centerOfExcellence');
 
-const CentreOfExcellencePage = async({ params }: { params: { slug: string; }; }) => {
 	const responseCenterOfExcellence = await getCoe({
 		query: {
 			is_publish: true,
@@ -105,7 +106,7 @@ const CentreOfExcellencePage = async({ params }: { params: { slug: string; }; })
 						!_.isEmpty(responseCenterOfExcellenceNewsByID?.data) &&
 						<div className='mt-[120px]'>
 							<Text
-								text={ language.relatedArticle }
+								text={ t('serviceLocation.relatedArticle') }
 								className='related'
 								fontWeight='700'
 								fontSize='24px'
