@@ -26,7 +26,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 	const [activeTab, setActiveTab] = useState(0);
 
 	const promo = activeTab === 0 ? events : events?.filter((item: any) => item?.category === tabData?.[activeTab]?.value);
-	console.log(promo, 'promo');
+	
 	if (showAsRelated) {
 		return (
 			<div className='w-full'>
