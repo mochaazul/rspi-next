@@ -195,7 +195,7 @@ const NewsHealthArticlesPage = ({
 												footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label='View Details' /> }
 												className='mb-0'
 												iconShare={ true }
-												to={ `${ data?.id }` }
+												to={ `/news/${ data?.slug }` }
 											/>
 										))
 									}

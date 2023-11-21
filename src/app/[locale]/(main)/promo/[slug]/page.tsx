@@ -16,9 +16,9 @@ import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/Pr
 import { fetchPromoByID, fetchEvents } from './helpers';
 import { PanelH1, PanelV1 } from '../../style';
 
-const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
+const DetailEventClassesPromo = (props: { params: { slug: any; }; }) => {
 	const pathName = usePathname();
-	const params = useParams();
+	
 	const [loading, setLoading] = useState(false);
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 	const [eventsData, setEventsData] = useState<EventClassesState['events']>();
@@ -36,13 +36,14 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 		phone: '',
 		short_description: '',
 		title: '',
+		slug: '',
 		updated_date: '',
 	});
 
 	const breadcrumbsPath = [{ name: 'Promo & Packages', url: '/promo' }, { url: '#', name: selectedEvent?.title || '' }];
 
 	useEffect(() => {
-		fetchPromoByID(props?.params?.id).then(function(response) {
+		fetchPromoByID(props?.params?.slug).then(function(response) {
 			setLoading(true);
 			setSelectedEvent(response?.data);
 			setLoading(false);
@@ -53,9 +54,9 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 	}, []);
 
 	useEffect(() => {
-		if (props.params.id !== selectedEvent?.id) {
+		if (props.params.slug !== selectedEvent?.slug) {
 			setLoading(true);
-			fetchPromoByID(props.params.id).then(function(response) {
+			fetchPromoByID(props.params.slug).then(function(response) {
 				setSelectedEvent(response?.data);
 				setLoading(false);
 			});
@@ -64,7 +65,7 @@ const DetailEventClassesPromo = (props: { params: { id: any; }; }) => {
 			});
 			setLoading(false);
 		}
-	}, [props.params.id]);
+	}, [props.params.slug]);
 
 	const handleOpenSocmed = (link: string) => () => {
 		window?.open(link, '_blank');

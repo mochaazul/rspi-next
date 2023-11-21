@@ -15,7 +15,7 @@ export const fetchNewsSpecialtyByID = (id: any) => {
 };
 
 export const fetchRelatedNews = (id: any) => {
-
+	
 	return getRelatedNews({
 		param: id,
 		query: {
