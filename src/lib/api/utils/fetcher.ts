@@ -19,11 +19,10 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 	const safeQueryParam = options?.query ?? {};
 	const safePagination = options?.pagination ?? {};
 	const Authorization = await cookiesHelper.getToken();
+	const language = await cookiesHelper.getCurrentLocale();
 
-	const language = 'TODO: ADJUST WITH i18n thing';
-	
 	const headers: Record<string, any> = {
-		'content-language': 'idn',
+		'content-language': language === 'id' ? 'idn' : language,
 		...Authorization ? { Authorization } : {},
 		'X-Channel': 'website'
 		// 'Content-Type': options?.isUpload ? 'multipart/form-data' : 'application/json'

@@ -33,6 +33,14 @@ export default {
 			success: 'Validation Success',
 			loading: 'Please Wait',
 			backToLogin: 'Back to Login'
+		},
+		formValidation: {
+			required: '{label} is a required field',
+			emailNotValid: 'Email must be a valid email',
+			minLength: '{label} should contain at least {minLength} characters',
+			minCapitalize: '{label} must have at least {minCapitalize} capitalized character',
+			exactLength: '{label} should contain {length} characters',
+			notMatch: '{label} do not match'
 		}
 	},
 	gender: {

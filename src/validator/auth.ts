@@ -1,19 +1,23 @@
 import * as yup from 'yup';
 
-const EmailYup = yup.string().email()
-	.required()
-	.label('Email');
+const EmailYup = yup.string().email('emailNotValid')
+	.required('required');
 
-const DefaultPasswordYup = yup.string().required()
-	.min(8, 'Password should contain at least 8 characters');
+const DefaultPasswordYup = yup.string().required('required')
+	.min(8, 'minLength')
+	.test(
+		'isValidPass',
+		'minCapitalize',
+		(value: any) => /[A-Z]/.test(value)
+	);
 
-export const DefaultPinYup = yup.string().required()
-	.min(6, 'PIN should contain 6 characters')
-	.max(6, 'PIN should contain 6 characters');
+export const DefaultPinYup = yup.string().required('required')
+	.min(6, 'exactLength')
+	.max(6, 'exactLength');
 
 export const LoginSchema = yup.object().shape({
 	email: EmailYup,
-	password: DefaultPasswordYup.label('Password'),
+	password: DefaultPasswordYup,
 });
 
 export const ForgotPasswordSchema = yup.object().shape({
@@ -21,58 +25,43 @@ export const ForgotPasswordSchema = yup.object().shape({
 });
 
 export const ResetPasswordSchema = yup.object().shape({
-	new_password: DefaultPasswordYup.label('Password'),
+	new_password: DefaultPasswordYup,
 	confirm_password: DefaultPasswordYup
 		.label('Confirmation password')
-		.oneOf([yup.ref('new_password')], 'Passwords do not match')
+		.oneOf([yup.ref('new_password')], 'notMatch')
 });
 
 export const RegisterSchema = yup.object().shape({
 	email: EmailYup,
 	password: DefaultPasswordYup
-		.label('Password')
-		.test(
-			'isValidPass',
-			'Password must have at least 1 capitalized character',
-			(value: any) => /[A-Z]/.test(value)
-		)
 	,
 	confirm_password: DefaultPasswordYup
 		.label('Confirmation password')
-		.test(
-			'isValidPass',
-			'Password must have at least 1 capitalized character',
-			(value: any) => /[A-Z]/.test(value)
-		)
-		.oneOf([yup.ref('password')], 'Passwords do not match')
+		.oneOf([yup.ref('password')], 'notMatch')
 });
 
 export const PinSchema = yup.object().shape({
-	pin: DefaultPinYup.label('PIN'),
-	confirm_pin: DefaultPinYup.label('Confirmation PIN')
-		.oneOf([yup.ref('pin')], 'PIN do not match')
+	pin: DefaultPinYup,
+	confirm_pin: DefaultPinYup
+		.oneOf([yup.ref('pin')], 'notMatch')
 });
 
 export const OTPSchema = yup.object().shape({
-	otp: yup.string().required()
-		.label('OTP')
-		.min(6, 'OTP should contain 6 characters')
-		.max(6, 'OTP should contain 6 characters')
+	otp: yup.string().required('required')
+		.min(6, 'exactLength')
+		.max(6, 'exactLength')
 });
 
 export const RegisterOnboardSchema = yup.object().shape({
-	medical_record: yup.string().required()
-		.label('Medical record number'),
-	phone: yup.string().required()
-		.label('Phone number'),
-	birth_date: yup.string().required()
-		.label('Date of birth'),
+	medical_record: yup.string().required('required'),
+	phone: yup.string().required('required'),
+	birth_date: yup.string().required('required'),
 });
 
 export const UpdatePasswordSchema = yup.object().shape({
-	old_password: DefaultPasswordYup.label('Password'),
-	new_password: DefaultPasswordYup.label('Password'),
+	old_password: DefaultPasswordYup,
+	new_password: DefaultPasswordYup,
 	confirm_password: DefaultPasswordYup
 		.label('Confirmation password')
-		.oneOf([yup.ref('new_password')], 'Passwords do not match')
+		.oneOf([yup.ref('new_password')], 'notMatch')
 });

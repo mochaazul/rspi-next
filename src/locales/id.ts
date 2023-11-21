@@ -37,6 +37,14 @@ export default {
 			success: 'Validasi Berhasil',
 			loading: 'Mohon Tunggu Sebentar',
 			backToLogin: 'Kembali ke halaman login'
+		},
+		formValidation: {
+			required: '{label} wajib diisi',
+			emailNotValid: 'Format email tidak valid',
+			minLength: '{label} minimum terdiri dari {minLength} karakter',
+			minCapitalize: '{label} minimum terdiri dari {minCapitalize} huruf kapital',
+			exactLength: '{label} harus terdiri dari {length} karakter',
+			notMatch: '{label} tidak sesuai'
 		}
 	},
 	page: {
