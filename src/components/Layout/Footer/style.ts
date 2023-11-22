@@ -18,15 +18,7 @@ const FooterStyled = styled.footer`
   .ambulance-icon {
     display: none;
   }
-  .store-images-container {
-    display:flex;
-    flex-wrap:wrap;
-    flex-direction:column;
-  }
-  .store-images {
-    width: 7em;
-    padding: 1em 0;
-  }
+ 
   .email-sub-form-container {
     display: flex;
     align-items: center;

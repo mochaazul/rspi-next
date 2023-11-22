@@ -9,6 +9,7 @@ import Text from '@/components/ui/Text';
 import Spinner from '@/components/ui/Spinner';
 import Button from '@/components/ui/Button';
 import { useScopedI18n } from '@/locales/client';
+import dayjs from 'dayjs';
 
 type Props = {
 	hospital?: string;
@@ -33,15 +34,19 @@ const VisitSchedule: React.FC<Props> = ({
 	timeslot,
 	isLoading
 }) => {
-	// const { selectedDoctorTimeSlot, timeSlotLoading } = useTypedSelector<FindDoctorState>('findDoctor');
 	const t = useScopedI18n('page.doctorProfile');
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('');
 
-	// const language = lang.page.doctorProfile;
-
 	const getTimeSlot = () => {
 		const filteredTimeSlot = timeslot?.filter(item => item.hospital_code === hospital) ?? [];
-		const grouped = _.groupBy(filteredTimeSlot, item => item.clinic_code);
+		const removePastDate = filteredTimeSlot.filter(item => {
+			const itemDateTime = `${item.date} ${formatTimeslot(item.session_app_start)}`;
+			// only return when the item is on the future
+			const isPastDateTime = dayjs().isAfter(dayjs(itemDateTime, 'YYYY-MM-DD HH:mm'));
+			return !isPastDateTime && item;
+
+		});
+		const grouped = _.groupBy(removePastDate, item => item.clinic_code);
 		return grouped;
 	};
 
@@ -73,7 +78,7 @@ const VisitSchedule: React.FC<Props> = ({
 
 	if (isLoading) return <div className='flex align-center justify-center h-full'><Spinner /></div>;
 	if (!selectedDate) return renderEmptyState;
-	if (dateStatus === 'Limited') return <>
+	if (dateStatus === 'Limited' || _.isEmpty(getTimeSlot())) return <>
 		<EmptyWarningContainer>
 			<Text
 				fontSize='14px'

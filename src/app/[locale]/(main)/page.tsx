@@ -22,6 +22,7 @@ import AccreditationAwards from '@/components/ui/PageComponents/LandingPageSecti
 import MobileAppBanner from '@/components/ui/PageComponents/LandingPageSections/MobileAppBanner';
 
 import { isMobile } from 'react-device-detect';
+import Image from 'next/image';
 
 export default async function Page() {
 	const coeRes = await getCoe();
@@ -40,7 +41,7 @@ export default async function Page() {
 				return banner.data.filter(img => img.img_url_mobile_idn !== '').map((image: any, index: any) => {
 					return <>
 						<a href={ image.url_link_idn } >
-							<img className='h-[85vh] max-sm:h-[360px] object-cover' key={ index } src={ image.img_url_mobile_idn } alt='slider' />
+							<Image fill objectFit='cover' key={ index } src={ image.img_url_mobile_idn } alt='slider' />
 						</a>;
 					</>;
 				});
@@ -48,7 +49,7 @@ export default async function Page() {
 				return banner.data.filter(img => img.img_url_idn !== '').map((image: any, index: any) => {
 					return <>
 						<a href={ image.url_link_idn } >
-							<img className='h-[85vh] max-sm:h-[360px] object-cover' key={ index } src={ image.img_url_idn } alt='slider' />
+							<Image fill objectFit='cover' key={ index } src={ image.img_url_idn } alt='slider' />
 						</a>;
 					</>;
 				});
@@ -58,7 +59,7 @@ export default async function Page() {
 				return banner.data.filter(img => img.img_url_mobile_en !== '').map((image: any, index: any) => {
 					return <>
 						<a href={ image.url_link_en } >
-							<img className='h-[85vh] max-sm:h-[360px] object-cover' key={ index } src={ image.img_url_mobile_en } alt='slider' />
+							<Image fill objectFit='cover' key={ index } src={ image.img_url_mobile_en } alt='slider' />
 						</a>;
 					</>;
 				});
@@ -66,7 +67,7 @@ export default async function Page() {
 				return banner.data.filter(img => img.img_url_en !== '').map((image: any, index: any) => {
 					return <>
 						<a href={ image.url_link_en } >
-							<img className='h-[85vh] max-sm:h-[360px] object-cover' key={ index } src={ image.img_url_en } alt='slider' />
+							<Image fill objectFit='cover' key={ index } src={ image.img_url_en } alt='slider' />
 						</a>;
 					</>;
 				});

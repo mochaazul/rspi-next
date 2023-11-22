@@ -42,7 +42,7 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 				i18n={ currentLang }
 				primaryColor='green'
 				displayFormat={ props.dateFormat }
-				value={ { startDate: new Date(props.value ?? ''), endDate: new Date(props.value ?? '') } }
+				value={ { startDate: props.value ? new Date(props.value ?? '') : null, endDate: props.value ? new Date(props.value ?? '') : null } }
 				onChange={ onChange }
 				placeholder={ props?.placeholder ?? 'Choose Preferred Day' }
 			/>
