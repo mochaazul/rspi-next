@@ -11,25 +11,23 @@ import {
 	Text,
 	Socmed
 } from '@/components/ui';
-import {
-	FooterDetail
-} from '@/interface/footer';
+import { FooterDetail } from '@/interface/footer';
 import { useScopedI18n } from '@/locales/client';
 
 import FooterStyled, { FooterContainer } from './style';
+import Image from 'next/image';
 
 const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 	const navigate = useRouter();
 
 	const t = useScopedI18n('page.footer');
 
-	// const { loading, footerList } = useTypedSelector<FooterState>('footerSlice'); // TODO: migrate
-	// const fetchFooter = useAppDispatch(getFooterSlug); // TODO: migrate
-
 	const [loading, setLoading] = useState<boolean>(false);
 	const [ourHospital, setOurHospital] = useState<FooterDetail[]>([]);
 	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
+	
 	const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]);
+
 	const [pages, setPages] = useState<FooterDetail[]>([]);
 
 	useEffect(() => {
@@ -59,8 +57,6 @@ const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 			}
 		});
 	}, []);
-
-	// End migrate
 
 	const renderItems = (items: FooterDetail[]) => {
 		return (
@@ -155,9 +151,11 @@ const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 					</div>
 					<div>
 						{ renderCategoryTitle(t('getRSPIMobileLabel')) }
-						<div className='store-images-container'>
-							<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'><img src={ Images.GooglePlay.src } alt='google play icon' className='store-images' /></a>
-							<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'><img src={ Images.AppStore.src } alt='app store icon' className='store-images' /></a>
+						<div className='flex flex-col gap-4 md:flex-row'>
+							<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'>
+								<Image src={ Images.GooglePlay.src } alt='google play icon' width={ 120 } height={ 37 } className='store-images' /></a>
+							<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'>
+								<Image src={ Images.AppStore.src } alt='app store icon' width={ 120 } height={ 37 } className='store-images' /></a>
 						</div>
 					</div>
 				</div>
