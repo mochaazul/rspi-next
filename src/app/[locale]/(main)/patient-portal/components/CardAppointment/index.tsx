@@ -145,20 +145,25 @@ const CardAppointment = (props: PropsType) => {
 		>
 			<div className='flex flex-wrap items-center'>
 				<Text text={ `Apointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='md:mr-[15px]' />
-				<Bullet />
-				<div>
-					<button
-						style={ { backgroundColor: mappingStatusColorBackground(props.visit_status ?? '') } }
-						className={ 'py-[4px] px-[15px] rounded-[10px] duration-300 mx-[8px] ' }
-					>
-						<Text
-							text={ mappingStatus(props.visit_status ?? '') }
-							fontWeight='600'
-							fontSize='14px'
-							className='max-sm:py-[0px]'
-							color={ mappingStatusColor(props.visit_status ?? '') } />
-					</button>
-				</div>
+				{
+					props.type === 'self' ?
+						<>
+							<Bullet />
+							<div>
+								<button
+									style={ { backgroundColor: mappingStatusColorBackground(props.visit_status ?? '') } }
+									className={ 'py-[4px] px-[15px] rounded-[10px] duration-300 mx-[8px] ' }
+								>
+									<Text
+										text={ mappingStatus(props.visit_status ?? '') }
+										fontWeight='600'
+										fontSize='14px'
+										className='max-sm:py-[0px]'
+										color={ mappingStatusColor(props.visit_status ?? '') } />
+								</button>
+							</div>
+						</> : <></>
+				}
 				{
 					!props.isTelemedicine && (
 						<button
@@ -216,7 +221,7 @@ const CardAppointment = (props: PropsType) => {
 				</div>
 			}
 			<div className='grid grid-cols-[auto_repeat(3,minmax(0,1fr))] mt-[24px] gap-[24px] cursor-pointer'>
-				<Image alt='' src={ props.doctorImgUrl || '' } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
+				<Image alt='' src={ props.doctorImgUrl || '' } height={ 60 } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
 				<div className='flex-1'>
 					<Text text={ props.doctorName || '-' } fontSize='16px' fontWeight='700' />
 					<Text text={ props.doctorSpeciality || '-' } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
