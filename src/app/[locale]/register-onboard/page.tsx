@@ -220,7 +220,6 @@ const RegisterOnboard = () => {
 						onChange={ onChangeInput }
 						errorMessage={ formikRegister.errors?.phone }
 						isError={ !!formikRegister.errors?.phone }
-					// onInput={(e) => }
 					/>
 					<Text
 						text={ languages('form.phoneHint') }

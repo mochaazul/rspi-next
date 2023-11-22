@@ -46,7 +46,7 @@ export const Header = ({
 	facilityServicesData: FacilityServicesState,
 	notificationResponseData?: NotificationResponse,
 	marAllReadNotifFunc: (params: any) => any,
-	footersData: FooterState,
+	footersData: FooterDetail[],
 }) => {
 
 	const router = useRouter();
@@ -196,7 +196,6 @@ export const Header = ({
 												// redirect to hospital detail, using footer data
 												Object.values(footersData || []).filter(footer => footer.footer_category === 'our-hospital')?.forEach((element: FooterDetail) => {
 													if (element?.title === item?.name) {
-														console.log(element.slug);
 														navigate.push(`/footer/${ element.slug }`);
 													}
 												});
