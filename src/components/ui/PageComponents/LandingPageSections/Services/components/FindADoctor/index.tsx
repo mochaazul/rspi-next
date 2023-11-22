@@ -25,20 +25,12 @@ const FindADoctor: React.FC<Props> = ({
 }) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor');
 
-	const {
-		findADoctorField,
-		onSubmitHandler
-	} = useFindADoctor();
+	const {	onSubmitHandler } = useFindADoctor();
 
 	const hospitalArr = [
 		{ key: 'all', value: hospitals.map(hospital => hospital.hospital_code).join(','), label: t('form.allHospital') },
 		...hospitals.map(hospital => ({ key: hospital?.id?.toString(), value: hospital.hospital_code, label: hospital?.name }))
 	];
-
-	const onSubmitForm = (evt: React.FormEvent<HTMLFormElement>) => {
-		// const { doctorName, hospital, preferredDay } = onSubmit(evt);
-		// onSubmitHandler(doctorName.value, hospital.value, selectedSpeciality?.speciality_code, preferredDay.value, isTelemedicine);
-	};
 
 	const mapSpeciality = () => {
 		if (clinics?.length > 0) {
