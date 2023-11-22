@@ -1,15 +1,16 @@
 'use client';
 
 import React from 'react';
+import { Edit3 } from 'react-feather';
 
 import { colors, icons } from '@/constant';
+import { useScopedI18n } from '@/locales/client';
 
 import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
 
 import Form from '../../../Form';
 import Text from '../../../Text';
 import WithInputLabel from '../../../withInputLabel';
-import { useScopedI18n } from '@/locales/client';
 
 interface HorizontalInputType {
 	inputProps: Partial<typeof Form.TextField>,
@@ -17,6 +18,7 @@ interface HorizontalInputType {
 	labelInfo?: string,
 	value?: string,
 	inputType?: string,
+	onEditClick?: () => void;
 }
 
 const HorizontalInputWrapper = (props: HorizontalInputType) => {
@@ -46,7 +48,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 						null
 				}
 			</WithInputLabel.LabelText>
-			<div className='col-auto'>
+			<div className='col-auto relative'>
 				{
 					props.inputType === 'dropdown' ?
 						<Form.Dropdown
@@ -70,6 +72,23 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 								{ ...props.inputProps } />
 				}
 
+				{ props.onEditClick && (
+					<div className='absolute pr-5 right-0 inset-y-0 flex items-center'>
+						<button
+							type='button'
+							className='flex items-center gap-2 focus:outline-none'
+							onClick={ props.onEditClick }
+						>
+							<Edit3 className='w-[18px] h-[18px] sm:w-5 sm:h-5' color={ colors.green.brandAccent } />
+							<Text
+								fontSize='14px'
+								fontWeight='900'
+								color={ colors.green.brandAccent }
+								subClassName='max-sm:text-xs'
+							>{ t('editLabel') }</Text>
+						</button>
+					</div>
+				) }
 			</div>
 		</div>
 	);

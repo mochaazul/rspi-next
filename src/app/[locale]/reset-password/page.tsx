@@ -109,10 +109,6 @@ const ResetPassword = () => {
 		}));
 	};
 
-	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formikResetPassword.setFieldValue(e.target.id, e.target.value);
-	};
-
 	const getInputErrorMessage = (key?: string, label?: string) => {
 		return getValidationTranslation(tValidation, key, { label });
 	};
@@ -154,9 +150,10 @@ const ResetPassword = () => {
 								<Form.FormGroup className='group-wrapper w-full'>
 									<Form.TextField
 										id='new_password'
+										name='new_password'
 										placeholder={ t('resetForm.newPasswordPlaceHolder') }
 										value={ formikResetPassword.values.new_password }
-										onChange={ onChangeInput }
+										onChange={ formikResetPassword.handleChange }
 										errorMessage={ getInputErrorMessage(formikResetPassword.errors.new_password, t('resetForm.newPasswordLabel')) }
 										isError={ !!formikResetPassword.errors.new_password }
 										label={ t('resetForm.newPasswordLabel') }
@@ -169,10 +166,11 @@ const ResetPassword = () => {
 								<Form.FormGroup className='group-wrapper w-full'>
 									<Form.TextField
 										id='confirm_password'
+										name='confirm_password'
 										placeholder={ t('resetForm.newPasswordConfirmationPlaceholder') }
 										label={ t('resetForm.newPasswordConfirmationLabel') }
 										value={ formikResetPassword.values.confirm_password }
-										onChange={ onChangeInput }
+										onChange={ formikResetPassword.handleChange }
 										type={ inputPasswordType.confirm_password }
 										iconName={ inputPasswordType.confirm_password === 'password' ? 'EyeClosed' : 'Eye' }
 										iconPosition='right'

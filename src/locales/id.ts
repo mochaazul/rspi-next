@@ -88,7 +88,11 @@ export default {
 					phone: 'No Hp',
 					gender: 'Jenis Kelamin',
 					submit: 'Simpan',
-					dob: 'Tanggal Lahir'
+					dob: 'Tanggal Lahir',
+					genderLabel: {
+						male: 'Laki-laki',
+						female: 'Perempuan'
+					}
 				},
 				emptyOther: 'Belum ada data orang lain',
 				emptySelf: 'Data diri Kosong',
@@ -107,7 +111,8 @@ export default {
 					front: 'Upload foto tampak depan',
 					back: 'Upload foto tampak belakang',
 				},
-				disclaimer: 'Disclaimer : Data yang diberikan adalah benar. Pendaftaran dilakukan untuk diri sendiri. Jika pendaftaran dilakukan untuk orang lain, sudah mendapatkan persetujuan dari pihak terkait'
+				disclaimer: 'Disclaimer : Data yang diberikan adalah benar. Pendaftaran dilakukan untuk diri sendiri. Jika pendaftaran dilakukan untuk orang lain, sudah mendapatkan persetujuan dari pihak terkait',
+				errorEmptyData: 'Pastikan Data Keluhan dan Penjamin Terisi'
 			},
 			confirmationModal: {
 				heading: 'Konfirmasi Booking Appointment',
@@ -704,7 +709,8 @@ export default {
 				patientEmailLabelInfo: 'Anda belum bisa melakukan perubahan alamat email jika belum mempunyai nomor rekam medis',
 				patientGenderMaleLabel: 'Laki-laki',
 				patientGenderFemaleLabel: 'Perempuan',
-				patientPhotoProfile: 'Foto profil'
+				patientPhotoProfile: 'Foto profil',
+				editLabel: 'Ubah'
 			},
 			securitySetting: {
 				heading: 'Pengaturan Keamanan',

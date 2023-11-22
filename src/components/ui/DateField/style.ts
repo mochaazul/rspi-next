@@ -61,7 +61,7 @@ export const DateFieldWrapper = styled.div<StyledDateFieldType>`
       z-index: 110 !important;
     }
     &:focus {
-      outline: 1px solid ${ colors.green.toscaLight };
+      outline: 1px solid ${ colors.green.brandAccent };
     }
     &.focus {
       box-shadow: 0 !important;

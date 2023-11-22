@@ -145,11 +145,11 @@ const OTPPage = () => {
 		});
 	};
 
-	const onChangeInputValue = useCallback((data: { name?: string; value?: string; }) => {
+	const onChangeInputValue = (data: { name?: string; value?: string; }) => {
 		if (data?.name) {
 			formikOtp.setFieldValue(data?.name, data?.value ?? '');
 		}
-	}, []);
+	};
 
 	return (
 		<OTPPageStyle>

@@ -163,10 +163,6 @@ const LoginPage = () => {
 		/>;
 	};
 
-	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formik.setFieldValue(e.target.id, e.target.value);
-	};
-
 	const getInputErrorMessage = (key?: string, label?: string) => {
 		return getValidationTranslation(tValidation, key, { label });
 	};
@@ -222,7 +218,7 @@ const LoginPage = () => {
 								name='email'
 								label={ t('form.emailLabel') }
 								value={ formik.values.email }
-								onChange={ onChangeInput }
+								onChange={ formik.handleChange }
 								errorMessage={ getInputErrorMessage(formik.errors.email, t('form.emailLabel')) }
 								isError={ !!formik.errors.email }
 							/>
@@ -230,6 +226,7 @@ const LoginPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='password'
+								name='password'
 								placeholder={ t('form.passwordPlaceholder') }
 								className='w-full'
 								iconName={ inputPasswordType === 'password' ? 'EyeClosed' : 'Eye' }
@@ -238,7 +235,7 @@ const LoginPage = () => {
 								onIconClick={ togglePasswordShow }
 								value={ formik.values.password }
 								label={ t('form.passwordLabel') }
-								onChange={ onChangeInput }
+								onChange={ formik.handleChange }
 								errorMessage={ getInputErrorMessage(formik.errors.password, t('form.passwordLabel')) }
 								isError={ !!formik.errors.password }
 							/>

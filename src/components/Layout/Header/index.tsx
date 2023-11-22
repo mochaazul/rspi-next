@@ -297,11 +297,11 @@ export const Header = ({
 								{
 									isLoggedIn ?
 										<>
-											<a href='#' className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
+											<div className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
 												<icons.Notif />
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponseData?.total_unread }</span>
-											</a>
+											</div>
 											<div className='flex text-white items-center'>
 												<div>
 
@@ -340,7 +340,7 @@ export const Header = ({
 												{ t('user.patientInformation') }
 											</Link>
 										</li>
-										<li className='block py-4 px-4 text-red-600' onClick={ handleClick }>
+										<li className='block py-4 px-4 text-red-600 cursor-pointer' onClick={ handleClick }>
 											{ t('user.logout') }
 										</li>
 									</ul>

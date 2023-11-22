@@ -45,7 +45,7 @@ export const SelectStyled = styled.select`
   ${ GlobalAllTransition5ms }
 
   &:focus {
-    outline: 1px solid ${ colors.green.toscaLight };
+    outline: 1px solid ${ colors.green.brandAccent };
   }
 `;
 

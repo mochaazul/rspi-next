@@ -75,10 +75,6 @@ const UpdatePasswordPage = () => {
 		}));
 	};
 
-	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formikUpdatePassword.setFieldValue(e.target.id, e.target.value);
-	};
-
 	const getInputErrorMessage = (key?: string, label?: string) => {
 		return getValidationTranslation(tValidation, key, { label });
 	};
@@ -132,9 +128,10 @@ const UpdatePasswordPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='old_password'
+								name='old_password'
 								placeholder={ t('resetForm.oldPasswordPlaceHolder') }
 								value={ formikUpdatePassword.values.old_password }
-								onChange={ onChangeInput }
+								onChange={ formikUpdatePassword.handleChange }
 								errorMessage={ getInputErrorMessage(formikUpdatePassword.errors.old_password, t('resetForm.oldPasswordLabel')) }
 								isError={ !!formikUpdatePassword.errors.old_password }
 								label={ t('resetForm.oldPasswordLabel') }
@@ -147,9 +144,10 @@ const UpdatePasswordPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='new_password'
+								name='new_password'
 								placeholder={ t('resetForm.newPasswordPlaceHolder') }
 								value={ formikUpdatePassword.values.new_password }
-								onChange={ onChangeInput }
+								onChange={ formikUpdatePassword.handleChange }
 								errorMessage={ getInputErrorMessage(formikUpdatePassword.errors.new_password, t('resetForm.newPasswordLabel')) }
 								isError={ !!formikUpdatePassword.errors.new_password }
 								label={ t('resetForm.newPasswordLabel') }
@@ -162,10 +160,11 @@ const UpdatePasswordPage = () => {
 						<Form.FormGroup className='group-wrapper w-full !mb-0'>
 							<Form.TextField
 								id='confirm_password'
+								name='confirm_password'
 								placeholder={ t('resetForm.newPasswordConfirmationPlaceholder') }
 								label={ t('resetForm.newPasswordConfirmationLabel') }
 								value={ formikUpdatePassword.values.confirm_password }
-								onChange={ onChangeInput }
+								onChange={ formikUpdatePassword.handleChange }
 								type={ inputPasswordType.confirm_password }
 								iconName={ inputPasswordType.confirm_password === 'password' ? 'EyeClosed' : 'Eye' }
 								iconPosition='right'

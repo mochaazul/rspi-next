@@ -114,10 +114,6 @@ const ContactUsForm = ({
 		return getValidationTranslation(tValidation, key, { label });
 	};
 
-	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formikContactUs.setFieldValue(e.target.id, e.target.value);
-	};
-
 	return (
 		<Form
 			className='sm:mt-8 mt-4 flex flex-col sm:gap-[25px] gap-4'
@@ -134,7 +130,7 @@ const ContactUsForm = ({
 				name='hospital_code'
 				label={ t('contactForm.labels.hospital') }
 				placeholder={ t('contactForm.placeholder.hospital') }
-				onChange={ onChangeInput }
+				onChange={ formikContactUs.handleChange }
 				value={ formikContactUs.values.hospital_code }
 				isError={ !!formikContactUs.errors.hospital_code }
 				errorMessage={ getInputErrorMessage(formikContactUs.errors.hospital_code, t('contactForm.labels.hospital')) }
@@ -146,7 +142,7 @@ const ContactUsForm = ({
 						name='full_name'
 						label={ t('contactForm.labels.fullName') }
 						placeholder={ t('contactForm.placeholder.fullName') }
-						onChange={ onChangeInput }
+						onChange={ formikContactUs.handleChange }
 						value={ formikContactUs.values.full_name }
 						isError={ !!formikContactUs.errors.full_name }
 						errorMessage={ getInputErrorMessage(formikContactUs.errors.full_name, t('contactForm.labels.fullName')) }
@@ -156,7 +152,7 @@ const ContactUsForm = ({
 						name='email'
 						label={ t('contactForm.labels.email') }
 						placeholder={ t('contactForm.placeholder.email') }
-						onChange={ onChangeInput }
+						onChange={ formikContactUs.handleChange }
 						value={ formikContactUs.values.email }
 						isError={ !!formikContactUs.errors.email }
 						errorMessage={ getInputErrorMessage(formikContactUs.errors.email, t('contactForm.labels.email')) }
@@ -180,7 +176,7 @@ const ContactUsForm = ({
 						name='gender'
 						label={ t('contactForm.labels.gender') }
 						placeholder={ t('contactForm.placeholder.gender') }
-						onChange={ onChangeInput }
+						onChange={ formikContactUs.handleChange }
 						value={ formikContactUs.values.gender }
 						isError={ !!formikContactUs.errors.gender }
 						errorMessage={ getInputErrorMessage(formikContactUs.errors.gender, t('contactForm.labels.gender')) }
@@ -190,7 +186,7 @@ const ContactUsForm = ({
 						name='phone'
 						label={ t('contactForm.labels.phone') }
 						placeholder={ t('contactForm.placeholder.phone') }
-						onChange={ onChangeInput }
+						onChange={ formikContactUs.handleChange }
 						value={ formikContactUs.values.phone }
 						isError={ !!formikContactUs.errors.phone }
 						errorMessage={ getInputErrorMessage(formikContactUs.errors.phone, t('contactForm.labels.phone')) }
@@ -219,7 +215,7 @@ const ContactUsForm = ({
 				name='title'
 				label={ t('contactForm.labels.subject') }
 				placeholder={ t('contactForm.placeholder.subject') }
-				onChange={ onChangeInput }
+				onChange={ formikContactUs.handleChange }
 				value={ formikContactUs.values.title }
 				isError={ !!formikContactUs.errors.title }
 				errorMessage={ getInputErrorMessage(formikContactUs.errors.title, t('contactForm.labels.subject')) }
@@ -230,7 +226,7 @@ const ContactUsForm = ({
 				name='content'
 				label={ t('contactForm.labels.notes') }
 				placeholder={ t('contactForm.placeholder.notes') }
-				onChange={ onChangeInput }
+				onChange={ formikContactUs.handleChange }
 				value={ formikContactUs.values.content }
 				isError={ !!formikContactUs.errors.content }
 				errorMessage={ getInputErrorMessage(formikContactUs.errors.content, t('contactForm.labels.notes')) }

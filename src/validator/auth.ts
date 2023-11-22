@@ -33,8 +33,7 @@ export const PinSchema = yup.object().shape({
 
 export const OTPSchema = yup.object().shape({
 	otp: yup.string().required('required')
-		.min(6, 'exactLength')
-		.max(6, 'exactLength')
+		.length(6, ({ length }) => `exactLength_${ length }`)
 });
 
 export const RegisterOnboardSchema = yup.object().shape({

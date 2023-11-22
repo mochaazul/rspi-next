@@ -100,10 +100,6 @@ const RegisterPage = () => {
 		}
 	};
 
-	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formikRegister.setFieldValue(e.target.id, e.target.value);
-	};
-
 	const getInputErrorMessage = (key?: string, label?: string) => {
 		return getValidationTranslation(tValidation, key, { label });
 	};
@@ -153,6 +149,7 @@ const RegisterPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='email'
+								name='email'
 								placeholder={ t('form.emailPlaceholder') }
 								label={ t('form.emailLabel') }
 								className='w-full'
@@ -160,12 +157,13 @@ const RegisterPage = () => {
 								value={ formikRegister.values.email }
 								errorMessage={ getInputErrorMessage(formikRegister.errors.email, t('form.emailLabel')) }
 								isError={ !!formikRegister.errors.email }
-								onChange={ onChangeInput }
+								onChange={ formikRegister.handleChange }
 							/>
 						</Form.FormGroup>
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='password'
+								name='password'
 								placeholder={ t('form.passwordLabel') }
 								label={ t('form.passwordLabel') }
 								className='w-full'
@@ -176,13 +174,14 @@ const RegisterPage = () => {
 								value={ formikRegister.values.password }
 								errorMessage={ getInputErrorMessage(formikRegister.errors.password, t('form.passwordLabel')) }
 								isError={ !!formikRegister.errors.password }
-								onChange={ onChangeInput }
+								onChange={ formikRegister.handleChange }
 								infoMessage={ t('form.passwordHint') }
 							/>
 						</Form.FormGroup>
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='confirm_password'
+								name='confirm_password'
 								placeholder={ t('form.passwordConfirmationPlaceholder') }
 								label={ t('form.passwordConfirmationLabel') }
 								className='w-full'
@@ -194,7 +193,7 @@ const RegisterPage = () => {
 								errorMessage={ getInputErrorMessage(formikRegister.errors.confirm_password, t('form.passwordConfirmationLabel')) }
 								isError={ !!formikRegister.errors.confirm_password }
 								infoMessage={ t('form.passwordHint') }
-								onChange={ onChangeInput }
+								onChange={ formikRegister.handleChange }
 							/>
 						</Form.FormGroup>
 						<Button

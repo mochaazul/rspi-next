@@ -47,12 +47,6 @@ import { getProfile } from '@/lib/api/profile';
 import ProfilePageStyle, { Divider } from './style';
 import { PanelH2, PanelV1 } from '../style';
 
-const editableInputProps = {
-	iconPosition: 'right',
-	featherIcon: 'Edit3',
-	$iconColor: colors.paradiso.default,
-};
-
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
 	return new Promise<string | ArrayBuffer | null>((resolve, reject) => {
@@ -254,10 +248,6 @@ export default function Page() {
 		setEnableValidation(prevToggle => ({ ...prevToggle, email: true }));
 		setError('');
 		formikEmail.handleSubmit();
-	};
-
-	const onChangeInputProfile = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formikProfile.setFieldValue(e.target.id, e.target.value);
 	};
 
 	const onChangeValueProfile = (data: { name?: string; value?: string; }) => {
@@ -660,15 +650,14 @@ export default function Page() {
 									<HorizontalInputWrapper
 										label={ t('profileDetail.patientEmail') }
 										labelInfo={ !isDisableFormProfile ? t('profileDetail.patientPhoneNumberLabelInfo') : undefined }
+										{ ...isDisableFormProfile
+											? {
+												onEditClick: () => {
+													setPinModalVisible(true);
+													setError('');
+												}
+											} : {} }
 										inputProps={ {
-											...isDisableFormProfile
-												? {
-													...editableInputProps,
-													onIconClick: () => {
-														setPinModalVisible(true);
-														setError('');
-													}
-												} : {},
 											type: 'email',
 											value: patientProfile?.data?.email ?? '',
 											placeholder: t('profileDetail.patientEmailPlaceholder'),
@@ -698,11 +687,10 @@ export default function Page() {
 									<HorizontalInputWrapper
 										label={ t('profileDetail.patientNameLabel') }
 										inputProps={ {
-											id: 'name',
 											name: 'name',
 											type: 'text',
 											value: formikProfile.values.name,
-											onChange: onChangeInputProfile,
+											onChange: formikProfile.handleChange,
 											placeholder: t('profileDetail.patientNamePlaceholder'),
 											errorMessage: getInputErrorMessage(formikProfile.errors.name, t('profileDetail.patientNameLabel')),
 											isError: !!formikProfile.errors.name,
@@ -713,10 +701,9 @@ export default function Page() {
 										label={ t('profileDetail.patientGenderLabel') }
 										inputType='dropdown'
 										inputProps={ {
-											id: 'gender',
 											name: 'gender',
 											value: formikProfile.values.gender,
-											onChange: onChangeInputProfile,
+											onChange: formikProfile.handleChange,
 											placeholder: t('profileDetail.patientGenderPlaceholder'),
 											disabled: isDisableFormProfile,
 											errorMessage: getInputErrorMessage(formikProfile.errors.gender, t('profileDetail.patientGenderLabel')),
@@ -753,10 +740,9 @@ export default function Page() {
 										label={ t('profileDetail.patientPhoneNumber') }
 										labelInfo={ isDisableFormProfile ? t('profileDetail.patientPhoneNumberLabelInfo') : undefined }
 										inputProps={ {
-											id: 'phone',
 											name: 'phone',
 											value: formikProfile.values.phone,
-											onChange: onChangeInputProfile,
+											onChange: formikProfile.handleChange,
 											placeholder: t('profileDetail.patientPhoneNumberPlaceholder'),
 											disabled: isDisableFormProfile,
 											errorMessage: getInputErrorMessage(formikProfile.errors.phone, t('profileDetail.patientPhoneNumber')),
@@ -797,23 +783,21 @@ export default function Page() {
 								<HorizontalInputWrapper
 									label={ t('securitySetting.passwordLabel') }
 									value='123456789010'
+									onEditClick={ () => navigate.push('/update-password') }
 									inputProps={ {
-										...editableInputProps,
 										placeholder: t('securitySetting.passwordLabel'),
 										disabled: true,
 										type: 'password',
-										onIconClick: () => navigate.push('/update-password')
 									} }
 								/>
 								<HorizontalInputWrapper
 									label={ t('securitySetting.pinLabel') }
 									value='123456'
+									onEditClick={ () => navigate.push('/pin-reset') }
 									inputProps={ {
-										...editableInputProps,
 										placeholder: t('securitySetting.pinLabel'),
 										disabled: true,
 										type: 'password',
-										onIconClick: () => navigate.push('/pin-reset')
 									} }
 								/>
 							</div>

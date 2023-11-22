@@ -88,7 +88,11 @@ export default {
 					phone: 'Phone',
 					gender: 'Gender',
 					submit: 'Submit',
-					dob: 'Birth Date'
+					dob: 'Birth Date',
+					genderLabel: {
+						male: 'Male',
+						female: 'Female'
+					}
 				},
 				emptyOther: 'There is no other\'s profile.',
 				emptySelf: 'Your profile is empty',
@@ -107,7 +111,8 @@ export default {
 					front: 'Upload face side of your insurance card',
 					back: 'Upload back side of your insurance card',
 				},
-				disclaimer: 'The provided data is correct. Registration is done for oneself. If the registration is done for someone else, consent has been obtained from the relevant party.'
+				disclaimer: 'The provided data is correct. Registration is done for oneself. If the registration is done for someone else, consent has been obtained from the relevant party.',
+				errorEmptyData: 'Make sure complaint and guarantor data are filled in'
 			},
 			confirmationModal: {
 				heading: 'Booking Confirmation',
@@ -137,6 +142,9 @@ export default {
 					done: 'has been successfully created.'
 				},
 				btnLabel: 'Ok'
+			},
+			bookingForm: {
+
 			}
 		},
 		awards: {
@@ -704,7 +712,8 @@ export default {
 				patientEmailLabelInfo: 'You can\'t change your email address if you don\'t have a medical record number',
 				patientGenderMaleLabel: 'Male',
 				patientGenderFemaleLabel: 'Female',
-				patientPhotoProfile: 'Photo profile'
+				patientPhotoProfile: 'Photo profile',
+				editLabel: 'Change'
 			},
 			securitySetting: {
 				emailLabel: 'Email',

@@ -85,8 +85,9 @@ const ForgotPassword = () => {
 							className='w-full'
 							type='email'
 							label={ t('form.emailLabel') }
+							name='email'
 							value={ formikForgotPassword.values.email }
-							onChange={ e => formikForgotPassword.setFieldValue(e.target.id, e.target.value) }
+							onChange={ formikForgotPassword.handleChange }
 							errorMessage={ getInputErrorMessage(formikForgotPassword.errors.email, t('form.emailLabel')) }
 							isError={ !!formikForgotPassword.errors.email }
 						/>

@@ -116,6 +116,7 @@ const RegisterOnboard = () => {
 				mappedMsg = t('errors.fieldIsEmpty');
 				break;
 			case 'mr and dob not match':
+			case 'trakcare: MR and DOB not match':
 				mappedMsg = t('errors.dobNotMatch');
 				break;
 			case 'your medical records has been registered':

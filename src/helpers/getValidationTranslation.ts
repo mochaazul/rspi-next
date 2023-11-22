@@ -4,6 +4,7 @@ export type ScopedValidationTranslation = Awaited<ReturnType<typeof useScopedI18
 export type ValidationParams = {
 	label?: string;
 	minLength?: string | number;
+	length?: string | number;
 	minCapitalize?: string | number;
 	maxFileSize?: string | number;
 };
@@ -28,6 +29,8 @@ export const getValidationTranslation = (
 			return passedScopedT('minLength', { minLength: params?.minLength ?? keys?.[1], label: params?.label });
 		case 'minCapitalize':
 			return passedScopedT('minCapitalize', { minCapitalize: params?.minCapitalize ?? keys?.[1], label: params?.label });
+		case 'exactLength':
+			return passedScopedT('exactLength', { length: params?.length ?? keys?.[1], label: params?.label });
 		case 'notMatch':
 			return passedScopedT('notMatch', { label: params?.label });
 		case 'fileNotValid':
