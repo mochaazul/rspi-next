@@ -1,11 +1,11 @@
 'use client';
 
-import {  useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { BookingPayload, FamilyProfile, UserDataDetail } from '@/interface';
 
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import {  colors, icons } from '@/constant';
+import { colors, icons } from '@/constant';
 import {
 	BookAppointmentContainer, BottomBar, DisclaimerAlert, FormCol, FormRow
 } from './style';
@@ -33,13 +33,11 @@ const genderMenuItems = [
 ];
 
 const BookAppointment = () => {
+	const t = useScopedI18n('page.bookingAppointment');
 
 	const breadCrumbs = [
-		{ name: 'Home', url: '/' },
-		{ name: 'Book Appointment', url: '#' },
+		{ name: t('heading'), url: '#' },
 	];
-
-	const t = useScopedI18n('page.bookingAppointment');
 
 	const searchParams = useSearchParams();
 	const navigate = useRouter();
@@ -149,10 +147,10 @@ const BookAppointment = () => {
 	// 	return '';
 	// };
 
-	const onConfirmed = async() => {
+	const onConfirmed = async () => {
 		try {
 			const { dob, email, gender, keluhan, klinik, layanan, name, pembayaran, phone, tindakan, asuransi, noAsuransi } = getCurrentForm();
-			const payloadBook:BookingPayload = {
+			const payloadBook: BookingPayload = {
 				patient_name: selectedProfile?.name ?? '',
 				'patient_code': selectedProfile?.patient_code ?? '',
 				'slot_id': timeSlot?.slot_id ?? '',
@@ -327,7 +325,7 @@ const BookAppointment = () => {
 				selfProfile={ userProfile?.data }
 				type={ selectedType }
 			/>
-			 <ConfirmationModal
+			<ConfirmationModal
 				timeSlot={ timeSlot }
 				visible={ confirmationModal }
 				onClose={ () => { setConfirmationModalVisible(false); } }
@@ -337,10 +335,10 @@ const BookAppointment = () => {
 				penjamin={ penjamin }
 				onConfirmed={ onConfirmed }
 				doctorResponse={ doctorResponse }
-				// loadingUploadPhoto={ uploadPhoto }
+			// loadingUploadPhoto={ uploadPhoto }
 			/>
-			
-		 <SuccessConfirmationModal
+
+			<SuccessConfirmationModal
 				hospitalName={ doctorResponse?.data.hospital[0].hospital_name }
 				doctorName={ doctorResponse?.data.name ?? '' }
 				date={ timeSlot?.date }

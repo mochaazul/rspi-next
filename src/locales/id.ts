@@ -70,6 +70,7 @@ export default {
 	},
 	page: {
 		bookingAppointment: {
+			heading: 'Buat Janji Temu',
 			validationError: 'Mohon isi semua data.',
 			profileSelector: {
 				deleteModal: {
@@ -194,6 +195,8 @@ export default {
 				}
 			},
 			faq: {
+				contactUsLabel: 'Hubungi Kami',
+				faqLongLabel: 'Pertanyaan Umum',
 				readMoreLabel: 'Baca selengkapnya',
 				heading: 'FAQ',
 				subHeading: 'Pertanyaan yang sering ditanyakan mengenai layanan di unit RS Pondok Indah',
@@ -777,6 +780,7 @@ export default {
 			},
 		},
 		doctorProfile: {
+			bookAppointmentLabel: 'Buat Janji Temu',
 			scheduleHeading: 'Jadwal Dokter',
 			form: {
 				visitDateLabel: 'Tanggal Kunjungan',

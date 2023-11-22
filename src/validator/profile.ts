@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-import { DefaultPinYup, DefaultEmailYup } from './auth';
+import { DefaultPinYup, DefaultEmailYup } from './defaultYup';
 
 export const UpdateProfileSchema = yup.object().shape({
 	name: yup.string(),

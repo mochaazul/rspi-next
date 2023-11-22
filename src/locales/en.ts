@@ -70,6 +70,7 @@ export default {
 	},
 	page: {
 		bookingAppointment: {
+			heading: 'Book Appointment',
 			validationError: 'Please fill all the data.',
 			profileSelector: {
 				deleteModal: {
@@ -194,6 +195,8 @@ export default {
 				}
 			},
 			faq: {
+				contactUsLabel: 'Contact Us',
+				faqLongLabel: 'Frequently Asked Questions',
 				heading: 'FAQ',
 				subHeading: 'Frequently Asked Questions about our services',
 				allFaqBtnLabel: 'View All FAQs',
@@ -774,6 +777,7 @@ export default {
 			},
 		},
 		doctorProfile: {
+			bookAppointmentLabel: 'Book Appointment',
 			scheduleHeading: 'Doctor&apos;s Schedule',
 			form: {
 				visitDateLabel: 'Visit Date',

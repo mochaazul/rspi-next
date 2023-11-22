@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 
 import { colors, icons } from '@/constant';
+import { useScopedI18n } from '@/locales/client';
 
 import Text from '../Text';
 import { ItemStyle } from './style';
@@ -14,12 +17,14 @@ export interface BreadcrumbsType {
 }
 
 const Breadcrumbs = (props: BreadcrumbsType) => {
+	const t = useScopedI18n('navMenu');
+
 	const datas: BreadcrumbsType['datas'] = props.datas;
 
 	if (!!props.removeHome === false && datas.filter(data => data.url === '/').length <= 0) {
 		datas.splice(0, 0,
 			{
-				name: 'Home',
+				name: t('home'),
 				url: '/'
 			}
 		);

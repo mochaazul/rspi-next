@@ -13,7 +13,6 @@ import {
 	CenterOfExcellenceState,
 	FacilityServicesState,
 	FooterDetail,
-	FooterState,
 	HospitalState,
 	NotificationResponse,
 	UserSessionData,
@@ -197,7 +196,7 @@ export const Header = ({
 												// redirect to hospital detail, using footer data
 												Object.values(footersData || []).filter(footer => footer.footer_category === 'our-hospital')?.forEach((element: FooterDetail) => {
 													if (element?.title === item?.name) {
-														navigate.push(`/footer/${ element.slug }`);
+														router.push(`/footer/${ element.slug }`);
 													}
 												});
 											} }>
@@ -331,12 +330,16 @@ export const Header = ({
 								isLoggedIn &&
 								<div id='dropdown' className={ `${ dropdownHide === true ? 'hidden' : 'fixed' } z-10 w-[208px] mt-[10px] bg-white divide-y divide-gray-100 shadow dark:bg-gray-700` }>
 									<ul className='py-1 text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										<Link href='/patient-portal' as='li' className='border-b border-gray block py-4 px-4' onClick={ () => setDropdownHide(true) }>
-											{ t('user.patientPortal') }
-										</Link>
-										<Link href='/user-information' as='li' className='border-b border-gray block py-4 px-4' onClick={ () => setDropdownHide(true) }>
-											{ t('user.patientInformation') }
-										</Link>
+										<li>
+											<Link href='/patient-portal' className='border-b border-gray block py-4 px-4' onClick={ () => setDropdownHide(true) }>
+												{ t('user.patientPortal') }
+											</Link>
+										</li>
+										<li>
+											<Link href='/user-information' className='border-b border-gray block py-4 px-4' onClick={ () => setDropdownHide(true) }>
+												{ t('user.patientInformation') }
+											</Link>
+										</li>
 										<li className='block py-4 px-4 text-red-600' onClick={ handleClick }>
 											{ t('user.logout') }
 										</li>
