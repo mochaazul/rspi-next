@@ -17,8 +17,9 @@ import {
 import { useScopedI18n } from '@/locales/client';
 
 import FooterStyled, { FooterContainer } from './style';
+import { HospitalDetail, HospitalState } from '@/interface/Hospital';
 
-const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
+const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalState; }) => {
 	const navigate = useRouter();
 
 	const t = useScopedI18n('page.footer');
@@ -27,7 +28,7 @@ const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 	// const fetchFooter = useAppDispatch(getFooterSlug); // TODO: migrate
 
 	const [loading, setLoading] = useState<boolean>(false);
-	const [ourHospital, setOurHospital] = useState<FooterDetail[]>([]);
+	const [ourHospital, setOurHospital] = useState<HospitalDetail[]>([]);
 	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
 	const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]);
 	const [pages, setPages] = useState<FooterDetail[]>([]);
@@ -38,13 +39,8 @@ const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 		setPrivacyPolicy([]);
 		setPages([]);
 		setLoading(true);
-
 		Object.values(footerData || [])?.forEach(item => {
 			switch (item?.footer_category) {
-				case 'our-hospital':
-					setOurHospital(ourHospital => [...ourHospital, item]);
-					setLoading(false);
-					break;
 				case 'our-company':
 					setOurCompany(ourCompany => [...ourCompany, item]);
 					setLoading(false);
@@ -58,6 +54,7 @@ const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 					break;
 			}
 		});
+		setOurHospital(Object.values(hospitalData || []));
 	}, []);
 
 	// End migrate
@@ -83,6 +80,27 @@ const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 		);
 	};
 
+	const renderItemsHospital = (items: HospitalDetail[]) => {
+		return (
+			<div className='flex flex-col gap-y-3 sm:gap-y-4'>
+				{
+					items.map((item, index) => {
+						return (
+							<Text
+								key={ index }
+								fontSize='14px'
+								fontWeight='700'
+								className='flex'
+								subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer'
+								onClick={ () => navigate.push(`/hospital/${ item.id }`) }
+							>{ item.name }</Text>
+						);
+					})
+				}
+			</div>
+		);
+	};
+
 	const date = new Date();
 
 	const renderCategoryItems = (items: FooterDetail[]) => {
@@ -101,6 +119,22 @@ const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 		return renderItems(items);
 	};
 
+	const renderHospitalItems = (items: HospitalDetail[]) => {
+		if (items.length > 4) {
+			const leftItems = items.slice(0, Math.ceil(items.length / 2));
+			const rightItems = items.slice(Math.ceil(items.length / 2));
+
+			return (
+				<div className='grid md:grid-cols-2 md:gap-x-4 gap-y-3 sm:gap-y-4'>
+					{ renderItemsHospital(leftItems) }
+					{ renderItemsHospital(rightItems) }
+				</div>
+			);
+		}
+
+		return renderItemsHospital(items);
+	};
+
 	const renderCategoryTitle = (text: string) => {
 		return (
 			<Text
@@ -109,6 +143,36 @@ const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 				className='mb-4 max-sm:text-xs font-bold sm:font-normal'
 			>{ text }</Text>
 		);
+	};
+
+	const renderFooterHospital = (data: HospitalDetail[], title: string) => {
+		if (loading && !data?.length) {
+			return (
+				<div className='w-2/5 sm:w-[200px] lg:w-1/6'>
+					<div className='animate-pulse flex w-full'>
+						<div className='flex-1 space-y-6 py-1'>
+							<div className='h-2 bg-slate-200 rounded' />
+							<div className='space-y-3'>
+								{ Array.from(Array(4).keys()).map(idx => (
+									<div key={ idx } className='h-2 bg-slate-200 rounded' />
+								)) }
+							</div>
+						</div>
+					</div>
+				</div>
+			);
+		}
+
+		if (data?.length) {
+			return (
+				<div>
+					{ renderCategoryTitle(title) }
+					{ renderHospitalItems(data) }
+				</div>
+			);
+		}
+
+		return null;
 	};
 
 	const renderFooterCategory = (data: FooterDetail[], title: string) => {
@@ -144,7 +208,7 @@ const FooterLayout = ({ footerData }: { footerData: FooterDetail[]; }) => {
 	return (
 		<FooterStyled className='px-4 xl:px-10 py-8 sm:py-16'>
 			<FooterContainer>
-				{ renderFooterCategory(ourHospital ?? [], t('ourHospitalsLabel')) }
+				{ renderFooterHospital(ourHospital ?? [], t('ourHospitalsLabel')) }
 				{ renderFooterCategory(ourCompany ?? [], t('ourCompanyLabel')) }
 				{ renderFooterCategory(pages ?? [], t('visitorPatientLabel')) }
 
