@@ -14,7 +14,6 @@ import { useScopedI18n } from '@/locales/client';
 import Pills from '../Pills';
 import useFindDoctor from '../useFindDoctor';
 
-
 type Props = {
 	hospitals: HospitalDetail[],
 	clinics: ClinicResponse[];
@@ -43,6 +42,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 		hospitals,
 		clinics
 	});
+	
 	const onChangeHospital = ({ hospital_code, id }: HospitalDetail, checked: boolean) => {
 		if (checked) {
 			const hospitals = [...hospitalFilter.getAll(), { hospital_code: hospital_code, id: id }].map(item => item.hospital_code).toString();

@@ -12,6 +12,8 @@ import Link from 'next/link';
 import {
 	CenterOfExcellenceState,
 	FacilityServicesState,
+	FooterDetail,
+	FooterState,
 	HospitalState,
 	NotificationResponse,
 } from '@/interface';
@@ -36,15 +38,17 @@ export const Header = ({
 	centerOfExcellenceData,
 	facilityServicesData,
 	notificationResponseData,
-	marAllReadNotifFunc
-}:{
-		hospitalData: HospitalState,
-		centerOfExcellenceData: CenterOfExcellenceState,
-		facilityServicesData: FacilityServicesState,
-		notificationResponseData?: NotificationResponse,
-		marAllReadNotifFunc: (params: any) => any,
-	}) => {
-	
+	marAllReadNotifFunc,
+	footersData,
+}: {
+	hospitalData: HospitalState,
+	centerOfExcellenceData: CenterOfExcellenceState,
+	facilityServicesData: FacilityServicesState,
+	notificationResponseData?: NotificationResponse,
+	marAllReadNotifFunc: (params: any) => any,
+	footersData: FooterDetail[],
+}) => {
+
 	const router = useRouter();
 
 	const currentLang = useCurrentLocale();
@@ -56,6 +60,7 @@ export const Header = ({
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
 	const session = useSession();
+	const navigate = useRouter();
 
 	const isLoggedIn = !!session?.token;
 
@@ -63,7 +68,7 @@ export const Header = ({
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const handleClick = async() => {
+	const handleClick = async () => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			router.refresh();
@@ -109,7 +114,7 @@ export const Header = ({
 							onClick={ () => marAllReadNotifFunc({
 								medical_record: 100154999,
 								email: 'riko.logwirno@rebelworks.co'
-							}).then(function(response: any) {
+							}).then(function (response: any) {
 								notificationResponseFetch();
 							})
 							}
@@ -187,7 +192,14 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
-											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100 '>
+											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100 ' onClick={ () => {
+												// redirect to hospital detail, using footer data
+												Object.values(footersData || []).filter(footer => footer.footer_category === 'our-hospital')?.forEach((element: FooterDetail) => {
+													if (element?.title === item?.name) {
+														navigate.push(`/footer/${ element.slug }`);
+													}
+												});
+											} }>
 												<Image
 													alt='hospital image'
 													src={ item?.img_url?.[0] || '' }
@@ -237,8 +249,8 @@ export const Header = ({
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100'>
-													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' }/>
-													<div className='ml-[10px] w-[310px] hover:bg-transparent'>
+													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
+													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
 													<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />

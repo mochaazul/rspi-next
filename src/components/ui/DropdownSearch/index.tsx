@@ -12,6 +12,7 @@ interface DropdownSearchType {
 	pickerItems?: PickerItem[];
 	onItemClick?: (item: PickerItem) => any;
 	isForLanding?: boolean;
+	
 }
 
 export type PickerItem = {
@@ -31,7 +32,7 @@ const DropdownSearch = ({ textFieldProps, pickerItems, onItemClick, isForLanding
 			onFocus={ () => setPickerShow(true) }
 			onBlur={ () => setTimeout(() => setPickerShow(false), 250) }
 		>
-			<TextField { ...textFieldProps } value={ searchKey } onChange={ (val: any) => setSearchKey(val.currentTarget.value) } />
+			<TextField value={ searchKey } onChange={ (val: any) => setSearchKey(val.currentTarget.value) } { ...textFieldProps } />
 			<Picker show={ pickerShow } className={ stylePicker }>
 				{
 					(pickerItems ?? [])

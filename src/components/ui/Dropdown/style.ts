@@ -16,7 +16,7 @@ export const SelectWrapper = styled.div<StatusType>`
   padding: 12px 36px 12px 0px;
   border-radius: 5px;
   outline: 1px solid ${ colors.grey.lighter };
-  min-height: 43px;
+  min-height: 48px;
   background-color: ${ props => props.disabled ? colors.grey.lighterOpacity : colors.white.default };
   cursor: ${ props => props.disabled ? 'default' : 'pointer' };
   
