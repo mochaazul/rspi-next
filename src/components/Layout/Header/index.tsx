@@ -12,6 +12,8 @@ import Link from 'next/link';
 import {
 	CenterOfExcellenceState,
 	FacilityServicesState,
+	FooterDetail,
+	FooterState,
 	HospitalState,
 	NotificationResponse,
 	UserSessionData,
@@ -37,7 +39,8 @@ export const Header = ({
 	centerOfExcellenceData,
 	facilityServicesData,
 	notificationResponseData,
-	marAllReadNotifFunc
+	marAllReadNotifFunc,
+	footersData,
 }: {
 	session: UserSessionData,
 	hospitalData: HospitalState,
@@ -45,6 +48,7 @@ export const Header = ({
 	facilityServicesData: FacilityServicesState,
 	notificationResponseData?: NotificationResponse,
 	marAllReadNotifFunc: (params: any) => any,
+	footersData: FooterDetail[],
 }) => {
 
 	const router = useRouter();
@@ -189,7 +193,14 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
-											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
+											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center' onClick={ () => {
+												// redirect to hospital detail, using footer data
+												Object.values(footersData || []).filter(footer => footer.footer_category === 'our-hospital')?.forEach((element: FooterDetail) => {
+													if (element?.title === item?.name) {
+														navigate.push(`/footer/${ element.slug }`);
+													}
+												});
+											} }>
 												<Image
 													alt='hospital image'
 													src={ item?.img_url?.[0] || '' }

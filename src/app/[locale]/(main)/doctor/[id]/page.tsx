@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import dayjs, { Dayjs } from 'dayjs';
@@ -48,7 +48,9 @@ export default function Page({ params }: Props) {
 	const [calendarMonth, setCalendarMonth] = useState<Dayjs>(dayjs());
 	
 	const { data: hospital, isLoading: hospitalLoading } = useGetHospital();
+	
 	const { data: doctor, isLoading } = useGetDoctorDetail({ param: params.id });
+
 	const { data: doctorCalendar, isLoading: doctorCalendarLoading } = useGetDoctorCalendar(
 		calendarMonth.format('YYYY-MM-DD'),
 		selectedHospital,
@@ -188,18 +190,27 @@ export default function Page({ params }: Props) {
 										className='flex flex-col md:flex-row'
 									>
 										<TimeSlotCard className='md:w-[calc(100%/2)]'>
-											<Calendar calendarData={ doctorCalendar?.data || [] } value={ selectedDate } onChange={ onChangeDate } onChangeMonth={ (month, year) => {
-												getCalendar(month, year);
-											} } loading={ doctorCalendarLoading } />
+											<Calendar
+												calendarData={ doctorCalendar?.data || [] }
+												value={ selectedDate }
+												onChange={ onChangeDate }
+												onChangeMonth={ (month, year) => {
+													getCalendar(month, year);
+												} }
+												loading={ doctorCalendarLoading } />
 										</TimeSlotCard>
 										<TimeSlotCard className='px-[24px] py-[20px] md:w-[calc(100%/2)]'>
-											<VisitSchedule isLoading={ doctorSlotLoading } timeslot={ doctorSlot?.data || [] } hospital={ selectedHospital } onSelect={ timeSlot => {
-												setSelectedTimeSlot(timeSlot);
-											} }
-											selectedDate={ selectedDate }
-											clinic={ doctor?.data?.clinic }
-											onClickContactHospital={ clickContactHospital }
-											dateStatus={ selectedDateStatus }
+											<VisitSchedule
+												isLoading={ doctorSlotLoading }
+												timeslot={ doctorSlot?.data || [] }
+												hospital={ selectedHospital }
+												onSelect={ timeSlot => {
+													setSelectedTimeSlot(timeSlot);
+												} }
+												selectedDate={ selectedDate }
+												clinic={ doctor?.data?.clinic }
+												onClickContactHospital={ clickContactHospital }
+												dateStatus={ selectedDateStatus }
 											/>
 										</TimeSlotCard>
 									</TimeSlotContainer>
@@ -230,7 +241,6 @@ export default function Page({ params }: Props) {
 						</div>
 					</>
 			}
-
 		</DoctorProfileStyle>
 	);
 };

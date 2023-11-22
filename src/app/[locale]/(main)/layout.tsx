@@ -43,6 +43,7 @@ export default async function RootLayout({
 				facilityServicesData={ facilityServices.data }
 				notificationResponseData={ notificationResponse?.data }
 				marAllReadNotifFunc={ marAllReadNotif }
+				footersData={ footers.data }
 			/>
 			{ children }
 

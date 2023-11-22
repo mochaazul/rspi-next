@@ -20,15 +20,9 @@ import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { RegisterOnboardStyle, Box } from './style';
 
 const regexPhone = (phone: string) => {
-	let phoneNumber;
-	if (phone.trim().substring(0, 2) ==
-		'62') {
-		phoneNumber = phone;
-	} else {
-		phoneNumber = '62' +
-			phone
-				.replace(/^0/, '');
-	}
+	let phoneNumber =
+		phone
+			.replace(/^0/, '').replace(/^62/, '');
 	return phoneNumber;
 };
 
@@ -50,7 +44,7 @@ const RegisterOnboard = () => {
 
 	const onCheckPhonePatient = async (phone: string) => {
 		try {
-			const responseCheckPhone = await checkPhonePatient({ phone: regexPhone(phone) });
+			const responseCheckPhone = await checkPhonePatient({ phone: '62' + phone });
 
 			return responseCheckPhone;
 		} catch (error: any) {
@@ -74,7 +68,7 @@ const RegisterOnboard = () => {
 				setLoadingUser(true);
 				const formRegisterPayload = {
 					...formRegister,
-					phone: regexPhone(formRegister.phone)
+					phone: formRegister.phone
 				};
 
 				const responseCheckPhone = await onCheckPhonePatient(formRegisterPayload.phone);
@@ -167,6 +161,10 @@ const RegisterOnboard = () => {
 	};
 
 	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+		if (e.target.id === 'phone') {
+			formikRegister.setFieldValue(e.target.id, regexPhone(e.target.value));
+			return;
+		}
 		formikRegister.setFieldValue(e.target.id, e.target.value);
 	};
 

@@ -395,6 +395,7 @@ export default {
 					form: {
 						resetBtnLabel: 'Reset',
 						submitBtnLabel: 'Cari Dokter',
+						allHospital: 'Seluruh Cabang RSPI',
 						labels: {
 							doctorName: 'Nama Dokter',
 							hospital: 'Rumah Sakit',

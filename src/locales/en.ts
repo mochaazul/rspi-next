@@ -394,6 +394,7 @@ export default {
 					form: {
 						resetBtnLabel: 'Reset',
 						submitBtnLabel: 'Find a Doctor',
+						allHospital: 'Semua Rumah Sakit',
 						labels: {
 							doctorName: 'Doctor Name',
 							hospital: 'Hospital',
