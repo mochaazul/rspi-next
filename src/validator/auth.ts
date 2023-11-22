@@ -1,42 +1,41 @@
 import * as yup from 'yup';
 
-const EmailYup = yup.string().email('emailNotValid')
+export const DefaultEmailYup = yup.string().email('emailNotValid')
 	.required('required');
 
 const DefaultPasswordYup = yup.string().required('required')
-	.min(8, 'minLength')
+	.min(8, ({ min }) => `minLength_${ min }`)
 	.test(
 		'isValidPass',
-		'minCapitalize',
+		'minCapitalize_1',
 		(value: any) => /[A-Z]/.test(value)
 	);
 
 export const DefaultPinYup = yup.string().required('required')
-	.min(6, 'exactLength')
-	.max(6, 'exactLength');
+	// .min(6, ({ min }) => `exactLength_${ min }`)
+	// .max(6, ({ max }) => `exactLength_${ max }`)
+	.length(6, ({ length }) => `exactLength_${ length }`);
 
 export const LoginSchema = yup.object().shape({
-	email: EmailYup,
+	email: DefaultEmailYup,
 	password: DefaultPasswordYup,
 });
 
 export const ForgotPasswordSchema = yup.object().shape({
-	email: EmailYup
+	email: DefaultEmailYup
 });
 
 export const ResetPasswordSchema = yup.object().shape({
 	new_password: DefaultPasswordYup,
 	confirm_password: DefaultPasswordYup
-		.label('Confirmation password')
 		.oneOf([yup.ref('new_password')], 'notMatch')
 });
 
 export const RegisterSchema = yup.object().shape({
-	email: EmailYup,
+	email: DefaultEmailYup,
 	password: DefaultPasswordYup
 	,
 	confirm_password: DefaultPasswordYup
-		.label('Confirmation password')
 		.oneOf([yup.ref('password')], 'notMatch')
 });
 
@@ -62,6 +61,5 @@ export const UpdatePasswordSchema = yup.object().shape({
 	old_password: DefaultPasswordYup,
 	new_password: DefaultPasswordYup,
 	confirm_password: DefaultPasswordYup
-		.label('Confirmation password')
 		.oneOf([yup.ref('new_password')], 'notMatch')
 });

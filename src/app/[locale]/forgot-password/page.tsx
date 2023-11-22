@@ -12,6 +12,7 @@ import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
 import { useScopedI18n } from '@/locales/client';
 import { useForgotPassword } from '@/lib/api/client/auth';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import { ForgotPasswordStyle, Box } from './style';
 
@@ -27,7 +28,7 @@ const ForgotPassword = () => {
 		validateOnChange: enableValidation,
 		validationSchema: ForgotPasswordSchema,
 		initialValues: { email: '' },
-		onSubmit: async(formForgotPassword: ForgotPasswordType) => {
+		onSubmit: async (formForgotPassword: ForgotPasswordType) => {
 			try {
 				await forgotPassword(formForgotPassword);
 			} catch (error: any) {
@@ -39,9 +40,14 @@ const ForgotPassword = () => {
 		}
 	});
 
-	const languages = useScopedI18n('page.forgotPassword');
+	const t = useScopedI18n('page.forgotPassword');
+	const tValidation = useScopedI18n('validation.formValidation');
 
 	const handleShowModal = () => setNotifVisible(!notifVisible);
+
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
+	};
 
 	return (
 		<ForgotPasswordStyle>
@@ -62,9 +68,9 @@ const ForgotPassword = () => {
 					<div className='mb-[32px] flex flex-col items-center'>
 						<Images.LogoRSPI />
 					</div>
-					<Text text={ languages('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } textAlign='center' subClassName='md:text-[32px] text-[20px]' />
+					<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } textAlign='center' subClassName='md:text-[32px] text-[20px]' />
 					<Text
-						text={ languages('subHeading') }
+						text={ t('subHeading') }
 						fontSize={ '20px' }
 						lineHeight={ '24px' }
 						fontWeight={ '400' }
@@ -75,13 +81,13 @@ const ForgotPassword = () => {
 					<Form.FormGroup className='group-wrapper w-full'>
 						<Form.TextField
 							id='email'
-							placeholder={ languages('form.emailPlaceholder') }
+							placeholder={ t('form.emailPlaceholder') }
 							className='w-full'
 							type='email'
-							label={ languages('form.emailLabel') }
+							label={ t('form.emailLabel') }
 							value={ formikForgotPassword.values.email }
 							onChange={ e => formikForgotPassword.setFieldValue(e.target.id, e.target.value) }
-							errorMessage={ formikForgotPassword.errors.email }
+							errorMessage={ getInputErrorMessage(formikForgotPassword.errors.email, t('form.emailLabel')) }
 							isError={ !!formikForgotPassword.errors.email }
 						/>
 					</Form.FormGroup>
@@ -91,7 +97,7 @@ const ForgotPassword = () => {
 						type='submit'
 						disabled={ !formikForgotPassword.values.email || loading }
 					>
-						{ languages('resetBtnlabel') }
+						{ t('resetBtnlabel') }
 					</Button>
 				</Form>
 			</Box>

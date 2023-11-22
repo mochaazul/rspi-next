@@ -25,7 +25,7 @@ const LoginPage = () => {
 	const searchParam = useSearchParams()!;
 	const { trigger: requestVerifyEmail } = useRequestVerifyEmail();
 	const t = useScopedI18n('page.loginPage');
-	const tvalidation = useScopedI18n('validation.formValidation');
+	const tValidation = useScopedI18n('validation.formValidation');
 
 	const [notifVisible, setNotifVisible] = useState(false);
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
@@ -167,8 +167,8 @@ const LoginPage = () => {
 		formik.setFieldValue(e.target.id, e.target.value);
 	};
 
-	const getErrorMessage = (key?: string, params?: any) => {
-		return getValidationTranslation(tvalidation, key, params);
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
 	};
 
 	return (
@@ -223,7 +223,7 @@ const LoginPage = () => {
 								label={ t('form.emailLabel') }
 								value={ formik.values.email }
 								onChange={ onChangeInput }
-								errorMessage={ getErrorMessage(formik.errors.email, { label: t('form.emailLabel') }) }
+								errorMessage={ getInputErrorMessage(formik.errors.email, t('form.emailLabel')) }
 								isError={ !!formik.errors.email }
 							/>
 						</Form.FormGroup>
@@ -239,11 +239,7 @@ const LoginPage = () => {
 								value={ formik.values.password }
 								label={ t('form.passwordLabel') }
 								onChange={ onChangeInput }
-								errorMessage={ getErrorMessage(formik.errors.password, {
-									label: t('form.passwordLabel'),
-									minLength: 8,
-									minCapitalize: 1
-								}) }
+								errorMessage={ getInputErrorMessage(formik.errors.password, t('form.passwordLabel')) }
 								isError={ !!formik.errors.password }
 							/>
 						</Form.FormGroup>

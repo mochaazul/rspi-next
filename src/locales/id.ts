@@ -27,7 +27,8 @@ export default {
 		pin: {
 			header: 'Masukkan PIN',
 			subHeader: 'Silahkan masukan PIN Untuk melanjutkan.',
-			submitBtnLabel: 'Konfirmasi'
+			submitBtnLabel: 'Konfirmasi',
+			pinLabel: 'PIN'
 		}
 	},
 	validation: {
@@ -44,7 +45,9 @@ export default {
 			minLength: '{label} minimum terdiri dari {minLength} karakter',
 			minCapitalize: '{label} minimum terdiri dari {minCapitalize} huruf kapital',
 			exactLength: '{label} harus terdiri dari {length} karakter',
-			notMatch: '{label} tidak sesuai'
+			notMatch: '{label} tidak sesuai',
+			fileNotValid: 'File tidak valid atau tidak didukung',
+			maxFileSize: 'File lebih besar dari {maxFileSize}'
 		}
 	},
 	page: {
@@ -662,7 +665,10 @@ export default {
 				patientOldEmailPlaceHolder: 'Email Lama',
 				patientNewEmail: 'Email Baru',
 				patientNewEmailPlaceHolder: 'Email Baru',
-				patientEmailLabelInfo: 'Anda belum bisa melakukan perubahan alamat email jika belum mempunyai nomor rekam medis'
+				patientEmailLabelInfo: 'Anda belum bisa melakukan perubahan alamat email jika belum mempunyai nomor rekam medis',
+				patientGenderMaleLabel: 'Pria',
+				patientGenderFemaleLabel: 'Wanita',
+				patientPhotoProfile: 'Foto profil'
 			},
 			securitySetting: {
 				heading: 'Pengaturan Keamanan',

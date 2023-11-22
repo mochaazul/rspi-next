@@ -15,6 +15,7 @@ import useSession from '@/session/client';
 import { useScopedI18n } from '@/locales/client';
 import { RegisterOnboardSchema } from '@/validator/auth';
 import { useCheckPhonePatient, useRegisterOnboard } from '@/lib/api/client/auth';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import { RegisterOnboardStyle, Box } from './style';
 
@@ -34,7 +35,8 @@ const regexPhone = (phone: string) => {
 const RegisterOnboard = () => {
 	const navigate = useRouter();
 	const session = useSession();
-	const languages = useScopedI18n('page.registerOnboard');
+	const t = useScopedI18n('page.registerOnboard');
+	const tValidation = useScopedI18n('validation.formValidation');
 	const { trigger: checkPhonePatient } = useCheckPhonePatient();
 	const { trigger: registerOnboard } = useRegisterOnboard();
 
@@ -46,7 +48,7 @@ const RegisterOnboard = () => {
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [isDuplicatePhoneNumber, setIsDuplicatePhoneNumber] = useState<boolean>(false);
 
-	const onCheckPhonePatient = async(phone: string) => {
+	const onCheckPhonePatient = async (phone: string) => {
 		try {
 			const responseCheckPhone = await checkPhonePatient({ phone: regexPhone(phone) });
 
@@ -67,7 +69,7 @@ const RegisterOnboard = () => {
 			phone: '',
 			name: ''
 		},
-		onSubmit: async(formRegister: RegisterOnboardType) => {
+		onSubmit: async (formRegister: RegisterOnboardType) => {
 			try {
 				setLoadingUser(true);
 				const formRegisterPayload = {
@@ -108,25 +110,25 @@ const RegisterOnboard = () => {
 		let mappedMsg = '';
 		switch (msg?.toLowerCase()) {
 			case 'mr not found':
-				mappedMsg = languages('errors.mrNotFound');
+				mappedMsg = t('errors.mrNotFound');
 				break;
 			case 'phone number not match':
-				mappedMsg = languages('errors.phoneNotMatch');
+				mappedMsg = t('errors.phoneNotMatch');
 				break;
 			case 'sent otp failed':
-				mappedMsg = 'Send OTP Failed';
+				mappedMsg = t('errors.sendOtpFailed');
 				break;
 			case 'field undefined':
-				mappedMsg = languages('errors.fieldIsEmpty');
+				mappedMsg = t('errors.fieldIsEmpty');
 				break;
 			case 'mr and dob not match':
-				mappedMsg = languages('errors.dobNotMatch');
+				mappedMsg = t('errors.dobNotMatch');
 				break;
 			case 'your medical records has been registered':
-				mappedMsg = languages('errors.mrHasBeenRegistered');
+				mappedMsg = t('errors.mrHasBeenRegistered');
 				break;
 			case 'your phone number has been registered. please change with new phone number':
-				mappedMsg = languages('errors.phoneHasBeenRegistered');
+				mappedMsg = t('errors.phoneHasBeenRegistered');
 				break;
 		}
 
@@ -168,6 +170,10 @@ const RegisterOnboard = () => {
 		formikRegister.setFieldValue(e.target.id, e.target.value);
 	};
 
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
+	};
+
 	return (
 		<RegisterOnboardStyle>
 			<Box>
@@ -175,9 +181,9 @@ const RegisterOnboard = () => {
 					<div className='mb-[32px] logo-image'>
 						<Images.LogoRSPI />
 					</div>
-					<Text text={ languages('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } textAlign='center' />
+					<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } textAlign='center' />
 					<Text
-						text={ languages('subHeading') }
+						text={ t('subHeading') }
 						fontSize={ '20px' }
 						lineHeight={ '24px' }
 						fontWeight={ '400' }
@@ -195,11 +201,11 @@ const RegisterOnboard = () => {
 						<Form.TextField
 							id='medical_record'
 							name='medical_record'
-							placeholder={ languages('form.mrPlaceholder') }
-							label={ languages('form.mrlabel') }
+							placeholder={ t('form.mrPlaceholder') }
+							label={ t('form.mrlabel') }
 							value={ formikRegister.values.medical_record }
 							onChange={ onChangeInput }
-							errorMessage={ formikRegister.errors?.medical_record }
+							errorMessage={ getInputErrorMessage(formikRegister.errors?.medical_record, t('form.mrlabel')) }
 							isError={ !!formikRegister.errors?.medical_record }
 							mask='9999999999'
 							isNumber
@@ -216,15 +222,15 @@ const RegisterOnboard = () => {
 						id='phone'
 						name='phone'
 						className='input'
-						placeholder={ languages('form.phonePlaceholder') }
-						label={ languages('form.phoneLabel') }
+						placeholder={ t('form.phonePlaceholder') }
+						label={ t('form.phoneLabel') }
 						value={ formikRegister.values.phone }
 						onChange={ onChangeInput }
-						errorMessage={ formikRegister.errors?.phone }
+						errorMessage={ getInputErrorMessage(formikRegister.errors?.phone, t('form.phoneLabel')) }
 						isError={ !!formikRegister.errors?.phone }
 					/>
 					<Text
-						text={ languages('form.phoneHint') }
+						text={ t('form.phoneHint') }
 						className='mb-8'
 						fontSize={ '12px' }
 						lineHeight={ '15px' }
@@ -244,11 +250,11 @@ const RegisterOnboard = () => {
 							className='input'
 							iconName='CalendarIcon'
 							iconPosition='right'
-							label={ languages('form.birthDateLabel') }
+							label={ t('form.birthDateLabel') }
 							placeholder='yyyy-mm-dd'
 							value={ formikRegister.values.birth_date }
 							onChangeValue={ onChangeInputValue }
-							errorMessage={ formikRegister.errors?.birth_date }
+							errorMessage={ getInputErrorMessage(formikRegister.errors?.birth_date, t('form.birthDateLabel')) }
 							isError={ !!formikRegister.errors?.birth_date }
 						/>
 						{
@@ -275,7 +281,7 @@ const RegisterOnboard = () => {
 						{
 							loadingUser
 								? <Spinner />
-								: languages('submitBtnLabel')
+								: t('submitBtnLabel')
 						}
 					</Button>
 					<Button theme='outline'
@@ -290,7 +296,7 @@ const RegisterOnboard = () => {
 							}
 						} }>
 						<Text
-							text={ languages('mrNotAvailableBtnLabel') }
+							text={ t('mrNotAvailableBtnLabel') }
 							className='cursor-pointer'
 							fontSize={ '16px' }
 							lineHeight={ '19px' }

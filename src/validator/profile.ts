@@ -1,20 +1,30 @@
 import * as yup from 'yup';
 
-import { DefaultPinYup } from './auth';
+import { DefaultPinYup, DefaultEmailYup } from './auth';
 
 export const UpdateProfileSchema = yup.object().shape({
 	name: yup.string(),
-	phone: yup.string().required()
-		.label('Phone number'),
+	phone: yup.string().required('required'),
 	birth_date: yup.string(),
 	gender: yup.string()
 });
 
 export const UpdateEmailSchema = yup.object().shape({
-	email: yup.string().required()
-		.label('New email')
+	email: DefaultEmailYup
 });
 
 export const CheckPinSchema = yup.object().shape({
-	pin: DefaultPinYup.label('PIN'),
+	pin: DefaultPinYup
+});
+
+export const UploadPhotoSchema = yup.object().shape({
+	photo_file: yup
+		.mixed()
+		.test('type', 'fileNotValid', (value: any) => {
+			return value && (['image/jpg', 'image/jpeg', 'image/png']?.includes(value?.type));
+		})
+		.test('fileSize', 'maxFileSize_800k', (value: any) => {
+			return value && value?.size / 1024 / 1024 <= 0.8;
+		})
+		.required('required')
 });

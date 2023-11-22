@@ -23,7 +23,8 @@ export default {
 		pin: {
 			header: 'Enter PIN',
 			subHeader: 'Please enter your PIN to continue.',
-			submitBtnLabel: 'Confirm'
+			submitBtnLabel: 'Confirm',
+			pinLabel: 'PIN'
 		}
 	},
 	validation: {
@@ -40,7 +41,9 @@ export default {
 			minLength: '{label} should contain at least {minLength} characters',
 			minCapitalize: '{label} must have at least {minCapitalize} capitalized character',
 			exactLength: '{label} should contain {length} characters',
-			notMatch: '{label} do not match'
+			notMatch: '{label} do not match',
+			fileNotValid: 'This file type is invalid or unsupported',
+			maxFileSize: 'This file is larger than {maxFileSize}'
 		}
 	},
 	gender: {
@@ -662,7 +665,10 @@ export default {
 				patientNewEmailPlaceHolder: 'New Email',
 				patientEmail: 'Email Address',
 				patientEmailPlaceholder: 'Email',
-				patientEmailLabelInfo: 'You can\'t change your email address if you don\'t have a medical record number'
+				patientEmailLabelInfo: 'You can\'t change your email address if you don\'t have a medical record number',
+				patientGenderMaleLabel: 'Male',
+				patientGenderFemaleLabel: 'Female',
+				patientPhotoProfile: 'Photo profile'
 			},
 			securitySetting: {
 				emailLabel: 'Email',

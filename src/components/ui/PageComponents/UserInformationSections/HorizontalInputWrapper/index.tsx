@@ -9,6 +9,7 @@ import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
 import Form from '../../../Form';
 import Text from '../../../Text';
 import WithInputLabel from '../../../withInputLabel';
+import { useScopedI18n } from '@/locales/client';
 
 interface HorizontalInputType {
 	inputProps: Partial<typeof Form.TextField>,
@@ -19,6 +20,8 @@ interface HorizontalInputType {
 }
 
 const HorizontalInputWrapper = (props: HorizontalInputType) => {
+	const t = useScopedI18n('page.profilePage.profileDetail');
+
 	return (
 		<div className='flex max-sm:flex-col sm:grid sm:grid-cols-[240px_1fr] sm:items-center max-sm:mb-4 mb-5'>
 			<WithInputLabel.LabelText className='mb-2.5 sm:mb-0 flex gap-3 items-center'>
@@ -51,12 +54,12 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 								{
 									key: '1',
 									value: 'Male',
-									label: 'Male'
+									label: t('patientGenderMaleLabel')
 								},
 								{
 									key: '2',
 									value: 'Female',
-									label: 'Female'
+									label: t('patientGenderFemaleLabel')
 								}
 							] }
 							{ ...props.inputProps } /> :

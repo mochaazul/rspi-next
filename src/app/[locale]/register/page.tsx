@@ -17,6 +17,7 @@ import PrivacyPolicyModal from '@/components/ui/PrivacyPolicyModal';
 import { useScopedI18n } from '@/locales/client';
 import { RegisterSchema } from '@/validator/auth';
 import { register } from '@/lib/api/auth';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import RegisterPageStyle from './style';
 
@@ -56,7 +57,8 @@ const RegisterPage = () => {
 		}
 	});
 
-	const languages = useScopedI18n('page.registerPage');
+	const t = useScopedI18n('page.registerPage');
+	const tValidation = useScopedI18n('validation.formValidation');
 
 	const togglePasswordShow = (inputKey: string) => {
 		setInputPasswordType(prevType => ({
@@ -102,6 +104,10 @@ const RegisterPage = () => {
 		formikRegister.setFieldValue(e.target.id, e.target.value);
 	};
 
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
+	};
+
 	return (
 		<RegisterPageStyle>
 			<div className='grid max-sm:grid-cols-2 grid-cols-3 max-sm:gap-0 gap-3 w-full overflow-x-hidden'>
@@ -127,10 +133,10 @@ const RegisterPage = () => {
 								</Link>
 							</div>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
-								{ languages('heading') }
+								{ t('heading') }
 							</Text>
 							<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-4 max-2xl:mb-6 mb-16' subClassName='max-lg:text-[16px] max-lg:leading-[24px]'>
-								{ languages('subHeading') }
+								{ t('subHeading') }
 							</Text>
 						</div>
 						{
@@ -139,7 +145,7 @@ const RegisterPage = () => {
 								<NotificationPanel
 									mode={ errorMessage ? 'error' : 'success' }
 									visible={ notifVisible && !!errorMessage && !loadingUser }
-									text={ errorMessage ? errorMessage : userData?.email ? languages('notificationMessage.onSuccess') : languages('notificationMessage.onError') }
+									text={ errorMessage ? errorMessage : userData?.email ? t('notificationMessage.onSuccess') : t('notificationMessage.onError') }
 									onClickRightIcon={ handleNotifOnClose }
 								/>
 							</div>
@@ -147,12 +153,12 @@ const RegisterPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='email'
-								placeholder={ languages('form.emailPlaceholder') }
-								label={ languages('form.emailLabel') }
+								placeholder={ t('form.emailPlaceholder') }
+								label={ t('form.emailLabel') }
 								className='w-full'
 								type='email'
 								value={ formikRegister.values.email }
-								errorMessage={ formikRegister.errors.email }
+								errorMessage={ getInputErrorMessage(formikRegister.errors.email, t('form.emailLabel')) }
 								isError={ !!formikRegister.errors.email }
 								onChange={ onChangeInput }
 							/>
@@ -160,39 +166,39 @@ const RegisterPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='password'
-								placeholder={ languages('form.passwordLabel') }
-								label={ languages('form.passwordLabel') }
+								placeholder={ t('form.passwordLabel') }
+								label={ t('form.passwordLabel') }
 								className='w-full'
 								type={ inputPasswordType.password }
 								iconName={ inputPasswordType.password === 'password' ? 'EyeClosed' : 'Eye' }
 								iconPosition='right'
 								onIconClick={ () => togglePasswordShow('password') }
 								value={ formikRegister.values.password }
-								errorMessage={ formikRegister.errors.password }
+								errorMessage={ getInputErrorMessage(formikRegister.errors.password, t('form.passwordLabel')) }
 								isError={ !!formikRegister.errors.password }
 								onChange={ onChangeInput }
-								infoMessage={ languages('form.passwordHint') }
+								infoMessage={ t('form.passwordHint') }
 							/>
 						</Form.FormGroup>
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='confirm_password'
-								placeholder={ languages('form.passwordConfirmationPlaceholder') }
-								label={ languages('form.passwordConfirmationLabel') }
+								placeholder={ t('form.passwordConfirmationPlaceholder') }
+								label={ t('form.passwordConfirmationLabel') }
 								className='w-full'
 								iconName={ inputPasswordType.confirm_password === 'password' ? 'EyeClosed' : 'Eye' }
 								iconPosition='right'
 								type={ inputPasswordType.confirm_password }
 								onIconClick={ () => togglePasswordShow('confirm_password') }
 								value={ formikRegister.values.confirm_password }
-								errorMessage={ formikRegister.errors.confirm_password }
+								errorMessage={ getInputErrorMessage(formikRegister.errors.confirm_password, t('form.passwordConfirmationLabel')) }
 								isError={ !!formikRegister.errors.confirm_password }
-								infoMessage={ languages('form.passwordHint') }
+								infoMessage={ t('form.passwordHint') }
 								onChange={ onChangeInput }
 							/>
 						</Form.FormGroup>
 						<Button
-							label={ languages('registerBtnLabel') }
+							label={ t('registerBtnLabel') }
 							theme='primary'
 							$hoverTheme='outline'
 							type='submit'
@@ -200,7 +206,7 @@ const RegisterPage = () => {
 							disabled={ loadingUser }
 						/>
 						<Text fontType={ null } fontSize='24px' fontWeight='400' color={ colors.grey.dark } className='max-2xl:mt-5 mt-8 max-lg:text-[14px] text-[20px]'>
-							{ languages('footer.hasAccountLabel') }&nbsp;
+							{ t('footer.hasAccountLabel') }&nbsp;
 							<Link href='/login'>
 								<Text
 									className='inline-block max-lg:text-[14px] text-[20px]'
@@ -208,7 +214,7 @@ const RegisterPage = () => {
 									fontWeight='700'
 									color={ colors.paradiso.default }
 								>
-									{ languages('footer.cta') }
+									{ t('footer.cta') }
 								</Text>
 							</Link>
 						</Text>
