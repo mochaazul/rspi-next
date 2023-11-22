@@ -15,10 +15,10 @@ RUN yarn install
 COPY . .
 
 # Build the Next.js application
-RUN yarn build --debug
+RUN yarn build
 
 # Expose the port used by your Next.js app
-EXPOSE 3001
+EXPOSE 4000
 
 # Command to run your Next.js app when the container starts
 CMD ["yarn", "start"]
