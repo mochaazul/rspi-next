@@ -187,14 +187,14 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
-											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
+											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100 '>
 												<Image
 													alt='hospital image'
 													src={ item?.img_url?.[0] || '' }
 													width={ 80 }
 													height={ 80 }
 												/>
-												<div className='ml-[10px] w-[310px]'>
+												<div className='ml-[10px] w-[310px] hover:bg-transparent'>
 													<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
 												</div>
@@ -214,9 +214,9 @@ export const Header = ({
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
 											<Link href={ `/centre-of-excellence/${ item.slug }` } key={ idx }>
-												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
+												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center  hover:bg-gray-100 '>
 													<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } alt='center-of-excellence-image' />
-													<div className='ml-[10px] w-[310px]'>
+													<div className='ml-[10px] w-[310px]  hover:bg-transparent'>
 														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
 													<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
@@ -236,9 +236,9 @@ export const Header = ({
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.slug }` } key={ idx }>
-												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
+												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100'>
 													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' }/>
-													<div className='ml-[10px] w-[310px]'>
+													<div className='ml-[10px] w-[310px] hover:bg-transparent'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
 													<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
