@@ -63,7 +63,6 @@ const useFindADoctor = () => {
 		if (isTelemedicine) search['telemedicine'] = 'true';
 		search['ref'] = 'landing';
 		const searchParam = new URLSearchParams(search);
-
 		router.push('/find-a-doctor' + `?${ searchParam.toString() }`);
 	};
 

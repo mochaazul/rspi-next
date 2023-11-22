@@ -28,7 +28,7 @@ export const useGetDoctorCalendar = (startDate: string, hospital?: string, optio
 };
 
 export const useGetDoctorSlot = (options?: ApiOptions) => {
-	return useSWR('doctorTimeSlot', () => fetcher<TimeSlot[]>('doctorTimeSlot', options));
+	return useSWR(['doctorTimeSlot', options], () => fetcher<TimeSlot[]>('doctorTimeSlot', options));
 };
 
 export const usePostDoctorRatingMutation = (options?: ApiOptions) => {

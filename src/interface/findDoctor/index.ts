@@ -135,3 +135,10 @@ export type I_HospitalFilterItem = {
 	id: number,
 	hospital_code: string;
 };
+
+export type LandingPageFindADoctorForm = {
+	doctorName: string,
+	hospital: string
+	speciality: string,
+	preferredDay: string
+}
