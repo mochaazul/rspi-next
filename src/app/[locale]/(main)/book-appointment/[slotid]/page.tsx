@@ -41,7 +41,6 @@ const BookAppointment = () => {
 
 	const t = useScopedI18n('page.bookingAppointment');
 
-	const { slotcode } = useParams();
 	const searchParams = useSearchParams();
 	const navigate = useRouter();
 
@@ -52,19 +51,9 @@ const BookAppointment = () => {
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
 	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
 
-	// const bookAppointmentDispatch = useAppAsyncDispatch(bookAppointment);
-	// const getFamilyProfilesDispatch = useAppAsyncDispatch(getFamilyProfiles);
-	// const uploadPhotoAsuransi = useAppAsyncDispatch(uploadPhotoProfile);
-	// const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
-
-	// const { familyProfiles, loading: familyProfileLoading, userDetail } = useTypedSelector<UserState>('user');
-	// const { loading: uploadPhoto } = useTypedSelector<PatientState>('patient');
-
 	const { bookAppointmentFields } = useBookAppointment();
 
 	const { registeredValue, onSubmit, getCurrentForm } = Form.useForm({ fields: bookAppointmentFields });
-
-	// const { selectedDoctorTimeSlot, masterDoctors } = useTypedSelector<FindDoctorState>('findDoctor');
 
 	const [confirmationModal, setConfirmationModalVisible] = useState<boolean>(false);
 	const [addProfileModal, setAddProfileModal] = useState<boolean>(false);
