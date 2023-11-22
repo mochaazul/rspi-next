@@ -1,20 +1,6 @@
 import * as yup from 'yup';
 
-export const DefaultEmailYup = yup.string().email('emailNotValid')
-	.required('required');
-
-const DefaultPasswordYup = yup.string().required('required')
-	.min(8, ({ min }) => `minLength_${ min }`)
-	.test(
-		'isValidPass',
-		'minCapitalize_1',
-		(value: any) => /[A-Z]/.test(value)
-	);
-
-export const DefaultPinYup = yup.string().required('required')
-	// .min(6, ({ min }) => `exactLength_${ min }`)
-	// .max(6, ({ max }) => `exactLength_${ max }`)
-	.length(6, ({ length }) => `exactLength_${ length }`);
+import { DefaultEmailYup, DefaultPasswordYup, DefaultPinYup } from './defaultYup';
 
 export const LoginSchema = yup.object().shape({
 	email: DefaultEmailYup,

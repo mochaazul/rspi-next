@@ -27,6 +27,23 @@ export default {
 			pinLabel: 'PIN'
 		}
 	},
+	navMenu: {
+		home: 'Home',
+		ourHospitals: 'Our Hospitals',
+		centreOfExcellence: 'Centre of Excellence',
+		facility: 'Facilities & Services',
+		career: 'Career',
+		findDoctor: 'Find a Doctor',
+		login: 'Login',
+		register: 'Register',
+		loginRegister: 'Login / Register',
+		bookAppointment: 'Book Appointment',
+		user: {
+			patientPortal: 'Patient Portal',
+			patientInformation: 'Patient Information',
+			logout: 'Logout'
+		}
+	},
 	validation: {
 		emailFormat: 'Invalid email format',
 		tokenValidation: {
@@ -43,7 +60,8 @@ export default {
 			exactLength: '{label} should contain {length} characters',
 			notMatch: '{label} do not match',
 			fileNotValid: 'This file type is invalid or unsupported',
-			maxFileSize: 'This file is larger than {maxFileSize}'
+			maxFileSize: 'This file is larger than {maxFileSize}',
+			phoneNotValid: 'Phone number must precede with +62 or 021 or 08 and then followed by phone number'
 		}
 	},
 	gender: {
@@ -125,6 +143,7 @@ export default {
 			subHeading: 'We are committed to being a world-class healthcare organization. We strongly believe that operational excellence and patient safety are integral parts of meeting and exceeding our customers\' expectations.'
 		},
 		centerOfExcellence: {
+			heading: 'Centre Of Excellence',
 			serviceLocation: {
 				heading: 'Available at',
 				hospitalName: 'RS Pondok Indah - Pondok Indah 1st Floor',
@@ -133,7 +152,8 @@ export default {
 				operationalHourHeading: 'Operational Hours',
 				informationHeading: 'Information',
 				emailHeading: 'E-mail',
-				relatedArticle: 'Artikel Terkait'
+				relatedArticle: 'Artikel Terkait',
+				readMore: 'Read More'
 			}
 		},
 		contactUs: {
@@ -163,6 +183,14 @@ export default {
 				submitBtnLabel: 'Send Message',
 				form: {
 					allHospitalLabel: 'All RSPI Hospitals'
+				},
+				genderOptionsLabel: {
+					male: 'Male',
+					female: 'Female'
+				},
+				titleOptionsLabel: {
+					general: 'General Questions',
+					specific: 'Specific Questions'
 				}
 			},
 			faq: {
@@ -452,6 +480,7 @@ export default {
 			}
 		},
 		facilities: {
+			heading: 'Facilities & Services',
 			relatedNewsHeading: 'Related News',
 			relatedDoctorsHeading: 'Related Doctors',
 			facilitiesMenu: {
@@ -471,9 +500,12 @@ export default {
 				healthFirst: 'Health First'
 			},
 			heading: 'News and Health Articles',
-			detailsBtnLabel: 'View Details'
+			detailsBtnLabel: 'View Details',
+			breadcrumbsLabel: 'News & Health Articles',
+			viewDetails: 'View Details'
 		},
 		newsDetail: {
+			breadcrumbsLabel: 'News & Health Articles',
 			oleh: 'By',
 		},
 		forgotPassword: {
@@ -634,14 +666,14 @@ export default {
 			mrNotAvailableBtnLabel: 'Skip'
 		},
 		profilePage: {
-			heading: 'User Information',
+			heading: 'Patient Information',
 			subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas at vestibulum nulla hac consectetur feugiat.',
 			loginAsLabel: 'Login as',
 			updatePhotoLabel: 'Update Photo',
 			uploadPhotoLabel: 'Upload Now',
 			deletePhotoLabel: 'Delete Photo',
 			choosePhotoLabel: 'Choose Photo',
-			formatPhotoLabel: 'JPG or PNG, maks size 800k',
+			formatPhotoLabel: 'JPG or PNG, max size 800k',
 			profileLabel: 'Profile',
 			securitySettingLabel: 'Security Setting',
 			profileDetail: {
@@ -779,7 +811,9 @@ export default {
 			followUsLabel: 'FOLLOW US',
 			getRSPIMobileLabel: 'GET RSPI MOBILE',
 			subscribeLabel: 'Stay Updated With Us',
-			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.'
+			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.',
+			subscribePlaceholder: 'Enter your email address',
+			subscribeSubmit: 'Subscribe'
 		},
 		medicalRecordReminder: {
 			heading: 'Get Access to Your Medical Visit Information',
@@ -787,7 +821,8 @@ export default {
 			tooltipLabel: 'Make sure you have booked an appointment and visited the nearest RSPI.'
 		},
 		topNav: {
-			welcome: 'Welcome'
+			welcome: 'Welcome',
+			contactUs: 'Hubungi Kami'
 		},
 		privacyPolicy: {
 			agreementStatement: {

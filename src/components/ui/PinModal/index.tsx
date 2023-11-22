@@ -1,15 +1,20 @@
 'use client';
 
+import { useState } from 'react';
+import { FormikProps, useFormik } from 'formik';
+
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
 import Button from '@/components/ui/Button';
 import { colors } from '@/constant';
-import { createFieldConfig, requiredRule } from '@/helpers';
 import NotificationPanel from '@/components/ui/NotificationPanel';
 import Spinner from '@/components/ui/Spinner';
 import { usePostCheckPinMutation } from '@/lib/api/client/auth';
 import { useScopedI18n } from '@/locales/client';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
+import { CheckPinSchema } from '@/validator/profile';
+import { CheckPinType } from '@/interface';
 
 import { PinModalContainer } from './style';
 
@@ -17,73 +22,84 @@ type Props = {
 	visible: boolean,
 	onSuccess: () => void;
 };
-const t = useScopedI18n('modalDialog.pin');
 
 const PinModal = ({ visible, onSuccess }: Props) => {
-	const { data: checkPinResponse, trigger: checkPinTrigger, error: checkPinError, isMutating: checkPinLoading } = usePostCheckPinMutation();
+	const t = useScopedI18n('modalDialog.pin');
+	const tValidation = useScopedI18n('validation.formValidation');
 
-	const pinField = {
-		pin: {
-			...createFieldConfig({
-				name: 'pin',
-				type: 'password'
-			}),
-			validationRules: [
-				requiredRule('pin'),
-			],
-			placeholder: 'PIN'
+	const { trigger: checkPinTrigger, isMutating: checkPinLoading } = usePostCheckPinMutation();
+
+	const [enableValidation, setEnableValidation] = useState<boolean>(false);
+	const [error, setError] = useState<string>('');
+
+	const formikPin: FormikProps<CheckPinType> = useFormik<CheckPinType>({
+		validateOnBlur: enableValidation,
+		validateOnChange: enableValidation,
+		initialValues: { pin: '' },
+		validationSchema: CheckPinSchema,
+		onSubmit: async (formPin: CheckPinType) => {
+			try {
+				await checkPinTrigger(formPin);
+
+				if (onSuccess) onSuccess();
+			} catch (error: any) {
+				setError(error?.message ?? '');
+			} finally {
+				setEnableValidation(false);
+			}
+		},
+	});
+
+	const onChangeValuePin = (data: { name?: string; value?: string; }) => {
+		if (data?.name) {
+			formikPin.setFieldValue(data?.name, data?.value ?? '');
 		}
 	};
-
-	const {
-		registeredValue,
-		onSubmit
-	} = Form.useForm({ fields: pinField });
 
 	return (
 		<Modal visible={ visible }>
 			<PinModalContainer>
 				<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
 				<Text text={ t('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
+				{
+					error &&
+					<div className='mt-5 w-full'>
+						<NotificationPanel
+							showIconLeft={ false }
+							showIconRight={ false }
+							mode={ 'error' }
+							visible={ true }
+						>
+							<Text
+								fontType={ null }
+								fontSize='14px'
+								fontWeight='500'
+								text={ error }
+								color={ colors.red.default }
+							/>
+						</NotificationPanel>
+					</div>
+				}
 				<Form
 					onSubmit={ async e => {
-						const { pin } = onSubmit(e);
-						checkPinTrigger({
-							pin: pin.value,
-						});
-						if (checkPinResponse?.stat_msg === 'Success') {
-							await onSuccess();
-						}
+						e.preventDefault();
+						setEnableValidation(true);
+						formikPin.handleSubmit();
 					} }>
-					<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
-					<Text text={ t('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
-					{
-						checkPinError &&
-						<div className='mt-[20px]'>
-							<NotificationPanel
-								showIconLeft={ false }
-								showIconRight={ false }
-								mode={ 'error' }
-								visible={ true }
-							>
-								<Text
-									fontType={ null }
-									fontSize='14px'
-									fontWeight='500'
-									text={ checkPinError }
-									color={ colors.red.default }
-								/>
-							</NotificationPanel>
-						</div>
-					}
-					<div className='mt-[48px] mb-[20px]'>
-						<Text text={ 'PIN' } fontWeight='700' />
+					<div className='mt-12 mb-10'>
 						<Form.TextFieldPin
 							className='input'
 							digitLength={ 6 }
 							semiSecure={ false }
 							password={ true }
-							{ ...registeredValue('pin', true) }
+							value={ formikPin.values.pin }
+							onChangeValue={ onChangeValuePin }
+							id='pin'
+							name='pin'
+							type='password'
+							label={ t('pinLabel') }
+							errorMessage={ getValidationTranslation(tValidation, formikPin.errors.pin, { label: t('pinLabel') }) }
+							isError={ !!formikPin.errors.pin }
 						/>
 					</div>
 					<Button type='submit' disabled={ checkPinLoading } >

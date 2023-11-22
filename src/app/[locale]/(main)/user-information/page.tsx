@@ -52,7 +52,6 @@ const editableInputProps = {
 	featherIcon: 'Edit3',
 	$iconColor: colors.paradiso.default,
 };
-const breadcrumbsPath = [{ name: 'User Information', url: '#' }];
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -87,6 +86,7 @@ export default function Page() {
 	const t = useScopedI18n('page.profilePage');
 	const tModalPin = useScopedI18n('modalDialog.pin');
 	const tValidation = useScopedI18n('validation.formValidation');
+	const breadcrumbsPath = [{ name: t('heading'), url: '#' }];
 
 	const [tempImageSrc, setTempImageSrc] = useState<string>('');
 	const [clickUpdatePhoto, setClickUpdatePhoto] = useState<boolean>(false);
@@ -366,7 +366,7 @@ export default function Page() {
 			<PanelH2>
 				<Breadcrumbs datas={ breadcrumbsPath } />
 				<ProfilePageStyle className='mt-[25px] sm:mt-[50px]'>
-					<div className='flex items-end lg:items-start justify-between max-lg:flex-col'>
+					<div className='flex'>
 						<div>
 							<Text
 								fontWeight='900'
@@ -374,14 +374,6 @@ export default function Page() {
 								lineHeight='29px'
 								color={ colors.grey.darker }
 								text={ t('heading') }
-							/>
-							<Text
-								fontWeight='400'
-								fontSize='16px'
-								lineHeight='19px'
-								color={ colors.grey.dark }
-								className='mt-3'
-								text={ t('subHeading') }
 							/>
 						</div>
 						{ /* Notes: Login As dipending */ }
@@ -828,7 +820,7 @@ export default function Page() {
 						</SubMenuPage>
 					</div>
 				</ProfilePageStyle>
-				<Modal visible={ pinModalVisible } onClose={ () => setPinModalVisible(false) }>
+				<Modal visible={ pinModalVisible } onClose={ () => { setPinModalVisible(false); setError(''); } }>
 					<div className='flex flex-col items-center gap-4'>
 						<Form
 							onSubmit={ e => {
@@ -840,8 +832,7 @@ export default function Page() {
 							<Text text={ tModalPin('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
 							<Text text={ tModalPin('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
 							{ renderErrorNotif() }
-							<div className='mt-[48px] mb-[20px]'>
-								{/* <Text text={ 'PIN' } fontWeight='700' /> */ }
+							<div className='mt-12 mb-10'>
 								<Form.TextFieldPin
 									className='input'
 									digitLength={ 6 }

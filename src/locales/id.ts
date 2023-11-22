@@ -31,6 +31,23 @@ export default {
 			pinLabel: 'PIN'
 		}
 	},
+	navMenu: {
+		home: 'Beranda',
+		ourHospitals: 'Rumah Sakit Kami',
+		centreOfExcellence: 'Centre of Excellence',
+		facility: 'Fasilitas dan Layanan',
+		career: 'Karir',
+		findDoctor: 'Cari Dokter',
+		login: 'Masuk',
+		register: 'Daftar',
+		loginRegister: 'Masuk / Daftar',
+		bookAppointment: 'Buat Janji Temu',
+		user: {
+			patientPortal: 'Portal Pasien',
+			patientInformation: 'Informasi Pasien',
+			logout: 'Keluar'
+		}
+	},
 	validation: {
 		emailFormat: 'Email format salah',
 		tokenValidation: {
@@ -47,7 +64,8 @@ export default {
 			exactLength: '{label} harus terdiri dari {length} karakter',
 			notMatch: '{label} tidak sesuai',
 			fileNotValid: 'File tidak valid atau tidak didukung',
-			maxFileSize: 'File lebih besar dari {maxFileSize}'
+			maxFileSize: 'File lebih besar dari {maxFileSize}',
+			phoneNotValid: 'No. telp harus diawali dengan +62 atau 021 atau 08 lalu diikuti dengan no. telp'
 		}
 	},
 	page: {
@@ -125,6 +143,7 @@ export default {
 			subHeading: 'Kami berkomitmen untuk menjadi organisasi perawatan kesehatan pilihan kelas dunia. Kami sangat percaya bahwa keunggulan operasional dan keselamatan pasien merupakan bagian integral dalam memenuhi dan melampaui harapan pelanggan kami.'
 		},
 		centerOfExcellence: {
+			heading: 'Centre Of Excellence',
 			serviceLocation: {
 				heading: 'Layanan ini tersedia di',
 				hospitalName: 'RS Pondok Indah - Pondok Indah Lantai 1',
@@ -133,11 +152,12 @@ export default {
 				operationalHourHeading: 'Jam Operasional Patient Relations',
 				informationHeading: 'Informasi',
 				emailHeading: 'Email',
-				relatedArticle: 'Artikel Terkait'
+				relatedArticle: 'Artikel Terkait',
+				readMore: 'Baca Selengkapnya'
 			}
 		},
 		contactUs: {
-			heading: 'Contact Us',
+			heading: 'Hubungi Kami',
 			subHeading: 'Mohon lengkapi data diri Anda dan tuliskan pertanyaan atau permintaan Anda dalam formulir di bawah ini. Unit Patient Relations kami akan segera membantu Anda.',
 			contactForm: {
 				heading: 'Hubungi Kami',
@@ -148,8 +168,8 @@ export default {
 					gender: 'Gender',
 					email: 'E-mail',
 					phone: 'No. Handphone',
-					subject: 'Subject',
-					notes: 'Notes'
+					subject: 'Subyek',
+					notes: 'Pesan'
 				},
 				placeholder: {
 					hospital: 'Hospital',
@@ -162,7 +182,15 @@ export default {
 				},
 				submitBtnLabel: 'Kirim Pesan',
 				form: {
-					allHospitalLabel: 'All RSPI Hospitals'
+					allHospitalLabel: 'Seluruh Cabang RSPI'
+				},
+				genderOptionsLabel: {
+					male: 'Laki-laki',
+					female: 'Perempuan'
+				},
+				titleOptionsLabel: {
+					general: 'Pertanyaan Umum',
+					specific: 'Pertanyaan Khusus'
 				}
 			},
 			faq: {
@@ -362,7 +390,7 @@ export default {
 		},
 		landingPage: {
 			services: {
-				tabsLabel: ['Find a Doctor'],
+				tabsLabel: ['Cari Dokter'],
 				findDoctor: {
 					form: {
 						resetBtnLabel: 'Reset',
@@ -371,7 +399,7 @@ export default {
 							doctorName: 'Nama Dokter',
 							hospital: 'Rumah Sakit',
 							speciality: 'Spesialisasi',
-							date: 'Preferred Day'
+							date: 'Pilihan Hari'
 						},
 						placeholder: {
 							doctorName: 'All doctors',
@@ -389,10 +417,10 @@ export default {
 							doctorName: 'Nama Dokter (Telemedicine)',
 							hospital: 'Hospital',
 							speciality: 'Speciality',
-							date: 'Preferred Day'
+							date: 'Pilihan Hari'
 						},
 						placeholder: {
-							doctorName: 'Doctor Name',
+							doctorName: 'Nama Dokter',
 							hospital: 'Seluruh Cabang RSPI',
 							speciality: 'Speciality',
 						}
@@ -402,34 +430,34 @@ export default {
 			centerOfExcelence: {
 				heading: 'Centre of Excellence',
 				subHeading: 'Telusuri lebih lanjut berbagai informasi seputar layanan kami, di sini.',
-				allItemBtnLabel: 'See All Centre of Excellence',
+				allItemBtnLabel: 'Lihat Semua Centre of Excellence',
 				cardItem: {
-					readMoreLabel: 'Read More'
+					readMoreLabel: 'Baca Selengkapnya'
 				},
-				createAppointmentBtnLabel: 'Book Appointment'
+				createAppointmentBtnLabel: 'Buat Janji Temu'
 			},
 			facilitiesServices: {
-				heading: 'Facilities & Services',
+				heading: 'Fasilitas & Layanan',
 				subHeading: 'Menyediakan pelayanan kesehatan terdepan yang terintegrasi. Dengan dukungan tenaga medis profesional, adopsi teknologi medis terkini, serta sistem informasi digital yang lebih efisien. Ketahui lebih lanjut, di sini.',
-				allItemlabel: 'See All Facilities & Services'
+				allItemlabel: 'Lihat Semua Fasilitas & Layanan'
 			},
 			promoPackages: {
-				heading: 'Promo and Packages',
+				heading: 'Promo dan Paket',
 				subHeading: 'Berbagai penawaran istimewa untuk anda.',
-				viewDetailsBtnLabel: 'View Details',
-				allItemBtnLabel: 'See All promo and Packages'
+				viewDetailsBtnLabel: 'Lihat Detail',
+				allItemBtnLabel: 'Lihat Semua Promo dan Paket'
 			},
 			newsHealthArticle: {
-				heading: 'News, Health Articles & Magazine',
-				allItemBtnLabel: 'See All News & Helath Articles',
-				readMoreBtnLabel: 'Read More'
+				heading: 'Berita, Artikel & Majalah Kesehatan',
+				allItemBtnLabel: 'Lihat Semua Berita & Artikel Kesehatan',
+				readMoreBtnLabel: 'Baca Selengkapnya'
 			},
 			customerReview: {
 				heading: 'Kisah Inspiratif dari Para Pasien kami',
 				allPpatientHistoryBtnLabel: 'Baca Semua Patient Story'
 			},
 			accreditationsAndAwards: {
-				heading: 'Accreditations & Awards',
+				heading: 'Akreditasi & Penghargaan',
 				subHeading: 'Berbagai pencapaian terbaik kami sebagai wujud komitmen untuk selalu memberikan pelayanan kesehatan terbaik, mengutamakan keselamatan dan kenyamanan Anda.',
 				readMoreBtnLabel: 'Lihat Penghargaan Kami Selengkapnya'
 			},
@@ -439,7 +467,7 @@ export default {
 			}
 		},
 		promoPage: {
-			heading: 'Promo & Packages',
+			heading: 'Promo & Paket',
 			hospitalSelectionLabel: 'Pilih lokasi rumah sakit',
 			allHospitalLabel: 'Seluruh Cabang RSPI',
 			tabPillsLabel: {
@@ -449,12 +477,13 @@ export default {
 				promoLabel: 'Promo'
 			},
 			promoItem: {
-				detailsBtnLabel: 'View Details'
+				detailsBtnLabel: 'Lihat Detail'
 			}
 		},
 		facilities: {
-			relatedNewsHeading: 'Related News',
-			relatedDoctorsHeading: 'Related Doctors',
+			heading: 'Fasilitas & Layanan',
+			relatedNewsHeading: 'Berita Terkait',
+			relatedDoctorsHeading: 'Dokter Terkait',
 			facilitiesMenu: {
 				servicesLocationHeading: 'Layanan ini tersedia di',
 				phoneHeading: 'Telepon',
@@ -462,19 +491,22 @@ export default {
 				emailHeading: 'Email',
 				operationalHourHeading: 'Jam Operasional Patient Relations',
 			},
-			readMoreLabel: 'Read More'
+			readMoreLabel: 'Baca Selengkapnya'
 		},
 		news: {
 			tabPillsLabel: {
-				all: 'All',
-				news: 'News',
-				healthArticles: 'Health Articles',
-				healthFirst: 'Health First'
+				all: 'Semua',
+				news: 'Berita',
+				healthArticles: 'Artikel Kesehatan',
+				healthFirst: 'Kesehatan Utama'
 			},
-			heading: 'News and Health Articles',
-			detailsBtnLabel: 'View Details'
+			heading: 'Berita dan Artikel Kesehatan',
+			detailsBtnLabel: 'Lihat Detail',
+			breadcrumbsLabel: 'Berita & Artikel Kesehatan',
+			viewDetails: 'Lihat Detail'
 		},
 		newsDetail: {
+			breadcrumbsLabel: 'Berita & Artikel Kesehatan',
 			oleh: 'Oleh',
 		},
 		forgotPassword: {
@@ -634,14 +666,14 @@ export default {
 			mrNotAvailableBtnLabel: 'Lewati'
 		},
 		profilePage: {
-			heading: 'User Information',
+			heading: 'Informasi Pasien',
 			subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas at vestibulum nulla hac consectetur feugiat.',
 			loginAsLabel: 'Login as',
-			updatePhotoLabel: 'Update Photo',
-			uploadPhotoLabel: 'Upload Now',
-			deletePhotoLabel: 'Delete Photo',
-			choosePhotoLabel: 'Choose Photo',
-			formatPhotoLabel: 'JPG or PNG, maks size 800k',
+			updatePhotoLabel: 'Ubah Foto',
+			uploadPhotoLabel: 'Unggah Foto',
+			deletePhotoLabel: 'Hapus Foto',
+			choosePhotoLabel: 'Pilih Foto',
+			formatPhotoLabel: 'JPG atau PNG, maks size 800k',
 			profileLabel: 'Profil',
 			securitySettingLabel: 'Pengaturan Keamanan',
 			profileDetail: {
@@ -666,8 +698,8 @@ export default {
 				patientNewEmail: 'Email Baru',
 				patientNewEmailPlaceHolder: 'Email Baru',
 				patientEmailLabelInfo: 'Anda belum bisa melakukan perubahan alamat email jika belum mempunyai nomor rekam medis',
-				patientGenderMaleLabel: 'Pria',
-				patientGenderFemaleLabel: 'Wanita',
+				patientGenderMaleLabel: 'Laki-laki',
+				patientGenderFemaleLabel: 'Perempuan',
 				patientPhotoProfile: 'Foto profil'
 			},
 			securitySetting: {
@@ -776,13 +808,15 @@ export default {
 				visitHoursPolicy: 'Tata Tertib & Waktu Berkunjung',
 				ourEffort: 'Upaya Kami Menjaga Anda Tetap Aman'
 			},
-			ourHospitalsLabel: 'OUR HOSPITALS',
-			ourCompanyLabel: 'OUR COMPANY',
-			visitorPatientLabel: 'VISITOR & PATIENT INFORMATION',
-			followUsLabel: 'FOLLOW US',
-			getRSPIMobileLabel: 'GET RSPI MOBILE',
-			subscribeLabel: 'Stay Updated With Us',
-			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.'
+			ourHospitalsLabel: 'RUMAH SAKIT KAMI',
+			ourCompanyLabel: 'PERUSAHAAN KAMI',
+			visitorPatientLabel: 'INFORMASI PENGUNJUNG DAN PASIEN',
+			followUsLabel: 'IKUTI KAMI',
+			getRSPIMobileLabel: 'DAPATKAN APLIKASI RSPI',
+			subscribeLabel: 'Ikuti Perkembangan Bersama Kami',
+			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.',
+			subscribePlaceholder: 'Masukkan alamat email',
+			subscribeSubmit: 'Subscribe'
 		},
 		medicalRecordReminder: {
 			heading: 'Dapatkan Akses terhadap Informasi Kunjungan Medis Anda',
@@ -790,7 +824,8 @@ export default {
 			tooltipLabel: 'Pastikan Anda telah booking appointment dan melakukan kunjungan ke RSPI terdekat.'
 		},
 		topNav: {
-			welcome: 'Selamat datang'
+			welcome: 'Selamat datang',
+			contactUs: 'Hubungi Kami'
 		},
 		privacyPolicy: {
 			agreementStatement: {

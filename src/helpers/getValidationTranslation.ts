@@ -1,7 +1,7 @@
 import type { useScopedI18n } from '@/locales/client';
 
 export type ScopedValidationTranslation = Awaited<ReturnType<typeof useScopedI18n<'validation.formValidation'>>>;
-type ValidationParams = {
+export type ValidationParams = {
 	label?: string;
 	minLength?: string | number;
 	minCapitalize?: string | number;
@@ -16,6 +16,8 @@ export const getValidationTranslation = (
 	// Notes: untuk translation dynamic value selain label, seperti minLength dan minCapitalize, params dapat di define di error message yup.
 	// contoh: `yup.string().min(8, 'minLength_8')`
 	const keys = errorKey?.split('_');
+
+	if (!keys?.[0]) return;
 
 	switch (keys?.[0]) {
 		case 'required':
@@ -32,7 +34,9 @@ export const getValidationTranslation = (
 			return passedScopedT('fileNotValid');
 		case 'maxFileSize':
 			return passedScopedT('maxFileSize', { maxFileSize: params?.maxFileSize ?? keys?.[1] });
+		case 'phoneNotValid':
+			return passedScopedT('phoneNotValid');
 		default:
-			return;
+			return errorKey; // return error message from message value yup
 	}
 };

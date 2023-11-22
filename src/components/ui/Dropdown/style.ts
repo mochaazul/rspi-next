@@ -26,13 +26,11 @@ export const SelectWrapper = styled.div<StatusType>`
     margin-top: 5px;
     transform: rotate(${ props => props.$isOpen ? '180deg' : '0deg' });
     transform-origin: 50% 42%;
-    z-index: 100;
     ${ GlobalAllTransition5ms }
   }
 
   .placeholder {
     position: absolute;
-    z-index: 99;
     padding: 0 28px 0 18px;
     user-select: none;
     width: 100%;

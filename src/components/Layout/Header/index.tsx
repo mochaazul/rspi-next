@@ -14,6 +14,7 @@ import {
 	FacilityServicesState,
 	HospitalState,
 	NotificationResponse,
+	UserSessionData,
 } from '@/interface';
 import colors from '@/constant/colors';
 import images from '@/constant/images';
@@ -26,28 +27,30 @@ import Modal from '@/components/ui/Modal';
 
 import HeaderStyle from './style';
 
-import { useCurrentLocale } from '@/locales/client';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
-import useSession from '@/session/client';
 import { cookiesHelper } from '@/helpers';
 
 export const Header = ({
+	session,
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData,
 	notificationResponseData,
 	marAllReadNotifFunc
-}:{
-		hospitalData: HospitalState,
-		centerOfExcellenceData: CenterOfExcellenceState,
-		facilityServicesData: FacilityServicesState,
-		notificationResponseData?: NotificationResponse,
-		marAllReadNotifFunc: (params: any) => any,
-	}) => {
-	
+}: {
+	session: UserSessionData,
+	hospitalData: HospitalState,
+	centerOfExcellenceData: CenterOfExcellenceState,
+	facilityServicesData: FacilityServicesState,
+	notificationResponseData?: NotificationResponse,
+	marAllReadNotifFunc: (params: any) => any,
+}) => {
+
 	const router = useRouter();
 
 	const currentLang = useCurrentLocale();
+	const t = useScopedI18n('navMenu');
 
 	const [dropdownHide, setDropdownHide] = useState(true);
 	const [showSideBar, setShowSideBar] = useState(false);
@@ -55,7 +58,6 @@ export const Header = ({
 	const [isHoverCOE, setIsHoverCOE] = useState(false);
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
-	const session = useSession();
 
 	const isLoggedIn = !!session?.token;
 
@@ -63,7 +65,7 @@ export const Header = ({
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const handleClick = async() => {
+	const handleClick = async () => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			router.refresh();
@@ -109,7 +111,7 @@ export const Header = ({
 							onClick={ () => marAllReadNotifFunc({
 								medical_record: 100154999,
 								email: 'riko.logwirno@rebelworks.co'
-							}).then(function(response: any) {
+							}).then(function (response: any) {
 								notificationResponseFetch();
 							})
 							}
@@ -174,12 +176,12 @@ export const Header = ({
 						<div className='menu max-sm:hidden'>
 							<div id='home' className='py-[22px] max-sm:py-[10px]'>
 								<Link href='/'>
-									<Text text={ 'Home' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+									<Text text={ t('home') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 								</Link>
 							</div>
 
 							<div id='our-hospital' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
-								<Text text={ 'Our Hospitals' } className='cursor-pointer' color={ isHover === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
+								<Text text={ t('ourHospitals') } className='cursor-pointer' color={ isHover === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
 									<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
 									/>
@@ -206,7 +208,7 @@ export const Header = ({
 							</div>
 
 							<div id='centre-of-excellence' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverCOE(true) } onMouseLeave={ toggleMouseHoverCOE(false) }>
-								<Text text={ 'Centre of Excellence' } className='cursor-pointer' color={ isHoverCOE === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
+								<Text text={ t('centreOfExcellence') } className='cursor-pointer' color={ isHoverCOE === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
 									<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
@@ -228,7 +230,7 @@ export const Header = ({
 							</div>
 
 							<div id='facilities' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverFacilities(true) } onMouseLeave={ toggleMouseHoverFacilities(false) }>
-								<Text text={ 'Facilities & Services' } className='cursor-pointer' color={ isHoverFacilities === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
+								<Text text={ t('facility') } className='cursor-pointer' color={ isHoverFacilities === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
 								<div className='ml-[9px] cursor-pointer'>
 									<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
 								</div>
@@ -237,7 +239,7 @@ export const Header = ({
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' }/>
+													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
@@ -260,11 +262,11 @@ export const Header = ({
 							</div>
 
 							<div id='career' className='py-[22px] max-sm:py-[10px]'>
-								<Text text={ 'Career' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+								<Text text={ t('career') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 							</div>
 
 							<Link id='find-doctor' className='py-[22px] max-sm:py-[10px]' href='/find-a-doctor'>
-								<Text text={ 'Find a Doctor' } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+								<Text text={ t('findDoctor') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 							</Link>
 
 						</div>
@@ -272,19 +274,16 @@ export const Header = ({
 					<div className='rightNav py-[22px] max-sm:py-[10px]'>
 						<div className='translate'>
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
-								<Image
-									src={ icons.Notif }
-									alt=''
-									onClick={ () => setShowNotification(true) }
-									fill
-								/>
+								<icons.Notif onClick={ () => setShowNotification(true) } />
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
 							<div>
 								{ modalNotification() }
 							</div>
 							<div className='flex items-center gap-6 max-sm:hidden'>
-								<Button className='btn-main h-[44px] min-w-[190px]' onClick={ () => router.push('/find-a-doctor') }>Book Appointment</Button>
+								<Button className='btn-main h-[44px] min-w-[190px]' onClick={ () => router.push('/find-a-doctor') }>
+									{ t('bookAppointment') }
+								</Button>
 								{
 									isLoggedIn ?
 										<>
@@ -313,7 +312,7 @@ export const Header = ({
 												</div>
 											</div>
 										</> :
-										<Button className='btn-main h-[44px] min-w-[190px]' theme='outline' $hoverTheme='primary' onClick={ handleLoginClick }>Login / Register</Button>
+										<Button className='btn-main h-[44px] min-w-[190px]' theme='outline' $hoverTheme='primary' onClick={ handleLoginClick }>{ t('loginRegister') }</Button>
 								}
 							</div>
 
@@ -321,17 +320,14 @@ export const Header = ({
 								isLoggedIn &&
 								<div id='dropdown' className={ `${ dropdownHide === true ? 'hidden' : 'fixed' } z-10 w-[208px] mt-[10px] bg-white divide-y divide-gray-100 shadow dark:bg-gray-700` }>
 									<ul className='py-1 text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										<li onClick={ () => {
-											setDropdownHide(true);
-											router.push('/patient-portal');
-										} }>
-											<a href='#' className='border-b border-gray block py-4 px-4'>Patient Portal</a>
-										</li>
-										<li>
-											<Link href='/user-information' className='border-b border-gray block py-4 px-4'>User Information</Link>
-										</li>
-										<li>
-											<a href='#' className='block py-4 px-4 text-red-600' onClick={ handleClick }>Logout</a>
+										<Link href='/patient-portal' as='li' className='border-b border-gray block py-4 px-4' onClick={ () => setDropdownHide(true) }>
+											{ t('user.patientPortal') }
+										</Link>
+										<Link href='/user-information' as='li' className='border-b border-gray block py-4 px-4' onClick={ () => setDropdownHide(true) }>
+											{ t('user.patientInformation') }
+										</Link>
+										<li className='block py-4 px-4 text-red-600' onClick={ handleClick }>
+											{ t('user.logout') }
 										</li>
 									</ul>
 								</div>
@@ -345,76 +341,52 @@ export const Header = ({
 							<div
 								className='nav-menu'
 								onClick={ () => { handleNavigateSideBar('/'); } }>
-								<Text text={ 'Home' } fontSize='16px' fontWeight='700' />
+								<Text text={ t('home') } fontSize='16px' fontWeight='700' />
 							</div>
 							{ isLoggedIn &&
 								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
-									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
+									<Text text={ t('user.patientPortal') } fontSize='16px' fontWeight='700' />
 								</div>
 							}
 							{ isLoggedIn &&
 								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
-									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
+									<Text text={ t('user.patientInformation') } fontSize='16px' fontWeight='700' />
 								</div>
 							}
 							{ isLoggedIn ? null :
 								<div className='nav-menu' onClick={ handleLoginClick }>
-									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
-								</div>
-							}
-							{ isLoggedIn ? null :
-								<div className='nav-menu' onClick={ handleLoginClick }>
-									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
-								</div>
-							}
-							{ isLoggedIn ? null :
-								<div className='nav-menu' onClick={ handleLoginClick }>
-									<Text text={ 'Login' } fontSize='16px' fontWeight='700' />
+									<Text text={ t('login') } fontSize='16px' fontWeight='700' />
 								</div>
 							}
 							{ isLoggedIn ? null :
 								<div
 									className='nav-menu'
 									onClick={ () => handleNavigateSideBar('/register') }>
-									<Text text={ 'Register' } fontSize='16px' fontWeight='700' />
+									<Text text={ t('register') } fontSize='16px' fontWeight='700' />
 								</div>
 							}
 							<div
 								className='nav-menu'
 								onClick={ () => handleNavigateSideBar('/find-a-doctor') }>
-								<Text text={ 'Book Appointment' } fontSize='16px' fontWeight='700' />
+								<Text text={ t('bookAppointment') } fontSize='16px' fontWeight='700' />
 							</div>
-							{ isLoggedIn ? null :
-								<div
-									className='nav-menu'
-									onClick={ () => handleNavigateSideBar('/patient-portal') }>
-									<Text text={ 'Patient Portal' } fontSize='16px' fontWeight='700' />
-								</div>
-							}
-							{ isLoggedIn ? null :
-								<div
-									className='nav-menu'
-									onClick={ () => handleNavigateSideBar('/user-information') }>
-									<Text text={ 'User Information' } fontSize='16px' fontWeight='700' />
-								</div>
-							}
 							<div
 								className='nav-menu'
 								onClick={ () => handleNavigateSideBar('/centre-of-excellence') }>
-								<Text text={ 'Center Of Excellence' } fontSize='16px' fontWeight='700' />
+								<Text text={ t('centreOfExcellence') } fontSize='16px' fontWeight='700' />
 							</div>
 							<div
 								className='nav-menu'
 								onClick={ () => handleNavigateSideBar('/facilities') }>
-								<Text text={ 'Facilities & Services' } fontSize='16px' fontWeight='700' />
+								<Text text={ t('facility') } fontSize='16px' fontWeight='700' />
 							</div>
 							<div className='nav-menu'>
-								<Text text={ 'Our Hospital' } fontSize='16px' fontWeight='700' />
+								<Text text={ t('ourHospitals') } fontSize='16px' fontWeight='700' />
 							</div>
 						</div>
 						{ isLoggedIn ?
 							<div className='nav-menu'>
-								<Text text={ 'Logout' } fontSize='16px' fontWeight='700' color={ colors.red.default } onClick={ handleClick } />
+								<Text text={ t('user.logout') } fontSize='16px' fontWeight='700' color={ colors.red.default } onClick={ handleClick } />
 							</div>
 							: null
 						}

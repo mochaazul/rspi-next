@@ -21,13 +21,7 @@ import CardNews from './CardNews';
 import { NewsHealthArticlesStyle } from './styles';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import { fetchArticle } from './helpers';
-
-const tabData = [
-	{ label: 'All', value: '' },
-	{ label: 'News', value: 'news' },
-	{ label: 'Health Articles', value: 'article' },
-	{ label: 'Health First', value: 'magazine' }
-];
+import { useScopedI18n } from '@/locales/client';
 
 const NewsHealthArticlesPage = ({
 	articles,
@@ -46,6 +40,14 @@ const NewsHealthArticlesPage = ({
 
 	const pathname = usePathname();
 	const navigate = useRouter();
+	const t = useScopedI18n('page.news');
+
+	const tabData = [
+		{ label: t('tabPillsLabel.all'), value: '' },
+		{ label: t('tabPillsLabel.news'), value: 'news' },
+		{ label: t('tabPillsLabel.healthArticles'), value: 'article' },
+		{ label: t('tabPillsLabel.healthFirst'), value: 'magazine' }
+	];
 
 	// const { articles, pagination, loading } = useTypedSelector<ArticleState>('articles'); Migrate
 	// const fetchArticle = useAppDispatch(getArticles); Migrate
@@ -55,12 +57,12 @@ const NewsHealthArticlesPage = ({
 		fetchArticle({
 			query: {
 				limit: '10',
-				page: `${pageNumber}`,
+				page: `${ pageNumber }`,
 				is_publish: 'true',
 				category: tabData[activeTab]?.value,
 				keyword: keyArticle
 			}
-		}).then(function(response: any) {
+		}).then(function (response: any) {
 			setArticlesData(response.data);
 			setLoading(false);
 		});
@@ -82,7 +84,7 @@ const NewsHealthArticlesPage = ({
 							fontType='h1'
 							fontWeight='900'
 							lineHeight='57px'
-							text='News and Health Articles'
+							text={ t('heading') }
 							className='sm:mt-[50px] mt-[25px]'
 							subClassName='max-sm:text-[24px]'
 						/>
@@ -192,7 +194,7 @@ const NewsHealthArticlesPage = ({
 													</div>
 												}
 												content={ <CardContentWithInner title={ data.title } description={ data.short_description } author={ data?.news_author?.doctor_name } /> }
-												footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label='View Details' /> }
+												footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetails') } /> }
 												className='mb-0'
 												iconShare={ true }
 												to={ `/news/${ data?.slug }` }
@@ -204,7 +206,7 @@ const NewsHealthArticlesPage = ({
 						</div>
 						:
 						<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
-							{ loading ? 'loading ...' : <EmptyData menu='News and Health Articles' /> }
+							{ loading ? 'loading ...' : <EmptyData menu={ t('heading') } /> }
 						</Text>
 					}
 
@@ -238,7 +240,7 @@ const NewsHealthArticlesPage = ({
 											</div>
 										}
 										content={ <CardContentWithInner title={ data.title } description={ data.short_description } author={ data?.news_author?.doctor_name } /> }
-										footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label='View Details' /> }
+										footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetails') } /> }
 										className='mb-0'
 										iconShare={ true }
 									/>
