@@ -4,6 +4,9 @@ import Text from '@/components/ui/Text';
 import { colors } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
 import { debounce } from 'lodash';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+import { useSearchParams } from 'next/navigation';
 
 type Props = {
   doctorCount:number
@@ -11,13 +14,22 @@ type Props = {
 	getter: () => string | null,
 }
 const ResultHeader = ({ doctorCount, setter, getter }:Props) => {
-  
+
+	const [keywordValue, setKeywordValue] = useState<string>();
+
 	const t = useScopedI18n('page.findDoctor');
+	const searchParams = useSearchParams();
+
+	useEffect(() => {
+		setKeywordValue(searchParams.get('keyword') ?? '');
+	}, []);
 
 	const onSearchDoctorByName = (value: string) => {
-		setter(value);
+		setKeywordValue(value);
+		debounceFilter(value);
 	};
-	const debounceFilter = debounce(onSearchDoctorByName, 500);
+
+	const debounceFilter = useCallback(debounce(setter, 500), []);
 
 	return (
 		<>
@@ -44,8 +56,9 @@ const ResultHeader = ({ doctorCount, setter, getter }:Props) => {
 				placeholder={ t('label.doctorName') }
 				featherIcon='Search'
 				iconPosition='right'
-				onChange={ ({ target }) => debounceFilter(target.value) }
+				onChange={ ({ target }) => onSearchDoctorByName(target.value) }
 				$iconColor={ colors.grey.light }
+				value={ keywordValue }
 			/>
       
 		</>

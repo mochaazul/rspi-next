@@ -8,6 +8,7 @@ import Form from '@/components/ui/Form';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';
+import useFindADoctor from './useFindADoctor';
 
 type Props = {
 	isTelemedicine: boolean;
@@ -21,22 +22,25 @@ const FindADoctor: React.FC<Props> = ({
 	clinics
 }) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor');
-	// const {
-	// 	findADoctorField,
-	// 	clinics,
-	// 	onSubmitHandler
-	// } = useFindADoctor();
 
-	// const {
-	// 	registeredValue, onSubmit, setFieldsValue
-	// } = Form.useForm({ fields: findADoctorField });
+	const {
+		findADoctorField,
+		onSubmitHandler
+	} = useFindADoctor();
 
-	const hospitalArr = hospitals.map(hospital => ({ key: hospital?.id?.toString(), value: hospital.hospital_code, label: hospital?.name }));
+	const {
+		onSubmit, registeredValue
+	} = Form.useForm({ fields: findADoctorField });
 
-	// const onSubmitForm = (evt: React.FormEvent<HTMLFormElement>) => {
-	// 	const { doctorName, hospital, speciality, preferredDay } = onSubmit(evt);
-	// 	onSubmitHandler(doctorName.value, hospital.value, selectedSpeciality?.speciality_code, preferredDay.value, isTelemedicine);
-	// };
+	const hospitalArr = [
+		{ key: 'all', value: hospitals.map(hospital => hospital.hospital_code).join(','), label: t('form.allHospital') },
+		...hospitals.map(hospital => ({ key: hospital?.id?.toString(), value: hospital.hospital_code, label: hospital?.name }))
+	];
+
+	const onSubmitForm = (evt: React.FormEvent<HTMLFormElement>) => {
+		const { doctorName, hospital, preferredDay } = onSubmit(evt);
+		onSubmitHandler(doctorName.value, hospital.value, selectedSpeciality?.speciality_code, preferredDay.value, isTelemedicine);
+	};
 
 	const mapSpeciality = () => {
 		if (clinics?.length > 0) {
@@ -50,6 +54,7 @@ const FindADoctor: React.FC<Props> = ({
 	};
 
 	const [selectedSpeciality, setSelectedSpeciality] = useState<PickerItem>();
+
 	const onChooseSpecialty = (item: PickerItem) => {
 		setSelectedSpeciality(item);
 	};
@@ -57,7 +62,7 @@ const FindADoctor: React.FC<Props> = ({
 	return (
 		<FindDoctorStyle>
 			<Form
-				// onSubmit={ onSubmitForm }
+				onSubmit={ onSubmitForm }
 				autoComplete='off'
 				className='flex flex-col mx-[30px]'
 			>
@@ -72,6 +77,7 @@ const FindADoctor: React.FC<Props> = ({
 							placeholder={ t('form.placeholder.doctorName') }
 							iconName='Search'
 							iconPosition='left'
+							{ ...registeredValue('doctorName') }
 							{
 								...isTelemedicine && { label: t('form.labels.doctorName') }
 							}
@@ -83,6 +89,10 @@ const FindADoctor: React.FC<Props> = ({
 						</div>
 						<Form.Dropdown
 							menuItems={ hospitalArr }
+							placeholder={ t('form.placeholder.hospital') }
+							{
+								...registeredValue('hospital')
+							}
 						/>
 					</div>
 					<div className='h-full flex-1'>
@@ -112,6 +122,9 @@ const FindADoctor: React.FC<Props> = ({
 							className='input'
 							iconName='CalendarIcon'
 							iconPosition='left'
+							{
+								...registeredValue('preferredDay', true)
+							}
 						/>
 					</div>
 				</div>
