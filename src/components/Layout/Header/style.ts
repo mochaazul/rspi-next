@@ -56,13 +56,6 @@ const HeaderStyle = styled.div`
     overflow-y: auto;
   }
 
-  .hospital-list {
-    :hover {
-      background: ${ colors.grey.lighter };
-      cursor: pointer;
-    }
-  }
-
   li {
     font-size: 16px;
     font-weight: 700;

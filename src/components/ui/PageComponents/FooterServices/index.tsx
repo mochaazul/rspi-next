@@ -14,19 +14,15 @@ import {
 	Text
 } from '@/components/ui';
 
-import { BreadcrumbsType } from '../../Breadcrumbs';
-
 import { FooterServiceStyle } from './style';
 
 type Props = PropsWithRef<PropsWithChildren<{
 	slug: string,
-	breadcrumbsPath: BreadcrumbsType['datas'],
     isMedSpec: boolean
 }>>;
 
 const FooterServices = ({
 	slug,
-	breadcrumbsPath,
 	isMedSpec
 }: Props) => {
     
@@ -79,12 +75,19 @@ const FooterServices = ({
 		</div>
 	);
 
+
+	const breadcrumbsPath = [
+		{ name: detail?.[0]?.title, url: `/footer/${detail?.[0]?.slug}` },
+	];
+
 	return (
 		<FooterServiceStyle>
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
 				<div>
-					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className='content-wrapper mt-[64px]'>
+					<div className='content-wrapper mt-[104px] flex flex-col'>
+						<div className='mb-[20px] sm:ml-[32px]'>
+							<Breadcrumbs datas={ breadcrumbsPath }/>
+						</div>
 						<div className='rightSide sm:ml-[32px]'>
 							{ renderContent }
 						</div>

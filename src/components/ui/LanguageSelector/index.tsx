@@ -6,6 +6,7 @@ import Picker from '@/components/ui/Picker';
 import { useChangeLocale, useCurrentLocale } from '@/locales/client';
 import icons from '@/constant/icons';
 import { colors } from '@/constant';
+import Image from 'next/image';
 
 const languageItem = [
 	{
@@ -13,14 +14,14 @@ const languageItem = [
 		label: 'ID',
 		value: 'id',
 		longLabel: 'Bahasa Indonesia',
-		icon: <icons.IDFlag alt='' className='w-5 h-5 flex-shrink-0 mr-3' />
+		icon: <Image src='/images/ic/flag.svg' alt='Indonesia Lang Icon' width={ 20 } height={ 20 }/>
 	},
 	{
 		key: 'en',
 		label: 'EN',
 		value: 'en',
 		longLabel: 'English',
-		icon: <icons.ENFlag alt='' className='w-5 h-5 flex-shrink-0 mr-3' />
+		icon: <Image src='/images/ic/eng-flag.svg' alt='English Lang Icon' width={ 20 } height={ 20 }/>
 	}
 ];
 
@@ -52,7 +53,7 @@ export const LanguageSelector = () => {
 							languageItem.map((item, index) => (
 								<div
 									key={ index }
-									className={ `flex cursor-pointer p-5 ${ index > 0 ? 'border-t border-[#F0F2F9]' : '' }` }
+									className={ `flex cursor-pointer gap-4 p-5 ${ index > 0 ? 'border-t border-[#F0F2F9]' : '' }` }
 									onClick={ () => onChangeLanguage(item.value) }
 								>
 									<>

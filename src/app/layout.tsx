@@ -33,6 +33,7 @@ export default async function RootLayout({ children }: Props) {
 				</StyledComponentsRegistry>
 
 				<FacebookPixel />
+				<div id='modal-base' />
 			</body>
 		</html>
 	);

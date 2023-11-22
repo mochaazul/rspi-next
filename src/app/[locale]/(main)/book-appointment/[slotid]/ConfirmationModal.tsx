@@ -38,21 +38,29 @@ type Props = {
 	doctorResponse?: ResponseType<FindDoctorDetail>;
 };
 
-export const ConfirmationModal = ({ doctorResponse, visible, onClose, selectedProfile, timeSlot, penjamin, namaAsuransi, noAsuransi, onConfirmed, loading, loadingUploadPhoto }: Props) => {
+export const ConfirmationModal = ({
+	doctorResponse,
+	visible,
+	onClose,
+	selectedProfile,
+	timeSlot,
+	penjamin,
+	namaAsuransi,
+	noAsuransi,
+	onConfirmed,
+	loading,
+	loadingUploadPhoto
+}: Props) => {
 	
 	const navigate = useRouter();
 	const t = useScopedI18n('page.bookingAppointment.confirmationModal');
-	// const { selectedDoctorTimeSlot, masterDoctors } = useTypedSelector<FindDoctorState>('findDoctor');
+
 	const [checked, setChecked] = useState<boolean>(false);
-	// const getDoctor = () => {
-	// 	return masterDoctors.find(doctor => doctor.doctor_code === timeSlot?.doctor_code);
-	// };
 
 	const toProfilPage = () => {
 		navigate.push('/user-information');
 	};
 
-	// if (selectedProfile && selectedProfile.phone && timeSlot && getDoctor()) {
 	if (selectedProfile && selectedProfile.phone && timeSlot) {
 		return <Modal borderRadius='12px' visible={ visible } onClose={ onClose } width='w-full' containerClassName='m-4'>
 			<ConfirmationModalContainer >
@@ -188,7 +196,6 @@ export const ConfirmationModal = ({ doctorResponse, visible, onClose, selectedPr
 						</>
 					}
 				</div>
-				{ /* <DoctorProfileWidget doctorData={ getDoctor() } timeSlot={ timeSlot } /> */ }
 				<DoctorProfileWidget doctorData={ doctorResponse?.data } timeSlot={ timeSlot } />
 
 				<div className='my-[32px] flex items-center'>
