@@ -2,13 +2,15 @@
 'use client';
 import FindDoctorStyle from './style';
 import React, { useState } from 'react';
-import { PickerItem } from '@/components/ui/DropdownSearch';
-import Button from '@/components/ui/Button';
-import Form from '@/components/ui/Form';
+import DropdownSearch, { PickerItem } from '@/components/ui/DropdownSearch';
 import { useScopedI18n } from '@/locales/client';
-import { HospitalDetail } from '@/interface';
+import { HospitalDetail, LandingPageFindADoctorForm } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';
 import useFindADoctor from './useFindADoctor';
+import { Field, Formik, FormikProps, useFormik } from 'formik';
+import DateField from '@/components/ui/DateField';
+import { Dropdown, Form, TextField } from '@/components/ui';
+import Button from '@/components/ui/Button';
 
 type Props = {
 	isTelemedicine: boolean;
@@ -28,18 +30,14 @@ const FindADoctor: React.FC<Props> = ({
 		onSubmitHandler
 	} = useFindADoctor();
 
-	const {
-		onSubmit, registeredValue
-	} = Form.useForm({ fields: findADoctorField });
-
 	const hospitalArr = [
 		{ key: 'all', value: hospitals.map(hospital => hospital.hospital_code).join(','), label: t('form.allHospital') },
 		...hospitals.map(hospital => ({ key: hospital?.id?.toString(), value: hospital.hospital_code, label: hospital?.name }))
 	];
 
 	const onSubmitForm = (evt: React.FormEvent<HTMLFormElement>) => {
-		const { doctorName, hospital, preferredDay } = onSubmit(evt);
-		onSubmitHandler(doctorName.value, hospital.value, selectedSpeciality?.speciality_code, preferredDay.value, isTelemedicine);
+		// const { doctorName, hospital, preferredDay } = onSubmit(evt);
+		// onSubmitHandler(doctorName.value, hospital.value, selectedSpeciality?.speciality_code, preferredDay.value, isTelemedicine);
 	};
 
 	const mapSpeciality = () => {
@@ -53,31 +51,51 @@ const FindADoctor: React.FC<Props> = ({
 		return [];
 	};
 
-	const [selectedSpeciality, setSelectedSpeciality] = useState<PickerItem>();
-
-	const onChooseSpecialty = (item: PickerItem) => {
-		setSelectedSpeciality(item);
-	};
+	const formFindDoctor:FormikProps<LandingPageFindADoctorForm> = useFormik<LandingPageFindADoctorForm>({
+		initialValues: {
+			doctorName: '',
+			hospital: 'all',
+			preferredDay: '',
+			speciality: ''
+		},
+		onSubmit: values => {
+			onSubmitHandler(values.doctorName, values.hospital, values.speciality, values.preferredDay, false);
+		}
+	});
 
 	return (
 		<FindDoctorStyle>
 			<Form
-				onSubmit={ onSubmitForm }
 				autoComplete='off'
 				className='flex flex-col mx-[30px]'
+				onSubmit={ e => {
+					e.preventDefault();
+					formFindDoctor.handleSubmit();
+				} }
+				onReset={ () => {
+					formFindDoctor.setValues({
+						doctorName: '',
+						hospital: 'all',
+						preferredDay: '',
+						speciality: ''
+					});
+				} }
 			>
 				<div className='form-wrapper'>
 					<div className='h-full flex-1'>
 						<div className='mb-2'>
 							<label className='font-black text-sm'>{ 'Doctor name' }</label>
 						</div>
-						<Form.TextField
-							id='doctorName'
+						<TextField
 							className='input'
 							placeholder={ t('form.placeholder.doctorName') }
 							iconName='Search'
 							iconPosition='left'
-							{ ...registeredValue('doctorName') }
+							name='doctorName'
+							onChange={ evt => {
+								formFindDoctor.setFieldValue(evt.target.name, evt.target.value);
+							} }
+							value={ formFindDoctor.values.doctorName }
 							{
 								...isTelemedicine && { label: t('form.labels.doctorName') }
 							}
@@ -87,28 +105,34 @@ const FindADoctor: React.FC<Props> = ({
 						<div className='mb-2'>
 							<label className='font-black text-sm'>{ 'Hospital' }</label>
 						</div>
-						<Form.Dropdown
+						<Dropdown
 							menuItems={ hospitalArr }
 							placeholder={ t('form.placeholder.hospital') }
-							{
-								...registeredValue('hospital')
-							}
+							name='hospital'
+							onChange={ evt => {
+								formFindDoctor.setFieldValue(evt.target.name, evt.target.value);
+							} }
+							value={ formFindDoctor.values.hospital }
 						/>
 					</div>
 					<div className='h-full flex-1'>
 						<div className='mb-2'>
 							<label className='font-black text-sm'>{ t('form.labels.speciality') }</label>
 						</div>
-						<Form.DropdownSearch
+						<DropdownSearch
 							isForLanding={ true }
 							textFieldProps={ {
 								placeholder: t('form.placeholder.speciality'),
 								iconName: 'Search',
 								iconPosition: 'left',
 								className: 'input',
+								name: 'speciality',
+								value: formFindDoctor.values.speciality,
 							} }
 							pickerItems={ mapSpeciality() }
-							onItemClick={ onChooseSpecialty }
+							onItemClick={ item => {
+								formFindDoctor.setFieldValue('speciality', item.speciality_code);
+							} }
 						/>
 					</div>
 					<div className='h-full flex-1'>
@@ -116,15 +140,17 @@ const FindADoctor: React.FC<Props> = ({
 						<div className='mb-2'>
 							<label className='font-black text-sm'>{ t('form.labels.date') }</label>
 						</div>
-						<Form.DateField
+						<DateField
 							id='preferredDay'
 							placeholder={ t('form.placeholder.date') }
 							className='input'
 							iconName='CalendarIcon'
 							iconPosition='left'
-							{
-								...registeredValue('preferredDay', true)
-							}
+							name='preferredDay'
+							value={ formFindDoctor.values.preferredDay }
+							onChangeValue={ evt => {
+								formFindDoctor.setFieldValue('preferredDay', evt.value);
+							} }
 						/>
 					</div>
 				</div>
@@ -133,6 +159,7 @@ const FindADoctor: React.FC<Props> = ({
 					<Button className='shrink-0 sm:max-w-[216px] max-sm:flex-1' theme='primary' type='submit'>{ t('form.submitBtnLabel') }</Button>
 				</div>
 			</Form>
+
 		</FindDoctorStyle>
 	);
 };
