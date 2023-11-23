@@ -175,14 +175,9 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
-											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100 ' onClick={ () => {
-												// redirect to hospital detail, using footer data
-												Object.values(footersData || []).filter(footer => footer.footer_category === 'our-hospital')
-													?.forEach((element: FooterDetail) => {
-														if (element?.title === item?.name) {
-															router.push(`/footer/${ element.slug }`);
-														}
-													});
+											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center' onClick={ () => {
+												// redirect to hospital detail
+												router.push(`/hospital/${ item?.id }`);
 											} }>
 												<Image
 													alt='hospital image'

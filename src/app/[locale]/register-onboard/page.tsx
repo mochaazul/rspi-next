@@ -216,6 +216,9 @@ const RegisterOnboard = () => {
 					{
 						handleNotifError('your medical records has been registered')
 					}
+					{
+						handleNotifError('trakcare: MR and DOB not match')
+					}
 
 					<Form.PhoneNumberInput
 						id='phone'
@@ -267,7 +270,7 @@ const RegisterOnboard = () => {
 					</div> */ }
 					<Button
 						className='mt-[32px]'
-						disabled={ loadingUser }
+						disabled={ !formikRegister.values.phone || !formikRegister.values.birth_date || !formikRegister.values.medical_record || loadingUser }
 						onClick={ () => {
 							setEnableValidation(true);
 							setErrorUser({

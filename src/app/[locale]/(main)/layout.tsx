@@ -48,7 +48,7 @@ export default async function RootLayout({
 			{ children }
 
 			{ props?.footerShow !== false &&
-				<Footer footerData={ footers.data } />
+				<Footer footerData={ footers.data } hospitalData={ hospitals.data } />
 			}
 			{ props?.footerShow !== false &&
 				<CallForAmbulance hospitalData={ hospitals.data } />
