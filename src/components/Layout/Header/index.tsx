@@ -68,7 +68,7 @@ export const Header = ({
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const handleClick = async () => {
+	const handleClick = async() => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			router.refresh();
@@ -102,21 +102,6 @@ export const Header = ({
 							textAlign='center'
 							color={ colors.black.default }
 							text='Notification'
-						/>
-						<Text
-							fontSize='12px'
-							lineHeight='20px'
-							fontWeight='400'
-							textAlign='center'
-							color={ colors.green.brandAccent }
-							text='Mark all as read'
-							// Migrate
-							onClick={ () => marAllReadNotifFunc()
-								.then(function (response: any) {
-								notificationResponseFetch();
-							})
-							}
-						// End Migrate
 						/>
 					</div>
 
@@ -192,11 +177,12 @@ export const Header = ({
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
 											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100 ' onClick={ () => {
 												// redirect to hospital detail, using footer data
-												Object.values(footersData || []).filter(footer => footer.footer_category === 'our-hospital')?.forEach((element: FooterDetail) => {
-													if (element?.title === item?.name) {
-														navigate.push(`/footer/${ element.slug }`);
-													}
-												});
+												Object.values(footersData || []).filter(footer => footer.footer_category === 'our-hospital')
+													?.forEach((element: FooterDetail) => {
+														if (element?.title === item?.name) {
+															navigate.push(`/footer/${ element.slug }`);
+														}
+													});
 											} }>
 												<Image
 													alt='hospital image'
@@ -285,7 +271,11 @@ export const Header = ({
 								<Image
 									src={ icons.Notif }
 									alt=''
-									onClick={ () => setShowNotification(true) }
+									onClick={ () => marAllReadNotifFunc()
+										.then(() => {
+											setShowNotification(true);
+											notificationResponseFetch();
+										}) }
 									fill
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
