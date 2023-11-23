@@ -36,10 +36,8 @@ const HospitalServices = ({
 	const detail = Object.values(HospitalDetail || []);
 
 	const renderContent = (
-		<div className='mt-10'>
-			<Breadcrumbs datas={ breadcrumbsPath } />
-
-			<Text fontSize='24px' fontWeight='900' className='mt-6' color={ colors.paradiso.default }>
+		<div>
+			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
 				{ detail?.[0]?.name }
 			</Text>
 
@@ -71,9 +69,14 @@ const HospitalServices = ({
 	return (
 		<HospitalServiceStyle>
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
-				<div className='content-wrapper mt-[64px]'>
-					<div className='rightSide sm:ml-[32px]'>
-						{ renderContent }
+				<div>
+					<div className='content-wrapper mt-[104px] flex flex-col'>
+						<div className='mb-[20px] sm:ml-[32px]'>
+							<Breadcrumbs datas={ breadcrumbsPath } />
+						</div>
+						<div className='rightSide sm:ml-[32px]'>
+							{ renderContent }
+						</div>
 					</div>
 				</div>
 			</div>
