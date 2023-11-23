@@ -70,11 +70,11 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 			fetchRelatedNews(response?.data?.id).then(function (response) {
 				setRelatedNews(response?.data);
 			});
-			
+
 		});
 	}, []);
 
-	const breadcrumbsPath = [{ name: 'News & Health Articles', url: '/news' }, { url: '#', name: 'Title Selected Article' || '' }]; // selectedArticle?.title
+	const breadcrumbsPath = [{ name: t('breadcrumbsLabel'), url: '/news' }, { url: '#', name: selectedArticle?.title || '' }];
 
 	const handleOpenSocmed = (link: string) => () => {
 		if (typeof window !== 'undefined') {

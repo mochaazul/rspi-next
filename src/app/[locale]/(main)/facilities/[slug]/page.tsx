@@ -45,7 +45,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 		relatedNews = relatedNewsRes?.data;
 	}
 
-	const languages = await getScopedI18n('page.facilities');
+	const t = await getScopedI18n('page.facilities');
 
 	const facilitiesServiceData: FacilityServicesDetail[] = [...facilityServices, {
 		id: 1234567890,
@@ -66,7 +66,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 		slug: 'medical-specialities'
 	}];
 	const breadcrumbsPath = [
-		{ name: 'Facilities & Services', url: '#' },
+		{ name: t('heading'), url: '#' },
 		{ url: '#', name: facilitiesServiceData?.find((facility: FacilityServicesDetail) => facility.slug === paramsSlug)?.name ?? '' }
 	];
 
@@ -88,7 +88,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 
 	return (
 		<FacilitiesServiceStyle>
-			<div className='lg:w-[1110px] mx-auto max-lg:mx-4 pt-[121px] sm:pt-[162px] pb-[60px]'>
+			<div className='lg:w-[1110px] mx-auto max-lg:mx-4 pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='content-wrapper mt-[25px] md:mt-16 flex md:gap-5 lg:gap-8'>
@@ -103,7 +103,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 						relatedNews && relatedNews.length > 0 &&
 						<div className='mt-8'>
 							<Text
-								text={ languages('relatedNewsHeading') }
+								text={ t('relatedNewsHeading') }
 								className='related'
 								fontWeight='700'
 								fontSize='24px'
@@ -135,7 +135,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 												</div>
 											}
 											content={ <CardContentWithInner title={ data.title_news } description={ data.short_description } author={ data.author } /> }
-											footer={ <CardFooter content={ languages('readMoreLabel') } /> }
+											footer={ <CardFooter content={ t('readMoreLabel') } /> }
 											className='mb-0 w-[304px] md:w-full'
 											iconShare={ true }
 											to={ `/news/${ data.news_id }` }

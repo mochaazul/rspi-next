@@ -32,20 +32,19 @@ import {
 	useUpdateEmail,
 	useUpdateProfile
 } from '@/lib/api/client/profile';
-import { CheckPinSchema, UpdateEmailSchema, UpdateProfileSchema } from '@/validator/profile';
+import {
+	CheckPinSchema,
+	UpdateEmailSchema,
+	UpdateProfileSchema,
+	UploadPhotoSchema
+} from '@/validator/profile';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { usePostCheckPinMutation } from '@/lib/api/client/auth';
 import { getProfile } from '@/lib/api/profile';
 
 import ProfilePageStyle, { Divider } from './style';
-import { PanelH2, PanelV1 } from '../style';
-
-const editableInputProps = {
-	iconPosition: 'right',
-	featherIcon: 'Edit3',
-	$iconColor: colors.paradiso.default,
-};
-const breadcrumbsPath = [{ name: 'User Information', url: '#' }];
+import { PanelH2 } from '../style';
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -61,11 +60,15 @@ const getBase64 = (file: File | null) => {
 	});
 };
 
+type UploadPhotoTypeState = {
+	photo_file: File | null;
+};
+
 export default function Page() {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
-	const { data: visitHospitalHistory } = useGetVisitHistory();
 	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile();
+	const { data: visitHospitalHistory } = useGetVisitHistory();
 	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: updateEmail } = useUpdateEmail();
@@ -73,10 +76,11 @@ export default function Page() {
 	const { trigger: checkPin } = usePostCheckPinMutation();
 
 	const navigate = useRouter();
-	const languages = useScopedI18n('page.profilePage');
-	const languagesPin = useScopedI18n('modalDialog.pin');
+	const t = useScopedI18n('page.profilePage');
+	const tModalPin = useScopedI18n('modalDialog.pin');
+	const tValidation = useScopedI18n('validation.formValidation');
+	const breadcrumbsPath = [{ name: t('heading'), url: '#' }];
 
-	const [tempImage, setTempImage] = useState<File | null>(null);
 	const [tempImageSrc, setTempImageSrc] = useState<string>('');
 	const [clickUpdatePhoto, setClickUpdatePhoto] = useState<boolean>(false);
 	const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
@@ -88,7 +92,8 @@ export default function Page() {
 	const [enableValidation, setEnableValidation] = useState<Record<string, boolean>>({
 		profile: false,
 		email: false,
-		pin: false
+		pin: false,
+		photo: false
 	});
 
 	const isDisableFormProfile = useMemo(() => {
@@ -159,6 +164,33 @@ export default function Page() {
 		},
 	});
 
+	const formikPhoto: FormikProps<UploadPhotoTypeState> = useFormik<UploadPhotoTypeState>({
+		validateOnBlur: enableValidation.photo,
+		validateOnChange: enableValidation.photo,
+		initialValues: { photo_file: null },
+		validationSchema: UploadPhotoSchema,
+		onSubmit: async (formUpload: UploadPhotoTypeState) => {
+			try {
+				if (formUpload.photo_file) {
+					setIsLoadingUploadAvatar(true);
+
+					const formImg = new FormData();
+					formImg.append('upload', formUpload.photo_file ?? '');
+					const responseData = await uploadPhotoPatient({ payload: formUpload.photo_file });
+					await updateAvatar({ img_url: responseData?.data });
+					await getProfile(true);
+					getProfileMutation();
+				}
+			} catch (error: any) {
+				setError(error?.message ?? '');
+			} finally {
+				setIsLoadingUploadAvatar(false);
+				setClickUpdatePhoto(false);
+				setEnableValidation(prevToggle => ({ ...prevToggle, photo: false }));
+			}
+		},
+	});
+
 	// const activeEmail = localStorage.getEmail(); // Notes: pending
 
 	// TODO: PENDING FEATURE
@@ -203,23 +235,6 @@ export default function Page() {
 	// 	setSwitchAccountUsers(tempSwitchAccountUsers);
 	// };
 
-	const clickUploadPhotoPatient = async () => {
-		try {
-			if (tempImage) {
-				setIsLoadingUploadAvatar(true);
-				const formImg = new FormData();
-				formImg.append('upload', tempImage ?? '');
-				const responseData = await uploadPhotoPatient({ payload: tempImage });
-				await updateAvatar({ img_url: responseData?.data });
-				getProfile(true);
-			}
-		} catch (error: any) {
-			setError(error?.message ?? '');
-		} finally {
-			setIsLoadingUploadAvatar(false);
-		}
-	};
-
 	const clickUpdateProfile = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		setEnableValidation(prevToggle => ({ ...prevToggle, profile: true }));
@@ -232,10 +247,6 @@ export default function Page() {
 		setEnableValidation(prevToggle => ({ ...prevToggle, email: true }));
 		setError('');
 		formikEmail.handleSubmit();
-	};
-
-	const onChangeInputProfile = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formikProfile.setFieldValue(e.target.id, e.target.value);
 	};
 
 	const onChangeValueProfile = (data: { name?: string; value?: string; }) => {
@@ -259,12 +270,21 @@ export default function Page() {
 			const selectedFile: File | null = event.target.files && event.target.files.length
 				? event.target.files[0]
 				: null;
-			const imageBase64: string | ArrayBuffer | null = await getBase64(selectedFile);
-			if (imageBase64 && typeof imageBase64 === 'string') setTempImageSrc(imageBase64);
 
-			if (selectedFile) setTempImage(selectedFile);
+			if (selectedFile) {
+				const isFileValid = ['image/jpg', 'image/jpeg', 'image/png']?.includes(selectedFile?.type ?? '');
+
+				if (isFileValid) {
+					const imageBase64: string | ArrayBuffer | null = await getBase64(selectedFile);
+					if (imageBase64 && typeof imageBase64 === 'string') setTempImageSrc(imageBase64);
+
+					formikPhoto.setFieldValue('photo_file', selectedFile);
+				}
+			} else {
+				formikPhoto.setFieldError('photo_file', 'fileNotValid');
+			}
 		} catch (error) {
-			setError('Upload image failed');
+			formikPhoto.setFieldError('photo_file', 'fileNotValid');
 		}
 	};
 
@@ -317,27 +337,48 @@ export default function Page() {
 		);
 	};
 
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
+	};
+
+	const onClickDeletePhoto = async () => {
+		try {
+			setEnableValidation(prevToggle => ({ ...prevToggle, photo: false }));
+
+			if (tempImageSrc && patientProfile?.data?.img_url) {
+				setIsLoadingUploadAvatar(true);
+
+				await updateAvatar({ img_url: '' });
+
+				await getProfile(true);
+				await getProfileMutation();
+
+				formikPhoto.resetForm();
+				setTempImageSrc('');
+			} else if (tempImageSrc && !patientProfile?.data?.img_url) {
+				formikPhoto.resetForm();
+				setTempImageSrc('');
+			}
+		} catch (error: any) {
+			setError(error?.message ?? '');
+		} finally {
+			setIsLoadingUploadAvatar(false);
+		}
+	};
+
 	return (
-		<PanelV1>
+		<div>
 			<PanelH2>
 				<Breadcrumbs datas={ breadcrumbsPath } />
 				<ProfilePageStyle className='mt-[25px] sm:mt-[50px]'>
-					<div className='flex items-end lg:items-start justify-between max-lg:flex-col'>
+					<div className='flex'>
 						<div>
 							<Text
 								fontWeight='900'
 								fontSize='24px'
 								lineHeight='29px'
 								color={ colors.grey.darker }
-								text={ languages('heading') }
-							/>
-							<Text
-								fontWeight='400'
-								fontSize='16px'
-								lineHeight='19px'
-								color={ colors.grey.dark }
-								className='mt-3'
-								text={ languages('subHeading') }
+								text={ t('heading') }
 							/>
 						</div>
 						{ /* Notes: Login As dipending */ }
@@ -387,7 +428,7 @@ export default function Page() {
 					{ renderCardUser() }
 
 					<div className='flex mt-5 sm:mt-12 mb-[200px]'>
-						<SubMenuPage menuList={ [languages('profileLabel'), languages('securitySettingLabel')] }>
+						<SubMenuPage menuList={ [t('profileLabel'), t('securitySettingLabel')] }>
 							<div className='flex flex-col gap-[10px]'>
 								<div className='flex max-md:mb-4 max-md:flex-col md:items-center md:justify-between md:w-full'>
 									<div className='flex flex-row gap-x-4 items-center w-full'>
@@ -425,7 +466,7 @@ export default function Page() {
 														subClassName='max-sm:text-sm cursor-pointer'
 														onClick={ () => uploadFileRef.current?.click() }
 													>
-														{ languages('choosePhotoLabel') }
+														{ t('choosePhotoLabel') }
 													</Text>
 													<Text
 														fontSize='14px'
@@ -435,7 +476,7 @@ export default function Page() {
 														color={ colors.grey.default }
 														subClassName='max-sm:text-xs'
 													>
-														{ languages('formatPhotoLabel') }
+														{ t('formatPhotoLabel') }
 													</Text>
 												</div> :
 												<Button
@@ -443,7 +484,7 @@ export default function Page() {
 													$hoverTheme='primary'
 													themeColor='rgba(173, 181, 189, 1)'
 													className='px-[15px] sm:px-5 py-2.5 !w-auto text-sm lg:text-base text-[#2A2536]'
-													label={ languages('updatePhotoLabel') }
+													label={ t('updatePhotoLabel') }
 													onClick={ () => setClickUpdatePhoto(true) }
 												/>
 										}
@@ -456,11 +497,9 @@ export default function Page() {
 														theme='primary'
 														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base text-[#2A2536] sm:whitespace-nowrap'
 														themeColor={ colors.grey.lightest }
-														label={ languages('deletePhotoLabel') }
-														onClick={ () => {
-															setTempImage(null);
-															setTempImageSrc('');
-														} }
+														label={ t('deletePhotoLabel') }
+														onClick={ onClickDeletePhoto }
+														disabled={ isLoadingUploadAvatar }
 													/>
 												</div>
 												<div>
@@ -468,34 +507,46 @@ export default function Page() {
 														theme='primary'
 														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base sm:whitespace-nowrap'
 														$hoverTheme='primary'
-														label={ languages('uploadPhotoLabel') }
-														onClick={ clickUploadPhotoPatient }
+														label={ t('uploadPhotoLabel') }
+														onClick={ () => {
+															setEnableValidation(prevToggle => ({ ...prevToggle, photo: true }));
+															formikPhoto.handleSubmit();
+														} }
 														disabled={ isLoadingUploadAvatar }
 													/>
 												</div>
 											</div>
 											: null
 									}
+
 								</div>
+								{ !!formikPhoto.errors.photo_file && (
+									<Text
+										fontSize='12px'
+										fontWeight='400'
+										color={ colors.red.default }
+									>
+										{ getInputErrorMessage(formikPhoto.errors.photo_file, t('profileDetail.patientPhotoProfile')) }
+									</Text>
+								) }
 								{ !showModalNewEmail
 									&& !pinModalVisible
 									&& renderErrorNotif() }
 								<Form onSubmit={ clickUpdateProfile }>
 									<HorizontalInputWrapper
-										label={ languages('profileDetail.patientEmail') }
-										labelInfo={ !isDisableFormProfile ? languages('profileDetail.patientPhoneNumberLabelInfo') : undefined }
+										label={ t('profileDetail.patientEmail') }
+										labelInfo={ !isDisableFormProfile ? t('profileDetail.patientPhoneNumberLabelInfo') : undefined }
+										{ ...isDisableFormProfile
+											? {
+												onEditClick: () => {
+													setPinModalVisible(true);
+													setError('');
+												}
+											} : {} }
 										inputProps={ {
-											...isDisableFormProfile
-												? {
-													...editableInputProps,
-													onIconClick: () => {
-														setPinModalVisible(true);
-														setError('');
-													}
-												} : {},
 											type: 'email',
 											value: patientProfile?.data?.email ?? '',
-											placeholder: languages('profileDetail.patientEmailPlaceholder'),
+											placeholder: t('profileDetail.patientEmailPlaceholder'),
 											disabled: true,
 										} }
 									/>
@@ -505,7 +556,7 @@ export default function Page() {
 											fontSize='20px'
 											fontWeight='900'
 											color={ colors.grey.dark }
-											text={ languages('medicalRecordLabel') }
+											text={ t('medicalRecordLabel') }
 										/>
 
 										{
@@ -515,35 +566,33 @@ export default function Page() {
 												fontWeight='400'
 												fontStyle='italic'
 												color={ colors.red.default }
-												text={ languages('medicalRecordEmptyInfo') }
+												text={ t('medicalRecordEmptyInfo') }
 											/>
 										}
 									</div>
 									<HorizontalInputWrapper
-										label={ languages('profileDetail.patientNameLabel') }
+										label={ t('profileDetail.patientNameLabel') }
 										inputProps={ {
-											id: 'name',
 											name: 'name',
 											type: 'text',
 											value: formikProfile.values.name,
-											onChange: onChangeInputProfile,
-											placeholder: languages('profileDetail.patientNamePlaceholder'),
-											errorMessage: formikProfile.errors.name,
+											onChange: formikProfile.handleChange,
+											placeholder: t('profileDetail.patientNamePlaceholder'),
+											errorMessage: getInputErrorMessage(formikProfile.errors.name, t('profileDetail.patientNameLabel')),
 											isError: !!formikProfile.errors.name,
 											disabled: isDisableFormProfile
 										} }
 									/>
 									<HorizontalInputWrapper
-										label={ languages('profileDetail.patientGenderLabel') }
+										label={ t('profileDetail.patientGenderLabel') }
 										inputType='dropdown'
 										inputProps={ {
-											id: 'gender',
 											name: 'gender',
 											value: formikProfile.values.gender,
-											onChange: onChangeInputProfile,
-											placeholder: languages('profileDetail.patientGenderPlaceholder'),
+											onChange: formikProfile.handleChange,
+											placeholder: t('profileDetail.patientGenderPlaceholder'),
 											disabled: isDisableFormProfile,
-											errorMessage: formikProfile.errors.gender,
+											errorMessage: getInputErrorMessage(formikProfile.errors.gender, t('profileDetail.patientGenderLabel')),
 											isError: !!formikProfile.errors.gender,
 											// className: 'capitalize'
 										} }
@@ -551,39 +600,38 @@ export default function Page() {
 									{
 										isDisableFormProfile &&
 										<HorizontalInputWrapper
-											label={ languages('profileDetail.patientMedicalNumber') }
+											label={ t('profileDetail.patientMedicalNumber') }
 											inputProps={ {
-												placeholder: languages('profileDetail.patientMedicalNumberPlaceholder'),
+												placeholder: t('profileDetail.patientMedicalNumberPlaceholder'),
 												disabled: true,
 												value: patientProfile?.data?.no_mr
 											} }
 										/>
 									}
 									<HorizontalInputWrapper
-										label={ languages('profileDetail.patientBirthDateLabel') }
+										label={ t('profileDetail.patientBirthDateLabel') }
 										inputType='date'
 										inputProps={ {
 											id: 'birthdate',
 											name: 'birthdate',
 											value: formikProfile.values.birthdate,
 											onChangeValue: onChangeValueProfile,
-											placeholder: languages('profileDetail.patientBirthDatePlaceholder'),
+											placeholder: t('profileDetail.patientBirthDatePlaceholder'),
 											disabled: isDisableFormProfile,
-											errorMessage: formikProfile.errors.birthdate,
+											errorMessage: getInputErrorMessage(formikProfile.errors.birthdate, t('profileDetail.patientBirthDateLabel')),
 											isError: !!formikProfile.errors.birthdate,
 										} }
 									/>
 									<HorizontalInputWrapper
-										label={ languages('profileDetail.patientPhoneNumber') }
-										labelInfo={ isDisableFormProfile ? languages('profileDetail.patientPhoneNumberLabelInfo') : undefined }
+										label={ t('profileDetail.patientPhoneNumber') }
+										labelInfo={ isDisableFormProfile ? t('profileDetail.patientPhoneNumberLabelInfo') : undefined }
 										inputProps={ {
-											id: 'phone',
 											name: 'phone',
 											value: formikProfile.values.phone,
-											onChange: onChangeInputProfile,
-											placeholder: languages('profileDetail.patientPhoneNumberPlaceholder'),
+											onChange: formikProfile.handleChange,
+											placeholder: t('profileDetail.patientPhoneNumberPlaceholder'),
 											disabled: isDisableFormProfile,
-											errorMessage: formikProfile.errors.phone,
+											errorMessage: getInputErrorMessage(formikProfile.errors.phone, t('profileDetail.patientPhoneNumber')),
 											isError: !!formikProfile.errors.phone,
 											onKeyDown: (ev: React.KeyboardEvent<HTMLInputElement>) => {
 												if (regExp.phone_allowed_char_list.indexOf(ev.key) < 0) {
@@ -600,7 +648,7 @@ export default function Page() {
 												<Button
 													theme='outline'
 													$hoverTheme='primary'
-													label={ languages('securitySetting.cancelBtnLabel') }
+													label={ t('securitySetting.cancelBtnLabel') }
 													onClick={ () => formikProfile.resetForm() }
 												/>
 											</div>
@@ -609,7 +657,7 @@ export default function Page() {
 													type='submit'
 													theme='primary'
 													$hoverTheme='outline'
-													label={ languages('securitySetting.saveBtnLabel') }
+													label={ t('securitySetting.saveBtnLabel') }
 													disabled={ loadingUpdateProfile || loadingGetProfile }
 												/>
 											</div>
@@ -619,32 +667,30 @@ export default function Page() {
 							</div>
 							<div className='flex flex-col gap-[10px]'>
 								<HorizontalInputWrapper
-									label={ languages('securitySetting.passwordLabel') }
+									label={ t('securitySetting.passwordLabel') }
 									value='123456789010'
+									onEditClick={ () => navigate.push('/update-password') }
 									inputProps={ {
-										...editableInputProps,
-										placeholder: languages('securitySetting.passwordLabel'),
+										placeholder: t('securitySetting.passwordLabel'),
 										disabled: true,
 										type: 'password',
-										onIconClick: () => navigate.push('/update-password')
 									} }
 								/>
 								<HorizontalInputWrapper
-									label={ languages('securitySetting.pinLabel') }
+									label={ t('securitySetting.pinLabel') }
 									value='123456'
+									onEditClick={ () => navigate.push('/pin-reset') }
 									inputProps={ {
-										...editableInputProps,
-										placeholder: languages('securitySetting.pinLabel'),
+										placeholder: t('securitySetting.pinLabel'),
 										disabled: true,
 										type: 'password',
-										onIconClick: () => navigate.push('/pin-reset')
 									} }
 								/>
 							</div>
 						</SubMenuPage>
 					</div>
-				</ProfilePageStyle>
-				<Modal visible={ pinModalVisible } onClose={ () => setPinModalVisible(false) }>
+				</ProfilePageStyle >
+				<Modal visible={ pinModalVisible } onClose={ () => { setPinModalVisible(false); setError(''); } }>
 					<div className='flex flex-col items-center gap-4'>
 						<Form
 							onSubmit={ e => {
@@ -653,11 +699,10 @@ export default function Page() {
 								setError('');
 								formikPin.handleSubmit();
 							} }>
-							<Text text={ languagesPin('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
-							<Text text={ languagesPin('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
+							<Text text={ tModalPin('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
+							<Text text={ tModalPin('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
 							{ renderErrorNotif() }
-							<div className='mt-[48px] mb-[20px]'>
-								<Text text={ 'PIN' } fontWeight='700' />
+							<div className='mt-12 mb-10'>
 								<Form.TextFieldPin
 									className='input'
 									digitLength={ 6 }
@@ -668,11 +713,12 @@ export default function Page() {
 									id='pin'
 									name='pin'
 									type='password'
-									errorMessage={ formikPin.errors.pin }
+									label={ tModalPin('pinLabel') }
+									errorMessage={ getInputErrorMessage(formikPin.errors.pin, tModalPin('pinLabel')) }
 									isError={ !!formikPin.errors.pin }
 								/>
 							</div>
-							<Button type='submit' label={ languagesPin('submitBtnLabel') } />
+							<Button type='submit' label={ tModalPin('submitBtnLabel') } />
 						</Form>
 
 					</div>
@@ -683,29 +729,31 @@ export default function Page() {
 
 						<Form onSubmit={ userClickUpdateEmail }>
 							<HorizontalInputWrapper
-								label={ languages('profileDetail.patientOldEmail') }
+								label={ t('profileDetail.patientOldEmail') }
 								inputProps={ {
 									value: patientProfile?.data?.email ?? '',
-									placeholder: languages('profileDetail.patientOldEmailPlaceHolder'),
+									placeholder: t('profileDetail.patientOldEmailPlaceHolder'),
 									disabled: true,
 									type: 'text',
 								} }
 							/>
 							<HorizontalInputWrapper
-								label={ languages('profileDetail.patientNewEmail') }
+								label={ t('profileDetail.patientNewEmail') }
 								inputProps={ {
 									id: 'email',
 									name: 'email',
 									value: formikEmail.values.email,
 									onChange: onChangeInputEmail,
-									placeholder: languages('profileDetail.patientNewEmailPlaceHolder'),
+									placeholder: t('profileDetail.patientNewEmailPlaceHolder'),
 									disabled: false,
-									type: 'email'
+									type: 'email',
+									errorMessage: getInputErrorMessage(formikEmail.errors.email, t('profileDetail.patientNewEmail')),
+									isError: !!formikEmail.errors.email,
 								} }
 							/>
 							<div className='flex justify-end align-center gap-5 mt-[50px]'>
 								<div>
-									<Button type='submit' theme='primary' $hoverTheme='outline' label={ languages('securitySetting.saveBtnLabel') } />
+									<Button type='submit' theme='primary' $hoverTheme='outline' label={ t('securitySetting.saveBtnLabel') } />
 								</div>
 							</div>
 						</Form>
@@ -734,7 +782,7 @@ export default function Page() {
 					</div>
 				</Modal>
 
-			</PanelH2>
-		</PanelV1 >
+			</PanelH2 >
+		</div >
 	);
 };

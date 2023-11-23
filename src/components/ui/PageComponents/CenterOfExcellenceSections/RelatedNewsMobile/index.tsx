@@ -6,9 +6,11 @@ import { useRef, Key } from 'react';
 import { colors } from '@/constant';
 import { Button, Text } from '@/components/ui';
 import Card, { CardContentWithInner, CardFooter, CardsScrollHorizontal } from '@/components/ui/Card';
+import { useScopedI18n } from '@/locales/client';
 
-const renderRelatedNewsMobile = (props: any) => {
+const RelatedNewsMobile = (props: any) => {
 	const CardWrapperRef = useRef<HTMLDivElement>(null);
+	const t = useScopedI18n('page.centerOfExcellence');
 
 	return (
 		<CardsScrollHorizontal customRef={ CardWrapperRef }>
@@ -36,7 +38,7 @@ const renderRelatedNewsMobile = (props: any) => {
 							</div>
 						}
 						content={ <CardContentWithInner title={ article?.news?.title || '' } description={ article?.news?.short_description || '' } author={ article?.news?.news_author?.doctor_name } /> }
-						footer={ <CardFooter content='Read More' /> }
+						footer={ <CardFooter content={ t('serviceLocation.readMore') } /> }
 						className='mb-0'
 						iconShare={ true }
 						to={ `/news/${ article?.news?.news_id }` }
@@ -47,4 +49,4 @@ const renderRelatedNewsMobile = (props: any) => {
 	);
 };
 
-export default renderRelatedNewsMobile;
+export default RelatedNewsMobile;

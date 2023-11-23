@@ -45,6 +45,7 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 				value={ { startDate: props.value ? new Date(props.value ?? '') : null, endDate: props.value ? new Date(props.value ?? '') : null } }
 				onChange={ onChange }
 				placeholder={ props?.placeholder ?? 'Choose Preferred Day' }
+				readOnly
 			/>
 		</DateFieldWrapper>
 	);

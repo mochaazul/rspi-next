@@ -40,7 +40,7 @@ export const PhoneNumberInputWrapper = styled.div<StyledPhoneNumberInputType>`
     padding-right: ${ props => (!!props.$iconName || !!props.featherIcon) && props.$iconPosition === 'right' && '43px' };
   }
   &:focus-within{
-    outline: 1px solid ${ colors.green.toscaLight }
+    outline: 1px solid ${ colors.green.brandAccent }
   }
   ${ GlobalAllTransition5ms }
  

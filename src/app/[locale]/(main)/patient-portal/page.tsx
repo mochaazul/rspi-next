@@ -189,30 +189,6 @@ const PatientPortal = () => {
 							: <MedicalRecordReminder isFloating={ false } />
 					}
 				</div>
-				{/* <div className='card flex  flex-wrap'>
-					<section id='user-info'
-						className='flex flex-row sm:w-1/2 md:w-1/4'
-					>
-						<NextImage alt='' src={ getProfileResponse?.data.img_url || '' } height={ 60 } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
-						<div className='ml-[15px]'>
-							<Text text={ getProfileResponse?.data.name } fontSize='16px' fontWeight='700' />
-							<Text text={ `${ parseBod(getProfileResponse?.data.birthdate) }` } className='md:mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						</div>
-					</section>
-					<section id='patient-ids' className='sm:w-1/2 md:w-1/4'>
-						<Text text={ 'Patient ID' } subClassName='max-sm:text-right' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						<Text text={ getProfileResponse?.data.patient_code || '-' } subClassName='max-sm:text-right' className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
-					</section>
-					<hr className='my-[24px] md:hidden w-full' />
-					<div className='sm:w-1/2 md:w-1/4'>
-						<Text text={ 'Last Visited Hospital' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						<Text text={ lastVisitedHospital?.hospital_name } className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
-					</div>
-					<div className='sm:w-1/2 md:w-1/4'>
-						<Text text={ 'Last Visited Date' } subClassName='max-sm:text-right' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						<Text text={ dayjs(lastVisitedHospital?.visit_date || dayjs()).format('dddd, DD MMMM YYYY') } subClassName='max-sm:text-right' className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
-					</div>
-				</div> */}
 				<div className='mt-[32px] flex'>
 					<div className='relative tabs border-solid border-b-[1px] border-b-white/20 max-sm:hidden'>
 						<div className='tabs-menu'>

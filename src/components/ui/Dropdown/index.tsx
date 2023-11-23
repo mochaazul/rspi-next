@@ -181,9 +181,13 @@ const Dropdown: React.FC<DropdownProps> = ({
 						/>
 					</div>
 			}
-			<div className={ `arrow-down ${ arrowClassName }` } onClick={ openOptionDialog }>
-				< icons.ArrowDown />
-			</div>
+			{
+				!props.disabled && (
+					<div className={ `arrow-down ${ arrowClassName }` } onClick={ openOptionDialog }>
+						<icons.ArrowDown />
+					</div>
+				)
+			}
 			<OptionsWrapper $isOpen={ isOpen } $topOffset={ SelectWrapperRef.current?.offsetHeight ?? 0 } onClick={ closeOptionDialog }>
 				{
 					props.multiple ?
