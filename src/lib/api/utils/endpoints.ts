@@ -19,6 +19,7 @@ const endpointData = {
 	footerPages: { path: '/footer-pages', method: 'GET' },
 	notification: { path: '/notification', method: 'POST' },
 	readNotification: { path: '/notification/seen', method: 'POST' },
+	pushNotification: { path: '/notification/push', method: 'POST' },
 	createFamilyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
 	checkPin: { path: '/patients/pin', method: 'POST' },

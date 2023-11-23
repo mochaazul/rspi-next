@@ -49,6 +49,7 @@ const BookAppointment = () => {
 	const { data: userProfile, isLoading: profileLoading } = useGetProfile();
 	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile();
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
+	// const { trigger: pushNotif, error: pushNotifError, isMutating: pushNotifLoading } = usePushNotifAPI();
 	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
 
 	const { bookAppointmentFields } = useBookAppointment();

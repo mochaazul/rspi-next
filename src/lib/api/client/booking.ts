@@ -7,3 +7,9 @@ export const useBookAppointmentAPI = (options?: ApiOptions) => {
 		fetcher('bookAppointment', { ...options, body: arg })
 	);
 };
+
+// export const usePushNotifAPI = (options?: ApiOptions) => {
+// 	return useSWRMutation('createPushNotif', (key, { arg }: {arg:}) =>
+// 		fetcher('pushNotification', { ...options, body: arg })
+// 	);
+// };
