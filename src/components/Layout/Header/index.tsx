@@ -45,7 +45,7 @@ export const Header = ({
 	centerOfExcellenceData: CenterOfExcellenceState,
 	facilityServicesData: FacilityServicesState,
 	notificationResponseData?: NotificationResponse,
-	marAllReadNotifFunc: (params: any) => any,
+	marAllReadNotifFunc: () => any,
 	footersData: FooterDetail[],
 }) => {
 
@@ -111,10 +111,8 @@ export const Header = ({
 							color={ colors.green.brandAccent }
 							text='Mark all as read'
 							// Migrate
-							onClick={ () => marAllReadNotifFunc({
-								medical_record: 100154999,
-								email: 'riko.logwirno@rebelworks.co'
-							}).then(function (response: any) {
+							onClick={ () => marAllReadNotifFunc()
+								.then(function (response: any) {
 								notificationResponseFetch();
 							})
 							}
