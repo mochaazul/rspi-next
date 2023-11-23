@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import * as FeatherIcons from 'react-feather';
 import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import { FormikProps, useFormik } from 'formik';
@@ -14,8 +13,6 @@ import {
 	UpdateEmailType,
 	UpdateProfileType
 } from '@/interface';
-import { getAge } from '@/helpers/getAge';
-import { splitDate } from '@/helpers/datetime';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
@@ -25,6 +22,7 @@ import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import SubMenuPage from '@/components/ui/SubMenuPage';
 import Form from '@/components/ui/Form';
 import HorizontalInputWrapper from '@/components/ui/PageComponents/UserInformationSections/HorizontalInputWrapper';
+import CardUserMR from '@/components/ui/PageComponents/UserInformationSections/CardUserMR';
 import { useScopedI18n } from '@/locales/client';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import {
@@ -98,7 +96,7 @@ export default function Page() {
 	}, [patientProfile?.data?.no_mr]);
 
 	const lastVisitedHospital = useMemo(() => {
-		if (!visitHospitalHistory?.data) return null;
+		if (!visitHospitalHistory?.data) return;
 		return getLastVisitedHospitalHelper(visitHospitalHistory?.data);
 	}, [visitHospitalHistory?.data]);
 
@@ -113,7 +111,7 @@ export default function Page() {
 			phone: patientProfile?.data?.phone ?? ''
 		},
 		enableReinitialize: true,
-		onSubmit: async(formProfile: UpdateProfileType) => {
+		onSubmit: async (formProfile: UpdateProfileType) => {
 			try {
 				await updateProfile(formProfile);
 				setShowModalSuccess(true);
@@ -131,7 +129,7 @@ export default function Page() {
 		validateOnChange: enableValidation.email,
 		validationSchema: UpdateEmailSchema,
 		initialValues: { email: '' },
-		onSubmit: async(formEmail: UpdateEmailType) => {
+		onSubmit: async (formEmail: UpdateEmailType) => {
 			try {
 				await updateEmail(formEmail);
 				setShowModalSuccessUpdateEmail(true);
@@ -148,7 +146,7 @@ export default function Page() {
 		validateOnChange: enableValidation.pin,
 		initialValues: { pin: '' },
 		validationSchema: CheckPinSchema,
-		onSubmit: async(formPin: CheckPinType) => {
+		onSubmit: async (formPin: CheckPinType) => {
 			try {
 				await checkPin(formPin);
 				setPinModalVisible(false);
@@ -185,7 +183,7 @@ export default function Page() {
 	// 	}
 	// };
 
-	const removeUserDatas = async() => {
+	const removeUserDatas = async () => {
 		await cookiesHelper.clearStorage();
 		navigate.replace('/login');
 	};
@@ -205,7 +203,7 @@ export default function Page() {
 	// 	setSwitchAccountUsers(tempSwitchAccountUsers);
 	// };
 
-	const clickUploadPhotoPatient = async() => {
+	const clickUploadPhotoPatient = async () => {
 		try {
 			if (tempImage) {
 				setIsLoadingUploadAvatar(true);
@@ -256,7 +254,7 @@ export default function Page() {
 		}
 	};
 
-	const onHandleTempProfileImage = async(event: React.ChangeEvent<HTMLInputElement>) => {
+	const onHandleTempProfileImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
 			const selectedFile: File | null = event.target.files && event.target.files.length
 				? event.target.files[0]
@@ -301,6 +299,22 @@ export default function Page() {
 		}
 
 		return null;
+	};
+
+	const renderCardUser = () => {
+		if (isDisableFormProfile) {
+			return (
+				<div className='mt-[30px]'>
+					<CardUserMR patientProfile={ patientProfile } lastVisitedHospital={ lastVisitedHospital } />
+				</div>
+			);
+		}
+
+		return (
+			<div className='mt-[30px] lg:px-[60px]'>
+				<MedicalRecordReminder isFloating={ false } />
+			</div>
+		);
 	};
 
 	return (
@@ -370,135 +384,8 @@ export default function Page() {
 						</div> */ }
 					</div>
 
-					{
-						isDisableFormProfile ?
-							<div className='user-panel card-shadow p-4 lg:p-5'>
-								<div className='flex justify-between lg:justify-center lg:grid lg:grid-cols-4 lg:gap-4 lg:items-center'>
-									<div className='flex items-center'>
-										<div className='flex-shrink-0 w-12 h-12 lg:w-[60px] lg:h-[60px] rounded-full mr-4 lg:mr-[18px] relative overflow-hidden cursor-pointer'>
-											{ (tempImageSrc || patientProfile?.data?.img_url)
-												? (
-													<Image
-														src={ tempImageSrc ? tempImageSrc : (patientProfile?.data?.img_url ?? '') }
-														alt=''
-														sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-														className='w-full h-full object-cover'
-														fill
-													/>
-												)
-												: <icons.EmptyProfile />
-											}
-											<div className='w-full h-full absolute flex items-center justify-center upload-mask top-0' onClick={ () => uploadFileRef.current?.click() }>
-												<FeatherIcons.Camera color={ colors.grey.dark } />
-											</div>
-											<input
-												type='file'
-												ref={ uploadFileRef }
-												onChange={ onHandleTempProfileImage }
-												className='hidden'
-												accept='image/*'
-											/>
-										</div>
-										<div className='flex flex-col gap-1 lg:gap-y-2.5'>
-											<Text
-												fontWeight='700'
-												fontSize='16px'
-												lineHeight='19px'
-												text={ patientProfile?.data?.name }
-											/>
-											<Text
-												fontWeight='400'
-												fontSize='14px'
-												lineHeight='17px'
-												className='capitalize'
-												text={ patientProfile?.data?.birthdate && patientProfile?.data?.gender && `${ getAge(splitDate(patientProfile?.data?.birthdate)) }, ${ patientProfile?.data?.gender }` }
-											/>
-										</div>
-									</div>
-									<div className='flex flex-col gap-1 lg:gap-y-2.5'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											subClassName='max-lg:text-center'
-											text={ languages('profileDetail.patientIdLabel') }
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											subClassName='max-lg:text-center'
-											text={ patientProfile?.data?.patient_code }
-										/>
-									</div>
-									<div className='max-lg:hidden flex flex-col gap-y-2.5'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											text={ languages('profileDetail.lastVisitedHospitalLabel') }
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											text={ lastVisitedHospital?.hospital_name ?? '-' }
-										/>
-									</div>
-									<div className='max-lg:hidden flex flex-col gap-y-2.5'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											text={ languages('profileDetail.lastVisitedDateLabel') }
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											text={ lastVisitedHospital?.visit_date ? dayjs(lastVisitedHospital?.visit_date).format('DD MMM YYYY') : '-' }
-										/>
-									</div>
-								</div>
-								<div className='hidden pt-6 mt-6 border-t border-[#F0F2F9] max-lg:flex justify-between'>
-									<div className='flex flex-col gap-1'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											text={ languages('profileDetail.lastVisitedHospitalLabel') }
-											textAlign='center'
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											text={ lastVisitedHospital?.hospital_name ?? '-' }
-											textAlign='center'
-										/>
-									</div>
-									<div className='flex flex-col gap-1'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											text={ languages('profileDetail.lastVisitedDateLabel') }
-											textAlign='center'
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											text={ lastVisitedHospital?.visit_date ? dayjs(lastVisitedHospital?.visit_date).format('DD MMM YYYY') : '-' }
-											textAlign='center'
-										/>
-									</div>
-								</div>
-							</div> :
-							<div className='mt-[30px] lg:px-[60px]'>
-								<MedicalRecordReminder isFloating={ false } />
-							</div>
-					}
+					{ renderCardUser() }
+
 					<div className='flex mt-5 sm:mt-12 mb-[200px]'>
 						<SubMenuPage menuList={ [languages('profileLabel'), languages('securitySettingLabel')] }>
 							<div className='flex flex-col gap-[10px]'>

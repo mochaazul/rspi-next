@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 
 import { colors, Images } from '@/constant';
 import { default as NextImage } from 'next/image';
-import { Text } from '@/components/ui';
+import { MedicalRecordReminder, Text } from '@/components/ui';
 import PinModal from '@/components/ui/PinModal';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import { useGetProfile } from '@/lib/api/client/profile';
@@ -18,6 +18,7 @@ import RiwayatVaksin from './components/RiwayatVaksin';
 import RiwayatLab from './components/RiwayatLab';
 
 import { VisitHistoryStyle } from './style';
+import CardUserMR from '@/components/ui/PageComponents/UserInformationSections/CardUserMR';
 
 type MenuType = {
 	id: number;
@@ -177,11 +178,18 @@ const PatientPortal = () => {
 
 	return (
 		<VisitHistoryStyle
-			className='max-sm:py-0 md:mt-[104px]'
+			className='max-sm:py-0'
 		>
 			<div className='rectangle' />
 			<div className='content-wrapper pt-[60px] md:pt-[120px]'>
-				<div className='card flex  flex-wrap'>
+				<div className='w-full -mt-[42px] relative'>
+					{
+						getProfileResponse?.data?.no_mr
+							? <CardUserMR patientProfile={ getProfileResponse } lastVisitedHospital={ lastVisitedHospital } />
+							: <MedicalRecordReminder isFloating={ false } />
+					}
+				</div>
+				{/* <div className='card flex  flex-wrap'>
 					<section id='user-info'
 						className='flex flex-row sm:w-1/2 md:w-1/4'
 					>
@@ -204,8 +212,7 @@ const PatientPortal = () => {
 						<Text text={ 'Last Visited Date' } subClassName='max-sm:text-right' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
 						<Text text={ dayjs(lastVisitedHospital?.visit_date || dayjs()).format('dddd, DD MMMM YYYY') } subClassName='max-sm:text-right' className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
 					</div>
-					{ /* */ }
-				</div>
+				</div> */}
 				<div className='mt-[32px] flex'>
 					<div className='relative tabs border-solid border-b-[1px] border-b-white/20 max-sm:hidden'>
 						<div className='tabs-menu'>
