@@ -28,21 +28,15 @@ const breadCrumbs = [{ name: 'Find a Doctor', url: '#' }];
 export default function Page() {
 
 	const searchParams = useSearchParams();
-	const [currentPage, setCurrentPage] = useState<number>(1);
-	const hasKeyword = searchParams.get('keyword');
 
-	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
+	const { data: doctorResponse, isLoading: doctorLoading, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
 
-	const { data: hospitalResponse, error: hospitalError, isLoading: hospitalLoading } = useGetHospital();
-	const { data: clinicsResponse, error: clinicsError, isLoading: clinicsLoading } = useGetClinics();
+	const { data: hospitalResponse } = useGetHospital();
+	const { data: clinicsResponse } = useGetClinics();
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
 	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinicsResponse?.data || [], hospitals: hospitalResponse?.data || [] });
-
-	// useEffect(() => {
-	// 	findDoctorEvent();
-	// }, []);
 
 	const RenderFilterPane = (
 		<div className='filter-pane' >

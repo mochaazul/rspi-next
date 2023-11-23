@@ -1,16 +1,17 @@
 
 'use client';
 import FindDoctorStyle from './style';
-import React, { useState } from 'react';
-import DropdownSearch, { PickerItem } from '@/components/ui/DropdownSearch';
+import React from 'react';
+import DropdownSearch from '@/components/ui/DropdownSearch';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail, LandingPageFindADoctorForm } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';
 import useFindADoctor from './useFindADoctor';
-import { Field, Formik, FormikProps, useFormik } from 'formik';
+import { FormikProps, useFormik } from 'formik';
 import DateField from '@/components/ui/DateField';
 import { Dropdown, Form, TextField } from '@/components/ui';
 import Button from '@/components/ui/Button';
+import Combobox from '@/components/ui/Combobox';
 
 type Props = {
 	isTelemedicine: boolean;
@@ -37,7 +38,7 @@ const FindADoctor: React.FC<Props> = ({
 			return clinics?.map(sp => ({
 				id: sp.id,
 				label: sp.clinic_name,
-				speciality_code: sp.clinic_code
+				value: sp.clinic_code
 			}));
 		}
 		return [];
@@ -48,7 +49,7 @@ const FindADoctor: React.FC<Props> = ({
 			doctorName: '',
 			hospital: 'all',
 			preferredDay: '',
-			speciality: ''
+			speciality: null
 		},
 		onSubmit: values => {
 			onSubmitHandler(values.doctorName, values.hospital, values.speciality, values.preferredDay, false);
@@ -69,7 +70,7 @@ const FindADoctor: React.FC<Props> = ({
 						doctorName: '',
 						hospital: 'all',
 						preferredDay: '',
-						speciality: ''
+						speciality: null
 					});
 				} }
 			>
@@ -111,7 +112,14 @@ const FindADoctor: React.FC<Props> = ({
 						<div className='mb-2'>
 							<label className='font-black text-sm'>{ t('form.labels.speciality') }</label>
 						</div>
-						<DropdownSearch
+						<Combobox
+							data={ mapSpeciality() }
+							placeholder={ t('form.placeholder.speciality') }
+							iconName='Search'
+							value={ formFindDoctor.values.speciality }
+							onSelectValue={ value => formFindDoctor.setFieldValue('speciality', value) }
+						/>
+						{ /* <DropdownSearch
 							isForLanding={ true }
 							textFieldProps={ {
 								placeholder: t('form.placeholder.speciality'),
@@ -120,12 +128,15 @@ const FindADoctor: React.FC<Props> = ({
 								className: 'input',
 								name: 'speciality',
 								value: formFindDoctor.values.speciality,
+								onChange: evt => {
+									formFindDoctor.setFieldValue('speciality', evt.target.value);
+								}
 							} }
 							pickerItems={ mapSpeciality() }
 							onItemClick={ item => {
-								formFindDoctor.setFieldValue('speciality', item.speciality_code);
+								formFindDoctor.setFieldValue('speciality', item.label);
 							} }
-						/>
+						/> */ }
 					</div>
 					<div className='h-full flex-1'>
 						{ /* Prefered day nya harusnya day only kan bukan datepicker ? */ }
