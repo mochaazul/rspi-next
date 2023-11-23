@@ -21,8 +21,8 @@ import CustomerReview from '@/components/ui/PageComponents/LandingPageSections/C
 import AccreditationAwards from '@/components/ui/PageComponents/LandingPageSections/AccreditationsAwards';
 import MobileAppBanner from '@/components/ui/PageComponents/LandingPageSections/MobileAppBanner';
 
-import { isMobile } from 'react-device-detect';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function Page() {
 	const coeRes = await getCoe();
@@ -37,41 +37,23 @@ export default async function Page() {
 	const currentLang = getCurrentLocale();
 	const arrayBanner = () => {
 		if (currentLang === 'id') {
-			if (isMobile) {
-				return banner.data.filter(img => img.img_url_mobile_idn !== '').map((image: any, index: any) => {
-					return <>
-						<a href={ image.url_link_idn } >
-							<Image fill objectFit='cover' key={ index } src={ image.img_url_mobile_idn } alt='slider' />
-						</a>;
-					</>;
-				});
-			} else {
-				return banner.data.filter(img => img.img_url_idn !== '').map((image: any, index: any) => {
-					return <>
-						<a href={ image.url_link_idn } >
-							<Image fill objectFit='cover' key={ index } src={ image.img_url_idn } alt='slider' />
-						</a>;
-					</>;
-				});
-			}
+			return banner.data.map((image: any, index: any) => {
+				return <div key={ `banner-${index}` }>
+					<Link href={ image.url_link_idn ?? '#' }>
+						<Image width={ 500 } height={ 500 } className='md:hidden object-contain' src={ image.img_url_mobile_idn } alt='slider' />
+						<Image width={ 1475 } height={ 800 } className='max-sm:hidden' src={ image.img_url_idn } alt='slider' />
+					</Link>
+				</div>;
+			});
 		} else {
-			if (isMobile) {
-				return banner.data.filter(img => img.img_url_mobile_en !== '').map((image: any, index: any) => {
-					return <>
-						<a href={ image.url_link_en } >
-							<Image fill objectFit='cover' key={ index } src={ image.img_url_mobile_en } alt='slider' />
-						</a>;
-					</>;
-				});
-			} else {
-				return banner.data.filter(img => img.img_url_en !== '').map((image: any, index: any) => {
-					return <>
-						<a href={ image.url_link_en } >
-							<Image fill objectFit='cover' key={ index } src={ image.img_url_en } alt='slider' />
-						</a>;
-					</>;
-				});
-			}
+			return banner.data.map((image: any, index: any) => {
+				return <div key={ `banner-${index}` }>
+					<Link href={ image.url_link_en ?? '#' }>
+						<Image width={ 500 } height={ 500 } className='md:hidden object-contain' src={ image.img_url_mobile_en } alt='slider' />
+						<Image width={ 1475 } height={ 800 } className='max-sm:hidden' src={ image.img_url_en } alt='slider' />
+					</Link>
+				</div>;
+			});
 		}
 	};
 
