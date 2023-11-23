@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
+import { Edit3 } from 'react-feather';
 
 import { colors, icons } from '@/constant';
+import { useScopedI18n } from '@/locales/client';
 
 import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
 
@@ -16,9 +18,12 @@ interface HorizontalInputType {
 	labelInfo?: string,
 	value?: string,
 	inputType?: string,
+	onEditClick?: () => void;
 }
 
 const HorizontalInputWrapper = (props: HorizontalInputType) => {
+	const t = useScopedI18n('page.profilePage.profileDetail');
+
 	return (
 		<div className='flex max-sm:flex-col sm:grid sm:grid-cols-[240px_1fr] sm:items-center max-sm:mb-4 mb-5'>
 			<WithInputLabel.LabelText className='mb-2.5 sm:mb-0 flex gap-3 items-center'>
@@ -43,7 +48,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 						null
 				}
 			</WithInputLabel.LabelText>
-			<div className='col-auto'>
+			<div className='col-auto relative'>
 				{
 					props.inputType === 'dropdown' ?
 						<Form.Dropdown
@@ -51,12 +56,12 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 								{
 									key: '1',
 									value: 'Male',
-									label: 'Male'
+									label: t('patientGenderMaleLabel')
 								},
 								{
 									key: '2',
 									value: 'Female',
-									label: 'Female'
+									label: t('patientGenderFemaleLabel')
 								}
 							] }
 							{ ...props.inputProps } /> :
@@ -67,6 +72,23 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 								{ ...props.inputProps } />
 				}
 
+				{ props.onEditClick && (
+					<div className='absolute pr-5 right-0 inset-y-0 flex items-center'>
+						<button
+							type='button'
+							className='flex items-center gap-2 focus:outline-none'
+							onClick={ props.onEditClick }
+						>
+							<Edit3 className='w-[18px] h-[18px] sm:w-5 sm:h-5' color={ colors.green.brandAccent } />
+							<Text
+								fontSize='14px'
+								fontWeight='900'
+								color={ colors.green.brandAccent }
+								subClassName='max-sm:text-xs'
+							>{ t('editLabel') }</Text>
+						</button>
+					</div>
+				) }
 			</div>
 		</div>
 	);

@@ -37,7 +37,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 	});
 
 	const breadcrumbsPath = [
-		{ name: 'Centre Of Excellence', url: '/centre-of-excellence' },
+		{ name: t('heading'), url: '/centre-of-excellence' },
 		{ url: '#', name: responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === params?.slug)?.title ?? '' }
 	];
 
@@ -68,7 +68,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 								</div>
 							}
 							content={ <CardContentWithInner title={ article?.news?.title || '' } description={ article?.news?.short_description || '' } author={ article?.news?.news_author?.doctor_name } /> }
-							footer={ <CardFooter content='Read More' /> }
+							footer={ <CardFooter content={ t('serviceLocation.readMore') } /> }
 							className='mb-0'
 							iconShare={ true }
 							to={ `/news/${ article?.news?.news_id }` }

@@ -37,6 +37,7 @@ export default async function RootLayout({
 	return (
 		<>
 			<Header
+				session={ session }
 				hospitalData={ hospitals.data }
 				centerOfExcellenceData={ centerOfExcellence.data }
 				facilityServicesData={ facilityServices.data }

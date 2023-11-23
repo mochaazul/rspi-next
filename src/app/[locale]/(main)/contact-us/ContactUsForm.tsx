@@ -5,14 +5,16 @@ import React, {
 } from 'react';
 import { useRouter } from 'next/navigation';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { FormikProps, useFormik } from 'formik';
 
 import { regExp, colors } from '@/constant';
 import { Button, Form, NotificationPanel, Text } from '@/components/ui';
-import { HospitalState, ContactUsState } from '@/interface';
+import { HospitalState, ContactUsState, ContactUsSubmitType } from '@/interface';
 import { PropsTypes as NotificationPanelTypes } from '@/components/ui/NotificationPanel';
 import { useScopedI18n } from '@/locales/client';
-
-import useContactUs from './useContactUs';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
+import { ContactUsSchema } from '@/validator/contact';
+import { postContactUs } from '@/lib/api';
 
 const ContactUsForm = ({
 	hospitalSelector
@@ -20,18 +22,9 @@ const ContactUsForm = ({
 	hospitalSelector: HospitalState;
 }) => {
 	const t = useScopedI18n('page.contactUs');
+	const tValidation = useScopedI18n('validation.formValidation');
 
 	const navigate = useRouter();
-
-	const {
-		onClickContactUs,
-		contactUsField
-	} = useContactUs();
-	const {
-		registeredValue,
-		isFormValid,
-		onSubmit
-	} = Form.useForm({ fields: contactUsField });
 
 	const [notifResponse, setNotifResponse] = useState<ContactUsState>(
 		{
@@ -49,11 +42,51 @@ const ContactUsForm = ({
 	const [notifVisible, setNotifVisible] = useState(false);
 	const [captchaStatus, setCaptchaStatus] = useState(false);
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
+	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 
 	const recaptchaRef = useRef(null);
 	const SITE_KEY = process.env.NEXT_PUBLIC_reCAPTCHA_SITE_KEY;
 
 	const hospitalArr = Object.values(hospitalSelector || [])?.map(hospital => ({ key: hospital?.name, value: hospital?.hospital_code, label: hospital?.name }));
+
+	const formikContactUs: FormikProps<ContactUsSubmitType> = useFormik<ContactUsSubmitType>({
+		validateOnBlur: enableValidation,
+		validateOnChange: enableValidation,
+		validationSchema: ContactUsSchema,
+		initialValues: {
+			hospital_code: '',
+			full_name: '',
+			gender: '',
+			email: '',
+			phone: '',
+			title: '',
+			content: ''
+		},
+		onSubmit: async (formContact: ContactUsSubmitType) => {
+			setNotifResponse({
+				loading: true,
+				error: {
+					stat_code: '',
+					stat_msg: '',
+				},
+				customMessage: ''
+			});
+
+			const response = await postContactUs({ body: formContact });
+
+			setNotifMode(response.stat_msg === 'Success' ? 'success' : 'error');
+			setNotifVisible(true);
+			setNotifResponse({
+				loading: false,
+				error: {
+					stat_code: response?.stat_code,
+					stat_msg: response?.stat_msg,
+				},
+				customMessage: response?.stat_msg + '-' + response?.stat_code,
+			});
+			setTimeout(() => response.stat_msg === 'Success' ? navigate.push('/contact-us/faq') : null, 1500);
+		},
+	});
 
 	useEffect(() => {
 
@@ -73,52 +106,56 @@ const ContactUsForm = ({
 			fontSize='14px'
 			fontWeight='500'
 			text={ errorUser?.stat_msg ? errorUser?.stat_msg : 'Berhasil' }
-			color={ errorUser?.stat_msg ? colors.red.default : colors.black.default }
+			color={ notifMode === 'error' ? colors.red.default : colors.black.default }
 		/>;
+	};
+
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
 	};
 
 	return (
 		<Form
 			className='sm:mt-8 mt-4 flex flex-col sm:gap-[25px] gap-4'
 			onSubmit={ e => {
-				const { hospital_code, full_name, email, gender, phone, title, content } = onSubmit(e);
-				onClickContactUs({
-					hospital_code: hospital_code.value,
-					full_name: full_name.value,
-					email: email.value,
-					gender: gender.value,
-					phone: phone.value,
-					title: title.value,
-					content: content.value
-				}).then(
-					function (response) {
-						setNotifResponse({
-							loading: false,
-							error: {
-								stat_code: response?.stat_code,
-								stat_msg: response?.stat_msg,
-							},
-							customMessage: response?.stat_msg + '-' + response?.stat_code,
-						});
-						setNotifMode(response.stat_msg === 'Success' ? 'success' : 'error');
-						setNotifVisible(true);
-						setTimeout(() => response.stat_msg === 'Success' ? navigate.push('/contact-us/faq') : null, 1500);
-					}
-				);
+				e.preventDefault();
+				setEnableValidation(true);
+				formikContactUs.handleSubmit();
 			} }
 			autoComplete='off'
 		>
 			<Form.Dropdown
 				menuItems={ [{ key: 'all-hospital', value: 'all-hospital', label: t('contactForm.form.allHospitalLabel') }, ...hospitalArr] }
-				{ ...registeredValue('hospital_code') }
+				id='hospital_code'
+				name='hospital_code'
+				label={ t('contactForm.labels.hospital') }
+				placeholder={ t('contactForm.placeholder.hospital') }
+				onChange={ formikContactUs.handleChange }
+				value={ formikContactUs.values.hospital_code }
+				isError={ !!formikContactUs.errors.hospital_code }
+				errorMessage={ getInputErrorMessage(formikContactUs.errors.hospital_code, t('contactForm.labels.hospital')) }
 			/>
 			<div className='flex sm:flex-row flex-col sm:gap-8 gap-4'>
 				<div className='flex flex-1 flex-col sm:gap-[25px] gap-4'>
 					<Form.TextField
-						{ ...registeredValue('full_name') }
+						id='full_name'
+						name='full_name'
+						label={ t('contactForm.labels.fullName') }
+						placeholder={ t('contactForm.placeholder.fullName') }
+						onChange={ formikContactUs.handleChange }
+						value={ formikContactUs.values.full_name }
+						isError={ !!formikContactUs.errors.full_name }
+						errorMessage={ getInputErrorMessage(formikContactUs.errors.full_name, t('contactForm.labels.fullName')) }
 					/>
 					<Form.TextField
-						{ ...registeredValue('email') }
+						id='email'
+						name='email'
+						label={ t('contactForm.labels.email') }
+						placeholder={ t('contactForm.placeholder.email') }
+						onChange={ formikContactUs.handleChange }
+						value={ formikContactUs.values.email }
+						isError={ !!formikContactUs.errors.email }
+						errorMessage={ getInputErrorMessage(formikContactUs.errors.email, t('contactForm.labels.email')) }
 					/>
 				</div>
 				<div className='flex flex-1 flex-col sm:gap-[25px] gap-4'>
@@ -127,18 +164,32 @@ const ContactUsForm = ({
 							{
 								key: '1',
 								value: 'Male',
-								label: 'Male'
+								label: t('contactForm.genderOptionsLabel.male')
 							},
 							{
 								key: '2',
 								value: 'Female',
-								label: 'Female'
+								label: t('contactForm.genderOptionsLabel.female')
 							}
 						] }
-						{ ...registeredValue('gender') }
+						id='gender'
+						name='gender'
+						label={ t('contactForm.labels.gender') }
+						placeholder={ t('contactForm.placeholder.gender') }
+						onChange={ formikContactUs.handleChange }
+						value={ formikContactUs.values.gender }
+						isError={ !!formikContactUs.errors.gender }
+						errorMessage={ getInputErrorMessage(formikContactUs.errors.gender, t('contactForm.labels.gender')) }
 					/>
 					<Form.TextField
-						{ ...registeredValue('phone') }
+						id='phone'
+						name='phone'
+						label={ t('contactForm.labels.phone') }
+						placeholder={ t('contactForm.placeholder.phone') }
+						onChange={ formikContactUs.handleChange }
+						value={ formikContactUs.values.phone }
+						isError={ !!formikContactUs.errors.phone }
+						errorMessage={ getInputErrorMessage(formikContactUs.errors.phone, t('contactForm.labels.phone')) }
 						onKeyDown={ ev => {
 							if (regExp.phone_allowed_char_list.indexOf(ev.key) < 0) {
 								ev.preventDefault();
@@ -152,19 +203,33 @@ const ContactUsForm = ({
 					{
 						key: '1',
 						value: 'Pertanyaan Umum',
-						label: 'Pertanyaan Umum'
+						label: t('contactForm.titleOptionsLabel.general')
 					},
 					{
 						key: '2',
 						value: 'Pertanyaan Khusus',
-						label: 'Pertanyaan Khusus'
+						label: t('contactForm.titleOptionsLabel.specific')
 					}
 				] }
-				{ ...registeredValue('title') }
+				id='title'
+				name='title'
+				label={ t('contactForm.labels.subject') }
+				placeholder={ t('contactForm.placeholder.subject') }
+				onChange={ formikContactUs.handleChange }
+				value={ formikContactUs.values.title }
+				isError={ !!formikContactUs.errors.title }
+				errorMessage={ getInputErrorMessage(formikContactUs.errors.title, t('contactForm.labels.subject')) }
 			/>
 			<Form.TextArea
 				rows={ 7 }
-				{ ...registeredValue('content') }
+				id='content'
+				name='content'
+				label={ t('contactForm.labels.notes') }
+				placeholder={ t('contactForm.placeholder.notes') }
+				onChange={ formikContactUs.handleChange }
+				value={ formikContactUs.values.content }
+				isError={ !!formikContactUs.errors.content }
+				errorMessage={ getInputErrorMessage(formikContactUs.errors.content, t('contactForm.labels.notes')) }
 			/>
 			{
 				notifVisible && errorUser.stat_msg &&
@@ -190,7 +255,8 @@ const ContactUsForm = ({
 						$hoverTheme='outline'
 						label={ t('contactForm.submitBtnLabel') }
 						type='submit'
-						disabled={ !isFormValid() || captchaStatus === false }
+						disabled={ loadingUser }
+					// disabled={ loadingUser || captchaStatus === false }
 					/>
 				</div>
 			</div>

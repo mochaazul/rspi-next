@@ -1,15 +1,15 @@
 'use client';
 
-import {  useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { FormikProps, useFormik } from 'formik';
 import { BookingPayload, FamilyProfile, UserDataDetail } from '@/interface';
 
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import {  colors, icons } from '@/constant';
+import { colors, icons } from '@/constant';
 import {
 	BookAppointmentContainer, BottomBar, DisclaimerAlert, FormCol, FormRow
 } from './style';
-import useBookAppointment from './useBookAppointment';
 import ConfirmationModal from './ConfirmationModal';
 import Radio from '@/components/ui/Radio';
 import SuccessConfirmationModal from './SuccessConfirmationModal';
@@ -32,14 +32,19 @@ const genderMenuItems = [
 	{ key: 'F', value: 'F', label: 'Female' }
 ];
 
+type BookingFormState = {
+	keluhan: string;
+	tindakan: string;
+	asuransi: string;
+	noAsuransi: string;
+};
+
 const BookAppointment = () => {
+	const t = useScopedI18n('page.bookingAppointment');
 
 	const breadCrumbs = [
-		{ name: 'Home', url: '/' },
-		{ name: 'Book Appointment', url: '#' },
+		{ name: t('heading'), url: '#' },
 	];
-
-	const t = useScopedI18n('page.bookingAppointment');
 
 	const searchParams = useSearchParams();
 	const navigate = useRouter();
@@ -50,10 +55,6 @@ const BookAppointment = () => {
 	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile();
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
 	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
-
-	const { bookAppointmentFields } = useBookAppointment();
-
-	const { registeredValue, onSubmit, getCurrentForm } = Form.useForm({ fields: bookAppointmentFields });
 
 	const [confirmationModal, setConfirmationModalVisible] = useState<boolean>(false);
 	const [addProfileModal, setAddProfileModal] = useState<boolean>(false);
@@ -72,6 +73,19 @@ const BookAppointment = () => {
 
 	const uploadAsuransiFrontFileRef = useRef<HTMLInputElement>(null);
 	const uploadAsuransiBackFileRef = useRef<HTMLInputElement>(null);
+
+	const formikBooking: FormikProps<BookingFormState> = useFormik<BookingFormState>({
+		initialValues: {
+			keluhan: '',
+			tindakan: '',
+			asuransi: '',
+			noAsuransi: ''
+		},
+		onSubmit: (_, { setSubmitting }) => {
+			setConfirmationModalVisible(true);
+			setSubmitting(false);
+		},
+	});
 
 	// const getClinic = () => {
 	// 	const timeSlot = getTimeSlot();
@@ -119,9 +133,8 @@ const BookAppointment = () => {
 	};
 
 	const onBookVisit = () => {
-		const { keluhan } = getCurrentForm();
-		if (keluhan.value.length && penjamin?.length) {
-			setConfirmationModalVisible(true);
+		if (formikBooking.values.keluhan && penjamin?.length) {
+			formikBooking.handleSubmit();
 		} else {
 			alert('Pastikan Data Keluhan dan Penjamin Terisi');
 		}
@@ -149,10 +162,10 @@ const BookAppointment = () => {
 	// 	return '';
 	// };
 
-	const onConfirmed = async() => {
+	const onConfirmed = async () => {
 		try {
-			const { dob, email, gender, keluhan, klinik, layanan, name, pembayaran, phone, tindakan, asuransi, noAsuransi } = getCurrentForm();
-			const payloadBook:BookingPayload = {
+			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
+			const payloadBook: BookingPayload = {
 				patient_name: selectedProfile?.name ?? '',
 				'patient_code': selectedProfile?.patient_code ?? '',
 				'slot_id': timeSlot?.slot_id ?? '',
@@ -166,13 +179,13 @@ const BookAppointment = () => {
 				'date_of_birth': (selectedProfile?.birthdate && splitDate(selectedProfile.birthdate)) ?? '',
 				'phone': selectedProfile?.phone ?? '',
 				'email': selectedProfile?.email ?? '',
-				'main_complaint': keluhan.value,
-				'necessity_action': tindakan.value,
+				'main_complaint': keluhan,
+				'necessity_action': tindakan,
 				'payment_method': penjamin,
 				'service': searchParams.get('service') ?? 'APP', 					// TEL / APP
 				'hospital_code': timeSlot?.hospital_code,
-				'insurance_name': asuransi.value,
-				'insurance_number': noAsuransi.value,
+				'insurance_name': asuransi,
+				'insurance_number': noAsuransi,
 				'insurance_front_img': '',
 				'insurance_back_img': ''
 				// 'insurance_front_img': tempImageAsuransiFront ? await uploadAsuransiPhotoFront() : '',
@@ -214,10 +227,13 @@ const BookAppointment = () => {
 						<FormCol>
 							<Form.TextField
 								width='100%'
-								{ ...registeredValue('keluhan') }
 								label={ t('form.complaintLabel') }
 								placeholder={ t('form.complaintLabel') }
 								required={ true }
+								id='keluhan'
+								name='keluhan'
+								value={ formikBooking.values.keluhan }
+								onChange={ formikBooking.handleChange }
 							/>
 						</FormCol>
 						<FormCol>
@@ -234,20 +250,26 @@ const BookAppointment = () => {
 							<FormRow className='flex flex-col md:flex-row'>
 								<FormCol >
 									<Form.TextField
-										{ ...registeredValue('asuransi') }
 										label={ t('form.insuranceName') }
 										placeholder={ t('form.insuranceName') }
 										width='100%'
+										id='asuransi'
+										name='asuransi'
+										value={ formikBooking.values.asuransi }
+										onChange={ formikBooking.handleChange }
 									/>
 								</FormCol>
 								<FormCol >
 									<Form.TextField
 										isNumber
 										mask={ '9999999999999999' }
-										{ ...registeredValue('noAsuransi') }
 										label={ t('form.insuranceNumber') }
 										placeholder={ t('form.insuranceNumber') }
 										width='100%'
+										id='noAsuransi'
+										name='noAsuransi'
+										value={ formikBooking.values.noAsuransi }
+										onChange={ formikBooking.handleChange }
 									/>
 								</FormCol>
 							</FormRow>
@@ -327,20 +349,20 @@ const BookAppointment = () => {
 				selfProfile={ userProfile?.data }
 				type={ selectedType }
 			/>
-			 <ConfirmationModal
+			<ConfirmationModal
 				timeSlot={ timeSlot }
 				visible={ confirmationModal }
 				onClose={ () => { setConfirmationModalVisible(false); } }
 				selectedProfile={ selectedProfile }
-				noAsuransi={ getCurrentForm().noAsuransi.value }
-				namaAsuransi={ getCurrentForm().asuransi.value }
+				noAsuransi={ formikBooking.values.noAsuransi }
+				namaAsuransi={ formikBooking.values.asuransi }
 				penjamin={ penjamin }
 				onConfirmed={ onConfirmed }
 				doctorResponse={ doctorResponse }
-				// loadingUploadPhoto={ uploadPhoto }
+			// loadingUploadPhoto={ uploadPhoto }
 			/>
-			
-		 <SuccessConfirmationModal
+
+			<SuccessConfirmationModal
 				hospitalName={ doctorResponse?.data.hospital[0].hospital_name }
 				doctorName={ doctorResponse?.data.name ?? '' }
 				date={ timeSlot?.date }

@@ -1,14 +1,16 @@
 
 import { getHospitals, } from '@/lib/api';
 import ContactUsPage from './ContactUsPage';
+import { getScopedI18n } from '@/locales/server';
 
-const ContactUs = async() => {
+const ContactUs = async () => {
 	const hospitals = await getHospitals();
+	const t = await getScopedI18n('page.contactUs');
 
 	return (
 		<ContactUsPage
-			hospitalSelector = { hospitals.data }
-			breadcrumbsPath={ [{ name: 'Contact Us', url: '/contact-us' }] }
+			hospitalSelector={ hospitals.data }
+			breadcrumbsPath={ [{ name: t('heading'), url: '/contact-us' }] }
 		/>
 	);
 };
