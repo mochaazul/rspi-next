@@ -33,7 +33,7 @@ const CentreOfExcellence = ({ data }: { data: CenterOfExcellenceDetail[]; }) => 
 					<Text fontSize='20px' fontType='p' fontWeight='400' color={ colors.grey.dark }>
 						{ t('subHeading') }
 					</Text>
-					<Link href='/centre-of-excellence' className='max-sm:hidden'>
+					<Link href={ `centre-of-excellence/${ data[0].slug }` } className='max-sm:hidden'>
 						<div className='see-all flex row items-center'>
 							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default }>
 								{ t('allItemBtnLabel') }
