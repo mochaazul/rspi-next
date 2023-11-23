@@ -9,11 +9,11 @@ export const useGetHospital = () => {
 };
 
 export const useGetVisitHistory = () => {
-	return useSWR('visitHistory', () => fetcher<I_VisitHistory[]>('visitHistory'));
+	return useSWR('visitHistory', () => fetcher<I_VisitHistory[]>('visitHistory'), { shouldRetryOnError: false });
 };
 
 export const useGetLabHistory = () => {
-	return useSWR('labHistory', () => fetcher<I_LabResults[]>('labHistory'));
+	return useSWR('labHistory', () => fetcher<I_LabResults[]>('labHistory'), { shouldRetryOnError: false });
 };
 
 export const useGetVaccineHistory = () => {

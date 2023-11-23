@@ -35,7 +35,8 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: '**',
+				hostname: 'rebel-env.s3.us-west-2.amazonaws.com',
+				// hostname: '**',
 			},
 		],
 	},
