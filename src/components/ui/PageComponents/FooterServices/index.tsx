@@ -18,14 +18,14 @@ import { FooterServiceStyle } from './style';
 
 type Props = PropsWithRef<PropsWithChildren<{
 	slug: string,
-    isMedSpec: boolean
+	isMedSpec: boolean;
 }>>;
 
 const FooterServices = ({
 	slug,
 	isMedSpec
 }: Props) => {
-    
+
 	const param = {
 		query: {
 			slug: slug
@@ -37,7 +37,7 @@ const FooterServices = ({
 	} = useGetFooterPages(param);
 
 	const detail = Object.values(FooterState?.data || []);
-	
+
 	const renderContent = (
 		<div>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
@@ -55,7 +55,7 @@ const FooterServices = ({
 						/> :
 						<CustomCarousel arrowButton={ true }>
 							{ detail?.[0]?.img_url?.map((image: string, index: any) => {
-                                return <img
+								return <img
 									key={ `carousel-nav-${ index }` }
 									src={ image }
 									alt='slider'
@@ -77,7 +77,7 @@ const FooterServices = ({
 
 
 	const breadcrumbsPath = [
-		{ name: detail?.[0]?.title, url: `/footer/${detail?.[0]?.slug}` },
+		{ name: detail?.[0]?.title, url: `/footer/${ detail?.[0]?.slug }` },
 	];
 
 	return (
@@ -86,7 +86,7 @@ const FooterServices = ({
 				<div>
 					<div className='content-wrapper mt-[104px] flex flex-col'>
 						<div className='mb-[20px] sm:ml-[32px]'>
-							<Breadcrumbs datas={ breadcrumbsPath }/>
+							<Breadcrumbs datas={ breadcrumbsPath } />
 						</div>
 						<div className='rightSide sm:ml-[32px]'>
 							{ renderContent }

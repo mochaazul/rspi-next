@@ -43,22 +43,16 @@ const HospitalServices = ({
 				{ detail?.[0]?.name }
 			</Text>
 
-			<div className='mt-4 md:mt-8 w-full'>
+			<div className='mt-[32px]'>
 				<CustomCarousel arrowButton>
 					{ (detail?.[0]?.img_url ?? [])?.map((image: string, index: any) => {
 						return (
-							<div key={ index } className='relative overflow-hidden bg-white rounded-[5px] h-[220px] sm:h-[420px] sm:w-full'>
-								{ image && (
-									<Image
-										key={ `carousel-nav-${ index }` }
-										src={ image }
-										alt='slider'
-										className='object-cover'
-										sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-										fill
-									/>
-								) }
-							</div>
+							<img
+								key={ `carousel-nav-${ index }` }
+								src={ image }
+								alt='slider'
+								className='bg-white h-[220px] sm:h-[420px] sm:w-full rounded-[5px] object-cover w-full'
+							/>
 						);
 					}) }
 				</CustomCarousel>
