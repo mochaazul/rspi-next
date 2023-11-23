@@ -1,7 +1,7 @@
 'use client';
 
 import {  useRef, useState } from 'react';
-import { BookingPayload, FamilyProfile, UserDataDetail } from '@/interface';
+import { BookingPayload, FamilyProfile, NotificationDetail, UserDataDetail } from '@/interface';
 
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
@@ -24,7 +24,7 @@ import { useGetFamilyProfile, useGetProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
 import { formatTimeslot, splitDate } from '@/helpers/datetime';
 import { isEqual } from 'lodash';
-import { useBookAppointmentAPI } from '@/lib/api/client/booking';
+import { useBookAppointmentAPI, usePushNotifAPI } from '@/lib/api/client/booking';
 import { useGetDoctorDetail } from '@/lib/api/client/doctors';
 
 const genderMenuItems = [
@@ -49,7 +49,7 @@ const BookAppointment = () => {
 	const { data: userProfile, isLoading: profileLoading } = useGetProfile();
 	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile();
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
-	// const { trigger: pushNotif, error: pushNotifError, isMutating: pushNotifLoading } = usePushNotifAPI();
+	const { trigger: pushNotification, error: pushNotifError, isMutating: pushNotifLoading } = usePushNotifAPI();
 	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
 
 	const { bookAppointmentFields } = useBookAppointment();
@@ -179,7 +179,28 @@ const BookAppointment = () => {
 				// 'insurance_front_img': tempImageAsuransiFront ? await uploadAsuransiPhotoFront() : '',
 				// 'insurance_back_img': tempImageAsuransiBack ? await uploadAsuransiPhotoBack() : ''
 			};
-			await bookAppointment(payloadBook);
+			await bookAppointment(payloadBook).then(res => {
+				console.log(res, 'res');
+				const pushNotifPayload:NotificationDetail = {
+					category: 'Kategori Pesan Pemberitahuan',
+					source: 'Sumber Rebel',
+					title_idn: 'Judul Indonesia Update Fitur Pasien Portal',
+					title_en: 'Judul English Patient portal New Fiture',
+					text_idn: 'Isi Indonesia Ada Fitur Baru di pasien portal',
+					text_en: 'Isi English Patient Portal New Fiture',
+					icon: 'Bell',
+					url: '/Patient-Portal',
+					notif_type: 1,
+					desc_type: 'Push by email account',
+					email_patient: 'abc@gmail.com',
+					medical_record: '100377120',
+					sent_datetime: '2023-08-09 07:38:50',
+					read_flag: 0
+				};
+				pushNotification(pushNotifPayload);
+			});
+
+			
 			setSuccessModal(true);
 		} catch (error: any) {
 			setConfirmationModalVisible(false);
