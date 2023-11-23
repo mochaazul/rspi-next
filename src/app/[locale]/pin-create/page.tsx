@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
 
@@ -14,6 +14,7 @@ import Text from '@/components/ui/Text';
 import useSession from '@/session/client';
 import { PinSchema } from '@/validator/auth';
 import { useCreatePin } from '@/lib/api/client/auth';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import PinPageStyle, { Box } from './style';
 
@@ -33,7 +34,7 @@ const PinPage = () => {
 			pin: '',
 			confirm_pin: ''
 		},
-		onSubmit: async(formPin: PinType) => {
+		onSubmit: async (formPin: PinType) => {
 			try {
 				await createPin(formPin);
 
@@ -46,18 +47,23 @@ const PinPage = () => {
 		}
 	});
 
-	const languages = useScopedI18n('page.pinPage');
+	const t = useScopedI18n('page.pinPage');
+	const tValidation = useScopedI18n('validation.formValidation');
 	const session = useSession();
 
 	const handleNotifOnClose = () => {
 		setNotifVisible(false);
 	};
 
-	const onChangeInputValue = useCallback((data: { name?: string; value?: string; }) => {
+	const onChangeInputValue = (data: { name?: string; value?: string; }) => {
 		if (data?.name) {
 			formikPin.setFieldValue(data?.name, data?.value ?? '');
 		}
-	}, []);
+	};
+
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
+	};
 
 	return (
 		<PinPageStyle>
@@ -65,9 +71,9 @@ const PinPage = () => {
 				<div className='mb-[32px]'>
 					<Images.LogoRSPI />
 				</div>
-				<Text text={ languages('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
+				<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
 				<Text
-					text={ languages('subHeading') }
+					text={ t('subHeading') }
 					fontSize={ '20px' }
 					lineHeight={ '24px' }
 					fontWeight={ '400' }
@@ -81,7 +87,7 @@ const PinPage = () => {
 						<NotificationPanel
 							mode={ errorUser?.stat_msg ? 'error' : 'success' }
 							visible={ notifVisible && !loadingUser }
-							text={ errorUser?.stat_msg ? errorUser?.stat_msg : session?.token ? languages('notification.onSuccessMsg') : languages('notification.onErrorMsg') }
+							text={ errorUser?.stat_msg ? errorUser?.stat_msg : session?.token ? t('notification.onSuccessMsg') : t('notification.onErrorMsg') }
 							onClickRightIcon={ handleNotifOnClose }
 						/>
 					</div>
@@ -105,8 +111,8 @@ const PinPage = () => {
 							digitLength={ 6 }
 							semiSecure={ false }
 							password={ true }
-							label={ languages('form.pinFieldLabel') }
-							errorMessage={ formikPin.errors.pin }
+							label={ t('form.pinFieldLabel') }
+							errorMessage={ getInputErrorMessage(formikPin.errors.pin, t('form.pinFieldLabel')) }
 							isError={ !!formikPin.errors.pin }
 							value={ formikPin.values.pin }
 							type='password'
@@ -121,8 +127,8 @@ const PinPage = () => {
 							digitLength={ 6 }
 							semiSecure={ false }
 							password={ true }
-							label={ languages('form.pinConfirmLabel') }
-							errorMessage={ formikPin.errors.confirm_pin }
+							label={ t('form.pinConfirmLabel') }
+							errorMessage={ getInputErrorMessage(formikPin.errors.confirm_pin, t('form.pinConfirmLabel')) }
 							isError={ !!formikPin.errors.confirm_pin }
 							value={ formikPin.values.confirm_pin }
 							type='password'
@@ -135,7 +141,7 @@ const PinPage = () => {
 						disabled={ loadingUser }
 						type='submit'
 					>
-						{ loadingUser ? languages('form.submitBtnLabel.loading') : languages('form.submitBtnLabel.default') }
+						{ loadingUser ? t('form.submitBtnLabel.loading') : t('form.submitBtnLabel.default') }
 					</Button>
 				</Form>
 			</Box>

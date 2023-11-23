@@ -14,9 +14,9 @@ export default async function AwardsPage() {
 	const awardsRes = await getAwards({ is_publish: true }, { page: 1, limit: 10 });
 	const awards: AwardsDetail[] = awardsRes?.data;
 
-	const languages = await getScopedI18n('page.awards');
+	const t = await getScopedI18n('page.awards');
 
-	const breadcrumbsPath = [{ name: 'Accreditations & Awards', url: '/accreditation-and-awards' }];
+	const breadcrumbsPath = [{ name: t('heading'), url: '/accreditation-and-awards' }];
 
 	const AwardItem = (data: AwardsDetail) => (
 		<div>
@@ -66,7 +66,7 @@ export default async function AwardsPage() {
 							fontWeight='900'
 							textAlign='center'
 							color={ colors.grey.darker }
-							text={ languages('heading') }
+							text={ t('heading') }
 							subClassName='max-sm:text-[24px] max-sm:text-left'
 						/>
 						<Text
@@ -75,7 +75,7 @@ export default async function AwardsPage() {
 							fontWeight='400'
 							textAlign='center'
 							color={ colors.grey.dark }
-							text={ languages('subHeading') }
+							text={ t('subHeading') }
 							className='sm:mt-4 mt-1'
 							subClassName='max-sm:text-left'
 						/>

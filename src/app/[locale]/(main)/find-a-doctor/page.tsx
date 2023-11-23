@@ -22,8 +22,8 @@ import Button from '@/components/ui/Button';
 import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useGetHospital } from '@/lib/api/client/hospital';
 import { useGetClinics } from '@/lib/api/client/clinics';
+import { useScopedI18n } from '@/locales/client';
 
-const breadCrumbs = [{ name: 'Find a Doctor', url: '#' }];
 
 export default function Page() {
 
@@ -31,7 +31,10 @@ export default function Page() {
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const hasKeyword = searchParams.get('keyword');
 
-	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
+	const t = useScopedI18n('page.findDoctor');
+	const breadCrumbs = [{ name: t('heading'), url: '#' }];
+
+	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams) });
 
 	const { data: hospitalResponse, error: hospitalError, isLoading: hospitalLoading } = useGetHospital();
 	const { data: clinicsResponse, error: clinicsError, isLoading: clinicsLoading } = useGetClinics();
@@ -70,11 +73,11 @@ export default function Page() {
 					...hospitalResponse.data
 						.filter(hospital => obj?.includes(hospital.hospital_code))
 						.map(item =>
-							({
-								id: item.hospital_code,
-								text: item.name ?? '',
-								key: entry
-							})
+						({
+							id: item.hospital_code,
+							text: item.name ?? '',
+							key: entry
+						})
 						)
 				);
 			} else
@@ -96,7 +99,7 @@ export default function Page() {
 
 	const hasSearchParams = () => {
 		const searchParamObj = Object.fromEntries(searchParams);
-		const paramFound = !_.isEmpty(searchParamObj[ 'specialty_category' ]) || !_.isEmpty(searchParamObj[ 'hospital_code' ]) || searchParamObj[ 'telemedicine' ] === 'true';
+		const paramFound = !_.isEmpty(searchParamObj['specialty_category']) || !_.isEmpty(searchParamObj['hospital_code']) || searchParamObj['telemedicine'] === 'true';
 		return paramFound;
 	};
 
@@ -151,7 +154,7 @@ export default function Page() {
 									</div>
 									{
 										getFilterValues().map((filter, index) => (
-											<div className='min-w-fit' key={ `filter-pills-${index}` }>
+											<div className='min-w-fit' key={ `filter-pills-${ index }` }>
 												<Pills onRemove={ () => onDeletePills(filter) }>
 													<Text
 														fontSize='16px'
@@ -194,7 +197,7 @@ export default function Page() {
 								className='flex flex-col gap-6 sm:mt-[47px]'
 								dataLength={ doctorData().length || 0 }
 								next={ loadMore }
-								hasMore={  hasMore() }
+								hasMore={ hasMore() }
 								loader={ <div className='loader' key={ 0 }>Loading ...</div> }
 								scrollThreshold={ '100px' }
 							>

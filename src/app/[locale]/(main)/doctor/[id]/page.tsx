@@ -46,9 +46,9 @@ export default function Page({ params }: Props) {
 	const [selectedDateStatus, setSelectedDateStatus] = useState<string>('');
 
 	const [calendarMonth, setCalendarMonth] = useState<Dayjs>(dayjs());
-	
+
 	const { data: hospital, isLoading: hospitalLoading } = useGetHospital();
-	
+
 	const { data: doctor, isLoading } = useGetDoctorDetail({ param: params.id });
 
 	const { data: doctorCalendar, isLoading: doctorCalendarLoading } = useGetDoctorCalendar(
@@ -77,18 +77,18 @@ export default function Page({ params }: Props) {
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot>();
 
 	const breadcrumbsPath = [
-		{ name: 'Book Appointment', url: '/find-a-doctor' },
+		{ name: t('bookAppointmentLabel'), url: '/find-a-doctor' },
 		{ name: doctor?.data.name || '', url: '#' }
 	];
 
 	const getCalendar = (month: number, year: number) => {
-		const inputDate = dayjs(`${year}-${month}-01`, 'YYYY-MM-DD');
+		const inputDate = dayjs(`${ year }-${ month }-01`, 'YYYY-MM-DD');
 		const todayDate = dayjs();
 		// get input date based on start day of the month
 		// compare it with today date
 		// check if the month and year is the same as today then, use today instead
 		// else use input date with start day of the month to 1
-		const sameMonth =  month === dayjs().month() + 1; // month will be 0 based so we need to add 1
+		const sameMonth = month === dayjs().month() + 1; // month will be 0 based so we need to add 1
 		const sameYear = year === dayjs().year();
 
 		if (sameMonth && sameYear) {
@@ -96,16 +96,16 @@ export default function Page({ params }: Props) {
 		} else {
 			setCalendarMonth(inputDate);
 		}
-	
+
 	};
 
 	const onBookHandler = () => {
-		
+
 		if (selectedTimeSlot?.slot_id) {
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const { available, ...safeParams } = selectedTimeSlot;
 			const bookParam = new URLSearchParams(safeParams);
-			router.push('/book-appointment/' + selectedTimeSlot.slot_id + `?${bookParam.toString()}`);
+			router.push('/book-appointment/' + selectedTimeSlot.slot_id + `?${ bookParam.toString() }`);
 		}
 	};
 
@@ -119,7 +119,7 @@ export default function Page({ params }: Props) {
 
 	const clickContactHospital = () => {
 		if (isMobile) {
-			window.open(`tel:${selectedHospitalPhoneNumber}`);
+			window.open(`tel:${ selectedHospitalPhoneNumber }`);
 		} else {
 			setShowModalTelp(true);
 		}
@@ -142,7 +142,7 @@ export default function Page({ params }: Props) {
 						<PhoneModal
 							visible={ showModalTelp }
 							hospitalDetail={ selectedHospitalDetails() }
-						 	clickCloseContactHospital={ closeContactHospital }
+							clickCloseContactHospital={ closeContactHospital }
 						/>
 						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] md:pt-[60px] pb-[120px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
@@ -153,7 +153,7 @@ export default function Page({ params }: Props) {
 										<DoctorAvatar className='lg:hidden md:hidden' profile_url={ doctor?.data?.img_url ?? Images.DoctorProfile.src } />
 										<div className='flex flex-col'>
 											<Text text={ doctor?.data?.name } fontSize='24px' fontWeight='900' lineHeight='24px' />
-											<Text text={ doctor?.data?.specialty[ 0 ] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' />
+											<Text text={ doctor?.data?.specialty[0] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' />
 											<hr className='my-[8px] md:hidden ' />
 											<ShareDoctor className=' md:hidden' />
 										</div>

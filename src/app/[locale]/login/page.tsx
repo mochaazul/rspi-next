@@ -16,6 +16,7 @@ import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
 import NotificationPanel, { PropsTypes as NotificationPanelTypes } from '@/components/ui/NotificationPanel';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import LoginPageStyle from './style';
 
@@ -23,6 +24,8 @@ const LoginPage = () => {
 	const navigate = useRouter();
 	const searchParam = useSearchParams()!;
 	const { trigger: requestVerifyEmail } = useRequestVerifyEmail();
+	const t = useScopedI18n('page.loginPage');
+	const tValidation = useScopedI18n('validation.formValidation');
 
 	const [notifVisible, setNotifVisible] = useState(false);
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
@@ -50,7 +53,7 @@ const LoginPage = () => {
 				const response = await login(formLogin);
 
 				if (response?.stat_code === 'APP:SUCCESS') {
-					setSuccessMessage(`${ languages('welcome') } ${ response?.data?.email }`);
+					setSuccessMessage(`${ t('welcome') } ${ response?.data?.email }`);
 					setNotifMode('success');
 					navigate.replace('/');
 				} else {
@@ -66,7 +69,6 @@ const LoginPage = () => {
 			}
 		}
 	});
-	const languages = useScopedI18n('page.loginPage');
 
 	useEffect(() => {
 		refHandler();
@@ -82,7 +84,7 @@ const LoginPage = () => {
 		const stat = searchParam.get('stat');
 		if (ref === 'reset' && stat === 'true') {
 			setNotifMode('success');
-			setSuccessMessage(languages('resetPasswordSuccess'));
+			setSuccessMessage(t('resetPasswordSuccess'));
 			setNotifVisible(true);
 		}
 		if (ref === 'invalid-token') {
@@ -96,7 +98,7 @@ const LoginPage = () => {
 
 		if (ref === 'reset' && stat === 'email') {
 			setNotifMode('success');
-			setSuccessMessage(languages('resetEmailSuccess'));
+			setSuccessMessage(t('resetEmailSuccess'));
 			setNotifVisible(true);
 		}
 	};
@@ -113,7 +115,7 @@ const LoginPage = () => {
 		try {
 			initErrorNotif();
 			await requestVerifyEmail({ email: formik.values.email });
-			setSuccessMessage(languages('notificationMessage.emailNotVerified.successMessage'));
+			setSuccessMessage(t('notificationMessage.emailNotVerified.successMessage'));
 			setNotifMode('success');
 		} catch (error: any) {
 			setErrorUser({ stat_msg: error?.message ?? '' });
@@ -137,7 +139,7 @@ const LoginPage = () => {
 		if (text === 'email is not verified') {
 			return (
 				<Text fontType={ null } fontSize='14px' fontWeight='500' color={ colors.red.default }>
-					{ languages('notificationMessage.emailNotVerified.heading') }&nbsp;
+					{ t('notificationMessage.emailNotVerified.heading') }&nbsp;
 					<Text
 						fontType={ null }
 						fontSize='14px'
@@ -146,9 +148,9 @@ const LoginPage = () => {
 						color={ colors.red.redder }
 						onClick={ handleResendEmailVerification }
 					>
-						{ languages('notificationMessage.emailNotVerified.cta') }
+						{ t('notificationMessage.emailNotVerified.cta') }
 					</Text>
-					&nbsp;{ languages('notificationMessage.emailNotVerified.tail') }
+					&nbsp;{ t('notificationMessage.emailNotVerified.tail') }
 				</Text>
 			);
 		}
@@ -161,8 +163,8 @@ const LoginPage = () => {
 		/>;
 	};
 
-	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formik.setFieldValue(e.target.id, e.target.value);
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
 	};
 
 	return (
@@ -189,10 +191,10 @@ const LoginPage = () => {
 								</Link>
 							</div>
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
-								{ languages('heading') }
+								{ t('heading') }
 							</Text>
 							<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-4 max-2xl:mb-6 mb-16' subClassName='max-lg:text-[16px] max-lg:leading-[24px]'>
-								{ languages('subHeading') }
+								{ t('subHeading') }
 							</Text>
 						</div>
 						{
@@ -210,30 +212,31 @@ const LoginPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='email'
-								placeholder={ languages('form.emailPlaceholder') }
+								placeholder={ t('form.emailPlaceholder') }
 								className='w-full'
 								type='email'
 								name='email'
-								label={ languages('form.emailLabel') }
+								label={ t('form.emailLabel') }
 								value={ formik.values.email }
-								onChange={ onChangeInput }
-								errorMessage={ formik.errors.email }
+								onChange={ formik.handleChange }
+								errorMessage={ getInputErrorMessage(formik.errors.email, t('form.emailLabel')) }
 								isError={ !!formik.errors.email }
 							/>
 						</Form.FormGroup>
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='password'
-								placeholder={ languages('form.passwordPlaceholder') }
+								name='password'
+								placeholder={ t('form.passwordPlaceholder') }
 								className='w-full'
 								iconName={ inputPasswordType === 'password' ? 'EyeClosed' : 'Eye' }
 								iconPosition='right'
 								type={ inputPasswordType }
 								onIconClick={ togglePasswordShow }
 								value={ formik.values.password }
-								label={ languages('form.passwordLabel') }
-								onChange={ onChangeInput }
-								errorMessage={ formik.errors.password }
+								label={ t('form.passwordLabel') }
+								onChange={ formik.handleChange }
+								errorMessage={ getInputErrorMessage(formik.errors.password, t('form.passwordLabel')) }
 								isError={ !!formik.errors.password }
 							/>
 						</Form.FormGroup>
@@ -246,18 +249,18 @@ const LoginPage = () => {
 									fontType={ null }
 									color={ colors.paradiso.default }
 								>
-									{ languages('forgotPasswordLabel') }
+									{ t('forgotPasswordLabel') }
 								</Text>
 							</Link>
 						</div>
 						<Button
-							label={ languages('loginBtnLabel') }
+							label={ t('loginBtnLabel') }
 							type='submit'
 							className='w-full mt-2'
 							disabled={ loadingSubmit }
 						/>
 						<Text fontType={ null } fontWeight='400' color={ colors.grey.dark } className='max-2xl:mt-5 mt-8 max-lg:text-[14px] text-[20px]'>
-							{ languages('footer.notRegisteredLabel') }&nbsp;
+							{ t('footer.notRegisteredLabel') }&nbsp;
 							<Link href='/register'>
 								<Text
 									className='inline-block max-lg:text-[14px] text-[20px]'
@@ -265,7 +268,7 @@ const LoginPage = () => {
 									fontWeight='700'
 									color={ colors.paradiso.default }
 								>
-									{ languages('footer.cta') }
+									{ t('footer.cta') }
 								</Text>
 							</Link>
 						</Text>

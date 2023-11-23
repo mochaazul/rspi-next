@@ -69,7 +69,7 @@ export const getFooterSlug = (params?: ApiOptions) => {
 	return fetcher<FooterDetail[]>('getFooter', params);
 };
 // Contact
-export const postContactUs = (param: { param: null; query: null; body: ContactUsSubmitType; }) => {
+export const postContactUs = (param: { body: ContactUsSubmitType; }) => {
 	return fetcher<ContactUsState>('contactUs', { body: param.body });
 };
 

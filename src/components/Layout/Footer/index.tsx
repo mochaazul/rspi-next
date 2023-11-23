@@ -229,13 +229,13 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					<div className='email-sub-form-container mt-4 lg:mt-6'>
 						<TextField
 							width='100%'
-							placeholder='Enter your email address'
+							placeholder={ t('subscribePlaceholder') }
 							className='text-sm sm:text-base'
 						/>
 						<Button
 							className='sub-button color-default text-sm sm:text-base font-black sm:font-bold'
 							theme='secondary'
-							label='Subscribe'
+							label={ t('subscribeSubmit') }
 						/>
 					</div>
 				</div>
