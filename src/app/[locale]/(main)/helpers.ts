@@ -11,9 +11,14 @@ import {
 import { getFAS } from '@/lib/api/clinics';
 import getSession from '@/session/server';
 
-export async function marAllReadNotif(params: any) {
+export async function marAllReadNotif() {
+	const session = await getSession();
+
 	return postMarkNotifAllRead({
-		param: params
+		query: {
+			medical_record: session.user?.medical_record,
+			email: session.user?.email,
+		},
 	});
 };
 
