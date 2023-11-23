@@ -1,11 +1,11 @@
 'use client';
 
-import {  useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { BookingPayload, FamilyProfile, UserDataDetail } from '@/interface';
 
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import {  colors, icons } from '@/constant';
+import { colors, icons } from '@/constant';
 import {
 	BookAppointmentContainer, BottomBar, DisclaimerAlert, FormCol, FormRow
 } from './style';
@@ -72,6 +72,26 @@ const BookAppointment = () => {
 
 	const uploadAsuransiFrontFileRef = useRef<HTMLInputElement>(null);
 	const uploadAsuransiBackFileRef = useRef<HTMLInputElement>(null);
+
+	const hasMainProfile = userProfile?.data?.name || userProfile?.data?.phone || userProfile?.data?.gender;
+
+	useEffect(() => {
+		if (hasMainProfile) {
+			setSelfProfile({
+				birthdate: userProfile?.data?.birthdate ?? '',
+				email: userProfile?.data?.email ?? '',
+				gender: userProfile?.data?.gender ?? '',
+				name: userProfile?.data?.name ?? '',
+				phone: userProfile?.data?.phone ?? '',
+				id: userProfile?.data?.id ?? 0,
+				created_date: '',
+				updated_date: '',
+				no_mr: '',
+				parent_email: '',
+				patient_code: ''
+			});
+		}
+	}, [userProfile?.data]);
 
 	// const getClinic = () => {
 	// 	const timeSlot = getTimeSlot();
@@ -149,10 +169,10 @@ const BookAppointment = () => {
 	// 	return '';
 	// };
 
-	const onConfirmed = async() => {
+	const onConfirmed = async () => {
 		try {
 			const { dob, email, gender, keluhan, klinik, layanan, name, pembayaran, phone, tindakan, asuransi, noAsuransi } = getCurrentForm();
-			const payloadBook:BookingPayload = {
+			const payloadBook: BookingPayload = {
 				patient_name: selectedProfile?.name ?? '',
 				'patient_code': selectedProfile?.patient_code ?? '',
 				'slot_id': timeSlot?.slot_id ?? '',
@@ -160,7 +180,7 @@ const BookAppointment = () => {
 				'time_slot': formatTimeslot(timeSlot?.session_app_start ?? ''),
 				'date': timeSlot?.date,
 				'user_name': 'RSPI_WEB',	// terserah
-				'type': isEqual(selfProfile, selectedProfile) ? 'self' : 'other', 	// self or other
+				'type': isEqual(selfProfile?.email, selectedProfile?.email) ? 'self' : 'other', 	// self or other
 				'doctor_code': timeSlot?.doctor_code,
 				'gender': selectedProfile?.gender === 'Female' ? 'F' : 'M',
 				'date_of_birth': (selectedProfile?.birthdate && splitDate(selectedProfile.birthdate)) ?? '',
@@ -327,7 +347,7 @@ const BookAppointment = () => {
 				selfProfile={ userProfile?.data }
 				type={ selectedType }
 			/>
-			 <ConfirmationModal
+			<ConfirmationModal
 				timeSlot={ timeSlot }
 				visible={ confirmationModal }
 				onClose={ () => { setConfirmationModalVisible(false); } }
@@ -337,10 +357,10 @@ const BookAppointment = () => {
 				penjamin={ penjamin }
 				onConfirmed={ onConfirmed }
 				doctorResponse={ doctorResponse }
-				// loadingUploadPhoto={ uploadPhoto }
+			// loadingUploadPhoto={ uploadPhoto }
 			/>
-			
-		 <SuccessConfirmationModal
+
+			<SuccessConfirmationModal
 				hospitalName={ doctorResponse?.data.hospital[0].hospital_name }
 				doctorName={ doctorResponse?.data.name ?? '' }
 				date={ timeSlot?.date }
