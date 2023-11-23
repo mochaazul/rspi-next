@@ -73,7 +73,7 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 
 	return (
 		<FooterServiceStyle>
-			<div className='lg:w-[1110px] mx-auto max-sm:mx-4 pt-[121px] sm:pt-[162px] pb-[60px]'>
+			<div className='lg:w-[1110px] mx-auto max-sm:mx-4 pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='content-wrapper mt-[64px] w-full'>

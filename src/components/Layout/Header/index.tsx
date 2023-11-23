@@ -46,7 +46,7 @@ export const Header = ({
 	centerOfExcellenceData: CenterOfExcellenceState,
 	facilityServicesData: FacilityServicesState,
 	notificationResponseData?: NotificationResponse,
-	marAllReadNotifFunc: (params: any) => any,
+	marAllReadNotifFunc: () => any,
 	footersData: FooterDetail[],
 }) => {
 
@@ -102,23 +102,6 @@ export const Header = ({
 							textAlign='center'
 							color={ colors.black.default }
 							text='Notification'
-						/>
-						<Text
-							fontSize='12px'
-							lineHeight='20px'
-							fontWeight='400'
-							textAlign='center'
-							color={ colors.green.brandAccent }
-							text='Mark all as read'
-							// Migrate
-							onClick={ () => marAllReadNotifFunc({
-								medical_record: 100154999,
-								email: 'riko.logwirno@rebelworks.co'
-							}).then(function (response: any) {
-								notificationResponseFetch();
-							})
-							}
-						// End Migrate
 						/>
 					</div>
 
@@ -194,11 +177,12 @@ export const Header = ({
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
 											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100 ' onClick={ () => {
 												// redirect to hospital detail, using footer data
-												Object.values(footersData || []).filter(footer => footer.footer_category === 'our-hospital')?.forEach((element: FooterDetail) => {
-													if (element?.title === item?.name) {
-														router.push(`/footer/${ element.slug }`);
-													}
-												});
+												Object.values(footersData || []).filter(footer => footer.footer_category === 'our-hospital')
+													?.forEach((element: FooterDetail) => {
+														if (element?.title === item?.name) {
+															router.push(`/footer/${ element.slug }`);
+														}
+													});
 											} }>
 												<Image
 													alt='hospital image'
@@ -284,7 +268,14 @@ export const Header = ({
 					<div className='rightNav py-[22px] max-sm:py-[10px]'>
 						<div className='translate'>
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
-								<icons.Notif onClick={ () => setShowNotification(true) } />
+								<icons.Notif
+									onClick={ () => marAllReadNotifFunc()
+										.then(() => {
+											setShowNotification(true);
+											notificationResponseFetch();
+										}) }
+									fill
+								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
 							<div>
