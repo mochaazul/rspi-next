@@ -68,30 +68,30 @@ const RegisterOnboard = () => {
 				setLoadingUser(true);
 				const formRegisterPayload = {
 					...formRegister,
-					phone: formRegister.phone
+					phone: `62${ formRegister.phone }`
 				};
 
-				const responseCheckPhone = await onCheckPhonePatient(formRegisterPayload.phone);
+				// const responseCheckPhone = await onCheckPhonePatient(formRegisterPayload.phone);
 
-				if (!responseCheckPhone?.data) {
-					setIsDuplicatePhoneNumber(false);
+				// if (!responseCheckPhone?.data) {
+				// 	setIsDuplicatePhoneNumber(false);
 
-					await registerOnboard(formRegisterPayload);
+				await registerOnboard(formRegisterPayload);
 
-					const {
-						medical_record,
-						phone,
-						birth_date,
-						name
-					} = formRegisterPayload;
+				const {
+					medical_record,
+					phone,
+					birth_date,
+					name
+				} = formRegisterPayload;
 
-					navigate.push(`/otp-verification?mr=${ medical_record }&phone=${ phone }&bod=${ birth_date }&name=${ name }`);
-				} else {
-					setIsDuplicatePhoneNumber(true);
-					setErrorUser({
-						stat_msg: 'your phone number has been registered. please change with new phone number'
-					});
-				}
+				navigate.push(`/otp-verification?mr=${ medical_record }&phone=${ phone }&bod=${ birth_date }&name=${ name }`);
+				// } else {
+				// 	setIsDuplicatePhoneNumber(true);
+				// 	setErrorUser({
+				// 		stat_msg: 'your phone number has been registered. please change with new phone number'
+				// 	});
+				// }
 			} catch (error: any) {
 				setErrorUser({ stat_msg: error?.message ?? '' });
 			} finally {
