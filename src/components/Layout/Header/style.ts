@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from '../../../constant/colors';
 
 const HeaderStyle = styled.div`
-  position: fixed;
+  position: sticky;
   display: flex;
   width: 100vw;
   z-index: 1000;
