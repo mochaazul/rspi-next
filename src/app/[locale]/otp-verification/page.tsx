@@ -207,7 +207,6 @@ const OTPPage = () => {
 					</Form.FormGroup>
 					<Button className='mt-8' theme='primary' type='submit' disabled={ loadingSubmit }>{ t('form.submitBtnLabel') }</Button>
 				</Form>
-				<Button className='mt-8' theme='text' onClick={ () => navigate.replace('/pin-create') }>{ t('form.backBtnlabel') }</Button>
 			</Box>
 		</OTPPageStyle>
 	);

@@ -223,6 +223,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						label={ t('profileSelector.form.dob') }
 						placeholder={ t('profileSelector.form.dob') }
 						isError={ !!formikProfile.errors.dob }
+						applyMaxDateForDoB={ true }
 						errorMessage={ getInputErrorMessage(formikProfile.errors.dob, t('profileSelector.form.dob')) }
 					/>
 				</FormRow>
