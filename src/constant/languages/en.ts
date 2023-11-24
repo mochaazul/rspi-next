@@ -35,10 +35,6 @@ export default {
 		}
 	},
 	page: {
-		unsubscribe: {
-			heading: 'Unsubscribe was successful',
-			subHeading: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again'
-		},
 		awards: {
 			heading: 'Accreditations & Awards',
 			subHeading: 'We are committed to being a world-class healthcare organization. We strongly believe that operational excellence and patient safety are integral parts of meeting and exceeding our customers\' expectations.'

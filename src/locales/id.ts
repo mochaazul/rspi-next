@@ -23,6 +23,10 @@ export default {
 		male: 'Laki-laki',
 		female: 'Perempuan'
 	},
+	unsubscribe: {
+		heading: 'Berhenti berlangganan telah berhasil',
+		subHeading: 'Berhenti berlangganan berita terupdate tentang RSPI berhasil, semoga kita dapat berjumpa kembali'
+	},
 	modalDialog: {
 		pin: {
 			header: 'Masukkan PIN',

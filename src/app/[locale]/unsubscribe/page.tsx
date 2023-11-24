@@ -7,10 +7,9 @@ import { getScopedI18n } from '@/locales/server';
 import { UnSubscribeStyle } from './style';
 
 export default async function UnSubscribe() {
-	const t = await getScopedI18n('page.unsubscribe');
+	const t = await getScopedI18n('unsubscribe');
 	return (
 		<UnSubscribeStyle>
-
 			<div className='grid max-sm:grid-cols-1 grid-cols-1 max-sm:gap-0 gap-3 w-full'>
 				<div className='col-span-2'>
 					<div className='mb-[32px] flex flex-col items-center'>
