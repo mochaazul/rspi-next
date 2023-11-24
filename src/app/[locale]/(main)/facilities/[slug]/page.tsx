@@ -138,7 +138,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 											footer={ <CardFooter content={ t('readMoreLabel') } /> }
 											className='mb-0 w-[304px] md:w-full'
 											iconShare={ true }
-											to={ `/news/${ data.news_id }` }
+											to={ `/news/${ data?.slug }` }
 										/>
 									))
 								}

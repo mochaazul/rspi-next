@@ -1,4 +1,5 @@
 'use client';
+import LoadingSkeleton from '@/components/Layout/LoadingSkeleton';
 import Form from '@/components/ui/Form';
 import Text from '@/components/ui/Text';
 import { colors } from '@/constant';
@@ -10,8 +11,9 @@ type Props = {
   doctorCount:number
 	setter: (value: string) => void,
 	getter: () => string | null,
+	hospitalLoading?: boolean
 }
-const ResultHeader = ({ doctorCount, setter, getter }:Props) => {
+const ResultHeader = ({ doctorCount, setter, getter, hospitalLoading }:Props) => {
 
 	const [keywordValue, setKeywordValue] = useState<string>();
 
@@ -25,6 +27,10 @@ const ResultHeader = ({ doctorCount, setter, getter }:Props) => {
 		setKeywordValue(value);
 		setter(value);
 	};
+
+	if (hospitalLoading) {
+		return <LoadingSkeleton type='line' />;
+	}
 
 	return (
 		<>

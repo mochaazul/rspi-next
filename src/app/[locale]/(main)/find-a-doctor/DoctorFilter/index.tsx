@@ -13,13 +13,16 @@ import { useScopedI18n } from '@/locales/client';
 
 import Pills from '../Pills';
 import useFindDoctor from '../useFindDoctor';
+import LoadingSkeleton from '@/components/Layout/LoadingSkeleton';
 
 type Props = {
 	hospitals: HospitalDetail[],
 	clinics: ClinicResponse[];
+	clinicLoading?: boolean,
+	hospitalLoading?: boolean
 };
 
-const DoctorFilter = ({ hospitals, clinics }: Props) => {
+const DoctorFilter = ({ hospitals, clinics, clinicLoading, hospitalLoading }: Props) => {
 
 	const d = useScopedI18n('dayName.full');
 	const t = useScopedI18n('page.findDoctor');
@@ -124,28 +127,33 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 			>
 				Hospital
 			</Text>
-			<div className='flex flex-col gap-4'>
-				<div>
-					<Form.Checkbox
-						label={ 'All Hospitals' }
-						isslider={ false }
-						onChange={ evt => onCheckedAllHospitals(evt.target.checked) }
-					/>
-				</div>
-				{
-					hospitals?.map((hospital, index) => (
-						<div key={ index }>
+			{
+				hospitalLoading
+					? <LoadingSkeleton type='line' />
+				 	: <div className='flex flex-col gap-4'>
+						<div>
 							<Form.Checkbox
+								label={ 'All Hospitals' }
 								isslider={ false }
-								onChange={ event => onChangeHospital(hospital, event.target.checked) }
-								checked={ hospitalFilter.getAll().some(checked => checked.id === hospital.id) }
-								label={ hospital.name ?? '' }
-								value={ hospital.id ?? 0 }
+								onChange={ evt => onCheckedAllHospitals(evt.target.checked) }
 							/>
 						</div>
-					))
-				}
-			</div>
+						{
+							hospitals?.map((hospital, index) => (
+								<div key={ index }>
+									<Form.Checkbox
+										isslider={ false }
+										onChange={ event => onChangeHospital(hospital, event.target.checked) }
+										checked={ hospitalFilter.getAll().some(checked => checked.id === hospital.id) }
+										label={ hospital.name ?? '' }
+										value={ hospital.id ?? 0 }
+									/>
+								</div>
+							))
+						}
+					</div>
+			}
+			
 			{ /* Horizontal spacer */ }
 			<div className='x-spacer mb-8 max-sm:hidden mt-8' />
 			{ /* Specialty search with accordion */ }
@@ -158,23 +166,26 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 			>
 				Speciality
 			</Text>
-			<div className='mx-[1px]'>
-				<Form.DropdownSearch
-					textFieldProps={ {
-						placeholder: 'Search',
-						featherIcon: 'Search',
-						iconPosition: 'left',
-						$iconColor: colors.grey.light
-					} }
-					pickerItems={ mapSpeciality() }
-					onItemClick={ onChooseSpecialty }
-				/>
-			</div>
-			<div className='flex flex-row gap-2 flex-wrap mt-6'>
-				{
-					clinicFilter?.getAll()?.map((speciality, index) => {
-						return (
-							speciality.label &&
+			{
+				clinicLoading ? <LoadingSkeleton type='line' /> :
+					<>
+						<div className='mx-[1px]'>
+							<Form.DropdownSearch
+								textFieldProps={ {
+									placeholder: 'Search',
+									featherIcon: 'Search',
+									iconPosition: 'left',
+									$iconColor: colors.grey.light
+								} }
+								pickerItems={ mapSpeciality() }
+								onItemClick={ onChooseSpecialty }
+							/>
+						</div>
+						<div className='flex flex-row gap-2 flex-wrap mt-6'>
+							{
+								clinicFilter?.getAll()?.map((speciality, index) => {
+									return (
+										speciality.label &&
 							<Pills key={ index } onRemove={ () => handleRemoveSpecialty(speciality) }>
 								<Text
 									fontSize='16px'
@@ -183,10 +194,12 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 									text={ speciality.label }
 								/>
 							</Pills>
-						);
-					})
-				}
-			</div>
+									);
+								})
+							}
+						</div>
+					</>
+			}
 
 			{ /* Horizontal spacer */ }
 			<div className='x-spacer my-8' />
