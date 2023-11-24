@@ -234,7 +234,6 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						name='phone'
 						value={ formikProfile.values.phone }
 						onChange={ formikProfile.handleChange }
-						mask={ '+62 999-9999-99999' }
 						label={ t('profileSelector.form.phone') }
 						placeholder={ t('profileSelector.form.phone') }
 						isError={ !!formikProfile.errors.phone }
