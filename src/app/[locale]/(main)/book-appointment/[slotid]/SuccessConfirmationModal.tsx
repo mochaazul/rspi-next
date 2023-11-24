@@ -1,5 +1,6 @@
 import 'moment/locale/id';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 
 import { useScopedI18n } from '@/locales/client';
@@ -7,6 +8,7 @@ import { Button, Modal, Text } from '@/components/ui';
 import { icons } from '@/constant';
 
 import { SuccessConfModalContainer } from './style';
+import { useSWRConfig } from 'swr';
 
 type Props = {
 	doctorName?: string;
@@ -22,6 +24,13 @@ const SuccessConfirmationModal = ({
 	visible
 }: Props) => {
 	const t = useScopedI18n('page.bookingAppointment.success');
+	const router = useRouter();
+	const { mutate } = useSWRConfig();
+
+	const onclickButton = () => {
+		mutate('getNotification');
+		router.push('/patient-portal');
+	};
 
 	const subHeadingText = () => {
 		return `${ t('subHeading.main') } ${ doctorName } ${ t('subHeading.at') } ${ hospitalName } ${ t('subHeading.on') } ${ dayjs(date).format('dddd, DD MMMM YYYY') } ${ t('subHeading.done') }`;
@@ -48,9 +57,9 @@ const SuccessConfirmationModal = ({
 				lineHeight='20px'
 				textAlign='center'
 				text={ subHeadingText() } />
-			<Link href={ '/patient-portal' }>
-				<Button label={ t('btnLabel') } />
-			</Link>
+			
+			<Button label={ t('btnLabel') } onClick={ onclickButton } />
+			
 		</SuccessConfModalContainer>
 	</Modal>;
 };
