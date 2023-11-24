@@ -74,6 +74,16 @@ export default function Page({ params }: Props) {
 
 	const hospitalArr = doctor?.data.hospital.map(hospital => ({ key: hospital?.hospital_code, value: hospital?.hospital_code, label: hospital?.hospital_name }));
 
+	const selectFirstHospital = () => {
+		if (hospitalArr) {
+			setSelectedHospital(hospitalArr[0].value ?? '');
+		}
+	};
+
+	useEffect(() => {
+		selectFirstHospital();
+	}, [hospitalArr]);
+
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot>();
 
 	const breadcrumbsPath = [
@@ -134,7 +144,7 @@ export default function Page({ params }: Props) {
 	};
 
 	return (
-		<DoctorProfileStyle className='lg:mt-[50px]'>
+		<DoctorProfileStyle>
 			{
 				isLoading
 					? <Spinner />
@@ -144,7 +154,7 @@ export default function Page({ params }: Props) {
 							hospitalDetail={ selectedHospitalDetails() }
 							clickCloseContactHospital={ closeContactHospital }
 						/>
-						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] md:pt-[60px] pb-[120px]'>
+						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] md:pt-7 pb-[120px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
 							<div className='content-wrapper sm:flex w-full'>
 								<DoctorAvatar className='max-sm:hidden' profile_url={ doctor?.data?.img_url ?? Images.DoctorProfile.src } />
@@ -154,7 +164,7 @@ export default function Page({ params }: Props) {
 										<div className='flex flex-col'>
 											<Text text={ doctor?.data?.name } fontSize='24px' fontWeight='900' lineHeight='24px' />
 											<Text text={ doctor?.data?.specialty[0] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' />
-											<hr className='my-[8px] md:hidden ' />
+											<hr className='my-[8px] md:hidden' />
 											<ShareDoctor className=' md:hidden' />
 										</div>
 									</div>
@@ -174,8 +184,8 @@ export default function Page({ params }: Props) {
 											}
 										</Radio>
 									</div>
-									{/* APP : mean appointment */ }
-									{/* TEL : mean telemedicine */ }
+									{ /* APP : mean appointment */ }
+									{ /* TEL : mean telemedicine */ }
 									<div className='mt-[30px]'>
 										<Radio groupLabel='Appointment Type'
 											onChange={ setRadioValue }
@@ -183,7 +193,8 @@ export default function Page({ params }: Props) {
 											groupContainerClassname='flex flex-col md:flex-row'
 										>
 											<Radio.Option label='Kunjungan Tatap Muka' value='APP' />
-											<Radio.Option label='Telekonsultasi' value='TEL' />
+											{ /* TODO: TAKEN OUT SINCE TrackCare do not support it yet 24 nov 23 */ }
+											{ /* <Radio.Option label='Telekonsultasi' value='TEL' /> */ }
 										</Radio>
 									</div>
 
