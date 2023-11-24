@@ -67,7 +67,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 							footer={ <CardFooter content={ t('serviceLocation.readMore') } /> }
 							className='mb-0'
 							iconShare={ true }
-							to={ `/news/${ article?.news?.news_id }` }
+							to={ `/news/${ article?.news?.slug }` }
 						/>
 					))
 				}
