@@ -5,28 +5,29 @@ import Datepicker from 'react-tailwindcss-datepicker';
 import { colors, icons } from '@/constant';
 
 interface DateFieldType extends Omit<typeof Datepicker, 'value' | 'onChange'> {
-  iconPosition?: 'left' | 'right';
-  iconName?: keyof typeof icons;
+	iconPosition?: 'left' | 'right';
+	iconName?: keyof typeof icons;
 }
 
 export interface DatepickerProps extends DateFieldType {
-  name?: string;
-  value?: string;
-  placeholder?: string;
-  onChangeValue?: ({ name, value }: { name?: string; value?: string; }) => void;
-  popOverDirection?: 'up' | 'down';
-  onIconClick?: () => any;
-  dateFormat?: string;
+	name?: string;
+	value?: string;
+	placeholder?: string;
+	onChangeValue?: ({ name, value }: { name?: string; value?: string; }) => void;
+	popOverDirection?: 'up' | 'down';
+	onIconClick?: () => any;
+	dateFormat?: string;
+	applyMaxDateForDoB?: boolean;
 }
 
 export interface InputType extends DatepickerProps, DateFieldType {
-  ref?: React.RefObject<HTMLInputElement>;
-  onIconClick?: () => any;
+	ref?: React.RefObject<HTMLInputElement>;
+	onIconClick?: () => any;
 }
 
 export interface StyledDateFieldType extends Omit<DateFieldType, 'iconPosition' | 'iconName'> {
-  $iconPosition?: 'left' | 'right';
-  $iconName?: keyof typeof icons;
+	$iconPosition?: 'left' | 'right';
+	$iconName?: keyof typeof icons;
 }
 
 export const DateFieldWrapper = styled.div<StyledDateFieldType>`
