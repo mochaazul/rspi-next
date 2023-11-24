@@ -42,19 +42,19 @@ export const getBanner = (query?: PayloadBanner, pagination?: Pagination) => {
 };
 
 export const getCoe = (param?: ApiOptions) => {
-	return fetcher<CenterOfExcellenceDetail[]>('centerOfExcellences', param);
+	return fetcher<CenterOfExcellenceDetail[]>('centerOfExcellences', { ...param, query: { ...param?.query, is_publish: true } });
 };
 
-export const getCenterOfExcellenceNewsByID = (param: ApiOptions) => {
-	return fetcher<any>('newsCenterOfExcellence', param);
+export const getCenterOfExcellenceNewsByID = (param?: ApiOptions) => {
+	return fetcher<any>('newsCenterOfExcellence', { ...param, query: { ...param?.query, is_publish: true } });
 };
 
 export const getHospitals = () => {
 	return fetcher<HospitalState>('hospital');
 };
 
-export const getCenterOfExcellence = () => {
-	return fetcher<CenterOfExcellenceState>('centerOfExcellences');
+export const getCenterOfExcellence = (param?: ApiOptions) => {
+	return fetcher<CenterOfExcellenceState>('centerOfExcellences', { ...param, query: { ...param?.query, is_publish: true } });
 };
 export const getNotificationResponse = (param: ApiOptions) => {
 	return fetcher<NotificationResponse>('getNotification', param);
@@ -86,6 +86,6 @@ export const getArticleById = (param: ApiOptions) => {
 	return fetcher<ArticleState['selectedArticle']>('getNews', param);
 };
 
-export const getRelatedNews = (param: ApiOptions) => {
-	return fetcher<ArticleState['relatedNews']>('getRelatedNews', param);
+export const getRelatedNews = (param?: ApiOptions) => {
+	return fetcher<ArticleState['relatedNews']>('getRelatedNews', { ...param, query: { ...param?.query, is_publish: true } });
 };

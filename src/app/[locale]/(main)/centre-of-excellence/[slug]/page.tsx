@@ -19,11 +19,7 @@ import { CentreOfExcellenceStyle } from './style';
 const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.centerOfExcellence');
 
-	const responseCenterOfExcellence = await getCoe({
-		query: {
-			is_publish: true,
-		}
-	});
+	const responseCenterOfExcellence = await getCoe();
 
 	const filteredResponseCenterOfExcellence = responseCenterOfExcellence?.data?.find(coe => {
 		return coe?.slug === params?.slug;

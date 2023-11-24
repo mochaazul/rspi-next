@@ -11,7 +11,7 @@ import { CentreOfExcellenceStyle } from './style';
 import { PanelH1, PanelH3, PanelV1 } from '../style';
 
 export default async function AwardsPage() {
-	const awardsRes = await getAwards({ is_publish: true }, { page: 1, limit: 10 });
+	const awardsRes = await getAwards({}, { page: 1, limit: 10 });
 	const awards: AwardsDetail[] = awardsRes?.data;
 
 	const t = await getScopedI18n('page.awards');
