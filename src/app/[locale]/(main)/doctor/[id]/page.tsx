@@ -77,7 +77,7 @@ export default function Page({ params }: Props) {
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot>();
 
 	const breadcrumbsPath = [
-		{ name: 'Book Appointment', url: '/find-a-doctor' },
+		{ name: t('bookAppointmentLabel'), url: '/find-a-doctor' },
 		{ name: doctor?.data.name || '', url: '#' }
 	];
 

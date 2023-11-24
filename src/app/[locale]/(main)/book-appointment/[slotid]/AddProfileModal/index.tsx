@@ -1,7 +1,7 @@
+import { FormikProps, useFormik } from 'formik';
 import { ModalHeader, ProfileModalContainer } from './style';
 import { colors, icons } from '@/constant';
 import { FormRow } from '@/app/[locale]/(main)/book-appointment/style';
-import { createFieldConfig } from '@/helpers';
 import { UserDataDetail } from '@/interface';
 
 import NotificationPanel from '@/components/ui/NotificationPanel';
@@ -12,54 +12,9 @@ import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import { useFamilyProfileMutation, useGetProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
+import { AddProfileSchema } from '@/validator/booking';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-const addProfileFormFields = {
-	name: {
-		...createFieldConfig({
-			name: 'name',
-			type: 'text'
-		}),
-		validationRules: [],
-		placeholder: 'Nama'
-	},
-	gender: {
-		...createFieldConfig({
-			name: 'gender',
-			type: 'text'
-		}),
-		validationRules: [],
-		placeholder: 'Gender'
-	},
-	dob: {
-		...createFieldConfig({
-			name: 'dob',
-			type: 'date'
-		}),
-		validationRules: [],
-		placeholder: 'Date of Birth'
-	},
-	phone: {
-		...createFieldConfig({
-			name: 'phone',
-			type: 'text'
-		}),
-		validationRules: [],
-		placeholder: 'Phone number / Whatsapp'
-	},
-	email: {
-		...createFieldConfig({
-			name: 'email',
-			type: 'text'
-		}),
-		validationRules: [],
-		placeholder: 'E-mail'
-	},
-};
-
-const genderMenuItems = [
-	{ key: 'M', value: 'M', label: 'Male' },
-	{ key: 'F', value: 'F', label: 'Female' }
-];
 type Props = {
 	onClose: (profile: ProfilePayload, isMain?: boolean) => void;
 	visible: boolean;
@@ -79,8 +34,7 @@ export type ProfilePayload = {
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
 
 	const t = useScopedI18n('page.bookingAppointment');
-
-	const { registeredValue, onSubmit, getCurrentForm, setFieldsValue } = Form.useForm({ fields: addProfileFormFields });
+	const tValidation = useScopedI18n('validation.formValidation');
 
 	// TODO: migrate
 	const { data: userProfile } = useGetProfile();
@@ -93,55 +47,74 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	const { data, trigger: createFamilyProfile, isMutating, error: createFamilyMutationError, reset: resetMutation } = useFamilyProfileMutation();
 	const [error, setError] = useState<string>('');
 	const [disabledEmail, setDisabledEmail] = useState<boolean>(false);
+	const [enableValidation, setEnableValidation] = useState<boolean>(false);
+
+	const formikProfile: FormikProps<ProfilePayload> = useFormik<ProfilePayload>({
+		validateOnBlur: enableValidation,
+		validateOnChange: enableValidation,
+		validationSchema: AddProfileSchema,
+		initialValues: {
+			dob: '',
+			email: '',
+			gender: '',
+			name: '',
+			phone: ''
+		},
+		onSubmit: async (values: ProfilePayload) => {
+			const { dob, email, gender, name, phone } = values;
+			// if (type === 'other') {
+			await createFamilyProfile({
+				birthdate: dob,
+				parent_email: selfProfile?.email ?? '',
+				email: email,
+				name: name,
+				phone: cleanUpMask(phone),
+				gender: gender
+			});
+			closeHandler();
+			// } else {
+			// 	const payload = {
+			// 		name: name.value,
+			// 		birthdate: dob.value,
+			// 		gender: gender.value,
+			// 		phone: cleanUpMask(phone.value)
+			// 	};
+			// 	TODO: migrate;
+			// 	const response = await clikUpdateProfile({
+			// 		payload
+			// 	});
+			// 	if (response.payload.stat_msg === 'Success') {
+			// 		setDisabledEmail(false);
+			// 		await getUserDetail();
+			// 		onClose({
+			// 			dob: dob.value,
+			// 			email: email.value,
+			// 			gender: gender.value,
+			// 			name: name.value,
+			// 			phone: phone.value
+			// 		});
+			// 		// TODO: migrate;
+			// 	}
+			// 	setError(response.payload.stat_msg);
+			// }
+			// setFieldsValue({
+			// 	email: '',
+			// 	name: '',
+			// 	birthdate: '',
+			// 	gender: '',
+			// 	phone: ''
+			// });
+		},
+	});
 
 	useEffect(() => {
 		resetMutation(); // we need this to clear errors
 	}, []);
 
 	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-		const { dob, email, gender, name, phone } = onSubmit(event);
-		// if (type === 'other') {
-		await createFamilyProfile({
-			birthdate: dob.value,
-			parent_email: selfProfile?.email ?? '',
-			email: email.value,
-			name: name.value,
-			phone: cleanUpMask(phone.value),
-			gender: gender.value
-		});
-		closeHandler();
-		// } else {
-		// 	const payload = {
-		// 		name: name.value,
-		// 		birthdate: dob.value,
-		// 		gender: gender.value,
-		// 		phone: cleanUpMask(phone.value)
-		// 	};
-		// 	TODO: migrate;
-		// 	const response = await clikUpdateProfile({
-		// 		payload
-		// 	});
-		// 	if (response.payload.stat_msg === 'Success') {
-		// 		setDisabledEmail(false);
-		// 		await getUserDetail();
-		// 		onClose({
-		// 			dob: dob.value,
-		// 			email: email.value,
-		// 			gender: gender.value,
-		// 			name: name.value,
-		// 			phone: phone.value
-		// 		});
-		// 		// TODO: migrate;
-		// 	}
-		// 	setError(response.payload.stat_msg);
-		// }
-		// setFieldsValue({
-		// 	email: '',
-		// 	name: '',
-		// 	birthdate: '',
-		// 	gender: '',
-		// 	phone: ''
-		// });
+		event.preventDefault();
+		setEnableValidation(true);
+		formikProfile.handleSubmit();
 	};
 
 	const cleanUpMask = (value: string) => {
@@ -165,24 +138,27 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			name: '',
 			phone: ''
 		});
+		formikProfile.resetForm();
 	};
 
 	useEffect(() => {
 		if (type === 'self') {
 			// TODO: migrate
-			setFieldsValue({
-				email: userProfile?.data?.email
-			});
+			// setFieldsValue({
+			// 	email: userProfile?.data?.email
+			// });
 			setDisabledEmail(true);
 		}
 	}, [type]);
 
-	const regexPhone = (phone: string) => {
-		let phoneNumber =
-			phone
-				.replace(/^0/, '').replace(/^62/, '');
-		console.log(phoneNumber);
-		return phoneNumber;
+	const onChangeInputValue = (data: { name?: string; value?: string; }) => {
+		if (data?.name) {
+			formikProfile.setFieldValue(data?.name, data?.value ?? '');
+		}
+	};
+
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
 	};
 
 	return <Modal
@@ -227,55 +203,75 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					<Form.TextField
 						labelClassName='font-normal'
 						labelGap={ 8 }
-						{ ...registeredValue('name') }
+						id='name'
+						name='name'
+						value={ formikProfile.values.name }
+						onChange={ formikProfile.handleChange }
 						label={ t('profileSelector.form.name') }
 						placeholder={ t('profileSelector.form.name') }
+						isError={ !!formikProfile.errors.name }
+						errorMessage={ getInputErrorMessage(formikProfile.errors.name, t('profileSelector.form.name')) }
 					/>
 					<Form.DateField
 						labelClassName='font-normal'
 						labelGap={ 8 }
-						{ ...registeredValue('dob', true) }
+						id='dob'
+						name='dob'
+						value={ formikProfile.values.dob }
+						onChangeValue={ onChangeInputValue }
 						dateFormat='DD MMMM YYYY'
 						label={ t('profileSelector.form.dob') }
 						placeholder={ t('profileSelector.form.dob') }
+						isError={ !!formikProfile.errors.dob }
+						errorMessage={ getInputErrorMessage(formikProfile.errors.dob, t('profileSelector.form.dob')) }
 					/>
 				</FormRow>
 				<FormRow className='grid grid-cols-2 gap-[16px] md:gap-[24px]'>
 					<Form.PhoneNumberInput
 						labelClassName='font-normal'
 						labelGap={ 8 }
-						{ ...registeredValue('phone') }
+						id='phone'
+						name='phone'
+						value={ formikProfile.values.phone }
+						onChange={ formikProfile.handleChange }
+						mask={ '+62 999-9999-99999' }
 						label={ t('profileSelector.form.phone') }
 						placeholder={ t('profileSelector.form.phone') }
-						onChange={ (e) => {
-							setFieldsValue({
-								phone: regexPhone(e.target.value),
-								email: registeredValue('email').value,
-								dob: registeredValue('dob').value,
-								gender: registeredValue('gender').value,
-								name: registeredValue('name').value,
-							});
-						} }
+						isError={ !!formikProfile.errors.phone }
+						errorMessage={ getInputErrorMessage(formikProfile.errors.phone, t('profileSelector.form.phone')) }
 						isNumber
 					/>
 					<Form.TextField
 						labelClassName='font-normal'
 						labelGap={ 8 }
-						{ ...registeredValue('email') }
+						id='email'
+						name='email'
+						value={ formikProfile.values.email }
+						onChange={ formikProfile.handleChange }
 						label={ t('profileSelector.form.email') }
 						placeholder={ t('profileSelector.form.email') }
-						disabled={ disabledEmail }
+						isError={ !!formikProfile.errors.email }
+						errorMessage={ getInputErrorMessage(formikProfile.errors.email, t('profileSelector.form.email')) }
+						disabled={ disabledEmail } // Notes: jika disabledEmail, pastikan set formikProfile.values.email
 					/>
 				</FormRow>
 				<FormRow className='grid grid-cols-2 gap-[16px] md:gap-[24px]'>
 					<Form.Dropdown
 						labelClassName='font-normal'
 						labelGap={ 8 }
-						menuItems={ genderMenuItems }
-						{ ...registeredValue('gender') }
+						menuItems={ [
+							{ key: 'M', value: 'M', label: t('profileSelector.form.genderLabel.male') },
+							{ key: 'F', value: 'F', label: t('profileSelector.form.genderLabel.female') }
+						] }
+						id='gender'
+						name='gender'
+						value={ formikProfile.values.gender }
+						onChange={ formikProfile.handleChange }
 						label={ t('profileSelector.form.gender') }
 						placeholder={ t('profileSelector.form.gender') }
-						className='w-[174px] block'
+						isError={ !!formikProfile.errors.gender }
+						errorMessage={ getInputErrorMessage(formikProfile.errors.gender, t('profileSelector.form.gender')) }
+					// className='w-[174px] block'
 					/>
 				</FormRow>
 				<Button type='submit' label={ t('profileSelector.form.submit') } className='mt-[32px]' />

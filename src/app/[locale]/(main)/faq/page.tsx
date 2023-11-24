@@ -22,8 +22,8 @@ const FAQPage = () => {
 	const t = useScopedI18n('page.contactUs.faq');
 
 	const breadCrumbsPath = [
-		{ name: 'Contact Us', url: '/contact-us' },
-		{ name: 'Frequently Asked Questions', url: '/contact-us/faq' }
+		{ name: t('contactUsLabel'), url: '/contact-us' },
+		{ name: t('heading'), url: '/contact-us/faq' }
 	];
 
 	if (params.id) {

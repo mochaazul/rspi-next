@@ -15,7 +15,7 @@ import Button from '@/components/ui/Button';
 type Props = {
 	isTelemedicine: boolean;
 	hospitals: HospitalDetail[],
-	clinics: ClinicResponse[]
+	clinics: ClinicResponse[];
 };
 
 const FindADoctor: React.FC<Props> = ({
@@ -76,7 +76,7 @@ const FindADoctor: React.FC<Props> = ({
 				<div className='form-wrapper'>
 					<div className='h-full flex-1'>
 						<div className='mb-2'>
-							<label className='font-black text-sm'>{ 'Doctor name' }</label>
+							<label className='font-black text-sm'>{ t('form.labels.doctorName') }</label>
 						</div>
 						<TextField
 							className='input'
@@ -89,13 +89,13 @@ const FindADoctor: React.FC<Props> = ({
 							} }
 							value={ formFindDoctor.values.doctorName }
 							{
-								...isTelemedicine && { label: t('form.labels.doctorName') }
+							...isTelemedicine && { label: t('form.labels.doctorName') }
 							}
 						/>
 					</div>
 					<div className='h-full flex-1'>
 						<div className='mb-2'>
-							<label className='font-black text-sm'>{ 'Hospital' }</label>
+							<label className='font-black text-sm'>{ t('form.labels.hospital') }</label>
 						</div>
 						<Dropdown
 							menuItems={ hospitalArr }

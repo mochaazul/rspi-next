@@ -13,12 +13,15 @@ import {
 import { colors, icons, sosmedLink } from '@/constant';
 import { EventClassesState } from '@/interface';
 import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
+import { useScopedI18n } from '@/locales/client';
+
 import { fetchPromoByID, fetchEvents } from './helpers';
 import { PanelH1, PanelV1 } from '../../style';
 
 const DetailEventClassesPromo = (props: { params: { slug: any; }; }) => {
 	const pathName = usePathname();
-	
+	const t = useScopedI18n('page.promoPage');
+
 	const [loading, setLoading] = useState(false);
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 	const [eventsData, setEventsData] = useState<EventClassesState['events']>();
@@ -40,15 +43,15 @@ const DetailEventClassesPromo = (props: { params: { slug: any; }; }) => {
 		updated_date: '',
 	});
 
-	const breadcrumbsPath = [{ name: 'Promo & Packages', url: '/promo' }, { url: '#', name: selectedEvent?.title || '' }];
+	const breadcrumbsPath = [{ name: t('heading'), url: '/promo' }, { url: '#', name: selectedEvent?.title || '' }];
 
 	useEffect(() => {
-		fetchPromoByID(props?.params?.slug).then(function(response) {
+		fetchPromoByID(props?.params?.slug).then(function (response) {
 			setLoading(true);
 			setSelectedEvent(response?.data);
 			setLoading(false);
 		});
-		fetchEvents().then(function(response) {
+		fetchEvents().then(function (response) {
 			setEventsData(response.data);
 		});
 	}, []);
@@ -56,11 +59,11 @@ const DetailEventClassesPromo = (props: { params: { slug: any; }; }) => {
 	useEffect(() => {
 		if (props.params.slug !== selectedEvent?.slug) {
 			setLoading(true);
-			fetchPromoByID(props.params.slug).then(function(response) {
+			fetchPromoByID(props.params.slug).then(function (response) {
 				setSelectedEvent(response?.data);
 				setLoading(false);
 			});
-			fetchEvents().then(function(response) {
+			fetchEvents().then(function (response) {
 				setEventsData(response.data);
 			});
 			setLoading(false);

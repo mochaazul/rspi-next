@@ -49,7 +49,7 @@ export const MainNavLanguage = () => {
 				<div className='flex divide-x divide-white/20 gap-5'>
 					<Link href='/contact-us'>
 						<Text fontSize='14px' fontWeight='400' color='white'>
-							Contact Us
+							{ t('contactUs') }
 						</Text>
 					</Link>
 					<div className='flex gap-[30px] pl-5'>

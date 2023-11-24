@@ -5,7 +5,7 @@ import withInputLabel from '@/components/ui/withInputLabel';
 import { CountrySelector, PhoneInputType, PhoneNumberInputWrapper } from './style';
 
 const PhoneNumberInput = ({ onIconClick, ...props }: PhoneInputType) => {
-	const { ref, featherIcon, ...restProps } = props;
+	const { ref, featherIcon, className, ...restProps } = props;
 	return (
 		<PhoneNumberInputWrapper
 			$iconPosition={ props.iconPosition }
@@ -16,7 +16,7 @@ const PhoneNumberInput = ({ onIconClick, ...props }: PhoneInputType) => {
 			<CountrySelector >
 				<option>+62</option>
 			</CountrySelector>
-			<InputMask className='w-full' mask={ '999999999999' } value={ props.value } onChange={ props.onChange } { ...restProps } maskChar={ '' } />
+			<InputMask mask={ '999999999999' } value={ props.value } onChange={ props.onChange } className={ `${ className } focus:outline-none` } { ...restProps } maskChar={ '' } />
 		</PhoneNumberInputWrapper>
 	);
 };

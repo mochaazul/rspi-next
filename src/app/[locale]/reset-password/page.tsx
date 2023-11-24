@@ -15,6 +15,7 @@ import { useScopedI18n } from '@/locales/client';
 import { ResetPasswordSchema } from '@/validator/auth';
 import { useSetNewPassword, useVerifyResetToken } from '@/lib/api/client/auth';
 import { NewPasswordPayload, ResponseStatus } from '@/interface';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import { ResetPasswordStyle } from './style';
 
@@ -45,7 +46,7 @@ const ResetPassword = () => {
 			new_password: '',
 			confirm_password: ''
 		},
-		onSubmit: async(formResetPassword: NewPasswordPayload) => {
+		onSubmit: async (formResetPassword: NewPasswordPayload) => {
 			try {
 				await setNewPassword({
 					query: { token: searchParams.get('token') ?? '' },
@@ -61,13 +62,14 @@ const ResetPassword = () => {
 		}
 	});
 
-	const languages = useScopedI18n('page.resetPassword');
+	const t = useScopedI18n('page.resetPassword');
+	const tValidation = useScopedI18n('validation.formValidation');
 
 	useEffect(() => {
 		hasToken();
 	}, []);
 
-	const hasToken = async() => {
+	const hasToken = async () => {
 		try {
 			if (!searchParams.get('token')) return navigate.replace('/login');
 
@@ -90,7 +92,7 @@ const ResetPassword = () => {
 	if (!tokenVerified)
 		return <SpinVerification status={ verificationStatus } />;
 
-	const onSubmitForm = async(evt: FormEvent<HTMLFormElement>) => {
+	const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		setEnableValidation(true);
 		setError({
@@ -107,8 +109,8 @@ const ResetPassword = () => {
 		}));
 	};
 
-	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formikResetPassword.setFieldValue(e.target.id, e.target.value);
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
 	};
 
 	if (tokenVerified)
@@ -125,10 +127,10 @@ const ResetPassword = () => {
 									<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
 								</Link>
 								<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
-									{ languages('heading') }
+									{ t('heading') }
 								</Text>
 								<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-4 max-2xl:mb-6 mb-16' subClassName='max-lg:text-[16px] max-lg:leading-[24px]'>
-									{ languages('subHeading') }
+									{ t('subHeading') }
 								</Text>
 							</div>
 							{
@@ -148,12 +150,13 @@ const ResetPassword = () => {
 								<Form.FormGroup className='group-wrapper w-full'>
 									<Form.TextField
 										id='new_password'
-										placeholder={ languages('resetForm.newPasswordPlaceHolder') }
+										name='new_password'
+										placeholder={ t('resetForm.newPasswordPlaceHolder') }
 										value={ formikResetPassword.values.new_password }
-										onChange={ onChangeInput }
-										errorMessage={ formikResetPassword.errors.new_password }
+										onChange={ formikResetPassword.handleChange }
+										errorMessage={ getInputErrorMessage(formikResetPassword.errors.new_password, t('resetForm.newPasswordLabel')) }
 										isError={ !!formikResetPassword.errors.new_password }
-										label={ languages('resetForm.newPasswordLabel') }
+										label={ t('resetForm.newPasswordLabel') }
 										iconName={ inputPasswordType.new_password === 'password' ? 'EyeClosed' : 'Eye' }
 										iconPosition='right'
 										type={ inputPasswordType.new_password }
@@ -163,21 +166,22 @@ const ResetPassword = () => {
 								<Form.FormGroup className='group-wrapper w-full'>
 									<Form.TextField
 										id='confirm_password'
-										placeholder={ languages('resetForm.newPasswordConfirmationPlaceholder') }
-										label={ languages('resetForm.newPasswordConfirmationLabel') }
+										name='confirm_password'
+										placeholder={ t('resetForm.newPasswordConfirmationPlaceholder') }
+										label={ t('resetForm.newPasswordConfirmationLabel') }
 										value={ formikResetPassword.values.confirm_password }
-										onChange={ onChangeInput }
+										onChange={ formikResetPassword.handleChange }
 										type={ inputPasswordType.confirm_password }
 										iconName={ inputPasswordType.confirm_password === 'password' ? 'EyeClosed' : 'Eye' }
 										iconPosition='right'
-										errorMessage={ formikResetPassword.errors.confirm_password }
+										errorMessage={ getInputErrorMessage(formikResetPassword.errors.confirm_password, t('resetForm.newPasswordConfirmationLabel')) }
 										isError={ !!formikResetPassword.errors.confirm_password }
 										onIconClick={ () => togglePasswordShow('confirm_password') }
 									/>
 								</Form.FormGroup>
 							</section>
 							<Button
-								label={ languages('resetForm.resetBtnLabel') }
+								label={ t('resetForm.resetBtnLabel') }
 								theme='primary'
 								$hoverTheme='outline'
 								type='submit'

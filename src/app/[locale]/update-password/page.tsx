@@ -14,6 +14,7 @@ import { useScopedI18n } from '@/locales/client';
 import { UpdatePasswordSchema } from '@/validator/auth';
 import { useUpdatePassword } from '@/lib/api/client/auth';
 import { UpdatePasswordType, ResponseStatus } from '@/interface';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import { UpdatePasswordPageStyle, Box } from './style';
 
@@ -41,7 +42,7 @@ const UpdatePasswordPage = () => {
 			new_password: '',
 			confirm_password: ''
 		},
-		onSubmit: async(formUpdatePassword: UpdatePasswordType) => {
+		onSubmit: async (formUpdatePassword: UpdatePasswordType) => {
 			try {
 				await updatePassword(formUpdatePassword);
 
@@ -54,9 +55,10 @@ const UpdatePasswordPage = () => {
 		}
 	});
 
-	const languages = useScopedI18n('page.updatePassword');
+	const t = useScopedI18n('page.updatePassword');
+	const tValidation = useScopedI18n('validation.formValidation');
 
-	const onSubmitForm = async(evt: FormEvent<HTMLFormElement>) => {
+	const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		setEnableValidation(true);
 		setError({
@@ -73,8 +75,8 @@ const UpdatePasswordPage = () => {
 		}));
 	};
 
-	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-		formikUpdatePassword.setFieldValue(e.target.id, e.target.value);
+	const getInputErrorMessage = (key?: string, label?: string) => {
+		return getValidationTranslation(tValidation, key, { label });
 	};
 
 	return (
@@ -92,7 +94,7 @@ const UpdatePasswordPage = () => {
 						lineHeight='48px'
 						subClassName='max-lg:leading-8 max-lg:text-[20px]'
 					>
-						{ languages('heading') }
+						{ t('heading') }
 					</Text>
 					<Text
 						fontType='h4'
@@ -101,7 +103,7 @@ const UpdatePasswordPage = () => {
 						className='mt-2 sm:mt-4'
 						subClassName='max-lg:text-base max-lg:leading-6'
 					>
-						{ languages('subHeading') }
+						{ t('subHeading') }
 					</Text>
 				</div>
 				{
@@ -126,12 +128,13 @@ const UpdatePasswordPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='old_password'
-								placeholder={ languages('resetForm.oldPasswordPlaceHolder') }
+								name='old_password'
+								placeholder={ t('resetForm.oldPasswordPlaceHolder') }
 								value={ formikUpdatePassword.values.old_password }
-								onChange={ onChangeInput }
-								errorMessage={ formikUpdatePassword.errors.old_password }
+								onChange={ formikUpdatePassword.handleChange }
+								errorMessage={ getInputErrorMessage(formikUpdatePassword.errors.old_password, t('resetForm.oldPasswordLabel')) }
 								isError={ !!formikUpdatePassword.errors.old_password }
-								label={ languages('resetForm.oldPasswordLabel') }
+								label={ t('resetForm.oldPasswordLabel') }
 								iconName={ inputPasswordType.old_password === 'password' ? 'EyeClosed' : 'Eye' }
 								iconPosition='right'
 								type={ inputPasswordType.old_password }
@@ -141,12 +144,13 @@ const UpdatePasswordPage = () => {
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField
 								id='new_password'
-								placeholder={ languages('resetForm.newPasswordPlaceHolder') }
+								name='new_password'
+								placeholder={ t('resetForm.newPasswordPlaceHolder') }
 								value={ formikUpdatePassword.values.new_password }
-								onChange={ onChangeInput }
-								errorMessage={ formikUpdatePassword.errors.new_password }
+								onChange={ formikUpdatePassword.handleChange }
+								errorMessage={ getInputErrorMessage(formikUpdatePassword.errors.new_password, t('resetForm.newPasswordLabel')) }
 								isError={ !!formikUpdatePassword.errors.new_password }
-								label={ languages('resetForm.newPasswordLabel') }
+								label={ t('resetForm.newPasswordLabel') }
 								iconName={ inputPasswordType.new_password === 'password' ? 'EyeClosed' : 'Eye' }
 								iconPosition='right'
 								type={ inputPasswordType.new_password }
@@ -156,21 +160,22 @@ const UpdatePasswordPage = () => {
 						<Form.FormGroup className='group-wrapper w-full !mb-0'>
 							<Form.TextField
 								id='confirm_password'
-								placeholder={ languages('resetForm.newPasswordConfirmationPlaceholder') }
-								label={ languages('resetForm.newPasswordConfirmationLabel') }
+								name='confirm_password'
+								placeholder={ t('resetForm.newPasswordConfirmationPlaceholder') }
+								label={ t('resetForm.newPasswordConfirmationLabel') }
 								value={ formikUpdatePassword.values.confirm_password }
-								onChange={ onChangeInput }
+								onChange={ formikUpdatePassword.handleChange }
 								type={ inputPasswordType.confirm_password }
 								iconName={ inputPasswordType.confirm_password === 'password' ? 'EyeClosed' : 'Eye' }
 								iconPosition='right'
-								errorMessage={ formikUpdatePassword.errors.confirm_password }
+								errorMessage={ getInputErrorMessage(formikUpdatePassword.errors.confirm_password, t('resetForm.newPasswordConfirmationLabel')) }
 								isError={ !!formikUpdatePassword.errors.confirm_password }
 								onIconClick={ () => togglePasswordShow('confirm_password') }
 							/>
 						</Form.FormGroup>
 					</section>
 					<Button
-						label={ languages('resetForm.resetBtnLabel') }
+						label={ t('resetForm.resetBtnLabel') }
 						theme='primary'
 						$hoverTheme='outline'
 						type='submit'

@@ -1,5 +1,7 @@
 'use server';
-import LandingPageStyle from './style';
+
+import Image from 'next/image';
+import Link from 'next/link';
 
 import { getNews } from '@/lib/api/news';
 import { getEvents } from '@/lib/api/events';
@@ -8,10 +10,8 @@ import { getBanner, getCoe } from '@/lib/api';
 import { getHospital } from '@/lib/api/hospital';
 import { getCurrentLocale } from '@/locales/server';
 import { getClinics, getFacilitiesAndServices } from '@/lib/api/clinics';
-
 import CustomCarousel from '@/components/ui/Carousel';
 import LangWrapper from '@/components/ui/LangWrapper';
-
 import CentreOfExcellence from '@/components/ui/PageComponents/LandingPageSections/CenterOfExcelence';
 import ServicesTabs from '@/components/ui/PageComponents/LandingPageSections/Services';
 import FacilitiesServices from '@/components/ui/PageComponents/LandingPageSections/FacilitiesServices';
@@ -21,8 +21,7 @@ import CustomerReview from '@/components/ui/PageComponents/LandingPageSections/C
 import AccreditationAwards from '@/components/ui/PageComponents/LandingPageSections/AccreditationsAwards';
 import MobileAppBanner from '@/components/ui/PageComponents/LandingPageSections/MobileAppBanner';
 
-import { isMobile } from 'react-device-detect';
-import Image from 'next/image';
+import LandingPageStyle from './style';
 
 export default async function Page() {
 	const coeRes = await getCoe();
@@ -33,45 +32,27 @@ export default async function Page() {
 	const events = await getEvents({ is_publish: true });
 	const articles = await getNews({ is_publish: true }, { page: 1 });
 	const awards = await getAwards({ is_publish: true }, { page: 1, limit: 8 });
-
 	const currentLang = getCurrentLocale();
+
 	const arrayBanner = () => {
 		if (currentLang === 'id') {
-			if (isMobile) {
-				return banner.data.filter(img => img.img_url_mobile_idn !== '').map((image: any, index: any) => {
-					return <>
-						<a href={ image.url_link_idn } >
-							<Image fill objectFit='cover' key={ index } src={ image.img_url_mobile_idn } alt='slider' />
-						</a>;
-					</>;
-				});
-			} else {
-				return banner.data.filter(img => img.img_url_idn !== '').map((image: any, index: any) => {
-					return <>
-						<a href={ image.url_link_idn } >
-							<Image fill objectFit='cover' key={ index } src={ image.img_url_idn } alt='slider' />
-						</a>;
-					</>;
-				});
-			}
+			return banner.data.map((image: any, index: any) => {
+				return <div key={ `banner-${ index }` } style={ { width: '100%', height: 450 } }>
+					<Link href={ image.url_link_idn ?? '#' }>
+						<Image width={ 450 } height={ 450 } style={ { objectFit: "contain" } } className='md:hidden' src={ image.img_url_mobile_idn || image.img_url_mobile_en } alt='slider' />
+						<Image width={ 1600 } height={ 450 } style={ { objectFit: "contain" } } className='max-sm:hidden' src={ image.img_url_idn || image.img_url_en } alt='slider' />
+					</Link>
+				</div>;
+			});
 		} else {
-			if (isMobile) {
-				return banner.data.filter(img => img.img_url_mobile_en !== '').map((image: any, index: any) => {
-					return <>
-						<a href={ image.url_link_en } >
-							<Image fill objectFit='cover' key={ index } src={ image.img_url_mobile_en } alt='slider' />
-						</a>;
-					</>;
-				});
-			} else {
-				return banner.data.filter(img => img.img_url_en !== '').map((image: any, index: any) => {
-					return <>
-						<a href={ image.url_link_en } >
-							<Image fill objectFit='cover' key={ index } src={ image.img_url_en } alt='slider' />
-						</a>;
-					</>;
-				});
-			}
+			return banner.data.map((image: any, index: any) => {
+				return <div key={ `banner-${ index }` } style={ { width: '100%', height: 450 } }>
+					<Link href={ image.url_link_en ?? '#' }>
+						<Image width={ 450 } height={ 450 } style={ { objectFit: "contain" } } className='md:hidden' src={ image.img_url_mobile_en || image.img_url_mobile_idn } alt='slider' />
+						<Image width={ 1600 } height={ 450 } style={ { objectFit: "contain" } } className='max-sm:hidden' src={ image.img_url_en || image.img_url_idn } alt='slider' />
+					</Link>
+				</div>;
+			});
 		}
 	};
 
