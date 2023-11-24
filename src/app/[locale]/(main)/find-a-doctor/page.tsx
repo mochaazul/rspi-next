@@ -24,12 +24,9 @@ import { useGetHospital } from '@/lib/api/client/hospital';
 import { useGetClinics } from '@/lib/api/client/clinics';
 import { useScopedI18n } from '@/locales/client';
 
-
 export default function Page() {
 
 	const searchParams = useSearchParams();
-	const [currentPage, setCurrentPage] = useState<number>(1);
-	const hasKeyword = searchParams.get('keyword');
 
 	const t = useScopedI18n('page.findDoctor');
 	const breadCrumbs = [{ name: t('heading'), url: '#' }];
@@ -46,7 +43,7 @@ export default function Page() {
 	// useEffect(() => {
 	// 	findDoctorEvent();
 	// }, []);
-
+	
 	const RenderFilterPane = (
 		<div className='filter-pane' >
 			<DoctorFilter hospitals={ hospitalResponse?.data || [] } clinics={ clinicsResponse?.data || [] } />
@@ -73,11 +70,11 @@ export default function Page() {
 					...hospitalResponse.data
 						.filter(hospital => obj?.includes(hospital.hospital_code))
 						.map(item =>
-						({
-							id: item.hospital_code,
-							text: item.name ?? '',
-							key: entry
-						})
+							({
+								id: item.hospital_code,
+								text: item.name ?? '',
+								key: entry
+							})
 						)
 				);
 			} else

@@ -18,13 +18,13 @@ export const useGetDoctors = (options?: ApiOptions) => {
 };
 
 export const useGetDoctorDetail = (options?: ApiOptions) => {
-	return useSWR('masterDoctor', () => fetcher<FindDoctorDetail>('doctorSchedule', options), { shouldRetryOnError: false });
+	return useSWR(['masterDoctor', options], () => fetcher<FindDoctorDetail>('doctorSchedule', options), { shouldRetryOnError: false });
 };
 
 export const useGetDoctorCalendar = (startDate: string, hospital?: string, options?: ApiOptions) => {
 	// validation to prevent prefetching without proper params
 	// if the swr key is null it wont send a request
-	return useSWR(hospital ? `doctorCalendar/${ startDate }` : null, () => fetcher<DoctorCalendar[]>('doctorCalendar', options));
+	return useSWR(hospital ? `doctorCalendar/${hospital}/${ startDate }` : null, () => fetcher<DoctorCalendar[]>('doctorCalendar', options));
 };
 
 export const useGetDoctorSlot = (options?: ApiOptions) => {

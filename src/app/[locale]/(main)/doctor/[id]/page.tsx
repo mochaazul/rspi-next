@@ -39,7 +39,6 @@ export default function Page({ params }: Props) {
 
 	const [selectedHospital, setSelectedHospital] = useState<string>('');
 	const [selectedHospitalPhoneNumber, setSelectedHospitalPhoneNumber] = useState<string>('');
-	const [selectedHospitalName, setSelectedHospitalName] = useState<string>('');
 	const [showModalTelp, setShowModalTelp] = useState<boolean>(false);
 	const [radioValue, setRadioValue] = useState('APP');
 	const [selectedDate, setSelectedDate] = useState<Date>();
@@ -49,7 +48,7 @@ export default function Page({ params }: Props) {
 
 	const { data: hospital, isLoading: hospitalLoading } = useGetHospital();
 
-	const { data: doctor, isLoading } = useGetDoctorDetail({ param: params.id });
+	const { data: doctor, isLoading, error: doctorError } = useGetDoctorDetail({ param: params.id });
 
 	const { data: doctorCalendar, isLoading: doctorCalendarLoading } = useGetDoctorCalendar(
 		calendarMonth.format('YYYY-MM-DD'),
