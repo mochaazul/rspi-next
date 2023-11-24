@@ -41,11 +41,11 @@ export interface PayloadPushNotification {
 	text_en?: string;
 	icon?: string;
 	url?: string;
-	notif_type?: number;
+	notif_type?: string;
 	desc_type?: string;
 	email_patient?: string;
 	medical_record?: string;
-	read_flag?: number;
+	read_flag?: string;
 	sent_datetime?: string;
 	read_datetime?: string;
 	create_datetime?: string;

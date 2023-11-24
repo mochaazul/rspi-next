@@ -15,7 +15,6 @@ import {
 	FacilityServicesDetail,
 	FooterDetail,
 	HospitalState,
-	NotificationResponse,
 	UserSessionData,
 } from '@/interface';
 import colors from '@/constant/colors';
@@ -26,7 +25,7 @@ import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import MainNavLanguage from '@/components/ui/MainNavLanguage';
 import Modal from '@/components/ui/Modal';
-
+import { useNotification } from '@/lib/api/client/header';
 import HeaderStyle from './style';
 
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';
@@ -38,7 +37,6 @@ export const Header = ({
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData,
-	notificationResponseData,
 	marAllReadNotifFunc,
 	footersData,
 }: {
@@ -46,7 +44,6 @@ export const Header = ({
 	hospitalData: HospitalState,
 	centerOfExcellenceData: CenterOfExcellenceState,
 	facilityServicesData: FacilityServicesDetail[],
-	notificationResponseData?: NotificationResponse,
 	marAllReadNotifFunc: () => any,
 	footersData: FooterDetail[],
 }) => {
@@ -68,6 +65,18 @@ export const Header = ({
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
+
+	const paramGetNotif = {
+		query: {
+			medical_record: session.user?.medical_record ?? '',
+			email: session.user?.email,
+		},
+	};
+	const {
+		data: getNotification,
+	} = useNotification(paramGetNotif);
+
+	const notificationResponseData = getNotification?.data;
 
 	const clearSWRCache = async () => {
 		const keys = cache.keys();

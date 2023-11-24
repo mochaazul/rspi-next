@@ -26,6 +26,8 @@ import { formatTimeslot, splitDate } from '@/helpers/datetime';
 import { isEqual } from 'lodash';
 import { useBookAppointmentAPI, usePushNotifAPI } from '@/lib/api/client/booking';
 import { useGetDoctorDetail } from '@/lib/api/client/doctors';
+import { useNotification } from '@/lib/api/client/header';
+import useSession from '@/session/client';
 
 const genderMenuItems = [
 	{ key: 'M', value: 'W', label: 'Male' },
@@ -41,7 +43,7 @@ type BookingFormState = {
 
 const BookAppointment = () => {
 	const t = useScopedI18n('page.bookingAppointment');
-
+	const session = useSession();
 	const breadCrumbs = [
 		{ name: t('heading'), url: '#' },
 	];
@@ -55,8 +57,19 @@ const BookAppointment = () => {
 	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile();
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
 	const { trigger: pushNotification, error: pushNotifError, isMutating: pushNotifLoading } = usePushNotifAPI();
+	
 	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
 
+	const paramGetNotif = {
+		query: {
+			medical_record: session.user?.medical_record ?? '',
+			email: session.user?.email,
+		},
+	};
+	const {
+		data: getNotification,
+	} = useNotification(paramGetNotif);
+	
 	const [confirmationModal, setConfirmationModalVisible] = useState<boolean>(false);
 	const [addProfileModal, setAddProfileModal] = useState<boolean>(false);
 	const [successModal, setSuccessModal] = useState<boolean>(false);
@@ -183,27 +196,8 @@ const BookAppointment = () => {
 	// 	return '';
 	// };
 
-	const onConfirmed = async () => {
+	const onConfirmed = async() => {
 		try {
-			console.log(selfProfile, 'selfProfile');
-			console.log(selectedProfile, 'selectedProfile');
-			// const pushNotifPayload:PayloadPushNotification = {
-			// 	category: 'Kategori Pesan Pemberitahuan',
-			// 	source: 'Booking Appointment',
-			// 	title_idn: 'Buat Janji Temu Berhasil',
-			// 	title_en: 'Booking Appointment Successful',
-			// 	text_idn: 'Pasien A Berhasil Booking Appointment Dokter B',
-			// 	text_en: 'Patient A Successfully Booked Doctor B's Appointment',
-			// 	icon: 'Bell',
-			// 	url: '/patient-portal',
-			// 	notif_type: 1,
-			// 	desc_type: 'Push by email account',
-			// 	email_patient: 'abc@gmail.com',
-			// 	medical_record: '100377120',
-			// 	sent_datetime: '2023-08-09 07:38:50',
-			// 	read_flag: 0
-			// };
-			// await pushNotification(pushNotifPayload);
 			
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
@@ -231,10 +225,27 @@ const BookAppointment = () => {
 				// 'insurance_front_img': tempImageAsuransiFront ? await uploadAsuransiPhotoFront() : '',
 				// 'insurance_back_img': tempImageAsuransiBack ? await uploadAsuransiPhotoBack() : ''
 			};
-			await bookAppointment(payloadBook).then(res => {
-				console.log(res, 'res');
-			});
+			await bookAppointment(payloadBook).then(() => {
 
+				const pushNotifPayload:PayloadPushNotification = {
+					category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
+					source: 'Rebelworks',
+					title_idn: 'Permintaan booking Berhasil',
+					title_en: 'Booking Appointment Successful',
+					text_idn: 'Permintaan booking anda untuk ' + selectedProfile?.name?.trim() + ' ke ' + doctorResponse?.data.name + ' pada ' + timeSlot?.date + ' ' + timeSlot?.session_app_start + ' sudah berhasil. Mohon konfirmasi ketidakhadiran 1 jam sebelum jadwal mulai praktek dokter untuk menghindari blacklist oleh system kami.',
+					text_en: 'Your appointment for ' + selectedProfile?.name?.trim() + ' ' + doctorResponse?.data.name + ' on ' + timeSlot?.date + ' ' + timeSlot?.session_app_start + ' has been booked. Please contact us at least 1 hour before the doctors schedule if you wish to cancel in order to avoid blacklist',
+					icon: 'Bell',
+					url: '/patient-portal',
+					notif_type: '1',
+					desc_type: 'Push by email account',
+					email_patient: selectedProfile?.email,
+					medical_record: selectedProfile?.no_mr ?? '',
+					sent_datetime: timeSlot?.date + ' ' + timeSlot?.session_app_start,
+					read_flag: '0'
+				};
+				pushNotification(pushNotifPayload);
+			});
+			
 			setSuccessModal(true);
 		} catch (error: any) {
 			setConfirmationModalVisible(false);
