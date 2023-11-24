@@ -28,22 +28,16 @@ export default function Page() {
 
 	const searchParams = useSearchParams();
 
+	const { data: doctorResponse, isLoading: doctorLoading, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
 	const t = useScopedI18n('page.findDoctor');
 	const breadCrumbs = [{ name: t('heading'), url: '#' }];
-
-	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams) });
-
-	const { data: hospitalResponse, error: hospitalError, isLoading: hospitalLoading } = useGetHospital();
-	const { data: clinicsResponse, error: clinicsError, isLoading: clinicsLoading } = useGetClinics();
+	const { data: hospitalResponse } = useGetHospital();
+	const { data: clinicsResponse } = useGetClinics();
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
 	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinicsResponse?.data || [], hospitals: hospitalResponse?.data || [] });
 
-	// useEffect(() => {
-	// 	findDoctorEvent();
-	// }, []);
-	
 	const RenderFilterPane = (
 		<div className='filter-pane' >
 			<DoctorFilter hospitals={ hospitalResponse?.data || [] } clinics={ clinicsResponse?.data || [] } />

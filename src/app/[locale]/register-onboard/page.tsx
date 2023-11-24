@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
 
 import { Images, colors } from '@/constant';
@@ -29,6 +29,7 @@ const regexPhone = (phone: string) => {
 const RegisterOnboard = () => {
 	const navigate = useRouter();
 	const session = useSession();
+	const searchParams = useSearchParams()!;
 	const t = useScopedI18n('page.registerOnboard');
 	const tValidation = useScopedI18n('validation.formValidation');
 	const { trigger: checkPhonePatient } = useCheckPhonePatient();
@@ -289,9 +290,8 @@ const RegisterOnboard = () => {
 					<Button theme='outline'
 						className='mt-[12px]'
 						onClick={ () => {
-							// check if logged user or register user
-							const data = session?.user;
-							if (data) {
+							const isHome: string = searchParams.get('isHome') ?? '';
+							if (isHome === 'true') {
 								navigate.replace('/');
 							} else {
 								navigate.replace('/pin-create');
