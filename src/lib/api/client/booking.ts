@@ -1,7 +1,7 @@
 import useSWRMutation from 'swr/mutation';
 import fetcher, { ApiOptions } from '../utils/fetcher';
 import { BookingPayload } from '@/interface';
-import { NotificationDetail } from '@/interface/Notification';
+import { PayloadPushNotification } from '@/interface/Notification';
 
 export const useBookAppointmentAPI = (options?: ApiOptions) => {
 	return useSWRMutation('createBooking', (key, { arg }: {arg:BookingPayload}) =>
@@ -10,7 +10,7 @@ export const useBookAppointmentAPI = (options?: ApiOptions) => {
 };
 
 export const usePushNotifAPI = (options?: ApiOptions) => {
-	return useSWRMutation('createPushNotif', (key, { arg }: {arg:NotificationDetail}) =>
+	return useSWRMutation('createPushNotif', (key, { arg }: {arg:PayloadPushNotification}) =>
 		fetcher('pushNotification', { ...options, body: arg })
 	);
 };

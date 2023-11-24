@@ -15,6 +15,25 @@ export interface NotificationResponse {
 export interface NotificationDetail {
 	id?: number;
 	category?: string;
+	resource?: string;
+	judul_idn?: string;
+	judul_en?: string;
+	isi_idn?: string;
+	isi_en?: string;
+	icon?: string;
+	url?: string[];
+	type?: boolean;
+	type_desc?: string;
+	email?: string;
+	mr?: string;
+	flag?: number;
+	sent_datetime?: string;
+	read_datetime?: string;
+	create_datetime?: string;
+}
+export interface PayloadPushNotification {
+	id?: number;
+	category?: string;
 	source?: string;
 	title_idn?: string;
 	title_en?: string;
@@ -31,7 +50,6 @@ export interface NotificationDetail {
 	read_datetime?: string;
 	create_datetime?: string;
 }
-
 export interface PayloadNotification {
 	medical_record?: string;
 	email?: string;

@@ -15,6 +15,7 @@ import Button from '@/components/ui/Button';
 import Form from '@/components/ui/Form';
 import Text from '@/components/ui/Text';
 import NotificationPanel from '@/components/ui/NotificationPanel';
+import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import OTPPageStyle, { Box, WarningNote } from './style';
 
@@ -98,7 +99,8 @@ const OTPPage = () => {
 	const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
 	const [errorMessageApi, setErrorMessageApi] = useState<string>('');
 
-	const languages = useScopedI18n('page.otpVerification');
+	const t = useScopedI18n('page.otpVerification');
+	const tValidation = useScopedI18n('validation.formValidation');
 	const session = useSession();
 
 	const formikOtp: FormikProps<OTPType> = useFormik<OTPType>({
@@ -106,7 +108,7 @@ const OTPPage = () => {
 		validateOnChange: enableValidation,
 		validationSchema: OTPSchema,
 		initialValues: { otp: '' },
-		onSubmit: async(formOtp: OTPType) => {
+		onSubmit: async (formOtp: OTPType) => {
 			try {
 				setLoadingSubmit(true);
 
@@ -133,7 +135,7 @@ const OTPPage = () => {
 		formikOtp.handleSubmit();
 	};
 
-	const resendOtpHandler = async() => {
+	const resendOtpHandler = async () => {
 		setCount(60);
 		await registerOnboard({
 			birth_date: searchParams.get('bod') ?? '',
@@ -143,11 +145,11 @@ const OTPPage = () => {
 		});
 	};
 
-	const onChangeInputValue = useCallback((data: { name?: string; value?: string; }) => {
+	const onChangeInputValue = (data: { name?: string; value?: string; }) => {
 		if (data?.name) {
 			formikOtp.setFieldValue(data?.name, data?.value ?? '');
 		}
-	}, []);
+	};
 
 	return (
 		<OTPPageStyle>
@@ -155,10 +157,10 @@ const OTPPage = () => {
 				<div className='mb-[32px]'>
 					<Images.LogoRSPI />
 				</div>
-				<Text text={ languages('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
+				<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
 				{ /* TODO : INI NOMOR HANDPHONE NYa masih hardcode ?? */ }
 				<Text
-					text={ languages('subHeading') }
+					text={ t('subHeading') }
 					fontSize={ '20px' }
 					lineHeight={ '24px' }
 					fontWeight={ '400' }
@@ -170,8 +172,8 @@ const OTPPage = () => {
 					onResend={ resendOtpHandler }
 					count={ count }
 					setCount={ setCount }
-					resendOtpText={ languages('resendOtp') }
-					resendWarnText={ languages('resendWarn') }
+					resendOtpText={ t('resendOtp') }
+					resendWarnText={ t('resendWarn') }
 				/>
 
 				{
@@ -193,17 +195,17 @@ const OTPPage = () => {
 							name='otp'
 							className='input'
 							digitLength={ 6 }
-							label={ languages('form.otpFieldLabel') }
+							label={ t('form.otpFieldLabel') }
 							type='text'
 							value={ formikOtp.values.otp }
-							errorMessage={ formikOtp.errors.otp }
+							errorMessage={ getValidationTranslation(tValidation, formikOtp.errors.otp, { label: t('form.otpFieldLabel') }) }
 							isError={ !!formikOtp.errors.otp }
 							onChangeValue={ onChangeInputValue }
 						/>
 					</Form.FormGroup>
-					<Button className='mt-8' theme='primary' type='submit' disabled={ loadingSubmit }>{ languages('form.submitBtnLabel') }</Button>
+					<Button className='mt-8' theme='primary' type='submit' disabled={ loadingSubmit }>{ t('form.submitBtnLabel') }</Button>
 				</Form>
-				<Button className='mt-8' theme='text' onClick={ () => navigate.replace('/pin-create') }>{ languages('form.backBtnlabel') }</Button>
+				<Button className='mt-8' theme='text' onClick={ () => navigate.replace('/pin-create') }>{ t('form.backBtnlabel') }</Button>
 			</Box>
 		</OTPPageStyle>
 	);
