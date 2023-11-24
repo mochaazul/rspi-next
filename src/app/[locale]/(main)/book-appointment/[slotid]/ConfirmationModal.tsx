@@ -51,7 +51,7 @@ export const ConfirmationModal = ({
 	loading,
 	loadingUploadPhoto
 }: Props) => {
-	
+
 	const navigate = useRouter();
 	const t = useScopedI18n('page.bookingAppointment.confirmationModal');
 
@@ -203,7 +203,7 @@ export const ConfirmationModal = ({
 						setChecked(evt.target.checked);
 					} } />
 				</div>
-				<Button onClick={ onConfirmed } disabled={ !checked } >
+				<Button onClick={ onConfirmed } disabled={ !checked || loading } >
 					{ loading || loadingUploadPhoto ? <Spinner /> : t('confirmBtnLabel') }
 				</Button>
 			</ConfirmationModalContainer>
