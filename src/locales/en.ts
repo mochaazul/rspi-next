@@ -403,6 +403,7 @@ export default {
 				tabsLabel: ['Find a Doctor'],
 				findDoctor: {
 					form: {
+						notFoundSpeciality: 'Not found any speciality',
 						resetBtnLabel: 'Reset',
 						submitBtnLabel: 'Find a Doctor',
 						allHospital: 'Semua Rumah Sakit',

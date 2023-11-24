@@ -24,28 +24,19 @@ import { useGetHospital } from '@/lib/api/client/hospital';
 import { useGetClinics } from '@/lib/api/client/clinics';
 import { useScopedI18n } from '@/locales/client';
 
-
 export default function Page() {
 
 	const searchParams = useSearchParams();
-	const [currentPage, setCurrentPage] = useState<number>(1);
-	const hasKeyword = searchParams.get('keyword');
 
+	const { data: doctorResponse, isLoading: doctorLoading, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
 	const t = useScopedI18n('page.findDoctor');
 	const breadCrumbs = [{ name: t('heading'), url: '#' }];
-
-	const { data: doctorResponse, error: doctorError, isLoading: doctorLoading, mutate, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams) });
-
-	const { data: hospitalResponse, error: hospitalError, isLoading: hospitalLoading } = useGetHospital();
-	const { data: clinicsResponse, error: clinicsError, isLoading: clinicsLoading } = useGetClinics();
+	const { data: hospitalResponse } = useGetHospital();
+	const { data: clinicsResponse } = useGetClinics();
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
 	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinicsResponse?.data || [], hospitals: hospitalResponse?.data || [] });
-
-	// useEffect(() => {
-	// 	findDoctorEvent();
-	// }, []);
 
 	const RenderFilterPane = (
 		<div className='filter-pane' >
@@ -73,11 +64,11 @@ export default function Page() {
 					...hospitalResponse.data
 						.filter(hospital => obj?.includes(hospital.hospital_code))
 						.map(item =>
-						({
-							id: item.hospital_code,
-							text: item.name ?? '',
-							key: entry
-						})
+							({
+								id: item.hospital_code,
+								text: item.name ?? '',
+								key: entry
+							})
 						)
 				);
 			} else
