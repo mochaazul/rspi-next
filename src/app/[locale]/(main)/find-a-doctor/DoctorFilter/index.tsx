@@ -42,7 +42,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 		hospitals,
 		clinics
 	});
-	
+
 	const onChangeHospital = ({ hospital_code, id }: HospitalDetail, checked: boolean) => {
 		if (checked) {
 			const hospitals = [...hospitalFilter.getAll(), { hospital_code: hospital_code, id: id }].map(item => item.hospital_code).toString();
@@ -54,7 +54,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 
 	const onCheckedAllHospitals = (checked: boolean) => {
 		if (checked) {
-			const hospitalCodes = hospitals.map(hospital => hospital.hospital_code);
+			const hospitalCodes = hospitals?.map(hospital => hospital.hospital_code);
 			createQueryString('hospital_code', hospitalCodes.toString());
 		} else {
 			hospitalFilter.clear();
@@ -133,7 +133,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 					/>
 				</div>
 				{
-					hospitals.map((hospital, index) => (
+					hospitals?.map((hospital, index) => (
 						<div key={ index }>
 							<Form.Checkbox
 								isslider={ false }

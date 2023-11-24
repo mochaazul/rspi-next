@@ -29,7 +29,6 @@ export interface BookingPayload {
 	gender: string;
 	date_of_birth: string;
 	phone: string;
-	email: string;
 	main_complaint: string;
 	necessity_action: string;
 	payment_method: string;

@@ -173,7 +173,7 @@ const BookAppointment = () => {
 		try {
 			const { dob, email, gender, keluhan, klinik, layanan, name, pembayaran, phone, tindakan, asuransi, noAsuransi } = getCurrentForm();
 			const payloadBook: BookingPayload = {
-				patient_name: selectedProfile?.name ?? '',
+				patient_name: selectedProfile?.name?.trim() ?? '',
 				'patient_code': selectedProfile?.patient_code ?? '',
 				'slot_id': timeSlot?.slot_id ?? '',
 				'location': timeSlot?.clinic_code, // clinic code
@@ -185,11 +185,10 @@ const BookAppointment = () => {
 				'gender': selectedProfile?.gender === 'Female' ? 'F' : 'M',
 				'date_of_birth': (selectedProfile?.birthdate && splitDate(selectedProfile.birthdate)) ?? '',
 				'phone': selectedProfile?.phone ?? '',
-				'email': selectedProfile?.email ?? '',
 				'main_complaint': keluhan.value,
 				'necessity_action': tindakan.value,
 				'payment_method': penjamin,
-				'service': searchParams.get('service') ?? 'APP', 					// TEL / APP
+				'service': searchParams.get('service') ?? 'APP', // TEL / APP
 				'hospital_code': timeSlot?.hospital_code,
 				'insurance_name': asuransi.value,
 				'insurance_number': noAsuransi.value,
