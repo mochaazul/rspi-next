@@ -185,23 +185,25 @@ const BookAppointment = () => {
 
 	const onConfirmed = async () => {
 		try {
-			const pushNotifPayload:PayloadPushNotification = {
-				category: 'Kategori Pesan Pemberitahuan',
-				source: 'Sumber Rebel',
-				title_idn: 'Judul Indonesia Update Fitur Pasien Portal',
-				title_en: 'Judul English Patient portal New Fiture',
-				text_idn: 'Isi Indonesia Ada Fitur Baru di pasien portal',
-				text_en: 'Isi English Patient Portal New Fiture',
-				icon: 'Bell',
-				url: '/Patient-Portal',
-				notif_type: 1,
-				desc_type: 'Push by email account',
-				email_patient: 'abc@gmail.com',
-				medical_record: '100377120',
-				sent_datetime: '2023-08-09 07:38:50',
-				read_flag: 0
-			};
-			await pushNotification(pushNotifPayload);
+			console.log(selfProfile, 'selfProfile');
+			console.log(selectedProfile, 'selectedProfile');
+			// const pushNotifPayload:PayloadPushNotification = {
+			// 	category: 'Kategori Pesan Pemberitahuan',
+			// 	source: 'Booking Appointment',
+			// 	title_idn: 'Buat Janji Temu Berhasil',
+			// 	title_en: 'Booking Appointment Successful',
+			// 	text_idn: 'Pasien A Berhasil Booking Appointment Dokter B',
+			// 	text_en: 'Patient A Successfully Booked Doctor B's Appointment',
+			// 	icon: 'Bell',
+			// 	url: '/patient-portal',
+			// 	notif_type: 1,
+			// 	desc_type: 'Push by email account',
+			// 	email_patient: 'abc@gmail.com',
+			// 	medical_record: '100377120',
+			// 	sent_datetime: '2023-08-09 07:38:50',
+			// 	read_flag: 0
+			// };
+			// await pushNotification(pushNotifPayload);
 			
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
@@ -233,9 +235,6 @@ const BookAppointment = () => {
 				console.log(res, 'res');
 			});
 
-
-
-			
 			setSuccessModal(true);
 		} catch (error: any) {
 			setConfirmationModalVisible(false);
