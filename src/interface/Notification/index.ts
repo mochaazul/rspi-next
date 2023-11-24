@@ -31,7 +31,25 @@ export interface NotificationDetail {
 	read_datetime?: string;
 	create_datetime?: string;
 }
-
+export interface PayloadPushNotification {
+	id?: number;
+	category?: string;
+	source?: string;
+	title_idn?: string;
+	title_en?: string;
+	text_idn?: string;
+	text_en?: string;
+	icon?: string;
+	url?: string;
+	notif_type?: string;
+	desc_type?: string;
+	email_patient?: string;
+	medical_record?: string;
+	read_flag?: string;
+	sent_datetime?: string;
+	read_datetime?: string;
+	create_datetime?: string;
+}
 export interface PayloadNotification {
 	medical_record?: string;
 	email?: string;
