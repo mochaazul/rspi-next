@@ -1,3 +1,4 @@
+import { ItemType } from '@/components/ui/Combobox';
 import { PickerItem } from '@/components/ui/DropdownSearch';
 import { Pagination, ResponseStatus } from '@/interface';
 
@@ -139,6 +140,6 @@ export type I_HospitalFilterItem = {
 export type LandingPageFindADoctorForm = {
 	doctorName: string,
 	hospital: string
-	speciality: string,
+	speciality: ItemType | null,
 	preferredDay: string
 }

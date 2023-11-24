@@ -4,9 +4,7 @@ import Text from '@/components/ui/Text';
 import { colors } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
 import { debounce } from 'lodash';
-import { useCallback, useEffect, useRef, useState } from 'react';
-
-import { useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 
 type Props = {
   doctorCount:number
@@ -18,18 +16,15 @@ const ResultHeader = ({ doctorCount, setter, getter }:Props) => {
 	const [keywordValue, setKeywordValue] = useState<string>();
 
 	const t = useScopedI18n('page.findDoctor');
-	const searchParams = useSearchParams();
-
+	
 	useEffect(() => {
-		setKeywordValue(searchParams.get('keyword') ?? '');
+		setKeywordValue(getter() ?? '');
 	}, []);
 
 	const onSearchDoctorByName = (value: string) => {
 		setKeywordValue(value);
-		debounceFilter(value);
+		setter(value);
 	};
-
-	const debounceFilter = useCallback(debounce(setter, 500), []);
 
 	return (
 		<>

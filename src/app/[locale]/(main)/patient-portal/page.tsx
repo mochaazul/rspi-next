@@ -33,6 +33,7 @@ const PatientPortal = () => {
 	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(`${ getProfileResponse?.data?.id }`);
 
 	const [activeTabIndex, setActiveTabIndex] = useState(1);
+	const [activeTabIndexForCallBackPin, setActiveTabIndexForCallBackPin] = useState(1);
 	const [headerOpened, setHeaderOpened] = useState<boolean>(false);
 	const [shouldEnterPin, setShouldEnterPin] = useState<boolean>(false);
 	const [pinModalVisible, setPinModalVisible] = useState<boolean>(false);
@@ -116,7 +117,7 @@ const PatientPortal = () => {
 		setPinModalVisible(false);
 		setShouldEnterPin(false);
 		setHeaderOpened(true);
-		setActiveTabIndex(3);
+		setActiveTabIndex(activeTabIndexForCallBackPin);
 	};
 
 	const renderMenuItem = () => {
@@ -154,7 +155,10 @@ const PatientPortal = () => {
 								ref={ el => (tabsRef.current[child.id] = el) }
 								style={ { backgroundColor: activeTabIndex === child.id ? colors.paradiso.opacity10 : '' } }
 								className={ 'py-[20px] w-[254px] max-lg:w-[200px] pl-[48px] duration-300' }
-								onClick={ () => setActiveTabIndex(child.id) }>
+								onClick={ () => {
+									setPinModalVisible(true);
+									setActiveTabIndexForCallBackPin(child.id); // temporary store active id, to be called in callback pin modal
+								} }>
 								<Text
 									text={ child.label }
 									fontWeight='700'

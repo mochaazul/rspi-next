@@ -401,6 +401,7 @@ export default {
 				tabsLabel: ['Cari Dokter'],
 				findDoctor: {
 					form: {
+						notFoundSpeciality: 'Tidak ditemukan data',
 						resetBtnLabel: 'Reset',
 						submitBtnLabel: 'Cari Dokter',
 						allHospital: 'Seluruh Cabang RSPI',

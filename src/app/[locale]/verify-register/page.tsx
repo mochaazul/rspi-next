@@ -26,7 +26,7 @@ const EmailVerificationPage = () => {
 	};
 
 	const handleNavigateSuccess = () => {
-		navigate.replace('/register-onboard');
+		navigate.replace('/register-onboard?isHome=false');
 	};
 
 	useEffect(() => {

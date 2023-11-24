@@ -32,7 +32,7 @@ interface PropsType {
 	doctorImgUrl?: string;
 	clinic_name?: string;
 	hospital_name?: string;
-	type: 'self' | 'others';
+	type: 'self' | 'other';
 	isTelemedicine: boolean,
 	date?: string;
 	data?: I_VisitHistory;
@@ -209,7 +209,7 @@ const CardAppointment = (props: PropsType) => {
 				{ props.visit_status === 'X' &&
 					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
 				}
-				{ props.status !== 'Jadwal Selesai' &&
+				{ (props.status !== 'Jadwal Selesai' && props.type !== 'other') &&
 					<div onClick={ async () => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
 				}
 
