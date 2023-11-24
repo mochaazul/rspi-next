@@ -32,7 +32,7 @@ interface PropsType {
 	doctorImgUrl?: string;
 	clinic_name?: string;
 	hospital_name?: string;
-	type: 'self' | 'others';
+	type: 'self' | 'other';
 	isTelemedicine: boolean,
 	date?: string;
 	data?: I_VisitHistory;
@@ -117,23 +117,23 @@ const CardAppointment = (props: PropsType) => {
 	const mappingStatus = (code: string) => {
 		switch (code) {
 			case 'C':
-				return 'Jadwal Selesai';
+				return t('jadwalKunjungan.statusLabel.C');
 			case 'X':
-				return 'Jadwal Dibatalkan';
+				return t('jadwalKunjungan.statusLabel.X');
 			case 'N':
-				return 'Tidak Hadir';
+				return t('jadwalKunjungan.statusLabel.N');
 			case 'H':
-				return 'Hold';
+				return t('jadwalKunjungan.statusLabel.H');
 			case 'T':
-				return 'Transferred';
+				return t('jadwalKunjungan.statusLabel.T');
 			case 'A':
-				return 'Arrived';
+				return t('jadwalKunjungan.statusLabel.A');
 			case 'P':
-				return 'Postponed';
+				return t('jadwalKunjungan.statusLabel.P');
 			case 'S':
-				return 'Seen';
+				return t('jadwalKunjungan.statusLabel.S');
 			case 'U':
-				return 'Arrived Not Seen';
+				return t('jadwalKunjungan.statusLabel.U');
 			default:
 				return '';
 		}
@@ -144,7 +144,7 @@ const CardAppointment = (props: PropsType) => {
 			className='flex flex-col'
 		>
 			<div className='flex flex-wrap items-center'>
-				<Text text={ `Apointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='md:mr-[15px]' />
+				<Text text={ `Appointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='md:mr-[15px]' />
 				{
 					props.type === 'self' ?
 						<>
@@ -172,7 +172,7 @@ const CardAppointment = (props: PropsType) => {
 						>
 							<div className='flex items-center gap-[5px]'>
 								<Text
-									text={ 'Konsultasi Tatap Muka' }
+									text={ t('jadwalKunjungan.offlineConsultation') }
 									fontWeight='600'
 									fontSize='14px'
 									color={ colors.white.body } />
@@ -189,7 +189,7 @@ const CardAppointment = (props: PropsType) => {
 							<div className='flex items-center gap-[5px]'>
 								<Icons.Video color={ colors.white.body } size={ 16 } />
 								<Text
-									text={ 'Telekonsultasi' }
+									text={ t('jadwalKunjungan.teleconsultationLabel') }
 									fontWeight='600'
 									fontSize='14px'
 									color={ colors.white.body } />
@@ -209,7 +209,7 @@ const CardAppointment = (props: PropsType) => {
 				{ props.visit_status === 'X' &&
 					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
 				}
-				{ props.status !== 'Jadwal Selesai' &&
+				{ (props.status !== 'Jadwal Selesai' && props.type !== 'other') &&
 					<div onClick={ async () => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
 				}
 

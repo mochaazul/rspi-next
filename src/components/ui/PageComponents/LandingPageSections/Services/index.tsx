@@ -8,7 +8,6 @@ import { FindADoctor } from './components';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';
-// import { useScopedI18n } from '@/locales/client';
 
 const ServicesTabs = ({ hospitals, clinics }:{hospitals: HospitalDetail[], clinics: ClinicResponse[]}) => {
 	const t = useScopedI18n('page.landingPage.services');

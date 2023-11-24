@@ -28,10 +28,10 @@ export default async function Page() {
 	const banner = await getBanner({ is_publish: true });
 	const hospitals = await getHospital();
 	const clinics = await getClinics();
-	const facilitiesServices = await getFacilitiesAndServices({ is_publish: true, is_home_page: true }, { page: 1, limit: 7 });
-	const events = await getEvents({ is_publish: true });
-	const articles = await getNews({ is_publish: true }, { page: 1 });
-	const awards = await getAwards({ is_publish: true }, { page: 1, limit: 8 });
+	const facilitiesServices = await getFacilitiesAndServices({ is_home_page: true }, { page: 1, limit: 7 });
+	const events = await getEvents();
+	const articles = await getNews({}, { page: 1 });
+	const awards = await getAwards({}, { page: 1, limit: 8 });
 	const currentLang = getCurrentLocale();
 
 	const arrayBanner = () => {

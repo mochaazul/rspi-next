@@ -5,5 +5,5 @@ import { ClinicResponse } from '@/interface/clinic';
 import fetcher, { ApiOptions } from '../utils/fetcher';
 
 export const useGetClinics = (option?: ApiOptions) => {
-	return useSWR('get-clinics', () => fetcher<ClinicResponse[]>('clinics', option));
+	return useSWR('get-clinics', () => fetcher<ClinicResponse[]>('clinics', option), { revalidateOnMount: true });
 };

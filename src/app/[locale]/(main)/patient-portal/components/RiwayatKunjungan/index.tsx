@@ -15,7 +15,7 @@ import { EmptyResultContainer } from '../../style';
 const RiwayatKunjungan = () => {
 	const t = useScopedI18n('page.patientPortal');
 
-	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory();
+	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory('riwayat-kunjungan');
 
 	const sortVisitHistories = () => {
 		return visitHistoryResponse?.data.slice().sort((a, b) => {
@@ -40,7 +40,7 @@ const RiwayatKunjungan = () => {
 				lineHeight='28px'
 			/>
 			<Link href={ '/find-a-doctor' }>
-				<Button label='Jadwalkan Konsultasi' className='w-[200px]' />
+				<Button label={ t('riwayatKunjungan.btnConsultationSchedule') } className='w-[200px]' />
 			</Link>
 		</EmptyResultContainer>);
 	}
@@ -53,9 +53,9 @@ const RiwayatKunjungan = () => {
 					<CardAppointment
 						key={ visitHistory.appointment_id }
 						id={ visitHistory.appointment_id }
-						status='Jadwal Selesai'
+						status={ t('riwayatKunjungan.label.doneAppointment') }
 						queueNo={ 24211 }
-						type='others'
+						type='other'
 						isTelemedicine={ false }
 						data={ visitHistory }
 						date={ visitHistory.visit_date }

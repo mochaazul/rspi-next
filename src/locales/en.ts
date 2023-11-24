@@ -407,6 +407,7 @@ export default {
 				tabsLabel: ['Find a Doctor'],
 				findDoctor: {
 					form: {
+						notFoundSpeciality: 'Not found any speciality',
 						resetBtnLabel: 'Reset',
 						submitBtnLabel: 'Find a Doctor',
 						allHospital: 'Semua Rumah Sakit',
@@ -729,15 +730,26 @@ export default {
 				cancelBtnLabel: 'Cancel'
 			},
 			medicalRecordLabel: 'Medical Record Information',
-			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)'
+			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)',
+			gender: {
+				male: 'Male',
+				female: 'Female'
+			}
 		},
 		patientPortal: {
-			tabMenuLabel: [
-				'Appointment Schedule',
-				'Visit History',
-				'Vaccine History',
-				'Laboratory Test History'
-			],
+			tabMenuLabel: {
+				menu1: {
+					heading: 'Consultation Schedule'
+				},
+				menu2: {
+					heading: 'Medical History',
+					children: [
+						'Consultation',
+						'Vaccines',
+						'Lab Results'
+					]
+				}
+			},
 			riwayatVaksin: {
 				warning: 'Disclaimer: All vaccines used in the vaccination process are from RSPI',
 				tableMenuLable: {
@@ -767,9 +779,21 @@ export default {
 					recommendDoctor: 'Would you recommend your doctor?'
 				},
 				recommendDoctorModal: {
-					header: 'Would you recommmend your doctor to your friends or family ?'
+					header: 'Would you recommmend your doctor to your friends or family?',
+					rating: [
+						'Highly not recommend',
+						'Highly recommend'
+					],
+					feedback: {
+						heading: 'What do you love about your doctor?',
+						notesInputLabel: 'Tell us more',
+						notesInputPlaceholder: 'Enter a description...',
+						optionalLabel: '(Optional)',
+						smallNotes: 'This would help us to keep improving our service.'
+					}
 				},
-				empty: 'You do not have any visit histories yet.'
+				empty: 'You do not have any visit histories yet.',
+				btnConsultationSchedule: 'Schedule a Consultation'
 			},
 			jadwalKunjungan: {
 				label: {
@@ -777,6 +801,36 @@ export default {
 					activeSchedule: 'Active Appointment',
 					cancelAppointment: 'Cancel Appointment',
 					empty: 'You do not have visit data at this time',
+					emptyBtnCta: 'Schedule a Visit'
+				},
+				options: [
+					'Myself',
+					'Other'
+				],
+				statusLabel: {
+					C: 'Schedule Completed',
+					X: 'Schedule Canceled',
+					N: 'Absent',
+					H: 'Hold',
+					T: 'Transferred',
+					A: 'Arrived',
+					P: 'Postponed',
+					S: 'Seen',
+					U: 'Arrived Not Seen'
+				},
+				teleconsultationLabel: 'Telekonsultasi',
+				offlineConsultation: 'Face-to-face Consultation'
+			},
+			cancelBooking: {
+				heading: 'Confirmation of Cancellation',
+				warningText: 'Are you sure you want to cancel your doctor\'s appointment?',
+				patientData: {
+					heading: 'Patient\'s Data',
+					nameLabel: 'Name : ',
+					dobLabel: 'Date of Birth : ',
+					phoneLabel: 'Phone : ',
+					consultationScheduleLabel: 'Consultation Schedule',
+					btnSubmitLabel: 'Cancel Consultation'
 				}
 			}
 		},

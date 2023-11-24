@@ -402,6 +402,7 @@ const BookAppointment = () => {
 				penjamin={ penjamin }
 				onConfirmed={ onConfirmed }
 				doctorResponse={ doctorResponse }
+				loading={ bookingLoading }
 			// loadingUploadPhoto={ uploadPhoto }
 			/>
 
