@@ -10,7 +10,7 @@ import Form from '@/components/ui/Form';
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
-import { useFamilyProfileMutation } from '@/lib/api/client/profile';
+import { useFamilyProfileMutation, useGetProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
 import { AddProfileSchema } from '@/validator/booking';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
@@ -37,7 +37,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	const tValidation = useScopedI18n('validation.formValidation');
 
 	// TODO: migrate
-	// const { userDetail } = useTypedSelector<UserState>('user');
+	const { data: userProfile } = useGetProfile();
 	// const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
 	// const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
 
@@ -145,7 +145,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		if (type === 'self') {
 			// TODO: migrate
 			// setFieldsValue({
-			// 	email: userDetail.email
+			// 	email: userProfile?.data?.email
 			// });
 			setDisabledEmail(true);
 		}
@@ -227,14 +227,13 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					/>
 				</FormRow>
 				<FormRow className='grid grid-cols-2 gap-[16px] md:gap-[24px]'>
-					<Form.TextField
+					<Form.PhoneNumberInput
 						labelClassName='font-normal'
 						labelGap={ 8 }
 						id='phone'
 						name='phone'
 						value={ formikProfile.values.phone }
 						onChange={ formikProfile.handleChange }
-						mask={ '+62 999-9999-99999' }
 						label={ t('profileSelector.form.phone') }
 						placeholder={ t('profileSelector.form.phone') }
 						isError={ !!formikProfile.errors.phone }

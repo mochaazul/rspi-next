@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { FormikProps, useFormik } from 'formik';
 import { BookingPayload, FamilyProfile, UserDataDetail } from '@/interface';
 
@@ -73,6 +73,26 @@ const BookAppointment = () => {
 
 	const uploadAsuransiFrontFileRef = useRef<HTMLInputElement>(null);
 	const uploadAsuransiBackFileRef = useRef<HTMLInputElement>(null);
+
+	const hasMainProfile = userProfile?.data?.name || userProfile?.data?.phone || userProfile?.data?.gender;
+
+	useEffect(() => {
+		if (hasMainProfile) {
+			setSelfProfile({
+				birthdate: userProfile?.data?.birthdate ?? '',
+				email: userProfile?.data?.email ?? '',
+				gender: userProfile?.data?.gender ?? '',
+				name: userProfile?.data?.name ?? '',
+				phone: userProfile?.data?.phone ?? '',
+				id: userProfile?.data?.id ?? 0,
+				created_date: '',
+				updated_date: '',
+				no_mr: '',
+				parent_email: '',
+				patient_code: ''
+			});
+		}
+	}, [userProfile?.data]);
 
 	const formikBooking: FormikProps<BookingFormState> = useFormik<BookingFormState>({
 		initialValues: {
@@ -166,23 +186,22 @@ const BookAppointment = () => {
 		try {
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
-				patient_name: selectedProfile?.name ?? '',
+				patient_name: selectedProfile?.name?.trim() ?? '',
 				'patient_code': selectedProfile?.patient_code ?? '',
 				'slot_id': timeSlot?.slot_id ?? '',
 				'location': timeSlot?.clinic_code, // clinic code
 				'time_slot': formatTimeslot(timeSlot?.session_app_start ?? ''),
 				'date': timeSlot?.date,
 				'user_name': 'RSPI_WEB',	// terserah
-				'type': isEqual(selfProfile, selectedProfile) ? 'self' : 'other', 	// self or other
+				'type': isEqual(selfProfile?.email, selectedProfile?.email) ? 'self' : 'other', 	// self or other
 				'doctor_code': timeSlot?.doctor_code,
 				'gender': selectedProfile?.gender === 'Female' ? 'F' : 'M',
 				'date_of_birth': (selectedProfile?.birthdate && splitDate(selectedProfile.birthdate)) ?? '',
 				'phone': selectedProfile?.phone ?? '',
-				'email': selectedProfile?.email ?? '',
 				'main_complaint': keluhan,
 				'necessity_action': tindakan,
 				'payment_method': penjamin,
-				'service': searchParams.get('service') ?? 'APP', 					// TEL / APP
+				'service': searchParams.get('service') ?? 'APP', // TEL / APP
 				'hospital_code': timeSlot?.hospital_code,
 				'insurance_name': asuransi,
 				'insurance_number': noAsuransi,

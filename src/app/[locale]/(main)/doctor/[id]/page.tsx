@@ -41,7 +41,7 @@ export default function Page({ params }: Props) {
 	const [selectedHospitalPhoneNumber, setSelectedHospitalPhoneNumber] = useState<string>('');
 	const [selectedHospitalName, setSelectedHospitalName] = useState<string>('');
 	const [showModalTelp, setShowModalTelp] = useState<boolean>(false);
-	const [radioValue, setRadioValue] = useState('Appointment');
+	const [radioValue, setRadioValue] = useState('APP');
 	const [selectedDate, setSelectedDate] = useState<Date>();
 	const [selectedDateStatus, setSelectedDateStatus] = useState<string>('');
 
@@ -174,15 +174,16 @@ export default function Page({ params }: Props) {
 											}
 										</Radio>
 									</div>
-
+									{/* APP : mean appointment */ }
+									{/* TEL : mean telemedicine */ }
 									<div className='mt-[30px]'>
 										<Radio groupLabel='Appointment Type'
 											onChange={ setRadioValue }
 											value={ radioValue }
 											groupContainerClassname='flex flex-col md:flex-row'
 										>
-											<Radio.Option label='Kunjungan Tatap Muka' value='Appointment' />
-											<Radio.Option label='Telekonsultasi' value='Telemedicine' />
+											<Radio.Option label='Kunjungan Tatap Muka' value='APP' />
+											<Radio.Option label='Telekonsultasi' value='TEL' />
 										</Radio>
 									</div>
 
