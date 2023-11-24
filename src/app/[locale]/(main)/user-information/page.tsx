@@ -540,14 +540,7 @@ export default function Page() {
 								<Form onSubmit={ clickUpdateProfile }>
 									<HorizontalInputWrapper
 										label={ t('profileDetail.patientEmail') }
-										labelInfo={ !isDisableFormProfile ? t('profileDetail.patientPhoneNumberLabelInfo') : undefined }
-										{ ...isDisableFormProfile
-											? {
-												onEditClick: () => {
-													setPinModalVisible(true);
-													setError('');
-												}
-											} : {} }
+										labelInfo={ t('profileDetail.patientPhoneNumberLabelInfo') }
 										inputProps={ {
 											type: 'email',
 											value: patientProfile?.data?.email ?? '',

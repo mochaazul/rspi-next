@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
 
@@ -16,6 +16,7 @@ import Form from '@/components/ui/Form';
 import Text from '@/components/ui/Text';
 import NotificationPanel from '@/components/ui/NotificationPanel';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
+import { getProfile } from '@/lib/api/profile';
 
 import OTPPageStyle, { Box, WarningNote } from './style';
 
@@ -113,6 +114,7 @@ const OTPPage = () => {
 				setLoadingSubmit(true);
 
 				await createOTP(formOtp);
+				await getProfile(true);
 
 				if (session?.user?.pin_status) {
 					navigate.replace('/');

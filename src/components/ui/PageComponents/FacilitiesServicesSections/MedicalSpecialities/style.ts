@@ -1,3 +1,4 @@
+import { colors } from '@/constant';
 import { GlobalAllTransition200ms } from '@/constant/globalstyle';
 import styled from 'styled-components';
 
@@ -7,14 +8,15 @@ export const MedicalSpecialitiesItemContainer = styled.div`
   gap: 32px;
 
   .specialities-item-container {
-    border: 1px solid #F0F2F9;
+    border: 1px solid ${ colors.grey.lighter };
     border-radius: 10px;
     cursor: pointer;
     background-color: white;
   
-    :hover{
-      background-color: rgba(53, 136, 136, 0.2);  
-    ${ GlobalAllTransition200ms }
+    &:hover {
+      border: 1px solid ${ colors.green.brandAccent };
+      box-shadow: 10px 10px 10px 0px rgba(230, 246, 244, 0.50);
+      border-radius: 10px;
     }
   }
 
