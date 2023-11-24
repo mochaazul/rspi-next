@@ -22,7 +22,7 @@ import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import SubMenuPage from '@/components/ui/SubMenuPage';
 import Form from '@/components/ui/Form';
 import HorizontalInputWrapper from '@/components/ui/PageComponents/UserInformationSections/HorizontalInputWrapper';
-import CardUserMR from '@/components/ui/PageComponents/UserInformationSections/CardUserMR';
+import CardUser from '@/components/ui/PageComponents/UserInformationSections/CardUser';
 import { useScopedI18n } from '@/locales/client';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import {
@@ -67,7 +67,7 @@ type UploadPhotoTypeState = {
 export default function Page() {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
-	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile();
+	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile('user-information');
 	const { data: visitHospitalHistory } = useGetVisitHistory();
 	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
@@ -322,17 +322,13 @@ export default function Page() {
 	};
 
 	const renderCardUser = () => {
-		if (isDisableFormProfile) {
-			return (
-				<div className='mt-[30px]'>
-					<CardUserMR patientProfile={ patientProfile } lastVisitedHospital={ lastVisitedHospital } />
-				</div>
-			);
-		}
-
 		return (
-			<div className='mt-[30px] lg:px-[60px]'>
-				<MedicalRecordReminder isFloating={ false } />
+			<div className={ `mt-[30px] ${ isDisableFormProfile ? '' : 'lg:px-[60px]' }` }>
+				<CardUser
+					patientProfile={ patientProfile }
+					lastVisitedHospital={ lastVisitedHospital }
+					isLoading={ loadingGetProfile }
+				/>
 			</div>
 		);
 	};

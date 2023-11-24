@@ -725,7 +725,11 @@ export default {
 				cancelBtnLabel: 'Cancel'
 			},
 			medicalRecordLabel: 'Medical Record Information',
-			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)'
+			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)',
+			gender: {
+				male: 'Male',
+				female: 'Female'
+			}
 		},
 		patientPortal: {
 			tabMenuLabel: {
@@ -770,7 +774,7 @@ export default {
 					recommendDoctor: 'Would you recommend your doctor?'
 				},
 				recommendDoctorModal: {
-					header: 'Would you recommmend your doctor to your friends or family ?'
+					header: 'Would you recommmend your doctor to your friends or family?'
 				},
 				empty: 'You do not have any visit histories yet.'
 			},
@@ -785,7 +789,20 @@ export default {
 				options: [
 					'Myself',
 					'Other'
-				]
+				],
+				statusLabel: {
+					C: 'Schedule Completed',
+					X: 'Schedule Canceled',
+					N: 'Absent',
+					H: 'Hold',
+					T: 'Transferred',
+					A: 'Arrived',
+					P: 'Postponed',
+					S: 'Seen',
+					U: 'Arrived Not Seen'
+				},
+				teleconsultationLabel: 'Telekonsultasi',
+				offlineConsultation: 'Face-to-face Consultation'
 			}
 		},
 		findDoctor: {

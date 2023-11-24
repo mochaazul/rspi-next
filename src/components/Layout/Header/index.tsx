@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 import {
 	CenterOfExcellenceState,
-	FacilityServicesState,
+	FacilityServicesDetail,
 	FooterDetail,
 	HospitalState,
 	NotificationResponse,
@@ -45,14 +45,14 @@ export const Header = ({
 	session: UserSessionData,
 	hospitalData: HospitalState,
 	centerOfExcellenceData: CenterOfExcellenceState,
-	facilityServicesData: FacilityServicesState,
+	facilityServicesData: FacilityServicesDetail[],
 	notificationResponseData?: NotificationResponse,
 	marAllReadNotifFunc: () => any,
 	footersData: FooterDetail[],
 }) => {
 
 	const router = useRouter();
-	const { cache } = useSWRConfig();
+	const { mutate } = useSWRConfig();
 	const currentLang = useCurrentLocale();
 	const t = useScopedI18n('navMenu');
 
@@ -69,11 +69,17 @@ export const Header = ({
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
+	const clearSWRCache = () => mutate(
+		() => true,
+		undefined,
+		false
+	);
+
 	const handleClick = async () => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			router.refresh();
-			cache.delete('profile');
+			clearSWRCache();
 		}
 	};
 
@@ -230,7 +236,11 @@ export const Header = ({
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100'>
-													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
+													{
+														item?.image_url?.[0] && (
+															<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
+														)
+													}
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
@@ -379,7 +389,7 @@ export const Header = ({
 							</div>
 							<div
 								className='nav-menu'
-								onClick={ () => handleNavigateSideBar('/facilities') }>
+								onClick={ () => handleNavigateSideBar(`/facilities/${ facilityServicesData?.[0]?.slug }`) }>
 								<Text text={ t('facility') } fontSize='16px' fontWeight='700' />
 							</div>
 							<div className='nav-menu'>

@@ -11,7 +11,7 @@ import PinModal from '@/components/ui/PinModal';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import { useGetProfile } from '@/lib/api/client/profile';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
-import CardUserMR from '@/components/ui/PageComponents/UserInformationSections/CardUserMR';
+import CardUser from '@/components/ui/PageComponents/UserInformationSections/CardUser';
 import { useScopedI18n } from '@/locales/client';
 
 import JadwalKunjungan from './components/JadwalKunjungan';
@@ -39,7 +39,7 @@ const PatientPortal = () => {
 	const t = useScopedI18n('page.patientPortal');
 
 	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory();
-	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile();
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('patient-portal');
 
 	const lastVisitedHospital = getLastVisitedHospitalHelper(visitHistoryResponse?.data || []);
 	const tabMenuLabel: MenuType[] = [
@@ -174,11 +174,11 @@ const PatientPortal = () => {
 			<div className='rectangle' />
 			<div className='content-wrapper pt-[60px] md:pt-[120px]'>
 				<div className='w-full -mt-[42px] relative'>
-					{
-						getProfileResponse?.data?.no_mr
-							? <CardUserMR patientProfile={ getProfileResponse } lastVisitedHospital={ lastVisitedHospital } />
-							: <MedicalRecordReminder isFloating={ false } />
-					}
+					<CardUser
+						patientProfile={ getProfileResponse }
+						lastVisitedHospital={ lastVisitedHospital }
+						isLoading={ getProfileLoading }
+					/>
 				</div>
 				<div className='mt-[32px] flex'>
 					<div className='relative tabs border-solid border-b-[1px] border-b-white/20 max-sm:hidden'>

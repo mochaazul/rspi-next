@@ -723,7 +723,11 @@ export default {
 				cancelBtnLabel: 'Batal'
 			},
 			medicalRecordLabel: 'Informasi Rekam Medis',
-			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)'
+			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)',
+			gender: {
+				male: 'Laki-laki',
+				female: 'Perempuan'
+			}
 		},
 		patientPortal: {
 			tabMenuLabel: {
@@ -765,11 +769,11 @@ export default {
 					canceledAppointment: 'Jadwal Dibatalkan',
 					doneAppointment: 'Jadwal Selesai',
 					seeDetail: 'Lihat Detail',
-					recommendDoctor: 'Would you recommend your doctor?'
+					recommendDoctor: 'Apakah Anda akan merekomendasikan dokter Anda?'
 
 				},
 				recommendDoctorModal: {
-					header: 'Would you recommmend your doctor to your friends or family ?'
+					header: 'Apakah Anda akan merekomendasikan dokter Anda kepada teman atau keluarga Anda?'
 				},
 				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.'
 
@@ -785,7 +789,20 @@ export default {
 				options: [
 					'Diri Sendiri',
 					'Orang Lain'
-				]
+				],
+				statusLabel: {
+					C: 'Jadwal Selesai',
+					X: 'Jadwal Dibatalkan',
+					N: 'Tidak Hadir',
+					H: 'Hold',
+					T: 'Transferred',
+					A: 'Arrived',
+					P: 'Postponed',
+					S: 'Seen',
+					U: 'Arrived Not Seen'
+				},
+				teleconsultationLabel: 'Telekonsultasi',
+				offlineConsultation: 'Konsultasi Tatap Muka'
 			}
 		},
 		findDoctor: {

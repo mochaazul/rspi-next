@@ -26,7 +26,7 @@ interface PropsType {
 }
 
 const ModalCancelBook = (props: PropsType) => {
-	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile();
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('patient-portal');
 
 	return (
 		<Modal

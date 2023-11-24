@@ -11,5 +11,5 @@ export const getFacilitiesAndServices = (query?: PayloadFacilityServices, pagina
 };
 
 export const getFAS = () => {
-	return fetcher<FacilityServicesState>('facilities');
+	return fetcher<FacilityServicesDetail[]>('facilities');
 };
