@@ -148,6 +148,10 @@ export default {
 				btnLabel: 'Oke'
 			}
 		},
+		unsubscribe: {
+			heading: 'Berhasil Berhenti Berlangganan',
+			subHeading: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali'
+		},
 		awards: {
 			heading: 'Accreditations & Awards',
 			subHeading: 'Kami berkomitmen untuk menjadi organisasi perawatan kesehatan pilihan kelas dunia. Kami sangat percaya bahwa keunggulan operasional dan keselamatan pasien merupakan bagian integral dalam memenuhi dan melampaui harapan pelanggan kami.'

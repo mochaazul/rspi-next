@@ -1,13 +1,15 @@
 
+'use client';
+
 import { Images, colors } from '@/constant';
 import Text from '@/components/ui/Text';
 
-import { getScopedI18n } from '@/locales/server';
+import { useScopedI18n } from '@/locales/client';
 
 import { UnSubscribeStyle } from './style';
 
-export default async function UnSubscribe() {
-	const t = await getScopedI18n('unsubscribe');
+export default function UnSubscribe() {
+	const t = useScopedI18n('page.unsubscribe');
 	return (
 		<UnSubscribeStyle>
 			<div className='grid max-sm:grid-cols-1 grid-cols-1 max-sm:gap-0 gap-3 w-full'>
