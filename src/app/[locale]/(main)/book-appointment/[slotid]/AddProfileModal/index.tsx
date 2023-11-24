@@ -10,7 +10,7 @@ import Form from '@/components/ui/Form';
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
-import { useFamilyProfileMutation } from '@/lib/api/client/profile';
+import { useFamilyProfileMutation, useGetProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
 
 const addProfileFormFields = {
@@ -83,7 +83,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	const { registeredValue, onSubmit, getCurrentForm, setFieldsValue } = Form.useForm({ fields: addProfileFormFields });
 
 	// TODO: migrate
-	// const { userDetail } = useTypedSelector<UserState>('user');
+	const { data: userProfile } = useGetProfile();
 	// const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
 	// const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
 
@@ -97,8 +97,8 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	useEffect(() => {
 		resetMutation(); // we need this to clear errors
 	}, []);
-	
-	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
+
+	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
 		const { dob, email, gender, name, phone } = onSubmit(event);
 		// if (type === 'other') {
 		await createFamilyProfile({
@@ -154,7 +154,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 
 	const mapError = () => {
 		if (createFamilyMutationError && createFamilyMutationError.message.toLowerCase() === 'validation error') return t('validationError');
-		return  createFamilyMutationError && createFamilyMutationError.message;
+		return createFamilyMutationError && createFamilyMutationError.message;
 	};
 
 	const closeHandler = () => {
@@ -170,12 +170,20 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	useEffect(() => {
 		if (type === 'self') {
 			// TODO: migrate
-			// setFieldsValue({
-			// 	email: userDetail.email
-			// });
+			setFieldsValue({
+				email: userProfile?.data?.email
+			});
 			setDisabledEmail(true);
 		}
 	}, [type]);
+
+	const regexPhone = (phone: string) => {
+		let phoneNumber =
+			phone
+				.replace(/^0/, '').replace(/^62/, '');
+		console.log(phoneNumber);
+		return phoneNumber;
+	};
 
 	return <Modal
 		visible={ visible }
@@ -233,13 +241,21 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					/>
 				</FormRow>
 				<FormRow className='grid grid-cols-2 gap-[16px] md:gap-[24px]'>
-					<Form.TextField
+					<Form.PhoneNumberInput
 						labelClassName='font-normal'
 						labelGap={ 8 }
 						{ ...registeredValue('phone') }
-						mask={ '+62 999-9999-99999' }
 						label={ t('profileSelector.form.phone') }
 						placeholder={ t('profileSelector.form.phone') }
+						onChange={ (e) => {
+							setFieldsValue({
+								phone: regexPhone(e.target.value),
+								email: registeredValue('email').value,
+								dob: registeredValue('dob').value,
+								gender: registeredValue('gender').value,
+								name: registeredValue('name').value,
+							});
+						} }
 						isNumber
 					/>
 					<Form.TextField
