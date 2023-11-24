@@ -7,9 +7,9 @@ export const getClinics = (option?: ApiOptions) => {
 };
 
 export const getFacilitiesAndServices = (query?: PayloadFacilityServices, pagination?: Pagination) => {
-	return fetcher<FacilityServicesDetail[]>('facilities', { query, pagination });
+	return fetcher<FacilityServicesDetail[]>('facilities', { query: { ...query, is_publish: true }, pagination });
 };
 
-export const getFAS = () => {
-	return fetcher<FacilityServicesDetail[]>('facilities');
+export const getFAS = (param?: ApiOptions) => {
+	return fetcher<FacilityServicesDetail[]>('facilities', { ...param, query: { ...param?.query, is_publish: true } });
 };
