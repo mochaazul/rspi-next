@@ -16,7 +16,7 @@ export default async function AwardsPage() {
 
 	const t = await getScopedI18n('page.awards');
 
-	const breadcrumbsPath = [{ name: t('heading'), url: '/accreditation-and-awards' }];
+	const breadcrumbsPath = [{ name: t('heading'), url: '#' }];
 
 	const AwardItem = (data: AwardsDetail) => (
 		<div>

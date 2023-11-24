@@ -19,7 +19,7 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 	const t = await getScopedI18n('page.facilities');
 
 	const breadcrumbsPath = [
-		{ name: t('heading'), url: '/facilities/medical-specialities' },
+		{ name: t('heading'), url: '#' },
 		{ name: detail?.[0]?.title ?? '', url: '#' },
 	];
 

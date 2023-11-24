@@ -269,7 +269,6 @@ export const Header = ({
 											setShowNotification(true);
 											notificationResponseFetch();
 										}) }
-									fill
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
@@ -297,7 +296,7 @@ export const Header = ({
 																<Image
 																	src={ session.user?.img_url }
 																	alt=''
-																	fill
+																	fill={ true }
 																/>
 															</div>
 														)
