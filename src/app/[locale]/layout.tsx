@@ -5,7 +5,6 @@ import { ReactElement, useState } from 'react';
 import { I18nProviderClient } from '@/locales/client';
 import { SWRConfig } from 'swr';
 import LogoutModal from '@/components/ui/LogoutModal';
-import { isTokenError } from '@/utils/parseError';
 import NeedLoginModal from '@/components/ui/NeedLoginModal';
 
 export default function SubLayout({ params: { locale }, children }: { params: { locale: string; }, children: ReactElement; }) {

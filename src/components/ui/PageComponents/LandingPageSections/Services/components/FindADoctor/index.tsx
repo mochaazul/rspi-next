@@ -29,10 +29,9 @@ const FindADoctor: React.FC<Props> = ({
 	const {	onSubmitHandler } = useFindADoctor();
 
 	const hospitalArr = [
-		{ key: 'all', value: hospitals.map(hospital => hospital.hospital_code).join(','), label: t('form.allHospital') },
+		{ key: 'all', value: '', label: t('form.allHospital') },
 		...hospitals.map(hospital => ({ key: hospital?.id?.toString(), value: hospital.hospital_code, label: hospital?.name }))
 	];
-
 	const mapSpeciality = () => {
 		if (clinics?.length > 0) {
 			return clinics?.map(sp => ({
