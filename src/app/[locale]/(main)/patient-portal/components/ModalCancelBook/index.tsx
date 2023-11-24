@@ -96,7 +96,7 @@ const ModalCancelBook = (props: PropsType) => {
 					</div>
 
 					<div className='flex my-[30px]'>
-						<Image alt='' src={ props.doctorImg || '' } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
+						<Image alt='' src={ props.doctorImg || '' } width={ 60 } height={ 60 } className='rounded-full h-[60px] w-[60px]' />
 						<div className='ml-[15px]'>
 							<Text text={ props.doctorName } fontSize='16px' fontWeight='700' />
 							<Text text={ props.doctorSpec } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
