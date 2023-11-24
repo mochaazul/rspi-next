@@ -12,10 +12,7 @@ export default function SubLayout({ params: { locale }, children }: { params: { 
 	return (
 		<SWRConfig
 			value={ {
-				// suspense fallback data
-				fallback: {
-					'masterDoctor': []
-				},
+			
 				onError: (err:any, key: string) => {
 					setLogoutModalVisible(isTokenError(err));
 				}
