@@ -55,7 +55,7 @@ const RiwayatKunjungan = () => {
 						id={ visitHistory.appointment_id }
 						status='Jadwal Selesai'
 						queueNo={ 24211 }
-						type='others'
+						type='other'
 						isTelemedicine={ false }
 						data={ visitHistory }
 						date={ visitHistory.visit_date }

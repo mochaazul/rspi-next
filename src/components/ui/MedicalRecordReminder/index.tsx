@@ -45,7 +45,7 @@ const MedicalRecordReminder = ({ isFloating = true, session }: PropsType) => {
 	}, []);
 
 	const onClickOnboard = () => {
-		navigate.push('/register-onboard');
+		navigate.push('/register-onboard?isHome=true');
 	};
 
 	const renderContent = () => {
