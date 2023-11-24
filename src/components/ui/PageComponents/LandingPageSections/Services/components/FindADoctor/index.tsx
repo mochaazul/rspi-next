@@ -47,7 +47,7 @@ const FindADoctor: React.FC<Props> = ({
 	const formFindDoctor:FormikProps<LandingPageFindADoctorForm> = useFormik<LandingPageFindADoctorForm>({
 		initialValues: {
 			doctorName: '',
-			hospital: 'all',
+			hospital: '',
 			preferredDay: '',
 			speciality: null
 		},
@@ -90,7 +90,7 @@ const FindADoctor: React.FC<Props> = ({
 							} }
 							value={ formFindDoctor.values.doctorName }
 							{
-							...isTelemedicine && { label: t('form.labels.doctorName') }
+								...isTelemedicine && { label: t('form.labels.doctorName') }
 							}
 						/>
 					</div>

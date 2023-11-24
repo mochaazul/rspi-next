@@ -12,6 +12,7 @@ export default function SubLayout({ params: { locale }, children }: { params: { 
 	return (
 		<SWRConfig
 			value={ {
+			
 				onError: (err:any, key: string) => {
 					setLogoutModalVisible(isTokenError(err));
 				}
