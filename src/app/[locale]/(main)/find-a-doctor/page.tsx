@@ -16,23 +16,26 @@ import DoctorFilter from './DoctorFilter';
 import ResultHeader from './ResultHeader';
 import LangWrapper from '@/components/ui/LangWrapper';
 import useFindDoctor from './useFindDoctor';
-import { useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useGetHospital } from '@/lib/api/client/hospital';
 import { useGetClinics } from '@/lib/api/client/clinics';
 import { useScopedI18n } from '@/locales/client';
+import FindADoctorLoading from './LoadingState';
+import LoadingSkeleton from '@/components/Layout/LoadingSkeleton';
 
 export default function Page() {
 
-	const searchParams = useSearchParams();
-
-	const { data: doctorResponse, isLoading: doctorLoading, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
 	const t = useScopedI18n('page.findDoctor');
+	
+	const searchParams = useSearchParams();
 	const breadCrumbs = [{ name: t('heading'), url: '#' }];
-	const { data: hospitalResponse } = useGetHospital();
-	const { data: clinicsResponse } = useGetClinics();
+	
+	const { data: doctorResponse, isLoading: doctorLoading, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
+	const { data: hospitalResponse, isLoading: hospitalLoading } = useGetHospital();
+	const { data: clinicsResponse, isLoading: clinicLoading } = useGetClinics(hospitalResponse?.data);
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
@@ -40,7 +43,7 @@ export default function Page() {
 
 	const RenderFilterPane = (
 		<div className='filter-pane' >
-			<DoctorFilter hospitals={ hospitalResponse?.data || [] } clinics={ clinicsResponse?.data || [] } />
+			<DoctorFilter hospitals={ hospitalResponse?.data || [] } clinics={ clinicsResponse?.data || [] } clinicLoading={ clinicLoading } hospitalLoading={ hospitalLoading }/>
 		</div>
 	);
 
@@ -118,7 +121,6 @@ export default function Page() {
 				<LangWrapper>
 					<Breadcrumbs datas={ breadCrumbs } />
 					<FindADoctorStyle className='mt-[25px] sm:mt-[50px]'>
-
 						{ /* Filter Pane */ }
 						<div className='max-sm:hidden'>
 							{ RenderFilterPane }
@@ -126,41 +128,44 @@ export default function Page() {
 
 						{ /* Doctors Pane */ }
 						<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
-							<ResultHeader doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } />
-							{ /* Search used filters - pills with remove icon */ }
-							<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
-								{ /* Applied dilter pills */ }
-								<div className='flex gap-2 sm:flex-wrap max-sm:flex-nowrap max-sm:pb-2'>
-									<div className='filter-pill min-w-fit sm:hidden'>
-										<div onClick={ () => setFilterModalVisible(true) }>
-											<Icons.Filter size={ 18 } color={ colors.paradiso.default } />
-											<Text
-												fontSize='16px'
-												fontWeight='400'
-												lineHeight='19px'
-												color={ colors.paradiso.default }
-												text='Filter'
-											/>
-										</div>
-									</div>
-									{
-										getFilterValues().map((filter, index) => (
-											<div className='min-w-fit' key={ `filter-pills-${ index }` }>
-												<Pills onRemove={ () => onDeletePills(filter) }>
+						
+							<ResultHeader doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } hospitalLoading={ hospitalLoading }/>
+							{
+								hospitalLoading ? <LoadingSkeleton type='line' />
+									:
+									<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
+										{ /* Applied dilter pills */ }
+										<div className='flex gap-2 sm:flex-wrap max-sm:flex-nowrap max-sm:pb-2'>
+											<div className='filter-pill min-w-fit sm:hidden'>
+												<div onClick={ () => setFilterModalVisible(true) }>
+													<Icons.Filter size={ 18 } color={ colors.paradiso.default } />
 													<Text
 														fontSize='16px'
 														fontWeight='400'
 														lineHeight='19px'
-														text={ filter.text }
+														color={ colors.paradiso.default }
+														text='Filter'
 													/>
-												</Pills>
+												</div>
 											</div>
-										))
-									}
-								</div>
-								<div className='cursor-pointer max-sm:hidden min-w-fit'>
-									{
-										hasSearchParams() &&
+											{
+												getFilterValues().map((filter, index) => (
+													<div className='min-w-fit' key={ `filter-pills-${ index }` }>
+														<Pills onRemove={ () => onDeletePills(filter) }>
+															<Text
+																fontSize='16px'
+																fontWeight='400'
+																lineHeight='19px'
+																text={ filter.text }
+															/>
+														</Pills>
+													</div>
+												))
+											}
+										</div>
+										<div className='cursor-pointer max-sm:hidden min-w-fit'>
+											{
+												hasSearchParams() &&
 										<Text
 											fontSize='16px'
 											fontWeight='400'
@@ -169,9 +174,11 @@ export default function Page() {
 											text='Clear All'
 											onClick={ clearSearchParams }
 										/>
-									}
-								</div>
-							</div>
+											}
+										</div>
+									</div>
+							}
+							{ /* Search used filters - pills with remove icon */ }
 							{ /* Doctor found counter - Mobile */ }
 							<div>
 								<Text
@@ -182,20 +189,24 @@ export default function Page() {
 									text={ `${ doctorCount() } Doctor Found` }
 								/>
 							</div>
+							{
+								hospitalLoading ? <LoadingSkeleton type='card-result' />
+									:
+									<InfiniteScroll
+										style={ { overflow: 'unset' } }
+										className='flex flex-col gap-6 sm:mt-[47px]'
+										dataLength={ doctorData().length || 0 }
+										next={ loadMore }
+										hasMore={ hasMore() }
+										loader={ <div className='loader' key={ 0 }>Loading ...</div> }
+										scrollThreshold={ '100px' }
+									>
+										{
+											doctorData().map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
+										}
+									</InfiniteScroll>
+							}
 							{ /* Doctors result card */ }
-							<InfiniteScroll
-								style={ { overflow: 'unset' } }
-								className='flex flex-col gap-6 sm:mt-[47px]'
-								dataLength={ doctorData().length || 0 }
-								next={ loadMore }
-								hasMore={ hasMore() }
-								loader={ <div className='loader' key={ 0 }>Loading ...</div> }
-								scrollThreshold={ '100px' }
-							>
-								{
-									doctorData().map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
-								}
-							</InfiniteScroll>
 						</div>
 
 						{ /* Popup Filter - Mobile only */ }
