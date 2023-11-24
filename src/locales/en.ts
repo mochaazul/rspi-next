@@ -728,12 +728,19 @@ export default {
 			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)'
 		},
 		patientPortal: {
-			tabMenuLabel: [
-				'Appointment Schedule',
-				'Visit History',
-				'Vaccine History',
-				'Laboratory Test History'
-			],
+			tabMenuLabel: {
+				menu1: {
+					heading: 'Consultation Schedule'
+				},
+				menu2: {
+					heading: 'Medical History',
+					children: [
+						'Consultation',
+						'Vaccines',
+						'Lab Results'
+					]
+				}
+			},
 			riwayatVaksin: {
 				warning: 'Disclaimer: All vaccines used in the vaccination process are from RSPI',
 				tableMenuLable: {
@@ -773,7 +780,12 @@ export default {
 					activeSchedule: 'Active Appointment',
 					cancelAppointment: 'Cancel Appointment',
 					empty: 'You do not have visit data at this time',
-				}
+					emptyBtnCta: 'Schedule a Visit'
+				},
+				options: [
+					'Myself',
+					'Other'
+				]
 			}
 		},
 		findDoctor: {

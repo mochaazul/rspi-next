@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import * as Icons from 'react-feather';
 import moment from 'moment';
+import { useSWRConfig } from 'swr';
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -51,7 +52,7 @@ export const Header = ({
 }) => {
 
 	const router = useRouter();
-
+	const { cache } = useSWRConfig();
 	const currentLang = useCurrentLocale();
 	const t = useScopedI18n('navMenu');
 
@@ -72,6 +73,7 @@ export const Header = ({
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			router.refresh();
+			cache.delete('profile');
 		}
 	};
 

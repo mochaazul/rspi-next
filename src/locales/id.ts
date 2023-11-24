@@ -726,12 +726,19 @@ export default {
 			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)'
 		},
 		patientPortal: {
-			tabMenuLabel: [
-				'Jadwal Kunjungan',
-				'Riwayat Kunjungan',
-				'Riwayat Vaksinasi',
-				'Riwayat Pemeriksaan Lab'
-			],
+			tabMenuLabel: {
+				menu1: {
+					heading: 'Jadwal Konsultasi'
+				},
+				menu2: {
+					heading: 'Riwayat Medis',
+					children: [
+						'Konsultasi',
+						'Vaksin',
+						'Hasil Lab'
+					]
+				}
+			},
 			riwayatVaksin: {
 				warning: 'Disclaimer: seluruh vaksin yang digunakan dalam proses vaksinasi merupakan vaksin dari RSPI',
 				tableMenuLable: {
@@ -773,7 +780,12 @@ export default {
 					activeSchedule: 'Jadwal Aktif',
 					cancelAppointment: 'Batalkan janji temu',
 					empty: 'Anda belum mempunyai data kunjungan saat ini',
-				}
+					emptyBtnCta: 'Jadwalkan Kunjungan'
+				},
+				options: [
+					'Diri Sendiri',
+					'Orang Lain'
+				]
 			}
 		},
 		findDoctor: {

@@ -11,6 +11,8 @@ import PinModal from '@/components/ui/PinModal';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import { useGetProfile } from '@/lib/api/client/profile';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
+import CardUserMR from '@/components/ui/PageComponents/UserInformationSections/CardUserMR';
+import { useScopedI18n } from '@/locales/client';
 
 import JadwalKunjungan from './components/JadwalKunjungan';
 import RiwayatKunjungan from './components/RiwayatKunjungan';
@@ -18,7 +20,6 @@ import RiwayatVaksin from './components/RiwayatVaksin';
 import RiwayatLab from './components/RiwayatLab';
 
 import { VisitHistoryStyle } from './style';
-import CardUserMR from '@/components/ui/PageComponents/UserInformationSections/CardUserMR';
 
 type MenuType = {
 	id: number;
@@ -26,40 +27,6 @@ type MenuType = {
 	isHeader: boolean,
 	children: MenuType[];
 };
-
-const tabMenuLabel: MenuType[] = [
-	{
-		id: 1,
-		label: 'Jadwal Konsultasi',
-		isHeader: false,
-		children: []
-	},
-	{
-		id: 2,
-		label: 'Riwayat Medis',
-		isHeader: true,
-		children: [
-			{
-				id: 3,
-				label: 'Konsultasi',
-				isHeader: false,
-				children: []
-			},
-			{
-				id: 4,
-				label: 'Vaksin',
-				isHeader: false,
-				children: []
-			},
-			{
-				id: 5,
-				label: 'Hasil Lab',
-				isHeader: false,
-				children: []
-			},
-		]
-	},
-];
 
 const PatientPortal = () => {
 	const [activeTabIndex, setActiveTabIndex] = useState(1);
@@ -69,11 +36,45 @@ const PatientPortal = () => {
 
 	const params = useParams();
 	const tabsRef = useRef<any>([]);
+	const t = useScopedI18n('page.patientPortal');
 
 	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory();
 	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile();
 
 	const lastVisitedHospital = getLastVisitedHospitalHelper(visitHistoryResponse?.data || []);
+	const tabMenuLabel: MenuType[] = [
+		{
+			id: 1,
+			label: t('tabMenuLabel.menu1.heading'),
+			isHeader: false,
+			children: []
+		},
+		{
+			id: 2,
+			label: t('tabMenuLabel.menu2.heading'),
+			isHeader: true,
+			children: [
+				{
+					id: 3,
+					label: t('tabMenuLabel.menu2.children.0'),
+					isHeader: false,
+					children: []
+				},
+				{
+					id: 4,
+					label: t('tabMenuLabel.menu2.children.1'),
+					isHeader: false,
+					children: []
+				},
+				{
+					id: 5,
+					label: t('tabMenuLabel.menu2.children.2'),
+					isHeader: false,
+					children: []
+				},
+			]
+		},
+	];
 
 	useEffect(() => {
 		if (params.id) {
@@ -164,16 +165,6 @@ const PatientPortal = () => {
 				);
 			}
 		});
-	};
-
-	const parseBod = (date?: string) => {
-		const dateParsed = dayjs(date, 'YYYY-MM-DD');
-		const years = dayjs().diff(dateParsed, 'years');
-		const month = dayjs().diff(dateParsed, 'months');
-		if (years < 0 && month > 0) {
-			return `${ month } Month${ month > 1 && 's' }, ${ getProfileResponse?.data.gender }`;
-		}
-		return `${ years } Yrs, ${ getProfileResponse?.data.gender }`;
 	};
 
 	return (
