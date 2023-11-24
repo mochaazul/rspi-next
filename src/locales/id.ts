@@ -724,15 +724,26 @@ export default {
 				cancelBtnLabel: 'Batal'
 			},
 			medicalRecordLabel: 'Informasi Rekam Medis',
-			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)'
+			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)',
+			gender: {
+				male: 'Laki-laki',
+				female: 'Perempuan'
+			}
 		},
 		patientPortal: {
-			tabMenuLabel: [
-				'Jadwal Kunjungan',
-				'Riwayat Kunjungan',
-				'Riwayat Vaksinasi',
-				'Riwayat Pemeriksaan Lab'
-			],
+			tabMenuLabel: {
+				menu1: {
+					heading: 'Jadwal Konsultasi'
+				},
+				menu2: {
+					heading: 'Riwayat Medis',
+					children: [
+						'Konsultasi',
+						'Vaksin',
+						'Hasil Lab'
+					]
+				}
+			},
 			riwayatVaksin: {
 				warning: 'Disclaimer: seluruh vaksin yang digunakan dalam proses vaksinasi merupakan vaksin dari RSPI',
 				tableMenuLable: {
@@ -759,14 +770,25 @@ export default {
 					canceledAppointment: 'Jadwal Dibatalkan',
 					doneAppointment: 'Jadwal Selesai',
 					seeDetail: 'Lihat Detail',
-					recommendDoctor: 'Would you recommend your doctor?'
+					recommendDoctor: 'Apakah Anda akan merekomendasikan dokter Anda?'
 
 				},
 				recommendDoctorModal: {
-					header: 'Would you recommmend your doctor to your friends or family ?'
+					header: 'Apakah Anda akan merekomendasikan dokter Anda kepada teman atau keluarga Anda?',
+					rating: [
+						'Sangat tidak direkomendasikan',
+						'Sangat direkomendasikan'
+					],
+					feedback: {
+						heading: 'Apa yang Anda sukai dari dokter Anda?',
+						notesInputLabel: 'Beritahu kami lebih lanjut',
+						notesInputPlaceholder: 'Masukkan deskripsi...',
+						optionalLabel: '(Opsional)',
+						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.'
+					}
 				},
-				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.'
-
+				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.',
+				btnConsultationSchedule: 'Jadwalkan Konsultasi'
 			},
 			jadwalKunjungan: {
 				label: {
@@ -774,6 +796,36 @@ export default {
 					activeSchedule: 'Jadwal Aktif',
 					cancelAppointment: 'Batalkan janji temu',
 					empty: 'Anda belum mempunyai data kunjungan saat ini',
+					emptyBtnCta: 'Jadwalkan Kunjungan'
+				},
+				options: [
+					'Diri Sendiri',
+					'Orang Lain'
+				],
+				statusLabel: {
+					C: 'Jadwal Selesai',
+					X: 'Jadwal Dibatalkan',
+					N: 'Tidak Hadir',
+					H: 'Hold',
+					T: 'Transferred',
+					A: 'Arrived',
+					P: 'Postponed',
+					S: 'Seen',
+					U: 'Arrived Not Seen'
+				},
+				teleconsultationLabel: 'Telekonsultasi',
+				offlineConsultation: 'Konsultasi Tatap Muka'
+			},
+			cancelBooking: {
+				heading: 'Konfirmasi Pembatalan',
+				warningText: 'Apakah Anda yakin ingin membatalkan janji temu dengan dokter?',
+				patientData: {
+					heading: 'Data Pasien',
+					nameLabel: 'Nama : ',
+					dobLabel: 'Tanggal Lahir : ',
+					phoneLabel: 'No HP : ',
+					consultationScheduleLabel: 'Jadwal Konsultasi',
+					btnSubmitLabel: 'Batalkan Kunjungan'
 				}
 			}
 		},

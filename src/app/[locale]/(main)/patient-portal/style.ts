@@ -71,12 +71,12 @@ export const VisitHistoryStyle = styled.div`
   position: relative;
   .rectangle {
     background: ${ colors.paradiso.opacity10 };
-    height: 90px;
+    height: 120px;
     position: absolute;
-    top: 30px;
+    top: 0;
     width: 100%;
     @media screen and (max-width: 640px) {
-      top: 0px;
+      height: 90px;
     }
   }
   .content-wrapper {
