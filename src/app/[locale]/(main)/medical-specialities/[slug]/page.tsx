@@ -5,6 +5,7 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 
 import { getFooterSlug } from '@/lib/api';
+import { getScopedI18n } from '@/locales/server';
 
 import { FooterServiceStyle } from './style';
 
@@ -15,8 +16,10 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 		}
 	});
 	const detail = footerSlugRes?.data;
+	const t = await getScopedI18n('page.facilities');
+
 	const breadcrumbsPath = [
-		{ name: 'Facilities & Services', url: '/facilities/medical-specialities' },
+		{ name: t('heading'), url: '/facilities/medical-specialities' },
 		{ name: detail?.[0]?.title ?? '', url: '#' },
 	];
 
@@ -70,7 +73,7 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 
 	return (
 		<FooterServiceStyle>
-			<div className='lg:w-[1110px] mx-auto max-sm:mx-4 pt-[121px] sm:pt-[162px] pb-[60px]'>
+			<div className='lg:w-[1110px] mx-auto max-sm:mx-4 pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='content-wrapper mt-[64px] w-full'>

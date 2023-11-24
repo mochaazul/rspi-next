@@ -23,7 +23,25 @@ export default {
 		pin: {
 			header: 'Enter PIN',
 			subHeader: 'Please enter your PIN to continue.',
-			submitBtnLabel: 'Confirm'
+			submitBtnLabel: 'Confirm',
+			pinLabel: 'PIN'
+		}
+	},
+	navMenu: {
+		home: 'Home',
+		ourHospitals: 'Our Hospitals',
+		centreOfExcellence: 'Centre of Excellence',
+		facility: 'Facilities & Services',
+		career: 'Career',
+		findDoctor: 'Find a Doctor',
+		login: 'Login',
+		register: 'Register',
+		loginRegister: 'Login / Register',
+		bookAppointment: 'Book Appointment',
+		user: {
+			patientPortal: 'Patient Portal',
+			patientInformation: 'Patient Information',
+			logout: 'Logout'
 		}
 	},
 	validation: {
@@ -33,6 +51,17 @@ export default {
 			success: 'Validation Success',
 			loading: 'Please Wait',
 			backToLogin: 'Back to Login'
+		},
+		formValidation: {
+			required: '{label} is a required field',
+			emailNotValid: 'Email must be a valid email',
+			minLength: '{label} should contain at least {minLength} characters',
+			minCapitalize: '{label} must have at least {minCapitalize} capitalized character',
+			exactLength: '{label} should contain {length} characters',
+			notMatch: '{label} do not match',
+			fileNotValid: 'This file type is invalid or unsupported',
+			maxFileSize: 'This file is larger than {maxFileSize}',
+			phoneNotValid: 'Phone number must precede with +62 or 021 or 08 and then followed by phone number'
 		}
 	},
 	gender: {
@@ -41,6 +70,7 @@ export default {
 	},
 	page: {
 		bookingAppointment: {
+			heading: 'Book Appointment',
 			validationError: 'Please fill all the data.',
 			profileSelector: {
 				deleteModal: {
@@ -58,7 +88,11 @@ export default {
 					phone: 'Phone',
 					gender: 'Gender',
 					submit: 'Submit',
-					dob: 'Birth Date'
+					dob: 'Birth Date',
+					genderLabel: {
+						male: 'Male',
+						female: 'Female'
+					}
 				},
 				emptyOther: 'There is no other\'s profile.',
 				emptySelf: 'Your profile is empty',
@@ -77,7 +111,8 @@ export default {
 					front: 'Upload face side of your insurance card',
 					back: 'Upload back side of your insurance card',
 				},
-				disclaimer: 'The provided data is correct. Registration is done for oneself. If the registration is done for someone else, consent has been obtained from the relevant party.'
+				disclaimer: 'The provided data is correct. Registration is done for oneself. If the registration is done for someone else, consent has been obtained from the relevant party.',
+				errorEmptyData: 'Make sure complaint and guarantor data are filled in'
 			},
 			confirmationModal: {
 				heading: 'Booking Confirmation',
@@ -107,6 +142,9 @@ export default {
 					done: 'has been successfully created.'
 				},
 				btnLabel: 'Ok'
+			},
+			bookingForm: {
+
 			}
 		},
 		awards: {
@@ -114,6 +152,7 @@ export default {
 			subHeading: 'We are committed to being a world-class healthcare organization. We strongly believe that operational excellence and patient safety are integral parts of meeting and exceeding our customers\' expectations.'
 		},
 		centerOfExcellence: {
+			heading: 'Centre Of Excellence',
 			serviceLocation: {
 				heading: 'Available at',
 				hospitalName: 'RS Pondok Indah - Pondok Indah 1st Floor',
@@ -122,7 +161,8 @@ export default {
 				operationalHourHeading: 'Operational Hours',
 				informationHeading: 'Information',
 				emailHeading: 'E-mail',
-				relatedArticle: 'Artikel Terkait'
+				relatedArticle: 'Artikel Terkait',
+				readMore: 'Read More'
 			}
 		},
 		contactUs: {
@@ -152,9 +192,19 @@ export default {
 				submitBtnLabel: 'Send Message',
 				form: {
 					allHospitalLabel: 'All RSPI Hospitals'
+				},
+				genderOptionsLabel: {
+					male: 'Male',
+					female: 'Female'
+				},
+				titleOptionsLabel: {
+					general: 'General Questions',
+					specific: 'Specific Questions'
 				}
 			},
 			faq: {
+				contactUsLabel: 'Contact Us',
+				faqLongLabel: 'Frequently Asked Questions',
 				heading: 'FAQ',
 				subHeading: 'Frequently Asked Questions about our services',
 				allFaqBtnLabel: 'View All FAQs',
@@ -443,6 +493,7 @@ export default {
 			}
 		},
 		facilities: {
+			heading: 'Facilities & Services',
 			relatedNewsHeading: 'Related News',
 			relatedDoctorsHeading: 'Related Doctors',
 			facilitiesMenu: {
@@ -462,9 +513,12 @@ export default {
 				healthFirst: 'Health First'
 			},
 			heading: 'News and Health Articles',
-			detailsBtnLabel: 'View Details'
+			detailsBtnLabel: 'View Details',
+			breadcrumbsLabel: 'News & Health Articles',
+			viewDetails: 'View Details'
 		},
 		newsDetail: {
+			breadcrumbsLabel: 'News & Health Articles',
 			oleh: 'By',
 		},
 		forgotPassword: {
@@ -625,14 +679,14 @@ export default {
 			mrNotAvailableBtnLabel: 'Skip'
 		},
 		profilePage: {
-			heading: 'User Information',
+			heading: 'Patient Information',
 			subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas at vestibulum nulla hac consectetur feugiat.',
 			loginAsLabel: 'Login as',
 			updatePhotoLabel: 'Update Photo',
 			uploadPhotoLabel: 'Upload Now',
 			deletePhotoLabel: 'Delete Photo',
 			choosePhotoLabel: 'Choose Photo',
-			formatPhotoLabel: 'JPG or PNG, maks size 800k',
+			formatPhotoLabel: 'JPG or PNG, max size 800k',
 			profileLabel: 'Profile',
 			securitySettingLabel: 'Security Setting',
 			profileDetail: {
@@ -656,7 +710,11 @@ export default {
 				patientNewEmailPlaceHolder: 'New Email',
 				patientEmail: 'Email Address',
 				patientEmailPlaceholder: 'Email',
-				patientEmailLabelInfo: 'You can\'t change your email address if you don\'t have a medical record number'
+				patientEmailLabelInfo: 'You can\'t change your email address if you don\'t have a medical record number',
+				patientGenderMaleLabel: 'Male',
+				patientGenderFemaleLabel: 'Female',
+				patientPhotoProfile: 'Photo profile',
+				editLabel: 'Change'
 			},
 			securitySetting: {
 				emailLabel: 'Email',
@@ -729,6 +787,7 @@ export default {
 			},
 		},
 		doctorProfile: {
+			bookAppointmentLabel: 'Book Appointment',
 			scheduleHeading: 'Doctor&apos;s Schedule',
 			form: {
 				visitDateLabel: 'Visit Date',
@@ -767,7 +826,9 @@ export default {
 			followUsLabel: 'FOLLOW US',
 			getRSPIMobileLabel: 'GET RSPI MOBILE',
 			subscribeLabel: 'Stay Updated With Us',
-			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.'
+			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.',
+			subscribePlaceholder: 'Enter your email address',
+			subscribeSubmit: 'Subscribe'
 		},
 		medicalRecordReminder: {
 			heading: 'Get Access to Your Medical Visit Information',
@@ -775,7 +836,8 @@ export default {
 			tooltipLabel: 'Make sure you have booked an appointment and visited the nearest RSPI.'
 		},
 		topNav: {
-			welcome: 'Welcome'
+			welcome: 'Welcome',
+			contactUs: 'Hubungi Kami'
 		},
 		privacyPolicy: {
 			agreementStatement: {

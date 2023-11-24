@@ -4,7 +4,7 @@ import colors from '../../../constant/colors';
 const HeaderStyle = styled.div`
   position: sticky;
   display: flex;
-  width: 100vw;
+  width: 100%;
   z-index: 1000;
   top: 0;
 

@@ -22,15 +22,15 @@ import Button from '@/components/ui/Button';
 import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useGetHospital } from '@/lib/api/client/hospital';
 import { useGetClinics } from '@/lib/api/client/clinics';
-
-const breadCrumbs = [{ name: 'Find a Doctor', url: '#' }];
+import { useScopedI18n } from '@/locales/client';
 
 export default function Page() {
 
 	const searchParams = useSearchParams();
 
 	const { data: doctorResponse, isLoading: doctorLoading, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
-
+	const t = useScopedI18n('page.findDoctor');
+	const breadCrumbs = [{ name: t('heading'), url: '#' }];
 	const { data: hospitalResponse } = useGetHospital();
 	const { data: clinicsResponse } = useGetClinics();
 
@@ -90,7 +90,7 @@ export default function Page() {
 
 	const hasSearchParams = () => {
 		const searchParamObj = Object.fromEntries(searchParams);
-		const paramFound = !_.isEmpty(searchParamObj[ 'specialty_category' ]) || !_.isEmpty(searchParamObj[ 'hospital_code' ]) || searchParamObj[ 'telemedicine' ] === 'true';
+		const paramFound = !_.isEmpty(searchParamObj['specialty_category']) || !_.isEmpty(searchParamObj['hospital_code']) || searchParamObj['telemedicine'] === 'true';
 		return paramFound;
 	};
 
@@ -145,7 +145,7 @@ export default function Page() {
 									</div>
 									{
 										getFilterValues().map((filter, index) => (
-											<div className='min-w-fit' key={ `filter-pills-${index}` }>
+											<div className='min-w-fit' key={ `filter-pills-${ index }` }>
 												<Pills onRemove={ () => onDeletePills(filter) }>
 													<Text
 														fontSize='16px'
@@ -188,7 +188,7 @@ export default function Page() {
 								className='flex flex-col gap-6 sm:mt-[47px]'
 								dataLength={ doctorData().length || 0 }
 								next={ loadMore }
-								hasMore={  hasMore() }
+								hasMore={ hasMore() }
 								loader={ <div className='loader' key={ 0 }>Loading ...</div> }
 								scrollThreshold={ '100px' }
 							>
