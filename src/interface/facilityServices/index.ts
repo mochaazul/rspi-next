@@ -18,6 +18,7 @@ export interface I_RelatedNews {
 	short_description: string;
 	title_news: string;
 	image_url: string;
+	slug: string;
 }
 
 export interface FacilityServicesHospital {
