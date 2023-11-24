@@ -60,6 +60,14 @@ export const Header = ({
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
 
+	const onclickMarkAllNotif = () => {
+		marAllReadNotifFunc()
+			.then(() => {
+				setShowNotification(true);
+				mutate('getNotification');
+			});
+	};
+
 	const isLoggedIn = !!session?.token;
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
@@ -136,7 +144,7 @@ export const Header = ({
 									<div className='flex justify-between'>
 										<Text
 											fontSize='12px'
-											fontWeight={item.flag === 0 ? '700' : '400'}
+											fontWeight={ item.flag === 0 ? '700' : '400' }
 											textAlign='left'
 											color={ colors.grey.pencil }
 											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
@@ -145,7 +153,7 @@ export const Header = ({
 									<Text
 										fontSize='14px'
 										lineHeight='20px'
-										fontWeight={item.flag === 0 ? '700' : '400'}
+										fontWeight={ item.flag === 0 ? '700' : '400' }
 										textAlign='left'
 										color={ colors.black.default }
 										text={ currentLang === 'id' ? item?.judul_idn : item?.judul_en }
@@ -154,7 +162,7 @@ export const Header = ({
 									<Text
 										fontSize='12px'
 										lineHeight='20px'
-										fontWeight={item.flag === 0 ? '700' : '400'}
+										fontWeight={ item.flag === 0 ? '700' : '400' }
 										textAlign='left'
 										color={ colors.black.default }
 										text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
@@ -290,11 +298,7 @@ export const Header = ({
 						<div className='translate'>
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
 								<icons.Notif
-									onClick={ () => marAllReadNotifFunc()
-										.then(() => {
-											setShowNotification(true);
-											notificationResponseFetch();
-										}) }
+									onClick={ onclickMarkAllNotif }
 									className='cursor-pointer'
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
