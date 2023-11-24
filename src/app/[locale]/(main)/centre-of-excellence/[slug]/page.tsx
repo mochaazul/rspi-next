@@ -37,7 +37,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 	});
 
 	const breadcrumbsPath = [
-		{ name: t('heading'), url: '/centre-of-excellence' },
+		{ name: t('heading'), url: `/centre-of-excellence/${ responseCenterOfExcellence?.data[0]?.slug }` },
 		{ url: '#', name: responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === params?.slug)?.title ?? '' }
 	];
 
