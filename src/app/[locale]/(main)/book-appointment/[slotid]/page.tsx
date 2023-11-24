@@ -59,16 +59,6 @@ const BookAppointment = () => {
 	const { trigger: pushNotification, error: pushNotifError, isMutating: pushNotifLoading } = usePushNotifAPI();
 	
 	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
-
-	const paramGetNotif = {
-		query: {
-			medical_record: session.user?.medical_record ?? '',
-			email: session.user?.email,
-		},
-	};
-	const {
-		data: getNotification,
-	} = useNotification(paramGetNotif);
 	
 	const [confirmationModal, setConfirmationModalVisible] = useState<boolean>(false);
 	const [addProfileModal, setAddProfileModal] = useState<boolean>(false);
