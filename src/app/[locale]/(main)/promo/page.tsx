@@ -9,7 +9,6 @@ const Promo = async () => {
 	const dataEvent = await fetchEvents({
 		page: 1,
 		limit: 10,
-		is_publish: true,
 		category: '',
 		hospital_id: ''
 	});

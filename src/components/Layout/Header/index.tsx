@@ -269,7 +269,6 @@ export const Header = ({
 											setShowNotification(true);
 											notificationResponseFetch();
 										}) }
-									fill
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
