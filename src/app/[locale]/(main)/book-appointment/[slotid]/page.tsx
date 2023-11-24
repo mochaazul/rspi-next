@@ -20,7 +20,7 @@ import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
 import Button from '@/components/ui/Button';
 import AddProfileModal from './AddProfileModal';
-import { useGetFamilyProfile, useGetProfile } from '@/lib/api/client/profile';
+import { useGeneralUploads, useGetFamilyProfile, useGetProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
 import { formatTimeslot, splitDate } from '@/helpers/datetime';
 import { isEqual } from 'lodash';
@@ -54,13 +54,14 @@ const BookAppointment = () => {
 	const { data: userProfile, isLoading: profileLoading } = useGetProfile();
 	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile();
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
+	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
 
 	const [confirmationModal, setConfirmationModalVisible] = useState<boolean>(false);
 	const [addProfileModal, setAddProfileModal] = useState<boolean>(false);
 	const [successModal, setSuccessModal] = useState<boolean>(false);
-	const [tempImageAsuransiFront, setTempImageAsuransiFront] = useState<Blob | null>(null);
-	const [tempImageAsuransiBack, setTempImageAsuransiBack] = useState<Blob | null>(null);
+	const [tempImageAsuransiFront, setTempImageAsuransiFront] = useState<File | null>(null);
+	const [tempImageAsuransiBack, setTempImageAsuransiBack] = useState<File | null>(null);
 	const [imgAsuransiFrontPath, setImgAsuransiFrontPath] = useState<string>('');
 	const [imgAsuransiBackPath, setImgAsuransiBackPath] = useState<string>('');
 
@@ -160,27 +161,25 @@ const BookAppointment = () => {
 		}
 	};
 
-	// const uploadAsuransiPhotoFront = async () => {
-	// 	const formImg = new FormData();
-	// 	formImg.append('upload', tempImageAsuransiFront ?? '');
-	// 	const responseData = await uploadPhotoAsuransi({ payload: formImg });
-	// 	if (responseData.stat_msg === 'Success') {
-	// 		const urlImage = 'https://rebel-env.s3.us-west-2.amazonaws.com/rspi/dev/rspi-api/uploads/';
-	// 		return urlImage + responseData.data;
-	// 	}
-	// 	return '';
-	// };
+	const uploadAsuransiPhotoFront = async () => {
+		if (tempImageAsuransiFront !== null) {
+			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiFront });
+			if (responseData.stat_msg === 'Success') {
+				return responseData.data;
+			}
+		}
+		return '';
+	};
 
-	// const uploadAsuransiPhotoBack = async () => {
-	// 	const formImg = new FormData();
-	// 	formImg.append('upload', tempImageAsuransiBack ?? '');
-	// 	const responseData = await uploadPhotoAsuransi({ payload: formImg });
-	// 	if (responseData.stat_msg === 'Success') {
-	// 		const urlImage = 'https://rebel-env.s3.us-west-2.amazonaws.com/rspi/dev/rspi-api/uploads/';
-	// 		return urlImage + responseData.data;
-	// 	}
-	// 	return '';
-	// };
+	const uploadAsuransiPhotoBack = async () => {
+		if (tempImageAsuransiBack !== null) {
+			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiBack });
+			if (responseData.stat_msg === 'Success') {
+				return responseData.data;
+			}
+		}
+		return '';
+	};
 
 	const onConfirmed = async () => {
 		try {
@@ -205,10 +204,8 @@ const BookAppointment = () => {
 				'hospital_code': timeSlot?.hospital_code,
 				'insurance_name': asuransi,
 				'insurance_number': noAsuransi,
-				'insurance_front_img': '',
-				'insurance_back_img': ''
-				// 'insurance_front_img': tempImageAsuransiFront ? await uploadAsuransiPhotoFront() : '',
-				// 'insurance_back_img': tempImageAsuransiBack ? await uploadAsuransiPhotoBack() : ''
+				'insurance_front_img': tempImageAsuransiFront ? await uploadAsuransiPhotoFront() : '',
+				'insurance_back_img': tempImageAsuransiBack ? await uploadAsuransiPhotoBack() : ''
 			};
 			await bookAppointment(payloadBook);
 			setSuccessModal(true);
