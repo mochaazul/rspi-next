@@ -128,16 +128,16 @@ export const Header = ({
 							<div key={ idx } className='pb-4'>
 								<div className='flex flex-col py-4 px-[20px]'
 									onClick={ () => {
-										router.push(`/${ item?.url }`);
+										router.push(`${ item?.url }`);
 									} }
 									style={ {
-										backgroundColor: item.flag === 0 ? 'rgba(0, 0, 0, 0)' : 'rgba(53, 136, 136, 0.1)'
+										backgroundColor: item.flag === 0 ? 'rgba(53, 136, 136, 0.1)' : 'rgba(0, 0, 0, 0)'
 									} }>
 									<div className='flex justify-between'>
 										<Text
 											fontSize='12px'
-											fontWeight='400'
-											textAlign='center'
+											fontWeight={item.flag === 0 ? '700' : '400'}
+											textAlign='left'
 											color={ colors.grey.pencil }
 											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
 										/>
@@ -145,8 +145,8 @@ export const Header = ({
 									<Text
 										fontSize='14px'
 										lineHeight='20px'
-										fontWeight='700'
-										textAlign='center'
+										fontWeight={item.flag === 0 ? '700' : '400'}
+										textAlign='left'
 										color={ colors.black.default }
 										text={ currentLang === 'id' ? item?.judul_idn : item?.judul_en }
 										className='flex justify-start'
@@ -154,8 +154,8 @@ export const Header = ({
 									<Text
 										fontSize='12px'
 										lineHeight='20px'
-										fontWeight='400'
-										textAlign='center'
+										fontWeight={item.flag === 0 ? '700' : '400'}
+										textAlign='left'
 										color={ colors.black.default }
 										text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
 										className='flex justify-start pt-2'
