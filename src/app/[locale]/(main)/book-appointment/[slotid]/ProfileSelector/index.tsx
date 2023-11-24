@@ -35,7 +35,7 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: Pr
 			<Text text={ profile.name } fontWeight='700' />
 			{
 				!isSelf &&
-				<div onClick={ async() => {
+				<div onClick={ async () => {
 					showModalDelete(profile?.id, true);
 				} }>
 					<icons.Trash />
@@ -49,7 +49,7 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: Pr
 		</ProfileCardRow>
 		<ProfileCardRow>
 			<icons.PhoneOutline
-				 />
+			/>
 			<Text text={ profile.phone } fontSize='14px' color={ colors.grey.darkOpacity } />
 		</ProfileCardRow>
 	</ProfileSelectorCard>);
@@ -59,11 +59,11 @@ type ProfileSelectorProps = {
 	onSelected: (profile: UserDataDetail) => void;
 	selfProfile?: UserDataDetail;
 	onAddNewProfileBtn: (type: string) => void;
-	familyProfiles?: UserDataDetail[]
+	familyProfiles?: UserDataDetail[];
 };
 
 const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyProfiles }: ProfileSelectorProps) => {
-	
+
 	const t = useScopedI18n('page.bookingAppointment.profileSelector');
 
 	const { data: deleteResponse, trigger: deleteFamilyProfileTrigger, error: deleteError } = useDeleteFamilyProfileMutation();
@@ -97,7 +97,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 			<NoProfileContainer>
 				<div className='flex flex-row mb-2 cursor-pointer items-center' onClick={ () => onAddNewProfileBtn('other') }>
 					<icons.AddButton />
-					<Text className='ml-2' fontWeight='600' color={ colors.green.brandAccent } text={ t('addNewProfile') }/>
+					<Text className='ml-2' fontWeight='600' color={ colors.green.brandAccent } text={ t('addNewProfile') } />
 				</div>
 			</NoProfileContainer>
 		);
@@ -105,13 +105,13 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 
 	const onSelectProfile = (id: number, self: boolean) => {
 		setSelectedProfile(id);
-		// const selectedProf = familyProfiles?.find(prof => prof.id === id);
+		const selectedProf = familyProfiles?.find(prof => prof.id === id);
 		if (self && selfProfile) {
 			onSelected(selfProfile);
 		}
-		// if (!self && selectedProf) {
-		// 	onSelected(selectedProf);
-		// }
+		if (!self && selectedProf) {
+			onSelected(selectedProf);
+		}
 	};
 
 	const renderNoProfileSelf = () => {
@@ -141,9 +141,9 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 					fontSize='24px'
 					fontWeight='700'
 					lineHeight='38px'
-					text={ `${t('deleteModal.heading')} "${selectedProfileOnDelete?.name}" ?` } />
+					text={ `${ t('deleteModal.heading') } "${ selectedProfileOnDelete?.name }" ?` } />
 				<div className='flex flex-row gap-x-5 w-full'>
-					<Button className='sub-button color-default' theme='primary' label='Ya' onClick={ async() => {
+					<Button className='sub-button color-default' theme='primary' label='Ya' onClick={ async () => {
 						setShowDeleteModal(false);
 						await deleteFamilyProfileTrigger({ id: selectedIdFamilyProfile ?? -1 });
 					} } />
@@ -190,7 +190,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 				className='flex flex-col md:flex-row gap-[12px] md:gap-[30px] md:overflow-x-auto'
 			>
 				{ /* <ProfileCard /> */ }
-				 { isEmpty(familyProfiles) || selfProfile === null
+				{ isEmpty(familyProfiles) || selfProfile === null
 					? renderNoProfile()
 					:
 					<>

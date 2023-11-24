@@ -36,29 +36,21 @@ const HospitalServices = ({
 	const detail = Object.values(HospitalDetail || []);
 
 	const renderContent = (
-		<div className='mt-10'>
-			<Breadcrumbs datas={ breadcrumbsPath } />
-
-			<Text fontSize='24px' fontWeight='900' className='mt-6' color={ colors.paradiso.default }>
+		<div>
+			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
 				{ detail?.[0]?.name }
 			</Text>
 
-			<div className='mt-4 md:mt-8 w-full'>
+			<div className='mt-[32px]'>
 				<CustomCarousel arrowButton>
 					{ (detail?.[0]?.img_url ?? [])?.map((image: string, index: any) => {
 						return (
-							<div key={ index } className='relative overflow-hidden bg-white rounded-[5px] h-[220px] sm:h-[420px] sm:w-full'>
-								{ image && (
-									<Image
-										key={ `carousel-nav-${ index }` }
-										src={ image }
-										alt='slider'
-										className='object-cover'
-										sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-										fill
-									/>
-								) }
-							</div>
+							<img
+								key={ `carousel-nav-${ index }` }
+								src={ image }
+								alt='slider'
+								className='bg-white h-[220px] sm:h-[420px] sm:w-full rounded-[5px] object-cover w-full'
+							/>
 						);
 					}) }
 				</CustomCarousel>
@@ -77,9 +69,14 @@ const HospitalServices = ({
 	return (
 		<HospitalServiceStyle>
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
-				<div className='content-wrapper mt-[64px]'>
-					<div className='rightSide sm:ml-[32px]'>
-						{ renderContent }
+				<div>
+					<div className='content-wrapper mt-[104px] flex flex-col'>
+						<div className='mb-[20px] sm:ml-[32px]'>
+							<Breadcrumbs datas={ breadcrumbsPath } />
+						</div>
+						<div className='rightSide sm:ml-[32px]'>
+							{ renderContent }
+						</div>
 					</div>
 				</div>
 			</div>

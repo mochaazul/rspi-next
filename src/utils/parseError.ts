@@ -3,6 +3,8 @@ export const isTokenError = (err: Error) => {
 		return true;
 	if (err.message.toLowerCase().includes('token is expired'))
 		return true;
+	if (err.message.toLowerCase().includes('signed out because your account is signed in from another device'))
+		return true;
 
 	return false;
 };
