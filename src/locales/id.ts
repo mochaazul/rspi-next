@@ -773,10 +773,21 @@ export default {
 
 				},
 				recommendDoctorModal: {
-					header: 'Apakah Anda akan merekomendasikan dokter Anda kepada teman atau keluarga Anda?'
+					header: 'Apakah Anda akan merekomendasikan dokter Anda kepada teman atau keluarga Anda?',
+					rating: [
+						'Sangat tidak direkomendasikan',
+						'Sangat direkomendasikan'
+					],
+					feedback: {
+						heading: 'Apa yang Anda sukai dari dokter Anda?',
+						notesInputLabel: 'Beritahu kami lebih lanjut',
+						notesInputPlaceholder: 'Masukkan deskripsi...',
+						optionalLabel: '(Opsional)',
+						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.'
+					}
 				},
-				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.'
-
+				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.',
+				btnConsultationSchedule: 'Jadwalkan Konsultasi'
 			},
 			jadwalKunjungan: {
 				label: {
@@ -803,6 +814,18 @@ export default {
 				},
 				teleconsultationLabel: 'Telekonsultasi',
 				offlineConsultation: 'Konsultasi Tatap Muka'
+			},
+			cancelBooking: {
+				heading: 'Konfirmasi Pembatalan',
+				warningText: 'Apakah Anda yakin ingin membatalkan janji temu dengan dokter?',
+				patientData: {
+					heading: 'Data Pasien',
+					nameLabel: 'Nama : ',
+					dobLabel: 'Tanggal Lahir : ',
+					phoneLabel: 'No HP : ',
+					consultationScheduleLabel: 'Jadwal Konsultasi',
+					btnSubmitLabel: 'Batalkan Kunjungan'
+				}
 			}
 		},
 		findDoctor: {

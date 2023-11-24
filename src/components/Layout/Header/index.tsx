@@ -52,7 +52,7 @@ export const Header = ({
 }) => {
 
 	const router = useRouter();
-	const { mutate } = useSWRConfig();
+	const { mutate, cache } = useSWRConfig();
 	const currentLang = useCurrentLocale();
 	const t = useScopedI18n('navMenu');
 
@@ -69,17 +69,18 @@ export const Header = ({
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const clearSWRCache = () => mutate(
-		() => true,
-		undefined,
-		false
-	);
+	const clearSWRCache = async () => {
+		const keys = cache.keys();
+		for (const key of keys) {
+			cache.delete(key);
+		}
+	};
 
 	const handleClick = async () => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
+			await clearSWRCache();
 			router.refresh();
-			clearSWRCache();
 		}
 	};
 

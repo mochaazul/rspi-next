@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import { FormikProps, useFormik } from 'formik';
 import Image from 'next/image';
+import { useSWRConfig } from 'swr';
 
 import { icons, colors, regExp } from '@/constant';
 import { cookiesHelper } from '@/helpers';
@@ -18,7 +19,6 @@ import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import NotificationPanel from '@/components/ui/NotificationPanel';
-import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import SubMenuPage from '@/components/ui/SubMenuPage';
 import Form from '@/components/ui/Form';
 import HorizontalInputWrapper from '@/components/ui/PageComponents/UserInformationSections/HorizontalInputWrapper';
@@ -67,14 +67,15 @@ type UploadPhotoTypeState = {
 export default function Page() {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
-	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile('user-information');
-	const { data: visitHospitalHistory } = useGetVisitHistory();
+	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile('user-information-page');
+	const { data: visitHospitalHistory } = useGetVisitHistory(`${ patientProfile?.data?.id }`);
 	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: updateEmail } = useUpdateEmail();
 	const { trigger: updateProfile, isMutating: loadingUpdateProfile } = useUpdateProfile();
 	const { trigger: checkPin } = usePostCheckPinMutation();
 
+	const { cache } = useSWRConfig();
 	const navigate = useRouter();
 	const t = useScopedI18n('page.profilePage');
 	const tModalPin = useScopedI18n('modalDialog.pin');
@@ -215,8 +216,16 @@ export default function Page() {
 	// 	}
 	// };
 
+	const clearSWRCache = async () => {
+		const keys = cache.keys();
+		for (const key of keys) {
+			cache.delete(key);
+		}
+	};
+
 	const removeUserDatas = async () => {
 		await cookiesHelper.clearStorage();
+		await clearSWRCache();
 		navigate.replace('/login');
 	};
 

@@ -774,9 +774,21 @@ export default {
 					recommendDoctor: 'Would you recommend your doctor?'
 				},
 				recommendDoctorModal: {
-					header: 'Would you recommmend your doctor to your friends or family?'
+					header: 'Would you recommmend your doctor to your friends or family?',
+					rating: [
+						'Highly not recommend',
+						'Highly recommend'
+					],
+					feedback: {
+						heading: 'What do you love about your doctor?',
+						notesInputLabel: 'Tell us more',
+						notesInputPlaceholder: 'Enter a description...',
+						optionalLabel: '(Optional)',
+						smallNotes: 'This would help us to keep improving our service.'
+					}
 				},
-				empty: 'You do not have any visit histories yet.'
+				empty: 'You do not have any visit histories yet.',
+				btnConsultationSchedule: 'Schedule a Consultation'
 			},
 			jadwalKunjungan: {
 				label: {
@@ -803,6 +815,18 @@ export default {
 				},
 				teleconsultationLabel: 'Telekonsultasi',
 				offlineConsultation: 'Face-to-face Consultation'
+			},
+			cancelBooking: {
+				heading: 'Confirmation of Cancellation',
+				warningText: 'Are you sure you want to cancel your doctor\'s appointment?',
+				patientData: {
+					heading: 'Patient\'s Data',
+					nameLabel: 'Name : ',
+					dobLabel: 'Date of Birth : ',
+					phoneLabel: 'Phone : ',
+					consultationScheduleLabel: 'Consultation Schedule',
+					btnSubmitLabel: 'Cancel Consultation'
+				}
 			}
 		},
 		findDoctor: {

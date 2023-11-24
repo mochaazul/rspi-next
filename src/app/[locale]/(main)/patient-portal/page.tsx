@@ -29,6 +29,9 @@ type MenuType = {
 };
 
 const PatientPortal = () => {
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('patient-portal-page');
+	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(`${ getProfileResponse?.data?.id }`);
+
 	const [activeTabIndex, setActiveTabIndex] = useState(1);
 	const [headerOpened, setHeaderOpened] = useState<boolean>(false);
 	const [shouldEnterPin, setShouldEnterPin] = useState<boolean>(false);
@@ -37,9 +40,6 @@ const PatientPortal = () => {
 	const params = useParams();
 	const tabsRef = useRef<any>([]);
 	const t = useScopedI18n('page.patientPortal');
-
-	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory();
-	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('patient-portal');
 
 	const lastVisitedHospital = getLastVisitedHospitalHelper(visitHistoryResponse?.data || []);
 	const tabMenuLabel: MenuType[] = [
@@ -135,7 +135,7 @@ const PatientPortal = () => {
 				</button>);
 			} else {
 				return (
-					<>
+					<div key={ menuItem.id } className='flex flex-col'>
 						<button
 							key={ menuItem.id }
 							ref={ el => (tabsRef.current[menuItem.id] = el) }
@@ -161,7 +161,7 @@ const PatientPortal = () => {
 									color={ activeTabIndex === child.id ? colors.paradiso.default : colors.grey.dark } />
 							</button>
 						)) }
-					</>
+					</div>
 				);
 			}
 		});

@@ -23,6 +23,8 @@ interface PropsType {
 const feedbackPills = ['Communication', 'Professionalism', 'Attitude', 'Skill', 'Timely', 'Knowledge'];
 
 const Rating = ({ onChange, value }: { value: string, onChange: (value: string) => void; }) => {
+	const t = useScopedI18n('page.patientPortal.riwayatKunjungan.recommendDoctorModal.rating');
+
 	const options = Array.from({ length: 10 }, (_, i) => i + 1);
 
 	return (<div>
@@ -38,12 +40,12 @@ const Rating = ({ onChange, value }: { value: string, onChange: (value: string) 
 			}
 		</RadioGroup>
 		<div className='flex justify-between mt-[8px]'>
-			<Text text='Highly not recommend'
+			<Text text={ t('0') }
 				fontSize='12px'
 				fontWeight='400'
 				color='#6A6D81'
 			/>
-			<Text text='Highly recommend'
+			<Text text={ t('1') }
 				fontSize='12px'
 				fontWeight='400'
 				color='#6A6D81'
@@ -53,6 +55,8 @@ const Rating = ({ onChange, value }: { value: string, onChange: (value: string) 
 };
 
 const Feedback = ({ onChange, value }: { value: string[], onChange: (value: string[]) => void; }) => {
+	const t = useScopedI18n('page.patientPortal.riwayatKunjungan.recommendDoctorModal.feedback');
+
 	const onChecked = (optValue: string) => {
 		const isChecked = value.includes(optValue);
 		if (isChecked) {
@@ -67,7 +71,7 @@ const Feedback = ({ onChange, value }: { value: string[], onChange: (value: stri
 	};
 
 	return (<div className='mt-[32px]'>
-		<Text text={ 'What do you love about your doctor?' } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
+		<Text text={ t('heading') } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
 		<div className='flex	flex-wrap gap-[11px] mt-[32px]'>
 			{
 				feedbackPills.map((opt, index) => (
@@ -88,24 +92,26 @@ const Feedback = ({ onChange, value }: { value: string[], onChange: (value: stri
 };
 
 const FeedbackNotes = ({ onChange, value }: { value: string, onChange: (value: string) => void; }) => {
+	const t = useScopedI18n('page.patientPortal.riwayatKunjungan.recommendDoctorModal.feedback');
+
 	return (
 		<div className='mt-[32px] '>
 			<div className='flex gap-[6px] mb-[6px]'>
-				<Text text='Tell us more'
+				<Text text={ t('notesInputLabel') }
 					fontSize='14px'
 					fontWeight='500'
 					lineHeight='20px' />
-				<Text text='(Optional)'
+				<Text text={ t('optionalLabel') }
 					fontSize='14px'
 					fontWeight='500'
 					lineHeight='20px'
 					color='#6A6D81'
 				/>
 			</div>
-			<StyledTextArea placeholder='Enter a description...' value={ value } onChange={ evt => {
+			<StyledTextArea placeholder={ t('notesInputPlaceholder') } value={ value } onChange={ evt => {
 				onChange(evt.target.value);
 			} } />
-			<Text text='This would help us to keep improving our service.'
+			<Text text={ t('smallNotes') }
 				fontSize='14px'
 				fontWeight='500'
 				lineHeight='20px'

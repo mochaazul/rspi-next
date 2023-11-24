@@ -14,7 +14,7 @@ import {
 import fetcher, { ApiOptions } from '../utils/fetcher';
 
 export const useGetProfile = (key?: string, options?: ApiOptions) => {
-	return useSWR(['profile', key], () => fetcher<UserDataDetail>('profile', options), { revalidateOnMount: true });
+	return useSWR(['profile', key ?? 'user'], () => fetcher<UserDataDetail>('profile', options), { revalidateOnMount: true });
 };
 
 export const useGetFamilyProfile = (options?: ApiOptions) => {

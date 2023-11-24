@@ -3,7 +3,7 @@ import { icons } from '@/constant';
 
 import { StyleProps, NotificationStyle } from './style';
 
-export interface PropsTypes extends StyleProps {
+export interface PropsTypes extends Omit<StyleProps, '$visible'> {
 	showIconLeft?: boolean;
 	showIconRight?: boolean;
 	showIconLeftOverride?: JSX.Element;
@@ -12,6 +12,7 @@ export interface PropsTypes extends StyleProps {
 	onClickRightIcon?: () => any;
 	text?: string;
 	children?: JSX.Element;
+	visible?: boolean;
 }
 
 const NotificationPanel = ({
@@ -26,7 +27,7 @@ const NotificationPanel = ({
 	const IconStatus = props.mode === 'success' ? icons.Check : icons.Close;
 
 	return (
-		<NotificationStyle mode={ props.mode } visible={ props.visible } className='flex items-center justify-center rounded-[4px] min-w-full'>
+		<NotificationStyle mode={ props.mode } $visible={ props.visible } className='flex items-center justify-center rounded-[4px] min-w-full'>
 			<div className={ `grow-0 mr-[8px] ${ showIconLeft === false && 'hidden' }` }>
 				<div className={ `icon-cont rounded-full p-[3px] ${ !!onClickLeftIcon === true && 'cursor-pointer' }` } onClick={ onClickLeftIcon && onClickLeftIcon }>
 					{
