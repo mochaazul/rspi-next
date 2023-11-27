@@ -13,7 +13,6 @@ export default function SubLayout({ params: { locale }, children }: { params: { 
 	return (
 		<SWRConfig
 			value={ {
-
 				onError: (err: any, key: string) => {
 					if (err.message.toLowerCase().includes('token is invalid') || err.message.toLowerCase().includes('token is expired'))
 						setLoginModalVisible(true);
