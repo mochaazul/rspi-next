@@ -31,7 +31,7 @@ const NeedLoginModal = ({ visible, toggler }: Props) => {
 				/>
 				<Button className='max-w-full' theme='primary' onClick={ () => {
 					toggler(false);
-					router.push('/login');
+					router.push('/login?ref=unauthorized');
 				} }>Login</Button>
 			</div>
 		</Modal>

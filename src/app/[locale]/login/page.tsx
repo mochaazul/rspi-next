@@ -55,9 +55,16 @@ const LoginPage = () => {
 				if (response?.stat_code === 'APP:SUCCESS') {
 					setSuccessMessage(`${ t('welcome') } ${ response?.data?.email }`);
 					setNotifMode('success');
-					navigate.replace('/');
+
+					if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
+						navigate.back();
+					} else
+						navigate.replace('/');
+
 				} else {
-					setErrorUser({ stat_msg: response?.stat_msg ?? '' });
+					setErrorUser({
+						stat_msg: response?.stat_msg ?? ''
+					});
 					setNotifMode('error');
 				}
 			} catch (error: any) {
