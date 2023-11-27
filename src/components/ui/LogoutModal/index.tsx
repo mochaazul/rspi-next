@@ -11,7 +11,7 @@ const LogoutModal = ({ visible, toggler }:Props) => {
 	const router = useRouter();
 
 	return (
-		<Modal visible={ visible } onClose={ () => console.log }>
+		<Modal visible={ visible } onClose={ () => console.log } backdropClassname='backdrop-blur-md'>
 			<div className='flex flex-col items-center'>
 				<center>
 					<icons.WarningIcon />

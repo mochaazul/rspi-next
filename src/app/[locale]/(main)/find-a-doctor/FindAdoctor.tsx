@@ -94,7 +94,7 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 
 	const hasSearchParams = () => {
 		const searchParamObj = Object.fromEntries(searchParams);
-		const paramFound = !_.isEmpty(searchParamObj['specialty_category']) || !_.isEmpty(searchParamObj['hospital_code']) || searchParamObj['telemedicine'] === 'true';
+		const paramFound = !_.isEmpty(searchParamObj['clinic_code']) || !_.isEmpty(searchParamObj['hospital_code']) || searchParamObj['telemedicine'] === 'true';
 		return paramFound;
 	};
 
