@@ -213,38 +213,41 @@ const NewsHealthArticlesPage = ({
 					<div className='mobile-view w-full sm:hidden'>
 						<CardsScrollHorizontal >
 							{
-								Object.values(articlesData || []).map((data, index) => (
-									<Card
-										key={ index }
-										image={ data?.img_url }
-										imageHeight='200px'
-										header={
-											<div className='flex items-center'>
-												<div>
-													<Button
-														theme='primary'
-														$hoverTheme='outline'
-														label={ data?.category?.charAt(0).toUpperCase() + data.category.slice(1) }
-														className='btn-category'
-													/>
+								Object.values(articlesData || []).map((data, index) => {
+									return (
+										<Card
+											key={ index }
+											id={ data?.id }
+											image={ data?.img_url }
+											imageHeight='200px'
+											header={
+												<div className='flex items-center'>
+													<div>
+														<Button
+															theme='primary'
+															$hoverTheme='outline'
+															label={ data?.category?.charAt(0).toUpperCase() + data.category.slice(1) }
+															className='btn-category'
+														/>
+													</div>
+													<div className='ml-[10px]'>
+														<Text
+															fontSize='14px'
+															fontWeight='400'
+															lineHeight='17px'
+															color={ colors.grey.dark }
+															text={ moment(Object.values(articlesData || [])[0]?.posted_date).format('dddd, DD MMM YYYY') }
+														/>
+													</div>
 												</div>
-												<div className='ml-[10px]'>
-													<Text
-														fontSize='14px'
-														fontWeight='400'
-														lineHeight='17px'
-														color={ colors.grey.dark }
-														text={ moment(Object.values(articlesData || [])[0]?.posted_date).format('dddd, DD MMM YYYY') }
-													/>
-												</div>
-											</div>
-										}
-										content={ <CardContentWithInner title={ data.title } description={ data.short_description } author={ data?.news_author?.doctor_name } /> }
-										footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetails') } /> }
-										className='mb-0'
-										iconShare={ true }
-									/>
-								))
+											}
+											content={ <CardContentWithInner title={ data.title } description={ data.short_description } author={ data?.news_author?.doctor_name } /> }
+											footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetails') } /> }
+											className='mb-0'
+											iconShare={ true }
+										/>
+									);
+								})
 							}
 						</CardsScrollHorizontal>
 					</div>
