@@ -51,7 +51,8 @@ export default {
 			patientPortal: 'Portal Pasien',
 			patientInformation: 'Informasi Pasien',
 			logout: 'Keluar'
-		}
+		},
+		logoutSuccess: 'Anda berhasil logout'
 	},
 	validation: {
 		emailFormat: 'Email format salah',
