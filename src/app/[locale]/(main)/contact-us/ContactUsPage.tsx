@@ -28,7 +28,7 @@ const ContactUsPage = ({
 	breadcrumbsPath,
 }: {
 	breadcrumbsPath: BreadcrumbsType['datas'],
-	hospitalSelector: HospitalState,
+	hospitalSelector: HospitalDetail[],
 }) => {
 	const t = useScopedI18n('page.contactUs');
 
