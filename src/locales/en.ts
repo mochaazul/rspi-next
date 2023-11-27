@@ -42,7 +42,8 @@ export default {
 			patientPortal: 'Patient Portal',
 			patientInformation: 'Patient Information',
 			logout: 'Logout'
-		}
+		},
+		logoutSuccess: 'You are successfully logged out'
 	},
 	validation: {
 		emailFormat: 'Invalid email format',
