@@ -22,6 +22,7 @@ interface ModalProps {
 	containerClassName?: string;
 	bottomSheet?: boolean,
 	header?: JSX.Element;
+	backdropClassname?: string
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -37,7 +38,8 @@ const Modal: React.FC<ModalProps> = ({
 	overflow,
 	containerClassName,
 	bottomSheet = false,
-	header
+	header,
+	backdropClassname
 }) => {
 	const [modalOpen, setModalOpen] = useState(visible);
 
@@ -69,7 +71,7 @@ const Modal: React.FC<ModalProps> = ({
 				overflow={ overflow }
 			>
 				<div className={ `modal-wrapper ${ bottomSheet && 'bottom-sheet' } ` }>
-					<div className={ `modal-backdrop ${ visible ? 'backdrop-open-animation' : 'backdrop-close-animation' }` } onClick={ onClose } />
+					<div className={ `modal-backdrop ${ visible ? 'backdrop-open-animation' : 'backdrop-close-animation' } ${backdropClassname}` } onClick={ onClose } />
 
 					<div id='modal-content' className={ ` ${ bottomSheet && 'bottom-sheet' } modal-content-container ${ visible ? 'open-animation' : 'close-animation' } ${ containerClassName }` }>
 						{

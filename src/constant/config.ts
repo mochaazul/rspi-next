@@ -26,3 +26,6 @@ export const appStage = process.env.NEXT_PUBLIC_STAGE as keyof typeof environmen
 export const config = environment['dev'];
 
 export const baseUrl = config.baseUrl ?? 'localhost:3000/v1';
+
+export const appStoreMobileUrl = 'https://apps.apple.com/id/app/rspi-mobile/id1181707029';
+export const playStoreMobileUrl = 'https://play.google.com/store/apps/details?id=id.co.rspondokindah';

@@ -60,9 +60,15 @@ const LoginPage = () => {
 					setNotifMode('success');
 					setLoadingNavigate(true);
 
-					navigate.replace('/');
+					if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
+						navigate.back();
+					} else
+						navigate.replace('/');
+
 				} else {
-					setErrorUser({ stat_msg: response?.stat_msg ?? '' });
+					setErrorUser({
+						stat_msg: response?.stat_msg ?? ''
+					});
 					setNotifMode('error');
 				}
 			} catch (error: any) {

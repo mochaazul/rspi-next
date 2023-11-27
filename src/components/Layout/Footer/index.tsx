@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 
 import { appStage, config } from '@/config';
 import { Images, colors } from '@/constant';
@@ -12,11 +14,11 @@ import {
 	Socmed
 } from '@/components/ui';
 import { FooterDetail } from '@/interface/footer';
+import { HospitalDetail, HospitalState } from '@/interface/Hospital';
 import { useScopedI18n } from '@/locales/client';
+import { appStoreMobileUrl, playStoreMobileUrl } from '@/constant/config';
 
 import FooterStyled, { FooterContainer } from './style';
-import { HospitalDetail, HospitalState } from '@/interface/Hospital';
-import Image from 'next/image';
 
 const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalState; }) => {
 	const navigate = useRouter();
@@ -216,10 +218,20 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					<div>
 						{ renderCategoryTitle(t('getRSPIMobileLabel')) }
 						<div className='flex flex-col gap-4 md:flex-row'>
-							<a href='https://play.google.com/store/apps/details?id=id.co.rspondokindah&hl=id' target='blank' rel='norel norefferer'>
-								<Image src={ Images.GooglePlay.src } alt='google play icon' width={ 120 } height={ 37 } className='store-images' /></a>
-							<a href='https://apps.apple.com/id/app/rspi-mobile/id1181707029?l=id' target='blank' rel='norel norefferer'>
-								<Image src={ Images.AppStore.src } alt='app store icon' width={ 120 } height={ 37 } className='store-images' /></a>
+							<Link
+								href={ playStoreMobileUrl }
+								target='_blank'
+								rel='noopener noreferrer'
+							>
+								<Image src={ Images.GooglePlay.src } alt='google play icon' width={ 120 } height={ 37 } className='store-images' />
+							</Link>
+							<Link
+								href={ appStoreMobileUrl }
+								target='_blank'
+								rel='noopener noreferrer'
+							>
+								<Image src={ Images.AppStore.src } alt='app store icon' width={ 120 } height={ 37 } className='store-images' />
+							</Link>
 						</div>
 					</div>
 				</div>

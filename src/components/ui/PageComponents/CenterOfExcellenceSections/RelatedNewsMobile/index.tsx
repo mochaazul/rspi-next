@@ -18,7 +18,7 @@ const RelatedNewsMobile = (props: any) => {
 				(props?.centerOfExcellenceNewsByID ?? []).map((article: any, index: Key) => (
 					<Card
 						key={ index }
-						id={ article?.news?.id }
+						id={ article?.news?.news_id }
 						image={ article?.news?.img_url }
 						imageHeight='200px'
 						header={

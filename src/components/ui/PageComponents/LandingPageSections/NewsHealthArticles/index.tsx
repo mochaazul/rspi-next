@@ -54,26 +54,30 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 					<CardsScrollHorizontal customRef={ CardNewsWrapperRef }>
 						<>
 							{
-								articles?.map((article, index) => (
-									<Card
-										image={ article.img_url }
-										imageHeight='200px'
-										key={ index }
-										to={ `/news/${ article?.slug }` }
-										header={
-											<Text
-												text={ moment(splitDate(article?.posted_date)).locale(currLang)
-													.format('dddd, DD MMM YYYY') }
-												fontWeight='400'
-												fontSize='14px'
-												lineHeight='17px'
-												color={ colors.grey.dark }
-											/>
-										}
-										content={ <CardContentWithInner title={ article.title } description={ article.short_description } /> }
-										footer={ <CardFooter content={ t('readMoreBtnLabel') } /> }
-									/>
-								)) || []
+								articles?.map((article, index) => {
+									return (
+										<Card
+											id={ article?.id }
+											image={ article.img_url }
+											imageHeight='200px'
+											key={ index }
+											to={ `/news/${ article?.slug }` }
+											header={
+												<Text
+													text={ moment(splitDate(article?.posted_date)).locale(currLang)
+														.format('dddd, DD MMM YYYY') }
+													fontWeight='400'
+													fontSize='14px'
+													lineHeight='17px'
+													color={ colors.grey.dark }
+												/>
+											}
+											content={ <CardContentWithInner title={ article.title } description={ article.short_description } /> }
+											footer={ <CardFooter content={ t('readMoreBtnLabel') } /> }
+											iconShare={ true }
+										/>
+									);
+								}) || []
 							}
 						</>
 					</CardsScrollHorizontal>

@@ -36,6 +36,7 @@ export default {
 		findDoctor: 'Find a Doctor',
 		login: 'Login',
 		register: 'Register',
+		contactUs: 'Contact Us',
 		loginRegister: 'Login / Register',
 		bookAppointment: 'Book Appointment',
 		user: {
@@ -205,7 +206,10 @@ export default {
 				titleOptionsLabel: {
 					general: 'General Questions',
 					specific: 'Specific Questions'
-				}
+				},
+				errorSubmit: 'Submit contact us has failed',
+				successSubmit: 'Submit contact us has been successful',
+				handleButtonModalSubmit: 'Close',
 			},
 			faq: {
 				contactUsLabel: 'Contact Us',
@@ -899,7 +903,7 @@ export default {
 		},
 		topNav: {
 			welcome: 'Welcome',
-			contactUs: 'Hubungi Kami'
+			contactUs: 'Contact Us'
 		},
 		privacyPolicy: {
 			agreementStatement: {

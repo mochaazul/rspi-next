@@ -102,7 +102,7 @@ const ButtonStyle = styled.button<ButtonStyleType>`
   border-radius: 5px;
   padding: ${ props => props.noPadding ? '0px' : '12px 20px' };
 	${ props => `width: ${ props.width };` }
-  cursor: pointer;
+  cursor: ${ props => props.disabled ? 'default' : 'pointer' };
   font-size: 16px;
   font-weight: bold;
   border: none;
