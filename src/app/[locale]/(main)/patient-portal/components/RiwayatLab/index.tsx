@@ -66,9 +66,7 @@ const RiwayatLab = () => {
 									<td>{ labResult.date ? dayjs(labResult.date).format('dddd D MMMM YYYY') : '-' }</td>
 									<td>{ labResult.hospital || '-' }</td>
 									<td>{ labResult.doctor || '-' }</td>
-									<td>{
-										<LaporanBtn href={ `${ baseUrl }/patients/patient-portal/lab-histories/pdf?$episode=${ labResult.episode }&lab_episode=${ labResult.lab_episode }` } target='_blank' rel='noreferrer' >{ t('tableMenuLable.viewReport') }</LaporanBtn>
-									}</td>
+									<td>{ <LaporanBtn href={ `${ baseUrl }/patients/patient-portal/lab-histories/pdf?episode=${ labResult.episode }&lab_episode=${ labResult.lab_episode }` } target='_blank' rel='noreferrer' >{ t('tableMenuLable.viewReport') }</LaporanBtn> }</td>
 								</tr>
 							))
 						}

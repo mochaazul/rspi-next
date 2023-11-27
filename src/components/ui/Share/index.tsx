@@ -1,8 +1,10 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 
 import { icons, sosmedLink } from '@/constant';
 import Text from '@/components/ui/Text';
+import { baseUrl } from '@/config';
 
 interface PropsType {
 	id?: number;
@@ -37,25 +39,26 @@ const Share = (props: PropsType) => {
 	};
 
 	const copy = () => {
-		navigator.clipboard.writeText(window.location.href + '/' + props.id)
+		navigator.clipboard.writeText(baseUrl + '/' + props.id)
 			.then(() => {
 				alert('URL Link copied');
 			});
 	};
 
-	const handleClickSocialShare = (e) => {
-		console.log('e :>> ', e);
+	const handleClickSocialShare = (e: any) => {
 		e.stopPropagation();
-		// setIsHoverShare(prevHover => !prevHover);
+		setIsHoverShare(prevHover => !prevHover);
 	};
 
 	return (
 		<div
-			// onMouseEnter={ toggleMouseHoverShare(true) } 
-			// onMouseLeave={ toggleMouseHoverShare(false) } 
+			// onMouseEnter={ toggleMouseHoverShare(true) }
+			// onMouseLeave={ toggleMouseHoverShare(false) }
 			className='w-full'>
 			<div className='absolute right-0 mr-[10px] mt-[10px] z-50'>
-				<icons.SocialShare onClick={ handleClickSocialShare } />
+				<div onClick={ handleClickSocialShare }>
+					<icons.SocialShare />
+				</div>
 				<div
 					className={ `${ isHoverShare === false ? 'hidden' : 'fixed right-0 mr-[10px] mt-[50px] rounded-[10px]' } mt-[15px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }
 				// onMouseEnter={ toggleMouseHoverShare(true) }
@@ -63,16 +66,17 @@ const Share = (props: PropsType) => {
 				>
 					<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 						{ buttonSocmed.map((item, idx) => (
-							<div
+							<Link
 								key={ idx }
 								className='border-b border-gray flex py-4 px-4 items-center'
-								onClick={ () => window.open(item?.url + window.location.href + '/' + props.id) }
+								href={ item?.url + baseUrl + '/' + props.id }
+								target='_blank'
 							>
 								{ item?.icon }
 								<div className='ml-[10px]'>
 									<Text text={ item?.label } fontSize='16px' fontWeight='400' />
 								</div>
-							</div>
+							</Link>
 						)) }
 						<div
 							className='border-b border-gray flex py-4 px-4 items-center'

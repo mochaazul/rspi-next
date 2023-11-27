@@ -21,8 +21,10 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 
 	const responseCenterOfExcellence = await getCoe();
 
+	const newParam = decodeURIComponent(params?.slug);
+
 	const filteredResponseCenterOfExcellence = responseCenterOfExcellence?.data?.find(coe => {
-		return coe?.slug === params?.slug;
+		return coe?.slug === newParam;
 	});
 
 	const responseCenterOfExcellenceNewsByID = await getCenterOfExcellenceNewsByID({
@@ -34,7 +36,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 
 	const breadcrumbsPath = [
 		{ name: t('heading'), url: '#' },
-		{ url: '#', name: responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === params?.slug)?.title ?? '' }
+		{ url: '#', name: responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam)?.title ?? '' }
 	];
 
 	const renderRelatedNewsDesktop = () => {
@@ -84,16 +86,16 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='content-wrapper mt-[64px]'>
 						<div className='leftSide hidden sm:block w-[349px]'>
-							<CardMenu data={ responseCenterOfExcellence?.data } activeMenuIndex={ params?.slug } />
+							<CardMenu data={ responseCenterOfExcellence?.data } activeMenuIndex={ newParam } />
 						</div>
 						<div className='rightSide sm:ml-[32px]'>
 							<div>
 								{
-									responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === params?.slug).length > 0
+									responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length > 0
 										?
 										<ServiceLocation
-											content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === params?.slug) }
-											activeMenuIndex={ params?.slug }
+											content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
+											activeMenuIndex={ newParam }
 											centerOfExcellence={ responseCenterOfExcellence?.data }
 										/> : null
 								}
