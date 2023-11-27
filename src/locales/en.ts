@@ -36,6 +36,7 @@ export default {
 		findDoctor: 'Find a Doctor',
 		login: 'Login',
 		register: 'Register',
+		contactUs: 'Contact Us',
 		loginRegister: 'Login / Register',
 		bookAppointment: 'Book Appointment',
 		user: {

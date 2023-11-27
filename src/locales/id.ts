@@ -44,6 +44,7 @@ export default {
 		findDoctor: 'Cari Dokter',
 		login: 'Masuk',
 		register: 'Daftar',
+		contactUs: 'Hubungi Kami',
 		loginRegister: 'Masuk / Daftar',
 		bookAppointment: 'Buat Janji Temu',
 		user: {
