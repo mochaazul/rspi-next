@@ -235,7 +235,7 @@ const BookAppointment = () => {
 					url: '/patient-portal',
 					notif_type: '1',
 					desc_type: 'Push by email account',
-					email_patient: selectedProfile?.email,
+					email_patient: selfProfile?.email,
 					medical_record: selectedProfile?.no_mr ?? '',
 					sent_datetime: timeSlot?.date + ' ' + timeSlot?.session_app_start,
 					read_flag: '0'

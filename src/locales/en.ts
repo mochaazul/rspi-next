@@ -205,7 +205,10 @@ export default {
 				titleOptionsLabel: {
 					general: 'General Questions',
 					specific: 'Specific Questions'
-				}
+				},
+				errorSubmit: 'Submit contact us has failed',
+				successSubmit: 'Submit contact us has been successful',
+				handleButtonModalSubmit: 'Close',
 			},
 			faq: {
 				contactUsLabel: 'Contact Us',

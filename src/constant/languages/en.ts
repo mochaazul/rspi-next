@@ -82,7 +82,10 @@ export default {
 				submitBtnLabel: 'Send Message',
 				form: {
 					allHospitalLabel: 'All RSPI Hospitals'
-				}
+				},
+				errorSubmit: 'Submit contact us has failed',
+				successSubmit: 'Submit contact us has been successful',
+				handleButtonModalSubmit: 'Close',
 			},
 			faq: {
 				heading: 'FAQ',

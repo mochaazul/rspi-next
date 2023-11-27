@@ -206,7 +206,10 @@ export default {
 				titleOptionsLabel: {
 					general: 'Pertanyaan Umum',
 					specific: 'Pertanyaan Khusus'
-				}
+				},
+				errorSubmit: 'Submit form hubungi kami telah gagal',
+				successSubmit: 'Submit form hubungi kami telah berhasil',
+				handleButtonModalSubmit: 'Tutup',
 			},
 			faq: {
 				contactUsLabel: 'Hubungi Kami',
