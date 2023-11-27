@@ -10,7 +10,7 @@ export interface CardStyleType {
   hoverHeight?: string;
 }
 
-export const CardWrapper = styled(Link)`
+export const CardWrapper = styled.div`
   perspective: 1000px;
   margin: 32px 0;
   width: 350px;
