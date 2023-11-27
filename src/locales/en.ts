@@ -147,6 +147,10 @@ export default {
 
 			}
 		},
+		unsubscribe: {
+			heading: 'Unsubscribe was successful',
+			subHeading: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again'
+		},
 		awards: {
 			heading: 'Accreditations & Awards',
 			subHeading: 'We are committed to being a world-class healthcare organization. We strongly believe that operational excellence and patient safety are integral parts of meeting and exceeding our customers\' expectations.'
@@ -503,7 +507,11 @@ export default {
 				emailHeading: 'E-mail',
 				operationalHourHeading: 'Operational Hours',
 			},
-			readMoreLabel: 'Read More'
+			readMoreLabel: 'Read More',
+			medicalSpecialities: {
+				heading: 'Medical Specialities',
+				content: 'Specific health needs require specific treatment according to your condition. Our outpatient clinic services are supported by doctors from various specialties and subspecialties and medical professionals to ensure the best service for you.'
+			}
 		},
 		news: {
 			tabPillsLabel: {

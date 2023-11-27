@@ -12,11 +12,12 @@ import { getFAS } from '@/lib/api/clinics';
 import getSession from '@/session/server';
 
 export async function marAllReadNotif() {
+	
 	const session = await getSession();
 
 	return postMarkNotifAllRead({
 		query: {
-			medical_record: session.user?.medical_record,
+			medical_record: session.user?.medical_record ?? '',
 			email: session.user?.email,
 		},
 	});
@@ -32,9 +33,9 @@ export const notificationResponseFetch = async () => {
 
 	// TO DO : ambil mr & email ambil dari session
 
-	return session.user?.medical_record ? await getNotificationResponse({
+	return session.user?.email ? await getNotificationResponse({
 		query: {
-			medical_record: session.user?.medical_record,
+			medical_record: session.user?.medical_record ?? '',
 			email: session.user?.email,
 		},
 	}) : null;

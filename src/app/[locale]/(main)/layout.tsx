@@ -32,7 +32,6 @@ export default async function RootLayout({
 	const footers = await footersFetch();
 	const centerOfExcellence = await centerOfExcellenceFetch();
 	const facilityServices = await facilityServicesFetch();
-	const notificationResponse = await notificationResponseFetch();
 
 	return (
 		<>
@@ -41,7 +40,6 @@ export default async function RootLayout({
 				hospitalData={ hospitals.data }
 				centerOfExcellenceData={ centerOfExcellence.data }
 				facilityServicesData={ facilityServices.data }
-				notificationResponseData={ notificationResponse?.data }
 				marAllReadNotifFunc={ marAllReadNotif }
 				footersData={ footers.data }
 			/>

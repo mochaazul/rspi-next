@@ -15,7 +15,6 @@ import {
 	FacilityServicesDetail,
 	FooterDetail,
 	HospitalState,
-	NotificationResponse,
 	UserSessionData,
 } from '@/interface';
 import colors from '@/constant/colors';
@@ -26,7 +25,7 @@ import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import MainNavLanguage from '@/components/ui/MainNavLanguage';
 import Modal from '@/components/ui/Modal';
-
+import { useNotification } from '@/lib/api/client/header';
 import HeaderStyle from './style';
 
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';
@@ -38,7 +37,6 @@ export const Header = ({
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData,
-	notificationResponseData,
 	marAllReadNotifFunc,
 	footersData,
 }: {
@@ -46,7 +44,6 @@ export const Header = ({
 	hospitalData: HospitalState,
 	centerOfExcellenceData: CenterOfExcellenceState,
 	facilityServicesData: FacilityServicesDetail[],
-	notificationResponseData?: NotificationResponse,
 	marAllReadNotifFunc: () => any,
 	footersData: FooterDetail[],
 }) => {
@@ -63,20 +60,40 @@ export const Header = ({
 	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
 	const [showNotification, setShowNotification] = useState(false);
 
+	const onclickMarkAllNotif = () => {
+		marAllReadNotifFunc()
+			.then(() => {
+				setShowNotification(true);
+				mutate('getNotification');
+			});
+	};
+
 	const isLoggedIn = !!session?.token;
 
 	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	const clearSWRCache = async () => {
+	const paramGetNotif = {
+		query: {
+			medical_record: session.user?.medical_record ?? '',
+			email: session.user?.email,
+		},
+	};
+	const {
+		data: getNotification,
+	} = useNotification(paramGetNotif);
+
+	const notificationResponseData = getNotification?.data;
+
+	const clearSWRCache = async() => {
 		const keys = cache.keys();
 		for (const key of keys) {
 			cache.delete(key);
 		}
 	};
 
-	const handleClick = async () => {
+	const handleClick = async() => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			await clearSWRCache();
@@ -117,14 +134,18 @@ export const Header = ({
 					{
 						notificationResponseData?.notification?.map((item, idx) => (
 							<div key={ idx } className='pb-4'>
-								<div className='flex flex-col py-4 px-[20px]' style={ {
-									backgroundColor: item.flag === 0 ? 'rgba(0, 0, 0, 0)' : 'rgba(53, 136, 136, 0.1)'
-								} }>
+								<div className='flex flex-col py-4 px-[20px]'
+									onClick={ () => {
+										router.push(`${ item?.url }`);
+									} }
+									style={ {
+										backgroundColor: item.flag === 0 ? 'rgba(53, 136, 136, 0.1)' : 'rgba(0, 0, 0, 0)'
+									} }>
 									<div className='flex justify-between'>
 										<Text
 											fontSize='12px'
-											fontWeight='400'
-											textAlign='center'
+											fontWeight={ item.flag === 0 ? '700' : '400' }
+											textAlign='left'
 											color={ colors.grey.pencil }
 											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
 										/>
@@ -132,8 +153,8 @@ export const Header = ({
 									<Text
 										fontSize='14px'
 										lineHeight='20px'
-										fontWeight='700'
-										textAlign='center'
+										fontWeight={ item.flag === 0 ? '700' : '400' }
+										textAlign='left'
 										color={ colors.black.default }
 										text={ currentLang === 'id' ? item?.judul_idn : item?.judul_en }
 										className='flex justify-start'
@@ -141,8 +162,8 @@ export const Header = ({
 									<Text
 										fontSize='12px'
 										lineHeight='20px'
-										fontWeight='400'
-										textAlign='center'
+										fontWeight={ item.flag === 0 ? '700' : '400' }
+										textAlign='left'
 										color={ colors.black.default }
 										text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
 										className='flex justify-start pt-2'
@@ -184,7 +205,7 @@ export const Header = ({
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
 										{ Object.values(hospitalData || [])?.map((item, idx) => (
-											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center' onClick={ () => {
+											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100 cursor-pointer' onClick={ () => {
 												// redirect to hospital detail
 												router.push(`/hospital/${ item?.id }`);
 											} }>
@@ -277,11 +298,8 @@ export const Header = ({
 						<div className='translate'>
 							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
 								<icons.Notif
-									onClick={ () => marAllReadNotifFunc()
-										.then(() => {
-											setShowNotification(true);
-											notificationResponseFetch();
-										}) }
+									onClick={ onclickMarkAllNotif }
+									className='cursor-pointer'
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
@@ -296,7 +314,13 @@ export const Header = ({
 									isLoggedIn ?
 										<>
 											<div className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<icons.Notif />
+												<icons.Notif onClick={ () => marAllReadNotifFunc()
+													.then(() => {
+														setShowNotification(true);
+														notificationResponseFetch();
+													}) }
+												className='cursor-pointer'
+												/>
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponseData?.total_unread }</span>
 											</div>

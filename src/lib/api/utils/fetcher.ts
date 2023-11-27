@@ -38,6 +38,7 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		...safeQueryParam,
 		...safePagination
 	});
+	
 
 	if (options && options.body) {
 		fetchOpt['body'] = options.isUpload ? options.body : JSON.stringify(options.body);
@@ -49,7 +50,7 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		...fetchOpt,
 	});
 	const response = await res.json();
-
+	
 	if (!res.ok) {
 		if (typeof window === 'undefined') { // check the origin of the caller is server rendered / client rendered
 			// just use console.error since throw, would result in crashing the service

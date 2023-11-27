@@ -18,7 +18,7 @@ export const useGetDoctors = (options?: ApiOptions) => {
 };
 
 export const useGetDoctorDetail = (options?: ApiOptions) => {
-	return useSWR(['masterDoctor', options], () => fetcher<FindDoctorDetail>('doctorSchedule', options), { shouldRetryOnError: false });
+	return useSWR(['doctorSchedule', options], () => fetcher<FindDoctorDetail>('doctorSchedule', options));
 };
 
 export const useGetDoctorCalendar = (startDate: string, hospital?: string, options?: ApiOptions) => {

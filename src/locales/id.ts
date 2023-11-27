@@ -23,6 +23,10 @@ export default {
 		male: 'Laki-laki',
 		female: 'Perempuan'
 	},
+	unsubscribe: {
+		heading: 'Berhenti berlangganan telah berhasil',
+		subHeading: 'Berhenti berlangganan berita terupdate tentang RSPI berhasil, semoga kita dapat berjumpa kembali'
+	},
 	modalDialog: {
 		pin: {
 			header: 'Masukkan PIN',
@@ -143,6 +147,10 @@ export default {
 				},
 				btnLabel: 'Oke'
 			}
+		},
+		unsubscribe: {
+			heading: 'Berhasil Berhenti Berlangganan',
+			subHeading: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali'
 		},
 		awards: {
 			heading: 'Accreditations & Awards',
@@ -501,7 +509,11 @@ export default {
 				emailHeading: 'Email',
 				operationalHourHeading: 'Jam Operasional Patient Relations',
 			},
-			readMoreLabel: 'Baca Selengkapnya'
+			readMoreLabel: 'Baca Selengkapnya',
+			medicalSpecialities: {
+				heading: 'Medical Specialities',
+				content: 'Kebutuhan kesehatan yang spesifik membutuhkan penanganan yang spesifik pula sesuai dengan kondisi yang Anda alami. Layanan klinik rawat jalan kami didukung oleh dokter dari berbagai spesialisasi dan subspesialisasi serta tenaga medis profesional dalam menjamin pelayanan terbaik untuk Anda.'
+			}
 		},
 		news: {
 			tabPillsLabel: {

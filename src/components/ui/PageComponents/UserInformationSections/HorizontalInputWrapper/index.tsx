@@ -67,7 +67,8 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 							{ ...props.inputProps } /> :
 						props.inputType === 'date' ?
 							<Form.DateField
-								{ ...props.inputProps } /> :
+								{ ...props.inputProps }
+								applyMaxDateForDoB={ true } /> :
 							<Form.TextField
 								{ ...props.inputProps } />
 				}

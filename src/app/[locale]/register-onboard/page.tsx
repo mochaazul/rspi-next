@@ -257,6 +257,7 @@ const RegisterOnboard = () => {
 							placeholder='yyyy-mm-dd'
 							value={ formikRegister.values.birth_date }
 							onChangeValue={ onChangeInputValue }
+							applyMaxDateForDoB={ true }
 							errorMessage={ getInputErrorMessage(formikRegister.errors?.birth_date, t('form.birthDateLabel')) }
 							isError={ !!formikRegister.errors?.birth_date }
 						/>
