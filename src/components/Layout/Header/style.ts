@@ -26,6 +26,7 @@ const HeaderStyle = styled.div`
 
   .rightNav {
     display: flex;
+    align-items:center;
   }
 
   .menu {
@@ -104,6 +105,7 @@ const HeaderStyle = styled.div`
   @media screen and (max-width: 640px) {
     .navbar {
       padding: 0 15px;
+      box-shadow:0px 4px 4px 0px rgba(53, 136, 136, 0.12);
     }
     .logo a {
       svg {

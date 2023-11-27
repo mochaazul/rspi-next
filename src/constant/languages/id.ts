@@ -82,7 +82,10 @@ export default {
 				submitBtnLabel: 'Kirim Pesan',
 				form: {
 					allHospitalLabel: 'All RSPI Hospitals'
-				}
+				},
+				errorSubmit: 'Submit form hubungi kami telah gagal',
+				successSubmit: 'Submit form hubungi kami telah berhasil',
+				handleButtonModalSubmit: 'Tutup',
 			},
 			faq: {
 				readMoreLabel: 'Baca selengkapnya',

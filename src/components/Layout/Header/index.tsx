@@ -184,9 +184,14 @@ export const Header = ({
 				<MainNavLanguage />
 				<div className={ 'xl:!px-[40px] navbar animate-slideUpToDown transition-all duration-300' }>
 					<div className='leftNav'>
-						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
+						<div className='hidden md:block lg:block xl:block logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
 								<Image src={ '/images/logo_rspi.svg' } alt='rspi-logo' width={ 150 } height={ 80 } />
+							</Link>
+						</div>
+						<div className='sm:hidden logo cursor-pointer py-[22px] pl-2 max-sm:py-[15px]'>
+							<Link href='/'>
+								<Image src={ '/images/logo_rspi.svg' } alt='rspi-logo' width={ 100 } height={ 62 } />
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
@@ -296,7 +301,7 @@ export const Header = ({
 					</div>
 					<div className='rightNav py-[22px] max-sm:py-[10px]'>
 						<div className='translate'>
-							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
+							<div className='mobile-nav flex items-center mr-2 gap-6 sm:hidden'>
 								<icons.Notif
 									onClick={ onclickMarkAllNotif }
 									className='cursor-pointer'
@@ -401,11 +406,13 @@ export const Header = ({
 									<Text text={ t('register') } fontSize='16px' fontWeight='700' />
 								</div>
 							}
+							
 							<div
 								className='nav-menu'
-								onClick={ () => handleNavigateSideBar('/find-a-doctor') }>
-								<Text text={ t('bookAppointment') } fontSize='16px' fontWeight='700' />
+								onClick={ () => handleNavigateSideBar('/contact-us') }>
+								<Text text={ t('contactUs') } fontSize='16px' fontWeight='700' />
 							</div>
+
 							<div
 								className='nav-menu'
 								onClick={ () => handleNavigateSideBar('/centre-of-excellence') }>

@@ -1,10 +1,10 @@
 
-import { getHospitals, } from '@/lib/api';
+import { getHospital } from '@/lib/api/hospital';
 import ContactUsPage from './ContactUsPage';
 import { getScopedI18n } from '@/locales/server';
 
 const ContactUs = async () => {
-	const hospitals = await getHospitals();
+	const hospitals = await getHospital();
 	const t = await getScopedI18n('page.contactUs');
 
 	return (
