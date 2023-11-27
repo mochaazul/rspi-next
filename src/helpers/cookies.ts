@@ -36,13 +36,3 @@ export const getCurrentLocale = async () => {
 
 	return nextLocale;
 };
-
-export const getUrlForRedirectLogin = async () => {
-	const nextLocale = cookies().get('redirect-url-login')?.value ?? '/';
-	cookies().delete('redirect-url-login'); // delete stored url, avoid being redirected to same url everytime do log in
-	return nextLocale;
-};
-
-export const setUrlForRedirectLogin = async (url: string) => {
-	return cookies().set('redirect-url-login', url);
-};
