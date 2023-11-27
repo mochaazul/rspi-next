@@ -19,6 +19,7 @@ import NotificationPanel, { PropsTypes as NotificationPanelTypes } from '@/compo
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import LoginPageStyle from './style';
+import { cookiesHelper } from '@/helpers';
 
 const LoginPage = () => {
 	const navigate = useRouter();
@@ -55,7 +56,13 @@ const LoginPage = () => {
 				if (response?.stat_code === 'APP:SUCCESS') {
 					setSuccessMessage(`${ t('welcome') } ${ response?.data?.email }`);
 					setNotifMode('success');
-					navigate.replace('/');
+					// check if, redirect url exist, redirect using stored url
+					const urlRedirect = await cookiesHelper.getUrlForRedirectLogin();
+					if (urlRedirect !== undefined) {
+						navigate.push(urlRedirect);
+					} else {
+						navigate.replace('/');
+					}
 				} else {
 					setErrorUser({ stat_msg: response?.stat_msg ?? '' });
 					setNotifMode('error');
