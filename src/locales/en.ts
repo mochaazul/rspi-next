@@ -899,7 +899,7 @@ export default {
 		},
 		topNav: {
 			welcome: 'Welcome',
-			contactUs: 'Hubungi Kami'
+			contactUs: 'Contact Us'
 		},
 		privacyPolicy: {
 			agreementStatement: {
