@@ -45,6 +45,7 @@ import { getProfile } from '@/lib/api/profile';
 
 import ProfilePageStyle, { Divider } from './style';
 import { PanelH2 } from '../style';
+import { Spinner } from '@/components/ui';
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -89,6 +90,7 @@ export default function Page() {
 	const [showModalNewEmail, setShowModalNewEmail] = useState<boolean>(false);
 	const [pinModalVisible, setPinModalVisible] = useState<boolean>(false);
 	const [isLoadingUploadAvatar, setIsLoadingUploadAvatar] = useState<boolean>(false);
+	const [isLoadingDeleteAvatar, setIsLoadingDeleteAvatar] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 	const [enableValidation, setEnableValidation] = useState<Record<string, boolean>>({
 		profile: false,
@@ -172,7 +174,7 @@ export default function Page() {
 		validationSchema: UploadPhotoSchema,
 		onSubmit: async (formUpload: UploadPhotoTypeState) => {
 			try {
-				if (formUpload.photo_file) {
+				if (formUpload.photo_file && !isLoadingDeleteAvatar) {
 					setIsLoadingUploadAvatar(true);
 
 					const formImg = new FormData();
@@ -181,12 +183,13 @@ export default function Page() {
 					await updateAvatar({ img_url: responseData?.data });
 					await getProfile(true);
 					getProfileMutation();
+
+					setClickUpdatePhoto(false);
 				}
 			} catch (error: any) {
 				setError(error?.message ?? '');
 			} finally {
 				setIsLoadingUploadAvatar(false);
-				setClickUpdatePhoto(false);
 				setEnableValidation(prevToggle => ({ ...prevToggle, photo: false }));
 			}
 		},
@@ -350,8 +353,8 @@ export default function Page() {
 		try {
 			setEnableValidation(prevToggle => ({ ...prevToggle, photo: false }));
 
-			if (tempImageSrc && patientProfile?.data?.img_url) {
-				setIsLoadingUploadAvatar(true);
+			if (patientProfile?.data?.img_url && !isLoadingUploadAvatar) {
+				setIsLoadingDeleteAvatar(true);
 
 				await updateAvatar({ img_url: '' });
 
@@ -360,14 +363,16 @@ export default function Page() {
 
 				formikPhoto.resetForm();
 				setTempImageSrc('');
-			} else if (tempImageSrc && !patientProfile?.data?.img_url) {
+				setClickUpdatePhoto(false);
+			} else if (tempImageSrc && !patientProfile?.data?.img_url && !isLoadingUploadAvatar) {
 				formikPhoto.resetForm();
 				setTempImageSrc('');
+				setClickUpdatePhoto(false);
 			}
 		} catch (error: any) {
 			setError(error?.message ?? '');
 		} finally {
-			setIsLoadingUploadAvatar(false);
+			setIsLoadingDeleteAvatar(false);
 		}
 	};
 
@@ -502,23 +507,37 @@ export default function Page() {
 														theme='primary'
 														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base text-[#2A2536] sm:whitespace-nowrap'
 														themeColor={ colors.grey.lightest }
-														label={ t('deletePhotoLabel') }
 														onClick={ onClickDeletePhoto }
-														disabled={ isLoadingUploadAvatar }
-													/>
+														disabled={ isLoadingDeleteAvatar }
+													>
+														{ isLoadingDeleteAvatar
+															? (
+																<div className='px-7 sm:px-10 py-0.5 lg:py-1'>
+																	<Spinner />
+																</div>
+															)
+															: t('deletePhotoLabel') }
+													</Button>
 												</div>
 												<div>
 													<Button
 														theme='primary'
 														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base sm:whitespace-nowrap'
 														$hoverTheme='primary'
-														label={ t('uploadPhotoLabel') }
 														onClick={ () => {
 															setEnableValidation(prevToggle => ({ ...prevToggle, photo: true }));
 															formikPhoto.handleSubmit();
 														} }
 														disabled={ isLoadingUploadAvatar }
-													/>
+													>
+														{ isLoadingUploadAvatar
+															? (
+																<div className='px-7 sm:px-10 py-0.5 lg:py-1'>
+																	<Spinner />
+																</div>
+															)
+															: t('uploadPhotoLabel') }
+													</Button>
 												</div>
 											</div>
 											: null
