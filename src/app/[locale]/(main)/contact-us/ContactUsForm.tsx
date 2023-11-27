@@ -261,8 +261,7 @@ const ContactUsForm = ({
 							$hoverTheme='outline'
 							label={ t('contactForm.submitBtnLabel') }
 							type='submit'
-							disabled={ loadingUser }
-							// disabled={ loadingUser || captchaStatus === false }
+							disabled={ loadingUser || captchaStatus === false }
 						/>
 					</div>
 				</div>
