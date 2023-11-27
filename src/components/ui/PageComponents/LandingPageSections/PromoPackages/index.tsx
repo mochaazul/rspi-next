@@ -26,7 +26,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 	const [activeTab, setActiveTab] = useState(0);
 
 	const promo = activeTab === 0 ? events : events?.filter((item: any) => item?.category === tabData?.[activeTab]?.value);
-	
+
 	if (showAsRelated) {
 		return (
 			<div className='w-full'>
@@ -55,7 +55,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 								}
 								footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetailsBtnLabel') } /> }
 								to={ `/promo/${ item?.slug }` }
-								iconShare={ false }
+								iconShare={ true }
 							/>
 						)) }
 					</CardsScrollHorizontal>

@@ -43,41 +43,51 @@ const Share = (props: PropsType) => {
 			});
 	};
 
+	const handleClickSocialShare = (e) => {
+		console.log('e :>> ', e);
+		e.stopPropagation();
+		// setIsHoverShare(prevHover => !prevHover);
+	};
+
 	return (
-		<div onMouseEnter={ toggleMouseHoverShare(true) } onMouseLeave={ toggleMouseHoverShare(false) } className='w-full'>
-			<div className='absolute right-0 mr-[10px] mt-[10px]'>
-				<icons.SocialShare />
-			</div>
-			<div
-				className={ `${ isHoverShare === false ? 'hidden' : 'fixed right-0 mr-[10px] mt-[50px] rounded-[10px]' } mt-[15px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }
-				onMouseEnter={ toggleMouseHoverShare(true) }
-				onMouseLeave={ toggleMouseHoverShare(false) }
-			>
-				<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-					{ buttonSocmed.map((item, idx) => (
+		<div
+			// onMouseEnter={ toggleMouseHoverShare(true) } 
+			// onMouseLeave={ toggleMouseHoverShare(false) } 
+			className='w-full'>
+			<div className='absolute right-0 mr-[10px] mt-[10px] z-50'>
+				<icons.SocialShare onClick={ handleClickSocialShare } />
+				<div
+					className={ `${ isHoverShare === false ? 'hidden' : 'fixed right-0 mr-[10px] mt-[50px] rounded-[10px]' } mt-[15px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }
+				// onMouseEnter={ toggleMouseHoverShare(true) }
+				// onMouseLeave={ toggleMouseHoverShare(false) }
+				>
+					<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
+						{ buttonSocmed.map((item, idx) => (
+							<div
+								key={ idx }
+								className='border-b border-gray flex py-4 px-4 items-center'
+								onClick={ () => window.open(item?.url + window.location.href + '/' + props.id) }
+							>
+								{ item?.icon }
+								<div className='ml-[10px]'>
+									<Text text={ item?.label } fontSize='16px' fontWeight='400' />
+								</div>
+							</div>
+						)) }
 						<div
-							key={ idx }
 							className='border-b border-gray flex py-4 px-4 items-center'
-							onClick={ () => window.open(item?.url + window.location.href + '/' + props.id) }
+							onClick={ copy }
 						>
-							{ item?.icon }
+							<icons.ShareNetwork />
+
 							<div className='ml-[10px]'>
-								<Text text={ item?.label } fontSize='16px' fontWeight='400' />
+								<Text text={ 'Share Link' } fontSize='16px' fontWeight='400' />
 							</div>
 						</div>
-					)) }
-					<div
-						className='border-b border-gray flex py-4 px-4 items-center'
-						onClick={ copy }
-					>
-						<icons.ShareNetwork />
-
-						<div className='ml-[10px]'>
-							<Text text={ 'Share Link' } fontSize='16px' fontWeight='400' />
-						</div>
-					</div>
-				</ul>
+					</ul>
+				</div>
 			</div>
+
 		</div>
 	);
 };

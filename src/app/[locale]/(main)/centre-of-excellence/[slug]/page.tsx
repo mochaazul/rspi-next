@@ -41,35 +41,37 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 		return (
 			<div className='grid grid-cols-3 gap-3'>
 				{
-					responseCenterOfExcellenceNewsByID?.data?.map((article: any, index: Key) => (
-						<Card
-							key={ index }
-							id={ article?.news?.id }
-							image={ article?.news?.img_url }
-							imageHeight='200px'
-							header={
-								<div className='flex items-center'>
-									<div>
-										<Button theme='primary' label={ article?.news?.category } className='btn-category' />
+					responseCenterOfExcellenceNewsByID?.data?.map((article: any, index: Key) => {
+						return (
+							<Card
+								key={ index }
+								id={ article?.news?.news_id }
+								image={ article?.news?.img_url }
+								imageHeight='200px'
+								header={
+									<div className='flex items-center'>
+										<div>
+											<Button theme='primary' label={ article?.news?.category } className='btn-category' />
+										</div>
+										<div className='ml-[10px]'>
+											<Text
+												fontSize='14px'
+												fontWeight='400'
+												lineHeight='17px'
+												color={ colors.grey.dark }
+												text={ moment(article?.news?.posted_date).format('dddd, DD MMM YYYY') }
+											/>
+										</div>
 									</div>
-									<div className='ml-[10px]'>
-										<Text
-											fontSize='14px'
-											fontWeight='400'
-											lineHeight='17px'
-											color={ colors.grey.dark }
-											text={ moment(article?.news?.posted_date).format('dddd, DD MMM YYYY') }
-										/>
-									</div>
-								</div>
-							}
-							content={ <CardContentWithInner title={ article?.news?.title || '' } description={ article?.news?.short_description || '' } author={ article?.news?.news_author?.doctor_name } /> }
-							footer={ <CardFooter content={ t('serviceLocation.readMore') } /> }
-							className='mb-0'
-							iconShare={ true }
-							to={ `/news/${ article?.news?.slug }` }
-						/>
-					))
+								}
+								content={ <CardContentWithInner title={ article?.news?.title || '' } description={ article?.news?.short_description || '' } author={ article?.news?.news_author?.doctor_name } /> }
+								footer={ <CardFooter content={ t('serviceLocation.readMore') } /> }
+								className='mb-0'
+								iconShare={ true }
+								to={ `/news/${ article?.news?.slug }` }
+							/>
+						);
+					})
 				}
 			</div>
 		);
