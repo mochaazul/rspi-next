@@ -1,10 +1,14 @@
 'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+
 import images from '@/constant/images';
 import { WrapperMobileAppBanner } from './style';
 import Text from '@/components/ui/Text';
 import { useScopedI18n } from '@/locales/client';
 import { colors } from '@/constant';
-import Image from 'next/image';
+import { appStoreMobileUrl, playStoreMobileUrl } from '@/constant/config';
 
 const MobileAppBanner = () => {
 
@@ -30,8 +34,20 @@ const MobileAppBanner = () => {
 						<div className='mt-[40px]'>
 							<Text text='Get the App' fontSize='20px' fontWeight='900' lineHeight='28px' />
 							<div className='flex gap-[13px] mt-[10px]'>
-								<Image src={ images.GooglePlay.src } alt='store-badge' width={ 158 } height={ 48 } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
-								<Image src={ images.AppStore.src } alt='store-badge' width={ 158 } height={ 48 } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
+								<Link
+									href={ playStoreMobileUrl }
+									target='_blank'
+									rel='noopener noreferrer'
+								>
+									<Image src={ images.GooglePlay.src } alt='store-badge' width={ 158 } height={ 48 } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
+								</Link>
+								<Link
+									href={ appStoreMobileUrl }
+									target='_blank'
+									rel='noopener noreferrer'
+								>
+									<Image src={ images.AppStore.src } alt='store-badge' width={ 158 } height={ 48 } className='w-[158px] h-[48px] max-lg:w-[132px] max-lg:h-[40px] cursor-pointer' />
+								</Link>
 							</div>
 						</div>
 					</div>
