@@ -25,9 +25,10 @@ export const DoctorProfileStyle = styled.div`
   .footer {
     position: fixed;
     display: flex;
-    width: 100vw;
+    width: 100%;
     z-index: 999;
     bottom: 0;
+    border-top: 1px solid ${ colors.grey.lighterOpacity };
   }
 `;
 

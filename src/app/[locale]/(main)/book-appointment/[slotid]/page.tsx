@@ -58,7 +58,7 @@ const BookAppointment = () => {
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: pushNotification, error: pushNotifError, isMutating: pushNotifLoading } = usePushNotifAPI();
-	
+
 	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
 
 	const paramGetNotif = {
@@ -70,7 +70,7 @@ const BookAppointment = () => {
 	const {
 		data: getNotification,
 	} = useNotification(paramGetNotif);
-	
+
 	const [confirmationModal, setConfirmationModalVisible] = useState<boolean>(false);
 	const [addProfileModal, setAddProfileModal] = useState<boolean>(false);
 	const [successModal, setSuccessModal] = useState<boolean>(false);
@@ -175,7 +175,7 @@ const BookAppointment = () => {
 		}
 	};
 
-	const uploadAsuransiPhotoFront = async() => {
+	const uploadAsuransiPhotoFront = async () => {
 		if (tempImageAsuransiFront !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiFront });
 			if (responseData.stat_msg === 'Success') {
@@ -185,7 +185,7 @@ const BookAppointment = () => {
 		return '';
 	};
 
-	const uploadAsuransiPhotoBack = async() => {
+	const uploadAsuransiPhotoBack = async () => {
 		if (tempImageAsuransiBack !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiBack });
 			if (responseData.stat_msg === 'Success') {
@@ -195,9 +195,9 @@ const BookAppointment = () => {
 		return '';
 	};
 
-	const onConfirmed = async() => {
+	const onConfirmed = async () => {
 		try {
-			
+
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
 				patient_name: selectedProfile?.name?.trim() ?? '',
@@ -224,7 +224,7 @@ const BookAppointment = () => {
 			};
 			await bookAppointment(payloadBook).then(() => {
 
-				const pushNotifPayload:PayloadPushNotification = {
+				const pushNotifPayload: PayloadPushNotification = {
 					category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
 					source: 'Rebelworks',
 					title_idn: 'Permintaan booking Berhasil',
@@ -242,7 +242,7 @@ const BookAppointment = () => {
 				};
 				pushNotification(pushNotifPayload);
 			});
-			
+
 			setSuccessModal(true);
 		} catch (error: any) {
 			setConfirmationModalVisible(false);
@@ -250,149 +250,150 @@ const BookAppointment = () => {
 		}
 	};
 	return (
-		<BookAppointmentContainer
-			className='lg:w-[1110px] mx-auto max-sm:px-[15px] md:pt-[60px] pb-[120px]'
-		>
-			<Breadcrumbs datas={ breadCrumbs } />
-			<div className='content-wrapper sm:flex w-full items-center flex-col max-sm:p-[16px]'>
-				<ProfileSelector onSelected={ setSelectedProfile } selfProfile={ userProfile?.data } familyProfiles={ familyProfile?.data } onAddNewProfileBtn={ onAddNewProfile } />
-				{
-					bookingError &&
-					<NotificationPanel
-						showIconLeft={ false }
-						showIconRight={ false }
-						mode={ 'error' }
-						visible={ true }
-					>
-						<Text
-							fontType={ null }
-							fontSize='14px'
-							fontWeight='500'
-							text={ bookingError.message }
-							color={ colors.red.default }
-						/>
-					</NotificationPanel>
-				}
-				<Form className='w-full mt-[10px] flex flex-col gap-[12px]'>
-					<FormRow className='flex flex-col md:flex-row items-center'>
-						<FormCol>
-							<Form.TextField
-								width='100%'
-								label={ t('form.complaintLabel') }
-								placeholder={ t('form.complaintLabel') }
-								required={ true }
-								id='keluhan'
-								name='keluhan'
-								value={ formikBooking.values.keluhan }
-								onChange={ formikBooking.handleChange }
-							/>
-						</FormCol>
-						<FormCol>
-							<Radio groupLabel={ t('form.guarantor') } onChange={ setPenjamin } value={ penjamin } >
-								<Radio.Option label={ t('form.selfInsurance') } value={ 'pribadi' } />
-								<Radio.Option label={ t('form.thirdPartyInsurance') } value={ 'asuransi' } />
-							</Radio>
-						</FormCol>
-					</FormRow>
+		<BookAppointmentContainer>
+			<div className='lg:w-[1110px] mx-auto max-sm:px-[15px] md:pt-[60px] pb-[120px]'>
+				<Breadcrumbs datas={ breadCrumbs } />
+				<div className='content-wrapper sm:flex w-full items-center flex-col max-sm:p-[16px]'>
+					<ProfileSelector onSelected={ setSelectedProfile } selfProfile={ userProfile?.data } familyProfiles={ familyProfile?.data } onAddNewProfileBtn={ onAddNewProfile } />
 					{
-						penjamin === 'asuransi'
-						&&
-						<div className='flex flex-col'>
-							<FormRow className='flex flex-col md:flex-row'>
-								<FormCol >
-									<Form.TextField
-										label={ t('form.insuranceName') }
-										placeholder={ t('form.insuranceName') }
-										width='100%'
-										id='asuransi'
-										name='asuransi'
-										value={ formikBooking.values.asuransi }
-										onChange={ formikBooking.handleChange }
-									/>
-								</FormCol>
-								<FormCol >
-									<Form.TextField
-										isNumber
-										mask={ '9999999999999999' }
-										label={ t('form.insuranceNumber') }
-										placeholder={ t('form.insuranceNumber') }
-										width='100%'
-										id='noAsuransi'
-										name='noAsuransi'
-										value={ formikBooking.values.noAsuransi }
-										onChange={ formikBooking.handleChange }
-									/>
-								</FormCol>
-							</FormRow>
-							<FormRow>
-								<div className='flex flex-col'>
-									<label className='text-sm font-black'>{ t('form.insuranceCard.label') }</label>
-									<div className='flex flex-row mt-2'>
-										<div className='w-[420px] h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
-											{
-												tempImageAsuransiFront ?
-													<img
-														src={ URL.createObjectURL(tempImageAsuransiFront) }
-														alt={ 'Temp Image' }
-														className='w-full h-full object-cover border border-dashed'
-													/> : <></>
-											}
-											<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiFrontFileRef.current?.click() }>
-												<Image
-													src={ icons.UploadCloud }
-													alt=''
-													color={ colors.grey.dark } />
-												<Text color={ colors.green.brandAccent } fontWeight='600'>{ t('form.insuranceCard.front') }</Text>
+						bookingError &&
+						<NotificationPanel
+							showIconLeft={ false }
+							showIconRight={ false }
+							mode={ 'error' }
+							visible={ true }
+						>
+							<Text
+								fontType={ null }
+								fontSize='14px'
+								fontWeight='500'
+								text={ bookingError.message }
+								color={ colors.red.default }
+							/>
+						</NotificationPanel>
+					}
+					<Form className='w-full mt-[10px] flex flex-col gap-[12px]'>
+						<FormRow className='flex flex-col md:flex-row items-center'>
+							<FormCol>
+								<Form.TextField
+									width='100%'
+									label={ t('form.complaintLabel') }
+									placeholder={ t('form.complaintLabel') }
+									required={ true }
+									id='keluhan'
+									name='keluhan'
+									value={ formikBooking.values.keluhan }
+									onChange={ formikBooking.handleChange }
+								/>
+							</FormCol>
+							<FormCol>
+								<Radio groupLabel={ t('form.guarantor') } onChange={ setPenjamin } value={ penjamin } >
+									<Radio.Option label={ t('form.selfInsurance') } value={ 'pribadi' } />
+									<Radio.Option label={ t('form.thirdPartyInsurance') } value={ 'asuransi' } />
+								</Radio>
+							</FormCol>
+						</FormRow>
+						{
+							penjamin === 'asuransi'
+							&&
+							<div className='flex flex-col'>
+								<FormRow className='flex flex-col md:flex-row'>
+									<FormCol >
+										<Form.TextField
+											label={ t('form.insuranceName') }
+											placeholder={ t('form.insuranceName') }
+											width='100%'
+											id='asuransi'
+											name='asuransi'
+											value={ formikBooking.values.asuransi }
+											onChange={ formikBooking.handleChange }
+										/>
+									</FormCol>
+									<FormCol >
+										<Form.TextField
+											isNumber
+											mask={ '9999999999999999' }
+											label={ t('form.insuranceNumber') }
+											placeholder={ t('form.insuranceNumber') }
+											width='100%'
+											id='noAsuransi'
+											name='noAsuransi'
+											value={ formikBooking.values.noAsuransi }
+											onChange={ formikBooking.handleChange }
+										/>
+									</FormCol>
+								</FormRow>
+								<FormRow>
+									<div className='flex flex-col'>
+										<label className='text-sm font-black'>{ t('form.insuranceCard.label') }</label>
+										<div className='flex flex-row mt-2'>
+											<div className='w-[420px] h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
+												{
+													tempImageAsuransiFront ?
+														<img
+															src={ URL.createObjectURL(tempImageAsuransiFront) }
+															alt={ 'Temp Image' }
+															className='w-full h-full object-cover border border-dashed'
+														/> : <></>
+												}
+												<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiFrontFileRef.current?.click() }>
+													<Image
+														src={ icons.UploadCloud }
+														alt=''
+														color={ colors.grey.dark } />
+													<Text color={ colors.green.brandAccent } fontWeight='600'>{ t('form.insuranceCard.front') }</Text>
+												</div>
+												<input
+													type='file'
+													ref={ uploadAsuransiFrontFileRef }
+													onChange={ () => setTempImageAsuransiFront(uploadAsuransiFrontFileRef.current?.files?.[0] ? uploadAsuransiFrontFileRef.current?.files[0] : null) }
+													className='hidden'
+													accept='image/*'
+												/>
 											</div>
-											<input
-												type='file'
-												ref={ uploadAsuransiFrontFileRef }
-												onChange={ () => setTempImageAsuransiFront(uploadAsuransiFrontFileRef.current?.files?.[0] ? uploadAsuransiFrontFileRef.current?.files[0] : null) }
-												className='hidden'
-												accept='image/*'
-											/>
-										</div>
-										<div className='w-[420px] h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
-											{
-												tempImageAsuransiBack ?
-													<img
-														src={ URL.createObjectURL(tempImageAsuransiBack) }
-														alt={ 'Temp Image' }
-														className='w-full h-full object-cover border border-dashed'
-													/> : <></>
-											}
-											<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiBackFileRef.current?.click() }>
-												<Image
-													src={ icons.UploadCloud }
-													alt=''
-													color={ colors.grey.dark } />
-												<Text color={ colors.green.brandAccent } fontWeight='600'>{ t('form.insuranceCard.back') }</Text>
+											<div className='w-[420px] h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
+												{
+													tempImageAsuransiBack ?
+														<img
+															src={ URL.createObjectURL(tempImageAsuransiBack) }
+															alt={ 'Temp Image' }
+															className='w-full h-full object-cover border border-dashed'
+														/> : <></>
+												}
+												<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiBackFileRef.current?.click() }>
+													<Image
+														src={ icons.UploadCloud }
+														alt=''
+														color={ colors.grey.dark } />
+													<Text color={ colors.green.brandAccent } fontWeight='600'>{ t('form.insuranceCard.back') }</Text>
+												</div>
+												<input
+													type='file'
+													ref={ uploadAsuransiBackFileRef }
+													onChange={ () => setTempImageAsuransiBack(uploadAsuransiBackFileRef.current?.files?.[0] ? uploadAsuransiBackFileRef.current?.files[0] : null) }
+													className='hidden'
+													accept='image/*'
+												/>
 											</div>
-											<input
-												type='file'
-												ref={ uploadAsuransiBackFileRef }
-												onChange={ () => setTempImageAsuransiBack(uploadAsuransiBackFileRef.current?.files?.[0] ? uploadAsuransiBackFileRef.current?.files[0] : null) }
-												className='hidden'
-												accept='image/*'
-											/>
 										</div>
 									</div>
-								</div>
 
-							</FormRow>
-						</div>
+								</FormRow>
+							</div>
 
-					}
-					<BottomBar >
-						<Button label='Back' theme='outline' className=' w-full md:w-auto' onClick={ () => { navigate.back(); } } />
-						<Button label='Book Visit Now' className=' w-full md:w-auto' disabled={ bookingLoading } onClick={ () => { onBookVisit(); } } />
-
-					</BottomBar>
-				</Form>
-				<DisclaimerAlert>
-					<Text color={ colors.green.brandAccent }>{ t('form.disclaimer') }</Text>
-				</DisclaimerAlert>
+						}
+					</Form>
+					<DisclaimerAlert>
+						<Text color={ colors.green.brandAccent }>{ t('form.disclaimer') }</Text>
+					</DisclaimerAlert>
+				</div>
 			</div>
+			<BottomBar>
+				<div className='lg:w-[1110px] w-full mx-auto max-sm:mx-[15px] md:flex md:justify-end gap-[12px] flex justify-between'>
+					<Button label={ t('form.btnLabel.back') } theme='outline' className='pt-[13px] px-[40px] pb-[12px] w-full md:w-auto' onClick={ () => { navigate.back(); } } />
+					<Button label={ t('form.btnLabel.submit') } className='pt-[13px] px-[40px] pb-[12px] w-full md:w-auto' disabled={ bookingLoading } onClick={ () => { onBookVisit(); } } />
+				</div>
+			</BottomBar>
 			<AddProfileModal
 				visible={ addProfileModal }
 				// onClose={ onCloseProfileModal }
