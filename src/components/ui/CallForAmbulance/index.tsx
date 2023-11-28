@@ -14,13 +14,14 @@ import {
 } from '@/components/ui';
 
 import { CallForAmbulanceStyle, ModalRSTelephoneStyle } from './style';
+import { useScopedI18n } from '@/locales/client';
 
 const CallForAmbulance = ({
 	hospitalData,
 }:{
 	hospitalData: HospitalState,
 }) => {
-
+	const t = useScopedI18n('global.callAmbulanceLabel');
 	const [visible, setVisible] = useState(false);
 
 	return (
@@ -47,7 +48,7 @@ const CallForAmbulance = ({
 						fontWeight='700'
 						textAlign='center'
 						color={ colors.grey.darker }
-						text='Call an Ambulance'
+						text={ t('heading') }
 						className='mt-5'
 					/>
 					<Text
@@ -56,7 +57,7 @@ const CallForAmbulance = ({
 						fontWeight='400'
 						textAlign='center'
 						color={ colors.grey.dark }
-						text='Please select hospital:'
+						text={ t('subHeading') }
 						className='mt-2'
 					/>
 					<div className='flex flex-col gap-4 mt-8'>

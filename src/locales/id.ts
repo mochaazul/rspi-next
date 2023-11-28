@@ -19,6 +19,12 @@ export default {
 			sunday: 'Min'
 		}
 	},
+	global: {
+		callAmbulanceLabel: {
+			heading: 'Panggil Ambulans',
+			subHeading: 'Silahkan pilih Rumah sakit: '
+		}
+	},
 	gender: {
 		male: 'Laki-laki',
 		female: 'Perempuan'

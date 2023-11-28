@@ -19,6 +19,12 @@ export default {
 			sunday: 'Sun'
 		}
 	},
+	global: {
+		callAmbulanceLabel: {
+			heading: 'Call an Ambulance',
+			subHeading: 'Please select hospital: '
+		}
+	},
 	modalDialog: {
 		pin: {
 			header: 'Enter PIN',
