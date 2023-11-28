@@ -26,9 +26,6 @@ const FindDoctorStyle = styled.div`
     .form-wrapper {
       grid-template-columns: 1fr;
     }
-    .input {
-      min-width: 300px;
-    }
   }
 `;
 
