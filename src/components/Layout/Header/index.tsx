@@ -6,7 +6,7 @@ import * as Icons from 'react-feather';
 import moment from 'moment';
 import { useSWRConfig } from 'swr';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -32,6 +32,8 @@ import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
 import { cookiesHelper } from '@/helpers';
 
+const protectedRoutes = ['/patient-portal', '/user-information'];
+
 export const Header = ({
 	session,
 	hospitalData,
@@ -49,16 +51,18 @@ export const Header = ({
 }) => {
 
 	const router = useRouter();
+	const pathname = usePathname();
 	const { mutate, cache } = useSWRConfig();
 	const currentLang = useCurrentLocale();
 	const t = useScopedI18n('navMenu');
 
-	const [dropdownHide, setDropdownHide] = useState(true);
-	const [showSideBar, setShowSideBar] = useState(false);
-	const [isHover, setIsHover] = useState(false);
-	const [isHoverCOE, setIsHoverCOE] = useState(false);
-	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
-	const [showNotification, setShowNotification] = useState(false);
+	const [dropdownHide, setDropdownHide] = useState<boolean>(true);
+	const [showSideBar, setShowSideBar] = useState<boolean>(false);
+	const [isHover, setIsHover] = useState<boolean>(false);
+	const [isHoverCOE, setIsHoverCOE] = useState<boolean>(false);
+	const [isHoverFacilities, setIsHoverFacilities] = useState<boolean>(false);
+	const [showNotification, setShowNotification] = useState<boolean>(false);
+	const [showSuccessLogout, setShowSuccessLogout] = useState<boolean>(false);
 
 	const onclickMarkAllNotif = () => {
 		marAllReadNotifFunc()
@@ -86,17 +90,21 @@ export const Header = ({
 
 	const notificationResponseData = getNotification?.data;
 
-	const clearSWRCache = async() => {
+	const clearSWRCache = async () => {
 		const keys = cache.keys();
 		for (const key of keys) {
 			cache.delete(key);
 		}
 	};
 
-	const handleClick = async() => {
+	const handleClick = async () => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			await clearSWRCache();
+			setShowSideBar(false);
+			if (!protectedRoutes?.some(path => pathname.includes(path))) {
+				setShowSuccessLogout(true);
+			}
 			router.refresh();
 		}
 	};
@@ -173,6 +181,30 @@ export const Header = ({
 						))
 					}
 
+				</div>
+			</Modal>
+		);
+	};
+
+	const renderModalSuccessLogout = () => {
+		return (
+			<Modal
+				visible={ showSuccessLogout }
+				onClose={ () => setShowSuccessLogout(false) }
+				noPadding
+			>
+				<div className='py-3 sm:py-4 px-6 sm:px-10 flex flex-col items-center gap-y-3'>
+					<div className='flex-shrink-0'>
+						<icons.Confirmed className='w-10 h-10 sm:w-12 sm:h-12' />
+					</div>
+
+					<Text
+						fontSize='16px'
+						lineHeight='24px'
+						fontWeight='700'
+					>
+						{ t('logoutSuccess') }
+					</Text>
 				</div>
 			</Modal>
 		);
@@ -324,7 +356,7 @@ export const Header = ({
 														setShowNotification(true);
 														notificationResponseFetch();
 													}) }
-												className='cursor-pointer'
+													className='cursor-pointer'
 												/>
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponseData?.total_unread }</span>
@@ -436,6 +468,8 @@ export const Header = ({
 					</div> : null
 				}
 			</div>
+
+			{ renderModalSuccessLogout() }
 		</HeaderStyle>
 	);
 };

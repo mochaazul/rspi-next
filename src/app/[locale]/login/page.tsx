@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
 
 import { LoginType, ResponseStatus } from '@/interface';
@@ -15,6 +15,7 @@ import { useScopedI18n } from '@/locales/client';
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
+import LoadingScreen from '@/components/ui/LoadingScreen';
 import NotificationPanel, { PropsTypes as NotificationPanelTypes } from '@/components/ui/NotificationPanel';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
@@ -22,6 +23,7 @@ import LoginPageStyle from './style';
 
 const LoginPage = () => {
 	const navigate = useRouter();
+	const pathname = usePathname();
 	const searchParam = useSearchParams()!;
 	const { trigger: requestVerifyEmail } = useRequestVerifyEmail();
 	const t = useScopedI18n('page.loginPage');
@@ -37,6 +39,7 @@ const LoginPage = () => {
 	const [successMessage, setSuccessMessage] = useState<string>('');
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
+	const [loadingNavigate, setLoadingNavigate] = useState<boolean>(false);
 
 	const formik: FormikProps<LoginType> = useFormik<LoginType>({
 		validateOnBlur: enableValidation,
@@ -55,9 +58,17 @@ const LoginPage = () => {
 				if (response?.stat_code === 'APP:SUCCESS') {
 					setSuccessMessage(`${ t('welcome') } ${ response?.data?.email }`);
 					setNotifMode('success');
-					navigate.replace('/');
+					setLoadingNavigate(true);
+
+					if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
+						navigate.back();
+					} else
+						navigate.replace('/');
+
 				} else {
-					setErrorUser({ stat_msg: response?.stat_msg ?? '' });
+					setErrorUser({
+						stat_msg: response?.stat_msg ?? ''
+					});
 					setNotifMode('error');
 				}
 			} catch (error: any) {
@@ -73,6 +84,10 @@ const LoginPage = () => {
 	useEffect(() => {
 		refHandler();
 	}, []);
+
+	useEffect(() => {
+		setLoadingNavigate(false);
+	}, [pathname]);
 
 	const initErrorNotif = () => {
 		setNotifVisible(false);
@@ -276,6 +291,8 @@ const LoginPage = () => {
 				</div>
 				<div className='max-sm:hidden col-span-1 h-full w-full bg-no-repeat bg-cover bg-center' style={ { backgroundImage: `url(${ Images.AuthRightBG })` } } />
 			</div>
+
+			<LoadingScreen show={ loadingNavigate } />
 		</LoginPageStyle>
 	);
 };

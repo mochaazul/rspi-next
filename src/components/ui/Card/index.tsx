@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 import * as Icons from 'react-feather';
 
@@ -14,8 +15,6 @@ import {
 	CardStyleType,
 	CardContentHTML
 } from './style';
-
-import { isMobile } from 'react-device-detect';
 
 import Image from 'next/image';
 import { Share } from '@/components/ui';
@@ -48,39 +47,42 @@ const Card = (props: PropsType) => {
 	};
 
 	return (
-		<CardWrapper href={ props.to || '#' } className={ `shrink-0 ${ props.className }` } onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
-			<CardStyle { ...props.cardStyle }>
-				{
-					props.iconShare &&
-					<div className={ `${ isMobile ? 'hidden' : 'block' }` }>
-						<Share id={ props.id } />
-					</div>
-				}
-				{
-					props.image &&
+		<CardWrapper className={ `shrink-0 ${ props.className } relative` }>
+			<Link href={ props.to || '#' } onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
+				<CardStyle { ...props.cardStyle }>
+				
+					{
+						props.image &&
 					<div className={ `relative w-full ${ props.imageHeight ? `h-[${ props.imageHeight }]` : 'h-fit' }` } >
 						<Image src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
 					</div>
-				}
-				{
-					props.header &&
+					}
+					{
+						props.header &&
 					<div className='footer px-[20px] pt-[20px]'>
 						{ typeof props.header === 'function' ? <props.header isHover={ isHover } /> : props.header }
 					</div>
-				}
-				{
-					props.content &&
+					}
+					{
+						props.content &&
 					<div className='content px-[20px] pb-[20px]'>
 						{ props.content }
 					</div>
-				}
-				{
-					props.footer &&
+					}
+					{
+						props.footer &&
 					<div className='footer pb-[20px] px-[20px] grow flex items-end'>
 						{ typeof props.footer === 'function' ? <props.footer isHover={ isHover } /> : props.footer }
 					</div>
-				}
-			</CardStyle>
+					}
+				</CardStyle>
+			</Link>
+			{
+				props.iconShare &&
+				<div className={ 'max-sm:hidden block' }>
+					<Share id={ props.id } />
+				</div>
+			}
 		</CardWrapper>
 	);
 };

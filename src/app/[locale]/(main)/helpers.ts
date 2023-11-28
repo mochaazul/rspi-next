@@ -12,7 +12,7 @@ import { getFAS } from '@/lib/api/clinics';
 import getSession from '@/session/server';
 
 export async function marAllReadNotif() {
-	
+
 	const session = await getSession();
 
 	return postMarkNotifAllRead({
@@ -24,7 +24,7 @@ export async function marAllReadNotif() {
 };
 
 export const footersFetch = async () => await getFooterSlug({ query: { is_publish: true } });
-export const hospitalsFetch = async () => await getHospitals();
+export const hospitalsFetch = async () => await getHospitals({ query: { is_active: true } });
 export const centerOfExcellenceFetch = async () => await getCenterOfExcellence();
 export const facilityServicesFetch = async () => await getFAS();
 export const notificationResponseFetch = async () => {

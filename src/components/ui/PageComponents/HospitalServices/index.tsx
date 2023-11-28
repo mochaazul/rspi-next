@@ -68,9 +68,9 @@ const HospitalServices = ({
 
 	return (
 		<HospitalServiceStyle>
-			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
+			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>
 				<div>
-					<div className='content-wrapper mt-[104px] flex flex-col'>
+					<div className='content-wrapper flex flex-col'>
 						<div className='mb-[20px] sm:ml-[32px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
 						</div>

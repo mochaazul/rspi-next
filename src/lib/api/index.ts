@@ -49,8 +49,8 @@ export const getCenterOfExcellenceNewsByID = (param?: ApiOptions) => {
 	return fetcher<any>('newsCenterOfExcellence', { ...param, query: { ...param?.query, is_publish: true } });
 };
 
-export const getHospitals = () => {
-	return fetcher<HospitalState>('hospital');
+export const getHospitals = (params?: ApiOptions) => {
+	return fetcher<HospitalState>('hospital', params);
 };
 
 export const getCenterOfExcellence = (param?: ApiOptions) => {

@@ -6,7 +6,7 @@ const RegisterPageStyle = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
 
   .register {
     border: 3px solid var(--color-blue-100);
