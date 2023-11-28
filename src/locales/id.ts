@@ -24,8 +24,10 @@ export default {
 		female: 'Perempuan'
 	},
 	unsubscribe: {
-		heading: 'Berhenti berlangganan telah berhasil',
-		subHeading: 'Berhenti berlangganan berita terupdate tentang RSPI berhasil, semoga kita dapat berjumpa kembali'
+		headingSuccess: 'Berhasil Berhenti Belangganan',
+		subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+		headingFailed: 'Gagal Berhenti Belangganan',
+		subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 	},
 	modalDialog: {
 		pin: {
@@ -150,8 +152,10 @@ export default {
 			}
 		},
 		unsubscribe: {
-			heading: 'Berhasil Berhenti Berlangganan',
-			subHeading: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali'
+			headingSuccess: 'Berhasil Berhenti Belangganan',
+			subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+			headingFailed: 'Gagal Berhenti Belangganan',
+			subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 		},
 		awards: {
 			heading: 'Accreditations & Awards',

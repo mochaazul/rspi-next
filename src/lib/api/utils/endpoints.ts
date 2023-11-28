@@ -20,6 +20,8 @@ const endpointData = {
 	notification: { path: '/notification', method: 'GET' },
 	readNotification: { path: '/notification/seen', method: 'GET' },
 	pushNotification: { path: '/notification/push', method: 'POST' },
+	subscribe: { path: '/newsletters/subscribe', method: 'POST' },
+	unSubscribe: { path: '/newsletters/unsubscribe', method: 'POST' },
 	createFamilyProfile: { path: '/patients/family', method: 'POST' },
 	changeEmail: { path: '/auths/request-verify', method: 'POST' },
 	checkPin: { path: '/patients/pin', method: 'POST' },

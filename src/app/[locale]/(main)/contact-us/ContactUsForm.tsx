@@ -90,6 +90,7 @@ const ContactUsForm = ({
 			setVisible(true);
 
 			formikContactUs.resetForm();
+			setCaptchaStatus(false);
 		},
 	});
 
