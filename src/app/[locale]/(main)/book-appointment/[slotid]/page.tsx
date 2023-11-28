@@ -58,7 +58,7 @@ const BookAppointment = () => {
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: pushNotification, error: pushNotifError, isMutating: pushNotifLoading } = usePushNotifAPI();
-	
+
 	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
 
 	const paramGetNotif = {
@@ -70,7 +70,7 @@ const BookAppointment = () => {
 	const {
 		data: getNotification,
 	} = useNotification(paramGetNotif);
-	
+
 	const [confirmationModal, setConfirmationModalVisible] = useState<boolean>(false);
 	const [addProfileModal, setAddProfileModal] = useState<boolean>(false);
 	const [successModal, setSuccessModal] = useState<boolean>(false);
@@ -175,7 +175,7 @@ const BookAppointment = () => {
 		}
 	};
 
-	const uploadAsuransiPhotoFront = async() => {
+	const uploadAsuransiPhotoFront = async () => {
 		if (tempImageAsuransiFront !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiFront });
 			if (responseData.stat_msg === 'Success') {
@@ -185,7 +185,7 @@ const BookAppointment = () => {
 		return '';
 	};
 
-	const uploadAsuransiPhotoBack = async() => {
+	const uploadAsuransiPhotoBack = async () => {
 		if (tempImageAsuransiBack !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiBack });
 			if (responseData.stat_msg === 'Success') {
@@ -195,9 +195,19 @@ const BookAppointment = () => {
 		return '';
 	};
 
-	const onConfirmed = async() => {
+	const serviceMap = (type: string) => {
+		switch (type) {
+			case 'Appointment':
+				return 'APP';
+			case 'Telemedicine':
+				return 'TEL';
+			default:
+				return 'APP';
+		}
+	};
+
+	const onConfirmed = async () => {
 		try {
-			
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
 				patient_name: selectedProfile?.name?.trim() ?? '',
@@ -215,7 +225,7 @@ const BookAppointment = () => {
 				'main_complaint': keluhan,
 				'necessity_action': tindakan,
 				'payment_method': penjamin,
-				'service': searchParams.get('service') ?? 'APP', // TEL / APP
+				'service': serviceMap(searchParams.get('service') ?? ''), // TEL / APP
 				'hospital_code': timeSlot?.hospital_code,
 				'insurance_name': asuransi,
 				'insurance_number': noAsuransi,
@@ -224,7 +234,7 @@ const BookAppointment = () => {
 			};
 			await bookAppointment(payloadBook).then(() => {
 
-				const pushNotifPayload:PayloadPushNotification = {
+				const pushNotifPayload: PayloadPushNotification = {
 					category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
 					source: 'Rebelworks',
 					title_idn: 'Permintaan booking Berhasil',
@@ -242,7 +252,7 @@ const BookAppointment = () => {
 				};
 				pushNotification(pushNotifPayload);
 			});
-			
+
 			setSuccessModal(true);
 		} catch (error: any) {
 			setConfirmationModalVisible(false);
