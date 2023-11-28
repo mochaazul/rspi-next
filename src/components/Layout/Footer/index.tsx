@@ -9,7 +9,8 @@ import {
 	TextField,
 	Button,
 	Text,
-	Socmed
+	Socmed,
+	Modal
 } from '@/components/ui';
 import { FooterDetail } from '@/interface/footer';
 import { useScopedI18n } from '@/locales/client';
@@ -17,13 +18,22 @@ import { useScopedI18n } from '@/locales/client';
 import FooterStyled, { FooterContainer } from './style';
 import { HospitalDetail, HospitalState } from '@/interface/Hospital';
 import Image from 'next/image';
+import { useSubscribe } from '@/lib/api/client/newsletter';
+import { NewsletterPayload } from '@/interface';
+import { icons } from '@/constant';
 
 const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalState; }) => {
 	const navigate = useRouter();
+	
+	const { trigger: subscribe } = useSubscribe();
 
 	const t = useScopedI18n('page.footer');
 
 	const [loading, setLoading] = useState<boolean>(false);
+	const [loadingSubs, setLoadingSubs] = useState<boolean>(false);
+	const [modalNewsletter, setModalNewsletter] = useState<boolean>(false);
+	const [emailNewsletter, setEmailNewsletter] = useState<string>('');
+	const [msgNewsletter, setMsgNewsletter] = useState<string>('');
 	const [ourHospital, setOurHospital] = useState<HospitalDetail[]>([]);
 	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
 
@@ -54,6 +64,29 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 		});
 		setOurHospital(Object.values(hospitalData || []));
 	}, []);
+
+	useEffect(() => {
+
+	}, [modalNewsletter, msgNewsletter]);
+
+	const subscribeNewsletter = () => {
+		if (emailNewsletter !== '') {
+			setLoadingSubs(true);
+			const subscribePayload: NewsletterPayload = {
+				email: decodeURIComponent(emailNewsletter),
+			};
+			subscribe(subscribePayload).then(res => {
+				setModalNewsletter(true);
+				setMsgNewsletter(res?.stat_msg ?? '');
+				setEmailNewsletter('');
+				setLoadingSubs(false);
+			});
+		} else {
+			setModalNewsletter(true);
+			setMsgNewsletter('error');
+		}
+		
+	};
 
 	const renderItems = (items: FooterDetail[]) => {
 		return (
@@ -226,16 +259,20 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
 					<Text fontSize='14px' className='sub-text'>{ t('subscribeDescription') }</Text>
-					<div className='email-sub-form-container mt-4 lg:mt-6'>
+					<div className='email-sub-form-container mt-4 lg:mt-6 gap-3'>
 						<TextField
 							width='100%'
 							placeholder={ t('subscribePlaceholder') }
 							className='text-sm sm:text-base'
+							value={ emailNewsletter }
+							onChange={ e => setEmailNewsletter(e.target.value) }
 						/>
 						<Button
-							className='sub-button color-default text-sm sm:text-base font-black sm:font-bold'
+							className={ ` ${loadingSubs ? '!bg-gray-50 !text-gray-300 cursor-not-allowed' : '' } sub-button color-default text-sm sm:text-base font-black sm:font-bold` }
 							theme='secondary'
 							label={ t('subscribeSubmit') }
+							onClick={ subscribeNewsletter }
+							disabled={ loadingSubs }
 						/>
 					</div>
 				</div>
@@ -249,6 +286,25 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					</div>
 				}
 			</div>
+			<Modal
+				visible={ modalNewsletter }
+				onClose={ () => setModalNewsletter(false) }
+				width='560px'
+			 >
+				<div className='relative flex flex-col items-center'>
+					{ msgNewsletter === 'Success' ? <icons.Confirmed /> : <div className='p-4 bg-gray-200 rounded-full'><icons.Close /></div> }
+					<Text
+						fontSize='23px'
+						lineHeight='19px'
+						fontType='h4'
+						fontWeight='900'
+						color={ colors.grey.darker }
+						text={ msgNewsletter === 'Success' ? t('successSubs') : t('errorSubs') }
+						className='mt-5'
+					/>
+					<Button type='submit' label={ t('handleButtonModalSubmit') } className='mt-[32px]' onClick={ () => setModalNewsletter(false) } />
+				</div>
+			 </Modal>
 		</FooterStyled>
 	);
 

@@ -895,7 +895,10 @@ export default {
 			subscribeLabel: 'Stay Updated With Us',
 			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.',
 			subscribePlaceholder: 'Enter your email address',
-			subscribeSubmit: 'Subscribe'
+			subscribeSubmit: 'Subscribe',
+			errorSubs: 'The subscription process failed',
+			successSubs: 'The subscription process successful',
+			handleButtonModalSubmit: 'Close',
 		},
 		medicalRecordReminder: {
 			heading: 'Get Access to Your Medical Visit Information',

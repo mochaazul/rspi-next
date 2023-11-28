@@ -273,7 +273,7 @@ const ContactUsForm = ({
 				width='560px'
 			 >
 				<div className='relative flex flex-col items-center'>
-					{ notifMode === 'success' ? <icons.Confirmed /> : <icons.Close /> }
+					{ notifMode === 'success' ? <icons.Confirmed /> : <div className='p-4 bg-gray-200 rounded-full'><icons.Close /></div> }
 					<Text
 						fontSize='23px'
 						lineHeight='19px'

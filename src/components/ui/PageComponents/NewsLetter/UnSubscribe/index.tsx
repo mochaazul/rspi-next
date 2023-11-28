@@ -20,7 +20,7 @@ const PageUnSubscribe: React.FC<PageUnSubscribeProps> = ({ success, message }) =
 			<div className='flex flex-col items-center justify-center gap-3 w-[500px] shadow-2xl p-5 rounded-xl'>
 				<div className='pt-5'>
 					{ success === '' ? <LoadingSkeleton type='block'/> :
-						success === 'Success' ? <icons.Confirmed /> : <icons.Close />
+						success === 'Success' ? <icons.Confirmed /> : <div className='p-4 bg-gray-200 rounded-full'><icons.Close /></div>
 					}
 				</div>
 				{ success === '' ? <LoadingSkeleton type='line'/> :

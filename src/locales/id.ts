@@ -900,7 +900,10 @@ export default {
 			subscribeLabel: 'Ikuti Perkembangan Bersama Kami',
 			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.',
 			subscribePlaceholder: 'Masukkan alamat email',
-			subscribeSubmit: 'Subscribe'
+			subscribeSubmit: 'Berlangganan',
+			errorSubs: 'Proses berlangganan gagal dilakukan',
+			successSubs: 'Proses berlangganan berhasil dilakukan',
+			handleButtonModalSubmit: 'Tutup',
 		},
 		medicalRecordReminder: {
 			heading: 'Dapatkan Akses terhadap Informasi Kunjungan Medis Anda',
