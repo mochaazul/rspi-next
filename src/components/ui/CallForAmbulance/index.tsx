@@ -21,24 +21,15 @@ const CallForAmbulance = ({
 	hospitalData: HospitalState,
 }) => {
 
-	// const hospitalSelector = useTypedSelector<HospitalState>('hospital'); // migrate
-	// const { user } = useTypedSelector<UserState>('user'); //migrate
-
 	const [visible, setVisible] = useState(false);
-
-	// const shouldGiveMargin = !user.medical_record && user.token; // migrate
 
 	return (
 		<>
-			{ /* Migrate  */ }
-			{ /* TBD max-sm:w-[60px] max-sm:h-[60px]  ${ shouldGiveMargin ? 'bottom-24' : '' } */ }
 			<CallForAmbulanceStyle className={ `
 				fixed cursor-pointer flex align-center justify-center 
-				max-sm:w-[60px] max-sm:h-[60px] }
-			
+				max-sm:w-[60px] max-sm:h-[60px] 
 			` } onClick={ () => setVisible(true) }>
-				<div className='absolute w-[80%] h-[80%] mt-1 rounded-full hover:animate-ping z-20' style={ { backgroundColor: colors.red.accentOpacity90 } } />
-				< images.AmbulanceIcon className='z-10 relative' />
+				<images.AmbulanceIcon className='z-10' />
 			</CallForAmbulanceStyle>
 			<Modal
 				visible={ visible }
@@ -47,7 +38,7 @@ const CallForAmbulance = ({
 			>
 				<ModalRSTelephoneStyle className='relative flex flex-col'>
 					<div className='flex justify-center'>
-						<img src={ images.AmbulanceIcon } alt='' className='z-10 relative' />
+						<images.AmbulanceIcon className='z-10 relative' />
 					</div>
 					<Text
 						fontSize='24px'
