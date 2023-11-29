@@ -42,11 +42,11 @@ export const Header = ({
 	marAllReadNotifFunc,
 	footersData,
 }: {
-	session: UserSessionData,
+	session?: UserSessionData,
 	hospitalData: HospitalDetail[],
 	centerOfExcellenceData: CenterOfExcellenceDetail[],
 	facilityServicesData: FacilityServicesDetail[],
-	marAllReadNotifFunc: () => any,
+	marAllReadNotifFunc?: () => any,
 	footersData: FooterDetail[],
 }) => {
 
@@ -66,11 +66,13 @@ export const Header = ({
 	const [activeSubMenuIdMobile, setActiveSubMenuIdMobile] = useState<string>('');
 
 	const onclickMarkAllNotif = () => {
-		marAllReadNotifFunc()
-			.then(() => {
-				setShowNotification(true);
-				mutate('getNotification');
-			});
+		if (marAllReadNotifFunc) {
+			marAllReadNotifFunc()
+				.then(() => {
+					setShowNotification(true);
+					mutate('getNotification');
+				});
+		}
 	};
 
 	const isLoggedIn = !!session?.token;
@@ -81,8 +83,8 @@ export const Header = ({
 
 	const paramGetNotif = {
 		query: {
-			medical_record: session.user?.medical_record ?? '',
-			email: session.user?.email,
+			medical_record: session?.user?.medical_record ?? '',
+			email: session?.user?.email,
 		},
 	};
 	const {
@@ -326,11 +328,15 @@ export const Header = ({
 		if (isLoggedIn) {
 			return (
 				<div className='relative inline-block text-white my-auto' onClick={ () => setShowNotification(true) }>
-					<icons.Notif onClick={ () => marAllReadNotifFunc()
-						.then(() => {
-							setShowNotification(true);
-							notificationResponseFetch();
-						}) }
+					<icons.Notif onClick={ () => {
+						if (marAllReadNotifFunc) {
+							marAllReadNotifFunc()
+								.then(() => {
+									setShowNotification(true);
+									notificationResponseFetch();
+								});
+						}
+					} }
 						className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
 					/>
 					<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
@@ -476,7 +482,7 @@ export const Header = ({
 										<div className='relative flex'>
 											<div className='flex text-white items-center relative z-[2]'>
 												<div>
-													{ session.user?.img_url
+													{ session?.user?.img_url
 														? (
 															<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
 																<Image
