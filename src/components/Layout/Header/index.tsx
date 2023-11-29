@@ -438,7 +438,7 @@ export const Header = ({
 									<Text text={ t('register') } fontSize='16px' fontWeight='700' />
 								</div>
 							}
-							
+
 							<div
 								className='nav-menu'
 								onClick={ () => handleNavigateSideBar('/contact-us') }>
