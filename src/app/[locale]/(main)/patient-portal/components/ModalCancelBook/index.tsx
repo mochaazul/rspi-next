@@ -7,6 +7,7 @@ import { Modal, Text, Button } from '@/components/ui';
 import { colors, icons } from '@/constant';
 import { useGetProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
+import useSession from '@/session/client';
 
 import { ModalStyle } from '../../style';
 
@@ -27,7 +28,8 @@ interface PropsType {
 }
 
 const ModalCancelBook = (props: PropsType) => {
-	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('user-information-page');
+	const session = useSession();
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile(session?.token);
 	const t = useScopedI18n('page.patientPortal.cancelBooking');
 
 	return (

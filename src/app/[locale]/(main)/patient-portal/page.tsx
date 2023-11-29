@@ -13,6 +13,7 @@ import { useGetProfile } from '@/lib/api/client/profile';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
 import CardUser from '@/components/ui/PageComponents/UserInformationSections/CardUser';
 import { useScopedI18n } from '@/locales/client';
+import useSession from '@/session/client';
 
 import JadwalKunjungan from './components/JadwalKunjungan';
 import RiwayatKunjungan from './components/RiwayatKunjungan';
@@ -29,8 +30,9 @@ type MenuType = {
 };
 
 const PatientPortal = () => {
-	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('user-information-page');
-	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(`${ getProfileResponse?.data?.id }`);
+	const session = useSession();
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile(session?.token);
+	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(session?.token);
 
 	const [activeTabIndex, setActiveTabIndex] = useState(1);
 	const [activeTabIndexForCallBackPin, setActiveTabIndexForCallBackPin] = useState(1);
