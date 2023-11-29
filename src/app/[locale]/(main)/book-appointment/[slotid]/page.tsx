@@ -195,9 +195,19 @@ const BookAppointment = () => {
 		return '';
 	};
 
+	const serviceMap = (type: string) => {
+		switch (type) {
+			case 'Appointment':
+				return 'APP';
+			case 'Telemedicine':
+				return 'TEL';
+			default:
+				return 'APP';
+		}
+	};
+
 	const onConfirmed = async () => {
 		try {
-
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
 				patient_name: selectedProfile?.name?.trim() ?? '',
@@ -215,7 +225,7 @@ const BookAppointment = () => {
 				'main_complaint': keluhan,
 				'necessity_action': tindakan,
 				'payment_method': penjamin,
-				'service': searchParams.get('service') ?? 'APP', // TEL / APP
+				'service': serviceMap(searchParams.get('service') ?? ''), // TEL / APP
 				'hospital_code': timeSlot?.hospital_code,
 				'insurance_name': asuransi,
 				'insurance_number': noAsuransi,
