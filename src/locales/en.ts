@@ -855,7 +855,9 @@ export default {
 		},
 		findDoctor: {
 			heading: 'Find a Doctor',
+			
 			label: {
+				hospital: 'Rumah sakit',
 				doctorName: 'Doctor Name',
 				specialty: 'Specialty',
 				doctorFound: 'Doctors Found',
