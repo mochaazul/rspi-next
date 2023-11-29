@@ -19,7 +19,8 @@ import NotificationPanel from '@/components/ui/NotificationPanel';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { getProfile } from '@/lib/api/profile';
 
-import OTPPageStyle, { Box, WarningNote } from './style';
+import { WarningNote } from './style';
+import { ContainerStyle, Box } from '../style';
 
 type Props = {
 	onResend?: () => void,
@@ -155,7 +156,7 @@ const OTPPage = () => {
 	};
 
 	return (
-		<OTPPageStyle>
+		<ContainerStyle>
 			<Box>
 				<div className='hidden md:flex justify-center mb-8'>
 					<Image
@@ -214,7 +215,7 @@ const OTPPage = () => {
 					<Button className='mt-8' theme='primary' type='submit' disabled={ loadingSubmit }>{ t('form.submitBtnLabel') }</Button>
 				</Form>
 			</Box>
-		</OTPPageStyle>
+		</ContainerStyle>
 	);
 };
 

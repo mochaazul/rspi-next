@@ -17,7 +17,7 @@ import { useScopedI18n } from '@/locales/client';
 import { useForgotPassword } from '@/lib/api/client/auth';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-import { ForgotPasswordStyle, Box } from './style';
+import { ContainerStyle, Box } from '../style';
 
 const ForgotPassword = () => {
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
@@ -53,7 +53,7 @@ const ForgotPassword = () => {
 	};
 
 	return (
-		<ForgotPasswordStyle>
+		<ContainerStyle>
 			<Box className={ `
 				md:py-8 md:px-16
 				px-4
@@ -140,7 +140,7 @@ const ForgotPassword = () => {
 				/>
 				: null
 			}
-		</ForgotPasswordStyle>
+		</ContainerStyle>
 	);
 };
 

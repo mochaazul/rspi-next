@@ -111,7 +111,7 @@ const RegisterPage = () => {
 				<div className='col-span-2'>
 					<Form className={ `
 					max-md:py-6 max-md:px-4
-					md:p-8 min-h-screen flex flex-col items-center justify-center max-md:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
+					md:p-8 min-h-screen flex flex-col items-center md:justify-center max-md:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
 					` }
 						onSubmit={ e => {
 							e.preventDefault();
@@ -124,7 +124,7 @@ const RegisterPage = () => {
 					>
 						<div className='w-full '>
 							<div className='hidden md:flex mb-2 xl:mb-8'>
-								<Link href='/' className='flex'>
+								<Link href='/'>
 									<Image
 										src='/images/logo_rspi.svg'
 										alt='rspi-logo'

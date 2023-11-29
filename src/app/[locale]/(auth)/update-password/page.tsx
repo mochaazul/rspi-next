@@ -17,7 +17,7 @@ import { useUpdatePassword } from '@/lib/api/client/auth';
 import { UpdatePasswordType, ResponseStatus } from '@/interface';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-import { UpdatePasswordPageStyle, Box } from './style';
+import { ContainerStyle, Box } from '../style';
 
 const UpdatePasswordPage = () => {
 	const navigate = useRouter();
@@ -81,10 +81,10 @@ const UpdatePasswordPage = () => {
 	};
 
 	return (
-		<UpdatePasswordPageStyle>
+		<ContainerStyle>
 			<Box>
 				<div className='w-full flex flex-col items-center'>
-					<div className='hidden md:flex justify-center mb-2 md:mb-8'>
+					<div className='hidden md:flex justify-center mb-8'>
 						<Link href='/'>
 							<Image
 								src='/images/logo_rspi.svg'
@@ -192,7 +192,7 @@ const UpdatePasswordPage = () => {
 					/>
 				</Form>
 			</Box>
-		</UpdatePasswordPageStyle>
+		</ContainerStyle>
 	);
 };
 

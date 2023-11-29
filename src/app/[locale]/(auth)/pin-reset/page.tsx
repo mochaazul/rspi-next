@@ -17,7 +17,7 @@ import { PinSchema } from '@/validator/auth';
 import useSession from '@/session/client';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-import PinPageStyle, { Box } from './style';
+import { ContainerStyle, Box } from '../style';
 
 const ResetPinPage = () => {
 	const navigate = useRouter();
@@ -67,7 +67,7 @@ const ResetPinPage = () => {
 	};
 
 	return (
-		<PinPageStyle>
+		<ContainerStyle>
 			<Box>
 				<div className='hidden md:flex justify-center mb-8'>
 					<Image
@@ -77,7 +77,14 @@ const ResetPinPage = () => {
 						height={ 60 }
 					/>
 				</div>
-				<Text text={ t('headingReset') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
+				<Text
+					text={ t('heading') }
+					fontSize={ '32px' }
+					lineHeight={ '48px' }
+					fontWeight={ '900' }
+					subClassName='max-md:leading-8 max-md:text-[20px]'
+					textAlign='center'
+				/>
 				<Text
 					text={ t('subHeadingReset') }
 					fontSize={ '20px' }
@@ -123,6 +130,8 @@ const ResetPinPage = () => {
 							value={ formikPin.values.pin }
 							type='password'
 							password
+							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>
 					<Form.FormGroup className='group-wrapper w-full'>
@@ -139,6 +148,8 @@ const ResetPinPage = () => {
 							value={ formikPin.values.confirm_pin }
 							type='password'
 							password
+							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>
 					<Button
@@ -151,7 +162,7 @@ const ResetPinPage = () => {
 					</Button>
 				</Form>
 			</Box>
-		</PinPageStyle>
+		</ContainerStyle>
 	);
 };
 

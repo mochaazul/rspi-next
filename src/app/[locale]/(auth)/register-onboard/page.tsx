@@ -18,7 +18,7 @@ import { RegisterOnboardSchema } from '@/validator/auth';
 import { useCheckPhonePatient, useRegisterOnboard } from '@/lib/api/client/auth';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-import { RegisterOnboardStyle, Box } from './style';
+import { ContainerStyle, Box } from '../style';
 
 const regexPhone = (phone: string) => {
 	let phoneNumber =
@@ -29,7 +29,6 @@ const regexPhone = (phone: string) => {
 
 const RegisterOnboard = () => {
 	const navigate = useRouter();
-	const session = useSession();
 	const searchParams = useSearchParams()!;
 	const t = useScopedI18n('page.registerOnboard');
 	const tValidation = useScopedI18n('validation.formValidation');
@@ -176,10 +175,10 @@ const RegisterOnboard = () => {
 	};
 
 	return (
-		<RegisterOnboardStyle>
+		<ContainerStyle>
 			<Box>
 				<Form autoComplete='off'>
-					<div className='mb-8 max-md:hidden logo-image'>
+					<div className='mb-8 max-md:hidden flex justify-center'>
 						<Image
 							src='/images/logo_rspi.svg'
 							alt='rspi-logo'
@@ -326,7 +325,7 @@ const RegisterOnboard = () => {
 					</Button>
 				</Form>
 			</Box>
-		</RegisterOnboardStyle>
+		</ContainerStyle>
 	);
 };
 

@@ -17,7 +17,7 @@ import { PinSchema } from '@/validator/auth';
 import { useCreatePin } from '@/lib/api/client/auth';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-import PinPageStyle, { Box } from './style';
+import { ContainerStyle, Box } from '../style';
 
 const PinPage = () => {
 	const navigate = useRouter();
@@ -67,9 +67,9 @@ const PinPage = () => {
 	};
 
 	return (
-		<PinPageStyle>
-			<Box>
-				<div className='hidden md:flex mb-8'>
+		<ContainerStyle>
+			<Box className='md:w-auto'>
+				<div className='hidden md:flex justify-center mb-8'>
 					<Image
 						src='/images/logo_rspi.svg'
 						alt='rspi-logo'
@@ -77,7 +77,14 @@ const PinPage = () => {
 						height={ 60 }
 					/>
 				</div>
-				<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } subClassName='max-md:leading-8 max-md:text-[20px]' />
+				<Text
+					text={ t('heading') }
+					fontSize={ '32px' }
+					lineHeight={ '48px' }
+					fontWeight={ '900' }
+					subClassName='max-md:leading-8 max-md:text-[20px]'
+					textAlign='center'
+				/>
 				<Text
 					text={ t('subHeading') }
 					fontSize={ '20px' }
@@ -124,6 +131,8 @@ const PinPage = () => {
 							value={ formikPin.values.pin }
 							type='password'
 							onChangeValue={ onChangeInputValue }
+							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>
 					<Form.FormGroup className='group-wrapper w-full'>
@@ -140,6 +149,8 @@ const PinPage = () => {
 							value={ formikPin.values.confirm_pin }
 							type='password'
 							onChangeValue={ onChangeInputValue }
+							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>
 					<Button
@@ -152,7 +163,7 @@ const PinPage = () => {
 					</Button>
 				</Form>
 			</Box>
-		</PinPageStyle>
+		</ContainerStyle>
 	);
 };
 
