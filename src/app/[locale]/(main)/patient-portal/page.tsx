@@ -29,7 +29,7 @@ type MenuType = {
 };
 
 const PatientPortal = () => {
-	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('patient-portal-page');
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('user-information-page');
 	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(`${ getProfileResponse?.data?.id }`);
 
 	const [activeTabIndex, setActiveTabIndex] = useState(1);

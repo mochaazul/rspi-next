@@ -27,7 +27,7 @@ interface PropsType {
 }
 
 const ModalCancelBook = (props: PropsType) => {
-	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('patient-portal-page');
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('user-information-page');
 	const t = useScopedI18n('page.patientPortal.cancelBooking');
 
 	return (
