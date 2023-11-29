@@ -19,10 +19,12 @@ export default {
 			sunday: 'Min'
 		}
 	},
+
 	gender: {
 		male: 'Laki-laki',
 		female: 'Perempuan'
 	},
+
 	unsubscribe: {
 		heading: 'Berhenti berlangganan telah berhasil',
 		subHeading: 'Berhenti berlangganan berita terupdate tentang RSPI berhasil, semoga kita dapat berjumpa kembali'
@@ -849,6 +851,7 @@ export default {
 		findDoctor: {
 			heading: 'Cari Dokter',
 			label: {
+				hospital: 'Rumah sakit',
 				doctorName: 'Nama Dokter',
 				specialty: 'Spesialisasi',
 				doctorFound: 'Dokter Ditemukan',
