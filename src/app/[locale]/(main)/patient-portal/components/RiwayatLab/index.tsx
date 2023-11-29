@@ -9,6 +9,7 @@ import { baseUrl } from '@/config';
 import { colors, icons } from '@/constant';
 import { useGetLabHistory } from '@/lib/api/client/hospital';
 import { useScopedI18n } from '@/locales/client';
+import useSession from '@/session/client';
 
 import { CardPatientPortalStyle, EmptyResultContainer } from '../../style';
 
@@ -30,6 +31,8 @@ const LaporanBtn = styled.a`
 
 const RiwayatLab = () => {
 	const t = useScopedI18n('page.patientPortal.riwayatLab');
+
+	const cookies = useSession();
 
 	const { data: labHistoryResponse, error: labHistoryError, isLoading: labHistoryLoading } = useGetLabHistory();
 
@@ -66,7 +69,7 @@ const RiwayatLab = () => {
 									<td>{ labResult.date ? dayjs(labResult.date).format('dddd D MMMM YYYY') : '-' }</td>
 									<td>{ labResult.hospital || '-' }</td>
 									<td>{ labResult.doctor || '-' }</td>
-									<td>{ <LaporanBtn href={ `${ baseUrl }/patients/patient-portal/lab-histories/pdf?episode=${ labResult.episode }&lab_episode=${ labResult.lab_episode }` } target='_blank' rel='noreferrer' >{ t('tableMenuLable.viewReport') }</LaporanBtn> }</td>
+									<td>{ <LaporanBtn href={ `${ baseUrl }/patients/patient-portal/lab-histories/pdf?episode=${ labResult.episode }&lab_episode=${ labResult.lab_episode }&token=${ cookies.token }` } target='_blank' rel='noreferrer' >{ t('tableMenuLable.viewReport') }</LaporanBtn> }</td>
 								</tr>
 							))
 						}

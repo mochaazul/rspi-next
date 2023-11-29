@@ -3,9 +3,11 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { default as NextImage } from 'next/image';
 
 import { colors, Images } from '@/constant';
-import { default as NextImage } from 'next/image';
 import { MedicalRecordReminder, Text } from '@/components/ui';
 import PinModal from '@/components/ui/PinModal';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
@@ -85,6 +87,12 @@ const PatientPortal = () => {
 			setActiveTabIndex(parseInt(params.id as string));
 		}
 	}, [params]);
+
+	useEffect(() => {
+		if (visitHistoryError) {
+			toast.error(visitHistoryError?.message);
+		}
+	}, [visitHistoryError]);
 
 	const renderContent = useMemo(() => {
 		switch (activeTabIndex) {
