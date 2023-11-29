@@ -43,7 +43,6 @@ export default async function RootLayout({
 				centerOfExcellenceData={ centerOfExcellence.data }
 				facilityServicesData={ facilityServices.data }
 				marAllReadNotifFunc={ marAllReadNotif }
-				footersData={ footers.data }
 			/>
 			{ children }
 			{

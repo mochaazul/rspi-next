@@ -3,24 +3,25 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
+import Image from 'next/image';
 
-import { Images, colors } from '@/constant';
-import { PinType, ResponseStatus } from '@/interface';
-import { useScopedI18n } from '@/locales/client';
+import { colors } from '@/constant';
 import Button from '@/components/ui/Button';
 import Form from '@/components/ui/Form';
 import NotificationPanel from '@/components/ui/NotificationPanel';
 import Text from '@/components/ui/Text';
-import useSession from '@/session/client';
+import { PinType, ResponseStatus } from '@/interface';
+import { useScopedI18n } from '@/locales/client';
+import { useUpdatePin } from '@/lib/api/client/auth';
 import { PinSchema } from '@/validator/auth';
-import { useCreatePin } from '@/lib/api/client/auth';
+import useSession from '@/session/client';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
 import PinPageStyle, { Box } from './style';
 
-const PinPage = () => {
+const ResetPinPage = () => {
 	const navigate = useRouter();
-	const { trigger: createPin, isMutating: loadingUser } = useCreatePin();
+	const { trigger: updatePin, isMutating: loadingUser } = useUpdatePin();
 
 	const [notifVisible, setNotifVisible] = useState<boolean>(false);
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
@@ -36,7 +37,7 @@ const PinPage = () => {
 		},
 		onSubmit: async (formPin: PinType) => {
 			try {
-				await createPin(formPin);
+				await updatePin(formPin);
 
 				navigate.replace('/');
 			} catch (error: any) {
@@ -68,12 +69,17 @@ const PinPage = () => {
 	return (
 		<PinPageStyle>
 			<Box>
-				<div className='mb-[32px]'>
-					<Images.LogoRSPI />
+				<div className='hidden md:flex justify-center mb-8'>
+					<Image
+						src='/images/logo_rspi.svg'
+						alt='rspi-logo'
+						width={ 132 }
+						height={ 60 }
+					/>
 				</div>
-				<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
+				<Text text={ t('headingReset') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
 				<Text
-					text={ t('subHeading') }
+					text={ t('subHeadingReset') }
 					fontSize={ '20px' }
 					lineHeight={ '24px' }
 					fontWeight={ '400' }
@@ -87,7 +93,7 @@ const PinPage = () => {
 						<NotificationPanel
 							mode={ errorUser?.stat_msg ? 'error' : 'success' }
 							visible={ notifVisible && !loadingUser }
-							text={ errorUser?.stat_msg ? errorUser?.stat_msg : session?.token ? t('notification.onSuccessMsg') : t('notification.onErrorMsg') }
+							text={ errorUser?.stat_msg ? errorUser?.stat_msg : session?.token ? t('notification.onSuccessMsgUpdatePin') : t('notification.onErrorMsg') }
 							onClickRightIcon={ handleNotifOnClose }
 						/>
 					</div>
@@ -110,13 +116,13 @@ const PinPage = () => {
 							className='input'
 							digitLength={ 6 }
 							semiSecure={ false }
-							password={ true }
+							onChangeValue={ onChangeInputValue }
 							label={ t('form.pinFieldLabel') }
 							errorMessage={ getInputErrorMessage(formikPin.errors.pin, t('form.pinFieldLabel')) }
 							isError={ !!formikPin.errors.pin }
 							value={ formikPin.values.pin }
 							type='password'
-							onChangeValue={ onChangeInputValue }
+							password
 						/>
 					</Form.FormGroup>
 					<Form.FormGroup className='group-wrapper w-full'>
@@ -126,13 +132,13 @@ const PinPage = () => {
 							className='input'
 							digitLength={ 6 }
 							semiSecure={ false }
-							password={ true }
+							onChangeValue={ onChangeInputValue }
 							label={ t('form.pinConfirmLabel') }
 							errorMessage={ getInputErrorMessage(formikPin.errors.confirm_pin, t('form.pinConfirmLabel')) }
 							isError={ !!formikPin.errors.confirm_pin }
 							value={ formikPin.values.confirm_pin }
 							type='password'
-							onChangeValue={ onChangeInputValue }
+							password
 						/>
 					</Form.FormGroup>
 					<Button
@@ -141,7 +147,7 @@ const PinPage = () => {
 						disabled={ loadingUser }
 						type='submit'
 					>
-						{ loadingUser ? t('form.submitBtnLabel.loading') : t('form.submitBtnLabel.default') }
+						{ loadingUser ? t('form.changeBtnLabel.loading') : t('form.changeBtnLabel.default') }
 					</Button>
 				</Form>
 			</Box>
@@ -149,4 +155,4 @@ const PinPage = () => {
 	);
 };
 
-export default PinPage;
+export default ResetPinPage;

@@ -1,7 +1,9 @@
 
 'use client';
 
-import { Images, colors } from '@/constant';
+import Image from 'next/image';
+
+import { colors } from '@/constant';
 import Text from '@/components/ui/Text';
 
 import { useScopedI18n } from '@/locales/client';
@@ -15,7 +17,12 @@ export default function UnSubscribe() {
 			<div className='grid max-sm:grid-cols-1 grid-cols-1 max-sm:gap-0 gap-3 w-full'>
 				<div className='col-span-2'>
 					<div className='mb-[32px] flex flex-col items-center'>
-						<Images.LogoRSPI />
+						<Image
+							src='/images/logo_rspi.svg'
+							alt='rspi-logo'
+							width={ 132 }
+							height={ 60 }
+						/>
 					</div>
 					<div className=''>
 						<Text

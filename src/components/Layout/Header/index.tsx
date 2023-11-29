@@ -13,7 +13,6 @@ import Link from 'next/link';
 import {
 	CenterOfExcellenceState,
 	FacilityServicesDetail,
-	FooterDetail,
 	HospitalState,
 	UserSessionData,
 } from '@/interface';
@@ -39,15 +38,13 @@ export const Header = ({
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData,
-	marAllReadNotifFunc,
-	footersData,
+	marAllReadNotifFunc
 }: {
 	session: UserSessionData,
 	hospitalData: HospitalState,
 	centerOfExcellenceData: CenterOfExcellenceState,
 	facilityServicesData: FacilityServicesDetail[],
 	marAllReadNotifFunc: () => any,
-	footersData: FooterDetail[],
 }) => {
 
 	const router = useRouter();

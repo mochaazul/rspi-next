@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useFormik, FormikProps } from 'formik';
 
 import { Images, colors } from '@/constant';
@@ -123,8 +124,13 @@ const ResetPassword = () => {
 							autoComplete='off'
 							onSubmit={ onSubmitForm }	>
 							<div className='w-full'>
-								<Link href='/'>
-									<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
+								<Link href='/' className='mb-2 md:mb-8'>
+									<Image
+										src='/images/logo_rspi.svg'
+										alt='rspi-logo'
+										width={ 132 }
+										height={ 60 }
+									/>
 								</Link>
 								<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 									{ t('heading') }

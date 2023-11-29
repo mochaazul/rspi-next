@@ -5,8 +5,12 @@ const PinPageStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
   min-height: 100vh;
+
+	@media screen and (min-width: 768px) {
+		justify-content: center;
+		padding: 32px 0;
+	}
 `;
 
 export const Box = styled.div`

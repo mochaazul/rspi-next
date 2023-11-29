@@ -1,19 +1,15 @@
-'use client';
-
 import styled from 'styled-components';
 
-const LandingPageStyle = styled.div`
+const RegisterPageStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  position: relative;
 
-  .login {
+  .register {
     border: 3px solid var(--color-blue-100);
-    padding: 30px;
     border-radius: 15px;
   }
 
@@ -24,8 +20,7 @@ const LandingPageStyle = styled.div`
     margin-bottom: 30px;
   }
   .group-wrapper {
-    min-height: 75px;
   }
 `;
 
-export default LandingPageStyle;
+export default RegisterPageStyle;
