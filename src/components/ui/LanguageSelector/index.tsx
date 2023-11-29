@@ -26,7 +26,6 @@ const languageItem = [
 ];
 
 export const LanguageSelector = () => {
-
 	const setLanguage = useChangeLocale();
 	const currentLang = useCurrentLocale();
 

@@ -2,6 +2,7 @@ import { Key } from 'react';
 import moment from 'moment';
 import _ from 'lodash';
 import { isMobile } from 'react-device-detect';
+import { redirect } from 'next/navigation';
 
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
@@ -22,6 +23,10 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 	const responseCenterOfExcellence = await getCoe();
 
 	const newParam = decodeURIComponent(params?.slug);
+
+	if (responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length <= 0) {
+		redirect(`/centre-of-excellence/${ responseCenterOfExcellence?.data[0]?.slug }`);
+	};
 
 	const filteredResponseCenterOfExcellence = responseCenterOfExcellence?.data?.find(coe => {
 		return coe?.slug === newParam;
@@ -97,7 +102,9 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 											content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
 											activeMenuIndex={ newParam }
 											centerOfExcellence={ responseCenterOfExcellence?.data }
-										/> : null
+										/>
+										:
+										null
 								}
 							</div>
 						</div>
