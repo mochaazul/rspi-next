@@ -33,6 +33,7 @@ type Props = {
 };
 
 export default function Page({ params }: Props) {
+
 	const t = useScopedI18n('page.doctorProfile');
 
 	const router = useRouter();
@@ -141,6 +142,12 @@ export default function Page({ params }: Props) {
 	const selectedHospitalDetails = () => {
 		return hospital?.data.find(hospital => hospital.hospital_code === selectedHospital);
 	};
+	const notFoundDoctor = () => {
+		if (doctorError && doctorError.message.toLowerCase() === 'error on get detail doctor detail on schedule') {
+			return 'Doctor not found';
+		}
+		return doctor?.data?.name;
+	};
 
 	return (
 		<DoctorProfileStyle>
@@ -161,7 +168,7 @@ export default function Page({ params }: Props) {
 									<div className='flex gap-[16px]'>
 										<DoctorAvatar className='lg:hidden md:hidden' profile_url={ doctor?.data?.img_url ?? Images.DoctorProfile.src } />
 										<div className='flex flex-col'>
-											<Text text={ doctor?.data?.name } fontSize='24px' fontWeight='900' lineHeight='24px' />
+											<Text text={ notFoundDoctor() } fontSize='24px' fontWeight='900' lineHeight='24px' />
 											<Text text={ doctor?.data?.specialty[0] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' />
 											<hr className='my-[8px] md:hidden' />
 											<ShareDoctor className=' md:hidden' />
