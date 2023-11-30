@@ -6,8 +6,6 @@ export const CallForAmbulanceStyle = styled.div`
   z-index: 800;
   bottom: 10px;
   right: 30px;
-  transition: all .2s;
-
   &:hover {
     transform: scale(1.2);
     transition: all .2s;
@@ -18,7 +16,7 @@ export const CallForAmbulanceStyle = styled.div`
   }
 
   @media not all and (min-width: 640px) {
-    bottom: 15px;
+    bottom: 30px;
     right: 15px;
   }
 `;
