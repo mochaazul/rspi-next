@@ -55,11 +55,11 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		validateOnChange: enableValidation,
 		validationSchema: AddProfileSchema,
 		initialValues: {
-			dob: selfProfile?.birthdate ?? '',
-			email: selfProfile?.email ?? '',
-			gender: selfProfile?.gender ?? '',
-			name: selfProfile?.name ?? '',
-			phone: selfProfile?.phone ?? ''
+			dob: type === 'self' ? selfProfile?.birthdate ?? '' : '',
+			email: type === 'self' ? selfProfile?.email ?? '' : '',
+			gender: type === 'self' ? selfProfile?.gender ?? '' : '',
+			name: type === 'self' ? selfProfile?.name ?? '' : '',
+			phone: type === 'self' ? selfProfile?.phone ?? '' : ''
 		},
 		onSubmit: async (values: ProfilePayload) => {
 			const { dob, email, gender, name, phone } = values;
