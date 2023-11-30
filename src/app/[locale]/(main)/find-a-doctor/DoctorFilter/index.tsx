@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import { colors } from '@/constant';
@@ -13,6 +13,8 @@ import { useScopedI18n } from '@/locales/client';
 
 import Pills from '../Pills';
 import useFindDoctor from '../useFindDoctor';
+import LoadingSkeleton from '@/components/Layout/LoadingSkeleton';
+import Combobox, { ItemType } from '@/components/ui/Combobox';
 
 type Props = {
 	hospitals: HospitalDetail[],
@@ -38,7 +40,9 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 
 	const params = new URLSearchParams(searchParams);
 
-	const { hospitalFilter, telemedicineFilter, clinicFilter, createQueryString } = useFindDoctor({
+	const [speacialityValue, setSpecialityValue] = useState<ItemType|null>(null);
+
+	const { hospitalFilter, clinicFilter, createQueryString } = useFindDoctor({
 		hospitals,
 		clinics
 	});
@@ -74,17 +78,17 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 			}).map(sp => ({
 				id: sp.id,
 				label: sp.clinic_name,
-				speciality_code: sp.clinic_code
+				value: sp.clinic_code
 			}));
 		}
 		return [];
 	};
 
-	const handleRemoveSpecialty = (item: PickerItem) => {
+	const handleRemoveSpecialty = (item: ItemType) => {
 		clinicFilter.delete(item);
 	};
 
-	const onChooseSpecialty = (item: PickerItem) => {
+	const onChooseSpecialty = (item: ItemType | null) => {
 		clinicFilter.add(item);
 	};
 
@@ -124,7 +128,8 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 			>
 				Hospital
 			</Text>
-			<div className='flex flex-col gap-4'>
+		
+			 <div className='flex flex-col gap-4'>
 				<div>
 					<Form.Checkbox
 						label={ 'All Hospitals' }
@@ -146,6 +151,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 					))
 				}
 			</div>
+			
 			{ /* Horizontal spacer */ }
 			<div className='x-spacer mb-8 max-sm:hidden mt-8' />
 			{ /* Specialty search with accordion */ }
@@ -158,23 +164,27 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 			>
 				Speciality
 			</Text>
-			<div className='mx-[1px]'>
-				<Form.DropdownSearch
-					textFieldProps={ {
-						placeholder: 'Search',
-						featherIcon: 'Search',
-						iconPosition: 'left',
-						$iconColor: colors.grey.light
-					} }
-					pickerItems={ mapSpeciality() }
-					onItemClick={ onChooseSpecialty }
-				/>
-			</div>
-			<div className='flex flex-row gap-2 flex-wrap mt-6'>
-				{
-					clinicFilter?.getAll()?.map((speciality, index) => {
-						return (
-							speciality.label &&
+		
+			<>
+				<div className='mx-[1px]'>
+					<Combobox
+						data={ mapSpeciality() }
+						placeholder={ 'Search' }
+						iconName='Search'
+						value={ speacialityValue }
+						onSelectValue={ value => {
+							if (value) {
+								onChooseSpecialty(value);
+							}
+						} }
+					/>
+					
+				</div>
+				<div className='flex flex-row gap-2 flex-wrap mt-6'>
+					{
+						clinicFilter?.getAll()?.map((speciality, index) => {
+							return (
+								speciality.label &&
 							<Pills key={ index } onRemove={ () => handleRemoveSpecialty(speciality) }>
 								<Text
 									fontSize='16px'
@@ -183,10 +193,11 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 									text={ speciality.label }
 								/>
 							</Pills>
-						);
-					})
-				}
-			</div>
+							);
+						})
+					}
+				</div>
+			</>
 
 			{ /* Horizontal spacer */ }
 			<div className='x-spacer my-8' />

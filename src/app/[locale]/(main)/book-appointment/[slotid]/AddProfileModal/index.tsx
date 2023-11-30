@@ -151,10 +151,21 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		}
 	}, [type]);
 
+	const regexPhone = (phone: string) => {
+		let phoneNumber =
+			phone
+				.replace(/^0/, '').replace(/^62/, '');
+		return phoneNumber;
+	};
+
 	const onChangeInputValue = (data: { name?: string; value?: string; }) => {
 		if (data?.name) {
 			formikProfile.setFieldValue(data?.name, data?.value ?? '');
 		}
+	};
+
+	const onChangeInputPhone = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+		formikProfile.setFieldValue(e.target.id, regexPhone(e.target.value));
 	};
 
 	const getInputErrorMessage = (key?: string, label?: string) => {
@@ -223,6 +234,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						label={ t('profileSelector.form.dob') }
 						placeholder={ t('profileSelector.form.dob') }
 						isError={ !!formikProfile.errors.dob }
+						applyMaxDateForDoB={ true }
 						errorMessage={ getInputErrorMessage(formikProfile.errors.dob, t('profileSelector.form.dob')) }
 					/>
 				</FormRow>
@@ -233,7 +245,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						id='phone'
 						name='phone'
 						value={ formikProfile.values.phone }
-						onChange={ formikProfile.handleChange }
+						onChange={ onChangeInputPhone }
 						label={ t('profileSelector.form.phone') }
 						placeholder={ t('profileSelector.form.phone') }
 						isError={ !!formikProfile.errors.phone }

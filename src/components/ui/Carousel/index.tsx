@@ -92,45 +92,56 @@ const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
 				<div className='shadow-custom' />
 
 				<div className={ `container__slider__links ${ props.dotsContainerClassName ?? '' }` }>
-					{ children.map((item, index) => {
-						return (
-							<button
-								key={ index }
-								className={
-									activeIndex === index
-										? 'container__slider__links-small container__slider__links-small-active'
-										: 'container__slider__links-small'
-								}
-								onClick={ e => {
-									e.preventDefault();
-									setActiveIndex(index);
-								} }
-							/>
-						);
-					}) }
+					{
+						children.length <= 1
+							? null
+							:
+							children.map((item, index) => {
+								return (
+									<button
+										key={ index }
+										className={
+											activeIndex === index
+												? 'container__slider__links-small container__slider__links-small-active'
+												: 'container__slider__links-small'
+										}
+										onClick={ e => {
+											e.preventDefault();
+											setActiveIndex(index);
+										} }
+									/>
+								);
+							})
+					}
 				</div>
 
-				{ !props.arrowButton ? '' :
-					<div>
-						<button
-							className='slider__btn next'
-							onClick={ e => {
-								e.preventDefault();
-								slideNext();
-							} }
-						>
-							<Icons.ArrowRight />
-						</button>
-						<button
-							className='slider__btn prev'
-							onClick={ e => {
-								e.preventDefault();
-								slidePrev();
-							} }
-						>
-							<Icons.ArrowLeft />
-						</button>
-					</div>
+				{
+					!props.arrowButton
+						? null
+						:
+						children.length <= 1
+							? null
+							:
+							<div>
+								<button
+									className='slider__btn next'
+									onClick={ e => {
+										e.preventDefault();
+										slideNext();
+									} }
+								>
+									<Icons.ArrowRight />
+								</button>
+								<button
+									className='slider__btn prev'
+									onClick={ e => {
+										e.preventDefault();
+										slidePrev();
+									} }
+								>
+									<Icons.ArrowLeft />
+								</button>
+							</div>
 				}
 			</div>
 		</CarouselWrapper>

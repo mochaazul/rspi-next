@@ -4,17 +4,17 @@ import React, { useState } from 'react';
 
 import * as Icons from 'react-feather';
 import moment from 'moment';
+import { useSWRConfig } from 'swr';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import {
 	CenterOfExcellenceState,
-	FacilityServicesState,
+	FacilityServicesDetail,
 	FooterDetail,
 	HospitalState,
-	NotificationResponse,
 	UserSessionData,
 } from '@/interface';
 import colors from '@/constant/colors';
@@ -25,42 +25,52 @@ import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import MainNavLanguage from '@/components/ui/MainNavLanguage';
 import Modal from '@/components/ui/Modal';
-
+import { useNotification } from '@/lib/api/client/header';
 import HeaderStyle from './style';
 
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
 import { cookiesHelper } from '@/helpers';
 
+const protectedRoutes = ['/patient-portal', '/user-information'];
+
 export const Header = ({
 	session,
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData,
-	notificationResponseData,
 	marAllReadNotifFunc,
 	footersData,
 }: {
 	session: UserSessionData,
 	hospitalData: HospitalState,
 	centerOfExcellenceData: CenterOfExcellenceState,
-	facilityServicesData: FacilityServicesState,
-	notificationResponseData?: NotificationResponse,
+	facilityServicesData: FacilityServicesDetail[],
 	marAllReadNotifFunc: () => any,
 	footersData: FooterDetail[],
 }) => {
 
 	const router = useRouter();
-
+	const pathname = usePathname();
+	const { mutate, cache } = useSWRConfig();
 	const currentLang = useCurrentLocale();
 	const t = useScopedI18n('navMenu');
 
-	const [dropdownHide, setDropdownHide] = useState(true);
-	const [showSideBar, setShowSideBar] = useState(false);
-	const [isHover, setIsHover] = useState(false);
-	const [isHoverCOE, setIsHoverCOE] = useState(false);
-	const [isHoverFacilities, setIsHoverFacilities] = useState(false);
-	const [showNotification, setShowNotification] = useState(false);
+	const [dropdownHide, setDropdownHide] = useState<boolean>(true);
+	const [showSideBar, setShowSideBar] = useState<boolean>(false);
+	const [isHover, setIsHover] = useState<boolean>(false);
+	const [isHoverCOE, setIsHoverCOE] = useState<boolean>(false);
+	const [isHoverFacilities, setIsHoverFacilities] = useState<boolean>(false);
+	const [showNotification, setShowNotification] = useState<boolean>(false);
+	const [showSuccessLogout, setShowSuccessLogout] = useState<boolean>(false);
+
+	const onclickMarkAllNotif = () => {
+		marAllReadNotifFunc()
+			.then(() => {
+				setShowNotification(true);
+				mutate('getNotification');
+			});
+	};
 
 	const isLoggedIn = !!session?.token;
 
@@ -68,9 +78,33 @@ export const Header = ({
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
+	const paramGetNotif = {
+		query: {
+			medical_record: session.user?.medical_record ?? '',
+			email: session.user?.email,
+		},
+	};
+	const {
+		data: getNotification,
+	} = useNotification(paramGetNotif);
+
+	const notificationResponseData = getNotification?.data;
+
+	const clearSWRCache = async () => {
+		const keys = cache.keys();
+		for (const key of keys) {
+			cache.delete(key);
+		}
+	};
+
 	const handleClick = async () => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
+			await clearSWRCache();
+			setShowSideBar(false);
+			if (!protectedRoutes?.some(path => pathname.includes(path))) {
+				setShowSuccessLogout(true);
+			}
 			router.refresh();
 		}
 	};
@@ -108,14 +142,18 @@ export const Header = ({
 					{
 						notificationResponseData?.notification?.map((item, idx) => (
 							<div key={ idx } className='pb-4'>
-								<div className='flex flex-col py-4 px-[20px]' style={ {
-									backgroundColor: item.flag === 0 ? 'rgba(0, 0, 0, 0)' : 'rgba(53, 136, 136, 0.1)'
-								} }>
+								<div className='flex flex-col py-4 px-[20px]'
+									onClick={ () => {
+										router.push(`${ item?.url }`);
+									} }
+									style={ {
+										backgroundColor: item.flag === 0 ? 'rgba(53, 136, 136, 0.1)' : 'rgba(0, 0, 0, 0)'
+									} }>
 									<div className='flex justify-between'>
 										<Text
 											fontSize='12px'
-											fontWeight='400'
-											textAlign='center'
+											fontWeight={ item.flag === 0 ? '700' : '400' }
+											textAlign='left'
 											color={ colors.grey.pencil }
 											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
 										/>
@@ -123,8 +161,8 @@ export const Header = ({
 									<Text
 										fontSize='14px'
 										lineHeight='20px'
-										fontWeight='700'
-										textAlign='center'
+										fontWeight={ item.flag === 0 ? '700' : '400' }
+										textAlign='left'
 										color={ colors.black.default }
 										text={ currentLang === 'id' ? item?.judul_idn : item?.judul_en }
 										className='flex justify-start'
@@ -132,8 +170,8 @@ export const Header = ({
 									<Text
 										fontSize='12px'
 										lineHeight='20px'
-										fontWeight='400'
-										textAlign='center'
+										fontWeight={ item.flag === 0 ? '700' : '400' }
+										textAlign='left'
 										color={ colors.black.default }
 										text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
 										className='flex justify-start pt-2'
@@ -148,15 +186,44 @@ export const Header = ({
 		);
 	};
 
+	const renderModalSuccessLogout = () => {
+		return (
+			<Modal
+				visible={ showSuccessLogout }
+				onClose={ () => setShowSuccessLogout(false) }
+				noPadding
+			>
+				<div className='py-3 sm:py-4 px-6 sm:px-10 flex flex-col items-center gap-y-3'>
+					<div className='flex-shrink-0'>
+						<icons.Confirmed className='w-10 h-10 sm:w-12 sm:h-12' />
+					</div>
+
+					<Text
+						fontSize='16px'
+						lineHeight='24px'
+						fontWeight='700'
+					>
+						{ t('logoutSuccess') }
+					</Text>
+				</div>
+			</Modal>
+		);
+	};
+
 	return (
 		<HeaderStyle>
 			<div className='w-full'>
 				<MainNavLanguage />
 				<div className={ 'xl:!px-[40px] navbar animate-slideUpToDown transition-all duration-300' }>
 					<div className='leftNav'>
-						<div className='logo cursor-pointer py-[22px] max-sm:py-[15px]'>
+						<div className='hidden md:block lg:block xl:block logo cursor-pointer py-[22px] max-sm:py-[15px]'>
 							<Link href='/'>
 								<Image src={ '/images/logo_rspi.svg' } alt='rspi-logo' width={ 150 } height={ 80 } />
+							</Link>
+						</div>
+						<div className='sm:hidden logo cursor-pointer py-[22px] pl-2 max-sm:py-[15px]'>
+							<Link href='/'>
+								<Image src={ '/images/logo_rspi.svg' } alt='rspi-logo' width={ 100 } height={ 62 } />
 							</Link>
 						</div>
 						<div className='menu max-sm:hidden'>
@@ -174,24 +241,25 @@ export const Header = ({
 								</div>
 								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
 									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										{ Object.values(hospitalData || [])?.map((item, idx) => (
-											<div key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center' onClick={ () => {
-												// redirect to hospital detail
-												router.push(`/hospital/${ item?.id }`);
-											} }>
-												<Image
-													alt='hospital image'
-													src={ item?.img_url?.[0] || '' }
-													width={ 80 }
-													height={ 80 }
-												/>
-												<div className='ml-[10px] w-[310px] hover:bg-transparent'>
-													<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
-													<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
-												</div>
-												<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
-											</div>
-										)) }
+										{ Object.values(hospitalData || [])?.map((item, idx) => {
+											return (
+												<Link key={ idx } href={ `/hospital/${ item?.id }` }>
+													<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100 cursor-pointer'>
+														<Image
+															alt='hospital image'
+															src={ item?.img_url?.[0] || '' }
+															width={ 80 }
+															height={ 80 }
+														/>
+														<div className='ml-[10px] w-[310px] hover:bg-transparent'>
+															<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+															<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
+														</div>
+														<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
+													</div>
+												</Link>
+											);
+										}) }
 									</ul>
 								</div>
 							</div>
@@ -228,7 +296,11 @@ export const Header = ({
 										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 											<Link href={ `/facilities/${ item.slug }` } key={ idx }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100'>
-													<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
+													{
+														item?.image_url?.[0] && (
+															<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
+														)
+													}
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
@@ -262,14 +334,10 @@ export const Header = ({
 					</div>
 					<div className='rightNav py-[22px] max-sm:py-[10px]'>
 						<div className='translate'>
-							<div className='mobile-nav flex items-center gap-6 sm:hidden'>
+							<div className='mobile-nav flex items-center mr-2 gap-6 sm:hidden'>
 								<icons.Notif
-									onClick={ () => marAllReadNotifFunc()
-										.then(() => {
-											setShowNotification(true);
-											notificationResponseFetch();
-										}) }
-									fill
+									onClick={ onclickMarkAllNotif }
+									className='cursor-pointer'
 								/>
 								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
 							</div>
@@ -284,7 +352,13 @@ export const Header = ({
 									isLoggedIn ?
 										<>
 											<div className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<icons.Notif />
+												<icons.Notif onClick={ () => marAllReadNotifFunc()
+													.then(() => {
+														setShowNotification(true);
+														notificationResponseFetch();
+													}) }
+													className='cursor-pointer'
+												/>
 												<span
 													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponseData?.total_unread }</span>
 											</div>
@@ -365,11 +439,13 @@ export const Header = ({
 									<Text text={ t('register') } fontSize='16px' fontWeight='700' />
 								</div>
 							}
+
 							<div
 								className='nav-menu'
-								onClick={ () => handleNavigateSideBar('/find-a-doctor') }>
-								<Text text={ t('bookAppointment') } fontSize='16px' fontWeight='700' />
+								onClick={ () => handleNavigateSideBar('/contact-us') }>
+								<Text text={ t('contactUs') } fontSize='16px' fontWeight='700' />
 							</div>
+
 							<div
 								className='nav-menu'
 								onClick={ () => handleNavigateSideBar('/centre-of-excellence') }>
@@ -377,7 +453,7 @@ export const Header = ({
 							</div>
 							<div
 								className='nav-menu'
-								onClick={ () => handleNavigateSideBar('/facilities') }>
+								onClick={ () => handleNavigateSideBar(`/facilities/${ facilityServicesData?.[0]?.slug }`) }>
 								<Text text={ t('facility') } fontSize='16px' fontWeight='700' />
 							</div>
 							<div className='nav-menu'>
@@ -393,6 +469,8 @@ export const Header = ({
 					</div> : null
 				}
 			</div>
+
+			{ renderModalSuccessLogout() }
 		</HeaderStyle>
 	);
 };

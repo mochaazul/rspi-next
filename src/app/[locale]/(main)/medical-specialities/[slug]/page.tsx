@@ -24,12 +24,12 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 	];
 
 	const renderContent = (
-		<div>
+		<div className='w-full'>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
 				{ detail?.[0]?.title }
 			</Text>
 
-			<div className='mt-[32px]'>
+			<div className='mt-4 md:mt-8 w-full'>
 				{ detail?.[0]?.img_url?.[0] && (
 					<div className='bg-white h-[220px] sm:h-[420px] w-full rounded-[5px] relative overflow-hidden'>
 						<Image
@@ -61,7 +61,7 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 						</CustomCarousel>
 				} */}
 			</div>
-			<div className='mt-[48px]'>
+			<div className='mt-8 md:mt-12'>
 				<div
 					style={ { lineHeight: '24px', fontSize: '16px' } }
 					className='innerHTML'
@@ -76,7 +76,7 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-4 pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className='content-wrapper mt-[64px] w-full'>
+					<div className='content-wrapper mt-[25px] md:mt-[50px] w-full'>
 						{ renderContent }
 					</div>
 				</div>

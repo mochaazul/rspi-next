@@ -42,6 +42,7 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 				i18n={ currentLang }
 				primaryColor='green'
 				displayFormat={ props.dateFormat }
+				maxDate={ props.applyMaxDateForDoB ? new Date() : null }
 				value={ { startDate: props.value ? new Date(props.value ?? '') : null, endDate: props.value ? new Date(props.value ?? '') : null } }
 				onChange={ onChange }
 				placeholder={ props?.placeholder ?? 'Choose Preferred Day' }

@@ -32,7 +32,7 @@ const DetailKunjungan = (props: PropsType) => {
 		>
 			<ModalStyle>
 				<div>
-					<Text text={ `Apointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='mr-[15px]' />
+					<Text text={ `Appointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='mr-[15px]' />
 					<Text text={ 'Konsultasi' } fontSize='20px' fontWeight='700' className='mt-[10px]' />
 					<div className='flex my-[30px]'>
 						<div><img src={ Images.ProfilePatient.src } alt='' /></div>

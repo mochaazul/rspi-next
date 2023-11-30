@@ -5,6 +5,9 @@ import {
 	useState
 } from 'react';
 
+import Link from 'next/link';
+import Image from 'next/image';
+
 import moment from 'moment';
 
 import {
@@ -26,6 +29,7 @@ import {
 	fetchDetail,
 	fetchRelatedNews
 } from './helpers';
+import { baseUrl } from '@/config';
 
 const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 	const t = useScopedI18n('page.newsDetail');
@@ -61,13 +65,13 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 	});
 
 	useEffect(() => {
-		fetchDetail(props.params.slug).then(function (response) {
+		fetchDetail(props.params.slug).then(function(response) {
 			setSelectedArticle(response?.data);
 
-			fetchNewsSpecialtyByID(response?.data?.id).then(function (response) {
+			fetchNewsSpecialtyByID(response?.data?.id).then(function(response) {
 				setSpecialty(response?.data);
 			});
-			fetchRelatedNews(response?.data?.id).then(function (response) {
+			fetchRelatedNews(response?.data?.id).then(function(response) {
 				setRelatedNews(response?.data);
 			});
 
@@ -111,17 +115,17 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 									color={ colors.grey.dark }
 								/>
 								<div className='flex gap-[15px]'>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook) }>
-										<icons.FacebookIcon width='16px' height='16px' />
-									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter) }>
-										<icons.TwitterIcon width='16px' height='13px' />
-									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin) }>
-										<icons.LinkedIn width='16px' height='16px' />
-									</div>
-									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathname); } }>
-										<icons.Link width='16px' height='16px' />
+									<Link href={ sosmedLink.facebook } className='cursor-pointer' >
+										<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
+									</Link>
+									<Link href={ sosmedLink.twitter } className='cursor-pointer' >
+										<Image src='/images/ic/twitter.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
+									</Link>
+									<Link href={ sosmedLink.linkedin } className='cursor-pointer' >
+										<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
+									</Link>
+									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(window?.location?.href); } }>
+										<Image src='/images/ic/Link.svg' alt='RSPI link' width={ 16 } height={ 16 } />
 									</div>
 								</div>
 							</div>

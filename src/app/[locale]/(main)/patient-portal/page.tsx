@@ -3,14 +3,18 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { default as NextImage } from 'next/image';
 
 import { colors, Images } from '@/constant';
-import { default as NextImage } from 'next/image';
-import { Text } from '@/components/ui';
+import { MedicalRecordReminder, Text } from '@/components/ui';
 import PinModal from '@/components/ui/PinModal';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import { useGetProfile } from '@/lib/api/client/profile';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
+import CardUser from '@/components/ui/PageComponents/UserInformationSections/CardUser';
+import { useScopedI18n } from '@/locales/client';
 
 import JadwalKunjungan from './components/JadwalKunjungan';
 import RiwayatKunjungan from './components/RiwayatKunjungan';
@@ -26,41 +30,10 @@ type MenuType = {
 	children: MenuType[];
 };
 
-const tabMenuLabel: MenuType[] = [
-	{
-		id: 1,
-		label: 'Jadwal Konsultasi',
-		isHeader: false,
-		children: []
-	},
-	{
-		id: 2,
-		label: 'Riwayat Medis',
-		isHeader: true,
-		children: [
-			{
-				id: 3,
-				label: 'Konsultasi',
-				isHeader: false,
-				children: []
-			},
-			{
-				id: 4,
-				label: 'Vaksin',
-				isHeader: false,
-				children: []
-			},
-			{
-				id: 5,
-				label: 'Hasil Lab',
-				isHeader: false,
-				children: []
-			},
-		]
-	},
-];
-
 const PatientPortal = () => {
+	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile('patient-portal-page');
+	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(`${ getProfileResponse?.data?.id }`);
+
 	const [activeTabIndex, setActiveTabIndex] = useState(1);
 	const [activeTabIndexForCallBackPin, setActiveTabIndexForCallBackPin] = useState(1);
 	const [headerOpened, setHeaderOpened] = useState<boolean>(false);
@@ -69,11 +42,42 @@ const PatientPortal = () => {
 
 	const params = useParams();
 	const tabsRef = useRef<any>([]);
-
-	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory();
-	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile();
+	const t = useScopedI18n('page.patientPortal');
 
 	const lastVisitedHospital = getLastVisitedHospitalHelper(visitHistoryResponse?.data || []);
+	const tabMenuLabel: MenuType[] = [
+		{
+			id: 1,
+			label: t('tabMenuLabel.menu1.heading'),
+			isHeader: false,
+			children: []
+		},
+		{
+			id: 2,
+			label: t('tabMenuLabel.menu2.heading'),
+			isHeader: true,
+			children: [
+				{
+					id: 3,
+					label: t('tabMenuLabel.menu2.children.0'),
+					isHeader: false,
+					children: []
+				},
+				{
+					id: 4,
+					label: t('tabMenuLabel.menu2.children.1'),
+					isHeader: false,
+					children: []
+				},
+				{
+					id: 5,
+					label: t('tabMenuLabel.menu2.children.2'),
+					isHeader: false,
+					children: []
+				},
+			]
+		},
+	];
 
 	useEffect(() => {
 		if (params.id) {
@@ -81,6 +85,12 @@ const PatientPortal = () => {
 			setActiveTabIndex(parseInt(params.id as string));
 		}
 	}, [params]);
+
+	useEffect(() => {
+		if (visitHistoryError) {
+			toast.error(visitHistoryError?.message);
+		}
+	}, [visitHistoryError]);
 
 	const renderContent = useMemo(() => {
 		switch (activeTabIndex) {
@@ -134,7 +144,7 @@ const PatientPortal = () => {
 				</button>);
 			} else {
 				return (
-					<>
+					<div key={ menuItem.id } className='flex flex-col'>
 						<button
 							key={ menuItem.id }
 							ref={ el => (tabsRef.current[menuItem.id] = el) }
@@ -163,52 +173,24 @@ const PatientPortal = () => {
 									color={ activeTabIndex === child.id ? colors.paradiso.default : colors.grey.dark } />
 							</button>
 						)) }
-					</>
+					</div>
 				);
 			}
 		});
 	};
 
-	const parseBod = (date?: string) => {
-		const dateParsed = dayjs(date, 'YYYY-MM-DD');
-		const years = dayjs().diff(dateParsed, 'years');
-		const month = dayjs().diff(dateParsed, 'months');
-		if (years < 0 && month > 0) {
-			return `${ month } Month${ month > 1 && 's' }, ${ getProfileResponse?.data.gender }`;
-		}
-		return `${ years } Yrs, ${ getProfileResponse?.data.gender }`;
-	};
-
 	return (
 		<VisitHistoryStyle
-			className='max-sm:py-0 md:mt-[104px]'
+			className='max-sm:py-0'
 		>
 			<div className='rectangle' />
 			<div className='content-wrapper pt-[60px] md:pt-[120px]'>
-				<div className='card flex  flex-wrap'>
-					<section id='user-info'
-						className='flex flex-row sm:w-1/2 md:w-1/4'
-					>
-						<NextImage alt='' src={ getProfileResponse?.data.img_url || '' } height={ 60 } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
-						<div className='ml-[15px]'>
-							<Text text={ getProfileResponse?.data.name } fontSize='16px' fontWeight='700' />
-							<Text text={ `${ parseBod(getProfileResponse?.data.birthdate) }` } className='md:mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						</div>
-					</section>
-					<section id='patient-ids' className='sm:w-1/2 md:w-1/4'>
-						<Text text={ 'Patient ID' } subClassName='max-sm:text-right' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						<Text text={ getProfileResponse?.data.patient_code || '-' } subClassName='max-sm:text-right' className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
-					</section>
-					<hr className='my-[24px] md:hidden w-full' />
-					<div className='sm:w-1/2 md:w-1/4'>
-						<Text text={ 'Last Visited Hospital' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						<Text text={ lastVisitedHospital?.hospital_name } className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
-					</div>
-					<div className='sm:w-1/2 md:w-1/4'>
-						<Text text={ 'Last Visited Date' } subClassName='max-sm:text-right' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-						<Text text={ dayjs(lastVisitedHospital?.visit_date || dayjs()).format('dddd, DD MMMM YYYY') } subClassName='max-sm:text-right' className='md:mt-[10px]' fontSize='16px' fontWeight='700' />
-					</div>
-					{ /* */ }
+				<div className='w-full -mt-[42px] relative'>
+					<CardUser
+						patientProfile={ getProfileResponse }
+						lastVisitedHospital={ lastVisitedHospital }
+						isLoading={ getProfileLoading }
+					/>
 				</div>
 				<div className='mt-[32px] flex'>
 					<div className='relative tabs border-solid border-b-[1px] border-b-white/20 max-sm:hidden'>

@@ -3,8 +3,7 @@ import Form from '@/components/ui/Form';
 import Text from '@/components/ui/Text';
 import { colors } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
-import { debounce } from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Props = {
   doctorCount:number

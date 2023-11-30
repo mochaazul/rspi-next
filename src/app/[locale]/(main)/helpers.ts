@@ -12,18 +12,19 @@ import { getFAS } from '@/lib/api/clinics';
 import getSession from '@/session/server';
 
 export async function marAllReadNotif() {
+
 	const session = await getSession();
 
 	return postMarkNotifAllRead({
 		query: {
-			medical_record: session.user?.medical_record,
+			medical_record: session.user?.medical_record ?? '',
 			email: session.user?.email,
 		},
 	});
 };
 
 export const footersFetch = async () => await getFooterSlug({ query: { is_publish: true } });
-export const hospitalsFetch = async () => await getHospitals();
+export const hospitalsFetch = async () => await getHospitals({ query: { is_active: true } });
 export const centerOfExcellenceFetch = async () => await getCenterOfExcellence();
 export const facilityServicesFetch = async () => await getFAS();
 export const notificationResponseFetch = async () => {
@@ -32,9 +33,9 @@ export const notificationResponseFetch = async () => {
 
 	// TO DO : ambil mr & email ambil dari session
 
-	return session.user?.medical_record ? await getNotificationResponse({
+	return session.user?.email ? await getNotificationResponse({
 		query: {
-			medical_record: session.user?.medical_record,
+			medical_record: session.user?.medical_record ?? '',
 			email: session.user?.email,
 		},
 	}) : null;

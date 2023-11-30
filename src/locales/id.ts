@@ -23,6 +23,10 @@ export default {
 		male: 'Laki-laki',
 		female: 'Perempuan'
 	},
+	unsubscribe: {
+		heading: 'Berhenti berlangganan telah berhasil',
+		subHeading: 'Berhenti berlangganan berita terupdate tentang RSPI berhasil, semoga kita dapat berjumpa kembali'
+	},
 	modalDialog: {
 		pin: {
 			header: 'Masukkan PIN',
@@ -40,13 +44,15 @@ export default {
 		findDoctor: 'Cari Dokter',
 		login: 'Masuk',
 		register: 'Daftar',
+		contactUs: 'Hubungi Kami',
 		loginRegister: 'Masuk / Daftar',
 		bookAppointment: 'Buat Janji Temu',
 		user: {
 			patientPortal: 'Portal Pasien',
 			patientInformation: 'Informasi Pasien',
 			logout: 'Keluar'
-		}
+		},
+		logoutSuccess: 'Anda berhasil logout'
 	},
 	validation: {
 		emailFormat: 'Email format salah',
@@ -144,6 +150,10 @@ export default {
 				btnLabel: 'Oke'
 			}
 		},
+		unsubscribe: {
+			heading: 'Berhasil Berhenti Berlangganan',
+			subHeading: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali'
+		},
 		awards: {
 			heading: 'Accreditations & Awards',
 			subHeading: 'Kami berkomitmen untuk menjadi organisasi perawatan kesehatan pilihan kelas dunia. Kami sangat percaya bahwa keunggulan operasional dan keselamatan pasien merupakan bagian integral dalam memenuhi dan melampaui harapan pelanggan kami.'
@@ -197,7 +207,10 @@ export default {
 				titleOptionsLabel: {
 					general: 'Pertanyaan Umum',
 					specific: 'Pertanyaan Khusus'
-				}
+				},
+				errorSubmit: 'Submit form hubungi kami telah gagal',
+				successSubmit: 'Submit form hubungi kami telah berhasil',
+				handleButtonModalSubmit: 'Tutup',
 			},
 			faq: {
 				contactUsLabel: 'Hubungi Kami',
@@ -501,7 +514,11 @@ export default {
 				emailHeading: 'Email',
 				operationalHourHeading: 'Jam Operasional Patient Relations',
 			},
-			readMoreLabel: 'Baca Selengkapnya'
+			readMoreLabel: 'Baca Selengkapnya',
+			medicalSpecialities: {
+				heading: 'Medical Specialities',
+				content: 'Kebutuhan kesehatan yang spesifik membutuhkan penanganan yang spesifik pula sesuai dengan kondisi yang Anda alami. Layanan klinik rawat jalan kami didukung oleh dokter dari berbagai spesialisasi dan subspesialisasi serta tenaga medis profesional dalam menjamin pelayanan terbaik untuk Anda.'
+			}
 		},
 		news: {
 			tabPillsLabel: {
@@ -724,15 +741,26 @@ export default {
 				cancelBtnLabel: 'Batal'
 			},
 			medicalRecordLabel: 'Informasi Rekam Medis',
-			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)'
+			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)',
+			gender: {
+				male: 'Laki-laki',
+				female: 'Perempuan'
+			}
 		},
 		patientPortal: {
-			tabMenuLabel: [
-				'Jadwal Kunjungan',
-				'Riwayat Kunjungan',
-				'Riwayat Vaksinasi',
-				'Riwayat Pemeriksaan Lab'
-			],
+			tabMenuLabel: {
+				menu1: {
+					heading: 'Jadwal Konsultasi'
+				},
+				menu2: {
+					heading: 'Riwayat Medis',
+					children: [
+						'Konsultasi',
+						'Vaksin',
+						'Hasil Lab'
+					]
+				}
+			},
 			riwayatVaksin: {
 				warning: 'Disclaimer: seluruh vaksin yang digunakan dalam proses vaksinasi merupakan vaksin dari RSPI',
 				tableMenuLable: {
@@ -759,14 +787,25 @@ export default {
 					canceledAppointment: 'Jadwal Dibatalkan',
 					doneAppointment: 'Jadwal Selesai',
 					seeDetail: 'Lihat Detail',
-					recommendDoctor: 'Would you recommend your doctor?'
+					recommendDoctor: 'Apakah Anda akan merekomendasikan dokter Anda?'
 
 				},
 				recommendDoctorModal: {
-					header: 'Would you recommmend your doctor to your friends or family ?'
+					header: 'Apakah Anda akan merekomendasikan dokter Anda kepada teman atau keluarga Anda?',
+					rating: [
+						'Sangat tidak direkomendasikan',
+						'Sangat direkomendasikan'
+					],
+					feedback: {
+						heading: 'Apa yang Anda sukai dari dokter Anda?',
+						notesInputLabel: 'Beritahu kami lebih lanjut',
+						notesInputPlaceholder: 'Masukkan deskripsi...',
+						optionalLabel: '(Opsional)',
+						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.'
+					}
 				},
-				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.'
-
+				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.',
+				btnConsultationSchedule: 'Jadwalkan Konsultasi'
 			},
 			jadwalKunjungan: {
 				label: {
@@ -774,6 +813,36 @@ export default {
 					activeSchedule: 'Jadwal Aktif',
 					cancelAppointment: 'Batalkan janji temu',
 					empty: 'Anda belum mempunyai data kunjungan saat ini',
+					emptyBtnCta: 'Jadwalkan Kunjungan'
+				},
+				options: [
+					'Diri Sendiri',
+					'Orang Lain'
+				],
+				statusLabel: {
+					C: 'Jadwal Selesai',
+					X: 'Jadwal Dibatalkan',
+					N: 'Tidak Hadir',
+					H: 'Hold',
+					T: 'Transferred',
+					A: 'Arrived',
+					P: 'Postponed',
+					S: 'Seen',
+					U: 'Arrived Not Seen'
+				},
+				teleconsultationLabel: 'Telekonsultasi',
+				offlineConsultation: 'Konsultasi Tatap Muka'
+			},
+			cancelBooking: {
+				heading: 'Konfirmasi Pembatalan',
+				warningText: 'Apakah Anda yakin ingin membatalkan janji temu dengan dokter?',
+				patientData: {
+					heading: 'Data Pasien',
+					nameLabel: 'Nama : ',
+					dobLabel: 'Tanggal Lahir : ',
+					phoneLabel: 'No HP : ',
+					consultationScheduleLabel: 'Jadwal Konsultasi',
+					btnSubmitLabel: 'Batalkan Kunjungan'
 				}
 			}
 		},

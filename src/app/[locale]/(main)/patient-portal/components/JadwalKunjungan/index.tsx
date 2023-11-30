@@ -27,8 +27,8 @@ const JadwalKunjungan = () => {
 	return (
 		<>
 			<Radio onChange={ setBookType } value={ bookType } >
-				<Radio.Option label={ 'Diri Sendiri' } value={ 'self' } />
-				<Radio.Option label={ 'Orang Lain' } value={ 'other' } />
+				<Radio.Option label={ t('jadwalKunjungan.options.0') } value={ 'self' } />
+				<Radio.Option label={ t('jadwalKunjungan.options.1') } value={ 'other' } />
 			</Radio>
 			{
 				!appointmentLoading
@@ -40,7 +40,9 @@ const JadwalKunjungan = () => {
 								fontWeight='700'
 								lineHeight='28px'
 							/>
-							<Button className='w-52' onClick={ () => navigate.push('/find-a-doctor') }>Jadwalkan Kunjungan</Button>
+							<Button className='w-52' onClick={ () => navigate.push('/find-a-doctor') }>
+								{ t('jadwalKunjungan.label.emptyBtnCta') }
+							</Button>
 						</EmptyResultContainer>
 						: appointmentResponse?.data?.map((data, index) => (
 							<div key={ index }>

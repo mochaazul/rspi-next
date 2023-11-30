@@ -1,5 +1,7 @@
 'use server';
 
+import { ToastContainer } from 'react-toastify';
+
 import { appStage } from '@/config';
 import { Footer, Header } from '@/components';
 import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
@@ -32,7 +34,6 @@ export default async function RootLayout({
 	const footers = await footersFetch();
 	const centerOfExcellence = await centerOfExcellenceFetch();
 	const facilityServices = await facilityServicesFetch();
-	const notificationResponse = await notificationResponseFetch();
 
 	return (
 		<>
@@ -41,23 +42,24 @@ export default async function RootLayout({
 				hospitalData={ hospitals.data }
 				centerOfExcellenceData={ centerOfExcellence.data }
 				facilityServicesData={ facilityServices.data }
-				notificationResponseData={ notificationResponse?.data }
 				marAllReadNotifFunc={ marAllReadNotif }
 				footersData={ footers.data }
 			/>
 			{ children }
-
-			{ props?.footerShow !== false &&
+			{
+				props?.footerShow !== false &&
 				<Footer footerData={ footers.data } hospitalData={ hospitals.data } />
 			}
-			{ props?.footerShow !== false &&
+			{
+				props?.footerShow !== false &&
 				<CallForAmbulance hospitalData={ hospitals.data } />
 			}
-			{ appStage !== 'prod' &&
+			{
+				appStage !== 'prod' &&
 				<DevTools />
 			}
-
 			<MedicalRecordReminder session={ session } />
+			<ToastContainer />
 		</>
 	);
 }

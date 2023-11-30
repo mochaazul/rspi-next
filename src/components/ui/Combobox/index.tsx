@@ -28,6 +28,8 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
 	const [query, setQuery] = useState('');
 	const Icons = iconName ? icons[iconName] : null;
 
+	const [open, setOpen] = useState(false);
+
 	const filteredItem =
     query === ''
     	? data
@@ -46,7 +48,8 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
 					onSelectValue(item);
 				}
 			} } nullable>
-				<div className='relative'>
+					
+				<div className='relative' onFocus={ () => { setOpen(true); } } onBlur={ () => { setOpen(false); } }>
 					<ComboboxWrapper>
 						{
 							Icons && (
@@ -62,12 +65,16 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
 							placeholder={ placeholder }
 						/>
 					</ComboboxWrapper>
+					
 					<Transition
 						as={ Fragment }
 						leave='transition ease-in duration-100'
 						leaveFrom='opacity-100'
 						leaveTo='opacity-0'
-						afterLeave={ () => setQuery('') }
+						afterLeave={ () => {
+							setQuery('');
+						} }
+						show={ open }
 					>
 						<HeadlessCombobox.Options
 							static={ true }
@@ -113,6 +120,7 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
 						</HeadlessCombobox.Options>
 					</Transition>
 				</div>
+
 			</HeadlessCombobox>
 		</div>
 	);

@@ -2,6 +2,7 @@ import { Key } from 'react';
 import moment from 'moment';
 import _ from 'lodash';
 import { isMobile } from 'react-device-detect';
+import { redirect } from 'next/navigation';
 
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
@@ -19,14 +20,16 @@ import { CentreOfExcellenceStyle } from './style';
 const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.centerOfExcellence');
 
-	const responseCenterOfExcellence = await getCoe({
-		query: {
-			is_publish: true,
-		}
-	});
+	const responseCenterOfExcellence = await getCoe();
+
+	const newParam = decodeURIComponent(params?.slug);
+
+	if (responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length <= 0) {
+		redirect(`/centre-of-excellence/${ responseCenterOfExcellence?.data[0]?.slug }`);
+	};
 
 	const filteredResponseCenterOfExcellence = responseCenterOfExcellence?.data?.find(coe => {
-		return coe?.slug === params?.slug;
+		return coe?.slug === newParam;
 	});
 
 	const responseCenterOfExcellenceNewsByID = await getCenterOfExcellenceNewsByID({
@@ -37,43 +40,45 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 	});
 
 	const breadcrumbsPath = [
-		{ name: t('heading'), url: '/centre-of-excellence' },
-		{ url: '#', name: responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === params?.slug)?.title ?? '' }
+		{ name: t('heading'), url: '#' },
+		{ url: '#', name: responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam)?.title ?? '' }
 	];
 
 	const renderRelatedNewsDesktop = () => {
 		return (
 			<div className='grid grid-cols-3 gap-3'>
 				{
-					responseCenterOfExcellenceNewsByID?.data?.map((article: any, index: Key) => (
-						<Card
-							key={ index }
-							id={ article?.news?.id }
-							image={ article?.news?.img_url }
-							imageHeight='200px'
-							header={
-								<div className='flex items-center'>
-									<div>
-										<Button theme='primary' label={ article?.news?.category } className='btn-category' />
+					responseCenterOfExcellenceNewsByID?.data?.map((article: any, index: Key) => {
+						return (
+							<Card
+								key={ index }
+								id={ article?.news?.news_id }
+								image={ article?.news?.img_url }
+								imageHeight='200px'
+								header={
+									<div className='flex items-center'>
+										<div>
+											<Button theme='primary' label={ article?.news?.category } className='btn-category' />
+										</div>
+										<div className='ml-[10px]'>
+											<Text
+												fontSize='14px'
+												fontWeight='400'
+												lineHeight='17px'
+												color={ colors.grey.dark }
+												text={ moment(article?.news?.posted_date).format('dddd, DD MMM YYYY') }
+											/>
+										</div>
 									</div>
-									<div className='ml-[10px]'>
-										<Text
-											fontSize='14px'
-											fontWeight='400'
-											lineHeight='17px'
-											color={ colors.grey.dark }
-											text={ moment(article?.news?.posted_date).format('dddd, DD MMM YYYY') }
-										/>
-									</div>
-								</div>
-							}
-							content={ <CardContentWithInner title={ article?.news?.title || '' } description={ article?.news?.short_description || '' } author={ article?.news?.news_author?.doctor_name } /> }
-							footer={ <CardFooter content={ t('serviceLocation.readMore') } /> }
-							className='mb-0'
-							iconShare={ true }
-							to={ `/news/${ article?.news?.news_id }` }
-						/>
-					))
+								}
+								content={ <CardContentWithInner title={ article?.news?.title || '' } description={ article?.news?.short_description || '' } author={ article?.news?.news_author?.doctor_name } /> }
+								footer={ <CardFooter content={ t('serviceLocation.readMore') } /> }
+								className='mb-0'
+								iconShare={ true }
+								to={ `/news/${ article?.news?.slug }` }
+							/>
+						);
+					})
 				}
 			</div>
 		);
@@ -86,18 +91,20 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='content-wrapper mt-[64px]'>
 						<div className='leftSide hidden sm:block w-[349px]'>
-							<CardMenu data={ responseCenterOfExcellence?.data } activeMenuIndex={ params?.slug } />
+							<CardMenu data={ responseCenterOfExcellence?.data } activeMenuIndex={ newParam } />
 						</div>
 						<div className='rightSide sm:ml-[32px]'>
 							<div>
 								{
-									responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === params?.slug).length > 0
+									responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length > 0
 										?
 										<ServiceLocation
-											content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === params?.slug) }
-											activeMenuIndex={ params?.slug }
+											content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
+											activeMenuIndex={ newParam }
 											centerOfExcellence={ responseCenterOfExcellence?.data }
-										/> : null
+										/>
+										:
+										null
 								}
 							</div>
 						</div>

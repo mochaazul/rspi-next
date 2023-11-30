@@ -3,16 +3,16 @@ import { MedicalSpecialities } from '@/interface/MedicalSpecialities';
 
 import fetcher, { ApiOptions } from './utils/fetcher';
 
-export const getFacilityServices = (options: ApiOptions) => {
-	return fetcher<FacilityServicesDetail[]>('facilities', options);
+export const getFacilityServices = (param?: ApiOptions) => {
+	return fetcher<FacilityServicesDetail[]>('facilities', { ...param, query: { ...param?.query, is_publish: true } });
 };
 
 export const getFacilityHospital = (options: ApiOptions) => {
 	return fetcher<FacilityServicesHospital[]>('facilityHospital', options);
 };
 
-export const getFacilityRelatedNews = (options: ApiOptions) => {
-	return fetcher<I_RelatedNews[]>('newsFacilities', options);
+export const getFacilityRelatedNews = (param?: ApiOptions) => {
+	return fetcher<I_RelatedNews[]>('newsFacilities', { ...param, query: { ...param?.query, is_publish: true } });
 };
 
 export const getMedicalSpecialities = (options: ApiOptions) => {

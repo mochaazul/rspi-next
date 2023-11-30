@@ -2,11 +2,12 @@
 
 import React, { PropsWithChildren, PropsWithRef } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { colors, icons } from '@/constant';
 import { MedicalSpecialities } from '@/interface/MedicalSpecialities';
 import { FacilityServicesDetail } from '@/interface';
+import { useScopedI18n } from '@/locales/client';
 
 import { MedicalSpecialitiesItemContainer } from './style';
 
@@ -103,54 +104,57 @@ const MedicalSpecialitiesComponent = ({
 	paramsSlug,
 	medicalSpecialities
 }: Props) => {
-	const navigate = useRouter();
+	const t = useScopedI18n('page.facilities.medicalSpecialities');
 
 	return (
 		<div>
-			<Text fontSize='24px' className='mt-[24px]' fontWeight='900' color={ colors.paradiso.default }>
-				Medical Specialities
+			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
+				{ t('heading') }
 			</Text>
 
-			<div className='mt-[32px]'>
-				<div
-					style={ { lineHeight: '24px', fontSize: '16px' } }
-					className='innerHTML'
-				>
-
-					<p className='max-[480px]:mb-4'>
-						Kebutuhan kesehatan yang spesifik membutuhkan penanganan yang spesifik pula sesuai dengan kondisi yang Anda alami. Layanan klinik rawat jalan kami didukung oleh dokter dari berbagai spesialisasi dan subspesialisasi serta tenaga medis profesional dalam menjamin pelayanan terbaik untuk Anda.
-					</p>
-					<div className='mt-[16px] mb-4 md:hidden'>
+			<div className='mt-4 md:mt-8'>
+				<div>
+					<Text
+						fontSize='16px'
+						lineHeight='24px'
+						className='max-md:text-sm'
+					>
+						{ t('content') }
+					</Text>
+					<div className='mt-4 mb-4 md:hidden'>
 						<CardMenu paramsSlug={ paramsSlug } data={ facilityData } />
 					</div>
-					<MedicalSpecialitiesItemContainer className='mt-[24px] max-[480px]:table-cell'>
+					<MedicalSpecialitiesItemContainer className='mt-[24px] w-full flex max-md:flex-col md:grid md:grid-cols-3 gap-4 md:gap-8'>
 						{
 							medicalSpecialities?.map((item, key) => {
 								const imageSrc = item.img_url?.length
 									? item.img_url[0]
 									: '';
+
 								return (
-									<div key={ key } className='specialities-item-container max-[480px]:mb-4' onClick={ () => navigate.push(`/medical-specialities/${ item.slug }`) }>
-										<div className='flex justify-between specialities-item w-full'>
+									<Link key={ key } href={ `/medical-specialities/${ item.slug }` }>
+										<div className='bg-white p-3 md:p-5 flex justify-between gap-2 w-full h-full specialities-item-container md:min-h-[96px]'>
 											<Text
 												text={ item.title }
-												fontWeight='700'
-												className='hover:!bg-transparent'
-												subClassName='hover:!bg-transparent'
+												fontSize='16px'
+												fontWeight='900'
+												lineHeight='28px'
+												subClassName='max-md:text-sm'
 											/>
-											<div className='max-[480px]:w-16' />
+
 											{ imageSrc && (
-												<div className='relative overflow-hidden w-10 max-[480px]:w-12'>
+												<div className='relative overflow-hidden w-6 h-6 md:w-10 md:h-10 flex-shrink-0'>
 													<Image
 														src={ imageSrc }
 														alt={ item.title ?? '' }
 														sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+														className='object-cover'
 														fill
 													/>
 												</div>
 											) }
 										</div>
-									</div>
+									</Link>
 								);
 							})
 						}

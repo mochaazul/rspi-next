@@ -18,7 +18,7 @@ const RelatedNewsMobile = (props: any) => {
 				(props?.centerOfExcellenceNewsByID ?? []).map((article: any, index: Key) => (
 					<Card
 						key={ index }
-						id={ article?.news?.id }
+						id={ article?.news?.news_id }
 						image={ article?.news?.img_url }
 						imageHeight='200px'
 						header={
@@ -41,7 +41,7 @@ const RelatedNewsMobile = (props: any) => {
 						footer={ <CardFooter content={ t('serviceLocation.readMore') } /> }
 						className='mb-0'
 						iconShare={ true }
-						to={ `/news/${ article?.news?.news_id }` }
+						to={ `/news/${ article?.news?.slug }` }
 					/>
 				))
 			}

@@ -49,6 +49,7 @@ const FacilitiesServices = ({ facilityServices }: { facilityServices: FacilitySe
 							src={ facilityServices[accordionOpenIndex]?.image_url?.[0] ?? '' }
 							alt={ facilityServices[accordionOpenIndex]?.short_description ?? 'placeholder image' }
 							className='object-cover'
+							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
 							fill
 						/>
 					</div>

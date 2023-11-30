@@ -1,3 +1,4 @@
+import { ItemType } from '@/components/ui/Combobox';
 import { PickerItem } from '@/components/ui/DropdownSearch';
 import { createFieldConfig } from '@/helpers';
 import { HospitalDetail } from '@/interface';
@@ -62,36 +63,36 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 		deleteQueryString('hospital_code');
 	};
 
-	const addSpecialty = (item: PickerItem) => {
+	const addSpecialty = (item: ItemType | null) => {
 		const prevSpecialty = searchParams.get('clinic_code');
-		createQueryString('clinic_code', prevSpecialty ? prevSpecialty + ',' + item.speciality_code : item.speciality_code);
+		createQueryString('clinic_code', prevSpecialty ? prevSpecialty + ',' + `${item?.value ?? ''}` : `${item?.value ?? ''}`);
 	};
 
-	const deleteSpecialty = (item: PickerItem) => {
+  	const deleteSpecialty = (item: ItemType | null) => {
 		const values = searchParams.get('clinic_code')?.split(',') ?? [];
 		if (values.length < 2) {
 			deleteQueryString('clinic_code');
 			return;
 		}
-		const filteredSpecialty = values.filter(sp => sp !== item.specialty_code);
+		const filteredSpecialty = values.filter(sp => sp !== item?.value);
 		createQueryString('clinic_code', filteredSpecialty.toString());
 	};
 
-	const getSpecialty = (): PickerItem[] => {
+	const getSpecialty = (): ItemType[] => {
 		const values = searchParams.get('clinic_code')?.split(',') ?? [];
 		return clinics.filter(sp => values.includes(sp.clinic_code ?? '')).map((sp, index) => ({
 			id: sp.id,
 			label: sp?.clinic_name ?? '',
-			specialty_code: sp.clinic_code
+			value: sp.clinic_code
 		}));
 	};
 
-	const getClinic = (): PickerItem[] => {
+	const getClinic = (): ItemType[] => {
 		const values = searchParams.get('clinic_code')?.split(',') ?? [];
 		return clinics.filter(sp => values.includes(sp?.clinic_code ?? '')).map((sp, index) => ({
 			id: sp.id,
 			label: sp?.clinic_name ?? '',
-			specialty_code: sp.clinic_code
+			value: sp.clinic_code
 		}));
 	};
 

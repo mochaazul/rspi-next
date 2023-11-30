@@ -35,6 +35,10 @@ export default {
 		}
 	},
 	page: {
+		unsubscribe: {
+			heading: 'Berhasil Berhenti Belangganan',
+			subHeading: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali'
+		},
 		awards: {
 			heading: 'Accreditations & Awards',
 			subHeading: 'Kami berkomitmen untuk menjadi organisasi perawatan kesehatan pilihan kelas dunia. Kami sangat percaya bahwa keunggulan operasional dan keselamatan pasien merupakan bagian integral dalam memenuhi dan melampaui harapan pelanggan kami.'
@@ -78,7 +82,10 @@ export default {
 				submitBtnLabel: 'Kirim Pesan',
 				form: {
 					allHospitalLabel: 'All RSPI Hospitals'
-				}
+				},
+				errorSubmit: 'Submit form hubungi kami telah gagal',
+				successSubmit: 'Submit form hubungi kami telah berhasil',
+				handleButtonModalSubmit: 'Tutup',
 			},
 			faq: {
 				readMoreLabel: 'Baca selengkapnya',

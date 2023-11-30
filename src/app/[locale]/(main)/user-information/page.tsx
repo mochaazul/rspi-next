@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import { FormikProps, useFormik } from 'formik';
 import Image from 'next/image';
+import { useSWRConfig } from 'swr';
 
 import { icons, colors, regExp } from '@/constant';
 import { cookiesHelper } from '@/helpers';
@@ -13,17 +14,16 @@ import {
 	UpdateEmailType,
 	UpdateProfileType
 } from '@/interface';
-import { getAge } from '@/helpers/getAge';
-import { splitDate } from '@/helpers/datetime';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import NotificationPanel from '@/components/ui/NotificationPanel';
-import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
 import SubMenuPage from '@/components/ui/SubMenuPage';
 import Form from '@/components/ui/Form';
+import Spinner from '@/components/ui/Spinner';
 import HorizontalInputWrapper from '@/components/ui/PageComponents/UserInformationSections/HorizontalInputWrapper';
+import CardUser from '@/components/ui/PageComponents/UserInformationSections/CardUser';
 import { useScopedI18n } from '@/locales/client';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import {
@@ -45,7 +45,7 @@ import { usePostCheckPinMutation } from '@/lib/api/client/auth';
 import { getProfile } from '@/lib/api/profile';
 
 import ProfilePageStyle, { Divider } from './style';
-import { PanelH2, PanelV1 } from '../style';
+import { PanelH2 } from '../style';
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -68,14 +68,15 @@ type UploadPhotoTypeState = {
 export default function Page() {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
-	const { data: visitHospitalHistory } = useGetVisitHistory();
-	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile();
+	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile('user-information-page');
+	const { data: visitHospitalHistory } = useGetVisitHistory(`${ patientProfile?.data?.id }`);
 	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: updateEmail } = useUpdateEmail();
 	const { trigger: updateProfile, isMutating: loadingUpdateProfile } = useUpdateProfile();
 	const { trigger: checkPin } = usePostCheckPinMutation();
 
+	const { cache } = useSWRConfig();
 	const navigate = useRouter();
 	const t = useScopedI18n('page.profilePage');
 	const tModalPin = useScopedI18n('modalDialog.pin');
@@ -89,6 +90,7 @@ export default function Page() {
 	const [showModalNewEmail, setShowModalNewEmail] = useState<boolean>(false);
 	const [pinModalVisible, setPinModalVisible] = useState<boolean>(false);
 	const [isLoadingUploadAvatar, setIsLoadingUploadAvatar] = useState<boolean>(false);
+	const [isLoadingDeleteAvatar, setIsLoadingDeleteAvatar] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 	const [enableValidation, setEnableValidation] = useState<Record<string, boolean>>({
 		profile: false,
@@ -102,7 +104,7 @@ export default function Page() {
 	}, [patientProfile?.data?.no_mr]);
 
 	const lastVisitedHospital = useMemo(() => {
-		if (!visitHospitalHistory?.data) return null;
+		if (!visitHospitalHistory?.data) return;
 		return getLastVisitedHospitalHelper(visitHospitalHistory?.data);
 	}, [visitHospitalHistory?.data]);
 
@@ -172,7 +174,7 @@ export default function Page() {
 		validationSchema: UploadPhotoSchema,
 		onSubmit: async (formUpload: UploadPhotoTypeState) => {
 			try {
-				if (formUpload.photo_file) {
+				if (formUpload.photo_file && !isLoadingDeleteAvatar) {
 					setIsLoadingUploadAvatar(true);
 
 					const formImg = new FormData();
@@ -181,12 +183,13 @@ export default function Page() {
 					await updateAvatar({ img_url: responseData?.data });
 					await getProfile(true);
 					getProfileMutation();
+
+					setClickUpdatePhoto(false);
 				}
 			} catch (error: any) {
 				setError(error?.message ?? '');
 			} finally {
 				setIsLoadingUploadAvatar(false);
-				setClickUpdatePhoto(false);
 				setEnableValidation(prevToggle => ({ ...prevToggle, photo: false }));
 			}
 		},
@@ -216,8 +219,16 @@ export default function Page() {
 	// 	}
 	// };
 
+	const clearSWRCache = async () => {
+		const keys = cache.keys();
+		for (const key of keys) {
+			cache.delete(key);
+		}
+	};
+
 	const removeUserDatas = async () => {
 		await cookiesHelper.clearStorage();
+		await clearSWRCache();
 		navigate.replace('/login');
 	};
 
@@ -322,6 +333,18 @@ export default function Page() {
 		return null;
 	};
 
+	const renderCardUser = () => {
+		return (
+			<div className={ `mt-[30px] ${ isDisableFormProfile ? '' : 'lg:px-[60px]' }` }>
+				<CardUser
+					patientProfile={ patientProfile }
+					lastVisitedHospital={ lastVisitedHospital }
+					isLoading={ loadingGetProfile }
+				/>
+			</div>
+		);
+	};
+
 	const getInputErrorMessage = (key?: string, label?: string) => {
 		return getValidationTranslation(tValidation, key, { label });
 	};
@@ -330,8 +353,8 @@ export default function Page() {
 		try {
 			setEnableValidation(prevToggle => ({ ...prevToggle, photo: false }));
 
-			if (tempImageSrc && patientProfile?.data?.img_url) {
-				setIsLoadingUploadAvatar(true);
+			if (patientProfile?.data?.img_url && !isLoadingUploadAvatar) {
+				setIsLoadingDeleteAvatar(true);
 
 				await updateAvatar({ img_url: '' });
 
@@ -340,19 +363,21 @@ export default function Page() {
 
 				formikPhoto.resetForm();
 				setTempImageSrc('');
-			} else if (tempImageSrc && !patientProfile?.data?.img_url) {
+				setClickUpdatePhoto(false);
+			} else if (tempImageSrc && !patientProfile?.data?.img_url && !isLoadingUploadAvatar) {
 				formikPhoto.resetForm();
 				setTempImageSrc('');
+				setClickUpdatePhoto(false);
 			}
 		} catch (error: any) {
 			setError(error?.message ?? '');
 		} finally {
-			setIsLoadingUploadAvatar(false);
+			setIsLoadingDeleteAvatar(false);
 		}
 	};
 
 	return (
-		<PanelV1>
+		<div>
 			<PanelH2>
 				<Breadcrumbs datas={ breadcrumbsPath } />
 				<ProfilePageStyle className='mt-[25px] sm:mt-[50px]'>
@@ -410,137 +435,8 @@ export default function Page() {
 						</div> */ }
 					</div>
 
-					{
-						isDisableFormProfile ?
-							<div className='user-panel card-shadow p-4 lg:p-5'>
-								<div className='flex justify-between lg:justify-center lg:grid lg:grid-cols-4 lg:gap-4 lg:items-center'>
-									<div className='flex items-center'>
-										<div className='mr-4 lg:mr-[18px] relative overflow-hidden'>
-											{ (patientProfile?.data?.img_url)
-												? (
-													<div className='flex-shrink-0 w-12 h-12 lg:w-[60px] lg:h-[60px] rounded-full relative overflow-hidden'>
-														<Image
-															src={ patientProfile?.data?.img_url }
-															alt=''
-															sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-															className='w-full h-full object-cover'
-															fill
-														/>
-													</div>
-												)
-												: <icons.EmptyProfile className='flex-shrink-0 w-12 h-12 lg:w-[60px] lg:h-[60px]' />
-											}
-											{/* <div className='w-full h-full absolute flex items-center justify-center upload-mask top-0' onClick={ () => uploadFileRef.current?.click() }>
-												<FeatherIcons.Camera color={ colors.grey.dark } />
-											</div>
-											<input
-												type='file'
-												ref={ uploadFileRef }
-												onChange={ onHandleTempProfileImage }
-												className='hidden'
-												accept='image/*'
-											/> */}
-										</div>
-										<div className='flex flex-col gap-1 lg:gap-y-2.5'>
-											<Text
-												fontWeight='700'
-												fontSize='16px'
-												lineHeight='19px'
-												text={ patientProfile?.data?.name }
-											/>
-											<Text
-												fontWeight='400'
-												fontSize='14px'
-												lineHeight='17px'
-												className='capitalize'
-												text={ patientProfile?.data?.birthdate && patientProfile?.data?.gender && `${ getAge(splitDate(patientProfile?.data?.birthdate)) }, ${ patientProfile?.data?.gender }` }
-											/>
-										</div>
-									</div>
-									<div className='flex flex-col gap-1 lg:gap-y-2.5'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											subClassName='max-lg:text-center'
-											text={ t('profileDetail.patientIdLabel') }
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											subClassName='max-lg:text-center'
-											text={ patientProfile?.data?.patient_code }
-										/>
-									</div>
-									<div className='max-lg:hidden flex flex-col gap-y-2.5'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											text={ t('profileDetail.lastVisitedHospitalLabel') }
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											text={ lastVisitedHospital?.hospital_name ?? '-' }
-										/>
-									</div>
-									<div className='max-lg:hidden flex flex-col gap-y-2.5'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											text={ t('profileDetail.lastVisitedDateLabel') }
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											text={ lastVisitedHospital?.visit_date ? dayjs(lastVisitedHospital?.visit_date).format('DD MMM YYYY') : '-' }
-										/>
-									</div>
-								</div>
-								<div className='hidden pt-6 mt-6 border-t border-[#F0F2F9] max-lg:flex justify-between'>
-									<div className='flex flex-col gap-1'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											text={ t('profileDetail.lastVisitedHospitalLabel') }
-											textAlign='center'
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											text={ lastVisitedHospital?.hospital_name ?? '-' }
-											textAlign='center'
-										/>
-									</div>
-									<div className='flex flex-col gap-1'>
-										<Text
-											fontWeight='400'
-											fontSize='14px'
-											lineHeight='17px'
-											text={ t('profileDetail.lastVisitedDateLabel') }
-											textAlign='center'
-										/>
-										<Text
-											fontWeight='700'
-											fontSize='16px'
-											lineHeight='19px'
-											text={ lastVisitedHospital?.visit_date ? dayjs(lastVisitedHospital?.visit_date).format('DD MMM YYYY') : '-' }
-											textAlign='center'
-										/>
-									</div>
-								</div>
-							</div> :
-							<div className='mt-[30px] lg:px-[60px]'>
-								<MedicalRecordReminder isFloating={ false } />
-							</div>
-					}
+					{ renderCardUser() }
+
 					<div className='flex mt-5 sm:mt-12 mb-[200px]'>
 						<SubMenuPage menuList={ [t('profileLabel'), t('securitySettingLabel')] }>
 							<div className='flex flex-col gap-[10px]'>
@@ -611,23 +507,37 @@ export default function Page() {
 														theme='primary'
 														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base text-[#2A2536] sm:whitespace-nowrap'
 														themeColor={ colors.grey.lightest }
-														label={ t('deletePhotoLabel') }
 														onClick={ onClickDeletePhoto }
-														disabled={ isLoadingUploadAvatar }
-													/>
+														disabled={ isLoadingDeleteAvatar }
+													>
+														{ isLoadingDeleteAvatar
+															? (
+																<div className='px-7 sm:px-10 py-0.5 lg:py-1'>
+																	<Spinner />
+																</div>
+															)
+															: t('deletePhotoLabel') }
+													</Button>
 												</div>
 												<div>
 													<Button
 														theme='primary'
 														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base sm:whitespace-nowrap'
 														$hoverTheme='primary'
-														label={ t('uploadPhotoLabel') }
 														onClick={ () => {
 															setEnableValidation(prevToggle => ({ ...prevToggle, photo: true }));
 															formikPhoto.handleSubmit();
 														} }
 														disabled={ isLoadingUploadAvatar }
-													/>
+													>
+														{ isLoadingUploadAvatar
+															? (
+																<div className='px-7 sm:px-10 py-0.5 lg:py-1'>
+																	<Spinner />
+																</div>
+															)
+															: t('uploadPhotoLabel') }
+													</Button>
 												</div>
 											</div>
 											: null
@@ -649,14 +559,7 @@ export default function Page() {
 								<Form onSubmit={ clickUpdateProfile }>
 									<HorizontalInputWrapper
 										label={ t('profileDetail.patientEmail') }
-										labelInfo={ !isDisableFormProfile ? t('profileDetail.patientPhoneNumberLabelInfo') : undefined }
-										{ ...isDisableFormProfile
-											? {
-												onEditClick: () => {
-													setPinModalVisible(true);
-													setError('');
-												}
-											} : {} }
+										labelInfo={ t('profileDetail.patientPhoneNumberLabelInfo') }
 										inputProps={ {
 											type: 'email',
 											value: patientProfile?.data?.email ?? '',
@@ -803,7 +706,7 @@ export default function Page() {
 							</div>
 						</SubMenuPage>
 					</div>
-				</ProfilePageStyle>
+				</ProfilePageStyle >
 				<Modal visible={ pinModalVisible } onClose={ () => { setPinModalVisible(false); setError(''); } }>
 					<div className='flex flex-col items-center gap-4'>
 						<Form
@@ -896,7 +799,7 @@ export default function Page() {
 					</div>
 				</Modal>
 
-			</PanelH2>
-		</PanelV1 >
+			</PanelH2 >
+		</div >
 	);
 };

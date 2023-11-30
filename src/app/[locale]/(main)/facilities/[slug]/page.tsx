@@ -23,7 +23,7 @@ import { FacilitiesServiceStyle } from './style';
 export default async function FacilitiesServicesPage({ params }: { params: { slug: string; }; }) {
 	const paramsSlug = params?.slug ?? '';
 
-	const facilitiyServicesRes = await getFacilityServices({ query: { is_publish: true } });
+	const facilitiyServicesRes = await getFacilityServices();
 	const facilityServices: FacilityServicesDetail[] = facilitiyServicesRes?.data;
 	const facility = facilityServices.find(item => item.slug === paramsSlug);
 
@@ -138,7 +138,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 											footer={ <CardFooter content={ t('readMoreLabel') } /> }
 											className='mb-0 w-[304px] md:w-full'
 											iconShare={ true }
-											to={ `/news/${ data.news_id }` }
+											to={ `/news/${ data?.slug }` }
 										/>
 									))
 								}

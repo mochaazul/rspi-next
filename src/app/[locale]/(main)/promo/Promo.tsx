@@ -47,10 +47,9 @@ const EventClassesPromo = ({
 		fetchEvents({
 			page: pageNumber,
 			limit: 10,
-			is_publish: true,
 			category: category,
 			hospital_id: hospitalID
-		}).then(function(response: any) {
+		}).then(function (response: any) {
 			setEventsData(response.data);
 			setLoading(false);
 		});
@@ -62,7 +61,6 @@ const EventClassesPromo = ({
 		fetchEvents({
 			page: pageNumber,
 			limit: 10,
-			is_publish: true,
 			category: category,
 			hospital_id: hospitalID
 		}).then(function (response: any) {
@@ -123,18 +121,21 @@ const EventClassesPromo = ({
 						}
 						{
 
-							!loading && eventsData?.map((data, index) => (
-								<Card
-									key={ index }
-									image={ data.img_url_card }
-									imageHeight='200px'
-									content={ <CardContent title={ data.title } description={ data.short_description } /> }
-									footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
-									className='mb-0'
-									to={ `/promo/${ data.id }` }
-									iconShare={ true }
-								/>
-							))
+							!loading && eventsData?.map((data, index) => {
+								return (
+									<Card
+										id={ data.id }
+										key={ index }
+										image={ data.img_url_card }
+										imageHeight='200px'
+										content={ <CardContent title={ data.title } description={ data.short_description } /> }
+										footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
+										className='mb-0'
+										to={ `/promo/${ data.id }` }
+										iconShare={ true }
+									/>
+								);
+							})
 						}
 						{
 							!loading && eventsData?.length === 0 ?

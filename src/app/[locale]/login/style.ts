@@ -8,7 +8,8 @@ const LandingPageStyle = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  position: relative;
 
   .login {
     border: 3px solid var(--color-blue-100);
