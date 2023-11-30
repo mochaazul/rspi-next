@@ -93,11 +93,6 @@ export const Option = styled.div`
     background-color: ${ colors.paradiso.light };
     ${ GlobalAllTransition5ms }
   }
-
-  @media screen and (max-width: 720px) {
-    font-size: 14px;
-    line-height: 24px;
-  }
 `;
 
 export const DialogCloser = styled.div<StatusType>`

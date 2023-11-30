@@ -179,12 +179,14 @@ const Dropdown: React.FC<DropdownProps> = ({
 						<Text
 							text={ props.placeholder }
 							color={ colors.grey.placeholderColor }
+							subClassName='!text-base'
 						/>
 					</div> :
 					<div className='placeholder'>
 						<Text
 							text={ Array.from(SelectInputRef.current.selectedOptions, option => option.label).join(', ') }
 							color={ props.disabled ? colors.grey.darkOpacity : colors.grey.darker }
+							subClassName='!text-base'
 						/>
 					</div>
 			}

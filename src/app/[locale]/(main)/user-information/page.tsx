@@ -117,7 +117,7 @@ export default function Page() {
 		validationSchema: UpdateProfileSchema,
 		initialValues: {
 			name: patientProfile?.data?.name ?? '',
-			birthdate: patientProfile?.data?.birthdate ? dayjs(patientProfile?.data?.birthdate).format('YYYY-MM-DD') : '',
+			birthdate: patientProfile?.data?.birthdate && patientProfile?.data?.birthdate !== '0001-01-01 00:00:00 +0000 UTC' ? dayjs(patientProfile?.data?.birthdate).format('YYYY-MM-DD') : '',
 			gender: patientProfile?.data?.gender ?? '',
 			phone: patientProfile?.data?.phone ? regexInputPhone(patientProfile?.data?.phone) : ''
 		},
@@ -126,6 +126,7 @@ export default function Page() {
 			try {
 				await updateProfile({
 					...formProfile,
+					birthdate: formProfile.birthdate ? formProfile.birthdate : patientProfile?.data?.birthdate ?? '',
 					phone: formProfile.phone ? `62${ regexInputPhone(formProfile.phone) }` : ''
 				});
 				setShowModalSuccess(true);

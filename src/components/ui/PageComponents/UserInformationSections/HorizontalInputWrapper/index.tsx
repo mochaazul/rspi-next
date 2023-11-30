@@ -24,8 +24,6 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 	const t = useScopedI18n('page.profilePage.profileDetail');
 
 	const renderInput = () => {
-		const defaultClassName = '!text-sm md:!text-base max-md:!leading-6';
-
 		if (props.inputType === 'dropdown') {
 			return (
 				<Form.Dropdown
@@ -42,7 +40,6 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 						}
 					] }
 					{ ...props.inputProps }
-					className={ defaultClassName }
 				/>
 			);
 		}
@@ -52,7 +49,6 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 				<Form.DateField
 					{ ...props.inputProps }
 					applyMaxDateForDoB={ true }
-					inputClassName={ defaultClassName }
 				/>
 			);
 		}
@@ -61,24 +57,25 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 			return (
 				<>
 					<span className='absolute top-1/2 -translate-y-1/2 left-0 pl-[18px] z-[1]'>
-						<Text fontSize='16px' color={ props.inputProps.disabled ? colors.grey.darkOpacity : colors.grey.darker }>+62</Text>
+						<Text
+							fontSize='16px'
+							color={ props.inputProps.disabled ? colors.grey.darkOpacity : colors.grey.darker }
+							subClassName='!text-base'
+						>+62</Text>
 					</span>
 
 					<Form.TextField
 						{ ...props.inputProps }
 						isNumber
 						mask='999999999999'
-						className={ `!pl-[50px] ${ defaultClassName }` }
+						className='!pl-[50px]'
 					/>
 				</>
 			);
 		}
 
 		return (
-			<Form.TextField
-				{ ...props.inputProps }
-				className={ defaultClassName }
-			/>
+			<Form.TextField	{ ...props.inputProps } />
 		);
 	};
 

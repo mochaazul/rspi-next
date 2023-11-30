@@ -45,7 +45,7 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: Pr
 		<ProfileCardRow>
 			<icons.Calendar16
 			/>
-			<Text text={ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } fontSize='14px' color={ colors.grey.darkOpacity } />
+			<Text text={ profile.birthdate && profile.birthdate !== '0001-01-01 00:00:00 +0000 UTC' ? dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') : '' } fontSize='14px' color={ colors.grey.darkOpacity } />
 		</ProfileCardRow>
 		<ProfileCardRow>
 			<icons.PhoneOutline
