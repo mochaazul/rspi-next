@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-import { EventClassesState, HospitalState, Pagination } from '@/interface';
+import { EventClassesState, HospitalDetail, HospitalState, Pagination } from '@/interface';
 import {
 	Breadcrumbs,
 	Button,
@@ -28,7 +28,7 @@ const EventClassesPromo = ({
 	pagination
 }: {
 	breadcrumbsPath: BreadcrumbsType['datas'],
-	hospitalSelector: HospitalState,
+	hospitalSelector: HospitalDetail[],
 	events: EventClassesState['events'],
 	pagination: Pagination,
 }) => {
@@ -49,7 +49,7 @@ const EventClassesPromo = ({
 			limit: 10,
 			category: category,
 			hospital_id: hospitalID
-		}).then(function (response: any) {
+		}).then(function(response: any) {
 			setEventsData(response.data);
 			setLoading(false);
 		});
@@ -63,7 +63,7 @@ const EventClassesPromo = ({
 			limit: 10,
 			category: category,
 			hospital_id: hospitalID
-		}).then(function (response: any) {
+		}).then(function(response: any) {
 			setEventsData(response.data);
 			setLoading(false);
 		});

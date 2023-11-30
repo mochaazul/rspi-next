@@ -20,7 +20,7 @@ import { appStoreMobileUrl, playStoreMobileUrl } from '@/constant/config';
 
 import FooterStyled, { FooterContainer } from './style';
 
-const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalState; }) => {
+const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalDetail[]; }) => {
 	const navigate = useRouter();
 
 	const t = useScopedI18n('page.footer');
