@@ -32,7 +32,7 @@ export type ProfilePayload = {
 };
 
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
-	console.log(selfProfile, 'selfProfile');
+	
 	const t = useScopedI18n('page.bookingAppointment');
 	const tValidation = useScopedI18n('validation.formValidation');
 
@@ -143,8 +143,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	};
 
 	useEffect(() => {
-		console.log(type);
-		console.log(selfProfile?.email);
+		
 		if (type === 'self') {
 			// TODO: migrate
 			// setFieldsValue({
