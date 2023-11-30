@@ -31,8 +31,10 @@ export default {
 	},
 
 	unsubscribe: {
-		heading: 'Berhenti berlangganan telah berhasil',
-		subHeading: 'Berhenti berlangganan berita terupdate tentang RSPI berhasil, semoga kita dapat berjumpa kembali'
+		headingSuccess: 'Berhasil Berhenti Belangganan',
+		subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+		headingFailed: 'Gagal Berhenti Belangganan',
+		subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 	},
 	modalDialog: {
 		pin: {
@@ -162,8 +164,10 @@ export default {
 			}
 		},
 		unsubscribe: {
-			heading: 'Berhasil Berhenti Berlangganan',
-			subHeading: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali'
+			headingSuccess: 'Berhasil Berhenti Belangganan',
+			subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+			headingFailed: 'Gagal Berhenti Belangganan',
+			subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 		},
 		awards: {
 			heading: 'Accreditations & Awards',
@@ -913,7 +917,10 @@ export default {
 			subscribeLabel: 'Ikuti Perkembangan Bersama Kami',
 			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.',
 			subscribePlaceholder: 'Masukkan alamat email',
-			subscribeSubmit: 'Subscribe'
+			subscribeSubmit: 'Berlangganan',
+			errorSubs: 'Proses berlangganan gagal dilakukan',
+			successSubs: 'Proses berlangganan berhasil dilakukan',
+			handleButtonModalSubmit: 'Tutup',
 		},
 		medicalRecordReminder: {
 			heading: 'Dapatkan Akses terhadap Informasi Kunjungan Medis Anda',

@@ -36,8 +36,10 @@ export default {
 	},
 	page: {
 		unsubscribe: {
-			heading: 'Unsubscribe was successful',
-			subHeading: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again'
+			headingSuccess: 'Unsubscribe was successful',
+			subHeadingSuccess: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again',
+			headingFailed: 'Unsubscribe was failed',
+			subHeadingFailed: 'Unsubscribing from the latest news about RSPI was failed, try again',
 		},
 		awards: {
 			heading: 'Accreditations & Awards',

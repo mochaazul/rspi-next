@@ -138,7 +138,7 @@ export type I_HospitalFilterItem = {
 };
 
 export type LandingPageFindADoctorForm = {
-	doctorName: string,
+	doctorName: ItemType | null,
 	hospital: string
 	speciality: ItemType | null,
 	preferredDay: string
