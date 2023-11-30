@@ -19,6 +19,7 @@ export interface DatepickerProps extends DateFieldType {
   dateFormat?: string;
   applyMaxDateForDoB?: boolean;
   inputClassName?: string;
+  iconClassName?: string;
 }
 
 export interface InputType extends DatepickerProps, DateFieldType {

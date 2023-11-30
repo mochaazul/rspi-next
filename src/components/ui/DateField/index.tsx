@@ -16,7 +16,7 @@ import withInputLabel from '../withInputLabel';
  * @param param0 Inputype
  * @returns JSX
  */
-const DateField = ({ onIconClick, ...props }: InputType) => {
+const DateField = ({ onIconClick, iconClassName, ...props }: InputType) => {
 	const currentLang = useCurrentLocale();
 
 	const Icons = props.iconName ? icons[props.iconName] : null;
@@ -30,7 +30,7 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 			{
 				props.iconName ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Icons />
+						<Icons className={ iconClassName } />
 					</IconWrapper> :
 					null
 			}

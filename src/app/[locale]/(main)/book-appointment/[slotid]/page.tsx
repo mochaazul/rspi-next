@@ -53,7 +53,7 @@ const BookAppointment = () => {
 
 	const timeSlot = Object.fromEntries(searchParams);
 
-	const { data: userProfile, isLoading: profileLoading } = useGetProfile();
+	const { data: userProfile, isLoading: profileLoading } = useGetProfile(session?.token);
 	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile();
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
