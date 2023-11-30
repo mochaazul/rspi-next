@@ -32,7 +32,7 @@ export type ProfilePayload = {
 };
 
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
-
+	console.log(selfProfile, 'selfProfile');
 	const t = useScopedI18n('page.bookingAppointment');
 	const tValidation = useScopedI18n('validation.formValidation');
 
@@ -50,15 +50,16 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 
 	const formikProfile: FormikProps<ProfilePayload> = useFormik<ProfilePayload>({
+		enableReinitialize: true,
 		validateOnBlur: enableValidation,
 		validateOnChange: enableValidation,
 		validationSchema: AddProfileSchema,
 		initialValues: {
-			dob: '',
-			email: '',
-			gender: '',
-			name: '',
-			phone: ''
+			dob: selfProfile?.birthdate ?? '',
+			email: selfProfile?.email ?? '',
+			gender: selfProfile?.gender ?? '',
+			name: selfProfile?.name ?? '',
+			phone: selfProfile?.phone ?? ''
 		},
 		onSubmit: async (values: ProfilePayload) => {
 			const { dob, email, gender, name, phone } = values;
@@ -142,6 +143,8 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	};
 
 	useEffect(() => {
+		console.log(type);
+		console.log(selfProfile?.email);
 		if (type === 'self') {
 			// TODO: migrate
 			// setFieldsValue({
