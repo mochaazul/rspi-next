@@ -2,12 +2,11 @@ import {
 	ArticleState,
 	BannerDetail,
 	CenterOfExcellenceDetail,
-	CenterOfExcellenceState,
 	ContactUsState,
 	ContactUsSubmitType,
 	FooterDetail,
 	ForgotPasswordType,
-	HospitalState,
+	HospitalDetail,
 	NotificationResponse,
 	OTPType,
 	Pagination,
@@ -50,11 +49,11 @@ export const getCenterOfExcellenceNewsByID = (param?: ApiOptions) => {
 };
 
 export const getHospitals = (params?: ApiOptions) => {
-	return fetcher<HospitalState>('hospital', params);
+	return fetcher<HospitalDetail[]>('hospital', params);
 };
 
 export const getCenterOfExcellence = (param?: ApiOptions) => {
-	return fetcher<CenterOfExcellenceState>('centerOfExcellences', { ...param, query: { ...param?.query, is_publish: true } });
+	return fetcher<CenterOfExcellenceDetail[]>('centerOfExcellences', { ...param, query: { ...param?.query, is_publish: true } });
 };
 export const getNotificationResponse = (param: ApiOptions) => {
 	return fetcher<NotificationResponse>('getNotification', param);
