@@ -10,11 +10,11 @@ import Form from '@/components/ui/Form';
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
-import { useFamilyProfileMutation, useGetProfile } from '@/lib/api/client/profile';
+import { useFamilyProfileMutation, useGetProfile, useUpdateProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
 import { AddProfileSchema } from '@/validator/booking';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
-
+import useSession from '@/session/client';
 type Props = {
 	onClose: (profile: ProfilePayload, isMain?: boolean) => void;
 	visible: boolean;
@@ -43,8 +43,10 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 
 	// const addFamilyProfileDispatch = useAppAsyncDispatch<FamilyProfilePayload>(addFamilyProfile);
 	// End migrate
-
+	const session = useSession();
+	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile(session?.token);
 	const { data, trigger: createFamilyProfile, isMutating, error: createFamilyMutationError, reset: resetMutation } = useFamilyProfileMutation();
+	const { trigger: updateProfile, isMutating: loadingUpdateProfile } = useUpdateProfile();
 	const [error, setError] = useState<string>('');
 	const [disabledEmail, setDisabledEmail] = useState<boolean>(false);
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
@@ -63,48 +65,27 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		},
 		onSubmit: async(values: ProfilePayload) => {
 			const { dob, email, gender, name, phone } = values;
-			// if (type === 'other') {
-			await createFamilyProfile({
-				birthdate: dob,
-				parent_email: selfProfile?.email ?? '',
-				email: email,
-				name: name,
-				phone: cleanUpMask(phone),
-				gender: gender
-			});
+			if (type === 'other') {
+				await createFamilyProfile({
+					birthdate: dob,
+					parent_email: selfProfile?.email ?? '',
+					email: email,
+					name: name,
+					phone: cleanUpMask(phone),
+					gender: gender
+				});
+			
+			} else {
+				await updateProfile({
+					name: name,
+					birthdate: dob,
+					gender: gender,
+					phone: cleanUpMask(phone)
+				});
+				getProfileMutation();
+			}
+
 			closeHandler();
-			// } else {
-			// 	const payload = {
-			// 		name: name.value,
-			// 		birthdate: dob.value,
-			// 		gender: gender.value,
-			// 		phone: cleanUpMask(phone.value)
-			// 	};
-			// 	TODO: migrate;
-			// 	const response = await clikUpdateProfile({
-			// 		payload
-			// 	});
-			// 	if (response.payload.stat_msg === 'Success') {
-			// 		setDisabledEmail(false);
-			// 		await getUserDetail();
-			// 		onClose({
-			// 			dob: dob.value,
-			// 			email: email.value,
-			// 			gender: gender.value,
-			// 			name: name.value,
-			// 			phone: phone.value
-			// 		});
-			// 		// TODO: migrate;
-			// 	}
-			// 	setError(response.payload.stat_msg);
-			// }
-			// setFieldsValue({
-			// 	email: '',
-			// 	name: '',
-			// 	birthdate: '',
-			// 	gender: '',
-			// 	phone: ''
-			// });
 		},
 	});
 
