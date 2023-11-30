@@ -10,19 +10,77 @@ import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
 
 import Form from '../../../Form';
 import Text from '../../../Text';
-import WithInputLabel from '../../../withInputLabel';
+import WithInputLabel, { PropsType } from '../../../withInputLabel';
 
 interface HorizontalInputType {
-	inputProps: Partial<typeof Form.TextField>,
+	inputProps: PropsType,
 	label: string,
 	labelInfo?: string,
-	value?: string,
 	inputType?: string,
 	onEditClick?: () => void;
 }
 
 const HorizontalInputWrapper = (props: HorizontalInputType) => {
 	const t = useScopedI18n('page.profilePage.profileDetail');
+
+	const renderInput = () => {
+		const defaultClassName = '!text-sm md:!text-base max-md:!leading-6';
+
+		if (props.inputType === 'dropdown') {
+			return (
+				<Form.Dropdown
+					menuItems={ [
+						{
+							key: '1',
+							value: 'Male',
+							label: t('patientGenderMaleLabel')
+						},
+						{
+							key: '2',
+							value: 'Female',
+							label: t('patientGenderFemaleLabel')
+						}
+					] }
+					{ ...props.inputProps }
+					className={ defaultClassName }
+				/>
+			);
+		}
+
+		if (props.inputType === 'date') {
+			return (
+				<Form.DateField
+					{ ...props.inputProps }
+					applyMaxDateForDoB={ true }
+					inputClassName={ defaultClassName }
+				/>
+			);
+		}
+
+		if (props.inputType === 'phone') {
+			return (
+				<>
+					<span className='absolute top-1/2 -translate-y-1/2 left-0 pl-[18px] z-[1]'>
+						<Text fontSize='16px' color={ props.inputProps.disabled ? colors.grey.darkOpacity : colors.grey.darker }>+62</Text>
+					</span>
+
+					<Form.TextField
+						{ ...props.inputProps }
+						isNumber
+						mask='999999999999'
+						className={ `!pl-[50px] ${ defaultClassName }` }
+					/>
+				</>
+			);
+		}
+
+		return (
+			<Form.TextField
+				{ ...props.inputProps }
+				className={ defaultClassName }
+			/>
+		);
+	};
 
 	return (
 		<div className='flex max-sm:flex-col sm:grid sm:grid-cols-[240px_1fr] sm:items-center max-sm:mb-4 mb-5'>
@@ -49,29 +107,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 				}
 			</WithInputLabel.LabelText>
 			<div className='col-auto relative'>
-				{
-					props.inputType === 'dropdown' ?
-						<Form.Dropdown
-							menuItems={ [
-								{
-									key: '1',
-									value: 'Male',
-									label: t('patientGenderMaleLabel')
-								},
-								{
-									key: '2',
-									value: 'Female',
-									label: t('patientGenderFemaleLabel')
-								}
-							] }
-							{ ...props.inputProps } /> :
-						props.inputType === 'date' ?
-							<Form.DateField
-								{ ...props.inputProps }
-								applyMaxDateForDoB={ true } /> :
-							<Form.TextField
-								{ ...props.inputProps } />
-				}
+				{ renderInput() }
 
 				{ props.onEditClick && (
 					<div className='absolute pr-5 right-0 inset-y-0 flex items-center'>

@@ -17,7 +17,12 @@ export const SelectWrapper = styled.div<StatusType>`
   border-radius: 5px;
   outline: 1px solid ${ colors.grey.lighter };
   min-height: 48px;
-  background-color: ${ props => props.disabled ? colors.grey.lighterOpacity : colors.white.default };
+  ${ props => props.disabled
+    ? `
+    background-color: ${ colors.grey.lighterOpacity };
+    color: ${ colors.grey.darkOpacity };
+  `
+    : `background-color: ${ colors.white.default }` };
   cursor: ${ props => props.disabled ? 'default' : 'pointer' };
   
   .arrow-down {
@@ -87,6 +92,11 @@ export const Option = styled.div`
   &:hover {
     background-color: ${ colors.paradiso.light };
     ${ GlobalAllTransition5ms }
+  }
+
+  @media screen and (max-width: 720px) {
+    font-size: 14px;
+    line-height: 24px;
   }
 `;
 

@@ -5,29 +5,30 @@ import Datepicker from 'react-tailwindcss-datepicker';
 import { colors, icons } from '@/constant';
 
 interface DateFieldType extends Omit<typeof Datepicker, 'value' | 'onChange'> {
-	iconPosition?: 'left' | 'right';
-	iconName?: keyof typeof icons;
+  iconPosition?: 'left' | 'right';
+  iconName?: keyof typeof icons;
 }
 
 export interface DatepickerProps extends DateFieldType {
-	name?: string;
-	value?: string;
-	placeholder?: string;
-	onChangeValue?: ({ name, value }: { name?: string; value?: string; }) => void;
-	popOverDirection?: 'up' | 'down';
-	onIconClick?: () => any;
-	dateFormat?: string;
-	applyMaxDateForDoB?: boolean;
+  name?: string;
+  value?: string;
+  placeholder?: string;
+  onChangeValue?: ({ name, value }: { name?: string; value?: string; }) => void;
+  popOverDirection?: 'up' | 'down';
+  onIconClick?: () => any;
+  dateFormat?: string;
+  applyMaxDateForDoB?: boolean;
+  inputClassName?: string;
 }
 
 export interface InputType extends DatepickerProps, DateFieldType {
-	ref?: React.RefObject<HTMLInputElement>;
-	onIconClick?: () => any;
+  ref?: React.RefObject<HTMLInputElement>;
+  onIconClick?: () => any;
 }
 
 export interface StyledDateFieldType extends Omit<DateFieldType, 'iconPosition' | 'iconName'> {
-	$iconPosition?: 'left' | 'right';
-	$iconName?: keyof typeof icons;
+  $iconPosition?: 'left' | 'right';
+  $iconName?: keyof typeof icons;
 }
 
 export const DateFieldWrapper = styled.div<StyledDateFieldType>`
@@ -54,6 +55,7 @@ export const DateFieldWrapper = styled.div<StyledDateFieldType>`
     padding-bottom: 12px !important;
     outline: 1px solid ${ colors.grey.lighter };
     font-family: var(--font-family) !important;
+    color: ${ colors.grey.darker };
 
     + button {
       display: none;
@@ -69,6 +71,7 @@ export const DateFieldWrapper = styled.div<StyledDateFieldType>`
     }
 		&:disabled {
       background-color: ${ colors.grey.lighterOpacity };
+      color: ${ colors.grey.darkOpacity };
     }
   }
 `;

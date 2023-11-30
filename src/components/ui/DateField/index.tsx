@@ -16,7 +16,7 @@ import withInputLabel from '../withInputLabel';
  * @param param0 Inputype
  * @returns JSX
  */
-const DateField = ({ onIconClick, ...props }: InputType) => {
+const DateField = ({ onIconClick, inputClassName, ...props }: InputType) => {
 	const currentLang = useCurrentLocale();
 
 	const Icons = props.iconName ? icons[props.iconName] : null;
@@ -36,7 +36,7 @@ const DateField = ({ onIconClick, ...props }: InputType) => {
 			}
 			<Datepicker
 				{ ...props }
-				inputClassName='rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[16px]'
+				inputClassName={ `rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[16px] ${ inputClassName }` }
 				asSingle={ true }
 				useRange={ false }
 				i18n={ currentLang }

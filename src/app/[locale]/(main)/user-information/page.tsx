@@ -46,6 +46,7 @@ import { getProfile } from '@/lib/api/profile';
 
 import ProfilePageStyle, { Divider } from './style';
 import { PanelH2 } from '../style';
+import { regexInputPhone } from '@/constant/regExp';
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -116,12 +117,15 @@ export default function Page() {
 			name: patientProfile?.data?.name ?? '',
 			birthdate: patientProfile?.data?.birthdate ? dayjs(patientProfile?.data?.birthdate).format('YYYY-MM-DD') : '',
 			gender: patientProfile?.data?.gender ?? '',
-			phone: patientProfile?.data?.phone ?? ''
+			phone: patientProfile?.data?.phone ? regexInputPhone(patientProfile?.data?.phone) : ''
 		},
 		enableReinitialize: true,
 		onSubmit: async (formProfile: UpdateProfileType) => {
 			try {
-				await updateProfile(formProfile);
+				await updateProfile({
+					...formProfile,
+					phone: formProfile.phone ? `62${ regexInputPhone(formProfile.phone) }` : ''
+				});
 				setShowModalSuccess(true);
 				getProfileMutation();
 			} catch (error: any) {
@@ -642,19 +646,15 @@ export default function Page() {
 									<HorizontalInputWrapper
 										label={ t('profileDetail.patientPhoneNumber') }
 										labelInfo={ isDisableFormProfile ? t('profileDetail.patientPhoneNumberLabelInfo') : undefined }
+										inputType='phone'
 										inputProps={ {
 											name: 'phone',
 											value: formikProfile.values.phone,
-											onChange: formikProfile.handleChange,
+											onChange: (e: any) => formikProfile.setFieldValue(e.target.name, regexInputPhone(e.target.value)),
 											placeholder: t('profileDetail.patientPhoneNumberPlaceholder'),
 											disabled: isDisableFormProfile,
 											errorMessage: getInputErrorMessage(formikProfile.errors.phone, t('profileDetail.patientPhoneNumber')),
-											isError: !!formikProfile.errors.phone,
-											onKeyDown: (ev: React.KeyboardEvent<HTMLInputElement>) => {
-												if (regExp.phone_allowed_char_list.indexOf(ev.key) < 0) {
-													ev.preventDefault();
-												}
-											}
+											isError: !!formikProfile.errors.phone
 										} }
 									/>
 
@@ -685,7 +685,6 @@ export default function Page() {
 							<div className='flex flex-col gap-[10px]'>
 								<HorizontalInputWrapper
 									label={ t('securitySetting.passwordLabel') }
-									value='123456789010'
 									onEditClick={ () => navigate.push('/update-password') }
 									inputProps={ {
 										placeholder: t('securitySetting.passwordLabel'),
@@ -695,7 +694,6 @@ export default function Page() {
 								/>
 								<HorizontalInputWrapper
 									label={ t('securitySetting.pinLabel') }
-									value='123456'
 									onEditClick={ () => navigate.push('/pin-reset') }
 									inputProps={ {
 										placeholder: t('securitySetting.pinLabel'),

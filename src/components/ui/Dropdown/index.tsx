@@ -177,7 +177,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 					<div className='placeholder'>
 						<Text
 							text={ Array.from(SelectInputRef.current.selectedOptions, option => option.label).join(', ') }
-							color={ colors.grey.darker }
+							color={ props.disabled ? colors.grey.darkOpacity : colors.grey.darker }
 						/>
 					</div>
 			}

@@ -6,4 +6,11 @@ const regExp = {
 	phone_allowed_char_list: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'ArrowLeft', 'ArrowRight', 'Backspace', 'Tab', '+', 'Shift', ' ']
 };
 
+export const regexInputPhone = (phone: string) => {
+	let phoneNumber =
+		phone
+			.replace(/^0/, '').replace(/^62/, '');
+	return phoneNumber;
+};
+
 export default regExp;

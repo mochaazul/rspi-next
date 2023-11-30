@@ -52,6 +52,7 @@ export const TextFieldWrapper = styled.div<StyledTextFieldType>`
 export const Input = styled.input<InputType>`
   width: 100%;
   font-family: var(--font-family);
+  color: ${ colors.grey.darker };
   ${ GlobalAllTransition5ms }
   &:focus {
     outline: none;
@@ -59,6 +60,7 @@ export const Input = styled.input<InputType>`
 
   &:disabled {
     background-color: ${ colors.grey.lighterOpacity };
+    color: ${ colors.grey.darkOpacity };
   }
 `;
 
@@ -67,11 +69,17 @@ export const InputMaskedStyled = styled(InputMask)`
   padding: 12px 18px;
   border-radius: 5px;
   font-family: var(--font-family);
+  color: ${ colors.grey.darker };
   outline: 1px solid ${ colors.grey.lighterOpacity };
   ${ GlobalAllTransition5ms }
 
   &:focus-within {
     outline: 1px solid ${ colors.green.brandAccent }
+  }
+
+  &:disabled {
+    background-color: ${ colors.grey.lighterOpacity };
+    color: ${ colors.grey.darkOpacity };
   }
 `;
 
