@@ -44,10 +44,10 @@ import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { usePostCheckPinMutation } from '@/lib/api/client/auth';
 import { getProfile } from '@/lib/api/profile';
 import useSession from '@/session/client';
+import { regexInputPhone } from '@/constant/regExp';
 
 import ProfilePageStyle, { Divider } from './style';
 import { PanelH2 } from '../style';
-import { regexInputPhone } from '@/constant/regExp';
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -663,7 +663,7 @@ export default function Page() {
 										inputProps={ {
 											name: 'phone',
 											value: formikProfile.values.phone,
-											onChange: (e: any) => formikProfile.setFieldValue(e.target.name, regexInputPhone(e.target.value)),
+											onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => formikProfile.setFieldValue(e.target.name, regexInputPhone(e.target.value)),
 											placeholder: t('profileDetail.patientPhoneNumberPlaceholder'),
 											disabled: isDisableFormProfile,
 											errorMessage: getInputErrorMessage(formikProfile.errors.phone, t('profileDetail.patientPhoneNumber')),
