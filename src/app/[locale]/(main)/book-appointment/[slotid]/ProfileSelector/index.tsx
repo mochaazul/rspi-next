@@ -162,7 +162,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 				(selfProfile && 
 					selfProfile?.name !== '' && 
 					selfProfile?.phone !== '' &&
-					selfProfile?.birthdate !== '0001-01-01 00:00:00 +0000 UTC')
+					selfProfile?.birthdate !== '0001-01-01')
 					? <ProfileCard profile={ selfProfile }
 						showModalDelete={ (id, visible) => {
 							setSelectedIdFamilyProfile(id);
