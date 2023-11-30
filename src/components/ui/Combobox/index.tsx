@@ -39,7 +39,6 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
     			.replace(/\s+/g, '')
     			.includes(query.toLowerCase().replace(/\s+/g, ''))
     	);
-	console.log(query);
 	return (
 		<div>
 			<HeadlessCombobox value={ selected } onChange={ item => {
