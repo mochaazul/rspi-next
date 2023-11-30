@@ -55,13 +55,13 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		validateOnChange: enableValidation,
 		validationSchema: AddProfileSchema,
 		initialValues: {
-			dob: type === 'self' ? selfProfile?.birthdate ?? '' : '',
-			email: type === 'self' ? selfProfile?.email ?? '' : '',
-			gender: type === 'self' ? selfProfile?.gender ?? '' : '',
-			name: type === 'self' ? selfProfile?.name ?? '' : '',
-			phone: type === 'self' ? selfProfile?.phone ?? '' : ''
+			dob: '',
+			email: '',
+			gender: '',
+			name: '',
+			phone: ''
 		},
-		onSubmit: async (values: ProfilePayload) => {
+		onSubmit: async(values: ProfilePayload) => {
 			const { dob, email, gender, name, phone } = values;
 			// if (type === 'other') {
 			await createFamilyProfile({
@@ -112,7 +112,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		resetMutation(); // we need this to clear errors
 	}, []);
 
-	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setEnableValidation(true);
 		formikProfile.handleSubmit();
@@ -145,16 +145,20 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	useEffect(() => {
 		
 		if (type === 'self') {
-			// TODO: migrate
-			// setFieldsValue({
-			// 	email: userProfile?.data?.email
-			// });
+			
+			formikProfile.setFieldValue('email', selfProfile?.email);
+			formikProfile.setFieldValue('phone', selfProfile?.phone);
+			formikProfile.setFieldValue('name', selfProfile?.name);
+			formikProfile.setFieldValue('birthdate', selfProfile?.birthdate);
+
 			setDisabledEmail(true);
+		} else {
+			setDisabledEmail(false);
 		}
 	}, [type]);
 
 	const regexPhone = (phone: string) => {
-		let phoneNumber =
+		const phoneNumber =
 			phone
 				.replace(/^0/, '').replace(/^62/, '');
 		return phoneNumber;
