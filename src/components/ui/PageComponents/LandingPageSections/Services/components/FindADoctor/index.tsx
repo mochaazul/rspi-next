@@ -12,18 +12,19 @@ import DateField from '@/components/ui/DateField';
 import { Dropdown, Form, TextField } from '@/components/ui';
 import Button from '@/components/ui/Button';
 import Combobox from '@/components/ui/Combobox';
+import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 
 type Props = {
 	isTelemedicine: boolean;
 	hospitals: HospitalDetail[],
 	doctors: I_MasterDoctor[],
-	clinics: ClinicResponse[];
+	specialtys: I_SpecialtyDropdownResponse[];
 };
 
 const FindADoctor: React.FC<Props> = ({
 	isTelemedicine = false,
 	hospitals,
-	clinics,
+	specialtys,
 	doctors,
 }) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor');
@@ -35,11 +36,11 @@ const FindADoctor: React.FC<Props> = ({
 		...hospitals.map(hospital => ({ key: hospital?.id?.toString(), value: hospital.hospital_code, label: hospital?.name }))
 	];
 	const mapSpeciality = () => {
-		if (clinics?.length > 0) {
-			return clinics?.map(sp => ({
-				id: sp.id,
-				label: sp.clinic_name,
-				value: sp.clinic_code
+		if (specialtys?.length > 0) {
+			return specialtys?.map(sp => ({
+				id: sp.clinic_category,
+				label: sp.clinic_category,
+				value: sp.clinic_category
 			}));
 		}
 		return [];
