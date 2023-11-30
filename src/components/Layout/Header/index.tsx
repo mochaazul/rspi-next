@@ -20,6 +20,7 @@ import {
 import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
+import { protectedRoutes } from '@/constant/config';
 
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
@@ -31,8 +32,6 @@ import HeaderStyle from './style';
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
 import { cookiesHelper } from '@/helpers';
-
-const protectedRoutes = ['/patient-portal', '/user-information'];
 
 export const Header = ({
 	session,
@@ -102,9 +101,16 @@ export const Header = ({
 			await cookiesHelper.clearStorage();
 			await clearSWRCache();
 			setShowSideBar(false);
+			// Notes: protectedRoutes sudah dihandle oleh middleware. shg cukup dgn refresh page akan redirect ke halaman login
+			// Khusus halaman doctor/:id & book-appointment tidak dihandle di middleware karna perlu show NeedLoginModal dari response error swr
+			if (['/doctor', '/book-appointment'].some(path => pathname.includes(path))) {
+				return router.replace('/login');
+			}
+
 			if (!protectedRoutes?.some(path => pathname.includes(path))) {
 				setShowSuccessLogout(true);
 			}
+
 			router.refresh();
 		}
 	};
