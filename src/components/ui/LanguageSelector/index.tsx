@@ -14,19 +14,18 @@ const languageItem = [
 		label: 'ID',
 		value: 'id',
 		longLabel: 'Bahasa Indonesia',
-		icon: <Image src='/images/ic/flag.svg' alt='Indonesia Lang Icon' width={ 20 } height={ 20 }/>
+		icon: <Image src='/images/ic/flag.svg' alt='Indonesia Lang Icon' width={ 20 } height={ 20 } />
 	},
 	{
 		key: 'en',
 		label: 'EN',
 		value: 'en',
 		longLabel: 'English',
-		icon: <Image src='/images/ic/eng-flag.svg' alt='English Lang Icon' width={ 20 } height={ 20 }/>
+		icon: <Image src='/images/ic/eng-flag.svg' alt='English Lang Icon' width={ 20 } height={ 20 } />
 	}
 ];
 
 export const LanguageSelector = () => {
-
 	const setLanguage = useChangeLocale();
 	const currentLang = useCurrentLocale();
 
