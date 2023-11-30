@@ -68,10 +68,6 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 		setOurHospital(Object.values(hospitalData || []));
 	}, []);
 
-	useEffect(() => {
-
-	}, [modalNewsletter, msgNewsletter]);
-
 	const subscribeNewsletter = () => {
 		if (emailNewsletter !== '') {
 			setLoadingSubs(true);

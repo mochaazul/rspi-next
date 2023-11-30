@@ -22,10 +22,6 @@ export default function UnSubscribe(props: { params: { email: any; }; }) {
 		setMsg(res.stat_msg ?? '');
 	});
 
-	useEffect(() => {
-		
-	}, [type, msg]);
-
 	return <PageUnSubscribe success={ type } message={ msg } />;
 
 };
