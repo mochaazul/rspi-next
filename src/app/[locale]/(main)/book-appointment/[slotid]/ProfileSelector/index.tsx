@@ -80,8 +80,6 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 		}
 	}, [selfProfile]);
 
-	console.log(selfProfile, 'selfProfile');
-
 	const renderNoProfile = () => {
 		return (
 			<NoProfileContainer>
@@ -161,7 +159,10 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 		<SelfProfileSection>
 			<Text text={ t('selfLabel') } fontWeight='900' />
 			{
-				(selfProfile && selfProfile?.name !== '' && selfProfile?.phone !== '')
+				(selfProfile && 
+					selfProfile?.name !== '' && 
+					selfProfile?.phone !== '' &&
+					selfProfile?.birthdate !== '0001-01-01 00:00:00 +0000 UTC')
 					? <ProfileCard profile={ selfProfile }
 						showModalDelete={ (id, visible) => {
 							setSelectedIdFamilyProfile(id);
