@@ -1,5 +1,7 @@
 'use server';
 
+import { ToastContainer } from 'react-toastify';
+
 import { appStage } from '@/config';
 import { Footer, Header } from '@/components';
 import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
@@ -44,18 +46,20 @@ export default async function RootLayout({
 				footersData={ footers.data }
 			/>
 			{ children }
-
-			{ props?.footerShow !== false &&
+			{
+				props?.footerShow !== false &&
 				<Footer footerData={ footers.data } hospitalData={ hospitals.data } />
 			}
-			{ props?.footerShow !== false &&
+			{
+				props?.footerShow !== false &&
 				<CallForAmbulance hospitalData={ hospitals.data } />
 			}
-			{ appStage !== 'prod' &&
+			{
+				appStage !== 'prod' &&
 				<DevTools />
 			}
-
 			<MedicalRecordReminder session={ session } />
+			<ToastContainer />
 		</>
 	);
 }
