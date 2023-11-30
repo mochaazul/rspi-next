@@ -28,6 +28,13 @@ const Dropdown: React.FC<DropdownProps> = ({
 	const SelectInputRef = useRef<HTMLSelectElement>(null);
 	const SelectOptionsRef = useRef<HTMLOptionElement[]>([]);
 
+	useEffect(() => {
+		if (SelectInputRef.current) {
+			const event = new Event('change', { bubbles: true });
+			SelectInputRef.current.dispatchEvent(event);
+		}
+	}, [SelectInputRef]);
+
 	const handlePreventDefaultOpen = (event?: React.MouseEvent<HTMLSelectElement> | React.KeyboardEvent<HTMLSelectElement>) => {
 		event?.preventDefault();
 		event?.currentTarget.focus();
