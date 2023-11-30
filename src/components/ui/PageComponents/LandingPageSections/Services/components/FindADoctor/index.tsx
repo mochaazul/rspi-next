@@ -155,6 +155,7 @@ const FindADoctor: React.FC<Props> = ({
 							iconName='CalendarIcon'
 							iconPosition='left'
 							name='preferredDay'
+							enableMinDateNow={ true }
 							value={ formFindDoctor.values.preferredDay }
 							onChangeValue={ evt => {
 								formFindDoctor.setFieldValue('preferredDay', evt.value);
