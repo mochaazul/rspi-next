@@ -39,7 +39,6 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
     			.replace(/\s+/g, '')
     			.includes(query.toLowerCase().replace(/\s+/g, ''))
     	);
-
 	return (
 		<div>
 			<HeadlessCombobox value={ selected } onChange={ item => {
@@ -60,7 +59,6 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
 						}
 						<HeadlessCombobox.Input
 							className='w-full border-none py-2 pl-3 pr-10 text-gray-900 '
-							displayValue={ (item:any) => item?.label }
 							onChange={ event => setQuery(event.target.value) }
 							placeholder={ placeholder }
 						/>
