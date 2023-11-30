@@ -13,7 +13,6 @@ import { Dropdown, Form, TextField } from '@/components/ui';
 import Button from '@/components/ui/Button';
 import Combobox from '@/components/ui/Combobox';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
-
 type Props = {
 	isTelemedicine: boolean;
 	hospitals: HospitalDetail[],
@@ -97,7 +96,7 @@ const FindADoctor: React.FC<Props> = ({
 							placeholder={ t('form.placeholder.doctorName') }
 							iconName='Search'
 							value={ formFindDoctor.values.doctorName }
-							onSelectValue={ value => formFindDoctor.setFieldValue('doctorName', value) }
+							onSelectValue={ (value: any) => formFindDoctor.setFieldValue('doctorName', value) }
 						/>
 					</div>
 					<div className='h-full flex-1'>
@@ -123,7 +122,7 @@ const FindADoctor: React.FC<Props> = ({
 							placeholder={ t('form.placeholder.speciality') }
 							iconName='Search'
 							value={ formFindDoctor.values.speciality }
-							onSelectValue={ value => formFindDoctor.setFieldValue('speciality', value) }
+							onSelectValue={ (value: any) => formFindDoctor.setFieldValue('speciality', value) }
 						/>
 						{ /* <DropdownSearch
 							isForLanding={ true }
