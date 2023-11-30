@@ -43,6 +43,7 @@ import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { usePostCheckPinMutation } from '@/lib/api/client/auth';
 import { getProfile } from '@/lib/api/profile';
+import useSession from '@/session/client';
 
 import ProfilePageStyle, { Divider } from './style';
 import { PanelH2 } from '../style';
@@ -68,8 +69,9 @@ type UploadPhotoTypeState = {
 export default function Page() {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
-	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile('user-information-page');
-	const { data: visitHospitalHistory } = useGetVisitHistory(`${ patientProfile?.data?.id }`);
+	const session = useSession();
+	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile(session?.token);
+	const { data: visitHospitalHistory } = useGetVisitHistory(session?.token);
 	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: updateEmail } = useUpdateEmail();

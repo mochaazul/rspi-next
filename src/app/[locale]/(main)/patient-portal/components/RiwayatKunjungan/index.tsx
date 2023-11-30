@@ -8,14 +8,16 @@ import { icons } from '@/constant';
 import { Button, Spinner, Text } from '@/components/ui';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import { useScopedI18n } from '@/locales/client';
+import useSession from '@/session/client';
 
 import CardAppointment from '../CardAppointment';
 import { EmptyResultContainer } from '../../style';
 
 const RiwayatKunjungan = () => {
 	const t = useScopedI18n('page.patientPortal');
+	const session = useSession();
 
-	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory('riwayat-kunjungan');
+	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(session?.token);
 
 	const sortVisitHistories = () => {
 		return visitHistoryResponse?.data.slice().sort((a, b) => {

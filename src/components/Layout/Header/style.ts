@@ -48,13 +48,21 @@ const HeaderStyle = styled.div`
     border-radius: 10px;
   }
 
-  #dropdownOurHospital {
-    left: 0;
-    z-index: 1;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  .dropdownNavbar {
     border-radius: 10px;
+    border: 1px solid ${ colors.grey.lightest };
+    background: ${ colors.white.default };
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.05);
     max-height: 300px;
     overflow-y: auto;
+    width: 480px;
+  }
+
+  .dropdownPosition {
+    top: 0;
+    padding-top: 55px;
+    left: 0;
+    z-index: 1;
   }
 
   li {
@@ -68,7 +76,7 @@ const HeaderStyle = styled.div`
     flex-direction: column;
     bottom: 0px;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 64px);
     max-width: 100%;
     background-color: #fff;
     z-index: 99;

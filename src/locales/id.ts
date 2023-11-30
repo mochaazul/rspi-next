@@ -19,10 +19,17 @@ export default {
 			sunday: 'Min'
 		}
 	},
+	global: {
+		callAmbulanceLabel: {
+			heading: 'Panggil Ambulans',
+			subHeading: 'Silahkan pilih Rumah sakit: '
+		}
+	},
 	gender: {
 		male: 'Laki-laki',
 		female: 'Perempuan'
 	},
+
 	unsubscribe: {
 		headingSuccess: 'Berhasil Berhenti Belangganan',
 		subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
@@ -120,7 +127,11 @@ export default {
 					back: 'Upload foto tampak belakang',
 				},
 				disclaimer: 'Disclaimer : Data yang diberikan adalah benar. Pendaftaran dilakukan untuk diri sendiri. Jika pendaftaran dilakukan untuk orang lain, sudah mendapatkan persetujuan dari pihak terkait',
-				errorEmptyData: 'Pastikan Data Keluhan dan Penjamin Terisi'
+				errorEmptyData: 'Pastikan Data Keluhan dan Penjamin Terisi',
+				btnLabel: {
+					back: 'Kembali',
+					submit: 'Buat Janji Temu'
+				}
 			},
 			confirmationModal: {
 				heading: 'Konfirmasi Booking Appointment',
@@ -853,6 +864,7 @@ export default {
 		findDoctor: {
 			heading: 'Cari Dokter',
 			label: {
+				hospital: 'Rumah sakit',
 				doctorName: 'Nama Dokter',
 				specialty: 'Spesialisasi',
 				doctorFound: 'Dokter Ditemukan',
@@ -865,7 +877,11 @@ export default {
 			form: {
 				visitDateLabel: 'Tanggal Kunjungan',
 				hospitalLabel: 'Rumah sakit',
-				clinicLabel: 'Klinik'
+				clinicLabel: 'Klinik',
+				btnLabel: {
+					back: 'Back',
+					submit: 'Next'
+				}
 			},
 			slotEmptyState: 'Silahkan pilih tanggal untuk menampilkan informasi jam yang tersedia.',
 			notAvailableSchedule: 'Jadwal dokter tidak tersedia di tanggal yang Anda pilih karena sudah mencapai maksimal reservasi online. Silakan pilih tanggal dan waktu lain yang tersedia di bawah ini atau hubungi call center kami untuk informasi lebih lanjut',

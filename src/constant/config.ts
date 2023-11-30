@@ -29,3 +29,5 @@ export const baseUrl = config.baseUrl ?? 'localhost:3000/v1';
 
 export const appStoreMobileUrl = 'https://apps.apple.com/id/app/rspi-mobile/id1181707029';
 export const playStoreMobileUrl = 'https://play.google.com/store/apps/details?id=id.co.rspondokindah';
+
+export const protectedRoutes = ['/patient-portal', '/user-information'];
