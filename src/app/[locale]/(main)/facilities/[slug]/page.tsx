@@ -120,7 +120,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 											header={
 												<div className='flex items-center'>
 													<div>
-														<Button theme='primary' label={ 'News' } className='btn-category max-sm:!px-2 max-sm:!py-1.5 max-sm:!font-normal max-sm:!text-xs' />
+														<Button theme='primary' label={ 'News' } className='btn-category !px-2 sm:px-2.5 !py-1 sm:py-[5px] !cursor-default !font-normal text-xs sm:text-sm' />
 													</div>
 													<div className='ml-[10px]'>
 														<Text
@@ -134,7 +134,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 													</div>
 												</div>
 											}
-											content={ <CardContentWithInner title={ data.title_news } description={ data.short_description } author={ data.author } /> }
+											content={ <CardContentWithInner title={ data.title_news } description={ data.short_description } author={ data.author_name } /> }
 											footer={ <CardFooter content={ t('readMoreLabel') } /> }
 											className='mb-0 w-[304px] md:w-full'
 											iconShare={ true }

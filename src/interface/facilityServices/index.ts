@@ -19,6 +19,7 @@ export interface I_RelatedNews {
 	title_news: string;
 	image_url: string;
 	slug: string;
+	author_name: string;
 }
 
 export interface FacilityServicesHospital {
