@@ -31,7 +31,7 @@ type Props ={
 
 export default function FindADoctorComponent({ hospital, clinics }:Props) {
 
-	const { onDeletePills, clearSearchParams, doctorNameFilter, specialtyFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
+	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
 
 	const t = useScopedI18n('page.findDoctor');
 	
@@ -81,15 +81,6 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 					// we need this condition since the value stored in params was string boolean "true"|"false" and we want to render it as "Telemedicine" text
 					JSON.parse(values) && mapped.push({ id: 'Telemedicine', text: 'Telemedicine', key: entry });
 				} else
-					if (entry === 'clinic_category' && values) {
-						// we need this condition to cover the rest of params but not keyword params (search doctor by name)
-						const vals = values.split(',').map(item => {
-							const sp = clinics.find(sp => sp.clinic_category === item);
-							return { id: sp?.clinic_category ?? '-', text: sp?.clinic_category ?? '-', key: entry };
-						});
-						mapped.push(...vals);
-					}
-					
 					if (entry === 'specialty' && values) {
 						// we need this condition to cover the rest of params but not keyword params (search doctor by name)
 						const vals = values.split(',').map(item => {

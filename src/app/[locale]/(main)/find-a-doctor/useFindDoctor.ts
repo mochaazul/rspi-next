@@ -185,6 +185,7 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 		return true;
 	};
 	const clearSearchParams = () => {
+		setDoctorName('');
 		router.push(pathName);
 	};
 	const setDoctorName = (value: string) => {

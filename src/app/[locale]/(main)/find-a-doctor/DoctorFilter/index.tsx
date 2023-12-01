@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import { colors } from '@/constant';
@@ -47,6 +47,12 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 		hospitals,
 		clinics
 	});
+
+	useEffect(() => {
+		if (params.get('day')) {
+			onChangePreferedDay(params.get('day') ?? '');
+		}
+	}, []);
 
 	const onChangeHospital = ({ hospital_code, id }: HospitalDetail, checked: boolean) => {
 		if (checked) {
