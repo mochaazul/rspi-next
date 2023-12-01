@@ -38,7 +38,7 @@ const FindADoctor: React.FC<Props> = ({
 		if (specialtys?.length > 0) {
 			return specialtys?.map(sp => ({
 				id: sp.clinic_category,
-				label: sp.clinic_category,
+				label: sp.specialty,
 				value: sp.clinic_category
 			}));
 		}

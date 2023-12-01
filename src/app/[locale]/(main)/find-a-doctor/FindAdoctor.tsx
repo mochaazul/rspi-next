@@ -22,25 +22,26 @@ import Button from '@/components/ui/Button';
 import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail } from '@/interface';
-import { ClinicResponse } from '@/interface/clinic';
+import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 
 type Props ={
   hospital: HospitalDetail[]
-  clinics: ClinicResponse[]
+  clinics: I_SpecialtyDropdownResponse[]
 }
 
 export default function FindADoctorComponent({ hospital, clinics }:Props) {
 
+	const { onDeletePills, clearSearchParams, doctorNameFilter, specialtyFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
+
 	const t = useScopedI18n('page.findDoctor');
 	
 	const searchParams = useSearchParams();
+	
 	const breadCrumbs = [{ name: t('heading'), url: '#' }];
 	
 	const { data: doctorResponse, isLoading: doctorLoading, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
-
-	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
 
 	const RenderFilterPane = (
 		<div className='filter-pane' >
@@ -80,11 +81,20 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 					// we need this condition since the value stored in params was string boolean "true"|"false" and we want to render it as "Telemedicine" text
 					JSON.parse(values) && mapped.push({ id: 'Telemedicine', text: 'Telemedicine', key: entry });
 				} else
-					if (entry === 'clinic_code' && values) {
+					if (entry === 'clinic_category' && values) {
 						// we need this condition to cover the rest of params but not keyword params (search doctor by name)
 						const vals = values.split(',').map(item => {
-							const sp = clinics.find(sp => sp.clinic_code === item);
-							return { id: sp?.clinic_code ?? '-', text: sp?.clinic_name ?? '-', key: entry };
+							const sp = clinics.find(sp => sp.clinic_category === item);
+							return { id: sp?.clinic_category ?? '-', text: sp?.clinic_category ?? '-', key: entry };
+						});
+						mapped.push(...vals);
+					}
+					
+					if (entry === 'specialty' && values) {
+						// we need this condition to cover the rest of params but not keyword params (search doctor by name)
+						const vals = values.split(',').map(item => {
+							const sp = clinics.find(sp => sp.specialty === item);
+							return { id: sp?.specialty ?? '-', text: sp?.specialty ?? '-', key: entry };
 						});
 						mapped.push(...vals);
 					}
@@ -94,7 +104,7 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 
 	const hasSearchParams = () => {
 		const searchParamObj = Object.fromEntries(searchParams);
-		const paramFound = !_.isEmpty(searchParamObj['clinic_code']) || !_.isEmpty(searchParamObj['hospital_code']) || searchParamObj['telemedicine'] === 'true';
+		const paramFound = !_.isEmpty(searchParamObj['clinic_category']) || !_.isEmpty(searchParamObj['hospital_code']) || searchParamObj['telemedicine'] === 'true';
 		return paramFound;
 	};
 

@@ -3,6 +3,7 @@ import { PickerItem } from '@/components/ui/DropdownSearch';
 import { createFieldConfig } from '@/helpers';
 import { HospitalDetail } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';
+import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const searchFilterField = {
@@ -26,16 +27,26 @@ export const searchFilterField = {
 
 type Props = {
 	hospitals: HospitalDetail[],
-	clinics: ClinicResponse[];
+	clinics: I_SpecialtyDropdownResponse[];
 };
 
 const useFindDoctor = ({ hospitals, clinics }: Props) => {
 	const router = useRouter();
 	const pathName = usePathname();
 	const searchParams = useSearchParams();
+	
 	const createQueryString = (name: string, value: string): void => {
 		const params = new URLSearchParams(searchParams);
 		params.set(name, value);
+		router.push(`${ pathName }?${ params.toString() }`, {});
+	};
+	
+	const createQueryStringArray = (items: any[]): void => {
+		const params = new URLSearchParams(searchParams);
+		
+		items.map(item => {
+			params.set(item.key, item.value);
+		});
 		router.push(`${ pathName }?${ params.toString() }`, {});
 	};
 
@@ -64,41 +75,89 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 	};
 
 	const addSpecialty = (item: ItemType | null) => {
-		const prevSpecialty = searchParams.get('clinic_code');
-		createQueryString('clinic_code', prevSpecialty ? prevSpecialty + ',' + `${item?.value ?? ''}` : `${item?.value ?? ''}`);
+		
+		// Mengambil param berdasarkan nama param
+		const prevSpecialty = searchParams.get('specialty');
+		const prevClinicCat = searchParams.get('clinic_category');
+
+		// memeriksa & membuat variable untuk menampung data param baru / menambah param yang sudah ada
+		const itemSpecialty = prevSpecialty ? prevSpecialty + ',' + `${item?.label ?? ''}` : `${item?.label ?? ''}`;
+		const itemClinicCat = prevClinicCat ? prevClinicCat + ',' + `${item?.value ?? ''}` : `${item?.value ?? ''}`;
+		
+		// Memanggil array baru, untuk memuat multi param, karena banyak data specialty/clinic_category yang dobel, jadi untuk filter harus di compare dengan 2 data (specialty & clinic_category)
+		const createArrayMultiParam = [
+			{
+				key: 'clinic_category',
+				value: itemClinicCat,
+			},
+			{
+				key: 'specialty',
+				value: itemSpecialty
+			}
+		];
+		createQueryStringArray(createArrayMultiParam);
+		
 	};
 
   	const deleteSpecialty = (item: ItemType | null) => {
-		const values = searchParams.get('clinic_code')?.split(',') ?? [];
+		const values = searchParams.get('clinic_category')?.split(',') ?? [];
 		if (values.length < 2) {
-			deleteQueryString('clinic_code');
+			deleteQueryString('clinic_category');
+			deleteQueryString('specialty');
 			return;
 		}
-		const filteredSpecialty = values.filter(sp => sp !== item?.value);
-		createQueryString('clinic_code', filteredSpecialty.toString());
+		const filteredSpecialty = values.filter(sp => sp !== item?.label);
+		const filteredClinicCat = values.filter(sp => sp !== item?.value);
+		// Memanggil array baru, untuk memuat multi param, karena banyak data specialty/clinic_category yang dobel, jadi untuk filter harus di compare dengan 2 data (specialty & clinic_category)
+		const createArrayMultiParam = [
+			{
+				key: 'clinic_category',
+				value: filteredClinicCat.toString(),
+			},
+			{
+				key: 'specialty',
+				value: filteredSpecialty.toString()
+			}
+		];
+		
+		createQueryStringArray(createArrayMultiParam);
 	};
 
 	const getSpecialty = (): ItemType[] => {
-		const values = searchParams.get('clinic_code')?.split(',') ?? [];
-		return clinics.filter(sp => values.includes(sp.clinic_code ?? '')).map((sp, index) => ({
-			id: sp.id,
-			label: sp?.clinic_name ?? '',
-			value: sp.clinic_code
+		const values = searchParams.get('clinic_category')?.split(',') ?? [];
+		return clinics.filter(sp => values.includes(sp.clinic_category ?? '')).map((sp, index) => ({
+			id: sp.specialty,
+			label: sp?.specialty ?? '',
+			value: sp.clinic_category
+		}));
+	};
+
+	const getMatchSpecialty = (): ItemType[] => {
+		// Memanggil 2 param clinic_category & specialty
+		const valuesClinicCat = searchParams.get('clinic_category')?.split(',') ?? [];
+		const valuesSpecialty = searchParams.get('specialty')?.split(',') ?? [];
+
+		// Melakukan filter dengan dengan kriteria clinic_category & specialty sesuai dengan param
+		return clinics.filter(sp => valuesClinicCat.includes(sp.clinic_category ?? '') && valuesSpecialty.includes(sp.specialty ?? '')).map((sp, index) => ({
+			id: sp.specialty,
+			label: sp?.specialty ?? '',
+			value: sp.clinic_category
 		}));
 	};
 
 	const getClinic = (): ItemType[] => {
-		const values = searchParams.get('clinic_code')?.split(',') ?? [];
-		return clinics.filter(sp => values.includes(sp?.clinic_code ?? '')).map((sp, index) => ({
-			id: sp.id,
-			label: sp?.clinic_name ?? '',
-			value: sp.clinic_code
+		const values = searchParams.get('clinic_category')?.split(',') ?? [];
+		return clinics.filter(sp => values.includes(sp?.clinic_category ?? '')).map((sp, index) => ({
+			id: sp.specialty,
+			label: sp?.specialty ?? '',
+			value: sp.clinic_category
 		}));
 	};
 
 	const onDeletePills = (pillValue: { id: string, text: string, key: string; }) => {
 		const currentParams = Object.fromEntries(searchParams);
 		const removedParams = removeFromString(currentParams[pillValue.key], pillValue.id);
+		
 		if (pillValue.key === 'telemedicine') {
 			createQueryString('telemedicine', 'false');
 		} else {
@@ -143,7 +202,8 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 		specialtyFilter: {
 			add: addSpecialty,
 			delete: deleteSpecialty,
-			getAll: getSpecialty
+			getAll: getSpecialty,
+			getMatch: getMatchSpecialty,
 		},
 		clinicFilter: {
 			add: addSpecialty,

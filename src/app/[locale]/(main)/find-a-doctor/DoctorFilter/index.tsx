@@ -15,10 +15,11 @@ import Pills from '../Pills';
 import useFindDoctor from '../useFindDoctor';
 
 import Combobox, { ItemType } from '@/components/ui/Combobox';
+import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 
 type Props = {
 	hospitals: HospitalDetail[],
-	clinics: ClinicResponse[];
+	clinics: I_SpecialtyDropdownResponse[];
 };
 
 const DoctorFilter = ({ hospitals, clinics }: Props) => {
@@ -40,9 +41,11 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 
 	const params = new URLSearchParams(searchParams);
 
+	const paramsDay = params.get('day');
+
 	const [speacialityValue, setSpecialityValue] = useState<ItemType|null>(null);
 
-	const { hospitalFilter, clinicFilter, createQueryString } = useFindDoctor({
+	const { hospitalFilter, clinicFilter, createQueryString, specialtyFilter } = useFindDoctor({
 		hospitals,
 		clinics
 	});
@@ -73,12 +76,12 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 		if (clinics?.length > 0) {
 			return clinics.filter(sp => {
 				const filterValue = clinicFilter.getAll();
-				const hasFilter = filterValue.some(item => item.id === sp.id);
+				const hasFilter = filterValue.some(item => item.specialty === sp.specialty);
 				return !hasFilter;
 			}).map(sp => ({
-				id: sp.id,
-				label: sp.clinic_name,
-				value: sp.clinic_code
+				id: sp.specialty,
+				label: sp.specialty,
+				value: sp.clinic_category
 			}));
 		}
 		return [];
@@ -114,6 +117,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 					multiple
 					menuItems={ Days }
 					onChangeValueDropdown={ onChangePreferedDay }
+					value={ paramsDay ?? '' }
 				/>
 			</div>
 			{ /* Horizontal spacer */ }
@@ -182,7 +186,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 				</div>
 				<div className='flex flex-row gap-2 flex-wrap mt-6'>
 					{
-						clinicFilter?.getAll()?.map((speciality, index) => {
+						specialtyFilter?.getMatch()?.map((speciality, index) => {
 							return (
 								speciality.label &&
 							<Pills key={ index } onRemove={ () => handleRemoveSpecialty(speciality) }>
