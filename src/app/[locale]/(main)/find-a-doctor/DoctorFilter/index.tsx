@@ -41,8 +41,6 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 
 	const params = new URLSearchParams(searchParams);
 
-	const paramsDay = params.get('day');
-
 	const [speacialityValue, setSpecialityValue] = useState<ItemType|null>(null);
 
 	const { hospitalFilter, clinicFilter, createQueryString, specialtyFilter } = useFindDoctor({
@@ -117,7 +115,6 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 					multiple
 					menuItems={ Days }
 					onChangeValueDropdown={ onChangePreferedDay }
-					value={ paramsDay ?? '' }
 				/>
 			</div>
 			{ /* Horizontal spacer */ }
