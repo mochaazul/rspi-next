@@ -9,16 +9,23 @@ type Props = {
   doctorCount:number
 	setter: (value: string) => void,
 	getter: () => string | null,
+	reset: boolean,
 }
-const ResultHeader = ({ doctorCount, setter, getter }:Props) => {
+const ResultHeader = ({ doctorCount, setter, getter, reset }:Props) => {
 
 	const [keywordValue, setKeywordValue] = useState<string>();
 
 	const t = useScopedI18n('page.findDoctor');
 	
 	useEffect(() => {
-		setKeywordValue(getter() ?? '');
-	}, []);
+		
+		if (reset) {
+			setKeywordValue('');
+		} else {
+			setKeywordValue(getter() ?? '');
+		}
+			
+	}, [reset]);
 
 	const onSearchDoctorByName = (value: string) => {
 		setKeywordValue(value);

@@ -17,6 +17,8 @@ import { useScopedI18n } from '@/locales/client';
 
 import { fetchPromoByID, fetchEvents } from './helpers';
 import { PanelH1, PanelV1 } from '../../style';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const DetailEventClassesPromo = (props: { params: { slug: any; }; }) => {
 	const pathName = usePathname();
@@ -46,23 +48,19 @@ const DetailEventClassesPromo = (props: { params: { slug: any; }; }) => {
 	const breadcrumbsPath = [{ name: t('heading'), url: '/promo' }, { url: '#', name: selectedEvent?.title || '' }];
 
 	useEffect(() => {
-		fetchPromoByID(props?.params?.slug).then(function (response) {
-			setLoading(true);
+		fetchPromoByID(props.params.slug).then(function(response) {
 			setSelectedEvent(response?.data);
-			setLoading(false);
-		});
-		fetchEvents().then(function (response) {
-			const filteredData = response?.data.filter(eachData => {
-				return eachData?.slug !== props?.params?.slug;
+
+			fetchEvents().then(function(response) {
+				const filteredData = response?.data.filter(eachData => {
+					return eachData?.slug !== props.params.slug;
+				});
+	
+				setEventsData(filteredData);
 			});
-
-			setEventsData(filteredData);
 		});
+		
 	}, []);
-
-	const handleOpenSocmed = (link: string) => () => {
-		window?.open(link, '_blank');
-	};
 
 	return (
 		<PanelV1>
@@ -83,17 +81,19 @@ const DetailEventClassesPromo = (props: { params: { slug: any; }; }) => {
 										fontWeight='400'
 										text='Share now'
 									/>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.facebook + window?.location?.href) }>
-										<icons.FacebookIcon width='16px' height='16px' />
-									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.twitter + window?.location?.href) }>
-										<icons.TwitterIcon width='16px' height='16px' />
-									</div>
-									<div className='cursor-pointer' onClick={ handleOpenSocmed(sosmedLink.linkedin + window?.location?.href) }>
-										<icons.LinkedIn width='16px' height='16px' />
-									</div>
-									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathName); } }>
-										<icons.Link width='16px' height='16px' />
+									<div className='flex gap-[15px]'>
+										<Link href={ sosmedLink.facebook } target='_blank' className='cursor-pointer' >
+											<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
+										</Link>
+										<Link href={ sosmedLink.twitter } target='_blank' className='cursor-pointer' >
+											<Image src='/images/ic/twitter.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
+										</Link>
+										<Link href={ sosmedLink.linkedin } target='_blank' className='cursor-pointer' >
+											<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
+										</Link>
+										<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(window?.location?.href); } }>
+											<Image src='/images/ic/Link.svg' alt='RSPI link' width={ 16 } height={ 16 } />
+										</div>
 									</div>
 								</div>
 							</div>

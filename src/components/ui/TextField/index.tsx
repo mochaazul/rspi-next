@@ -19,6 +19,7 @@ const TextField = ({
 	iconPosition,
 	$iconColor,
 	featherIcon,
+	wrapperClassName,
 	...props
 }: InputType) => {
 	const { ref, ...restProps } = props;
@@ -30,7 +31,7 @@ const TextField = ({
 			$iconName={ iconName }
 			$featherIcon={ featherIcon }
 			$isNumber={ isNumber }
-			className='w-full'
+			className={ `w-full ${ wrapperClassName }` }
 		>
 			{
 				iconName ?

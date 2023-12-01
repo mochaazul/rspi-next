@@ -17,7 +17,9 @@ export const MainNavLanguage = () => {
 	const isLoggedIn = !!session?.token;
 
 	const handleOpenSocmed = (links: string) => () => {
-		window.open(links, '_blank');
+		if (typeof window !== 'undefined') {
+			window.open(links, '_blank');
+		}
 	};
 
 	const renderWelcomeText = () => {

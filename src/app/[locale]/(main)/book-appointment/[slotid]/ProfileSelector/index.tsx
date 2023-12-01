@@ -65,7 +65,7 @@ type ProfileSelectorProps = {
 const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyProfiles }: ProfileSelectorProps) => {
 
 	const t = useScopedI18n('page.bookingAppointment.profileSelector');
-
+	
 	const { data: deleteResponse, trigger: deleteFamilyProfileTrigger, error: deleteError } = useDeleteFamilyProfileMutation();
 
 	const [selectedProfile, setSelectedProfile] = useState<number>();
@@ -197,7 +197,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 					? renderNoProfile()
 					:
 					<>
-						{ familyProfiles && familyProfiles.map(profile => (<ProfileCard showModalDelete={ (id, visible) => {
+						{ familyProfiles && familyProfiles?.map(profile => (<ProfileCard showModalDelete={ (id, visible) => {
 							setSelectedIdFamilyProfile(id);
 							setSelectedProfileOnDelete(profile);
 							setShowDeleteModal(true);

@@ -8,14 +8,15 @@ import { FindADoctor } from './components';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail, I_MasterDoctor } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';
+import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 
 const ServicesTabs = ({
 	hospitals,
-	clinics,
+	specialtys,
 	doctors
 }:{
 	hospitals: HospitalDetail[],
-	clinics: ClinicResponse[],
+	specialtys: I_SpecialtyDropdownResponse[],
 	doctors: I_MasterDoctor[]
 }) => {
 	const t = useScopedI18n('page.landingPage.services');
@@ -42,7 +43,7 @@ const ServicesTabs = ({
 					<FindADoctor
 						isTelemedicine={ activeTabIndex === 1 }
 						hospitals={ hospitals }
-						clinics={ clinics }
+						specialtys={ specialtys }
 						doctors={ doctors }/>
 				</div>
 			</TabsStyle>

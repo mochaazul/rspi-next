@@ -22,9 +22,10 @@ import { PinModalContainer } from './style';
 type Props = {
 	visible: boolean,
 	onSuccess: () => void;
+	isLoading?: boolean;
 };
 
-const PinModal = ({ visible, onSuccess }: Props) => {
+const PinModal = ({ visible, onSuccess, isLoading }: Props) => {
 	const t = useScopedI18n('modalDialog.pin');
 	const tValidation = useScopedI18n('validation.formValidation');
 
@@ -117,7 +118,7 @@ const PinModal = ({ visible, onSuccess }: Props) => {
 							/>
 						</Link>
 					</div>
-					<Button type='submit' disabled={ checkPinLoading } >
+					<Button type='submit' disabled={ checkPinLoading || isLoading } >
 						{ checkPinLoading ? <Spinner /> : t('submitBtnLabel') }
 					</Button>
 				</Form>

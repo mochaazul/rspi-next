@@ -4,7 +4,7 @@ import { DefaultPinYup, DefaultEmailYup } from './defaultYup';
 
 export const UpdateProfileSchema = yup.object().shape({
 	name: yup.string(),
-	phone: yup.string().required('required'),
+	phone: yup.string(),
 	birth_date: yup.string(),
 	gender: yup.string()
 });
