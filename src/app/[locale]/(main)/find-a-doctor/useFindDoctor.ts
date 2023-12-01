@@ -77,25 +77,25 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 	const addSpecialty = (item: ItemType | null) => {
 		
 		// Mengambil param berdasarkan nama param
-		const prevSpecialty = searchParams.get('specialty');
+		// const prevSpecialty = searchParams.get('specialty');
 		const prevClinicCat = searchParams.get('clinic_category');
 
 		// memeriksa & membuat variable untuk menampung data param baru / menambah param yang sudah ada
-		const itemSpecialty = prevSpecialty ? prevSpecialty + ',' + `${item?.label ?? ''}` : `${item?.label ?? ''}`;
-		const itemClinicCat = prevClinicCat ? prevClinicCat + ',' + `${item?.value ?? ''}` : `${item?.value ?? ''}`;
+		// const itemSpecialty = prevSpecialty ? prevSpecialty + ',' + `${item?.label ?? ''}` : `${item?.label ?? ''}`;
+		// const itemClinicCat = prevClinicCat ? prevClinicCat + ',' + `${item?.value ?? ''}` : `${item?.value ?? ''}`;
 		
 		// Memanggil array baru, untuk memuat multi param, karena banyak data specialty/clinic_category yang dobel, jadi untuk filter harus di compare dengan 2 data (specialty & clinic_category)
-		const createArrayMultiParam = [
-			{
-				key: 'clinic_category',
-				value: itemClinicCat,
-			},
-			{
-				key: 'specialty',
-				value: itemSpecialty
-			}
-		];
-		createQueryStringArray(createArrayMultiParam);
+		// const createArrayMultiParam = [
+		// 	{
+		// 		key: 'clinic_category',
+		// 		value: itemClinicCat,
+		// 	},
+		// 	{
+		// 		key: 'specialty',
+		// 		value: itemSpecialty
+		// 	}
+		// ];
+		createQueryString('clinic_category', prevClinicCat ? prevClinicCat + ',' + `${item?.value ?? ''}` : `${item?.value ?? ''}`);
 		
 	};
 
@@ -103,31 +103,31 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 		const values = searchParams.get('clinic_category')?.split(',') ?? [];
 		if (values.length < 2) {
 			deleteQueryString('clinic_category');
-			deleteQueryString('specialty');
+			// deleteQueryString('specialty');
 			return;
 		}
-		const filteredSpecialty = values.filter(sp => sp !== item?.label);
+		// const filteredSpecialty = values.filter(sp => sp !== item?.label);
 		const filteredClinicCat = values.filter(sp => sp !== item?.value);
 		// Memanggil array baru, untuk memuat multi param, karena banyak data specialty/clinic_category yang dobel, jadi untuk filter harus di compare dengan 2 data (specialty & clinic_category)
-		const createArrayMultiParam = [
-			{
-				key: 'clinic_category',
-				value: filteredClinicCat.toString(),
-			},
-			{
-				key: 'specialty',
-				value: filteredSpecialty.toString()
-			}
-		];
+		// const createArrayMultiParam = [
+		// 	{
+		// 		key: 'clinic_category',
+		// 		value: filteredClinicCat.toString(),
+		// 	},
+		// 	{
+		// 		key: 'specialty',
+		// 		value: filteredSpecialty.toString()
+		// 	}
+		// ];
 		
-		createQueryStringArray(createArrayMultiParam);
+		createQueryString('clinic_category', filteredClinicCat.toString());
 	};
 
 	const getSpecialty = (): ItemType[] => {
 		const values = searchParams.get('clinic_category')?.split(',') ?? [];
 		return clinics.filter(sp => values.includes(sp.clinic_category ?? '')).map((sp, index) => ({
 			id: sp.specialty,
-			label: sp?.specialty ?? '',
+			label: sp?.clinic_category ?? '',
 			value: sp.clinic_category
 		}));
 	};
@@ -148,8 +148,8 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 	const getClinic = (): ItemType[] => {
 		const values = searchParams.get('clinic_category')?.split(',') ?? [];
 		return clinics.filter(sp => values.includes(sp?.clinic_category ?? '')).map((sp, index) => ({
-			id: sp.specialty,
-			label: sp?.specialty ?? '',
+			id: sp.clinic_category,
+			label: sp?.clinic_category ?? '',
 			value: sp.clinic_category
 		}));
 	};

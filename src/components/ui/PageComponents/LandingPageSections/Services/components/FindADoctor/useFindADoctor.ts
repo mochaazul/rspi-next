@@ -12,7 +12,7 @@ const useFindADoctor = () => {
 		if (preferredDay) search['day'] = Days[dayjs(preferredDay).get('day') ?? 0];
 		if (hospital) search['hospital_code'] = hospital;
 		if (doctorName) search['keyword'] = `${doctorName.value}`;
-		if (speciality) search['specialty'] = `${speciality.label}`;
+		// if (speciality) search['specialty'] = `${speciality.label}`;
 		if (speciality) search['clinic_category'] = `${speciality.value}`;
 		if (isTelemedicine) search['telemedicine'] = 'true';
 		search['ref'] = 'landing';

@@ -80,11 +80,11 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 		if (clinics?.length > 0) {
 			return clinics.filter(sp => {
 				const filterValue = clinicFilter.getAll();
-				const hasFilter = filterValue.some(item => item.specialty === sp.specialty);
+				const hasFilter = filterValue.some(item => item.clinic_category === sp.clinic_category);
 				return !hasFilter;
 			}).map(sp => ({
-				id: sp.specialty,
-				label: sp.specialty,
+				id: sp.clinic_category,
+				label: sp.clinic_category,
 				value: sp.clinic_category
 			}));
 		}
@@ -189,7 +189,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 				</div>
 				<div className='flex flex-row gap-2 flex-wrap mt-6'>
 					{
-						specialtyFilter?.getMatch()?.map((speciality, index) => {
+						specialtyFilter?.getAll()?.map((speciality, index) => {
 							return (
 								speciality.label &&
 							<Pills key={ index } onRemove={ () => handleRemoveSpecialty(speciality) }>

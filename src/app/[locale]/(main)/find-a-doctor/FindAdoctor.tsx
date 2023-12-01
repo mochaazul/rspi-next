@@ -81,11 +81,11 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 					// we need this condition since the value stored in params was string boolean "true"|"false" and we want to render it as "Telemedicine" text
 					JSON.parse(values) && mapped.push({ id: 'Telemedicine', text: 'Telemedicine', key: entry });
 				} else
-					if (entry === 'specialty' && values) {
+					if (entry === 'clinic_category' && values) {
 						// we need this condition to cover the rest of params but not keyword params (search doctor by name)
 						const vals = values.split(',').map(item => {
-							const sp = clinics.find(sp => sp.specialty === item);
-							return { id: sp?.specialty ?? '-', text: sp?.specialty ?? '-', key: entry };
+							const sp = clinics.find(sp => sp.clinic_category === item);
+							return { id: sp?.clinic_category ?? '-', text: sp?.clinic_category ?? '-', key: entry };
 						});
 						mapped.push(...vals);
 					}
