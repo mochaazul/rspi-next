@@ -97,6 +97,7 @@ const FindADoctor: React.FC<Props> = ({
 							iconName='Search'
 							value={ formFindDoctor.values.doctorName }
 							onSelectValue={ (value: any) => formFindDoctor.setFieldValue('doctorName', value) }
+							retainValue
 						/>
 					</div>
 					<div className='h-full flex-1'>
