@@ -103,7 +103,7 @@ export default function Page() {
 	});
 
 	const isDisableFormProfile = useMemo(() => {
-		return patientProfile?.data?.no_mr && patientProfile?.data?.mr_active;
+		return !!patientProfile?.data?.no_mr && patientProfile?.data?.mr_active;
 	}, [patientProfile?.data?.no_mr, patientProfile?.data?.mr_active]);
 
 	const lastVisitedHospital = useMemo(() => {
@@ -124,7 +124,7 @@ export default function Page() {
 			phone: patientProfile?.data?.phone ? regexInputPhone(patientProfile?.data?.phone) : ''
 		},
 		enableReinitialize: true,
-		onSubmit: async (formProfile: UpdateProfileType) => {
+		onSubmit: async(formProfile: UpdateProfileType) => {
 			try {
 				await updateProfile({
 					...formProfile,
@@ -146,7 +146,7 @@ export default function Page() {
 		validateOnChange: enableValidation.email,
 		validationSchema: UpdateEmailSchema,
 		initialValues: { email: '' },
-		onSubmit: async (formEmail: UpdateEmailType) => {
+		onSubmit: async(formEmail: UpdateEmailType) => {
 			try {
 				await updateEmail(formEmail);
 				setShowModalSuccessUpdateEmail(true);
@@ -163,7 +163,7 @@ export default function Page() {
 		validateOnChange: enableValidation.pin,
 		initialValues: { pin: '' },
 		validationSchema: CheckPinSchema,
-		onSubmit: async (formPin: CheckPinType) => {
+		onSubmit: async(formPin: CheckPinType) => {
 			try {
 				await checkPin(formPin);
 				setPinModalVisible(false);
@@ -181,7 +181,7 @@ export default function Page() {
 		validateOnChange: enableValidation.photo,
 		initialValues: { photo_file: null },
 		validationSchema: UploadPhotoSchema,
-		onSubmit: async (formUpload: UploadPhotoTypeState) => {
+		onSubmit: async(formUpload: UploadPhotoTypeState) => {
 			try {
 				if (formUpload.photo_file && !isLoadingDeleteAvatar) {
 					setIsLoadingUploadAvatar(true);
@@ -228,14 +228,14 @@ export default function Page() {
 	// 	}
 	// };
 
-	const clearSWRCache = async () => {
+	const clearSWRCache = async() => {
 		const keys = cache.keys();
 		for (const key of keys) {
 			cache.delete(key);
 		}
 	};
 
-	const removeUserDatas = async () => {
+	const removeUserDatas = async() => {
 		await cookiesHelper.clearStorage();
 		await clearSWRCache();
 		navigate.replace('/login');
@@ -286,7 +286,7 @@ export default function Page() {
 		}
 	};
 
-	const onHandleTempProfileImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+	const onHandleTempProfileImage = async(event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
 			const selectedFile: File | null = event.target.files && event.target.files.length
 				? event.target.files[0]
@@ -358,7 +358,7 @@ export default function Page() {
 		return getValidationTranslation(tValidation, key, { label });
 	};
 
-	const onClickDeletePhoto = async () => {
+	const onClickDeletePhoto = async() => {
 		try {
 			setEnableValidation(prevToggle => ({ ...prevToggle, photo: false }));
 
