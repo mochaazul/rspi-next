@@ -13,7 +13,7 @@ import { useScopedI18n } from '@/locales/client';
 
 import Pills from '../Pills';
 import useFindDoctor from '../useFindDoctor';
-import LoadingSkeleton from '@/components/Layout/LoadingSkeleton';
+
 import Combobox, { ItemType } from '@/components/ui/Combobox';
 
 type Props = {

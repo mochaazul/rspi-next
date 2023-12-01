@@ -15,3 +15,4 @@ export * from './Notification';
 export * from './rootAppState';
 export * from './appointment';
 export * from './PatientProfile';
+export * from './newsletter';
