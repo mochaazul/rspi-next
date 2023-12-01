@@ -44,6 +44,7 @@ import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { usePostCheckPinMutation } from '@/lib/api/client/auth';
 import { getProfile } from '@/lib/api/profile';
 import useSession from '@/session/client';
+import { regexInputPhone } from '@/constant/regExp';
 
 import ProfilePageStyle, { Divider } from './style';
 import { PanelH2 } from '../style';
@@ -116,14 +117,20 @@ export default function Page() {
 		validationSchema: UpdateProfileSchema,
 		initialValues: {
 			name: patientProfile?.data?.name ?? '',
-			birthdate: patientProfile?.data?.birthdate ? dayjs(patientProfile?.data?.birthdate).format('YYYY-MM-DD') : '',
+			birthdate: patientProfile?.data?.birthdate && patientProfile?.data?.birthdate !== '0001-01-01 00:00:00 +0000 UTC' && patientProfile?.data?.birthdate !== '0001-01-01'
+				? dayjs(patientProfile?.data?.birthdate).format('YYYY-MM-DD')
+				: '',
 			gender: patientProfile?.data?.gender ?? '',
-			phone: patientProfile?.data?.phone ?? ''
+			phone: patientProfile?.data?.phone ? regexInputPhone(patientProfile?.data?.phone) : ''
 		},
 		enableReinitialize: true,
 		onSubmit: async (formProfile: UpdateProfileType) => {
 			try {
-				await updateProfile(formProfile);
+				await updateProfile({
+					...formProfile,
+					birthdate: formProfile.birthdate ? formProfile.birthdate : '0001-01-01',
+					phone: formProfile.phone ? `62${ regexInputPhone(formProfile.phone) }` : ''
+				});
 				setShowModalSuccess(true);
 				getProfileMutation();
 			} catch (error: any) {
@@ -639,24 +646,28 @@ export default function Page() {
 											disabled: isDisableFormProfile,
 											errorMessage: getInputErrorMessage(formikProfile.errors.birthdate, t('profileDetail.patientBirthDateLabel')),
 											isError: !!formikProfile.errors.birthdate,
+											...formikProfile.values.birthdate && !isDisableFormProfile
+												? {
+													iconName: 'Close',
+													iconPosition: 'right',
+													iconClassName: 'w-4 h-4',
+													onIconClick: () => formikProfile.setFieldValue('birthdate', '')
+												}
+												: {}
 										} }
 									/>
 									<HorizontalInputWrapper
 										label={ t('profileDetail.patientPhoneNumber') }
 										labelInfo={ isDisableFormProfile ? t('profileDetail.patientPhoneNumberLabelInfo') : undefined }
+										inputType='phone'
 										inputProps={ {
 											name: 'phone',
 											value: formikProfile.values.phone,
-											onChange: formikProfile.handleChange,
+											onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => formikProfile.setFieldValue(e.target.name, regexInputPhone(e.target.value)),
 											placeholder: t('profileDetail.patientPhoneNumberPlaceholder'),
 											disabled: isDisableFormProfile,
 											errorMessage: getInputErrorMessage(formikProfile.errors.phone, t('profileDetail.patientPhoneNumber')),
-											isError: !!formikProfile.errors.phone,
-											onKeyDown: (ev: React.KeyboardEvent<HTMLInputElement>) => {
-												if (regExp.phone_allowed_char_list.indexOf(ev.key) < 0) {
-													ev.preventDefault();
-												}
-											}
+											isError: !!formikProfile.errors.phone
 										} }
 									/>
 
@@ -687,7 +698,6 @@ export default function Page() {
 							<div className='flex flex-col gap-[10px]'>
 								<HorizontalInputWrapper
 									label={ t('securitySetting.passwordLabel') }
-									value='123456789010'
 									onEditClick={ () => navigate.push('/update-password') }
 									inputProps={ {
 										placeholder: t('securitySetting.passwordLabel'),
@@ -697,7 +707,6 @@ export default function Page() {
 								/>
 								<HorizontalInputWrapper
 									label={ t('securitySetting.pinLabel') }
-									value='123456'
 									onEditClick={ () => navigate.push('/pin-reset') }
 									inputProps={ {
 										placeholder: t('securitySetting.pinLabel'),
