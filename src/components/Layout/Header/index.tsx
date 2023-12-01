@@ -11,14 +11,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import {
-	CenterOfExcellenceState,
+	CenterOfExcellenceDetail,
 	FacilityServicesDetail,
-	HospitalState,
+	HospitalDetail,
 	UserSessionData,
 } from '@/interface';
 import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
+import { protectedRoutes } from '@/constant/config';
 
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
@@ -31,8 +32,6 @@ import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
 import { cookiesHelper } from '@/helpers';
 
-const protectedRoutes = ['/patient-portal', '/user-information'];
-
 export const Header = ({
 	session,
 	hospitalData,
@@ -40,11 +39,11 @@ export const Header = ({
 	facilityServicesData,
 	marAllReadNotifFunc
 }: {
-	session: UserSessionData,
-	hospitalData: HospitalState,
-	centerOfExcellenceData: CenterOfExcellenceState,
+	session?: UserSessionData,
+	hospitalData: HospitalDetail[],
+	centerOfExcellenceData: CenterOfExcellenceDetail[],
 	facilityServicesData: FacilityServicesDetail[],
-	marAllReadNotifFunc: () => any,
+	marAllReadNotifFunc?: () => any;
 }) => {
 
 	const router = useRouter();
@@ -60,13 +59,16 @@ export const Header = ({
 	const [isHoverFacilities, setIsHoverFacilities] = useState<boolean>(false);
 	const [showNotification, setShowNotification] = useState<boolean>(false);
 	const [showSuccessLogout, setShowSuccessLogout] = useState<boolean>(false);
+	const [activeSubMenuIdMobile, setActiveSubMenuIdMobile] = useState<string>('');
 
 	const onclickMarkAllNotif = () => {
-		marAllReadNotifFunc()
-			.then(() => {
-				setShowNotification(true);
-				mutate('getNotification');
-			});
+		if (marAllReadNotifFunc) {
+			marAllReadNotifFunc()
+				.then(() => {
+					setShowNotification(true);
+					mutate('getNotification');
+				});
+		}
 	};
 
 	const isLoggedIn = !!session?.token;
@@ -77,8 +79,8 @@ export const Header = ({
 
 	const paramGetNotif = {
 		query: {
-			medical_record: session.user?.medical_record ?? '',
-			email: session.user?.email,
+			medical_record: session?.user?.medical_record ?? '',
+			email: session?.user?.email,
 		},
 	};
 	const {
@@ -99,15 +101,18 @@ export const Header = ({
 			await cookiesHelper.clearStorage();
 			await clearSWRCache();
 			setShowSideBar(false);
+			// Notes: protectedRoutes sudah dihandle oleh middleware. shg cukup dgn refresh page akan redirect ke halaman login
+			// Khusus halaman doctor/:id & book-appointment tidak dihandle di middleware karna perlu show NeedLoginModal dari response error swr
+			if (['/doctor', '/book-appointment'].some(path => pathname.includes(path))) {
+				return router.replace('/login');
+			}
+
 			if (!protectedRoutes?.some(path => pathname.includes(path))) {
 				setShowSuccessLogout(true);
 			}
+
 			router.refresh();
 		}
-	};
-
-	const handleLoginClick = () => {
-		router.push('/login');
 	};
 
 	const handleNavigateSideBar = (path: string) => {
@@ -141,6 +146,7 @@ export const Header = ({
 							<div key={ idx } className='pb-4'>
 								<div className='flex flex-col py-4 px-[20px]'
 									onClick={ () => {
+										setShowNotification(false);
 										router.push(`${ item?.url }`);
 									} }
 									style={ {
@@ -207,266 +213,350 @@ export const Header = ({
 		);
 	};
 
+	const renderMenuWithDropdown = (label: string, isActive: boolean) => {
+		return (
+			<div className='flex gap-x-[5px] cursor-pointer relative z-[2]'>
+				<Text text={ label } color={ isActive ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
+				<div className='flex-shrink-0'>
+					<icons.ArrowDown className='[&>path]:stroke-[#6A6D81] group-hover:rotate-180 transition-all' />
+				</div>
+			</div>
+		);
+	};
+
+	const getDataSubMenu = () => {
+		switch (activeSubMenuIdMobile) {
+			case 'centre-of-excellence':
+				return {
+					title: t('centreOfExcellence'),
+					data: centerOfExcellenceData,
+					href: '/centre-of-excellence'
+				};
+			case 'our-hospital':
+				return {
+					title: t('ourHospitals'),
+					data: hospitalData,
+					href: '/hospital'
+				};
+			case 'facilities':
+				return {
+					title: t('facility'),
+					data: facilityServicesData,
+					href: '/facilities'
+				};
+			default:
+				return {
+					title: '',
+					data: []
+				};
+		}
+	};
+
+	const renderMenuMobile = (label: string, href: string) => {
+		return (
+			<div className='nav-menu' onClick={ () => handleNavigateSideBar(href) }>
+				<Text text={ label } fontSize='16px' fontWeight='700' />
+			</div>
+		);
+	};
+
+	const renderMenuMobileWithSubmenu = (label: string, id: string) => {
+		return (
+			<div className='nav-menu flex items-center justify-end gap-2.5' onClick={ () => setActiveSubMenuIdMobile(id) }>
+				<Text text={ label } fontSize='16px' fontWeight='700' />
+				<icons.ArrowRight className='w-4 h-4 [&>path]:fill-[#6A6D81] flex-shrink-0' />
+			</div>
+		);
+	};
+
+	const renderListMenuMobile = () => {
+		if (activeSubMenuIdMobile) {
+			const data = getDataSubMenu().data;
+			const prefixHref = getDataSubMenu().href;
+
+			return data.map((item: any) => {
+				const title = activeSubMenuIdMobile === 'centre-of-excellence'
+					? item.title
+					: item.name;
+				const dataIdentifier = activeSubMenuIdMobile === 'our-hospital'
+					? item.id
+					: item.slug;
+
+				return (
+					<div
+						className='nav-menu'
+						key={ item.id }
+						onClick={ () => handleNavigateSideBar(`${ prefixHref }/${ dataIdentifier }`) }
+					>
+						<Text text={ title } fontSize='16px' fontWeight='700' />
+					</div>
+				);
+			});
+		}
+
+		return (
+			<>
+				{ renderMenuMobile(t('home'), '/') }
+				{ isLoggedIn
+					? (
+						<>
+							{ renderMenuMobile(t('bookAppointment'), '/find-a-doctor') }
+							{ renderMenuMobile(t('user.patientPortal'), '/patient-portal') }
+							{ renderMenuMobile(t('user.patientInformation'), '/user-information') }
+						</>
+					)
+					: (
+						<>
+							{ renderMenuMobile(t('login'), '/login') }
+							{ renderMenuMobile(t('register'), '/register') }
+							{ renderMenuMobile(t('bookAppointment'), '/find-a-doctor') }
+						</>
+					) }
+				{ renderMenuMobileWithSubmenu(t('ourHospitals'), 'our-hospital') }
+				{ renderMenuMobileWithSubmenu(t('centreOfExcellence'), 'centre-of-excellence') }
+				{ renderMenuMobileWithSubmenu(t('facility'), 'facilities') }
+				{ renderMenuMobile(t('findDoctor'), '/find-a-doctor') }
+				{ renderMenuMobile(t('career'), '/') }
+				{ renderMenuMobile(t('contactUs'), '/contact-us') }
+				{ isLoggedIn ?
+					<div className='nav-menu' onClick={ handleClick }>
+						<Text text={ t('user.logout') } fontSize='16px' fontWeight='700' color={ colors.red.default } />
+					</div>
+					: null
+				}
+			</>
+		);
+	};
+
+	const renderNotifIcon = () => {
+		if (isLoggedIn) {
+			return (
+				<div className='relative inline-block text-white my-auto' onClick={ () => setShowNotification(true) }>
+					<icons.Notif onClick={ () => {
+						if (marAllReadNotifFunc) {
+							marAllReadNotifFunc()
+								.then(() => {
+									setShowNotification(true);
+									notificationResponseFetch();
+								});
+						}
+					} }
+						className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
+					/>
+					<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
+						{ notificationResponseData?.total_unread ?? 0 }
+					</span>
+				</div>
+			);
+		}
+	};
+
 	return (
 		<HeaderStyle>
-			<div className='w-full'>
-				<MainNavLanguage />
-				<div className={ 'xl:!px-[40px] navbar animate-slideUpToDown transition-all duration-300' }>
-					<div className='leftNav'>
-						<div className='hidden md:block lg:block xl:block logo cursor-pointer py-[22px] max-sm:py-[15px]'>
-							<Link href='/'>
-								<Image src={ '/images/logo_rspi.svg' } alt='rspi-logo' width={ 150 } height={ 80 } />
+			<div className='w-full animate-slideUpToDown transition-all duration-300'>
+				<div className='lg:flex hidden'>
+					<MainNavLanguage />
+				</div>
+				<header className='bg-white'>
+					<nav className='mx-auto flex items-center justify-between gap-2 lg:gap-5 px-4 lg:px-10 h-[64px] lg:h-[90px]' aria-label='Global'>
+						<div className='flex items-center gap-x-10'>
+							<Link href='/' className='relative overflow-hidden w-[70px] h-8 lg:w-[132px] lg:h-[60px]'>
+								<Image
+									src='/images/logo_rspi.svg'
+									alt='rspi-logo'
+									sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+									fill
+								/>
 							</Link>
-						</div>
-						<div className='sm:hidden logo cursor-pointer py-[22px] pl-2 max-sm:py-[15px]'>
-							<Link href='/'>
-								<Image src={ '/images/logo_rspi.svg' } alt='rspi-logo' width={ 100 } height={ 62 } />
-							</Link>
-						</div>
-						<div className='menu max-sm:hidden'>
-							<div id='home' className='py-[22px] max-sm:py-[10px]'>
-								<Link href='/'>
-									<Text text={ t('home') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
-								</Link>
-							</div>
-
-							<div id='our-hospital' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
-								<Text text={ t('ourHospitals') } className='cursor-pointer' color={ isHover === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
-								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' }
-									/>
+							<div className='hidden lg:flex lg:gap-x-5'>
+								<div id='home'>
+									<Link href='/'>
+										<Text text={ t('home') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+									</Link>
 								</div>
-								<div id='dropdownOurHospital' className={ `${ isHover === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[240px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
-									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										{ Object.values(hospitalData || [])?.map((item, idx) => {
-											return (
-												<Link key={ idx } href={ `/hospital/${ item?.id }` }>
-													<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100 cursor-pointer'>
-														<Image
-															alt='hospital image'
-															src={ item?.img_url?.[0] || '' }
-															width={ 80 }
-															height={ 80 }
-														/>
+
+								<div id='our-hospital' className='relative group' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
+									{ renderMenuWithDropdown(t('ourHospitals'), isHover) }
+									<div className={ `${ isHover === false ? 'hidden' : 'absolute' } dropdownPosition` }>
+										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
+											{ Object.values(hospitalData || [])?.map((item, idx) => (
+												<Link href={ `/hospital/${ item?.id }` } key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] cursor-pointer'>
+													<Image
+														alt='hospital image'
+														src={ item?.img_url?.[0] || '' }
+														width={ 80 }
+														height={ 80 }
+													/>
+													<div className='ml-[10px] w-[310px] hover:bg-transparent'>
+														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+														<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
+													</div>
+													<icons.ArrowRight className='ml-[27px] mr-auto' />
+												</Link>
+											)) }
+										</ul>
+									</div>
+								</div>
+
+								<div id='centre-of-excellence' className='relative group' onMouseEnter={ toggleMouseHoverCOE(true) } onMouseLeave={ toggleMouseHoverCOE(false) }>
+									{ renderMenuWithDropdown(t('centreOfExcellence'), isHoverCOE) }
+
+									<div className={ `${ isHoverCOE === false ? 'hidden' : 'absolute' } dropdownPosition` }>
+										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
+											{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
+												<Link href={ `/centre-of-excellence/${ item.slug }` } key={ idx }>
+													<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
+														{ item?.img_url?.[0] && (
+															<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } alt='center-of-excellence-image' />
+														) }
 														<div className='ml-[10px] w-[310px] hover:bg-transparent'>
-															<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
-															<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
+															<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 														</div>
-														<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
+														<icons.ArrowRight className='ml-[27px] mr-auto' />
 													</div>
 												</Link>
-											);
-										}) }
-									</ul>
+											)) }
+										</ul>
+									</div>
 								</div>
-							</div>
 
-							<div id='centre-of-excellence' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverCOE(true) } onMouseLeave={ toggleMouseHoverCOE(false) }>
-								<Text text={ t('centreOfExcellence') } className='cursor-pointer' color={ isHoverCOE === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
-								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
-								</div>
-								<div id='dropdownOurHospital' className={ `${ isHoverCOE === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[380px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
-									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
-											<Link href={ `/centre-of-excellence/${ item.slug }` } key={ idx }>
-												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center  hover:bg-gray-100 '>
-													<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } alt='center-of-excellence-image' />
-													<div className='ml-[10px] w-[310px]  hover:bg-transparent'>
-														<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+								<div id='facilities' className='flex relative group' onMouseEnter={ toggleMouseHoverFacilities(true) } onMouseLeave={ toggleMouseHoverFacilities(false) }>
+									{ renderMenuWithDropdown(t('facility'), isHoverFacilities) }
+									<div className={ `${ isHoverFacilities === false ? 'hidden' : 'absolute' } dropdownPosition` }>
+										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
+											{ Object.values(facilityServicesData || [])?.map((item, idx) => (
+												<Link href={ `/facilities/${ item.slug }` } key={ idx }>
+													<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
+														{
+															item?.image_url?.[0] && (
+																<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
+															)
+														}
+														<div className='ml-[10px] w-[310px]'>
+															<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+														</div>
+														<icons.ArrowRight className='ml-[27px] mr-auto' />
 													</div>
-													<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
-												</div>
-											</Link>
-										)) }
-									</ul>
-								</div>
-							</div>
+												</Link>
+											)) }
 
-							<div id='facilities' className='flex py-[22px] max-sm:py-[10px]' onMouseEnter={ toggleMouseHoverFacilities(true) } onMouseLeave={ toggleMouseHoverFacilities(false) }>
-								<Text text={ t('facility') } className='cursor-pointer' color={ isHoverFacilities === true ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
-								<div className='ml-[9px] cursor-pointer'>
-									<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } />
-								</div>
-								<div id='dropdownOurHospital' className={ `${ isHoverFacilities === false ? 'hidden' : 'fixed' } w-[480px] mt-[45px] ml-[540px] bg-white divide-y divide-gray-100 shadow custom-scrollbar` }>
-									<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										{ Object.values(facilityServicesData || [])?.map((item, idx) => (
-											<Link href={ `/facilities/${ item.slug }` } key={ idx }>
-												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-gray-100'>
-													{
-														item?.image_url?.[0] && (
-															<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
-														)
-													}
+											<Link href={ '/facilities/medical-specialities' }>
+												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
+													<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
-														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+														<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
-													<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
+													<icons.ArrowRight className='ml-[27px] mr-auto' />
 												</div>
 											</Link>
-										)) }
-
-										<Link href={ '/facilities/medical-specialities' } >
-											<div className='hospital-list border-b border-gray flex py-4 px-4 items-center'>
-												<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
-												<div className='ml-[10px] w-[310px]'>
-													<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
-												</div>
-												<icons.ArrowRight alt='' className='ml-[27px] mr-auto' />
-											</div>
-										</Link>
-									</ul>
+										</ul>
+									</div>
 								</div>
+
+								<div id='career'>
+									<Text text={ t('career') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+								</div>
+
+								<Link id='find-doctor' href='/find-a-doctor'>
+									<Text text={ t('findDoctor') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+								</Link>
 							</div>
-
-							<div id='career' className='py-[22px] max-sm:py-[10px]'>
-								<Text text={ t('career') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
-							</div>
-
-							<Link id='find-doctor' className='py-[22px] max-sm:py-[10px]' href='/find-a-doctor'>
-								<Text text={ t('findDoctor') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
-							</Link>
-
 						</div>
-					</div>
-					<div className='rightNav py-[22px] max-sm:py-[10px]'>
-						<div className='translate'>
-							<div className='mobile-nav flex items-center mr-2 gap-6 sm:hidden'>
-								<icons.Notif
-									onClick={ onclickMarkAllNotif }
-									className='cursor-pointer'
-								/>
-								<Icons.AlignLeft onClick={ () => setShowSideBar(!showSideBar) } />
-							</div>
-							<div>
-								{ modalNotification() }
-							</div>
-							<div className='flex items-center gap-6 max-sm:hidden'>
-								<Button className='btn-main h-[44px] min-w-[190px]' onClick={ () => router.push('/find-a-doctor') }>
+						<div className='flex lg:hidden items-center gap-x-6'>
+							{ renderNotifIcon() }
+							<button
+								type='button'
+								className='-m-2 inline-flex items-center justify-center p-2 focus:outline-none focus:ring-0'
+								onClick={ () => setShowSideBar(!showSideBar) }
+							>
+								<Icons.AlignLeft color={ colors.grey.darkOpacity } size={ 24 } />
+							</button>
+						</div>
+						<div className='hidden lg:flex lg:items-center lg:gap-x-5'>
+							<Link href='/find-a-doctor'>
+								<Button className='h-11 px-5 flex items-center whitespace-nowrap text-base font-black'>
 									{ t('bookAppointment') }
 								</Button>
-								{
-									isLoggedIn ?
-										<>
-											<div className='relative inline-block text-6xl text-white mx-[24px] my-auto' onClick={ () => setShowNotification(true) }>
-												<icons.Notif onClick={ () => marAllReadNotifFunc()
-													.then(() => {
-														setShowNotification(true);
-														notificationResponseFetch();
-													}) }
-													className='cursor-pointer'
-												/>
-												<span
-													className='absolute top-0 right-0 px-2 py-1 translate-x-1/2 bg-red-500 border border-white rounded-full text-xs text-white'>{ notificationResponseData?.total_unread }</span>
-											</div>
-											<div className='flex text-white items-center'>
-												<div>
+							</Link>
 
-													{ session.user?.img_url
+							{ isLoggedIn
+								? (
+									<>
+										{ renderNotifIcon() }
+										<div className='relative flex'>
+											<div className='flex text-white items-center relative z-[2]'>
+												<div>
+													{ session?.user?.img_url
 														? (
 															<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
 																<Image
 																	src={ session.user?.img_url }
 																	alt=''
+																	sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+
 																	fill
 																/>
 															</div>
 														)
 														: <icons.EmptyProfile className='w-[50px] h-[50px]' /> }
 												</div>
-												<div className='ml-[24px] cursor-pointer'>
-													<icons.ArrowDown alt='' className={ 'xl:relative xl:top-[1px] [&>path]:stroke-gray-700' } onClick={ () => setDropdownHide(!dropdownHide) } />
+												<div className='ml-4 cursor-pointer'>
+													<icons.ArrowDown className={ '[&>path]:stroke-[#6A6D81]' } onClick={ () => setDropdownHide(!dropdownHide) } />
 												</div>
 											</div>
-										</> :
-										<Button className='btn-main h-[44px] min-w-[190px]' theme='outline' $hoverTheme='primary' onClick={ handleLoginClick }>{ t('loginRegister') }</Button>
-								}
-							</div>
 
-							{
-								isLoggedIn &&
-								<div id='dropdown' className={ `${ dropdownHide === true ? 'hidden' : 'fixed' } z-10 w-[208px] mt-[10px] bg-white divide-y divide-gray-100 shadow dark:bg-gray-700` }>
-									<ul className='py-1 text-sm text-gray-700' aria-labelledby='dropdownDefault'>
-										<li>
-											<Link href='/patient-portal' className='border-b border-gray block py-4 px-4' onClick={ () => setDropdownHide(true) }>
-												{ t('user.patientPortal') }
-											</Link>
-										</li>
-										<li>
-											<Link href='/user-information' className='border-b border-gray block py-4 px-4' onClick={ () => setDropdownHide(true) }>
-												{ t('user.patientInformation') }
-											</Link>
-										</li>
-										<li className='block py-4 px-4 text-red-600 cursor-pointer' onClick={ handleClick }>
-											{ t('user.logout') }
-										</li>
-									</ul>
-								</div>
-							}
+											<div className={ `${ dropdownHide ? 'hidden' : 'absolute' } top-0 right-0 pt-[70px] z-[1]` }>
+												<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar !w-[230px]' aria-labelledby='dropdownDefault'>
+													<li>
+														<Link href='/patient-portal' className='border-b border-gray block py-4 px-4 hover:bg-[#F0F2F9]' onClick={ () => setDropdownHide(true) }>
+															{ t('user.patientPortal') }
+														</Link>
+													</li>
+													<li>
+														<Link href='/user-information' className='border-b border-gray block py-4 px-4 hover:bg-[#F0F2F9]' onClick={ () => setDropdownHide(true) }>
+															{ t('user.patientInformation') }
+														</Link>
+													</li>
+													<li className='block py-4 px-4 text-red-600 cursor-pointer hover:bg-[#F0F2F9]' onClick={ handleClick }>
+														{ t('user.logout') }
+													</li>
+												</ul>
+											</div>
+										</div>
+									</>
+								)
+								: (
+									<Link href='/login'>
+										<Button className='h-11 flex items-center whitespace-nowrap px-5 text-base font-black' theme='outline' $hoverTheme='primary'>
+											{ t('loginRegister') }
+										</Button>
+									</Link>
+								) }
 						</div>
-					</div>
-				</div>
-				{ showSideBar === true ?
-					<div className='mobile-sidebar'>
-						<div className='sider-nav-menu divide-y divide-solid'>
-							<div
-								className='nav-menu'
-								onClick={ () => { handleNavigateSideBar('/'); } }>
-								<Text text={ t('home') } fontSize='16px' fontWeight='700' />
-							</div>
-							{ isLoggedIn &&
-								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/patient-portal'); } }>
-									<Text text={ t('user.patientPortal') } fontSize='16px' fontWeight='700' />
+					</nav>
+					{ showSideBar && (
+						<div className='mobile-sidebar'>
+							<MainNavLanguage />
+							{ activeSubMenuIdMobile && (
+								<div className='p-4 bg-[#F0F2F9] flex items-center gap-2'>
+									<button
+										type='button'
+										className='flex-shrink-0 focus:outline-none focus:ring-0'
+										onClick={ () => setActiveSubMenuIdMobile('') }
+									>
+										<Icons.ArrowLeft size={ 20 } color={ colors.grey.darkOpacity } />
+									</button>
+									<Text fontSize='16px' fontWeight='700'>{ getDataSubMenu().title }</Text>
 								</div>
-							}
-							{ isLoggedIn &&
-								<div className='nav-menu' onClick={ () => { handleNavigateSideBar('/user-information'); } }>
-									<Text text={ t('user.patientInformation') } fontSize='16px' fontWeight='700' />
-								</div>
-							}
-							{ isLoggedIn ? null :
-								<div className='nav-menu' onClick={ handleLoginClick }>
-									<Text text={ t('login') } fontSize='16px' fontWeight='700' />
-								</div>
-							}
-							{ isLoggedIn ? null :
-								<div
-									className='nav-menu'
-									onClick={ () => handleNavigateSideBar('/register') }>
-									<Text text={ t('register') } fontSize='16px' fontWeight='700' />
-								</div>
-							}
-
-							<div
-								className='nav-menu'
-								onClick={ () => handleNavigateSideBar('/contact-us') }>
-								<Text text={ t('contactUs') } fontSize='16px' fontWeight='700' />
-							</div>
-
-							<div
-								className='nav-menu'
-								onClick={ () => handleNavigateSideBar('/centre-of-excellence') }>
-								<Text text={ t('centreOfExcellence') } fontSize='16px' fontWeight='700' />
-							</div>
-							<div
-								className='nav-menu'
-								onClick={ () => handleNavigateSideBar(`/facilities/${ facilityServicesData?.[0]?.slug }`) }>
-								<Text text={ t('facility') } fontSize='16px' fontWeight='700' />
-							</div>
-							<div className='nav-menu'>
-								<Text text={ t('ourHospitals') } fontSize='16px' fontWeight='700' />
+							) }
+							<div className='sider-nav-menu divide-y divide-solid overflow-y-auto'>
+								{ renderListMenuMobile() }
 							</div>
 						</div>
-						{ isLoggedIn ?
-							<div className='nav-menu'>
-								<Text text={ t('user.logout') } fontSize='16px' fontWeight='700' color={ colors.red.default } onClick={ handleClick } />
-							</div>
-							: null
-						}
-					</div> : null
-				}
+					) }
+				</header>
 			</div>
-
+			{ modalNotification() }
 			{ renderModalSuccessLogout() }
 		</HeaderStyle>
 	);

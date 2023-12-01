@@ -13,7 +13,7 @@ import { useScopedI18n } from '@/locales/client';
 
 import Pills from '../Pills';
 import useFindDoctor from '../useFindDoctor';
-import LoadingSkeleton from '@/components/Layout/LoadingSkeleton';
+
 import Combobox, { ItemType } from '@/components/ui/Combobox';
 
 type Props = {
@@ -126,7 +126,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 				fontWeight='700'
 				subClassName='max-sm:text-[16px] max-sm:leading-[23px] mb-6'
 			>
-				Hospital
+				{ t('label.hospital') }
 			</Text>
 		
 			 <div className='flex flex-col gap-4'>
@@ -162,7 +162,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 				fontWeight='700'
 				subClassName='max-sm:text-[16px] max-sm:leading-[23px] mb-6 max-sm:mt-8'
 			>
-				Speciality
+				{ t('label.specialty') }
 			</Text>
 		
 			<>

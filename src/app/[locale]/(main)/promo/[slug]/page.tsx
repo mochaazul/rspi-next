@@ -52,23 +52,13 @@ const DetailEventClassesPromo = (props: { params: { slug: any; }; }) => {
 			setLoading(false);
 		});
 		fetchEvents().then(function (response) {
-			setEventsData(response.data);
+			const filteredData = response?.data.filter(eachData => {
+				return eachData?.slug !== props?.params?.slug;
+			});
+
+			setEventsData(filteredData);
 		});
 	}, []);
-
-	useEffect(() => {
-		if (props.params.slug !== selectedEvent?.slug) {
-			setLoading(true);
-			fetchPromoByID(props.params.slug).then(function (response) {
-				setSelectedEvent(response?.data);
-				setLoading(false);
-			});
-			fetchEvents().then(function (response) {
-				setEventsData(response.data);
-			});
-			setLoading(false);
-		}
-	}, [props.params.slug]);
 
 	const handleOpenSocmed = (link: string) => () => {
 		window?.open(link, '_blank');

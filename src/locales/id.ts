@@ -19,20 +19,30 @@ export default {
 			sunday: 'Min'
 		}
 	},
+	global: {
+		callAmbulanceLabel: {
+			heading: 'Panggil Ambulans',
+			subHeading: 'Silahkan pilih Rumah sakit: '
+		}
+	},
 	gender: {
 		male: 'Laki-laki',
 		female: 'Perempuan'
 	},
+
 	unsubscribe: {
-		heading: 'Berhenti berlangganan telah berhasil',
-		subHeading: 'Berhenti berlangganan berita terupdate tentang RSPI berhasil, semoga kita dapat berjumpa kembali'
+		headingSuccess: 'Berhasil Berhenti Belangganan',
+		subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+		headingFailed: 'Gagal Berhenti Belangganan',
+		subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 	},
 	modalDialog: {
 		pin: {
 			header: 'Masukkan PIN',
 			subHeader: 'Silahkan masukan PIN Untuk melanjutkan.',
 			submitBtnLabel: 'Konfirmasi',
-			pinLabel: 'PIN'
+			pinLabel: 'PIN',
+			forgotPin: 'Lupa PIN?'
 		}
 	},
 	navMenu: {
@@ -118,7 +128,11 @@ export default {
 					back: 'Upload foto tampak belakang',
 				},
 				disclaimer: 'Disclaimer : Data yang diberikan adalah benar. Pendaftaran dilakukan untuk diri sendiri. Jika pendaftaran dilakukan untuk orang lain, sudah mendapatkan persetujuan dari pihak terkait',
-				errorEmptyData: 'Pastikan Data Keluhan dan Penjamin Terisi'
+				errorEmptyData: 'Pastikan Data Keluhan dan Penjamin Terisi',
+				btnLabel: {
+					back: 'Kembali',
+					submit: 'Buat Janji Temu'
+				}
 			},
 			confirmationModal: {
 				heading: 'Konfirmasi Booking Appointment',
@@ -151,8 +165,10 @@ export default {
 			}
 		},
 		unsubscribe: {
-			heading: 'Berhasil Berhenti Berlangganan',
-			subHeading: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali'
+			headingSuccess: 'Berhasil Berhenti Belangganan',
+			subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+			headingFailed: 'Gagal Berhenti Belangganan',
+			subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 		},
 		awards: {
 			heading: 'Accreditations & Awards',
@@ -849,6 +865,7 @@ export default {
 		findDoctor: {
 			heading: 'Cari Dokter',
 			label: {
+				hospital: 'Rumah sakit',
 				doctorName: 'Nama Dokter',
 				specialty: 'Spesialisasi',
 				doctorFound: 'Dokter Ditemukan',
@@ -861,7 +878,11 @@ export default {
 			form: {
 				visitDateLabel: 'Tanggal Kunjungan',
 				hospitalLabel: 'Rumah sakit',
-				clinicLabel: 'Klinik'
+				clinicLabel: 'Klinik',
+				btnLabel: {
+					back: 'Back',
+					submit: 'Next'
+				}
 			},
 			slotEmptyState: 'Silahkan pilih tanggal untuk menampilkan informasi jam yang tersedia.',
 			notAvailableSchedule: 'Jadwal dokter tidak tersedia di tanggal yang Anda pilih karena sudah mencapai maksimal reservasi online. Silakan pilih tanggal dan waktu lain yang tersedia di bawah ini atau hubungi call center kami untuk informasi lebih lanjut',
@@ -897,7 +918,10 @@ export default {
 			subscribeLabel: 'Ikuti Perkembangan Bersama Kami',
 			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.',
 			subscribePlaceholder: 'Masukkan alamat email',
-			subscribeSubmit: 'Subscribe'
+			subscribeSubmit: 'Berlangganan',
+			errorSubs: 'Proses berlangganan gagal dilakukan',
+			successSubs: 'Proses berlangganan berhasil dilakukan',
+			handleButtonModalSubmit: 'Tutup',
 		},
 		medicalRecordReminder: {
 			heading: 'Dapatkan Akses terhadap Informasi Kunjungan Medis Anda',

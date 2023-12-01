@@ -36,17 +36,18 @@ export const MainNavLanguage = () => {
 				fontWeight='700'
 				color={ colors.white.default }
 				text={ welcomeText }
+				subClassName='max-lg:text-right max-sm:text-xs'
 			/>
 		);
 	};
 
 	return (
 		<div
-			className='hidden lg:flex items-center h-10 animate-slideUpToDown transition-all duration-300'
+			className='flex items-center h-10 w-full flex-shrink-0'
 			style={ { background: colors.paradiso.default } }
 		>
-			<div className='flex justify-between w-full mx-10'>
-				<div className='flex divide-x divide-white/20 gap-5'>
+			<div className='flex lg:justify-between w-full px-4 lg:px-10'>
+				<div className='hidden lg:flex divide-x divide-white/20 gap-5'>
 					<Link href='/contact-us'>
 						<Text fontSize='14px' fontWeight='400' color='white'>
 							{ t('contactUs') }
@@ -73,9 +74,9 @@ export const MainNavLanguage = () => {
 						</div>
 					</div>
 				</div>
-				<div className='flex items-center divide-x divide-white/20 gap-5'>
+				<div className='flex max-lg:flex-row-reverse items-center max-lg:justify-between max-lg:w-full lg:divide-x lg:divide-white/20 gap-5'>
 					{ renderWelcomeText() }
-					<div className='flex items-center pl-5'>
+					<div className='flex items-center lg:pl-5'>
 						<LanguageSelector />
 					</div>
 				</div>

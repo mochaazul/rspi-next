@@ -19,12 +19,19 @@ export default {
 			sunday: 'Sun'
 		}
 	},
+	global: {
+		callAmbulanceLabel: {
+			heading: 'Call an Ambulance',
+			subHeading: 'Please select hospital: '
+		}
+	},
 	modalDialog: {
 		pin: {
 			header: 'Enter PIN',
 			subHeader: 'Please enter your PIN to continue.',
 			submitBtnLabel: 'Confirm',
-			pinLabel: 'PIN'
+			pinLabel: 'PIN',
+			forgotPin: 'Forgot PIN?'
 		}
 	},
 	navMenu: {
@@ -114,7 +121,11 @@ export default {
 					back: 'Upload back side of your insurance card',
 				},
 				disclaimer: 'The provided data is correct. Registration is done for oneself. If the registration is done for someone else, consent has been obtained from the relevant party.',
-				errorEmptyData: 'Make sure complaint and guarantor data are filled in'
+				errorEmptyData: 'Make sure complaint and guarantor data are filled in',
+				btnLabel: {
+					back: 'Back',
+					submit: 'Book Appointment'
+				}
 			},
 			confirmationModal: {
 				heading: 'Booking Confirmation',
@@ -150,8 +161,10 @@ export default {
 			}
 		},
 		unsubscribe: {
-			heading: 'Unsubscribe was successful',
-			subHeading: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again'
+			headingSuccess: 'Unsubscribe was successful',
+			subHeadingSuccess: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again',
+			headingFailed: 'Unsubscribe was failed',
+			subHeadingFailed: 'Unsubscribing from the latest news about RSPI was failed, try again',
 		},
 		awards: {
 			heading: 'Accreditations & Awards',
@@ -845,7 +858,9 @@ export default {
 		},
 		findDoctor: {
 			heading: 'Find a Doctor',
+
 			label: {
+				hospital: 'Rumah sakit',
 				doctorName: 'Doctor Name',
 				specialty: 'Specialty',
 				doctorFound: 'Doctors Found',
@@ -858,7 +873,11 @@ export default {
 			form: {
 				visitDateLabel: 'Visit Date',
 				hospitalLabel: 'Hospital',
-				clinicLabel: 'Clinic'
+				clinicLabel: 'Clinic',
+				btnLabel: {
+					back: 'Kembali',
+					submit: 'Lanjut'
+				}
 			},
 			slotEmptyState: 'Please select a date to display available time information.',
 			notAvailableSchedule: 'The doctor\'s schedule is not available on the date you selected because it has reached the maximum online reservations. Please choose another available date and time below or contact our call center for further information.',
@@ -894,7 +913,10 @@ export default {
 			subscribeLabel: 'Stay Updated With Us',
 			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.',
 			subscribePlaceholder: 'Enter your email address',
-			subscribeSubmit: 'Subscribe'
+			subscribeSubmit: 'Subscribe',
+			errorSubs: 'The subscription process failed',
+			successSubs: 'The subscription process successful',
+			handleButtonModalSubmit: 'Close',
 		},
 		medicalRecordReminder: {
 			heading: 'Get Access to Your Medical Visit Information',

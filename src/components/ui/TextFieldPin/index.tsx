@@ -45,7 +45,7 @@ const TextFieldPin = ({ digitLength, password, onChangeValue, wrapperClassName, 
 			return;
 		}
 
-		if (['Backspace'].indexOf(event.key) >= 0) {
+		if (['Backspace'].indexOf(event.key) >= 0 || ['ArrowLeft'].indexOf(event.key) >= 0) {
 			InputRefs.current[key - 1]?.focus();
 			return;
 		}

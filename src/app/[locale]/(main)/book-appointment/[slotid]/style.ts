@@ -31,21 +31,15 @@ export const FormCol = styled.div`
 `;
 
 export const BottomBar = styled.div`
-  box-shadow: 5px 5px 10px 0px rgba(0, -1, 0, 0.05);
-  background-color: white;
   position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 100%;
   display: flex;
-  padding: 16px;
-  justify-content: space-between;
-  gap: 24px;
-  @media only screen and (min-width: 764px) {
-    justify-content: flex-end;
-    padding: 18px 220px 18px 220px;
-  }
-}
+  width: 100%;
+  z-index: 999;
+  bottom: 0;
+  border-top: 1px solid ${ colors.grey.lighterOpacity };
+  padding-top: 26px;
+  padding-bottom: 30px;
+  background: ${ colors.white.default };
 `;
 
 export const DisclaimerAlert = styled.div`
