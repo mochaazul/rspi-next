@@ -10,6 +10,10 @@
     "start:service": "pm2 start yarn --interpreter bash --name web_rspi_next -- start -p 3001",
     "lint": "next lint"
   },
+  "moduleDirectories": [
+    "node_modules",
+    "src"
+  ],
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "dayjs": "^1.11.10",
