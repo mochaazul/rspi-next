@@ -30,7 +30,8 @@ export default {
 			header: 'Enter PIN',
 			subHeader: 'Please enter your PIN to continue.',
 			submitBtnLabel: 'Confirm',
-			pinLabel: 'PIN'
+			pinLabel: 'PIN',
+			forgotPin: 'Forgot PIN?'
 		}
 	},
 	navMenu: {
@@ -160,8 +161,10 @@ export default {
 			}
 		},
 		unsubscribe: {
-			heading: 'Unsubscribe was successful',
-			subHeading: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again'
+			headingSuccess: 'Unsubscribe was successful',
+			subHeadingSuccess: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again',
+			headingFailed: 'Unsubscribe was failed',
+			subHeadingFailed: 'Unsubscribing from the latest news about RSPI was failed, try again',
 		},
 		awards: {
 			heading: 'Accreditations & Awards',
@@ -855,7 +858,7 @@ export default {
 		},
 		findDoctor: {
 			heading: 'Find a Doctor',
-			
+
 			label: {
 				hospital: 'Rumah sakit',
 				doctorName: 'Doctor Name',
@@ -910,7 +913,10 @@ export default {
 			subscribeLabel: 'Stay Updated With Us',
 			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.',
 			subscribePlaceholder: 'Enter your email address',
-			subscribeSubmit: 'Subscribe'
+			subscribeSubmit: 'Subscribe',
+			errorSubs: 'The subscription process failed',
+			successSubs: 'The subscription process successful',
+			handleButtonModalSubmit: 'Close',
 		},
 		medicalRecordReminder: {
 			heading: 'Get Access to Your Medical Visit Information',

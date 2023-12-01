@@ -29,7 +29,7 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
 	const Icons = iconName ? icons[iconName] : null;
 
 	const [open, setOpen] = useState(false);
-
+	
 	const filteredItem =
     query === ''
     	? data

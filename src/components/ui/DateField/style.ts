@@ -18,7 +18,7 @@ export interface DatepickerProps extends DateFieldType {
   onIconClick?: () => any;
   dateFormat?: string;
   applyMaxDateForDoB?: boolean;
-  inputClassName?: string;
+  enableMinDateNow?: boolean;
   iconClassName?: string;
 }
 

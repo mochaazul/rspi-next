@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { FormikProps, useFormik } from 'formik';
+import Link from 'next/link';
 
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
@@ -86,7 +87,7 @@ const PinModal = ({ visible, onSuccess }: Props) => {
 						setEnableValidation(true);
 						formikPin.handleSubmit();
 					} }>
-					<div className='mt-12 mb-10'>
+					<div className='mt-12 mb-5'>
 						<Form.TextFieldPin
 							className='input'
 							digitLength={ 6 }
@@ -101,6 +102,20 @@ const PinModal = ({ visible, onSuccess }: Props) => {
 							errorMessage={ getValidationTranslation(tValidation, formikPin.errors.pin, { label: t('pinLabel') }) }
 							isError={ !!formikPin.errors.pin }
 						/>
+					</div>
+					<div className='mb-10 flex justify-center'>
+						<Link href={ '/pin-reset' }>
+							<Text
+								fontSize='14px'
+								lineHeight='21px'
+								fontType={ null }
+								fontWeight='700'
+								color={ colors.paradiso.default }
+								className='ml-1 inline-block'
+								subClassName='text-justify max-sm:leading-[18px]'
+								text={ t('forgotPin') }
+							/>
+						</Link>
 					</div>
 					<Button type='submit' disabled={ checkPinLoading } >
 						{ checkPinLoading ? <Spinner /> : t('submitBtnLabel') }
