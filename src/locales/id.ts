@@ -41,7 +41,8 @@ export default {
 			header: 'Masukkan PIN',
 			subHeader: 'Silahkan masukan PIN Untuk melanjutkan.',
 			submitBtnLabel: 'Konfirmasi',
-			pinLabel: 'PIN'
+			pinLabel: 'PIN',
+			forgotPin: 'Lupa PIN?'
 		}
 	},
 	navMenu: {

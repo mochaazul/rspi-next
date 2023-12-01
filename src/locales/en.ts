@@ -30,7 +30,8 @@ export default {
 			header: 'Enter PIN',
 			subHeader: 'Please enter your PIN to continue.',
 			submitBtnLabel: 'Confirm',
-			pinLabel: 'PIN'
+			pinLabel: 'PIN',
+			forgotPin: 'Forgot PIN?'
 		}
 	},
 	navMenu: {
@@ -857,7 +858,7 @@ export default {
 		},
 		findDoctor: {
 			heading: 'Find a Doctor',
-			
+
 			label: {
 				hospital: 'Rumah sakit',
 				doctorName: 'Doctor Name',

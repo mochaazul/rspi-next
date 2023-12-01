@@ -25,7 +25,7 @@ import { NewsletterPayload } from '@/interface';
 
 import FooterStyled, { FooterContainer } from './style';
 
-const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalState; }) => {
+const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalDetail[]; }) => {
 	const navigate = useRouter();
 	
 	const { trigger: subscribe } = useSubscribe();

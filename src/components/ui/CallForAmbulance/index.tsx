@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { colors } from '@/constant';
 import images from '@/constant/images';
-import { HospitalState } from '@/interface';
+import { HospitalDetail, HospitalState } from '@/interface';
 
 import {
 	Button,
@@ -19,7 +19,7 @@ import { useScopedI18n } from '@/locales/client';
 const CallForAmbulance = ({
 	hospitalData,
 }:{
-	hospitalData: HospitalState,
+	hospitalData: HospitalDetail[],
 }) => {
 	const t = useScopedI18n('global.callAmbulanceLabel');
 	const [visible, setVisible] = useState(false);

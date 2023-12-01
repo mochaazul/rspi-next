@@ -5,7 +5,7 @@ import { getScopedI18n } from '@/locales/server';
 import EventClassesPromo from './Promo';
 import { fetchEvents } from './helpers';
 
-const Promo = async () => {
+const Promo = async() => {
 	const dataEvent = await fetchEvents({
 		page: 1,
 		limit: 10,
