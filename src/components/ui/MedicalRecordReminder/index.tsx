@@ -109,8 +109,7 @@ const MedicalRecordReminder = ({ isFloating = true, session }: PropsType) => {
 	const renderMedicalRecordReminder = () => {
 		if (isFloating) {
 			const isHideFloatingComponent = isEmpty(session?.token)
-				|| session?.user?.medical_record
-				|| session?.user?.no_mr
+				|| ((session?.user?.medical_record || session?.user?.no_mr) && session?.user?.mr_active)
 				|| !shouldRenderReminder;
 
 			if (isHideFloatingComponent) return null;

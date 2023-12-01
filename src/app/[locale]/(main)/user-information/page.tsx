@@ -102,8 +102,8 @@ export default function Page() {
 	});
 
 	const isDisableFormProfile = useMemo(() => {
-		return !!patientProfile?.data?.no_mr;
-	}, [patientProfile?.data?.no_mr]);
+		return patientProfile?.data?.no_mr && patientProfile?.data?.mr_active;
+	}, [patientProfile?.data?.no_mr, patientProfile?.data?.mr_active]);
 
 	const lastVisitedHospital = useMemo(() => {
 		if (!visitHospitalHistory?.data) return;
