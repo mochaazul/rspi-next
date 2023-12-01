@@ -19,9 +19,10 @@ type Props = {
   placeholder?: string
   iconName?: keyof typeof icons
   value: ItemType | null
+	retainValue?: boolean
 }
 
-const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => {
+const Combobox = ({ data, key, placeholder, iconName, onSelectValue, retainValue }:Props) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor.form');
 	const [selected, setSelected] = useState<ItemType|null>(null);
 
@@ -61,7 +62,7 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
 							className='w-full border-none py-2 pl-3 pr-10 text-gray-900 '
 							onChange={ event => setQuery(event.target.value) }
 							placeholder={ placeholder }
-							value={ selected?.value }
+							{ ...(retainValue ? { displayValue: (item: ItemType) => `${item?.label ?? ''}` } : {}) }
 						/>
 					</ComboboxWrapper>
 					
