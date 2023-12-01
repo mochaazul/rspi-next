@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const FooterStyled = styled.footer`
-  
   .bold {
     font-weight: 600;
   }
@@ -18,31 +17,38 @@ const FooterStyled = styled.footer`
   .ambulance-icon {
     display: none;
   }
- 
-  .email-sub-form-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 2em;
+  .store-images-container {
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:column;
+    gap: 16px;
+  }
+  .store-images {
+    width: 7em;
   }
   .follow-section {
     display: flex;
-    flex-wrap: wrap;
-    justify-content:space-between;
-    width:100%;
+    justify-content: space-between;
+    width: 100%;
   }
   .follow-icon-section {
     min-width: 9em;
-    padding-top: .5rem;
   }
-  .email-sub-form-container input {
+  .input {
     border-radius: 5px 0px 0px 5px;
     border: 1px solid #F0F2F9;
     min-width: 0 !important;
   }
   .sub-button {
     padding: 0.95em;
-    max-width: 10em;
-    &, > .bg-overlay {
+    max-width: 7em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px 5px 5px 0px;
+
+    &, > .bg-overlay,
+    &:hover > .bg-overlay {
       border-radius: 0px 5px 5px 0px;
     }
   }
@@ -62,7 +68,6 @@ const FooterStyled = styled.footer`
     }
     .sub-text {
       max-width: 20vw;
-      margin-bottom: 1rem;
     }
     .ambulance-icon {
       display: flex;
@@ -73,15 +78,11 @@ const FooterStyled = styled.footer`
     }
     .follow-icon-section {
       padding-top: 0;
-
-    }
-    .email-sub-form-container {
-      margin-bottom:0;
     }
   }
 
   @media (min-width: 1440px) {
-    .email-sub-form-container input {
+    .input {
       min-width: 20em;
     }
   }
@@ -90,5 +91,7 @@ const FooterStyled = styled.footer`
 export const FooterContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;`;
+  justify-content: space-between;
+  row-gap: 24px;
+`;
 export default FooterStyled;

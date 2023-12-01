@@ -13,6 +13,7 @@ interface TextFieldType {
   $iconColor?: string;
   isNumber?: boolean,
   mask?: string | (string | RegExp)[];
+  wrapperClassName?: string;
 }
 
 export interface InputType extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, TextFieldType {

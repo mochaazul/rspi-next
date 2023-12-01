@@ -16,7 +16,7 @@ import {
 } from '@/components/ui';
 
 import { FooterDetail } from '@/interface/footer';
-import { HospitalDetail, HospitalState } from '@/interface/Hospital';
+import { HospitalDetail } from '@/interface/Hospital';
 import { useScopedI18n } from '@/locales/client';
 import { appStoreMobileUrl, playStoreMobileUrl } from '@/constant/config';
 
@@ -27,7 +27,7 @@ import FooterStyled, { FooterContainer } from './style';
 
 const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalDetail[]; }) => {
 	const navigate = useRouter();
-	
+
 	const { trigger: subscribe } = useSubscribe();
 
 	const t = useScopedI18n('page.footer');
@@ -84,7 +84,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			setModalNewsletter(true);
 			setMsgNewsletter('error');
 		}
-		
+
 	};
 
 	const renderItems = (items: FooterDetail[]) => {
@@ -168,7 +168,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			<Text
 				fontSize='14px'
 				color={ colors.paradiso.default }
-				className='mb-4 max-sm:text-xs font-bold sm:font-normal'
+				className='mb-4 max-sm:text-xs font-bold sm:font-normal max-sm:uppercase'
 			>{ text }</Text>
 		);
 	};
@@ -247,7 +247,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					</div>
 					<div>
 						{ renderCategoryTitle(t('getRSPIMobileLabel')) }
-						<div className='flex flex-col gap-4 md:flex-row'>
+						<div className='store-images-container'>
 							<Link
 								href={ playStoreMobileUrl }
 								target='_blank'
@@ -268,16 +268,18 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
 					<Text fontSize='14px' className='sub-text'>{ t('subscribeDescription') }</Text>
-					<div className='email-sub-form-container mt-4 lg:mt-6 gap-3'>
-						<TextField
-							width='100%'
-							placeholder={ t('subscribePlaceholder') }
-							className='text-sm sm:text-base'
-							value={ emailNewsletter }
-							onChange={ e => setEmailNewsletter(e.target.value) }
-						/>
+					<div className='flex items-center mt-4 lg:mt-6'>
+						<div className='w-full -mr-2 flex'>
+							<TextField
+								width='100%'
+								placeholder={ t('subscribePlaceholder') }
+								className='text-sm sm:text-base !h-11 !w-full'
+								value={ emailNewsletter }
+								onChange={ e => setEmailNewsletter(e.target.value) }
+							/>
+						</div>
 						<Button
-							className={ ` ${loadingSubs ? '!bg-gray-50 !text-gray-300 cursor-not-allowed' : '' } sub-button color-default text-sm sm:text-base font-black sm:font-bold` }
+							className={ ` ${ loadingSubs ? '!bg-gray-50 !text-gray-300 cursor-not-allowed' : '' } sub-button color-default !text-base !font-bold !h-[48px]` }
 							theme='secondary'
 							label={ t('subscribeSubmit') }
 							onClick={ subscribeNewsletter }
@@ -299,7 +301,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				visible={ modalNewsletter }
 				onClose={ () => setModalNewsletter(false) }
 				width='560px'
-			 >
+			>
 				<div className='relative flex flex-col items-center'>
 					{ msgNewsletter === 'Success' ? <icons.Confirmed /> : <div className='p-4 bg-gray-200 rounded-full'><icons.Close /></div> }
 					<Text
@@ -313,7 +315,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					/>
 					<Button type='submit' label={ t('handleButtonModalSubmit') } className='mt-[32px]' onClick={ () => setModalNewsletter(false) } />
 				</div>
-			 </Modal>
+			</Modal>
 		</FooterStyled>
 	);
 
