@@ -118,24 +118,6 @@ const FindADoctor: React.FC<Props> = ({
 							value={ formFindDoctor.values.speciality }
 							onSelectValue={ value => formFindDoctor.setFieldValue('speciality', value) }
 						/>
-						{ /* <DropdownSearch
-							isForLanding={ true }
-							textFieldProps={ {
-								placeholder: t('form.placeholder.speciality'),
-								iconName: 'Search',
-								iconPosition: 'left',
-								className: 'input',
-								name: 'speciality',
-								value: formFindDoctor.values.speciality,
-								onChange: evt => {
-									formFindDoctor.setFieldValue('speciality', evt.target.value);
-								}
-							} }
-							pickerItems={ mapSpeciality() }
-							onItemClick={ item => {
-								formFindDoctor.setFieldValue('speciality', item.label);
-							} }
-						/> */ }
 					</div>
 					<div className='h-full flex-1'>
 						{ /* Prefered day nya harusnya day only kan bukan datepicker ? */ }
