@@ -14,7 +14,7 @@ import {
 	Socmed
 } from '@/components/ui';
 import { FooterDetail } from '@/interface/footer';
-import { HospitalDetail, HospitalState } from '@/interface/Hospital';
+import { HospitalDetail } from '@/interface/Hospital';
 import { useScopedI18n } from '@/locales/client';
 import { appStoreMobileUrl, playStoreMobileUrl } from '@/constant/config';
 
@@ -138,7 +138,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			<Text
 				fontSize='14px'
 				color={ colors.paradiso.default }
-				className='mb-4 max-sm:text-xs font-bold sm:font-normal'
+				className='mb-4 max-sm:text-xs font-bold sm:font-normal max-sm:uppercase'
 			>{ text }</Text>
 		);
 	};
@@ -217,7 +217,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					</div>
 					<div>
 						{ renderCategoryTitle(t('getRSPIMobileLabel')) }
-						<div className='flex flex-col gap-4 md:flex-row'>
+						<div className='store-images-container'>
 							<Link
 								href={ playStoreMobileUrl }
 								target='_blank'
@@ -238,14 +238,17 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
 					<Text fontSize='14px' className='sub-text'>{ t('subscribeDescription') }</Text>
-					<div className='email-sub-form-container mt-4 lg:mt-6'>
-						<TextField
-							width='100%'
-							placeholder={ t('subscribePlaceholder') }
-							className='text-sm sm:text-base'
-						/>
+					<div className='flex items-center mt-4 lg:mt-6'>
+						<div className='w-full -mr-2 flex'>
+							<TextField
+								width='100%'
+								placeholder={ t('subscribePlaceholder') }
+								className='text-sm sm:text-base !h-11 !w-full'
+								wrapperClassName='input'
+							/>
+						</div>
 						<Button
-							className='sub-button color-default text-sm sm:text-base font-black sm:font-bold'
+							className='sub-button color-default !text-base !font-bold !h-[48px]'
 							theme='secondary'
 							label={ t('subscribeSubmit') }
 						/>
