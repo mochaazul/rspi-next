@@ -32,7 +32,9 @@ type Props ={
 export default function FindADoctorComponent({ hospital, clinics }:Props) {
 
 	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
-
+	
+	const [resetSearchDoctor, setResetSearchDoctor] = useState(false);
+	
 	const t = useScopedI18n('page.findDoctor');
 	
 	const searchParams = useSearchParams();
@@ -51,6 +53,11 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 
 	const loadMore = () => {
 		setSize(size + 1);
+	};
+
+	const clearParams = () => {
+		setResetSearchDoctor(true);
+		clearSearchParams();
 	};
 
 	const getFilterValues = () => {
@@ -131,7 +138,7 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 						{ /* Doctors Pane */ }
 						<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
 						
-							<ResultHeader doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } />
+							<ResultHeader doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } reset={ resetSearchDoctor } />
 					
 							<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
 								{ /* Applied dilter pills */ }
@@ -172,7 +179,7 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 											lineHeight='19px'
 											color={ colors.red.default }
 											text='Clear All'
-											onClick={ clearSearchParams }
+											onClick={ clearParams }
 										/>
 									}
 								</div>

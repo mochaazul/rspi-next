@@ -65,7 +65,7 @@ type ProfileSelectorProps = {
 const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyProfiles }: ProfileSelectorProps) => {
 
 	const t = useScopedI18n('page.bookingAppointment.profileSelector');
-	console.log(familyProfiles, 'kjhlkjhl');
+	
 	const { data: deleteResponse, trigger: deleteFamilyProfileTrigger, error: deleteError } = useDeleteFamilyProfileMutation();
 
 	const [selectedProfile, setSelectedProfile] = useState<number>();
