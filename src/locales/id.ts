@@ -441,7 +441,7 @@ export default {
 							date: 'Pilihan Hari'
 						},
 						placeholder: {
-							doctorName: 'All doctors',
+							doctorName: 'Nama Dokter',
 							hospital: 'Seluruh Cabang RSPI',
 							speciality: 'Spesialis',
 							date: 'Pilih Tanggal',
