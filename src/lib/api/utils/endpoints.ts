@@ -60,7 +60,7 @@ const endpointData = {
 	article: { path: '/news', method: 'GET' },
 	getFooter: { path: '/footer-pages', method: 'GET' },
 	masterDoctor: { path: '/doctors/master', method: 'GET' },
-	specialtyDropdown: { path: '/doctors/specialty', method: 'GET' },
+	specialtyDropdown: { path: '/clinics/clinic-category', method: 'GET' },
 
 	deleteFamilyProfile: { path: '/patients/family', method: 'DELETE' },
 
