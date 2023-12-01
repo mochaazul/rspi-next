@@ -149,6 +149,7 @@ export const Header = ({
 							<div key={ idx } className='pb-4'>
 								<div className='flex flex-col py-4 px-[20px]'
 									onClick={ () => {
+										setShowNotification(false);
 										router.push(`${ item?.url }`);
 									} }
 									style={ {

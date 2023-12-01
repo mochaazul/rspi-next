@@ -4,7 +4,7 @@ import FindDoctorStyle from './style';
 import React from 'react';
 import DropdownSearch from '@/components/ui/DropdownSearch';
 import { useScopedI18n } from '@/locales/client';
-import { HospitalDetail, LandingPageFindADoctorForm } from '@/interface';
+import { HospitalDetail, I_MasterDoctor, LandingPageFindADoctorForm } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';
 import useFindADoctor from './useFindADoctor';
 import { FormikProps, useFormik } from 'formik';
@@ -16,13 +16,15 @@ import Combobox from '@/components/ui/Combobox';
 type Props = {
 	isTelemedicine: boolean;
 	hospitals: HospitalDetail[],
+	doctors: I_MasterDoctor[],
 	clinics: ClinicResponse[];
 };
 
 const FindADoctor: React.FC<Props> = ({
 	isTelemedicine = false,
 	hospitals,
-	clinics
+	clinics,
+	doctors,
 }) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor');
 
@@ -43,9 +45,20 @@ const FindADoctor: React.FC<Props> = ({
 		return [];
 	};
 
+	const mapDoctors = () => {
+		if (doctors?.length > 0) {
+			return doctors?.map(dc => ({
+				id: dc.doctor_code,
+				label: dc.doctor_name,
+				value: dc.doctor_name
+			}));
+		}
+		return [];
+	};
+
 	const formFindDoctor:FormikProps<LandingPageFindADoctorForm> = useFormik<LandingPageFindADoctorForm>({
 		initialValues: {
-			doctorName: '',
+			doctorName: null,
 			hospital: '',
 			preferredDay: '',
 			speciality: null
@@ -66,7 +79,7 @@ const FindADoctor: React.FC<Props> = ({
 				} }
 				onReset={ () => {
 					formFindDoctor.setValues({
-						doctorName: '',
+						doctorName: null,
 						hospital: 'all',
 						preferredDay: '',
 						speciality: null
@@ -78,19 +91,12 @@ const FindADoctor: React.FC<Props> = ({
 						<div className='mb-2'>
 							<label className='font-black text-sm'>{ t('form.labels.doctorName') }</label>
 						</div>
-						<TextField
-							className='input'
+						<Combobox
+							data={ mapDoctors() }
 							placeholder={ t('form.placeholder.doctorName') }
 							iconName='Search'
-							iconPosition='left'
-							name='doctorName'
-							onChange={ evt => {
-								formFindDoctor.setFieldValue(evt.target.name, evt.target.value);
-							} }
 							value={ formFindDoctor.values.doctorName }
-							{
-								...isTelemedicine && { label: t('form.labels.doctorName') }
-							}
+							onSelectValue={ value => formFindDoctor.setFieldValue('doctorName', value) }
 						/>
 					</div>
 					<div className='h-full flex-1'>
@@ -149,6 +155,7 @@ const FindADoctor: React.FC<Props> = ({
 							iconName='CalendarIcon'
 							iconPosition='left'
 							name='preferredDay'
+							enableMinDateNow={ true }
 							value={ formFindDoctor.values.preferredDay }
 							onChangeValue={ evt => {
 								formFindDoctor.setFieldValue('preferredDay', evt.value);
