@@ -61,6 +61,7 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue }:Props) => 
 							className='w-full border-none py-2 pl-3 pr-10 text-gray-900 '
 							onChange={ event => setQuery(event.target.value) }
 							placeholder={ placeholder }
+							value={ selected?.value }
 						/>
 					</ComboboxWrapper>
 					

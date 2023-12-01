@@ -80,12 +80,6 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 
 	const breadcrumbsPath = [{ name: t('breadcrumbsLabel'), url: '/news' }, { url: '#', name: selectedArticle?.title || '' }];
 
-	const handleOpenSocmed = (link: string) => () => {
-		if (typeof window !== 'undefined') {
-			window?.open(link + window?.location?.href, '_blank');
-		}
-	};
-
 	return (
 		<div>
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
@@ -115,13 +109,13 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 									color={ colors.grey.dark }
 								/>
 								<div className='flex gap-[15px]'>
-									<Link href={ sosmedLink.facebook } className='cursor-pointer' >
+									<Link href={ sosmedLink.facebook } target='_blank' className='cursor-pointer' >
 										<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
 									</Link>
-									<Link href={ sosmedLink.twitter } className='cursor-pointer' >
+									<Link href={ sosmedLink.twitter } target='_blank' className='cursor-pointer' >
 										<Image src='/images/ic/twitter.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
 									</Link>
-									<Link href={ sosmedLink.linkedin } className='cursor-pointer' >
+									<Link href={ sosmedLink.linkedin } target='_blank' className='cursor-pointer' >
 										<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
 									</Link>
 									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(window?.location?.href); } }>

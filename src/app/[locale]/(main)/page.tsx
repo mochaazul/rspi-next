@@ -10,7 +10,8 @@ import { getBanner, getCoe } from '@/lib/api';
 import { getDoctors } from '@/lib/api/doctors';
 import { getHospital } from '@/lib/api/hospital';
 import { getCurrentLocale } from '@/locales/server';
-import { getClinics, getFacilitiesAndServices } from '@/lib/api/clinics';
+import { getFacilitiesAndServices } from '@/lib/api/clinics';
+import { getSpecialtyDropdown } from '@/lib/api/specialty';
 import CustomCarousel from '@/components/ui/Carousel';
 import LangWrapper from '@/components/ui/LangWrapper';
 import CentreOfExcellence from '@/components/ui/PageComponents/LandingPageSections/CenterOfExcelence';
@@ -28,7 +29,7 @@ export default async function Page() {
 	const coeRes = await getCoe();
 	const banner = await getBanner({ is_publish: true });
 	const hospitals = await getHospital();
-	const clinics = await getClinics();
+	const specialtyDropdown = await getSpecialtyDropdown();
 	const masterDoctor = await getDoctors();
 	const facilitiesServices = await getFacilitiesAndServices({ is_home_page: true }, { page: 1, limit: 7 });
 	const events = await getEvents();
@@ -64,7 +65,11 @@ export default async function Page() {
 				{ arrayBanner() }
 			</CustomCarousel>
 			<LangWrapper>
-				<ServicesTabs hospitals={ hospitals.data } clinics={ clinics.data } doctors={ masterDoctor.data } />
+				<ServicesTabs
+					hospitals={ hospitals.data }
+					specialtys={ specialtyDropdown.data }
+					doctors={ masterDoctor.data }
+				/>
 				<CentreOfExcellence data={ coeRes.data } />
 				<FacilitiesServices facilityServices={ facilitiesServices.data } />
 				<PromoPackages events={ events.data } />

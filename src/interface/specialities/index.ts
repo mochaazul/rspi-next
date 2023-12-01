@@ -50,3 +50,8 @@ export interface I_ClinicsResponse {
 export interface PayloadClinic {
 	hospital_code?: string;
 }
+
+export interface I_SpecialtyDropdownResponse {
+	specialty: string;
+	clinic_category: string;
+}

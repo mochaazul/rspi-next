@@ -10,10 +10,7 @@ interface Props {
 }
 
 const Socmed: React.FC<Props> = ({ withBackground, isDark }: any) => {
-	const handleOpenSocmed = (link: string) => () => {
-		window.open(link, '_blank');
-	};
-
+	
 	return (
 		<SocmedStyle>
 			<div className={ withBackground ? 'socmed-bg-content' : 'socmed-container' }>
