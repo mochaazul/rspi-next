@@ -1,7 +1,7 @@
 
 'use client';
 import FindDoctorStyle from './style';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DropdownSearch from '@/components/ui/DropdownSearch';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail, I_MasterDoctor, LandingPageFindADoctorForm } from '@/interface';
@@ -14,10 +14,10 @@ import Button from '@/components/ui/Button';
 import Combobox from '@/components/ui/Combobox';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 import { useGetDoctors } from '@/lib/api/client/doctors';
+import { debounce } from 'lodash';
 type Props = {
 	isTelemedicine: boolean;
 	hospitals: HospitalDetail[],
-	doctors: I_MasterDoctor[],
 	specialtys: I_SpecialtyDropdownResponse[];
 };
 
@@ -29,6 +29,7 @@ const FindADoctor: React.FC<Props> = ({
 	const t = useScopedI18n('page.landingPage.services.findDoctor');
 
 	const {	onSubmitHandler } = useFindADoctor();
+	const [doctorFieldSearch, setDoctorFieldSearch] = useState('');
 
 	const hospitalArr = [
 		{ key: 'all', value: '', label: t('form.allHospital') },
@@ -57,7 +58,17 @@ const FindADoctor: React.FC<Props> = ({
 		}
 	});
 
-	const { data: doctorResponse } = useGetDoctors({ query: { keyword: formFindDoctor.values.doctorName ?? '' }});
+	async function changeSearchDoctor(value: React.SetStateAction<string>) {
+		debouncedSearch(value);
+	}
+
+	const debouncedSearch = React.useRef(
+		debounce(async (criteria) => {
+			setDoctorFieldSearch(criteria);
+		}, 300)
+	).current;
+
+	const { data: doctorResponse } = useGetDoctors({ query: { keyword: doctorFieldSearch ?? '' }});
 
 	const mapDoctors = () => {
 		
@@ -65,7 +76,7 @@ const FindADoctor: React.FC<Props> = ({
 			const dataDoctors = doctorResponse?.flatMap(res => res.data);
 			
 			if (dataDoctors.length > 0) {
-				return dataDoctors.map(dc => ({
+				return dataDoctors.map((dc : any) => ({
 					id: dc.doctor_code,
 					label: dc.doctor_name,
 					value: dc.doctor_name
@@ -74,6 +85,12 @@ const FindADoctor: React.FC<Props> = ({
 		}
 		return [];
 	};
+
+	React.useEffect(() => {
+		return () => {
+		  debouncedSearch.cancel();
+		};
+	}, [debouncedSearch]);
 
 	return (
 		<FindDoctorStyle>
@@ -104,7 +121,7 @@ const FindADoctor: React.FC<Props> = ({
 							iconName='Search'
 							value={ formFindDoctor.values.doctorName }
 							onSelectValue={ (value: any) => formFindDoctor.setFieldValue('doctorName', value) }
-							inputOnChange={ (value: any) => formFindDoctor.setFieldValue('doctorName', value) }
+							inputOnChange={ (value: any) => changeSearchDoctor(value) }
 							retainValue
 						/>
 					</div>
