@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, SetStateAction, useState } from 'react';
 import { Combobox as HeadlessCombobox, Transition } from '@headlessui/react';
 import { ComboboxWrapper, IconWrapper } from './style';
 import { icons } from '@/constant';
@@ -8,21 +8,31 @@ export type ItemType = {
   id: string | number,
   value: string | number,
   label: string | number
-  [key: string]: string | number
+  [key: string]: string | number,
 }
 
 type Props = {
   data: ItemType[],
   key?: string,
-  selectKey?: string
-  onSelectValue?: (value: ItemType | null) => any
-  placeholder?: string
-  iconName?: keyof typeof icons
-  value: ItemType | null
-	retainValue?: boolean
+  selectKey?: string,
+  onSelectValue?: (value: ItemType | null) => any,
+  inputOnChange?: (value: ItemType | null) => any,
+  placeholder?: string,
+  iconName?: keyof typeof icons,
+  value: ItemType | null,
+  retainValue?: boolean,
+  isAutoComplete?: string
 }
 
-const Combobox = ({ data, key, placeholder, iconName, onSelectValue, retainValue }:Props) => {
+const Combobox = ({
+	data,
+	key,
+	placeholder,
+	iconName,
+	onSelectValue,
+	inputOnChange,
+	retainValue,
+}:Props) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor.form');
 	const [selected, setSelected] = useState<ItemType|null>(null);
 
@@ -30,6 +40,14 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue, retainValue
 	const Icons = iconName ? icons[iconName] : null;
 
 	const [open, setOpen] = useState(false);
+
+	const changeQuery = (value: any) => {
+		setQuery(value);
+		if (inputOnChange) {
+			inputOnChange(value);
+		}
+		
+	};
 	
 	const filteredItem =
     query === ''
@@ -60,7 +78,7 @@ const Combobox = ({ data, key, placeholder, iconName, onSelectValue, retainValue
 						}
 						<HeadlessCombobox.Input
 							className='w-full border-none py-2 pl-3 pr-10 text-gray-900 '
-							onChange={ event => setQuery(event.target.value) }
+							onChange={ event => changeQuery(event.target.value) }
 							placeholder={ placeholder }
 							{ ...(retainValue ? { displayValue: (item: ItemType) => `${item?.label ?? ''}` } : {}) }
 						/>

@@ -12,12 +12,10 @@ import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 
 const ServicesTabs = ({
 	hospitals,
-	specialtys,
-	doctors
+	specialtys
 }:{
 	hospitals: HospitalDetail[],
 	specialtys: I_SpecialtyDropdownResponse[],
-	doctors: I_MasterDoctor[]
 }) => {
 	const t = useScopedI18n('page.landingPage.services');
 	const tabsData = [t('tabsLabel.0')];
@@ -44,7 +42,7 @@ const ServicesTabs = ({
 						isTelemedicine={ activeTabIndex === 1 }
 						hospitals={ hospitals }
 						specialtys={ specialtys }
-						doctors={ doctors }/>
+					/>
 				</div>
 			</TabsStyle>
 		</TabContainerStyle>

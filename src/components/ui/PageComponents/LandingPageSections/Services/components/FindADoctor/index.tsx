@@ -13,6 +13,7 @@ import { Dropdown, Form, TextField } from '@/components/ui';
 import Button from '@/components/ui/Button';
 import Combobox from '@/components/ui/Combobox';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
+import { useGetDoctors } from '@/lib/api/client/doctors';
 type Props = {
 	isTelemedicine: boolean;
 	hospitals: HospitalDetail[],
@@ -24,7 +25,6 @@ const FindADoctor: React.FC<Props> = ({
 	isTelemedicine = false,
 	hospitals,
 	specialtys,
-	doctors,
 }) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor');
 
@@ -45,17 +45,6 @@ const FindADoctor: React.FC<Props> = ({
 		return [];
 	};
 
-	const mapDoctors = () => {
-		if (doctors?.length > 0) {
-			return doctors?.map(dc => ({
-				id: dc.doctor_code,
-				label: dc.doctor_name,
-				value: dc.doctor_name
-			}));
-		}
-		return [];
-	};
-
 	const formFindDoctor:FormikProps<LandingPageFindADoctorForm> = useFormik<LandingPageFindADoctorForm>({
 		initialValues: {
 			doctorName: null,
@@ -67,6 +56,24 @@ const FindADoctor: React.FC<Props> = ({
 			onSubmitHandler(values.doctorName, values.hospital, values.speciality, values.preferredDay, false);
 		}
 	});
+
+	const { data: doctorResponse } = useGetDoctors({ query: { keyword: formFindDoctor.values.doctorName ?? '' }});
+
+	const mapDoctors = () => {
+		
+		if (doctorResponse) {
+			const dataDoctors = doctorResponse?.flatMap(res => res.data);
+			
+			if (dataDoctors.length > 0) {
+				return dataDoctors.map(dc => ({
+					id: dc.doctor_code,
+					label: dc.doctor_name,
+					value: dc.doctor_name
+				}));
+			}
+		}
+		return [];
+	};
 
 	return (
 		<FindDoctorStyle>
@@ -97,6 +104,7 @@ const FindADoctor: React.FC<Props> = ({
 							iconName='Search'
 							value={ formFindDoctor.values.doctorName }
 							onSelectValue={ (value: any) => formFindDoctor.setFieldValue('doctorName', value) }
+							inputOnChange={ (value: any) => formFindDoctor.setFieldValue('doctorName', value) }
 							retainValue
 						/>
 					</div>

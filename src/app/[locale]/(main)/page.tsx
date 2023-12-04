@@ -30,7 +30,6 @@ export default async function Page() {
 	const banner = await getBanner({ is_publish: true });
 	const hospitals = await getHospital();
 	const specialtyDropdown = await getSpecialtyDropdown();
-	const masterDoctor = await getDoctors();
 	const facilitiesServices = await getFacilitiesAndServices({ is_home_page: true }, { page: 1, limit: 7 });
 	const events = await getEvents();
 	const articles = await getNews({}, { page: 1 });
@@ -68,7 +67,6 @@ export default async function Page() {
 				<ServicesTabs
 					hospitals={ hospitals.data }
 					specialtys={ specialtyDropdown.data }
-					doctors={ masterDoctor.data }
 				/>
 				<CentreOfExcellence data={ coeRes.data } />
 				<FacilitiesServices facilityServices={ facilitiesServices.data } />
