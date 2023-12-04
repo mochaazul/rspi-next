@@ -255,7 +255,7 @@ export default function Page() {
 		setEnableValidation(prevToggle => ({ ...prevToggle, profile: true }));
 		setError('');
 		if (!formikProfile.values.name || !formikProfile.values.birthdate || !formikProfile.values.gender || !formikProfile.values.phone) {
-			setError('Informasi profil tidak boleh kosong guna untuk pengisian formulir otomatis pada saat buat janji temu');
+			setError(t('errorAllInputMustBeFilled'));
 		}
 		formikProfile.handleSubmit();
 	};

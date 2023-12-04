@@ -68,24 +68,6 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 			return (
 				<Form.PhoneNumberInput { ...props.inputProps } wrapperClassName={ props.inputProps.isError ? errorInputProps.className : '' } />
 			);
-			// return (
-			// 	<>
-			// 		<span className='absolute top-1/2 -translate-y-1/2 left-0 pl-[18px] z-[1]'>
-			// 			<Text
-			// 				fontSize='16px'
-			// 				color={ props.inputProps.disabled ? colors.grey.darkOpacity : colors.grey.darker }
-			// 				subClassName='!text-base'
-			// 			>+62</Text>
-			// 		</span>
-
-			// 		<Form.TextField
-			// 			{ ...props.inputProps }
-			// 			isNumber
-			// 			mask='999999999999'
-			// 			className='!pl-[50px]'
-			// 		/>
-			// 	</>
-			// );
 		}
 
 		return (
