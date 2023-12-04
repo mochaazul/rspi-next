@@ -46,7 +46,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 
 	const renderRelatedNewsDesktop = () => {
 		return (
-			<div className='grid grid-cols-3 gap-3'>
+			<div className='flex flex-row gap-3'>
 				{
 					responseCenterOfExcellenceNewsByID?.data?.map((article: any, index: Key) => {
 						return (
@@ -89,7 +89,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className='content-wrapper mt-[64px]'>
+					<div className='content-wrapper mt-[64px] max-sm:mt-[24px]'>
 						<div className='leftSide hidden sm:block w-[349px]'>
 							<CardMenu data={ responseCenterOfExcellence?.data } activeMenuIndex={ newParam } />
 						</div>
@@ -119,7 +119,9 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 								fontSize='24px'
 								lineHeight='29px'
 							/>
-							{ isMobile ? <RelatedNewsMobile centerOfExcellenceNewsByID={ responseCenterOfExcellenceNewsByID?.data } /> : renderRelatedNewsDesktop() }
+							<div className='overflow-auto'>
+								{ isMobile ? <RelatedNewsMobile centerOfExcellenceNewsByID={ responseCenterOfExcellenceNewsByID?.data } /> : renderRelatedNewsDesktop() }
+							</div>
 						</div>
 					}
 				</div>
