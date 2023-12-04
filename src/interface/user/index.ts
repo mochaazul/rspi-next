@@ -44,6 +44,7 @@ export interface UserData {
 	created_date?: string;
 	medical_record?: string,
 	pin_status?: boolean;
+	mr_active?: boolean;
 }
 export interface UserDataDetail {
 	birthdate: string;
@@ -60,6 +61,7 @@ export interface UserDataDetail {
 	patient_id_rspi: string;
 	phone: string;
 	updated_date: string;
+	mr_active?: boolean;
 }
 
 export type ResendEmailVerificationType = {

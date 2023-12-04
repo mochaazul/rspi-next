@@ -15,6 +15,7 @@ import {
 
 import { CallForAmbulanceStyle, ModalRSTelephoneStyle } from './style';
 import { useScopedI18n } from '@/locales/client';
+import useSession from '@/session/client';
 
 const CallForAmbulance = ({
 	hospitalData,
@@ -24,11 +25,15 @@ const CallForAmbulance = ({
 	const t = useScopedI18n('global.callAmbulanceLabel');
 	const [visible, setVisible] = useState(false);
 
+	const session = useSession();
+
+	const hasMedicalRecordReminder = !!!session?.user?.medical_record || !!!session.user?.no_mr;
 	return (
 		<>
 			<CallForAmbulanceStyle className={ `
 				fixed cursor-pointer flex align-center justify-center 
 				max-sm:w-[60px] max-sm:h-[60px] 
+				${hasMedicalRecordReminder ? 'max-md:bottom-28 max-lg:bottom-20' : ''}
 			` } onClick={ () => setVisible(true) }>
 				<images.AmbulanceIcon className='z-10' />
 			</CallForAmbulanceStyle>

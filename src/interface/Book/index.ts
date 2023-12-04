@@ -7,3 +7,7 @@ export interface AppointmentState {
 	error: ResponseStatus;
 	pagination?: Pagination;
 }
+
+export interface BookCancelRequest {
+	appointment_id: string;
+}

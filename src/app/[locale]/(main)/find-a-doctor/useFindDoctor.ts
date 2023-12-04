@@ -3,6 +3,7 @@ import { PickerItem } from '@/components/ui/DropdownSearch';
 import { createFieldConfig } from '@/helpers';
 import { HospitalDetail } from '@/interface';
 import { ClinicResponse } from '@/interface/clinic';
+import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const searchFilterField = {
@@ -26,13 +27,14 @@ export const searchFilterField = {
 
 type Props = {
 	hospitals: HospitalDetail[],
-	clinics: ClinicResponse[];
+	clinics: I_SpecialtyDropdownResponse[];
 };
 
 const useFindDoctor = ({ hospitals, clinics }: Props) => {
 	const router = useRouter();
 	const pathName = usePathname();
 	const searchParams = useSearchParams();
+	
 	const createQueryString = (name: string, value: string): void => {
 		const params = new URLSearchParams(searchParams);
 		params.set(name, value);
@@ -64,41 +66,43 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 	};
 
 	const addSpecialty = (item: ItemType | null) => {
-		const prevSpecialty = searchParams.get('clinic_code');
-		createQueryString('clinic_code', prevSpecialty ? prevSpecialty + ',' + `${item?.value ?? ''}` : `${item?.value ?? ''}`);
+		const prevClinicCat = searchParams.get('clinic_category');
+		createQueryString('clinic_category', prevClinicCat ? prevClinicCat + ',' + `${item?.value ?? ''}` : `${item?.value ?? ''}`);
+		
 	};
 
   	const deleteSpecialty = (item: ItemType | null) => {
-		const values = searchParams.get('clinic_code')?.split(',') ?? [];
+		const values = searchParams.get('clinic_category')?.split(',') ?? [];
 		if (values.length < 2) {
-			deleteQueryString('clinic_code');
+			deleteQueryString('clinic_category');
 			return;
 		}
-		const filteredSpecialty = values.filter(sp => sp !== item?.value);
-		createQueryString('clinic_code', filteredSpecialty.toString());
+		const filteredClinicCat = values.filter(sp => sp !== item?.value);
+		createQueryString('clinic_category', filteredClinicCat.toString());
 	};
 
 	const getSpecialty = (): ItemType[] => {
-		const values = searchParams.get('clinic_code')?.split(',') ?? [];
-		return clinics.filter(sp => values.includes(sp.clinic_code ?? '')).map((sp, index) => ({
-			id: sp.id,
-			label: sp?.clinic_name ?? '',
-			value: sp.clinic_code
+		const values = searchParams.get('clinic_category')?.split(',') ?? [];
+		return clinics.filter(sp => values.includes(sp.clinic_category ?? '')).map((sp, index) => ({
+			id: sp.specialty,
+			label: sp?.clinic_category ?? '',
+			value: sp.clinic_category
 		}));
 	};
 
 	const getClinic = (): ItemType[] => {
-		const values = searchParams.get('clinic_code')?.split(',') ?? [];
-		return clinics.filter(sp => values.includes(sp?.clinic_code ?? '')).map((sp, index) => ({
-			id: sp.id,
-			label: sp?.clinic_name ?? '',
-			value: sp.clinic_code
+		const values = searchParams.get('clinic_category')?.split(',') ?? [];
+		return clinics.filter(sp => values.includes(sp?.clinic_category ?? '')).map((sp, index) => ({
+			id: sp.clinic_category,
+			label: sp?.clinic_category ?? '',
+			value: sp.clinic_category
 		}));
 	};
 
 	const onDeletePills = (pillValue: { id: string, text: string, key: string; }) => {
 		const currentParams = Object.fromEntries(searchParams);
 		const removedParams = removeFromString(currentParams[pillValue.key], pillValue.id);
+		
 		if (pillValue.key === 'telemedicine') {
 			createQueryString('telemedicine', 'false');
 		} else {
@@ -126,6 +130,7 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 		return true;
 	};
 	const clearSearchParams = () => {
+		setDoctorName('');
 		router.push(pathName);
 	};
 	const setDoctorName = (value: string) => {
@@ -143,7 +148,7 @@ const useFindDoctor = ({ hospitals, clinics }: Props) => {
 		specialtyFilter: {
 			add: addSpecialty,
 			delete: deleteSpecialty,
-			getAll: getSpecialty
+			getAll: getSpecialty,
 		},
 		clinicFilter: {
 			add: addSpecialty,

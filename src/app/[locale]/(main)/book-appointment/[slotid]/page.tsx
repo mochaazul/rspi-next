@@ -53,7 +53,7 @@ const BookAppointment = () => {
 
 	const timeSlot = Object.fromEntries(searchParams);
 
-	const { data: userProfile, isLoading: profileLoading } = useGetProfile();
+	const { data: userProfile, isLoading: profileLoading } = useGetProfile(session?.token);
 	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile();
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
@@ -102,7 +102,7 @@ const BookAppointment = () => {
 				id: userProfile?.data?.id ?? 0,
 				created_date: '',
 				updated_date: '',
-				no_mr: '',
+				no_mr: userProfile?.data?.no_mr ?? '',
 				parent_email: '',
 				patient_code: ''
 			});
@@ -246,7 +246,7 @@ const BookAppointment = () => {
 					notif_type: '1',
 					desc_type: 'Push by email account',
 					email_patient: selfProfile?.email,
-					medical_record: selectedProfile?.no_mr ?? '',
+					medical_record: selfProfile?.no_mr ?? '',
 					sent_datetime: timeSlot?.date + ' ' + timeSlot?.session_app_start,
 					read_flag: '0'
 				};

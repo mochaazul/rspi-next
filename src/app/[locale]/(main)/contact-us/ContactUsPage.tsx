@@ -52,7 +52,9 @@ const ContactUsPage = ({
 	}, [hospitalSelector]);
 
 	const handleOpenMapLink = (link: string) => () => {
-		window.open(link, '_blank');
+		if (typeof window !== 'undefined') {
+			window.open(link, '_blank');
+		}
 	};
 
 	const renderTooltip = (data: HospitalDetail[]) => {

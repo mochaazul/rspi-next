@@ -18,6 +18,7 @@ import { CardPatientPortalStyle } from '../../style';
 import RecommendDoctorModal from '../ModalRecommendDoctor';
 import ModalCancelBook from '../ModalCancelBook';
 import DetailKunjungan from '../ModalDetailKunjungan';
+import { toast } from 'react-toastify';
 
 interface PropsType {
 	status?: string;
@@ -54,7 +55,7 @@ const CardAppointment = (props: PropsType) => {
 	const [showModalCancelBook, setShowModalCancelBook] = useState(false);
 	const [showPinModal, setShowPinModal] = useState(false);
 
-	const { data: cancelBookingResponse, trigger: cancelBookingTrigger, error: cancelBookingError } = usePostCancelBookingMutation();
+	const { data: cancelBookingResponse, trigger: cancelBookingTrigger, error: cancelBookingError, isMutating: isLoadingCancelBook } = usePostCancelBookingMutation();
 
 	const handleShowModal = () => {
 		if (!props.isHistory) {
@@ -76,11 +77,17 @@ const CardAppointment = (props: PropsType) => {
 	};
 
 	const userClickCancelBook = async (appointmentId: string) => {
-		await cancelBookingTrigger({
-			id: appointmentId
-		});
-		setShowPinModal(false);
-		navigate.push('/patient-portal/3');
+		try {
+			await cancelBookingTrigger({
+				appointment_id: appointmentId
+			});
+			toast.success('Cancel Booking Success');
+			setShowPinModal(false);
+			setShowModalCancelBook(false);
+			navigate.push('/patient-portal');
+		} catch (error) {
+			toast.error('Error');
+		}
 	};
 
 	const isVisitActive = () => {
@@ -279,7 +286,7 @@ const CardAppointment = (props: PropsType) => {
 				birthDate={ props.patientBirthDate || '-' }
 				noHp={ props.patientPhone || '-' }
 			/>
-			<PinModal visible={ showPinModal } onSuccess={ () => userClickCancelBook(props.id) } />
+			<PinModal visible={ showPinModal } onSuccess={ () => userClickCancelBook(props.id) } isLoading={ isLoadingCancelBook } />
 		</CardPatientPortalStyle >
 	);
 };
