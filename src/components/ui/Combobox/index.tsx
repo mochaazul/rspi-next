@@ -21,7 +21,8 @@ type Props = {
   iconName?: keyof typeof icons,
   value: ItemType | null,
   retainValue?: boolean,
-  isAutoComplete?: string
+  isAutoComplete?: string,
+  isLoading?: boolean
 }
 
 const Combobox = ({
@@ -32,8 +33,10 @@ const Combobox = ({
 	onSelectValue,
 	inputOnChange,
 	retainValue,
+	isLoading,
 }:Props) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor.form');
+	const tCombobox = useScopedI18n('combobox');
 	const [selected, setSelected] = useState<ItemType|null>(null);
 
 	const [query, setQuery] = useState('');
@@ -100,7 +103,7 @@ const Combobox = ({
 							{ filteredItem.length === 0 && query !== '' ? (
 								<div className='relative cursor-default select-none px-4 py-2 text-gray-700'>
 									{
-										t('notFoundSpeciality')
+										isLoading ? tCombobox('loading') : tCombobox('notFound')
 									}
 								</div>
 							) : (

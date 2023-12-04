@@ -65,10 +65,10 @@ const FindADoctor: React.FC<Props> = ({
 	const debouncedSearch = React.useRef(
 		debounce(async (criteria) => {
 			setDoctorFieldSearch(criteria);
-		}, 300)
+		}, 500)
 	).current;
 
-	const { data: doctorResponse } = useGetDoctors({ query: { keyword: doctorFieldSearch ?? '' }});
+	const { data: doctorResponse, isLoading: doctorResponseLoading } = useGetDoctors({ query: { keyword: doctorFieldSearch ?? '' }});
 
 	const mapDoctors = () => {
 		
@@ -122,6 +122,7 @@ const FindADoctor: React.FC<Props> = ({
 							value={ formFindDoctor.values.doctorName }
 							onSelectValue={ (value: any) => formFindDoctor.setFieldValue('doctorName', value) }
 							inputOnChange={ (value: any) => changeSearchDoctor(value) }
+							isLoading={ doctorResponseLoading }
 							retainValue
 						/>
 					</div>
