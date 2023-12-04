@@ -15,7 +15,7 @@ export const SelectWrapper = styled.div<StatusType>`
   align-items: center;
   padding: 12px 36px 12px 0px;
   border-radius: 5px;
-  outline: 1px solid ${ colors.grey.lighter };
+  outline: 1px solid ${ props => props.$isOpen ? colors.green.brandAccent : colors.grey.lighter };
   min-height: 48px;
   ${ props => props.disabled
     ? `
@@ -24,7 +24,7 @@ export const SelectWrapper = styled.div<StatusType>`
   `
     : `background-color: ${ colors.white.default }` };
   cursor: ${ props => props.disabled ? 'default' : 'pointer' };
-  
+
   .arrow-down {
     position: absolute;
     right: 10px;
@@ -48,10 +48,6 @@ export const SelectStyled = styled.select`
   font-family: var(--font-family);
   appearance: none;
   ${ GlobalAllTransition5ms }
-
-  &:focus {
-    outline: 1px solid ${ colors.green.brandAccent };
-  }
 `;
 
 export const OptionsWrapper = styled.div<StatusType>`

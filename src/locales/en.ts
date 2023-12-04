@@ -756,7 +756,8 @@ export default {
 			gender: {
 				male: 'Male',
 				female: 'Female'
-			}
+			},
+			errorAllInputMustBeFilled: 'Profile information must not be empty for the appointment booking form.'
 		},
 		patientPortal: {
 			tabMenuLabel: {

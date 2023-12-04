@@ -20,6 +20,7 @@ export interface DatepickerProps extends DateFieldType {
   applyMaxDateForDoB?: boolean;
   enableMinDateNow?: boolean;
   iconClassName?: string;
+  className?: string;
 }
 
 export interface InputType extends DatepickerProps, DateFieldType {

@@ -761,7 +761,8 @@ export default {
 			gender: {
 				male: 'Laki-laki',
 				female: 'Perempuan'
-			}
+			},
+			errorAllInputMustBeFilled: 'Informasi profil tidak boleh kosong guna untuk pengisian formulir otomatis pada saat buat janji temu'
 		},
 		patientPortal: {
 			tabMenuLabel: {

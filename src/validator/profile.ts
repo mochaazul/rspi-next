@@ -3,10 +3,10 @@ import * as yup from 'yup';
 import { DefaultPinYup, DefaultEmailYup } from './defaultYup';
 
 export const UpdateProfileSchema = yup.object().shape({
-	name: yup.string(),
-	phone: yup.string(),
-	birth_date: yup.string(),
-	gender: yup.string()
+	name: yup.string().required('required'),
+	phone: yup.string().required('required'),
+	birthdate: yup.string().required('required'),
+	gender: yup.string().required('required')
 });
 
 export const UpdateEmailSchema = yup.object().shape({
