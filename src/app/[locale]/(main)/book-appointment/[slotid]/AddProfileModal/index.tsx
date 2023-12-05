@@ -1,7 +1,7 @@
 import { FormikProps, useFormik } from 'formik';
 import { ModalHeader, ProfileModalContainer } from './style';
 import { colors, icons } from '@/constant';
-import { FormRow } from '../style';
+import { FormRow } from '@/app/[locale]/(main)/book-appointment/style';
 import { UserDataDetail } from '@/interface';
 
 import NotificationPanel from '@/components/ui/NotificationPanel';
@@ -37,6 +37,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	const tValidation = useScopedI18n('validation.formValidation');
 
 	// TODO: migrate
+	const { data: userProfile } = useGetProfile();
 	// const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
 	// const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
 

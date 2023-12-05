@@ -1,6 +1,6 @@
 import { icons } from '@/constant';
 import { Button, Modal, Text } from '..';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useSWRConfig } from 'swr';
 import { cookiesHelper } from '@/helpers';
 import clearSWRCache from '@/helpers/clearSwrCache';
@@ -12,23 +12,14 @@ type Props = {
 const NeedLoginModal = ({ visible, toggler }: Props) => {
 
 	const router = useRouter();
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
 
 	const { cache } = useSWRConfig();
 
 	const handleLogout = async () => {
 		await cookiesHelper.clearStorage();
 		await clearSWRCache(cache);
-
-		if (pathname.includes('login')) {
-			return toggler(false);
-		}
-
-		// const url = pathname + (searchParams.toString() ? `?${ searchParams.toString() }` : '');
-		// router.replace(`/login?ref=unauthorized&callbackUrl=${ encodeURIComponent(url) }`);
+		toggler(false);
 		router.push('/login?ref=unauthorized');
-		// toggler(false);
 	};
 
 	return (
