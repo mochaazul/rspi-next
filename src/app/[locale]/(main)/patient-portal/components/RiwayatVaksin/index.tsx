@@ -1,7 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
 import { isEmpty } from 'lodash';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 
 import { Spinner, Text } from '@/components/ui';
 import { colors, icons } from '@/constant';
@@ -14,6 +16,12 @@ const RiwayatVaksin = () => {
 	const t = useScopedI18n('page.patientPortal.riwayatVaksin');
 
 	const { data: vaccineHistoryResponse, error: vaccineHistoryError, isLoading: vaccineHistoryLoading } = useGetVaccineHistory();
+
+	useEffect(() => {
+		if (vaccineHistoryError) {
+			toast.error(vaccineHistoryError?.message);
+		}
+	}, [vaccineHistoryError]);
 
 	if (vaccineHistoryLoading) return (
 		<Spinner />
