@@ -7,14 +7,14 @@ import clearSWRCache from '@/helpers/clearSwrCache';
 
 type Props = {
 	visible: boolean,
-	toggler: (arg0: boolean) => void;
-};
-const LogoutModal = ({ visible, toggler }: Props) => {
-
+	toggler: (arg0: boolean) => void
+}
+const LogoutModal = ({ visible, toggler }:Props) => {
+	
 	const router = useRouter();
 	const { cache } = useSWRConfig();
 
-	const handleLogout = async () => {
+	const handleLogout = async() => {
 		await cookiesHelper.clearStorage();
 		await clearSWRCache(cache);
 		toggler(false);

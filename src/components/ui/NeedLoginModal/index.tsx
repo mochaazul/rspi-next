@@ -15,7 +15,7 @@ const NeedLoginModal = ({ visible, toggler }: Props) => {
 
 	const { cache } = useSWRConfig();
 
-	const handleLogout = async () => {
+	const handleLogout = async() => {
 		await cookiesHelper.clearStorage();
 		await clearSWRCache(cache);
 		toggler(false);
