@@ -21,6 +21,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 	menuItems,
 	onChange,
 	arrowClassName,
+	className,
 	...props
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -29,11 +30,12 @@ const Dropdown: React.FC<DropdownProps> = ({
 	const SelectOptionsRef = useRef<HTMLOptionElement[]>([]);
 
 	useEffect(() => {
-		if (SelectInputRef.current) {
+		if (SelectInputRef.current && props.defaultValue) {
+			SelectInputRef.current.value = `${ props.defaultValue }`;
 			const event = new Event('change', { bubbles: true });
 			SelectInputRef.current.dispatchEvent(event);
 		}
-	}, [SelectInputRef]);
+	}, [SelectInputRef, props.defaultValue]);
 
 	const handlePreventDefaultOpen = (event?: React.MouseEvent<HTMLSelectElement> | React.KeyboardEvent<HTMLSelectElement>) => {
 		event?.preventDefault();
@@ -152,6 +154,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 				: undefined }
 			disabled={ props.disabled }
 			ref={ SelectWrapperRef }
+			className={ className }
 		>
 			<SelectStyled
 				onMouseDown={ handlePreventDefaultOpen }

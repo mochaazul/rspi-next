@@ -10,6 +10,7 @@ interface PhoneNumberInputType {
   iconName?: keyof typeof icons;
   featherIcon?: keyof typeof FeatherIcons;
   iconColor?: string;
+  wrapperClassName?: string;
 }
 
 export interface PhoneInputType extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, PhoneNumberInputType {
@@ -20,6 +21,7 @@ export interface PhoneInputType extends React.DetailedHTMLProps<React.InputHTMLA
 export interface StyledPhoneNumberInputType extends Omit<PhoneNumberInputType, 'iconPosition' | 'iconName'> {
   $iconPosition?: 'left' | 'right';
   $iconName?: keyof typeof icons;
+  $disabled?: boolean;
 }
 
 export const PhoneNumberInputWrapper = styled.div<StyledPhoneNumberInputType>`
@@ -44,6 +46,11 @@ export const PhoneNumberInputWrapper = styled.div<StyledPhoneNumberInputType>`
   }
   ${ GlobalAllTransition5ms }
  
+  ${ props => props.$disabled
+    ? `
+    background-color: ${ colors.grey.lighterOpacity };
+    color: ${ colors.grey.darkOpacity };
+  ` : '' }
 `;
 
 export const CountrySelector = styled.select`
@@ -51,6 +58,7 @@ export const CountrySelector = styled.select`
   &:focus-visible{
     outline: none;
   }
+  background-color: inherit;
 `;
 
 export const Input = styled.input<PhoneInputType>`

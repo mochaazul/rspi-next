@@ -41,6 +41,7 @@ import {
 } from '@/validator/profile';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
+import clearSWRCache from '@/helpers/clearSwrCache';
 import { usePostCheckPinMutation } from '@/lib/api/client/auth';
 import { getProfile } from '@/lib/api/profile';
 import useSession from '@/session/client';
@@ -124,7 +125,7 @@ export default function Page() {
 			phone: patientProfile?.data?.phone ? regexInputPhone(patientProfile?.data?.phone) : ''
 		},
 		enableReinitialize: true,
-		onSubmit: async(formProfile: UpdateProfileType) => {
+		onSubmit: async (formProfile: UpdateProfileType) => {
 			try {
 				await updateProfile({
 					...formProfile,
@@ -146,7 +147,7 @@ export default function Page() {
 		validateOnChange: enableValidation.email,
 		validationSchema: UpdateEmailSchema,
 		initialValues: { email: '' },
-		onSubmit: async(formEmail: UpdateEmailType) => {
+		onSubmit: async (formEmail: UpdateEmailType) => {
 			try {
 				await updateEmail(formEmail);
 				setShowModalSuccessUpdateEmail(true);
@@ -163,7 +164,7 @@ export default function Page() {
 		validateOnChange: enableValidation.pin,
 		initialValues: { pin: '' },
 		validationSchema: CheckPinSchema,
-		onSubmit: async(formPin: CheckPinType) => {
+		onSubmit: async (formPin: CheckPinType) => {
 			try {
 				await checkPin(formPin);
 				setPinModalVisible(false);
@@ -181,7 +182,7 @@ export default function Page() {
 		validateOnChange: enableValidation.photo,
 		initialValues: { photo_file: null },
 		validationSchema: UploadPhotoSchema,
-		onSubmit: async(formUpload: UploadPhotoTypeState) => {
+		onSubmit: async (formUpload: UploadPhotoTypeState) => {
 			try {
 				if (formUpload.photo_file && !isLoadingDeleteAvatar) {
 					setIsLoadingUploadAvatar(true);
@@ -228,16 +229,9 @@ export default function Page() {
 	// 	}
 	// };
 
-	const clearSWRCache = async() => {
-		const keys = cache.keys();
-		for (const key of keys) {
-			cache.delete(key);
-		}
-	};
-
-	const removeUserDatas = async() => {
+	const removeUserDatas = async () => {
 		await cookiesHelper.clearStorage();
-		await clearSWRCache();
+		await clearSWRCache(cache);
 		navigate.replace('/login');
 	};
 
@@ -260,6 +254,9 @@ export default function Page() {
 		evt.preventDefault();
 		setEnableValidation(prevToggle => ({ ...prevToggle, profile: true }));
 		setError('');
+		if (!formikProfile.values.name || !formikProfile.values.birthdate || !formikProfile.values.gender || !formikProfile.values.phone) {
+			setError(t('errorAllInputMustBeFilled'));
+		}
 		formikProfile.handleSubmit();
 	};
 
@@ -286,7 +283,7 @@ export default function Page() {
 		}
 	};
 
-	const onHandleTempProfileImage = async(event: React.ChangeEvent<HTMLInputElement>) => {
+	const onHandleTempProfileImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
 			const selectedFile: File | null = event.target.files && event.target.files.length
 				? event.target.files[0]
@@ -323,9 +320,9 @@ export default function Page() {
 				<div className='mt-[20px]'>
 					<NotificationPanel
 						showIconLeft={ false }
-						showIconRight={ false }
 						mode={ 'error' }
 						visible={ !!error }
+						onClickRightIcon={ () => setError('') }
 					>
 						<Text
 							fontType={ null }
@@ -358,7 +355,7 @@ export default function Page() {
 		return getValidationTranslation(tValidation, key, { label });
 	};
 
-	const onClickDeletePhoto = async() => {
+	const onClickDeletePhoto = async () => {
 		try {
 			setEnableValidation(prevToggle => ({ ...prevToggle, photo: false }));
 
@@ -445,6 +442,14 @@ export default function Page() {
 					</div>
 
 					{ renderCardUser() }
+
+					<div className='flex justify-end mt-3'>
+						<div className='sm:max-w-[538px]'>
+							{ !showModalNewEmail
+								&& !pinModalVisible
+								&& renderErrorNotif() }
+						</div>
+					</div>
 
 					<div className='flex mt-5 sm:mt-12 mb-[200px]'>
 						<SubMenuPage menuList={ [t('profileLabel'), t('securitySettingLabel')] }>
@@ -562,9 +567,7 @@ export default function Page() {
 										{ getInputErrorMessage(formikPhoto.errors.photo_file, t('profileDetail.patientPhotoProfile')) }
 									</Text>
 								) }
-								{ !showModalNewEmail
-									&& !pinModalVisible
-									&& renderErrorNotif() }
+
 								<Form onSubmit={ clickUpdateProfile }>
 									<HorizontalInputWrapper
 										label={ t('profileDetail.patientEmail') }
@@ -604,7 +607,7 @@ export default function Page() {
 											value: formikProfile.values.name,
 											onChange: formikProfile.handleChange,
 											placeholder: t('profileDetail.patientNamePlaceholder'),
-											errorMessage: getInputErrorMessage(formikProfile.errors.name, t('profileDetail.patientNameLabel')),
+											// errorMessage: getInputErrorMessage(formikProfile.errors.name, t('profileDetail.patientNameLabel')),
 											isError: !!formikProfile.errors.name,
 											disabled: isDisableFormProfile
 										} }
@@ -614,11 +617,12 @@ export default function Page() {
 										inputType='dropdown'
 										inputProps={ {
 											name: 'gender',
-											value: formikProfile.values.gender,
+											// value: formikProfile.values.gender,
+											defaultValue: patientProfile?.data?.gender,
 											onChange: formikProfile.handleChange,
 											placeholder: t('profileDetail.patientGenderPlaceholder'),
 											disabled: isDisableFormProfile,
-											errorMessage: getInputErrorMessage(formikProfile.errors.gender, t('profileDetail.patientGenderLabel')),
+											// errorMessage: getInputErrorMessage(formikProfile.errors.gender, t('profileDetail.patientGenderLabel')),
 											isError: !!formikProfile.errors.gender,
 											// className: 'capitalize'
 										} }
@@ -644,16 +648,8 @@ export default function Page() {
 											onChangeValue: onChangeValueProfile,
 											placeholder: t('profileDetail.patientBirthDatePlaceholder'),
 											disabled: isDisableFormProfile,
-											errorMessage: getInputErrorMessage(formikProfile.errors.birthdate, t('profileDetail.patientBirthDateLabel')),
-											isError: !!formikProfile.errors.birthdate,
-											...formikProfile.values.birthdate && !isDisableFormProfile
-												? {
-													iconName: 'Close',
-													iconPosition: 'right',
-													iconClassName: 'w-4 h-4',
-													onIconClick: () => formikProfile.setFieldValue('birthdate', '')
-												}
-												: {}
+											// errorMessage: getInputErrorMessage(formikProfile.errors.birthdate, t('profileDetail.patientBirthDateLabel')),
+											isError: !!formikProfile.errors.birthdate
 										} }
 									/>
 									<HorizontalInputWrapper
@@ -666,7 +662,7 @@ export default function Page() {
 											onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => formikProfile.setFieldValue(e.target.name, regexInputPhone(e.target.value)),
 											placeholder: t('profileDetail.patientPhoneNumberPlaceholder'),
 											disabled: isDisableFormProfile,
-											errorMessage: getInputErrorMessage(formikProfile.errors.phone, t('profileDetail.patientPhoneNumber')),
+											// errorMessage: getInputErrorMessage(formikProfile.errors.phone, t('profileDetail.patientPhoneNumber')),
 											isError: !!formikProfile.errors.phone
 										} }
 									/>

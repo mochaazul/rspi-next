@@ -23,6 +23,13 @@ interface HorizontalInputType {
 const HorizontalInputWrapper = (props: HorizontalInputType) => {
 	const t = useScopedI18n('page.profilePage.profileDetail');
 
+	const errorInputProps = {
+		className: '!outline-red-default focus-within:!outline-red-default',
+		iconPosition: 'right' as PropsType['iconPosition'],
+		featherIcon: 'AlertTriangle' as PropsType['featherIcon'],
+		iconColor: colors.red.default
+	};
+
 	const renderInput = () => {
 		if (props.inputType === 'dropdown') {
 			return (
@@ -40,6 +47,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 						}
 					] }
 					{ ...props.inputProps }
+					className={ props.inputProps.isError ? errorInputProps.className : '' }
 				/>
 			);
 		}
@@ -49,33 +57,30 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 				<Form.DateField
 					{ ...props.inputProps }
 					applyMaxDateForDoB={ true }
+					iconPosition='left'
+					iconName='CalendarIcon'
+					className={ props.inputProps.isError ? errorInputProps.className : '' }
 				/>
 			);
 		}
 
 		if (props.inputType === 'phone') {
 			return (
-				<>
-					<span className='absolute top-1/2 -translate-y-1/2 left-0 pl-[18px] z-[1]'>
-						<Text
-							fontSize='16px'
-							color={ props.inputProps.disabled ? colors.grey.darkOpacity : colors.grey.darker }
-							subClassName='!text-base'
-						>+62</Text>
-					</span>
-
-					<Form.TextField
-						{ ...props.inputProps }
-						isNumber
-						mask='999999999999'
-						className='!pl-[50px]'
-					/>
-				</>
+				<Form.PhoneNumberInput { ...props.inputProps } wrapperClassName={ props.inputProps.isError ? errorInputProps.className : '' } />
 			);
 		}
 
 		return (
-			<Form.TextField	{ ...props.inputProps } />
+			<Form.TextField
+				{ ...props.inputProps }
+				{ ...props.inputProps.isError
+					? {
+						wrapperClassName: errorInputProps.className,
+						iconPosition: errorInputProps.iconPosition,
+						$iconColor: errorInputProps.iconColor,
+						featherIcon: errorInputProps.featherIcon
+					} : {} }
+			/>
 		);
 	};
 

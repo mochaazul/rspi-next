@@ -16,7 +16,7 @@ import withInputLabel from '../withInputLabel';
  * @param param0 Inputype
  * @returns JSX
  */
-const DateField = ({ onIconClick, iconClassName, ...props }: InputType) => {
+const DateField = ({ onIconClick, iconClassName, className, ...props }: InputType) => {
 	const currentLang = useCurrentLocale();
 
 	const Icons = props.iconName ? icons[props.iconName] : null;
@@ -36,14 +36,14 @@ const DateField = ({ onIconClick, iconClassName, ...props }: InputType) => {
 			}
 			<Datepicker
 				{ ...props }
-				inputClassName='rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[16px]'
+				inputClassName={ `rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[16px] ${ className }` }
 				asSingle={ true }
 				useRange={ false }
 				i18n={ currentLang }
 				primaryColor='green'
 				displayFormat={ props.dateFormat }
 				maxDate={ props.applyMaxDateForDoB ? new Date() : null }
-				minDate = { props.enableMinDateNow ? new Date() : null }
+				minDate={ props.enableMinDateNow ? new Date() : null }
 				value={ { startDate: props.value ? new Date(props.value ?? '') : null, endDate: props.value ? new Date(props.value ?? '') : null } }
 				onChange={ onChange }
 				placeholder={ props?.placeholder ?? 'Choose Preferred Day' }
