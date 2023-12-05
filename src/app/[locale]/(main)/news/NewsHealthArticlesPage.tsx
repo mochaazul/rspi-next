@@ -116,7 +116,7 @@ const NewsHealthArticlesPage = ({
 							{ loading ? <div className='text-center mb-[30px] w-full'><Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>loading ...</Text></div> :
 								<div className='flex mb-[30px] justify-between'>
 									<div
-										key={ Object.values(articlesData || [])[0]?.id }
+										key={ Object.values(articlesData || [])[0]?.slug }
 										className='w-[540px] mr-[32px] cursor-pointer magazine relative'
 										onClick={ () => navigate.push(`${ pathname }/${ Object.values(articlesData || [])[0]?.slug }`) }
 									>
