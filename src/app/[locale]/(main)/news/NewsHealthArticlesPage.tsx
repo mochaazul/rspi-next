@@ -118,7 +118,7 @@ const NewsHealthArticlesPage = ({
 									<div
 										key={ Object.values(articlesData || [])[0]?.id }
 										className='w-[540px] mr-[32px] cursor-pointer magazine relative'
-										onClick={ () => navigate.push(`${ pathname }/${ Object.values(articlesData || [])[0]?.id }`) }
+										onClick={ () => navigate.push(`${ pathname }/${ Object.values(articlesData || [])[0]?.slug }`) }
 									>
 										<div>
 											<Share />
@@ -151,7 +151,7 @@ const NewsHealthArticlesPage = ({
 												?.map((data, index) => (
 													<div
 														key={ index }
-														onClick={ () => navigate.push(`${ pathname }/${ data?.id }`) }
+														onClick={ () => navigate.push(`${ pathname }/${ data?.slug }`) }
 													>
 														<CardNews
 															id={ data.id }
