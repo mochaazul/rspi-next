@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { default as NextImage } from 'next/image';
 
 import { colors, Images } from '@/constant';
-import { MedicalRecordReminder, Text } from '@/components/ui';
+import { MedicalRecordReminder, Tabs, Text } from '@/components/ui';
 import PinModal from '@/components/ui/PinModal';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import { useGetProfile } from '@/lib/api/client/profile';
@@ -182,9 +182,7 @@ const PatientPortal = () => {
 	};
 
 	return (
-		<VisitHistoryStyle
-			className='max-sm:py-0'
-		>
+		<VisitHistoryStyle className='max-sm:py-0'>
 			<div className='rectangle' />
 			<div className='content-wrapper pt-[60px] md:pt-[120px]'>
 				<div className='w-full -mt-[42px] relative'>
@@ -200,6 +198,14 @@ const PatientPortal = () => {
 							{ renderMenuItem() }
 						</div>
 					</div>
+					{ /* <div className='md:hidden'>
+						<Tabs
+							activeTabIndex={ activeTabIndex }
+							setActiveTabIndex={ setActiveTabIndex }
+							tabsData={ tabMenuLabel.flatMap(eachMenu => eachMenu.children.length > 0 ? eachMenu.children : eachMenu).map(eachMap => eachMap.label) }
+							onClickItem={ () => setPinModalVisible(true) }
+						/>
+					</div> */ }
 					<div className='md:ml-[31px] w-full min-h-[500px]'>
 						{ renderContent }
 					</div>
