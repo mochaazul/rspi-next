@@ -131,7 +131,7 @@ const EventClassesPromo = ({
 										content={ <CardContent title={ data.title } description={ data.short_description } /> }
 										footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
 										className='mb-0'
-										to={ `/promo/${ data.id }` }
+										to={ `/promo/${ data.slug }` }
 										iconShare={ true }
 									/>
 								);

@@ -22,7 +22,7 @@ const CardNews = (props: PropsType) => {
 	return (
 		<CardNewsStyle>
 			<div
-				className={ `shrink-0 py-10 max-sm:px-3 max-sm:py-5 cursor-pointer flex relative justify-between ${ props.isActive ? 'active' : '' }` }
+				className={ `shrink-0 max-sm:px-3 max-sm:py-5 cursor-pointer flex relative justify-between ${ props.isActive ? 'active' : '' }` }
 				onClick={ handleOnClick(props.id) }
 			>
 				<div>
