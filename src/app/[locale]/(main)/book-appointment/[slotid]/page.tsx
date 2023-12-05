@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import { FormikProps, useFormik } from 'formik';
 import { BookingPayload, FamilyProfile, UserDataDetail, PayloadPushNotification } from '@/interface';
 
-import { useRouter, useParams, useSearchParams } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { colors, icons } from '@/constant';
 import {
@@ -50,17 +50,19 @@ const BookAppointment = () => {
 
 	const searchParams = useSearchParams();
 	const navigate = useRouter();
+	const pathname = usePathname();
 
 	const timeSlot = Object.fromEntries(searchParams);
 
 	const { data: userProfile, isLoading: profileLoading } = useGetProfile(session?.token);
-	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile();
+	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile(session?.token);
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: pushNotification, error: pushNotifError, isMutating: pushNotifLoading } = usePushNotifAPI();
 
-	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code });
+	const { data: doctorResponse } = useGetDoctorDetail({ param: timeSlot?.doctor_code }, userProfile?.data?.id);
 
+	console.log({ userProfile, familyProfile, doctorResponse });
 	const paramGetNotif = {
 		query: {
 			medical_record: session.user?.medical_record ?? '',
@@ -70,6 +72,10 @@ const BookAppointment = () => {
 	const {
 		data: getNotification,
 	} = useNotification(paramGetNotif);
+
+	useEffect(() => {
+		console.log('ismounted');
+	}, []);
 
 	const [confirmationModal, setConfirmationModalVisible] = useState<boolean>(false);
 	const [addProfileModal, setAddProfileModal] = useState<boolean>(false);

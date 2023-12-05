@@ -1,7 +1,7 @@
 import { FormikProps, useFormik } from 'formik';
 import { ModalHeader, ProfileModalContainer } from './style';
 import { colors, icons } from '@/constant';
-import { FormRow } from '@/app/[locale]/(main)/book-appointment/style';
+import { FormRow } from '../style';
 import { UserDataDetail } from '@/interface';
 
 import NotificationPanel from '@/components/ui/NotificationPanel';
@@ -32,12 +32,11 @@ export type ProfilePayload = {
 };
 
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
-	
+
 	const t = useScopedI18n('page.bookingAppointment');
 	const tValidation = useScopedI18n('validation.formValidation');
 
 	// TODO: migrate
-	const { data: userProfile } = useGetProfile();
 	// const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
 	// const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
 
@@ -63,7 +62,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			name: '',
 			phone: ''
 		},
-		onSubmit: async(values: ProfilePayload) => {
+		onSubmit: async (values: ProfilePayload) => {
 			const { dob, email, gender, name, phone } = values;
 			if (type === 'other') {
 				await createFamilyProfile({
@@ -74,7 +73,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					phone: cleanUpMask(phone),
 					gender: gender
 				});
-			
+
 			} else {
 				await updateProfile({
 					name: name,
@@ -93,7 +92,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		resetMutation(); // we need this to clear errors
 	}, []);
 
-	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
+	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setEnableValidation(true);
 		formikProfile.handleSubmit();
@@ -124,9 +123,9 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	};
 
 	useEffect(() => {
-		
+
 		if (type === 'self') {
-			
+
 			formikProfile.setFieldValue('email', selfProfile?.email);
 			formikProfile.setFieldValue('phone', selfProfile?.phone);
 			formikProfile.setFieldValue('name', selfProfile?.name);

@@ -14,11 +14,11 @@ import {
 import fetcher, { ApiOptions } from '../utils/fetcher';
 
 export const useGetProfile = (key?: string, options?: ApiOptions) => {
-	return useSWR(['profile', key ?? 'user'], () => fetcher<UserDataDetail>('profile', options), { revalidateOnMount: true });
+	return useSWR(['profile', key ?? 'user'], () => fetcher<UserDataDetail>('profile', options), { revalidateOnMount: true, shouldRetryOnError: false });
 };
 
-export const useGetFamilyProfile = (options?: ApiOptions) => {
-	return useSWR('familyProfile', () => fetcher<UserDataDetail[]>('familyProfile', options));
+export const useGetFamilyProfile = (key?: any, options?: ApiOptions) => {
+	return useSWR(['familyProfile', key ?? 'booking'], () => fetcher<UserDataDetail[]>('familyProfile', options), { revalidateOnMount: true, shouldRetryOnError: false });
 };
 
 export const useFamilyProfileMutation = (options?: ApiOptions) => {

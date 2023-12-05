@@ -1,24 +1,34 @@
 import { icons } from '@/constant';
 import { Button, Modal, Text } from '..';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { cookiesHelper } from '@/helpers';
 import { useSWRConfig } from 'swr';
 import clearSWRCache from '@/helpers/clearSwrCache';
 
 type Props = {
 	visible: boolean,
-	toggler: (arg0: boolean) => void
-}
-const LogoutModal = ({ visible, toggler }:Props) => {
-	
+	toggler: (arg0: boolean) => void;
+};
+const LogoutModal = ({ visible, toggler }: Props) => {
+
 	const router = useRouter();
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
 	const { cache } = useSWRConfig();
 
-	const handleLogout = async() => {
-		await cookiesHelper.clearStorage();
+	const handleLogout = async () => {
 		await clearSWRCache(cache);
-		toggler(false);
+		await cookiesHelper.clearStorage();
+
+		if (pathname.includes('login')) {
+			return toggler(false);
+		}
+
+		// const url = pathname + (searchParams.toString() ? `?${ searchParams.toString() }` : '');
+		// router.replace(`/login?ref=unauthorized&callbackUrl=${ encodeURIComponent(url) }`);
 		router.push('/login?ref=unauthorized');
+		// toggler(false);
 	};
 
 	return (

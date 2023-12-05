@@ -34,7 +34,7 @@ type MenuType = {
 const PatientPortal = () => {
 	const session = useSession();
 	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile(session?.token);
-	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(session?.token);
+	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(session?.token + getProfileResponse?.data?.id);
 
 	const [activeTabIndex, setActiveTabIndex] = useState(1);
 	const [activeTabIndexForCallBackPin, setActiveTabIndexForCallBackPin] = useState(1);
