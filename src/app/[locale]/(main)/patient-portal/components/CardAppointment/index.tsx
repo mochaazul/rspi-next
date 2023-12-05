@@ -146,6 +146,8 @@ const CardAppointment = (props: PropsType) => {
 		}
 	};
 
+	const criteriaForShowRateDoctor = ['Jadwal Selesai', 'Appointment Done'];
+
 	return (
 		<CardPatientPortalStyle
 			className='flex flex-col'
@@ -249,7 +251,7 @@ const CardAppointment = (props: PropsType) => {
 			</div >
 
 			{
-				props.status === 'Jadwal Selesai' &&
+				criteriaForShowRateDoctor.includes(props.status ?? '') &&
 				<div className='flex flex-row gap-x-2 items-center justify-end cursor-pointer mt-[20px]' onClick={ () => {
 					handleShowModal && handleShowModal();
 				} }>

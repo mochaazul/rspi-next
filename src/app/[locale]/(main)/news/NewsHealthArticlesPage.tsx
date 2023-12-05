@@ -46,7 +46,7 @@ const NewsHealthArticlesPage = ({
 		{ label: t('tabPillsLabel.all'), value: '' },
 		{ label: t('tabPillsLabel.news'), value: 'news' },
 		{ label: t('tabPillsLabel.healthArticles'), value: 'article' },
-		{ label: t('tabPillsLabel.healthFirst'), value: 'magazine' }
+		{ label: t('tabPillsLabel.healthFirst'), value: 'healthfirst' }
 	];
 
 	// const { articles, pagination, loading } = useTypedSelector<ArticleState>('articles'); Migrate
@@ -124,7 +124,7 @@ const NewsHealthArticlesPage = ({
 											<Share />
 										</div>
 										<img
-											className='rounded-[10px]'
+											className='rounded-[10px] img-thumbnail-magazine'
 											src={ Object.values(articlesData || [])[0]?.img_url }
 										/>
 										<div className='mt-[30px] mb-[10px] flex items-center'>

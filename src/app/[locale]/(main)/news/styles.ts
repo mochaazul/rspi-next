@@ -11,7 +11,7 @@ export const NewsHealthArticlesStyle = styled.div`
     transition: all .5s;
     background-color: ${ colors.paradiso.accent1Opacity5 };
     }
-    img {
+    .img-thumbnail-magazine {
       width: 540px;
       height: 318px;
       object-fit: cover;

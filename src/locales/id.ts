@@ -817,7 +817,10 @@ export default {
 						notesInputLabel: 'Beritahu kami lebih lanjut',
 						notesInputPlaceholder: 'Masukkan deskripsi...',
 						optionalLabel: '(Opsional)',
-						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.'
+						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.',
+						responReview: 'Review telah',
+						responReviewFailed: ' gagal',
+						responReviewSuccess: ' berhasil'
 					}
 				},
 				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.',

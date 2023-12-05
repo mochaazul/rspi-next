@@ -12,6 +12,7 @@ import { usePostDoctorRatingMutation } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 
 import { ModalStyle } from '../../style';
+import Image from 'next/image';
 
 interface PropsType {
 	visible?: boolean;
@@ -20,7 +21,14 @@ interface PropsType {
 	visitHistory?: I_VisitHistory;
 }
 
-const feedbackPills = ['Communication', 'Professionalism', 'Attitude', 'Skill', 'Timely', 'Knowledge'];
+const feedbackPills = [
+	{ label: 'Communication', value: '1' },
+	{ label: 'Professionalism', value: '2' },
+	{ label: 'Attitude', value: '3' },
+	{ label: 'Skill', value: '4' },
+	{ label: 'Timely', value: '5' },
+	{ label: 'Knowledge', value: '6' }
+];
 
 const Rating = ({ onChange, value }: { value: string, onChange: (value: string) => void; }) => {
 	const t = useScopedI18n('page.patientPortal.riwayatKunjungan.recommendDoctorModal.rating');
@@ -75,14 +83,14 @@ const Feedback = ({ onChange, value }: { value: string[], onChange: (value: stri
 		<div className='flex	flex-wrap gap-[11px] mt-[32px]'>
 			{
 				feedbackPills.map((opt, index) => (
-					<FeedbackPills checked={ isChecked(opt) } key={ index } onClick={ () => { onChecked(opt); } }>
+					<FeedbackPills checked={ isChecked(opt.value) } key={ index } onClick={ () => { onChecked(opt.value); } }>
 						<Text
 							fontSize='16px'
-							fontWeight={ isChecked(opt) ? '900' : '500' }
-							color={ isChecked(opt) ? '#358888' : '#2A2536' }
-							text={ opt } />
-						{ isChecked(opt)
-							? <icons.CheckActive />
+							fontWeight={ isChecked(opt.value) ? '900' : '500' }
+							color={ isChecked(opt.value) ? '#358888' : '#2A2536' }
+							text={ opt.label } />
+						{ isChecked(opt.value)
+							? <Image alt='' src='/images/ic/check-active.svg' width={ 16 } height={ 16 } />
 							: <FeedbackPillsCheck /> }
 					</FeedbackPills>
 				))
@@ -125,25 +133,64 @@ const RecommendDoctorModal = (props: PropsType) => {
 	const t = useScopedI18n('page.patientPortal');
 
 	const { data: giveDoctorRatingResponse, trigger: giveDoctorRating, error: giveDoctorRatingError, isMutating: giveDoctorRatingLoading } = usePostDoctorRatingMutation();
-
+	const [showSuccessReview, setShowSuccessReview] = useState<boolean>(false);
+	const [showSuccessStatus, setShowSuccessStatus] = useState<string>('');
 	const [ratingValue, setRatingValue] = useState<string>('');
 	const [feedbackValue, setFeedbackValue] = useState<string[]>([]);
 	const [feedbackNotes, setFeedbackNotes] = useState<string>('');
 
-	const onSubmit = async () => {
-		if (props.visitHistory) {
+	const onSubmit = async() => {
+		
+		if (props?.visitHistory) {
 			await giveDoctorRating({
-				id: props.visitHistory.appointment_id,
-				payload: {
-					doctor_code: props.visitHistory.doctor_code,
-					question_1: `${ ratingValue }`,
-					question_2: feedbackValue,
-					question_3: feedbackNotes,
-					username: 'RSPI-WebPortal'
-				}
+				appointment_id: props.visitHistory.appointment_id,
+				doctor_code: props.visitHistory.doctor_code,
+				question_1: `${ ratingValue }`,
+				question_2: feedbackValue,
+				question_3: feedbackNotes,
+				username: 'Rebelworks'
+			}).then(res => {
+				setShowSuccessReview(true);
+				setShowSuccessStatus(res.stat_msg ?? '');
+				props.onClose && props.onClose();
+				resetForm();
 			});
-			props.onClose && props.onClose();
+			
 		}
+	};
+
+	const renderModalReview = () => {
+		return (
+			<Modal
+				visible={ showSuccessReview }
+				onClose={ () => setShowSuccessReview(false) }
+				noPadding
+			>
+				<div className='py-3 sm:py-4 px-6 sm:px-10 flex flex-col items-center gap-y-3'>
+					<div className='flex-shrink-0'>
+						{ showSuccessStatus === 'Success' ? <icons.Confirmed className='w-10 h-10 sm:w-12 sm:h-12' /> : <icons.Close className='w-10 h-10 sm:w-12 sm:h-12' /> }
+					</div>
+
+					<Text
+						fontSize='16px'
+						lineHeight='24px'
+						fontWeight='700'
+					>
+						{ t('riwayatKunjungan.recommendDoctorModal.feedback.responReview') }
+						{ showSuccessStatus === 'Success'
+							? t('riwayatKunjungan.recommendDoctorModal.feedback.responReviewSuccess')
+							: t('riwayatKunjungan.recommendDoctorModal.feedback.responReviewFailed')
+						}
+					</Text>
+				</div>
+			</Modal>
+		);
+	};
+
+	const resetForm = () => {
+		setRatingValue('');
+		setFeedbackValue([]);
+		setFeedbackNotes('');
 	};
 
 	const shouldDisable = () => {
@@ -151,33 +198,36 @@ const RecommendDoctorModal = (props: PropsType) => {
 	};
 
 	return (
-		<Modal
-			visible={ props.visible }
-			onClose={ props.onClose }
-			width='520px'
-			noPadding={ true }
-		>
-			<ModalStyle>
-				<div>
-					<Text text={ t('riwayatKunjungan.recommendDoctorModal.header') } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
-					<div className='flex my-[30px] p-[16px] rounded-md bg-[#FAFAFA]'>
-						<div><img className='rounded-full h-[48px] w-[48px]' src={ props.visitHistory?.doctor_photo || Images.Doctor1.src } /></div>
-						<div className='ml-[15px]'>
-							<Text text={ props.visitHistory?.doctor_name ?? '-' } fontSize='16px' fontWeight='700' />
-							<Text text={ props.visitHistory?.doctor_specialty } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
+		<>
+			<Modal
+				visible={ props.visible }
+				onClose={ props.onClose }
+				width='520px'
+				noPadding={ true }
+			>
+				<ModalStyle>
+					<div>
+						<Text text={ t('riwayatKunjungan.recommendDoctorModal.header') } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
+						<div className='flex my-[30px] p-[16px] rounded-md bg-[#FAFAFA]'>
+							<div><img className='rounded-full h-[48px] w-[48px]' src={ props.visitHistory?.doctor_photo || Images.Doctor1.src } /></div>
+							<div className='ml-[15px]'>
+								<Text text={ props.visitHistory?.doctor_name ?? '-' } fontSize='16px' fontWeight='700' />
+								<Text text={ props.visitHistory?.doctor_specialty } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
+							</div>
 						</div>
+						<Rating onChange={ setRatingValue } value={ ratingValue } />
+						<Feedback value={ feedbackValue } onChange={ setFeedbackValue } />
+						<FeedbackNotes value={ feedbackNotes } onChange={ setFeedbackNotes } />
+						<Button label='Submit' className='mt-[32px]' onClick={ onSubmit } disabled={ shouldDisable() }>
+							{
+								giveDoctorRatingLoading && <Spinner />
+							}
+						</Button>
 					</div>
-					<Rating onChange={ setRatingValue } value={ ratingValue } />
-					<Feedback value={ feedbackValue } onChange={ setFeedbackValue } />
-					<FeedbackNotes value={ feedbackNotes } onChange={ setFeedbackNotes } />
-					<Button label='Submit' className='mt-[32px]' onClick={ onSubmit } disabled={ shouldDisable() }>
-						{
-							giveDoctorRatingLoading && <Spinner />
-						}
-					</Button>
-				</div>
-			</ModalStyle>
-		</Modal>
+				</ModalStyle>
+			</Modal>
+			{ renderModalReview() }
+		</>
 	);
 };
 
