@@ -1,4 +1,8 @@
 export default {
+	combobox: {
+		notFound: 'Not found any data',
+		loading: 'Loading...',
+	},
 	dayName: {
 		full: {
 			monday: 'Monday',

@@ -1,4 +1,8 @@
 export default {
+	combobox: {
+		notFound: 'Data tidak ditemukan',
+		loading: 'Sedang memuat...',
+	},
 	dayName: {
 		full: {
 			monday: 'Senin',
