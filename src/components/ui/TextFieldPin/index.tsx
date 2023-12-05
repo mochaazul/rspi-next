@@ -68,7 +68,7 @@ const TextFieldPin = ({ digitLength, password, onChangeValue, wrapperClassName, 
 			{
 				[...Array(digitLength ?? 1)].map((value, key) =>
 					<Input
-						className='max-sm:w-10 max-sm:h-10'
+						className={ `max-sm:w-10 max-sm:h-10 ${inputClassName}` }
 						key={ key }
 						maxLength={ 1 }
 						ref={ elem => InputRefs.current[key] = elem }
@@ -79,7 +79,6 @@ const TextFieldPin = ({ digitLength, password, onChangeValue, wrapperClassName, 
 						onKeyUp={ event => handleOnKeyUp(event, key) }
 						onBlur={ () => handleOnBlur(key) }
 						onFocusCapture={ () => handleOnFocus(key) }
-						className={ inputClassName }
 					/>
 				)
 			}
