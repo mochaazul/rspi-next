@@ -113,6 +113,25 @@ const PatientPortal = () => {
 		}
 	}, [activeTabIndex]);
 
+	const renderContentMobile = useMemo(() => {
+		switch (activeTabIndex) {
+			case 0:
+				return <JadwalKunjungan />;
+			case 1:
+				return <RiwayatKunjungan />;
+			case 2:
+				return <>
+					<RiwayatVaksin />
+				</>;
+			case 3:
+				return <>
+					<RiwayatLab />
+				</>;
+			default:
+				return null;
+		}
+	}, [activeTabIndex]);
+
 	const onHeaderClick = () => {
 		if (shouldEnterPin) {
 			setPinModalVisible(true);
@@ -192,22 +211,30 @@ const PatientPortal = () => {
 						isLoading={ getProfileLoading }
 					/>
 				</div>
-				<div className='mt-[32px] flex'>
+				<div className='mt-[32px] flex flex-col md:flex-row'>
 					<div className='relative tabs border-solid border-b-[1px] border-b-white/20 max-sm:hidden'>
 						<div className='tabs-menu'>
 							{ renderMenuItem() }
 						</div>
 					</div>
-					{ /* <div className='md:hidden'>
+					<div className='md:hidden'>
 						<Tabs
 							activeTabIndex={ activeTabIndex }
 							setActiveTabIndex={ setActiveTabIndex }
 							tabsData={ tabMenuLabel.flatMap(eachMenu => eachMenu.children.length > 0 ? eachMenu.children : eachMenu).map(eachMap => eachMap.label) }
-							onClickItem={ () => setPinModalVisible(true) }
+							onClickItem={ index => {
+								if (index > 0) {
+									setPinModalVisible(true);
+								}
+								setActiveTabIndexForCallBackPin(index);
+							} }
 						/>
-					</div> */ }
-					<div className='md:ml-[31px] w-full min-h-[500px]'>
+					</div>
+					<div className='md:ml-[31px] w-full min-h-[500px] max-sm:hidden'>
 						{ renderContent }
+					</div>
+					<div className='md:ml-[31px] w-full min-h-[500px] md:hidden'>
+						{ renderContentMobile }
 					</div>
 				</div>
 			</div>

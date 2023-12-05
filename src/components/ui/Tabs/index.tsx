@@ -12,7 +12,7 @@ type Props = {
 	tabsData: string[];
 	isBackground?: boolean;
 	className?: HTMLDivElement['className'];
-	onClickItem?: () => void;
+	onClickItem?: (i: number) => void;
 };
 
 const Tabs: React.FC<Props> = ({
@@ -54,7 +54,7 @@ const Tabs: React.FC<Props> = ({
 								className={ `${ !isBackground ? 'py-[20px]' : 'py-[20px] px-[37px]' } transition-all duration-300` }
 								onClick={ () => {
 									if (onClickItem) {
-										onClickItem();
+										onClickItem(idx);
 									}
 									setActiveTabIndex(idx);
 								} }>

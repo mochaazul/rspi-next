@@ -68,6 +68,7 @@ const TextFieldPin = ({ digitLength, password, onChangeValue, ...props }: InputP
 			{
 				[...Array(digitLength ?? 1)].map((value, key) =>
 					<Input
+						className='max-sm:w-10 max-sm:h-10'
 						key={ key }
 						maxLength={ 1 }
 						ref={ elem => InputRefs.current[key] = elem }
