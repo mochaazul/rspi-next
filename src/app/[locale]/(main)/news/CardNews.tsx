@@ -28,7 +28,7 @@ const CardNews = (props: PropsType) => {
 				<div>
 					<Share id={ props.id } />
 				</div>
-				<div className='mr-[30px]'>
+				<div className='mr-[30px] lg:w-1/2'>
 					<div className='flex items-center'>
 						<div className='max-w-[160px]'>
 							<Button theme='primary' label={ props.category } className='btn-category' />

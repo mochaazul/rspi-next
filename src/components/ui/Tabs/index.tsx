@@ -38,7 +38,7 @@ const Tabs: React.FC<Props> = ({
 			window.addEventListener('resize', setTabPosition);
 		}
 
-		return () => window.removeEventListener('resize', setTabPosition);
+		return () => typeof window !== 'undefined' ? window.removeEventListener('resize', setTabPosition) : null;
 	}, [activeTabIndex]);
 
 	return (

@@ -145,7 +145,7 @@ const NewsHealthArticlesPage = ({
 										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ Object.values(articlesData || [])[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
 										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px]' dangerouslySetInnerHTML={ { __html: Object.values(articlesData || [])[0]?.short_description } } />
 									</div>
-									<div className='divide-y divide-solid'>
+									<div className='mb-3'>
 										{
 											Object.values(articlesData || [])?.slice(0, 3)
 												?.map((data, index) => (

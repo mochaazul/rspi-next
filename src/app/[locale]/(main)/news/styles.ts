@@ -31,7 +31,11 @@ export const CardNewsStyle = styled.div`
     @media screen and (min-width: 640px) {
       border-left: 6px solid transparent;
       transition: all .5s;
-  
+      padding-left: 10px;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      margin-bottom:20px;
+      
       &.active, &:hover {
         transition: all .5s;
         border-left-color: ${ colors.paradiso.default };
