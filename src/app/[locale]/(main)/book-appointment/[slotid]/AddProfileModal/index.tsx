@@ -32,7 +32,7 @@ export type ProfilePayload = {
 };
 
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
-
+	
 	const t = useScopedI18n('page.bookingAppointment');
 	const tValidation = useScopedI18n('validation.formValidation');
 
@@ -63,7 +63,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			name: '',
 			phone: ''
 		},
-		onSubmit: async (values: ProfilePayload) => {
+		onSubmit: async(values: ProfilePayload) => {
 			const { dob, email, gender, name, phone } = values;
 			if (type === 'other') {
 				await createFamilyProfile({
@@ -74,7 +74,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					phone: cleanUpMask(phone),
 					gender: gender
 				});
-
+			
 			} else {
 				await updateProfile({
 					name: name,
@@ -93,7 +93,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		resetMutation(); // we need this to clear errors
 	}, []);
 
-	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setEnableValidation(true);
 		formikProfile.handleSubmit();
@@ -124,9 +124,9 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	};
 
 	useEffect(() => {
-
+		
 		if (type === 'self') {
-
+			
 			formikProfile.setFieldValue('email', selfProfile?.email);
 			formikProfile.setFieldValue('phone', selfProfile?.phone);
 			formikProfile.setFieldValue('name', selfProfile?.name);

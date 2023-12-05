@@ -1,12 +1,14 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import { FormikProps, useFormik } from 'formik';
 import Image from 'next/image';
+import { useSWRConfig } from 'swr';
 
-import { icons, colors } from '@/constant';
+import { icons, colors, regExp } from '@/constant';
+import { cookiesHelper } from '@/helpers';
 import {
 	CheckPinType,
 	UpdateEmailType,
@@ -69,7 +71,7 @@ export default function Page() {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
 	const session = useSession();
-	const { data: patientProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile(session?.token);
+	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile(session?.token);
 	const { data: visitHospitalHistory } = useGetVisitHistory(session?.token + patientProfile?.data?.id);
 	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
@@ -77,6 +79,7 @@ export default function Page() {
 	const { trigger: updateProfile, isMutating: loadingUpdateProfile } = useUpdateProfile();
 	const { trigger: checkPin } = usePostCheckPinMutation();
 
+	const { cache } = useSWRConfig();
 	const navigate = useRouter();
 	const t = useScopedI18n('page.profilePage');
 	const tModalPin = useScopedI18n('modalDialog.pin');
@@ -121,7 +124,7 @@ export default function Page() {
 			phone: patientProfile?.data?.phone ? regexInputPhone(patientProfile?.data?.phone) : ''
 		},
 		enableReinitialize: true,
-		onSubmit: async (formProfile: UpdateProfileType) => {
+		onSubmit: async(formProfile: UpdateProfileType) => {
 			try {
 				await updateProfile({
 					...formProfile,
@@ -143,7 +146,7 @@ export default function Page() {
 		validateOnChange: enableValidation.email,
 		validationSchema: UpdateEmailSchema,
 		initialValues: { email: '' },
-		onSubmit: async (formEmail: UpdateEmailType) => {
+		onSubmit: async(formEmail: UpdateEmailType) => {
 			try {
 				await updateEmail(formEmail);
 				setShowModalSuccessUpdateEmail(true);
@@ -160,7 +163,7 @@ export default function Page() {
 		validateOnChange: enableValidation.pin,
 		initialValues: { pin: '' },
 		validationSchema: CheckPinSchema,
-		onSubmit: async (formPin: CheckPinType) => {
+		onSubmit: async(formPin: CheckPinType) => {
 			try {
 				await checkPin(formPin);
 				setPinModalVisible(false);
@@ -178,7 +181,7 @@ export default function Page() {
 		validateOnChange: enableValidation.photo,
 		initialValues: { photo_file: null },
 		validationSchema: UploadPhotoSchema,
-		onSubmit: async (formUpload: UploadPhotoTypeState) => {
+		onSubmit: async(formUpload: UploadPhotoTypeState) => {
 			try {
 				if (formUpload.photo_file && !isLoadingDeleteAvatar) {
 					setIsLoadingUploadAvatar(true);
@@ -216,6 +219,34 @@ export default function Page() {
 	// useEffect(() => {
 	// createListOfHistoryUsers();
 	// }, []);
+
+	// TODO: bagaimana cara yg baik jika pakai useSWR?
+	// const getDataProfile = async () => {
+	// 	const responseData = await getProfile();
+	// 	if (responseData.payload.stat_msg !== 'Success') {
+	// 		removeUserDatas();
+	// 	}
+	// };
+
+	const clearSWRCache = async() => {
+		const keys = cache.keys();
+		for (const key of keys) {
+			cache.delete(key);
+		}
+	};
+
+	const removeUserDatas = async() => {
+		await cookiesHelper.clearStorage();
+		await clearSWRCache();
+		navigate.replace('/login');
+	};
+
+	// Notes: apakah ada cara yg lebih baik?
+	useEffect(() => {
+		if (errorGetProfile) {
+			removeUserDatas();
+		}
+	}, [errorGetProfile]);
 
 	// TODO: PENDING FEATURE
 	// const createListOfHistoryUsers = () => {
@@ -255,7 +286,7 @@ export default function Page() {
 		}
 	};
 
-	const onHandleTempProfileImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+	const onHandleTempProfileImage = async(event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
 			const selectedFile: File | null = event.target.files && event.target.files.length
 				? event.target.files[0]
@@ -327,7 +358,7 @@ export default function Page() {
 		return getValidationTranslation(tValidation, key, { label });
 	};
 
-	const onClickDeletePhoto = async () => {
+	const onClickDeletePhoto = async() => {
 		try {
 			setEnableValidation(prevToggle => ({ ...prevToggle, photo: false }));
 

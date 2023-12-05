@@ -59,16 +59,11 @@ const LoginPage = () => {
 					setSuccessMessage(`${ t('welcome') } ${ response?.data?.email }`);
 					setNotifMode('success');
 					setLoadingNavigate(true);
-					const callbackUrl = searchParam.get('callbackUrl') || '/';
-					console.log({ callbackUrl });
-					if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
-						// navigate.replace(callbackUrl);
-						navigate.back();
-						// setLoadingNavigate(false);
 
+					if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
+						navigate.back();
 					} else
 						navigate.replace('/');
-					// setLoadingNavigate(false);
 
 				} else {
 					setErrorUser({
