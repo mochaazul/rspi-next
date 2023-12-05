@@ -73,7 +73,7 @@ export default function Page() {
 
 	const session = useSession();
 	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile(session?.token);
-	const { data: visitHospitalHistory } = useGetVisitHistory(session?.token);
+	const { data: visitHospitalHistory } = useGetVisitHistory(session?.token + patientProfile?.data?.id);
 	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: updateEmail } = useUpdateEmail();
