@@ -3,9 +3,10 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useFormik, FormikProps } from 'formik';
 
-import { Images, colors } from '@/constant';
+import { colors } from '@/constant';
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
@@ -16,7 +17,7 @@ import { useUpdatePassword } from '@/lib/api/client/auth';
 import { UpdatePasswordType, ResponseStatus } from '@/interface';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-import { UpdatePasswordPageStyle, Box } from './style';
+import { ContainerStyle, Box } from '../style';
 
 const UpdatePasswordPage = () => {
 	const navigate = useRouter();
@@ -80,12 +81,19 @@ const UpdatePasswordPage = () => {
 	};
 
 	return (
-		<UpdatePasswordPageStyle>
+		<ContainerStyle>
 			<Box>
 				<div className='w-full flex flex-col items-center'>
-					<Link href='/' className='mb-2 lg:mb-8'>
-						<Images.LogoRSPI />
-					</Link>
+					<div className='hidden md:flex justify-center mb-8'>
+						<Link href='/'>
+							<Image
+								src='/images/logo_rspi.svg'
+								alt='rspi-logo'
+								width={ 132 }
+								height={ 60 }
+							/>
+						</Link>
+					</div>
 					<Text
 						fontType='h1'
 						fontSize='32px'
@@ -184,7 +192,7 @@ const UpdatePasswordPage = () => {
 					/>
 				</Form>
 			</Box>
-		</UpdatePasswordPageStyle>
+		</ContainerStyle>
 	);
 };
 

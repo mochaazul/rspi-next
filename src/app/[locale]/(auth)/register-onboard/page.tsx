@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
+import Image from 'next/image';
 
-import { Images, colors } from '@/constant';
+import { colors } from '@/constant';
 import { RegisterOnboardType, ResponseStatus } from '@/interface';
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
@@ -17,7 +18,7 @@ import { RegisterOnboardSchema } from '@/validator/auth';
 import { useCheckPhonePatient, useRegisterOnboard } from '@/lib/api/client/auth';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-import { RegisterOnboardStyle, Box } from './style';
+import { ContainerStyle, Box } from '../style';
 
 const regexPhone = (phone: string) => {
 	let phoneNumber =
@@ -28,7 +29,6 @@ const regexPhone = (phone: string) => {
 
 const RegisterOnboard = () => {
 	const navigate = useRouter();
-	const session = useSession();
 	const searchParams = useSearchParams()!;
 	const t = useScopedI18n('page.registerOnboard');
 	const tValidation = useScopedI18n('validation.formValidation');
@@ -175,19 +175,32 @@ const RegisterOnboard = () => {
 	};
 
 	return (
-		<RegisterOnboardStyle>
+		<ContainerStyle>
 			<Box>
 				<Form autoComplete='off'>
-					<div className='mb-[32px] logo-image'>
-						<Images.LogoRSPI />
+					<div className='mb-8 max-md:hidden flex justify-center'>
+						<Image
+							src='/images/logo_rspi.svg'
+							alt='rspi-logo'
+							width={ 132 }
+							height={ 60 }
+						/>
 					</div>
-					<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } textAlign='center' />
+					<Text
+						fontType={ 'h1' }
+						text={ t('heading') }
+						fontSize={ '32px' }
+						lineHeight={ '48px' }
+						fontWeight={ '900' }
+						textAlign='center'
+						subClassName='max-md:leading-8 max-md:text-[20px]'
+					/>
 					<Text
 						text={ t('subHeading') }
 						fontSize={ '20px' }
 						lineHeight={ '24px' }
 						fontWeight={ '400' }
-						className='mt-[16px] mb-[62px]'
+						className='mt-2 md:mt-4 mb-[42px] md:mb-[62px]'
 						color={ colors.grey.pencil }
 						textAlign='center'
 					/>
@@ -197,7 +210,7 @@ const RegisterOnboard = () => {
 						&& handleNotifError(errorUser?.stat_msg?.toLowerCase())
 					}
 
-					<div className='mb-8'>
+					<div className='mb-8 md:mb-4'>
 						<Form.TextField
 							id='medical_record'
 							name='medical_record'
@@ -234,7 +247,7 @@ const RegisterOnboard = () => {
 					/>
 					<Text
 						text={ t('form.phoneHint') }
-						className='mb-8'
+						className='mb-8 md:mb-4'
 						fontSize={ '12px' }
 						lineHeight={ '15px' }
 						fontWeight={ '400' }
@@ -246,7 +259,7 @@ const RegisterOnboard = () => {
 					{
 						isDuplicatePhoneNumber && handleNotifError('your phone number has been registered. please change with new phone number')
 					}
-					<div className='mb-8'>
+					<div className='mb-8 md:mb-4'>
 						<Form.DateField
 							id='birth_date'
 							name='birth_date'
@@ -271,7 +284,6 @@ const RegisterOnboard = () => {
 						/>
 					</div> */ }
 					<Button
-						className='mt-[32px]'
 						disabled={ !formikRegister.values.phone || !formikRegister.values.birth_date || !formikRegister.values.medical_record || loadingUser }
 						onClick={ () => {
 							setEnableValidation(true);
@@ -281,6 +293,7 @@ const RegisterOnboard = () => {
 							});
 							formikRegister.handleSubmit();
 						} }
+						className='max-md:text-sm'
 					>
 						{
 							loadingUser
@@ -288,8 +301,9 @@ const RegisterOnboard = () => {
 								: t('submitBtnLabel')
 						}
 					</Button>
-					<Button theme='outline'
-						className='mt-[12px]'
+					<Button
+						theme='text'
+						className='md:mt-4 mt-6 max-md:!py-0'
 						onClick={ () => {
 							const isHome: string = searchParams.get('isHome') ?? '';
 							if (isHome === 'true') {
@@ -297,7 +311,8 @@ const RegisterOnboard = () => {
 							} else {
 								navigate.replace('/pin-create');
 							}
-						} }>
+						} }
+					>
 						<Text
 							text={ t('mrNotAvailableBtnLabel') }
 							className='cursor-pointer'
@@ -305,12 +320,12 @@ const RegisterOnboard = () => {
 							lineHeight={ '19px' }
 							fontWeight={ 'bold' }
 							textAlign='center'
-							color={ colors.green.default }
+							color={ colors.grey.dark }
 						/>
 					</Button>
 				</Form>
 			</Box>
-		</RegisterOnboardStyle>
+		</ContainerStyle>
 	);
 };
 
