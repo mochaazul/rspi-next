@@ -37,6 +37,8 @@ export const getValidationTranslation = (
 			return passedScopedT('fileNotValid');
 		case 'maxFileSize':
 			return passedScopedT('maxFileSize', { maxFileSize: params?.maxFileSize ?? keys?.[1] });
+		case 'prefixPhoneNotValid':
+			return passedScopedT('prefixPhoneNotValid');
 		case 'phoneNotValid':
 			return passedScopedT('phoneNotValid');
 		default:

@@ -11,6 +11,7 @@ import { BalloonPopupStyle, PopupInfoContainerStyle } from './style';
 import Form from '../../../Form';
 import Text from '../../../Text';
 import WithInputLabel, { PropsType } from '../../../withInputLabel';
+import { ErrorText } from '../../../withInputLabel/style';
 
 interface HorizontalInputType {
 	inputProps: PropsType,
@@ -48,6 +49,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 					] }
 					{ ...props.inputProps }
 					className={ props.inputProps.isError ? errorInputProps.className : '' }
+					errorMessage={ undefined }
 				/>
 			);
 		}
@@ -60,13 +62,18 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 					iconPosition='left'
 					iconName='CalendarIcon'
 					className={ props.inputProps.isError ? errorInputProps.className : '' }
+					errorMessage={ undefined }
 				/>
 			);
 		}
 
 		if (props.inputType === 'phone') {
 			return (
-				<Form.PhoneNumberInput { ...props.inputProps } wrapperClassName={ props.inputProps.isError ? errorInputProps.className : '' } />
+				<Form.PhoneNumberInput
+					{ ...props.inputProps }
+					wrapperClassName={ props.inputProps.isError ? errorInputProps.className : '' }
+					errorMessage={ undefined }
+				/>
 			);
 		}
 
@@ -80,55 +87,64 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 						$iconColor: errorInputProps.iconColor,
 						featherIcon: errorInputProps.featherIcon
 					} : {} }
+				errorMessage={ undefined }
 			/>
 		);
 	};
 
 	return (
-		<div className='flex max-sm:flex-col sm:grid sm:grid-cols-[240px_1fr] sm:items-center max-sm:mb-4 mb-5'>
-			<WithInputLabel.LabelText className='mb-2.5 sm:mb-0 flex gap-3 items-center'>
-				{ props.label }
-				{
-					!!props.labelInfo ?
-						<PopupInfoContainerStyle>
-							<icons.ExclamationMark className='cursor-pointer' />
-							<BalloonPopupStyle className='balloon-popup min-[300px]:min-w-[250px] min-[480px]:min-w-[400px]'>
-								<div className='rounded-[10px] px-[10px] py-[5px] h-full relative z-10'>
-									<Text
-										fontWeight='400'
-										fontSize='12px'
-										lineHeight='23px'
-										color={ colors.white.default }
-										text={ props.labelInfo }
-										className={ '' }
-									/>
-								</div>
-							</BalloonPopupStyle>
-						</PopupInfoContainerStyle> :
-						null
-				}
-			</WithInputLabel.LabelText>
-			<div className='col-auto relative'>
-				{ renderInput() }
+		<div className='max-sm:mb-4 mb-5'>
+			<div className='flex max-sm:flex-col sm:grid sm:grid-cols-[240px_1fr] sm:items-center'>
+				<WithInputLabel.LabelText className='mb-2.5 sm:mb-0 flex gap-3 items-center'>
+					{ props.label }
+					{
+						!!props.labelInfo ?
+							<PopupInfoContainerStyle>
+								<icons.ExclamationMark className='cursor-pointer' />
+								<BalloonPopupStyle className='balloon-popup min-[300px]:min-w-[250px] min-[480px]:min-w-[400px]'>
+									<div className='rounded-[10px] px-[10px] py-[5px] h-full relative z-10'>
+										<Text
+											fontWeight='400'
+											fontSize='12px'
+											lineHeight='23px'
+											color={ colors.white.default }
+											text={ props.labelInfo }
+											className={ '' }
+										/>
+									</div>
+								</BalloonPopupStyle>
+							</PopupInfoContainerStyle> :
+							null
+					}
+				</WithInputLabel.LabelText>
+				<div className='col-auto relative'>
+					{ renderInput() }
 
-				{ props.onEditClick && (
-					<div className='absolute pr-5 right-0 inset-y-0 flex items-center'>
-						<button
-							type='button'
-							className='flex items-center gap-2 focus:outline-none'
-							onClick={ props.onEditClick }
-						>
-							<Edit3 className='w-[18px] h-[18px] sm:w-5 sm:h-5' color={ colors.green.brandAccent } />
-							<Text
-								fontSize='14px'
-								fontWeight='900'
-								color={ colors.green.brandAccent }
-								subClassName='max-sm:text-xs'
-							>{ t('editLabel') }</Text>
-						</button>
-					</div>
-				) }
+					{ props.onEditClick && (
+						<div className='absolute pr-5 right-0 inset-y-0 flex items-center'>
+							<button
+								type='button'
+								className='flex items-center gap-2 focus:outline-none'
+								onClick={ props.onEditClick }
+							>
+								<Edit3 className='w-[18px] h-[18px] sm:w-5 sm:h-5' color={ colors.green.brandAccent } />
+								<Text
+									fontSize='14px'
+									fontWeight='900'
+									color={ colors.green.brandAccent }
+									subClassName='max-sm:text-xs'
+								>{ t('editLabel') }</Text>
+							</button>
+						</div>
+					) }
+				</div>
 			</div>
+
+			{ props.inputProps?.errorMessage && !!props.inputProps?.isError &&
+				<div className='flex justify-end'>
+					<ErrorText>{ props.inputProps?.errorMessage }</ErrorText>
+				</div>
+			}
 		</div>
 	);
 };

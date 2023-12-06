@@ -50,7 +50,7 @@ const TextField = ({
 			{
 				!isNumber
 					? <Input { ...props } />
-					: <InputMaskedStyled mask={ mask ?? '' } maskChar={ '' } { ...restProps } />
+					: <InputMaskedStyled mask={ mask ?? '999999999999999' } maskChar={ '' } { ...restProps } />
 			}
 		</TextFieldWrapper>
 	);

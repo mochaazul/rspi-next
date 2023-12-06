@@ -10,8 +10,8 @@ export const ContactUsSchema = yup.object().shape({
 	phone: yup.string().required('required')
 		.test(
 			'isPhoneValid',
-			'phoneNotValid',
-			(value: any) => /^(0\d+|(\+\d+|\(\d{1,5}\))?)[ -]?\d{6,14}$/g.test(value)
+			'prefixPhoneNotValid',
+			(value: any) => /^(0\d+|(\+\d+|\(\d{1,5}\))?)[ -]?\d{8,15}$/g.test(value)
 		),
 	title: yup.string().required('required'),
 	content: yup.string().required('required')

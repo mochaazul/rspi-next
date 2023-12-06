@@ -26,8 +26,8 @@ export type PropsType = InputType & TextAreaType & InputPinType & DropdownProps 
 	infoMessage?: string;
 	width?: string;
 	labelHorizontal?: boolean;
-	labelClassName?: string
-	labelGap?: number
+	labelClassName?: string;
+	labelGap?: number;
 };
 
 /**
@@ -49,7 +49,7 @@ const withInputLabel = (WrappedComponent: WrappedComponentType['WrappedComponent
 ) => {
 	return (
 		<InputWrapper width={ width }>
-			<div className={ `flex ${ labelHorizontal ? 'items-center' : '' } ${ labelHorizontal ? 'flex-row' : 'flex-col' } ${props.labelGap && `gap-[${props.labelGap}px]`}` }>
+			<div className={ `flex ${ labelHorizontal ? 'items-center' : '' } ${ labelHorizontal ? 'flex-row' : 'flex-col' } ${ props.labelGap && `gap-[${ props.labelGap }px]` }` }>
 				{
 					label ?
 						<div className={ `${ labelHorizontal ? 'mr-10' : 'mb-2' }` }>

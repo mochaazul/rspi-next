@@ -662,7 +662,9 @@ export default function Page() {
 											onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => formikProfile.setFieldValue(e.target.name, regexInputPhone(e.target.value)),
 											placeholder: t('profileDetail.patientPhoneNumberPlaceholder'),
 											disabled: isDisableFormProfile,
-											// errorMessage: getInputErrorMessage(formikProfile.errors.phone, t('profileDetail.patientPhoneNumber')),
+											errorMessage: formikProfile.errors.phone !== 'required' // Notes: required telah dihandle dishow di notif panel
+												? getInputErrorMessage(formikProfile.errors.phone, t('profileDetail.patientPhoneNumber'))
+												: '',
 											isError: !!formikProfile.errors.phone
 										} }
 									/>
