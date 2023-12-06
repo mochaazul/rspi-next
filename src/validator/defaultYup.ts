@@ -16,3 +16,10 @@ export const DefaultPasswordYup = yup.string().required('required')
 
 export const DefaultPinYup = yup.string().required('required')
 	.length(6, ({ length }) => `exactLength_${ length }`);
+
+export const DefaultPhoneSelectYup = yup.string().required('required')
+	.test(
+		'idPhoneWithPrefixValid',
+		'phoneNotValid',
+		(value: any) => /\d{6,14}$/g.test(value)
+	);

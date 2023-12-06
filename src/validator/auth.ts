@@ -1,6 +1,11 @@
 import * as yup from 'yup';
 
-import { DefaultEmailYup, DefaultPasswordYup, DefaultPinYup } from './defaultYup';
+import {
+	DefaultEmailYup,
+	DefaultPasswordYup,
+	DefaultPhoneSelectYup,
+	DefaultPinYup
+} from './defaultYup';
 
 export const LoginSchema = yup.object().shape({
 	email: DefaultEmailYup,
@@ -38,7 +43,7 @@ export const OTPSchema = yup.object().shape({
 
 export const RegisterOnboardSchema = yup.object().shape({
 	medical_record: yup.string().required('required'),
-	phone: yup.string().required('required'),
+	phone: DefaultPhoneSelectYup,
 	birth_date: yup.string().required('required'),
 });
 
