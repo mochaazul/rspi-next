@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
+import Image from 'next/image';
 
-import { colors, icons, Images } from '@/constant';
+import { colors, icons } from '@/constant';
 
 import { OTPType } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
@@ -18,7 +19,8 @@ import NotificationPanel from '@/components/ui/NotificationPanel';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { getProfile } from '@/lib/api/profile';
 
-import OTPPageStyle, { Box, WarningNote } from './style';
+import { WarningNote } from './style';
+import { ContainerStyle, Box } from '../style';
 
 type Props = {
 	onResend?: () => void,
@@ -154,10 +156,15 @@ const OTPPage = () => {
 	};
 
 	return (
-		<OTPPageStyle>
+		<ContainerStyle>
 			<Box>
-				<div className='mb-[32px]'>
-					<Images.LogoRSPI />
+				<div className='hidden md:flex justify-center mb-8'>
+					<Image
+						src='/images/logo_rspi.svg'
+						alt='rspi-logo'
+						width={ 132 }
+						height={ 60 }
+					/>
 				</div>
 				<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
 				{ /* TODO : INI NOMOR HANDPHONE NYa masih hardcode ?? */ }
@@ -208,7 +215,7 @@ const OTPPage = () => {
 					<Button className='mt-8' theme='primary' type='submit' disabled={ loadingSubmit }>{ t('form.submitBtnLabel') }</Button>
 				</Form>
 			</Box>
-		</OTPPageStyle>
+		</ContainerStyle>
 	);
 };
 

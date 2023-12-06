@@ -10,22 +10,6 @@ const LandingPageStyle = styled.div`
   min-height: 100vh;
   width: 100%;
   position: relative;
-
-  .login {
-    border: 3px solid var(--color-blue-100);
-    padding: 30px;
-    border-radius: 15px;
-  }
-
-  .mb-20 {
-    margin-bottom: 20px;
-  }
-  .mb-30 {
-    margin-bottom: 30px;
-  }
-  .group-wrapper {
-    min-height: 75px;
-  }
 `;
 
 export default LandingPageStyle;

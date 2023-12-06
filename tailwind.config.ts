@@ -12,7 +12,11 @@ module.exports = {
 			screens: {
 				'ssm': '320px',
 			},
-			colors: {},
+			colors: {
+				red: {
+					default: '#EB5757'
+				}
+			},
 			width: {
 				'920': '920px',
 				defaultContent: '1110px',

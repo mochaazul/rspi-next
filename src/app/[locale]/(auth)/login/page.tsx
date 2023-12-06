@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
+import Image from 'next/image';
 
 import { LoginType, ResponseStatus } from '@/interface';
 import { colors, Images } from '@/constant';
@@ -184,12 +185,11 @@ const LoginPage = () => {
 
 	return (
 		<LoginPageStyle>
-			<div className='grid max-sm:grid-cols-2 grid-cols-3 max-sm:gap-0 gap-3 w-full'>
+			<div className='grid max-md:grid-cols-2 grid-cols-3 max-md:gap-0 gap-3 w-full'>
 				<div className='col-span-2'>
 					<Form className={ `
-					p-4
-					md:p-8
-					login min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
+					max-md:py-6 max-md:px-4
+					md:p-8 min-h-screen flex flex-col items-center md:justify-center max-md:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
 					` }
 						onSubmit={ (e: React.SyntheticEvent) => {
 							e.preventDefault();
@@ -200,21 +200,26 @@ const LoginPage = () => {
 						autoComplete='off'
 					>
 						<div className='w-full'>
-							<div className='hidden sm:flex max-2xl:mb-2 mb-8'>
+							<div className='hidden md:flex mb-2 xl:mb-8'>
 								<Link href='/' className='flex'>
-									<Images.LogoRSPI />
+									<Image
+										src='/images/logo_rspi.svg'
+										alt='rspi-logo'
+										width={ 132 }
+										height={ 60 }
+									/>
 								</Link>
 							</div>
-							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
+							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-md:leading-8 max-md:text-[20px]'>
 								{ t('heading') }
 							</Text>
-							<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-4 max-2xl:mb-6 mb-16' subClassName='max-lg:text-[16px] max-lg:leading-[24px]'>
+							<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-2 mb-4 md:mt-4' subClassName='max-md:text-base max-md:leading-6'>
 								{ t('subHeading') }
 							</Text>
 						</div>
 						{
 							notifVisible &&
-							<div className='w-full mb-[32px]'>
+							<div className='w-full mb-[60px] md:mb-8'>
 								<NotificationPanel
 									mode={ notifMode }
 									visible={ notifVisible && !loadingSubmit }
@@ -224,7 +229,7 @@ const LoginPage = () => {
 								</NotificationPanel>
 							</div>
 						}
-						<Form.FormGroup className='group-wrapper w-full'>
+						<Form.FormGroup className={ `group-wrapper w-full ${ notifVisible ? '' : 'pt-[26px]' }` }>
 							<Form.TextField
 								id='email'
 								placeholder={ t('form.emailPlaceholder') }
@@ -274,11 +279,11 @@ const LoginPage = () => {
 							className='w-full mt-2'
 							disabled={ loadingSubmit }
 						/>
-						<Text fontType={ null } fontWeight='400' color={ colors.grey.dark } className='max-2xl:mt-5 mt-8 max-lg:text-[14px] text-[20px]'>
+						<Text fontType={ null } fontWeight='400' color={ colors.grey.dark } className='max-2xl:mt-5 mt-8 max-md:text-[14px] text-[20px]'>
 							{ t('footer.notRegisteredLabel') }&nbsp;
 							<Link href='/register'>
 								<Text
-									className='inline-block max-lg:text-[14px] text-[20px]'
+									className='inline-block max-md:text-[14px] text-[20px]'
 									fontType={ null }
 									fontWeight='700'
 									color={ colors.paradiso.default }
@@ -289,7 +294,7 @@ const LoginPage = () => {
 						</Text>
 					</Form>
 				</div>
-				<div className='max-sm:hidden col-span-1 h-full w-full bg-no-repeat bg-cover bg-center' style={ { backgroundImage: `url(${ Images.AuthRightBG })` } } />
+				<div className='max-md:hidden col-span-1 h-full w-full bg-no-repeat bg-cover bg-center' style={ { backgroundImage: `url(${ Images.AuthRightBG })` } } />
 			</div>
 
 			<LoadingScreen show={ loadingNavigate } />

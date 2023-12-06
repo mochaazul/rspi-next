@@ -293,7 +293,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				{
 					appStage !== 'prod' &&
 					<div className='flex justify-center'>
-						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version { config.version } - { appStage.toUpperCase() }</Text>
+						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version { config.version } </Text>
 					</div>
 				}
 			</div>

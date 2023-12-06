@@ -5,17 +5,19 @@ import { colors } from '@/constant';
 import { GlobalAllTransition5ms } from '@/constant/globalstyle';
 
 export interface InputPinType extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-	password?: boolean;
-	digitLength?: number;
-	onChangeValue?: (obj: { name?: string; value: string; }) => any;
-	semiSecure?: boolean;
+  password?: boolean;
+  digitLength?: number;
+  onChangeValue?: (obj: { name?: string; value: string; }) => any;
+  semiSecure?: boolean;
+  inputClassName?: string;
+  wrapperClassName?: string;
 }
 
 export const TextFieldPinWrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  margin: 0 -10px;
+  column-gap: 20px;
 `;
 
 export const Input = styled.input`
@@ -27,7 +29,6 @@ export const Input = styled.input`
   font-size: 32px;
   outline: 1px solid ${ colors.grey.lighter };
   text-align: center;
-  margin: 0 10px;
   ${ GlobalAllTransition5ms }
 
   &:focus {

@@ -13,7 +13,6 @@ import Link from 'next/link';
 import {
 	CenterOfExcellenceDetail,
 	FacilityServicesDetail,
-	FooterDetail,
 	HospitalDetail,
 	UserSessionData,
 } from '@/interface';
@@ -39,15 +38,13 @@ export const Header = ({
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData,
-	marAllReadNotifFunc,
-	footersData,
+	marAllReadNotifFunc
 }: {
 	session?: UserSessionData,
 	hospitalData: HospitalDetail[],
 	centerOfExcellenceData: CenterOfExcellenceDetail[],
 	facilityServicesData: FacilityServicesDetail[],
-	marAllReadNotifFunc?: () => any,
-	footersData: FooterDetail[],
+	marAllReadNotifFunc?: () => any;
 }) => {
 
 	const router = useRouter();
@@ -313,7 +310,7 @@ export const Header = ({
 				{ renderMenuMobileWithSubmenu(t('centreOfExcellence'), 'centre-of-excellence') }
 				{ renderMenuMobileWithSubmenu(t('facility'), 'facilities') }
 				{ renderMenuMobile(t('findDoctor'), '/find-a-doctor') }
-				{ renderMenuMobile(t('career'), '/') }
+				{/* { renderMenuMobile(t('career'), '/') } */}
 				{ renderMenuMobile(t('contactUs'), '/contact-us') }
 				{ isLoggedIn ?
 					<div className='nav-menu' onClick={ handleClick }>
@@ -450,9 +447,9 @@ export const Header = ({
 									</div>
 								</div>
 
-								<div id='career'>
+								{/* <div id='career'>
 									<Text text={ t('career') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
-								</div>
+								</div> */}
 
 								<Link id='find-doctor' href='/find-a-doctor'>
 									<Text text={ t('findDoctor') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />

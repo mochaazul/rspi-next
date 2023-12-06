@@ -1,7 +1,7 @@
 
 'use client';
 import FindDoctorStyle from './style';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DropdownSearch from '@/components/ui/DropdownSearch';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail, I_MasterDoctor, LandingPageFindADoctorForm } from '@/interface';
@@ -13,10 +13,11 @@ import { Dropdown, Form, TextField } from '@/components/ui';
 import Button from '@/components/ui/Button';
 import Combobox from '@/components/ui/Combobox';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
+import { useGetDoctors } from '@/lib/api/client/doctors';
+import { debounce } from 'lodash';
 type Props = {
 	isTelemedicine: boolean;
 	hospitals: HospitalDetail[],
-	doctors: I_MasterDoctor[],
 	specialtys: I_SpecialtyDropdownResponse[];
 };
 
@@ -24,11 +25,11 @@ const FindADoctor: React.FC<Props> = ({
 	isTelemedicine = false,
 	hospitals,
 	specialtys,
-	doctors,
 }) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor');
 
 	const {	onSubmitHandler } = useFindADoctor();
+	const [doctorFieldSearch, setDoctorFieldSearch] = useState('');
 
 	const hospitalArr = [
 		{ key: 'all', value: '', label: t('form.allHospital') },
@@ -45,17 +46,6 @@ const FindADoctor: React.FC<Props> = ({
 		return [];
 	};
 
-	const mapDoctors = () => {
-		if (doctors?.length > 0) {
-			return doctors?.map(dc => ({
-				id: dc.doctor_code,
-				label: dc.doctor_name,
-				value: dc.doctor_name
-			}));
-		}
-		return [];
-	};
-
 	const formFindDoctor:FormikProps<LandingPageFindADoctorForm> = useFormik<LandingPageFindADoctorForm>({
 		initialValues: {
 			doctorName: null,
@@ -67,6 +57,40 @@ const FindADoctor: React.FC<Props> = ({
 			onSubmitHandler(values.doctorName, values.hospital, values.speciality, values.preferredDay, false);
 		}
 	});
+
+	async function changeSearchDoctor(value: React.SetStateAction<string>) {
+		debouncedSearch(value);
+	}
+
+	const debouncedSearch = React.useRef(
+		debounce(async (criteria) => {
+			setDoctorFieldSearch(criteria);
+		}, 500)
+	).current;
+
+	const { data: doctorResponse, isLoading: doctorResponseLoading } = useGetDoctors({ query: { keyword: doctorFieldSearch ?? '' }});
+
+	const mapDoctors = () => {
+		
+		if (doctorResponse) {
+			const dataDoctors = doctorResponse?.flatMap(res => res.data);
+			
+			if (dataDoctors.length > 0) {
+				return dataDoctors.map((dc : any) => ({
+					id: dc.doctor_code,
+					label: dc.doctor_name,
+					value: dc.doctor_name
+				}));
+			}
+		}
+		return [];
+	};
+
+	React.useEffect(() => {
+		return () => {
+		  debouncedSearch.cancel();
+		};
+	}, [debouncedSearch]);
 
 	return (
 		<FindDoctorStyle>
@@ -97,6 +121,9 @@ const FindADoctor: React.FC<Props> = ({
 							iconName='Search'
 							value={ formFindDoctor.values.doctorName }
 							onSelectValue={ (value: any) => formFindDoctor.setFieldValue('doctorName', value) }
+							inputOnChange={ (value: any) => changeSearchDoctor(value) }
+							isLoading={ doctorResponseLoading }
+							retainValue
 						/>
 					</div>
 					<div className='h-full flex-1'>

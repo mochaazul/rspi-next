@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { isEmpty } from 'lodash';
@@ -35,6 +37,12 @@ const RiwayatLab = () => {
 	const cookies = useSession();
 
 	const { data: labHistoryResponse, error: labHistoryError, isLoading: labHistoryLoading } = useGetLabHistory();
+
+	useEffect(() => {
+		if (labHistoryError) {
+			toast.error(labHistoryError?.message);
+		}
+	}, [labHistoryError]);
 
 	if (labHistoryLoading) return (
 		<Spinner />

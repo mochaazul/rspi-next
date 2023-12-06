@@ -32,12 +32,11 @@ export type ProfilePayload = {
 };
 
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
-	
+
 	const t = useScopedI18n('page.bookingAppointment');
 	const tValidation = useScopedI18n('validation.formValidation');
 
 	// TODO: migrate
-	const { data: userProfile } = useGetProfile();
 	// const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
 	// const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
 
@@ -63,7 +62,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			name: '',
 			phone: ''
 		},
-		onSubmit: async(values: ProfilePayload) => {
+		onSubmit: async (values: ProfilePayload) => {
 			const { dob, email, gender, name, phone } = values;
 			if (type === 'other') {
 				await createFamilyProfile({
@@ -71,16 +70,16 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					parent_email: selfProfile?.email ?? '',
 					email: email,
 					name: name,
-					phone: cleanUpMask(phone),
+					phone: `62${ cleanUpMask(phone) }`,
 					gender: gender
 				});
-			
+
 			} else {
 				await updateProfile({
 					name: name,
 					birthdate: dob,
 					gender: gender,
-					phone: cleanUpMask(phone)
+					phone: `62${ cleanUpMask(phone) }`
 				});
 				getProfileMutation();
 			}
@@ -93,7 +92,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		resetMutation(); // we need this to clear errors
 	}, []);
 
-	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
+	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setEnableValidation(true);
 		formikProfile.handleSubmit();
@@ -124,13 +123,17 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	};
 
 	useEffect(() => {
-		
+
 		if (type === 'self') {
-			
+
 			formikProfile.setFieldValue('email', selfProfile?.email);
 			formikProfile.setFieldValue('phone', selfProfile?.phone);
 			formikProfile.setFieldValue('name', selfProfile?.name);
-			formikProfile.setFieldValue('birthdate', selfProfile?.birthdate);
+			if (selfProfile?.birthdate
+				&& selfProfile?.birthdate !== '0001-01-01'
+				&& selfProfile?.birthdate !== '0001-01-01 00:00:00 +0000 UTC') {
+				formikProfile.setFieldValue('birthdate', selfProfile?.birthdate);
+			}
 
 			setDisabledEmail(true);
 		} else {
@@ -258,8 +261,8 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						labelClassName='font-normal'
 						labelGap={ 8 }
 						menuItems={ [
-							{ key: 'M', value: 'M', label: t('profileSelector.form.genderLabel.male') },
-							{ key: 'F', value: 'F', label: t('profileSelector.form.genderLabel.female') }
+							{ key: 'M', value: 'Male', label: t('profileSelector.form.genderLabel.male') },
+							{ key: 'F', value: 'Female', label: t('profileSelector.form.genderLabel.female') }
 						] }
 						id='gender'
 						name='gender'

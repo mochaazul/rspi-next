@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { isEmpty } from 'lodash';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 import Radio from '@/components/ui/Radio';
 import { Button, Spinner, Text } from '@/components/ui';
@@ -23,6 +24,12 @@ const JadwalKunjungan = () => {
 	const { data: appointmentResponse, error: appointmentError, isLoading: appointmentLoading } = useGetAppointmentList({
 		query: { type: bookType },
 	});
+
+	useEffect(() => {
+		if (appointmentError) {
+			toast.error(appointmentError?.message);
+		}
+	}, [appointmentError]);
 
 	return (
 		<>

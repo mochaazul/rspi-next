@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { default as NextImage } from 'next/image';
 
 import { colors, Images } from '@/constant';
-import { MedicalRecordReminder, Text } from '@/components/ui';
+import { MedicalRecordReminder, Tabs, Text } from '@/components/ui';
 import PinModal from '@/components/ui/PinModal';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import { useGetProfile } from '@/lib/api/client/profile';
@@ -34,7 +34,7 @@ type MenuType = {
 const PatientPortal = () => {
 	const session = useSession();
 	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile(session?.token);
-	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(session?.token);
+	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(session?.token + getProfileResponse?.data?.id);
 
 	const [activeTabIndex, setActiveTabIndex] = useState(1);
 	const [activeTabIndexForCallBackPin, setActiveTabIndexForCallBackPin] = useState(1);
@@ -113,6 +113,25 @@ const PatientPortal = () => {
 		}
 	}, [activeTabIndex]);
 
+	const renderContentMobile = useMemo(() => {
+		switch (activeTabIndex) {
+			case 0:
+				return <JadwalKunjungan />;
+			case 1:
+				return <RiwayatKunjungan />;
+			case 2:
+				return <>
+					<RiwayatVaksin />
+				</>;
+			case 3:
+				return <>
+					<RiwayatLab />
+				</>;
+			default:
+				return null;
+		}
+	}, [activeTabIndex]);
+
 	const onHeaderClick = () => {
 		if (shouldEnterPin) {
 			setPinModalVisible(true);
@@ -182,9 +201,7 @@ const PatientPortal = () => {
 	};
 
 	return (
-		<VisitHistoryStyle
-			className='max-sm:py-0'
-		>
+		<VisitHistoryStyle className='max-sm:py-0'>
 			<div className='rectangle' />
 			<div className='content-wrapper pt-[60px] md:pt-[120px]'>
 				<div className='w-full -mt-[42px] relative'>
@@ -194,14 +211,30 @@ const PatientPortal = () => {
 						isLoading={ getProfileLoading }
 					/>
 				</div>
-				<div className='mt-[32px] flex'>
+				<div className='mt-[32px] flex flex-col md:flex-row'>
 					<div className='relative tabs border-solid border-b-[1px] border-b-white/20 max-sm:hidden'>
 						<div className='tabs-menu'>
 							{ renderMenuItem() }
 						</div>
 					</div>
-					<div className='md:ml-[31px] w-full min-h-[500px]'>
+					<div className='md:hidden'>
+						<Tabs
+							activeTabIndex={ activeTabIndex }
+							setActiveTabIndex={ setActiveTabIndex }
+							tabsData={ tabMenuLabel.flatMap(eachMenu => eachMenu.children.length > 0 ? eachMenu.children : eachMenu).map(eachMap => eachMap.label) }
+							onClickItem={ index => {
+								if (index > 0) {
+									setPinModalVisible(true);
+								}
+								setActiveTabIndexForCallBackPin(index);
+							} }
+						/>
+					</div>
+					<div className='md:ml-[31px] w-full min-h-[500px] max-sm:hidden'>
 						{ renderContent }
+					</div>
+					<div className='md:ml-[31px] w-full min-h-[500px] md:hidden'>
+						{ renderContentMobile }
 					</div>
 				</div>
 			</div>

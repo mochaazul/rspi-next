@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormikProps, useFormik } from 'formik';
+import Image from 'next/image';
 
-import { Images, colors } from '@/constant';
+import { colors } from '@/constant';
 import { PinType, ResponseStatus } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
 import Button from '@/components/ui/Button';
@@ -16,7 +17,7 @@ import { PinSchema } from '@/validator/auth';
 import { useCreatePin } from '@/lib/api/client/auth';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-import PinPageStyle, { Box } from './style';
+import { ContainerStyle, Box } from '../style';
 
 const PinPage = () => {
 	const navigate = useRouter();
@@ -66,24 +67,37 @@ const PinPage = () => {
 	};
 
 	return (
-		<PinPageStyle>
-			<Box>
-				<div className='mb-[32px]'>
-					<Images.LogoRSPI />
+		<ContainerStyle>
+			<Box className='md:w-auto'>
+				<div className='hidden md:flex justify-center mb-8'>
+					<Image
+						src='/images/logo_rspi.svg'
+						alt='rspi-logo'
+						width={ 132 }
+						height={ 60 }
+					/>
 				</div>
-				<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
+				<Text
+					text={ t('heading') }
+					fontSize={ '32px' }
+					lineHeight={ '48px' }
+					fontWeight={ '900' }
+					subClassName='max-md:leading-8 max-md:text-[20px]'
+					textAlign='center'
+				/>
 				<Text
 					text={ t('subHeading') }
 					fontSize={ '20px' }
 					lineHeight={ '24px' }
 					fontWeight={ '400' }
-					className='mt-[16px] mb-[62px]'
+					className='mt-2 md:mt-4 mb-8 md:mb-[62px]'
+					subClassName='max-md:text-base max-md:leading-6'
 					color={ colors.grey.pencil }
 					textAlign='center'
 				/>
 				{
 					notifVisible &&
-					<div className='w-full mb-[32px]'>
+					<div className='w-full mb-8'>
 						<NotificationPanel
 							mode={ errorUser?.stat_msg ? 'error' : 'success' }
 							visible={ notifVisible && !loadingUser }
@@ -117,6 +131,8 @@ const PinPage = () => {
 							value={ formikPin.values.pin }
 							type='password'
 							onChangeValue={ onChangeInputValue }
+							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>
 					<Form.FormGroup className='group-wrapper w-full'>
@@ -133,6 +149,8 @@ const PinPage = () => {
 							value={ formikPin.values.confirm_pin }
 							type='password'
 							onChangeValue={ onChangeInputValue }
+							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>
 					<Button
@@ -145,7 +163,7 @@ const PinPage = () => {
 					</Button>
 				</Form>
 			</Box>
-		</PinPageStyle>
+		</ContainerStyle>
 	);
 };
 

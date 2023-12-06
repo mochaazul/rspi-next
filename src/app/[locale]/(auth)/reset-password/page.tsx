@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useFormik, FormikProps } from 'formik';
 
 import { Images, colors } from '@/constant';
@@ -117,19 +118,25 @@ const ResetPassword = () => {
 		return (
 			<ResetPasswordStyle>
 
-				<div className='grid max-sm:grid-cols-2 grid-cols-3 max-sm:gap-0 gap-3 w-full'>
+				<div className='grid max-md:grid-cols-2 grid-cols-3 max-md:gap-0 gap-3 w-full'>
 					<div className='col-span-2'>
-						<Form className='register min-h-screen flex flex-col items-center justify-center max-sm:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto'
+						<Form
+							className='max-md:py-6 max-md:px-4 md:p-8 min-h-screen flex flex-col items-center md:justify-center max-md:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto'
 							autoComplete='off'
 							onSubmit={ onSubmitForm }	>
 							<div className='w-full'>
-								<Link href='/'>
-									<Images.LogoRSPI className='max-2xl:mb-2 mb-8' />
+								<Link href='/' className='hidden md:flex mb-2 xl:mb-8'>
+									<Image
+										src='/images/logo_rspi.svg'
+										alt='rspi-logo'
+										width={ 132 }
+										height={ 60 }
+									/>
 								</Link>
 								<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 									{ t('heading') }
 								</Text>
-								<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-4 max-2xl:mb-6 mb-16' subClassName='max-lg:text-[16px] max-lg:leading-[24px]'>
+								<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-2 md:mt-4 mb-8 md:mb-16' subClassName='max-lg:text-[16px] max-lg:leading-[24px]'>
 									{ t('subHeading') }
 								</Text>
 							</div>
@@ -146,7 +153,7 @@ const ResetPassword = () => {
 									</NotificationPanel>
 								</div>
 							}
-							<section className='mt-[32px] w-full'>
+							<div className='w-full'>
 								<Form.FormGroup className='group-wrapper w-full'>
 									<Form.TextField
 										id='new_password'
@@ -179,20 +186,20 @@ const ResetPassword = () => {
 										onIconClick={ () => togglePasswordShow('confirm_password') }
 									/>
 								</Form.FormGroup>
-							</section>
+							</div>
 							<Button
 								label={ t('resetForm.resetBtnLabel') }
 								theme='primary'
 								$hoverTheme='outline'
 								type='submit'
-								className='w-full mt-[64px]'
+								className='w-full mt-6 md:mt-12'
 								disabled={ loadingSubmit }
 							/>
 						</Form>
 					</div>
-					<div className='max-sm:hidden col-span-1 h-full w-full bg-no-repeat bg-cover bg-center' style={ { backgroundImage: `url(${ Images.AuthRightBG })` } } />
+					<div className='max-md:hidden col-span-1 h-full w-full bg-no-repeat bg-cover bg-center' style={ { backgroundImage: `url(${ Images.AuthRightBG })` } } />
 				</div>
-			</ResetPasswordStyle >
+			</ResetPasswordStyle>
 		);
 
 	return null;

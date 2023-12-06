@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import { isEmpty } from 'lodash';
 import Link from 'next/link';
@@ -18,6 +20,12 @@ const RiwayatKunjungan = () => {
 	const session = useSession();
 
 	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(session?.token);
+
+	useEffect(() => {
+		if (visitHistoryError) {
+			toast.error(visitHistoryError?.message);
+		}
+	}, [visitHistoryError]);
 
 	const sortVisitHistories = () => {
 		return visitHistoryResponse?.data.slice().sort((a, b) => {

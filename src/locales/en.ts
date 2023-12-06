@@ -1,4 +1,8 @@
 export default {
+	combobox: {
+		notFound: 'Not found any data',
+		loading: 'Loading...',
+	},
 	dayName: {
 		full: {
 			monday: 'Monday',
@@ -756,7 +760,8 @@ export default {
 			gender: {
 				male: 'Male',
 				female: 'Female'
-			}
+			},
+			errorAllInputMustBeFilled: 'Profile information must not be empty for the appointment booking form.'
 		},
 		patientPortal: {
 			tabMenuLabel: {

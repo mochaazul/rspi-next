@@ -9,11 +9,11 @@
 const environment = {
 	dev: {
 		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_DEV,
-		version: '1.1.159-next'
+		version: '1.1.160-next'
 	},
 	staging: {
 		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_STAGING,
-		version: '1.1.156-next'
+		version: '1.1.159-next'
 	},
 	prod: {
 		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_PROD,

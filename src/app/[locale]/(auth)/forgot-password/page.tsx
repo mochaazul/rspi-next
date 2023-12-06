@@ -2,19 +2,22 @@
 
 import { useState } from 'react';
 import { useFormik, FormikProps } from 'formik';
+import Link from 'next/link';
+import Image from 'next/image';
 
 import { ForgotPasswordSchema } from '@/validator/auth';
-import { Images, colors } from '@/constant';
+import { colors } from '@/constant';
 import { ForgotPasswordType } from '@/interface';
 import ConfirmationModal from '@/components/ui/PageComponents/ForgotPasswordSections/ConfirmationModal';
 import Button from '@/components/ui/Button';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
+import NotificationPanel from '@/components/ui/NotificationPanel';
 import { useScopedI18n } from '@/locales/client';
 import { useForgotPassword } from '@/lib/api/client/auth';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 
-import { ForgotPasswordStyle, Box } from './style';
+import { ContainerStyle, Box } from '../style';
 
 const ForgotPassword = () => {
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
@@ -31,11 +34,11 @@ const ForgotPassword = () => {
 		onSubmit: async (formForgotPassword: ForgotPasswordType) => {
 			try {
 				await forgotPassword(formForgotPassword);
+				setNotifVisible(true);
 			} catch (error: any) {
 				setErrorMessageApi(error?.message ?? '');
 			} finally {
 				setEnableValidation(false);
-				setNotifVisible(true);
 			}
 		}
 	});
@@ -50,7 +53,7 @@ const ForgotPassword = () => {
 	};
 
 	return (
-		<ForgotPasswordStyle>
+		<ContainerStyle>
 			<Box className={ `
 				md:py-8 md:px-16
 				px-4
@@ -65,8 +68,15 @@ const ForgotPassword = () => {
 					} }
 					autoComplete='off'
 				>
-					<div className='mb-[32px] flex flex-col items-center'>
-						<Images.LogoRSPI />
+					<div className='hidden md:flex justify-center mb-8'>
+						<Link href='/'>
+							<Image
+								src='/images/logo_rspi.svg'
+								alt='rspi-logo'
+								width={ 132 }
+								height={ 60 }
+							/>
+						</Link>
 					</div>
 					<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } textAlign='center' subClassName='md:text-[32px] text-[20px]' />
 					<Text
@@ -74,10 +84,29 @@ const ForgotPassword = () => {
 						fontSize={ '20px' }
 						lineHeight={ '24px' }
 						fontWeight={ '400' }
-						className='mt-[8px] md:mt-[32px] mb-8 md:mb-[62px]'
+						className='mt-2 md:mt-4 mb-8 md:mb-[62px]'
+						subClassName='max-md:text-base max-md:leading-6'
 						color={ colors.grey.pencil }
 						textAlign='center'
 					/>
+					{
+						errorMessageApi &&
+						<div className='w-full mb-8'>
+							<NotificationPanel
+								mode='error'
+								visible={ !!errorMessageApi && !loading }
+								onClickRightIcon={ () => setErrorMessageApi('') }
+							>
+								<Text
+									fontType={ null }
+									fontSize='14px'
+									fontWeight='500'
+									text={ errorMessageApi }
+									color={ colors.red.default }
+								/>
+							</NotificationPanel>
+						</div>
+					}
 					<Form.FormGroup className='group-wrapper w-full'>
 						<Form.TextField
 							id='email'
@@ -102,7 +131,7 @@ const ForgotPassword = () => {
 					</Button>
 				</Form>
 			</Box>
-			{ !loading ?
+			{ !loading && notifVisible ?
 				<ConfirmationModal
 					visible={ notifVisible }
 					onClose={ handleShowModal }
@@ -111,7 +140,7 @@ const ForgotPassword = () => {
 				/>
 				: null
 			}
-		</ForgotPasswordStyle>
+		</ContainerStyle>
 	);
 };
 

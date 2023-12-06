@@ -5,7 +5,7 @@ import withInputLabel from '../withInputLabel';
 
 import { Input, InputPinType, TextFieldPinWrapper } from './style';
 
-const TextFieldPin = ({ digitLength, password, onChangeValue, ...props }: InputPinType) => {
+const TextFieldPin = ({ digitLength, password, onChangeValue, wrapperClassName, inputClassName, ...props }: InputPinType) => {
 	const InputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
 	const onChangeHandler = () => {
@@ -64,10 +64,11 @@ const TextFieldPin = ({ digitLength, password, onChangeValue, ...props }: InputP
 	};
 
 	return (
-		<TextFieldPinWrapper className='w-full'>
+		<TextFieldPinWrapper className={ `w-full ${ wrapperClassName }` }>
 			{
 				[...Array(digitLength ?? 1)].map((value, key) =>
 					<Input
+						className={ `max-sm:w-10 max-sm:h-10 ${inputClassName}` }
 						key={ key }
 						maxLength={ 1 }
 						ref={ elem => InputRefs.current[key] = elem }
