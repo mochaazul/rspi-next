@@ -11,7 +11,7 @@ export const NewsHealthArticlesStyle = styled.div`
     transition: all .5s;
     background-color: ${ colors.paradiso.accent1Opacity5 };
     }
-    img {
+    .img-thumbnail-magazine {
       width: 540px;
       height: 318px;
       object-fit: cover;
@@ -24,6 +24,7 @@ export const NewsHealthArticlesStyle = styled.div`
 `;
 
 export const CardNewsStyle = styled.div`
+  z-index:-999;
   perspective: 1000px;
   background-color: ${ colors.white.default };
   
@@ -31,7 +32,11 @@ export const CardNewsStyle = styled.div`
     @media screen and (min-width: 640px) {
       border-left: 6px solid transparent;
       transition: all .5s;
-  
+      padding-left: 10px;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      margin-bottom:20px;
+      
       &.active, &:hover {
         transition: all .5s;
         border-left-color: ${ colors.paradiso.default };

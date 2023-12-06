@@ -46,7 +46,7 @@ const NewsHealthArticlesPage = ({
 		{ label: t('tabPillsLabel.all'), value: '' },
 		{ label: t('tabPillsLabel.news'), value: 'news' },
 		{ label: t('tabPillsLabel.healthArticles'), value: 'article' },
-		{ label: t('tabPillsLabel.healthFirst'), value: 'magazine' }
+		{ label: t('tabPillsLabel.healthFirst'), value: 'healthfirst' }
 	];
 
 	// const { articles, pagination, loading } = useTypedSelector<ArticleState>('articles'); Migrate
@@ -62,7 +62,7 @@ const NewsHealthArticlesPage = ({
 				category: tabData[activeTab]?.value,
 				keyword: keyArticle
 			}
-		}).then(function (response: any) {
+		}).then(function(response: any) {
 			setArticlesData(response.data);
 			setLoading(false);
 		});
@@ -72,6 +72,12 @@ const NewsHealthArticlesPage = ({
 		activeTab,
 		keyArticle
 	]);
+
+	const clickTabs = (idx: any) => {
+		setPageNumber(1);
+		setKeyArticle('');
+		setActiveTab(idx);
+	};
 
 	return (
 		<NewsHealthArticlesStyle>
@@ -88,15 +94,15 @@ const NewsHealthArticlesPage = ({
 							className='sm:mt-[50px] mt-[25px]'
 							subClassName='max-sm:text-[24px]'
 						/>
-						<div className='flex justify-between'>
-							<div className='flex flex-row mt-[31px] gap-4 items-center max-sm:justify-between max-sm:grid-cols-2 max-sm:grid'>
+						<div className='flex justify-between max-sm:flex-col'>
+							<div className='flex flex-row mt-[31px] gap-4 items-center xs:grid-cols-1 max-sm:justify-between max-sm:grid-cols-2 max-sm:grid'>
 								{ tabData.map((tab, idx) => (
 									<div key={ idx }>
 										<Button
 											theme={ activeTab === idx ? 'primary' : 'secondary' }
 											$hoverTheme={ activeTab === idx ? 'secondary' : 'primary' }
 											label={ tab.label }
-											onClick={ () => setActiveTab(idx) }
+											onClick={ () => clickTabs(idx) }
 										/>
 									</div>
 								)) }
@@ -116,15 +122,15 @@ const NewsHealthArticlesPage = ({
 							{ loading ? <div className='text-center mb-[30px] w-full'><Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>loading ...</Text></div> :
 								<div className='flex mb-[30px] justify-between'>
 									<div
-										key={ Object.values(articlesData || [])[0]?.id }
+										key={ Object.values(articlesData || [])[0]?.slug }
 										className='w-[540px] mr-[32px] cursor-pointer magazine relative'
-										onClick={ () => navigate.push(`${ pathname }/${ Object.values(articlesData || [])[0]?.id }`) }
+										onClick={ () => navigate.push(`${ pathname }/${ Object.values(articlesData || [])[0]?.slug }`) }
 									>
 										<div>
 											<Share />
 										</div>
 										<img
-											className='rounded-[10px]'
+											className='rounded-[10px] img-thumbnail-magazine'
 											src={ Object.values(articlesData || [])[0]?.img_url }
 										/>
 										<div className='mt-[30px] mb-[10px] flex items-center'>
@@ -145,22 +151,27 @@ const NewsHealthArticlesPage = ({
 										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ Object.values(articlesData || [])[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
 										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px]' dangerouslySetInnerHTML={ { __html: Object.values(articlesData || [])[0]?.short_description } } />
 									</div>
-									<div className='divide-y divide-solid'>
+									<div className='mb-3'>
 										{
-											Object.values(articlesData || [])?.slice(0, 3)
+											Object.values(articlesData || [])?.slice(1, 4)
 												?.map((data, index) => (
 													<div
+														className='relative'
 														key={ index }
-														onClick={ () => navigate.push(`${ pathname }/${ data?.id }`) }
 													>
-														<CardNews
-															id={ data.id }
-															title={ data.title }
-															category={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
-															imgThumb={ data.img_url }
-															date={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
-															author={ data?.news_author?.doctor_name }
-														/>
+														<div>
+															<Share id={ data.id } />
+														</div>
+														<div onClick={ () => navigate.push(`${ pathname }/${ data?.slug }`) } style={ { zIndex: '-999 !important' } }>
+															<CardNews
+																id={ data.id }
+																title={ data.title }
+																category={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
+																imgThumb={ data.img_url }
+																date={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
+																author={ data?.news_author?.doctor_name }
+															/>
+														</div>
 													</div>
 												))
 										}
@@ -209,7 +220,7 @@ const NewsHealthArticlesPage = ({
 							{ loading ? 'loading ...' : <EmptyData menu={ t('heading') } /> }
 						</Text>
 					}
-
+					
 					<div className='mobile-view w-full sm:hidden'>
 						<CardsScrollHorizontal >
 							{
@@ -251,7 +262,7 @@ const NewsHealthArticlesPage = ({
 							}
 						</CardsScrollHorizontal>
 					</div>
-
+					
 					{ Object.values(articlesData || []).length !== 0 ?
 						<div className='mt-[50px] flex flex-col items-center'>
 							{ loading ? '' :

@@ -13,7 +13,9 @@ export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
 	const pathName = usePathname();
 
 	const handleOpenSocmed = (link: string) => () => {
-		window.open(link, '_blank');
+		if (typeof window !== 'undefined') {
+			window.open(link, '_blank');
+		}
 	};
 
 	return (

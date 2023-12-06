@@ -24,7 +24,9 @@ const SelectRSLocation = (props: PropsType) => {
 
 	const openGMaps = () => {
 		if (props.mapURL) {
-			window.location.href = props.mapURL;
+			if (typeof window !== 'undefined') {
+				window.location.href = props.mapURL;
+			}
 		}
 	};
 

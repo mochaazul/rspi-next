@@ -320,7 +320,6 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 									<FormCol >
 										<Form.TextField
 											isNumber
-											mask={ '9999999999999999' }
 											label={ t('form.insuranceNumber') }
 											placeholder={ t('form.insuranceNumber') }
 											width='100%'

@@ -68,13 +68,14 @@ export default {
 		formValidation: {
 			required: '{label} is a required field',
 			emailNotValid: 'Email must be a valid email',
+			phoneNotValid: 'Invalid phone number',
 			minLength: '{label} should contain at least {minLength} characters',
 			minCapitalize: '{label} must have at least {minCapitalize} capitalized character',
 			exactLength: '{label} should contain {length} characters',
 			notMatch: '{label} do not match',
 			fileNotValid: 'This file type is invalid or unsupported',
 			maxFileSize: 'This file is larger than {maxFileSize}',
-			phoneNotValid: 'Phone number must precede with +62 or 021 or 08 and then followed by phone number'
+			prefixPhoneNotValid: 'Phone number must precede with +62 or 021 or 08 and then followed by phone number'
 		}
 	},
 	gender: {
@@ -816,7 +817,10 @@ export default {
 						notesInputLabel: 'Tell us more',
 						notesInputPlaceholder: 'Enter a description...',
 						optionalLabel: '(Optional)',
-						smallNotes: 'This would help us to keep improving our service.'
+						smallNotes: 'This would help us to keep improving our service.',
+						responReview: 'Review has been',
+						responReviewFailed: ' Failed',
+						responReviewSuccess: ' Successfully'
 					}
 				},
 				empty: 'You do not have any visit histories yet.',

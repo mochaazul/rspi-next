@@ -79,13 +79,14 @@ export default {
 		formValidation: {
 			required: '{label} wajib diisi',
 			emailNotValid: 'Format email tidak valid',
+			phoneNotValid: 'Format telp tidak valid',
 			minLength: '{label} minimum terdiri dari {minLength} karakter',
 			minCapitalize: '{label} minimum terdiri dari {minCapitalize} huruf kapital',
 			exactLength: '{label} harus terdiri dari {length} karakter',
 			notMatch: '{label} tidak sesuai',
 			fileNotValid: 'File tidak valid atau tidak didukung',
 			maxFileSize: 'File lebih besar dari {maxFileSize}',
-			phoneNotValid: 'No. telp harus diawali dengan +62 atau 021 atau 08 lalu diikuti dengan no. telp'
+			prefixPhoneNotValid: 'No. telp harus diawali dengan +62 atau 021 atau 08 lalu diikuti dengan no. telp'
 		}
 	},
 	page: {
@@ -822,7 +823,10 @@ export default {
 						notesInputLabel: 'Beritahu kami lebih lanjut',
 						notesInputPlaceholder: 'Masukkan deskripsi...',
 						optionalLabel: '(Opsional)',
-						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.'
+						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.',
+						responReview: 'Review telah',
+						responReviewFailed: ' gagal',
+						responReviewSuccess: ' berhasil'
 					}
 				},
 				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.',
