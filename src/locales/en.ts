@@ -817,7 +817,10 @@ export default {
 						notesInputLabel: 'Tell us more',
 						notesInputPlaceholder: 'Enter a description...',
 						optionalLabel: '(Optional)',
-						smallNotes: 'This would help us to keep improving our service.'
+						smallNotes: 'This would help us to keep improving our service.',
+						responReview: 'Review has been',
+						responReviewFailed: ' Failed',
+						responReviewSuccess: ' Successfully'
 					}
 				},
 				empty: 'You do not have any visit histories yet.',

@@ -118,7 +118,7 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 									<Link href={ sosmedLink.linkedin } target='_blank' className='cursor-pointer' >
 										<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
 									</Link>
-									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(window?.location?.href); } }>
+									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(typeof window !== 'undefined' ? window?.location?.href : '' ); } }>
 										<Image src='/images/ic/Link.svg' alt='RSPI link' width={ 16 } height={ 16 } />
 									</div>
 								</div>

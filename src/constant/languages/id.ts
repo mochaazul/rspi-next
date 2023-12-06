@@ -614,7 +614,7 @@ export default {
 					canceledAppointment: 'Jadwal Dibatalkan',
 					doneAppointment: 'Jadwal Selesai',
 					seeDetail: 'Lihat Detail',
-					recommendDoctor: 'Would you recommend your doctor?'
+					recommendDoctor: 'Apakah Anda akan merekomendasikan dokter Anda?'
 
 				},
 				recommendDoctorModal: {
