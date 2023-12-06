@@ -32,7 +32,7 @@ export const getFamilyProfiles = async() => {
 		next: {
 			tags: ['familyProfiles']
 		},
-		cache: 'no-cache'
+		
 	} });
 };
 

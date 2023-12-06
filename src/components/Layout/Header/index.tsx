@@ -90,7 +90,7 @@ export const Header = ({
 
 	const notificationResponseData = getNotification?.data;
 
-	const handleClick = async () => {
+	const handleClick = async() => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			await clearSWRCache(cache);
@@ -310,7 +310,7 @@ export const Header = ({
 				{ renderMenuMobileWithSubmenu(t('centreOfExcellence'), 'centre-of-excellence') }
 				{ renderMenuMobileWithSubmenu(t('facility'), 'facilities') }
 				{ renderMenuMobile(t('findDoctor'), '/find-a-doctor') }
-				{/* { renderMenuMobile(t('career'), '/') } */ }
+				{ /* { renderMenuMobile(t('career'), '/') } */ }
 				{ renderMenuMobile(t('contactUs'), '/contact-us') }
 				{ isLoggedIn ?
 					<div className='nav-menu' onClick={ handleClick }>
@@ -335,7 +335,7 @@ export const Header = ({
 								});
 						}
 					} }
-						className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
+					className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
 					/>
 					<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
 						{ notificationResponseData?.total_unread ?? 0 }
@@ -347,7 +347,7 @@ export const Header = ({
 
 	return (
 		<HeaderStyle>
-			<div className='w-full animate-slideUpToDown transition-all duration-300'>
+			<div className='w-full '>
 				<div className='lg:flex hidden'>
 					<MainNavLanguage session={ session } />
 				</div>
@@ -447,9 +447,9 @@ export const Header = ({
 									</div>
 								</div>
 
-								{/* <div id='career'>
+								{ /* <div id='career'>
 									<Text text={ t('career') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
-								</div> */}
+								</div> */ }
 
 								<Link id='find-doctor' href='/find-a-doctor'>
 									<Text text={ t('findDoctor') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
