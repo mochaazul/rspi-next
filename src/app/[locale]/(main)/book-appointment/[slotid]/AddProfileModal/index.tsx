@@ -34,13 +34,8 @@ export type ProfilePayload = {
 	phone: string;
 };
 
-const SubmitBtn = () => {
-	const { pending } = useFormStatus();
-	console.log({ pending });
-	return <Button type='submit' label={ 'sumbit' } className='mt-[32px]' />;
-};
-
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
+	const { pending } = useFormStatus();
 	
 	const t = useScopedI18n('page.bookingAppointment');
 	const tValidation = useScopedI18n('validation.formValidation');
@@ -281,8 +276,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					// className='w-[174px] block'
 					/>
 				</FormRow>
-				<SubmitBtn />
-				
+				<Button type='submit' label={ t('profileSelector.form.submit') } className='mt-[32px]' />
 			</Form>
 		</ProfileModalContainer>
 	</Modal>;

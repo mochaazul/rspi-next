@@ -31,7 +31,8 @@ export const getFamilyProfiles = async() => {
 	return fetcher<UserDataDetail[]>('familyProfile', { requestOpt: {
 		next: {
 			tags: ['familyProfiles']
-		}
+		},
+		cache: 'no-cache'
 	} });
 };
 
