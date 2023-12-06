@@ -104,7 +104,7 @@ const FindADoctor: React.FC<Props> = ({
 				onReset={ () => {
 					formFindDoctor.setValues({
 						doctorName: null,
-						hospital: 'all',
+						hospital: '',
 						preferredDay: '',
 						speciality: null
 					});
