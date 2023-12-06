@@ -109,12 +109,7 @@ const FeedbackNotes = ({ onChange, value }: { value: string, onChange: (value: s
 					fontSize='14px'
 					fontWeight='500'
 					lineHeight='20px' />
-				<Text text={ t('optionalLabel') }
-					fontSize='14px'
-					fontWeight='500'
-					lineHeight='20px'
-					color='#6A6D81'
-				/>
+				
 			</div>
 			<StyledTextArea placeholder={ t('notesInputPlaceholder') } value={ value } onChange={ evt => {
 				onChange(evt.target.value);
@@ -194,7 +189,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 	};
 
 	const shouldDisable = () => {
-		return isEmpty(feedbackValue) || !ratingValue || giveDoctorRatingLoading;
+		return isEmpty(feedbackValue) || !ratingValue || giveDoctorRatingLoading || isEmpty(feedbackNotes);
 	};
 
 	return (
