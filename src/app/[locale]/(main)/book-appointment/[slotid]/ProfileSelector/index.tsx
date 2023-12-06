@@ -17,6 +17,7 @@ import { ProfileModalContainer } from '../AddProfileModal/style';
 import Button from '@/components/ui/Button';
 import { useDeleteFamilyProfileMutation } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
+import { deleteFamilyProfile } from '@/lib/api/profile';
 
 type ProfileCardProps = {
 	profile: UserDataDetail,
@@ -35,7 +36,7 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: Pr
 			<Text text={ profile.name } fontWeight='700' />
 			{
 				!isSelf &&
-				<div onClick={ async () => {
+				<div onClick={ async() => {
 					showModalDelete(profile?.id, true);
 				} }>
 					<icons.Trash />
@@ -65,8 +66,6 @@ type ProfileSelectorProps = {
 const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyProfiles }: ProfileSelectorProps) => {
 
 	const t = useScopedI18n('page.bookingAppointment.profileSelector');
-
-	const { data: deleteResponse, trigger: deleteFamilyProfileTrigger, error: deleteError } = useDeleteFamilyProfileMutation();
 
 	const [selectedProfile, setSelectedProfile] = useState<number>();
 	const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
@@ -143,9 +142,9 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 					lineHeight='38px'
 					text={ `${ t('deleteModal.heading') } "${ selectedProfileOnDelete?.name }" ?` } />
 				<div className='flex flex-row gap-x-5 w-full'>
-					<Button className='sub-button color-default' theme='primary' label='Ya' onClick={ async () => {
+					<Button className='sub-button color-default' theme='primary' label='Ya' onClick={ async() => {
 						setShowDeleteModal(false);
-						await deleteFamilyProfileTrigger({ id: selectedIdFamilyProfile ?? -1 });
+						await deleteFamilyProfile(selectedIdFamilyProfile ?? -1);
 					} } />
 					<Button className='sub-button color-red' theme='outline' label='Tidak' onClick={ () => setShowDeleteModal(false) } />
 				</div>

@@ -2,6 +2,7 @@ import endpoints, { EndpointKey } from './endpoints';
 import { Pagination, ResponseType as SuccessResponse } from '@/interface';
 import { cookiesHelper, generateQueryString } from '@/helpers';
 import { config } from '@/constant/config';
+import { RequestInit } from 'next/dist/server/web/spec-extension/request';
 
 export type ApiOptions = {
 	body?: any,
@@ -9,6 +10,7 @@ export type ApiOptions = {
 	query?: Record<string, any>,
 	pagination?: Pagination;
 	isUpload?: boolean;
+	requestOpt?: RequestInit
 };
 
 const baseUrl = config.baseUrl ?? 'localhost:3000/v1';
@@ -38,7 +40,6 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		...safeQueryParam,
 		...safePagination
 	});
-	
 
 	if (options && options.body) {
 		fetchOpt['body'] = options.isUpload ? options.body : JSON.stringify(options.body);
@@ -48,6 +49,7 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		method: endpoint.method,
 		headers,
 		...fetchOpt,
+		...options?.requestOpt
 	});
 	const response = await res.json();
 	
@@ -55,7 +57,7 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		if (typeof window === 'undefined') { // check the origin of the caller is server rendered / client rendered
 			// just use console.error since throw, would result in crashing the service
 			// eslint-disable-next-line no-console
-			console.error({ endpoint, response });
+			console.error({ endpoint, response, options });
 		} else {
 			// if client rendered we can safely use throw
 			throw new Error(response.stat_msg);
