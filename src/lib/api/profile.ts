@@ -3,18 +3,8 @@
 import { FamilyProfilePayload, UpdateProfileType, UserDataDetail } from '@/interface';
 import { cookiesHelper } from '@/helpers';
 import { revalidateTag } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 import fetcher from './utils/fetcher';
-
-// TODO: pisahkan di file lain
-const isErrorToken = (errMessage?: string) => {
-	const isShouldRedirect = errMessage && (errMessage?.toLowerCase().includes('token is invalid')
-		|| errMessage?.toLowerCase().includes('token is expired')
-		|| errMessage?.toLowerCase().includes('signed out because your account is signed in from another device'));
-
-	return isShouldRedirect;
-};
 
 export const getProfile = async (setCookies?: boolean) => {
 	const response = await fetcher<UserDataDetail>('profile', {
@@ -24,16 +14,14 @@ export const getProfile = async (setCookies?: boolean) => {
 			}
 		}
 	});
-	if (response?.stat_code === 'APP:SUCCESS') {
-		if (setCookies) {
-			const currentUser = await cookiesHelper.getUserData();
+	if (response?.stat_code === 'APP:SUCCESS' && setCookies) {
+		const currentUser = await cookiesHelper.getUserData();
 
-			cookiesHelper.setUserData(JSON.stringify({
-				medical_record: currentUser?.medical_record,
-				pin_status: currentUser?.pin_status,
-				...response?.data
-			}));
-		}
+		cookiesHelper.setUserData(JSON.stringify({
+			medical_record: currentUser?.medical_record,
+			pin_status: currentUser?.pin_status,
+			...response?.data
+		}));
 	}
 
 	return response;
@@ -44,7 +32,8 @@ export const getFamilyProfiles = async () => {
 		requestOpt: {
 			next: {
 				tags: ['familyProfiles']
-			}
+			},
+
 		}
 	});
 };
@@ -62,7 +51,7 @@ export const updateProfile = async (palyoad: UpdateProfileType) => {
 	const res = await fetcher<UserDataDetail>('updateProfile', {
 		body: palyoad
 	});
-	// revalidateTag('profile');
+	revalidateTag('profile');
 	return res;
 };
 

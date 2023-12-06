@@ -119,7 +119,7 @@ const PinModal = ({ visible, onSuccess, isLoading }: Props) => {
 						</Link>
 					</div>
 					<Button type='submit' disabled={ checkPinLoading || isLoading } >
-						{ checkPinLoading ? <Spinner /> : t('submitBtnLabel') }
+						{ checkPinLoading || isLoading ? <Spinner /> : t('submitBtnLabel') }
 					</Button>
 				</Form>
 			</PinModalContainer>

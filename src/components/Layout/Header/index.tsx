@@ -310,7 +310,7 @@ export const Header = ({
 				{ renderMenuMobileWithSubmenu(t('centreOfExcellence'), 'centre-of-excellence') }
 				{ renderMenuMobileWithSubmenu(t('facility'), 'facilities') }
 				{ renderMenuMobile(t('findDoctor'), '/find-a-doctor') }
-				{/* { renderMenuMobile(t('career'), '/') } */}
+				{ /* { renderMenuMobile(t('career'), '/') } */ }
 				{ renderMenuMobile(t('contactUs'), '/contact-us') }
 				{ isLoggedIn ?
 					<div className='nav-menu' onClick={ handleClick }>
@@ -344,12 +344,11 @@ export const Header = ({
 			);
 		}
 	};
-
 	return (
 		<HeaderStyle>
-			<div className='w-full animate-slideUpToDown transition-all duration-300'>
+			<div className='w-full '>
 				<div className='lg:flex hidden'>
-					<MainNavLanguage />
+					<MainNavLanguage session={ session } />
 				</div>
 				<header className='bg-white'>
 					<nav className='mx-auto flex items-center justify-between gap-2 lg:gap-5 px-4 lg:px-10 h-[64px] lg:h-[90px]' aria-label='Global'>
@@ -374,7 +373,7 @@ export const Header = ({
 									<div className={ `${ isHover === false ? 'hidden' : 'absolute' } dropdownPosition` }>
 										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
 											{ Object.values(hospitalData || [])?.map((item, idx) => (
-												<Link href={ `/hospital/${ item?.id }` } key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] cursor-pointer'>
+												<Link href={ `/hospital/${ item?.slug }` } key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] cursor-pointer'>
 													<Image
 														alt='hospital image'
 														src={ item?.img_url?.[0] || '' }
@@ -447,9 +446,9 @@ export const Header = ({
 									</div>
 								</div>
 
-								{/* <div id='career'>
+								{ /* <div id='career'>
 									<Text text={ t('career') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
-								</div> */}
+								</div> */ }
 
 								<Link id='find-doctor' href='/find-a-doctor'>
 									<Text text={ t('findDoctor') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
@@ -530,7 +529,7 @@ export const Header = ({
 					</nav>
 					{ showSideBar && (
 						<div className='mobile-sidebar'>
-							<MainNavLanguage />
+							<MainNavLanguage session={ session } />
 							{ activeSubMenuIdMobile && (
 								<div className='p-4 bg-[#F0F2F9] flex items-center gap-2'>
 									<button

@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 
-import { DefaultPinYup, DefaultEmailYup } from './defaultYup';
+import { DefaultPinYup, DefaultEmailYup, DefaultPhoneSelectYup } from './defaultYup';
 
 export const UpdateProfileSchema = yup.object().shape({
 	name: yup.string().required('required'),
-	phone: yup.string().required('required'),
+	phone: DefaultPhoneSelectYup,
 	birthdate: yup.string().required('required'),
 	gender: yup.string().required('required')
 });

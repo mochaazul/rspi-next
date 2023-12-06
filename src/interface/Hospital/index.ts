@@ -22,6 +22,7 @@ export interface HospitalDetail {
 	is_active?: boolean;
 	created_date?: string;
 	updated_date?: string;
+	slug:	string
 }
 
 export interface PayloadHospital {

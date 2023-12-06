@@ -10,11 +10,13 @@ import Form from '@/components/ui/Form';
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
-import { useFamilyProfileMutation, useGetProfile, useUpdateProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
 import { AddProfileSchema } from '@/validator/booking';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
-import useSession from '@/session/client';
+import { addFamilyProfile, updateProfile } from '@/lib/api/profile';
+import { useFormStatus } from 'react-dom';
+import dayjs from 'dayjs';
+
 type Props = {
 	onClose: (profile: ProfilePayload, isMain?: boolean) => void;
 	visible: boolean;
@@ -32,20 +34,10 @@ export type ProfilePayload = {
 };
 
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
-
+	const { pending } = useFormStatus();
+	
 	const t = useScopedI18n('page.bookingAppointment');
 	const tValidation = useScopedI18n('validation.formValidation');
-
-	// TODO: migrate
-	// const clikUpdateProfile = useAppDispatch<UpdateProfileType>(updateProfile);
-	// const getUserDetail = useAppAsyncDispatch<UserDataDetail>(userDetailAction);
-
-	// const addFamilyProfileDispatch = useAppAsyncDispatch<FamilyProfilePayload>(addFamilyProfile);
-	// End migrate
-	const session = useSession();
-	const { data: patientProfile, error: errorGetProfile, mutate: getProfileMutation, isLoading: loadingGetProfile } = useGetProfile(session?.token);
-	const { data, trigger: createFamilyProfile, isMutating, error: createFamilyMutationError, reset: resetMutation } = useFamilyProfileMutation();
-	const { trigger: updateProfile, isMutating: loadingUpdateProfile } = useUpdateProfile();
 	const [error, setError] = useState<string>('');
 	const [disabledEmail, setDisabledEmail] = useState<boolean>(false);
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
@@ -62,37 +54,48 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			name: '',
 			phone: ''
 		},
-		onSubmit: async (values: ProfilePayload) => {
-			const { dob, email, gender, name, phone } = values;
-			if (type === 'other') {
-				await createFamilyProfile({
-					birthdate: dob,
-					parent_email: selfProfile?.email ?? '',
-					email: email,
-					name: name,
-					phone: `62${ cleanUpMask(phone) }`,
-					gender: gender
-				});
+		onSubmit: async(values: ProfilePayload) => {
+			try {
+				const { dob, email, gender, name, phone } = values;
+				if (type === 'other') {
+					const res = await addFamilyProfile({
+						birthdate: dob,
+						parent_email: selfProfile?.email ?? '',
+						email: email,
+						name: name,
+						phone: `62${ cleanUpMask(phone) }`,
+						gender: gender
+					});
+	
+					if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
+	
+				} else {
+					const res = await updateProfile({
+						name: name,
+						birthdate: dob,
+						gender: gender,
+						phone: `62${ cleanUpMask(phone) }`
+					});
+					
+					if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
+				}
 
-			} else {
-				await updateProfile({
-					name: name,
-					birthdate: dob,
-					gender: gender,
-					phone: `62${ cleanUpMask(phone) }`
-				});
-				getProfileMutation();
+				closeHandler();
+
+			} catch (error:any) {
+				setError(error);
 			}
 
-			closeHandler();
 		},
 	});
 
 	useEffect(() => {
-		resetMutation(); // we need this to clear errors
-	}, []);
+		if (!visible) {
+			setError('');
+		}
+	}, [visible]);
 
-	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setEnableValidation(true);
 		formikProfile.handleSubmit();
@@ -104,11 +107,6 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			.replaceAll(' ', '')
 			.replaceAll('-', '')
 			.trim();
-	};
-
-	const mapError = () => {
-		if (createFamilyMutationError && createFamilyMutationError.message.toLowerCase() === 'validation error') return t('validationError');
-		return createFamilyMutationError && createFamilyMutationError.message;
 	};
 
 	const closeHandler = () => {
@@ -129,10 +127,11 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			formikProfile.setFieldValue('email', selfProfile?.email);
 			formikProfile.setFieldValue('phone', selfProfile?.phone);
 			formikProfile.setFieldValue('name', selfProfile?.name);
+			formikProfile.setFieldValue('gender', selfProfile?.gender);
 			if (selfProfile?.birthdate
 				&& selfProfile?.birthdate !== '0001-01-01'
 				&& selfProfile?.birthdate !== '0001-01-01 00:00:00 +0000 UTC') {
-				formikProfile.setFieldValue('birthdate', selfProfile?.birthdate);
+				formikProfile.setFieldValue('dob', selfProfile?.birthdate);
 			}
 
 			setDisabledEmail(true);
@@ -187,17 +186,17 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 				showIconLeft={ false }
 				showIconRight={ false }
 				mode={ 'error' }
-				visible={ !!createFamilyMutationError }
+				visible={ !!error }
 			>
 				<Text
 					fontType={ null }
 					fontSize='14px'
 					fontWeight='500'
-					text={ mapError() }
+					text={ error }
 					color={ colors.red.default }
 				/>
 			</NotificationPanel>
-			<Form onSubmit={ onSubmitHandler } className='mt-[8px]'>
+			<Form onSubmit={ onSubmitHandler } className='mt-[8px]' action={ '' }>
 				<FormRow
 					className='grid grid-cols-2 gap-[16px] md:gap-[24px]'
 				>
@@ -218,7 +217,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						labelGap={ 8 }
 						id='dob'
 						name='dob'
-						value={ formikProfile.values.dob }
+						value={ dayjs(formikProfile.values.dob).format('YYYY MMMM DD') ?? formikProfile.values.dob }
 						onChangeValue={ onChangeInputValue }
 						dateFormat='DD MMMM YYYY'
 						label={ t('profileSelector.form.dob') }
@@ -266,7 +265,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						] }
 						id='gender'
 						name='gender'
-						value={ formikProfile.values.gender }
+						defaultValue={ formikProfile.values.gender }
 						onChange={ formikProfile.handleChange }
 						label={ t('profileSelector.form.gender') }
 						placeholder={ t('profileSelector.form.gender') }

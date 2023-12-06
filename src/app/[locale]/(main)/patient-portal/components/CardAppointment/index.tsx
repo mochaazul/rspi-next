@@ -19,6 +19,7 @@ import RecommendDoctorModal from '../ModalRecommendDoctor';
 import ModalCancelBook from '../ModalCancelBook';
 import DetailKunjungan from '../ModalDetailKunjungan';
 import { toast } from 'react-toastify';
+import { useSWRConfig } from 'swr';
 
 interface PropsType {
 	status?: string;
@@ -47,6 +48,8 @@ interface PropsType {
 
 const CardAppointment = (props: PropsType) => {
 	const t = useScopedI18n('page.patientPortal');
+	
+	const { mutate } = useSWRConfig();
 
 	const navigate = useRouter();
 
@@ -76,15 +79,20 @@ const CardAppointment = (props: PropsType) => {
 		);
 	};
 
-	const userClickCancelBook = async (appointmentId: string) => {
+	const userClickCancelBook = async(appointmentId: string) => {
 		try {
 			await cancelBookingTrigger({
 				appointment_id: appointmentId
+			}).then(() => {
+				mutate('appointmentResponse');
+				toast.success('Cancel Booking Success', {
+					hideProgressBar: true,
+					pauseOnHover: false,
+				});
+				setShowPinModal(false);
+				setShowModalCancelBook(false);
 			});
-			toast.success('Cancel Booking Success');
-			setShowPinModal(false);
-			setShowModalCancelBook(false);
-			navigate.push('/patient-portal');
+			
 		} catch (error) {
 			toast.error('Error');
 		}
@@ -145,6 +153,8 @@ const CardAppointment = (props: PropsType) => {
 				return '';
 		}
 	};
+
+	const criteriaForShowRateDoctor = ['Jadwal Selesai', 'Appointment Done'];
 
 	return (
 		<CardPatientPortalStyle
@@ -211,13 +221,13 @@ const CardAppointment = (props: PropsType) => {
 					</div>
 				} */ }
 				{ props.visit_status === 'C' &&
-					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Lagi' }</div>
+					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Lagi' }</div>
 				}
 				{ props.visit_status === 'X' &&
-					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
+					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
 				}
 				{ (props.status !== 'Jadwal Selesai' && props.type !== 'other') &&
-					<div onClick={ async () => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
+					<div onClick={ async() => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
 				}
 
 			</div>
@@ -249,7 +259,7 @@ const CardAppointment = (props: PropsType) => {
 			</div >
 
 			{
-				props.status === 'Jadwal Selesai' &&
+				criteriaForShowRateDoctor.includes(props.status ?? '') &&
 				<div className='flex flex-row gap-x-2 items-center justify-end cursor-pointer mt-[20px]' onClick={ () => {
 					handleShowModal && handleShowModal();
 				} }>
