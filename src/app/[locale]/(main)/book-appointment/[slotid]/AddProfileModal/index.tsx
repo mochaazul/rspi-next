@@ -10,14 +10,13 @@ import Form from '@/components/ui/Form';
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
-import { useFamilyProfileMutation, useGetProfile, useUpdateProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
 import { AddProfileSchema } from '@/validator/booking';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
-import useSession from '@/session/client';
 import { addFamilyProfile, updateProfile } from '@/lib/api/profile';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
 import dayjs from 'dayjs';
+
 type Props = {
 	onClose: (profile: ProfilePayload, isMain?: boolean) => void;
 	visible: boolean;
@@ -57,7 +56,6 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		},
 		onSubmit: async(values: ProfilePayload) => {
 			try {
-				
 				const { dob, email, gender, name, phone } = values;
 				if (type === 'other') {
 					const res = await addFamilyProfile({
