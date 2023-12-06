@@ -2,7 +2,9 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { FormikProps, useFormik } from 'formik';
-import { BookingPayload, FamilyProfile, UserDataDetail, PayloadPushNotification, ResponseType, FindDoctorDetail } from '@/interface';
+import {
+	BookingPayload, FamilyProfile, UserDataDetail, PayloadPushNotification, ResponseType, FindDoctorDetail
+} from '@/interface';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
@@ -37,9 +39,11 @@ type BookingFormState = {
 
 type BookAppointmentProps = {
 	doctorResponse: ResponseType<FindDoctorDetail>;
+	familyProfiles: UserDataDetail[]
+	userProfile: UserDataDetail
 };
 
-const BookAppointment = ({ doctorResponse }: BookAppointmentProps) => {
+const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAppointmentProps) => {
 	const t = useScopedI18n('page.bookingAppointment');
 	const session = useSession();
 	const breadCrumbs = [
@@ -51,8 +55,6 @@ const BookAppointment = ({ doctorResponse }: BookAppointmentProps) => {
 
 	const timeSlot = Object.fromEntries(searchParams);
 
-	const { data: userProfile, isLoading: profileLoading } = useGetProfile(session?.token);
-	const { data: familyProfile, isLoading: familyProfileLoading } = useGetFamilyProfile();
 	const { trigger: bookAppointment, error: bookingError, isMutating: bookingLoading } = useBookAppointmentAPI();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: pushNotification, error: pushNotifError, isMutating: pushNotifLoading } = usePushNotifAPI();
@@ -85,25 +87,25 @@ const BookAppointment = ({ doctorResponse }: BookAppointmentProps) => {
 	const uploadAsuransiFrontFileRef = useRef<HTMLInputElement>(null);
 	const uploadAsuransiBackFileRef = useRef<HTMLInputElement>(null);
 
-	const hasMainProfile = userProfile?.data?.name || userProfile?.data?.phone || userProfile?.data?.gender;
+	const hasMainProfile = userProfile.name || userProfile.phone || userProfile.gender;
 
 	useEffect(() => {
 		if (hasMainProfile) {
 			setSelfProfile({
-				birthdate: userProfile?.data?.birthdate ?? '',
-				email: userProfile?.data?.email ?? '',
-				gender: userProfile?.data?.gender ?? '',
-				name: userProfile?.data?.name ?? '',
-				phone: userProfile?.data?.phone ?? '',
-				id: userProfile?.data?.id ?? 0,
+				birthdate: userProfile.birthdate ?? '',
+				email: userProfile.email ?? '',
+				gender: userProfile.gender ?? '',
+				name: userProfile.name ?? '',
+				phone: userProfile.phone ?? '',
+				id: userProfile.id ?? 0,
 				created_date: '',
 				updated_date: '',
-				no_mr: userProfile?.data?.no_mr ?? '',
+				no_mr: userProfile.no_mr ?? '',
 				parent_email: '',
 				patient_code: ''
 			});
 		}
-	}, [userProfile?.data]);
+	}, [userProfile]);
 
 	const formikBooking: FormikProps<BookingFormState> = useFormik<BookingFormState>({
 		initialValues: {
@@ -171,7 +173,7 @@ const BookAppointment = ({ doctorResponse }: BookAppointmentProps) => {
 		}
 	};
 
-	const uploadAsuransiPhotoFront = async () => {
+	const uploadAsuransiPhotoFront = async() => {
 		if (tempImageAsuransiFront !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiFront });
 			if (responseData.stat_msg === 'Success') {
@@ -181,7 +183,7 @@ const BookAppointment = ({ doctorResponse }: BookAppointmentProps) => {
 		return '';
 	};
 
-	const uploadAsuransiPhotoBack = async () => {
+	const uploadAsuransiPhotoBack = async() => {
 		if (tempImageAsuransiBack !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiBack });
 			if (responseData.stat_msg === 'Success') {
@@ -202,7 +204,7 @@ const BookAppointment = ({ doctorResponse }: BookAppointmentProps) => {
 		}
 	};
 
-	const onConfirmed = async () => {
+	const onConfirmed = async() => {
 		try {
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
@@ -260,7 +262,7 @@ const BookAppointment = ({ doctorResponse }: BookAppointmentProps) => {
 			<div className='lg:w-[1110px] mx-auto max-sm:px-[15px] md:pt-[60px] pb-[120px]'>
 				<Breadcrumbs datas={ breadCrumbs } />
 				<div className='content-wrapper sm:flex w-full items-center flex-col max-sm:p-[16px]'>
-					<ProfileSelector onSelected={ setSelectedProfile } selfProfile={ userProfile?.data } familyProfiles={ familyProfile?.data } onAddNewProfileBtn={ onAddNewProfile } />
+					<ProfileSelector onSelected={ setSelectedProfile } selfProfile={ userProfile } familyProfiles={ familyProfiles } onAddNewProfileBtn={ onAddNewProfile } />
 					{
 						bookingError &&
 						<NotificationPanel
@@ -404,7 +406,7 @@ const BookAppointment = ({ doctorResponse }: BookAppointmentProps) => {
 				visible={ addProfileModal }
 				// onClose={ onCloseProfileModal }
 				onClose={ () => { setAddProfileModal(false); } }
-				selfProfile={ userProfile?.data }
+				selfProfile={ userProfile }
 				type={ selectedType }
 			/>
 			<ConfirmationModal

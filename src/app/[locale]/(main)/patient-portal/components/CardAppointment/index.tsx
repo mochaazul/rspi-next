@@ -76,7 +76,7 @@ const CardAppointment = (props: PropsType) => {
 		);
 	};
 
-	const userClickCancelBook = async (appointmentId: string) => {
+	const userClickCancelBook = async(appointmentId: string) => {
 		try {
 			await cancelBookingTrigger({
 				appointment_id: appointmentId
@@ -211,13 +211,13 @@ const CardAppointment = (props: PropsType) => {
 					</div>
 				} */ }
 				{ props.visit_status === 'C' &&
-					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Lagi' }</div>
+					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Lagi' }</div>
 				}
 				{ props.visit_status === 'X' &&
-					<div onClick={ () => navigate.push(`/doctor-detail/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
+					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
 				}
 				{ (props.status !== 'Jadwal Selesai' && props.type !== 'other') &&
-					<div onClick={ async () => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
+					<div onClick={ async() => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
 				}
 
 			</div>
