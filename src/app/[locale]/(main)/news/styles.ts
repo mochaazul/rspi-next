@@ -24,6 +24,7 @@ export const NewsHealthArticlesStyle = styled.div`
 `;
 
 export const CardNewsStyle = styled.div`
+  z-index:-999;
   perspective: 1000px;
   background-color: ${ colors.white.default };
   

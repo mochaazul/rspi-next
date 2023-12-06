@@ -62,7 +62,7 @@ const NewsHealthArticlesPage = ({
 				category: tabData[activeTab]?.value,
 				keyword: keyArticle
 			}
-		}).then(function (response: any) {
+		}).then(function(response: any) {
 			setArticlesData(response.data);
 			setLoading(false);
 		});
@@ -72,6 +72,12 @@ const NewsHealthArticlesPage = ({
 		activeTab,
 		keyArticle
 	]);
+
+	const clickTabs = (idx: any) => {
+		setPageNumber(1);
+		setKeyArticle('');
+		setActiveTab(idx);
+	};
 
 	return (
 		<NewsHealthArticlesStyle>
@@ -88,15 +94,15 @@ const NewsHealthArticlesPage = ({
 							className='sm:mt-[50px] mt-[25px]'
 							subClassName='max-sm:text-[24px]'
 						/>
-						<div className='flex justify-between'>
-							<div className='flex flex-row mt-[31px] gap-4 items-center max-sm:justify-between max-sm:grid-cols-2 max-sm:grid'>
+						<div className='flex justify-between max-sm:flex-col'>
+							<div className='flex flex-row mt-[31px] gap-4 items-center xs:grid-cols-1 max-sm:justify-between max-sm:grid-cols-2 max-sm:grid'>
 								{ tabData.map((tab, idx) => (
 									<div key={ idx }>
 										<Button
 											theme={ activeTab === idx ? 'primary' : 'secondary' }
 											$hoverTheme={ activeTab === idx ? 'secondary' : 'primary' }
 											label={ tab.label }
-											onClick={ () => setActiveTab(idx) }
+											onClick={ () => clickTabs(idx) }
 										/>
 									</div>
 								)) }
@@ -147,20 +153,25 @@ const NewsHealthArticlesPage = ({
 									</div>
 									<div className='mb-3'>
 										{
-											Object.values(articlesData || [])?.slice(0, 3)
+											Object.values(articlesData || [])?.slice(1, 4)
 												?.map((data, index) => (
 													<div
+														className='relative'
 														key={ index }
-														onClick={ () => navigate.push(`${ pathname }/${ data?.slug }`) }
 													>
-														<CardNews
-															id={ data.id }
-															title={ data.title }
-															category={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
-															imgThumb={ data.img_url }
-															date={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
-															author={ data?.news_author?.doctor_name }
-														/>
+														<div>
+															<Share id={ data.id } />
+														</div>
+														<div onClick={ () => navigate.push(`${ pathname }/${ data?.slug }`) } style={ { zIndex: '-999 !important' } }>
+															<CardNews
+																id={ data.id }
+																title={ data.title }
+																category={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
+																imgThumb={ data.img_url }
+																date={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
+																author={ data?.news_author?.doctor_name }
+															/>
+														</div>
 													</div>
 												))
 										}
@@ -209,7 +220,7 @@ const NewsHealthArticlesPage = ({
 							{ loading ? 'loading ...' : <EmptyData menu={ t('heading') } /> }
 						</Text>
 					}
-
+					
 					<div className='mobile-view w-full sm:hidden'>
 						<CardsScrollHorizontal >
 							{
@@ -251,7 +262,7 @@ const NewsHealthArticlesPage = ({
 							}
 						</CardsScrollHorizontal>
 					</div>
-
+					
 					{ Object.values(articlesData || []).length !== 0 ?
 						<div className='mt-[50px] flex flex-col items-center'>
 							{ loading ? '' :

@@ -130,7 +130,7 @@ export default function Page({ params }: Props) {
 	const clickContactHospital = () => {
 		if (isMobile) {
 			if (typeof window !== 'undefined') {
-				window.open(`tel:${ selectedHospitalPhoneNumber }`);
+				window?.open(`tel:${ selectedHospitalPhoneNumber }`);
 			}
 		} else {
 			setShowModalTelp(true);

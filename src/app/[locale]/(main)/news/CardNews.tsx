@@ -25,10 +25,7 @@ const CardNews = (props: PropsType) => {
 				className={ `shrink-0 max-sm:px-3 max-sm:py-5 cursor-pointer flex relative justify-between ${ props.isActive ? 'active' : '' }` }
 				onClick={ handleOnClick(props.id) }
 			>
-				<div>
-					<Share id={ props.id } />
-				</div>
-				<div className='mr-[30px] lg:w-1/2'>
+				<div className='mr-[30px] lg:w-1/2 z-0'>
 					<div className='flex items-center'>
 						<div className='max-w-[160px]'>
 							<Button theme='primary' label={ props.category } className='btn-category' />
@@ -61,7 +58,7 @@ const CardNews = (props: PropsType) => {
 						/>
 					</div>
 				</div>
-				<img src={ props.imgThumb || '' } alt={ props.title } className='w-[254px] h-[145px] rounded-md object-cover' />
+				<img src={ props.imgThumb || '' } alt={ props.title } className='w-[254px] h-[145px] rounded-md object-cover z-0' />
 			</div>
 		</CardNewsStyle>
 	);
