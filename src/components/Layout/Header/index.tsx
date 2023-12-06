@@ -344,7 +344,6 @@ export const Header = ({
 			);
 		}
 	};
-
 	return (
 		<HeaderStyle>
 			<div className='w-full '>
@@ -374,7 +373,7 @@ export const Header = ({
 									<div className={ `${ isHover === false ? 'hidden' : 'absolute' } dropdownPosition` }>
 										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
 											{ Object.values(hospitalData || [])?.map((item, idx) => (
-												<Link href={ `/hospital/${ item?.id }` } key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] cursor-pointer'>
+												<Link href={ `/hospital/${ item?.slug }` } key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] cursor-pointer'>
 													<Image
 														alt='hospital image'
 														src={ item?.img_url?.[0] || '' }
