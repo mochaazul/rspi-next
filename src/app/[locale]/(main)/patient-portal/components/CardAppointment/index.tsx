@@ -161,7 +161,7 @@ const CardAppointment = (props: PropsType) => {
 
 	return (
 		<CardPatientPortalStyle
-			className='flex flex-col'
+			className='flex flex-col mb-4'
 		>
 			<div className='flex flex-wrap items-center'>
 				<Text text={ `Appointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='md:mr-[15px]' />
@@ -240,19 +240,19 @@ const CardAppointment = (props: PropsType) => {
 					<Text text={ `Patient: ${ props.patientName }` } fontSize='14px' fontWeight='700' color={ colors.blue.neon } />
 				</div>
 			}
-			<div className='grid grid-cols-[auto_repeat(3,minmax(0,1fr))] mt-[24px] gap-[24px] cursor-pointer'>
+			<div className='md:grid grid-cols-[auto_repeat(3,minmax(0,1fr))] mt-[24px] gap-[24px] cursor-pointer'>
 				<Image alt='' src={ props.doctorImgUrl || '' } height={ 60 } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
 				<div className='flex-1'>
 					<Text text={ props.doctorName || '-' } fontSize='16px' fontWeight='700' />
-					<Text text={ props.doctorSpeciality || '-' } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
+					<Text text={ props.doctorSpeciality || '-' } className='md:mt-[10px] max-sm:mb-4' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
 				</div >
-				<div className='flex flex-col-reverse md:flex-col gap-[10px]' >
+				<div className='md:flex flex-col-reverse md:flex-col gap-[10px]' >
 					<Text text={ dayjs(`${ props.date } ${ props.time }`).format('DD MMMM YYYY hh:mm A') ?? '-' } fontSize='16px' fontWeight='700' />
 					<Text text={ 'Visit Schedule' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
 				</div>
 				<div
-					className='md:hidden inline-block h-[100px] min-h-[1em] w-0.5 self-stretch bg-neutral-200 opacity-100 dark:opacity-50' />
-				<div className='flex flex-col-reverse md:flex-col gap-[10px]' >
+					className='md:hidden inline-block md:h-[100px] min-h-[1em] w-0.5 self-stretch md:bg-neutral-200 opacity-100 dark:opacity-50' />
+				<div className='md:flex flex-col-reverse md:flex-col gap-[10px]' >
 					<Text text={ props.clinic_name || '-' } fontSize='16px' fontWeight='700' />
 					<Text text={ props.hospital_name || '-' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
 				</div >
