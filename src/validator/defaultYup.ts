@@ -21,5 +21,5 @@ export const DefaultPhoneSelectYup = yup.string().required('required')
 	.test(
 		'idPhoneWithPrefixValid',
 		'phoneNotValid',
-		(value: any) => /\d{6,14}$/g.test(value)
+		(value: any) => /\d{8,15}$/g.test(value)
 	);

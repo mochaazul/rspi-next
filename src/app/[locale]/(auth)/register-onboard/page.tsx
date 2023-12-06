@@ -220,7 +220,6 @@ const RegisterOnboard = () => {
 							onChange={ onChangeInput }
 							errorMessage={ getInputErrorMessage(formikRegister.errors?.medical_record, t('form.mrlabel')) }
 							isError={ !!formikRegister.errors?.medical_record }
-							mask='9999999999'
 							isNumber
 						/>
 					</div>

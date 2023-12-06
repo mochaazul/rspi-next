@@ -11,7 +11,7 @@ export const ContactUsSchema = yup.object().shape({
 		.test(
 			'isPhoneValid',
 			'prefixPhoneNotValid',
-			(value: any) => /^(0\d+|(\+\d+|\(\d{1,5}\))?)[ -]?\d{6,14}$/g.test(value)
+			(value: any) => /^(0\d+|(\+\d+|\(\d{1,5}\))?)[ -]?\d{8,15}$/g.test(value)
 		),
 	title: yup.string().required('required'),
 	content: yup.string().required('required')
