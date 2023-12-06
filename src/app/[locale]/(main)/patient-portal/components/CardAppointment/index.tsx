@@ -19,6 +19,7 @@ import RecommendDoctorModal from '../ModalRecommendDoctor';
 import ModalCancelBook from '../ModalCancelBook';
 import DetailKunjungan from '../ModalDetailKunjungan';
 import { toast } from 'react-toastify';
+import { useSWRConfig } from 'swr';
 
 interface PropsType {
 	status?: string;
@@ -47,6 +48,8 @@ interface PropsType {
 
 const CardAppointment = (props: PropsType) => {
 	const t = useScopedI18n('page.patientPortal');
+	
+	const { mutate } = useSWRConfig();
 
 	const navigate = useRouter();
 
@@ -80,11 +83,16 @@ const CardAppointment = (props: PropsType) => {
 		try {
 			await cancelBookingTrigger({
 				appointment_id: appointmentId
+			}).then(() => {
+				mutate('appointmentResponse');
+				toast.success('Cancel Booking Success', {
+					hideProgressBar: true,
+					pauseOnHover: false,
+				});
+				setShowPinModal(false);
+				setShowModalCancelBook(false);
 			});
-			toast.success('Cancel Booking Success');
-			setShowPinModal(false);
-			setShowModalCancelBook(false);
-			navigate.push('/patient-portal');
+			
 		} catch (error) {
 			toast.error('Error');
 		}
