@@ -11,7 +11,8 @@ export default {
 			thursday: 'Kamis',
 			friday: 'Jumat',
 			saturday: 'Sabtu',
-			sunday: 'Minggu'
+			sunday: 'Minggu',
+			all: 'Semua'
 		},
 		short: {
 			monday: 'Sen',
@@ -20,7 +21,8 @@ export default {
 			thursday: 'Kam',
 			friday: 'Jum',
 			saturday: 'Sab',
-			sunday: 'Min'
+			sunday: 'Min',
+			all: 'Semua'
 		}
 	},
 	global: {
@@ -546,7 +548,7 @@ export default {
 				all: 'Semua',
 				news: 'Berita',
 				healthArticles: 'Artikel Kesehatan',
-				healthFirst: 'Kesehatan Utama'
+				healthFirst: 'Health First'
 			},
 			heading: 'Berita dan Artikel Kesehatan',
 			detailsBtnLabel: 'Lihat Detail',

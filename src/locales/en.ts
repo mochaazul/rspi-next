@@ -11,7 +11,8 @@ export default {
 			thursday: 'Thursday',
 			friday: 'Friday',
 			saturday: 'Saturday',
-			sunday: 'Sunday'
+			sunday: 'Sunday',
+			all: 'All'
 		},
 		short: {
 			monday: 'Mon',
@@ -20,7 +21,8 @@ export default {
 			thursday: 'Thu',
 			friday: 'Fri',
 			saturday: 'Sat',
-			sunday: 'Sun'
+			sunday: 'Sun',
+			all: 'All'
 		}
 	},
 	global: {

@@ -121,6 +121,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 					multiple
 					menuItems={ Days }
 					onChangeValueDropdown={ onChangePreferedDay }
+					allOptionLabel={ d('all') }
 				/>
 			</div>
 			{ /* Horizontal spacer */ }
