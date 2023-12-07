@@ -253,7 +253,8 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				pushNotification(pushNotifPayload);
 				// Invalidate cache with given key, so the data will be re-fetched from server
 				mutate('getNotification');
-				mutate('appointmentList/self', undefined);
+				mutate((key:any) => typeof key === 'string' && key.startsWith('appointmentList'), undefined);
+
 			});
 
 			setSuccessModal(true);
