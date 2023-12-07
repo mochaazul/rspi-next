@@ -10,7 +10,7 @@ export type ApiOptions = {
 	query?: Record<string, any>,
 	pagination?: Pagination;
 	isUpload?: boolean;
-	requestOpt?: RequestInit;
+	requestOpt?: RequestInit
 };
 
 const baseUrl = config.baseUrl ?? 'localhost:3000/v1';
@@ -52,7 +52,7 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 		...options?.requestOpt
 	});
 	const response = await res.json();
-
+	
 	if (!res.ok) {
 		if (typeof window === 'undefined') { // check the origin of the caller is server rendered / client rendered
 			// just use console.error since throw, would result in crashing the service

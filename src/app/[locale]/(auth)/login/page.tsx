@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 import { LoginType, ResponseStatus } from '@/interface';
 import { colors, Images } from '@/constant';
+
 import { login } from '@/lib/api/auth';
 import { useRequestVerifyEmail } from '@/lib/api/client/auth';
 import { LoginSchema } from '@/validator/auth';
@@ -62,9 +63,8 @@ const LoginPage = () => {
 
 					if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
 						navigate.back();
-					} else {
+					} else
 						navigate.replace('/');
-					}
 
 				} else {
 					setErrorUser({
