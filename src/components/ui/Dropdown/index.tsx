@@ -15,6 +15,7 @@ export interface DropdownProps extends React.DetailedHTMLProps<React.InputHTMLAt
 	}[];
 	arrowClassName?: string;
 	onChangeValueDropdown?: (value: string) => any;
+	allOptionLabel?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -22,6 +23,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 	onChange,
 	arrowClassName,
 	className,
+	allOptionLabel = 'All',
 	...props
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -215,7 +217,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 								</div>
 							}
 							<>
-								Semua
+								{ allOptionLabel }
 							</>
 						</Option> :
 						null

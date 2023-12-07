@@ -234,7 +234,7 @@ const CardAppointment = (props: PropsType) => {
 			{ props.isTelemedicine
 				&& <div className='flex items-center mt-[12px] gap-[8px]' >
 					<icons.User className={ 'w-3 h-3' } />
-					<Text text={ `Pasien: ${ props.patientName }` } fontSize='14px' fontWeight='700' color={ colors.blue.neon } />
+					<Text text={ `Patient: ${ props.patientName }` } fontSize='14px' fontWeight='700' color={ colors.blue.neon } />
 				</div>
 			}
 			<div className='grid grid-cols-[auto_repeat(3,minmax(0,1fr))] mt-[24px] gap-[24px] cursor-pointer'>
