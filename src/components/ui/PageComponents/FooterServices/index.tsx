@@ -1,9 +1,6 @@
 'use client';
 import { PropsWithChildren, PropsWithRef } from 'react';
 
-import Image from 'next/image';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-
 import { colors } from '@/constant';
 
 import { useGetFooterPages } from '@/lib/api/client/footer';
