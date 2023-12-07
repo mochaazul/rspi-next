@@ -52,24 +52,24 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 			children: []
 		},
 		{
-			id: 2,
+			id: 99,
 			label: t('tabMenuLabel.menu2.heading'),
 			isHeader: true,
 			children: [
 				{
-					id: 3,
+					id: 2,
 					label: t('tabMenuLabel.menu2.children.0'),
 					isHeader: false,
 					children: []
 				},
 				{
-					id: 4,
+					id: 3,
 					label: t('tabMenuLabel.menu2.children.1'),
 					isHeader: false,
 					children: []
 				},
 				{
-					id: 5,
+					id: 4,
 					label: t('tabMenuLabel.menu2.children.2'),
 					isHeader: false,
 					children: []
@@ -95,13 +95,13 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 		switch (activeTabIndex) {
 			case 1:
 				return <JadwalKunjungan patientProfile={ patientProfile } />;
-			case 3:
+			case 2:
 				return <RiwayatKunjungan patientProfile={ patientProfile } />;
-			case 4:
+			case 3:
 				return <>
 					<RiwayatVaksin />
 				</>;
-			case 5:
+			case 4:
 				return <>
 					<RiwayatLab />
 				</>;

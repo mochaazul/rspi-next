@@ -29,6 +29,7 @@ import { isEqual } from 'lodash';
 import { useBookAppointmentAPI, usePushNotifAPI } from '@/lib/api/client/booking';
 import { useNotification } from '@/lib/api/client/header';
 import useSession from '@/session/client';
+import { useSWRConfig } from 'swr';
 
 type BookingFormState = {
 	keluhan: string;
@@ -46,6 +47,7 @@ type BookAppointmentProps = {
 const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAppointmentProps) => {
 	const t = useScopedI18n('page.bookingAppointment');
 	const session = useSession();
+	const { mutate } = useSWRConfig();
 	const breadCrumbs = [
 		{ name: t('heading'), url: '#' },
 	];
@@ -230,26 +232,26 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				'insurance_front_img': tempImageAsuransiFront ? await uploadAsuransiPhotoFront() : '',
 				'insurance_back_img': tempImageAsuransiBack ? await uploadAsuransiPhotoBack() : ''
 			};
-			await bookAppointment(payloadBook).then(() => {
+			await bookAppointment(payloadBook);
 
-				const pushNotifPayload: PayloadPushNotification = {
-					category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
-					source: 'Rebelworks',
-					title_idn: 'Permintaan booking Berhasil',
-					title_en: 'Booking Appointment Successful',
-					text_idn: 'Permintaan booking anda untuk ' + selectedProfile?.name?.trim() + ' ke ' + doctorResponse?.data?.name + ' pada ' + timeSlot?.date + ' ' + timeSlot?.session_app_start + ' sudah berhasil. Mohon konfirmasi ketidakhadiran 1 jam sebelum jadwal mulai praktek dokter untuk menghindari blacklist oleh system kami.',
-					text_en: 'Your appointment for ' + selectedProfile?.name?.trim() + ' ' + doctorResponse?.data?.name + ' on ' + timeSlot?.date + ' ' + timeSlot?.session_app_start + ' has been booked. Please contact us at least 1 hour before the doctors schedule if you wish to cancel in order to avoid blacklist',
-					icon: 'Bell',
-					url: '/patient-portal',
-					notif_type: '1',
-					desc_type: 'Push by email account',
-					email_patient: selfProfile?.email,
-					medical_record: selfProfile?.no_mr ?? '',
-					sent_datetime: timeSlot?.date + ' ' + timeSlot?.session_app_start,
-					read_flag: '0'
-				};
-				pushNotification(pushNotifPayload);
-			});
+			const pushNotifPayload: PayloadPushNotification = {
+				category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
+				source: 'Rebelworks',
+				title_idn: 'Permintaan booking Berhasil',
+				title_en: 'Booking Appointment Successful',
+				text_idn: 'Permintaan booking anda untuk ' + selectedProfile?.name?.trim() + ' ke ' + doctorResponse?.data?.name + ' pada ' + timeSlot?.date + ' ' + timeSlot?.session_app_start + ' sudah berhasil. Mohon konfirmasi ketidakhadiran 1 jam sebelum jadwal mulai praktek dokter untuk menghindari blacklist oleh system kami.',
+				text_en: 'Your appointment for ' + selectedProfile?.name?.trim() + ' ' + doctorResponse?.data?.name + ' on ' + timeSlot?.date + ' ' + timeSlot?.session_app_start + ' has been booked. Please contact us at least 1 hour before the doctors schedule if you wish to cancel in order to avoid blacklist',
+				icon: 'Bell',
+				url: '/patient-portal',
+				notif_type: '1',
+				desc_type: 'Push by email account',
+				email_patient: selfProfile?.email,
+				medical_record: selfProfile?.no_mr ?? '',
+				sent_datetime: timeSlot?.date + ' ' + timeSlot?.session_app_start,
+				read_flag: '0'
+			};
+			pushNotification(pushNotifPayload);
+			mutate((key:any) => Array.isArray(key) && key.includes('appointmentList'));
 
 			setSuccessModal(true);
 		} catch (error: any) {
