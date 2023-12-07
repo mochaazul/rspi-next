@@ -11,7 +11,7 @@ import PinModal from '@/components/ui/PinModal';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
 import CardUser from '@/components/ui/PageComponents/UserInformationSections/CardUser';
 import { useScopedI18n } from '@/locales/client';
-import { I_VisitHistory, UserDataDetail } from '@/interface';
+import { I_VisitHistory, ResponseType, UserDataDetail } from '@/interface';
 
 import JadwalKunjungan from '../JadwalKunjungan';
 import RiwayatKunjungan from '../RiwayatKunjungan';
@@ -29,10 +29,10 @@ type MenuType = {
 
 type PortalContainerProps = {
 	patientProfile: UserDataDetail;
-	visitHospitalHistory: I_VisitHistory[];
+	visitHistoryResponse: ResponseType<I_VisitHistory[]>;
 };
 
-const PortalContainer = ({ patientProfile, visitHospitalHistory }: PortalContainerProps) => {
+const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContainerProps) => {
 	const [activeTabIndex, setActiveTabIndex] = useState(1);
 	const [activeTabIndexForCallBackPin, setActiveTabIndexForCallBackPin] = useState(1);
 	const [headerOpened, setHeaderOpened] = useState<boolean>(false);
@@ -43,7 +43,7 @@ const PortalContainer = ({ patientProfile, visitHospitalHistory }: PortalContain
 	const tabsRef = useRef<any>([]);
 	const t = useScopedI18n('page.patientPortal');
 
-	const lastVisitedHospital = getLastVisitedHospitalHelper(visitHospitalHistory || []);
+	const lastVisitedHospital = getLastVisitedHospitalHelper(visitHistoryResponse?.data || []);
 	const tabMenuLabel: MenuType[] = [
 		{
 			id: 1,
@@ -85,12 +85,11 @@ const PortalContainer = ({ patientProfile, visitHospitalHistory }: PortalContain
 		}
 	}, [params]);
 
-	// TODO: tapi apakah ini diperlukan? sudah dihandle di RiwayatKunjungan component
-	// useEffect(() => {
-	// 	if (visitHistoryError) {
-	// 		toast.error(visitHistoryError?.message);
-	// 	}
-	// }, [visitHistoryError]);
+	useEffect(() => {
+		if (visitHistoryResponse?.stat_code !== 'APP:SUCCESS' && visitHistoryResponse?.stat_msg) {
+			toast.error(visitHistoryResponse?.stat_msg);
+		}
+	}, [visitHistoryResponse?.stat_code]);
 
 	const renderContent = useMemo(() => {
 		switch (activeTabIndex) {

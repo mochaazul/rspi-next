@@ -8,7 +8,7 @@ export default async function Page() {
 	const profile = await getProfile();
 	let visitHistory: I_VisitHistory[] = [];
 
-	if (profile && profile?.data?.no_mr) {
+	if (profile?.data?.no_mr && profile?.data?.mr_active) {
 		const visitHistoryResponse = await getVisitHistory();
 		visitHistory = visitHistoryResponse?.data;
 	}
