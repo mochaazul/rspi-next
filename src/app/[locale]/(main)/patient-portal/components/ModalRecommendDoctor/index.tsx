@@ -230,6 +230,7 @@ const RatingOptionLabel = styled.div<{ checked: boolean; }>`
   border-radius: 5px;
   border: 1px solid #EAEAEA;
   display: flex;
+	padding: 7px 13px;
 	@media screen and (max-width: 640px) {
 		padding: 4px 8px;
   }
