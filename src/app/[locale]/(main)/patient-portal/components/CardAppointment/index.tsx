@@ -88,7 +88,7 @@ const CardAppointment = (props: PropsType) => {
 			await cancelBookingTrigger({
 				appointment_id: appointmentId
 			});
-			mutate((key:any) => Array.isArray(key) && key.includes('appointmentList'));
+			mutate((key:any) => typeof key === 'string' && key.startsWith('appointmentList'));
 			toast.success('Cancel Booking Success', {
 				hideProgressBar: true,
 				pauseOnHover: false,

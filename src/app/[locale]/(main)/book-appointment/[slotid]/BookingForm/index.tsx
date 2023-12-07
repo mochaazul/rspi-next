@@ -251,8 +251,8 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				read_flag: '0'
 			};
 			pushNotification(pushNotifPayload);
-			mutate((key:any) => Array.isArray(key) && key.includes('appointmentList'));
-
+			// Invalidate cache with given key
+			mutate('appointmentList/self', undefined);
 			setSuccessModal(true);
 		} catch (error: any) {
 			setConfirmationModalVisible(false);

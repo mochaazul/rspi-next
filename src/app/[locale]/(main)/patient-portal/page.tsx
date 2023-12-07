@@ -15,6 +15,7 @@ export default async function Page() {
 	if (profile && profile?.data?.no_mr) {
 		visitHistoryResponse = await getVisitHistory();
 	}
+
 	return (
 		<PortalContainer patientProfile={ profile?.data } visitHistoryResponse={ visitHistoryResponse } />
 	);

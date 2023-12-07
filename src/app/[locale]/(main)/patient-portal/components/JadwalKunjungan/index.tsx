@@ -26,7 +26,7 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 
 	const [bookType, setBookType] = useState('self');
 
-	const { data: appointmentResponse, error: appointmentError, isLoading: appointmentLoading } = useGetAppointmentList({
+	const { data: appointmentResponse, error: appointmentError, isLoading: appointmentLoading, isValidating } = useGetAppointmentList({
 		query: { type: bookType },
 	});
 
@@ -43,7 +43,7 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 				<Radio.Option label={ t('jadwalKunjungan.options.1') } value={ 'other' } />
 			</Radio>
 			{
-				!appointmentLoading
+				!appointmentLoading || !isValidating
 					? isEmpty(appointmentResponse?.data) ?
 						<EmptyResultContainer>
 							<icons.NoAppointmentSchedule />

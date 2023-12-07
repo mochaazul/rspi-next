@@ -7,8 +7,8 @@ import fetcher, { ApiOptions } from '../utils/fetcher';
 import { BookCancelRequest } from '@/interface/Book';
 
 export const useGetAppointmentList = (options?: ApiOptions) => {
-	return useSWR(['appointmentList', options], ([key, apiOptions]) => {
-		return fetcher<any[]>('appointmentList', apiOptions);
+	return useSWR(`appointmentList/${options?.query?.type}`, () => {
+		return fetcher<any[]>('appointmentList', options);
 	}, { revalidateOnMount: true });
 };
 
