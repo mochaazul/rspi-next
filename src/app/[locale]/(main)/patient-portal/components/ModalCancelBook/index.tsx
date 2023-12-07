@@ -5,9 +5,8 @@ import Image from 'next/image';
 
 import { Modal, Text, Button } from '@/components/ui';
 import { colors, icons } from '@/constant';
-import { useGetProfile } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
-import useSession from '@/session/client';
+import { UserDataDetail } from '@/interface';
 
 import { ModalStyle } from '../../style';
 
@@ -25,11 +24,10 @@ interface PropsType {
 	bookClinic?: string;
 	hospital?: string;
 	onClickButtonCancelAppointment: () => void;
+	patientProfile: UserDataDetail;
 }
 
 const ModalCancelBook = (props: PropsType) => {
-	const session = useSession();
-	const { data: getProfileResponse, isLoading: getProfileLoading } = useGetProfile(session?.token);
 	const t = useScopedI18n('page.patientPortal.cancelBooking');
 
 	return (
@@ -63,7 +61,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ getProfileResponse?.data?.name }
+								text={ props.patientProfile?.name }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
@@ -77,7 +75,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ props.birthDate ? dayjs(getProfileResponse?.data?.birthdate).format('DD MMMM YYYY') : '-' }
+								text={ props.birthDate ? dayjs(props.patientProfile?.birthdate).format('DD MMMM YYYY') : '-' }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
@@ -91,7 +89,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ getProfileResponse?.data?.phone ?? '-' }
+								text={ props.patientProfile?.phone ?? '-' }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'

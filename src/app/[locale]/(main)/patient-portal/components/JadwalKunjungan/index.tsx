@@ -10,11 +10,16 @@ import { Button, Spinner, Text } from '@/components/ui';
 import icons from '@/constant/icons';
 import { useGetAppointmentList } from '@/lib/api/client/appointments';
 import { useScopedI18n } from '@/locales/client';
+import { UserDataDetail } from '@/interface';
 
 import CardAppointment from '../CardAppointment';
 import { EmptyResultContainer } from '../../style';
 
-const JadwalKunjungan = () => {
+type JadwalKunjunganProps = {
+	patientProfile: UserDataDetail;
+};
+
+const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 	const t = useScopedI18n('page.patientPortal');
 
 	const navigate = useRouter();
@@ -70,6 +75,7 @@ const JadwalKunjungan = () => {
 									patientBirthDate={ data.patient_birthdate }
 									patientPhone={ data.patient_phone }
 									visit_status={ data.app_status }
+									patientProfile={ patientProfile }
 								/>
 							</div>
 						))

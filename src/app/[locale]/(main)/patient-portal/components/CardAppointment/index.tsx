@@ -20,6 +20,7 @@ import ModalCancelBook from '../ModalCancelBook';
 import DetailKunjungan from '../ModalDetailKunjungan';
 import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
+import { UserDataDetail } from '@/interface';
 
 interface PropsType {
 	status?: string;
@@ -44,11 +45,12 @@ interface PropsType {
 	patientPhone?: string;
 	visit_status?: string;
 	doctor_id?: string;
+	patientProfile: UserDataDetail;
 }
 
 const CardAppointment = (props: PropsType) => {
 	const t = useScopedI18n('page.patientPortal');
-	
+
 	const { mutate } = useSWRConfig();
 
 	const navigate = useRouter();
@@ -79,7 +81,7 @@ const CardAppointment = (props: PropsType) => {
 		);
 	};
 
-	const userClickCancelBook = async(appointmentId: string) => {
+	const userClickCancelBook = async (appointmentId: string) => {
 		try {
 			await cancelBookingTrigger({
 				appointment_id: appointmentId
@@ -92,7 +94,7 @@ const CardAppointment = (props: PropsType) => {
 				setShowPinModal(false);
 				setShowModalCancelBook(false);
 			});
-			
+
 		} catch (error) {
 			toast.error('Error');
 		}
@@ -227,7 +229,7 @@ const CardAppointment = (props: PropsType) => {
 					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
 				}
 				{ (props.status !== 'Jadwal Selesai' && props.type !== 'other') &&
-					<div onClick={ async() => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
+					<div onClick={ async () => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
 				}
 
 			</div>
@@ -295,6 +297,7 @@ const CardAppointment = (props: PropsType) => {
 				onClickButtonCancelAppointment={ () => setShowPinModal(true) }
 				birthDate={ props.patientBirthDate || '-' }
 				noHp={ props.patientPhone || '-' }
+				patientProfile={ props.patientProfile }
 			/>
 			<PinModal visible={ showPinModal } onSuccess={ () => userClickCancelBook(props.id) } isLoading={ isLoadingCancelBook } />
 		</CardPatientPortalStyle >

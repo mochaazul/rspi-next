@@ -1,8 +1,14 @@
 'use server';
 
-import {  FamilyProfilePayload, UpdateProfileType, UserDataDetail } from '@/interface';
-import { cookiesHelper } from '@/helpers';
 import { revalidateTag } from 'next/cache';
+import {
+	FamilyProfilePayload,
+	PatientUploadPhoto,
+	UpdateAvatarType,
+	UpdateProfileType,
+	UserDataDetail
+} from '@/interface';
+import { cookiesHelper } from '@/helpers';
 
 import fetcher from './utils/fetcher';
 
@@ -28,19 +34,21 @@ export const getProfile = async(setCookies?: boolean) => {
 };
 
 export const getFamilyProfiles = async() => {
-	return fetcher<UserDataDetail[]>('familyProfile', { requestOpt: {
-		next: {
-			tags: ['familyProfiles']
-		},
-		
-	} });
+	return fetcher<UserDataDetail[]>('familyProfile', {
+		requestOpt: {
+			next: {
+				tags: ['familyProfiles']
+			},
+
+		}
+	});
 };
 
 export const addFamilyProfile = async(payload: FamilyProfilePayload) => {
 	const res = await fetcher<UserDataDetail>('createFamilyProfile', {
 		body: payload
 	});
-	
+
 	revalidateTag('familyProfiles');
 	return res;
 };
@@ -55,9 +63,26 @@ export const updateProfile = async(palyoad: UpdateProfileType) => {
 
 export const deleteFamilyProfile = async(id: number) => {
 	const res = await fetcher('deleteFamilyProfile', {
-		param: `${id}`
+		param: `${ id }`
 	});
-	
+
 	revalidateTag('profile');
+	return res;
+};
+
+export const updateAvatar = async(payload: UpdateAvatarType) => {
+	const res = await fetcher<PatientUploadPhoto>('updateAvatar', { body: payload });
+
+	if (res?.stat_code === 'APP:SUCCESS') {
+		const currentUser = await cookiesHelper.getUserData();
+
+		cookiesHelper.setUserData(JSON.stringify({
+			...currentUser,
+			img_url: payload.img_url
+		}));
+
+		revalidateTag('profile');
+	}
+
 	return res;
 };

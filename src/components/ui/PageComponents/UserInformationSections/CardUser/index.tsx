@@ -15,7 +15,7 @@ import { MedicalRecordReminder, Spinner } from '@/components/ui';
 import CardUserStyle from './style';
 
 type CardUserProps = {
-	patientProfile?: ResponseType<UserDataDetail>;
+	patientProfile?: UserDataDetail;
 	lastVisitedHospital?: I_VisitHistory;
 	isLoading?: boolean;
 };
@@ -28,15 +28,15 @@ const CardUser: React.FC<CardUserProps> = ({
 	const t = useScopedI18n('page.profilePage');
 
 	const isUserWithMR = useMemo(() => {
-		return patientProfile?.data?.no_mr && patientProfile?.data?.mr_active;
-	}, [patientProfile?.data?.no_mr, patientProfile?.data?.mr_active]);
+		return patientProfile?.no_mr && patientProfile?.mr_active;
+	}, [patientProfile?.no_mr, patientProfile?.mr_active]);
 
 	const setGender = () => {
-		if (patientProfile?.data?.gender?.toLowerCase() === 'male') {
+		if (patientProfile?.gender?.toLowerCase() === 'male') {
 			return t('gender.male');
 		}
 
-		if (patientProfile?.data?.gender?.toLowerCase() === 'female') {
+		if (patientProfile?.gender?.toLowerCase() === 'female') {
 			return t('gender.female');
 		}
 
@@ -49,11 +49,11 @@ const CardUser: React.FC<CardUserProps> = ({
 				<div className='flex justify-between lg:justify-center lg:grid lg:grid-cols-4 lg:gap-4 lg:items-center'>
 					<div className='flex items-center'>
 						<div className='mr-4 lg:mr-[18px] relative overflow-hidden'>
-							{ (patientProfile?.data?.img_url)
+							{ (patientProfile?.img_url)
 								? (
 									<div className='flex-shrink-0 w-12 h-12 lg:w-[60px] lg:h-[60px] rounded-full relative overflow-hidden'>
 										<Image
-											src={ patientProfile?.data?.img_url }
+											src={ patientProfile?.img_url }
 											alt=''
 											sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
 											className='w-full h-full object-cover'
@@ -69,14 +69,14 @@ const CardUser: React.FC<CardUserProps> = ({
 								fontWeight='700'
 								fontSize='16px'
 								lineHeight='19px'
-								text={ patientProfile?.data?.name }
+								text={ patientProfile?.name }
 							/>
 							<Text
 								fontWeight='400'
 								fontSize='14px'
 								lineHeight='17px'
 								className='capitalize'
-								text={ patientProfile?.data?.birthdate && patientProfile?.data?.gender && `${ getAge(splitDate(patientProfile?.data?.birthdate)) }, ${ setGender() }` }
+								text={ patientProfile?.birthdate && patientProfile?.gender && `${ getAge(splitDate(patientProfile?.birthdate)) }, ${ setGender() }` }
 							/>
 						</div>
 					</div>
@@ -93,7 +93,7 @@ const CardUser: React.FC<CardUserProps> = ({
 							fontSize='16px'
 							lineHeight='19px'
 							subClassName='max-lg:text-center'
-							text={ patientProfile?.data?.patient_code }
+							text={ patientProfile?.patient_code }
 						/>
 					</div>
 					<div className='max-lg:hidden flex flex-col gap-y-2.5'>
