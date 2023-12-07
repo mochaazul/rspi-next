@@ -21,6 +21,7 @@ import DetailKunjungan from '../ModalDetailKunjungan';
 import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
 import { UserDataDetail } from '@/interface';
+import useSession from '@/session/client';
 
 interface PropsType {
 	status?: string;
@@ -59,6 +60,7 @@ const CardAppointment = (props: PropsType) => {
 	const [modalRecommend, setModalRecommend] = useState(false);
 	const [showModalCancelBook, setShowModalCancelBook] = useState(false);
 	const [showPinModal, setShowPinModal] = useState(false);
+	const session = useSession();
 
 	const { data: cancelBookingResponse, trigger: cancelBookingTrigger, error: cancelBookingError, isMutating: isLoadingCancelBook } = usePostCancelBookingMutation();
 
@@ -81,19 +83,18 @@ const CardAppointment = (props: PropsType) => {
 		);
 	};
 
-	const userClickCancelBook = async (appointmentId: string) => {
+	const userClickCancelBook = async(appointmentId: string) => {
 		try {
 			await cancelBookingTrigger({
 				appointment_id: appointmentId
-			}).then(() => {
-				mutate('appointmentResponse');
-				toast.success('Cancel Booking Success', {
-					hideProgressBar: true,
-					pauseOnHover: false,
-				});
-				setShowPinModal(false);
-				setShowModalCancelBook(false);
 			});
+			mutate((key:any) => typeof key === 'string' && key.startsWith('appointmentList'));
+			toast.success('Cancel Booking Success', {
+				hideProgressBar: true,
+				pauseOnHover: false,
+			});
+			setShowPinModal(false);
+			setShowModalCancelBook(false);
 
 		} catch (error) {
 			toast.error('Error');
@@ -229,7 +230,7 @@ const CardAppointment = (props: PropsType) => {
 					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
 				}
 				{ (props.status !== 'Jadwal Selesai' && props.type !== 'other') &&
-					<div onClick={ async () => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
+					<div onClick={ async() => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
 				}
 
 			</div>

@@ -29,6 +29,7 @@ import { isEqual } from 'lodash';
 import { useBookAppointmentAPI, usePushNotifAPI } from '@/lib/api/client/booking';
 import { useNotification } from '@/lib/api/client/header';
 import useSession from '@/session/client';
+import { useSWRConfig } from 'swr';
 
 type BookingFormState = {
 	keluhan: string;
@@ -46,6 +47,7 @@ type BookAppointmentProps = {
 const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAppointmentProps) => {
 	const t = useScopedI18n('page.bookingAppointment');
 	const session = useSession();
+	const { mutate } = useSWRConfig();
 	const breadCrumbs = [
 		{ name: t('heading'), url: '#' },
 	];
@@ -230,8 +232,8 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				'insurance_front_img': tempImageAsuransiFront ? await uploadAsuransiPhotoFront() : '',
 				'insurance_back_img': tempImageAsuransiBack ? await uploadAsuransiPhotoBack() : ''
 			};
-			await bookAppointment(payloadBook).then(() => {
 
+			await bookAppointment(payloadBook).then(res => {
 				const pushNotifPayload: PayloadPushNotification = {
 					category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
 					source: 'Rebelworks',
@@ -249,6 +251,10 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 					read_flag: '0'
 				};
 				pushNotification(pushNotifPayload);
+				// Invalidate cache with given key, so the data will be re-fetched from server
+				mutate('getNotification');
+				mutate((key:any) => typeof key === 'string' && key.startsWith('appointmentList'), undefined);
+
 			});
 
 			setSuccessModal(true);

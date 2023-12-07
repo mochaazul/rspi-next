@@ -9,7 +9,7 @@ export const useGetHospital = () => {
 };
 
 export const useGetVisitHistory = (key?: string) => {
-	return useSWR(['visitHistories', key ?? 'patient'], () => fetcher<I_VisitHistory[]>('visitHistory'), { shouldRetryOnError: false, revalidateOnMount: true });
+	return useSWR(`visitHistories/${key ?? 'patient'}`, () => fetcher<I_VisitHistory[]>('visitHistory'), { shouldRetryOnError: false, revalidateOnMount: true });
 };
 
 export const useGetLabHistory = () => {
