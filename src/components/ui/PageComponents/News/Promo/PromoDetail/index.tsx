@@ -15,6 +15,7 @@ import {
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { EventClassesDetail } from '@/interface';
 
 const PromoDetail = ({
 	selectedEvent,
@@ -94,14 +95,14 @@ const PromoDetail = ({
 									/>
 									<div className='flex flex-col gap-1 mt-3'>
 										{
-											(selectedEvent?.hospitals ?? []).map((hospital, index) =>
+											(selectedEvent?.hospitals ?? []).map((hospital: any, index: number) =>
 												<Text
 													key={ index }
 													lineHeight='20px'
 													fontSize='16px'
 													fontWeight='900'
 													color={ colors.grey.dark }
-													text={ hospital.hospital_name }
+													text={ hospital?.hospital_name }
 												/>
 											)
 										}
