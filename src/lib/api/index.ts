@@ -1,4 +1,5 @@
 import {
+	ArticleDetail,
 	ArticleState,
 	BannerDetail,
 	CenterOfExcellenceDetail,
@@ -77,12 +78,12 @@ export const getArticle = (param?: ApiOptions) => {
 	return fetcher<ArticleState>('getNews', param);
 };
 
-export const getNewsSpecialtyByID = (param: ApiOptions) => {
+export const getNewsSpecialtyByID = (param?: ApiOptions) => {
 	return fetcher<ArticleState['specialty']>('getNewsSpecialtyByID', param);
 };
 
-export const getArticleById = (param: ApiOptions) => {
-	return fetcher<ArticleState['selectedArticle']>('getNews', param);
+export const getArticleById = (param?: ApiOptions) => {
+	return fetcher<ArticleDetail[]>('getNews', param);
 };
 
 export const getRelatedNews = (param?: ApiOptions) => {

@@ -399,6 +399,7 @@ export default {
 			detailsBtnLabel: 'View Details'
 		},
 		newsDetail: {
+			breadcrumbsLabel: 'Berita & Artikel Kesehatan',
 			oleh: 'Oleh',
 		},
 		forgotPassword: {
