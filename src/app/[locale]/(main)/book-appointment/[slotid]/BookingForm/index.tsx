@@ -232,6 +232,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				'insurance_front_img': tempImageAsuransiFront ? await uploadAsuransiPhotoFront() : '',
 				'insurance_back_img': tempImageAsuransiBack ? await uploadAsuransiPhotoBack() : ''
 			};
+
 			await bookAppointment(payloadBook).then(res => {
 				const pushNotifPayload: PayloadPushNotification = {
 					category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
@@ -251,9 +252,8 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				};
 				pushNotification(pushNotifPayload);
 				// Invalidate cache with given key, so the data will be re-fetched from server
-				mutate('getNotification', undefined);
+				mutate('getNotification');
 				mutate('appointmentList/self', undefined);
-				
 			});
 
 			setSuccessModal(true);
