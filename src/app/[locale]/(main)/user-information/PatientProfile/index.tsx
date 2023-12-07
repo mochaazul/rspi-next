@@ -118,11 +118,14 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 			try {
 				setIsLoadingUpdateProfile(true);
 
-				await updateProfile({
+				const res = await updateProfile({
 					...formProfile,
 					birthdate: formProfile.birthdate ? formProfile.birthdate : '0001-01-01',
 					phone: formProfile.phone ? `62${ regexInputPhone(formProfile.phone) }` : ''
 				});
+
+				if (res?.stat_code !== 'APP:SUCCESS') throw new Error(res?.stat_msg);
+
 				setShowModalSuccess(true);
 			} catch (error: any) {
 				setError(error?.message ?? '');
@@ -180,8 +183,10 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 
 					const formImg = new FormData();
 					formImg.append('upload', formUpload.photo_file ?? '');
-					const responseData = await uploadPhotoPatient({ payload: formUpload.photo_file });
-					await updateAvatar({ img_url: responseData?.data });
+					const responseUpload = await uploadPhotoPatient({ payload: formUpload.photo_file });
+					const responseUpdate = await updateAvatar({ img_url: responseUpload?.data });
+
+					if (responseUpdate.stat_code !== 'APP:SUCCESS') throw new Error(responseUpdate.stat_msg);
 
 					setClickUpdatePhoto(false);
 				}
@@ -331,7 +336,9 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 			if (patientProfile?.img_url && !isLoadingUploadAvatar) {
 				setIsLoadingDeleteAvatar(true);
 
-				await updateAvatar({ img_url: '' });
+				const res = await updateAvatar({ img_url: '' });
+
+				if (res?.stat_code !== 'APP:SUCCESS') throw new Error(res?.stat_msg);
 
 				formikPhoto.resetForm();
 				setTempImageSrc('');
