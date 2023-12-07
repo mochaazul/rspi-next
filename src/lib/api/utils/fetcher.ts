@@ -4,6 +4,8 @@ import { cookiesHelper, generateQueryString } from '@/helpers';
 import { config } from '@/constant/config';
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
 
+import { redirectInvalidToken } from './redirect';
+
 export type ApiOptions = {
 	body?: any,
 	param?: string;
@@ -58,6 +60,7 @@ export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions):
 			// just use console.error since throw, would result in crashing the service
 			// eslint-disable-next-line no-console
 			console.error({ endpoint, response, options });
+			redirectInvalidToken(response?.stat_msg);
 		} else {
 			// if client rendered we can safely use throw
 			throw new Error(response.stat_msg);

@@ -27,7 +27,9 @@ const CardUser: React.FC<CardUserProps> = ({
 }) => {
 	const t = useScopedI18n('page.profilePage');
 
-	const isUserWithMR = true;
+	const isUserWithMR = useMemo(() => {
+		return patientProfile?.no_mr && patientProfile?.mr_active;
+	}, [patientProfile?.no_mr, patientProfile?.mr_active]);
 
 	const setGender = () => {
 		if (patientProfile?.gender?.toLowerCase() === 'male') {

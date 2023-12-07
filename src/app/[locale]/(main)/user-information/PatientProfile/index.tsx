@@ -40,7 +40,7 @@ import {
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { usePostCheckPinMutation } from '@/lib/api/client/auth';
-import { updateProfile } from '@/lib/api/profile';
+import { updateAvatar, updateProfile } from '@/lib/api/profile';
 import { regexInputPhone } from '@/constant/regExp';
 
 import ProfilePageStyle, { Divider } from './style';
@@ -72,7 +72,6 @@ type PatientProfileProps = {
 export default function PatientProfile({ patientProfile, visitHospitalHistory }: PatientProfileProps) {
 	const uploadFileRef = useRef<HTMLInputElement>(null);
 
-	const { trigger: updateAvatar } = useUpdateAvatar();
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: updateEmail } = useUpdateEmail();
 	const { trigger: checkPin } = usePostCheckPinMutation();
@@ -663,7 +662,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 							<div className='flex flex-col gap-[10px]'>
 								<HorizontalInputWrapper
 									label={ t('securitySetting.passwordLabel') }
-									onEditClick={ () => navigate.push('/update-password') }
+									editHref='/update-password'
 									inputProps={ {
 										placeholder: t('securitySetting.passwordLabel'),
 										disabled: true,
@@ -672,7 +671,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 								/>
 								<HorizontalInputWrapper
 									label={ t('securitySetting.pinLabel') }
-									onEditClick={ () => navigate.push('/pin-reset') }
+									editHref='/pin-reset'
 									inputProps={ {
 										placeholder: t('securitySetting.pinLabel'),
 										disabled: true,

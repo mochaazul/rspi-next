@@ -1,6 +1,6 @@
 'use server';
 
-import { FamilyProfilePayload, UpdateProfileType, UserDataDetail } from '@/interface';
+import { FamilyProfilePayload, PatientUploadPhoto, UpdateAvatarType, UpdateProfileType, UserDataDetail } from '@/interface';
 import { cookiesHelper } from '@/helpers';
 import { revalidateTag } from 'next/cache';
 
@@ -61,5 +61,22 @@ export const deleteFamilyProfile = async (id: number) => {
 	});
 
 	revalidateTag('profile');
+	return res;
+};
+
+export const updateAvatar = async (payload: UpdateAvatarType) => {
+	const res = await fetcher<PatientUploadPhoto>('updateAvatar', { body: payload });
+
+	if (res?.stat_code === 'APP:SUCCESS') {
+		const currentUser = await cookiesHelper.getUserData();
+
+		cookiesHelper.setUserData(JSON.stringify({
+			...currentUser,
+			img_url: payload.img_url
+		}));
+
+		revalidateTag('profile');
+	}
+
 	return res;
 };

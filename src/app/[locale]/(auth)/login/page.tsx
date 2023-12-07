@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 import { LoginType, ResponseStatus } from '@/interface';
 import { colors, Images } from '@/constant';
-
+import { cookiesHelper } from '@/helpers';
 import { login } from '@/lib/api/auth';
 import { useRequestVerifyEmail } from '@/lib/api/client/auth';
 import { LoginSchema } from '@/validator/auth';
@@ -19,6 +19,8 @@ import Form from '@/components/ui/Form';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import NotificationPanel, { PropsTypes as NotificationPanelTypes } from '@/components/ui/NotificationPanel';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
+import clearSWRCache from '@/helpers/clearSwrCache';
+import { useSWRConfig } from 'swr';
 
 import LoginPageStyle from './style';
 
@@ -29,6 +31,7 @@ const LoginPage = () => {
 	const { trigger: requestVerifyEmail } = useRequestVerifyEmail();
 	const t = useScopedI18n('page.loginPage');
 	const tValidation = useScopedI18n('validation.formValidation');
+	const { cache } = useSWRConfig();
 
 	const [notifVisible, setNotifVisible] = useState(false);
 	const [notifMode, setNotifMode] = useState<NotificationPanelTypes['mode']>('success');
@@ -41,6 +44,17 @@ const LoginPage = () => {
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
 	const [loadingNavigate, setLoadingNavigate] = useState<boolean>(false);
+
+	const clearSession = () => {
+		cookiesHelper.clearStorage();
+		clearSWRCache(cache);
+	};
+
+	useEffect(() => {
+		if (searchParam.get('ref') === 'invalid') {
+			clearSession();
+		}
+	}, [searchParam]);
 
 	const formik: FormikProps<LoginType> = useFormik<LoginType>({
 		validateOnBlur: enableValidation,
@@ -63,8 +77,9 @@ const LoginPage = () => {
 
 					if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
 						navigate.back();
-					} else
+					} else {
 						navigate.replace('/');
+					}
 
 				} else {
 					setErrorUser({
