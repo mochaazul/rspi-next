@@ -3,8 +3,6 @@ import { PropsWithChildren, PropsWithRef } from 'react';
 
 import { colors } from '@/constant';
 
-import { useGetFooterPages } from '@/lib/api/client/footer';
-
 import {
 	Breadcrumbs,
 	CustomCarousel,
@@ -14,26 +12,14 @@ import {
 import { FooterServiceStyle } from './style';
 
 type Props = PropsWithRef<PropsWithChildren<{
-	slug: string,
+	detail: any,
 	isMedSpec: boolean;
 }>>;
 
 const FooterServices = ({
-	slug,
+	detail,
 	isMedSpec
 }: Props) => {
-
-	const param = {
-		query: {
-			slug: slug
-		}
-	};
-
-	const {
-		data: FooterState,
-	} = useGetFooterPages(param);
-
-	const detail = Object.values(FooterState?.data || []);
 
 	const renderContent = (
 		<div>
