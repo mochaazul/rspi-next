@@ -53,11 +53,12 @@ const Share = (props: PropsType) => {
 		setIsHoverShare(prevHover => !prevHover);
 	};
 	return (
-		<div className='absolute right-0 mr-[10px] mt-[10px] z-10 top-0 cursor-pointer flex flex-col items-end group'>
-			<div onClick={ handleClickSocialShare }>
+		<div className='absolute right-0 mr-[10px] mt-[10px] top-0 cursor-pointer flex flex-col items-end group'>
+			<div onClick={ handleClickSocialShare } style={ { zIndex: '15 !important' } }>
 				<icons.SocialShare />
 			</div>
 			<div
+				style={ { zIndex: '100 !important' } }
 				className={ 'hidden group-hover:block rounded-[10px] mt-2 bg-white divide-y divide-gray-100 shadow custom-scrollbar' }
 			>
 				<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
