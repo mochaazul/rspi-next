@@ -1,6 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
+import { icons } from '@/constant';
+
 import ModalStyle from './style';
 
 type ModalType = 'bottom' | 'center';
@@ -78,6 +80,11 @@ const Modal: React.FC<ModalProps> = ({
 						}
 						<div className='modal-content'>
 							{ children }
+							{
+								onClose && <div className='cursor-pointer absolute top-5 right-5' onClick={ onClose }>
+									<icons.Close alt='' />
+								</div>
+							}
 						</div>
 					</div>
 				</div>

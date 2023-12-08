@@ -83,12 +83,12 @@ const CardAppointment = (props: PropsType) => {
 		);
 	};
 
-	const userClickCancelBook = async(appointmentId: string) => {
+	const userClickCancelBook = async (appointmentId: string) => {
 		try {
 			await cancelBookingTrigger({
 				appointment_id: appointmentId
 			});
-			mutate((key:any) => typeof key === 'string' && key.startsWith('appointmentList'));
+			mutate((key: any) => typeof key === 'string' && key.startsWith('appointmentList'));
 			toast.success('Cancel Booking Success', {
 				hideProgressBar: true,
 				pauseOnHover: false,
@@ -230,7 +230,7 @@ const CardAppointment = (props: PropsType) => {
 					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
 				}
 				{ (props.status !== 'Jadwal Selesai' && props.type !== 'other') &&
-					<div onClick={ async() => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
+					<div onClick={ async () => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
 				}
 
 			</div>
@@ -270,7 +270,7 @@ const CardAppointment = (props: PropsType) => {
 					<icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />
 				</div>
 			}
-			< DetailKunjungan
+			<DetailKunjungan
 				visible={ modalOpen }
 				onClose={ handleShowModal }
 				id={ props.id }
@@ -300,7 +300,7 @@ const CardAppointment = (props: PropsType) => {
 				noHp={ props.patientPhone || '-' }
 				patientProfile={ props.patientProfile }
 			/>
-			<PinModal visible={ showPinModal } onSuccess={ () => userClickCancelBook(props.id) } isLoading={ isLoadingCancelBook } />
+			<PinModal visible={ showPinModal } onSuccess={ () => userClickCancelBook(props.id) } isLoading={ isLoadingCancelBook } onClose={ () => setShowPinModal(false) } />
 		</CardPatientPortalStyle >
 	);
 };

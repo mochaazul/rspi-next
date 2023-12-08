@@ -13,7 +13,6 @@ import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 
 const DevTools = () => {
-
 	const [open, setOpen] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -35,9 +34,7 @@ const DevTools = () => {
 		setOpen(false);
 	};
 
-	return <Modal
-		visible={ open }
-	>
+	return <Modal visible={ open }>
 		<div>
 			<Text className='mb-2' text='Dev Tools' fontType={ 'h4' } />
 			<Button onClick={ flushReduxPersist } className='mb-2'>Reset Redux</Button>

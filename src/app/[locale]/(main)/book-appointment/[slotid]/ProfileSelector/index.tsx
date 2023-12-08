@@ -27,7 +27,6 @@ type ProfileCardProps = {
 	showModalDelete: (id: number, visible: boolean) => void;
 };
 const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: ProfileCardProps) => {
-
 	return (<ProfileSelectorCard isActive={ isActive } onClick={ () => { onClick(profile.id); } }
 		className='max-sm:min-w-full max-sm:max-w-full'
 	>
@@ -64,7 +63,6 @@ type ProfileSelectorProps = {
 };
 
 const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyProfiles }: ProfileSelectorProps) => {
-
 	const t = useScopedI18n('page.bookingAppointment.profileSelector');
 
 	const [selectedProfile, setSelectedProfile] = useState<number>();
@@ -124,6 +122,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 			</NoProfileContainer>
 		);
 	};
+
 	const modalDelete = () => {
 		return <Modal
 			visible={ showDeleteModal }
@@ -132,6 +131,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 			borderRadius='12px'
 			overflow='none'
 			containerClassName='m-[10px]'
+			onClose={ () => setShowDeleteModal(false) }
 		>
 			<ProfileModalContainer>
 				<icons.WarningIcon />

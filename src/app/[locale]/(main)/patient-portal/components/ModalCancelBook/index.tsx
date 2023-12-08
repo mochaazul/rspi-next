@@ -35,6 +35,7 @@ const ModalCancelBook = (props: PropsType) => {
 			visible={ props.visible }
 			width='558px'
 			noPadding={ true }
+			onClose={ props.onClose }
 		>
 			<ModalStyle>
 				<div>

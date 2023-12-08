@@ -15,13 +15,15 @@ type Props = {
 	hospitalName?: string;
 	date?: string;
 	visible: boolean;
+	onClose?: () => void;
 };
 
 const SuccessConfirmationModal = ({
 	date,
 	doctorName,
 	hospitalName,
-	visible
+	visible,
+	onClose
 }: Props) => {
 	const t = useScopedI18n('page.bookingAppointment.success');
 	const router = useRouter();
@@ -36,11 +38,13 @@ const SuccessConfirmationModal = ({
 		return `${ t('subHeading.main') } ${ doctorName } ${ t('subHeading.at') } ${ hospitalName } ${ t('subHeading.on') } ${ dayjs(date).format('dddd, DD MMMM YYYY') } ${ t('subHeading.done') }`;
 	};
 
-	return <Modal visible={ visible }
+	return <Modal
+		visible={ visible }
 		noPadding
 		width='526px'
 		containerClassName='mx-[10px]'
 		borderRadius='12px'
+		onClose={ onClose }
 	>
 		<SuccessConfModalContainer>
 			<icons.CheckShadowed />
@@ -57,9 +61,9 @@ const SuccessConfirmationModal = ({
 				lineHeight='20px'
 				textAlign='center'
 				text={ subHeadingText() } />
-			
+
 			<Button label={ t('btnLabel') } onClick={ onclickButton } />
-			
+
 		</SuccessConfModalContainer>
 	</Modal>;
 };
