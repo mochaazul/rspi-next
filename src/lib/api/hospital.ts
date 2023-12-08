@@ -7,3 +7,6 @@ export const getHospital = (param?: ApiOptions) => {
 export const getLastVisitHospital = () => {
 	return fetcher<I_VisitHistory[]>('visitHistory');
 };
+export const getHospitalDetail = (options?: ApiOptions) => {
+	return fetcher<HospitalDetail>('hospital', options);
+};
