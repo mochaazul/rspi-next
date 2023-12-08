@@ -53,8 +53,8 @@ const Share = (props: PropsType) => {
 		setIsHoverShare(prevHover => !prevHover);
 	};
 	return (
-		<div className='absolute right-0 mr-[10px] mt-[10px] top-0 cursor-pointer flex flex-col items-end group'>
-			<div onClick={ handleClickSocialShare } style={ { zIndex: '15 !important' } }>
+		<div className='absolute right-0 mr-[10px] mt-[10px] top-0 cursor-pointer flex flex-col items-end group z-10 z-max'>
+			<div onClick={ handleClickSocialShare } className='relative'>
 				<icons.SocialShare />
 			</div>
 			<div
