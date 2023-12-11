@@ -1,9 +1,9 @@
 import { getProfile } from '@/lib/api/profile';
 import { getVisitHistory } from '@/lib/api/hospital';
 import { I_VisitHistory } from '@/interface';
+import AuthError from '@/components/Layout/AuthError';
 
 import PatientProfile from './PatientProfile';
-import AuthError from '@/components/Layout/AuthError';
 
 export default async function Page() {
 	const profile = await getProfile();
