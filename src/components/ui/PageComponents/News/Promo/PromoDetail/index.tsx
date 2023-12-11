@@ -68,8 +68,8 @@ const PromoDetail = ({
 					</div>
 				</div>
 				<div className='content-wrapper mt-[20px] mb-[100px]'>
-					<div className='mt-[30px] w-full flex gap-8'>
-						<img src={ selectedEvent?.img_url_detail || '' } className='mx-auto object-cover max-w-[450px] max-h-[624px]' alt='' />
+					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
+						<img src={ selectedEvent?.img_url_detail || '' } className='mx-auto object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
 						<div>
 							<div
 								className='innerHTML'
