@@ -35,7 +35,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 	let relatedNews: I_RelatedNews[] = [];
 
 	if (paramsSlug === 'medical-specialities') {
-		const medicalSpecialitiesRes = await getMedicalSpecialities({ query: { footer_category: 'medical-specialities' } });
+		const medicalSpecialitiesRes = await getMedicalSpecialities({ query: { footer_category: 'medical-specialities', is_publish: true } });
 		medicalSpecialities = medicalSpecialitiesRes?.data;
 	} else {
 		const relatedNewsRes = await getFacilityRelatedNews({

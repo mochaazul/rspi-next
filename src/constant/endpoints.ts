@@ -46,5 +46,6 @@ export const endpoints = {
 	updateEmail: '/patients/update-email',
 	changeEmail: '/auths/request-verify',
 	clinics: '/clinics/clinic-category',
+	getMedicalSpeciality: '/footer-pages/medical-speciality',
 };
 export default endpoints;
