@@ -433,6 +433,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				doctorName={ doctorResponse?.data?.name ?? '' }
 				date={ timeSlot?.date }
 				visible={ successModal }
+				onClose={ () => setConfirmationModalVisible(false) }
 			/>
 		</BookAppointmentContainer>
 	);

@@ -5,16 +5,19 @@ import Button from '@/components/ui/Button';
 import { HospitalDetail } from '@/interface';
 
 type Props = {
-	visible: boolean,
-	clickCloseContactHospital: () => void,
-	hospitalDetail?: HospitalDetail
+	visible: boolean;
+	clickCloseContactHospital: () => void;
+	hospitalDetail?: HospitalDetail;
+	onClose?: () => void;
 };
 const PhoneModal = ({
 	visible,
-	clickCloseContactHospital, hospitalDetail
+	clickCloseContactHospital,
+	hospitalDetail,
+	onClose
 }: Props) => {
 	return (
-		<Modal visible={ visible }>
+		<Modal visible={ visible } onClose={ onClose }>
 			<PinModalContainer>
 				<Text text={ hospitalDetail?.name || '' } fontWeight='900' fontSize='20px' lineHeight='48px' />
 				<Text text={ hospitalDetail?.phone || '' } fontWeight='900' fontSize='28px' lineHeight='normal' />

@@ -23,9 +23,10 @@ type Props = {
 	visible: boolean,
 	onSuccess: () => void;
 	isLoading?: boolean;
+	onClose?: () => void;
 };
 
-const PinModal = ({ visible, onSuccess, isLoading }: Props) => {
+const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 	const t = useScopedI18n('modalDialog.pin');
 	const tValidation = useScopedI18n('validation.formValidation');
 
@@ -59,7 +60,7 @@ const PinModal = ({ visible, onSuccess, isLoading }: Props) => {
 	};
 
 	return (
-		<Modal visible={ visible }>
+		<Modal visible={ visible } onClose={ onClose }>
 			<PinModalContainer>
 				<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
 				<Text text={ t('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />

@@ -109,7 +109,7 @@ const FeedbackNotes = ({ onChange, value }: { value: string, onChange: (value: s
 					fontSize='14px'
 					fontWeight='500'
 					lineHeight='20px' />
-				
+
 			</div>
 			<StyledTextArea placeholder={ t('notesInputPlaceholder') } value={ value } onChange={ evt => {
 				onChange(evt.target.value);
@@ -134,8 +134,8 @@ const RecommendDoctorModal = (props: PropsType) => {
 	const [feedbackValue, setFeedbackValue] = useState<string[]>([]);
 	const [feedbackNotes, setFeedbackNotes] = useState<string>('');
 
-	const onSubmit = async() => {
-		
+	const onSubmit = async () => {
+
 		if (props?.visitHistory) {
 			await giveDoctorRating({
 				appointment_id: props.visitHistory.appointment_id,
@@ -150,7 +150,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 				props.onClose && props.onClose();
 				resetForm();
 			});
-			
+
 		}
 	};
 
@@ -200,7 +200,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 				width='520px'
 				noPadding={ true }
 			>
-				<ModalStyle>
+				<ModalStyle className='max-sm:p-4'>
 					<div>
 						<Text text={ t('riwayatKunjungan.recommendDoctorModal.header') } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
 						<div className='flex my-[30px] p-[16px] rounded-md bg-[#FAFAFA]'>
@@ -230,7 +230,10 @@ const RatingOptionLabel = styled.div<{ checked: boolean; }>`
   border-radius: 5px;
   border: 1px solid #EAEAEA;
   display: flex;
-  padding: 7px 13px;
+	padding: 7px 13px;
+	@media screen and (max-width: 640px) {
+		padding: 4px 8px;
+  }
   flex-direction: column;
   justify-content: center;
   align-items: center;

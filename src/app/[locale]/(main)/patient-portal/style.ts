@@ -8,6 +8,10 @@ export const CardPatientPortalStyle = styled.div`
   padding: 20px;
   max-height: 600px;
   overflow-y: auto;
+
+	@media screen and (max-width: 640px) {
+    padding: 14px;
+  }
   
   .btn-cancel {
     padding: 5px 10px;
@@ -20,7 +24,6 @@ export const CardPatientPortalStyle = styled.div`
     @media screen and (max-width: 640px) {
       margin: auto;
       padding: 8px 16px;
-
     }
   }
 
@@ -35,7 +38,6 @@ export const CardPatientPortalStyle = styled.div`
     @media screen and (max-width: 640px) {
       margin: auto;
       padding: 8px 16px;
-
     }
   }
 
@@ -46,6 +48,13 @@ export const CardPatientPortalStyle = styled.div`
   table {
     width: 100%;
     border-collapse: collapse;
+		@media screen and (max-width: 640px) {
+			th {
+				font-size: 12px !important;
+				text-align: center !important;
+				padding-right: 8px !important;
+			}
+    }
     th {
       text-align: left;
       font-weight: 700;
@@ -55,6 +64,11 @@ export const CardPatientPortalStyle = styled.div`
     }
     td {
       padding-top: 20px;
+			@media screen and (max-width: 640px) {
+				font-size: 11px;
+				text-align: center;
+				padding-right: 8px;
+    	}
     }
   }
 `;

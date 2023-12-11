@@ -234,7 +234,7 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 					</div>
 				</div>
 			</div>
-			<PinModal visible={ pinModalVisible } onSuccess={ onSuccessEnterPin } />
+			<PinModal visible={ pinModalVisible } onSuccess={ onSuccessEnterPin } onClose={ () => setPinModalVisible(false) } />
 		</VisitHistoryStyle>
 	);
 };

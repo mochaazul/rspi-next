@@ -41,7 +41,7 @@ const RiwayatVaksin = () => {
 	return (
 		<>
 			<CardPatientPortalStyle>
-				<div className='table-wrapper' style={ { minHeight: '300px' } }>
+				<div className='table-wrapper max-sm:m-0' style={ { minHeight: '300px' } }>
 					<table>
 						<tr>
 							<th>No</th>

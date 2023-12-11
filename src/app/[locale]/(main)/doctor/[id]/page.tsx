@@ -161,6 +161,7 @@ export default function Page({ params }: Props) {
 							visible={ showModalTelp }
 							hospitalDetail={ selectedHospitalDetails() }
 							clickCloseContactHospital={ closeContactHospital }
+							onClose={ () => setShowModalTelp(false) }
 						/>
 						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] md:pt-7 pb-[120px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
