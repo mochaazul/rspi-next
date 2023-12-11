@@ -15,7 +15,7 @@ import { MedicalRecordReminder, Spinner } from '@/components/ui';
 import CardUserStyle from './style';
 
 type CardUserProps = {
-	patientProfile?: UserDataDetail;
+	patientProfile?: UserDataDetail | null;
 	lastVisitedHospital?: I_VisitHistory;
 	isLoading?: boolean;
 };

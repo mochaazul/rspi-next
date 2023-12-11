@@ -38,6 +38,17 @@ export default {
 			submitBtnLabel: 'Confirm',
 			pinLabel: 'PIN',
 			forgotPin: 'Forgot PIN?'
+		},
+		needLogin: {
+			heading: 'Please Login',
+			subHeading: 'To access this page, you need to log in first',
+			btnLabel: 'Login'
+		},
+		needLogout: {
+			heading: 'Login access detected!',
+			subHeading: 'A new access was logged into your account on another device.',
+			desc: 'Please log out manually.',
+			btnLabel: 'Log Out'
 		}
 	},
 	navMenu: {
@@ -598,7 +609,7 @@ export default {
 		pinPage: {
 			heading: 'Create New PIN',
 			headingReset: 'Change PIN',
-			subHeading: 'Please create your 6-digit PIN',
+			subHeading: 'Please type in your 6-digit numeric PIN to access your history in more detail in the Patient Portal.',
 			subHeadingReset: 'Enter your 6-digit PIN',
 			notification: {
 				onSuccessMsg: 'Successfully created PIN',

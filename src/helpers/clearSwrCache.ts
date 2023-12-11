@@ -1,5 +1,5 @@
 
-const clearSWRCache = async(cache:any) => {
+const clearSWRCache = async (cache: any) => {
 	const keys = cache.keys();
 	for (const key of keys) {
 		cache.delete(key);
