@@ -38,6 +38,17 @@ export default {
 			submitBtnLabel: 'Confirm',
 			pinLabel: 'PIN',
 			forgotPin: 'Forgot PIN?'
+		},
+		needLogin: {
+			heading: 'Please Login',
+			subHeading: 'To access this page, you need to log in first',
+			btnLabel: 'Login'
+		},
+		needLogout: {
+			heading: 'Login access detected!',
+			subHeading: 'A new access was logged into your account on another device.',
+			desc: 'Please log out manually.',
+			btnLabel: 'Log Out'
 		}
 	},
 	navMenu: {

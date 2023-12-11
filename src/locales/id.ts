@@ -49,6 +49,17 @@ export default {
 			submitBtnLabel: 'Konfirmasi',
 			pinLabel: 'PIN',
 			forgotPin: 'Lupa PIN?'
+		},
+		needLogin: {
+			heading: 'Silakan Login',
+			subHeading: 'Untuk mengakses halaman ini perlu login terlebih dahulu.',
+			btnLabel: 'Login'
+		},
+		needLogout: {
+			heading: 'Akses masuk terdeteksi!',
+			subHeading: 'Terdapat akses baru yang masuk ke akun Anda pada perangkat lain.',
+			desc: 'Silahkan log out secara manual.',
+			btnLabel: 'Log Out'
 		}
 	},
 	navMenu: {

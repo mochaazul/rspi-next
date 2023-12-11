@@ -83,7 +83,7 @@ export const Header = ({
 	const handleClick = async () => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
-			clearSWRCache(cache, mutate);
+			await clearSWRCache(cache);
 			setShowSideBar(false);
 			// Notes: protectedRoutes sudah dihandle oleh middleware. shg cukup dgn refresh page akan redirect ke halaman login
 			// Khusus halaman disini tidak dihandle di middleware karna perlu show NeedLoginModal dari response error swr
