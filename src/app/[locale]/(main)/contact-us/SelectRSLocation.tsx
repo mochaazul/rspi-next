@@ -72,7 +72,7 @@ const SelectRSLocation = (props: PropsType) => {
 			</div>
 			<div className='p-3 pt-2 gap-3 flex sm:hidden'>
 				<Button theme='outline' $hoverTheme='primary' label='See Direction' onClick={ openGMaps } />
-				<Button theme='primary' $hoverTheme='outline' label='Find a Doctor' />
+				<Button theme='primary' label='Find a Doctor' />
 			</div>
 		</SelectRSLocationStyle>
 	);

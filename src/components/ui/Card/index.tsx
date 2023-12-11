@@ -37,6 +37,7 @@ interface CardsScrollHorizontalType {
 	children: JSX.Element | JSX.Element[];
 	customRef?: React.RefObject<HTMLDivElement>;
 	noHorizontalPadding?: boolean;
+	className?: string;
 }
 
 const Card = (props: PropsType) => {
@@ -50,30 +51,30 @@ const Card = (props: PropsType) => {
 		<CardWrapper className={ `shrink-0 ${ props.className } relative` }>
 			<Link href={ props.to || '#' } onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 				<CardStyle { ...props.cardStyle }>
-				
+
 					{
 						props.image &&
-					<div className={ `relative w-full ${ props.imageHeight ? `h-[${ props.imageHeight }]` : 'h-fit' }` } >
-						<Image src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
-					</div>
+						<div className={ `relative w-full ${ props.imageHeight ? `h-[${ props.imageHeight }]` : 'h-fit' }` } >
+							<Image src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
+						</div>
 					}
 					{
 						props.header &&
-					<div className='footer px-[20px] pt-[20px]'>
-						{ typeof props.header === 'function' ? <props.header isHover={ isHover } /> : props.header }
-					</div>
+						<div className='footer px-[20px] pt-[20px]'>
+							{ typeof props.header === 'function' ? <props.header isHover={ isHover } /> : props.header }
+						</div>
 					}
 					{
 						props.content &&
-					<div className='content px-[20px] pb-[20px]'>
-						{ props.content }
-					</div>
+						<div className='content px-[20px] pb-[20px]'>
+							{ props.content }
+						</div>
 					}
 					{
 						props.footer &&
-					<div className='footer pb-[20px] px-[20px] grow flex items-end'>
-						{ typeof props.footer === 'function' ? <props.footer isHover={ isHover } /> : props.footer }
-					</div>
+						<div className='footer pb-[20px] px-[20px] grow flex items-end'>
+							{ typeof props.footer === 'function' ? <props.footer isHover={ isHover } /> : props.footer }
+						</div>
 					}
 				</CardStyle>
 			</Link>
@@ -129,8 +130,8 @@ export const CardFooter = ({ content, to }: { content: string; to?: string; }) =
 	</div>
 );
 
-export const CardsScrollHorizontal = ({ children, customRef, noHorizontalPadding }: CardsScrollHorizontalType) => (
-	<CardHorizontalStyle ref={ customRef } className={ ` ${ noHorizontalPadding ? '' : 'pl-3 md:px-40' } flex gap-x-[32px] pr-[32px] w-full` }>
+export const CardsScrollHorizontal = ({ children, customRef, noHorizontalPadding, className }: CardsScrollHorizontalType) => (
+	<CardHorizontalStyle ref={ customRef } className={ ` ${ noHorizontalPadding ? '' : 'pl-3 md:px-40' } ${ className } flex gap-x-[32px] pr-[32px] w-full` }>
 		{ children }
 	</CardHorizontalStyle>
 );

@@ -20,7 +20,7 @@ type Props = {
 	selectedDate?: Date;
 	dateStatus?: string;
 	timeslot: TimeSlot[],
-	isLoading: boolean
+	isLoading: boolean;
 };
 
 const VisitSchedule: React.FC<Props> = ({
@@ -40,7 +40,7 @@ const VisitSchedule: React.FC<Props> = ({
 	const getTimeSlot = () => {
 		const filteredTimeSlot = timeslot?.filter(item => item.hospital_code === hospital) ?? [];
 		const removePastDate = filteredTimeSlot.filter(item => {
-			const itemDateTime = `${item.date} ${formatTimeslot(item.session_app_start)}`;
+			const itemDateTime = `${ item.date } ${ formatTimeslot(item.session_app_start) }`;
 			// only return when the item is on the future
 			const isPastDateTime = dayjs().isAfter(dayjs(itemDateTime, 'YYYY-MM-DD HH:mm'));
 			return !isPastDateTime && item;
@@ -56,7 +56,7 @@ const VisitSchedule: React.FC<Props> = ({
 
 	const renderEmptyState = (
 		<div className='flex flex-col items-center justify-center h-full'>
-			
+
 			<icons.EmptyCalendar />
 			<Text
 				fontSize='16px'
@@ -69,7 +69,7 @@ const VisitSchedule: React.FC<Props> = ({
 	);
 
 	const selectTimeSlotHandler = (slotId: string) => {
-		const timeSlotItem = timeslot?.find((item:any) => item.slot_id === slotId);
+		const timeSlotItem = timeslot?.find((item: any) => item.slot_id === slotId);
 		if (timeSlotItem) {
 			onSelect(timeSlotItem);
 		}
@@ -87,7 +87,7 @@ const VisitSchedule: React.FC<Props> = ({
 				color='#DC6803'
 				text={ t('notAvailableSchedule') } />
 		</EmptyWarningContainer>
-		<Button onClick={ onClickContactHospital } className='mt-[16px]' label={ t('callCenter') } theme='outline' />
+		<Button onClick={ onClickContactHospital } className='mt-[16px]' label={ t('callCenter') } theme='outline' $hoverTheme='primary' />
 	</>;
 	return (
 		<VisitScheduleStyle>

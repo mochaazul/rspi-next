@@ -34,10 +34,10 @@ const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 				{ t('subHeading') }
 			</Text>
 
-			<div className='flex md:flex-row flex-col mt-9'>
+			<div className='grid grid-cols-2 lg:flex gap-y-8 gap-x-6 lg:gap-x-5 mt-6 sm:mt-[50px]'>
 				{
-					datas?.map((data, index) => (
-						<div key={ index } className='md:flex-1 sm:px-5 sm:py-3 card-shadow'>
+					datas?.slice(0, 4)?.map((data, index) => (
+						<div key={ index } className='card-shadow w-full lg:p-3 flex-1'>
 							<div className='image'>
 								{ data.img_url && (
 									<Image src={ data.img_url } alt={ data.title ?? 'rspi-awards' } width={ 120 } height={ 120 } />

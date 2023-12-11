@@ -36,7 +36,7 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: Pr
 			<Text text={ profile.name } fontWeight='700' />
 			{
 				!isSelf &&
-				<div onClick={ async() => {
+				<div onClick={ async () => {
 					showModalDelete(profile?.id, true);
 				} }>
 					<icons.Trash />
@@ -142,11 +142,11 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 					lineHeight='38px'
 					text={ `${ t('deleteModal.heading') } "${ selectedProfileOnDelete?.name }" ?` } />
 				<div className='flex flex-row gap-x-5 w-full'>
-					<Button className='sub-button color-default' theme='primary' label='Ya' onClick={ async() => {
+					<Button className='sub-button color-default' theme='primary' label={ t('deleteModal.yesLabel') } onClick={ async () => {
 						setShowDeleteModal(false);
 						await deleteFamilyProfile(selectedIdFamilyProfile ?? -1);
 					} } />
-					<Button className='sub-button color-red' theme='outline' label='Tidak' onClick={ () => setShowDeleteModal(false) } />
+					<Button className='sub-button color-red' theme='outline' label={ t('deleteModal.noLabel') } onClick={ () => setShowDeleteModal(false) } />
 				</div>
 			</ProfileModalContainer>
 		</Modal>;

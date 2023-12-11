@@ -85,7 +85,7 @@ const BookByIssues = () => {
 				</div>
 			</div>
 			<div className='flex flex-1 gap-4 mt-8 justify-end'>
-				<Button className='shrink-0 max-w-[121px]' theme='outline'>Reset</Button>
+				<Button className='shrink-0 max-w-[121px]' theme='outline' $hoverTheme='primary'>Reset</Button>
 				<Button className='shrink-0 max-w-[216px]' theme='primary'>Book Appointment</Button>
 			</div>
 		</div>
