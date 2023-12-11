@@ -120,7 +120,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 								fontWeight='700'
 								className='flex'
 								subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer'
-								onClick={ () => navigate.push(`/hospital/${ item.id }`) }
+								onClick={ () => navigate.push(`/hospital/${ item.slug }`) }
 							>{ item.name }</Text>
 						);
 					})

@@ -20,7 +20,7 @@ import { CentreOfExcellenceStyle } from './style';
 const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.centerOfExcellence');
 
-	const responseCenterOfExcellence = await getCoe();
+	const responseCenterOfExcellence = await getCoe({ limit: 1000 });
 
 	const newParam = decodeURIComponent(params?.slug);
 
