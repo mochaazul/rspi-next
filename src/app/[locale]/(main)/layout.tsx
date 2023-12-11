@@ -51,7 +51,7 @@ export default async function RootLayout({
 			}
 			{
 				props?.footerShow !== false &&
-				<CallForAmbulance hospitalData={ hospitals.data } />
+				<CallForAmbulance hospitalData={ hospitals.data } session={ session } />
 			}
 			{
 				appStage !== 'prod' &&

@@ -62,7 +62,7 @@ const NewsHealthArticlesPage = ({
 				category: tabData[activeTab]?.value,
 				keyword: keyArticle
 			}
-		}).then(function(response: any) {
+		}).then(function (response: any) {
 			setArticlesData(response.data);
 			setLoading(false);
 		});
@@ -126,7 +126,7 @@ const NewsHealthArticlesPage = ({
 										className='w-[540px] mr-[32px] cursor-pointer magazine relative'
 										onClick={ () => navigate.push(`${ pathname }/${ Object.values(articlesData || [])[0]?.slug }`) }
 									>
-										<div>
+										<div className='relative'>
 											<Share />
 										</div>
 										<img
@@ -159,7 +159,7 @@ const NewsHealthArticlesPage = ({
 														className='relative'
 														key={ index }
 													>
-														<div>
+														<div className='relative'>
 															<Share id={ data.id } />
 														</div>
 														<div onClick={ () => navigate.push(`${ pathname }/${ data?.slug }`) } style={ { zIndex: '-999 !important' } }>
@@ -220,7 +220,7 @@ const NewsHealthArticlesPage = ({
 							{ loading ? 'loading ...' : <EmptyData menu={ t('heading') } /> }
 						</Text>
 					}
-					
+
 					<div className='mobile-view w-full sm:hidden'>
 						<CardsScrollHorizontal >
 							{
@@ -236,7 +236,6 @@ const NewsHealthArticlesPage = ({
 													<div>
 														<Button
 															theme='primary'
-															$hoverTheme='outline'
 															label={ data?.category?.charAt(0).toUpperCase() + data.category.slice(1) }
 															className='btn-category'
 														/>
@@ -262,7 +261,7 @@ const NewsHealthArticlesPage = ({
 							}
 						</CardsScrollHorizontal>
 					</div>
-					
+
 					{ Object.values(articlesData || []).length !== 0 ?
 						<div className='mt-[50px] flex flex-col items-center'>
 							{ loading ? '' :

@@ -11,7 +11,8 @@ export default {
 			thursday: 'Kamis',
 			friday: 'Jumat',
 			saturday: 'Sabtu',
-			sunday: 'Minggu'
+			sunday: 'Minggu',
+			all: 'Semua'
 		},
 		short: {
 			monday: 'Sen',
@@ -20,7 +21,8 @@ export default {
 			thursday: 'Kam',
 			friday: 'Jum',
 			saturday: 'Sab',
-			sunday: 'Min'
+			sunday: 'Min',
+			all: 'Semua'
 		}
 	},
 	global: {
@@ -546,7 +548,7 @@ export default {
 				all: 'Semua',
 				news: 'Berita',
 				healthArticles: 'Artikel Kesehatan',
-				healthFirst: 'Kesehatan Utama'
+				healthFirst: 'Health First'
 			},
 			heading: 'Berita dan Artikel Kesehatan',
 			detailsBtnLabel: 'Lihat Detail',
@@ -819,7 +821,8 @@ export default {
 						'Sangat direkomendasikan'
 					],
 					feedback: {
-						heading: 'Apa yang Anda sukai dari dokter Anda?',
+						headingLove: 'Apa yang Anda sukai dari dokter Anda?',
+						headingImprove: 'Apa yang ingin Anda tingkatkan dari dokter Anda?',
 						notesInputLabel: 'Beritahu kami lebih lanjut',
 						notesInputPlaceholder: 'Masukkan deskripsi...',
 						optionalLabel: '(Opsional)',

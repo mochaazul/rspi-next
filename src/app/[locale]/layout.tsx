@@ -31,7 +31,7 @@ export default function SubLayout({ params: { locale }, children }: { params: { 
 			*/ }
 
 			<LogoutModal visible={ logoutModalVisible } toggler={ setLogoutModalVisible } />
-			<NeedLoginModal visible={ loginModalVisible } toggler={ setLoginModalVisible } />
+			<NeedLoginModal visible={ loginModalVisible } toggler={ setLoginModalVisible } onClose={ () => setLoginModalVisible(false) } />
 		</SWRConfig>
 	);
 }

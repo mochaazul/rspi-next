@@ -1,11 +1,12 @@
 import ButtonStyle, { ButtonType } from './style';
+import { colors } from '@/constant';
 
 const Button = ({
 	children,
 	label = 'Submit',
 	theme = 'primary',
-	themeColor,
-	$hoverTheme: hoverTheme,
+	themeColor = colors.paradiso.default,
+	$hoverTheme: hoverTheme = theme,
 	type = 'button',
 	width,
 	className,
@@ -20,7 +21,7 @@ const Button = ({
 			$themeColor={ themeColor }
 			className={ className }
 			type={ type }
-			onClick={ onClick && onClick }
+			onClick={ onClick }
 			width={ width }
 			disabled={ disabled }
 			noPadding={ noPadding }

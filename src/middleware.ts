@@ -5,7 +5,8 @@ import { protectedRoutes } from './constant/config';
 
 const I18nMiddleware = createI18nMiddleware({
 	locales: ['id', 'en'],
-	defaultLocale: 'id'
+	defaultLocale: 'id',
+	resolveLocaleFromRequest: () => 'id'
 });
 
 export function middleware(request: NextRequest) {

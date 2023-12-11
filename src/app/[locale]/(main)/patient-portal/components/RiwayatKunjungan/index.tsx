@@ -11,11 +11,16 @@ import { Button, Spinner, Text } from '@/components/ui';
 import { useGetVisitHistory } from '@/lib/api/client/hospital';
 import { useScopedI18n } from '@/locales/client';
 import useSession from '@/session/client';
+import { UserDataDetail } from '@/interface';
 
 import CardAppointment from '../CardAppointment';
 import { EmptyResultContainer } from '../../style';
 
-const RiwayatKunjungan = () => {
+type RiwayatKunjunganProps = {
+	patientProfile: UserDataDetail;
+};
+
+const RiwayatKunjungan = ({ patientProfile }: RiwayatKunjunganProps) => {
 	const t = useScopedI18n('page.patientPortal');
 	const session = useSession();
 
@@ -77,6 +82,7 @@ const RiwayatKunjungan = () => {
 						hospital_name={ visitHistory.hospital_name }
 						visit_status={ visitHistory.visit_status }
 						doctor_id={ visitHistory.doctor_code }
+						patientProfile={ patientProfile }
 						isHistory
 					/>
 				);

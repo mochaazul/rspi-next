@@ -204,7 +204,6 @@ const RegisterPage = () => {
 						<Button
 							label={ t('registerBtnLabel') }
 							theme='primary'
-							$hoverTheme='outline'
 							type='submit'
 							className='w-full mt-6'
 							disabled={ loadingUser }

@@ -56,7 +56,7 @@ const ItemFAQ = (props: ItemType) => {
 								{ props.readMore ? props.desc.substring(0, 250) : props.desc }
 								{
 									props.readMore ?
-										<Link href={ `/contact-us/faq/${ props.index }` }>
+										<Link href='/contact-us/faq'>
 											<Text
 												fontSize='14px'
 												lineHeight='21px'

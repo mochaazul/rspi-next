@@ -27,7 +27,6 @@ type ProfileCardProps = {
 	showModalDelete: (id: number, visible: boolean) => void;
 };
 const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: ProfileCardProps) => {
-
 	return (<ProfileSelectorCard isActive={ isActive } onClick={ () => { onClick(profile.id); } }
 		className='max-sm:min-w-full max-sm:max-w-full'
 	>
@@ -36,7 +35,7 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: Pr
 			<Text text={ profile.name } fontWeight='700' />
 			{
 				!isSelf &&
-				<div onClick={ async() => {
+				<div onClick={ async () => {
 					showModalDelete(profile?.id, true);
 				} }>
 					<icons.Trash />
@@ -64,7 +63,6 @@ type ProfileSelectorProps = {
 };
 
 const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyProfiles }: ProfileSelectorProps) => {
-
 	const t = useScopedI18n('page.bookingAppointment.profileSelector');
 
 	const [selectedProfile, setSelectedProfile] = useState<number>();
@@ -124,6 +122,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 			</NoProfileContainer>
 		);
 	};
+
 	const modalDelete = () => {
 		return <Modal
 			visible={ showDeleteModal }
@@ -132,6 +131,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 			borderRadius='12px'
 			overflow='none'
 			containerClassName='m-[10px]'
+			onClose={ () => setShowDeleteModal(false) }
 		>
 			<ProfileModalContainer>
 				<icons.WarningIcon />
@@ -142,11 +142,11 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 					lineHeight='38px'
 					text={ `${ t('deleteModal.heading') } "${ selectedProfileOnDelete?.name }" ?` } />
 				<div className='flex flex-row gap-x-5 w-full'>
-					<Button className='sub-button color-default' theme='primary' label='Ya' onClick={ async() => {
+					<Button className='sub-button color-default' theme='primary' label={ t('deleteModal.yesLabel') } onClick={ async () => {
 						setShowDeleteModal(false);
 						await deleteFamilyProfile(selectedIdFamilyProfile ?? -1);
 					} } />
-					<Button className='sub-button color-red' theme='outline' label='Tidak' onClick={ () => setShowDeleteModal(false) } />
+					<Button className='sub-button color-red' theme='outline' label={ t('deleteModal.noLabel') } onClick={ () => setShowDeleteModal(false) } />
 				</div>
 			</ProfileModalContainer>
 		</Modal>;

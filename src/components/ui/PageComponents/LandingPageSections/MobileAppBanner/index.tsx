@@ -17,13 +17,13 @@ const MobileAppBanner = () => {
 	return (
 		<WrapperMobileAppBanner>
 			<div className='sm:flex-1'>
-				<div className='sm:hidden w-full'>
+				<div className='sm:hidden w-full max-sm:mb-6'>
 					<img className='mx-auto' src={ images.MobileGroup.src } />
 				</div>
 
 				<div className='flex flex-col sm:justify-center sm:items-center sm:h-[546px]'>
 					<div>
-						<Text fontSize='44px' fontWeight='900' lineHeight='51px' color={ colors.grey.darker }>
+						<Text fontSize='44px' fontWeight='900' lineHeight='51px' color={ colors.grey.darker } subClassName='max-sm:!text-[20px] max-sm:!leading-8 max-md:!text-[34px] max-md:!leading-normal'>
 							{ t('heading') }
 						</Text>
 						<div className='mt-3'>

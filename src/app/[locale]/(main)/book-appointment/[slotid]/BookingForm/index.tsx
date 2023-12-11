@@ -29,6 +29,7 @@ import { isEqual } from 'lodash';
 import { useBookAppointmentAPI, usePushNotifAPI } from '@/lib/api/client/booking';
 import { useNotification } from '@/lib/api/client/header';
 import useSession from '@/session/client';
+import { useSWRConfig } from 'swr';
 
 type BookingFormState = {
 	keluhan: string;
@@ -39,13 +40,14 @@ type BookingFormState = {
 
 type BookAppointmentProps = {
 	doctorResponse: ResponseType<FindDoctorDetail>;
-	familyProfiles: UserDataDetail[]
-	userProfile: UserDataDetail
+	familyProfiles: UserDataDetail[];
+	userProfile: UserDataDetail;
 };
 
 const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAppointmentProps) => {
 	const t = useScopedI18n('page.bookingAppointment');
 	const session = useSession();
+	const { mutate } = useSWRConfig();
 	const breadCrumbs = [
 		{ name: t('heading'), url: '#' },
 	];
@@ -173,7 +175,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		}
 	};
 
-	const uploadAsuransiPhotoFront = async() => {
+	const uploadAsuransiPhotoFront = async () => {
 		if (tempImageAsuransiFront !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiFront });
 			if (responseData.stat_msg === 'Success') {
@@ -183,7 +185,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		return '';
 	};
 
-	const uploadAsuransiPhotoBack = async() => {
+	const uploadAsuransiPhotoBack = async () => {
 		if (tempImageAsuransiBack !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiBack });
 			if (responseData.stat_msg === 'Success') {
@@ -204,7 +206,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		}
 	};
 
-	const onConfirmed = async() => {
+	const onConfirmed = async () => {
 		try {
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
@@ -230,8 +232,8 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				'insurance_front_img': tempImageAsuransiFront ? await uploadAsuransiPhotoFront() : '',
 				'insurance_back_img': tempImageAsuransiBack ? await uploadAsuransiPhotoBack() : ''
 			};
-			await bookAppointment(payloadBook).then(() => {
 
+			await bookAppointment(payloadBook).then(res => {
 				const pushNotifPayload: PayloadPushNotification = {
 					category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
 					source: 'Rebelworks',
@@ -249,6 +251,10 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 					read_flag: '0'
 				};
 				pushNotification(pushNotifPayload);
+				// Invalidate cache with given key, so the data will be re-fetched from server
+				mutate('getNotification');
+				mutate((key: any) => typeof key === 'string' && key.startsWith('appointmentList'), undefined);
+
 			});
 
 			setSuccessModal(true);
@@ -397,7 +403,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 			</div>
 			<BottomBar>
 				<div className='lg:w-[1110px] w-full mx-auto max-sm:mx-[15px] md:flex md:justify-end gap-[12px] flex justify-between'>
-					<Button label={ t('form.btnLabel.back') } theme='outline' className='pt-[13px] px-[40px] pb-[12px] w-full md:w-auto' onClick={ () => { navigate.back(); } } />
+					<Button label={ t('form.btnLabel.back') } theme='outline' $hoverTheme='primary' className='pt-[13px] px-[40px] pb-[12px] w-full md:w-auto' onClick={ () => { navigate.back(); } } />
 					<Button label={ t('form.btnLabel.submit') } className='pt-[13px] px-[40px] pb-[12px] w-full md:w-auto' disabled={ bookingLoading } onClick={ () => { onBookVisit(); } } />
 				</div>
 			</BottomBar>
@@ -427,6 +433,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				doctorName={ doctorResponse?.data?.name ?? '' }
 				date={ timeSlot?.date }
 				visible={ successModal }
+				onClose={ () => setConfirmationModalVisible(false) }
 			/>
 		</BookAppointmentContainer>
 	);

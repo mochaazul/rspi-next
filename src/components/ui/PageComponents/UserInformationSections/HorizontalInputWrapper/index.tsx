@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Edit3 } from 'react-feather';
+import Link from 'next/link';
 
 import { colors, icons } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
@@ -18,7 +19,7 @@ interface HorizontalInputType {
 	label: string,
 	labelInfo?: string,
 	inputType?: string,
-	onEditClick?: () => void;
+	editHref?: string;
 }
 
 const HorizontalInputWrapper = (props: HorizontalInputType) => {
@@ -120,12 +121,11 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 				<div className='col-auto relative'>
 					{ renderInput() }
 
-					{ props.onEditClick && (
+					{ props.editHref && (
 						<div className='absolute pr-5 right-0 inset-y-0 flex items-center'>
-							<button
-								type='button'
+							<Link
 								className='flex items-center gap-2 focus:outline-none'
-								onClick={ props.onEditClick }
+								href={ props.editHref }
 							>
 								<Edit3 className='w-[18px] h-[18px] sm:w-5 sm:h-5' color={ colors.green.brandAccent } />
 								<Text
@@ -134,7 +134,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 									color={ colors.green.brandAccent }
 									subClassName='max-sm:text-xs'
 								>{ t('editLabel') }</Text>
-							</button>
+							</Link>
 						</div>
 					) }
 				</div>

@@ -21,7 +21,7 @@ const SpinVerification = ({ status }: Props) => {
 
 	const session = useSession();
 
-	const handleBackLogin = async() => {
+	const handleBackLogin = async () => {
 		if (session.isAuthenticated) {
 			await cookiesHelper.clearStorage();
 			navigate.replace('/login');
@@ -74,7 +74,6 @@ const SpinVerification = ({ status }: Props) => {
 			<div className={ `back-login failed ${ status !== 'failed' && 'hidden' }` }>
 				<Button
 					theme='primary'
-					$hoverTheme='outline'
 					label={ languages('backToLogin') }
 					onClick={ handleBackLogin }
 				/>

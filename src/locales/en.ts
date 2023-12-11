@@ -11,7 +11,8 @@ export default {
 			thursday: 'Thursday',
 			friday: 'Friday',
 			saturday: 'Saturday',
-			sunday: 'Sunday'
+			sunday: 'Sunday',
+			all: 'All'
 		},
 		short: {
 			monday: 'Mon',
@@ -20,7 +21,8 @@ export default {
 			thursday: 'Thu',
 			friday: 'Fri',
 			saturday: 'Sat',
-			sunday: 'Sun'
+			sunday: 'Sun',
+			all: 'All'
 		}
 	},
 	global: {
@@ -813,7 +815,8 @@ export default {
 						'Highly recommend'
 					],
 					feedback: {
-						heading: 'What do you love about your doctor?',
+						headingLove: 'What do you love about your doctor?',
+						headingImprove: 'What do you want to improve from your doctor?',
 						notesInputLabel: 'Tell us more',
 						notesInputPlaceholder: 'Enter a description...',
 						optionalLabel: '(Optional)',

@@ -64,7 +64,7 @@ const ContactUsForm = ({
 			title: '',
 			content: ''
 		},
-		onSubmit: async(formContact: ContactUsSubmitType) => {
+		onSubmit: async (formContact: ContactUsSubmitType) => {
 			setNotifResponse({
 				loading: true,
 				error: {
@@ -259,7 +259,6 @@ const ContactUsForm = ({
 					<div className='max-sm:w-full'>
 						<Button
 							theme='primary'
-							$hoverTheme='outline'
 							label={ t('contactForm.submitBtnLabel') }
 							type='submit'
 							disabled={ loadingUser || captchaStatus === false }
@@ -271,7 +270,7 @@ const ContactUsForm = ({
 				visible={ visible }
 				onClose={ () => setVisible(false) }
 				width='560px'
-			 >
+			>
 				<div className='relative flex flex-col items-center'>
 					{ notifMode === 'success' ? <icons.Confirmed /> : <div className='p-4 bg-gray-200 rounded-full'><icons.Close /></div> }
 					<Text
@@ -285,9 +284,9 @@ const ContactUsForm = ({
 					/>
 					<Button type='submit' label={ t('contactForm.handleButtonModalSubmit') } className='mt-[32px]' onClick={ () => setVisible(false) } />
 				</div>
-			 </Modal>
+			</Modal>
 		</>
-		
+
 	);
 };
 

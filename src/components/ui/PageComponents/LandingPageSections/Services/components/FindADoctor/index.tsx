@@ -28,7 +28,7 @@ const FindADoctor: React.FC<Props> = ({
 }) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor');
 
-	const {	onSubmitHandler } = useFindADoctor();
+	const { onSubmitHandler } = useFindADoctor();
 	const [doctorFieldSearch, setDoctorFieldSearch] = useState('');
 
 	const hospitalArr = [
@@ -46,7 +46,7 @@ const FindADoctor: React.FC<Props> = ({
 		return [];
 	};
 
-	const formFindDoctor:FormikProps<LandingPageFindADoctorForm> = useFormik<LandingPageFindADoctorForm>({
+	const formFindDoctor: FormikProps<LandingPageFindADoctorForm> = useFormik<LandingPageFindADoctorForm>({
 		initialValues: {
 			doctorName: null,
 			hospital: '',
@@ -68,15 +68,15 @@ const FindADoctor: React.FC<Props> = ({
 		}, 500)
 	).current;
 
-	const { data: doctorResponse, isLoading: doctorResponseLoading } = useGetDoctors({ query: { keyword: doctorFieldSearch ?? '' }});
+	const { data: doctorResponse, isLoading: doctorResponseLoading } = useGetDoctors({ query: { keyword: doctorFieldSearch ?? '' } });
 
 	const mapDoctors = () => {
-		
+
 		if (doctorResponse) {
 			const dataDoctors = doctorResponse?.flatMap(res => res.data);
-			
+
 			if (dataDoctors.length > 0) {
-				return dataDoctors.map((dc : any) => ({
+				return dataDoctors.map((dc: any) => ({
 					id: dc.doctor_code,
 					label: dc.doctor_name,
 					value: dc.doctor_name
@@ -88,7 +88,7 @@ const FindADoctor: React.FC<Props> = ({
 
 	React.useEffect(() => {
 		return () => {
-		  debouncedSearch.cancel();
+			debouncedSearch.cancel();
 		};
 	}, [debouncedSearch]);
 
@@ -174,7 +174,7 @@ const FindADoctor: React.FC<Props> = ({
 					</div>
 				</div>
 				<div className='flex flex-1 gap-4 mt-8 justify-end'>
-					<Button className='shrink-0 sm:max-w-[121px] max-sm:flex-1' theme='outline' type='reset'>{ t('form.resetBtnLabel') }</Button>
+					<Button className='shrink-0 sm:max-w-[121px] max-sm:flex-1' theme='outline' $hoverTheme='primary' type='reset'>{ t('form.resetBtnLabel') }</Button>
 					<Button className='shrink-0 sm:max-w-[216px] max-sm:flex-1' theme='primary' type='submit'>{ t('form.submitBtnLabel') }</Button>
 				</div>
 			</Form>

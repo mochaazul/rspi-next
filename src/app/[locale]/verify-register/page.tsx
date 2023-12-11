@@ -102,7 +102,6 @@ const EmailVerificationPage = () => {
 				<div className={ `back-login ${ status !== 'failed' ? 'invisible' : '' }` }>
 					<Button
 						theme='primary'
-						$hoverTheme='outline'
 						label={ languages('backToLogin') }
 						onClick={ handleBackLogin }
 					/>

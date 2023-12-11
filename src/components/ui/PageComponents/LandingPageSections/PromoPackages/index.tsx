@@ -113,13 +113,14 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 			</div>
 			<div className='w-full'>
 				{ promo.length !== 0 ?
-					<CardsScrollHorizontal customRef={ CardNewsWrapperRef }>
-						{ promo?.map((item : EventClassesDetail, index: number) => (
+					<CardsScrollHorizontal customRef={ CardNewsWrapperRef } className='lg:gap-x-[30px] lg:overflow-hidden lg:grid lg:grid-cols-3'>
+						{ promo?.slice(0, 3)?.map((item, index) => (
 							<Card
 								key={ index }
 								id={ item?.id }
 								image={ item.img_url_card }
 								imageHeight='200px'
+								className='lg:!w-full'
 								header={
 									<Text
 										color={ colors.grey.dark }

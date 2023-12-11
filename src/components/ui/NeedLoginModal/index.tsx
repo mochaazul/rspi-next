@@ -6,16 +6,16 @@ import { cookiesHelper } from '@/helpers';
 import clearSWRCache from '@/helpers/clearSwrCache';
 
 type Props = {
-	visible: boolean,
+	visible: boolean;
 	toggler: (arg0: boolean) => void;
+	onClose?: () => void;
 };
-const NeedLoginModal = ({ visible, toggler }: Props) => {
-
+const NeedLoginModal = ({ visible, toggler, onClose }: Props) => {
 	const router = useRouter();
 
 	const { cache } = useSWRConfig();
 
-	const handleLogout = async() => {
+	const handleLogout = async () => {
 		await cookiesHelper.clearStorage();
 		await clearSWRCache(cache);
 		toggler(false);
@@ -23,7 +23,7 @@ const NeedLoginModal = ({ visible, toggler }: Props) => {
 	};
 
 	return (
-		<Modal visible={ visible } onClose={ () => console.log } backdropClassname='backdrop-blur-md'>
+		<Modal visible={ visible } onClose={ onClose } backdropClassname='backdrop-blur-md'>
 			<div className='flex flex-col items-center'>
 				<center>
 					<icons.WarningIcon />

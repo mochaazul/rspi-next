@@ -29,7 +29,7 @@ export type ButtonStyleType = ButtonType & {
 const buttonTheme = ({
 	theme,
 	disabled,
-	$themeColor = colors.paradiso.default
+	$themeColor
 }: ButtonStyleType) => {
 	let style = `
 		color: ${ $themeColor };
@@ -95,6 +95,18 @@ const buttonTheme = ({
 	return style;
 };
 
+const buttonHoverTheme = ({
+	theme,
+	$hoverTheme,
+	...props
+}: ButtonStyleType) => {
+	if (theme === $hoverTheme) {
+		return 'opacity: 0.9;';
+	}
+
+	return buttonTheme({ ...props, theme: $hoverTheme ?? theme });
+};
+
 const ButtonStyle = styled.button<ButtonStyleType>`
 	transition: all .3s;
 	font-family: ${ fonts.lato }, Arial, sans-serif;
@@ -153,7 +165,7 @@ const ButtonStyle = styled.button<ButtonStyleType>`
 	${ props => buttonTheme(props) }
 
 	&:hover {
-		${ props => !props.disabled && buttonTheme({ ...props, theme: props.$hoverTheme ?? props.theme }) }
+		${ props => !props.disabled && buttonHoverTheme(props) }
 	}
 `;
 

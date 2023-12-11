@@ -8,6 +8,7 @@ import isEmpty from 'lodash/isEmpty';
 import { icons } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
 import { UserSessionData } from '@/interface';
+import { blacklistedRouteMedicalRecordReminder } from '@/constant/config';
 
 import {
 	BgContainer,
@@ -25,20 +26,13 @@ type PropsType = {
 	session?: UserSessionData;
 };
 
-const blacklistedRoute = [
-	'/patient-portal',
-	'/doctor-detail',
-	'/book-appointment',
-	'/user-information'
-];
-
 const MedicalRecordReminder = ({ isFloating = true, session }: PropsType) => {
 	const languages = useScopedI18n('page.medicalRecordReminder');
 	const navigate = useRouter();
 	const pathname = usePathname();
 	const [isMounted, setIsMounted] = useState<boolean>(false);
 
-	const shouldRenderReminder = !blacklistedRoute.some(route => pathname.includes(route));
+	const shouldRenderReminder = !blacklistedRouteMedicalRecordReminder.some(route => pathname.includes(route));
 
 	useEffect(() => {
 		setIsMounted(true);

@@ -7,9 +7,13 @@ import fetcher, { ApiOptions } from '../utils/fetcher';
 import { BookCancelRequest } from '@/interface/Book';
 
 export const useGetAppointmentList = (options?: ApiOptions) => {
-	return useSWR(['appointmentList', options], ([key, apiOptions]) => fetcher<any[]>('appointmentList', apiOptions));
+	return useSWR(`appointmentList/${options?.query?.type}`, () => {
+		return fetcher<any[]>('appointmentList', options);
+	}, { revalidateOnMount: true });
 };
 
 export const usePostCancelBookingMutation = (options?: ApiOptions) => {
-	return useSWRMutation('cancelBooking', (key, { arg }: { arg: BookCancelRequest; }) => fetcher<ResponseStatus[]>('cancelBooking', { ...options, body: arg }));
+	return useSWRMutation('cancelBooking', (key, { arg }: { arg: BookCancelRequest; }) => {
+		return fetcher<ResponseStatus[]>('cancelBooking', { ...options, body: arg });
+	});
 };
