@@ -7,6 +7,7 @@ import Button from '@/components/ui/Button';
 import { useScopedI18n } from '@/locales/client';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 	const t = useScopedI18n('page.landingPage.accreditationsAndAwards');
@@ -57,9 +58,11 @@ const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 				}
 			</div>
 			<div className='sm:mt-16 mt-6 sm:max-w-fit max-w-full m-auto'>
-				<Button theme='secondary' $hoverTheme='primary' className='px-[40px] max-sm:text-[14px]' onClick={ () => router.push('/accreditation-and-awards') }>
-					{ t('readMoreBtnLabel') }
-				</Button>
+				<Link href={ '/accreditation-and-awards' }>
+					<Button theme='secondary' $hoverTheme='primary' className='px-[40px] max-sm:text-[14px]'>
+						{ t('readMoreBtnLabel') }
+					</Button>
+				</Link>
 			</div>
 		</AccreditationsAwardsWrapper>
 	);
