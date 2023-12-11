@@ -41,7 +41,7 @@ export const getBanner = (query?: PayloadBanner, pagination?: Pagination) => {
 };
 
 export const getCoe = (param?: ApiOptions) => {
-	return fetcher<CenterOfExcellenceDetail[]>('centerOfExcellences', { ...param, query: { ...param?.query, is_publish: true } });
+	return fetcher<CenterOfExcellenceDetail[]>('centerOfExcellences', { ...param, query: { ...param?.query, is_publish: true, limit: 1000 } });
 };
 
 export const getCenterOfExcellenceNewsByID = (param?: ApiOptions) => {
