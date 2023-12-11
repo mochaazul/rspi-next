@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
-
 import {
 	Accordion,
 	Breadcrumbs,
@@ -74,8 +74,12 @@ const ContactUsPage = ({
 					</div>
 				</div>
 				<div className='flex flex-row gap-x-2'>
-					<Button theme='outline' $hoverTheme='primary' label={ 'See Direction' } onClick={ handleOpenMapLink(data?.[0]?.share_link ?? '') } />
-					<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } onClick={ () => navigate.push(`/find-a-doctor?hospital_code=${ data[0].hospital_code }`) } />
+					<a target='_blank' href={ data?.[0]?.share_link } rel='noopener noreferrer'>
+						<Button theme='outline' $hoverTheme='primary' label={ 'See Direction' } />
+					</a>
+					<Link href={ `/find-a-doctor?hospital_code=${ data[0]?.hospital_code }` }>
+						<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } />
+					</Link>
 				</div>
 
 			</div>

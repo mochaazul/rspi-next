@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Tooltip } from 'react-tooltip';
 import isEmpty from 'lodash/isEmpty';
+import Link from 'next/link';
 
 import { icons } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
@@ -38,10 +39,6 @@ const MedicalRecordReminder = ({ isFloating = true, session }: PropsType) => {
 		setIsMounted(true);
 	}, []);
 
-	const onClickOnboard = () => {
-		navigate.push('/register-onboard?isHome=true');
-	};
-
 	const renderContent = () => {
 		return (
 			<>
@@ -69,11 +66,12 @@ const MedicalRecordReminder = ({ isFloating = true, session }: PropsType) => {
 							<icons.ExclamationMark data-tooltip-place='top-end' data-tooltip-id='booking-tooltip' style={ { width: '24px' } } />
 						</div>
 					</LeftContent>
-					<Button
-						label={ languages('btnLabel') }
-						onClick={ onClickOnboard }
-						className={ `max-sm:p-[10px] ${ isFloating ? '!w-auto max-sm:text-[12px] max-md:text-sm' : 'w-full lg:w-auto max-md:text-sm' }` }
-					/>
+					<Link href={ '/register-onboard?isHome=true' }>
+						<Button
+							label={ languages('btnLabel') }
+							className={ `max-sm:p-[10px] ${ isFloating ? '!w-auto max-sm:text-[12px] max-md:text-sm' : 'w-full lg:w-auto max-md:text-sm' }` }
+						/>
+					</Link>
 				</BodyContainer>
 				{ isMounted && (
 					<Tooltip id='booking-tooltip' offset={ 24 } style={ { width: 300, padding: '12px', borderRadius: '5px' } }>
