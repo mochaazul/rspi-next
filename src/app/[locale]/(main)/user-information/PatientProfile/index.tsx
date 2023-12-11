@@ -657,7 +657,6 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 												<Button
 													type='submit'
 													theme='primary'
-													$hoverTheme='outline'
 													label={ t('securitySetting.saveBtnLabel') }
 													disabled={ isLoadingUpdateProfile }
 												/>
@@ -752,7 +751,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 							/>
 							<div className='flex justify-end align-center gap-5 mt-[50px]'>
 								<div>
-									<Button type='submit' theme='primary' $hoverTheme='outline' label={ t('securitySetting.saveBtnLabel') } />
+									<Button type='submit' theme='primary' label={ t('securitySetting.saveBtnLabel') } />
 								</div>
 							</div>
 						</Form>

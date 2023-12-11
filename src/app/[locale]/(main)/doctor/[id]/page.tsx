@@ -240,7 +240,7 @@ export default function Page({ params }: Props) {
 						<div className='bg-white pt-[26px] pb-[30px] footer'>
 							<div className='lg:w-[1110px] w-full mx-auto max-sm:mx-[15px] md:flex md:justify-end gap-[12px] flex justify-between'>
 								<Button
-									$hoverTheme='secondary'
+									$hoverTheme='primary'
 									label={ t('form.btnLabel.back') }
 									noPadding={ true }
 									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
@@ -250,7 +250,6 @@ export default function Page({ params }: Props) {
 									} }
 								/>
 								<Button
-									$hoverTheme='secondary'
 									label={ t('form.btnLabel.submit') }
 									noPadding={ true }
 									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'

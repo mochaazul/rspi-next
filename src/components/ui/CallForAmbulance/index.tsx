@@ -2,38 +2,45 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { colors } from '@/constant';
 import images from '@/constant/images';
-import { HospitalDetail, HospitalState } from '@/interface';
-
+import { HospitalDetail, UserSessionData } from '@/interface';
+import { useScopedI18n } from '@/locales/client';
 import {
 	Button,
 	Modal,
 	Text
 } from '@/components/ui';
+import { blacklistedRouteMedicalRecordReminder } from '@/constant/config';
 
 import { CallForAmbulanceStyle, ModalRSTelephoneStyle } from './style';
-import { useScopedI18n } from '@/locales/client';
-import useSession from '@/session/client';
 
 const CallForAmbulance = ({
 	hospitalData,
-}:{
+	session
+}: {
 	hospitalData: HospitalDetail[],
+	session?: UserSessionData;
 }) => {
+	const pathname = usePathname();
 	const t = useScopedI18n('global.callAmbulanceLabel');
+
 	const [visible, setVisible] = useState(false);
 
-	const session = useSession();
+	const shouldRenderReminder = !blacklistedRouteMedicalRecordReminder.some(route => pathname.includes(route));
 
-	const hasMedicalRecordReminder = !!!session?.user?.medical_record || !!!session.user?.no_mr;
+	const hasMedicalRecordReminder = session?.token
+		&& (!session?.user?.medical_record || !session?.user?.no_mr || !session?.user?.mr_active)
+		&& shouldRenderReminder;
+
 	return (
 		<>
 			<CallForAmbulanceStyle className={ `
 				fixed cursor-pointer flex align-center justify-center 
 				max-sm:w-[60px] max-sm:h-[60px] 
-				${hasMedicalRecordReminder ? 'max-md:bottom-28 max-lg:bottom-20' : ''}
+				${ hasMedicalRecordReminder ? 'max-md:bottom-28 max-lg:bottom-20' : '' }
 			` } onClick={ () => setVisible(true) }>
 				<images.AmbulanceIcon className='z-10' />
 			</CallForAmbulanceStyle>

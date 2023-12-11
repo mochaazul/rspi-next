@@ -21,7 +21,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 		<DoctorCardStyle>
 			{ /* Foto & nama dokter */ }
 			<div className='flex gap-4'>
-				<Image src={ props.img_url || Images.Doctor2 } alt={ props.full_name_doctor } width={ 80 } height={ 80 } className='rounded-[10px] w-[80px] h-[80px] object-cover' />
+				<Image src={ props.img_url || Images.Doctor2 } alt={ props.full_name_doctor } width={ 80 } height={ 80 } className='rounded-[10px] w-[80px] h-[80px] object-cover object-top' />
 				<div className='flex flex-col gap-1 sm:gap-2'>
 					<Text
 						fontSize='20px'
@@ -88,7 +88,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 			<div className='mt-4 text-right sm:mt-6'>
 				<Link href={ `/doctor/${ props.doctor_code }` }>
 					<div className='md:inline-block'>
-						<Button theme='outline' className='h-[36px] py-0 grow-0'>
+						<Button theme='outline' $hoverTheme='primary' className='h-[36px] py-0 grow-0 group'>
 							<div className='flex gap-3 items-center justify-center'>
 								<Text
 									fontSize='14px'
@@ -96,8 +96,9 @@ const DoctorCard = (props: I_MasterDoctor) => {
 									fontWeight='900'
 									color={ colors.paradiso.default }
 									text={ t('label.seeDetail') }
+									subClassName='group-hover:!text-white'
 								/>
-								<Icons.ArrowRight size={ 18 } color={ colors.paradiso.default } />
+								<Icons.ArrowRight size={ 18 } color={ colors.paradiso.default } className='group-hover:!stroke-white' />
 							</div>
 						</Button>
 					</div>

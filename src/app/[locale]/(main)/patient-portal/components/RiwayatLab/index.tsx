@@ -8,7 +8,7 @@ import { isEmpty } from 'lodash';
 
 import { Spinner, Text } from '@/components/ui';
 import { baseUrl } from '@/config';
-import { colors, icons } from '@/constant';
+import { colors, fonts, icons } from '@/constant';
 import { useGetLabHistory } from '@/lib/api/client/hospital';
 import { useScopedI18n } from '@/locales/client';
 import useSession from '@/session/client';
@@ -24,11 +24,11 @@ const LaporanBtn = styled.a`
 	align-items: center;
 	justify-content: center;
 
-	:hover{
-		background-color: ${ colors.green.accent };
-		color: ${ colors.green.brandAccent };
+	&:hover{
+		opacity: 0.9;
 	}
 	transition: all 150ms;
+	font-family: ${ fonts.lato }, Arial, sans-serif;
 `;
 
 const RiwayatLab = () => {

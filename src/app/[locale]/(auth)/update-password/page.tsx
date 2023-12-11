@@ -185,7 +185,6 @@ const UpdatePasswordPage = () => {
 					<Button
 						label={ t('resetForm.resetBtnLabel') }
 						theme='primary'
-						$hoverTheme='outline'
 						type='submit'
 						className='w-full mt-8 sm:mt-12'
 						disabled={ loadingSubmit }
