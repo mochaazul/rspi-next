@@ -43,6 +43,10 @@ const nextConfig = {
 				hostname: 'rspi-assets.s3-ap-southeast-1.amazonaws.com',
 				// hostname: '**',
 			},
+			{
+				protocol: 'https',
+				hostname: 'storage.googleapis.com'
+			}
 		],
 	},
 	output: 'standalone',
