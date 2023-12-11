@@ -62,7 +62,7 @@ const Rating = ({ onChange, value }: { value: string, onChange: (value: string) 
 	</div>);
 };
 
-const Feedback = ({ onChange, value }: { value: string[], onChange: (value: string[]) => void; }) => {
+const Feedback = ({ onChange, value, valueRating }: { valueRating: string, value: string[], onChange: (value: string[]) => void; }) => {
 	const t = useScopedI18n('page.patientPortal.riwayatKunjungan.recommendDoctorModal.feedback');
 
 	const onChecked = (optValue: string) => {
@@ -79,7 +79,7 @@ const Feedback = ({ onChange, value }: { value: string[], onChange: (value: stri
 	};
 
 	return (<div className='mt-[32px]'>
-		<Text text={ t('heading') } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
+		<Text text={ parseInt(valueRating) > 8 ? t('headingLove') : t('headingImprove') } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
 		<div className='flex	flex-wrap gap-[11px] mt-[32px]'>
 			{
 				feedbackPills.map((opt, index) => (
@@ -211,7 +211,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 							</div>
 						</div>
 						<Rating onChange={ setRatingValue } value={ ratingValue } />
-						<Feedback value={ feedbackValue } onChange={ setFeedbackValue } />
+						<Feedback value={ feedbackValue } onChange={ setFeedbackValue } valueRating = { ratingValue } />
 						<FeedbackNotes value={ feedbackNotes } onChange={ setFeedbackNotes } />
 						<Button label='Submit' className='mt-[32px]' onClick={ onSubmit } disabled={ shouldDisable() }>
 							{

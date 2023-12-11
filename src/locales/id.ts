@@ -821,7 +821,8 @@ export default {
 						'Sangat direkomendasikan'
 					],
 					feedback: {
-						heading: 'Apa yang Anda sukai dari dokter Anda?',
+						headingLove: 'Apa yang Anda sukai dari dokter Anda?',
+						headingImprove: 'Apa yang ingin Anda tingkatkan dari dokter Anda?',
 						notesInputLabel: 'Beritahu kami lebih lanjut',
 						notesInputPlaceholder: 'Masukkan deskripsi...',
 						optionalLabel: '(Opsional)',

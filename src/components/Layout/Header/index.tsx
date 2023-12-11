@@ -29,7 +29,7 @@ import { useNotification } from '@/lib/api/client/header';
 import HeaderStyle from './style';
 
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';
-import { notificationResponseFetch } from '@/app/[locale]/(main)/helpers';
+
 import { cookiesHelper } from '@/helpers';
 import clearSWRCache from '@/helpers/clearSwrCache';
 
@@ -61,16 +61,6 @@ export const Header = ({
 	const [showNotification, setShowNotification] = useState<boolean>(false);
 	const [showSuccessLogout, setShowSuccessLogout] = useState<boolean>(false);
 	const [activeSubMenuIdMobile, setActiveSubMenuIdMobile] = useState<string>('');
-
-	const onclickMarkAllNotif = () => {
-		if (marAllReadNotifFunc) {
-			marAllReadNotifFunc()
-				.then(() => {
-					setShowNotification(true);
-					mutate('getNotification');
-				});
-		}
-	};
 
 	const isLoggedIn = !!session?.token;
 
@@ -331,7 +321,7 @@ export const Header = ({
 							marAllReadNotifFunc()
 								.then(() => {
 									setShowNotification(true);
-									notificationResponseFetch();
+									mutate('getNotification');
 								});
 						}
 					} }

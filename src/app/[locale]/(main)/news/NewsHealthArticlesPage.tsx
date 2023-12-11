@@ -126,7 +126,7 @@ const NewsHealthArticlesPage = ({
 										className='w-[540px] mr-[32px] cursor-pointer magazine relative'
 										onClick={ () => navigate.push(`${ pathname }/${ Object.values(articlesData || [])[0]?.slug }`) }
 									>
-										<div>
+										<div className='relative'>
 											<Share />
 										</div>
 										<img
@@ -159,7 +159,7 @@ const NewsHealthArticlesPage = ({
 														className='relative'
 														key={ index }
 													>
-														<div>
+														<div className='relative'>
 															<Share id={ data.id } />
 														</div>
 														<div onClick={ () => navigate.push(`${ pathname }/${ data?.slug }`) } style={ { zIndex: '-999 !important' } }>
