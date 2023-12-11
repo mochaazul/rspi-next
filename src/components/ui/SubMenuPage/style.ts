@@ -8,7 +8,6 @@ export const ItemStyle = styled.div`
   opacity: 0;
   position: absolute;
   z-index: 0;
-  transition: all .3s;
 	left: 0;
   
   @media (min-width: 1024px) {
@@ -21,7 +20,6 @@ export const ItemStyle = styled.div`
     left: 0;
     opacity: 1;
     position: relative;
-    transition: all .3s;
   }
 `;
 

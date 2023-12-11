@@ -12,9 +12,9 @@ export default async function Page() {
 	};
 	// TODO: ada issue di trackare jika tidak ada no_mr menampilkan semua data. akan jadi sangat berat.
 	// jika sudah fix, bisa diadjust lagi
-	if (profile && profile?.data?.no_mr) {
-		visitHistoryResponse = await getVisitHistory();
-	}
+	// if (profile && profile?.data?.no_mr) {
+	visitHistoryResponse = await getVisitHistory();
+	// }
 
 	return (
 		<PortalContainer patientProfile={ profile?.data } visitHistoryResponse={ visitHistoryResponse } />

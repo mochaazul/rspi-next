@@ -45,7 +45,7 @@ export default {
 	modalDialog: {
 		pin: {
 			header: 'Masukkan PIN',
-			subHeader: 'Silahkan masukan PIN Untuk melanjutkan.',
+			subHeader: 'Silahkan masukan PIN untuk melanjutkan.',
 			submitBtnLabel: 'Konfirmasi',
 			pinLabel: 'PIN',
 			forgotPin: 'Lupa PIN?'
@@ -603,7 +603,7 @@ export default {
 		pinPage: {
 			heading: 'Buat PIN Baru',
 			headingReset: 'Ubah PIN',
-			subHeading: 'Silahkan buat 6 digit PIN Anda',
+			subHeading: 'Mohon ketik 6 digit numerik PIN untuk mengakses riwayat Anda secara lebih detail di Patient Portal',
 			subHeadingReset: 'Masukkan 6 digit angka PIN Anda',
 			notification: {
 				onSuccessMsg: 'Berhasil membuat PIN',

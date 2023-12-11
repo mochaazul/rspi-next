@@ -61,10 +61,14 @@ const LoginPage = () => {
 					setNotifMode('success');
 					setLoadingNavigate(true);
 
-					if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
+					if (searchParam.get('callbackUrl')) {
+						const callbackUrl = decodeURIComponent(searchParam.get('callbackUrl') ?? '/');
+						navigate.replace(callbackUrl);
+					} else if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
 						navigate.back();
-					} else
+					} else {
 						navigate.replace('/');
+					}
 
 				} else {
 					setErrorUser({

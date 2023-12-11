@@ -598,7 +598,7 @@ export default {
 		pinPage: {
 			heading: 'Create New PIN',
 			headingReset: 'Change PIN',
-			subHeading: 'Please create your 6-digit PIN',
+			subHeading: 'Please type in your 6-digit numeric PIN to access your history in more detail in the Patient Portal.',
 			subHeadingReset: 'Enter your 6-digit PIN',
 			notification: {
 				onSuccessMsg: 'Successfully created PIN',

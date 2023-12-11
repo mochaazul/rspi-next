@@ -9,17 +9,24 @@ type Props = {
 	visible: boolean;
 	toggler: (arg0: boolean) => void;
 	onClose?: () => void;
+	callbackUrl?: string;
 };
-const NeedLoginModal = ({ visible, toggler, onClose }: Props) => {
+
+const NeedLoginModal = ({
+	visible,
+	toggler,
+	onClose,
+	callbackUrl = ''
+}: Props) => {
 	const router = useRouter();
 
-	const { cache } = useSWRConfig();
+	const { cache, mutate } = useSWRConfig();
 
 	const handleLogout = async () => {
 		await cookiesHelper.clearStorage();
-		await clearSWRCache(cache);
+		clearSWRCache(cache, mutate);
 		toggler(false);
-		router.push('/login?ref=unauthorized');
+		router.push(`/login?ref=unauthorized${ callbackUrl ? `&callbackUrl=${ encodeURIComponent(callbackUrl) }` : '' }`);
 	};
 
 	return (

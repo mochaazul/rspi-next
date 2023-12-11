@@ -12,11 +12,11 @@ type Props = {
 };
 const LogoutModal = ({ visible, toggler, onClose }: Props) => {
 	const router = useRouter();
-	const { cache } = useSWRConfig();
+	const { cache, mutate } = useSWRConfig();
 
 	const handleLogout = async () => {
 		await cookiesHelper.clearStorage();
-		await clearSWRCache(cache);
+		clearSWRCache(cache, mutate);
 		toggler(false);
 		router.push('/login?ref=unauthorized');
 	};

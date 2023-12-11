@@ -80,14 +80,14 @@ export const Header = ({
 
 	const notificationResponseData = getNotification?.data;
 
-	const handleClick = async() => {
+	const handleClick = async () => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
-			await clearSWRCache(cache);
+			clearSWRCache(cache, mutate);
 			setShowSideBar(false);
 			// Notes: protectedRoutes sudah dihandle oleh middleware. shg cukup dgn refresh page akan redirect ke halaman login
-			// Khusus halaman doctor/:id & book-appointment tidak dihandle di middleware karna perlu show NeedLoginModal dari response error swr
-			if (['/doctor', '/book-appointment'].some(path => pathname.includes(path))) {
+			// Khusus halaman disini tidak dihandle di middleware karna perlu show NeedLoginModal dari response error swr
+			if (['/book-appointment'].some(path => pathname.includes(path))) {
 				return router.replace('/login');
 			}
 
@@ -177,7 +177,6 @@ export const Header = ({
 		return (
 			<Modal
 				visible={ showSuccessLogout }
-				onClose={ () => setShowSuccessLogout(false) }
 				noPadding
 			>
 				<div className='py-3 sm:py-4 px-6 sm:px-10 flex flex-col items-center gap-y-3'>
@@ -325,7 +324,7 @@ export const Header = ({
 								});
 						}
 					} }
-					className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
+						className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
 					/>
 					<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
 						{ notificationResponseData?.total_unread ?? 0 }

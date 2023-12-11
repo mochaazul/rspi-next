@@ -68,7 +68,7 @@ const PinPage = () => {
 
 	return (
 		<ContainerStyle>
-			<Box className='md:w-auto'>
+			<Box className='md:w-auto md:max-w-[618px]'>
 				<div className='hidden md:flex justify-center mb-8'>
 					<Image
 						src='/images/logo_rspi.svg'
@@ -131,7 +131,7 @@ const PinPage = () => {
 							value={ formikPin.values.pin }
 							type='password'
 							onChangeValue={ onChangeInputValue }
-							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							inputClassName='max-sm:!w-full max-sm:!h-12 max-md:w-full max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
 							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>
@@ -149,7 +149,7 @@ const PinPage = () => {
 							value={ formikPin.values.confirm_pin }
 							type='password'
 							onChangeValue={ onChangeInputValue }
-							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							inputClassName='max-sm:!w-full max-sm:!h-12 max-md:w-full max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
 							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>
