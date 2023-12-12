@@ -43,10 +43,10 @@ const DetailNewsHealthPage = async ({ params }: { params: { slug: string; }; }) 
 
 	return (
 		<NewsDetail
-			filteredSelectedArticle = { filteredSelectedArticle }
-			specialty = { specialty?.data }
-			relatedNews = { relatedNews?.data }
-			breadcrumbsPath = { breadcrumbsPath }
+			filteredSelectedArticle={ filteredSelectedArticle }
+			specialty={ specialty?.data }
+			relatedNews={ relatedNews?.data }
+			breadcrumbsPath={ breadcrumbsPath }
 		/>
 
 	);

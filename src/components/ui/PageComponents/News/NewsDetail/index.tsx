@@ -1,5 +1,5 @@
 'use client';
-import  { useState } from 'react';
+import { useState } from 'react';
 
 import moment from 'moment';
 import Link from 'next/link';
@@ -26,22 +26,22 @@ const NewsDetail = ({
 	specialty,
 	relatedNews,
 	breadcrumbsPath,
-}:{
+}: {
 	filteredSelectedArticle: any,
-    specialty: ArticleState['specialty'],
-    relatedNews: ArticleState['relatedNews'],
-    breadcrumbsPath: {
+	specialty: ArticleState['specialty'],
+	relatedNews: ArticleState['relatedNews'],
+	breadcrumbsPath: {
 		name: string;
 		url: string;
 	}[],
 }) => {
-	
+
 	const t = useScopedI18n('page.newsDetail');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 
 	return (
-    	<div>
-			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
+		<div>
+			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='mt-[70px]'>
