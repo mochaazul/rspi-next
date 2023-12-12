@@ -564,6 +564,8 @@ export default {
 		newsDetail: {
 			breadcrumbsLabel: 'News & Health Articles',
 			oleh: 'By',
+			downloadFilePdf: 'Download Health First magazine ',
+			here: 'here'
 		},
 		forgotPassword: {
 			heading: 'Forgot Password',

@@ -35,30 +35,108 @@ const NewsDetail = ({
 		url: string;
 	}[],
 }) => {
-	
+	console.log(filteredSelectedArticle, 'filteredSelectedArticle');
 	const t = useScopedI18n('page.newsDetail');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
+
+	const renderNews = () => {
+		return (
+			<div>
+				<Text fontWeight='700' fontSize='20px' lineHeight='30px'>
+					{ filteredSelectedArticle?.short_description }
+				</Text>
+				<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
+				<div
+					style={ { color: colors.grey.dark } }
+					className='innerHTML mt-[10px]'
+					dangerouslySetInnerHTML={ { __html: filteredSelectedArticle?.content || '' } }
+				/>
+				<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' }>
+					<Tabs
+						activeTabIndex={ activeTabIdx }
+						setActiveTabIndex={ setActiveTabIdx }
+						tabsData={ ['Related News'] }
+					/>
+					<div className='divide-y divide-solid pt-[10px]'>
+						{ Object.values(relatedNews || []).map((a, index) => {
+							return (
+								<div key={ index }>
+									<Text
+										text={ a.posted_date }
+										className='py-[10px]'
+										fontSize='12px'
+										fontWeight='400'
+										lineHeight='14px'
+										color={ colors.grey.dark }
+									/>
+									<Text
+										text={ a.title }
+										className='pb-[10px]'
+										fontSize='14px'
+										fontWeight='900'
+										lineHeight='24px'
+										color={ colors.grey.darker }
+									/>
+								</div>
+							);
+						}) }
+					</div>
+				</div>
+			</div>
+		);
+	};
+
+	const renderHealthFirst = () => {
+		return (
+			<div className='flec-col lg:flex-row xl:flex-row md:flex-row flex gap-x-10'>
+				<div>
+					<img
+						alt={ filteredSelectedArticle?.title }
+						src={ filteredSelectedArticle?.img_url }
+						className='mx-auto lg:w-[729px] object-cover' />
+				</div>
+				<div className='lg:w-3/4 md:w-3/4 xl:w-3/4'>
+					<div className='w-full'>
+						<Text fontWeight='700' fontSize='20px' lineHeight='30px'>
+							{ filteredSelectedArticle?.short_description }
+						</Text>
+						<div
+							style={ { color: colors.grey.dark } }
+							className='innerHTML mt-[10px]'
+							dangerouslySetInnerHTML={ { __html: filteredSelectedArticle?.content || '' } }
+						/>
+						<Link href={ filteredSelectedArticle?.pdf_url } className='text-gray-500 font-bold cursor-pointer' >{ t('downloadFilePdf') } <span className='text-orange-700'>{t('here')}</span> </Link>
+					</div>
+				</div>
+			</div>
+		);
+	};
 
 	return (
     	<div>
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className='mt-[70px]'>
-						<div className='w-[81px]'>
-							<Button label={ filteredSelectedArticle?.category } className='px-[8px] py-[6px]' />
+					<div className={ ' mt-[70px]' }>
+						<div className='w-fit'>
+							<Button label={ filteredSelectedArticle?.category } className='px-[8px] py-[6px] capitalize' />
 						</div>
-						<div className='sm:w-[729px]'>
+						<div className={ `${filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'sm:w-[729px] '} ` }>
 							<Text fontWeight='900' fontSize='32px' lineHeight='48px' className='my-[20px]'>
 								{ filteredSelectedArticle?.title }
 							</Text>
-							<Text
-								text={ `${ t('oleh') } ${ filteredSelectedArticle?.news_author?.doctor_name }` }
-								fontWeight='400'
-								fontSize='18px'
-								lineHeight='22px'
-								color={ colors.grey.dark }
-							/>
+							{
+								filteredSelectedArticle?.news_author?.doctor_name ?
+									<Text
+										text={ `${ t('oleh') } ${ filteredSelectedArticle?.news_author?.doctor_name }` }
+										fontWeight='400'
+										fontSize='18px'
+										lineHeight='22px'
+										color={ colors.grey.dark }
+									/>
+									: <></>
+							}
+							
 							<div className='flex items-center gap-[30px] mt-[20px]'>
 								<Text
 									text={ moment(filteredSelectedArticle?.posted_date).format('dddd, DD MMM YYYY') }
@@ -78,7 +156,7 @@ const NewsDetail = ({
 										<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
 									</Link>
 									<div className='cursor-pointer' onClick={ () => {
-										navigator.clipboard.writeText(window?.location?.href).then(() => {
+										navigator?.clipboard?.writeText(window?.location?.href).then(() => {
 											alert('URL Link copied');
 										});
 									} }>
@@ -88,47 +166,8 @@ const NewsDetail = ({
 							</div>
 						</div>
 						<div className='content-wrapper flex mt-[20px] mb-[100px]'>
-							<div className='leftSide mt-[30px] w-[729px]'>
-								<Text fontWeight='700' fontSize='20px' lineHeight='30px'>
-									{ filteredSelectedArticle?.short_description }
-								</Text>
-								<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
-								<div
-									style={ { color: colors.grey.dark } }
-									className='innerHTML mt-[10px]'
-									dangerouslySetInnerHTML={ { __html: filteredSelectedArticle?.content || '' } }
-								/>
-								<div className='sm:hidden'>
-									<Tabs
-										activeTabIndex={ activeTabIdx }
-										setActiveTabIndex={ setActiveTabIdx }
-										tabsData={ ['Related News'] }
-									/>
-									<div className='divide-y divide-solid pt-[10px]'>
-										{ Object.values(relatedNews || []).map((a, index) => {
-											return (
-												<div key={ index }>
-													<Text
-														text={ a.posted_date }
-														className='py-[10px]'
-														fontSize='12px'
-														fontWeight='400'
-														lineHeight='14px'
-														color={ colors.grey.dark }
-													/>
-													<Text
-														text={ a.title }
-														className='pb-[10px]'
-														fontSize='14px'
-														fontWeight='900'
-														lineHeight='24px'
-														color={ colors.grey.darker }
-													/>
-												</div>
-											);
-										}) }
-									</div>
-								</div>
+							<div className={` ${filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-[30px] `}>
+								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
 								<div className='sm:hidden'>
 									<Tabs
 										activeTabIndex={ activeTabIdx }
@@ -161,8 +200,8 @@ const NewsDetail = ({
 									</div>
 								</div>
 							</div>
-							<div className='rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px]'>
-								<div className='w-[349px]'>
+							<div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] '} ` }>
+								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'w-[349px]' }>
 									<Tabs
 										activeTabIndex={ activeTabIdx }
 										setActiveTabIndex={ setActiveTabIdx }
@@ -193,7 +232,7 @@ const NewsDetail = ({
 										}) }
 									</div>
 								</div>
-								<div className='mt-[40px]'>
+								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'mt-[40px]' }>
 									<Tabs
 										activeTabIndex={ activeTabIdx }
 										setActiveTabIndex={ setActiveTabIdx }
