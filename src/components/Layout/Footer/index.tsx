@@ -114,7 +114,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				{
 					items.map((item, index) => {
 						return (
-							<Link key={ index } href={ `/hospital/${ item.id }` }>
+							<Link key={ index } href={ `/hospital/${ item.slug }` }>
 								<Text
 									fontSize='14px'
 									fontWeight='700'
