@@ -3,69 +3,72 @@ import Image from 'next/image';
 import { colors } from '@/constant';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
-
-import { getFooterSlug } from '@/lib/api';
+import CustomCarousel from '@/components/ui/Carousel';
+import { getMedicalSpecialityDetail } from '@/lib/api/facilities';
 import { getScopedI18n } from '@/locales/server';
 
 import { FooterServiceStyle } from './style';
 
 const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; }) => {
-	const footerSlugRes = await getFooterSlug({
-		query: {
-			slug: params.slug,
-		}
+	const footerSlugRes = await getMedicalSpecialityDetail({
+		param: params.slug
 	});
 	const detail = footerSlugRes?.data;
 	const t = await getScopedI18n('page.facilities');
 
 	const breadcrumbsPath = [
 		{ name: t('heading'), url: '/facilities/medical-specialities' },
-		{ name: detail?.[0]?.title ?? '', url: '#' },
+		{ name: detail?.title ?? '', url: '#' },
 	];
+
+	const renderImage = (image?: string) => {
+		if (image) {
+			return (
+				<div className='relative overflow-hidden bg-white rounded-[5px] h-[220px] sm:h-[420px] w-full'>
+					<Image
+						src={ image }
+						alt=''
+						className='object-cover'
+						sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+						fill
+					/>
+				</div>
+			);
+		}
+
+		return null;
+	};
 
 	const renderContent = (
 		<div className='w-full'>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
-				{ detail?.[0]?.title }
+				{ detail?.title }
 			</Text>
 
 			<div className='mt-4 md:mt-8 w-full'>
-				{ detail?.[0]?.img_url?.[0] && (
-					<div className='bg-white h-[220px] sm:h-[420px] w-full rounded-[5px] relative overflow-hidden'>
-						<Image
-							src={ detail?.[0]?.img_url?.[0] }
-							alt='slider'
-							className='object-cover'
-							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw'
-							fill
-						/>
-					</div>
-				) }
-				{/* {
-					isMedSpec ?
-						<Image
-							key={ 'carousel-nav' }
-							src={ detail?.[0]?.img_url?.[0] }
-							alt='slider'
-							className='bg-white h-[220px] sm:h-[420px] sm:w-[729px] rounded-[5px] object-cover'
-						/> :
-						<CustomCarousel arrowButton={ true }>
-							{ detail?.[0]?.img_url?.map((image, index) => {
-								return <img
-									key={ `carousel-nav-${ index }` }
-									src={ image }
-									alt='slider'
-									className='bg-white h-[220px] sm:h-[420px] sm:w-[729px] rounded-[5px] object-cover'
-								/>;
-							}) ?? [] }
+				{ detail?.img_url && detail?.img_url?.length > 1
+					? (
+						<CustomCarousel arrowButton>
+							{ detail?.img_url?.map((image, index) => {
+								return (
+									<div key={ index }>
+										{ renderImage(image) }
+									</div>
+								);
+							}) }
 						</CustomCarousel>
-				} */}
+					)
+					: (
+						<>
+							{ renderImage(detail?.img_url?.[0]) }
+						</>
+					) }
 			</div>
 			<div className='mt-8 md:mt-12'>
 				<div
 					style={ { lineHeight: '24px', fontSize: '16px' } }
 					className='innerHTML'
-					dangerouslySetInnerHTML={ { __html: detail?.[0]?.content || '' } }
+					dangerouslySetInnerHTML={ { __html: detail?.content || '' } }
 				/>
 			</div>
 		</div>
