@@ -21,7 +21,7 @@ import { getScopedI18n } from '@/locales/server';
 import { FacilitiesServiceStyle } from './style';
 
 export default async function FacilitiesServicesPage({ params }: { params: { slug: string; }; }) {
-	const paramsSlug = params?.slug ?? '';
+	const paramsSlug = decodeURIComponent(params?.slug ?? '');
 
 	const facilitiyServicesRes = await getFacilityServices();
 	const facilityServices: FacilityServicesDetail[] = facilitiyServicesRes?.data;

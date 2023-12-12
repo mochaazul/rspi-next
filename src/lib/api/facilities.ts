@@ -1,4 +1,9 @@
-import { FacilityServicesDetail, FacilityServicesHospital, FooterDetail, I_RelatedNews } from '@/interface';
+import {
+	FacilityServicesDetail,
+	FacilityServicesHospital,
+	FooterDetail,
+	I_RelatedNews
+} from '@/interface';
 import { MedicalSpecialities } from '@/interface/MedicalSpecialities';
 
 import fetcher, { ApiOptions } from './utils/fetcher';

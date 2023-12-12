@@ -11,7 +11,7 @@ import { FooterServiceStyle } from './style';
 
 const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; }) => {
 	const footerSlugRes = await getMedicalSpecialityDetail({
-		param: params.slug
+		param: decodeURIComponent(params?.slug)
 	});
 	const detail = footerSlugRes?.data;
 	const t = await getScopedI18n('page.facilities');
