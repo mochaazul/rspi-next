@@ -14,36 +14,26 @@ import {
 import { BreadcrumbsType } from '../../Breadcrumbs';
 
 import { HospitalServiceStyle } from './style';
-import { useGetHospitalDetail } from '@/lib/api/client/hospital';
 
 type Props = PropsWithRef<PropsWithChildren<{
-	id: string,
+	detail: any,
 	breadcrumbsPath: BreadcrumbsType['datas'],
 }>>;
 
 const HospitalServices = ({
-	id,
+	detail,
 	breadcrumbsPath,
 }: Props) => {
-	const param = {
-		param: id,
-	};
-
-	const {
-		data: HospitalDetail,
-	} = useGetHospitalDetail(param);
-
-	const detail = Object.values(HospitalDetail || []);
-
+	
 	const renderContent = (
 		<div>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
-				{ detail?.[0]?.name }
+				{ detail?.name }
 			</Text>
 
 			<div className='mt-[32px]'>
 				<CustomCarousel arrowButton>
-					{ (detail?.[0]?.img_url ?? [])?.map((image: string, index: any) => {
+					{ (detail?.img_url ?? [])?.map((image: string, index: any) => {
 						return (
 							<img
 								key={ `carousel-nav-${ index }` }
@@ -60,7 +50,7 @@ const HospitalServices = ({
 				<div
 					style={ { lineHeight: '24px', fontSize: '16px' } }
 					className='innerHTML'
-					dangerouslySetInnerHTML={ { __html: detail?.[0]?.description || '' } }
+					dangerouslySetInnerHTML={ { __html: detail?.description || '' } }
 				/>
 			</div>
 		</div>

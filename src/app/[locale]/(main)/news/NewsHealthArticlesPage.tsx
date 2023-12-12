@@ -49,9 +49,6 @@ const NewsHealthArticlesPage = ({
 		{ label: t('tabPillsLabel.healthFirst'), value: 'healthfirst' }
 	];
 
-	// const { articles, pagination, loading } = useTypedSelector<ArticleState>('articles'); Migrate
-	// const fetchArticle = useAppDispatch(getArticles); Migrate
-
 	useEffect(() => {
 		setLoading(true);
 		fetchArticle({
@@ -60,7 +57,8 @@ const NewsHealthArticlesPage = ({
 				page: `${ pageNumber }`,
 				is_publish: 'true',
 				category: tabData[activeTab]?.value,
-				keyword: keyArticle
+				keyword: keyArticle,
+				with_healthfirst: tabData[activeTab]?.value === 'healthfirst'
 			}
 		}).then(function (response: any) {
 			setArticlesData(response.data);

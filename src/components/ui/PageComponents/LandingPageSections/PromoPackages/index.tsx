@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { useState, useRef } from 'react';
 
 interface PromoPackagesProps {
-	events: EventClassesDetail[];
+	events: any;
 	showAsRelated?: boolean;
 }
 
@@ -26,13 +26,13 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 	const [activeTab, setActiveTab] = useState(0);
 
 	const promo = activeTab === 0 ? events : events?.filter((item: any) => item?.category === tabData?.[activeTab]?.value);
-
+	
 	if (showAsRelated) {
 		return (
 			<div className='w-full'>
 				{ promo?.length !== 0 ?
 					<CardsScrollHorizontal noHorizontalPadding={ true }>
-						{ promo?.map((item, index) => (
+						{ promo?.map((item : EventClassesDetail, index: number) => (
 							<Card
 								key={ index }
 								id={ item?.id }
@@ -114,7 +114,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 			<div className='w-full'>
 				{ promo.length !== 0 ?
 					<CardsScrollHorizontal customRef={ CardNewsWrapperRef } className='lg:gap-x-[30px] lg:overflow-hidden lg:grid lg:grid-cols-3'>
-						{ promo?.slice(0, 3)?.map((item, index) => (
+						{ promo?.slice(0, 3)?.map((item: any, index: number) => (
 							<Card
 								key={ index }
 								id={ item?.id }

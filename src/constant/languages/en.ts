@@ -398,6 +398,7 @@ export default {
 			detailsBtnLabel: 'View Details'
 		},
 		newsDetail: {
+			breadcrumbsLabel: 'News & Health Articles',
 			oleh: 'By',
 		},
 		forgotPassword: {

@@ -1,12 +1,7 @@
 'use client';
 import { PropsWithChildren, PropsWithRef } from 'react';
 
-import Image from 'next/image';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-
 import { colors } from '@/constant';
-
-import { useGetFooterPages } from '@/lib/api/client/footer';
 
 import {
 	Breadcrumbs,
@@ -17,26 +12,14 @@ import {
 import { FooterServiceStyle } from './style';
 
 type Props = PropsWithRef<PropsWithChildren<{
-	slug: string,
+	detail: any,
 	isMedSpec: boolean;
 }>>;
 
 const FooterServices = ({
-	slug,
+	detail,
 	isMedSpec
 }: Props) => {
-
-	const param = {
-		query: {
-			slug: slug
-		}
-	};
-
-	const {
-		data: FooterState,
-	} = useGetFooterPages(param);
-
-	const detail = Object.values(FooterState?.data || []);
 
 	const renderContent = (
 		<div>
