@@ -65,7 +65,7 @@ type UploadPhotoTypeState = {
 };
 
 type PatientProfileProps = {
-	patientProfile: UserDataDetail;
+	patientProfile: UserDataDetail | null;
 	visitHospitalHistory: I_VisitHistory[];
 };
 

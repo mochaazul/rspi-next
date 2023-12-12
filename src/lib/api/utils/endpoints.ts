@@ -68,6 +68,7 @@ const endpointData = {
 	getNews: { path: '/news', method: 'GET' },
 	getNewsSpecialtyByID: { path: '/specialities/related-specialities', method: 'GET' },
 	getRelatedNews: { path: '/news/related-news', method: 'GET' },
+	getMedicalSpeciality: { path: '/footer-pages/medical-speciality', method: 'GET' },
 	// No implementation / not yet implemented
 	// pin: { path: '/patients/pin', method: 'POST' },
 	// doctors: '/doctors' -> replaced by masterdoctor,

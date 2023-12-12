@@ -68,7 +68,7 @@ const ResetPinPage = () => {
 
 	return (
 		<ContainerStyle>
-			<Box>
+			<Box className='md:w-auto md:max-w-[618px]'>
 				<div className='hidden md:flex justify-center mb-8'>
 					<Image
 						src='/images/logo_rspi.svg'
@@ -78,7 +78,7 @@ const ResetPinPage = () => {
 					/>
 				</div>
 				<Text
-					text={ t('heading') }
+					text={ t('headingReset') }
 					fontSize={ '32px' }
 					lineHeight={ '48px' }
 					fontWeight={ '900' }
@@ -130,7 +130,7 @@ const ResetPinPage = () => {
 							value={ formikPin.values.pin }
 							type='password'
 							password
-							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							inputClassName='max-sm:!w-full max-sm:!h-12 max-md:w-full max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
 							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>
@@ -148,7 +148,7 @@ const ResetPinPage = () => {
 							value={ formikPin.values.confirm_pin }
 							type='password'
 							password
-							inputClassName='max-sm:w-full max-sm:h-12 max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
+							inputClassName='max-sm:!w-full max-sm:!h-12 max-md:w-full max-sm:rounded-[10px] max-sm:text-2xl max-sm:leading-[48px]'
 							wrapperClassName='max-sm:!gap-x-2.5'
 						/>
 					</Form.FormGroup>

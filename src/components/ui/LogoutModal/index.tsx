@@ -1,9 +1,12 @@
+'use client';
+
 import { icons } from '@/constant';
 import { Button, Modal, Text } from '..';
 import { useRouter } from 'next/navigation';
 import { cookiesHelper } from '@/helpers';
 import { useSWRConfig } from 'swr';
 import clearSWRCache from '@/helpers/clearSwrCache';
+import { useScopedI18n } from '@/locales/client';
 
 type Props = {
 	visible: boolean;
@@ -12,6 +15,7 @@ type Props = {
 };
 const LogoutModal = ({ visible, toggler, onClose }: Props) => {
 	const router = useRouter();
+	const t = useScopedI18n('modalDialog.needLogout');
 	const { cache } = useSWRConfig();
 
 	const handleLogout = async () => {
@@ -28,26 +32,26 @@ const LogoutModal = ({ visible, toggler, onClose }: Props) => {
 					<icons.WarningIcon />
 				</center>
 				<Text
-					text='Akses masuk terdeteksi!'
+					text={ t('heading') }
 					fontWeight='700'
 					fontSize='24px'
 					className='pt-6'
 				/>
 				<Text
-					text='Terdapat akses baru yang masuk ke akun Anda pada perangkat lain. '
+					text={ t('subHeading') }
 					fontWeight='400'
 					fontSize='16px'
 					color='#6A6D81'
 					className='pt-4'
 				/>
 				<Text
-					text='Silahkan log out secara manual. '
+					text={ t('desc') }
 					fontWeight='400'
 					fontSize='16px'
 					color='#6A6D81'
 					className='pt-1 pb-4'
 				/>
-				<Button className='max-w-full' theme='primary' onClick={ handleLogout }>Log Out</Button>
+				<Button className='max-w-full' theme='primary' onClick={ handleLogout }>{ t('btnLabel') }</Button>
 			</div>
 		</Modal>
 	);

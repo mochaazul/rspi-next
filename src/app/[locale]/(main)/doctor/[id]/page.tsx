@@ -11,6 +11,7 @@ import Text from '@/components/ui/Text';
 import Radio from '@/components/ui/Radio';
 import Calendar from '@/components/ui/Calendar';
 import Button from '@/components/ui/Button';
+import NeedLoginModal from '@/components/ui/NeedLoginModal';
 import { Images, colors } from '@/constant';
 import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
 import { useScopedI18n } from '@/locales/client';
@@ -19,6 +20,7 @@ import VisitSchedule from './sections/VisitSchedule';
 import { TimeSlot } from '@/interface';
 import { useGetHospital } from '@/lib/api/client/hospital';
 import { useGetDoctorCalendar, useGetDoctorDetail, useGetDoctorSlot } from '@/lib/api/client/doctors';
+import { cookiesHelper } from '@/helpers';
 
 type FormAppointment = {
 	clinic: string,
@@ -46,6 +48,7 @@ export default function Page({ params }: Props) {
 	const [selectedDateStatus, setSelectedDateStatus] = useState<string>('');
 
 	const [calendarMonth, setCalendarMonth] = useState<Dayjs>(dayjs());
+	const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
 
 	const { data: hospital, isLoading: hospitalLoading } = useGetHospital();
 
@@ -106,16 +109,29 @@ export default function Page({ params }: Props) {
 		} else {
 			setCalendarMonth(inputDate);
 		}
-
 	};
 
-	const onBookHandler = () => {
-
+	const getBookAppointmentUrl = () => {
 		if (selectedTimeSlot?.slot_id) {
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const { available, ...safeParams } = selectedTimeSlot;
 			const bookParam = new URLSearchParams(safeParams);
-			router.push('/book-appointment/' + selectedTimeSlot.slot_id + `?${ bookParam.toString() }`);
+			return '/book-appointment/' + selectedTimeSlot.slot_id + `?${ bookParam.toString() }`;
+		}
+
+		return '';
+	};
+
+	const onBookHandler = async () => {
+		const token = await cookiesHelper.getToken();
+
+		if (!token) {
+			return setLoginModalVisible(true);
+		}
+
+		if (selectedTimeSlot?.slot_id) {
+			const bookAppointmentUrl = getBookAppointmentUrl();
+			router.push(bookAppointmentUrl);
 		}
 	};
 
@@ -261,6 +277,12 @@ export default function Page({ params }: Props) {
 						</div>
 					</>
 			}
+			<NeedLoginModal
+				visible={ loginModalVisible }
+				toggler={ setLoginModalVisible }
+				onClose={ () => setLoginModalVisible(false) }
+				callbackUrl={ getBookAppointmentUrl() }
+			/>
 		</DoctorProfileStyle>
 	);
 };

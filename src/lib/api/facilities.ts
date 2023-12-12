@@ -16,5 +16,5 @@ export const getFacilityRelatedNews = (param?: ApiOptions) => {
 };
 
 export const getMedicalSpecialities = (options: ApiOptions) => {
-	return fetcher<MedicalSpecialities[]>('getFooter', options);
+	return fetcher<MedicalSpecialities[]>('getMedicalSpeciality', options);
 };
