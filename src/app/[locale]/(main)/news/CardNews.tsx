@@ -16,19 +16,19 @@ interface PropsType {
 
 const CardNews = (props: PropsType) => {
 	const handleOnClick = (id: number) => () => {
-		props.onClick?.(id);
+		props?.onClick?.(id);
 	};
 
 	return (
 		<CardNewsStyle>
 			<div
-				className={ `shrink-0 max-sm:px-3 max-sm:py-5 cursor-pointer flex relative justify-between ${ props.isActive ? 'active' : '' }` }
-				onClick={ handleOnClick(props.id) }
+				className={ `shrink-0 max-sm:px-3 max-sm:py-5 cursor-pointer flex relative justify-between ${ props?.isActive ? 'active' : '' }` }
+				onClick={ handleOnClick(props?.id) }
 			>
 				<div className='mr-[30px] lg:w-1/2 z-0'>
 					<div className='flex items-center'>
 						<div className='max-w-[160px]'>
-							<Button theme='primary' label={ props.category } className='btn-category' />
+							<Button theme='primary' label={ props?.category } className='btn-category' />
 						</div>
 						<div className='ml-[10px]'>
 							<Text
@@ -36,7 +36,7 @@ const CardNews = (props: PropsType) => {
 								fontWeight='400'
 								lineHeight='17px'
 								color={ colors.grey.dark }
-								text={ props.date }
+								text={ props?.date }
 							/>
 						</div>
 					</div>
@@ -46,7 +46,7 @@ const CardNews = (props: PropsType) => {
 							fontWeight='900'
 							lineHeight='24px'
 							color={ colors.grey.darker }
-							text={ props.title }
+							text={ props?.title }
 						/>
 						<Text
 							fontSize='14px'
@@ -54,11 +54,11 @@ const CardNews = (props: PropsType) => {
 							lineHeight='24px'
 							color={ colors.grey.dark }
 							className='mt-[5px]'
-							text={ props.author }
+							text={ props?.author }
 						/>
 					</div>
 				</div>
-				<img src={ props.imgThumb || '' } alt={ props.title } className='w-[254px] h-[145px] rounded-md object-cover z-0' />
+				<img src={ props?.imgThumb || '' } alt={ props?.title } className='w-[254px] h-[145px] rounded-md object-cover z-0' />
 			</div>
 		</CardNewsStyle>
 	);

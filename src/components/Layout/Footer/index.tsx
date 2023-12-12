@@ -93,14 +93,17 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				{
 					items.map((item, index) => {
 						return (
-							<Text
+							<Link
+								href={ `/footer/${ item.slug }` }
 								key={ index }
-								fontSize='14px'
-								fontWeight='700'
-								className='flex'
-								subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer'
-								onClick={ () => navigate.push(`/footer/${ item.slug }`) }
-							>{ item.title }</Text>
+							>
+								<Text
+									fontSize='14px'
+									fontWeight='700'
+									className='flex'
+									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
+								>{ item.title }</Text>
+							</Link>
 						);
 					})
 				}
@@ -114,14 +117,17 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				{
 					items.map((item, index) => {
 						return (
-							<Text
+							<Link
+								href={ `/hospital/${ item.slug }` }
 								key={ index }
-								fontSize='14px'
-								fontWeight='700'
-								className='flex'
-								subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer'
-								onClick={ () => navigate.push(`/hospital/${ item.id }`) }
-							>{ item.name }</Text>
+							>
+								<Text
+									fontSize='14px'
+									fontWeight='700'
+									className='flex'
+									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
+								>{ item.name }</Text>
+							</Link>
 						);
 					})
 				}
