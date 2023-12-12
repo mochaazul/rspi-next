@@ -114,7 +114,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 			<div className='w-full'>
 				{ promo.length !== 0 ?
 					<CardsScrollHorizontal customRef={ CardNewsWrapperRef } className='lg:gap-x-[30px] lg:overflow-hidden lg:grid lg:grid-cols-3'>
-						{ promo?.slice(0, 3)?.map((item, index) => (
+						{ promo?.slice(0, 3)?.map((item: any, index: number) => (
 							<Card
 								key={ index }
 								id={ item?.id }
