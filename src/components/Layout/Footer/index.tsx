@@ -98,7 +98,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 									fontSize='14px'
 									fontWeight='700'
 									className='flex'
-									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer'
+									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
 								>{ item.title }</Text>
 							</Link>
 						);
@@ -119,7 +119,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 									fontSize='14px'
 									fontWeight='700'
 									className='flex'
-									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer'
+									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
 								>{ item.name }</Text>
 							</Link>
 						);

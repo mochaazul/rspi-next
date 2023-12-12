@@ -1,16 +1,30 @@
 import { headers } from 'next/headers';
 
 import FooterServices from '@/components/ui/PageComponents/FooterServices';
-export default function FooterPages(props: { params: { slug: any; }; }) {
+
+import { getFooterPages } from '@/lib/api/footer';
+
+const FooterPages = async({ params }: { params: { slug: string; }; }) => {
+
 	const headersList = headers();
 	
 	const pathname = headersList.get('x-invoke-path') || '';
 	const isMedSpec = pathname.includes('medical-specialities');
+
+	const param = {
+		query: {
+			slug: params?.slug
+		}
+	};
+
+	const dataDetail = await getFooterPages(param);
 	
 	return (
 		<FooterServices
-			slug={ props.params.slug }
+			detail={ dataDetail?.data }
 			isMedSpec={ isMedSpec }
 		/>
 	);
 };
+
+export default FooterPages;
