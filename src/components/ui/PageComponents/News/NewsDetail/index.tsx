@@ -35,7 +35,7 @@ const NewsDetail = ({
 		url: string;
 	}[],
 }) => {
-	console.log(filteredSelectedArticle, 'filteredSelectedArticle');
+	
 	const t = useScopedI18n('page.newsDetail');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 
@@ -61,22 +61,24 @@ const NewsDetail = ({
 						{ Object.values(relatedNews || []).map((a, index) => {
 							return (
 								<div key={ index }>
-									<Text
-										text={ a.posted_date }
-										className='py-[10px]'
-										fontSize='12px'
-										fontWeight='400'
-										lineHeight='14px'
-										color={ colors.grey.dark }
-									/>
-									<Text
-										text={ a.title }
-										className='pb-[10px]'
-										fontSize='14px'
-										fontWeight='900'
-										lineHeight='24px'
-										color={ colors.grey.darker }
-									/>
+									<Link href={ `/news/${a.slug}` }>
+										<Text
+											text={ a.posted_date }
+											className='py-[10px]'
+											fontSize='12px'
+											fontWeight='400'
+											lineHeight='14px'
+											color={ colors.grey.dark }
+										/>
+										<Text
+											text={ a.title }
+											className='pb-[10px]'
+											fontSize='14px'
+											fontWeight='900'
+											lineHeight='24px'
+											color={ colors.grey.darker }
+										/>
+									</Link>
 								</div>
 							);
 						}) }
@@ -88,7 +90,7 @@ const NewsDetail = ({
 
 	const renderHealthFirst = () => {
 		return (
-			<div className='flec-col lg:flex-row xl:flex-row md:flex-row flex gap-x-10'>
+			<div className='flex-col lg:flex-row xl:flex-row md:flex-row flex gap-10'>
 				<div>
 					<img
 						alt={ filteredSelectedArticle?.title }
@@ -105,7 +107,7 @@ const NewsDetail = ({
 							className='innerHTML mt-[10px]'
 							dangerouslySetInnerHTML={ { __html: filteredSelectedArticle?.content || '' } }
 						/>
-						<Link href={ filteredSelectedArticle?.pdf_url } className='text-gray-500 font-bold cursor-pointer' >{ t('downloadFilePdf') } <span className='text-orange-700'>{t('here')}</span> </Link>
+						<Link href={ filteredSelectedArticle?.pdf_url } className='text-gray-500 font-bold cursor-pointer' >{ t('downloadFilePdf') } <span className='text-orange-700'>{ t('here') }</span> </Link>
 					</div>
 				</div>
 			</div>
@@ -166,9 +168,9 @@ const NewsDetail = ({
 							</div>
 						</div>
 						<div className='content-wrapper flex mt-[20px] mb-[100px]'>
-							<div className={` ${filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-[30px] `}>
+							<div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-[30px] ` }>
 								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
-								<div className='sm:hidden'>
+								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' } >
 									<Tabs
 										activeTabIndex={ activeTabIdx }
 										setActiveTabIndex={ setActiveTabIdx }
@@ -211,22 +213,24 @@ const NewsDetail = ({
 										{ Object.values(relatedNews || [])?.map((a, index) => {
 											return (
 												<div key={ index }>
-													<Text
-														text={ a.posted_date }
-														className='py-[10px]'
-														fontSize='12px'
-														fontWeight='400'
-														lineHeight='14px'
-														color={ colors.grey.dark }
-													/>
-													<Text
-														text={ a.title }
-														className='pb-[10px]'
-														fontSize='14px'
-														fontWeight='900'
-														lineHeight='24px'
-														color={ colors.grey.darker }
-													/>
+													<Link href={ `/news/${a.slug}` }>
+														<Text
+															text={ a.posted_date }
+															className='py-[10px]'
+															fontSize='12px'
+															fontWeight='400'
+															lineHeight='14px'
+															color={ colors.grey.dark }
+														/>
+														<Text
+															text={ a.title }
+															className='pb-[10px]'
+															fontSize='14px'
+															fontWeight='900'
+															lineHeight='24px'
+															color={ colors.grey.darker }
+														/>
+													</Link>
 												</div>
 											);
 										}) }
