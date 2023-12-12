@@ -265,7 +265,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 	};
 	return (
 		<BookAppointmentContainer>
-			<div className='lg:w-[1110px] mx-auto max-sm:px-[15px] md:pt-[60px] pb-[120px]'>
+			<div className='lg:w-[1110px] mx-auto max-sm:px-[15px] pb-[120px]'>
 				<Breadcrumbs datas={ breadCrumbs } />
 				<div className='content-wrapper sm:flex w-full items-center flex-col max-sm:p-[16px]'>
 					<ProfileSelector onSelected={ setSelectedProfile } selfProfile={ userProfile } familyProfiles={ familyProfiles } onAddNewProfileBtn={ onAddNewProfile } />

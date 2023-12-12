@@ -65,13 +65,13 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 	});
 
 	useEffect(() => {
-		fetchDetail(props.params.slug).then(function(response) {
+		fetchDetail(props.params.slug).then(function (response) {
 			setSelectedArticle(response?.data);
 
-			fetchNewsSpecialtyByID(response?.data?.id).then(function(response) {
+			fetchNewsSpecialtyByID(response?.data?.id).then(function (response) {
 				setSpecialty(response?.data);
 			});
-			fetchRelatedNews(response?.data?.id).then(function(response) {
+			fetchRelatedNews(response?.data?.id).then(function (response) {
 				setRelatedNews(response?.data);
 			});
 
@@ -82,7 +82,7 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 
 	return (
 		<div>
-			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] md:pt-[60px] pb-[60px]'>
+			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='mt-[70px]'>
@@ -118,7 +118,7 @@ const DetailNewsHealthPage = (props: { params: { slug: any; }; }) => {
 									<Link href={ sosmedLink.linkedin } target='_blank' className='cursor-pointer' >
 										<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
 									</Link>
-									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(typeof window !== 'undefined' ? window?.location?.href : '' ); } }>
+									<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(typeof window !== 'undefined' ? window?.location?.href : ''); } }>
 										<Image src='/images/ic/Link.svg' alt='RSPI link' width={ 16 } height={ 16 } />
 									</div>
 								</div>

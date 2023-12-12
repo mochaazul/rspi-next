@@ -179,7 +179,7 @@ export default function Page({ params }: Props) {
 							clickCloseContactHospital={ closeContactHospital }
 							onClose={ () => setShowModalTelp(false) }
 						/>
-						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] md:pt-7 pb-[120px]'>
+						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] pb-[120px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
 							<div className='content-wrapper sm:flex w-full'>
 								<DoctorAvatar className='max-sm:hidden' profile_url={ doctor?.data?.img_url } />
