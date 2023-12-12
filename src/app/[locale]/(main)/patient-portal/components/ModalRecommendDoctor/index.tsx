@@ -211,7 +211,7 @@ const RecommendDoctorModal = (props: PropsType) => {
 							</div>
 						</div>
 						<Rating onChange={ setRatingValue } value={ ratingValue } />
-						<Feedback value={ feedbackValue } onChange={ setFeedbackValue } valueRating = { ratingValue } />
+						<Feedback value={ feedbackValue } onChange={ setFeedbackValue } valueRating={ ratingValue } />
 						<FeedbackNotes value={ feedbackNotes } onChange={ setFeedbackNotes } />
 						<Button label='Submit' className='mt-[32px]' onClick={ onSubmit } disabled={ shouldDisable() }>
 							{

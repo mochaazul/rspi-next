@@ -41,9 +41,6 @@ const ModalCancelBook = (props: PropsType) => {
 				<div>
 					<div className='flex flex-row'>
 						<Text text={ t('heading') } fontSize='24px' fontWeight='700' className='flex-1' />
-						<div onClick={ props.onClose } className='cursor-pointer'>
-							<icons.Close />
-						</div>
 					</div>
 					<Text text={ t('warningText') } fontSize='14px' fontWeight='400' className='mt-[10px]' color={ colors.grey.darkOpacity } />
 
