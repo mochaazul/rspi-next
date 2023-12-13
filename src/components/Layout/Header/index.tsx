@@ -14,7 +14,6 @@ import {
 	CenterOfExcellenceDetail,
 	FacilityServicesDetail,
 	HospitalDetail,
-	NotificationResponse,
 	UserSessionData,
 } from '@/interface';
 import colors from '@/constant/colors';
@@ -33,22 +32,19 @@ import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 
 import { cookiesHelper } from '@/helpers';
 import clearSWRCache from '@/helpers/clearSwrCache';
-import { markAllNotif } from '@/lib/api/notif';
 
 export const Header = ({
 	session,
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData,
-	// marAllReadNotifFunc,
-	notificationResponseData
+	marAllReadNotifFunc
 }: {
 	session?: UserSessionData,
 	hospitalData: HospitalDetail[],
 	centerOfExcellenceData: CenterOfExcellenceDetail[],
 	facilityServicesData: FacilityServicesDetail[],
 	marAllReadNotifFunc?: () => any;
-	notificationResponseData?: NotificationResponse;
 }) => {
 
 	const router = useRouter();
@@ -72,17 +68,17 @@ export const Header = ({
 	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
 	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
-	// const paramGetNotif = {
-	// 	query: {
-	// 		medical_record: session?.user?.medical_record ?? '',
-	// 		email: session?.user?.email,
-	// 	},
-	// };
-	// const {
-	// 	data: getNotification,
-	// } = useNotification(paramGetNotif);
+	const paramGetNotif = {
+		query: {
+			medical_record: session?.user?.medical_record ?? '',
+			email: session?.user?.email,
+		},
+	};
+	const {
+		data: getNotification,
+	} = useNotification(paramGetNotif);
 
-	// const notificationResponseData = getNotification?.data;
+	const notificationResponseData = getNotification?.data;
 
 	const handleClick = async () => {
 		if (isLoggedIn) {
@@ -318,16 +314,18 @@ export const Header = ({
 	const renderNotifIcon = () => {
 		if (isLoggedIn) {
 			return (
-				<div className='relative inline-block text-white my-auto' onClick={ () => {
-					setShowNotification(true);
-					markAllNotif({
-						query: {
-							medical_record: session.user?.medical_record ?? '',
-							email: session.user?.email,
+				<div className='relative inline-block text-white my-auto' onClick={ () => setShowNotification(true) }>
+					<icons.Notif onClick={ () => {
+						if (marAllReadNotifFunc) {
+							marAllReadNotifFunc()
+								.then(() => {
+									setShowNotification(true);
+									mutate('getNotification');
+								});
 						}
-					});
-				} }>
-					<icons.Notif className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11' />
+					} }
+						className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
+					/>
 					<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
 						{ notificationResponseData?.total_unread ?? 0 }
 					</span>
