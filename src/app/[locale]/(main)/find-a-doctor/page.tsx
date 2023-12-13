@@ -8,7 +8,10 @@ export default async function Page() {
 
 	return (
 		<>
-			<FindADoctorComponent hospital={ hospital.data } clinics={ specialtyDropdown.data }/>
+			<FindADoctorComponent
+				hospital={ hospital.data }
+				clinics={ specialtyDropdown.data }
+			/>
 		</>
 	);
 };

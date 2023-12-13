@@ -23,6 +23,7 @@ import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail } from '@/interface';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
+import { useSWRConfig } from 'swr';
 
 type Props ={
   hospital: HospitalDetail[]
@@ -35,6 +36,8 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 	
 	const [resetSearchDoctor, setResetSearchDoctor] = useState(false);
 	
+	const { mutate } = useSWRConfig();
+
 	const t = useScopedI18n('page.findDoctor');
 	
 	const searchParams = useSearchParams();
@@ -119,6 +122,12 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 		}
 		return 0;
 	};
+	
+	useEffect(() => {
+		if (!doctorResponse) {
+			setSize(size);
+		};
+	}, [doctorResponse]);
 
 	const hasMore = () => {
 		return doctorCount() > size;
