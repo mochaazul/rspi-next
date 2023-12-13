@@ -35,7 +35,7 @@ export type ProfilePayload = {
 
 const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
 	const { pending } = useFormStatus();
-	
+
 	const t = useScopedI18n('page.bookingAppointment');
 	const tValidation = useScopedI18n('validation.formValidation');
 	const [error, setError] = useState<string>('');
@@ -54,7 +54,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			name: '',
 			phone: ''
 		},
-		onSubmit: async(values: ProfilePayload) => {
+		onSubmit: async (values: ProfilePayload) => {
 			try {
 				const { dob, email, gender, name, phone } = values;
 				if (type === 'other') {
@@ -66,9 +66,9 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						phone: `62${ cleanUpMask(phone) }`,
 						gender: gender
 					});
-	
+
 					if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
-	
+
 				} else {
 					const res = await updateProfile({
 						name: name,
@@ -76,13 +76,13 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						gender: gender,
 						phone: `62${ cleanUpMask(phone) }`
 					});
-					
+
 					if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
 				}
 
 				closeHandler();
 
-			} catch (error:any) {
+			} catch (error: any) {
 				setError(error);
 			}
 
@@ -95,7 +95,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		}
 	}, [visible]);
 
-	const onSubmitHandler = async(event: React.FormEvent<HTMLFormElement>) => {
+	const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setEnableValidation(true);
 		formikProfile.handleSubmit();
@@ -177,10 +177,8 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					fontSize='24px'
 					fontWeight='700'
 					lineHeight='28px'
-					text={ selfProfile ? t('profileSelector.selfLabel') : t('profileSelector.other') } />
-				<div className='cursor-pointer' onClick={ closeHandler }>
-					<icons.Close alt='' />
-				</div>
+					text={ selfProfile ? t('profileSelector.selfLabel') : t('profileSelector.other') }
+				/>
 			</ModalHeader>
 			<NotificationPanel
 				showIconLeft={ false }
