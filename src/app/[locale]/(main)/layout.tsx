@@ -12,9 +12,10 @@ import { OutletStyleType, } from './style';
 import {
 	centerOfExcellenceFetch,
 	facilityServicesFetch,
+	marAllReadNotif,
+	notificationResponseFetch,
 	footersFetch,
-	hospitalsFetch,
-	marAllReadNotif
+	hospitalsFetch
 } from './helpers';
 import getSession from '@/session/server';
 
