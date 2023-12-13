@@ -23,7 +23,6 @@ import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail } from '@/interface';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
-import { useSWRConfig } from 'swr';
 
 type Props ={
   hospital: HospitalDetail[]
@@ -35,8 +34,6 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
 	
 	const [resetSearchDoctor, setResetSearchDoctor] = useState(false);
-	
-	const { mutate } = useSWRConfig();
 
 	const t = useScopedI18n('page.findDoctor');
 	
