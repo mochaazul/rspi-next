@@ -14,9 +14,10 @@ import NotificationPanel from '@/components/ui/NotificationPanel';
 import SpinVerification from '@/components/ui/SpinVerification';
 import { useScopedI18n } from '@/locales/client';
 import { ResetPasswordSchema } from '@/validator/auth';
-import { useSetNewPassword, useVerifyResetToken } from '@/lib/api/client/auth';
+import { useSetNewPassword } from '@/lib/api/client/auth';
 import { NewPasswordPayload, ResponseStatus } from '@/interface';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
+import { verifyResetToken } from '@/lib/api/auth';
 
 import { ResetPasswordStyle } from './style';
 
@@ -25,7 +26,6 @@ const ResetPassword = () => {
 	const searchParams = useSearchParams()!;
 
 	const { trigger: setNewPassword, isMutating: loadingSubmit } = useSetNewPassword();
-	const { trigger: verifyResetToken } = useVerifyResetToken();
 
 	const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'failed'>('loading');
 	const [tokenVerified, setTokenVerified] = useState<boolean>(false);
@@ -66,32 +66,37 @@ const ResetPassword = () => {
 	const t = useScopedI18n('page.resetPassword');
 	const tValidation = useScopedI18n('validation.formValidation');
 
+	const hasToken = async () => {
+		try {
+			const token: string = searchParams.get('token') ?? '';
+			// redirect to login page if user manualy navigate to this page
+			if (!token) return navigate.replace('/login');
+
+			// verify token if present
+			setVerificationStatus('loading');
+			const response = await verifyResetToken(token);
+			if (response?.stat_code === 'APP:SUCCESS') {
+				setVerificationStatus('success');
+
+				// need timeout to wait for animation
+				setTimeout(() => {
+					setTokenVerified(true);
+				}, 1200);
+			} else {
+				setVerificationStatus('failed');
+			}
+		} catch (error) {
+			setVerificationStatus('failed');
+		}
+	};
+
 	useEffect(() => {
 		hasToken();
 	}, []);
 
-	const hasToken = async () => {
-		try {
-			if (!searchParams.get('token')) return navigate.replace('/login');
-
-			// verify token if present
-			setVerificationStatus('loading');
-			await verifyResetToken({ token: searchParams.get('token') ?? '' });
-
-			setVerificationStatus('success');
-
-			// need timeout to wait for animation
-			setTimeout(() => {
-				setTokenVerified(true);
-			}, 1200);
-		} catch (error) {
-			setVerificationStatus('failed');
-		}
-		// redirect to login page if user manualy navigate to this page
-	};
-
-	if (!tokenVerified)
+	if (!tokenVerified) {
 		return <SpinVerification status={ verificationStatus } />;
+	}
 
 	const onSubmitForm = async (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();

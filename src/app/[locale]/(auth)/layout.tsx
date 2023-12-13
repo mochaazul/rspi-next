@@ -9,14 +9,28 @@ import {
 	centerOfExcellenceFetch,
 	facilityServicesFetch,
 	hospitalsFetch,
-	marAllReadNotif // TODO: remove
 } from '../(main)/helpers';
+import { NotificationResponse } from '@/interface';
+import { getNotificationResponse } from '@/lib/api';
 
 export default async function AuthLayout({ children }: PropsWithChildren) {
 	const session = await getSession();
 	const hospitals = await hospitalsFetch();
 	const centerOfExcellence = await centerOfExcellenceFetch();
 	const facilityServices = await facilityServicesFetch();
+	let notificationResponseData: NotificationResponse = {
+		notification: [],
+		total_unread: 0
+	};
+	if (session?.token && session?.user?.email) {
+		const notificationResponse = await getNotificationResponse({
+			query: {
+				medical_record: session?.user?.medical_record ?? '',
+				email: session?.user?.email,
+			},
+		});
+		notificationResponseData = notificationResponse?.data;
+	}
 
 	return (
 		<>
@@ -26,7 +40,7 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
 					hospitalData={ hospitals.data }
 					centerOfExcellenceData={ centerOfExcellence.data }
 					facilityServicesData={ facilityServices.data }
-					marAllReadNotifFunc={ marAllReadNotif } // TODO: remove
+					notificationResponseData={ notificationResponseData }
 				/>
 			</div>
 

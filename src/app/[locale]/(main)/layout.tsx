@@ -12,12 +12,12 @@ import { OutletStyleType, } from './style';
 import {
 	centerOfExcellenceFetch,
 	facilityServicesFetch,
-	marAllReadNotif,
-	notificationResponseFetch,
 	footersFetch,
 	hospitalsFetch
 } from './helpers';
 import getSession from '@/session/server';
+import { NotificationResponse } from '@/interface';
+import { getNotification } from '@/lib/api/notif';
 
 export default async function RootLayout({
 	props,
@@ -34,6 +34,19 @@ export default async function RootLayout({
 	const footers = await footersFetch();
 	const centerOfExcellence = await centerOfExcellenceFetch();
 	const facilityServices = await facilityServicesFetch();
+	let notificationResponseData: NotificationResponse = {
+		notification: [],
+		total_unread: 0
+	};
+	if (session?.token && session?.user?.email) {
+		const notificationResponse = await getNotification({
+			query: {
+				medical_record: session?.user?.medical_record ?? '',
+				email: session?.user?.email,
+			},
+		});
+		notificationResponseData = notificationResponse?.data;
+	}
 
 	return (
 		<>
@@ -42,7 +55,7 @@ export default async function RootLayout({
 				hospitalData={ hospitals.data }
 				centerOfExcellenceData={ centerOfExcellence.data }
 				facilityServicesData={ facilityServices.data }
-				marAllReadNotifFunc={ marAllReadNotif }
+				notificationResponseData={ notificationResponseData }
 			/>
 			{ children }
 			{

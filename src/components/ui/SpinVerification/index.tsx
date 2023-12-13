@@ -24,8 +24,9 @@ const SpinVerification = ({ status }: Props) => {
 	const handleBackLogin = async () => {
 		if (session.isAuthenticated) {
 			await cookiesHelper.clearStorage();
-			navigate.replace('/login');
 		}
+
+		navigate.replace('/login');
 	};
 
 	return <SpinContainer>

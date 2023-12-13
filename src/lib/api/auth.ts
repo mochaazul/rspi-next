@@ -50,3 +50,11 @@ export const verifyEmail = async (token: string) => {
 
 	return verifyRes;
 };
+
+export const verifyResetToken = (token: string) => {
+	return fetcher<any>('verifyResetToken', { query: { token } });
+};
+
+export const verifyChangeEmail = (token: string) => {
+	return fetcher<any>('verifyChangeEmailToken', { query: { token } });
+};
