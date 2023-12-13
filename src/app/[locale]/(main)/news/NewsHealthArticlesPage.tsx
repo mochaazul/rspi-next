@@ -22,6 +22,7 @@ import { NewsHealthArticlesStyle } from './styles';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import { fetchArticle } from './helpers';
 import { useScopedI18n } from '@/locales/client';
+import Link from 'next/link';
 
 const NewsHealthArticlesPage = ({
 	articles,
@@ -60,7 +61,7 @@ const NewsHealthArticlesPage = ({
 				keyword: keyArticle,
 				with_healthfirst: tabData[activeTab]?.value === 'healthfirst'
 			}
-		}).then(function (response: any) {
+		}).then(function(response: any) {
 			setArticlesData(response.data);
 			setLoading(false);
 		});
@@ -122,32 +123,33 @@ const NewsHealthArticlesPage = ({
 									<div
 										key={ Object.values(articlesData || [])[0]?.slug }
 										className='w-[540px] mr-[32px] cursor-pointer magazine relative'
-										onClick={ () => navigate.push(`${ pathname }/${ Object.values(articlesData || [])[0]?.slug }`) }
 									>
 										<div className='relative'>
 											<Share />
 										</div>
-										<img
-											className='rounded-[10px] img-thumbnail-magazine'
-											src={ Object.values(articlesData || [])[0]?.img_url }
-										/>
-										<div className='mt-[30px] mb-[10px] flex items-center'>
-											<div className='btn-category'>
-												{ Object.values(articlesData || [])[0]?.category.charAt(0).toUpperCase() + Object.values(articlesData || [])[0].category.slice(1) }
+										<Link href={ `${ pathname }/${ Object.values(articlesData || [])[0]?.slug }` } >
+											<img
+												className='rounded-[10px] img-thumbnail-magazine'
+												src={ Object.values(articlesData || [])[0]?.img_url }
+											/>
+											<div className='mt-[30px] mb-[10px] flex items-center'>
+												<div className='btn-category'>
+													{ Object.values(articlesData || [])[0]?.category.charAt(0).toUpperCase() + Object.values(articlesData || [])[0].category.slice(1) }
+												</div>
+												<div className='ml-[10px]'>
+													<Text
+														fontSize='14px'
+														fontWeight='400'
+														lineHeight='17px'
+														color={ colors.grey.dark }
+														text={ moment(Object.values(articlesData || [])[0]?.posted_date).format('dddd, DD MMM YYYY') }
+													/>
+												</div>
 											</div>
-											<div className='ml-[10px]'>
-												<Text
-													fontSize='14px'
-													fontWeight='400'
-													lineHeight='17px'
-													color={ colors.grey.dark }
-													text={ moment(Object.values(articlesData || [])[0]?.posted_date).format('dddd, DD MMM YYYY') }
-												/>
-											</div>
-										</div>
-										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ Object.values(articlesData || [])[0]?.title } lineHeight='28px' />
-										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ Object.values(articlesData || [])[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
-										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px]' dangerouslySetInnerHTML={ { __html: Object.values(articlesData || [])[0]?.short_description } } />
+											<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ Object.values(articlesData || [])[0]?.title } lineHeight='28px' />
+											<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ Object.values(articlesData || [])[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
+											<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px]' dangerouslySetInnerHTML={ { __html: Object.values(articlesData || [])[0]?.short_description } } />
+										</Link>
 									</div>
 									<div className='mb-3'>
 										{
@@ -160,7 +162,7 @@ const NewsHealthArticlesPage = ({
 														<div className='relative'>
 															<Share id={ data.id } />
 														</div>
-														<div onClick={ () => navigate.push(`${ pathname }/${ data?.slug }`) } style={ { zIndex: '-999 !important' } }>
+														<Link href={ `${ pathname }/${ data?.slug }` } style={ { zIndex: '-999 !important' } }>
 															<CardNews
 																id={ data.id }
 																title={ data.title }
@@ -169,7 +171,7 @@ const NewsHealthArticlesPage = ({
 																date={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
 																author={ data?.news_author?.doctor_name }
 															/>
-														</div>
+														</Link>
 													</div>
 												))
 										}
