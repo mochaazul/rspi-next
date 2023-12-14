@@ -70,13 +70,22 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 		{ url: '#', name: facilitiesServiceData?.find((facility: FacilityServicesDetail) => facility.slug === paramsSlug)?.name ?? '' }
 	];
 
+	const facilitiesMenu = facilitiesServiceData?.map(facility => ({
+		name: facility?.name ?? '',
+		slug: facility?.slug ?? ''
+	}));
+
 	const renderContent = () => {
 		if (paramsSlug === 'medical-specialities') {
 			return (
 				<MedicalSpecialitiesComponent
 					paramsSlug={ paramsSlug }
-					facilityData={ facilitiesServiceData }
-					medicalSpecialities={ medicalSpecialities }
+					facilityData={ facilitiesMenu }
+					medicalSpecialities={ medicalSpecialities?.map(medspec => ({
+						id: medspec.id,
+						title: medspec.title,
+						slug: medspec.slug
+					})) }
 				/>
 			);
 		}
@@ -93,7 +102,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='content-wrapper mt-[25px] md:mt-16 flex md:gap-5 lg:gap-8'>
 						<div className='leftSide hidden md:block lg:w-[349px]'>
-							<CardMenu paramsSlug={ paramsSlug } data={ facilitiesServiceData } />
+							<CardMenu paramsSlug={ paramsSlug } data={ facilitiesMenu } />
 						</div>
 						<div className='rightSide w-full'>
 							{ renderContent() }

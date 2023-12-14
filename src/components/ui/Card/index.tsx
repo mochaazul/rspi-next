@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import * as Icons from 'react-feather';
 
-import { colors } from '@/constant';
+import { colors, icons } from '@/constant';
 import Text from '../Text';
 
 import {
@@ -17,8 +17,8 @@ import {
 } from './style';
 
 import Image from 'next/image';
-import { Share } from '@/components/ui';
-import { icons } from '@/constant';
+import Share from '../Share';
+import TextHtml from '../TextHtml';
 
 interface PropsType {
 	image?: string;
@@ -119,7 +119,7 @@ export const CardContentWithInner = ({ title, description, author, RSLocation }:
 			</div>
 		}
 		<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ author } className='mt-[5px] mb-[2px] max-sm:!text-xs' lineHeight='24px' />
-		<div className='innerHTML text-xs max-sm:leading-[18px] sm:text-sm md:text-base mt-[10px]' style={ { color: colors.grey.dark } } dangerouslySetInnerHTML={ { __html: description } } />
+		<TextHtml className='innerHTML text-xs max-sm:leading-[18px] sm:text-sm md:text-base mt-[10px]' style={ { color: colors.grey.dark } } htmlStr={ description ?? '' } />
 	</CardContentHTML>
 );
 

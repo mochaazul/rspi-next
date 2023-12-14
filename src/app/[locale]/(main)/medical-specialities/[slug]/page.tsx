@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { colors } from '@/constant';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
+import TextHtml from '@/components/ui/TextHtml';
 import CustomCarousel from '@/components/ui/Carousel';
 import { getMedicalSpecialityDetail } from '@/lib/api/facilities';
 import { getScopedI18n } from '@/locales/server';
@@ -65,10 +66,9 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 					) }
 			</div>
 			<div className='mt-8 md:mt-12'>
-				<div
-					style={ { lineHeight: '24px', fontSize: '16px' } }
-					className='innerHTML'
-					dangerouslySetInnerHTML={ { __html: detail?.content || '' } }
+				<TextHtml
+					className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
+					htmlStr={ detail?.content || '' }
 				/>
 			</div>
 		</div>

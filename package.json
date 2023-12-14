@@ -19,6 +19,7 @@
     "dayjs": "^1.11.10",
     "formik": "^2.4.5",
     "html-react-parser": "^5.0.6",
+    "isomorphic-dompurify": "^1.12.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "next": "^14.0.2",

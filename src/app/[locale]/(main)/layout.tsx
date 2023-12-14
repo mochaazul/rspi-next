@@ -34,24 +34,51 @@ export default async function RootLayout({
 	const footers = await footersFetch();
 	const centerOfExcellence = await centerOfExcellenceFetch();
 	const facilityServices = await facilityServicesFetch();
+	const footerData = footers.data?.map(footer => ({
+		title: footer.title,
+		slug: footer.slug,
+		footer_category: footer.footer_category
+	}));
+	const hospitalData = hospitals.data?.map(hospital => ({
+		slug: hospital.slug,
+		img_url: hospital.img_url,
+		name: hospital.name,
+		address: hospital.address,
+		phone: hospital.phone,
+		id: hospital.id,
+		hospital_code: hospital.hospital_code
+	}));
+	const centerOfExcellenceData = centerOfExcellence?.data?.map(coe => ({
+		img_url: coe.img_url,
+		slug: coe.slug,
+		title: coe.title
+	}));
+	const facilityServicesData = facilityServices?.data?.map(facility => ({
+		slug: facility.slug,
+		image_url: facility.image_url,
+		name: facility.name
+	}));
 
 	return (
 		<>
 			<Header
 				session={ session }
-				hospitalData={ hospitals.data }
-				centerOfExcellenceData={ centerOfExcellence.data }
-				facilityServicesData={ facilityServices.data }
+				hospitalData={ hospitalData }
+				centerOfExcellenceData={ centerOfExcellenceData }
+				facilityServicesData={ facilityServicesData }
 				marAllReadNotifFunc={ marAllReadNotif }
 			/>
 			{ children }
 			{
 				props?.footerShow !== false &&
-				<Footer footerData={ footers.data } hospitalData={ hospitals.data } />
+				<Footer
+					footerData={ footerData }
+					hospitalData={ hospitalData }
+				/>
 			}
 			{
 				props?.footerShow !== false &&
-				<CallForAmbulance hospitalData={ hospitals.data } session={ session } />
+				<CallForAmbulance hospitalData={ hospitalData } session={ session } />
 			}
 			{
 				appStage !== 'prod' &&
