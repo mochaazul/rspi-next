@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import moment from 'moment';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 import { ArticleState, Pagination } from '@/interface';
 import { colors } from '@/constant';
@@ -41,6 +42,7 @@ const NewsHealthArticlesPage = ({
 
 	const pathname = usePathname();
 	const navigate = useRouter();
+	const searchParam = useSearchParams()!;
 	const t = useScopedI18n('page.news');
 
 	const tabData = [
@@ -76,6 +78,9 @@ const NewsHealthArticlesPage = ({
 		setPageNumber(1);
 		setKeyArticle('');
 		setActiveTab(idx);
+
+		// const callbackUrl = decodeURIComponent(searchParam.get('callbackUrl') ?? '/');
+		// navigate.push(callbackUrl);
 	};
 
 	return (
@@ -96,14 +101,14 @@ const NewsHealthArticlesPage = ({
 						<div className='flex justify-between max-sm:flex-col'>
 							<div className='flex flex-row mt-[31px] gap-4 items-center xs:grid-cols-1 max-sm:justify-between max-sm:grid-cols-2 max-sm:grid'>
 								{ tabData.map((tab, idx) => (
-									<div key={ idx }>
+									<Link href={ idx > 0 ? `/news?category=${ tab.value }` : '/news' } key={ idx }>
 										<Button
 											theme={ activeTab === idx ? 'primary' : 'secondary' }
 											$hoverTheme={ activeTab === idx ? 'secondary' : 'primary' }
 											label={ tab.label }
 											onClick={ () => clickTabs(idx) }
 										/>
-									</div>
+									</Link>
 								)) }
 							</div>
 							<div className='mt-[31px] w-[349px]'>
