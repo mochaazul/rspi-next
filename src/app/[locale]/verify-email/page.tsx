@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import SpinVerification from '@/components/ui/SpinVerification';
 import { cookiesHelper } from '@/helpers';
-import useSession from '@/session/client';
 import { useVerifyChangeEmailToken } from '@/lib/api/client/auth';
 
 const ResetEmailPage = () => {
@@ -17,13 +16,7 @@ const ResetEmailPage = () => {
 
 	const { trigger: verifyChangeEmail } = useVerifyChangeEmailToken();
 
-	const session = useSession();
-
-	useEffect(() => {
-		hasToken();
-	}, []);
-
-	const hasToken = async() => {
+	const hasToken = async () => {
 		try {
 			if (!searchParams.get('token')) return navigate.replace('/login');
 
@@ -35,7 +28,9 @@ const ResetEmailPage = () => {
 
 			setVerificationStatus('success');
 
-			if (session?.isAuthenticated) {
+			const accessToken = await cookiesHelper.getToken();
+
+			if (accessToken) {
 				await cookiesHelper.clearStorage();
 			}
 			// need timeout to wait for animation
@@ -49,6 +44,10 @@ const ResetEmailPage = () => {
 		}
 		// redirect to login page if user manualy navigate to this page
 	};
+
+	useEffect(() => {
+		hasToken();
+	}, []);
 
 	if (!tokenVerified)
 		return <SpinVerification status={ verificationStatus } />;
