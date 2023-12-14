@@ -31,6 +31,9 @@ export default {
 			subHeading: 'Please select hospital: '
 		}
 	},
+	blacklist: {
+		contactUs: 'Contact Us',
+	},
 	modalDialog: {
 		pin: {
 			header: 'Enter PIN',
