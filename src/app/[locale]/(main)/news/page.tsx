@@ -4,9 +4,18 @@ import { getScopedI18n } from '@/locales/server';
 
 import NewsHealthArticlesPage from './NewsHealthArticlesPage';
 
-const News = async () => {
-
-	const articles = await getArticle();
+const News = async ({ searchParams }: any) => {
+	const articles = await getArticle({
+		query: {
+			limit: '10',
+			// page: `${ pageNumber }`,
+			page: 1,
+			is_publish: 'true',
+			category: searchParams.category ?? '',
+			keyword: searchParams.keyword ?? '',
+			with_healthfirst: searchParams.category === 'healthfirst'
+		}
+	});
 	const t = await getScopedI18n('page.news');
 
 	return (
