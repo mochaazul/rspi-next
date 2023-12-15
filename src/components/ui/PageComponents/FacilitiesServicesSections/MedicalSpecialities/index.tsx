@@ -108,7 +108,13 @@ const MedicalSpecialitiesComponent = ({
 
 	return (
 		<div>
-			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
+			<Text
+				fontSize='24px'
+				fontWeight='900'
+				color={ colors.paradiso.default }
+				subClassName='max-md:!text-base'
+				fontType='h1'
+			>
 				{ t('heading') }
 			</Text>
 

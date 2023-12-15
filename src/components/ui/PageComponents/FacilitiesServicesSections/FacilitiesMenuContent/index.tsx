@@ -30,6 +30,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 				fontWeight='900'
 				color={ colors.paradiso.default }
 				subClassName='max-md:!text-base'
+				fontType='h1'
 			>
 				{ getContent()?.name }
 			</Text>

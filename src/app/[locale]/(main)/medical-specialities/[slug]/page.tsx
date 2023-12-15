@@ -42,7 +42,13 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 
 	const renderContent = (
 		<div className='w-full'>
-			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
+			<Text
+				fontType='h1'
+				fontSize='24px'
+				fontWeight='900'
+				color={ colors.paradiso.default }
+				subClassName='max-md:!text-base'
+			>
 				{ detail?.title }
 			</Text>
 
