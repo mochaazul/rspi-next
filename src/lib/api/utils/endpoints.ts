@@ -27,6 +27,7 @@ const endpointData = {
 	checkPin: { path: '/patients/pin', method: 'POST' },
 	checkPatientPhone: { path: '/patients/check-patient-phone', method: 'POST' },
 	doctorRating: { path: '/patients/patient-portal/patient-review', method: 'POST' },
+	checkBlacklist: { path: '/patients/check-blacklist', method: 'POST' },
 
 	// PUT
 	updatePassword: { path: '/patients/update-password', method: 'PUT' },

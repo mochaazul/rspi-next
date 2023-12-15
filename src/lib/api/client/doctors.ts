@@ -5,6 +5,7 @@ import useSWRMutation from 'swr/mutation';
 import { DoctorCalendar, FindDoctorDetail, I_MasterDoctor, TimeSlot } from '@/interface';
 
 import fetcher, { ApiOptions } from '../utils/fetcher';
+import { BlacklistPayload, BlacklistResponse } from '@/interface/Book';
 
 export const useGetDoctors = (options?: ApiOptions) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -33,4 +34,8 @@ export const useGetDoctorSlot = (options?: ApiOptions) => {
 
 export const usePostDoctorRatingMutation = (options?: ApiOptions) => {
 	return useSWRMutation('doctorRating', (key, { arg }: { arg: any; }) => fetcher<any>('doctorRating', { ...options, body: arg }));
+};
+
+export const useCheckBlacklist = (options?: ApiOptions) => {
+	return useSWRMutation('checkBlacklist', (key, { arg }: { arg: BlacklistPayload; }) => fetcher<BlacklistResponse>('checkBlacklist', { ...options, body: arg }));
 };

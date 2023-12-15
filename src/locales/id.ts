@@ -31,6 +31,9 @@ export default {
 			subHeading: 'Silahkan pilih Rumah sakit: '
 		}
 	},
+	blacklist: {
+		contactUs: 'Hubungi kami',
+	},
 	gender: {
 		male: 'Laki-laki',
 		female: 'Perempuan'

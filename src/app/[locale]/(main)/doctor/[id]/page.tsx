@@ -14,13 +14,15 @@ import Button from '@/components/ui/Button';
 import NeedLoginModal from '@/components/ui/NeedLoginModal';
 import { Images, colors } from '@/constant';
 import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
-import { useScopedI18n } from '@/locales/client';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { useRouter } from 'next/navigation';
 import VisitSchedule from './sections/VisitSchedule';
 import { TimeSlot } from '@/interface';
 import { useGetHospital } from '@/lib/api/client/hospital';
-import { useGetDoctorCalendar, useGetDoctorDetail, useGetDoctorSlot } from '@/lib/api/client/doctors';
+import { useCheckBlacklist, useGetDoctorCalendar, useGetDoctorDetail, useGetDoctorSlot } from '@/lib/api/client/doctors';
 import { cookiesHelper } from '@/helpers';
+import useSession from '@/session/client';
+import BlacklistModal from '@/components/ui/BlacklistModal';
 
 type FormAppointment = {
 	clinic: string,
@@ -37,7 +39,7 @@ type Props = {
 export default function Page({ params }: Props) {
 
 	const t = useScopedI18n('page.doctorProfile');
-
+	const lang = useCurrentLocale();
 	const router = useRouter();
 
 	const [selectedHospital, setSelectedHospital] = useState<string>('');
@@ -49,10 +51,15 @@ export default function Page({ params }: Props) {
 
 	const [calendarMonth, setCalendarMonth] = useState<Dayjs>(dayjs());
 	const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
+	const [blacklistModalVisible, setBlacklistModalVisible] = useState<boolean>(false);
 
 	const { data: hospital, isLoading: hospitalLoading } = useGetHospital();
 
 	const { data: doctor, isLoading, error: doctorError } = useGetDoctorDetail({ param: params.id });
+
+	const { data: blacklistResponse, isMutating: blacklistLoading, trigger: checkBlacklist, error: blacklistError } = useCheckBlacklist();
+
+	const [blacklistMsg, setBlacklistMsg] = useState<string>('');
 
 	const { data: doctorCalendar, isLoading: doctorCalendarLoading } = useGetDoctorCalendar(
 		calendarMonth.format('YYYY-MM-DD'),
@@ -122,16 +129,32 @@ export default function Page({ params }: Props) {
 		return '';
 	};
 
-	const onBookHandler = async () => {
-		const token = await cookiesHelper.getToken();
+	const onBookHandler = async() => {
+		try {
+			const token = await cookiesHelper.getToken();
+			const userData = await cookiesHelper.getUserData();
+			if (!token) {
+				return setLoginModalVisible(true);
+			}
+			const res = await checkBlacklist({
+				doctor_code: params.id,
+				hospital_code: selectedHospital,
+				mr_number: (userData?.no_mr || userData?.medical_record || userData?.patient_id_rspi) ?? ''
+			});
 
-		if (!token) {
-			return setLoginModalVisible(true);
-		}
-
-		if (selectedTimeSlot?.slot_id) {
-			const bookAppointmentUrl = getBookAppointmentUrl();
-			router.push(bookAppointmentUrl);
+			if (res.data.is_blacklist) {
+				
+				const msg = lang === 'id' ? res.data.description_id : res.data.description_en;
+				setBlacklistMsg(msg);
+				return setBlacklistModalVisible(true);
+			}
+			
+			if (selectedTimeSlot?.slot_id) {
+				const bookAppointmentUrl = getBookAppointmentUrl();
+				router.push(bookAppointmentUrl);
+			}
+		} catch (error) {
+			console.log('here', error);
 		}
 	};
 
@@ -272,7 +295,9 @@ export default function Page({ params }: Props) {
 									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
 									onClick={ onBookHandler }
 									disabled={ !selectedTimeSlot }
-								/>
+								>
+									{ blacklistLoading ? <span className='spinner-loader'/> : t('form.btnLabel.submit') }
+								</Button>
 							</div>
 						</div>
 					</>
@@ -282,6 +307,12 @@ export default function Page({ params }: Props) {
 				toggler={ setLoginModalVisible }
 				onClose={ () => setLoginModalVisible(false) }
 				callbackUrl={ getBookAppointmentUrl() }
+			/>
+			<BlacklistModal
+				visible={ blacklistModalVisible }
+				toggler={ setBlacklistModalVisible }
+				onClose={ () => { setBlacklistModalVisible(false); } }
+				msg={ blacklistMsg }
 			/>
 		</DoctorProfileStyle>
 	);
