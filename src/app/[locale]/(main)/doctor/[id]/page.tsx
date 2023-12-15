@@ -41,7 +41,6 @@ export default function Page({ params }: Props) {
 	const t = useScopedI18n('page.doctorProfile');
 	const lang = useCurrentLocale();
 	const router = useRouter();
-	const { user, token } = useSession();
 
 	const [selectedHospital, setSelectedHospital] = useState<string>('');
 	const [selectedHospitalPhoneNumber, setSelectedHospitalPhoneNumber] = useState<string>('');
