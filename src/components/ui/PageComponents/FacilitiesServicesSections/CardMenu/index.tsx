@@ -1,7 +1,3 @@
-'use client';
-
-import { PropsWithChildren, PropsWithRef } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import { colors } from '@/constant';
@@ -9,13 +5,12 @@ import { FacilityServicesDetail } from '@/interface';
 
 import Text from '../../../Text';
 
-type Props = PropsWithRef<PropsWithChildren<{
-	data: FacilityServicesDetail[],
+type Props = {
+	data: FacilityServicesDetail[];
 	paramsSlug: string;
-}>>;
+};
 
 const CardMenu = ({ data, paramsSlug }: Props) => {
-	const navigate = useRouter();
 	return (
 		<div className='cardMenu p-4 sm:p-6 flex flex-col gap-y-2 md:gap-y-[15px]'>
 			{ data.map((item, index) => {

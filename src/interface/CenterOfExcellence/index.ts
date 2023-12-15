@@ -33,6 +33,7 @@ export interface CenterOfExcellenceDetail {
 	category?: string;
 	posted_date?: string;
 	author?: string;
+	available_at?: string[];
 }
 
 export interface PayloadCenterCenterOfExcellence {

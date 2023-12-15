@@ -8,6 +8,7 @@ import CardMenu from '../CardMenu';
 
 import Text from '../../../Text';
 import CustomCarousel from '../../../Carousel';
+import TextHtml from '../../../TextHtml';
 
 type Props = {
 	facilitiesData: FacilityServicesDetail[];
@@ -29,6 +30,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 				fontWeight='900'
 				color={ colors.paradiso.default }
 				subClassName='max-md:!text-base'
+				fontType='h1'
 			>
 				{ getContent()?.name }
 			</Text>
@@ -54,12 +56,18 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 				</CustomCarousel>
 			</div>
 			<div className='mt-4 md:hidden w-full'>
-				<CardMenu paramsSlug={ paramsSlug } data={ facilitiesData } />
+				<CardMenu
+					paramsSlug={ paramsSlug }
+					data={ facilitiesData?.map(facility => ({
+						name: facility?.name ?? '',
+						slug: facility?.slug ?? ''
+					})) }
+				/>
 			</div>
 			<div className='mt-[50px] md:mt-12'>
-				<div
+				<TextHtml
+					htmlStr={ getContent()?.information || '' }
 					className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
-					dangerouslySetInnerHTML={ { __html: getContent()?.information || '' } }
 				/>
 			</div>
 			{ /* <Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineHeight='24px'>
@@ -74,9 +82,12 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 								return (
 									<div className='flex flex-col mt-[16px]' key={ index }>
 										<Text fontSize='18px' fontWeight='900' lineHeight='24px'>
-											{ data?.split(':+split+:')[0] }
+											{ data?.split(':+split+:')?.[0] }
 										</Text>
-										<div className='innerHTML text-16 mt-[10px]' dangerouslySetInnerHTML={ { __html: data?.split(':+split+:')[1] } } />
+										<TextHtml
+											htmlStr={ data?.split(':+split+:')?.[1] || '' }
+											className='innerHTML text-16 mt-[10px]'
+										/>
 									</div>
 								);
 						})
