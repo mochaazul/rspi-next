@@ -34,7 +34,7 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
 	
 	const [resetSearchDoctor, setResetSearchDoctor] = useState(false);
-	
+
 	const t = useScopedI18n('page.findDoctor');
 	
 	const searchParams = useSearchParams();
@@ -119,6 +119,12 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 		}
 		return 0;
 	};
+	
+	useEffect(() => {
+		if (!doctorResponse) {
+			setSize(size);
+		};
+	}, [doctorResponse]);
 
 	const hasMore = () => {
 		return doctorCount() > size;
