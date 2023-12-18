@@ -17,17 +17,17 @@ const Promo = async ({ searchParams }: any) => {
 
 	const dataEvent = getEvent?.data?.map(event => ({
 		id: event?.id,
-		img_url_card: event?.img_url_card,
-		title: event?.title,
-		short_description: event?.short_description,
-		slug: event?.slug,
+		img_url_card: event?.img_url_card ?? '',
+		title: event?.title ?? '',
+		short_description: event?.short_description ?? '',
+		slug: event?.slug ?? '',
 	}));
 
 	const getHospital = await getHospitals();
 
 	const hospitals = getHospital?.data?.map(hospital => ({
 		id: hospital?.id,
-		name: hospital?.name,
+		name: hospital?.name ?? '',
 	}));
 
 	const t = await getScopedI18n('page.promoPage');

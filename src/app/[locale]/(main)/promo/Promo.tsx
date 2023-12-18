@@ -147,7 +147,7 @@ const EventClassesPromo = ({
 										key={ index }
 										image={ data.img_url_card }
 										imageHeight='200px'
-										content={ <CardContent title={ data.title } description={ data.short_description } /> }
+										content={ <CardContent title={ data?.title ?? '' } description={ data?.short_description ?? '' } /> }
 										footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
 										className='mb-0'
 										to={ `/promo/${ data.slug }` }
