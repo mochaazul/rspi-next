@@ -8,8 +8,7 @@ const News = async ({ searchParams }: any) => {
 	const articles = await getArticle({
 		query: {
 			limit: '10',
-			// page: `${ pageNumber }`,
-			page: 1,
+			page: searchParams.page ?? '',
 			is_publish: 'true',
 			category: searchParams.category ?? '',
 			keyword: searchParams.keyword ?? '',

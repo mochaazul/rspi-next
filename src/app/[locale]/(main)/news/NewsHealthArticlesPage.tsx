@@ -55,6 +55,12 @@ const NewsHealthArticlesPage = ({
 		setKeywordSearch('');
 	};
 
+	const clickPagination = (page: number) => {
+		setPageNumber(page);
+		params.set('page', page.toString());
+		navigate.push(`${ pathname }?${ params.toString() }`);
+	};
+
 	return (
 		<NewsHealthArticlesStyle>
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px] animate-slideDownToUp '>
@@ -245,7 +251,7 @@ const NewsHealthArticlesPage = ({
 					</div>
 
 					<div className='mt-[50px] flex flex-col items-center'>
-						<PaginationNumber totalPage={ pagination?.total_page || 1 } currentPage={ pageNumber } onItemClick={ page => setPageNumber(page) } />
+						<PaginationNumber totalPage={ pagination?.total_page || 1 } currentPage={ pageNumber } onItemClick={ page => clickPagination(page) } />
 					</div>
 				</div>
 			</div>
