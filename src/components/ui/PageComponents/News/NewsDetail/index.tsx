@@ -133,12 +133,16 @@ const NewsDetail = ({
 							{
 								filteredSelectedArticle?.news_author?.doctor_name ?
 									<Text
-										text={ `${ t('oleh') } ${ filteredSelectedArticle?.news_author?.doctor_name }` }
 										fontWeight='400'
 										fontSize='18px'
 										lineHeight='22px'
 										color={ colors.grey.dark }
-									/>
+									>
+										<span>{ t('oleh') }{ ' ' }</span>
+										<Link href={ `/doctor/${ filteredSelectedArticle?.author }` } className='hover:underline'>
+											<span>{ filteredSelectedArticle?.news_author?.doctor_name }</span>
+										</Link>
+									</Text>
 									: <></>
 							}
 
@@ -249,14 +253,16 @@ const NewsDetail = ({
 										{ Object.values(specialty || [])?.map((specialty, index) => {
 											return (
 												<div key={ index }>
-													<Text
-														text={ specialty.fullname_doctor }
-														className='py-[10px]'
-														fontSize='14px'
-														fontWeight='900'
-														lineHeight='24px'
-														color={ colors.grey.darker }
-													/>
+													<Link href={ `/doctor/${ specialty.doctor_code }` } className='hover:underline'>
+														<Text
+															text={ specialty.fullname_doctor }
+															className='py-[10px]'
+															fontSize='14px'
+															fontWeight='900'
+															lineHeight='24px'
+															color={ colors.grey.darker }
+														/>
+													</Link>
 													<Text
 														text={ specialty.speciality }
 														className='pb-[10px]'
