@@ -5,7 +5,7 @@ import { getScopedI18n } from '@/locales/server';
 import {
 	getNewsSpecialtyByID,
 	getRelatedNews,
-	getArticleById
+	getArticleBySlug
 } from '@/lib/api';
 
 import NewsDetail from '@/components/ui/PageComponents/News/NewsDetail';
@@ -13,12 +13,11 @@ import NewsDetail from '@/components/ui/PageComponents/News/NewsDetail';
 const DetailNewsHealthPage = async ({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.newsDetail');
 
-	const selectedArticle = await getArticleById();
-
 	const newParam = decodeURIComponent(params?.slug);
+	const selectedArticle = await getArticleBySlug({ query: { slug: newParam } });
 
-	if (selectedArticle?.data?.filter(coe => `${ coe.slug }` === newParam).length <= 0) {
-		redirect(`/news/${ selectedArticle?.data[0]?.slug }`);
+	if (selectedArticle?.data?.filter(news => `${ news.slug }` === newParam).length <= 0) {
+		redirect(`/news`);
 	};
 
 	const filteredSelectedArticle = selectedArticle?.data?.find(coe => {

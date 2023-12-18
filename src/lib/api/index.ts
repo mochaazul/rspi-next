@@ -82,7 +82,7 @@ export const getNewsSpecialtyByID = (param?: ApiOptions) => {
 	return fetcher<ArticleState['specialty']>('getNewsSpecialtyByID', param);
 };
 
-export const getArticleById = (param?: ApiOptions) => {
+export const getArticleBySlug = (param?: ApiOptions) => {
 	return fetcher<ArticleDetail[]>('getNews', param);
 };
 
