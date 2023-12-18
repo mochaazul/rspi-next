@@ -50,7 +50,7 @@ const LoginPage = () => {
 			email: '',
 			password: ''
 		},
-		onSubmit: async (formLogin: LoginType) => {
+		onSubmit: async(formLogin: LoginType) => {
 			try {
 				setLoadingSubmit(true);
 
@@ -62,8 +62,10 @@ const LoginPage = () => {
 					setLoadingNavigate(true);
 
 					if (searchParam.get('callbackUrl')) {
-						const callbackUrl = decodeURIComponent(searchParam.get('callbackUrl') ?? '/');
-						navigate.replace(callbackUrl);
+						// TODO: To be removed since there is blacklist checking on doctor profile
+						// this callback url can be used a way to bypass blacklist checking
+						// const callbackUrl = decodeURIComponent(searchParam.get('callbackUrl') ?? '/');
+						navigate.back();
 					} else if (searchParam.get('ref') === 'unauthorized') { // handle route based on ref
 						navigate.back();
 					} else {
@@ -131,7 +133,7 @@ const LoginPage = () => {
 		setNotifVisible(false);
 	};
 
-	const handleResendEmailVerification = async () => {
+	const handleResendEmailVerification = async() => {
 		try {
 			initErrorNotif();
 			await requestVerifyEmail({ email: formik.values.email });
@@ -195,13 +197,13 @@ const LoginPage = () => {
 					max-md:py-6 max-md:px-4
 					md:p-8 min-h-screen flex flex-col items-center md:justify-center max-md:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
 					` }
-						onSubmit={ (e: React.SyntheticEvent) => {
-							e.preventDefault();
-							initErrorNotif();
-							setEnableValidation(true);
-							formik.handleSubmit();
-						} }
-						autoComplete='off'
+					onSubmit={ (e: React.SyntheticEvent) => {
+						e.preventDefault();
+						initErrorNotif();
+						setEnableValidation(true);
+						formik.handleSubmit();
+					} }
+					autoComplete='off'
 					>
 						<div className='w-full'>
 							<div className='hidden md:flex mb-2 xl:mb-8'>
