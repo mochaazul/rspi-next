@@ -18,7 +18,6 @@ import { promoPageEvent } from '@/utils/metaPixelTrack';
 import { useScopedI18n } from '@/locales/client';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 
-import { fetchEvents } from './helpers';
 import { EventClassesPromoStyle } from './style';
 import { PanelH1 } from '../style';
 
