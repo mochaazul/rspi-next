@@ -1,27 +1,43 @@
 
 import { getHospitals, } from '@/lib/api';
 import { getScopedI18n } from '@/locales/server';
-
+import { getAllEvents } from '@/lib/api/events';
 import EventClassesPromo from './Promo';
-import { fetchEvents } from './helpers';
 
-const Promo = async() => {
-	const dataEvent = await fetchEvents({
-		page: 1,
-		limit: 10,
-		category: '',
-		hospital_id: ''
+const Promo = async ({ searchParams }: any) => {
+	
+	const getEvent = await getAllEvents({
+		query: {
+			limit: 10,
+			page: searchParams?.page ?? 1,
+			category: searchParams?.category ?? '',
+			hospital_id: searchParams?.hospital_id ?? '',
+		}
 	});
 
-	const hospitals = await getHospitals();
+	const dataEvent = getEvent?.data?.map(event => ({
+		id: event?.id,
+		img_url_card: event?.img_url_card ?? '',
+		title: event?.title ?? '',
+		short_description: event?.short_description ?? '',
+		slug: event?.slug ?? '',
+	}));
+
+	const getHospital = await getHospitals();
+
+	const hospitals = getHospital?.data?.map(hospital => ({
+		id: hospital?.id,
+		name: hospital?.name ?? '',
+	}));
+
 	const t = await getScopedI18n('page.promoPage');
 
 	return (
 		<EventClassesPromo
-			hospitalSelector={ hospitals?.data }
+			hospitalSelector={ hospitals }
 			breadcrumbsPath={ [{ name: t('heading'), url: '/promo' }] }
-			events={ dataEvent?.data }
-			pagination={ dataEvent?.pagination }
+			events={ dataEvent }
+			pagination={ getEvent?.pagination }
 		/>
 	);
 };
