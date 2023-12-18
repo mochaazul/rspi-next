@@ -61,7 +61,11 @@ const EventClassesPromo = ({
 	};
 
 	const filterHospitalID = (id: string) => {
-		params.set('hospital_id', id);
+		if (id === '') {
+			params.delete('hospital_id');
+		} else {
+			params.set('hospital_id', id);
+		}
 		navigate.push(`${ pathname }?${ params.toString() }`);
 	};
 	
