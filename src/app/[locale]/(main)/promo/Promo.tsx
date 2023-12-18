@@ -21,6 +21,19 @@ import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import { EventClassesPromoStyle } from './style';
 import { PanelH1 } from '../style';
 
+type DataEventProps = {
+	id: number;
+	img_url_card?: string;
+	title?: string;
+	short_description?: string;
+	slug?: string;
+}
+
+type DataHospitalProps = {
+	id: number;
+	name?: string;
+}
+
 const EventClassesPromo = ({
 	hospitalSelector,
 	breadcrumbsPath,
@@ -28,8 +41,8 @@ const EventClassesPromo = ({
 	pagination
 }: {
 	breadcrumbsPath: BreadcrumbsType['datas'],
-	hospitalSelector: HospitalDetail[],
-	events: EventClassesState['events'],
+	hospitalSelector: DataHospitalProps[],
+	events: DataEventProps[],
 	pagination: Pagination,
 }) => {
 	const t = useScopedI18n('page.promoPage');

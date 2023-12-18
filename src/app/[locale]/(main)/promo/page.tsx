@@ -6,7 +6,7 @@ import EventClassesPromo from './Promo';
 
 const Promo = async ({ searchParams }: any) => {
 	
-	const dataEvent = await getAllEvents({
+	const getEvent = await getAllEvents({
 		query: {
 			limit: 10,
 			page: searchParams?.page ?? 1,
@@ -15,15 +15,29 @@ const Promo = async ({ searchParams }: any) => {
 		}
 	});
 
-	const hospitals = await getHospitals();
+	const dataEvent = getEvent?.data?.map(event => ({
+		id: event?.id,
+		img_url_card: event?.img_url_card,
+		title: event?.title,
+		short_description: event?.short_description,
+		slug: event?.slug,
+	}));
+
+	const getHospital = await getHospitals();
+
+	const hospitals = getHospital?.data?.map(hospital => ({
+		id: hospital?.id,
+		name: hospital?.name,
+	}));
+
 	const t = await getScopedI18n('page.promoPage');
 
 	return (
 		<EventClassesPromo
-			hospitalSelector={ hospitals?.data }
+			hospitalSelector={ hospitals }
 			breadcrumbsPath={ [{ name: t('heading'), url: '/promo' }] }
-			events={ dataEvent?.data }
-			pagination={ dataEvent?.pagination }
+			events={ dataEvent }
+			pagination={ getEvent?.pagination }
 		/>
 	);
 };
