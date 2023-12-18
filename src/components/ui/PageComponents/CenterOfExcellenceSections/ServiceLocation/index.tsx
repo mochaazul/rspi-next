@@ -22,8 +22,6 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 
-	console.log(content?.doctors, '---');
-
 	const renderContent = useMemo(() => {
 		const Contents = [];
 		Contents.push(

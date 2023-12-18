@@ -4,7 +4,7 @@ export interface ArticleState {
 	articles: ArticleDetail[];
 	selectedArticle?: ArticleDetail;
 	relatedNews: ArticleDetail[];
-	specialty: ArticleDetail[];
+	specialty: NewsSpeciality[];
 	loading: boolean;
 	error: ResponseStatus;
 	pagination: Pagination | null;
@@ -28,6 +28,17 @@ export interface ArticleDetail {
 	hospitals?: (string | number)[] | null;
 	fullname_doctor: string;
 	speciality: string;
+}
+
+export interface NewsSpeciality {
+	id: number;
+	specialty_code: string;
+	speciality: string;
+	fullname_doctor: string;
+	doctor_code: string;
+	hospitals: string[];
+	created_date?: string;
+	updated_date?: string;
 }
 export interface PayloadArticle {
 	id?: number;
