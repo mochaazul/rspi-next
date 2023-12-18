@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 
 import { CustomCarousel, Text, Tabs } from '@/components/ui';
 import { useScopedI18n } from '@/locales/client';
 import { colors } from '@/constant';
 
 import CardMenu from '../CardMenu';
-import Link from 'next/link';
 
 interface NewsProps {
 	content?: any;

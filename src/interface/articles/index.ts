@@ -40,6 +40,7 @@ export interface NewsSpeciality {
 	created_date?: string;
 	updated_date?: string;
 }
+
 export interface PayloadArticle {
 	id?: number;
 	title?: string;
