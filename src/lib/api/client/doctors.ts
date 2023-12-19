@@ -12,6 +12,7 @@ export const useGetDoctors = (options?: ApiOptions) => {
 	return useSWRInfinite(index => ['masterDoctor', options, index], ([key, apiOptions, index]) => fetcher<I_MasterDoctor[]>('masterDoctor', {
 		...apiOptions,
 		pagination: {
+			limit: 4,
 			...apiOptions?.pagination,
 			page: index + 1
 		}
