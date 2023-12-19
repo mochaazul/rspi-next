@@ -14,6 +14,10 @@ export const CardWrapper = styled.div`
   perspective: 1000px;
   margin: 32px 0;
   width: 350px;
+
+  @media screen and (max-width: 640px) {
+    margin: 24px 0;
+  }
 `;
 
 export const CardStyle = styled.div<CardStyleType>`

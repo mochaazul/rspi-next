@@ -68,13 +68,15 @@ export default async function Page() {
 					hospitals={ hospitals.data }
 					specialtys={ specialtyDropdown.data }
 				/>
-				<CentreOfExcellence data={ coeRes.data } />
-				<FacilitiesServices facilityServices={ facilitiesServices.data } />
-				<PromoPackages events={ events.data } />
-				<NewsHealthArticles articles={ articles.data } />
-				<CustomerReview />
-				<AccreditationAwards datas={ awards.data } />
-				<MobileAppBanner />
+				<div className='flex flex-col items-center justify-center w-full gap-y-12 lg:gap-y-[120px] relative mt-14 lg:mt-[62px] max-sm:pb-12'>
+					<CentreOfExcellence data={ coeRes.data } />
+					<FacilitiesServices facilityServices={ facilitiesServices.data } />
+					<PromoPackages events={ events.data } />
+					<NewsHealthArticles articles={ articles.data } />
+					<CustomerReview />
+					<AccreditationAwards datas={ awards.data } />
+					<MobileAppBanner />
+				</div>
 			</LangWrapper>
 		</LandingPageStyle>
 	);

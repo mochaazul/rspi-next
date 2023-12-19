@@ -25,6 +25,10 @@ export const LandingPageStyle = styled.div`
   .group-wrapper {
     min-height: 75px;
   }
+
+  svg.svg-green path {
+    stroke: ${ colors.paradiso.default };
+  }
 `;
 
 export const Panel = styled.div`

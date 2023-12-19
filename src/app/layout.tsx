@@ -9,7 +9,7 @@ import ProgressBar from '@/components/ui/ProgressBar';
 import '@/styles/globals.css';
 
 type Props = {
-  children: ReactNode;
+	children: ReactNode;
 };
 
 export const metadata: Metadata = {
@@ -20,15 +20,18 @@ export const metadata: Metadata = {
 const lato = Lato({
 	subsets: ['latin'],
 	fallback: ['Arial', 'sans-serif'],
-	weight: ['100', '300', '400', '700', '900']
+	weight: ['100', '300', '400', '700', '900'],
+	variable: '--font-Lato'
 });
 
 export default async function RootLayout({ children }: Props) {
 	return (
 		<html lang='en'>
-			<body className={ lato.className } suppressHydrationWarning>
+			<body className={ lato.variable } suppressHydrationWarning>
 				<StyledComponentsRegistry>
-					{ children }
+					<div className='font-Lato'>
+						{ children }
+					</div>
 					<ProgressBar />
 				</StyledComponentsRegistry>
 

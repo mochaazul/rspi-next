@@ -75,7 +75,7 @@ const Combobox = ({
 						{
 							Icons && (
 								<IconWrapper>
-									<Icons />
+									<Icons className='svg-darkgrey' />
 								</IconWrapper>
 							)
 						}

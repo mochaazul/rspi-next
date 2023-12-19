@@ -16,7 +16,7 @@ const BalloonSlider = (props: PropTypes) => {
 	return (
 		<div className='balloon-item flex flex-col items-center justify-end h-full gap-10'>
 			<BalloonItemStyle>
-				<div className='rounded-[10px] bg-white p-[20px] h-full'>
+				<div className='rounded-[10px] bg-white p-4 sm:p-5 h-full'>
 					<Text
 						fontWeight='700'
 						fontSize='20px'
@@ -32,7 +32,7 @@ const BalloonSlider = (props: PropTypes) => {
 						color={ colors.grey.dark }
 						text={ props.short_description }
 						className={ `${ props.title ? 'mt-3' : '' }` }
-						subClassName='text-center'
+						subClassName='text-center max-sm:text-xs max-sm:leading-[18px]'
 					/>
 				</div>
 			</BalloonItemStyle>
@@ -54,7 +54,7 @@ const BalloonSlider = (props: PropTypes) => {
 						lineHeight='19px'
 						color={ colors.white.default }
 						text={ props.customer_illness }
-						className='mt-2'
+						className='mt-2 max-sm:text-xs max-sm:leading-normal'
 					/>
 				</div>
 			</div>

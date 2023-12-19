@@ -198,7 +198,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 			{
 				!props.disabled && (
 					<div className={ `arrow-down ${ arrowClassName }` } onClick={ openOptionDialog }>
-						<icons.ArrowDown />
+						<icons.ArrowDown className='svg-darkgrey' />
 					</div>
 				)
 			}
