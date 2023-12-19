@@ -1,3 +1,5 @@
+'use client';
+
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -22,7 +24,8 @@ import {
 
 import { ConfirmationModalContainer } from './style';
 import DoctorProfileWidget from './DoctorProfileWidget';
-import { useScopedI18n } from '@/locales/client';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
+import { guarantorOptions } from './BookingForm';
 
 type Props = {
 	visible: boolean,
@@ -54,6 +57,7 @@ export const ConfirmationModal = ({
 
 	const navigate = useRouter();
 	const t = useScopedI18n('page.bookingAppointment.confirmationModal');
+	const currentLang = useCurrentLocale();
 
 	const [checked, setChecked] = useState<boolean>(false);
 
@@ -148,7 +152,7 @@ export const ConfirmationModal = ({
 							lineHeight='20px'
 						/>
 						<Text
-							text={ penjamin ?? '-' }
+							text={ penjamin ? guarantorOptions[currentLang][penjamin] : '-' }
 							className='capitalize'
 							fontWeight='700'
 							fontSize='14px'
