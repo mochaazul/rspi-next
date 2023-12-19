@@ -28,3 +28,19 @@ export const IconWrapper = styled.div`
   justify-content: center;
   min-width: 48px;
 `;
+
+export const ClearWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 16px;
+  background-color: ${ colors.grey.light };
+  padding: 4px;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  z-index: 200;
+  
+`;

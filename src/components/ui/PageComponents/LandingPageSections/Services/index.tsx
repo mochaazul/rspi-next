@@ -27,9 +27,9 @@ const ServicesTabs = ({
 	};
 
 	return (
-		<TabContainerStyle>
+		<TabContainerStyle className='max-sm:px-4'>
 			<div className={ `backdrop ${ isActive ? 'active' : '' }` } onClick={ toggleIsActive(false) } />
-			<TabsStyle className={ `${ isActive ? 'active' : '' }` } onClick={ toggleIsActive(true) }>
+			<TabsStyle className={ `${ isActive ? 'active' : 'top-4 lg:top-[-64px]' }` } onClick={ toggleIsActive(true) }>
 				<Tabs
 					activeTabIndex={ activeTabIndex }
 					setActiveTabIndex={ setActiveTabIndex }

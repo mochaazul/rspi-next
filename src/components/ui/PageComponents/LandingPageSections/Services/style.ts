@@ -25,9 +25,10 @@ export const TabContainerStyle = styled.div`
 `;
 
 export const TabsStyle = styled.div`
-  ${ GlobalCardShadow }
+  
+  box-shadow: 0px 2px 8px 0px rgba(53, 136, 136, 0.25);
   width: 1360px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: ${ colors.white.default };
   top: -57px;
   position: relative;
