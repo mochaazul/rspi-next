@@ -34,6 +34,10 @@ export const SelectWrapper = styled.div<StatusType>`
     ${ GlobalAllTransition5ms }
   }
 
+  .svg-darkgrey {
+    color: ${ colors.grey.darkOpacity };
+  }
+
   .placeholder {
     position: absolute;
     padding: 0 28px 0 18px;

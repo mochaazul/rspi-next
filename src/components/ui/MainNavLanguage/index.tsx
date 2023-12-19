@@ -42,7 +42,7 @@ export const MainNavLanguage = ({ session }: MainNavLanguageProps) => {
 			className='flex items-center h-10 w-full flex-shrink-0'
 			style={ { background: colors.paradiso.default } }
 		>
-			<div className='flex lg:justify-between w-full px-4 lg:px-10'>
+			<div className='flex lg:justify-between w-full container-page'>
 				<div className='hidden lg:flex divide-x divide-white/20 gap-5'>
 					<Link href='/contact-us'>
 						<Text fontSize='14px' fontWeight='400' color='white'>

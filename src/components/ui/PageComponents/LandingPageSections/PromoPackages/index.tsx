@@ -26,13 +26,13 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 	const [activeTab, setActiveTab] = useState(0);
 
 	const promo = activeTab === 0 ? events : events?.filter((item: any) => item?.category === tabData?.[activeTab]?.value);
-	
+
 	if (showAsRelated) {
 		return (
 			<div className='w-full'>
 				{ promo?.length !== 0 ?
 					<CardsScrollHorizontal noHorizontalPadding={ true }>
-						{ promo?.map((item : EventClassesDetail, index: number) => (
+						{ promo?.map((item: EventClassesDetail, index: number) => (
 							<Card
 								key={ index }
 								id={ item?.id }
@@ -77,9 +77,9 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 	};
 
 	return (
-		<div className='w-full mt-12'>
-			<div className='px-3 row justify-between items-center md:px-40'>
-				<Text fontSize='44px' fontType='h1' fontWeight='900' color={ colors.grey.darker } lineHeight='57px'>
+		<div className='w-full'>
+			<div className='container-content row justify-between items-center'>
+				<Text fontSize='44px' fontType='h2' fontWeight='900' color={ colors.grey.darker } lineHeight='57px' subClassName='heading-section'>
 					{ t('heading') }
 				</Text>
 				<div className='mt-3'>
@@ -88,14 +88,15 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 					</Text>
 				</div>
 			</div>
-			<div className='px-3 mt-[50px] flex row justify-between items-center md:px-40'>
-				<div className='flex gap-x-[15px]'>
+			<div className='container-content mt-7 lg:mt-[50px] flex row justify-between items-center'>
+				<div className='flex gap-x-3 sm:gap-x-[15px]'>
 					{ tabData.map((tab, idx) => (
 						<div key={ idx }>
 							<Button
 								theme={ activeTab === idx ? 'primary' : 'secondary' }
 								label={ tab.label }
 								onClick={ () => setActiveTab(idx) }
+								className='!rounded-[10px] py-1 sm:!py-2.5 px-[18px] sm:!px-5 text-sm leading-5 sm:text-base font-bold sm:leading-[23px]'
 							/>
 						</div>
 					)) }
@@ -103,7 +104,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 				<div className=' mt-3'>
 					<Link href='/promo' className='max-sm:hidden'>
 						<div className='see-all flex row items-center'>
-							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default }>
+							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-right'>
 								{ t('allItemBtnLabel') }
 							</Text>
 							<icons.LongArrowRight className='svg-green ml-2' />
@@ -113,20 +114,21 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 			</div>
 			<div className='w-full'>
 				{ promo.length !== 0 ?
-					<CardsScrollHorizontal customRef={ CardNewsWrapperRef } className='lg:gap-x-[30px] lg:overflow-hidden lg:grid lg:grid-cols-3'>
+					<CardsScrollHorizontal customRef={ CardNewsWrapperRef } className='lg:gap-x-[30px] lg:overflow-hidden lg:grid lg:grid-cols-3 mt-6 sm:mt-[40px]'>
 						{ promo?.slice(0, 3)?.map((item: any, index: number) => (
 							<Card
 								key={ index }
 								id={ item?.id }
 								image={ item.img_url_card }
 								imageHeight='200px'
-								className='lg:!w-full'
+								className='lg:!w-full !m-0'
 								header={
 									<Text
 										color={ colors.grey.dark }
 										fontSize='16px'
 										text={ item?.category?.charAt(0).toUpperCase() + item?.category?.slice(1) }
 										fontWeight='400'
+										subClassName='max-sm:text-xs max-sm:leading-normal'
 									/>
 								}
 								content={
@@ -136,7 +138,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 										RSLocation={ (item?.hospitals ?? [])?.map((hospital: { hospital_name: any; }) => hospital.hospital_name) }
 									/>
 								}
-								footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetailsBtnLabel') } /> }
+								footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetailsBtnLabel') } className='max-sm:text-sm max-sm:py-2' /> }
 								to={ `/promo/${ item?.slug }` }
 								iconShare={ true }
 							/>
@@ -148,7 +150,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 					</Text>
 				}
 			</div>
-			<div className='flex px-3 md:px-40'>
+			<div className='flex container-content'>
 				<div className='flex row justify-between items-center'>
 					<div className='arrow-left rounded-full w-[34px] h-[34px] md:w-[44px] md:h-[44px] flex items-center justify-center cursor-pointer' onClick={ handleArrowClick('left') }>
 						<icons.LongArrowRight className='svg-green ml-2 rotate-180' />

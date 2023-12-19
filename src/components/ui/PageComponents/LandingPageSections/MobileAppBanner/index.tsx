@@ -15,7 +15,7 @@ const MobileAppBanner = () => {
 	const t = useScopedI18n('page.landingPage.mobileAppBanner');
 
 	return (
-		<WrapperMobileAppBanner>
+		<WrapperMobileAppBanner className='container-content max-sm:py-6'>
 			<div className='sm:flex-1'>
 				<div className='sm:hidden w-full max-sm:mb-6'>
 					<img className='mx-auto' src={ images.MobileGroup.src } />
@@ -23,7 +23,7 @@ const MobileAppBanner = () => {
 
 				<div className='flex flex-col sm:justify-center sm:items-center sm:h-[546px]'>
 					<div>
-						<Text fontSize='44px' fontWeight='900' lineHeight='51px' color={ colors.grey.darker } subClassName='max-sm:!text-[20px] max-sm:!leading-8 max-md:!text-[34px] max-md:!leading-normal'>
+						<Text fontSize='44px' fontWeight='900' lineHeight='51px' color={ colors.grey.darker } subClassName='heading-section'>
 							{ t('heading') }
 						</Text>
 						<div className='mt-3'>
@@ -31,9 +31,9 @@ const MobileAppBanner = () => {
 								{ t('subHeading') }
 							</Text>
 						</div>
-						<div className='mt-[40px]'>
-							<Text text='Get the App' fontSize='20px' fontWeight='900' lineHeight='28px' />
-							<div className='flex gap-[13px] mt-[10px]'>
+						<div className='mt-6 sm:mt-10'>
+							<Text text='Get the App' fontSize='20px' fontWeight='900' lineHeight='28px' subClassName='max-sm:text-base' />
+							<div className='flex gap-3 mt-2.5'>
 								<Link
 									href={ playStoreMobileUrl }
 									target='_blank'

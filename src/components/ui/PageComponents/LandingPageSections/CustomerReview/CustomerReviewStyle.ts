@@ -9,9 +9,12 @@ export const CustomerReviewStyle = styled.div`
   background-attachment: fixed;
   background-size: cover;
   width: 100%;
-  margin-top: 80px;
   padding: 100px 0 80px;
   position: relative;
+
+  svg.svg-white path {
+		stroke: ${ colors.white.default };
+	}
 
   @media not all and (min-width: 640px) {
     padding: 42px 0 24px;
@@ -27,6 +30,11 @@ export const CustomerReviewStyle = styled.div`
       height: 44px;
       cursor: pointer;
       user-select: none; /* Standard syntax */
+
+      @media screen and (max-width: 640px) {
+        width: 32px;
+        height: 32px;
+      }
   
       &:hover {
         transition: all .3s;
@@ -52,7 +60,6 @@ export const CustomerReviewStyle = styled.div`
 
     &>div {
       perspective: 100px;
-      padding: 10px;
       &>div {
         transition: all .5s;
       }
