@@ -33,15 +33,15 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 		});
 	};
 	return (
-		<WrapperNewsHealthArticles className='w-full mt-12'>
-			<div className='flex px-3 row justify-between items-center md:px-40'>
-				<Text fontSize='44px' fontType='h1' fontWeight='900' color={ colors.grey.darker } lineHeight='57px'>
+		<WrapperNewsHealthArticles className='w-full'>
+			<div className='flex row justify-between items-center container-content'>
+				<Text fontSize='44px' fontType='h2' fontWeight='900' color={ colors.grey.darker } lineHeight='57px' subClassName='heading-section'>
 					{ t('heading') }
 				</Text>
 				<div className='slider-title mt-3'>
 					<Link href='/news' className='max-sm:hidden'>
 						<div className='see-all flex row items-center'>
-							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default }>
+							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-right'>
 								{ t('allItemBtnLabel') }
 							</Text>
 							<icons.LongArrowRight className='svg-green ml-2' />
@@ -50,7 +50,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 				</div>
 			</div>
 			{ articles.length !== 0 ?
-				<div className='flex flex-row w-full mt-[20px] relative'>
+				<div className='flex flex-row w-full mt-6 sm:mt-[58px] relative'>
 					<CardsScrollHorizontal customRef={ CardNewsWrapperRef }>
 						<>
 							{
@@ -62,6 +62,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 											imageHeight='200px'
 											key={ index }
 											to={ `/news/${ article?.slug }` }
+											className='!m-0'
 											header={
 												<Text
 													text={ moment(splitDate(article?.posted_date)).locale(currLang)

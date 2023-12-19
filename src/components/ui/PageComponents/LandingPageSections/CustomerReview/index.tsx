@@ -79,27 +79,27 @@ const CustomerReview = () => {
 			<div className='opacity-10 top-0 left-5 sm:left-[5%] absolute'>
 				<img src={ images.CustomerQuoteImg.src } alt='Quote' />
 			</div>
-			<div className='sm:mx-32 mx-3 flex flex-row space-between items-center max-sm:px-5'>
+			<div className='sm:px-32 px-4 flex flex-row space-between items-center'>
 				<Text
 					className='flex-1'
-					fontType='h1'
+					fontType='h2'
 					fontSize='44px'
 					fontWeight='900'
 					lineHeight='57px'
 					color={ colors.white.default }
 					text={ t('heading') }
-					subClassName='max-sm:text-[20px] max-sm:leading-[30px]'
+					subClassName='max-sm:!text-base heading-section'
 				/>
-				<div className='indicator-cont flex flex-row space-between gap-8 ml-6'>
+				<div className='indicator-cont flex flex-row space-between gap-4 md:gap-[30px] ml-6'>
 					<div className='btn-indicator left rounded-full flex items-center justify-center' onClick={ handleArrowClick('left') }>
-						<icons.LongArrowRight className='svg-white rotate-180' />
+						<icons.LongArrowRight className='svg-white rotate-180 w-[17px] h-[17px] sm:w-6 sm:h-6' />
 					</div>
 					<div className='btn-indicator right rounded-full flex items-center justify-center' onClick={ handleArrowClick('right') }>
-						<icons.LongArrowRight className='svg-white' />
+						<icons.LongArrowRight className='svg-white w-[17px] h-[17px] sm:w-6 sm:h-6' />
 					</div>
 				</div>
 			</div>
-			<div ref={ CardReviewRef } className='balloon-container sm:mt-[48px] mt-6 w-full flex flex-1 flex-row flex-nowrap gap-8 relative overflow-x-auto px-[5vw]'>
+			<div ref={ CardReviewRef } className='balloon-container sm:mt-[48px] mt-6 w-full flex flex-1 flex-row flex-nowrap gap-4 md:gap-[30px] relative overflow-x-auto px-4 md:px-[5vw]'>
 				{
 					(currentLang === 'id' ? sampleDatasIdn : sampleDatasEn).map((data, index) => (
 						<div className='relative perspective-[100px] sm:w-[540px] w-full shrink-0' key={ index }>

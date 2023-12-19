@@ -27,6 +27,11 @@ export const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-width: 48px;
+  
+  svg.svg-darkgrey circle,
+  svg.svg-darkgrey path {
+    stroke: ${ colors.grey.darkOpacity };
+  }
 `;
 
 export const ClearWrapper = styled.div`
@@ -43,4 +48,5 @@ export const ClearWrapper = styled.div`
   cursor: pointer;
   z-index: 200;
   
+
 `;
