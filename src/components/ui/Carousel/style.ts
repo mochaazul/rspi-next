@@ -108,7 +108,7 @@ const CarouselWrapper = styled.div`
     width: 100%;
     height: auto;
     @media screen and (max-width: 1024px) {
-      height: 500px ;
+      // height: 500px ;
       object-fit: cover;
     }
   }

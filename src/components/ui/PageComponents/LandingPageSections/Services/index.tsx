@@ -1,5 +1,5 @@
 'use client';
-import  { useState } from 'react';
+import { useState } from 'react';
 
 import Tabs from '@/components/ui/Tabs';
 
@@ -13,7 +13,7 @@ import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 const ServicesTabs = ({
 	hospitals,
 	specialtys
-}:{
+}: {
 	hospitals: HospitalDetail[],
 	specialtys: I_SpecialtyDropdownResponse[],
 }) => {
@@ -27,9 +27,9 @@ const ServicesTabs = ({
 	};
 
 	return (
-		<TabContainerStyle>
+		<TabContainerStyle className='w-full container-page max-sm:px-4'>
 			<div className={ `backdrop ${ isActive ? 'active' : '' }` } onClick={ toggleIsActive(false) } />
-			<TabsStyle className={ `${ isActive ? 'active' : '' }` } onClick={ toggleIsActive(true) }>
+			<TabsStyle className={ `${ isActive ? 'active' : 'top-4 lg:top-[-64px]' }` } onClick={ toggleIsActive(true) }>
 				<Tabs
 					activeTabIndex={ activeTabIndex }
 					setActiveTabIndex={ setActiveTabIndex }
@@ -37,7 +37,7 @@ const ServicesTabs = ({
 					isBackground={ true }
 					className='rounded-t-[10px] overflow-hidden'
 				/>
-				<div className='mt-[30px]'>
+				<div className='w-full'>
 					<FindADoctor
 						isTelemedicine={ activeTabIndex === 1 }
 						hospitals={ hospitals }

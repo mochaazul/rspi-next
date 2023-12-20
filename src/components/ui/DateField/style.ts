@@ -90,4 +90,10 @@ export const DatepickerStyle = styled(Datepicker)`
 export const IconWrapper = styled.div`
   position: absolute;
   margin-top: 2px;
+
+  .svg-darkgrey,
+  svg.svg-darkgrey path {
+    color: ${ colors.grey.darkOpacity };
+    stroke: ${ colors.grey.darkOpacity };
+  }
 `;

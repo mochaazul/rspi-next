@@ -234,7 +234,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 	};
 
 	return (
-		<FooterStyled className='px-4 xl:px-10 py-8 sm:py-16'>
+		<FooterStyled className='container-page py-8 sm:py-16'>
 			<FooterContainer>
 				{ renderFooterHospital(ourHospital ?? [], t('ourHospitalsLabel')) }
 				{ renderFooterCategory(ourCompany ?? [], t('ourCompanyLabel')) }

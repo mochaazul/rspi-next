@@ -14,14 +14,14 @@ const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 	const router = useRouter();
 
 	return (
-		<AccreditationsAwardsWrapper className='px-3 md:px-40 mt-12 w-full'>
+		<AccreditationsAwardsWrapper className='container-page w-full'>
 			<Text
 				fontSize='44px'
-				fontType='h1'
+				fontType='h2'
 				fontWeight='900'
 				lineHeight='57px'
 				text={ t('heading') }
-				subClassName='sm:text-center max-sm:text-[24px]'
+				subClassName='sm:text-center heading-section'
 			/>
 			<Text
 				fontSize='20px'
@@ -57,9 +57,9 @@ const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 					))
 				}
 			</div>
-			<div className='sm:mt-16 mt-6 sm:max-w-fit max-w-full m-auto'>
+			<div className='sm:mt-[60px] mt-6 sm:max-w-fit max-w-full m-auto'>
 				<Link href={ '/accreditation-and-awards' }>
-					<Button theme='secondary' $hoverTheme='primary' className='px-[40px] max-sm:text-[14px]'>
+					<Button theme='secondary' $hoverTheme='primary' className='sm:px-10 leading-normal py-2 sm:py-3 max-sm:text-[14px]'>
 						{ t('readMoreBtnLabel') }
 					</Button>
 				</Link>

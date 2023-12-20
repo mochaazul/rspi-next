@@ -1,5 +1,4 @@
 import { colors } from '@/constant';
-import { GlobalCardShadow } from '@/constant/globalstyle';
 import styled from 'styled-components';
 
 export const TabContainerStyle = styled.div`
@@ -25,32 +24,24 @@ export const TabContainerStyle = styled.div`
 `;
 
 export const TabsStyle = styled.div`
-  ${ GlobalCardShadow }
-  width: 1360px;
+  box-shadow: 10px 10px 10px 0px rgba(53, 136, 136, 0.12);
+  max-width: 1400px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 10px;
   background: ${ colors.white.default };
   top: -57px;
   position: relative;
   z-index: 0;
-  padding-bottom: 30px;
 
   &.active {
     z-index: 1100;
   }
 
-  @media screen and (max-width: 1390px) {
-    width: 1290px;
-  }
-  @media screen and (max-width: 1330px) {
-    width: 1100px;
-  }
-  @media screen and (max-width: 1160px) {
-    width: 900px;
-  }
-  @media screen and (max-width: 850px) {
-    width: 720px;
-  }
-  @media screen and (max-width: 720px) {
-    width: 100%;
+  @media screen and (max-width: 640px) {
+    top: 0px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px 0px rgba(53, 136, 136, 0.25);
   }
 `;

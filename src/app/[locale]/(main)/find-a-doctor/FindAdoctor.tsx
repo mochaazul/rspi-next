@@ -41,7 +41,7 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 	
 	const breadCrumbs = [{ name: t('heading'), url: '#' }];
 	
-	const { data: doctorResponse, isLoading: doctorLoading, size, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
+	const { data: doctorResponse, isLoading: doctorLoading, size: currentPage, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
@@ -52,7 +52,7 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 	);
 
 	const loadMore = () => {
-		setSize(size + 1);
+		setSize(currentPage + 1);
 	};
 
 	const clearParams = () => {
@@ -122,12 +122,16 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 	
 	useEffect(() => {
 		if (!doctorResponse) {
-			setSize(size);
+			setSize(currentPage);
 		};
 	}, [doctorResponse]);
 
 	const hasMore = () => {
-		return doctorCount() > size;
+		if (doctorResponse) {
+			const totalPage =  doctorResponse[0].pagination.total_page || 0;
+			return currentPage < totalPage;
+		}
+		return false;
 	};
 
 	return (

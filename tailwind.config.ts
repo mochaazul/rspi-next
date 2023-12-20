@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
+import type { Config } from 'tailwindcss';
+
 module.exports = {
 	darkMode: 'class',
 	important: true,
@@ -9,6 +11,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				Lato: ['var(--font-Lato)']
+			},
 			screens: {
 				'ssm': '320px',
 			},
@@ -191,5 +196,13 @@ module.exports = {
 			}
 		},
 	},
-	plugins: [],
+	plugins: [
+		({ addComponents }: Config['PluginAPI']) => {
+			addComponents({
+				'.container-page': { '@apply w-full px-4 lg:px-10': {} },
+				'.container-content': { '@apply w-full px-4 md:px-10 lg:px-20 xl:px-40': {} },
+				'.heading-section': { '@apply !text-xl !leading-8 md:!text-[34px] md:!leading-normal xl:!text-[44px] xl:!leading-[41px] font-bold': {} }
+			});
+		}
+	]
 };

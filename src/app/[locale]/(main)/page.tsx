@@ -39,19 +39,19 @@ export default async function Page() {
 	const arrayBanner = () => {
 		if (currentLang === 'id') {
 			return banner.data.map((image: any, index: any) => {
-				return <div key={ `banner-${ index }` } style={ { width: '100%', height: 450 } }>
+				return <div key={ `banner-${ index }` } style={ { width: '100%' } }>
 					<Link href={ image.url_link_idn ?? '#' }>
-						<Image width={ 450 } height={ 450 } style={ { objectFit: "contain" } } className='md:hidden' src={ image.img_url_mobile_idn || image.img_url_mobile_en } alt='slider' />
-						<Image width={ 1600 } height={ 450 } style={ { objectFit: "contain" } } className='max-sm:hidden' src={ image.img_url_idn || image.img_url_en } alt='slider' />
+						<Image width={ 450 } height={ 450 } style={ { objectFit: 'contain' } } className='md:hidden' src={ image.img_url_mobile_idn || image.img_url_mobile_en } alt='slider' />
+						<Image width={ 1600 } height={ 450 } style={ { objectFit: 'contain' } } className='max-sm:hidden' src={ image.img_url_idn || image.img_url_en } alt='slider' />
 					</Link>
 				</div>;
 			});
 		} else {
 			return banner.data.map((image: any, index: any) => {
-				return <div key={ `banner-${ index }` } style={ { width: '100%', height: 450 } }>
+				return <div key={ `banner-${ index }` } style={ { width: '100%' } }>
 					<Link href={ image.url_link_en ?? '#' }>
-						<Image width={ 450 } height={ 450 } style={ { objectFit: "contain" } } className='md:hidden' src={ image.img_url_mobile_en || image.img_url_mobile_idn } alt='slider' />
-						<Image width={ 1600 } height={ 450 } style={ { objectFit: "contain" } } className='max-sm:hidden' src={ image.img_url_en || image.img_url_idn } alt='slider' />
+						<Image width={ 450 } height={ 450 } style={ { objectFit: 'contain' } } className='md:hidden' src={ image.img_url_mobile_en || image.img_url_mobile_idn } alt='slider' />
+						<Image width={ 1600 } height={ 450 } style={ { objectFit: 'contain' } } className='max-sm:hidden' src={ image.img_url_en || image.img_url_idn } alt='slider' />
 					</Link>
 				</div>;
 			});
@@ -68,13 +68,15 @@ export default async function Page() {
 					hospitals={ hospitals.data }
 					specialtys={ specialtyDropdown.data }
 				/>
-				<CentreOfExcellence data={ coeRes.data } />
-				<FacilitiesServices facilityServices={ facilitiesServices.data } />
-				<PromoPackages events={ events.data } />
-				<NewsHealthArticles articles={ articles.data } />
-				<CustomerReview />
-				<AccreditationAwards datas={ awards.data } />
-				<MobileAppBanner />
+				<div className='flex flex-col items-center justify-center w-full gap-y-12 lg:gap-y-[120px] relative mt-14 lg:mt-[62px] max-sm:pb-12'>
+					<CentreOfExcellence data={ coeRes.data } />
+					<FacilitiesServices facilityServices={ facilitiesServices.data } />
+					<PromoPackages events={ events.data } />
+					<NewsHealthArticles articles={ articles.data } />
+					<CustomerReview />
+					<AccreditationAwards datas={ awards.data } />
+					<MobileAppBanner />
+				</div>
 			</LangWrapper>
 		</LandingPageStyle>
 	);

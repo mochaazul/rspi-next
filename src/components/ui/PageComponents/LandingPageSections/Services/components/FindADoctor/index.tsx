@@ -93,10 +93,10 @@ const FindADoctor: React.FC<Props> = ({
 	}, [debouncedSearch]);
 
 	return (
-		<FindDoctorStyle>
+		<FindDoctorStyle className='w-full pt-8 pb-6 px-4 md:pt-[30px] md:pb-[30px] md:px-[30px]'>
 			<Form
 				autoComplete='off'
-				className='flex flex-col mx-[30px]'
+				className='flex flex-col w-full'
 				onSubmit={ e => {
 					e.preventDefault();
 					formFindDoctor.handleSubmit();
@@ -110,9 +110,9 @@ const FindADoctor: React.FC<Props> = ({
 					});
 				} }
 			>
-				<div className='form-wrapper'>
-					<div className='h-full flex-1'>
-						<div className='mb-2'>
+				<div className='form-wrapper grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 xl:gap-[30px]'>
+					<div className='w-full'>
+						<div className='mb-2.5'>
 							<label className='font-black text-sm'>{ t('form.labels.doctorName') }</label>
 						</div>
 						<Combobox
@@ -126,8 +126,8 @@ const FindADoctor: React.FC<Props> = ({
 							retainValue
 						/>
 					</div>
-					<div className='h-full flex-1'>
-						<div className='mb-2'>
+					<div className='w-full'>
+						<div className='mb-2.5'>
 							<label className='font-black text-sm'>{ t('form.labels.hospital') }</label>
 						</div>
 						<Dropdown
@@ -140,8 +140,8 @@ const FindADoctor: React.FC<Props> = ({
 							value={ formFindDoctor.values.hospital }
 						/>
 					</div>
-					<div className='h-full flex-1'>
-						<div className='mb-2'>
+					<div className='w-full'>
+						<div className='mb-2.5'>
 							<label className='font-black text-sm'>{ t('form.labels.speciality') }</label>
 						</div>
 						<Combobox
@@ -153,9 +153,9 @@ const FindADoctor: React.FC<Props> = ({
 							retainValue
 						/>
 					</div>
-					<div className='h-full flex-1'>
+					<div className='w-full'>
 						{ /* Prefered day nya harusnya day only kan bukan datepicker ? */ }
-						<div className='mb-2'>
+						<div className='mb-2.5'>
 							<label className='font-black text-sm'>{ t('form.labels.date') }</label>
 						</div>
 						<DateField
@@ -173,9 +173,9 @@ const FindADoctor: React.FC<Props> = ({
 						/>
 					</div>
 				</div>
-				<div className='flex flex-1 gap-4 mt-8 justify-end'>
-					<Button className='shrink-0 sm:max-w-[121px] max-sm:flex-1' theme='outline' $hoverTheme='primary' type='reset'>{ t('form.resetBtnLabel') }</Button>
-					<Button className='shrink-0 sm:max-w-[216px] max-sm:flex-1' theme='primary' type='submit'>{ t('form.submitBtnLabel') }</Button>
+				<div className='flex gap-4 mt-8 justify-end'>
+					<Button theme='outline' $hoverTheme='primary' type='reset' className='w-auto max-sm:text-sm max-sm:leading-normal py-2.5 px-4 md:py-[15px] md:px-10'>{ t('form.resetBtnLabel') }</Button>
+					<Button theme='primary' type='submit' className='w-auto max-sm:text-sm max-sm:leading-normal py-2.5 px-4 md:py-[15px] md:px-10'>{ t('form.submitBtnLabel') }</Button>
 				</div>
 			</Form>
 

@@ -16,9 +16,9 @@ const FacilitiesServices = ({ facilityServices }: { facilityServices: FacilitySe
 	const [accordionOpenIndex, setAccordionOpenIndex] = useState(0);
 
 	return (
-		<WrapperFacilitiesServices className='w-full px-3 md:px-40 sm:mt-16 mt-12'>
+		<WrapperFacilitiesServices className='w-full container-content'>
 			<div>
-				<Text fontSize='44px' fontType='h1' fontWeight='900' color={ colors.grey.darker } lineHeight='57px'>
+				<Text fontSize='44px' fontType='h2' fontWeight='900' color={ colors.grey.darker } lineHeight='57px' subClassName='heading-section'>
 					{ t('heading') }
 				</Text>
 				<div className='desc flex row justify-between items-center mt-3'>
@@ -27,7 +27,7 @@ const FacilitiesServices = ({ facilityServices }: { facilityServices: FacilitySe
 					</Text>
 					<Link href={ `/facilities/${ facilityServices[0]?.slug ?? '' }` } className='max-sm:hidden'>
 						<div className='see-all flex row items-center'>
-							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default }>
+							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-right'>
 								{ t('allItemlabel') }
 							</Text>
 							<icons.LongArrowRight className='svg-green ml-2' />
@@ -36,7 +36,7 @@ const FacilitiesServices = ({ facilityServices }: { facilityServices: FacilitySe
 				</div>
 			</div>
 			<div className='accordion-img flex sm:flex-row flex-col-reverse mt-[24px]'>
-				<div className='sm:flex-1 sm:pr-11 py-4 max-sm:pt-6 max-sm:pl-4 max-sm:pr-4'>
+				<div className='sm:flex-1 sm:pr-11 py-4 max-sm:pt-6 max-sm:pl-4 max-sm:pr-4 bg-white sm:bg-transparent'>
 					<Accordion
 						onlyOpenOne={ true }
 						onOpenIndex={ index => setAccordionOpenIndex(index) }
@@ -44,7 +44,7 @@ const FacilitiesServices = ({ facilityServices }: { facilityServices: FacilitySe
 					/>
 				</div>
 				<div className='sm:grow-0'>
-					<div className='relative sm:w-[350px] w-[450px] h-[450px] max-h-[450px] img-shadow sm:border-[10px] overflow-hidden sm:border-white sm:border-solid'>
+					<div className='relative sm:w-[350px] w-full h-[450px] max-h-[450px] img-shadow sm:border-[10px] overflow-hidden sm:border-white sm:border-solid'>
 						<Image
 							src={ facilityServices[accordionOpenIndex]?.image_url?.[0] ?? '' }
 							alt={ facilityServices[accordionOpenIndex]?.short_description ?? 'placeholder image' }

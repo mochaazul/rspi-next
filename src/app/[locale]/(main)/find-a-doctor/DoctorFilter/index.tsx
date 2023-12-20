@@ -80,7 +80,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 		if (clinics?.length > 0) {
 			return clinics.filter(sp => {
 				const filterValue = clinicFilter.getAll();
-				const hasFilter = filterValue.some(item => item.clinic_category === sp.clinic_category);
+				const hasFilter = filterValue.some(item => item.value === sp.clinic_category);
 				return !hasFilter;
 			}).map(sp => ({
 				id: sp.clinic_category,

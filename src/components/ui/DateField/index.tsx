@@ -30,7 +30,7 @@ const DateField = ({ onIconClick, iconClassName, className, ...props }: InputTyp
 			{
 				props.iconName ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Icons className={ iconClassName } />
+						<Icons className={ `${ iconClassName } svg-darkgrey` } />
 					</IconWrapper> :
 					null
 			}

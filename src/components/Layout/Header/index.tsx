@@ -340,7 +340,7 @@ export const Header = ({
 					<MainNavLanguage session={ session } />
 				</div>
 				<header className='bg-white'>
-					<nav className='mx-auto flex items-center justify-between gap-2 lg:gap-5 px-4 lg:px-10 h-[64px] lg:h-[90px]' aria-label='Global'>
+					<nav className='mx-auto flex items-center justify-between gap-2 lg:gap-5 container-page h-[64px] lg:h-[90px]' aria-label='Global'>
 						<div className='flex items-center gap-x-10'>
 							<Link href='/' className='relative overflow-hidden w-[70px] h-8 lg:w-[132px] lg:h-[60px]'>
 								<Image

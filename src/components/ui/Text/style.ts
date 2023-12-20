@@ -83,8 +83,8 @@ const TextStyle = styled.div<StyleProps>`
       }
 
       h3 {
-        font-size: 24px;
-        line-height: 36px;
+        font-size: 20px;
+        line-height: 32px;
       }
 
       h4 {
@@ -101,6 +101,18 @@ const TextStyle = styled.div<StyleProps>`
 
     pre {
       white-space: normal;
+    }
+
+    @media screen and (max-width: 640px) {
+      h1 {
+        font-size: 20px;
+        line-height: 32px;
+      }
+
+      h3 {
+        font-size: 16px;
+        line-height: 24px;
+      }
     }
   `}
 `;
