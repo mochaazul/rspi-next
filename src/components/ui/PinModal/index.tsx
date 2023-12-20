@@ -121,11 +121,15 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 								subClassName='text-justify max-sm:leading-[18px]'
 								text={ t('forgotPin') }
 								onClick={ async () => {
-
-									const res = await reqEmailPinVerification();
-									if (res?.stat_code !== 'APP:SUCCESS') throw new Error(res?.stat_msg);
-									setShowModalSuccessSentEmailPinVerification(true);
-
+									try {
+										const res = await reqEmailPinVerification();
+										if (res?.stat_code !== 'APP:SUCCESS') {
+											throw new Error(res?.stat_msg);
+										}
+										setShowModalSuccessSentEmailPinVerification(true);
+									} catch (error) {
+										console.error(error);
+									}
 								} }
 							/>
 						</div>

@@ -739,11 +739,15 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 								color={ colors.green.brandAccent }
 								textAlign='center'
 								onClick={ async () => {
-
-									const res = await reqEmailPinVerification();
-									if (res?.stat_code !== 'APP:SUCCESS') throw new Error(res?.stat_msg);
-									setShowModalSuccessSentEmailPinVerification(true);
-
+									try {
+										const res = await reqEmailPinVerification();
+										if (res?.stat_code !== 'APP:SUCCESS') {
+											throw new Error(res?.stat_msg);
+										}
+										setShowModalSuccessSentEmailPinVerification(true);
+									} catch (error) {
+										console.error(error);
+									}
 								} }
 							/>
 							<Button type='submit' label={ tModalPin('submitBtnLabel') } />
