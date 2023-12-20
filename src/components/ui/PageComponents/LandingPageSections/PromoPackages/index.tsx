@@ -40,6 +40,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 								imageHeight='200px'
 								header={
 									<Text
+										fontType='p'
 										color={ colors.grey.dark }
 										fontSize='16px'
 										text={ item?.category?.charAt(0).toUpperCase() + item?.category?.slice(1) }
