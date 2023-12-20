@@ -658,7 +658,9 @@ export default {
 			loginBtnLabel: 'Masuk',
 			footer: {
 				notRegisteredLabel: 'Belum mempunyai akun? Silahkan mendaftar',
-				cta: 'disini'
+				cta: 'disini',
+				notRegisteredLabelMobile: 'Belum mempunyai akun?',
+				registerBtnLabel: 'Daftar',
 			},
 			form: {
 				emailLabel: 'Email',
@@ -697,7 +699,9 @@ export default {
 			registerBtnLabel: 'Daftar',
 			footer: {
 				hasAccountLabel: 'Sudah mempunyai akun? Silahkan masuk',
-				cta: 'disini'
+				cta: 'disini',
+				hasAccountLabelMobile: 'Sudah mempunyai akun?',
+				loginBtnLabel: 'Masuk',
 			},
 			buttonPrivacy: 'Lanjut',
 			buttonTnC: 'Kirim',
@@ -946,7 +950,7 @@ export default {
 			subscribeLabel: 'Ikuti Perkembangan Bersama Kami',
 			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.',
 			subscribePlaceholder: 'Masukkan alamat email',
-			subscribeSubmit: 'Berlangganan',
+			subscribeSubmit: 'Subscribe',
 			errorSubs: 'Proses berlangganan gagal dilakukan',
 			successSubs: 'Proses berlangganan berhasil dilakukan',
 			handleButtonModalSubmit: 'Tutup',
