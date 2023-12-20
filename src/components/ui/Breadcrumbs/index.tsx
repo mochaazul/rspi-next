@@ -38,6 +38,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 						<Link href={ data.url }>
 							<ItemStyle className='px-1 py-1 max-sm:px-0.5'>
 								<Text
+									fontType='p'
 									className='item-text text-ellipsis'
 									fontSize='14px'
 									lineHeight='17px'

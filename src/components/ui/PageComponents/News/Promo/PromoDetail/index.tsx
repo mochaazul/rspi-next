@@ -16,32 +16,40 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { EventClassesDetail } from '@/interface';
+import TextHtml from '@/components/ui/TextHtml';
 
-const PromoDetail = ({
-	selectedEvent,
-	breadcrumbsPath,
-	eventsOther
-}:{
-	selectedEvent: any,
-    eventsOther: any,
+type Props = {
+	selectedEvent: any;
+    eventsOther: any;
     breadcrumbsPath: {
 		name: string;
 		url: string;
 	}[],
+};
+
+const PromoDetail: React.FC<Props> = ({
+	selectedEvent,
+	breadcrumbsPath,
+	eventsOther
 }) => {
 
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 
 	return (
     	<div>
-			<Breadcrumbs datas={ breadcrumbsPath } />
 			<div className='mt-[50px]'>
-				<Text fontWeight='900' fontSize='44px' lineHeight='57px'>
+				
+				<Text 
+					fontType='h1'
+					fontWeight='900'
+					fontSize='44px'
+					lineHeight='57px'>
 					{ selectedEvent?.title }
 				</Text>
 				<div className='flex items-center gap-[30px] mt-[10px]'>
 					<div className='flex gap-[15px] items-center'>
 						<Text
+							fontType='p'
 							lineHeight='24px'
 							fontSize='20px'
 							fontWeight='400'
@@ -71,12 +79,13 @@ const PromoDetail = ({
 					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
 						<img src={ selectedEvent?.img_url_detail || '' } className='mx-auto object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
 						<div>
-							<div
-								className='innerHTML'
-								dangerouslySetInnerHTML={ { __html: selectedEvent?.content || '' } }
+							<TextHtml
+								htmlStr={  selectedEvent?.content || '' }
+								className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 							/>
 							<div className='mt-[50px]'>
 								<Text
+									fontType='p'
 									lineHeight='30px'
 									fontSize='20px'
 									fontWeight='900'
@@ -85,18 +94,16 @@ const PromoDetail = ({
 									text='Jadwal'
 								/>
 								<div>
-									<Text
-										lineHeight='30px'
-										fontSize='20px'
-										fontWeight='900'
+									<TextHtml
 										color={ colors.grey.darker }
-										className='mt-5'
-										text={ selectedEvent?.title }
+										className='innerHTML mt-5 leading-[30px] text-[20px] font-'
+										htmlStr={ selectedEvent?.title }
 									/>
 									<div className='flex flex-col gap-1 mt-3'>
 										{
 											(selectedEvent?.hospitals ?? []).map((hospital: any, index: number) =>
 												<Text
+													fontType='p'
 													key={ index }
 													lineHeight='20px'
 													fontSize='16px'
@@ -110,42 +117,44 @@ const PromoDetail = ({
 									<div className='grid grid-cols-2 gap-4 mt-6'>
 										<div>
 											<Text
+												fontType='p'
 												lineHeight='18px'
 												fontSize='14px'
 												fontWeight='900'
 												color={ colors.grey.darker }
 												text='Informasi'
 											/>
-											<div
-												className='mt-2 innerHTML text-14'
-												dangerouslySetInnerHTML={ { __html: selectedEvent?.information ?? '' } }
+											<TextHtml
+												htmlStr={  selectedEvent?.information || '' }
+												className='innerHTML mt-2 text-14'
 											/>
 										</div>
 										<div>
 											<Text
+												fontType='p'
 												lineHeight='18px'
 												fontSize='14px'
 												fontWeight='900'
 												color={ colors.grey.darker }
 												text='Telepon (WhatsApp Only)'
 											/>
-											<div
+											<TextHtml
+												htmlStr={  selectedEvent?.phone || '' }
 												className='mt-2 innerHTML text-14 leading-[18px] font-bold'
-												style={ { color: colors.paradiso.default } }
-												dangerouslySetInnerHTML={ { __html: selectedEvent?.phone ?? '' } }
 											/>
 										</div>
 										<div>
 											<Text
+												fontType='p'
 												lineHeight='18px'
 												fontSize='14px'
 												fontWeight='900'
 												color={ colors.grey.darker }
 												text='Jam Operasional'
 											/>
-											<div
+											<TextHtml
+												htmlStr={  selectedEvent?.operational_hour || '' }
 												className='mt-2 innerHTML text-14 leading-[18px]'
-												dangerouslySetInnerHTML={ { __html: selectedEvent?.operational_hour ?? '' } }
 											/>
 										</div>
 									</div>
