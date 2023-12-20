@@ -26,7 +26,7 @@ const languageItem = [
 ];
 
 export const LanguageSelector = () => {
-	const setLanguage = useChangeLocale();
+	const setLanguage = useChangeLocale({ preserveSearchParams: true });
 	const currentLang = useCurrentLocale();
 
 	const [showLanguagePicker, setShowLanguagePicker] = useState<boolean>(false);
