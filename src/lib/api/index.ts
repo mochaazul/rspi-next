@@ -75,7 +75,7 @@ export const postContactUs = (param: { body: ContactUsSubmitType; }) => {
 
 // Article
 export const getArticle = (param?: ApiOptions) => {
-	return fetcher<ArticleState>('getNews', param);
+	return fetcher<ArticleDetail[]>('getNews', param);
 };
 
 export const getNewsSpecialtyByID = (param?: ApiOptions) => {

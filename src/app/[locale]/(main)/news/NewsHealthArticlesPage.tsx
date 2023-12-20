@@ -5,7 +5,7 @@ import moment from 'moment';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-import { ArticleState, Pagination } from '@/interface';
+import { ArticleState, NewsAuthorDetail, Pagination } from '@/interface';
 import { colors } from '@/constant';
 import {
 	Breadcrumbs,
@@ -23,13 +23,24 @@ import { NewsHealthArticlesStyle } from './styles';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import { useScopedI18n } from '@/locales/client';
 
+type ArticleProps = {
+	id: number;
+	slug: string;
+	img_url: string;
+	category: string;
+	posted_date: string;
+	title: string;
+	news_author: NewsAuthorDetail;
+	short_description: string;
+};
+
 const NewsHealthArticlesPage = ({
 	articles,
 	pagination,
 	breadcrumbsPath,
 }: {
 	breadcrumbsPath: BreadcrumbsType['datas'],
-	articles: ArticleState,
+	articles: ArticleProps[],
 	pagination: Pagination | null,
 }) => {
 	const [pageNumber, setPageNumber] = useState(pagination?.page || 1);
@@ -106,26 +117,28 @@ const NewsHealthArticlesPage = ({
 							</div>
 						</div>
 					</div>
-					{ Object.values(articles || []).length !== 0
+					{ articles.length !== 0
 						?
 						<div className='content mt-[60px] max-sm:hidden'>
 							<div className='flex mb-[30px] justify-between'>
 								<div
-									key={ Object.values(articles || [])[0]?.slug }
+									key={ articles[0]?.slug }
 									className='w-[540px] mr-[32px] cursor-pointer magazine relative'
 								>
 									<div className='relative'>
 										<Share />
 									</div>
-									<Link href={ `${ pathname }/${ Object.values(articles || [])[0]?.slug }` } >
+									<Link href={ `${ pathname }/${ articles[0]?.slug }` } >
 										<img
 											className='rounded-[10px] img-thumbnail-magazine'
-											src={ Object.values(articles || [])[0]?.img_url }
+											src={ articles[0]?.img_url }
 										/>
 										<div className='mt-[30px] mb-[10px] flex items-center'>
-											<div className='btn-category'>
-												{ Object.values(articles || [])[0]?.category.charAt(0).toUpperCase() + Object.values(articles || [])[0].category.slice(1) }
-											</div>
+											<Button
+												theme='primary'
+												label={ articles[0]?.category.charAt(0).toUpperCase() + articles[0].category.slice(1) }
+												className='btn-category w-auto'
+											/>
 											<div className='ml-[10px]'>
 												<Text
 													fontSize='14px'
@@ -136,14 +149,14 @@ const NewsHealthArticlesPage = ({
 												/>
 											</div>
 										</div>
-										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ Object.values(articles || [])[0]?.title } lineHeight='28px' />
-										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ Object.values(articles || [])[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
-										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px]' dangerouslySetInnerHTML={ { __html: Object.values(articles || [])[0]?.short_description } } />
+										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ articles[0]?.title } lineHeight='28px' />
+										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ articles[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
+										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px]' > { articles[0]?.short_description } </div>
 									</Link>
 								</div>
 								<div className='mb-3'>
 									{
-										Object.values(articles || [])?.slice(1, 4)
+										articles?.slice(1, 4)
 											?.map((data, index) => (
 												<div
 													className='relative'
@@ -170,7 +183,7 @@ const NewsHealthArticlesPage = ({
 
 							<div className='mt-[60px] grid grid-cols-3 gap-3'>
 								{
-									Object.values(articles || []).map((data, index) => (
+									articles.map((data, index) => (
 										<Card
 											key={ index }
 											id={ data?.id }
@@ -178,9 +191,11 @@ const NewsHealthArticlesPage = ({
 											imageHeight='200px'
 											header={
 												<div className='flex items-center'>
-													<div className='btn-category'>
-														{ data?.category.charAt(0).toUpperCase() + data.category.slice(1) }
-													</div>
+													<Button
+														theme='primary'
+														label={ data?.category?.charAt(0).toUpperCase() + data?.category?.slice(1) }
+														className='btn-category w-auto'
+													/>
 													<div className='ml-[10px]'>
 														<Text
 															fontSize='14px'
