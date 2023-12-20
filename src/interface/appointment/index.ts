@@ -31,7 +31,8 @@ export interface BookingPayload {
 	phone: string;
 	main_complaint: string;
 	necessity_action: string;
-	payment_method: string;
+	payment_method_idn: string;
+	payment_method_en: string;
 	service: string;
 	hospital_code: string;
 	insurance_name: string;

@@ -1,6 +1,6 @@
-import { Fragment, SetStateAction, useState } from 'react';
+import { Fragment, SetStateAction, useRef, useState } from 'react';
 import { Combobox as HeadlessCombobox, Transition } from '@headlessui/react';
-import { ComboboxWrapper, IconWrapper } from './style';
+import { ClearWrapper, ComboboxWrapper, IconWrapper } from './style';
 import { icons } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
 
@@ -43,7 +43,7 @@ const Combobox = ({
 	const Icons = iconName ? icons[iconName] : null;
 
 	const [open, setOpen] = useState(false);
-
+	
 	const changeQuery = (value: any) => {
 		setQuery(value);
 		if (inputOnChange) {
@@ -61,21 +61,23 @@ const Combobox = ({
     			.replace(/\s+/g, '')
     			.includes(query.toLowerCase().replace(/\s+/g, ''))
     	);
+	
 	return (
 		<div>
 			<HeadlessCombobox value={ selected } onChange={ item => {
 				setSelected(item);
 				if (onSelectValue) {
+					setOpen(false);
 					onSelectValue(item);
 				}
 			} } nullable>
 					
-				<div className='relative' onFocus={ () => { setOpen(true); } } onBlur={ () => { setOpen(false); } }>
-					<ComboboxWrapper>
+				<div className='relative' onBlur={ () => { setOpen(false);  } }>
+					<ComboboxWrapper onClick={ () => { setOpen(true); } }>
 						{
 							Icons && (
 								<IconWrapper>
-									<Icons />
+									<Icons className='svg-darkgrey' />
 								</IconWrapper>
 							)
 						}
@@ -85,6 +87,19 @@ const Combobox = ({
 							placeholder={ placeholder }
 							{ ...(retainValue ? { displayValue: (item: ItemType) => `${item?.label ?? ''}` } : {}) }
 						/>
+						{
+							(retainValue ? selected : query) && (
+								<ClearWrapper onClick={ () => {
+									if (onSelectValue) {
+										setSelected(null);
+										onSelectValue(null);
+										setQuery('');
+									}
+								} }>
+									<icons.Close/>
+								</ClearWrapper>
+							)
+						}
 					</ComboboxWrapper>
 					
 					<Transition
@@ -140,6 +155,7 @@ const Combobox = ({
 							) }
 						</HeadlessCombobox.Options>
 					</Transition>
+					
 				</div>
 
 			</HeadlessCombobox>

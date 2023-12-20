@@ -19,6 +19,7 @@ import {
 import Image from 'next/image';
 import Share from '../Share';
 import TextHtml from '../TextHtml';
+import { Tooltip } from 'react-tooltip';
 
 interface PropsType {
 	image?: string;
@@ -60,19 +61,19 @@ const Card = (props: PropsType) => {
 					}
 					{
 						props.header &&
-						<div className='footer px-[20px] pt-[20px]'>
+						<div className='footer px-4 md:px-5 pt-4 md:pt-5'>
 							{ typeof props.header === 'function' ? <props.header isHover={ isHover } /> : props.header }
 						</div>
 					}
 					{
 						props.content &&
-						<div className='content px-[20px] pb-[20px]'>
+						<div className='content px-4 md:px-5 pb-4 md:pb-5'>
 							{ props.content }
 						</div>
 					}
 					{
 						props.footer &&
-						<div className='footer pb-[20px] px-[20px] grow flex items-end'>
+						<div className='footer pb-4 md:pb-5 px-4 md:px-5 grow flex items-end'>
 							{ typeof props.footer === 'function' ? <props.footer isHover={ isHover } /> : props.footer }
 						</div>
 					}
@@ -90,36 +91,54 @@ const Card = (props: PropsType) => {
 
 export const CardContent = ({ title, description }: { title: string, description: string; }) => (
 	<>
-		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-[20px]' />
-		<Text fontSize='16px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ description } className='mt-[10px]' lineHeight='23px' />
+		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-4 md:pt-5' />
+		<Text fontSize='16px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ description } className='mt-[10px] line-clamp-3' lineHeight='23px' />
 	</>
 );
 
-export const CardContentWithInner = ({ title, description, author, RSLocation }: { title: string, description: string; author?: string; RSLocation?: string[]; }) => (
+export const CardContentWithInner = ({ title, description, author, RSLocation, index = 0 }: { title: string, description: string; author?: string; RSLocation?: string[]; index?: number; }) => (
 	<CardContentHTML>
-		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-[10px]' subClassName='max-sm:text-base' />
+		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-1 sm:pt-2.5' subClassName='max-sm:text-base' />
 		{
 			!!RSLocation &&
-			<div className='flex gap-3 mt-3 items-center'>
-				<Icons.MapPin color={ colors.paradiso.default } />
+			<div className='flex gap-2 sm:gap-2.5 mt-1 sm:mt-2.5 items-center'>
+				<Icons.MapPin color={ colors.paradiso.default } size={ 16 } />
 				<div className='flex flex-col gap-1'>
-					{
-						RSLocation.map(name =>
-							<Text
-								key={ name }
-								fontSize='16px'
-								lineHeight='19px'
-								fontWeight='900'
-								color={ colors.paradiso.default }
-								text={ name }
-							/>
-						)
-					}
+					<Text
+						fontSize='16px'
+						fontWeight='900'
+						color={ colors.paradiso.default }
+						fontType={ null }
+						subClassName='max-sm:text-xs !leading-normal'
+					>{ RSLocation?.[0] }
+						{ RSLocation?.length > 1
+							? (
+								<span className='relative group'>
+									<span data-tooltip-place='top-end' data-tooltip-id={ `rslocation-tooltip-${ index }` }>, +{ RSLocation?.length - 1 }..</span>
+									<Tooltip id={ `rslocation-tooltip-${ index }` } offset={ 24 } style={ { width: 220, padding: '10px', borderRadius: '5px' } }>
+										{ RSLocation?.slice(1)?.map(name => (
+											<Text
+												key={ name }
+												fontSize='14px'
+												fontWeight='400'
+												color={ colors.white.default }
+												text={ name }
+												subClassName='max-sm:text-xs max-sm:leading-normal'
+											/>
+										)) }
+									</Tooltip>
+								</span>
+							)
+							: null }
+					</Text>
+
 				</div>
 			</div>
 		}
-		<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ author } className='mt-[5px] mb-[2px] max-sm:!text-xs' lineHeight='24px' />
-		<TextHtml className='innerHTML text-xs max-sm:leading-[18px] sm:text-sm md:text-base mt-[10px]' style={ { color: colors.grey.dark } } htmlStr={ description ?? '' } />
+		{ author && (
+			<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ author } className='mt-[5px] mb-[2px] max-sm:!text-xs' lineHeight='24px' />
+		) }
+		<TextHtml className='innerHTML text-xs max-sm:leading-[18px] sm:text-sm md:text-base mt-4 sm:mt-5 line-clamp-3' style={ { color: colors.grey.dark } } htmlStr={ description ?? '' } />
 	</CardContentHTML>
 );
 
@@ -131,7 +150,7 @@ export const CardFooter = ({ content, to }: { content: string; to?: string; }) =
 );
 
 export const CardsScrollHorizontal = ({ children, customRef, noHorizontalPadding, className }: CardsScrollHorizontalType) => (
-	<CardHorizontalStyle ref={ customRef } className={ ` ${ noHorizontalPadding ? '' : 'pl-3 md:px-40' } ${ className } flex gap-x-[32px] pr-[32px] w-full` }>
+	<CardHorizontalStyle ref={ customRef } className={ ` ${ noHorizontalPadding ? '' : 'container-content' } ${ className } flex gap-x-4 xl2:gap-x-[32px] w-full` }>
 		{ children }
 	</CardHorizontalStyle>
 );

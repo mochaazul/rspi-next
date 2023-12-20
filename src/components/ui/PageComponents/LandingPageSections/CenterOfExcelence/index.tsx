@@ -24,18 +24,18 @@ const CentreOfExcellence = ({ data }: { data: CenterOfExcellenceDetail[]; }) => 
 	};
 
 	return (
-		<WrapperCentreOfExcellence className='w-full mt-12'>
-			<div className='px-3 md:px-40'>
-				<Text fontSize='44px' fontType='h1' fontWeight='900' color={ colors.grey.darker } lineHeight='57px'>
+		<WrapperCentreOfExcellence className='w-full'>
+			<div className='container-content'>
+				<Text fontSize='44px' fontType='h2' fontWeight='900' color={ colors.grey.darker } lineHeight='57px' subClassName='heading-section'>
 					{ t('heading') }
 				</Text>
-				<div className='slider-title flex row justify-between items-center mt-3'>
-					<Text fontSize='20px' fontType='p' fontWeight='400' color={ colors.grey.dark }>
+				<div className='slider-title flex max-sm:flex-col max-sm:gap-3 sm:justify-between sm:items-center mt-3'>
+					<Text fontSize='20px' fontType='p' fontWeight='400' color={ colors.grey.dark } subClassName='subheading-section'>
 						{ t('subHeading') }
 					</Text>
-					<Link href={ `centre-of-excellence/${ data[0]?.slug }` } className='max-sm:hidden'>
-						<div className='see-all flex row items-center'>
-							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default }>
+					<Link href={ `centre-of-excellence/${ data[0]?.slug }` }>
+						<div className='see-all flex sm:items-center'>
+							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-left sm:text-right'>
 								{ t('allItemBtnLabel') }
 							</Text>
 							<icons.LongArrowRight alt='arrow-right' className='svg-green ml-2' />
@@ -59,14 +59,14 @@ const CentreOfExcellence = ({ data }: { data: CenterOfExcellenceDetail[]; }) => 
 					}
 				</CardsScrollHorizontal>
 			</div>
-			<div className='px-3 md:px-40'>
+			<div className='container-content'>
 				<div className='flex row justify-between items-center'>
 					<div className='arrow-left rounded-full w-[34px] h-[34px] md:w-[44px] md:h-[44px] flex items-center justify-center cursor-pointer' onClick={ handleArrowClick('left') }>
 						<icons.LongArrowRight className='svg-white rotate-180' style={ { color: colors.paradiso.default } } />
 					</div>
 					<div>
 						<Link href='/find-a-doctor'>
-							<Button theme='primary'>{ t('createAppointmentBtnLabel') }</Button>
+							<Button theme='primary' className='max-sm:text-sm px-4 sm:px-10 py-2 sm:py-3'>{ t('createAppointmentBtnLabel') }</Button>
 						</Link>
 					</div>
 					<div className='arrow-right rounded-full w-[34px] h-[34px] md:w-[44px] md:h-[44px] flex items-center justify-center cursor-pointer' onClick={ handleArrowClick('right') }>

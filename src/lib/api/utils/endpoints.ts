@@ -28,6 +28,8 @@ const endpointData = {
 	checkPatientPhone: { path: '/patients/check-patient-phone', method: 'POST' },
 	doctorRating: { path: '/patients/patient-portal/patient-review', method: 'POST' },
 	checkBlacklist: { path: '/patients/check-blacklist', method: 'POST' },
+	reqEmailPin: { path: '/patients/reset-pin', method: 'POST' },
+	verifyEmailPin: { path: '/patients/reset-pin/verify', method: 'POST' },
 
 	// PUT
 	updatePassword: { path: '/patients/update-password', method: 'PUT' },

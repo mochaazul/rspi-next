@@ -20,15 +20,14 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
 
 	return (
 		<>
-			<div className='md:hidden'>
-				<Header
-					session={ session }
-					hospitalData={ hospitals.data }
-					centerOfExcellenceData={ centerOfExcellence.data }
-					facilityServicesData={ facilityServices.data }
-					marAllReadNotifFunc={ marAllReadNotif }
-				/>
-			</div>
+			<Header
+				session={ session }
+				hospitalData={ hospitals.data }
+				centerOfExcellenceData={ centerOfExcellence.data }
+				facilityServicesData={ facilityServices.data }
+				marAllReadNotifFunc={ marAllReadNotif }
+				className='md:hidden'
+			/>
 
 			{ children }
 		</>

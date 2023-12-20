@@ -3,7 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { colors, fonts } from '@/constant';
+import { colors } from '@/constant';
 
 type ThemeType = 'primary' | 'secondary' | 'outline' | 'text';
 
@@ -109,7 +109,6 @@ const buttonHoverTheme = ({
 
 const ButtonStyle = styled.button<ButtonStyleType>`
 	transition: all .3s;
-	font-family: ${ fonts.lato }, Arial, sans-serif;
   background-color: white;
   border-radius: 5px;
   padding: ${ props => props.noPadding ? '0px' : '12px 20px' };

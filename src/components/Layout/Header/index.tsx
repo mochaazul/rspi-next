@@ -38,13 +38,15 @@ export const Header = ({
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData,
-	marAllReadNotifFunc
+	marAllReadNotifFunc,
+	className
 }: {
 	session?: UserSessionData,
 	hospitalData: HospitalDetail[],
 	centerOfExcellenceData: CenterOfExcellenceDetail[],
 	facilityServicesData: FacilityServicesDetail[],
 	marAllReadNotifFunc?: () => any;
+	className?: string;
 }) => {
 
 	const router = useRouter();
@@ -245,7 +247,7 @@ export const Header = ({
 
 	const renderMenuMobileWithSubmenu = (label: string, id: string) => {
 		return (
-			<div className='nav-menu flex items-center justify-end gap-2.5' onClick={ () => setActiveSubMenuIdMobile(id) }>
+			<div className='nav-menu flex items-center justify-between gap-2.5' onClick={ () => setActiveSubMenuIdMobile(id) }>
 				<Text text={ label } fontSize='16px' fontWeight='700' />
 				<icons.ArrowRight className='w-4 h-4 [&>path]:fill-[#6A6D81] flex-shrink-0' />
 			</div>
@@ -290,8 +292,7 @@ export const Header = ({
 					)
 					: (
 						<>
-							{ renderMenuMobile(t('login'), '/login') }
-							{ renderMenuMobile(t('register'), '/register') }
+							{ renderMenuMobile(t('loginRegister'), '/login') }
 							{ renderMenuMobile(t('bookAppointment'), '/find-a-doctor') }
 						</>
 					) }
@@ -334,14 +335,14 @@ export const Header = ({
 		}
 	};
 	return (
-		<HeaderStyle>
-			<div className='w-full '>
+		<HeaderStyle className={ className }>
+			<div className='w-full'>
 				<div className='lg:flex hidden'>
 					<MainNavLanguage session={ session } />
 				</div>
-				<header className='bg-white'>
-					<nav className='mx-auto flex items-center justify-between gap-2 lg:gap-5 px-4 lg:px-10 h-[64px] lg:h-[90px]' aria-label='Global'>
-						<div className='flex items-center gap-x-10'>
+				<header className='bg-white navbar w-full'>
+					<nav className='mx-auto flex items-center justify-between container-page gap-2 lg:gap-5 h-[64px] lg:h-[90px]' aria-label='Global'>
+						<div className='flex items-center gap-x-5 xl2:gap-x-10'>
 							<Link href='/' className='relative overflow-hidden w-[70px] h-8 lg:w-[132px] lg:h-[60px]'>
 								<Image
 									src='/images/logo_rspi.svg'
@@ -350,7 +351,7 @@ export const Header = ({
 									fill
 								/>
 							</Link>
-							<div className='hidden lg:flex lg:gap-x-5'>
+							<div className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
 								<div id='home'>
 									<Link href='/'>
 										<Text text={ t('home') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
@@ -444,17 +445,20 @@ export const Header = ({
 								</Link>
 							</div>
 						</div>
-						<div className='flex lg:hidden items-center gap-x-6'>
+						<div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
 							{ renderNotifIcon() }
 							<button
 								type='button'
 								className='-m-2 inline-flex items-center justify-center p-2 focus:outline-none focus:ring-0'
 								onClick={ () => setShowSideBar(!showSideBar) }
 							>
-								<Icons.AlignLeft color={ colors.grey.darkOpacity } size={ 24 } />
+								{ showSideBar
+									? <Icons.X color={ colors.grey.darkOpacity } size={ 24 } />
+									: <Icons.AlignLeft color={ colors.grey.darkOpacity } size={ 24 } /> }
+
 							</button>
 						</div>
-						<div className='hidden lg:flex lg:items-center lg:gap-x-5'>
+						<div className='hidden lg:flex lg:items-center lg:gap-x-4 xl2:gap-x-5'>
 							<Link href='/find-a-doctor'>
 								<Button className='h-11 px-5 flex items-center whitespace-nowrap text-base font-black'>
 									{ t('bookAppointment') }
