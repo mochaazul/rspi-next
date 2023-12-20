@@ -81,7 +81,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
 					{ children.map((item, index) => {
 						return (
 							<div
-								className={ 'slider__item slider__item-active-' + (activeIndex + 1) }
+								className={ 'max-h-[550px] slider__item slider__item-active-' + (activeIndex + 1) }
 								key={ index }
 							>
 								{ item }

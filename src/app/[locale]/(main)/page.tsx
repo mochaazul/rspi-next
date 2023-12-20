@@ -36,6 +36,8 @@ export default async function Page() {
 	const awards = await getAwards({}, { page: 1, limit: 8 });
 	const currentLang = getCurrentLocale();
 
+	console.log(banner);
+
 	const arrayBanner = () => {
 		if (currentLang === 'id') {
 			return banner.data.map((image: any, index: any) => {

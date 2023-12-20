@@ -61,6 +61,7 @@ const Combobox = ({
     			.replace(/\s+/g, '')
     			.includes(query.toLowerCase().replace(/\s+/g, ''))
     	);
+	
 	return (
 		<div>
 			<HeadlessCombobox value={ selected } onChange={ item => {
@@ -87,7 +88,7 @@ const Combobox = ({
 							{ ...(retainValue ? { displayValue: (item: ItemType) => `${item?.label ?? ''}` } : {}) }
 						/>
 						{
-							(query) && (
+							(retainValue ? selected : query) && (
 								<ClearWrapper onClick={ () => {
 									if (onSelectValue) {
 										setSelected(null);
