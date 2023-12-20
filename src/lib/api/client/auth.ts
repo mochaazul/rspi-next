@@ -66,3 +66,11 @@ export const useCheckPhonePatient = (options?: ApiOptions) => {
 export const usePostCheckPinMutation = (options?: ApiOptions) => {
 	return useSWRMutation('checkPin', (key, { arg }: { arg: CheckPinType; }) => fetcher<UserData[]>('checkPin', { ...options, body: arg }));
 };
+
+export const usePostRequestEmailVerifPinMutation = (options?: ApiOptions) => {
+	return useSWRMutation('reqEmailPin', (key) => fetcher<UserData[]>('reqEmailPin', { ...options }));
+};
+
+export const usePostVerificationEmailVerifPinMutation = (options?: ApiOptions) => {
+	return useSWRMutation('verifyEmailPin', (key, { arg }: { arg: { token: string; }; }) => fetcher<any>('verifyEmailPin', { ...options, query: arg }));
+};
