@@ -44,6 +44,22 @@ type BookAppointmentProps = {
 	userProfile: UserDataDetail;
 };
 
+type GuarantorOption = {
+	id: { [key: string]: string; };
+	en: { [key: string]: string; };
+};
+
+export const guarantorOptions: GuarantorOption = {
+	id: {
+		pribadi: 'pribadi',
+		asuransi: 'asuransi',
+	},
+	en: {
+		pribadi: 'self',
+		asuransi: 'insurance',
+	}
+};
+
 const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAppointmentProps) => {
 	const t = useScopedI18n('page.bookingAppointment');
 	const session = useSession();
@@ -224,7 +240,8 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				'phone': selectedProfile?.phone ?? '',
 				'main_complaint': keluhan,
 				'necessity_action': tindakan,
-				'payment_method': penjamin,
+				'payment_method_idn': guarantorOptions.id[penjamin],
+				'payment_method_en': guarantorOptions.en[penjamin],
 				'service': serviceMap(searchParams.get('service') ?? ''), // TEL / APP
 				'hospital_code': timeSlot?.hospital_code,
 				'insurance_name': asuransi,

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 
 import { CustomCarousel, Text, Tabs } from '@/components/ui';
 import { useScopedI18n } from '@/locales/client';
@@ -36,7 +37,9 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 			<div className='mt-[30px]'>
 				{ content?.doctors?.map((doctor: any, index: number) => {
 					return <div key={ index } className='mb-[20px]'>
-						<Text text={ doctor?.doctor_name } fontWeight='700' className='mb-[5px]' />
+						<Link href={ `/doctor/${ doctor?.doctor_code }` } className='hover:underline'>
+							<Text text={ doctor?.doctor_name } fontWeight='700' className='mb-[5px]' />
+						</Link>
 						<Text text={ doctor?.speciality } fontWeight='400' color={ colors.grey.dark } />
 					</div>;
 				}) }

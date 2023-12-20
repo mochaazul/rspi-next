@@ -27,9 +27,26 @@ export const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-width: 48px;
-
+  
   svg.svg-darkgrey circle,
   svg.svg-darkgrey path {
     stroke: ${ colors.grey.darkOpacity };
   }
+`;
+
+export const ClearWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 16px;
+  background-color: ${ colors.grey.light };
+  padding: 4px;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  z-index: 200;
+  
+
 `;

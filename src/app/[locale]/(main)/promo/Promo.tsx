@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 
 import { EventClassesState, HospitalDetail, HospitalState, Pagination } from '@/interface';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
 	Breadcrumbs,
 	Button,
@@ -17,9 +18,21 @@ import { promoPageEvent } from '@/utils/metaPixelTrack';
 import { useScopedI18n } from '@/locales/client';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 
-import { fetchEvents } from './helpers';
 import { EventClassesPromoStyle } from './style';
 import { PanelH1 } from '../style';
+
+type DataEventProps = {
+	id: number;
+	img_url_card?: string;
+	title?: string;
+	short_description?: string;
+	slug?: string;
+}
+
+type DataHospitalProps = {
+	id: number;
+	name?: string;
+}
 
 const EventClassesPromo = ({
 	hospitalSelector,
@@ -28,46 +41,51 @@ const EventClassesPromo = ({
 	pagination
 }: {
 	breadcrumbsPath: BreadcrumbsType['datas'],
-	hospitalSelector: HospitalDetail[],
-	events: EventClassesState['events'],
+	hospitalSelector: DataHospitalProps[],
+	events: DataEventProps[],
 	pagination: Pagination,
 }) => {
 	const t = useScopedI18n('page.promoPage');
+	const searchParam = useSearchParams()!;
+	
+	const pathname = usePathname();
+	const navigate = useRouter();
 
-	const [pageNumber, setPageNumber] = useState(1);
-	const [hospitalID, setHospitalID] = useState<number | string>('');
-	const [category, setCategory] = useState<'' | 'event' | 'class' | 'promo'>('');
-	const [eventsData, setEventsData] = useState(events);
+	const params = new URLSearchParams(searchParam);
+	const categoryParams = params.get('category') ?? '';
+	const hospitalIDParams = params.get('hospital_id') ?? '';
+	const pageParams = params.get('page') ?? 1;
+	
 	const [loading, setLoading] = useState(false);
 
 	const hospitalArr = Object.values(hospitalSelector || [])?.map(hospital => ({ key: hospital?.id?.toString(), value: hospital?.id?.toString(), label: hospital?.name }));
 
 	useEffect(() => {
-		setLoading(true);
-		fetchEvents({
-			page: pageNumber,
-			limit: 10,
-			category: category,
-			hospital_id: hospitalID
-		}).then(function(response: any) {
-			setEventsData(response.data);
-			setLoading(false);
-		});
 		promoPageEvent();
 	}, []);
 
-	useEffect(() => {
-		setLoading(true);
-		fetchEvents({
-			page: pageNumber,
-			limit: 10,
-			category: category,
-			hospital_id: hospitalID
-		}).then(function(response: any) {
-			setEventsData(response.data);
-			setLoading(false);
-		});
-	}, [hospitalID, category]);
+	const filterCategory = (cat: '' | 'event' | 'class' | 'promo') => {
+		if (cat === '') {
+			params.delete('category');
+		} else {
+			params.set('category', cat);
+		}
+		navigate.push(`${ pathname }?${ params.toString() }`);
+	};
+
+	const filterHospitalID = (id: string) => {
+		if (id === '') {
+			params.delete('hospital_id');
+		} else {
+			params.set('hospital_id', id);
+		}
+		navigate.push(`${ pathname }?${ params.toString() }`);
+	};
+	
+	const filterPage = (pages: number) => {
+		params.set('page', pages.toString());
+		navigate.push(`${ pathname }?${ params.toString() }`);
+	};
 
 	return (
 		<EventClassesPromoStyle>
@@ -93,24 +111,25 @@ const EventClassesPromo = ({
 						/>
 						<div className='min-w-[300px]'>
 							<Form.Dropdown
+								defaultValue={ hospitalIDParams }
 								placeholder={ t('allHospitalLabel') }
 								menuItems={ [{ key: '', value: '', label: t('allHospitalLabel') }, ...hospitalArr] }
-								onChange={ event => setHospitalID(event.currentTarget.value === '' ? '' : parseInt(event.currentTarget.value)) }
+								onChange={ event => filterHospitalID(event.currentTarget.value) }
 							/>
 						</div>
 					</div>
 					<div className='flex flex-row mt-[50px] gap-4 items-center max-sm:justify-between'>
 						<div>
-							<Button className='mb-4' theme={ category === '' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('') }>{ t('tabPillsLabel.allLabel') }</Button>
+							<Button className='mb-4' theme={ categoryParams === '' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('') }>{ t('tabPillsLabel.allLabel') }</Button>
 						</div>
 						<div>
-							<Button className='mb-4' theme={ category === 'event' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('event') }>{ t('tabPillsLabel.eventLabel') }</Button>
+							<Button className='mb-4' theme={ categoryParams === 'event' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('event') }>{ t('tabPillsLabel.eventLabel') }</Button>
 						</div>
 						<div>
-							<Button className='mb-4' theme={ category === 'class' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('class') }>{ t('tabPillsLabel.classesLabel') }</Button>
+							<Button className='mb-4' theme={ categoryParams === 'class' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('class') }>{ t('tabPillsLabel.classesLabel') }</Button>
 						</div>
 						<div>
-							<Button className='mb-4' theme={ category === 'promo' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => setCategory('promo') }>{ t('tabPillsLabel.promoLabel') }</Button>
+							<Button className='mb-4' theme={ categoryParams === 'promo' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('promo') }>{ t('tabPillsLabel.promoLabel') }</Button>
 						</div>
 					</div>
 				</div>
@@ -121,14 +140,14 @@ const EventClassesPromo = ({
 						}
 						{
 
-							!loading && eventsData?.map((data, index) => {
+							!loading && events?.map((data, index) => {
 								return (
 									<Card
 										id={ data.id }
 										key={ index }
 										image={ data.img_url_card }
 										imageHeight='200px'
-										content={ <CardContent title={ data.title } description={ data.short_description } /> }
+										content={ <CardContent title={ data?.title ?? '' } description={ data?.short_description ?? '' } /> }
 										footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
 										className='mb-0'
 										to={ `/promo/${ data.slug }` }
@@ -138,7 +157,7 @@ const EventClassesPromo = ({
 							})
 						}
 						{
-							!loading && eventsData?.length === 0 ?
+							!loading && events?.length === 0 ?
 								<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
 									<EmptyData menu='Promo and Packages' />
 								</Text> : <></>
@@ -148,8 +167,8 @@ const EventClassesPromo = ({
 				<div className='mt-[50px] flex flex-col items-center'>
 					<PaginationNumber
 						totalPage={ pagination?.total_page ?? 1 }
-						currentPage={ pageNumber }
-						onItemClick={ page => setPageNumber(page) }
+						currentPage={ Number(pageParams) ?? 1 }
+						onItemClick={ page => filterPage(page) }
 					/>
 				</div>
 			</PanelH1>

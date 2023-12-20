@@ -20,6 +20,8 @@ import {
 	icons,
 	sosmedLink
 } from '@/constant';
+import dayjs from 'dayjs';
+import { useCurrentLocale } from '@/locales/client';
 
 const NewsDetail = ({
 	filteredSelectedArticle,
@@ -38,6 +40,7 @@ const NewsDetail = ({
 
 	const t = useScopedI18n('page.newsDetail');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
+	const currentLang = useCurrentLocale();
 
 	const renderNews = () => {
 		return (
@@ -61,7 +64,7 @@ const NewsDetail = ({
 						{ Object.values(relatedNews || []).map((a, index) => {
 							return (
 								<div key={ index }>
-									<Link href={ `/news/${a.slug}` }>
+									<Link href={ `/news/${ a.slug }` }>
 										<Text
 											text={ a.posted_date }
 											className='py-[10px]'
@@ -123,25 +126,29 @@ const NewsDetail = ({
 						<div className='w-fit'>
 							<Button label={ filteredSelectedArticle?.category } className='px-[8px] py-[6px] capitalize' />
 						</div>
-						<div className={ `${filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'sm:w-[729px] '} ` }>
+						<div className={ `${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'sm:w-[729px] ' } ` }>
 							<Text fontWeight='900' fontSize='32px' lineHeight='48px' className='my-[20px]'>
 								{ filteredSelectedArticle?.title }
 							</Text>
 							{
 								filteredSelectedArticle?.news_author?.doctor_name ?
 									<Text
-										text={ `${ t('oleh') } ${ filteredSelectedArticle?.news_author?.doctor_name }` }
 										fontWeight='400'
 										fontSize='18px'
 										lineHeight='22px'
 										color={ colors.grey.dark }
-									/>
+									>
+										<span>{ t('oleh') }{ ' ' }</span>
+										<Link href={ `/doctor/${ filteredSelectedArticle?.author }` } className='hover:underline'>
+											<span>{ filteredSelectedArticle?.news_author?.doctor_name }</span>
+										</Link>
+									</Text>
 									: <></>
 							}
-							
+
 							<div className='flex items-center gap-[30px] mt-[20px]'>
 								<Text
-									text={ moment(filteredSelectedArticle?.posted_date).format('dddd, DD MMM YYYY') }
+									text={ dayjs(filteredSelectedArticle?.posted_date).locale(currentLang).format('dddd, DD MMMM YYYY') }
 									fontWeight='400'
 									fontSize='18px'
 									lineHeight='22px'
@@ -168,7 +175,7 @@ const NewsDetail = ({
 							</div>
 						</div>
 						<div className='content-wrapper flex mt-[20px] mb-[100px]'>
-							<div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-[30px] ` }>
+							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-[30px] ` }>
 								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' } >
 									<Tabs
@@ -202,7 +209,7 @@ const NewsDetail = ({
 									</div>
 								</div>
 							</div>
-							<div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] '} ` }>
+							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] ' } ` }>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'w-[349px]' }>
 									<Tabs
 										activeTabIndex={ activeTabIdx }
@@ -213,9 +220,9 @@ const NewsDetail = ({
 										{ Object.values(relatedNews || [])?.map((a, index) => {
 											return (
 												<div key={ index }>
-													<Link href={ `/news/${a.slug}` }>
+													<Link href={ `/news/${ a.slug }` }>
 														<Text
-															text={ a.posted_date }
+															text={ dayjs(a.posted_date).locale(currentLang).format('dddd, DD MMMM YYYY') }
 															className='py-[10px]'
 															fontSize='12px'
 															fontWeight='400'
@@ -246,14 +253,16 @@ const NewsDetail = ({
 										{ Object.values(specialty || [])?.map((specialty, index) => {
 											return (
 												<div key={ index }>
-													<Text
-														text={ specialty.fullname_doctor }
-														className='py-[10px]'
-														fontSize='14px'
-														fontWeight='900'
-														lineHeight='24px'
-														color={ colors.grey.darker }
-													/>
+													<Link href={ `/doctor/${ specialty.doctor_code }` } className='hover:underline'>
+														<Text
+															text={ specialty.fullname_doctor }
+															className='py-[10px]'
+															fontSize='14px'
+															fontWeight='900'
+															lineHeight='24px'
+															color={ colors.grey.darker }
+														/>
+													</Link>
 													<Text
 														text={ specialty.speciality }
 														className='pb-[10px]'

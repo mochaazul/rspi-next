@@ -61,7 +61,7 @@ const NewsHealthArticlesPage = ({
 				keyword: keyArticle,
 				with_healthfirst: tabData[activeTab]?.value === 'healthfirst'
 			}
-		}).then(function(response: any) {
+		}).then(function (response: any) {
 			setArticlesData(response.data);
 			setLoading(false);
 		});
