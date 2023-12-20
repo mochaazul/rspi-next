@@ -58,9 +58,8 @@ const FooterServices = ({
 		</div>
 	);
 
-
 	const breadcrumbsPath = [
-		{ name: detail?.[0]?.title, url: `/footer/${ detail?.[0]?.slug }` },
+		{ name: detail?.[0]?.title, url: `/${ detail?.[0]?.slug }` },
 	];
 
 	return (
