@@ -29,13 +29,13 @@ const CentreOfExcellence = ({ data }: { data: CenterOfExcellenceDetail[]; }) => 
 				<Text fontSize='44px' fontType='h2' fontWeight='900' color={ colors.grey.darker } lineHeight='57px' subClassName='heading-section'>
 					{ t('heading') }
 				</Text>
-				<div className='slider-title flex row justify-between items-center mt-3'>
-					<Text fontSize='20px' fontType='p' fontWeight='400' color={ colors.grey.dark }>
+				<div className='slider-title flex max-sm:flex-col max-sm:gap-3 sm:justify-between sm:items-center mt-3'>
+					<Text fontSize='20px' fontType='p' fontWeight='400' color={ colors.grey.dark } subClassName='subheading-section'>
 						{ t('subHeading') }
 					</Text>
-					<Link href={ `centre-of-excellence/${ data[0]?.slug }` } className='max-sm:hidden'>
-						<div className='see-all flex row items-center'>
-							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-right'>
+					<Link href={ `centre-of-excellence/${ data[0]?.slug }` }>
+						<div className='see-all flex sm:items-center'>
+							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-left sm:text-right'>
 								{ t('allItemBtnLabel') }
 							</Text>
 							<icons.LongArrowRight alt='arrow-right' className='svg-green ml-2' />

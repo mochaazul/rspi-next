@@ -17,13 +17,12 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
 
 	return (
 		<>
-			<div className='md:hidden'>
-				<Header
-					hospitalData={ hospitals.data }
-					centerOfExcellenceData={ centerOfExcellence.data }
-					facilityServicesData={ facilityServices.data }
-				/>
-			</div>
+			<Header
+				hospitalData={ hospitals.data }
+				centerOfExcellenceData={ centerOfExcellence.data }
+				facilityServicesData={ facilityServices.data }
+				className='md:hidden'
+			/>
 
 			{ children }
 		</>

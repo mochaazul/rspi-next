@@ -53,7 +53,6 @@ const TextStyle = styled.div<StyleProps>`
       font-size: ${ props.fontSize || '24px' };
       text-align: ${ props.$textAlign || 'left' };
       font-weight: ${ props.fontWeight || 'unset' };
-      font-weight: ${ props.fontFamily };
       line-height: ${ props.$lineHeight || '36px' } ;
 
       span {

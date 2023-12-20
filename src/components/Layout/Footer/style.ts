@@ -40,12 +40,12 @@ const FooterStyled = styled.footer`
     min-width: 0 !important;
   }
   .sub-button {
-    padding: 0.95em;
-    max-width: 7em;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 0px 5px 5px 0px;
+    width: fit-content;
 
     &, > .bg-overlay,
     &:hover > .bg-overlay {

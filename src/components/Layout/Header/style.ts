@@ -9,11 +9,7 @@ const HeaderStyle = styled.div`
   top: 0;
 
   .navbar {
-    width: 100%;
-    display: flex;
-    margin: auto;
-    justify-content: space-between;
-    background-color: ${ colors.white.default };
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08);
   }
 
   .leftNav {
@@ -85,10 +81,7 @@ const HeaderStyle = styled.div`
   }
 
   .nav-menu {
-    padding: 20px 26px 20px 0;
-      p {
-        text-align: right;
-      }
+    padding: 16px;
   }
 
   .close-icon {
@@ -112,9 +105,9 @@ const HeaderStyle = styled.div`
 
   @media screen and (max-width: 640px) {
     .navbar {
-      padding: 0 15px;
       box-shadow:0px 4px 4px 0px rgba(53, 136, 136, 0.12);
     }
+
     .logo a {
       svg {
         height: 50px;

@@ -653,7 +653,9 @@ export default {
 			loginBtnLabel: 'Login',
 			footer: {
 				notRegisteredLabel: 'Don\'t have an account yet? Please register',
-				cta: 'here'
+				cta: 'here',
+				notRegisteredLabelMobile: 'Don\'t have an account yet?',
+				registerBtnLabel: 'Register',
 			},
 			form: {
 				emailLabel: 'Email',
@@ -692,7 +694,9 @@ export default {
 			registerBtnLabel: 'Register',
 			footer: {
 				hasAccountLabel: 'Already have an account? Please log in',
-				cta: 'here'
+				cta: 'here',
+				hasAccountLabelMobile: 'Already have an account?',
+				loginBtnLabel: 'Login',
 			},
 			buttonPrivacy: 'Next',
 			buttonTnC: 'Send',
