@@ -81,7 +81,7 @@ const Card = (props: PropsType) => {
 			</Link>
 			{
 				props.iconShare &&
-				<div className={ 'max-sm:hidden block' }>
+				<div className='block'>
 					<Share id={ props.id } />
 				</div>
 			}
