@@ -120,6 +120,15 @@ const MedicalSpecialitiesComponent = ({
 
 			<div className='mt-4 md:mt-8'>
 				<div>
+					<div className='w-full mb-4 md:mb-8'>
+						<Image
+							src='/images/specialities/background.png'
+							alt='medicalSpecialities'
+							className='object-cover object-top w-full'
+							width={ 1600 }
+							height={ 350 }
+						/>
+					</div>
 					<Text
 						fontSize='16px'
 						lineHeight='24px'
@@ -127,15 +136,15 @@ const MedicalSpecialitiesComponent = ({
 					>
 						{ t('content') }
 					</Text>
-					<div className='mt-4 mb-4 md:hidden'>
+					<div className='mt-4 md:hidden'>
 						<CardMenu paramsSlug={ paramsSlug } data={ facilityData } />
 					</div>
-					<MedicalSpecialitiesItemContainer className='mt-[24px] w-full flex max-md:flex-col md:grid md:grid-cols-3 gap-4 md:gap-8'>
+					<MedicalSpecialitiesItemContainer className='mt-[50px] md:mt-8 w-full grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6'>
 						{
 							medicalSpecialities?.map((item, key) => {
 								return (
 									<Link key={ key } href={ `/medical-specialities/${ item.slug }` }>
-										<div className='bg-white p-3 md:p-5 flex justify-between gap-2 w-full h-full specialities-item-container md:min-h-[96px]'>
+										<div className='bg-white p-3 md:p-4 flex justify-between gap-2 w-full h-full specialities-item-container min-h-[64px] md:min-h-[88px]'>
 											<Text
 												text={ item.title }
 												fontSize='16px'
