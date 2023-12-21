@@ -21,8 +21,8 @@ const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; 
 	const eventsOther = eventsData?.data?.filter(ev => {
 		return ev?.slug !== newParam;
 	});
-
-	const breadcrumbsPath = [{ name: t('heading'), url: '/promo' }, { url: '#', name: selectedEvent?.data[0]?.title || '' }];
+	
+	const breadcrumbsPath = [{ name: t('heading'), url: '/promo' }, { url: '#', name: Object.values(selectedEvent)[0].title || '' }];
 
 	return (
 		<PanelV1>

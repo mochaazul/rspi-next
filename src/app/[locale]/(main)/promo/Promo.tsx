@@ -12,7 +12,7 @@ import {
 	Spinner,
 	EmptyData
 } from '@/components/ui';
-import Card, { CardContent, CardsScrollHorizontal } from '@/components/ui/Card';
+import Card, { CardContent, CardContentWithInner, CardsScrollHorizontal } from '@/components/ui/Card';
 import { colors } from '@/constant';
 import { promoPageEvent } from '@/utils/metaPixelTrack';
 import { useScopedI18n } from '@/locales/client';
@@ -27,6 +27,8 @@ type DataEventProps = {
 	title?: string;
 	short_description?: string;
 	slug?: string;
+	hospitals?: any;
+	category: string;
 }
 
 type DataHospitalProps = {
@@ -151,7 +153,23 @@ const EventClassesPromo = ({
 										key={ index }
 										image={ data.img_url_card }
 										imageHeight='200px'
-										content={ <CardContent title={ data?.title ?? '' } description={ data?.short_description ?? '' } /> }
+										header={
+											<Text
+												color={ colors.grey.dark }
+												fontSize='16px'
+												text={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
+												fontWeight='400'
+												subClassName='max-sm:text-xs max-sm:leading-normal'
+											/>
+										}
+										content={
+											<CardContentWithInner
+												title={ data.title || '' }
+												description={ data.short_description || '' }
+												RSLocation={ (data.hospitals ?? []).map((hospital: { hospital_name: any; }) => hospital.hospital_name) }
+												index={ index }
+											/>
+										}
 										footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
 										className='mb-0 !w-[100%]'
 										to={ `/promo/${ data.slug }` }
@@ -168,7 +186,7 @@ const EventClassesPromo = ({
 						}
 					</div>
 					<div className='mobile-view w-full sm:hidden grid grid-cols-1'>
-						<CardsScrollHorizontal >
+						<CardsScrollHorizontal className='pl-0' >
 							{
 								events?.map((data, index) => {
 									return (
@@ -177,7 +195,23 @@ const EventClassesPromo = ({
 											key={ index }
 											image={ data.img_url_card }
 											imageHeight='200px'
-											content={ <CardContent title={ data?.title ?? '' } description={ data?.short_description ?? '' } /> }
+											header={
+												<Text
+													color={ colors.grey.dark }
+													fontSize='16px'
+													text={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
+													fontWeight='400'
+													subClassName='max-sm:text-xs max-sm:leading-normal'
+												/>
+											}
+											content={
+												<CardContentWithInner
+													title={ data.title || '' }
+													description={ data.short_description || '' }
+													RSLocation={ (data.hospitals ?? []).map((hospital: { hospital_name: any; }) => hospital.hospital_name) }
+													index={ index }
+												/>
+											}
 											footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
 											className='mb-0 !w-[90%]'
 											to={ `/promo/${ data.slug }` }

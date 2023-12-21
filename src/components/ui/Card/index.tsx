@@ -81,7 +81,7 @@ const Card = (props: PropsType) => {
 			</Link>
 			{
 				props.iconShare &&
-				<div className='block'>
+				<div className={ 'block' }>
 					<Share id={ props.id } />
 				</div>
 			}

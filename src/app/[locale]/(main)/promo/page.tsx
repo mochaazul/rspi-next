@@ -21,6 +21,8 @@ const Promo = async ({ searchParams }: any) => {
 		title: event?.title ?? '',
 		short_description: event?.short_description ?? '',
 		slug: event?.slug ?? '',
+		category: event?.category,
+		hospitals: event?.hospitals
 	}));
 
 	const getHospital = await getHospitals();

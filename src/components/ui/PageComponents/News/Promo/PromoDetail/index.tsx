@@ -37,6 +37,7 @@ const PromoDetail: React.FC<Props> = ({
 
 	return (
     	<div>
+			<Breadcrumbs datas={ breadcrumbsPath } />
 			<div className='mt-[50px]'>
 				
 				<Text 
