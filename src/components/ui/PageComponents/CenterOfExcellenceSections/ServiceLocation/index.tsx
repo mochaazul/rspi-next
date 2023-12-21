@@ -55,6 +55,7 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 		return Contents[activeTabIdx] ?? null;
 	}, [activeTabIdx, activeMenuIndex]);
 
+	console.log(content);
 	return (
 		<div>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h1' }>
@@ -97,11 +98,11 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 				</div>
 			</div>
 			<div className='mt-[92px]'>
-				<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default }>
+				<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h4' }>
 					{ t('serviceLocation.heading') }
 				</Text>
 
-				<Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineHeight='24px'>
+				<Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineHeight='24px' >
 					{ content.available_at[0] }
 				</Text>
 

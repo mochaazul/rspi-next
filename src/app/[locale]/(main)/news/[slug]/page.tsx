@@ -10,14 +10,14 @@ import {
 
 import NewsDetail from '@/components/ui/PageComponents/News/NewsDetail';
 
-const DetailNewsHealthPage = async ({ params }: { params: { slug: string; }; }) => {
+const DetailNewsHealthPage = async({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.newsDetail');
 
 	const newParam = decodeURIComponent(params?.slug);
 	const selectedArticle = await getArticleBySlug({ query: { slug: newParam } });
 
 	if (selectedArticle?.data?.filter(news => `${ news.slug }` === newParam).length <= 0) {
-		redirect(`/news`);
+		redirect('/news');
 	};
 
 	const filteredSelectedArticle = selectedArticle?.data?.find(coe => {

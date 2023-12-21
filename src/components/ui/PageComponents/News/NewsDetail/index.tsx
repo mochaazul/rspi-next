@@ -17,7 +17,6 @@ import {
 
 import {
 	colors,
-	icons,
 	sosmedLink
 } from '@/constant';
 import dayjs from 'dayjs';
@@ -41,6 +40,8 @@ const NewsDetail = ({
 	const t = useScopedI18n('page.newsDetail');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 	const currentLang = useCurrentLocale();
+
+	console.log(filteredSelectedArticle);
 
 	const renderNews = () => {
 		return (
@@ -148,7 +149,8 @@ const NewsDetail = ({
 
 							<div className='flex items-center gap-[30px] mt-[20px]'>
 								<Text
-									text={ dayjs(filteredSelectedArticle?.posted_date).locale(currentLang).format('dddd, DD MMMM YYYY') }
+									text={ dayjs(filteredSelectedArticle?.posted_date).locale(currentLang)
+										.format('dddd, DD MMMM YYYY') }
 									fontWeight='400'
 									fontSize='18px'
 									lineHeight='22px'
@@ -222,7 +224,8 @@ const NewsDetail = ({
 												<div key={ index }>
 													<Link href={ `/news/${ a.slug }` }>
 														<Text
-															text={ dayjs(a.posted_date).locale(currentLang).format('dddd, DD MMMM YYYY') }
+															text={ dayjs(a.posted_date).locale(currentLang)
+																.format('dddd, DD MMMM YYYY') }
 															className='py-[10px]'
 															fontSize='12px'
 															fontWeight='400'
