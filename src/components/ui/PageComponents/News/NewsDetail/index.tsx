@@ -4,7 +4,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import Link from 'next/link';
 import Image from 'next/image';
-
+import TextHtml from '@/components/ui/TextHtml';
 import { ArticleDetail, ArticleState } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
 
@@ -37,7 +37,7 @@ const NewsDetail = ({
 		url: string;
 	}[],
 }) => {
-
+	
 	const t = useScopedI18n('page.newsDetail');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 	const currentLang = useCurrentLocale();
@@ -45,15 +45,17 @@ const NewsDetail = ({
 	const renderNews = () => {
 		return (
 			<div>
-				<Text fontWeight='700' fontSize='20px' lineHeight='30px'>
+				<Text fontType='p' fontWeight='700' fontSize='20px' lineHeight='30px'>
 					{ filteredSelectedArticle?.short_description }
 				</Text>
 				<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
-				<div
+				
+				<TextHtml
 					style={ { color: colors.grey.dark } }
 					className='innerHTML mt-[10px]'
-					dangerouslySetInnerHTML={ { __html: filteredSelectedArticle?.content || '' } }
+					htmlStr={ filteredSelectedArticle?.content ?? '' }
 				/>
+				
 				<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' }>
 					<Tabs
 						activeTabIndex={ activeTabIdx }
@@ -72,8 +74,10 @@ const NewsDetail = ({
 											fontWeight='400'
 											lineHeight='14px'
 											color={ colors.grey.dark }
+											fontType='p'
 										/>
 										<Text
+											fontType='h3'
 											text={ a.title }
 											className='pb-[10px]'
 											fontSize='14px'
@@ -102,13 +106,17 @@ const NewsDetail = ({
 				</div>
 				<div className='lg:w-3/4 md:w-3/4 xl:w-3/4'>
 					<div className='w-full'>
-						<Text fontWeight='700' fontSize='20px' lineHeight='30px'>
+						<Text
+							fontType='p'
+							fontWeight='700'
+							fontSize='20px'
+							lineHeight='30px'>
 							{ filteredSelectedArticle?.short_description }
 						</Text>
-						<div
+						<TextHtml
 							style={ { color: colors.grey.dark } }
 							className='innerHTML mt-[10px]'
-							dangerouslySetInnerHTML={ { __html: filteredSelectedArticle?.content || '' } }
+							htmlStr={ filteredSelectedArticle?.content ?? '' }
 						/>
 						<Link href={ filteredSelectedArticle?.pdf_url } className='text-gray-500 font-bold cursor-pointer' >{ t('downloadFilePdf') } <span className='text-orange-700'>{ t('here') }</span> </Link>
 					</div>
@@ -127,12 +135,19 @@ const NewsDetail = ({
 							<Button label={ filteredSelectedArticle?.category } className='px-[8px] py-[6px] capitalize' />
 						</div>
 						<div className={ `${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'sm:w-[729px] ' } ` }>
-							<Text fontWeight='900' fontSize='32px' lineHeight='48px' className='my-[20px]'>
+							<Text
+								fontType='h1'
+								fontWeight='900'
+								fontSize='32px'
+								lineHeight='48px'
+								className='my-[20px]'
+							>
 								{ filteredSelectedArticle?.title }
 							</Text>
 							{
 								filteredSelectedArticle?.news_author?.doctor_name ?
 									<Text
+										fontType='p'
 										fontWeight='400'
 										fontSize='18px'
 										lineHeight='22px'
@@ -148,10 +163,12 @@ const NewsDetail = ({
 
 							<div className='flex items-center gap-[30px] mt-[20px]'>
 								<Text
-									text={ dayjs(filteredSelectedArticle?.posted_date).locale(currentLang).format('dddd, DD MMMM YYYY') }
+									text={ dayjs(filteredSelectedArticle?.posted_date).locale(currentLang)
+										.format('dddd, DD MMMM YYYY') }
 									fontWeight='400'
 									fontSize='18px'
 									lineHeight='22px'
+									fontType='p'
 									color={ colors.grey.dark }
 								/>
 								<div className='flex gap-[15px]'>
@@ -188,6 +205,7 @@ const NewsDetail = ({
 											return (
 												<div key={ index }>
 													<Text
+														fontType='p'
 														text={ specialty.fullname_doctor }
 														className='py-[10px]'
 														fontSize='14px'
@@ -196,6 +214,7 @@ const NewsDetail = ({
 														color={ colors.grey.darker }
 													/>
 													<Text
+														fontType='p'
 														text={ specialty.speciality }
 														className='pb-[10px]'
 														fontSize='12px'
@@ -222,14 +241,17 @@ const NewsDetail = ({
 												<div key={ index }>
 													<Link href={ `/news/${ a.slug }` }>
 														<Text
-															text={ dayjs(a.posted_date).locale(currentLang).format('dddd, DD MMMM YYYY') }
+															text={ dayjs(a.posted_date).locale(currentLang)
+																.format('dddd, DD MMMM YYYY') }
 															className='py-[10px]'
 															fontSize='12px'
+															fontType='p'
 															fontWeight='400'
 															lineHeight='14px'
 															color={ colors.grey.dark }
 														/>
 														<Text
+															fontType='h3'
 															text={ a.title }
 															className='pb-[10px]'
 															fontSize='14px'
@@ -255,6 +277,7 @@ const NewsDetail = ({
 												<div key={ index }>
 													<Link href={ `/doctor/${ specialty.doctor_code }` } className='hover:underline'>
 														<Text
+															fontType='p'
 															text={ specialty.fullname_doctor }
 															className='py-[10px]'
 															fontSize='14px'
@@ -264,6 +287,7 @@ const NewsDetail = ({
 														/>
 													</Link>
 													<Text
+														fontType='p'
 														text={ specialty.speciality }
 														className='pb-[10px]'
 														fontSize='12px'
