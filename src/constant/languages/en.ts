@@ -23,7 +23,8 @@ export default {
 		pin: {
 			header: 'Enter PIN',
 			subHeader: 'Please enter your PIN to continue.',
-			submitBtnLabel: 'Confirm'
+			submitBtnLabel: 'Confirm',
+			forgotPin: 'Forgot Pin'
 		}
 	},
 	validation: {

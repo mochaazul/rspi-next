@@ -58,3 +58,8 @@ export const verifyResetToken = (token: string) => {
 export const verifyChangeEmail = (token: string) => {
 	return fetcher<any>('verifyChangeEmailToken', { query: { token } });
 };
+
+export const verifyPinEmail = async (token: string, authorization: string) => {
+	await cookiesHelper.setTokenUser(authorization || '');
+	return fetcher<any>('verifyEmailPin', { query: { token } });
+};

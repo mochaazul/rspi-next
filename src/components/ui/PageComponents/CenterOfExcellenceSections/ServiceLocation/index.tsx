@@ -8,6 +8,7 @@ import { useScopedI18n } from '@/locales/client';
 import { colors } from '@/constant';
 
 import CardMenu from '../CardMenu';
+import TextHtml from '@/components/ui/TextHtml';
 
 interface NewsProps {
 	content?: any;
@@ -25,13 +26,19 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 	const renderContent = useMemo(() => {
 		const Contents = [];
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16' dangerouslySetInnerHTML={ { __html: content?.conditions } } />
+			<div className='mt-[30px] innerHTML text-16' >
+				<TextHtml htmlStr={ content?.conditions }/>
+			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16' dangerouslySetInnerHTML={ { __html: content?.treatments } } />
+			<div className='mt-[30px] innerHTML text-16' >
+				<TextHtml htmlStr={ content?.treatments }/>
+			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16' dangerouslySetInnerHTML={ { __html: content?.technology } } />
+			<div className='mt-[30px] innerHTML text-16'>
+				<TextHtml htmlStr={ content?.technology }/>
+			</div>
 		);
 		Contents.push(
 			<div className='mt-[30px]'>
@@ -50,7 +57,7 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 
 	return (
 		<div>
-			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
+			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h1' }>
 				{ content?.title }
 			</Text>
 
@@ -72,7 +79,9 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 			</div>
 
 			<div className='mt-[48px]'>
-				<div className='innerHTML text-16' dangerouslySetInnerHTML={ { __html: content?.content } } />
+				<div className='innerHTML text-16' >
+					<TextHtml htmlStr={ content?.content }/>
+				</div>
 			</div>
 
 			<div className='mt-[50px]'>
@@ -106,7 +115,9 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 											<Text fontSize='18px' fontWeight='900' lineHeight='24px'>
 												{ data?.split(':+split+:')[0] }
 											</Text>
-											<div className='innerHTML text-16 mt-[10px]' dangerouslySetInnerHTML={ { __html: data?.split(':+split+:')[1] } } />
+											<div className='innerHTML text-16 mt-[10px]' >
+												<TextHtml htmlStr={ data?.split(':+split+:')[1] } />
+											</div>
 										</div>
 									);
 							})

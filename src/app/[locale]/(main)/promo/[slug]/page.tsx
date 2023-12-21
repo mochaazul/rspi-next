@@ -24,7 +24,6 @@ const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; 
 
 	const breadcrumbsPath = [{ name: t('heading'), url: '/promo' }, { url: '#', name: selectedEvent?.data[0]?.title || '' }];
 
-
 	return (
 		<PanelV1>
 			<PanelH1>
