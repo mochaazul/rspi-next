@@ -107,11 +107,11 @@ const RegisterPage = () => {
 
 	return (
 		<RegisterPageStyle>
-			<div className='grid max-md:grid-cols-2 grid-cols-3 max-md:gap-0 gap-3 w-full overflow-x-hidden'>
-				<div className='col-span-2'>
+			<div className='min-h-[calc(100svh-64px)] md:min-h-screen flex max-md:flex-col flex-grow max-md:justify-between h-full md:grid md:grid-cols-3 md:gap-3 w-full'>
+				<div className='md:col-span-2 flex-1 relative overflow-hidden h-full'>
 					<Form className={ `
-					max-md:py-6 max-md:px-4
-					md:p-8 min-h-screen flex flex-col items-center md:justify-center max-md:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 m-auto
+					max-md:py-6 max-md:container-page
+					md:p-8 flex flex-col md:items-center md:justify-center max-md:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 md:m-auto
 					` }
 						onSubmit={ e => {
 							e.preventDefault();
@@ -208,7 +208,7 @@ const RegisterPage = () => {
 							className='w-full mt-6'
 							disabled={ loadingUser }
 						/>
-						<Text fontType={ null } fontSize='24px' fontWeight='400' color={ colors.grey.dark } className='max-2xl:mt-5 mt-8 max-md:text-[14px] text-[20px]'>
+						<Text fontType={ null } fontSize='24px' fontWeight='400' color={ colors.grey.dark } className='max-md:hidden max-2xl:mt-5 mt-8 max-md:text-[14px] text-[20px]'>
 							{ t('footer.hasAccountLabel') }&nbsp;
 							<Link href='/login'>
 								<Text
@@ -224,6 +224,17 @@ const RegisterPage = () => {
 					</Form>
 				</div>
 				<div className='max-md:hidden col-span-1 h-full w-full bg-no-repeat bg-cover bg-center' style={ { backgroundImage: `url(${ Images.AuthRightBG })` } } />
+
+				<div className='w-full py-6 container-page flex flex-col gap-3 items-center md:hidden'>
+					<Text fontSize='16px' lineHeight='24px' fontType={ null } color={ colors.grey.darkOpacity }>
+						{ t('footer.hasAccountLabelMobile') }
+					</Text>
+					<Link href='/login' className='w-full'>
+						<Button theme='outline' $hoverTheme='primary' className='w-full py-3'>
+							{ t('footer.loginBtnLabel') }
+						</Button>
+					</Link>
+				</div>
 			</div>
 			{ infoBoxVisible && (
 				<InfoModal

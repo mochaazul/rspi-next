@@ -27,7 +27,7 @@ const MobileAppBanner = () => {
 							{ t('heading') }
 						</Text>
 						<div className='mt-3'>
-							<Text fontSize='20px' fontWeight='400' lineHeight='28px' color={ colors.grey.dark }>
+							<Text fontSize='20px' fontWeight='400' lineHeight='28px' color={ colors.grey.dark } subClassName='subheading-section'>
 								{ t('subHeading') }
 							</Text>
 						</div>

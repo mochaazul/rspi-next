@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormikProps, useFormik } from 'formik';
 import Link from 'next/link';
 
@@ -8,16 +8,18 @@ import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
 import Form from '@/components/ui/Form';
 import Button from '@/components/ui/Button';
-import { colors } from '@/constant';
+import { colors, icons } from '@/constant';
 import NotificationPanel from '@/components/ui/NotificationPanel';
 import Spinner from '@/components/ui/Spinner';
-import { usePostCheckPinMutation } from '@/lib/api/client/auth';
+import { usePostCheckPinMutation, usePostRequestEmailVerifPinMutation } from '@/lib/api/client/auth';
 import { useScopedI18n } from '@/locales/client';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { CheckPinSchema } from '@/validator/profile';
-import { CheckPinType } from '@/interface';
+import { CheckPinType, UserSessionData } from '@/interface';
 
 import { PinModalContainer } from './style';
+import { ModalStyle } from '../PageComponents/RegisterSections/InfoModal/style';
+import getSession from '@/session/server';
 
 type Props = {
 	visible: boolean,
@@ -34,6 +36,9 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 
 	const [enableValidation, setEnableValidation] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
+	const { trigger: reqEmailPinVerification } = usePostRequestEmailVerifPinMutation();
+	const [showModalSuccessSentEmailPinVerification, setShowModalSuccessSentEmailPinVerification] = useState<boolean>(false);
+	const [sessionData, setSession] = useState<UserSessionData>();
 
 	const formikPin: FormikProps<CheckPinType> = useFormik<CheckPinType>({
 		validateOnBlur: enableValidation,
@@ -59,72 +64,122 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 		}
 	};
 
+	useEffect(() => {
+		getUserData();
+	}, []);
+
+	const getUserData = async () => {
+		const session = await getSession();
+		setSession(session);
+	};
+
 	return (
-		<Modal visible={ visible } onClose={ onClose }>
-			<PinModalContainer>
-				<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
-				<Text text={ t('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
-				{
-					error &&
-					<div className='mt-5 w-full'>
-						<NotificationPanel
-							showIconLeft={ false }
-							showIconRight={ false }
-							mode={ 'error' }
-							visible={ true }
-						>
-							<Text
-								fontType={ null }
-								fontSize='14px'
-								fontWeight='500'
-								text={ error }
-								color={ colors.red.default }
+		<>
+
+			<Modal visible={ visible } onClose={ onClose }>
+				<PinModalContainer>
+					<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
+					<Text text={ t('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
+					{
+						error &&
+						<div className='mt-5 w-full'>
+							<NotificationPanel
+								showIconLeft={ false }
+								showIconRight={ false }
+								mode={ 'error' }
+								visible={ true }
+							>
+								<Text
+									fontType={ null }
+									fontSize='14px'
+									fontWeight='500'
+									text={ error }
+									color={ colors.red.default }
+								/>
+							</NotificationPanel>
+						</div>
+					}
+					<Form
+						onSubmit={ async e => {
+							e.preventDefault();
+							setEnableValidation(true);
+							formikPin.handleSubmit();
+						} }>
+						<div className='mt-12 mb-5'>
+							<Form.TextFieldPin
+								className='input'
+								digitLength={ 6 }
+								semiSecure={ false }
+								password={ true }
+								value={ formikPin.values.pin }
+								onChangeValue={ onChangeValuePin }
+								id='pin'
+								name='pin'
+								type='password'
+								label={ t('pinLabel') }
+								errorMessage={ getValidationTranslation(tValidation, formikPin.errors.pin, { label: t('pinLabel') }) }
+								isError={ !!formikPin.errors.pin }
 							/>
-						</NotificationPanel>
-					</div>
-				}
-				<Form
-					onSubmit={ async e => {
-						e.preventDefault();
-						setEnableValidation(true);
-						formikPin.handleSubmit();
-					} }>
-					<div className='mt-12 mb-5'>
-						<Form.TextFieldPin
-							className='input'
-							digitLength={ 6 }
-							semiSecure={ false }
-							password={ true }
-							value={ formikPin.values.pin }
-							onChangeValue={ onChangeValuePin }
-							id='pin'
-							name='pin'
-							type='password'
-							label={ t('pinLabel') }
-							errorMessage={ getValidationTranslation(tValidation, formikPin.errors.pin, { label: t('pinLabel') }) }
-							isError={ !!formikPin.errors.pin }
-						/>
-					</div>
-					<div className='mb-10 flex justify-center'>
-						<Link href={ '/pin-reset' }>
+						</div>
+						<div className='mb-10 flex justify-center'>
 							<Text
 								fontSize='14px'
 								lineHeight='21px'
 								fontType={ null }
 								fontWeight='700'
 								color={ colors.paradiso.default }
-								className='ml-1 inline-block'
+								className='ml-1 inline-block cursor-pointer'
 								subClassName='text-justify max-sm:leading-[18px]'
 								text={ t('forgotPin') }
+								onClick={ async () => {
+									try {
+										const res = await reqEmailPinVerification();
+										if (res?.stat_code !== 'APP:SUCCESS') {
+											throw new Error(res?.stat_msg);
+										}
+										setShowModalSuccessSentEmailPinVerification(true);
+									} catch (error) {
+										console.error(error);
+									}
+								} }
 							/>
-						</Link>
-					</div>
-					<Button type='submit' disabled={ checkPinLoading || isLoading } >
-						{ checkPinLoading || isLoading ? <Spinner /> : t('submitBtnLabel') }
-					</Button>
-				</Form>
-			</PinModalContainer>
-		</Modal>
+						</div>
+						<Button type='submit' disabled={ checkPinLoading || isLoading } >
+							{ checkPinLoading || isLoading ? <Spinner /> : t('submitBtnLabel') }
+						</Button>
+					</Form>
+				</PinModalContainer>
+			</Modal>
+			<Modal noPadding containerClassName='w-[90vw] md:w-[480px]' visible={ showModalSuccessSentEmailPinVerification }>
+				<ModalStyle>
+					<icons.Confirmed />
+					<Text
+						fontSize='20px'
+						lineHeight='19px'
+						fontWeight='900'
+						color={ colors.black.default }
+						text={ t('modalPinTitle') }
+						className='mt-4'
+						textAlign='center'
+					/>
+					<Text
+						fontSize='16px'
+						lineHeight='19px'
+						fontWeight='400'
+						color={ colors.grey.pencil }
+						text={ `${ t('labelSuccess1') } ${ sessionData?.user?.email }, ${ t('labelSuccess2') }` }
+						className='mt-2'
+						textAlign='center'
+					/>
+					<Button
+						className='mt-6'
+						theme='primary'
+						onClick={ () => { setShowModalSuccessSentEmailPinVerification(false); setError(''); } }
+					>{ t('modalPinBtn') }</Button>
+				</ModalStyle>
+			</Modal>
+		</>
+
 	);
 };
 

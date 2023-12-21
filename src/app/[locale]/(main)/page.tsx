@@ -41,8 +41,8 @@ export default async function Page() {
 			return banner.data.map((image: any, index: any) => {
 				return <div key={ `banner-${ index }` } style={ { width: '100%' } }>
 					<Link href={ image.url_link_idn ?? '#' }>
-						<Image width={ 450 } height={ 450 } style={ { objectFit: 'contain' } } className='md:hidden' src={ image.img_url_mobile_idn || image.img_url_mobile_en } alt='slider' />
-						<Image width={ 1600 } height={ 450 } style={ { objectFit: 'contain' } } className='max-sm:hidden' src={ image.img_url_idn || image.img_url_en } alt='slider' />
+						<Image width={ 500 } height={ 500 } className='md:hidden object-contain' src={ image.img_url_mobile_idn || image.img_url_mobile_en } alt='slider' />
+						<Image width={ 1440 } height={ 580 } className='max-md:hidden object-contain' src={ image.img_url_idn || image.img_url_en } alt='slider' />
 					</Link>
 				</div>;
 			});
@@ -50,8 +50,8 @@ export default async function Page() {
 			return banner.data.map((image: any, index: any) => {
 				return <div key={ `banner-${ index }` } style={ { width: '100%' } }>
 					<Link href={ image.url_link_en ?? '#' }>
-						<Image width={ 450 } height={ 450 } style={ { objectFit: 'contain' } } className='md:hidden' src={ image.img_url_mobile_en || image.img_url_mobile_idn } alt='slider' />
-						<Image width={ 1600 } height={ 450 } style={ { objectFit: 'contain' } } className='max-sm:hidden' src={ image.img_url_en || image.img_url_idn } alt='slider' />
+						<Image width={ 500 } height={ 500 } className='md:hidden object-contain' src={ image.img_url_mobile_en || image.img_url_mobile_idn } alt='slider' />
+						<Image width={ 1440 } height={ 580 } className='max-md:hidden object-contain' src={ image.img_url_en || image.img_url_idn } alt='slider' />
 					</Link>
 				</div>;
 			});
