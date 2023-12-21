@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormikProps, useFormik } from 'formik';
 import Link from 'next/link';
 
@@ -15,10 +15,11 @@ import { usePostCheckPinMutation, usePostRequestEmailVerifPinMutation } from '@/
 import { useScopedI18n } from '@/locales/client';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { CheckPinSchema } from '@/validator/profile';
-import { CheckPinType } from '@/interface';
+import { CheckPinType, UserSessionData } from '@/interface';
 
 import { PinModalContainer } from './style';
 import { ModalStyle } from '../PageComponents/RegisterSections/InfoModal/style';
+import getSession from '@/session/server';
 
 type Props = {
 	visible: boolean,
@@ -37,6 +38,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 	const [error, setError] = useState<string>('');
 	const { trigger: reqEmailPinVerification } = usePostRequestEmailVerifPinMutation();
 	const [showModalSuccessSentEmailPinVerification, setShowModalSuccessSentEmailPinVerification] = useState<boolean>(false);
+	const [sessionData, setSession] = useState<UserSessionData>();
 
 	const formikPin: FormikProps<CheckPinType> = useFormik<CheckPinType>({
 		validateOnBlur: enableValidation,
@@ -60,6 +62,15 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 		if (data?.name) {
 			formikPin.setFieldValue(data?.name, data?.value ?? '');
 		}
+	};
+
+	useEffect(() => {
+		getUserData();
+	}, []);
+
+	const getUserData = async () => {
+		const session = await getSession();
+		setSession(session);
 	};
 
 	return (
@@ -156,7 +167,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 						lineHeight='19px'
 						fontWeight='400'
 						color={ colors.grey.pencil }
-						text={ 'Mohon periksa email Anda [email], untuk memverifikasi permintaan ubah PIN' }
+						text={ `Mohon periksa email Anda ${ sessionData?.user?.email }, untuk memverifikasi permintaan ubah PIN` }
 						className='mt-2'
 						textAlign='center'
 					/>

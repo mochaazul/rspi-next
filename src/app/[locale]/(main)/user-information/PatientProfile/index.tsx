@@ -772,7 +772,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 							lineHeight='19px'
 							fontWeight='400'
 							color={ colors.grey.pencil }
-							text={ 'Mohon periksa email Anda [email], untuk memverifikasi permintaan ubah PIN' }
+							text={ `Mohon periksa email Anda ${ patientProfile?.email }, untuk memverifikasi permintaan ubah PIN` }
 							className='mt-2'
 							textAlign='center'
 						/>
