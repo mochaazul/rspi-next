@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, usePathname } from 'next/navigation';
 
 import { colors, icons, sosmedLink } from '@/constant';
 
@@ -15,7 +14,7 @@ import {
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { EventClassesDetail } from '@/interface';
+
 import TextHtml from '@/components/ui/TextHtml';
 
 type Props = {
@@ -32,15 +31,18 @@ const PromoDetail: React.FC<Props> = ({
 	breadcrumbsPath,
 	eventsOther
 }) => {
-
+	
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
-
+	const getLinkShareSocmed = (link: any) => {
+		
+		return link + window?.location?.href;
+	};
 	return (
     	<div>
 			<Breadcrumbs datas={ breadcrumbsPath } />
 			<div className='mt-[50px]'>
 				
-				<Text 
+				<Text
 					fontType='h1'
 					fontWeight='900'
 					fontSize='44px'
@@ -57,13 +59,13 @@ const PromoDetail: React.FC<Props> = ({
 							text='Share now'
 						/>
 						<div className='flex gap-[15px]'>
-							<Link href={ sosmedLink.facebook } target='_blank' className='cursor-pointer' >
+							<Link href={ getLinkShareSocmed(sosmedLink.facebook) ?? ''  } target='_blank' className='cursor-pointer' >
 								<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
 							</Link>
-							<Link href={ sosmedLink.twitter } target='_blank' className='cursor-pointer' >
+							<Link href={ getLinkShareSocmed(sosmedLink.twitter) ?? ''  } target='_blank' className='cursor-pointer' >
 								<Image src='/images/ic/twitter.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
 							</Link>
-							<Link href={ sosmedLink.linkedin } target='_blank' className='cursor-pointer' >
+							<Link href={ getLinkShareSocmed(sosmedLink.linkedin) ?? ''  } target='_blank' className='cursor-pointer' >
 								<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
 							</Link>
 							<div className='cursor-pointer' onClick={ () => {
