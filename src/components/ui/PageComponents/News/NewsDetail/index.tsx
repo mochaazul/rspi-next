@@ -37,7 +37,7 @@ const NewsDetail = ({
 		url: string;
 	}[],
 }) => {
-
+	
 	const t = useScopedI18n('page.newsDetail');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 	const currentLang = useCurrentLocale();

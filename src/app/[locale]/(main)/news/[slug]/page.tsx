@@ -14,35 +14,34 @@ const DetailNewsHealthPage = async ({ params }: { params: { slug: string; }; }) 
 	const t = await getScopedI18n('page.newsDetail');
 
 	const newParam = decodeURIComponent(params?.slug);
-	const selectedArticle = await getArticleBySlug({ query: { slug: newParam } });
 
-	if (selectedArticle?.data?.filter(news => `${ news.slug }` === newParam).length <= 0) {
+	const selectedArticle = await getArticleBySlug({
+		param: params?.slug,
+	});
+
+	if (Object.values(selectedArticle?.data)?.filter(news => `${ news.slug }` === newParam).length <= 0) {
 		redirect(`/news`);
 	};
 
-	const filteredSelectedArticle = selectedArticle?.data?.find(coe => {
-		return coe?.slug === newParam;
-	});
-
 	const specialty = await getNewsSpecialtyByID({
-		param: `${ filteredSelectedArticle?.id }`,
+		param: `${ selectedArticle?.data[0]?.id }`,
 		query: {
 			limit: '2'
 		}
 	});
 
 	const relatedNews = await getRelatedNews({
-		param: `${ filteredSelectedArticle?.id }`,
+		param: `${ selectedArticle?.data[0]?.id }`,
 		query: {
 			limit: '2'
 		}
 	});
 
-	const breadcrumbsPath = [{ name: t('breadcrumbsLabel'), url: '/news' }, { url: '#', name: filteredSelectedArticle?.title || '' }];
+	const breadcrumbsPath = [{ name: t('breadcrumbsLabel'), url: '/news' }, { url: '#', name: selectedArticle?.data[0]?.title || '' }];
 
 	return (
 		<NewsDetail
-			filteredSelectedArticle={ filteredSelectedArticle }
+			filteredSelectedArticle={ selectedArticle?.data }
 			specialty={ specialty?.data }
 			relatedNews={ relatedNews?.data }
 			breadcrumbsPath={ breadcrumbsPath }
