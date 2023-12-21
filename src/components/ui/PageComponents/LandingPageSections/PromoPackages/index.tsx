@@ -17,7 +17,7 @@ interface PromoPackagesProps {
 const tabData = [
 	{ label: 'All', value: '' },
 	{ label: 'Event', value: 'event' },
-	{ label: 'Class', value: 'class' },
+	{ label: 'Classes', value: 'class' },
 	{ label: 'Promo', value: 'promo' }
 ];
 
