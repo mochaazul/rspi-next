@@ -46,7 +46,6 @@ export const ClearWrapper = styled.div`
   width: 16px;
   height: 16px;
   cursor: pointer;
-  z-index: 200;
   
 
 `;

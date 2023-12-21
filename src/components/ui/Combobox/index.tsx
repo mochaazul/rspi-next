@@ -72,8 +72,8 @@ const Combobox = ({
 				}
 			} } nullable>
 					
-				<div className='relative' onBlur={ () => { setOpen(false);  } }>
-					<ComboboxWrapper onClick={ () => { setOpen(true); } }>
+				<div className='relative' onClick={ () => { setOpen(true); } } onBlur={ () => { setOpen(false); } }>
+					<ComboboxWrapper>
 						{
 							Icons && (
 								<IconWrapper>
@@ -89,13 +89,15 @@ const Combobox = ({
 						/>
 						{
 							(retainValue ? selected : query) && (
-								<ClearWrapper onClick={ () => {
-									if (onSelectValue) {
-										setSelected(null);
-										onSelectValue(null);
-										setQuery('');
-									}
-								} }>
+								<ClearWrapper
+									onClick={ evt => {
+										evt.stopPropagation();
+										if (onSelectValue) {
+											setSelected(null);
+											onSelectValue(null);
+											setQuery('');
+										}
+									} }>
 									<icons.Close/>
 								</ClearWrapper>
 							)
