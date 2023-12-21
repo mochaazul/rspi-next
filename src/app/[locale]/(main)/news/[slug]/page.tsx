@@ -13,35 +13,35 @@ import NewsDetail from '@/components/ui/PageComponents/News/NewsDetail';
 const DetailNewsHealthPage = async ({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.newsDetail');
 
-	const newParam = decodeURIComponent(params?.slug);
-
-	const selectedArticle = await getArticleBySlug({
+	const getArticle = await getArticleBySlug({
 		param: params?.slug,
 	});
 
-	if (Object.values(selectedArticle?.data)?.filter(news => `${ news.slug }` === newParam).length <= 0) {
+	const selectedArticle = Object.values(getArticle)[0];
+	
+	if (selectedArticle?.slug !== params?.slug) {
 		redirect(`/news`);
 	};
 
 	const specialty = await getNewsSpecialtyByID({
-		param: `${ selectedArticle?.data[0]?.id }`,
+		param: `${ selectedArticle?.id }`,
 		query: {
 			limit: '2'
 		}
 	});
 
 	const relatedNews = await getRelatedNews({
-		param: `${ selectedArticle?.data[0]?.id }`,
+		param: `${ selectedArticle?.id }`,
 		query: {
 			limit: '2'
 		}
 	});
 
-	const breadcrumbsPath = [{ name: t('breadcrumbsLabel'), url: '/news' }, { url: '#', name: selectedArticle?.data[0]?.title || '' }];
+	const breadcrumbsPath = [{ name: t('breadcrumbsLabel'), url: '/news' }, { url: '#', name: selectedArticle?.title || '' }];
 
 	return (
 		<NewsDetail
-			filteredSelectedArticle={ selectedArticle?.data }
+			filteredSelectedArticle={ selectedArticle }
 			specialty={ specialty?.data }
 			relatedNews={ relatedNews?.data }
 			breadcrumbsPath={ breadcrumbsPath }
