@@ -158,7 +158,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 						lineHeight='19px'
 						fontWeight='900'
 						color={ colors.black.default }
-						text={ 'Link Verifikasi Ubah PIN Terkirim' }
+						text={ t('modalPinTitle') }
 						className='mt-4'
 						textAlign='center'
 					/>
@@ -167,7 +167,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 						lineHeight='19px'
 						fontWeight='400'
 						color={ colors.grey.pencil }
-						text={ `Mohon periksa email Anda ${ sessionData?.user?.email }, untuk memverifikasi permintaan ubah PIN` }
+						text={ `${ t('labelSuccess1') } ${ sessionData?.user?.email }, ${ t('labelSuccess2') }` }
 						className='mt-2'
 						textAlign='center'
 					/>
@@ -175,7 +175,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 						className='mt-6'
 						theme='primary'
 						onClick={ () => { setShowModalSuccessSentEmailPinVerification(false); setError(''); } }
-					>{ 'Okay' }</Button>
+					>{ t('modalPinBtn') }</Button>
 				</ModalStyle>
 			</Modal>
 		</>
