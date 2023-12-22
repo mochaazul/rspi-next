@@ -14,7 +14,7 @@ import {
 
 import Link from 'next/link';
 import Image from 'next/image';
-
+import { useScopedI18n } from '@/locales/client';
 import TextHtml from '@/components/ui/TextHtml';
 
 import { useHostname } from '@/utils/useHostname';
@@ -33,7 +33,7 @@ const PromoDetail: React.FC<Props> = ({
 	breadcrumbsPath,
 	eventsOther
 }) => {
-	
+	const t = useScopedI18n('page.promoPage');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 	const hostname = useHostname({ fullUrl: true });
 
@@ -98,7 +98,7 @@ const PromoDetail: React.FC<Props> = ({
 									fontWeight='900'
 									color={ colors.paradiso.default }
 									className='mt-[50px]'
-									text='Jadwal'
+									text={ t('schedule') }
 								/>
 								<div>
 									<TextHtml
