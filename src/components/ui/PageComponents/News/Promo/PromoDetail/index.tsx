@@ -102,8 +102,7 @@ const PromoDetail: React.FC<Props> = ({
 								/>
 								<div>
 									<TextHtml
-										color={ colors.grey.darker }
-										className='innerHTML mt-5 leading-[30px] text-[20px] font-'
+										className='innerHTML mt-5 leading-[30px] text-[20px] font-bold'
 										htmlStr={ selectedEvent?.title }
 									/>
 									<div className='flex flex-col gap-1 mt-3'>
@@ -146,6 +145,7 @@ const PromoDetail: React.FC<Props> = ({
 												text='Telepon (WhatsApp Only)'
 											/>
 											<TextHtml
+												style={ { color: colors.grey.dark } }
 												htmlStr={  selectedEvent?.phone || '' }
 												className='mt-2 innerHTML text-14 leading-[18px] font-bold'
 											/>
