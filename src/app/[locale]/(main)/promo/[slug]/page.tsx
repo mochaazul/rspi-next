@@ -1,11 +1,9 @@
-
 import { getScopedI18n } from '@/locales/server';
 
 import { PanelH1, PanelV1 } from '../../style';
 
 import { getAllEvents, getPromoById } from '@/lib/api/events';
 import PromoDetail from '@/components/ui/PageComponents/News/Promo/PromoDetail';
-
 
 const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; }) => {
 	

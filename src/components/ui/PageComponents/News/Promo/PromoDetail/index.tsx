@@ -17,6 +17,8 @@ import Image from 'next/image';
 
 import TextHtml from '@/components/ui/TextHtml';
 
+import { useHostname } from '@/utils/useHostname';
+
 type Props = {
 	selectedEvent: any;
     eventsOther: any;
@@ -33,10 +35,12 @@ const PromoDetail: React.FC<Props> = ({
 }) => {
 	
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
+	const hostname = useHostname({ fullUrl: true });
+
 	const getLinkShareSocmed = (link: any) => {
-		
-		return link + window?.location?.href;
+		return link + hostname;
 	};
+
 	return (
     	<div>
 			<Breadcrumbs datas={ breadcrumbsPath } />
