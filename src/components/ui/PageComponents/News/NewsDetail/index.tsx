@@ -22,6 +22,7 @@ import {
 } from '@/constant';
 import dayjs from 'dayjs';
 import { useCurrentLocale } from '@/locales/client';
+import { useHostname } from '@/utils/useHostname';
 
 const NewsDetail = ({
 	filteredSelectedArticle,
@@ -39,8 +40,15 @@ const NewsDetail = ({
 }) => {
 	
 	const t = useScopedI18n('page.newsDetail');
+
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 	const currentLang = useCurrentLocale();
+
+	const hostname = useHostname({ fullUrl: true });
+
+	const getLinkShareSocmed = (link: any) => {
+		return link + hostname;
+	};
 
 	const renderNews = () => {
 		return (
@@ -172,13 +180,13 @@ const NewsDetail = ({
 									color={ colors.grey.dark }
 								/>
 								<div className='flex gap-[15px]'>
-									<Link href={ sosmedLink.facebook } target='_blank' className='cursor-pointer' >
+									<Link href={ getLinkShareSocmed(sosmedLink.facebook) ?? ''  } target='_blank' className='cursor-pointer' >
 										<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
 									</Link>
-									<Link href={ sosmedLink.twitter } target='_blank' className='cursor-pointer' >
+									<Link href={ getLinkShareSocmed(sosmedLink.twitter) ?? ''  } target='_blank' className='cursor-pointer' >
 										<Image src='/images/ic/twitter.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
 									</Link>
-									<Link href={ sosmedLink.linkedin } target='_blank' className='cursor-pointer' >
+									<Link href={ getLinkShareSocmed(sosmedLink.linkedin) ?? ''  } target='_blank' className='cursor-pointer' >
 										<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
 									</Link>
 									<div className='cursor-pointer' onClick={ () => {
