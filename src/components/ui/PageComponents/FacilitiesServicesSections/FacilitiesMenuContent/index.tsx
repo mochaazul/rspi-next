@@ -19,9 +19,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 	facilitiesData,
 	paramsSlug
 }) => {
-	const getContent = () => {
-		return facilitiesData.find(item => item.slug === paramsSlug);
-	};
+	const facilityDetail = facilitiesData.find(item => item.slug === paramsSlug);
 
 	return (
 		<div className='flex flex-col w-full'>
@@ -32,12 +30,12 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 				subClassName='max-md:!text-base'
 				fontType='h1'
 			>
-				{ getContent()?.name }
+				{ facilityDetail?.name }
 			</Text>
 
 			<div className='mt-4 md:mt-8 w-full'>
 				<CustomCarousel arrowButton>
-					{ (getContent()?.image_url ?? [])?.map((image, index) => {
+					{ (facilityDetail?.image_url ?? [])?.map((image, index) => {
 						return (
 							<div key={ index } className='relative overflow-hidden bg-white rounded-[5px] h-[220px] sm:h-[420px] sm:w-full'>
 								{ image && (
@@ -66,36 +64,35 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 			</div>
 			<div className='mt-[50px] md:mt-12'>
 				<TextHtml
-					htmlStr={ getContent()?.information || '' }
+					htmlStr={ facilityDetail?.information || '' }
 					className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 				/>
 			</div>
-			{ /* <Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineHeight='24px'>
-				{ getContent()?.available_at?.[0] }
-			</Text> */ }
 
-			<div className='sm:flex gap-x-5'>
-				<div className='grid grid-cols-2 gap-x-20 mt-[24px]'>
-					{
-						getContent()?.available_at?.map((data: any, index: number) => {
-							if (index !== 0)
-								return (
-									<div className='flex flex-col mt-[16px]' key={ index }>
-										<Text fontSize='18px' fontWeight='900' lineHeight='24px'>
-											{ data?.split(':+split+:')?.[0] }
-										</Text>
-										<TextHtml
-											htmlStr={ data?.split(':+split+:')?.[1] || '' }
-											className='innerHTML text-16 mt-[10px]'
-										/>
-									</div>
-								);
-						})
-					}
+			{ facilityDetail?.available_at?.length && (
+				<div className='sm:flex gap-x-5'>
+					<div className='grid grid-cols-2 gap-4 sm:gap-10 mt-6 w-full'>
+						{
+							facilityDetail?.available_at?.map((data: string, index: number) => {
+								if (index !== 0)
+									return (
+										<div className='flex flex-col mt-[16px]' key={ index }>
+											<Text fontSize='18px' fontWeight='900' lineHeight='24px'>
+												{ data?.split(':+split+:')?.[0] }
+											</Text>
+											<TextHtml
+												htmlStr={ data?.split(':+split+:')?.[1] || '' }
+												className='innerHTML text-sm md:text-base mt-2.5'
+											/>
+										</div>
+									);
+							})
+						}
+					</div>
 				</div>
-			</div>
-			{ getContent()?.facilities_hospitals && getContent()?.facilities_hospitals?.length
-				? <AvailableAt hospital={ getContent()?.facilities_hospitals ?? [] } />
+			) }
+			{ facilityDetail?.facilities_hospitals && facilityDetail?.facilities_hospitals?.length
+				? <AvailableAt hospital={ facilityDetail?.facilities_hospitals } />
 				: null }
 		</div>
 	);
