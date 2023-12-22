@@ -4,6 +4,7 @@ import { PanelH1, PanelV1 } from '../../style';
 
 import { getAllEvents, getPromoById } from '@/lib/api/events';
 import PromoDetail from '@/components/ui/PageComponents/News/Promo/PromoDetail';
+import { redirect } from 'next/navigation';
 
 const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; }) => {
 	
@@ -13,6 +14,10 @@ const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; 
 	const selectedEvent = await getPromoById({
 		param: `${ params?.slug }`,
 	});
+
+	if (Object.values(selectedEvent)[0].slug !== params?.slug) {
+		redirect(`/promo`);
+	};
 
 	const eventsData = await getAllEvents();
 
