@@ -11,5 +11,5 @@ export const getFacilitiesAndServices = (query?: PayloadFacilityServices, pagina
 };
 
 export const getFAS = (param?: ApiOptions) => {
-	return fetcher<FacilityServicesDetail[]>('facilities', { ...param, query: { ...param?.query, is_publish: true } });
+	return fetcher<FacilityServicesDetail[]>('facilities', { ...param, query: { ...param?.query, is_publish: true }, pagination: { limit: 100 } });
 };

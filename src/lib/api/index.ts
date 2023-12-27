@@ -54,7 +54,7 @@ export const getHospitals = (params?: ApiOptions) => {
 };
 
 export const getCenterOfExcellence = (param?: ApiOptions) => {
-	return fetcher<CenterOfExcellenceDetail[]>('centerOfExcellences', { ...param, query: { ...param?.query, is_publish: true } });
+	return fetcher<CenterOfExcellenceDetail[]>('centerOfExcellences', { ...param, query: { ...param?.query, is_publish: true }, pagination: { limit: 100 } });
 };
 export const getNotificationResponse = (param: ApiOptions) => {
 	return fetcher<NotificationResponse>('getNotification', param);
