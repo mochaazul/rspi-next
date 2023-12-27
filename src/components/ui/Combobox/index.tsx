@@ -138,10 +138,7 @@ const Combobox = ({
 										value={ item }
 									>
 										{ ({ selected }) => (
-											<span
-												className={ `block truncate ${ selected ? 'font-bold text-green-secondary' : 'font-normal text-gray-1'
-													}` }
-											>
+											<span className={ `block truncate ${ selected ? 'font-bold text-green-secondary' : 'font-normal text-gray-1' }` }>
 												{ item.label }
 											</span>
 										) }
