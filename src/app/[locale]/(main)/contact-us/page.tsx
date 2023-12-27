@@ -10,7 +10,7 @@ const ContactUs = async () => {
 	return (
 		<ContactUsPage
 			hospitalSelector={ hospitals.data }
-			breadcrumbsPath={ [{ name: t('heading'), url: '/contact-us' }] }
+			breadcrumbsPath={ [{ name: t('heading'), url: '/contact' }] }
 		/>
 	);
 };

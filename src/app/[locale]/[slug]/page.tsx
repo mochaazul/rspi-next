@@ -8,7 +8,7 @@ const FooterPages = async ({ params }: { params: { slug: string; }; }) => {
 	const headersList = headers();
 
 	const pathname = headersList.get('x-invoke-path') || '';
-	const isMedSpec = pathname.includes('medical-specialities');
+	const isMedSpec = pathname.includes('medical-specialties');
 
 	const param = {
 		query: {

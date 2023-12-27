@@ -33,7 +33,7 @@ const CentreOfExcellence = ({ data }: { data: CenterOfExcellenceDetail[]; }) => 
 					<Text fontSize='20px' fontType='p' fontWeight='400' color={ colors.grey.dark } subClassName='subheading-section'>
 						{ t('subHeading') }
 					</Text>
-					<Link href={ `centre-of-excellence/${ data[0]?.slug }` }>
+					<Link href={ `center-of-excellence/${ data[0]?.slug }` }>
 						<div className='see-all flex sm:items-center'>
 							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-left sm:text-right'>
 								{ t('allItemBtnLabel') }
@@ -53,7 +53,7 @@ const CentreOfExcellence = ({ data }: { data: CenterOfExcellenceDetail[]; }) => 
 								imageHeight='200px'
 								content={ <CardContent title={ data.title ?? '' } description={ data.short_description ?? '' } /> }
 								footer={ <CardFooter content={ t('cardItem.readMoreLabel') } /> }
-								to={ `centre-of-excellence/${ data.slug }` }
+								to={ `center-of-excellence/${ data.slug }` }
 							/>
 						))
 					}

@@ -123,7 +123,7 @@ const MedicalSpecialitiesComponent = ({
 					<div className='w-full mb-4 md:mb-8'>
 						<Image
 							src='/images/specialities/background.png'
-							alt='medicalSpecialities'
+							alt='medicalSpecialties'
 							className='object-cover object-top w-full'
 							width={ 1600 }
 							height={ 350 }
@@ -143,7 +143,7 @@ const MedicalSpecialitiesComponent = ({
 						{
 							medicalSpecialities?.map((item, key) => {
 								return (
-									<Link key={ key } href={ `/medical-specialities/${ item.slug }` }>
+									<Link key={ key } href={ `/medical-specialties/${ item.slug }` }>
 										<div className='bg-white p-3 md:p-4 flex justify-between gap-2 w-full h-full specialities-item-container min-h-[64px] md:min-h-[88px]'>
 											<Text
 												text={ item.title }
@@ -153,7 +153,7 @@ const MedicalSpecialitiesComponent = ({
 												subClassName='max-md:text-sm'
 											/>
 
-											{/* { imageSrc && (
+											{ /* { imageSrc && (
 												<div className='relative overflow-hidden w-6 h-6 md:w-10 md:h-10 flex-shrink-0'>
 													<Image
 														src={ imageSrc }
@@ -163,7 +163,7 @@ const MedicalSpecialitiesComponent = ({
 														fill
 													/>
 												</div>
-											) } */}
+											) } */ }
 										</div>
 									</Link>
 								);

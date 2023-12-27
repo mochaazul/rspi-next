@@ -183,7 +183,7 @@ const ContactUsPage = ({
 								theme='outline'
 								$hoverTheme='primary'
 								label={ t('faq.allFaqBtnLabel') }
-								onClick={ () => navigate.push('/contact-us/faq') }
+								onClick={ () => navigate.push('/contact/faq') }
 							/>
 						</div>
 					</div>
