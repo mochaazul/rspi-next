@@ -74,7 +74,6 @@ export const Option = styled.div`
   gap: 10px;
   padding: 15px 20px;
   cursor: pointer;
-  font-weight: 700;
   font-size: 16px;
   ${ GlobalAllTransition5ms };
   
@@ -90,7 +89,7 @@ export const Option = styled.div`
   }
 
   &:hover {
-    background-color: ${ colors.paradiso.light };
+    background-color: ${ colors.paradiso.opacity10 };
     ${ GlobalAllTransition5ms }
   }
 `;

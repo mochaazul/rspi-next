@@ -21,6 +21,12 @@ module.exports = {
 			colors: {
 				red: {
 					default: '#EB5757'
+				},
+				green: {
+					secondary: '#358888'
+				},
+				gray: {
+					1: '#2A2536'
 				}
 			},
 			width: {

@@ -5,25 +5,25 @@ import { icons } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
 
 export type ItemType = {
-  id: string | number,
-  value: string | number,
-  label: string | number
-  [key: string]: string | number,
-}
+	id: string | number,
+	value: string | number,
+	label: string | number;
+	[key: string]: string | number,
+};
 
 type Props = {
-  data: ItemType[],
-  key?: string,
-  selectKey?: string,
-  onSelectValue?: (value: ItemType | null) => any,
-  inputOnChange?: (value: ItemType | null) => any,
-  placeholder?: string,
-  iconName?: keyof typeof icons,
-  value: ItemType | null,
-  retainValue?: boolean,
-  isAutoComplete?: string,
-  isLoading?: boolean
-}
+	data: ItemType[],
+	key?: string,
+	selectKey?: string,
+	onSelectValue?: (value: ItemType | null) => any,
+	inputOnChange?: (value: ItemType | null) => any,
+	placeholder?: string,
+	iconName?: keyof typeof icons,
+	value: ItemType | null,
+	retainValue?: boolean,
+	isAutoComplete?: string,
+	isLoading?: boolean;
+};
 
 const Combobox = ({
 	data,
@@ -34,44 +34,49 @@ const Combobox = ({
 	inputOnChange,
 	retainValue,
 	isLoading,
-}:Props) => {
+}: Props) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor.form');
 	const tCombobox = useScopedI18n('combobox');
-	const [selected, setSelected] = useState<ItemType|null>(null);
+	const [selected, setSelected] = useState<ItemType | null>(null);
 
 	const [query, setQuery] = useState('');
 	const Icons = iconName ? icons[iconName] : null;
 
 	const [open, setOpen] = useState(false);
-	
+
 	const changeQuery = (value: any) => {
 		setQuery(value);
 		if (inputOnChange) {
 			inputOnChange(value);
 		}
-		
+
 	};
-	
+
 	const filteredItem =
-    query === ''
-    	? data
-    	: data.filter((item:any) =>
-    		item.label
-    			.toLowerCase()
-    			.replace(/\s+/g, '')
-    			.includes(query.toLowerCase().replace(/\s+/g, ''))
-    	);
-	
+		query === ''
+			? data
+			: data.filter((item: any) =>
+				item.label
+					.toLowerCase()
+					.replace(/\s+/g, '')
+					.includes(query.toLowerCase().replace(/\s+/g, ''))
+			);
+
 	return (
 		<div>
-			<HeadlessCombobox value={ selected } onChange={ item => {
-				setSelected(item);
-				if (onSelectValue) {
-					setOpen(false);
-					onSelectValue(item);
-				}
-			} } nullable>
-					
+			<HeadlessCombobox
+				by='id'
+				value={ selected }
+				onChange={ item => {
+					setSelected(item);
+					if (onSelectValue) {
+						setOpen(false);
+						onSelectValue(item);
+					}
+				} }
+				nullable
+			>
+
 				<div className='relative' onClick={ () => { setOpen(true); } } onBlur={ () => { setOpen(false); } }>
 					<ComboboxWrapper>
 						{
@@ -85,7 +90,7 @@ const Combobox = ({
 							className='w-full border-none py-2 pl-3 pr-10 text-gray-900 '
 							onChange={ event => changeQuery(event.target.value) }
 							placeholder={ placeholder }
-							{ ...(retainValue ? { displayValue: (item: ItemType) => `${item?.label ?? ''}` } : {}) }
+							{ ...(retainValue ? { displayValue: (item: ItemType) => `${ item?.label ?? '' }` } : {}) }
 						/>
 						{
 							(retainValue ? selected : query) && (
@@ -98,12 +103,12 @@ const Combobox = ({
 											setQuery('');
 										}
 									} }>
-									<icons.Close/>
+									<icons.Close />
 								</ClearWrapper>
 							)
 						}
 					</ComboboxWrapper>
-					
+
 					<Transition
 						as={ Fragment }
 						leave='transition ease-in duration-100'
@@ -126,38 +131,26 @@ const Combobox = ({
 							) : (
 								filteredItem.map((item, index) => (
 									<HeadlessCombobox.Option
-										key={ `combobox-${index}` }
-										className={ ({ active }) =>
-											`relative cursor-default select-none py-2 pl-3 pr-4 ${
-												active ? 'bg-teal-600 text-white' : 'text-gray-900'
-											}`
+										key={ `combobox-${ index }` }
+										className={ ({ selected }) =>
+											`relative cursor-default select-none py-2 pl-3 pr-4 hover:bg-green-secondary/10 ${ selected ? 'bg-green-secondary/10' : '' }`
 										}
 										value={ item }
 									>
-										{ ({ selected, active }) => (
-											<>
-												<span
-													className={ `block truncate ${
-														selected ? 'font-medium' : 'font-normal'
+										{ ({ selected }) => (
+											<span
+												className={ `block truncate ${ selected ? 'font-bold text-green-secondary' : 'font-normal text-gray-1'
 													}` }
-												>
-													{ item.label }
-												</span>
-												{ selected ? (
-													<span
-														className={ `absolute inset-y-0 left-0 flex items-center${
-															active ? 'text-white' : 'text-teal-600'
-														}` }
-													 />
-												) : null }
-											</>
+											>
+												{ item.label }
+											</span>
 										) }
 									</HeadlessCombobox.Option>
 								))
 							) }
 						</HeadlessCombobox.Options>
 					</Transition>
-					
+
 				</div>
 
 			</HeadlessCombobox>

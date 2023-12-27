@@ -174,8 +174,12 @@ const FindADoctor: React.FC<Props> = ({
 					</div>
 				</div>
 				<div className='flex gap-4 mt-8 justify-end'>
-					<Button theme='outline' $hoverTheme='primary' type='reset' className='w-auto max-sm:text-sm max-sm:leading-normal py-2.5 px-4 md:py-[15px] md:px-10'>{ t('form.resetBtnLabel') }</Button>
-					<Button theme='primary' type='submit' className='w-auto max-sm:text-sm max-sm:leading-normal py-2.5 px-4 md:py-[15px] md:px-10'>{ t('form.submitBtnLabel') }</Button>
+					<div className='flex'>
+						<Button theme='outline' $hoverTheme='primary' type='reset' className='w-auto max-sm:text-sm max-sm:leading-normal py-2.5 px-4 md:py-[15px] md:px-10'>{ t('form.resetBtnLabel') }</Button>
+					</div>
+					<div className='flex'>
+						<Button theme='primary' type='submit' className='w-auto max-sm:text-sm max-sm:leading-normal py-2.5 px-4 md:py-[15px] md:px-10'>{ t('form.submitBtnLabel') }</Button>
+					</div>
 				</div>
 			</Form>
 
