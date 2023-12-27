@@ -23,7 +23,8 @@ export default {
 		pin: {
 			header: 'Masukkan PIN',
 			subHeader: 'Silahkan masukan PIN Untuk melanjutkan.',
-			submitBtnLabel: 'Konfirmasi'
+			submitBtnLabel: 'Konfirmasi',
+			forgotPin: 'Lupa Pin'
 		}
 	},
 	validation: {

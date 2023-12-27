@@ -40,7 +40,11 @@ export default {
 			subHeader: 'Please enter your PIN to continue.',
 			submitBtnLabel: 'Confirm',
 			pinLabel: 'PIN',
-			forgotPin: 'Forgot PIN?'
+			forgotPin: 'Forgot PIN?',
+			labelSuccess1: 'Please check your email',
+			labelSuccess2: 'to verify the PIN change request',
+			modalPinTitle: 'PIN Change Verification Link Sent',
+			modalPinBtn: 'Okay'
 		},
 		needLogin: {
 			heading: 'Please Login',
@@ -533,7 +537,8 @@ export default {
 			},
 			promoItem: {
 				detailsBtnLabel: 'View Details'
-			}
+			},
+			schedule: 'Schedule'
 		},
 		facilities: {
 			heading: 'Facilities & Services',
@@ -653,7 +658,9 @@ export default {
 			loginBtnLabel: 'Login',
 			footer: {
 				notRegisteredLabel: 'Don\'t have an account yet? Please register',
-				cta: 'here'
+				cta: 'here',
+				notRegisteredLabelMobile: 'Don\'t have an account yet?',
+				registerBtnLabel: 'Register',
 			},
 			form: {
 				emailLabel: 'Email',
@@ -692,7 +699,9 @@ export default {
 			registerBtnLabel: 'Register',
 			footer: {
 				hasAccountLabel: 'Already have an account? Please log in',
-				cta: 'here'
+				cta: 'here',
+				hasAccountLabelMobile: 'Already have an account?',
+				loginBtnLabel: 'Login',
 			},
 			buttonPrivacy: 'Next',
 			buttonTnC: 'Send',
@@ -976,6 +985,6 @@ export default {
 				newPasswordConfirmationPlaceholder: 'Confirm your new password',
 				resetBtnLabel: 'Change Password'
 			},
-		},
+		}
 	}
 } as const;

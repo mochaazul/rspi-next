@@ -61,6 +61,7 @@ const Combobox = ({
     			.replace(/\s+/g, '')
     			.includes(query.toLowerCase().replace(/\s+/g, ''))
     	);
+	
 	return (
 		<div>
 			<HeadlessCombobox value={ selected } onChange={ item => {
@@ -71,8 +72,8 @@ const Combobox = ({
 				}
 			} } nullable>
 					
-				<div className='relative' onBlur={ () => { setOpen(false);  } }>
-					<ComboboxWrapper onClick={ () => { setOpen(true); } }>
+				<div className='relative' onClick={ () => { setOpen(true); } } onBlur={ () => { setOpen(false); } }>
+					<ComboboxWrapper>
 						{
 							Icons && (
 								<IconWrapper>
@@ -87,14 +88,16 @@ const Combobox = ({
 							{ ...(retainValue ? { displayValue: (item: ItemType) => `${item?.label ?? ''}` } : {}) }
 						/>
 						{
-							(query) && (
-								<ClearWrapper onClick={ () => {
-									if (onSelectValue) {
-										setSelected(null);
-										onSelectValue(null);
-										setQuery('');
-									}
-								} }>
+							(retainValue ? selected : query) && (
+								<ClearWrapper
+									onClick={ evt => {
+										evt.stopPropagation();
+										if (onSelectValue) {
+											setSelected(null);
+											onSelectValue(null);
+											setQuery('');
+										}
+									} }>
 									<icons.Close/>
 								</ClearWrapper>
 							)

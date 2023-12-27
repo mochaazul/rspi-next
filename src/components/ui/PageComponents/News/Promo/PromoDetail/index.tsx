@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, usePathname } from 'next/navigation';
 
 import { colors, icons, sosmedLink } from '@/constant';
 
@@ -15,46 +14,62 @@ import {
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { EventClassesDetail } from '@/interface';
+import { useScopedI18n } from '@/locales/client';
+import TextHtml from '@/components/ui/TextHtml';
 
-const PromoDetail = ({
-	selectedEvent,
-	breadcrumbsPath,
-	eventsOther
-}:{
-	selectedEvent: any,
-    eventsOther: any,
+import { useHostname } from '@/utils/useHostname';
+
+type Props = {
+	selectedEvent: any;
+    eventsOther: any;
     breadcrumbsPath: {
 		name: string;
 		url: string;
 	}[],
-}) => {
+};
 
+const PromoDetail: React.FC<Props> = ({
+	selectedEvent,
+	breadcrumbsPath,
+	eventsOther
+}) => {
+	const t = useScopedI18n('page.promoPage');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
+	const hostname = useHostname({ fullUrl: true });
+
+	const getLinkShareSocmed = (link: any) => {
+		return link + hostname;
+	};
 
 	return (
     	<div>
 			<Breadcrumbs datas={ breadcrumbsPath } />
 			<div className='mt-[50px]'>
-				<Text fontWeight='900' fontSize='44px' lineHeight='57px'>
+				
+				<Text
+					fontType='h1'
+					fontWeight='900'
+					fontSize='44px'
+					lineHeight='57px'>
 					{ selectedEvent?.title }
 				</Text>
 				<div className='flex items-center gap-[30px] mt-[10px]'>
 					<div className='flex gap-[15px] items-center'>
 						<Text
+							fontType='p'
 							lineHeight='24px'
 							fontSize='20px'
 							fontWeight='400'
 							text='Share now'
 						/>
 						<div className='flex gap-[15px]'>
-							<Link href={ sosmedLink.facebook } target='_blank' className='cursor-pointer' >
+							<Link href={ getLinkShareSocmed(sosmedLink.facebook) ?? ''  } target='_blank' className='cursor-pointer' >
 								<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
 							</Link>
-							<Link href={ sosmedLink.twitter } target='_blank' className='cursor-pointer' >
+							<Link href={ getLinkShareSocmed(sosmedLink.twitter) ?? ''  } target='_blank' className='cursor-pointer' >
 								<Image src='/images/ic/twitter.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
 							</Link>
-							<Link href={ sosmedLink.linkedin } target='_blank' className='cursor-pointer' >
+							<Link href={ getLinkShareSocmed(sosmedLink.linkedin) ?? ''  } target='_blank' className='cursor-pointer' >
 								<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
 							</Link>
 							<div className='cursor-pointer' onClick={ () => {
@@ -71,32 +86,30 @@ const PromoDetail = ({
 					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
 						<img src={ selectedEvent?.img_url_detail || '' } className='mx-auto object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
 						<div>
-							<div
-								className='innerHTML'
-								dangerouslySetInnerHTML={ { __html: selectedEvent?.content || '' } }
+							<TextHtml
+								htmlStr={  selectedEvent?.content || '' }
+								className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 							/>
 							<div className='mt-[50px]'>
 								<Text
+									fontType='p'
 									lineHeight='30px'
 									fontSize='20px'
 									fontWeight='900'
 									color={ colors.paradiso.default }
 									className='mt-[50px]'
-									text='Jadwal'
+									text={ t('schedule') }
 								/>
 								<div>
-									<Text
-										lineHeight='30px'
-										fontSize='20px'
-										fontWeight='900'
-										color={ colors.grey.darker }
-										className='mt-5'
-										text={ selectedEvent?.title }
+									<TextHtml
+										className='innerHTML mt-5 leading-[30px] text-[20px] font-bold'
+										htmlStr={ selectedEvent?.title }
 									/>
 									<div className='flex flex-col gap-1 mt-3'>
 										{
 											(selectedEvent?.hospitals ?? []).map((hospital: any, index: number) =>
 												<Text
+													fontType='p'
 													key={ index }
 													lineHeight='20px'
 													fontSize='16px'
@@ -110,42 +123,45 @@ const PromoDetail = ({
 									<div className='grid grid-cols-2 gap-4 mt-6'>
 										<div>
 											<Text
+												fontType='p'
 												lineHeight='18px'
 												fontSize='14px'
 												fontWeight='900'
 												color={ colors.grey.darker }
 												text='Informasi'
 											/>
-											<div
-												className='mt-2 innerHTML text-14'
-												dangerouslySetInnerHTML={ { __html: selectedEvent?.information ?? '' } }
+											<TextHtml
+												htmlStr={  selectedEvent?.information || '' }
+												className='innerHTML mt-2 text-14'
 											/>
 										</div>
 										<div>
 											<Text
+												fontType='p'
 												lineHeight='18px'
 												fontSize='14px'
 												fontWeight='900'
 												color={ colors.grey.darker }
 												text='Telepon (WhatsApp Only)'
 											/>
-											<div
+											<TextHtml
+												style={ { color: colors.grey.dark } }
+												htmlStr={  selectedEvent?.phone || '' }
 												className='mt-2 innerHTML text-14 leading-[18px] font-bold'
-												style={ { color: colors.paradiso.default } }
-												dangerouslySetInnerHTML={ { __html: selectedEvent?.phone ?? '' } }
 											/>
 										</div>
 										<div>
 											<Text
+												fontType='p'
 												lineHeight='18px'
 												fontSize='14px'
 												fontWeight='900'
 												color={ colors.grey.darker }
 												text='Jam Operasional'
 											/>
-											<div
+											<TextHtml
+												htmlStr={  selectedEvent?.operational_hour || '' }
 												className='mt-2 innerHTML text-14 leading-[18px]'
-												dangerouslySetInnerHTML={ { __html: selectedEvent?.operational_hour ?? '' } }
 											/>
 										</div>
 									</div>

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -26,8 +25,6 @@ import { NewsletterPayload } from '@/interface';
 import FooterStyled, { FooterContainer } from './style';
 
 const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalDetail[]; }) => {
-	const navigate = useRouter();
-
 	const { trigger: subscribe } = useSubscribe();
 
 	const t = useScopedI18n('page.footer');
@@ -93,7 +90,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				{
 					items.map((item, index) => {
 						return (
-							<Link key={ index } href={ `/footer/${ item.slug }` }>
+							<Link key={ index } href={ `/${ item.slug }` }>
 								<Text
 									fontSize='14px'
 									fontWeight='700'
@@ -268,8 +265,8 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
 					<Text fontSize='14px' className='sub-text'>{ t('subscribeDescription') }</Text>
-					<div className='flex items-center mt-4 lg:mt-6'>
-						<div className='w-full -mr-2 flex'>
+					<div className='flex items-center mt-4 lg:mt-6 w-full'>
+						<div className='-mr-2 flex-1'>
 							<TextField
 								width='100%'
 								placeholder={ t('subscribePlaceholder') }
@@ -279,7 +276,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 							/>
 						</div>
 						<Button
-							className={ ` ${ loadingSubs ? '!bg-gray-50 !text-gray-300 cursor-not-allowed' : '' } sub-button color-default !text-base !font-bold !h-[48px]` }
+							className={ ` ${ loadingSubs ? '!bg-gray-50 !text-gray-300 cursor-not-allowed' : '' } sub-button !text-base !font-bold !h-[48px]` }
 							theme='secondary'
 							label={ t('subscribeSubmit') }
 							onClick={ subscribeNewsletter }

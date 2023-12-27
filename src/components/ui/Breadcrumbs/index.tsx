@@ -31,13 +31,14 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 	}
 
 	return (
-		<div className='flex flex-row sm:ml-[-0.25rem]'>
+		<div className='flex flex-row sm:ml-[-0.25rem] mt-[25px] sm:mt-8'>
 			{
 				datas.map((data, index) => (
 					<div key={ index } className='flex flex-row items-center'>
 						<Link href={ data.url }>
 							<ItemStyle className='px-1 py-1 max-sm:px-0.5'>
 								<Text
+									fontType='p'
 									className='item-text text-ellipsis'
 									fontSize='14px'
 									lineHeight='17px'

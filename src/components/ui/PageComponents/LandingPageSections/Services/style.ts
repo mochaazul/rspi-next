@@ -31,7 +31,7 @@ export const TabsStyle = styled.div`
   margin-right: auto;
   border-radius: 10px;
   background: ${ colors.white.default };
-  top: -57px;
+  top: -58px;
   position: relative;
   z-index: 0;
 
@@ -40,7 +40,7 @@ export const TabsStyle = styled.div`
   }
 
   @media screen and (max-width: 640px) {
-    top: 0px;
+    top: 16px;
     border-radius: 8px;
     box-shadow: 0px 2px 8px 0px rgba(53, 136, 136, 0.25);
   }

@@ -20,14 +20,14 @@ const FooterServices = ({
 	detail,
 	isMedSpec
 }: Props) => {
-
+	const isImgEmpty = detail?.[0]?.img_url !== null;
 	const renderContent = (
 		<div>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
 				{ detail?.[0]?.title }
 			</Text>
 
-			<div className='mt-[32px]'>
+			<div className={ isImgEmpty ? 'mt-[32px]' : 'mt-[10px]' }>
 				{
 					isMedSpec ?
 						<img
@@ -48,7 +48,7 @@ const FooterServices = ({
 						</CustomCarousel>
 				}
 			</div>
-			<div className='mt-[48px]'>
+			<div className={ isImgEmpty ? 'mt-[48px]' : 'mt-[10px]' }>
 				<div
 					style={ { lineHeight: '24px', fontSize: '16px' } }
 					className='innerHTML'
@@ -58,9 +58,8 @@ const FooterServices = ({
 		</div>
 	);
 
-
 	const breadcrumbsPath = [
-		{ name: detail?.[0]?.title, url: `/footer/${ detail?.[0]?.slug }` },
+		{ name: detail?.[0]?.title, url: `/${ detail?.[0]?.slug }` },
 	];
 
 	return (

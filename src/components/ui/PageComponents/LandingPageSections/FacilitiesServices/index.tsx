@@ -22,7 +22,7 @@ const FacilitiesServices = ({ facilityServices }: { facilityServices: FacilitySe
 					{ t('heading') }
 				</Text>
 				<div className='desc flex row justify-between items-center mt-3'>
-					<Text fontSize='20px' lineHeight='30px' fontType='p' fontWeight='400' color={ colors.grey.dark } className='flex-1 md:pr-32'>
+					<Text fontSize='20px' lineHeight='30px' fontType='p' fontWeight='400' color={ colors.grey.dark } className='flex-1 md:pr-32' subClassName='subheading-section'>
 						{ t('subHeading') }
 					</Text>
 					<Link href={ `/facilities/${ facilityServices[0]?.slug ?? '' }` } className='max-sm:hidden'>

@@ -29,7 +29,7 @@ const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 				fontWeight='400'
 				lineHeight='30px'
 				color={ colors.grey.dark }
-				subClassName='sm:text-center'
+				subClassName='sm:text-center subheading-section'
 				className='mt-4 sm:max-w-[930px] m-auto'
 			>
 				{ t('subHeading') }

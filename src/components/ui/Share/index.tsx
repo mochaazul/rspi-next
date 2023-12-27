@@ -78,7 +78,7 @@ const Share = (props: PropsType) => {
 						className='border-b border-gray flex py-4 px-4 items-center'
 						onClick={ copy }
 					>
-						<icons.ShareNetwork />
+						<icons.ShareNetwork className='w-4' />
 
 						<div className='ml-[10px]'>
 							<Text text={ 'Share Link' } fontSize='16px' fontWeight='400' />

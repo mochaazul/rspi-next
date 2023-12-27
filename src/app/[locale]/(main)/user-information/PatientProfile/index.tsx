@@ -39,12 +39,14 @@ import {
 } from '@/validator/profile';
 import { getLastVisitedHospitalHelper } from '@/helpers/visitHelper';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
-import { usePostCheckPinMutation } from '@/lib/api/client/auth';
+import { usePostCheckPinMutation, usePostRequestEmailVerifPinMutation } from '@/lib/api/client/auth';
 import { updateAvatar, updateProfile } from '@/lib/api/profile';
 import { regexInputPhone } from '@/constant/regExp';
 
 import ProfilePageStyle, { Divider } from './style';
 import { PanelH2 } from '../../style';
+import PinModal from '@/components/ui/PinModal';
+import { ModalStyle } from '@/components/ui/PageComponents/RegisterSections/InfoModal/style';
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -75,6 +77,8 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 	const { trigger: uploadPhotoPatient } = useGeneralUploads();
 	const { trigger: updateEmail } = useUpdateEmail();
 	const { trigger: checkPin } = usePostCheckPinMutation();
+	const { trigger: reqEmailPinVerification } = usePostRequestEmailVerifPinMutation();
+
 
 	const navigate = useRouter();
 	const t = useScopedI18n('page.profilePage');
@@ -85,9 +89,11 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 	const [tempImageSrc, setTempImageSrc] = useState<string>('');
 	const [clickUpdatePhoto, setClickUpdatePhoto] = useState<boolean>(false);
 	const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
+	const [showModalSuccessSentEmailPinVerification, setShowModalSuccessSentEmailPinVerification] = useState<boolean>(false);
 	const [showModalSuccessUpdateEmail, setShowModalSuccessUpdateEmail] = useState<boolean>(false);
 	const [showModalNewEmail, setShowModalNewEmail] = useState<boolean>(false);
 	const [pinModalVisible, setPinModalVisible] = useState<boolean>(false);
+	const [pinModalVisibleForgotPin, setPinModalVisibleForgotPin] = useState<boolean>(false);
 	const [isLoadingUploadAvatar, setIsLoadingUploadAvatar] = useState<boolean>(false);
 	const [isLoadingDeleteAvatar, setIsLoadingDeleteAvatar] = useState<boolean>(false);
 	const [isLoadingUpdateProfile, setIsLoadingUpdateProfile] = useState<boolean>(false);
@@ -353,6 +359,10 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 		} finally {
 			setIsLoadingDeleteAvatar(false);
 		}
+	};
+
+	const successInputPinFlowForgotPin = () => {
+		navigate.push('/pin-reset');
 	};
 
 	return (
@@ -675,19 +685,22 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 										type: 'password',
 									} }
 								/>
-								<HorizontalInputWrapper
-									label={ t('securitySetting.pinLabel') }
-									editHref='/pin-reset'
-									inputProps={ {
-										placeholder: t('securitySetting.pinLabel'),
-										disabled: true,
-										type: 'password',
-									} }
-								/>
+								<div onClick={ () => { setPinModalVisibleForgotPin(true); } }>
+									<HorizontalInputWrapper
+										label={ t('securitySetting.pinLabel') }
+										editHref='#'
+										inputProps={ {
+											placeholder: t('securitySetting.pinLabel'),
+											disabled: true,
+											type: 'password',
+										} }
+									/>
+								</div>
 							</div>
 						</SubMenuPage>
 					</div>
 				</ProfilePageStyle >
+				<PinModal visible={ pinModalVisibleForgotPin } onSuccess={ successInputPinFlowForgotPin } onClose={ () => setPinModalVisibleForgotPin(false) } />
 				<Modal visible={ pinModalVisible } onClose={ () => { setPinModalVisible(false); setError(''); } }>
 					<div className='flex flex-col items-center gap-4'>
 						<Form
@@ -716,10 +729,59 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 									isError={ !!formikPin.errors.pin }
 								/>
 							</div>
+							<Text
+								text={ tModalPin('forgotPin') }
+								fontSize={ '14px' }
+								lineHeight={ '24px' }
+								fontWeight={ '700' }
+								className='mt-2 md:mt-4 mb-8 md:mb-[62px] cursor-pointer'
+								subClassName='max-md:text-base max-md:leading-6'
+								color={ colors.green.brandAccent }
+								textAlign='center'
+								onClick={ async () => {
+									try {
+										const res = await reqEmailPinVerification();
+										if (res?.stat_code !== 'APP:SUCCESS') {
+											throw new Error(res?.stat_msg);
+										}
+										setShowModalSuccessSentEmailPinVerification(true);
+									} catch (error) {
+										console.error(error);
+									}
+								} }
+							/>
 							<Button type='submit' label={ tModalPin('submitBtnLabel') } />
 						</Form>
 
 					</div>
+				</Modal>
+				<Modal noPadding containerClassName='w-[90vw] md:w-[480px]' visible={ showModalSuccessSentEmailPinVerification }>
+					<ModalStyle>
+						<icons.Confirmed />
+						<Text
+							fontSize='20px'
+							lineHeight='19px'
+							fontWeight='900'
+							color={ colors.black.default }
+							text={ tModalPin('modalPinTitle') }
+							className='mt-4'
+							textAlign='center'
+						/>
+						<Text
+							fontSize='16px'
+							lineHeight='19px'
+							fontWeight='400'
+							color={ colors.grey.pencil }
+							text={ `${ tModalPin('labelSuccess1') } ${ patientProfile?.email }, ${ tModalPin('labelSuccess2') }` }
+							className='mt-2'
+							textAlign='center'
+						/>
+						<Button
+							className='mt-6'
+							theme='primary'
+							onClick={ () => { setShowModalSuccessSentEmailPinVerification(false); setError(''); } }
+						>{ tModalPin('modalPinBtn') }</Button>
+					</ModalStyle>
 				</Modal>
 				<Modal visible={ showModalNewEmail } onClose={ () => { setShowModalNewEmail(false); setError(''); } }>
 					<div>

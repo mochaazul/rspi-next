@@ -7,7 +7,7 @@ import { colors, icons } from '@/constant';
 import { EventClassesDetail } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 interface PromoPackagesProps {
 	events: any;
@@ -17,7 +17,7 @@ interface PromoPackagesProps {
 const tabData = [
 	{ label: 'All', value: '' },
 	{ label: 'Event', value: 'event' },
-	{ label: 'Class', value: 'class' },
+	{ label: 'Classes', value: 'class' },
 	{ label: 'Promo', value: 'promo' }
 ];
 
@@ -26,6 +26,19 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 	const [activeTab, setActiveTab] = useState(0);
 
 	const promo = activeTab === 0 ? events : events?.filter((item: any) => item?.category === tabData?.[activeTab]?.value);
+
+	const renderSeeAll = () => {
+		return (
+			<Link href='/promo'>
+				<div className='see-all flex items-center'>
+					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-center sm:text-right'>
+						{ t('allItemBtnLabel') }
+					</Text>
+					<icons.LongArrowRight className='svg-green ml-2' />
+				</div>
+			</Link>
+		);
+	};
 
 	if (showAsRelated) {
 		return (
@@ -40,6 +53,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 								imageHeight='200px'
 								header={
 									<Text
+										fontType='p'
 										color={ colors.grey.dark }
 										fontSize='16px'
 										text={ item?.category?.charAt(0).toUpperCase() + item?.category?.slice(1) }
@@ -51,6 +65,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 										title={ item.title || '' }
 										description={ item.short_description || '' }
 										RSLocation={ (item.hospitals ?? []).map((hospital: { hospital_name: any; }) => hospital.hospital_name) }
+										index={ index }
 									/>
 								}
 								footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetailsBtnLabel') } /> }
@@ -67,14 +82,6 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 			</div>
 		);
 	}
-	const CardNewsWrapperRef = useRef<HTMLDivElement>(null);
-
-	const handleArrowClick = (direction: 'left' | 'right') => () => {
-		CardNewsWrapperRef.current?.scrollBy({
-			left: direction === 'left' ? -382 : 382,
-			behavior: 'smooth'
-		});
-	};
 
 	return (
 		<div className='w-full'>
@@ -83,7 +90,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 					{ t('heading') }
 				</Text>
 				<div className='mt-3'>
-					<Text fontSize='20px' fontWeight='400' color={ colors.grey.pencil } lineHeight='30px'>
+					<Text fontSize='20px' fontWeight='400' color={ colors.grey.pencil } lineHeight='30px' subClassName='subheading-section'>
 						{ t('subHeading') }
 					</Text>
 				</div>
@@ -101,20 +108,13 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 						</div>
 					)) }
 				</div>
-				<div className=' mt-3'>
-					<Link href='/promo' className='max-sm:hidden'>
-						<div className='see-all flex row items-center'>
-							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-right'>
-								{ t('allItemBtnLabel') }
-							</Text>
-							<icons.LongArrowRight className='svg-green ml-2' />
-						</div>
-					</Link>
+				<div className='mt-3 max-sm:hidden'>
+					{ renderSeeAll() }
 				</div>
 			</div>
-			<div className='w-full'>
+			<div className='w-full mt-6 sm:mt-10'>
 				{ promo.length !== 0 ?
-					<CardsScrollHorizontal customRef={ CardNewsWrapperRef } className='lg:gap-x-[30px] lg:overflow-hidden lg:grid lg:grid-cols-3 mt-6 sm:mt-[40px]'>
+					<CardsScrollHorizontal className='lg:overflow-hidden lg:grid lg:grid-cols-3'>
 						{ promo?.slice(0, 3)?.map((item: any, index: number) => (
 							<Card
 								key={ index }
@@ -136,6 +136,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 										title={ item.title || '' }
 										description={ item.short_description || '' }
 										RSLocation={ (item?.hospitals ?? [])?.map((hospital: { hospital_name: any; }) => hospital.hospital_name) }
+										index={ index }
 									/>
 								}
 								footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetailsBtnLabel') } className='max-sm:text-sm max-sm:py-2' /> }
@@ -150,16 +151,8 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 					</Text>
 				}
 			</div>
-			<div className='flex container-content'>
-				<div className='flex row justify-between items-center'>
-					<div className='arrow-left rounded-full w-[34px] h-[34px] md:w-[44px] md:h-[44px] flex items-center justify-center cursor-pointer' onClick={ handleArrowClick('left') }>
-						<icons.LongArrowRight className='svg-green ml-2 rotate-180' />
-					</div>
-					<div />
-					<div className='arrow-right rounded-full w-[34px] h-[34px] md:w-[44px] md:h-[44px] flex items-center justify-center cursor-pointer' onClick={ handleArrowClick('right') }>
-						<icons.LongArrowRight className='svg-green ml-2' />
-					</div>
-				</div>
+			<div className='w-full mt-6 flex justify-center sm:hidden'>
+				{ renderSeeAll() }
 			</div>
 		</div>
 	);

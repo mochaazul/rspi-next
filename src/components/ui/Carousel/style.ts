@@ -17,7 +17,6 @@ const CarouselWrapper = styled.div`
       overflow-x: hidden;
       display: flex;
       justify-content: flex-start;
-      align-items: center;
       flex-direction: row;
       flex-wrap: nowrap;
     }
