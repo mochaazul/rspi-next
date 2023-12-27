@@ -12,9 +12,9 @@ import {
 import { colors } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
 
-import FAQDatas from '../contact-us/FAQDatas';
 import { FAQStyle } from './style';
 import { PanelH1, PanelH4, PanelV1 } from '../style';
+import FAQDatas from '../contact/FAQDatas';
 
 const FAQPage = () => {
 	const params = useParams();
