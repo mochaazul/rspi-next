@@ -215,7 +215,7 @@ export const Header = ({
 				return {
 					title: t('centreOfExcellence'),
 					data: centerOfExcellenceData,
-					href: '/centre-of-excellence'
+					href: '/center-of-excellence'
 				};
 			case 'our-hospital':
 				return {
@@ -227,7 +227,7 @@ export const Header = ({
 				return {
 					title: t('facility'),
 					data: facilityServicesData,
-					href: '/facilities'
+					href: '/facilities-service'
 				};
 			default:
 				return {
@@ -297,11 +297,11 @@ export const Header = ({
 						</>
 					) }
 				{ renderMenuMobileWithSubmenu(t('ourHospitals'), 'our-hospital') }
-				{ renderMenuMobileWithSubmenu(t('centreOfExcellence'), 'centre-of-excellence') }
-				{ renderMenuMobileWithSubmenu(t('facility'), 'facilities') }
+				{ renderMenuMobileWithSubmenu(t('centreOfExcellence'), 'center-of-excellence') }
+				{ renderMenuMobileWithSubmenu(t('facility'), 'facilities-service') }
 				{ renderMenuMobile(t('findDoctor'), '/find-a-doctor') }
 				{ /* { renderMenuMobile(t('career'), '/') } */ }
-				{ renderMenuMobile(t('contactUs'), '/contact-us') }
+				{ renderMenuMobile(t('contactUs'), '/contact') }
 				{ isLoggedIn ?
 					<div className='nav-menu' onClick={ handleClick }>
 						<Text text={ t('user.logout') } fontSize='16px' fontWeight='700' color={ colors.red.default } />
@@ -387,7 +387,7 @@ export const Header = ({
 									<div className={ `${ isHoverCOE === false ? 'hidden' : 'absolute' } dropdownPosition` }>
 										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
 											{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
-												<Link href={ `/centre-of-excellence/${ item.slug }` } key={ idx }>
+												<Link href={ `/center-of-excellence/${ item.slug }` } key={ idx }>
 													<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
 														{ item?.img_url?.[0] && (
 															<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } alt='center-of-excellence-image' />
@@ -408,7 +408,7 @@ export const Header = ({
 									<div className={ `${ isHoverFacilities === false ? 'hidden' : 'absolute' } dropdownPosition` }>
 										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
 											{ Object.values(facilityServicesData || [])?.map((item, idx) => (
-												<Link href={ `/facilities/${ item.slug }` } key={ idx }>
+												<Link href={ `/facilities-service/${ item.slug }` } key={ idx }>
 													<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
 														{
 															item?.image_url?.[0] && (
@@ -423,11 +423,11 @@ export const Header = ({
 												</Link>
 											)) }
 
-											<Link href={ '/facilities/medical-specialities' }>
+											<Link href={ '/facilities-service/medical-specialties' }>
 												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
 													<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
-														<Text text={ 'Medical Specialities' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+														<Text text={ 'Medical Specialties' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 													</div>
 													<icons.ArrowRight className='ml-[27px] mr-auto' />
 												</div>

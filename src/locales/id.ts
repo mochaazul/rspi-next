@@ -72,7 +72,7 @@ export default {
 	navMenu: {
 		home: 'Beranda',
 		ourHospitals: 'Rumah Sakit Kami',
-		centreOfExcellence: 'Centre of Excellence',
+		centreOfExcellence: 'Center of Excellence',
 		facility: 'Fasilitas dan Layanan',
 		career: 'Karir',
 		findDoctor: 'Cari Dokter',
@@ -200,7 +200,7 @@ export default {
 			subHeading: 'Kami berkomitmen untuk menjadi organisasi perawatan kesehatan pilihan kelas dunia. Kami sangat percaya bahwa keunggulan operasional dan keselamatan pasien merupakan bagian integral dalam memenuhi dan melampaui harapan pelanggan kami.'
 		},
 		centerOfExcellence: {
-			heading: 'Centre Of Excellence',
+			heading: 'Center Of Excellence',
 			serviceLocation: {
 				heading: 'Layanan ini tersedia di',
 				hospitalName: 'RS Pondok Indah - Pondok Indah Lantai 1',
@@ -492,9 +492,9 @@ export default {
 				}
 			},
 			centerOfExcelence: {
-				heading: 'Centre of Excellence',
+				heading: 'Center of Excellence',
 				subHeading: 'Telusuri lebih lanjut berbagai informasi seputar layanan kami, di sini.',
-				allItemBtnLabel: 'Lihat Semua Centre of Excellence',
+				allItemBtnLabel: 'Lihat Semua Center of Excellence',
 				cardItem: {
 					readMoreLabel: 'Baca Selengkapnya'
 				},

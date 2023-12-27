@@ -240,7 +240,7 @@ export default {
 					Telemedicine Pondok Indah Hospital Group Mechanism
 					<ol className='list-decimal pl-4'>
 						<li>Please ensure that you are already Pondok Indah Hospital Group&apos;s patient with medical record number</li>
-						<li>Contact Pondok Indah Hospital Group Call Centre to make a Telemedicine appointment or to check our  doctors’ schedule that provides telemedicine services</li>
+						<li>Contact Pondok Indah Hospital Group Call Center to make a Telemedicine appointment or to check our  doctors’ schedule that provides telemedicine services</li>
 						<li>Click the <a href='#'>link</a> we send to your WhatsApp number to start the consultation session at the agreed time</li>
 						<li>Finish the administration processes that we send to your <a href='#'>email</a></li>
 						<li>This telemedicine service can only be done with self-paid system through bank transfer. We have yet to accept payment through insurance or debit/credit card</li>

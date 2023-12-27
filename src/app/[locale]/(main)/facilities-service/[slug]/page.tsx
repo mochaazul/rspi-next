@@ -25,14 +25,14 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 	const facilityServices: FacilityServicesDetail[] = facilitiyServicesRes?.data;
 	const facility = facilityServices.find(item => item.slug === paramsSlug);
 
-	if (!facility && paramsSlug !== 'medical-specialities') {
-		redirect(`/facilities/${ facilityServices?.[0]?.slug ?? '' }`);
+	if (!facility && paramsSlug !== 'medical-specialties') {
+		redirect(`/facilities-service/${ facilityServices?.[0]?.slug ?? '' }`);
 	}
 
 	let medicalSpecialities: MedicalSpecialities[] = [];
 	let relatedNews: I_RelatedNews[] = [];
 
-	if (paramsSlug === 'medical-specialities') {
+	if (paramsSlug === 'medical-specialties') {
 		const medicalSpecialitiesRes = await getMedicalSpecialities({ query: { footer_category: 'medical-specialities', is_publish: true } });
 		medicalSpecialities = medicalSpecialitiesRes?.data;
 	} else {
@@ -56,12 +56,12 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 		information: 'Patient Relations at RS Pondok Indah - Puri Indah',
 		is_home_page: false,
 		is_publish: true,
-		name: 'Medical Specialities',
+		name: 'Medical Specialties',
 		operational_hour: [],
 		order_id: 2,
 		short_description: 'Lorem ipsum',
 		unit: 'Patient Relations RS Pondok Indah - Bintaro Jaya',
-		slug: 'medical-specialities'
+		slug: 'medical-specialties'
 	}];
 	const breadcrumbsPath = [
 		{ name: t('heading'), url: '#' },
@@ -74,7 +74,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 	}));
 
 	const renderContent = () => {
-		if (paramsSlug === 'medical-specialities') {
+		if (paramsSlug === 'medical-specialties') {
 			return (
 				<MedicalSpecialitiesComponent
 					paramsSlug={ paramsSlug }

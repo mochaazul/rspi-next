@@ -44,7 +44,7 @@ export const MainNavLanguage = ({ session }: MainNavLanguageProps) => {
 		>
 			<div className='flex lg:justify-between w-full container-page'>
 				<div className='hidden lg:flex divide-x divide-white/20 gap-5'>
-					<Link href='/contact-us'>
+					<Link href='/contact'>
 						<Text fontSize='14px' fontWeight='400' color='white'>
 							{ t('contactUs') }
 						</Text>
