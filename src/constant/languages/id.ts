@@ -325,9 +325,9 @@ export default {
 				}
 			},
 			centerOfExcelence: {
-				heading: 'Centre of Excellence',
+				heading: 'Center of Excellence',
 				subHeading: 'Telusuri lebih lanjut berbagai informasi seputar layanan kami, di sini.',
-				allItemBtnLabel: 'See All Centre of Excellence',
+				allItemBtnLabel: 'See All Center of Excellence',
 				cardItem: {
 					readMoreLabel: 'Read More'
 				},
