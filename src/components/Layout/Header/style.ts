@@ -9,7 +9,7 @@ const HeaderStyle = styled.div`
   top: 0;
 
   .navbar {
-    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 4px 4px 0px rgba(53, 136, 136, 0.12);
   }
 
   .leftNav {
@@ -104,10 +104,6 @@ const HeaderStyle = styled.div`
   }
 
   @media screen and (max-width: 640px) {
-    .navbar {
-      box-shadow:0px 4px 4px 0px rgba(53, 136, 136, 0.12);
-    }
-
     .logo a {
       svg {
         height: 50px;
