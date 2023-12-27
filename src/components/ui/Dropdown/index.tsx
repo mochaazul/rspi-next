@@ -226,7 +226,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 					menuItems?.map((item, index) =>
 						<Option
 							key={ index }
-							className='select-none'
+							className={ `select-none ${ isCheckedOption(item?.value ?? '') ? 'bg-green-secondary/10 text-green-secondary font-bold' : 'text-gray-1 font-normal' }` }
 							onClick={ (props.multiple ? handleOptionClickMultiple : handleOptionClick)(item.value ? item?.value : item?.label || '') }
 						>
 							{
