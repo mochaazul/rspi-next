@@ -537,7 +537,8 @@ export default {
 			},
 			promoItem: {
 				detailsBtnLabel: 'View Details'
-			}
+			},
+			schedule: 'Schedule'
 		},
 		facilities: {
 			heading: 'Facilities & Services',

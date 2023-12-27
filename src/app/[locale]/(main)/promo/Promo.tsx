@@ -12,7 +12,7 @@ import {
 	Spinner,
 	EmptyData
 } from '@/components/ui';
-import Card, { CardContent } from '@/components/ui/Card';
+import Card, { CardContent, CardContentWithInner, CardsScrollHorizontal } from '@/components/ui/Card';
 import { colors } from '@/constant';
 import { promoPageEvent } from '@/utils/metaPixelTrack';
 import { useScopedI18n } from '@/locales/client';
@@ -27,6 +27,8 @@ type DataEventProps = {
 	title?: string;
 	short_description?: string;
 	slug?: string;
+	hospitals?: any;
+	category: string;
 }
 
 type DataHospitalProps = {
@@ -101,40 +103,44 @@ const EventClassesPromo = ({
 						className='sm:mt-[50px] mt-[25px]'
 						subClassName='max-sm:text-[24px]'
 					/>
-					<div className='flex sm:flex-row flex-col sm:mt-[50px] mt-[15px] gap-4 sm:items-center'>
-						<Text
-							fontSize='20px'
-							fontWeight='700'
-							lineHeight='24px'
-							text={ t('hospitalSelectionLabel') }
-							subClassName='max-sm:font-black max-sm:text-[16px]'
-						/>
-						<div className='min-w-[300px]'>
-							<Form.Dropdown
-								defaultValue={ hospitalIDParams }
-								placeholder={ t('allHospitalLabel') }
-								menuItems={ [{ key: '', value: '', label: t('allHospitalLabel') }, ...hospitalArr] }
-								onChange={ event => filterHospitalID(event.currentTarget.value) }
+					<div className='flex sm:flex-row sm:mt-[50px] mt-[16px] flex-col justify-between items-start sm:items-center'>
+						<div className='flex sm:flex-row flex-col sm:gap-4 gap-1 sm:items-center sm:w-auto w-full'>
+							<Text
+								fontSize='20px'
+								fontWeight='700'
+								lineHeight='24px'
+								text={ t('hospitalSelectionLabel') }
+								subClassName='max-sm:font-black max-sm:text-[16px]'
 							/>
+							<div className='sm:min-w-[300px] min-w-full'>
+								<Form.Dropdown
+									defaultValue={ hospitalIDParams }
+									placeholder={ t('allHospitalLabel') }
+									menuItems={ [{ key: '', value: '', label: t('allHospitalLabel') }, ...hospitalArr] }
+									onChange={ event => filterHospitalID(event.currentTarget.value) }
+								/>
+							</div>
+						</div>
+						<div className='flex flex-row sm:gap-4 gap-[10px] items-center mt-[8px] sm:mt-0 max-sm:justify-between'>
+							<div>
+								<Button className='sm:rounded-[10px] rounded-[8px] sm:py-[10px] py-[5px] sm:px-[20px] px-[18px] sm:text-[16px] text-[14px]' theme={ categoryParams === '' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('') }>{ t('tabPillsLabel.allLabel') }</Button>
+							</div>
+							<div>
+								<Button className='sm:rounded-[10px] rounded-[8px] sm:py-[10px] py-[5px] sm:px-[20px] px-[18px] sm:text-[16px] text-[14px]' theme={ categoryParams === 'event' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('event') }>{ t('tabPillsLabel.eventLabel') }</Button>
+							</div>
+							<div>
+								<Button className='sm:rounded-[10px] rounded-[8px] sm:py-[10px] py-[5px] sm:px-[20px] px-[18px] sm:text-[16px] text-[14px]' theme={ categoryParams === 'class' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('class') }>{ t('tabPillsLabel.classesLabel') }</Button>
+							</div>
+							<div>
+								<Button className='sm:rounded-[10px] rounded-[8px] sm:py-[10px] py-[5px] sm:px-[20px] px-[18px] sm:text-[16px] text-[14px]' theme={ categoryParams === 'promo' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('promo') }>{ t('tabPillsLabel.promoLabel') }</Button>
+							</div>
 						</div>
 					</div>
-					<div className='flex flex-row mt-[50px] gap-4 items-center max-sm:justify-between'>
-						<div>
-							<Button className='mb-4' theme={ categoryParams === '' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('') }>{ t('tabPillsLabel.allLabel') }</Button>
-						</div>
-						<div>
-							<Button className='mb-4' theme={ categoryParams === 'event' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('event') }>{ t('tabPillsLabel.eventLabel') }</Button>
-						</div>
-						<div>
-							<Button className='mb-4' theme={ categoryParams === 'class' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('class') }>{ t('tabPillsLabel.classesLabel') }</Button>
-						</div>
-						<div>
-							<Button className='mb-4' theme={ categoryParams === 'promo' ? 'primary' : 'secondary' } $hoverTheme='primary' onClick={ () => filterCategory('promo') }>{ t('tabPillsLabel.promoLabel') }</Button>
-						</div>
-					</div>
+					
 				</div>
-				<div className='content'>
-					<div className='flex flex-row flex-wrap gap-8 w-full justify-center'>
+				{ /* Sebenarnya tingginya mt-41, di kasih 17 karena di card sudah adamt-24 */ }
+				<div className='content mt-[0px] sm:mt-[17px]'>
+					<div className='hidden sm:grid sm:grid-cols-3 grid-cols-1 gap-x-8 w-full justify-center'>
 						{
 							loading && <Spinner size='m' className='sm:my-10 my-3' />
 						}
@@ -147,9 +153,25 @@ const EventClassesPromo = ({
 										key={ index }
 										image={ data.img_url_card }
 										imageHeight='200px'
-										content={ <CardContent title={ data?.title ?? '' } description={ data?.short_description ?? '' } /> }
+										header={
+											<Text
+												color={ colors.grey.dark }
+												fontSize='16px'
+												text={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
+												fontWeight='400'
+												subClassName='max-sm:text-xs max-sm:leading-normal'
+											/>
+										}
+										content={
+											<CardContentWithInner
+												title={ data.title || '' }
+												description={ data.short_description || '' }
+												RSLocation={ (data.hospitals ?? []).map((hospital: { hospital_name: any; }) => hospital.hospital_name) }
+												index={ index }
+											/>
+										}
 										footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
-										className='mb-0'
+										className='mb-0 !w-[100%]'
 										to={ `/promo/${ data.slug }` }
 										iconShare={ true }
 									/>
@@ -162,6 +184,44 @@ const EventClassesPromo = ({
 									<EmptyData menu='Promo and Packages' />
 								</Text> : <></>
 						}
+					</div>
+					<div className='mobile-view w-full sm:hidden grid grid-cols-1'>
+						<CardsScrollHorizontal className='pl-0' >
+							{
+								events?.map((data, index) => {
+									return (
+										<Card
+											id={ data.id }
+											key={ index }
+											image={ data.img_url_card }
+											imageHeight='200px'
+											header={
+												<Text
+													color={ colors.grey.dark }
+													fontSize='16px'
+													text={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
+													fontWeight='400'
+													subClassName='max-sm:text-xs max-sm:leading-normal'
+												/>
+											}
+											content={
+												<CardContentWithInner
+													title={ data.title || '' }
+													description={ data.short_description || '' }
+													RSLocation={ (data.hospitals ?? []).map((hospital: { hospital_name: any; }) => hospital.hospital_name) }
+													index={ index }
+												/>
+											}
+											footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
+											className='mb-0 !w-[90%]'
+											to={ `/promo/${ data.slug }` }
+											iconShare={ true }
+										/>
+									);
+								})
+							}
+							
+						</CardsScrollHorizontal>
 					</div>
 				</div>
 				<div className='mt-[50px] flex flex-col items-center'>

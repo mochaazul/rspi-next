@@ -542,7 +542,8 @@ export default {
 			},
 			promoItem: {
 				detailsBtnLabel: 'Lihat Detail'
-			}
+			},
+			schedule: 'Jadwal'
 		},
 		facilities: {
 			heading: 'Fasilitas & Layanan',
