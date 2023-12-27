@@ -11,58 +11,66 @@ type Props = {
 };
 
 const AvailableAt: React.FC<Props> = ({ hospital }) => {
-	const languages = useScopedI18n('page.facilities.facilitiesMenu');
+	const t = useScopedI18n('page.facilities.facilitiesMenu');
 
 	return (
-		<div className='mt-8 md:mt-[92px]'>
+		<div className='mt-8 md:mt-[62px]'>
 			{
 				hospital && hospital.length > 0 &&
-				<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default }>
-					{ languages('servicesLocationHeading') }
+				<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default } subClassName='max-sm:!text-base max-sm:!leading-[30px]'>
+					{ t('servicesLocationHeading') }
 				</Text>
 			}
-			<div className='divide-y divide-solid'>
+			<div className='divide-y divide-[#EAEAEA]'>
 				{ hospital.map((item, index) => {
 					return (
-						<div className='mb-[32px]' key={ `hospital-${ index }` }>
-							<Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineHeight='24px'>
+						<div className='mb-4 sm:mb-8' key={ `hospital-${ index }` }>
+							<Text className='mt-4 sm:mt-8' fontSize='20px' fontWeight='900' lineHeight='24px'>
 								{ item?.unit }
 							</Text>
-							<Text className='mt-[12px]' fontSize='16px' fontWeight='900' color={ colors.grey.dark }>
+							<Text className='mt-2 sm:mt-3' fontSize='16px' fontWeight='900' color={ colors.grey.dark } subClassName='max-sm:text-[#2A2536] max-sm:font-normal'>
 								{ item?.floor }
 							</Text>
-							<div className='sm:flex mt-[24px]'>
-								<div className='flex-1'>
-									<Text fontSize='14px' fontWeight='900' lineHeight='24px'>
-										{ languages('phoneHeading') }
-									</Text>
-									<Text fontSize='14px' fontWeight='400' lineHeight='24px'>
-										<span style={ { color: colors.paradiso.default, fontWeight: '700' } }>{ item.hospital_phone || '-' }</span>
-									</Text>
+							<div className='flex flex-col gap-y-3 sm:gap-y-4 mt-3 sm:mt-6'>
+								<div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
+									<div>
+										<Text fontSize='14px' fontWeight='900' lineHeight='24px'>
+											{ t('phoneHeading') }
+										</Text>
+										<Text fontSize='14px' fontWeight='400' lineHeight='24px'>
+											<span style={ { color: colors.paradiso.default, fontWeight: '700' } }>{ item.hospital_phone || '-' }</span>
+										</Text>
+									</div>
 
-									<Text className='mt-[16px]' fontSize='14px' fontWeight='900' lineHeight='24px'>
-										{ languages('informationHeading') }
-									</Text>
-									<Text fontSize='14px' fontWeight='400' lineHeight='24px'>
-										{ item.information }
-									</Text>
+									<div>
+										<Text fontSize='14px' fontWeight='900' lineHeight='24px'>
+											{ t('emailHeading') }
+										</Text>
+										<Text fontSize='14px' fontWeight='700' lineHeight='24px' color={ colors.paradiso.default }>
+											{ item.hospital_email || '-' }
+										</Text>
+									</div>
 								</div>
-								<div className='flex-1'>
-									<Text fontSize='14px' fontWeight='900' lineHeight='24px'>
-										{ languages('emailHeading') }
-									</Text>
-									<Text fontSize='14px' fontWeight='700' lineHeight='24px' color={ colors.paradiso.default }>
-										{ item.hospital_email || '-' }
-									</Text>
+								<div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
+									<div>
+										<Text fontSize='14px' fontWeight='900' lineHeight='24px'>
+											{ t('informationHeading') }
+										</Text>
+										<Text fontSize='14px' fontWeight='400' lineHeight='24px'>
+											{ item.information }
+										</Text>
+									</div>
 
-									<Text className='mt-[16px]' fontSize='14px' fontWeight='900' lineHeight='24px'>
-										{ languages('operationalHourHeading') }
-									</Text>
-									<Text fontSize='14px' fontWeight='400' lineHeight='24px'>
-										{
-											item.operational_hour?.map((operationalHour: string, index: number) => (<span key={ `op-hour-${ index }` }>{ operationalHour }</span>))
-										}
-									</Text>
+									<div>
+										<Text fontSize='14px' fontWeight='900' lineHeight='24px'>
+											{ t('operationalHourHeading') }
+										</Text>
+										<Text fontSize='14px' fontWeight='400' lineHeight='24px'>
+											{
+												item.operational_hour?.map((operationalHour: string, index: number) => (<span key={ `op-hour-${ index }` }>{ operationalHour }</span>))
+											}
+										</Text>
+									</div>
 								</div>
 							</div>
 						</div>

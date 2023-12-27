@@ -51,7 +51,11 @@ export default {
 			subHeader: 'Silahkan masukan PIN untuk melanjutkan.',
 			submitBtnLabel: 'Konfirmasi',
 			pinLabel: 'PIN',
-			forgotPin: 'Lupa PIN?'
+			forgotPin: 'Lupa PIN?',
+			labelSuccess1: 'Mohon periksa email Anda',
+			labelSuccess2: 'untuk memverifikasi permintaan ubah PIN',
+			modalPinTitle: 'Link Verifikasi Ubah PIN Terkirim',
+			modalPinBtn: 'Oke'
 		},
 		needLogin: {
 			heading: 'Silakan Login',
@@ -538,7 +542,8 @@ export default {
 			},
 			promoItem: {
 				detailsBtnLabel: 'Lihat Detail'
-			}
+			},
+			schedule: 'Jadwal'
 		},
 		facilities: {
 			heading: 'Fasilitas & Layanan',

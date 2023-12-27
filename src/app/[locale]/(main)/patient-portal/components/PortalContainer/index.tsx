@@ -33,8 +33,8 @@ type PortalContainerProps = {
 };
 
 const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContainerProps) => {
-	const [activeTabIndex, setActiveTabIndex] = useState(1);
-	const [activeTabIndexForCallBackPin, setActiveTabIndexForCallBackPin] = useState(1);
+	const [activeTabIndex, setActiveTabIndex] = useState(0);
+	const [activeTabIndexForCallBackPin, setActiveTabIndexForCallBackPin] = useState(0);
 	const [headerOpened, setHeaderOpened] = useState<boolean>(false);
 	const [shouldEnterPin, setShouldEnterPin] = useState<boolean>(false);
 	const [pinModalVisible, setPinModalVisible] = useState<boolean>(false);
@@ -46,7 +46,7 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 	const lastVisitedHospital = getLastVisitedHospitalHelper(visitHistoryResponse?.data || []);
 	const tabMenuLabel: MenuType[] = [
 		{
-			id: 1,
+			id: 0,
 			label: t('tabMenuLabel.menu1.heading'),
 			isHeader: false,
 			children: []
@@ -57,19 +57,19 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 			isHeader: true,
 			children: [
 				{
-					id: 2,
+					id: 1,
 					label: t('tabMenuLabel.menu2.children.0'),
 					isHeader: false,
 					children: []
 				},
 				{
-					id: 3,
+					id: 2,
 					label: t('tabMenuLabel.menu2.children.1'),
 					isHeader: false,
 					children: []
 				},
 				{
-					id: 4,
+					id: 3,
 					label: t('tabMenuLabel.menu2.children.2'),
 					isHeader: false,
 					children: []
@@ -93,15 +93,15 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 
 	const renderContent = useMemo(() => {
 		switch (activeTabIndex) {
-			case 1:
+			case 0:
 				return <JadwalKunjungan patientProfile={ patientProfile } />;
-			case 2:
+			case 1:
 				return <RiwayatKunjungan patientProfile={ patientProfile } />;
-			case 3:
+			case 2:
 				return <>
 					<RiwayatVaksin />
 				</>;
-			case 4:
+			case 3:
 				return <>
 					<RiwayatLab />
 				</>;

@@ -763,7 +763,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 							lineHeight='19px'
 							fontWeight='900'
 							color={ colors.black.default }
-							text={ 'Link Verifikasi Ubah PIN Terkirim' }
+							text={ tModalPin('modalPinTitle') }
 							className='mt-4'
 							textAlign='center'
 						/>
@@ -772,7 +772,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 							lineHeight='19px'
 							fontWeight='400'
 							color={ colors.grey.pencil }
-							text={ 'Mohon periksa email Anda [email], untuk memverifikasi permintaan ubah PIN' }
+							text={ `${ tModalPin('labelSuccess1') } ${ patientProfile?.email }, ${ tModalPin('labelSuccess2') }` }
 							className='mt-2'
 							textAlign='center'
 						/>
@@ -780,7 +780,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 							className='mt-6'
 							theme='primary'
 							onClick={ () => { setShowModalSuccessSentEmailPinVerification(false); setError(''); } }
-						>{ 'Okay' }</Button>
+						>{ tModalPin('modalPinBtn') }</Button>
 					</ModalStyle>
 				</Modal>
 				<Modal visible={ showModalNewEmail } onClose={ () => { setShowModalNewEmail(false); setError(''); } }>

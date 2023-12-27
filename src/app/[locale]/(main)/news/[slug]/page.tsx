@@ -13,36 +13,35 @@ import NewsDetail from '@/components/ui/PageComponents/News/NewsDetail';
 const DetailNewsHealthPage = async({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.newsDetail');
 
-	const newParam = decodeURIComponent(params?.slug);
-	const selectedArticle = await getArticleBySlug({ query: { slug: newParam } });
+	const getArticle = await getArticleBySlug({
+		param: params?.slug,
+	});
 
-	if (selectedArticle?.data?.filter(news => `${ news.slug }` === newParam).length <= 0) {
+	const selectedArticle = Object.values(getArticle)[0];
+	
+	if (selectedArticle?.slug !== params?.slug) {
 		redirect('/news');
 	};
 
-	const filteredSelectedArticle = selectedArticle?.data?.find(coe => {
-		return coe?.slug === newParam;
-	});
-
 	const specialty = await getNewsSpecialtyByID({
-		param: `${ filteredSelectedArticle?.id }`,
+		param: `${ selectedArticle?.id }`,
 		query: {
 			limit: '2'
 		}
 	});
 
 	const relatedNews = await getRelatedNews({
-		param: `${ filteredSelectedArticle?.id }`,
+		param: `${ selectedArticle?.id }`,
 		query: {
 			limit: '2'
 		}
 	});
 
-	const breadcrumbsPath = [{ name: t('breadcrumbsLabel'), url: '/news' }, { url: '#', name: filteredSelectedArticle?.title || '' }];
+	const breadcrumbsPath = [{ name: t('breadcrumbsLabel'), url: '/news' }, { url: '#', name: selectedArticle?.title || '' }];
 
 	return (
 		<NewsDetail
-			filteredSelectedArticle={ filteredSelectedArticle }
+			filteredSelectedArticle={ selectedArticle }
 			specialty={ specialty?.data }
 			relatedNews={ relatedNews?.data }
 			breadcrumbsPath={ breadcrumbsPath }

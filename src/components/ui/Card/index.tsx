@@ -81,7 +81,7 @@ const Card = (props: PropsType) => {
 			</Link>
 			{
 				props.iconShare &&
-				<div className={ 'max-sm:hidden block' }>
+				<div className={ 'block' }>
 					<Share id={ props.id } />
 				</div>
 			}
@@ -145,7 +145,7 @@ export const CardContentWithInner = ({ title, description, author, RSLocation, i
 export const CardFooter = ({ content, to }: { content: string; to?: string; }) => (
 	<div className='flex flex-row gap-x-2 items-center'> { /* TODO: if use a Link it will cause an error <a> cannot appear as a descendant of <a> because CardWrapper = styled(Link) */ }
 		<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ content } />
-		<icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />
+		<icons.LongArrowRight className='[&>path]:stroke-[#358888]' style={ { width: '20px' } } />
 	</div>
 );
 

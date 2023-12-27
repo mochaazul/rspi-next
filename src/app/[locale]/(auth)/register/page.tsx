@@ -229,7 +229,7 @@ const RegisterPage = () => {
 					<Text fontSize='16px' lineHeight='24px' fontType={ null } color={ colors.grey.darkOpacity }>
 						{ t('footer.hasAccountLabelMobile') }
 					</Text>
-					<Link href='/register' className='w-full'>
+					<Link href='/login' className='w-full'>
 						<Button theme='outline' $hoverTheme='primary' className='w-full py-3'>
 							{ t('footer.loginBtnLabel') }
 						</Button>
