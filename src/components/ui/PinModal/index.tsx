@@ -50,6 +50,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 				await checkPinTrigger(formPin);
 
 				if (onSuccess) onSuccess();
+				setError('');
 			} catch (error: any) {
 				setError(error?.message ?? '');
 			} finally {
@@ -73,10 +74,14 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 		setSession(session);
 	};
 
+	const handleOnClose = () => {
+		onClose ? onClose() : null;
+		setError('');
+	};
+
 	return (
 		<>
-
-			<Modal visible={ visible } onClose={ onClose }>
+			<Modal visible={ visible } onClose={ handleOnClose }>
 				<PinModalContainer>
 					<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
 					<Text text={ t('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
@@ -87,7 +92,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 								showIconLeft={ false }
 								showIconRight={ false }
 								mode={ 'error' }
-								visible={ true }
+								visible={ error !== '' }
 							>
 								<Text
 									fontType={ null }
