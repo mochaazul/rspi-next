@@ -10,7 +10,7 @@ import {
 
 import NewsDetail from '@/components/ui/PageComponents/News/NewsDetail';
 
-const DetailNewsHealthPage = async ({ params }: { params: { slug: string; }; }) => {
+const DetailNewsHealthPage = async({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.newsDetail');
 
 	const getArticle = await getArticleBySlug({
@@ -20,7 +20,7 @@ const DetailNewsHealthPage = async ({ params }: { params: { slug: string; }; }) 
 	const selectedArticle = Object.values(getArticle)[0];
 	
 	if (selectedArticle?.slug !== params?.slug) {
-		redirect(`/news`);
+		redirect('/news');
 	};
 
 	const specialty = await getNewsSpecialtyByID({

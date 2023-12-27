@@ -17,7 +17,6 @@ import {
 
 import {
 	colors,
-	icons,
 	sosmedLink
 } from '@/constant';
 import dayjs from 'dayjs';

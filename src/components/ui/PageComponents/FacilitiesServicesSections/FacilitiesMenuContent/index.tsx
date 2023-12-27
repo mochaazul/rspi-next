@@ -69,7 +69,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 				/>
 			</div>
 
-			{ facilityDetail?.available_at?.length && (
+			{ facilityDetail?.available_at?.filter(data => !!data)?.length ? (
 				<div className='sm:flex gap-x-5'>
 					<div className='grid grid-cols-2 gap-4 sm:gap-10 mt-6 w-full'>
 						{
@@ -90,7 +90,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 						}
 					</div>
 				</div>
-			) }
+			) : null }
 			{ facilityDetail?.facilities_hospitals && facilityDetail?.facilities_hospitals?.length
 				? <AvailableAt hospital={ facilityDetail?.facilities_hospitals } />
 				: null }

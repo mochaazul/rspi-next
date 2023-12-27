@@ -14,7 +14,7 @@ type Props = {
 	toggler: (arg0: boolean) => void;
 	onClose?: () => void;
 	callbackUrl?: string;
-  msg?: string
+	msg?: string;
 };
 
 const BlacklistModal = ({
@@ -26,7 +26,7 @@ const BlacklistModal = ({
 }: Props) => {
 
 	const t = useScopedI18n('blacklist');
-  
+
 	return (
 		<Modal visible={ visible } onClose={ onClose } backdropClassname='backdrop-blur-md' >
 			<div className='flex flex-col items-center'>
@@ -42,8 +42,8 @@ const BlacklistModal = ({
 					textAlign='center'
 					className='pt-4 pb-8 w-[400px] text-center'
 				/>
-				<Link href={ '/contact-us' }>
-				  <Button className='max-w-full' theme='primary' >{ t('contactUs') }</Button>
+				<Link href={ '/contact' }>
+					<Button className='max-w-full' theme='primary' >{ t('contactUs') }</Button>
 				</Link>
 			</div>
 		</Modal>
