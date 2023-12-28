@@ -87,7 +87,7 @@ const Combobox = ({
 							)
 						}
 						<HeadlessCombobox.Input
-							className='w-full border-none py-2 pl-3 pr-10 text-gray-900 '
+							className='w-full border-none py-2 pl-[9px] pr-10 text-gray-900 '
 							onChange={ event => changeQuery(event.target.value) }
 							placeholder={ placeholder }
 							{ ...(retainValue ? { displayValue: (item: ItemType) => `${ item?.label ?? '' }` } : {}) }
@@ -121,7 +121,7 @@ const Combobox = ({
 					>
 						<HeadlessCombobox.Options
 							static={ true }
-							className='z-30 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
+							className='z-30 absolute mt-0.5 max-h-60 w-full overflow-auto rounded-[10px] bg-white text-base leading-normal shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] ring-0 focus:ring-0 focus:outline-none'>
 							{ filteredItem.length === 0 && query !== '' ? (
 								<div className='relative cursor-default select-none px-4 py-2 text-gray-700'>
 									{
@@ -133,12 +133,12 @@ const Combobox = ({
 									<HeadlessCombobox.Option
 										key={ `combobox-${ index }` }
 										className={ ({ selected }) =>
-											`relative cursor-default select-none py-2 pl-3 pr-4 hover:bg-green-secondary/10 ${ selected ? 'bg-green-secondary/10' : '' }`
+											`relative cursor-default select-none py-4 px-5 hover:bg-green-secondary/10 ${ selected ? 'bg-green-secondary/10' : '' }`
 										}
 										value={ item }
 									>
 										{ ({ selected }) => (
-											<span className={ `block truncate ${ selected ? 'font-bold text-green-secondary' : 'font-normal text-gray-1' }` }>
+											<span className={ `text-base block truncate ${ selected ? 'font-bold text-green-secondary' : 'font-normal text-gray-1' }` }>
 												{ item.label }
 											</span>
 										) }
