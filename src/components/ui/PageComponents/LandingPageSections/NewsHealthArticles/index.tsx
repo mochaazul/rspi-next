@@ -58,6 +58,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 									return (
 										<Card
 											id={ article?.id }
+											slug={ article?.slug }
 											image={ article.img_url }
 											imageHeight='200px'
 											key={ index }

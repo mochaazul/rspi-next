@@ -32,6 +32,7 @@ interface PropsType {
 	className?: string | undefined;
 	iconShare?: boolean;
 	id?: number;
+	slug?: string;
 }
 
 interface CardsScrollHorizontalType {
@@ -82,7 +83,7 @@ const Card = (props: PropsType) => {
 			{
 				props.iconShare &&
 				<div className={ 'block' }>
-					<Share id={ props.id } />
+					<Share slug={ props.slug } />
 				</div>
 			}
 		</CardWrapper>

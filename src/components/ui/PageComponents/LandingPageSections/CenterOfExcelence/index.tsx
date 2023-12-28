@@ -49,6 +49,7 @@ const CentreOfExcellence = ({ data }: { data: CenterOfExcellenceDetail[]; }) => 
 						data?.map((data, index) => (
 							<Card
 								key={ data.id ?? index }
+								slug={ data.slug }
 								image={ (data.img_url?.length ?? 0) > 0 && data.img_url?.[0] ? data.img_url[0] : undefined }
 								imageHeight='200px'
 								content={ <CardContent title={ data.title ?? '' } description={ data.short_description ?? '' } /> }

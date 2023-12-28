@@ -5,10 +5,11 @@ import Image from 'next/image';
 
 import { icons, sosmedLink } from '@/constant';
 import Text from '@/components/ui/Text';
-import { baseUrl } from '@/config';
+
+import { useHostname } from '@/utils/useHostname';
 
 interface PropsType {
-	id?: number;
+	slug?: string;
 }
 
 const buttonSocmed = [
@@ -35,14 +36,12 @@ const buttonSocmed = [
 ];
 
 const Share = (props: PropsType) => {
+	const hostname = useHostname({ fullUrl: false });
+
 	const [isHoverShare, setIsHoverShare] = useState(false);
 
-	const toggleMouseHoverShare = (hovered: boolean) => () => {
-		setIsHoverShare(hovered);
-	};
-
 	const copy = () => {
-		navigator.clipboard.writeText(baseUrl + '/' + props.id)
+		navigator.clipboard.writeText(hostname + '/' + props.slug)
 			.then(() => {
 				alert('URL Link copied');
 			});
@@ -65,7 +64,7 @@ const Share = (props: PropsType) => {
 						<Link
 							key={ idx }
 							className='border-b border-gray flex py-4 px-4 items-center'
-							href={ item?.url + baseUrl + '/' + props.id }
+							href={ item?.url + hostname + '/' + props.slug }
 							target='_blank'
 						>
 							{ item?.icon }

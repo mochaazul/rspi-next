@@ -150,6 +150,7 @@ const EventClassesPromo = ({
 								return (
 									<Card
 										id={ data.id }
+										slug={ data.slug }
 										key={ index }
 										image={ data.img_url_card }
 										imageHeight='200px'
@@ -192,6 +193,7 @@ const EventClassesPromo = ({
 									return (
 										<Card
 											id={ data.id }
+											slug={ data.slug }
 											key={ index }
 											image={ data.img_url_card }
 											imageHeight='200px'
