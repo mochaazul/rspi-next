@@ -63,7 +63,7 @@ const Combobox = ({
 			);
 
 	return (
-		<div>
+		<div className='my-[5px]'>
 			<HeadlessCombobox
 				by='id'
 				value={ selected }
