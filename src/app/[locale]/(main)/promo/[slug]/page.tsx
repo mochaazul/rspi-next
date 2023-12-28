@@ -29,7 +29,7 @@ const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; 
 
 	return (
 		<PanelV1>
-			<PanelH1>
+			<PanelH1 className='sm:mx-[165px] mx-0' >
 				<PromoDetail
 					selectedEvent = { selectedEvent?.data }
 					breadcrumbsPath = { breadcrumbsPath }

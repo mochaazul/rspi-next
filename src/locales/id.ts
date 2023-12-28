@@ -29,7 +29,8 @@ export default {
 		callAmbulanceLabel: {
 			heading: 'Panggil Ambulans',
 			subHeading: 'Silahkan pilih Rumah sakit: '
-		}
+		},
+		share: 'Bagikan'
 	},
 	blacklist: {
 		contactUs: 'Hubungi kami',
@@ -544,7 +545,10 @@ export default {
 				detailsBtnLabel: 'Lihat Detail'
 			},
 			schedule: 'Jadwal',
-			more: 'Lihat Promo & Paket Lebih Banyak'
+			more: 'Lihat Promo & Paket Lebih Banyak',
+			info: 'Informasi',
+			phone: 'Telepon (Whatsapp Only)',
+			operational: 'Jam Operasional',
 		},
 		facilities: {
 			heading: 'Fasilitas & Layanan',

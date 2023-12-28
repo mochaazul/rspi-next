@@ -31,7 +31,8 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 	}
 
 	return (
-		<div className='flex flex-row sm:ml-[-0.25rem] mt-[25px] sm:mt-8'>
+		// for 'mt (mobile view)' I updated -45 because in the PanelV1 styling there was already 60px top padding, so to get a distance of 25px from the top, I subtracted 45px
+		<div className='flex flex-row sm:ml-[-0.25rem] mt-[-45px] sm:mt-8 truncate text-ellipsis'>
 			{
 				datas.map((data, index) => (
 					<div key={ index } className='flex flex-row items-center'>
@@ -39,7 +40,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 							<ItemStyle className='px-1 py-1 max-sm:px-0.5'>
 								<Text
 									fontType='p'
-									className='item-text text-ellipsis'
+									className='item-text'
 									fontSize='14px'
 									lineHeight='17px'
 									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }
