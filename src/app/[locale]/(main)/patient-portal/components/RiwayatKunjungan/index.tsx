@@ -69,7 +69,7 @@ const RiwayatKunjungan = ({ patientProfile }: RiwayatKunjunganProps) => {
 						key={ visitHistory.appointment_id }
 						id={ visitHistory.appointment_id }
 						status={ t('riwayatKunjungan.label.doneAppointment') }
-						queueNo={ 24211 }
+						queueNo={ + visitHistory.q_number }
 						type='other'
 						isTelemedicine={ false }
 						data={ visitHistory }

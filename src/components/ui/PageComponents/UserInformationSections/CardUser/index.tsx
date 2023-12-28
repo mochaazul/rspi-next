@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 
-import { icons } from '@/constant';
+import { colors, icons } from '@/constant';
 import Text from '@/components/ui/Text';
 import { I_VisitHistory, ResponseType, UserDataDetail } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
@@ -76,6 +76,7 @@ const CardUser: React.FC<CardUserProps> = ({
 								fontSize='14px'
 								lineHeight='17px'
 								className='capitalize'
+								color={ colors.grey.darkOpacity }
 								text={ patientProfile?.birthdate && patientProfile?.gender && `${ getAge(splitDate(patientProfile?.birthdate)) }, ${ setGender() }` }
 							/>
 						</div>
@@ -86,6 +87,7 @@ const CardUser: React.FC<CardUserProps> = ({
 							fontSize='14px'
 							lineHeight='17px'
 							subClassName='max-lg:text-center'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.patientIdLabel') }
 						/>
 						<Text

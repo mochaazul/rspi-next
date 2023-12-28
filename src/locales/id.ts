@@ -852,9 +852,8 @@ export default {
 						notesInputPlaceholder: 'Masukkan deskripsi...',
 						optionalLabel: '(Opsional)',
 						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.',
-						responReview: 'Review telah',
-						responReviewFailed: ' gagal',
-						responReviewSuccess: ' berhasil'
+						responReviewFailed: 'Review telah gagal',
+						responReviewSuccess: 'Review telah berhasil'
 					}
 				},
 				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.',
@@ -862,11 +861,12 @@ export default {
 			},
 			jadwalKunjungan: {
 				label: {
-					queueNo: 'Nomor Antrean',
+					queueNo: 'No. Antrian:',
 					activeSchedule: 'Jadwal Aktif',
-					cancelAppointment: 'Batalkan janji temu',
+					cancelAppointment: 'Batalkan Janji Temu',
 					empty: 'Anda belum mempunyai data kunjungan saat ini',
-					emptyBtnCta: 'Jadwalkan Kunjungan'
+					emptyBtnCta: 'Jadwalkan Kunjungan',
+					visitSchedule: 'Jadwal Konsultasi'
 				},
 				options: [
 					'Diri Sendiri',

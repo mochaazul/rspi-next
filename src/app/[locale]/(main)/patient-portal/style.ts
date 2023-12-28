@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import { colors } from '@/constant';
 
 export const CardPatientPortalStyle = styled.div`
-  box-shadow: 5px 5px 10px rgba(53, 136, 136, 0.12);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px 20px;
   max-height: 600px;
   overflow-y: auto;
+  background-color: ${ colors.white.default };
 
 	@media screen and (max-width: 640px) {
-    padding: 14px;
+    padding: 16px;
   }
   
   .btn-cancel {
@@ -20,8 +21,7 @@ export const CardPatientPortalStyle = styled.div`
     color: ${ colors.red.default };
     font-size: 12px;
     font-weight: 700;
-    margin: auto 0 auto auto;
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 768px) {
       margin: auto;
       padding: 8px 16px;
     }
@@ -35,6 +35,10 @@ export const CardPatientPortalStyle = styled.div`
     font-size: 12px;
     font-weight: 700;
     margin: auto 0 auto auto;
+    &:hover {
+      background-color: ${ colors.paradiso.default };
+      color: ${ colors.white.default };
+    }
     @media screen and (max-width: 640px) {
       margin: auto;
       padding: 8px 16px;
@@ -74,7 +78,7 @@ export const CardPatientPortalStyle = styled.div`
 `;
 
 export const ModalStyle = styled.div`
-  padding: 30px;
+  padding: 24px;
   .divider {
     border-top: 1px solid ${ colors.grey.lighterOpacity }
   }
@@ -138,5 +142,5 @@ export const EmptyResultContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 32px;
 `;

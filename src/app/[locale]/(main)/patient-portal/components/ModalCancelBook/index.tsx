@@ -42,9 +42,9 @@ const ModalCancelBook = (props: PropsType) => {
 					<div className='flex flex-row'>
 						<Text text={ t('heading') } fontSize='24px' fontWeight='700' className='flex-1' />
 					</div>
-					<Text text={ t('warningText') } fontSize='14px' fontWeight='400' className='mt-[10px]' color={ colors.grey.darkOpacity } />
+					<Text text={ t('warningText') } fontSize='14px' fontWeight='400' lineHeight='20px' className='mt-2' color={ colors.grey.darkOpacity } />
 
-					<div className='mt-[24px] px-[16px] flex flex-col gap-[12px]' >
+					<div className='mt-8 px-[16px] flex flex-col gap-[12px]' >
 						<Text
 							text={ t('patientData.heading') }
 							fontWeight='700'
@@ -95,8 +95,16 @@ const ModalCancelBook = (props: PropsType) => {
 						</div>
 					</div>
 
-					<div className='flex my-[30px]'>
-						<Image alt='' src={ props.doctorImg || '' } width={ 60 } height={ 60 } className='rounded-full h-[60px] w-[60px]' />
+					<div className='flex my-8 bg-[#FAFAFA] p-4 rounded-[10px]'>
+						<div className='relative overflow-hidden w-[60px] h-[60px] rounded-full flex-shrink-0'>
+							<Image
+								className='object-cover object-top'
+								sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+								alt=''
+								src={ props.doctorImg || '/images/samples/default-avatar.jpg' }
+								fill
+							/>
+						</div>
 						<div className='ml-[15px]'>
 							<Text text={ props.doctorName } fontSize='16px' fontWeight='700' />
 							<Text text={ props.doctorSpec } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
@@ -112,7 +120,14 @@ const ModalCancelBook = (props: PropsType) => {
 							</div>
 						</div>
 					</div>
-					<Button theme='primary' $hoverTheme='primary' themeColor='red' label={ t('patientData.btnSubmitLabel') } onClick={ props.onClickButtonCancelAppointment } />
+					<Button
+						theme='primary'
+						$hoverTheme='primary'
+						themeColor={ colors.red.default }
+						label={ t('patientData.btnSubmitLabel') }
+						onClick={ props.onClickButtonCancelAppointment }
+						className='!rounded-lg !py-2.5 !text-base !font-medium'
+					/>
 				</div>
 			</ModalStyle>
 		</Modal>
