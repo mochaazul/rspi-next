@@ -215,7 +215,7 @@ const EventClassesPromo = ({
 												/>
 											}
 											footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
-											className='mb-0 !w-[90%]'
+											className={ `mb-0 ${events?.length > 1 ? '!w-[90%]' : '!w-[100%]'}` }
 											to={ `/promo/${ data.slug }` }
 											iconShare={ true }
 										/>

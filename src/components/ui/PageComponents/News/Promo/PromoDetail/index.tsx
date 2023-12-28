@@ -48,24 +48,14 @@ const PromoDetail: React.FC<Props> = ({
 				<Breadcrumbs datas={ breadcrumbsPath } />
 			</div>
 			<div className='mt-[25px] sm:mt-[50px]'>
-				
-				<Text
-					fontType='h1'
-					fontWeight='900'
-					fontSize='44px'
-					className='mx-[16px] sm:mx-0 '
-					lineHeight='57px'>
+				<h1 className='leading-[32px] sm:leading-[57px] font-bold sm:text-[44px] text-[24px] mx-[16px] sm:mx-0 '>
 					{ selectedEvent?.title }
-				</Text>
+				</h1>
 				<div className='flex items-center gap-[30px] mt-[10px] sm:mx-0 mx-[16px]'>
 					<div className='flex gap-[15px] items-center'>
-						<Text
-							fontType='p'
-							lineHeight='24px'
-							fontSize='20px'
-							fontWeight='400'
-							text={ tGlobal('share') }
-						/>
+						<p className='leading-[24px] font-normal text-[14px] sm:text-[24px]'>
+							{ tGlobal('share') }
+						</p>
 						<div className='flex gap-[15px]'>
 							<Link href={ getLinkShareSocmed(sosmedLink.facebook) ?? ''  } target='_blank' className='cursor-pointer' >
 								<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
@@ -95,15 +85,10 @@ const PromoDetail: React.FC<Props> = ({
 								className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 							/>
 							<div className='mt-[50px]'>
-								<Text
-									fontType='p'
-									lineHeight='30px'
-									fontSize='20px'
-									fontWeight='900'
-									color={ colors.paradiso.default }
-									className='mt-[50px]'
-									text={ t('schedule') }
-								/>
+								<p className={ 'sm:leading-[30px] leading-[24px] sm:text-[20px] text-[16px] font-bold text-green-secondary mt-[50px]' }>
+									{ t('schedule') }
+								</p>
+								
 								<div>
 									<TextHtml
 										className='innerHTML mt-5 leading-[30px] sm:text-[20px] text-[16px] font-bold'
@@ -112,15 +97,9 @@ const PromoDetail: React.FC<Props> = ({
 									<div className='flex flex-col gap-1 mt-3'>
 										{
 											(selectedEvent?.hospitals ?? []).map((hospital: any, index: number) =>
-												<Text
-													fontType='p'
-													key={ index }
-													lineHeight='20px'
-													fontSize='16px'
-													fontWeight='900'
-													color={ colors.grey.dark }
-													text={ hospital?.hospital_name }
-												/>
+												<p key={ index } className='leading-[20px] font-bold sm:text-[16px] text-[14px] text-gray-2'>
+													{ hospital?.hospital_name }
+												</p>
 											)
 										}
 									</div>
