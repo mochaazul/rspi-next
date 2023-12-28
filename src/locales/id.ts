@@ -543,7 +543,8 @@ export default {
 			promoItem: {
 				detailsBtnLabel: 'Lihat Detail'
 			},
-			schedule: 'Jadwal'
+			schedule: 'Jadwal',
+			more: 'Lihat Promo & Paket Lebih Banyak'
 		},
 		facilities: {
 			heading: 'Fasilitas & Layanan',

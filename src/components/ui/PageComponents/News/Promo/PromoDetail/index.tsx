@@ -169,13 +169,11 @@ const PromoDetail: React.FC<Props> = ({
 							</div>
 						</div>
 					</div>
-					<div className=''>
+					<div className='mt-[100px]'>
 						<div className='mt-[40px]'>
-							<Tabs
-								activeTabIndex={ activeTabIdx }
-								setActiveTabIndex={ setActiveTabIdx }
-								tabsData={ ['More From Promo & Packages'] }
-							/>
+							<span className={ 'text-gray-1 font-bold w-auto text-2xl leading-[10px] border-b-[4px] border-green-secondary' }>
+								{ t('more') }
+							</span>
 							<div className='pt-[10px]' />
 							<PromoPackages showAsRelated={ true } events={ eventsOther } />
 						</div>

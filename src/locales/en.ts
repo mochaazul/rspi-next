@@ -538,7 +538,8 @@ export default {
 			promoItem: {
 				detailsBtnLabel: 'View Details'
 			},
-			schedule: 'Schedule'
+			schedule: 'Schedule',
+			more: 'More From Promo & Packages'
 		},
 		facilities: {
 			heading: 'Facilities & Services',
