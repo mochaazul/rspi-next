@@ -889,7 +889,8 @@ export default {
 					A: 'Arrived',
 					P: 'Postponed',
 					S: 'Seen Doctor',
-					U: 'Arrived Not Seen'
+					U: 'Arrived Not Seen',
+					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
 				offlineConsultation: 'Konsultasi Tatap Muka'

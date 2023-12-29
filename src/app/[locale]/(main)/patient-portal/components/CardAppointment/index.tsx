@@ -160,6 +160,8 @@ const CardAppointment = (props: PropsType) => {
 				return t('jadwalKunjungan.statusLabel.S');
 			case 'U':
 				return t('jadwalKunjungan.statusLabel.U');
+			case 'D':
+				return t('jadwalKunjungan.statusLabel.D');
 			default:
 				return '';
 		}
