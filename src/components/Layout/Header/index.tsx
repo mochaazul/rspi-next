@@ -148,7 +148,7 @@ export const Header = ({
 
 	const getDataSubMenu = () => {
 		switch (activeSubMenuIdMobile) {
-			case 'centre-of-excellence':
+			case 'center-of-excellence':
 				return {
 					title: t('centreOfExcellence'),
 					data: centerOfExcellenceData,
@@ -160,7 +160,7 @@ export const Header = ({
 					data: hospitalData,
 					href: '/hospital'
 				};
-			case 'facilities':
+			case 'facilities-service':
 				return {
 					title: t('facility'),
 					data: facilityServicesData,
@@ -197,7 +197,7 @@ export const Header = ({
 			const prefixHref = getDataSubMenu().href;
 
 			return data.map((item: any) => {
-				const title = activeSubMenuIdMobile === 'centre-of-excellence'
+				const title = activeSubMenuIdMobile === 'center-of-excellence'
 					? item.title
 					: item.name;
 				const dataIdentifier = activeSubMenuIdMobile === 'our-hospital'

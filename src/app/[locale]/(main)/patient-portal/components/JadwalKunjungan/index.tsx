@@ -64,7 +64,7 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 							<div key={ index }>
 								<CardAppointment
 									id={ data.appointment_id }
-									status={ data.status }
+									status='appointment'
 									queueNo={ + data.q_number }
 									type={ data.type }
 									patientName={ data.patient_name }

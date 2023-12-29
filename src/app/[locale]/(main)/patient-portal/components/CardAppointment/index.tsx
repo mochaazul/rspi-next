@@ -24,7 +24,7 @@ import { UserDataDetail } from '@/interface';
 import useSession from '@/session/client';
 
 interface PropsType {
-	status?: string;
+	status?: 'appointment' | 'history';
 	queueNo?: number;
 	id: string;
 	doctorName?: string;
@@ -183,7 +183,7 @@ const CardAppointment = (props: PropsType) => {
 	};
 
 	const renderButtonReschedule = (className?: string) => {
-		if (props.visit_status === 'C' && criteriaAppointmentDone.includes(props?.status ?? '')) {
+		if (props.visit_status === 'C' && props.status === 'history') {
 			return (
 				<button onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className={ `btn-success cursor-pointer ${ className }` }>{ t('jadwalKunjungan.label.rescheduleAgain') }</button>
 			);
@@ -304,7 +304,7 @@ const CardAppointment = (props: PropsType) => {
 			</div>
 
 			{
-				criteriaAppointmentDone.includes(props.status ?? '')
+				props.status === 'history'
 				&& props.visit_status === 'C'
 				&&
 				<div className='flex flex-row gap-x-2 items-center justify-center md:justify-end cursor-pointer mt-8 md:mt-5' onClick={ handleShowModal }>

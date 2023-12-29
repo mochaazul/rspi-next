@@ -987,6 +987,7 @@ export default {
 				newPasswordConfirmationPlaceholder: 'Confirm your new password',
 				resetBtnLabel: 'Change Password'
 			},
+			forgotPasswordLabel: 'Forgot Password?'
 		}
 	}
 } as const;

@@ -30,6 +30,7 @@ export const PhoneNumberInputWrapper = styled.div<StyledPhoneNumberInputType>`
   position: relative;
   border-radius: 5px;
   outline: 1px solid ${ colors.grey.lighter };
+  padding: 12px 18px;
 
   .iconWrapper {
     display: ${ props => (!!props.$iconName || !!props.featherIcon) ? 'block' : 'none' };
@@ -53,17 +54,16 @@ export const PhoneNumberInputWrapper = styled.div<StyledPhoneNumberInputType>`
   ` : '' }
 `;
 
-export const CountrySelector = styled.select`
-  padding: 12px;
-  &:focus-visible{
-    outline: none;
-  }
+export const CountrySelector = styled.div`
   background-color: inherit;
+  border-right-width: 1px;
+  border-color: ${ colors.grey.light };
+  padding-right: 8px;
 `;
 
 export const Input = styled.input<PhoneInputType>`
   width: 100%;
-  padding: 12px 18px;
+  padding-left: 8px;
   font-family: var(--font-family);
   &:focus {
     outline: none;
