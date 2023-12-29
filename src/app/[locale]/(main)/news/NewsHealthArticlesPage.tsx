@@ -97,6 +97,7 @@ const NewsHealthArticlesPage = ({
 												$hoverTheme={ tab?.value === categoryParams ? 'secondary' : 'primary' }
 												label={ tab.label }
 												onClick={ () => clickTabs() }
+												className='rounded-[10px]'
 											/>
 										</Link>
 									);
@@ -105,10 +106,11 @@ const NewsHealthArticlesPage = ({
 							<div className='mt-[31px] w-[349px]'>
 								<Form.TextField
 									placeholder='Cari Artikel'
-									iconName='Search'
+									featherIcon='Search'
 									iconPosition='left'
 									$iconColor={ colors.grey.light }
 									value={ keywordSearch }
+									className='placeholder-gray-3'
 									onChange={ e => {
 										setKeywordSearch(e.target.value);
 										params.set('keyword', e.target.value);
