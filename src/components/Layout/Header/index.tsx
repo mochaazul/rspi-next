@@ -344,12 +344,21 @@ export const Header = ({
 					<MainNavLanguage session={ session } />
 				</div>
 				<header className='bg-white navbar w-full'>
-					<nav className='mx-auto flex items-center justify-between container-page gap-2 lg:gap-5 h-[64px] lg:h-[90px]' aria-label='Global'>
+					<nav className='mx-auto flex items-center container-page gap-2 lg:gap-5 h-[64px] lg:h-[90px]' aria-label='Global'>
 						<div className='flex items-center gap-x-5 xl2:gap-x-10'>
 							<HeaderBrand />
 						</div>
             <section id='nav-menus' className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
               <Menus label={t('ourHospitals')}  items={[]}/>
+            </section>
+						<section id='nav-menus' className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
+              <Menus label={t('centreOfExcellence')}  items={[]}/>
+            </section>
+						<section id='nav-menus' className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
+              <Menus label={t('facility')}  items={[]}/>
+            </section>
+						<section id='nav-menus' className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
+              <Menus label={t('findDoctor')}  items={[]}/>
             </section>
 
             {/* Mobile View Notif ETC */}

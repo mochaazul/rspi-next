@@ -23,12 +23,14 @@ module.exports = {
 					default: '#EB5757'
 				},
 				green: {
+					primary: '#358888',
 					secondary: '#358888',
 					500: '#358888', // for override primaryColor DateField component
 				},
 				gray: {
 					1: '#2A2536'
-				}
+				},
+				
 			},
 			width: {
 				'920': '920px',

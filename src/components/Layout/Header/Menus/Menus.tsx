@@ -1,6 +1,6 @@
 import { Text } from '@/components/ui';
-import { colors } from '@/constant';
-import { PropsWithChildren, PropsWithRef } from 'react'
+import { colors, icons } from '@/constant';
+import { PropsWithChildren, PropsWithRef } from 'react';
 
 type Props = PropsWithRef<PropsWithChildren<{
   items: unknown[]
@@ -8,13 +8,16 @@ type Props = PropsWithRef<PropsWithChildren<{
   itemKey?: string
 }>>
 
-const Menus = ({items,itemKey, label}:Props) => {
+const Menus = ({ items, itemKey, label }:Props) => {
   
-  return (
-    <section>
-      <Text text={ label } color={ colors.paradiso.default } fontSize='14px' fontWeight='900' />
-    </section>
-  )
-}
+	return (
+		<section className='flex flex-row gap-x-2 relative '>
+			<Text text={ label } subClassName='text-black' fontSize='14px' fontWeight='900' />
+			<div className='flex-shrink-0'>
+				<icons.ArrowDown className='[&>path]:stroke-[#6A6D81] group-hover:rotate-180 transition-all' />
+			</div>
+		</section>
+	);
+};
 
-export default Menus
+export default Menus;
