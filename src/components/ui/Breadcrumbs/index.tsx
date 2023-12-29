@@ -32,7 +32,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 
 	return (
 		// for 'mt (mobile view)' I updated -45px because in the PanelV1 styling there was already 60px top padding, so to get a distance of 25px from the top, I subtracted 45px
-		<div className='flex flex-row sm:ml-[-0.25rem] mt-[-45px] sm:mt-8'>
+		<div className='flex flex-row sm:ml-[-0.25rem] mt-[25px] sm:mt-8'>
 			{
 				datas.map((data, index) => (
 					<div key={ index } className='flex flex-row items-center'>
@@ -45,7 +45,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 									lineHeight='17px'
 									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }
 									color={ (index + 1) < props.datas.length ? colors.grey.dark : colors.paradiso.default }
-									subClassName='max-sm:!text-[10px] line-clamp-1 max-sm:!leading-normal'
+									subClassName={ `max-sm:!text-[10px] ${index === (props.datas.length - 1) ? 'line-clamp-1' : 'whitespace-no-wrap w-max'} max-sm:!leading-normal` }
 									text={ data.name }
 								/>
 							</ItemStyle>
