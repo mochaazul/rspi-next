@@ -32,6 +32,21 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 			behavior: 'smooth'
 		});
 	};
+
+
+	const renderSeeAll = () => {
+		return (
+			<Link href='/news' className='max-sm:hidden'>
+				<div className='see-all flex row items-center'>
+					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-right'>
+						{ t('allItemBtnLabel') }
+					</Text>
+					<icons.LongArrowRight className='svg-green ml-2' />
+				</div>
+			</Link>
+		);
+	};
+
 	return (
 		<WrapperNewsHealthArticles className='w-full'>
 			<div className='flex row justify-between items-center container-content'>
@@ -39,14 +54,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 					{ t('heading') }
 				</Text>
 				<div className='slider-title mt-3'>
-					<Link href='/news' className='max-sm:hidden'>
-						<div className='see-all flex row items-center'>
-							<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-right'>
-								{ t('allItemBtnLabel') }
-							</Text>
-							<icons.LongArrowRight className='svg-green ml-2' />
-						</div>
-					</Link>
+					{ renderSeeAll() }
 				</div>
 			</div>
 			{ articles.length !== 0 ?
@@ -59,6 +67,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 										<Card
 											id={ article?.id }
 											slug={ article?.slug }
+											language={ article?.language }
 											image={ article.img_url }
 											imageHeight='200px'
 											key={ index }
@@ -93,6 +102,9 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 					<EmptyData menu='News and Health Articles' />
 				</Text>
 			}
+			<div className='w-full mt-6 flex justify-center sm:hidden'>
+				{ renderSeeAll() }
+			</div>
 
 		</WrapperNewsHealthArticles>
 	);

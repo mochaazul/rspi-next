@@ -32,6 +32,7 @@ type ArticleProps = {
 	title: string;
 	news_author: NewsAuthorDetail;
 	short_description: string;
+	language: string;
 };
 
 const NewsHealthArticlesPage = ({
@@ -130,7 +131,7 @@ const NewsHealthArticlesPage = ({
 									className='w-[540px] mr-[32px] cursor-pointer magazine relative'
 								>
 									<div className='relative'>
-										<Share slug={ articles[0]?.slug } />
+										<Share slug={ `${articles[0].language === 'idn' ? 'id' : 'en'}/news/${articles[0]?.slug}` } />
 									</div>
 									<Link href={ `${ pathname }/${ articles[0]?.slug }` } >
 										<img
@@ -167,7 +168,7 @@ const NewsHealthArticlesPage = ({
 													key={ index }
 												>
 													<div className='relative z-1'>
-														<Share slug={ data.slug } />
+														<Share slug={ `${data.language === 'idn' ? 'id' : 'en'}/news/${data.slug}` } />
 													</div>
 													<Link href={ `${ pathname }/${ data?.slug }` } style={ { zIndex: '-999 !important' } }>
 														<CardNews
@@ -192,6 +193,7 @@ const NewsHealthArticlesPage = ({
 											key={ index }
 											id={ data?.id }
 											slug={ data?.slug }
+											language={ data?.language }
 											image={ data?.img_url }
 											imageHeight='200px'
 											header={
@@ -237,6 +239,7 @@ const NewsHealthArticlesPage = ({
 											key={ index }
 											id={ data?.id }
 											slug={ data?.slug }
+											language={ data?.language }
 											image={ data?.img_url }
 											imageHeight='200px'
 											header={

@@ -123,6 +123,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 										key={ index }
 										id={ data?.id }
 										slug={ data?.slug }
+										language={ data?.language }
 										image={ data.image_url }
 										imageHeight='200px'
 										header={
