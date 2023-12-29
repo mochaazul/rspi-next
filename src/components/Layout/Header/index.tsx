@@ -9,6 +9,8 @@ import { useSWRConfig } from 'swr';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Menu, Popover, Transition } from '@headlessui/react';
+import { toast } from 'react-toastify';
 
 import {
 	CenterOfExcellenceDetail,
@@ -32,9 +34,6 @@ import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 
 import { cookiesHelper } from '@/helpers';
 import clearSWRCache from '@/helpers/clearSwrCache';
-import { Menu, Popover, Transition } from '@headlessui/react';
-import { toast } from 'react-toastify';
-import Spinner from '@/components/ui/Spinner';
 
 export const Header = ({
 	session,
