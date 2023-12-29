@@ -781,7 +781,8 @@ export default {
 				patientGenderMaleLabel: 'Laki-laki',
 				patientGenderFemaleLabel: 'Perempuan',
 				patientPhotoProfile: 'Foto profil',
-				editLabel: 'Ubah'
+				editLabel: 'Ubah',
+				successUpdateProfile: 'Berhasil update profil',
 			},
 			securitySetting: {
 				heading: 'Pengaturan Keamanan',
@@ -857,9 +858,8 @@ export default {
 						notesInputPlaceholder: 'Masukkan deskripsi...',
 						optionalLabel: '(Opsional)',
 						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.',
-						responReview: 'Review telah',
-						responReviewFailed: ' gagal',
-						responReviewSuccess: ' berhasil'
+						responReviewFailed: 'Review telah gagal',
+						responReviewSuccess: 'Review telah berhasil'
 					}
 				},
 				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.',
@@ -867,11 +867,14 @@ export default {
 			},
 			jadwalKunjungan: {
 				label: {
-					queueNo: 'Nomor Antrean',
+					queueNo: 'No. Antrian:',
 					activeSchedule: 'Jadwal Aktif',
-					cancelAppointment: 'Batalkan janji temu',
+					cancelAppointment: 'Batalkan Janji Temu',
 					empty: 'Anda belum mempunyai data kunjungan saat ini',
-					emptyBtnCta: 'Jadwalkan Kunjungan'
+					emptyBtnCta: 'Jadwalkan Kunjungan',
+					visitSchedule: 'Jadwal Konsultasi',
+					reschedule: 'Jadwalkan Ulang',
+					rescheduleAgain: 'Jadwalkan Lagi'
 				},
 				options: [
 					'Diri Sendiri',
@@ -885,8 +888,9 @@ export default {
 					T: 'Transferred',
 					A: 'Arrived',
 					P: 'Postponed',
-					S: 'Seen',
-					U: 'Arrived Not Seen'
+					S: 'Seen Doctor',
+					U: 'Arrived Not Seen',
+					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
 				offlineConsultation: 'Konsultasi Tatap Muka'
