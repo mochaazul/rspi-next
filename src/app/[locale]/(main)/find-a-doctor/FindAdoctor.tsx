@@ -24,30 +24,30 @@ import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail } from '@/interface';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 
-type Props ={
-  hospital: HospitalDetail[]
-  clinics: I_SpecialtyDropdownResponse[]
-}
+type Props = {
+	hospital: HospitalDetail[];
+	clinics: I_SpecialtyDropdownResponse[];
+};
 
-export default function FindADoctorComponent({ hospital, clinics }:Props) {
+export default function FindADoctorComponent({ hospital, clinics }: Props) {
 
 	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
-	
+
 	const [resetSearchDoctor, setResetSearchDoctor] = useState(false);
 
 	const t = useScopedI18n('page.findDoctor');
-	
+
 	const searchParams = useSearchParams();
-	
+
 	const breadCrumbs = [{ name: t('heading'), url: '#' }];
-	
-	const { data: doctorResponse, isLoading: doctorLoading, size: currentPage, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams)	});
+
+	const { data: doctorResponse, isLoading: doctorLoading, size: currentPage, setSize } = useGetDoctors({ query: Object.fromEntries(searchParams) });
 
 	const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
 	const RenderFilterPane = (
 		<div className='filter-pane' >
-			<DoctorFilter hospitals={ hospital } clinics={ clinics }/>
+			<DoctorFilter hospitals={ hospital } clinics={ clinics } />
 		</div>
 	);
 
@@ -76,11 +76,11 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 					...hospital
 						.filter(hospital => obj?.includes(hospital.hospital_code))
 						.map(item =>
-							({
-								id: item.hospital_code,
-								text: item.name ?? '',
-								key: entry
-							})
+						({
+							id: item.hospital_code,
+							text: item.name ?? '',
+							key: entry
+						})
 						)
 				);
 			} else
@@ -119,7 +119,7 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 		}
 		return 0;
 	};
-	
+
 	useEffect(() => {
 		if (!doctorResponse) {
 			setSize(currentPage);
@@ -128,142 +128,145 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 
 	const hasMore = () => {
 		if (doctorResponse) {
-			const totalPage =  doctorResponse[0].pagination.total_page || 0;
+			const totalPage = doctorResponse[0].pagination.total_page || 0;
 			return currentPage < totalPage;
 		}
 		return false;
 	};
 
 	return (
-		<PanelV1>
-			<PanelH1>
-				<LangWrapper>
-					<Breadcrumbs datas={ breadCrumbs } />
-					<FindADoctorStyle className='mt-[25px] sm:mt-[50px]'>
-						{ /* Filter Pane */ }
-						<div className='max-sm:hidden'>
-							{ RenderFilterPane }
-						</div>
+		<div className='bg-[#FAFAFA] pt-[1px]'>
+			<PanelV1>
+				<PanelH1>
+					<LangWrapper>
+						<Breadcrumbs datas={ breadCrumbs } />
+						<FindADoctorStyle className='mt-[25px] sm:mt-[50px]'>
+							{ /* Filter Pane */ }
+							<div className='max-sm:hidden'>
+								{ RenderFilterPane }
+							</div>
 
-						{ /* Doctors Pane */ }
-						<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
-						
-							<ResultHeader doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } reset={ resetSearchDoctor } />
-					
-							<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
-								{ /* Applied dilter pills */ }
-								<div className='flex gap-2 sm:flex-wrap max-sm:flex-nowrap max-sm:pb-2'>
-									<div className='filter-pill min-w-fit sm:hidden'>
-										<div onClick={ () => setFilterModalVisible(true) }>
-											<Icons.Filter size={ 18 } color={ colors.paradiso.default } />
+							{ /* Doctors Pane */ }
+							<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
+
+								<ResultHeader doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } reset={ resetSearchDoctor } />
+
+								<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
+									{ /* Applied dilter pills */ }
+									<div className='flex gap-2 sm:flex-wrap max-sm:flex-nowrap max-sm:pb-2'>
+										<div className='filter-pill min-w-fit sm:hidden'>
+											<div onClick={ () => setFilterModalVisible(true) }>
+												<Icons.Filter size={ 18 } color={ colors.paradiso.default } />
+												<Text
+													fontSize='16px'
+													fontWeight='400'
+													lineHeight='19px'
+													color={ colors.paradiso.default }
+													text='Filter'
+												/>
+											</div>
+										</div>
+										{
+											getFilterValues().map((filter, index) => (
+												<div className='min-w-fit' key={ `filter-pills-${ index }` }>
+													<Pills onRemove={ () => onDeletePills(filter) }>
+														<Text
+															fontSize='16px'
+															fontWeight='400'
+															lineHeight='19px'
+															text={ filter.text }
+														/>
+													</Pills>
+												</div>
+											))
+										}
+									</div>
+									<div className='cursor-pointer max-sm:hidden min-w-fit'>
+										{
+											hasSearchParams() &&
 											<Text
 												fontSize='16px'
 												fontWeight='400'
 												lineHeight='19px'
-												color={ colors.paradiso.default }
-												text='Filter'
+												color={ colors.red.default }
+												text='Clear All'
+												onClick={ clearParams }
 											/>
-										</div>
+										}
 									</div>
-									{
-										getFilterValues().map((filter, index) => (
-											<div className='min-w-fit' key={ `filter-pills-${ index }` }>
-												<Pills onRemove={ () => onDeletePills(filter) }>
-													<Text
-														fontSize='16px'
-														fontWeight='400'
-														lineHeight='19px'
-														text={ filter.text }
-													/>
-												</Pills>
-											</div>
-										))
-									}
 								</div>
-								<div className='cursor-pointer max-sm:hidden min-w-fit'>
+
+								{ /* Search used filters - pills with remove icon */ }
+								{ /* Doctor found counter - Mobile */ }
+								<div>
+									<Text
+										fontSize='14px'
+										fontWeight='700'
+										lineHeight='17px'
+										className='mb-2 mt-6 sm:hidden'
+										text={ `${ doctorCount() } Doctor Found` }
+									/>
+								</div>
+
+								<InfiniteScroll
+									style={ { overflow: 'unset' } }
+									className='flex flex-col gap-6 sm:mt-[47px]'
+									dataLength={ doctorData().length || 0 }
+									next={ loadMore }
+									hasMore={ hasMore() }
+									loader={ <div className='loader' key={ 0 }>Loading ...</div> }
+									scrollThreshold={ '100px' }
+								>
 									{
-										hasSearchParams() &&
+										doctorData().map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
+									}
+								</InfiniteScroll>
+								{ /* Doctors result card */ }
+							</div>
+
+							{ /* Popup Filter - Mobile only */ }
+							<Modal
+								visible={ filterModalVisible }
+								onClose={ () => setFilterModalVisible(false) }
+								width='90%'
+								borderRadius='16px'
+								backdropColor={ colors.black.opacity64 }
+							>
+								<div className='relative flex flex-col'>
+									<div className='flex justify-between items-center'>
 										<Text
 											fontSize='16px'
-											fontWeight='400'
 											lineHeight='19px'
-											color={ colors.red.default }
-											text='Clear All'
-											onClick={ clearParams }
+											fontType='h4'
+											fontWeight='900'
+											color={ colors.grey.darker }
+											text='Filter'
+											className=''
 										/>
-									}
-								</div>
-							</div>
-							
-							{ /* Search used filters - pills with remove icon */ }
-							{ /* Doctor found counter - Mobile */ }
-							<div>
-								<Text
-									fontSize='14px'
-									fontWeight='700'
-									lineHeight='17px'
-									className='mb-2 mt-6 sm:hidden'
-									text={ `${ doctorCount() } Doctor Found` }
-								/>
-							</div>
-						
-							<InfiniteScroll
-								style={ { overflow: 'unset' } }
-								className='flex flex-col gap-6 sm:mt-[47px]'
-								dataLength={ doctorData().length || 0 }
-								next={ loadMore }
-								hasMore={ hasMore() }
-								loader={ <div className='loader' key={ 0 }>Loading ...</div> }
-								scrollThreshold={ '100px' }
-							>
-								{
-									doctorData().map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
-								}
-							</InfiniteScroll>
-							{ /* Doctors result card */ }
-						</div>
+										<Icons.X color={ colors.grey.darker } size={ 20 } className='cursor-pointer' onClick={ () => setFilterModalVisible(false) } />
+									</div>
+									<div className='x-spacer my-4' />
 
-						{ /* Popup Filter - Mobile only */ }
-						<Modal
-							visible={ filterModalVisible }
-							onClose={ () => setFilterModalVisible(false) }
-							width='90%'
-							borderRadius='16px'
-							backdropColor={ colors.black.opacity64 }
-						>
-							<div className='relative flex flex-col'>
-								<div className='flex justify-between items-center'>
-									<Text
-										fontSize='16px'
-										lineHeight='19px'
-										fontType='h4'
-										fontWeight='900'
-										color={ colors.grey.darker }
-										text='Filter'
-										className=''
-									/>
-									<Icons.X color={ colors.grey.darker } size={ 20 } className='cursor-pointer' onClick={ () => setFilterModalVisible(false) } />
-								</div>
-								<div className='x-spacer my-4' />
+									{ /* Filter form */ }
+									<div>
+										{ RenderFilterPane }
+									</div>
 
-								{ /* Filter form */ }
-								<div>
-									{ RenderFilterPane }
+									<div className='mt-4'>
+										<Button
+											theme='primary'
+											themeColor={ colors.green.brandAccent }
+											label='Terapkan'
+											onClick={ () => setFilterModalVisible(false) }
+										/>
+									</div>
 								</div>
+							</Modal>
+						</FindADoctorStyle>
+					</LangWrapper>
+				</PanelH1>
+			</PanelV1>
+		</div>
 
-								<div className='mt-4'>
-									<Button
-										theme='primary'
-										themeColor={ colors.green.brandAccent }
-										label='Terapkan'
-										onClick={ () => setFilterModalVisible(false) }
-									/>
-								</div>
-							</div>
-						</Modal>
-					</FindADoctorStyle>
-				</LangWrapper>
-			</PanelH1>
-		</PanelV1>
 	);
 };
