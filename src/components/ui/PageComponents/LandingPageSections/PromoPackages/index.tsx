@@ -49,8 +49,10 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 							<Card
 								key={ index }
 								id={ item?.id }
+								slug={ item?.slug }
 								image={ item.img_url_card }
 								imageHeight='200px'
+								className='!w-[90%] sm:!w-[350px]'
 								header={
 									<Text
 										fontType='p'
@@ -119,6 +121,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 							<Card
 								key={ index }
 								id={ item?.id }
+								slug={ item?.slug }
 								image={ item.img_url_card }
 								imageHeight='200px'
 								className='lg:!w-full !m-0'

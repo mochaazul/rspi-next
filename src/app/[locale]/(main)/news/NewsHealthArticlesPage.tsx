@@ -163,7 +163,7 @@ const NewsHealthArticlesPage = ({
 													key={ index }
 												>
 													<div className='relative'>
-														<Share id={ data.id } />
+														<Share slug={ data.slug } />
 													</div>
 													<Link href={ `${ pathname }/${ data?.slug }` } style={ { zIndex: '-999 !important' } }>
 														<CardNews
@@ -187,6 +187,7 @@ const NewsHealthArticlesPage = ({
 										<Card
 											key={ index }
 											id={ data?.id }
+											slug={ data?.slug }
 											image={ data?.img_url }
 											imageHeight='200px'
 											header={
@@ -231,6 +232,7 @@ const NewsHealthArticlesPage = ({
 										<Card
 											key={ index }
 											id={ data?.id }
+											slug={ data?.slug }
 											image={ data?.img_url }
 											imageHeight='200px'
 											header={
