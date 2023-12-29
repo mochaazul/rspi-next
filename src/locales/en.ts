@@ -876,13 +876,13 @@ export default {
 				],
 				statusLabel: {
 					C: 'Schedule Completed',
-					X: 'Schedule Canceled',
-					N: 'Absent',
+					X: 'Cancelled',
+					N: 'Not Attended',
 					H: 'Hold',
 					T: 'Transferred',
 					A: 'Arrived',
 					P: 'Postponed',
-					S: 'Seen',
+					S: 'Seen Doctor',
 					U: 'Arrived Not Seen'
 				},
 				teleconsultationLabel: 'Telekonsultasi',

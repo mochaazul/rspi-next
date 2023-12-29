@@ -888,7 +888,7 @@ export default {
 					T: 'Transferred',
 					A: 'Arrived',
 					P: 'Postponed',
-					S: 'Seen',
+					S: 'Seen Doctor',
 					U: 'Arrived Not Seen'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
