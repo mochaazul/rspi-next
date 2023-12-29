@@ -148,6 +148,16 @@ const UpdatePasswordPage = () => {
 								type={ inputPasswordType.old_password }
 								onIconClick={ () => togglePasswordShow('old_password') }
 							/>
+							<div className='flex justify-start md:justify-end'>
+								<Link href='/forgot-password'>
+									<Text
+										fontSize='14px'
+										color={ colors.paradiso.default }
+										fontWeight='700'
+										subClassName='leading-normal'
+									>{ t('forgotPasswordLabel') }</Text>
+								</Link>
+							</div>
 						</Form.FormGroup>
 						<Form.FormGroup className='group-wrapper w-full'>
 							<Form.TextField

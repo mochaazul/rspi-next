@@ -65,7 +65,7 @@ export const Divider = styled.div`
   border-top-width: 1px;
   border-color: ${ colors.grey.lighter };
   margin: 25px 0;
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 640px) {
     margin: 16px 0;
   }
 `;
