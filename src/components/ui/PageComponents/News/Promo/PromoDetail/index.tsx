@@ -48,12 +48,12 @@ const PromoDetail: React.FC<Props> = ({
 				<Breadcrumbs datas={ breadcrumbsPath } />
 			</div>
 			<div className='mt-[25px] sm:mt-[50px]'>
-				<h1 className='leading-[32px] sm:leading-[57px] font-bold sm:text-[44px] text-[24px] mx-[16px] sm:mx-0 '>
+				<h1 className='leading-[32px] sm:leading-[57px] font-black text-gray-1 sm:text-[44px] text-[24px] mx-[16px] sm:mx-0 '>
 					{ selectedEvent?.title }
 				</h1>
 				<div className='flex items-center gap-[30px] mt-[10px] sm:mx-0 mx-[16px]'>
 					<div className='flex gap-[15px] items-center'>
-						<p className='leading-[24px] font-normal text-[14px] sm:text-[24px]'>
+						<p className='leading-[24px] text-[14px] font-normal text-gray-1 sm:text-[20px]'>
 							{ tGlobal('share') }
 						</p>
 						<div className='flex gap-[15px]'>
