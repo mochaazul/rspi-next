@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Tooltip } from 'react-tooltip';
 import isEmpty from 'lodash/isEmpty';
 import Link from 'next/link';
@@ -29,7 +29,6 @@ type PropsType = {
 
 const MedicalRecordReminder = ({ isFloating = true, session }: PropsType) => {
 	const languages = useScopedI18n('page.medicalRecordReminder');
-	const navigate = useRouter();
 	const pathname = usePathname();
 	const [isMounted, setIsMounted] = useState<boolean>(false);
 

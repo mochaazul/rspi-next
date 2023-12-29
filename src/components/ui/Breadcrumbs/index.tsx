@@ -47,6 +47,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 									color={ (index + 1) < props.datas.length ? colors.grey.dark : colors.paradiso.default }
 									subClassName={ `max-sm:!text-[10px] ${index === (props.datas.length - 1) ? 'line-clamp-1' : 'whitespace-no-wrap w-max'} max-sm:!leading-normal` }
 									text={ data.name }
+									subClassName='max-sm:!text-[10px] line-clamp-1 max-sm:!leading-normal'
 								/>
 							</ItemStyle>
 						</Link>

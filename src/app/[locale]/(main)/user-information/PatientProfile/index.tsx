@@ -375,9 +375,10 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 							<Text
 								fontWeight='900'
 								fontSize='24px'
-								lineHeight='29px'
+								lineHeight='32px'
 								color={ colors.grey.darker }
 								text={ t('heading') }
+								subClassName='!text-[24px] !leading-[32px]'
 							/>
 						</div>
 						{ /* Notes: Login As dipending */ }
@@ -436,7 +437,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 
 					<div className='flex mt-5 sm:mt-12 mb-[200px]'>
 						<SubMenuPage menuList={ [t('profileLabel'), t('securitySettingLabel')] }>
-							<div className='flex flex-col gap-[10px]'>
+							<div className='flex flex-col gap-4 sm:gap-[25px]'>
 								<div className='flex max-md:mb-4 max-md:flex-col md:items-center md:justify-between md:w-full'>
 									<div className='flex flex-row gap-x-4 items-center w-full'>
 										{ (tempImageSrc || patientProfile?.img_url)
@@ -490,7 +491,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 													theme='outline'
 													$hoverTheme='primary'
 													themeColor='rgba(173, 181, 189, 1)'
-													className='px-[15px] sm:px-5 py-2.5 !w-auto text-sm lg:text-base text-[#2A2536]'
+													className='px-[15px] sm:px-5 py-2.5 !w-auto text-sm lg:text-base text-[#2A2536] !font-bold'
 													label={ t('updatePhotoLabel') }
 													onClick={ () => setClickUpdatePhoto(true) }
 												/>
@@ -502,7 +503,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 												<div>
 													<Button
 														theme='primary'
-														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base text-[#2A2536] sm:whitespace-nowrap'
+														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base text-[#2A2536] sm:whitespace-nowrap !font-bold'
 														themeColor={ colors.grey.lightest }
 														onClick={ onClickDeletePhoto }
 														disabled={ isLoadingDeleteAvatar }
@@ -519,7 +520,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 												<div>
 													<Button
 														theme='primary'
-														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base sm:whitespace-nowrap'
+														className='px-5 sm:px-4 py-2.5 text-sm lg:text-base sm:whitespace-nowrap !font-bold'
 														$hoverTheme='primary'
 														onClick={ () => {
 															setEnableValidation(prevToggle => ({ ...prevToggle, photo: true }));

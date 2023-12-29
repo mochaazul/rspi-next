@@ -55,8 +55,8 @@ const SubMenuPage = ({ menuList, children }: PropsTypes) => {
 		return (
 			<>
 				{ mobileSubMenu() }
-				<div className='hidden lg:flex w-full'>
-					<div className='mr-[100px]'>
+				<div className='hidden lg:flex w-full divide-x divide-[#F0F2F9]'>
+					<div className='divide-y divide-[#F0F2F9]'>
 						{
 							menuList?.map((menu, index) => (
 								<MenuItemStyle
@@ -75,7 +75,7 @@ const SubMenuPage = ({ menuList, children }: PropsTypes) => {
 							))
 						}
 					</div>
-					<div className='flex-1 relative'>
+					<div className='flex-1 relative lg:pl-20 xl:pl-[100px]'>
 						{
 							children.map ? (
 								<>

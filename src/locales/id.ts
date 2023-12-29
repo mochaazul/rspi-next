@@ -605,11 +605,11 @@ export default {
 			subHeading: 'Masukkan data akun yang terdaftar dalam sistem kami',
 			resetForm: {
 				oldPasswordLabel: 'Kata Sandi Lama',
-				oldPasswordPlaceHolder: 'Silahkan masukan kata sandi lama anda',
+				oldPasswordPlaceHolder: 'Masukkan kata sandi lama',
 				newPasswordLabel: 'Kata Sandi Baru',
-				newPasswordPlaceHolder: 'Silahkan masukan kata sandi baru anda',
+				newPasswordPlaceHolder: 'Masukkan kata sandi baru',
 				newPasswordConfirmationLabel: 'Konfirmasi Kata Sandi',
-				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru anda',
+				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru',
 				resetBtnLabel: 'Reset Kata Sandi'
 			},
 		},
@@ -988,13 +988,14 @@ export default {
 			subHeading: 'Silahkan masukkan password baru anda',
 			resetForm: {
 				oldPasswordLabel: 'Kata Sandi Lama',
-				oldPasswordPlaceHolder: 'Silahkan masukan kata sandi lama anda',
+				oldPasswordPlaceHolder: 'Masukkan kata sandi lama',
 				newPasswordLabel: 'Kata Sandi Baru',
-				newPasswordPlaceHolder: 'Silahkan masukan kata sandi baru anda',
+				newPasswordPlaceHolder: 'Masukkan kata sandi baru',
 				newPasswordConfirmationLabel: 'Konfirmasi Kata Sandi',
-				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru anda',
+				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru',
 				resetBtnLabel: 'Ubah Password'
 			},
+			forgotPasswordLabel: 'Lupa Password?'
 		},
 	},
 } as const;

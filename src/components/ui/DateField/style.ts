@@ -40,7 +40,7 @@ export const DateFieldWrapper = styled.div<StyledDateFieldType>`
 
   .iconWrapper {
     display: ${ props => !!props.$iconName ? 'block' : 'none' };
-    left: ${ props => (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '10px' };
+    left: ${ props => (props.$iconPosition === 'left' || !(!!props.$iconPosition)) && '18px' };
     right: ${ props => props.$iconPosition === 'right' && '10px' };
     z-index: 1;
   }
@@ -51,7 +51,7 @@ export const DateFieldWrapper = styled.div<StyledDateFieldType>`
 
   input {
     padding-left: 18px;
-    padding-left: ${ props => !!props.$iconName && (props.$iconPosition === 'left' || !(!!props.$iconPosition)) ? '43px !important' : '18px !important' };
+    padding-left: ${ props => !!props.$iconName && (props.$iconPosition === 'left' || !(!!props.$iconPosition)) ? '51px !important' : '18px !important' };
     padding-right: ${ props => !!props.$iconName && props.$iconPosition === 'right' ? '43px !important' : '18px !important' };
     padding-top: 12px !important;
     padding-bottom: 12px !important;
