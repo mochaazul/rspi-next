@@ -776,7 +776,8 @@ export default {
 				patientGenderMaleLabel: 'Laki-laki',
 				patientGenderFemaleLabel: 'Perempuan',
 				patientPhotoProfile: 'Foto profil',
-				editLabel: 'Ubah'
+				editLabel: 'Ubah',
+				successUpdateProfile: 'Berhasil update profil',
 			},
 			securitySetting: {
 				heading: 'Pengaturan Keamanan',

@@ -7,7 +7,6 @@ import Image from 'next/image';
 import dayjs from 'dayjs';
 
 import { colors, icons } from '@/constant';
-import images from '@/constant/images';
 import PinModal from '@/components/ui/PinModal';
 import Text from '@/components/ui/Text';
 import { I_VisitHistory } from '@/interface/PatientProfile';
@@ -21,7 +20,6 @@ import DetailKunjungan from '../ModalDetailKunjungan';
 import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
 import { UserDataDetail } from '@/interface';
-import useSession from '@/session/client';
 
 interface PropsType {
 	status?: 'appointment' | 'history';
@@ -60,7 +58,6 @@ const CardAppointment = (props: PropsType) => {
 	const [modalRecommend, setModalRecommend] = useState(false);
 	const [showModalCancelBook, setShowModalCancelBook] = useState(false);
 	const [showPinModal, setShowPinModal] = useState(false);
-	const session = useSession();
 
 	const { data: cancelBookingResponse, trigger: cancelBookingTrigger, error: cancelBookingError, isMutating: isLoadingCancelBook } = usePostCancelBookingMutation();
 
@@ -101,12 +98,15 @@ const CardAppointment = (props: PropsType) => {
 		}
 	};
 
-	const isVisitActive = () => {
-		const activeStatus = ['arrived not seen', 'seen doctor', 'postponed', 'admitted / arrived', 'admitted', 'arrived'];
-		return activeStatus.includes(props.status?.toLowerCase() || '');
+	const isVisitActive = (code: string) => {
+		return props.status === 'appointment' && ['U', 'S', 'P', 'A'].includes(code);
 	};
 
 	const mappingStatusColor = (code: string) => {
+		if (isVisitActive(code)) {
+			return colors.paradiso.default;
+		}
+
 		switch (code) {
 			case 'C':
 				return colors.grey.darkOpacity;
@@ -120,6 +120,10 @@ const CardAppointment = (props: PropsType) => {
 	};
 
 	const mappingStatusColorBackground = (code: string) => {
+		if (isVisitActive(code)) {
+			return colors.paradiso.opacity10;
+		}
+
 		switch (code) {
 			case 'C':
 				return colors.grey.lighterOpacity;
@@ -133,6 +137,10 @@ const CardAppointment = (props: PropsType) => {
 	};
 
 	const mappingStatus = (code: string) => {
+		if (isVisitActive(code)) {
+			return t('jadwalKunjungan.label.activeSchedule');
+		}
+
 		switch (code) {
 			case 'C':
 				return t('jadwalKunjungan.statusLabel.C');
@@ -157,10 +165,8 @@ const CardAppointment = (props: PropsType) => {
 		}
 	};
 
-	const criteriaAppointmentDone = ['Jadwal Selesai', 'Appointment Done'];
-
 	const renderButtonCancelAppointment = (className?: string) => {
-		if (!criteriaAppointmentDone.includes(props?.status ?? '')) {
+		if (props.status === 'appointment') {
 			return (
 				<button onClick={ () => setShowModalCancelBook(true) } className={ `btn-cancel group hover:text-white hover:bg-[#EB5757] focus:outline-none focus:ring-0 cursor-pointer flex items-center gap-[5px] ${ className }` }>
 					<icons.Close className='w-4 h-4 [&>path]:fill-[#EB5757] group-hover:[&>path]:fill-white' />

@@ -772,7 +772,8 @@ export default {
 				patientGenderMaleLabel: 'Male',
 				patientGenderFemaleLabel: 'Female',
 				patientPhotoProfile: 'Photo profile',
-				editLabel: 'Change'
+				editLabel: 'Change',
+				successUpdateProfile: 'Successfully Update Profile',
 			},
 			securitySetting: {
 				emailLabel: 'Email',

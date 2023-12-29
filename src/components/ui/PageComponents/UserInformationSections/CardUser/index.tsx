@@ -78,6 +78,7 @@ const CardUser: React.FC<CardUserProps> = ({
 								className='capitalize'
 								color={ colors.grey.darkOpacity }
 								text={ patientProfile?.birthdate && patientProfile?.gender && `${ getAge(splitDate(patientProfile?.birthdate)) }, ${ setGender() }` }
+								subClassName='max-lg:text-xs max-lg:leading-normal'
 							/>
 						</div>
 					</div>
@@ -86,7 +87,7 @@ const CardUser: React.FC<CardUserProps> = ({
 							fontWeight='400'
 							fontSize='14px'
 							lineHeight='17px'
-							subClassName='max-lg:text-center'
+							subClassName='max-lg:text-center max-lg:text-xs max-lg:leading-normal'
 							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.patientIdLabel') }
 						/>
@@ -131,10 +132,10 @@ const CardUser: React.FC<CardUserProps> = ({
 					<div className='flex flex-col gap-1'>
 						<Text
 							fontWeight='400'
-							fontSize='14px'
-							lineHeight='17px'
+							fontSize='12px'
 							text={ t('profileDetail.lastVisitedHospitalLabel') }
 							textAlign='center'
+							subClassName='max-lg:text-xs max-lg:leading-normal'
 						/>
 						<Text
 							fontWeight='700'
@@ -147,10 +148,10 @@ const CardUser: React.FC<CardUserProps> = ({
 					<div className='flex flex-col gap-1'>
 						<Text
 							fontWeight='400'
-							fontSize='14px'
-							lineHeight='17px'
+							fontSize='12px'
 							text={ t('profileDetail.lastVisitedDateLabel') }
 							textAlign='center'
+							subClassName='max-lg:text-xs max-lg:leading-normal'
 						/>
 						<Text
 							fontWeight='700'
