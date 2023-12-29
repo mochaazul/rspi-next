@@ -32,8 +32,6 @@ import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 
 import { cookiesHelper } from '@/helpers';
 import clearSWRCache from '@/helpers/clearSwrCache';
-import HeaderBrand from './Brand';
-import Menus from './Menus/Menus';
 
 export const Header = ({
 	session,
@@ -340,20 +338,114 @@ export const Header = ({
 		<HeaderStyle className={ className }>
 			<div className='w-full'>
 				<div className='lg:flex hidden'>
-          {/* Parent should be converted to full ssr */}
 					<MainNavLanguage session={ session } />
 				</div>
 				<header className='bg-white navbar w-full'>
 					<nav className='mx-auto flex items-center justify-between container-page gap-2 lg:gap-5 h-[64px] lg:h-[90px]' aria-label='Global'>
 						<div className='flex items-center gap-x-5 xl2:gap-x-10'>
-							<HeaderBrand />
-						</div>
-            <section id='nav-menus' className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
-              <Menus label={t('ourHospitals')}  items={[]}/>
-            </section>
+							<Link href='/' className='relative overflow-hidden w-[70px] h-8 lg:w-[132px] lg:h-[60px]'>
+								<Image
+									src='/images/logo_rspi.svg'
+									alt='rspi-logo'
+									sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+									fill
+								/>
+							</Link>
+							<div className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
+								<div id='home'>
+									<Link href='/'>
+										<Text text={ t('home') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+									</Link>
+								</div>
 
-            {/* Mobile View Notif ETC */}
-						{/* <div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
+								<div id='our-hospital' className='relative group' onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
+									{ renderMenuWithDropdown(t('ourHospitals'), isHover) }
+									<div className={ `${ isHover === false ? 'hidden' : 'absolute' } dropdownPosition` }>
+										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
+											{ Object.values(hospitalData || [])?.map((item, idx) => (
+												<Link href={ `/hospital/${ item?.slug }` } key={ idx } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] cursor-pointer'>
+													<Image
+														alt='hospital image'
+														src={ item?.img_url?.[0] || '' }
+														width={ 80 }
+														height={ 80 }
+													/>
+													<div className='ml-[10px] w-[310px] hover:bg-transparent'>
+														<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+														<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
+													</div>
+													<icons.ArrowRight className='ml-[27px] mr-auto' />
+												</Link>
+											)) }
+										</ul>
+									</div>
+								</div>
+
+								<div id='centre-of-excellence' className='relative group' onMouseEnter={ toggleMouseHoverCOE(true) } onMouseLeave={ toggleMouseHoverCOE(false) }>
+									{ renderMenuWithDropdown(t('centreOfExcellence'), isHoverCOE) }
+
+									<div className={ `${ isHoverCOE === false ? 'hidden' : 'absolute' } dropdownPosition` }>
+										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
+											{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
+												<Link href={ `/center-of-excellence/${ item.slug }` } key={ idx }>
+													<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
+														{ item?.img_url?.[0] && (
+															<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } alt='center-of-excellence-image' />
+														) }
+														<div className='ml-[10px] w-[310px] hover:bg-transparent'>
+															<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+														</div>
+														<icons.ArrowRight className='ml-[27px] mr-auto' />
+													</div>
+												</Link>
+											)) }
+										</ul>
+									</div>
+								</div>
+
+								<div id='facilities' className='flex relative group' onMouseEnter={ toggleMouseHoverFacilities(true) } onMouseLeave={ toggleMouseHoverFacilities(false) }>
+									{ renderMenuWithDropdown(t('facility'), isHoverFacilities) }
+									<div className={ `${ isHoverFacilities === false ? 'hidden' : 'absolute' } dropdownPosition` }>
+										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
+											{ Object.values(facilityServicesData || [])?.map((item, idx) => (
+												<Link href={ `/facilities-service/${ item.slug }` } key={ idx }>
+													<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
+														{
+															item?.image_url?.[0] && (
+																<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
+															)
+														}
+														<div className='ml-[10px] w-[310px]'>
+															<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+														</div>
+														<icons.ArrowRight className='ml-[27px] mr-auto' />
+													</div>
+												</Link>
+											)) }
+
+											<Link href={ '/facilities-service/medical-specialties' }>
+												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
+													<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
+													<div className='ml-[10px] w-[310px]'>
+														<Text text={ 'Medical Specialties' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+													</div>
+													<icons.ArrowRight className='ml-[27px] mr-auto' />
+												</div>
+											</Link>
+										</ul>
+									</div>
+								</div>
+
+								{ /* <div id='career'>
+									<Text text={ t('career') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+								</div> */ }
+
+								<Link id='find-doctor' href='/find-a-doctor'>
+									<Text text={ t('findDoctor') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+								</Link>
+							</div>
+						</div>
+						<div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
 							{ renderNotifIcon() }
 							<button
 								type='button'
@@ -365,10 +457,8 @@ export const Header = ({
 									: <Icons.AlignLeft color={ colors.grey.darkOpacity } size={ 24 } /> }
 
 							</button>
-						</div> */}
-
-            {/* Right side Menus */}
-						{/* <div className='hidden lg:flex lg:items-center lg:gap-x-4 xl2:gap-x-5'>
+						</div>
+						<div className='hidden lg:flex lg:items-center lg:gap-x-4 xl2:gap-x-5'>
 							<Link href='/find-a-doctor'>
 								<Button className='h-11 px-5 flex items-center whitespace-nowrap text-base font-black'>
 									{ t('bookAppointment') }
@@ -428,7 +518,7 @@ export const Header = ({
 										</Button>
 									</Link>
 								) }
-						</div> */}
+						</div>
 					</nav>
 					{ showSideBar && (
 						<div className='mobile-sidebar'>

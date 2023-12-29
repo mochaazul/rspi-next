@@ -81,7 +81,6 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			setModalNewsletter(true);
 			setMsgNewsletter('error');
 		}
-
 	};
 
 	const renderItems = (items: FooterDetail[]) => {
@@ -232,87 +231,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 
 	return (
 		<FooterStyled className='container-page py-8 sm:py-16'>
-			<FooterContainer>
-				{ renderFooterHospital(ourHospital ?? [], t('ourHospitalsLabel')) }
-				{ renderFooterCategory(ourCompany ?? [], t('ourCompanyLabel')) }
-				{ renderFooterCategory(pages ?? [], t('visitorPatientLabel')) }
-
-				<div className='follow-section flex flex-col max-sm:flex-row-reverse gap-4 sm:gap-8'>
-					<div className='follow-icon-section'>
-						{ renderCategoryTitle(t('followUsLabel')) }
-						<Socmed />
-					</div>
-					<div>
-						{ renderCategoryTitle(t('getRSPIMobileLabel')) }
-						<div className='store-images-container'>
-							<Link
-								href={ playStoreMobileUrl }
-								target='_blank'
-								rel='noopener noreferrer'
-							>
-								<Image src={ Images.GooglePlay.src } alt='google play icon' width={ 120 } height={ 37 } className='store-images' />
-							</Link>
-							<Link
-								href={ appStoreMobileUrl }
-								target='_blank'
-								rel='noopener noreferrer'
-							>
-								<Image src={ Images.AppStore.src } alt='app store icon' width={ 120 } height={ 37 } className='store-images' />
-							</Link>
-						</div>
-					</div>
-				</div>
-				<div className='email-sub-container'>
-					{ renderCategoryTitle(t('subscribeLabel')) }
-					<Text fontSize='14px' className='sub-text'>{ t('subscribeDescription') }</Text>
-					<div className='flex items-center mt-4 lg:mt-6 w-full'>
-						<div className='-mr-2 flex-1'>
-							<TextField
-								width='100%'
-								placeholder={ t('subscribePlaceholder') }
-								className='text-sm sm:text-base !h-11 !w-full'
-								value={ emailNewsletter }
-								onChange={ e => setEmailNewsletter(e.target.value) }
-							/>
-						</div>
-						<Button
-							className={ ` ${ loadingSubs ? '!bg-gray-50 !text-gray-300 cursor-not-allowed' : '' } sub-button !text-base !font-bold !h-[48px]` }
-							theme='secondary'
-							label={ t('subscribeSubmit') }
-							onClick={ subscribeNewsletter }
-							disabled={ loadingSubs }
-						/>
-					</div>
-				</div>
-			</FooterContainer>
-			<div className='flex flex-col items-center max-sm:pb-8 pt-8 sm:pt-16'>
-				<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group. <span className='sm:hidden'><br /></span>All Rights Reserved.</Text>
-				{
-					appStage !== 'prod' &&
-					<div className='flex justify-center'>
-						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version { config?.version } </Text>
-					</div>
-				}
-			</div>
-			<Modal
-				visible={ modalNewsletter }
-				onClose={ () => setModalNewsletter(false) }
-				width='560px'
-			>
-				<div className='relative flex flex-col items-center'>
-					{ msgNewsletter === 'Success' ? <icons.Confirmed /> : <div className='p-4 bg-gray-200 rounded-full'><icons.Close /></div> }
-					<Text
-						fontSize='23px'
-						lineHeight='19px'
-						fontType='h4'
-						fontWeight='900'
-						color={ colors.grey.darker }
-						text={ msgNewsletter === 'Success' ? t('successSubs') : t('errorSubs') }
-						className='mt-5'
-					/>
-					<Button type='submit' label={ t('handleButtonModalSubmit') } className='mt-[32px]' onClick={ () => setModalNewsletter(false) } />
-				</div>
-			</Modal>
+			
 		</FooterStyled>
 	);
 

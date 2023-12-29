@@ -18,6 +18,7 @@ import {
 	hospitalsFetch
 } from './helpers';
 import getSession from '@/session/server';
+import LangWrapper from '@/components/ui/LangWrapper';
 
 export default async function PageWrapper({
 	children,
@@ -56,6 +57,7 @@ export default async function PageWrapper({
 
 	return (
 		<>
+				<LangWrapper>
 			<Header
 				session={ session }
 				hospitalData={ hospitalData }
@@ -68,12 +70,14 @@ export default async function PageWrapper({
 				footerData={ footerData }
 				hospitalData={ hospitalData }
 			/>
-			<CallForAmbulance hospitalData={ hospitalData } session={ session } />
+				<CallForAmbulance hospitalData={ hospitalData } session={ session } />
+				<MedicalRecordReminder session={ session } />
+
+			</LangWrapper>
 			{
 				appStage !== 'prod' &&
 				<DevTools />
 			}
-			<MedicalRecordReminder session={ session } />
 			<ToastContainer />
 		</>
 	);

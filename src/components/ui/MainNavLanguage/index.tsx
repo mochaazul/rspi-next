@@ -14,7 +14,7 @@ type MainNavLanguageProps = {
 	session?: UserSessionData;
 };
 
-export const MainNavLanguage = ({ session }: MainNavLanguageProps) => {
+export const MainNavLanguage =async  ({ session }: MainNavLanguageProps) => {
 	const t = useScopedI18n('page.topNav');
 
 	const renderWelcomeText = () => {

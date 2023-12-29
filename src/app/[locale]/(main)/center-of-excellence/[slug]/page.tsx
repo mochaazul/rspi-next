@@ -86,7 +86,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 
 	return (
 		<CentreOfExcellenceStyle>
-			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>
+			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px] md:pt-16'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='content-wrapper mt-[64px] max-sm:mt-[24px]'>
