@@ -26,7 +26,7 @@ import Button from '@/components/ui/Button';
 import MainNavLanguage from '@/components/ui/MainNavLanguage';
 import Modal from '@/components/ui/Modal';
 import { useNotification } from '@/lib/api/client/header';
-import HeaderStyle from './style';
+import HeaderStyle, { MenuList } from './style';
 
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 
@@ -84,7 +84,7 @@ export const Header = ({
 
 	const notificationResponseData = getNotification?.data;
 
-	const handleClick = async () => {
+	const handleClick = async() => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			await clearSWRCache(cache);
@@ -327,7 +327,7 @@ export const Header = ({
 								});
 						}
 					} }
-						className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
+					className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
 					/>
 					<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
 						{ notificationResponseData?.total_unread ?? 0 }
@@ -336,11 +336,74 @@ export const Header = ({
 			);
 		}
 	};
+
+	const renderHospitalMenuItem = (item: HospitalDetail) => {
+		return (
+			<Link href={ `/hospital/${ item?.slug }` } key={ item.id } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] cursor-pointer'>
+				<Image
+					alt={ `thumbnail-${item.name}` }
+					src={ item?.img_url?.[0] || '' }
+					width={ 80 }
+					height={ 80 }
+				/>
+				<div className='ml-[10px] w-[310px] hover:bg-transparent'>
+					<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+					<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
+				</div>
+				<icons.ArrowRight className='ml-[27px] mr-auto' />
+			</Link>
+		);
+	};
+
+	const renderCoeMenuItem = (item: CenterOfExcellenceDetail) => {
+		return (
+			<Link href={ `/center-of-excellence/${ item.slug }` }>
+				<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
+					{ item?.img_url?.[0] && (
+						<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } alt='center-of-excellence-image' />
+					) }
+					<div className='ml-[10px] w-[310px] hover:bg-transparent'>
+						<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+					</div>
+					<icons.ArrowRight className='ml-[27px] mr-auto' />
+				</div>
+			</Link>
+		);
+	};
+
+	const renderFacilitiesMenuItem = (item: FacilityServicesDetail) => {
+		return (
+			<Link href={ `/facilities-service/${ item.slug }` }>
+				<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
+					{
+						item?.image_url?.[0] && (
+							<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
+						)
+					}
+					<div className='ml-[10px] w-[310px]'>
+						<Text text={ item?.name } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+					</div>
+					<icons.ArrowRight className='ml-[27px] mr-auto' />
+				</div>
+			</Link>
+		);
+	};
+
+	const renderMedicalSpecialities = (<Link href={ '/facilities-service/medical-specialties' }>
+		<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
+			<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
+			<div className='ml-[10px] w-[310px]'>
+				<Text text={ 'Medical Specialties' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+			</div>
+			<icons.ArrowRight className='ml-[27px] mr-auto' />
+		</div>
+	</Link>);
+	
 	return (
 		<HeaderStyle className={ className }>
 			<div className='w-full'>
 				<div className='lg:flex hidden'>
-          {/* Parent should be converted to full ssr */}
+					{ /* Parent should be converted to full ssr */ }
 					<MainNavLanguage session={ session } />
 				</div>
 				<header className='bg-white navbar w-full'>
@@ -348,21 +411,15 @@ export const Header = ({
 						<div className='flex items-center gap-x-5 xl2:gap-x-10'>
 							<HeaderBrand />
 						</div>
-            <section id='nav-menus' className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
-              <Menus label={t('ourHospitals')}  items={[]}/>
-            </section>
-						<section id='nav-menus' className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
-              <Menus label={t('centreOfExcellence')}  items={[]}/>
-            </section>
-						<section id='nav-menus' className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
-              <Menus label={t('facility')}  items={[]}/>
-            </section>
-						<section id='nav-menus' className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
-              <Menus label={t('findDoctor')}  items={[]}/>
-            </section>
+						<MenuList className='gap-x-2'>
+							<Menus label={ t('ourHospitals') } items={ hospitalData } hrefKey='hospital' itemRender={ renderHospitalMenuItem } />
+							<Menus label={ t('centreOfExcellence') } items={ centerOfExcellenceData } hrefKey='center-of-excellence' itemRender={ renderCoeMenuItem }/>
+							<Menus label={ t('facility') } items={ facilityServicesData } hrefKey='facilities' itemRender={ renderFacilitiesMenuItem } appendItem={ renderMedicalSpecialities }/>
+							<Menus label={ t('findDoctor') } hrefKey='find-a-doctor'/>
+						</MenuList>
 
-            {/* Mobile View Notif ETC */}
-						{/* <div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
+						{ /* Mobile View Notif ETC */ }
+						{ /* <div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
 							{ renderNotifIcon() }
 							<button
 								type='button'
@@ -374,10 +431,10 @@ export const Header = ({
 									: <Icons.AlignLeft color={ colors.grey.darkOpacity } size={ 24 } /> }
 
 							</button>
-						</div> */}
+						</div> */ }
 
-            {/* Right side Menus */}
-						{/* <div className='hidden lg:flex lg:items-center lg:gap-x-4 xl2:gap-x-5'>
+						{ /* Right side Menus */ }
+						{ /* <div className='hidden lg:flex lg:items-center lg:gap-x-4 xl2:gap-x-5'>
 							<Link href='/find-a-doctor'>
 								<Button className='h-11 px-5 flex items-center whitespace-nowrap text-base font-black'>
 									{ t('bookAppointment') }
@@ -437,7 +494,7 @@ export const Header = ({
 										</Button>
 									</Link>
 								) }
-						</div> */}
+						</div> */ }
 					</nav>
 					{ showSideBar && (
 						<div className='mobile-sidebar'>

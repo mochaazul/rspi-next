@@ -113,4 +113,54 @@ const HeaderStyle = styled.div`
   }
 `;
 
+export const MenuList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  display: flex;
+
+  li {
+    display: block;
+    transition-duration: 0.5s;
+   }
+   
+   li:hover {
+     cursor: pointer;
+   }
+   
+  
+   li ul {
+    :before{
+      content: "";
+      display: block;
+      height: 80px;
+      position: absolute;
+      top: -40px;
+      width: 100%;
+    }
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transition: all 0.5s ease;
+    left: 0;
+    display: none;
+    background-color: white;
+    width: 480px;
+    z-index: 20;
+    top: 100%;
+  }
+  
+   li:hover > ul,
+   li ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+  }
+  
+  li ul li {
+    clear: both;
+
+  }
+`;
+
 export default HeaderStyle;

@@ -1,22 +1,45 @@
 import { Text } from '@/components/ui';
 import { colors, icons } from '@/constant';
-import { PropsWithChildren, PropsWithRef } from 'react';
+import { HospitalDetail } from '@/interface';
+import React, { PropsWithChildren, PropsWithRef } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
-type Props = PropsWithRef<PropsWithChildren<{
-  items: unknown[]
+type Props<T> = {
+  items?: T[]
   label: string
   itemKey?: string
-}>>
+	hrefKey?: string
+	itemRender?: (item: T) => React.ReactNode,
+	appendItem?: React.ReactNode
+}
 
-const Menus = ({ items, itemKey, label }:Props) => {
+function Menus<T>({ items, itemKey, label, hrefKey, itemRender, appendItem }:Props<T>) {
   
 	return (
-		<section className='flex flex-row gap-x-2 relative '>
-			<Text text={ label } subClassName='text-black' fontSize='14px' fontWeight='900' />
+		<li className='flex flex-row gap-x-2 relative group cursor-pointer h-full align-middle justify-center items-center'>
+			<Text text={ label } subClassName='text-black group-hover:text-green-primary' fontSize='14px' fontWeight='900' />
 			<div className='flex-shrink-0'>
 				<icons.ArrowDown className='[&>path]:stroke-[#6A6D81] group-hover:rotate-180 transition-all' />
 			</div>
-		</section>
+			{
+				items &&
+				<ul className='dropdown mt-[34px]'>
+					{ items.map((item, index) => (
+						<li key={ `menu-${label}-${index}` } className='divide-y'>
+							{
+								itemRender
+									? itemRender(item)
+									: <>
+										<Text text={ `${item}` } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+									</>
+							}
+						</li>
+					)) }
+					{ appendItem }
+				</ul>
+			}
+		</li>
 	);
 };
 
