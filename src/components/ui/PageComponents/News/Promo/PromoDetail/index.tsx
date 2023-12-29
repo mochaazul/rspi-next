@@ -34,6 +34,7 @@ const PromoDetail: React.FC<Props> = ({
 	eventsOther
 }) => {
 	const t = useScopedI18n('page.promoPage');
+	const tGlobal = useScopedI18n('global');
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 	const hostname = useHostname({ fullUrl: true });
 
@@ -43,25 +44,18 @@ const PromoDetail: React.FC<Props> = ({
 
 	return (
     	<div>
-			<Breadcrumbs datas={ breadcrumbsPath } />
-			<div className='mt-[50px]'>
-				
-				<Text
-					fontType='h1'
-					fontWeight='900'
-					fontSize='44px'
-					lineHeight='57px'>
+			<div className='sm:mx-0 mx-[16px]'>
+				<Breadcrumbs datas={ breadcrumbsPath } />
+			</div>
+			<div className='mt-[25px] sm:mt-[50px]'>
+				<h1 className='leading-[32px] sm:leading-[57px] font-black text-gray-1 sm:text-[44px] text-[24px] mx-[16px] sm:mx-0 '>
 					{ selectedEvent?.title }
-				</Text>
-				<div className='flex items-center gap-[30px] mt-[10px]'>
+				</h1>
+				<div className='flex items-center gap-[30px] mt-[10px] sm:mx-0 mx-[16px]'>
 					<div className='flex gap-[15px] items-center'>
-						<Text
-							fontType='p'
-							lineHeight='24px'
-							fontSize='20px'
-							fontWeight='400'
-							text='Share now'
-						/>
+						<p className='leading-[24px] text-[14px] font-normal text-gray-1 sm:text-[20px]'>
+							{ tGlobal('share') }
+						</p>
 						<div className='flex gap-[15px]'>
 							<Link href={ getLinkShareSocmed(sosmedLink.facebook) ?? ''  } target='_blank' className='cursor-pointer' >
 								<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
@@ -82,96 +76,88 @@ const PromoDetail: React.FC<Props> = ({
 						</div>
 					</div>
 				</div>
-				<div className='content-wrapper mt-[20px] mb-[100px]'>
+				<div className='content-wrapper mt-[20px] mb-[32px] sm:mb-[100px]'>
 					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
-						<img src={ selectedEvent?.img_url_detail || '' } className='mx-auto object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
-						<div>
+						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
+						<div className='mx-[16px] sm:mx-0 '>
 							<TextHtml
 								htmlStr={  selectedEvent?.content || '' }
 								className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 							/>
 							<div className='mt-[50px]'>
-								<Text
-									fontType='p'
-									lineHeight='30px'
-									fontSize='20px'
-									fontWeight='900'
-									color={ colors.paradiso.default }
-									className='mt-[50px]'
-									text={ t('schedule') }
-								/>
+								<p className={ 'sm:leading-[30px] leading-[24px] sm:text-[20px] text-[16px] font-bold text-green-secondary mt-[50px]' }>
+									{ t('schedule') }
+								</p>
+								
 								<div>
 									<TextHtml
-										className='innerHTML mt-5 leading-[30px] text-[20px] font-bold'
+										className='innerHTML mt-5 leading-[30px] sm:text-[20px] text-[16px] font-bold'
 										htmlStr={ selectedEvent?.title }
 									/>
 									<div className='flex flex-col gap-1 mt-3'>
 										{
 											(selectedEvent?.hospitals ?? []).map((hospital: any, index: number) =>
-												<Text
-													fontType='p'
-													key={ index }
-													lineHeight='20px'
-													fontSize='16px'
-													fontWeight='900'
-													color={ colors.grey.dark }
-													text={ hospital?.hospital_name }
-												/>
+												<p key={ index } className='leading-[20px] font-bold sm:text-[16px] text-[14px] text-gray-2'>
+													{ hospital?.hospital_name }
+												</p>
 											)
 										}
 									</div>
-									<div className='grid grid-cols-2 gap-4 mt-6'>
-										<div>
-											<Text
-												fontType='p'
-												lineHeight='18px'
-												fontSize='14px'
-												fontWeight='900'
-												color={ colors.grey.darker }
-												text='Informasi'
-											/>
-											<TextHtml
-												htmlStr={  selectedEvent?.information || '' }
-												className='innerHTML mt-2 text-14'
-											/>
+									<div className='grid sm:grid-cols-2 grid-cols-1 gap-4 mt-6'>
+										<div className='flex flex-col gap-4'>
+											<div>
+												<Text
+													fontType='p'
+													lineHeight='18px'
+													fontSize='14px'
+													fontWeight='900'
+													color={ colors.grey.darker }
+													text={ t('info') }
+												/>
+												<TextHtml
+													htmlStr={  selectedEvent?.information || '' }
+													className='innerHTML mt-2 text-14'
+												/>
+											</div>
+											<div>
+												<Text
+													fontType='p'
+													lineHeight='18px'
+													fontSize='14px'
+													fontWeight='900'
+													color={ colors.grey.darker }
+													text={ t('operational') }
+												/>
+												<TextHtml
+													htmlStr={  selectedEvent?.operational_hour || '' }
+													className='mt-2 innerHTML text-14 leading-[18px]'
+												/>
+											</div>
 										</div>
+
 										<div>
 											<Text
 												fontType='p'
 												lineHeight='18px'
 												fontSize='14px'
 												fontWeight='900'
-												color={ colors.grey.darker }
-												text='Telepon (WhatsApp Only)'
+												className='text-gray-1'
+												text={ t('phone') }
 											/>
 											<TextHtml
-												style={ { color: colors.grey.dark } }
 												htmlStr={  selectedEvent?.phone || '' }
-												className='mt-2 innerHTML text-14 leading-[18px] font-bold'
+												className='mt-2 innerHTML text-14 leading-[18px] font-bold text-green-secondary'
 											/>
 										</div>
-										<div>
-											<Text
-												fontType='p'
-												lineHeight='18px'
-												fontSize='14px'
-												fontWeight='900'
-												color={ colors.grey.darker }
-												text='Jam Operasional'
-											/>
-											<TextHtml
-												htmlStr={  selectedEvent?.operational_hour || '' }
-												className='mt-2 innerHTML text-14 leading-[18px]'
-											/>
-										</div>
+										
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div className='mt-[100px]'>
+					<div className='sm:mt-[100px] mt-[40px] mx-[16px] sm:mx-0 '>
 						<div className='mt-[40px]'>
-							<span className={ 'text-gray-1 font-bold w-auto text-2xl leading-[10px] border-b-[4px] border-green-secondary' }>
+							<span className={ 'text-gray-1 font-bold w-auto sm:text-2xl text-[16px] py-[5px] sm:border-b-[4px] border-b-[2px] border-green-secondary' }>
 								{ t('more') }
 							</span>
 							<div className='pt-[10px]' />

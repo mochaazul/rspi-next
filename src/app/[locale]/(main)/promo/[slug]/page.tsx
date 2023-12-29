@@ -6,7 +6,7 @@ import { getAllEvents, getPromoById } from '@/lib/api/events';
 import PromoDetail from '@/components/ui/PageComponents/News/Promo/PromoDetail';
 import { redirect } from 'next/navigation';
 
-const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; }) => {
+const DetailEventClassesPromo = async({ params }: { params: { slug: string; }; }) => {
 	
 	const t = await getScopedI18n('page.promoPage');
 	const newParam = decodeURIComponent(params?.slug);
@@ -16,7 +16,7 @@ const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; 
 	});
 
 	if (Object.values(selectedEvent)[0].slug !== params?.slug) {
-		redirect(`/promo`);
+		redirect('/promo');
 	};
 
 	const eventsData = await getAllEvents();
@@ -28,15 +28,13 @@ const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; 
 	const breadcrumbsPath = [{ name: t('heading'), url: '/promo' }, { url: '#', name: Object.values(selectedEvent)[0].title || '' }];
 
 	return (
-		<PanelV1>
-			<PanelH1>
-				<PromoDetail
-					selectedEvent = { selectedEvent?.data }
-					breadcrumbsPath = { breadcrumbsPath }
-					eventsOther = { eventsOther }
-				/>
-			</PanelH1>
-		</PanelV1>
+		<PanelH1 className='sm:mx-[165px] mx-0' >
+			<PromoDetail
+				selectedEvent = { selectedEvent?.data }
+				breadcrumbsPath = { breadcrumbsPath }
+				eventsOther = { eventsOther }
+			/>
+		</PanelH1>
 	);
 };
 
