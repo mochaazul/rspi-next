@@ -103,9 +103,9 @@ const EventClassesPromo = ({
 						lineHeight='57px'
 						text={ t('heading') }
 						className='sm:mt-[50px] mt-[25px]'
-						subClassName='max-sm:text-[24px]'
+						subClassName='max-sm:text-[24px] text-gray-1'
 					/>
-					<div className='flex sm:flex-row sm:mt-[50px] mt-[16px] flex-col justify-between items-start sm:items-center'>
+					<div className='flex sm:flex-row sm:mt-[42px] mt-[16px] flex-col justify-between items-start sm:items-center'>
 						<div className='flex sm:flex-row flex-col sm:gap-4 gap-1 sm:items-center sm:w-auto w-full'>
 							<Text
 								fontSize='20px'

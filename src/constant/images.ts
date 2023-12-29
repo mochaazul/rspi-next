@@ -6,7 +6,7 @@ import Profile from '/public/images/profile.svg';
 import GooglePlay from '/public/images/google-play.png';
 import AppStore from '/public/images/app-store.png';
 import FacebookLogo from '/public/svg/facebook.svg';
-import TwitterLogo from '/public/svg/twitter.svg';
+import TwitterLogo from '/public/svg/twitter_x.svg';
 import YoutubeLogo from '/public/svg/youtube.svg';
 import InstagramLogo from '/public/svg/instagram.svg';
 import AmbulanceIcon from '/public/svg/ambulance.svg';

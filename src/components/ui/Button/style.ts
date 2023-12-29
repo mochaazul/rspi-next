@@ -35,7 +35,7 @@ const buttonTheme = ({
 		color: ${ $themeColor };
 			> div.bg-overlay {
 				opacity: 1;
-				border-radius: 5px;
+				border-radius: 10px;
 			}
 	`;
 
