@@ -35,11 +35,13 @@ export const CardPatientPortalStyle = styled.div`
     font-size: 12px;
     font-weight: 700;
     margin: auto 0 auto auto;
+    cursor: pointer;
+
     &:hover {
       background-color: ${ colors.paradiso.default };
       color: ${ colors.white.default };
     }
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 768px) {
       margin: auto;
       padding: 8px 16px;
     }
@@ -55,7 +57,6 @@ export const CardPatientPortalStyle = styled.div`
 		@media screen and (max-width: 640px) {
 			th {
 				font-size: 12px !important;
-				text-align: center !important;
 				padding-right: 8px !important;
 			}
     }
@@ -64,14 +65,19 @@ export const CardPatientPortalStyle = styled.div`
       font-weight: 700;
       font-size: 16px;
       padding-bottom: 20px;
-      border-bottom: 1px solid ${ colors.grey.lighterOpacity }
+      padding-right: 8px !important;
+      line-height: normal;
     }
     td {
       padding-top: 20px;
+      padding-right: 8px;
+      line-height: normal;
+      
 			@media screen and (max-width: 640px) {
 				font-size: 11px;
-				text-align: center;
 				padding-right: 8px;
+        padding-top: 16px;
+        vertical-align: top;
     	}
     }
   }
@@ -132,7 +138,7 @@ export const VisitHistoryStyle = styled.div`
   @media screen and (max-width: 1150px) {
     .content-wrapper {
       width: 100%;
-      padding: 30px;
+      padding: 16px;
     }
   }
 `;

@@ -59,7 +59,7 @@ export default async function PageWrapper({
 			<Header
 				session={ session }
 				hospitalData={ hospitalData }
-				centerOfExcellenceData={ [] }
+				centerOfExcellenceData={ centerOfExcellenceData }
 				facilityServicesData={ facilityServicesData }
 				marAllReadNotifFunc={ marAllReadNotif }
 			/>

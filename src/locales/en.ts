@@ -860,7 +860,9 @@ export default {
 					cancelAppointment: 'Cancel Appointment',
 					empty: 'You do not have visit data at this time',
 					emptyBtnCta: 'Schedule a Visit',
-					visitSchedule: 'Visit Schedule'
+					visitSchedule: 'Visit Schedule',
+					reschedule: 'Reschedule',
+					rescheduleAgain: 'Reschedule Again',
 				},
 				options: [
 					'Myself',

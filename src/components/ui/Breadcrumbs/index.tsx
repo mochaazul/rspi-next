@@ -45,11 +45,12 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }
 									color={ (index + 1) < props.datas.length ? colors.grey.dark : colors.paradiso.default }
 									text={ data.name }
+									subClassName='max-sm:!text-[10px] line-clamp-1'
 								/>
 							</ItemStyle>
 						</Link>
 						{
-							(index + 1) < props.datas.length ? <icons.ArrowRight className='w-[15px] h-[15px]' /> : null
+							(index + 1) < props.datas.length ? <icons.ArrowRight className='w-[14px] sm:w-4 h-[14px] sm:h-4' /> : null
 						}
 					</div>
 				))

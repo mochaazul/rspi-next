@@ -866,7 +866,9 @@ export default {
 					cancelAppointment: 'Batalkan Janji Temu',
 					empty: 'Anda belum mempunyai data kunjungan saat ini',
 					emptyBtnCta: 'Jadwalkan Kunjungan',
-					visitSchedule: 'Jadwal Konsultasi'
+					visitSchedule: 'Jadwal Konsultasi',
+					reschedule: 'Jadwalkan Ulang',
+					rescheduleAgain: 'Jadwalkan Lagi'
 				},
 				options: [
 					'Diri Sendiri',

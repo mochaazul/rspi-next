@@ -4,7 +4,6 @@ import moment from 'moment';
 
 import { WrapperNewsHealthArticles } from './style';
 
-import 'moment/locale/id';
 import { ArticleDetail } from '@/interface';
 import Text from '@/components/ui/Text';
 import Link from 'next/link';

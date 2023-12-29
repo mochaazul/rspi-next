@@ -196,7 +196,7 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 	return (
 		<VisitHistoryStyle className='max-sm:py-0'>
 			<div className='rectangle' />
-			<div className='content-wrapper pt-[60px] md:pt-[120px]'>
+			<div className='content-wrapper pt-[60px] md:pt-[120px] pb-[107px]'>
 				<div className='w-full -mt-[42px] relative'>
 					<CardUser
 						patientProfile={ patientProfile }

@@ -4,7 +4,7 @@ interface ModalStyleProps {
   width?: string;
   $noPadding: boolean;
   $bgColor: string;
-  borderRadius?: string;
+  $borderRadius?: string;
   backdropColor?: string;
   $padding: string;
   overflow?: string;
@@ -54,7 +54,7 @@ const ModalStyle = styled.div<ModalStyleProps>`
 
   .modal-content-container {
     width: ${ props => props.width ? props.width : 'unset' };
-    border-radius: ${ props => props.borderRadius || '5px' };
+    border-radius: ${ props => props.$borderRadius || '5px' };
     background: white;
     z-index: 1;
   }

@@ -47,7 +47,7 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 					? isEmpty(appointmentResponse?.data) ?
 						<EmptyResultContainer>
 							<div className='flex flex-col items-center gap-4 lg:gap-6'>
-								<icons.NoAppointmentSchedule className='w-[120px] h-[120px] lg:w-[200px] lg:h-[200px]' />
+								<icons.NoAppointmentSchedule className='w-[120px] h-[120px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px]' />
 								<Text
 									text={ t('jadwalKunjungan.label.empty') }
 									fontSize='20px'

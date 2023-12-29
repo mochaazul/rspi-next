@@ -122,13 +122,13 @@ const CardAppointment = (props: PropsType) => {
 	const mappingStatusColorBackground = (code: string) => {
 		switch (code) {
 			case 'C':
-				return colors.grey.light;
+				return colors.grey.lighterOpacity;
 			case 'X':
-				return colors.red.light;
+				return colors.red.defaultOpacity10;
 			case 'N':
-				return colors.red.light;
+				return colors.red.defaultOpacity10;
 			default:
-				return colors.grey.light;
+				return colors.grey.lighterOpacity;
 		}
 	};
 
@@ -157,10 +157,10 @@ const CardAppointment = (props: PropsType) => {
 		}
 	};
 
-	const criteriaForShowRateDoctor = ['Jadwal Selesai', 'Appointment Done'];
+	const criteriaAppointmentDone = ['Jadwal Selesai', 'Appointment Done'];
 
 	const renderButtonCancelAppointment = (className?: string) => {
-		if (!criteriaForShowRateDoctor.includes(props?.status ?? '')) {
+		if (!criteriaAppointmentDone.includes(props?.status ?? '')) {
 			return (
 				<button onClick={ () => setShowModalCancelBook(true) } className={ `btn-cancel group hover:text-white hover:bg-[#EB5757] focus:outline-none focus:ring-0 cursor-pointer flex items-center gap-[5px] ${ className }` }>
 					<icons.Close className='w-4 h-4 [&>path]:fill-[#EB5757] group-hover:[&>path]:fill-white' />
@@ -182,6 +182,25 @@ const CardAppointment = (props: PropsType) => {
 			);
 	};
 
+	const renderButtonReschedule = (className?: string) => {
+		if (props.visit_status === 'C' && criteriaAppointmentDone.includes(props?.status ?? '')) {
+			return (
+				<button onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className={ `btn-success cursor-pointer ${ className }` }>{ t('jadwalKunjungan.label.rescheduleAgain') }</button>
+			);
+		}
+
+		if (props.visit_status === 'X') {
+			return (
+				<button onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className={ `btn-success group flex items-center justify-center gap-[5px] ${ className }` }>
+					<icons.ArrowsClockwise className='group-hover:[&>path]:fill-white' />
+					{ t('jadwalKunjungan.label.reschedule') }
+				</button>
+			);
+		}
+
+		return null;
+	};
+
 	return (
 		<CardPatientPortalStyle
 			className='flex flex-col mb-4 sm:mb-5'
@@ -194,7 +213,7 @@ const CardAppointment = (props: PropsType) => {
 					<div>
 						<button
 							style={ { backgroundColor: mappingStatusColorBackground(props.visit_status ?? '') } }
-							className='py-[3px] px-[15px] rounded-[10px] duration-300'
+							className='py-[3px] px-[15px] rounded-[10px] duration-300 cursor-default'
 						>
 							<Text
 								text={ mappingStatus(props.visit_status ?? '') }
@@ -209,7 +228,7 @@ const CardAppointment = (props: PropsType) => {
 					!props.isTelemedicine && (
 						<button
 							style={ { backgroundColor: colors.grey.darked } }
-							className={ 'py-1 px-2.5 rounded-[100px] duration-300 ' }
+							className={ 'py-1 px-2.5 rounded-[100px] duration-300 cursor-default' }
 						>
 							<div className='flex items-center justify-center'>
 								<Text
@@ -217,7 +236,7 @@ const CardAppointment = (props: PropsType) => {
 									fontWeight='700'
 									fontSize='14px'
 									subClassName='text-center'
-									color={ colors.white.body } />
+									color={ colors.white.default } />
 							</div>
 						</button>
 					)
@@ -239,24 +258,15 @@ const CardAppointment = (props: PropsType) => {
 						</button>
 					)
 				}
-				{ /* { props.status !== 'Jadwal Selesai' &&
-					<div className='flex items-center w-'>
-						<Bullet />
-						<Text text={ `${ jadwalKunjungan.label.queueNo } : ${ props.queueNo }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='pl-[15px]' />
-					</div>
-				} */ }
-				{ props.visit_status === 'C' &&
-					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Lagi' }</div>
-				}
-				{ props.visit_status === 'X' &&
-					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
-				}
-				{ renderButtonCancelAppointment('max-md:hidden my-auto ml-auto mr-0') }
+				<div className='max-md:hidden my-auto ml-auto mr-0'>
+					{ renderButtonReschedule() }
+					{ renderButtonCancelAppointment() }
+				</div>
 
 			</div>
 			{ renderPatientName() }
 
-			<div className='flex flex-col md:flex-row md:grid md:grid-cols-3 mt-4 sm:mt-6 gap-8 md:gap-6 cursor-pointer'>
+			<div className='flex flex-col md:flex-row md:grid md:grid-cols-3 mt-4 sm:mt-6 gap-8 md:gap-6'>
 				<div className='flex gap-[15px] md:col-span-1'>
 					<div className='relative overflow-hidden w-12 h-12 md:w-[60px] md:h-[60px] rounded-full flex-shrink-0'>
 						<Image
@@ -287,16 +297,17 @@ const CardAppointment = (props: PropsType) => {
 						<Text text={ props.hospital_name || '-' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } subClassName='!text-center md:text-left max-sm:text-xs !leading-normal' />
 					</div>
 				</div>
-				<div className='md:hidden w-full flex justify-center'>
-					{ renderButtonCancelAppointment() }
-				</div>
-			</div >
+			</div>
+			<div className='md:hidden w-full flex flex-col items-center'>
+				{ renderButtonCancelAppointment('mt-8') }
+				{ renderButtonReschedule('mt-8') }
+			</div>
 
 			{
-				criteriaForShowRateDoctor.includes(props.status ?? '')
-				// && props.visit_status === 'C'
+				criteriaAppointmentDone.includes(props.status ?? '')
+				&& props.visit_status === 'C'
 				&&
-				<div className='flex flex-row gap-x-2 items-center justify-center md:justify-end cursor-pointer md:mt-5' onClick={ handleShowModal }>
+				<div className='flex flex-row gap-x-2 items-center justify-center md:justify-end cursor-pointer mt-8 md:mt-5' onClick={ handleShowModal }>
 					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ props.isHistory ? t('riwayatKunjungan.label.recommendDoctor') : t('riwayatKunjungan.label.seeDetail') } subClassName='max-md:text-center' />
 					<icons.LongArrowRight className='[&>path]:stroke-green-secondary w-5 h-5 max-md:hidden' />
 				</div>

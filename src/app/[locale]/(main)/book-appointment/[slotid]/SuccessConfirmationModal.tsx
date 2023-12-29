@@ -1,5 +1,3 @@
-import 'moment/locale/id';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 

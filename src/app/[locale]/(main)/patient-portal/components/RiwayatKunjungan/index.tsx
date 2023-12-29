@@ -48,14 +48,14 @@ const RiwayatKunjungan = ({ patientProfile }: RiwayatKunjunganProps) => {
 
 	if (isEmpty(visitHistoryResponse?.data)) {
 		return (<EmptyResultContainer>
-			<icons.EmptyVisitHistories />
+			<icons.EmptyVisitHistories className='w-[120px] h-[120px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px]' />
 			<Text text={ t('riwayatKunjungan.empty') }
 				fontSize='20px'
 				fontWeight='700'
 				lineHeight='28px'
 			/>
 			<Link href={ '/find-a-doctor' }>
-				<Button label={ t('riwayatKunjungan.btnConsultationSchedule') } className='w-[200px]' />
+				<Button label={ t('riwayatKunjungan.btnConsultationSchedule') } className='w-auto whitespace-nowrap py-3 sm:py-[15px] px-10 max-sm:text-sm' />
 			</Link>
 		</EmptyResultContainer>);
 	}
