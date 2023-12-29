@@ -29,6 +29,7 @@ module.exports = {
 				gray: {
 					1: '#2A2536',
 					2: '#6A6D81',
+					3: '#D4D2D8'
 				}
 			},
 			width: {

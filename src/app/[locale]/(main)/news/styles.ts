@@ -30,20 +30,18 @@ export const CardNewsStyle = styled.div`
   
   > div {
     @media screen and (min-width: 640px) {
-      border-left: 6px solid transparent;
       transition: all .5s;
-      padding-left: 10px;
       border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      margin-bottom:20px;
+      border-bottom: 1px solid #EAEAEA;
+      margin-bottom:30px;
+      padding-bottom:30px;
       
       &.active, &:hover {
         transition: all .5s;
-        border-left-color: ${ colors.paradiso.default };
         border-top: 1px solid ${ colors.paradiso.accent1Opacity5 };
         border-bottom: 1px solid ${ colors.paradiso.accent1Opacity5 };
         background-color: ${ colors.paradiso.accent1Opacity5 };
-        padding-left: 10px;
+        
   
         .map-title p {
           transition: all .5s;
