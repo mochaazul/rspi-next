@@ -50,6 +50,8 @@ const EventClassesPromo = ({
 	const t = useScopedI18n('page.promoPage');
 	const searchParam = useSearchParams()!;
 	
+	const totalPages = pagination?.total_page || 1;
+
 	const pathname = usePathname();
 	const navigate = useRouter();
 
@@ -227,11 +229,13 @@ const EventClassesPromo = ({
 					</div>
 				</div>
 				<div className='mt-[50px] flex flex-col items-center'>
-					<PaginationNumber
-						totalPage={ pagination?.total_page ?? 1 }
+					{ totalPages > 1 ? <PaginationNumber
+						totalPage={ totalPages }
 						currentPage={ Number(pageParams) ?? 1 }
 						onItemClick={ page => filterPage(page) }
 					/>
+						: <></>
+					}
 				</div>
 			</PanelH1>
 		</EventClassesPromoStyle>
