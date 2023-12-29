@@ -189,7 +189,7 @@ const NewsDetail = ({
 										<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
 									</Link>
 									<div className='cursor-pointer' onClick={ () => {
-										navigator?.clipboard?.writeText(window?.location?.href).then(() => {
+										navigator?.clipboard?.writeText(hostname).then(() => {
 											alert('URL Link copied');
 										});
 									} }>

@@ -138,9 +138,9 @@ const EventClassesPromo = ({
 					</div>
 					
 				</div>
-				{ /* Sebenarnya tingginya mt-41, di kasih 17 karena di card sudah adamt-24 */ }
+				{ /* Sebenarnya tingginya mt-41, di kasih 17 karena di card sudah ada mt-24 */ }
 				<div className='content mt-[0px] sm:mt-[17px]'>
-					<div className='hidden sm:grid sm:grid-cols-3 grid-cols-1 gap-x-8 w-full justify-center'>
+					<div className={ `hidden sm:grid ${ !loading && events?.length === 0 ? 'sm:grid-cols-1' : 'sm:grid-cols-3' }  grid-cols-1 gap-x-8 w-full justify-center` }>
 						{
 							loading && <Spinner size='m' className='sm:my-10 my-3' />
 						}
@@ -150,6 +150,7 @@ const EventClassesPromo = ({
 								return (
 									<Card
 										id={ data.id }
+										slug={ data.slug }
 										key={ index }
 										image={ data.img_url_card }
 										imageHeight='200px'
@@ -192,6 +193,7 @@ const EventClassesPromo = ({
 									return (
 										<Card
 											id={ data.id }
+											slug={ data.slug }
 											key={ index }
 											image={ data.img_url_card }
 											imageHeight='200px'
@@ -213,7 +215,7 @@ const EventClassesPromo = ({
 												/>
 											}
 											footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
-											className='mb-0 !w-[90%]'
+											className={ `mb-0 ${events?.length > 1 ? '!w-[90%]' : '!w-[100%]'}` }
 											to={ `/promo/${ data.slug }` }
 											iconShare={ true }
 										/>

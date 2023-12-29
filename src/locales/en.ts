@@ -29,7 +29,8 @@ export default {
 		callAmbulanceLabel: {
 			heading: 'Call an Ambulance',
 			subHeading: 'Please select hospital: '
-		}
+		},
+		share: 'Share now'
 	},
 	blacklist: {
 		contactUs: 'Contact Us',
@@ -538,7 +539,11 @@ export default {
 			promoItem: {
 				detailsBtnLabel: 'View Details'
 			},
-			schedule: 'Schedule'
+			schedule: 'Schedule',
+			more: 'More From Promo & Packages',
+			info: 'Information',
+			phone: 'Phone (Whatsapp Only)',
+			operational: 'Operational Hours',
 		},
 		facilities: {
 			heading: 'Facilities & Services',

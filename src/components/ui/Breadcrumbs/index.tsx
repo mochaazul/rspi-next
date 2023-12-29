@@ -39,13 +39,13 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 							<ItemStyle className='px-1 py-1 max-sm:px-0.5'>
 								<Text
 									fontType='p'
-									className='item-text text-ellipsis'
+									className='item-text'
 									fontSize='14px'
 									lineHeight='17px'
 									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }
 									color={ (index + 1) < props.datas.length ? colors.grey.dark : colors.paradiso.default }
+									subClassName={ `max-sm:!text-[10px] ${index === (props.datas.length - 1) ? 'line-clamp-1' : 'whitespace-no-wrap w-max'} max-sm:!leading-normal` }
 									text={ data.name }
-									subClassName='max-sm:!text-[10px] line-clamp-1 max-sm:!leading-normal'
 								/>
 							</ItemStyle>
 						</Link>
