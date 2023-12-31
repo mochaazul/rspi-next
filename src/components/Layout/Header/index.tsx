@@ -26,7 +26,7 @@ import Button from '@/components/ui/Button';
 import MainNavLanguage from '@/components/ui/MainNavLanguage';
 import Modal from '@/components/ui/Modal';
 import { useNotification } from '@/lib/api/client/header';
-import HeaderStyle, { MenuList } from './style';
+import HeaderStyle, { DesktopMenu } from './style';
 
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 
@@ -34,6 +34,9 @@ import { cookiesHelper } from '@/helpers';
 import clearSWRCache from '@/helpers/clearSwrCache';
 import HeaderBrand from './Brand';
 import Menus from './Menus/Menus';
+import NotificationBell from './NotificationBell';
+import ProfileMenus from './ProfileMenus';
+import MobileMenus from './Menus/MobileMenus';
 
 export const Header = ({
 	session,
@@ -57,20 +60,12 @@ export const Header = ({
 	const currentLang = useCurrentLocale();
 	const t = useScopedI18n('navMenu');
 
-	const [dropdownHide, setDropdownHide] = useState<boolean>(true);
 	const [showSideBar, setShowSideBar] = useState<boolean>(false);
-	const [isHover, setIsHover] = useState<boolean>(false);
-	const [isHoverCOE, setIsHoverCOE] = useState<boolean>(false);
-	const [isHoverFacilities, setIsHoverFacilities] = useState<boolean>(false);
 	const [showNotification, setShowNotification] = useState<boolean>(false);
 	const [showSuccessLogout, setShowSuccessLogout] = useState<boolean>(false);
 	const [activeSubMenuIdMobile, setActiveSubMenuIdMobile] = useState<string>('');
 
 	const isLoggedIn = !!session?.token;
-
-	const toggleMouseHover = (hovered: boolean) => () => { setIsHover(hovered); };
-	const toggleMouseHoverCOE = (hovered: boolean) => () => { setIsHoverCOE(hovered); };
-	const toggleMouseHoverFacilities = (hovered: boolean) => () => { setIsHoverFacilities(hovered); };
 
 	const paramGetNotif = {
 		query: {
@@ -106,98 +101,6 @@ export const Header = ({
 	const handleNavigateSideBar = (path: string) => {
 		setShowSideBar(!showSideBar);
 		router.push(path);
-	};
-
-	const modalNotification = () => {
-		return (
-			<Modal
-				visible={ showNotification }
-				onClose={ () => setShowNotification(false) }
-				width='380px'
-				noPadding={ true }
-			>
-				<div className='relative flex flex-col'>
-					<div className='flex justify-between p-[20px]'>
-						<Text
-							fontSize='16px'
-							lineHeight='24px'
-							fontType='h3'
-							fontWeight='700'
-							textAlign='center'
-							color={ colors.black.default }
-							text='Notification'
-						/>
-					</div>
-
-					{
-						notificationResponseData?.notification?.map((item, idx) => (
-							<div key={ idx } className='pb-4'>
-								<div className='flex flex-col py-4 px-[20px]'
-									onClick={ () => {
-										setShowNotification(false);
-										router.push(`${ item?.url }`);
-									} }
-									style={ {
-										backgroundColor: item.flag === 0 ? 'rgba(53, 136, 136, 0.1)' : 'rgba(0, 0, 0, 0)'
-									} }>
-									<div className='flex justify-between'>
-										<Text
-											fontSize='12px'
-											fontWeight={ item.flag === 0 ? '700' : '400' }
-											textAlign='left'
-											color={ colors.grey.pencil }
-											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
-										/>
-									</div>
-									<Text
-										fontSize='14px'
-										lineHeight='20px'
-										fontWeight={ item.flag === 0 ? '700' : '400' }
-										textAlign='left'
-										color={ colors.black.default }
-										text={ currentLang === 'id' ? item?.judul_idn : item?.judul_en }
-										className='flex justify-start'
-									/>
-									<Text
-										fontSize='12px'
-										lineHeight='20px'
-										fontWeight={ item.flag === 0 ? '700' : '400' }
-										textAlign='left'
-										color={ colors.black.default }
-										text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
-										className='flex justify-start pt-2'
-									/>
-								</div>
-							</div>
-						))
-					}
-
-				</div>
-			</Modal>
-		);
-	};
-
-	const renderModalSuccessLogout = () => {
-		return (
-			<Modal
-				visible={ showSuccessLogout }
-				noPadding
-			>
-				<div className='py-3 sm:py-4 px-6 sm:px-10 flex flex-col items-center gap-y-3'>
-					<div className='flex-shrink-0'>
-						<icons.Confirmed className='w-10 h-10 sm:w-12 sm:h-12' />
-					</div>
-
-					<Text
-						fontSize='16px'
-						lineHeight='24px'
-						fontWeight='700'
-					>
-						{ t('logoutSuccess') }
-					</Text>
-				</div>
-			</Modal>
-		);
 	};
 
 	const renderMenuWithDropdown = (label: string, isActive: boolean) => {
@@ -319,13 +222,13 @@ export const Header = ({
 			return (
 				<div className='relative inline-block text-white my-auto' onClick={ () => setShowNotification(true) }>
 					<icons.Notif onClick={ () => {
-						if (marAllReadNotifFunc) {
-							marAllReadNotifFunc()
-								.then(() => {
-									setShowNotification(true);
-									mutate('getNotification');
-								});
-						}
+
+						// if (marAllReadNotifFunc) {
+						// 	marAllReadNotifFunc()
+						// 		.then(() => {
+						// 			mutate('getNotification');
+						// 		});
+						// }
 					} }
 					className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
 					/>
@@ -411,30 +314,23 @@ export const Header = ({
 						<div className='flex items-center gap-x-5 xl2:gap-x-10'>
 							<HeaderBrand />
 						</div>
-						<MenuList className='gap-x-2'>
+						<DesktopMenu className='gap-x-2 hidden md:flex'>
 							<Menus label={ t('ourHospitals') } items={ hospitalData } hrefKey='hospital' itemRender={ renderHospitalMenuItem } />
 							<Menus label={ t('centreOfExcellence') } items={ centerOfExcellenceData } hrefKey='center-of-excellence' itemRender={ renderCoeMenuItem }/>
 							<Menus label={ t('facility') } items={ facilityServicesData } hrefKey='facilities' itemRender={ renderFacilitiesMenuItem } appendItem={ renderMedicalSpecialities }/>
 							<Menus label={ t('findDoctor') } hrefKey='find-a-doctor'/>
-						</MenuList>
+						</DesktopMenu>
+
+						<section id='nav-separator' className='flex-1' />
 
 						{ /* Mobile View Notif ETC */ }
-						{ /* <div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
+						 <div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
 							{ renderNotifIcon() }
-							<button
-								type='button'
-								className='-m-2 inline-flex items-center justify-center p-2 focus:outline-none focus:ring-0'
-								onClick={ () => setShowSideBar(!showSideBar) }
-							>
-								{ showSideBar
-									? <Icons.X color={ colors.grey.darkOpacity } size={ 24 } />
-									: <Icons.AlignLeft color={ colors.grey.darkOpacity } size={ 24 } /> }
-
-							</button>
-						</div> */ }
+							<MobileMenus session={ session }/>
+						</div>
 
 						{ /* Right side Menus */ }
-						{ /* <div className='hidden lg:flex lg:items-center lg:gap-x-4 xl2:gap-x-5'>
+						<div className='hidden lg:flex lg:items-center lg:gap-x-4 xl2:gap-x-5'>
 							<Link href='/find-a-doctor'>
 								<Button className='h-11 px-5 flex items-center whitespace-nowrap text-base font-black'>
 									{ t('bookAppointment') }
@@ -444,47 +340,8 @@ export const Header = ({
 							{ isLoggedIn
 								? (
 									<>
-										{ renderNotifIcon() }
-										<div className='relative flex'>
-											<div className='flex text-white items-center relative z-[2]'>
-												<div>
-													{ session?.user?.img_url
-														? (
-															<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
-																<Image
-																	src={ session.user?.img_url }
-																	alt=''
-																	sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-
-																	fill
-																/>
-															</div>
-														)
-														: <icons.EmptyProfile className='w-[50px] h-[50px]' /> }
-												</div>
-												<div className='ml-4 cursor-pointer'>
-													<icons.ArrowDown className={ '[&>path]:stroke-[#6A6D81]' } onClick={ () => setDropdownHide(!dropdownHide) } />
-												</div>
-											</div>
-
-											<div className={ `${ dropdownHide ? 'hidden' : 'absolute' } top-0 right-0 pt-[70px] z-[1]` }>
-												<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar !w-[230px]' aria-labelledby='dropdownDefault'>
-													<li>
-														<Link href='/patient-portal' className='border-b border-gray block py-4 px-4 hover:bg-[#F0F2F9]' onClick={ () => setDropdownHide(true) }>
-															{ t('user.patientPortal') }
-														</Link>
-													</li>
-													<li>
-														<Link href='/user-information' className='border-b border-gray block py-4 px-4 hover:bg-[#F0F2F9]' onClick={ () => setDropdownHide(true) }>
-															{ t('user.patientInformation') }
-														</Link>
-													</li>
-													<li className='block py-4 px-4 text-red-600 cursor-pointer hover:bg-[#F0F2F9]' onClick={ handleClick }>
-														{ t('user.logout') }
-													</li>
-												</ul>
-											</div>
-										</div>
+										<NotificationBell session={ session }/>
+										<ProfileMenus session={ session }/>
 									</>
 								)
 								: (
@@ -494,32 +351,30 @@ export const Header = ({
 										</Button>
 									</Link>
 								) }
-						</div> */ }
-					</nav>
-					{ showSideBar && (
-						<div className='mobile-sidebar'>
-							<MainNavLanguage session={ session } />
-							{ activeSubMenuIdMobile && (
-								<div className='p-4 bg-[#F0F2F9] flex items-center gap-2'>
-									<button
-										type='button'
-										className='flex-shrink-0 focus:outline-none focus:ring-0'
-										onClick={ () => setActiveSubMenuIdMobile('') }
-									>
-										<Icons.ArrowLeft size={ 20 } color={ colors.grey.darkOpacity } />
-									</button>
-									<Text fontSize='16px' fontWeight='700'>{ getDataSubMenu().title }</Text>
-								</div>
-							) }
-							<div className='sider-nav-menu divide-y divide-solid overflow-y-auto'>
-								{ renderListMenuMobile() }
-							</div>
 						</div>
-					) }
+						{ showSideBar && (
+							<div className='mobile-sidebar'>
+								<MainNavLanguage session={ session } />
+								{ activeSubMenuIdMobile && (
+									<div className='p-4 bg-[#F0F2F9] flex items-center gap-2'>
+										<button
+											type='button'
+											className='flex-shrink-0 focus:outline-none focus:ring-0'
+											onClick={ () => setActiveSubMenuIdMobile('') }
+										>
+											<Icons.ArrowLeft size={ 20 } color={ colors.grey.darkOpacity } />
+										</button>
+										<Text fontSize='16px' fontWeight='700'>{ getDataSubMenu().title }</Text>
+									</div>
+								) }
+								<div className='sider-nav-menu divide-y divide-solid overflow-y-auto'>
+									{ renderListMenuMobile() }
+								</div>
+							</div>
+						) }
+					</nav>
 				</header>
 			</div>
-			{ modalNotification() }
-			{ renderModalSuccessLogout() }
 		</HeaderStyle>
 	);
 };

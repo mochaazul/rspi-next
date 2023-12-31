@@ -19,25 +19,30 @@ function Menus<T>({ items, itemKey, label, hrefKey, itemRender, appendItem }:Pro
 	return (
 		<li className='flex flex-row gap-x-2 relative group cursor-pointer h-full align-middle justify-center items-center'>
 			<Text text={ label } subClassName='text-black group-hover:text-green-primary' fontSize='14px' fontWeight='900' />
-			<div className='flex-shrink-0'>
-				<icons.ArrowDown className='[&>path]:stroke-[#6A6D81] group-hover:rotate-180 transition-all' />
-			</div>
+			
 			{
 				items &&
-				<ul className='dropdown mt-[34px]'>
-					{ items.map((item, index) => (
-						<li key={ `menu-${label}-${index}` } className='divide-y'>
-							{
-								itemRender
-									? itemRender(item)
-									: <>
-										<Text text={ `${item}` } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
-									</>
-							}
-						</li>
-					)) }
-					{ appendItem }
-				</ul>
+				<>
+					<div className='flex-shrink-0'>
+						<icons.ArrowDown className='[&>path]:stroke-[#6A6D81] group-hover:rotate-180 transition-all' />
+					</div>
+					<div className='dropdown-wrapper'>
+						<ul className='mt-[34px] custom-scrollbar'>
+							{ items.map((item, index) => (
+								<li key={ `menu-${label}-${index}` } className='divide-y'>
+									{
+										itemRender
+											? itemRender(item)
+											: <>
+												<Text text={ `${item}` } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+											</>
+									}
+								</li>
+							)) }
+							{ appendItem }
+						</ul>
+					</div>
+				</>
 			}
 		</li>
 	);

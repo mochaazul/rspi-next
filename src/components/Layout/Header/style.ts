@@ -113,7 +113,7 @@ const HeaderStyle = styled.div`
   }
 `;
 
-export const MenuList = styled.ul`
+export const DesktopMenu = styled.ul`
   list-style: none;
   margin: 0;
   padding-left: 0;
@@ -127,34 +127,31 @@ export const MenuList = styled.ul`
    li:hover {
      cursor: pointer;
    }
-   
-  
-   li ul {
-    :before{
-      content: "";
-      display: block;
-      height: 80px;
-      position: absolute;
-      top: -40px;
-      width: 100%;
-    }
+   .dropdown-wrapper{
     visibility: hidden;
     opacity: 0;
     position: absolute;
-    transition: all 0.5s ease;
-    left: 0;
     display: none;
     background-color: white;
     width: 480px;
     z-index: 20;
     top: 100%;
+    left: 0;
+    transition: all 0.5s ease;
+   }
+   
+  
+   li ul {
+    max-height: 320px;
+    overflow-y: auto;
   }
   
-   li:hover > ul,
-   li ul:hover {
+   li:hover > .dropdown-wrapper,
+   li .dropdown-wrapper:hover {
     visibility: visible;
     opacity: 1;
     display: block;
+    transition: all 0.5s ease;
   }
   
   li ul li {
