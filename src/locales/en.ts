@@ -777,7 +777,8 @@ export default {
 				patientGenderMaleLabel: 'Male',
 				patientGenderFemaleLabel: 'Female',
 				patientPhotoProfile: 'Photo profile',
-				editLabel: 'Change'
+				editLabel: 'Change',
+				successUpdateProfile: 'Successfully Update Profile',
 			},
 			securitySetting: {
 				emailLabel: 'Email',
@@ -851,9 +852,8 @@ export default {
 						notesInputPlaceholder: 'Enter a description...',
 						optionalLabel: '(Optional)',
 						smallNotes: 'This would help us to keep improving our service.',
-						responReview: 'Review has been',
-						responReviewFailed: ' Failed',
-						responReviewSuccess: ' Successfully'
+						responReviewFailed: 'Review has been failed',
+						responReviewSuccess: 'Review has been successfully'
 					}
 				},
 				empty: 'You do not have any visit histories yet.',
@@ -861,11 +861,14 @@ export default {
 			},
 			jadwalKunjungan: {
 				label: {
-					queueNo: 'Queue Number',
+					queueNo: 'Queue No.:',
 					activeSchedule: 'Active Appointment',
 					cancelAppointment: 'Cancel Appointment',
 					empty: 'You do not have visit data at this time',
-					emptyBtnCta: 'Schedule a Visit'
+					emptyBtnCta: 'Schedule a Visit',
+					visitSchedule: 'Visit Schedule',
+					reschedule: 'Reschedule',
+					rescheduleAgain: 'Reschedule Again',
 				},
 				options: [
 					'Myself',
@@ -873,14 +876,15 @@ export default {
 				],
 				statusLabel: {
 					C: 'Schedule Completed',
-					X: 'Schedule Canceled',
-					N: 'Absent',
+					X: 'Cancelled',
+					N: 'Not Attended',
 					H: 'Hold',
 					T: 'Transferred',
 					A: 'Arrived',
 					P: 'Postponed',
-					S: 'Seen',
-					U: 'Arrived Not Seen'
+					S: 'Seen Doctor',
+					U: 'Arrived Not Seen',
+					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
 				offlineConsultation: 'Face-to-face Consultation'

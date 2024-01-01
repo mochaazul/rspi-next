@@ -821,13 +821,15 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 					</div>
 				</Modal>
 				<Modal visible={ showModalSuccess } onClose={ () => { setShowModalSuccess(false); setError(''); } }>
-					<div>
+					<div className='flex flex-col items-center gap-y-2.5'>
+						<icons.Confirmed />
+
 						<Text
 							fontSize='16px'
 							lineHeight='19px'
 							fontWeight='900'
 							color={ colors.paradiso.default }
-							text={ 'Berhasil Update Profile' }
+							text={ t('profileDetail.successUpdateProfile') }
 						/>
 					</div>
 				</Modal>

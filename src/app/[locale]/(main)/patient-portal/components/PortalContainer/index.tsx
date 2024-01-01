@@ -34,9 +34,8 @@ type PortalContainerProps = {
 
 const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContainerProps) => {
 	const [activeTabIndex, setActiveTabIndex] = useState(0);
-	const [activeTabIndexForCallBackPin, setActiveTabIndexForCallBackPin] = useState(0);
+	const [activeParentTabMobileIndex, setActiveParentTabMobileIndex] = useState(0);
 	const [headerOpened, setHeaderOpened] = useState<boolean>(false);
-	const [shouldEnterPin, setShouldEnterPin] = useState<boolean>(false);
 	const [pinModalVisible, setPinModalVisible] = useState<boolean>(false);
 
 	const params = useParams();
@@ -130,20 +129,15 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 	}, [activeTabIndex]);
 
 	const onHeaderClick = () => {
-		if (shouldEnterPin) {
+		if (!headerOpened) {
 			setPinModalVisible(true);
-		} else if (headerOpened) {
-			setHeaderOpened(false);
-		} else {
-			setHeaderOpened(true);
 		}
 	};
 
 	const onSuccessEnterPin = () => {
 		setPinModalVisible(false);
-		setShouldEnterPin(false);
 		setHeaderOpened(true);
-		setActiveTabIndex(activeTabIndexForCallBackPin);
+		setActiveTabIndex(1);
 	};
 
 	const renderMenuItem = () => {
@@ -154,7 +148,10 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 					ref={ el => (tabsRef.current[menuItem.id] = el) }
 					style={ { backgroundColor: activeTabIndex === menuItem.id ? colors.paradiso.opacity10 : '' } }
 					className={ 'py-[20px] w-[254px] max-lg:w-[200px] pl-[20px] duration-300' }
-					onClick={ () => setActiveTabIndex(menuItem.id) }>
+					onClick={ () => {
+						setActiveTabIndex(menuItem.id);
+						setHeaderOpened(false);
+					} }>
 					<Text
 						text={ menuItem.label }
 						fontWeight='700'
@@ -182,8 +179,7 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 								style={ { backgroundColor: activeTabIndex === child.id ? colors.paradiso.opacity10 : '' } }
 								className={ 'py-[20px] w-[254px] max-lg:w-[200px] pl-[48px] duration-300' }
 								onClick={ () => {
-									setPinModalVisible(true);
-									setActiveTabIndexForCallBackPin(child.id); // temporary store active id, to be called in callback pin modal
+									setActiveTabIndex(child.id);
 								} }>
 								<Text
 									text={ child.label }
@@ -200,7 +196,7 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 	return (
 		<VisitHistoryStyle className='max-sm:py-0'>
 			<div className='rectangle' />
-			<div className='content-wrapper pt-[60px] md:pt-[120px]'>
+			<div className='content-wrapper pt-[60px] md:pt-[120px] pb-[107px]'>
 				<div className='w-full -mt-[42px] relative'>
 					<CardUser
 						patientProfile={ patientProfile }
@@ -215,21 +211,44 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 					</div>
 					<div className='md:hidden'>
 						<Tabs
-							activeTabIndex={ activeTabIndex }
-							setActiveTabIndex={ setActiveTabIndex }
-							tabsData={ tabMenuLabel.flatMap(eachMenu => eachMenu.children.length > 0 ? eachMenu.children : eachMenu).map(eachMap => eachMap.label) }
+							activeTabIndex={ activeParentTabMobileIndex }
+							setActiveTabIndex={ setActiveParentTabMobileIndex }
+							tabsData={ tabMenuLabel.map(eachMap => eachMap.label) }
 							onClickItem={ index => {
 								if (index > 0) {
-									setPinModalVisible(true);
+									onHeaderClick();
+								} else {
+									setHeaderOpened(false);
+									setActiveTabIndex(index);
 								}
-								setActiveTabIndexForCallBackPin(index);
 							} }
+							className='mb-6'
 						/>
+
+						{ headerOpened && (
+							<div className='flex items-center flex-wrap gap-3 mb-4'>
+								{ tabMenuLabel[activeParentTabMobileIndex]?.children?.map(child => (
+									<button
+										key={ child.id }
+										ref={ el => (tabsRef.current[child.id] = el) }
+										style={ { backgroundColor: activeTabIndex === child.id ? colors.paradiso.opacity10 : colors.grey.lightest } }
+										className='py-1 px-3 rounded-full'
+										onClick={ () => {
+											setActiveTabIndex(child.id);
+										} }>
+										<Text
+											text={ child.label }
+											fontWeight={ activeTabIndex === child.id ? '700' : '400' }
+											color={ activeTabIndex === child.id ? colors.paradiso.default : colors.grey.darker } />
+									</button>
+								)) }
+							</div>
+						) }
 					</div>
 					<div className='md:ml-[31px] w-full min-h-[500px] max-sm:hidden'>
 						{ renderContent }
 					</div>
-					<div className='md:ml-[31px] w-full min-h-[500px] md:hidden'>
+					<div className='min-h-[500px] w-full md:hidden'>
 						{ renderContentMobile }
 					</div>
 				</div>

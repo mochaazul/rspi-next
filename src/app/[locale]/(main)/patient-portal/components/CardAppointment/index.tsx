@@ -7,7 +7,6 @@ import Image from 'next/image';
 import dayjs from 'dayjs';
 
 import { colors, icons } from '@/constant';
-import images from '@/constant/images';
 import PinModal from '@/components/ui/PinModal';
 import Text from '@/components/ui/Text';
 import { I_VisitHistory } from '@/interface/PatientProfile';
@@ -21,10 +20,9 @@ import DetailKunjungan from '../ModalDetailKunjungan';
 import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
 import { UserDataDetail } from '@/interface';
-import useSession from '@/session/client';
 
 interface PropsType {
-	status?: string;
+	status?: 'appointment' | 'history';
 	queueNo?: number;
 	id: string;
 	doctorName?: string;
@@ -60,7 +58,6 @@ const CardAppointment = (props: PropsType) => {
 	const [modalRecommend, setModalRecommend] = useState(false);
 	const [showModalCancelBook, setShowModalCancelBook] = useState(false);
 	const [showPinModal, setShowPinModal] = useState(false);
-	const session = useSession();
 
 	const { data: cancelBookingResponse, trigger: cancelBookingTrigger, error: cancelBookingError, isMutating: isLoadingCancelBook } = usePostCancelBookingMutation();
 
@@ -101,12 +98,15 @@ const CardAppointment = (props: PropsType) => {
 		}
 	};
 
-	const isVisitActive = () => {
-		const activeStatus = ['arrived not seen', 'seen doctor', 'postponed', 'admitted / arrived', 'admitted', 'arrived'];
-		return activeStatus.includes(props.status?.toLowerCase() || '');
+	const isVisitActive = (code: string) => {
+		return props.status === 'appointment' && ['U', 'S', 'P', 'A'].includes(code);
 	};
 
 	const mappingStatusColor = (code: string) => {
+		if (isVisitActive(code)) {
+			return colors.paradiso.default;
+		}
+
 		switch (code) {
 			case 'C':
 				return colors.grey.darkOpacity;
@@ -120,19 +120,27 @@ const CardAppointment = (props: PropsType) => {
 	};
 
 	const mappingStatusColorBackground = (code: string) => {
+		if (isVisitActive(code)) {
+			return colors.paradiso.opacity10;
+		}
+
 		switch (code) {
 			case 'C':
-				return colors.grey.light;
+				return colors.grey.lighterOpacity;
 			case 'X':
-				return colors.red.light;
+				return colors.red.defaultOpacity10;
 			case 'N':
-				return colors.red.light;
+				return colors.red.defaultOpacity10;
 			default:
-				return colors.grey.light;
+				return colors.grey.lighterOpacity;
 		}
 	};
 
 	const mappingStatus = (code: string) => {
+		if (isVisitActive(code)) {
+			return t('jadwalKunjungan.label.activeSchedule');
+		}
+
 		switch (code) {
 			case 'C':
 				return t('jadwalKunjungan.statusLabel.C');
@@ -152,50 +160,91 @@ const CardAppointment = (props: PropsType) => {
 				return t('jadwalKunjungan.statusLabel.S');
 			case 'U':
 				return t('jadwalKunjungan.statusLabel.U');
+			case 'D':
+				return t('jadwalKunjungan.statusLabel.D');
 			default:
 				return '';
 		}
 	};
 
-	const criteriaForShowRateDoctor = ['Jadwal Selesai', 'Appointment Done'];
+	const renderButtonCancelAppointment = (className?: string) => {
+		if (props.status === 'appointment') {
+			return (
+				<button onClick={ () => setShowModalCancelBook(true) } className={ `btn-cancel group hover:text-white hover:bg-[#EB5757] focus:outline-none focus:ring-0 cursor-pointer flex items-center gap-[5px] ${ className }` }>
+					<icons.Close className='w-4 h-4 [&>path]:fill-[#EB5757] group-hover:[&>path]:fill-white' />
+					<span className='inline-block'>{ t('jadwalKunjungan.label.cancelAppointment') }</span>
+				</button>
+			);
+		}
+
+		return null;
+	};
+
+	const renderPatientName = () => {
+		if (props.type === 'other' && props.patientName)
+			return (
+				<div className='flex items-center mt-[12px] gap-[8px]' >
+					<icons.User className='w-4 h-4' />
+					<Text text={ `Patient: ${ props.patientName }` } fontSize='16px' fontWeight='700' color={ colors.blue.neon } />
+				</div>
+			);
+	};
+
+	const renderButtonReschedule = (className?: string) => {
+		if (props.visit_status === 'C' && props.status === 'history') {
+			return (
+				<button onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className={ `btn-success cursor-pointer ${ className }` }>{ t('jadwalKunjungan.label.rescheduleAgain') }</button>
+			);
+		}
+
+		if (props.visit_status === 'X') {
+			return (
+				<button onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className={ `btn-success group flex items-center justify-center gap-[5px] ${ className }` }>
+					<icons.ArrowsClockwise className='group-hover:[&>path]:fill-white' />
+					{ t('jadwalKunjungan.label.reschedule') }
+				</button>
+			);
+		}
+
+		return null;
+	};
 
 	return (
 		<CardPatientPortalStyle
-			className='flex flex-col mb-4'
+			className='flex flex-col mb-4 sm:mb-5'
 		>
-			<div className='flex flex-wrap items-center'>
-				<Text text={ `Appointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='md:mr-[15px]' />
-				{
-					props.type === 'self' ?
-						<>
-							<Bullet />
-							<div>
-								<button
-									style={ { backgroundColor: mappingStatusColorBackground(props.visit_status ?? '') } }
-									className={ 'py-[4px] px-[15px] rounded-[10px] duration-300 mx-[8px] ' }
-								>
-									<Text
-										text={ mappingStatus(props.visit_status ?? '') }
-										fontWeight='600'
-										fontSize='14px'
-										className='max-sm:py-[0px]'
-										color={ mappingStatusColor(props.visit_status ?? '') } />
-								</button>
-							</div>
-						</> : <></>
-				}
+			<div className='flex flex-wrap items-center gap-1 md:gap-2.5'>
+				<Text text={ `Appointment ID: ${ props.id }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
+
+				<Bullet />
+				{ props.visit_status && (
+					<div>
+						<button
+							style={ { backgroundColor: mappingStatusColorBackground(props.visit_status ?? '') } }
+							className='py-[3px] px-[15px] rounded-[10px] duration-300 cursor-default'
+						>
+							<Text
+								text={ mappingStatus(props.visit_status ?? '') }
+								fontWeight='700'
+								fontSize='14px'
+								subClassName='leading-normal text-center'
+								color={ mappingStatusColor(props.visit_status ?? '') } />
+						</button>
+					</div>
+				) }
 				{
 					!props.isTelemedicine && (
 						<button
 							style={ { backgroundColor: colors.grey.darked } }
-							className={ 'py-[4px] px-[15px] rounded-[10px] duration-300 ' }
+							className={ 'py-1 px-2.5 rounded-[100px] duration-300 cursor-default' }
 						>
-							<div className='flex items-center gap-[5px]'>
+							<div className='flex items-center justify-center'>
 								<Text
 									text={ t('jadwalKunjungan.offlineConsultation') }
-									fontWeight='600'
+									fontWeight='700'
 									fontSize='14px'
-									color={ colors.white.body } />
+									subClassName='text-center'
+									color={ colors.white.default } />
 							</div>
 						</button>
 					)
@@ -204,70 +253,71 @@ const CardAppointment = (props: PropsType) => {
 					props.isTelemedicine && (
 						<button
 							style={ { backgroundColor: colors.red.danger } }
-							className={ 'py-[4px] px-[15px] rounded-[10px] duration-300 ' }
+							className={ 'py-1 px-2.5 rounded-[100px] duration-300 ' }
 						>
 							<div className='flex items-center gap-[5px]'>
 								<Icons.Video color={ colors.white.body } size={ 16 } />
 								<Text
 									text={ t('jadwalKunjungan.teleconsultationLabel') }
-									fontWeight='600'
+									fontWeight='700'
 									fontSize='14px'
 									color={ colors.white.body } />
 							</div>
 						</button>
 					)
 				}
-				{ /* { props.status !== 'Jadwal Selesai' &&
-					<div className='flex items-center w-'>
-						<Bullet />
-						<Text text={ `${ jadwalKunjungan.label.queueNo } : ${ props.queueNo }` } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } className='pl-[15px]' />
-					</div>
-				} */ }
-				{ props.visit_status === 'C' &&
-					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Lagi' }</div>
-				}
-				{ props.visit_status === 'X' &&
-					<div onClick={ () => navigate.push(`/doctor/${ props.doctor_id }`) } className='btn-success max-sm:hidden cursor-pointer'>{ 'Jadwalkan Ulang' }</div>
-				}
-				{ (props.status !== 'Jadwal Selesai' && props.type !== 'other') &&
-					<div onClick={ async () => { setShowModalCancelBook(true); } } className='btn-cancel max-sm:hidden cursor-pointer'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
-				}
+				<div className='max-md:hidden my-auto ml-auto mr-0'>
+					{ renderButtonReschedule() }
+					{ renderButtonCancelAppointment() }
+				</div>
 
 			</div>
-			{ props.isTelemedicine
-				&& <div className='flex items-center mt-[12px] gap-[8px]' >
-					<icons.User className={ 'w-3 h-3' } />
-					<Text text={ `Patient: ${ props.patientName }` } fontSize='14px' fontWeight='700' color={ colors.blue.neon } />
+			{ renderPatientName() }
+
+			<div className='flex flex-col md:flex-row md:grid md:grid-cols-3 mt-4 sm:mt-6 gap-8 md:gap-6'>
+				<div className='flex gap-[15px] md:col-span-1'>
+					<div className='relative overflow-hidden w-12 h-12 md:w-[60px] md:h-[60px] rounded-full flex-shrink-0'>
+						<Image
+							className='object-cover object-top'
+							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+							alt=''
+							src={ props.doctorImgUrl || '/images/samples/default-avatar.jpg' }
+							fill
+						/>
+					</div>
+					<div className='flex flex-col gap-2.5'>
+						<Text text={ props.doctorName || '-' } fontSize='16px' fontWeight='700' />
+						<Text text={ props.doctorSpeciality || '-' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } subClassName='max-sm:text-xs !leading-normal' />
+					</div>
 				</div>
-			}
-			<div className='md:grid grid-cols-[auto_repeat(3,minmax(0,1fr))] mt-[24px] gap-[24px] cursor-pointer'>
-				<Image alt='' src={ props.doctorImgUrl || '' } height={ 60 } width={ 60 } className='rounded-full h-[60px] w-[60px]' />
-				<div className='flex-1'>
-					<Text text={ props.doctorName || '-' } fontSize='16px' fontWeight='700' />
-					<Text text={ props.doctorSpeciality || '-' } className='md:mt-[10px] max-sm:mb-4' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-				</div >
-				<div className='md:flex flex-col-reverse md:flex-col gap-[10px]' >
-					<Text text={ dayjs(`${ props.date } ${ props.time }`).format('DD MMMM YYYY hh:mm A') ?? '-' } fontSize='16px' fontWeight='700' />
-					<Text text={ 'Visit Schedule' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
+				<div className='max-md:divide-x divide-[#EAEAEA] md:col-span-2 grid grid-cols-2 items-start max-md:justify-between md:gap-6'>
+					<div className='flex flex-col-reverse md:flex-col gap-[10px] max-md:pr-2'>
+						<div>
+							<Text text={ dayjs(`${ props.date } ${ props.time }`).format('DD MMMM YYYY, hh:mm A') ?? '-' } fontSize='16px' fontWeight='700' subClassName='!text-center md:text-left !leading-normal' />
+							{ props.queueNo && !props.isTelemedicine && (
+								<Text text={ `${ t('jadwalKunjungan.label.queueNo') } ${ props.queueNo }` } fontSize='16px' fontWeight='700' className='max-md:hidden !leading-normal' />
+							) }
+						</div>
+						<Text text={ t('jadwalKunjungan.label.visitSchedule') } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } subClassName='!text-center md:text-left max-sm:text-xs !leading-normal' />
+					</div>
+					<div className='flex flex-col-reverse md:flex-col gap-[10px] max-md:pl-2' >
+						<Text text={ props.clinic_name || '-' } fontSize='16px' fontWeight='700' subClassName='!text-center md:text-left !leading-normal' />
+						<Text text={ props.hospital_name || '-' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } subClassName='!text-center md:text-left max-sm:text-xs !leading-normal' />
+					</div>
 				</div>
-				<div
-					className='md:hidden inline-block md:h-[100px] min-h-[1em] w-0.5 self-stretch md:bg-neutral-200 opacity-100 dark:opacity-50' />
-				<div className='md:flex flex-col-reverse md:flex-col gap-[10px]' >
-					<Text text={ props.clinic_name || '-' } fontSize='16px' fontWeight='700' />
-					<Text text={ props.hospital_name || '-' } fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-				</div >
-				{ props.status !== 'Jadwal Selesai' &&
-					<div className='btn-cancel md:hidden'>{ `X ${ t('jadwalKunjungan.label.cancelAppointment') }` }</div>
-				}
-			</div >
+			</div>
+			<div className='md:hidden w-full flex flex-col items-center'>
+				{ renderButtonCancelAppointment('mt-8') }
+				{ renderButtonReschedule('mt-8') }
+			</div>
 
 			{
-				criteriaForShowRateDoctor.includes(props.status ?? '') &&
-				<div className='flex flex-row gap-x-2 items-center justify-end cursor-pointer mt-[20px]' onClick={ () => {
-					handleShowModal && handleShowModal();
-				} }>
-					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ props.isHistory ? t('riwayatKunjungan.label.recommendDoctor') : t('riwayatKunjungan.label.seeDetail') } />
-					<icons.LongArrowRight className='svg-green' style={ { width: '20px' } } />
+				props.status === 'history'
+				&& props.visit_status === 'C'
+				&&
+				<div className='flex flex-row gap-x-2 items-center justify-center md:justify-end cursor-pointer mt-8 md:mt-5' onClick={ handleShowModal }>
+					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ props.isHistory ? t('riwayatKunjungan.label.recommendDoctor') : t('riwayatKunjungan.label.seeDetail') } subClassName='max-md:text-center' />
+					<icons.LongArrowRight className='[&>path]:stroke-green-secondary w-5 h-5 max-md:hidden' />
 				</div>
 			}
 			<DetailKunjungan
@@ -289,7 +339,7 @@ const CardAppointment = (props: PropsType) => {
 				visible={ showModalCancelBook }
 				onClose={ () => { setShowModalCancelBook(false); } }
 				nama={ props.patientName }
-				doctorImg={ props.doctorImgUrl || images.Doctor1.src }
+				doctorImg={ props.doctorImgUrl }
 				doctorName={ props.doctorName || '-' }
 				doctorSpec={ props.doctorSpeciality || '-' }
 				bookDate={ dayjs(`${ props.date } ${ props.time }`).format('DD MMMM YYYY hh:mm A') ?? '-' }

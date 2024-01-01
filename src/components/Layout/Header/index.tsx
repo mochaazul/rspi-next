@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import * as Icons from 'react-feather';
 import moment from 'moment';
@@ -9,6 +9,8 @@ import { useSWRConfig } from 'swr';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Menu, Popover, Transition } from '@headlessui/react';
+import { toast } from 'react-toastify';
 
 import {
 	CenterOfExcellenceDetail,
@@ -60,7 +62,6 @@ export const Header = ({
 	const [isHover, setIsHover] = useState<boolean>(false);
 	const [isHoverCOE, setIsHoverCOE] = useState<boolean>(false);
 	const [isHoverFacilities, setIsHoverFacilities] = useState<boolean>(false);
-	const [showNotification, setShowNotification] = useState<boolean>(false);
 	const [showSuccessLogout, setShowSuccessLogout] = useState<boolean>(false);
 	const [activeSubMenuIdMobile, setActiveSubMenuIdMobile] = useState<string>('');
 
@@ -82,7 +83,7 @@ export const Header = ({
 
 	const notificationResponseData = getNotification?.data;
 
-	const handleClick = async () => {
+	const handleClickLogout = async () => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			await clearSWRCache(cache);
@@ -93,9 +94,13 @@ export const Header = ({
 				return router.replace('/login');
 			}
 
-			if (!protectedRoutes?.some(path => pathname.includes(path))) {
-				setShowSuccessLogout(true);
-			}
+			// if (!protectedRoutes?.some(path => pathname.includes(path))) {
+			// 	setShowSuccessLogout(true);
+			// }
+			toast.success(t('logoutSuccess'), {
+				hideProgressBar: true,
+				pauseOnHover: false,
+			});
 
 			router.refresh();
 		}
@@ -104,75 +109,6 @@ export const Header = ({
 	const handleNavigateSideBar = (path: string) => {
 		setShowSideBar(!showSideBar);
 		router.push(path);
-	};
-
-	const modalNotification = () => {
-		return (
-			<Modal
-				visible={ showNotification }
-				onClose={ () => setShowNotification(false) }
-				width='380px'
-				noPadding={ true }
-			>
-				<div className='relative flex flex-col'>
-					<div className='flex justify-between p-[20px]'>
-						<Text
-							fontSize='16px'
-							lineHeight='24px'
-							fontType='h3'
-							fontWeight='700'
-							textAlign='center'
-							color={ colors.black.default }
-							text='Notification'
-						/>
-					</div>
-
-					{
-						notificationResponseData?.notification?.map((item, idx) => (
-							<div key={ idx } className='pb-4'>
-								<div className='flex flex-col py-4 px-[20px]'
-									onClick={ () => {
-										setShowNotification(false);
-										router.push(`${ item?.url }`);
-									} }
-									style={ {
-										backgroundColor: item.flag === 0 ? 'rgba(53, 136, 136, 0.1)' : 'rgba(0, 0, 0, 0)'
-									} }>
-									<div className='flex justify-between'>
-										<Text
-											fontSize='12px'
-											fontWeight={ item.flag === 0 ? '700' : '400' }
-											textAlign='left'
-											color={ colors.grey.pencil }
-											text={ moment(item.create_datetime)?.format('DD MMM, hh:mm') }
-										/>
-									</div>
-									<Text
-										fontSize='14px'
-										lineHeight='20px'
-										fontWeight={ item.flag === 0 ? '700' : '400' }
-										textAlign='left'
-										color={ colors.black.default }
-										text={ currentLang === 'id' ? item?.judul_idn : item?.judul_en }
-										className='flex justify-start'
-									/>
-									<Text
-										fontSize='12px'
-										lineHeight='20px'
-										fontWeight={ item.flag === 0 ? '700' : '400' }
-										textAlign='left'
-										color={ colors.black.default }
-										text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
-										className='flex justify-start pt-2'
-									/>
-								</div>
-							</div>
-						))
-					}
-
-				</div>
-			</Modal>
-		);
 	};
 
 	const renderModalSuccessLogout = () => {
@@ -303,7 +239,7 @@ export const Header = ({
 				{ /* { renderMenuMobile(t('career'), '/') } */ }
 				{ renderMenuMobile(t('contactUs'), '/contact') }
 				{ isLoggedIn ?
-					<div className='nav-menu' onClick={ handleClick }>
+					<div className='nav-menu' onClick={ handleClickLogout }>
 						<Text text={ t('user.logout') } fontSize='16px' fontWeight='700' color={ colors.red.default } />
 					</div>
 					: null
@@ -312,28 +248,147 @@ export const Header = ({
 		);
 	};
 
-	const renderNotifIcon = () => {
+	const handleReadAllNotif = () => {
+		if (marAllReadNotifFunc) {
+			marAllReadNotifFunc()
+				.then(() => {
+					mutate('getNotification');
+				});
+		}
+	};
+
+	const renderMenuNotif = () => {
 		if (isLoggedIn) {
 			return (
-				<div className='relative inline-block text-white my-auto' onClick={ () => setShowNotification(true) }>
-					<icons.Notif onClick={ () => {
-						if (marAllReadNotifFunc) {
-							marAllReadNotifFunc()
-								.then(() => {
-									setShowNotification(true);
-									mutate('getNotification');
-								});
-						}
-					} }
-						className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
-					/>
-					<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
-						{ notificationResponseData?.total_unread ?? 0 }
-					</span>
-				</div>
+				<Popover className='relative'>
+					<div>
+						<Popover.Button
+							onClick={ handleReadAllNotif }
+							className='flex items-center justify-center relative w-full focus:ring-0 focus:outline-none'>
+							<icons.Notif className='w-8 h-8 sm:w-11 sm:h-11 flex-shrink-0' />
+							<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
+								{ notificationResponseData?.total_unread ?? 0 }
+							</span>
+						</Popover.Button>
+					</div>
+
+					<Transition
+						as={ Fragment }
+						enter='transition ease-out duration-100'
+						enterFrom='transform opacity-0 scale-95'
+						enterTo='transform opacity-100 scale-100'
+						leave='transition ease-in duration-75'
+						leaveFrom='transform opacity-100 scale-100'
+						leaveTo='transform opacity-0 scale-95'
+					>
+						<Popover.Panel className='absolute z-[999] right-0 mt-4 lg:mt-5 w-screen max-w-[calc(100vw-92px)] sm:max-w-[400px] origin-top-right shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] overflow-hidden bg-white rounded-[10px] font-Lato'>
+							<div className='flex flex-col gap-2'>
+								<div className='flex p-3'>
+									<Text
+										fontSize='16px'
+										lineHeight='24px'
+										fontType='h3'
+										fontWeight='700'
+										color={ colors.black.ink }
+										text='Notification'
+									/>
+								</div>
+
+								<div className='max-h-[50vh] overflow-y-auto custom-scrollbar flex flex-col gap-y-2 px-3 pb-3'>
+									{
+										notificationResponseData?.notification?.map((item, idx) => (
+											<div
+												key={ idx }
+												className={ `flex flex-col gap-y-2 p-3 rounded-lg cursor-pointer hover:bg-green-secondary/10 ${ item.flag === 0 ? 'bg-green-secondary/10' : '' }` }
+												onClick={ () => {
+													if (item?.url) {
+														router.push(`${ item?.url }`);
+													}
+												} }
+											>
+												<Text
+													fontSize='12px'
+													fontWeight='400'
+													color={ colors.grey.pencil }
+													text={ moment(item.create_datetime)?.format('DD MMM, hh:mm A') }
+												/>
+												<Text
+													fontSize='14px'
+													lineHeight='20px'
+													fontWeight='700'
+													color={ colors.black.ink }
+													text={ currentLang === 'id' ? item?.judul_idn : item?.judul_en }
+												/>
+												<Text
+													fontSize='12px'
+													lineHeight='20px'
+													fontWeight='400'
+													color={ colors.black.ink }
+													text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
+												/>
+											</div>
+										))
+									}
+								</div>
+
+							</div>
+						</Popover.Panel>
+					</Transition>
+				</Popover>
 			);
 		}
 	};
+
+	const renderMenuProfile = () => {
+		return (
+			<Menu as='div' className='relative inline-block text-left'>
+				<div>
+					<Menu.Button className='flex items-center relative w-full focus:ring-0 focus:outline-none'>
+						<div>
+							{ session?.user?.img_url
+								? (
+									<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
+										<Image
+											src={ session.user?.img_url }
+											alt=''
+											sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+
+											fill
+										/>
+									</div>
+								)
+								: <icons.EmptyProfile className='w-[50px] h-[50px]' /> }
+						</div>
+						<div className='ml-4 cursor-pointer'>
+							<icons.ArrowDown className={ '[&>path]:stroke-[#6A6D81]' } onClick={ () => setDropdownHide(!dropdownHide) } />
+						</div>
+					</Menu.Button>
+				</div>
+				<Transition
+					as={ Fragment }
+					enter='transition ease-out duration-100'
+					enterFrom='transform opacity-0 scale-95'
+					enterTo='transform opacity-100 scale-100'
+					leave='transition ease-in duration-75'
+					leaveFrom='transform opacity-100 scale-100'
+					leaveTo='transform opacity-0 scale-95'
+				>
+					<Menu.Items className='absolute right-0 mt-5 w-[230px] origin-top-right shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] overflow-hidden bg-white rounded-b-[10px] font-Lato font-bold text-base'>
+						<Menu.Item as={ Link } href='/patient-portal' className='flex px-5 py-4 text-gray-1 hover:bg-[#F0F2F9]'>
+							{ t('user.patientPortal') }
+						</Menu.Item>
+						<Menu.Item as={ Link } href='/user-information' className='flex px-5 py-4 text-gray-1 hover:bg-[#F0F2F9]'>
+							{ t('user.patientInformation') }
+						</Menu.Item>
+						<Menu.Item as='div' className='px-5 py-4 text-[#D71F28] cursor-pointer hover:bg-[#F0F2F9]' onClick={ handleClickLogout }>
+							{ t('user.logout') }
+						</Menu.Item>
+					</Menu.Items>
+				</Transition>
+			</Menu>
+		);
+	};
+
 	return (
 		<HeaderStyle className={ className }>
 			<div className='w-full'>
@@ -446,7 +501,7 @@ export const Header = ({
 							</div>
 						</div>
 						<div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
-							{ renderNotifIcon() }
+							{ renderMenuNotif() }
 							<button
 								type='button'
 								className='-m-2 inline-flex items-center justify-center p-2 focus:outline-none focus:ring-0'
@@ -468,47 +523,8 @@ export const Header = ({
 							{ isLoggedIn
 								? (
 									<>
-										{ renderNotifIcon() }
-										<div className='relative flex'>
-											<div className='flex text-white items-center relative z-[2]'>
-												<div>
-													{ session?.user?.img_url
-														? (
-															<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
-																<Image
-																	src={ session.user?.img_url }
-																	alt=''
-																	sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-
-																	fill
-																/>
-															</div>
-														)
-														: <icons.EmptyProfile className='w-[50px] h-[50px]' /> }
-												</div>
-												<div className='ml-4 cursor-pointer'>
-													<icons.ArrowDown className={ '[&>path]:stroke-[#6A6D81]' } onClick={ () => setDropdownHide(!dropdownHide) } />
-												</div>
-											</div>
-
-											<div className={ `${ dropdownHide ? 'hidden' : 'absolute' } top-0 right-0 pt-[70px] z-[1]` }>
-												<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar !w-[230px]' aria-labelledby='dropdownDefault'>
-													<li>
-														<Link href='/patient-portal' className='border-b border-gray block py-4 px-4 hover:bg-[#F0F2F9]' onClick={ () => setDropdownHide(true) }>
-															{ t('user.patientPortal') }
-														</Link>
-													</li>
-													<li>
-														<Link href='/user-information' className='border-b border-gray block py-4 px-4 hover:bg-[#F0F2F9]' onClick={ () => setDropdownHide(true) }>
-															{ t('user.patientInformation') }
-														</Link>
-													</li>
-													<li className='block py-4 px-4 text-red-600 cursor-pointer hover:bg-[#F0F2F9]' onClick={ handleClick }>
-														{ t('user.logout') }
-													</li>
-												</ul>
-											</div>
-										</div>
+										{ renderMenuNotif() }
+										{ renderMenuProfile() }
 									</>
 								)
 								: (
@@ -542,7 +558,6 @@ export const Header = ({
 					) }
 				</header>
 			</div>
-			{ modalNotification() }
 			{ renderModalSuccessLogout() }
 		</HeaderStyle>
 	);

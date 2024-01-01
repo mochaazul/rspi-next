@@ -29,7 +29,7 @@ const RiwayatVaksin = () => {
 
 	if (isEmpty(vaccineHistoryResponse?.data)) {
 		return (<EmptyResultContainer>
-			<icons.NoVaccineResult />
+			<icons.NoVaccineResult className='w-[120px] h-[120px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px]' />
 			<Text text={ t('empty') }
 				fontSize='20px'
 				fontWeight='700'
@@ -41,9 +41,9 @@ const RiwayatVaksin = () => {
 	return (
 		<>
 			<CardPatientPortalStyle>
-				<div className='table-wrapper max-sm:m-0' style={ { minHeight: '300px' } }>
+				<div className='min-h-[300px] lg:px-[15px] lg:py-[10px]'>
 					<table>
-						<tr>
+						<tr className='border-b border-[#EAEAEA]'>
 							<th>No</th>
 							<th>{ t('tableMenuLable.vaccineType') }</th>
 							<th>{ t('tableMenuLable.vaccineName') }</th>
