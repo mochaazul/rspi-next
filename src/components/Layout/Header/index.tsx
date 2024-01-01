@@ -1,12 +1,7 @@
-'use client';
+'use server';
 
-import React, { useState } from 'react';
+import React from 'react';
 
-import * as Icons from 'react-feather';
-import moment from 'moment';
-import { useSWRConfig } from 'swr';
-
-import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -19,26 +14,21 @@ import {
 import colors from '@/constant/colors';
 import images from '@/constant/images';
 import icons from '@/constant/icons';
-import { protectedRoutes } from '@/constant/config';
 
 import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import MainNavLanguage from '@/components/ui/MainNavLanguage';
-import Modal from '@/components/ui/Modal';
-import { useNotification } from '@/lib/api/client/header';
 import HeaderStyle, { DesktopMenu } from './style';
 
-import { useCurrentLocale, useScopedI18n } from '@/locales/client';
-
-import { cookiesHelper } from '@/helpers';
-import clearSWRCache from '@/helpers/clearSwrCache';
 import HeaderBrand from './Brand';
 import Menus from './Menus/Menus';
 import NotificationBell from './NotificationBell';
 import ProfileMenus from './ProfileMenus';
 import MobileMenus from './Menus/MobileMenus';
+import { getScopedI18n } from '@/locales/server';
+import LangWrapper from '@/components/ui/LangWrapper';
 
-export const Header = ({
+export default async function Header({
 	session,
 	hospitalData,
 	centerOfExcellenceData,
@@ -52,193 +42,53 @@ export const Header = ({
 	facilityServicesData: FacilityServicesDetail[],
 	marAllReadNotifFunc?: () => any;
 	className?: string;
-}) => {
+}) {
 
-	const router = useRouter();
-	const pathname = usePathname();
-	const { mutate, cache } = useSWRConfig();
-	const currentLang = useCurrentLocale();
-	const t = useScopedI18n('navMenu');
+	// const router = useRouter();
+	// const pathname = usePathname();
+	// const { mutate, cache } = useSWRConfig();
+	// const currentLang = useCurrentLocale();
+	const t = await getScopedI18n('navMenu');
 
-	const [showSideBar, setShowSideBar] = useState<boolean>(false);
-	const [showNotification, setShowNotification] = useState<boolean>(false);
-	const [showSuccessLogout, setShowSuccessLogout] = useState<boolean>(false);
-	const [activeSubMenuIdMobile, setActiveSubMenuIdMobile] = useState<string>('');
+	// const [showSideBar, setShowSideBar] = useState<boolean>(false);
+	// const [showNotification, setShowNotification] = useState<boolean>(false);
 
 	const isLoggedIn = !!session?.token;
 
-	const paramGetNotif = {
-		query: {
-			medical_record: session?.user?.medical_record ?? '',
-			email: session?.user?.email,
-		},
-	};
-	const {
-		data: getNotification,
-	} = useNotification(paramGetNotif);
+	// const paramGetNotif = {
+	// 	query: {
+	// 		medical_record: session?.user?.medical_record ?? '',
+	// 		email: session?.user?.email,
+	// 	},
+	// };
+	// const {
+	// 	data: getNotification,
+	// } = useNotification(paramGetNotif);
 
-	const notificationResponseData = getNotification?.data;
+	// const notificationResponseData = getNotification?.data;
 
-	const handleClick = async() => {
-		if (isLoggedIn) {
-			await cookiesHelper.clearStorage();
-			await clearSWRCache(cache);
-			setShowSideBar(false);
-			// Notes: protectedRoutes sudah dihandle oleh middleware. shg cukup dgn refresh page akan redirect ke halaman login
-			// Khusus halaman disini tidak dihandle di middleware karna perlu show NeedLoginModal dari response error swr
-			if (['/book-appointment'].some(path => pathname.includes(path))) {
-				return router.replace('/login');
-			}
+	// const renderNotifIcon = () => {
+	// 	if (isLoggedIn) {
+	// 		return (
+	// 			<div className='relative inline-block text-white my-auto' onClick={ () => setShowNotification(true) }>
+	// 				<icons.Notif onClick={ () => {
 
-			if (!protectedRoutes?.some(path => pathname.includes(path))) {
-				setShowSuccessLogout(true);
-			}
-
-			router.refresh();
-		}
-	};
-
-	const handleNavigateSideBar = (path: string) => {
-		setShowSideBar(!showSideBar);
-		router.push(path);
-	};
-
-	const renderMenuWithDropdown = (label: string, isActive: boolean) => {
-		return (
-			<div className='flex gap-x-[5px] cursor-pointer relative z-[2]'>
-				<Text text={ label } color={ isActive ? colors.paradiso.default : colors.grey.darker } fontSize='14px' fontWeight='900' />
-				<div className='flex-shrink-0'>
-					<icons.ArrowDown className='[&>path]:stroke-[#6A6D81] group-hover:rotate-180 transition-all' />
-				</div>
-			</div>
-		);
-	};
-
-	const getDataSubMenu = () => {
-		switch (activeSubMenuIdMobile) {
-			case 'centre-of-excellence':
-				return {
-					title: t('centreOfExcellence'),
-					data: centerOfExcellenceData,
-					href: '/center-of-excellence'
-				};
-			case 'our-hospital':
-				return {
-					title: t('ourHospitals'),
-					data: hospitalData,
-					href: '/hospital'
-				};
-			case 'facilities':
-				return {
-					title: t('facility'),
-					data: facilityServicesData,
-					href: '/facilities-service'
-				};
-			default:
-				return {
-					title: '',
-					data: []
-				};
-		}
-	};
-
-	const renderMenuMobile = (label: string, href: string) => {
-		return (
-			<div className='nav-menu' onClick={ () => handleNavigateSideBar(href) }>
-				<Text text={ label } fontSize='16px' fontWeight='700' />
-			</div>
-		);
-	};
-
-	const renderMenuMobileWithSubmenu = (label: string, id: string) => {
-		return (
-			<div className='nav-menu flex items-center justify-between gap-2.5' onClick={ () => setActiveSubMenuIdMobile(id) }>
-				<Text text={ label } fontSize='16px' fontWeight='700' />
-				<icons.ArrowRight className='w-4 h-4 [&>path]:fill-[#6A6D81] flex-shrink-0' />
-			</div>
-		);
-	};
-
-	const renderListMenuMobile = () => {
-		if (activeSubMenuIdMobile) {
-			const data = getDataSubMenu().data;
-			const prefixHref = getDataSubMenu().href;
-
-			return data.map((item: any) => {
-				const title = activeSubMenuIdMobile === 'centre-of-excellence'
-					? item.title
-					: item.name;
-				const dataIdentifier = activeSubMenuIdMobile === 'our-hospital'
-					? item.id
-					: item.slug;
-
-				return (
-					<div
-						className='nav-menu'
-						key={ item.id }
-						onClick={ () => handleNavigateSideBar(`${ prefixHref }/${ dataIdentifier }`) }
-					>
-						<Text text={ title } fontSize='16px' fontWeight='700' />
-					</div>
-				);
-			});
-		}
-
-		return (
-			<>
-				{ renderMenuMobile(t('home'), '/') }
-				{ isLoggedIn
-					? (
-						<>
-							{ renderMenuMobile(t('bookAppointment'), '/find-a-doctor') }
-							{ renderMenuMobile(t('user.patientPortal'), '/patient-portal') }
-							{ renderMenuMobile(t('user.patientInformation'), '/user-information') }
-						</>
-					)
-					: (
-						<>
-							{ renderMenuMobile(t('loginRegister'), '/login') }
-							{ renderMenuMobile(t('bookAppointment'), '/find-a-doctor') }
-						</>
-					) }
-				{ renderMenuMobileWithSubmenu(t('ourHospitals'), 'our-hospital') }
-				{ renderMenuMobileWithSubmenu(t('centreOfExcellence'), 'center-of-excellence') }
-				{ renderMenuMobileWithSubmenu(t('facility'), 'facilities-service') }
-				{ renderMenuMobile(t('findDoctor'), '/find-a-doctor') }
-				{ /* { renderMenuMobile(t('career'), '/') } */ }
-				{ renderMenuMobile(t('contactUs'), '/contact') }
-				{ isLoggedIn ?
-					<div className='nav-menu' onClick={ handleClick }>
-						<Text text={ t('user.logout') } fontSize='16px' fontWeight='700' color={ colors.red.default } />
-					</div>
-					: null
-				}
-			</>
-		);
-	};
-
-	const renderNotifIcon = () => {
-		if (isLoggedIn) {
-			return (
-				<div className='relative inline-block text-white my-auto' onClick={ () => setShowNotification(true) }>
-					<icons.Notif onClick={ () => {
-
-						// if (marAllReadNotifFunc) {
-						// 	marAllReadNotifFunc()
-						// 		.then(() => {
-						// 			mutate('getNotification');
-						// 		});
-						// }
-					} }
-					className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
-					/>
-					<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
-						{ notificationResponseData?.total_unread ?? 0 }
-					</span>
-				</div>
-			);
-		}
-	};
+	// 					// if (marAllReadNotifFunc) {
+	// 					// 	marAllReadNotifFunc()
+	// 					// 		.then(() => {
+	// 					// 			mutate('getNotification');
+	// 					// 		});
+	// 					// }
+	// 				} }
+	// 				className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
+	// 				/>
+	// 				<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
+	// 					{ notificationResponseData?.total_unread ?? 0 }
+	// 				</span>
+	// 			</div>
+	// 		);
+	// 	}
+	// };
 
 	const renderHospitalMenuItem = (item: HospitalDetail) => {
 		return (
@@ -307,7 +157,9 @@ export const Header = ({
 			<div className='w-full'>
 				<div className='lg:flex hidden'>
 					{ /* Parent should be converted to full ssr */ }
-					<MainNavLanguage session={ session } />
+					<LangWrapper>
+						<MainNavLanguage session={ session } />
+					</LangWrapper>
 				</div>
 				<header className='bg-white navbar w-full'>
 					<nav className='mx-auto flex items-center container-page gap-2 lg:gap-5 h-[64px] lg:h-[90px]' aria-label='Global'>
@@ -325,8 +177,13 @@ export const Header = ({
 
 						{ /* Mobile View Notif ETC */ }
 						 <div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
-							{ renderNotifIcon() }
-							<MobileMenus session={ session }/>
+							{ /* { renderNotifIcon() } */ }
+							<MobileMenus
+								session={ session }
+							 	hospitals={ hospitalData }
+							 	coe={ centerOfExcellenceData }
+								facilitiy={ facilityServicesData }
+							/>
 						</div>
 
 						{ /* Right side Menus */ }
@@ -339,10 +196,10 @@ export const Header = ({
 
 							{ isLoggedIn
 								? (
-									<>
+									<LangWrapper>
 										<NotificationBell session={ session }/>
 										<ProfileMenus session={ session }/>
-									</>
+									</LangWrapper>
 								)
 								: (
 									<Link href='/login'>
@@ -352,31 +209,9 @@ export const Header = ({
 									</Link>
 								) }
 						</div>
-						{ showSideBar && (
-							<div className='mobile-sidebar'>
-								<MainNavLanguage session={ session } />
-								{ activeSubMenuIdMobile && (
-									<div className='p-4 bg-[#F0F2F9] flex items-center gap-2'>
-										<button
-											type='button'
-											className='flex-shrink-0 focus:outline-none focus:ring-0'
-											onClick={ () => setActiveSubMenuIdMobile('') }
-										>
-											<Icons.ArrowLeft size={ 20 } color={ colors.grey.darkOpacity } />
-										</button>
-										<Text fontSize='16px' fontWeight='700'>{ getDataSubMenu().title }</Text>
-									</div>
-								) }
-								<div className='sider-nav-menu divide-y divide-solid overflow-y-auto'>
-									{ renderListMenuMobile() }
-								</div>
-							</div>
-						) }
 					</nav>
 				</header>
 			</div>
 		</HeaderStyle>
 	);
 };
-
-export default React.memo(Header);

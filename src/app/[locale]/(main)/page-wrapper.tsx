@@ -45,9 +45,9 @@ export default async function PageWrapper({
 		hospital_code: hospital.hospital_code
 	}));
 	const centerOfExcellenceData = centerOfExcellence?.data?.map(coe => ({
-		img_url: coe.img_url,
+		img_url: coe.img_url ?? '',
 		slug: coe.slug,
-		title: coe.title
+		title: coe.title ?? ''
 	}));
 	const facilityServicesData = facilityServices?.data?.map(facility => ({
 		slug: facility.slug,
@@ -57,19 +57,19 @@ export default async function PageWrapper({
 
 	return (
 		<>
-				<LangWrapper>
 			<Header
 				session={ session }
 				hospitalData={ hospitalData }
-				centerOfExcellenceData={ centerOfExcellenceData }
-				facilityServicesData={ facilityServicesData }
+				centerOfExcellenceData={ centerOfExcellenceData as any }
+				facilityServicesData={ facilityServicesData as any }
 				marAllReadNotifFunc={ marAllReadNotif }
 			/>
 			{ children }
-			<Footer
-				footerData={ footerData }
-				hospitalData={ hospitalData }
-			/>
+			<LangWrapper>
+				<Footer
+					footerData={ footerData }
+					hospitalData={ hospitalData }
+				/>
 				<CallForAmbulance hospitalData={ hospitalData } session={ session } />
 				<MedicalRecordReminder session={ session } />
 

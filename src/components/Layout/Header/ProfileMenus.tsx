@@ -1,3 +1,4 @@
+'use client';
 import { Modal, Text } from '@/components/ui';
 import { icons } from '@/constant';
 import { protectedRoutes } from '@/constant/config';

@@ -1,3 +1,4 @@
+'use client';
 import { Modal, Text } from '@/components/ui';
 import { colors, icons } from '@/constant';
 import { UserSessionData } from '@/interface';

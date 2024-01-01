@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 
 import colors from '@/constant/colors';
@@ -14,7 +15,7 @@ type MainNavLanguageProps = {
 	session?: UserSessionData;
 };
 
-export const MainNavLanguage =async  ({ session }: MainNavLanguageProps) => {
+export const MainNavLanguage = ({ session }: MainNavLanguageProps) => {
 	const t = useScopedI18n('page.topNav');
 
 	const renderWelcomeText = () => {

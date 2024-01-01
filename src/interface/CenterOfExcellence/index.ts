@@ -11,7 +11,7 @@ export interface CenterOfExcellenceState {
 }
 
 export interface CenterOfExcellenceDetail {
-	id?: number;
+	id: number;
 	slug: string;
 	title?: string;
 	content?: string;
