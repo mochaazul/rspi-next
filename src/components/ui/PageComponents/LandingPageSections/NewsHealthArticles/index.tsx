@@ -32,10 +32,9 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 		});
 	};
 
-
 	const renderSeeAll = () => {
 		return (
-			<Link href='/news' className='max-sm:hidden'>
+			<Link href='/news'>
 				<div className='see-all flex row items-center'>
 					<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } subClassName='text-right'>
 						{ t('allItemBtnLabel') }
@@ -52,7 +51,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 				<Text fontSize='44px' fontType='h2' fontWeight='900' color={ colors.grey.darker } lineHeight='57px' subClassName='heading-section'>
 					{ t('heading') }
 				</Text>
-				<div className='slider-title mt-3'>
+				<div className='slider-title mt-3 max-sm:hidden'>
 					{ renderSeeAll() }
 				</div>
 			</div>

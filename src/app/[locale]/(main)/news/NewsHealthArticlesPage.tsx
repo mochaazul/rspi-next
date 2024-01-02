@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import moment from 'moment';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-import { ArticleState, NewsAuthorDetail, Pagination } from '@/interface';
+import { NewsAuthorDetail, Pagination } from '@/interface';
 import { colors } from '@/constant';
 import {
 	Breadcrumbs,
@@ -97,10 +97,9 @@ const NewsHealthArticlesPage = ({
 										<Link href={ idx > 0 ? `/news?category=${ tab.value }` : '/news' } key={ idx }>
 											<Button
 												theme={ tab?.value === categoryParams ? 'primary' : 'secondary' }
-												$hoverTheme={ tab?.value === categoryParams ? 'secondary' : 'primary' }
 												label={ tab.label }
 												onClick={ () => clickTabs() }
-												className='rounded-[10px] py-[10px] px-[20px]'
+												className='rounded-[10px] py-[10px] px-[20px] sm:hover:bg-green-secondary sm:hover:text-white'
 											/>
 										</Link>
 									);
