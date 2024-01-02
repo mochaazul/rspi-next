@@ -59,7 +59,7 @@ const ContactUsPage = ({
 
 	const renderTooltip = (data: HospitalDetail[]) => {
 		return (
-			<div className='flex flex-col gap-y-4 absolute block max-w-sm p-4 m-2 bg-white rounded-lg shadow'>
+			<div className='max-sm:hidden flex flex-col gap-y-4 absolute block max-w-sm p-4 m-2 bg-white rounded-lg shadow'>
 				<div className='flex flex-row gap-x-5'>
 					<img src={ data?.[0]?.img_url?.[0] ?? '' } alt={ data?.[0]?.name ?? '' } className='w-[80px] h-[80px] rounded-md object-cover' />
 					<div className='flex flex-col'>
