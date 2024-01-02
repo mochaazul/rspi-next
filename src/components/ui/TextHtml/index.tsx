@@ -3,7 +3,7 @@ import { sanitize } from 'isomorphic-dompurify';
 import parse from 'html-react-parser';
 import { TextContainer } from './style';
 
-export type TextHtmlProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
+export type TextHtmlProps = React.HTMLAttributes<HTMLDivElement> & {
 	htmlStr?: string;
 };
 

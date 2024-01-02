@@ -55,14 +55,13 @@ export const SelectStyled = styled.select`
 `;
 
 export const OptionsWrapper = styled.div<StatusType>`
-  ${ GlobalBoxShadow }
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.15);
   display: ${ props => props.$isOpen ? 'block' : 'none' };
   position: absolute;
   width: 100%;
   top: calc(${ props => props.$topOffset }px + 2px);
   background-color: ${ colors.white.default };
-  border-radius: 5px;
-  border: 1px solid ${ colors.grey.lighter };
+  border-radius: 10px;
   max-height: 500px;
   overflow-y: auto;
   z-index: 200;
@@ -72,9 +71,10 @@ export const Option = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 15px 20px;
+  padding: 16px 20px;
   cursor: pointer;
   font-size: 16px;
+  line-height: normal;
   ${ GlobalAllTransition5ms };
   
   .multiple-checkbox {

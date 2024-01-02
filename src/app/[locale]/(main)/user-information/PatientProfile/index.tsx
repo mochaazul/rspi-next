@@ -375,9 +375,10 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 							<Text
 								fontWeight='900'
 								fontSize='24px'
-								lineHeight='29px'
+								lineHeight='32px'
 								color={ colors.grey.darker }
 								text={ t('heading') }
+								subClassName='!text-[24px] !leading-[32px]'
 							/>
 						</div>
 						{ /* Notes: Login As dipending */ }
@@ -820,13 +821,15 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 					</div>
 				</Modal>
 				<Modal visible={ showModalSuccess } onClose={ () => { setShowModalSuccess(false); setError(''); } }>
-					<div>
+					<div className='flex flex-col items-center gap-y-2.5'>
+						<icons.Confirmed />
+
 						<Text
 							fontSize='16px'
 							lineHeight='19px'
 							fontWeight='900'
 							color={ colors.paradiso.default }
-							text={ 'Berhasil Update Profile' }
+							text={ t('profileDetail.successUpdateProfile') }
 						/>
 					</div>
 				</Modal>

@@ -50,6 +50,8 @@ const EventClassesPromo = ({
 	const t = useScopedI18n('page.promoPage');
 	const searchParam = useSearchParams()!;
 	
+	const totalPages = pagination?.total_page || 1;
+
 	const pathname = usePathname();
 	const navigate = useRouter();
 
@@ -101,9 +103,9 @@ const EventClassesPromo = ({
 						lineHeight='57px'
 						text={ t('heading') }
 						className='sm:mt-[50px] mt-[25px]'
-						subClassName='max-sm:text-[24px]'
+						subClassName='max-sm:text-[24px] text-gray-1'
 					/>
-					<div className='flex sm:flex-row sm:mt-[50px] mt-[16px] flex-col justify-between items-start sm:items-center'>
+					<div className='flex sm:flex-row sm:mt-[42px] mt-[16px] flex-col justify-between items-start sm:items-center'>
 						<div className='flex sm:flex-row flex-col sm:gap-4 gap-1 sm:items-center sm:w-auto w-full'>
 							<Text
 								fontSize='20px'
@@ -138,9 +140,9 @@ const EventClassesPromo = ({
 					</div>
 					
 				</div>
-				{ /* Sebenarnya tingginya mt-41, di kasih 17 karena di card sudah adamt-24 */ }
+				{ /* Sebenarnya tingginya mt-41, di kasih 17 karena di card sudah ada mt-24 */ }
 				<div className='content mt-[0px] sm:mt-[17px]'>
-					<div className='hidden sm:grid sm:grid-cols-3 grid-cols-1 gap-x-8 w-full justify-center'>
+					<div className={ `hidden sm:grid ${ !loading && events?.length === 0 ? 'sm:grid-cols-1' : 'sm:grid-cols-3' }  grid-cols-1 gap-x-8 w-full justify-center` }>
 						{
 							loading && <Spinner size='m' className='sm:my-10 my-3' />
 						}
@@ -150,6 +152,7 @@ const EventClassesPromo = ({
 								return (
 									<Card
 										id={ data.id }
+										slug={ data.slug }
 										key={ index }
 										image={ data.img_url_card }
 										imageHeight='200px'
@@ -192,6 +195,7 @@ const EventClassesPromo = ({
 									return (
 										<Card
 											id={ data.id }
+											slug={ data.slug }
 											key={ index }
 											image={ data.img_url_card }
 											imageHeight='200px'
@@ -213,7 +217,7 @@ const EventClassesPromo = ({
 												/>
 											}
 											footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
-											className='mb-0 !w-[90%]'
+											className={ `mb-0 ${events?.length > 1 ? '!w-[90%]' : '!w-[100%]'}` }
 											to={ `/promo/${ data.slug }` }
 											iconShare={ true }
 										/>
@@ -225,11 +229,13 @@ const EventClassesPromo = ({
 					</div>
 				</div>
 				<div className='mt-[50px] flex flex-col items-center'>
-					<PaginationNumber
-						totalPage={ pagination?.total_page ?? 1 }
+					{ totalPages > 1 ? <PaginationNumber
+						totalPage={ totalPages }
 						currentPage={ Number(pageParams) ?? 1 }
 						onItemClick={ page => filterPage(page) }
 					/>
+						: <></>
+					}
 				</div>
 			</PanelH1>
 		</EventClassesPromoStyle>

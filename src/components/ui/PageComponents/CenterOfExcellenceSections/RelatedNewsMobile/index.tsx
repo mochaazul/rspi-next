@@ -19,6 +19,7 @@ const RelatedNewsMobile = (props: any) => {
 					<Card
 						key={ index }
 						id={ article?.news?.news_id }
+						slug={ article?.news?.slug }
 						image={ article?.news?.img_url }
 						imageHeight='200px'
 						header={

@@ -6,6 +6,10 @@ export interface SpinnerTypes {
 }
 
 const SpinnerSize = {
+	xs: {
+		size: 10,
+		$borderWidth: 2
+	},
 	s: {
 		size: 15,
 		$borderWidth: 3
