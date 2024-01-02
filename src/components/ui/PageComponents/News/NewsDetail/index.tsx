@@ -134,9 +134,9 @@ const NewsDetail = ({
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className={ ' mt-[70px] max-sm:mt-[25px]' }>
+					<div className={ ' mt-[50px] max-sm:mt-[25px]' }>
 						<div className='w-fit'>
-							<Button label={ filteredSelectedArticle?.category } className='px-[8px] py-[6px] max-sm:px-[18px] max-sm:py-[4px] capitalize max-sm:text-[14px] max-sm:font-normal' />
+							<Button label={ filteredSelectedArticle?.category } className='px-[20px] py-[10px] max-sm:px-[18px] max-sm:py-[4px] capitalize max-sm:text-[14px] max-sm:font-normal' />
 						</div>
 						<div className={ `${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'sm:w-[729px] ' } ` }>
 							<Text
@@ -176,6 +176,7 @@ const NewsDetail = ({
 									fontType='p'
 									color={ colors.grey.dark }
 								/>
+								<span className='font-[18px] text-gray-2'>&#x2022;</span>
 								<div className='flex gap-[15px]'>
 									<Link href={ getLinkShareSocmed(sosmedLink.facebook) ?? ''  } target='_blank' className='cursor-pointer' >
 										<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
