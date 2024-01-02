@@ -12,7 +12,7 @@ const TextHtml: React.FC<TextHtmlProps> = ({
 	...props
 }) => {
 	return (
-		<TextContainer { ...props }>{ parse(sanitize(htmlStr || '')) }</TextContainer>
+		<TextContainer className={ `ql-editor ${ props.className }` } { ...props }>{ parse(sanitize(htmlStr || '')) }</TextContainer>
 	);
 };
 
