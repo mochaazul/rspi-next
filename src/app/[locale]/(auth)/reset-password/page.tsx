@@ -141,7 +141,7 @@ const ResetPassword = () => {
 								<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-lg:leading-8 max-lg:text-[20px]'>
 									{ t('heading') }
 								</Text>
-								<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-2 md:mt-4 mb-8 md:mb-16' subClassName='max-lg:text-[16px] max-lg:leading-[24px]'>
+								<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-2 md:mt-4 mb-8 md:mb-16' subClassName='max-lg:text-base md:!leading-normal'>
 									{ t('subHeading') }
 								</Text>
 							</div>
