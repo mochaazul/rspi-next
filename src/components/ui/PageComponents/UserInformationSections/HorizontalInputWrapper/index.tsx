@@ -20,6 +20,7 @@ interface HorizontalInputType {
 	labelInfo?: string,
 	inputType?: string,
 	editHref?: string;
+	onClickEdit?: () => void;
 }
 
 const HorizontalInputWrapper = (props: HorizontalInputType) => {
@@ -89,14 +90,15 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 						featherIcon: errorInputProps.featherIcon
 					} : {} }
 				errorMessage={ undefined }
+				infoMessage={ undefined }
 			/>
 		);
 	};
 
 	return (
 		<div className='max-sm:mb-4 mb-5'>
-			<div className='flex max-sm:flex-col sm:grid sm:grid-cols-[240px_1fr] sm:items-center'>
-				<WithInputLabel.LabelText className='mb-2.5 sm:mb-0 flex gap-3 items-center'>
+			<div className='flex max-sm:flex-col sm:grid sm:grid-cols-10 sm:gap-x-2 sm:items-center'>
+				<WithInputLabel.LabelText className='mb-2.5 sm:mb-0 flex gap-3 items-center sm:col-span-3'>
 					{ props.label }
 					{
 						!!props.labelInfo ?
@@ -118,7 +120,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 							null
 					}
 				</WithInputLabel.LabelText>
-				<div className='col-auto relative'>
+				<div className='sm:col-span-7 relative'>
 					{ renderInput() }
 
 					{ props.editHref && (
@@ -126,6 +128,7 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 							<Link
 								className='flex items-center gap-2 focus:outline-none'
 								href={ props.editHref }
+								onClick={ props.onClickEdit }
 							>
 								<Edit3 className='w-[18px] h-[18px] sm:w-5 sm:h-5' color={ colors.green.brandAccent } />
 								<Text
@@ -139,6 +142,19 @@ const HorizontalInputWrapper = (props: HorizontalInputType) => {
 					) }
 				</div>
 			</div>
+
+			{ props.inputProps?.infoMessage && (
+				<div className='sm:grid sm:grid-cols-10 sm:gap-2'>
+					<div className='sm:col-span-3 max-sm:hidden' />
+					<div className='sm:col-span-7'>
+						<Text
+							fontSize='14px'
+							color={ colors.grey.dark }
+							subClassName='text-xs sm:text-sm !leading-normal'
+						>{ props.inputProps?.infoMessage }</Text>
+					</div>
+				</div>
+			) }
 
 			{ props.inputProps?.errorMessage && !!props.inputProps?.isError &&
 				<div className='flex justify-end'>
