@@ -1,11 +1,10 @@
 'use client';
 import { useState } from 'react';
 
-import moment from 'moment';
 import Link from 'next/link';
 import Image from 'next/image';
 import TextHtml from '@/components/ui/TextHtml';
-import { ArticleDetail, ArticleState } from '@/interface';
+import { ArticleState } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
 
 import {
@@ -59,17 +58,15 @@ const NewsDetail = ({
 				
 				<TextHtml
 					style={ { color: colors.grey.dark } }
-					className='innerHTML mt-[10px]'
+					className='innerHTML mt-[10px] '
 					htmlStr={ filteredSelectedArticle?.content ?? '' }
 				/>
 				
-				<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' }>
-					<Tabs
-						activeTabIndex={ activeTabIdx }
-						setActiveTabIndex={ setActiveTabIdx }
-						tabsData={ ['Related News'] }
-					/>
-					<div className='divide-y divide-solid pt-[10px]'>
+				<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden  max-sm:mt-[36px]' }>
+					<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
+						Related News
+					</span>
+					<div className='divide-y divide-solid pt-[10px] max-sm:mb-[40px] '>
 						{ Object.values(relatedNews || []).map((a, index) => {
 							return (
 								<div key={ index }>
@@ -137,9 +134,9 @@ const NewsDetail = ({
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>
 				<div>
 					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className={ ' mt-[70px]' }>
+					<div className={ ' mt-[70px] max-sm:mt-[25px]' }>
 						<div className='w-fit'>
-							<Button label={ filteredSelectedArticle?.category } className='px-[8px] py-[6px] capitalize' />
+							<Button label={ filteredSelectedArticle?.category } className='px-[8px] py-[6px] max-sm:px-[18px] max-sm:py-[4px] capitalize max-sm:text-[14px] max-sm:font-normal' />
 						</div>
 						<div className={ `${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'sm:w-[729px] ' } ` }>
 							<Text
@@ -159,6 +156,7 @@ const NewsDetail = ({
 										fontSize='18px'
 										lineHeight='22px'
 										color={ colors.grey.dark }
+										className='max-sm:mt-[12px]'
 									>
 										<span>{ t('oleh') }{ ' ' }</span>
 										<Link href={ `/doctor/${ filteredSelectedArticle?.author }` } className='hover:underline'>
@@ -168,7 +166,7 @@ const NewsDetail = ({
 									: <></>
 							}
 
-							<div className='flex items-center gap-[30px] mt-[20px]'>
+							<div className='flex items-center gap-[30px] mt-[20px] max-sm:mt-[4px]'>
 								<Text
 									text={ dayjs(filteredSelectedArticle?.posted_date).locale(currentLang)
 										.format('dddd, DD MMMM YYYY') }
@@ -198,15 +196,13 @@ const NewsDetail = ({
 								</div>
 							</div>
 						</div>
-						<div className='content-wrapper flex mt-[20px] mb-[100px]'>
+						<div className='content-wrapper flex mt-[20px] mb-[100px] max-sm:mt-[47px]'>
 							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-[30px] ` }>
 								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' } >
-									<Tabs
-										activeTabIndex={ activeTabIdx }
-										setActiveTabIndex={ setActiveTabIdx }
-										tabsData={ ['Specialty'] }
-									/>
+									<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
+										Specialty
+									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(specialty || [])?.map((specialty, index) => {
 											return (
@@ -237,11 +233,9 @@ const NewsDetail = ({
 							</div>
 							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] ' } ` }>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'w-[349px]' }>
-									<Tabs
-										activeTabIndex={ activeTabIdx }
-										setActiveTabIndex={ setActiveTabIdx }
-										tabsData={ ['Related News'] }
-									/>
+									<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
+										Related News
+									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(relatedNews || [])?.map((a, index) => {
 											return (
@@ -273,11 +267,9 @@ const NewsDetail = ({
 									</div>
 								</div>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'mt-[40px]' }>
-									<Tabs
-										activeTabIndex={ activeTabIdx }
-										setActiveTabIndex={ setActiveTabIdx }
-										tabsData={ ['Specialty'] }
-									/>
+									<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
+										Specialty
+									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(specialty || [])?.map((specialty, index) => {
 											return (
