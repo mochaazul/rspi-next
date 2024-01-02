@@ -68,7 +68,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 				</div>
 			</div>
 			{ /* List accordion RS */ }
-			{ isOpened && <div className={ `${ isMobile ? 'mt-6' : 'mt-12' }` }>
+			{ isOpened && <div className='mt-6'>
 				<Accordion
 					onlyOpenOne={ false }
 					itemTheme={ itemProps => <ItemAccordion props={ itemProps } hospitals={ props?.doctor_schedule } /> }

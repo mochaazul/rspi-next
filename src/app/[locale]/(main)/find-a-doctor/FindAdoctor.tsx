@@ -243,7 +243,6 @@ export default function FindADoctorComponent({ hospital, clinics }: Props) {
 											text='Filter'
 											className=''
 										/>
-										<Icons.X color={ colors.grey.darker } size={ 20 } className='cursor-pointer' onClick={ () => setFilterModalVisible(false) } />
 									</div>
 									<div className='x-spacer my-4' />
 

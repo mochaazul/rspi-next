@@ -88,7 +88,7 @@ export const ConfirmationModal = ({
 						fontSize='14px'
 						lineHeight='20px'
 					/>
-					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
+					<div className={ `grid grid-cols-${ isMobile ? '2' : '[150px_auto]' }` }>
 						<Text
 							text={ t('patientDetail.name') }
 							fontWeight='500'
@@ -102,7 +102,7 @@ export const ConfirmationModal = ({
 							lineHeight='20px'
 						/>
 					</div>
-					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
+					<div className={ `grid grid-cols-${ isMobile ? '2' : '[150px_auto]' }` }>
 						<Text
 							text={ t('patientDetail.birthDate') }
 							fontWeight='500'
@@ -116,7 +116,7 @@ export const ConfirmationModal = ({
 							lineHeight='20px'
 						/>
 					</div>
-					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
+					<div className={ `grid grid-cols-${ isMobile ? '2' : '[150px_auto]' }` }>
 						<Text
 							text={ t('patientDetail.phone') }
 							fontWeight='500'
@@ -130,7 +130,7 @@ export const ConfirmationModal = ({
 							lineHeight='20px'
 						/>
 					</div>
-					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
+					<div className={ `grid grid-cols-${ isMobile ? '2' : '[150px_auto]' }` }>
 						<Text
 							text={ t('patientDetail.email') }
 							fontWeight='500'
@@ -144,7 +144,7 @@ export const ConfirmationModal = ({
 							lineHeight='20px'
 						/>
 					</div>
-					<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
+					<div className={ `grid grid-cols-${ isMobile ? '2' : '[150px_auto]' }` }>
 						<Text
 							text={ t('patientDetail.guarantor') }
 							fontWeight='500'
@@ -169,7 +169,7 @@ export const ConfirmationModal = ({
 								fontSize='14px'
 								lineHeight='20px'
 							/>
-							<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
+							<div className={ `grid grid-cols-${ isMobile ? '2' : '[150px_auto]' }` }>
 								<Text
 									text={ t('patientDetail.name') }
 									fontWeight='500'
@@ -183,7 +183,7 @@ export const ConfirmationModal = ({
 									lineHeight='20px'
 								/>
 							</div>
-							<div className={ `grid grid-cols-[${ isMobile ? '100px_auto' : '150px_auto' }]` }>
+							<div className={ `grid grid-cols-${ isMobile ? '2' : '[150px_auto]' }` }>
 								<Text
 									text={ t('insuranceNumber') }
 									fontWeight='500'
