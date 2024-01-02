@@ -5,7 +5,6 @@ export const ComboboxWrapper = styled.div`
   outline: 1px solid ${ colors.grey.lighterOpacity };
   border-radius: 5px;
   min-height: 48px;
-  margin-bottom: 6px;
   display: flex;
   align-items: center;
 
@@ -26,7 +25,7 @@ export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 48px;
+  padding-left: 18px;
   
   svg.svg-darkgrey circle,
   svg.svg-darkgrey path {

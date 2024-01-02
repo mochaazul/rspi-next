@@ -25,40 +25,42 @@ const CardNews = (props: PropsType) => {
 				className={ `shrink-0 max-sm:px-3 max-sm:py-5 cursor-pointer flex relative justify-between ${ props?.isActive ? 'active' : '' }` }
 				onClick={ handleOnClick(props?.id) }
 			>
-				<div className='mr-[30px] lg:w-1/2 z-0'>
-					<div className='flex items-center'>
-						<div className='max-w-[160px]'>
-							<Button theme='primary' label={ props?.category } className='btn-category' />
+				<div className='flex flex-row gap-[30px]'>
+					<div className='mr-[30px] lg:w-1/2 z-0'>
+						<div className='flex items-center'>
+							<div className='max-w-[160px]'>
+								<Button theme='primary' label={ props?.category } className='btn-category px-[8px] py-[6px] rounded-[5px] text-[14px]' />
+							</div>
+							<div className='ml-[10px]'>
+								<Text
+									fontSize='14px'
+									fontWeight='400'
+									lineHeight='17px'
+									color={ colors.grey.dark }
+									text={ props?.date }
+								/>
+							</div>
 						</div>
-						<div className='ml-[10px]'>
+						<div className='sm:mt-4 mt-1 gap-y-3 max-w-[255px]'>
+							<Text
+								fontSize='16px'
+								fontWeight='900'
+								lineHeight='24px'
+								color={ colors.grey.darker }
+								text={ props?.title }
+							/>
 							<Text
 								fontSize='14px'
 								fontWeight='400'
-								lineHeight='17px'
+								lineHeight='24px'
 								color={ colors.grey.dark }
-								text={ props?.date }
+								className='mt-[5px]'
+								text={ props?.author }
 							/>
 						</div>
 					</div>
-					<div className='sm:mt-4 mt-1 gap-y-3 max-w-[255px]'>
-						<Text
-							fontSize='16px'
-							fontWeight='900'
-							lineHeight='24px'
-							color={ colors.grey.darker }
-							text={ props?.title }
-						/>
-						<Text
-							fontSize='14px'
-							fontWeight='400'
-							lineHeight='24px'
-							color={ colors.grey.dark }
-							className='mt-[5px]'
-							text={ props?.author }
-						/>
-					</div>
+					<img src={ props?.imgThumb || '' } alt={ props?.title } className='w-[254px] h-[145px] rounded-md object-cover z-0' />
 				</div>
-				<img src={ props?.imgThumb || '' } alt={ props?.title } className='w-[254px] h-[145px] rounded-md object-cover z-0' />
 			</div>
 		</CardNewsStyle>
 	);

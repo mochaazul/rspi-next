@@ -27,7 +27,9 @@ module.exports = {
 					500: '#358888', // for override primaryColor DateField component
 				},
 				gray: {
-					1: '#2A2536'
+					1: '#2A2536',
+					2: '#6A6D81',
+					3: '#D4D2D8'
 				}
 			},
 			width: {

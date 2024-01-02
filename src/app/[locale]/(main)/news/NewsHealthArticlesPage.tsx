@@ -45,6 +45,8 @@ const NewsHealthArticlesPage = ({
 }) => {
 	const [pageNumber, setPageNumber] = useState(pagination?.page || 1);
 	const [keywordSearch, setKeywordSearch] = useState<string>('');
+	
+	const totalPages = pagination?.total_page || 1;
 
 	const pathname = usePathname();
 	const navigate = useRouter();
@@ -97,6 +99,7 @@ const NewsHealthArticlesPage = ({
 												$hoverTheme={ tab?.value === categoryParams ? 'secondary' : 'primary' }
 												label={ tab.label }
 												onClick={ () => clickTabs() }
+												className='rounded-[10px] py-[10px] px-[20px]'
 											/>
 										</Link>
 									);
@@ -105,10 +108,11 @@ const NewsHealthArticlesPage = ({
 							<div className='mt-[31px] w-[349px]'>
 								<Form.TextField
 									placeholder='Cari Artikel'
-									iconName='Search'
+									featherIcon='Search'
 									iconPosition='left'
 									$iconColor={ colors.grey.light }
 									value={ keywordSearch }
+									className='placeholder-gray-3'
 									onChange={ e => {
 										setKeywordSearch(e.target.value);
 										params.set('keyword', e.target.value);
@@ -126,7 +130,7 @@ const NewsHealthArticlesPage = ({
 									className='w-[540px] mr-[32px] cursor-pointer magazine relative'
 								>
 									<div className='relative'>
-										<Share />
+										<Share slug={ articles[0]?.slug } />
 									</div>
 									<Link href={ `${ pathname }/${ articles[0]?.slug }` } >
 										<img
@@ -137,7 +141,7 @@ const NewsHealthArticlesPage = ({
 											<Button
 												theme='primary'
 												label={ articles[0]?.category.charAt(0).toUpperCase() + articles[0].category.slice(1) }
-												className='btn-category w-auto'
+												className='btn-category w-auto px-[8px] py-[6px] rounded-[5px] text-[14px]'
 											/>
 											<div className='ml-[10px]'>
 												<Text
@@ -151,7 +155,7 @@ const NewsHealthArticlesPage = ({
 										</div>
 										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ articles[0]?.title } lineHeight='28px' />
 										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ articles[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
-										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px]' > { articles[0]?.short_description } </div>
+										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px] line-clamp-3' > { articles[0]?.short_description } </div>
 									</Link>
 								</div>
 								<div className='mb-3'>
@@ -162,8 +166,8 @@ const NewsHealthArticlesPage = ({
 													className='relative'
 													key={ index }
 												>
-													<div className='relative'>
-														<Share id={ data.id } />
+													<div className='relative z-1'>
+														<Share slug={ data.slug } />
 													</div>
 													<Link href={ `${ pathname }/${ data?.slug }` } style={ { zIndex: '-999 !important' } }>
 														<CardNews
@@ -187,6 +191,7 @@ const NewsHealthArticlesPage = ({
 										<Card
 											key={ index }
 											id={ data?.id }
+											slug={ data?.slug }
 											image={ data?.img_url }
 											imageHeight='200px'
 											header={
@@ -194,7 +199,7 @@ const NewsHealthArticlesPage = ({
 													<Button
 														theme='primary'
 														label={ data?.category?.charAt(0).toUpperCase() + data?.category?.slice(1) }
-														className='btn-category w-auto'
+														className=' btn-category px-[8px] py-[6px] rounded-[5px] text-[14px] w-auto'
 													/>
 													<div className='ml-[10px]'>
 														<Text
@@ -231,6 +236,7 @@ const NewsHealthArticlesPage = ({
 										<Card
 											key={ index }
 											id={ data?.id }
+											slug={ data?.slug }
 											image={ data?.img_url }
 											imageHeight='200px'
 											header={
@@ -239,7 +245,7 @@ const NewsHealthArticlesPage = ({
 														<Button
 															theme='primary'
 															label={ data?.category?.charAt(0).toUpperCase() + data.category.slice(1) }
-															className='btn-category'
+															className='btn-category px-[8px] py-[6px] rounded-[5px] text-[14px]'
 														/>
 													</div>
 													<div className='ml-[10px]'>
@@ -266,7 +272,7 @@ const NewsHealthArticlesPage = ({
 					</div>
 
 					<div className='mt-[50px] flex flex-col items-center'>
-						<PaginationNumber totalPage={ pagination?.total_page || 1 } currentPage={ pageNumber } onItemClick={ page => clickPagination(page) } />
+						{ totalPages > 1 ? <PaginationNumber totalPage={ totalPages } currentPage={ pageNumber } onItemClick={ page => clickPagination(page) } /> : <></> }
 					</div>
 				</div>
 			</div>

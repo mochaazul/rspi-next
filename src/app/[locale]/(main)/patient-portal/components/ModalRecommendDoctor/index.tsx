@@ -2,17 +2,18 @@
 
 import { useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
+import Image from 'next/image';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { isEmpty } from 'lodash';
 
 import { Modal, Text, Button, Spinner } from '@/components/ui';
-import { Images, colors, icons } from '@/constant';
+import { colors } from '@/constant';
 import { I_VisitHistory, } from '@/interface/PatientProfile';
 import { usePostDoctorRatingMutation } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 
 import { ModalStyle } from '../../style';
-import Image from 'next/image';
 
 interface PropsType {
 	visible?: boolean;
@@ -80,7 +81,7 @@ const Feedback = ({ onChange, value, valueRating }: { valueRating: string, value
 
 	return (<div className='mt-[32px]'>
 		<Text text={ parseInt(valueRating) > 8 ? t('headingLove') : t('headingImprove') } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
-		<div className='flex	flex-wrap gap-[11px] mt-[32px]'>
+		<div className='flex flex-wrap gap-[11px] mt-4'>
 			{
 				feedbackPills.map((opt, index) => (
 					<FeedbackPills checked={ isChecked(opt.value) } key={ index } onClick={ () => { onChecked(opt.value); } }>
@@ -128,8 +129,6 @@ const RecommendDoctorModal = (props: PropsType) => {
 	const t = useScopedI18n('page.patientPortal');
 
 	const { data: giveDoctorRatingResponse, trigger: giveDoctorRating, error: giveDoctorRatingError, isMutating: giveDoctorRatingLoading } = usePostDoctorRatingMutation();
-	const [showSuccessReview, setShowSuccessReview] = useState<boolean>(false);
-	const [showSuccessStatus, setShowSuccessStatus] = useState<string>('');
 	const [ratingValue, setRatingValue] = useState<string>('');
 	const [feedbackValue, setFeedbackValue] = useState<string[]>([]);
 	const [feedbackNotes, setFeedbackNotes] = useState<string>('');
@@ -145,41 +144,21 @@ const RecommendDoctorModal = (props: PropsType) => {
 				question_3: feedbackNotes,
 				username: 'Rebelworks'
 			}).then(res => {
-				setShowSuccessReview(true);
-				setShowSuccessStatus(res.stat_msg ?? '');
-				props.onClose && props.onClose();
-				resetForm();
+				if (res.stat_msg === 'Success') {
+					toast.success(t('riwayatKunjungan.recommendDoctorModal.feedback.responReviewSuccess'), {
+						hideProgressBar: true,
+						pauseOnHover: false,
+					});
+					if (props.onClose) props.onClose();
+					resetForm();
+				} else {
+					toast.error(t('riwayatKunjungan.recommendDoctorModal.feedback.responReviewFailed'));
+				}
+			}).catch(() => {
+				toast.error(t('riwayatKunjungan.recommendDoctorModal.feedback.responReviewFailed'));
 			});
 
 		}
-	};
-
-	const renderModalReview = () => {
-		return (
-			<Modal
-				visible={ showSuccessReview }
-				onClose={ () => setShowSuccessReview(false) }
-				noPadding
-			>
-				<div className='py-3 sm:py-4 px-6 sm:px-10 flex flex-col items-center gap-y-3'>
-					<div className='flex-shrink-0'>
-						{ showSuccessStatus === 'Success' ? <icons.Confirmed className='w-10 h-10 sm:w-12 sm:h-12' /> : <icons.Close className='w-10 h-10 sm:w-12 sm:h-12' /> }
-					</div>
-
-					<Text
-						fontSize='16px'
-						lineHeight='24px'
-						fontWeight='700'
-					>
-						{ t('riwayatKunjungan.recommendDoctorModal.feedback.responReview') }
-						{ showSuccessStatus === 'Success'
-							? t('riwayatKunjungan.recommendDoctorModal.feedback.responReviewSuccess')
-							: t('riwayatKunjungan.recommendDoctorModal.feedback.responReviewFailed')
-						}
-					</Text>
-				</div>
-			</Modal>
-		);
 	};
 
 	const resetForm = () => {
@@ -204,7 +183,15 @@ const RecommendDoctorModal = (props: PropsType) => {
 					<div>
 						<Text text={ t('riwayatKunjungan.recommendDoctorModal.header') } fontSize='20px' fontWeight='700' lineHeight='30px' color={ '#2A2536' } />
 						<div className='flex my-[30px] p-[16px] rounded-md bg-[#FAFAFA]'>
-							<div><img className='rounded-full h-[48px] w-[48px]' src={ props.visitHistory?.doctor_photo || Images.Doctor1.src } /></div>
+							<div className='relative overflow-hidden w-12 h-12 rounded-full'>
+								<Image
+									className='object-cover object-top'
+									sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+									alt=''
+									src={ props.visitHistory?.doctor_photo || '/images/samples/default-avatar.jpg' }
+									fill
+								/>
+							</div>
 							<div className='ml-[15px]'>
 								<Text text={ props.visitHistory?.doctor_name ?? '-' } fontSize='16px' fontWeight='700' />
 								<Text text={ props.visitHistory?.doctor_specialty } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
@@ -221,7 +208,6 @@ const RecommendDoctorModal = (props: PropsType) => {
 					</div>
 				</ModalStyle>
 			</Modal>
-			{ renderModalReview() }
 		</>
 	);
 };

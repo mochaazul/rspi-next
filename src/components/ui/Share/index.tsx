@@ -5,10 +5,11 @@ import Image from 'next/image';
 
 import { icons, sosmedLink } from '@/constant';
 import Text from '@/components/ui/Text';
-import { baseUrl } from '@/config';
+
+import { useHostname } from '@/utils/useHostname';
 
 interface PropsType {
-	id?: number;
+	slug?: string;
 }
 
 const buttonSocmed = [
@@ -16,7 +17,7 @@ const buttonSocmed = [
 		action: 'link',
 		url: sosmedLink.twitter,
 		label: 'Twitter',
-		icon: <Image src='/images/ic/twitter.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
+		icon: <Image src='/images/ic/twitter_x.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
 	},
 	{
 		action: 'link',
@@ -35,14 +36,12 @@ const buttonSocmed = [
 ];
 
 const Share = (props: PropsType) => {
+	const hostname = useHostname({ fullUrl: false });
+
 	const [isHoverShare, setIsHoverShare] = useState(false);
 
-	const toggleMouseHoverShare = (hovered: boolean) => () => {
-		setIsHoverShare(hovered);
-	};
-
 	const copy = () => {
-		navigator.clipboard.writeText(baseUrl + '/' + props.id)
+		navigator.clipboard.writeText(hostname + '/' + props.slug)
 			.then(() => {
 				alert('URL Link copied');
 			});
@@ -60,12 +59,12 @@ const Share = (props: PropsType) => {
 			<div
 				className={ 'hidden group-hover:block z-10 rounded-[10px] mt-2 bg-white divide-y divide-gray-100 shadow custom-scrollbar' }
 			>
-				<ul className='text-sm text-gray-700' aria-labelledby='dropdownDefault'>
+				<ul className='text-sm text-gray-700 z-10 ' aria-labelledby='dropdownDefault'>
 					{ buttonSocmed.map((item, idx) => (
 						<Link
 							key={ idx }
 							className='border-b border-gray flex py-4 px-4 items-center'
-							href={ item?.url + baseUrl + '/' + props.id }
+							href={ item?.url + hostname + '/' + props.slug }
 							target='_blank'
 						>
 							{ item?.icon }
@@ -75,7 +74,7 @@ const Share = (props: PropsType) => {
 						</Link>
 					)) }
 					<div
-						className='border-b border-gray flex py-4 px-4 items-center'
+						className='flex py-4 px-4 z-10 items-center'
 						onClick={ copy }
 					>
 						<icons.ShareNetwork className='w-4' />

@@ -4,7 +4,6 @@ import moment from 'moment';
 
 import { WrapperNewsHealthArticles } from './style';
 
-import 'moment/locale/id';
 import { ArticleDetail } from '@/interface';
 import Text from '@/components/ui/Text';
 import Link from 'next/link';
@@ -58,6 +57,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 									return (
 										<Card
 											id={ article?.id }
+											slug={ article?.slug }
 											image={ article.img_url }
 											imageHeight='200px'
 											key={ index }

@@ -122,6 +122,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 									<Card
 										key={ index }
 										id={ data?.id }
+										slug={ data?.slug }
 										image={ data.image_url }
 										imageHeight='200px'
 										header={
