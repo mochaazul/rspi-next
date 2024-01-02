@@ -65,7 +65,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 			<div className='mt-[50px] md:mt-12'>
 				<TextHtml
 					htmlStr={ facilityDetail?.information || '' }
-					className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
+					className='text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 				/>
 			</div>
 
@@ -76,13 +76,13 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 							facilityDetail?.available_at?.map((data: string, index: number) => {
 								if (index !== 0)
 									return (
-										<div className='flex flex-col mt-[16px]' key={ index }>
-											<Text fontSize='18px' fontWeight='900' lineHeight='24px'>
+										<div className='flex flex-col' key={ index }>
+											<Text fontSize='18px' fontWeight='900' lineHeight='24px' subClassName='max-md:text-base'>
 												{ data?.split(':+split+:')?.[0] }
 											</Text>
 											<TextHtml
-												htmlStr={ data?.split(':+split+:')?.[1] || '' }
-												className='innerHTML text-sm md:text-base mt-2.5'
+												htmlStr={ (data?.split(':+split+:')?.[1] || '')?.trim() }
+												className='text-sm md:text-base mt-2.5'
 											/>
 										</div>
 									);
