@@ -85,5 +85,6 @@ export const ItemChildrenStyle = styled.div`
 		border-bottom: 1px solid ${ colors.grey.light };
 		padding-bottom: 16px;
 		margin-bottom: 16px;
+		padding: 16px 24px 16px 24px;
 	}
 `;

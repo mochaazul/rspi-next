@@ -936,6 +936,7 @@ export default {
 			asuransiCard: 'Foto Kartu Asuransi (Opsional)',
 			asuransiCardFront: 'Upload foto tampak depan',
 			asuransiCardBack: 'Upload foto tampak belakang',
+			labelPhoneModal: 'Silahkan hubungi call center'
 		},
 		footer: {
 			visitorInfo: {

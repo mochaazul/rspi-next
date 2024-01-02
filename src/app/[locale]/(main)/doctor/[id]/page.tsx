@@ -259,7 +259,7 @@ export default function Page({ params }: Props) {
 												} }
 												loading={ doctorCalendarLoading } />
 										</TimeSlotCard>
-										<TimeSlotCard className='px-[24px] py-[20px] md:w-[calc(100%/2)]'>
+										<TimeSlotCard className='px-[16px] py-[20px] md:w-[calc(100%/2)]'>
 											<VisitSchedule
 												isLoading={ doctorSlotLoading }
 												timeslot={ doctorSlot?.data || [] }

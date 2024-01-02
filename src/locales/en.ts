@@ -931,6 +931,7 @@ export default {
 			asuransiCard: 'Insurance Card Photo (Optional)',
 			asuransiCardBack: 'Upload a rear view photo',
 			asuransiCardFront: 'Upload a photo of the front view',
+			labelPhoneModal: 'Please contact the call center'
 		},
 		footer: {
 			visitorInfo: {
