@@ -55,7 +55,6 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 		return Contents[activeTabIdx] ?? null;
 	}, [activeTabIdx, activeMenuIndex]);
 
-	console.log('data :>> ', content.available_at);
 	return (
 		<div>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h1' }>

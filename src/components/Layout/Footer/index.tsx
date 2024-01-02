@@ -36,16 +36,14 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 	const [msgNewsletter, setMsgNewsletter] = useState<string>('');
 	const [ourHospital, setOurHospital] = useState<HospitalDetail[]>([]);
 	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
-
-	const [privacyPolicy, setPrivacyPolicy] = useState<FooterDetail[]>([]);
-
 	const [pages, setPages] = useState<FooterDetail[]>([]);
+	const [visitorAndPatientInfo, setVisitorAndPatientInfo] = useState<FooterDetail[]>([]);
 
 	useEffect(() => {
 		setOurHospital([]);
 		setOurCompany([]);
-		setPrivacyPolicy([]);
 		setPages([]);
+		setVisitorAndPatientInfo([]);
 		setLoading(true);
 		Object.values(footerData || [])?.forEach(item => {
 			switch (item?.footer_category) {
@@ -55,6 +53,10 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					break;
 				case 'pages':
 					setPages(pages => [...pages, item]);
+					setLoading(false);
+					break;
+				case 'visitor-and-patient-info':
+					setVisitorAndPatientInfo(visitorAndPatientInfo => [...visitorAndPatientInfo, item]);
 					setLoading(false);
 					break;
 				default:
@@ -126,6 +128,27 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 		);
 	};
 
+	const renderItemsVisitorAndPatientInfo = (items: any) => {
+		return (
+			<div className='flex flex-col gap-y-3 sm:gap-y-4'>
+				{
+					items.map((item: any, index: number) => {
+						return (
+							<Link key={ index } href={ `${ item.slug }` }>
+								<Text
+									fontSize='14px'
+									fontWeight='700'
+									className='flex'
+									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
+								>{ item.title }</Text>
+							</Link>
+						);
+					})
+				}
+			</div>
+		);
+	};
+
 	const date = new Date();
 
 	const renderCategoryItems = (items: FooterDetail[]) => {
@@ -142,6 +165,22 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 		}
 
 		return renderItems(items);
+	};
+
+	const renderVisitorAndPatientInfoItems = (items: any) => {
+		if (items.length > 4) {
+			const leftItems = items.slice(0, Math.ceil(items.length / 2));
+			const rightItems = items.slice(Math.ceil(items.length / 2));
+
+			return (
+				<div className='grid md:grid-cols-2 md:gap-x-4 gap-y-3 sm:gap-y-4'>
+					{ renderItemsVisitorAndPatientInfo(leftItems) }
+					{ renderItemsVisitorAndPatientInfo(rightItems) }
+				</div>
+			);
+		}
+
+		return renderItemsVisitorAndPatientInfo(items);
 	};
 
 	const renderHospitalItems = (items: HospitalDetail[]) => {
@@ -230,12 +269,42 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 		return null;
 	};
 
+	const renderFooterVisitorAndPatientInfo = (data: any, title: string) => {
+		if (loading && !data?.length) {
+			return (
+				<div className='w-2/5 sm:w-[200px] lg:w-1/6'>
+					<div className='animate-pulse flex w-full'>
+						<div className='flex-1 space-y-6 py-1'>
+							<div className='h-2 bg-slate-200 rounded' />
+							<div className='space-y-3'>
+								{ Array.from(Array(4).keys()).map(idx => (
+									<div key={ idx } className='h-2 bg-slate-200 rounded' />
+								)) }
+							</div>
+						</div>
+					</div>
+				</div>
+			);
+		}
+
+		if (data?.length) {
+			return (
+				<div>
+					{ renderCategoryTitle(title) }
+					{ renderVisitorAndPatientInfoItems(data) }
+				</div>
+			);
+		}
+
+		return null;
+	};
+
 	return (
 		<FooterStyled className='container-page py-8 sm:py-16'>
 			<FooterContainer>
 				{ renderFooterHospital(ourHospital ?? [], t('ourHospitalsLabel')) }
 				{ renderFooterCategory(ourCompany ?? [], t('ourCompanyLabel')) }
-				{ renderFooterCategory(pages ?? [], t('visitorPatientLabel')) }
+				{ renderFooterVisitorAndPatientInfo(visitorAndPatientInfo ?? [], t('visitorPatientLabel')) }
 
 				<div className='follow-section flex flex-col max-sm:flex-row-reverse gap-4 sm:gap-8'>
 					<div className='follow-icon-section'>
