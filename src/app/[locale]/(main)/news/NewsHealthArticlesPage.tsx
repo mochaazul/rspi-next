@@ -167,7 +167,7 @@ const NewsHealthArticlesPage = ({
 													className='relative'
 													key={ index }
 												>
-													<div className='relative z-1'>
+													<div className=''>
 														<Share slug={ `${data.language === 'idn' ? 'id' : 'en'}/news/${data.slug}` } />
 													</div>
 													<Link href={ `${ pathname }/${ data?.slug }` } style={ { zIndex: '-999 !important' } }>

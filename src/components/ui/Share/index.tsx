@@ -53,37 +53,39 @@ const Share = (props: PropsType) => {
 	};
 	return (
 		<div className='absolute right-0 mr-[10px] mt-[10px] top-0 cursor-pointer flex flex-col items-end group'>
-			<div onClick={ handleClickSocialShare } className='z-1'>
+			<div onClick={ handleClickSocialShare } className='pb-2 z-1'>
 				<icons.SocialShare />
 			</div>
 			<div
-				className={ 'hidden group-hover:block z-10 rounded-[10px] mt-2 bg-white divide-y divide-gray-100 shadow custom-scrollbar' }
+				className={ 'hidden group-hover:block z-10 rounded-[10px] bg-white divide-y divide-gray-100 shadow custom-scrollbar' }
 			>
-				<ul className='text-sm text-gray-700 z-10 ' aria-labelledby='dropdownDefault'>
-					{ buttonSocmed.map((item, idx) => (
-						<Link
-							key={ idx }
-							className='border-b border-gray flex py-4 px-4 items-center'
-							href={ item?.url + hostname + '/' + props.slug }
-							target='_blank'
+				<div className='relative'>
+					<ul className='text-sm text-gray-700 z-10 ' aria-labelledby='dropdownDefault'>
+						{ buttonSocmed.map((item, idx) => (
+							<Link
+								key={ idx }
+								className='border-b border-gray flex py-4 px-4 items-center'
+								href={ item?.url + hostname + '/' + props.slug }
+								target='_blank'
+							>
+								{ item?.icon }
+								<div className='ml-[10px]'>
+									<Text text={ item?.label } fontSize='16px' fontWeight='400' />
+								</div>
+							</Link>
+						)) }
+						<div
+							className='flex py-4 px-4 z-10 items-center'
+							onClick={ copy }
 						>
-							{ item?.icon }
-							<div className='ml-[10px]'>
-								<Text text={ item?.label } fontSize='16px' fontWeight='400' />
-							</div>
-						</Link>
-					)) }
-					<div
-						className='flex py-4 px-4 z-10 items-center'
-						onClick={ copy }
-					>
-						<icons.ShareNetwork className='w-4' />
+							<icons.ShareNetwork className='w-4' />
 
-						<div className='ml-[10px]'>
-							<Text text={ 'Share Link' } fontSize='16px' fontWeight='400' />
+							<div className='ml-[10px]'>
+								<Text text={ 'Share Link' } fontSize='16px' fontWeight='400' />
+							</div>
 						</div>
-					</div>
-				</ul>
+					</ul>
+				</div>
 			</div>
 		</div>
 	);
