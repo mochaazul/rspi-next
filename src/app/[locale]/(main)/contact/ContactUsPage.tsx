@@ -75,10 +75,10 @@ const ContactUsPage = ({
 				</div>
 				<div className='flex flex-row gap-x-2'>
 					<a target='_blank' href={ data?.[0]?.share_link } rel='noopener noreferrer'>
-						<Button theme='outline' $hoverTheme='primary' label={ 'See Direction' } />
+						<Button theme='outline' $hoverTheme='primary' label={ 'See Direction' } className='px-[40px] py-[12px] text-[16px]' />
 					</a>
 					<Link href={ `/find-a-doctor?hospital_code=${ data[0]?.hospital_code }` }>
-						<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } />
+						<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } className='px-[40px] py-[12px] text-[16px]' />
 					</Link>
 				</div>
 
