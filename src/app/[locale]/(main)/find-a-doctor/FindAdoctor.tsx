@@ -255,7 +255,7 @@ export default function FindADoctorComponent({ hospital, clinics }: Props) {
 										<Button
 											theme='primary'
 											themeColor={ colors.green.brandAccent }
-											label='Terapkan'
+											label={ t('label.applyFilter') }
 											onClick={ () => setFilterModalVisible(false) }
 										/>
 									</div>

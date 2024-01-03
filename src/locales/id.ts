@@ -915,8 +915,10 @@ export default {
 				doctorName: 'Nama Dokter',
 				specialty: 'Spesialisasi',
 				doctorFound: 'Dokter Ditemukan',
-				seeDetail: 'Book Appointment'
+				seeDetail: 'Book Appointment',
+				applyFilter: 'Terapkan'
 			},
+
 		},
 		doctorProfile: {
 			bookAppointmentLabel: 'Buat Janji Temu',

@@ -910,7 +910,8 @@ export default {
 				doctorName: 'Doctor Name',
 				specialty: 'Specialty',
 				doctorFound: 'Doctors Found',
-				seeDetail: 'Book Appointment'
+				seeDetail: 'Book Appointment',
+				applyFilter: 'Apply'
 			},
 		},
 		doctorProfile: {
