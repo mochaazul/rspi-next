@@ -787,7 +787,9 @@ export default {
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Save',
-				cancelBtnLabel: 'Cancel'
+				cancelBtnLabel: 'Cancel',
+				pinLabelInfo: 'The PIN is used to access patient portal service features and security activities on your account.',
+				lastUpdatedPasswordLabel: 'Last updated on {date}'
 			},
 			medicalRecordLabel: 'Medical Record Information',
 			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)',
@@ -994,7 +996,8 @@ export default {
 				newPasswordConfirmationPlaceholder: 'Confirm your new password',
 				resetBtnLabel: 'Change Password'
 			},
-			forgotPasswordLabel: 'Forgot Password?'
+			forgotPasswordLabel: 'Forgot Password?',
+			lastUpdatedPasswordLabel: 'Last updated on {date}'
 		}
 	}
 } as const;

@@ -198,9 +198,9 @@ const RegisterOnboard = () => {
 					<Text
 						text={ t('subHeading') }
 						fontSize={ '20px' }
-						lineHeight={ '24px' }
 						fontWeight={ '400' }
 						className='mt-2 md:mt-4 mb-[42px] md:mb-[62px]'
+						subClassName='max-md:text-base md:!leading-normal'
 						color={ colors.grey.pencil }
 						textAlign='center'
 					/>
@@ -247,10 +247,11 @@ const RegisterOnboard = () => {
 					<Text
 						text={ t('form.phoneHint') }
 						className='mb-8 md:mb-4'
-						fontSize={ '12px' }
-						lineHeight={ '15px' }
-						fontWeight={ '400' }
-						textAlign={ 'left' }
+						color={ colors.grey.dark }
+						fontSize='12px'
+						fontWeight='400'
+						subClassName='!text-xs !leading-normal'
+						textAlign='left'
 					/>
 					{
 						handleNotifError('phone number not match')
