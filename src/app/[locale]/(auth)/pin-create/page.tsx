@@ -88,10 +88,9 @@ const PinPage = () => {
 				<Text
 					text={ t('subHeading') }
 					fontSize={ '20px' }
-					lineHeight={ '24px' }
 					fontWeight={ '400' }
 					className='mt-2 md:mt-4 mb-8 md:mb-[62px]'
-					subClassName='max-md:text-base max-md:leading-6'
+					subClassName='max-md:text-base md:!leading-normal'
 					color={ colors.grey.pencil }
 					textAlign='center'
 				/>

@@ -36,5 +36,6 @@ export const blacklistedRouteMedicalRecordReminder = [
 	'/patient-portal',
 	'/doctor-detail',
 	'/book-appointment',
-	'/user-information'
+	'/user-information',
+	'/update-password'
 ];

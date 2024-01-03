@@ -6,7 +6,7 @@ import { colors } from '@/constant';
 import { GlobalCardShadow } from '@/constant/globalstyle';
 
 export const CentreOfExcellenceStyle = styled.div`
-  background-color: ${ colors.white.body };
+  background-color:  #FAFAFA;
 
   .image-cont {
     ${ GlobalCardShadow }
