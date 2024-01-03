@@ -26,7 +26,7 @@ import FooterStyled, { FooterContainer } from './style';
 
 const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalDetail[]; }) => {
 	const { trigger: subscribe } = useSubscribe();
-
+	console.log({ footerData, hospitalData });
 	const t = useScopedI18n('page.footer');
 
 	const [loading, setLoading] = useState<boolean>(false);

@@ -141,7 +141,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 				<div>
 					<Form.Checkbox
 						label={ 'All Hospitals' }
-						isslider={ false }
+						$isslider={ false }
 						onChange={ evt => onCheckedAllHospitals(evt.target.checked) }
 					/>
 				</div>
@@ -149,7 +149,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 					hospitals?.map((hospital, index) => (
 						<div key={ index }>
 							<Form.Checkbox
-								isslider={ false }
+								$isslider={ false }
 								onChange={ event => onChangeHospital(hospital, event.target.checked) }
 								checked={ hospitalFilter.getAll().some(checked => checked.id === hospital.id) }
 								label={ hospital.name ?? '' }
