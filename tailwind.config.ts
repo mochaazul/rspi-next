@@ -32,6 +32,9 @@ module.exports = {
 					3: '#D4D2D8'
 				}
 			},
+			boxShadow: {
+				'green-small': '5px 5px 10px 0px rgba(53, 136, 136, 0.12)'
+			},
 			width: {
 				'920': '920px',
 				defaultContent: '1110px',
