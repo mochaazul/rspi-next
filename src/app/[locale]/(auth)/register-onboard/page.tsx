@@ -210,12 +210,13 @@ const RegisterOnboard = () => {
 						&& handleNotifError(errorUser?.stat_msg?.toLowerCase())
 					}
 
-					<div className='mb-8 md:mb-4'>
+					<div className='mb-4 md:mb-[18px]'>
 						<Form.TextField
 							id='medical_record'
 							name='medical_record'
 							placeholder={ t('form.mrPlaceholder') }
 							label={ t('form.mrlabel') }
+							labelWrapperClassName='!mb-2.5 md:!mb-1.5'
 							value={ formikRegister.values.medical_record }
 							onChange={ onChangeInput }
 							errorMessage={ getInputErrorMessage(formikRegister.errors?.medical_record, t('form.mrlabel')) }
@@ -239,6 +240,7 @@ const RegisterOnboard = () => {
 						className='input'
 						placeholder={ t('form.phonePlaceholder') }
 						label={ t('form.phoneLabel') }
+						labelWrapperClassName='!mb-2.5 md:!mb-1.5'
 						value={ formikRegister.values.phone }
 						onChange={ onChangeInput }
 						errorMessage={ getInputErrorMessage(formikRegister.errors?.phone, t('form.phoneLabel')) }
@@ -246,7 +248,7 @@ const RegisterOnboard = () => {
 					/>
 					<Text
 						text={ t('form.phoneHint') }
-						className='mb-8 md:mb-4'
+						className='mb-4 md:mb-[18px]'
 						color={ colors.grey.dark }
 						fontSize='12px'
 						fontWeight='400'
@@ -259,7 +261,7 @@ const RegisterOnboard = () => {
 					{
 						isDuplicatePhoneNumber && handleNotifError('your phone number has been registered. please change with new phone number')
 					}
-					<div className='mb-8 md:mb-4'>
+					<div className='mb-4 md:mb-[18px]'>
 						<Form.DateField
 							id='birth_date'
 							name='birth_date'
@@ -267,6 +269,7 @@ const RegisterOnboard = () => {
 							iconName='CalendarIcon'
 							iconPosition='right'
 							label={ t('form.birthDateLabel') }
+							labelWrapperClassName='!mb-2.5 md:!mb-1.5'
 							placeholder='yyyy-mm-dd'
 							value={ formikRegister.values.birth_date }
 							onChangeValue={ onChangeInputValue }

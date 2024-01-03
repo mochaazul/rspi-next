@@ -718,8 +718,8 @@ export default {
 			}
 		},
 		registerOnboard: {
-			heading: 'Welcome to RS. Pondok Indah',
-			subHeading: 'Please enter your medical record to access all the services provided by RS. Pondok Indah. Your account information will be securely stored by us',
+			heading: 'Welcome to Pondok Indah Hospital',
+			subHeading: 'Please enter your medical record to access all the services provided by Pondok Indah Hospital',
 			form: {
 				mrlabel: 'Medical Record Number',
 				mrPlaceholder: 'Medical Record Number',

@@ -723,8 +723,8 @@ export default {
 			}
 		},
 		registerOnboard: {
-			heading: 'Selamat datang di RS. Pondok Indah',
-			subHeading: 'Silahkan masukan rekam medis anda untuk menggunakan seluruh fitur layanan dari RS. Pondok Indah. Informasi akun Anda tersimpan aman oleh kami',
+			heading: 'Selamat Datang di RS Pondok Indah',
+			subHeading: 'Masukkan nomor rekam medis Anda untuk mengakses seluruh fitur layanan RS Pondok Indah.',
 			form: {
 				mrlabel: 'Nomor rekam medis',
 				mrPlaceholder: 'Nomor rekam medis',
