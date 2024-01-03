@@ -676,7 +676,8 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 									label={ t('securitySetting.passwordLabel') }
 									editHref='/update-password'
 									inputProps={ {
-										placeholder: t('securitySetting.passwordLabel'),
+										placeholder: '••••••',
+										className: 'placeholder:text-[#212529]',
 										disabled: true,
 										type: 'password',
 										infoMessage: patientProfile?.password_updated_date && patientProfile?.password_updated_date !== '0001-01-01 00:00:00'
@@ -690,9 +691,10 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 									editHref='#'
 									onClickEdit={ () => setPinModalVisibleForgotPin(true) }
 									inputProps={ {
-										placeholder: t('securitySetting.pinLabel'),
+										placeholder: '••••••',
 										disabled: true,
 										type: 'password',
+										className: 'placeholder:text-[#212529]'
 									} }
 								/>
 							</div>
