@@ -113,7 +113,7 @@ const NewsHealthArticlesPage = ({
 									$iconColor='#D4D2D8'
 									value={ keywordSearch }
 									className='placeholder-gray-2 max-sm:w-full'
-									wrapperClassName= 'max-sm:flex-row-reverse max-sm:px-5 border-gray-3'
+									wrapperClassName= 'max-sm:flex-row-reverse max-sm:px-5 !outline-gray-3'
 									onChange={ e => {
 										setKeywordSearch(e.target.value);
 										params.set('keyword', e.target.value);
