@@ -108,7 +108,7 @@ const RegisterPage = () => {
 	return (
 		<RegisterPageStyle>
 			<div className='min-h-[calc(100svh-64px)] md:min-h-screen flex max-md:flex-col flex-grow max-md:justify-between h-full md:grid md:grid-cols-3 md:gap-3 w-full'>
-				<div className='md:col-span-2 flex-1 relative overflow-hidden h-full'>
+				<div className='md:col-span-2 flex-1 relative overflow-hidden h-full md:items-center md:flex'>
 					<Form className={ `
 					max-md:py-6 max-md:container-page
 					md:p-8 flex flex-col md:items-center md:justify-center max-md:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 md:m-auto
@@ -136,7 +136,7 @@ const RegisterPage = () => {
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-md:leading-8 max-md:text-[20px]'>
 								{ t('heading') }
 							</Text>
-							<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-2 mb-4 md:mt-4' subClassName='max-md:text-base max-md:leading-6'>
+							<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-2 mb-4' subClassName='max-md:text-base max-md:leading-6 md:!leading-normal'>
 								{ t('subHeading') }
 							</Text>
 						</div>

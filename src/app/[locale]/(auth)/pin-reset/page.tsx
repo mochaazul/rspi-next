@@ -88,9 +88,9 @@ const ResetPinPage = () => {
 				<Text
 					text={ t('subHeadingReset') }
 					fontSize={ '20px' }
-					lineHeight={ '24px' }
 					fontWeight={ '400' }
 					className='mt-[16px] mb-[62px]'
+					subClassName='max-md:text-base md:!leading-normal'
 					color={ colors.grey.pencil }
 					textAlign='center'
 				/>

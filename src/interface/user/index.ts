@@ -62,6 +62,8 @@ export interface UserDataDetail {
 	phone: string;
 	updated_date: string;
 	mr_active?: boolean;
+	password_updated_date?: string;
+	pin_updated_date?: string;
 }
 
 export type ResendEmailVerificationType = {
