@@ -257,7 +257,7 @@ export default {
 			faq: {
 				contactUsLabel: 'Hubungi Kami',
 				faqLongLabel: 'Pertanyaan Umum',
-				readMoreLabel: 'Baca selengkapnya',
+				readMoreLabel: 'Baca Selengkapnya',
 				heading: 'FAQ',
 				subHeading: 'Pertanyaan yang sering ditanyakan mengenai layanan di unit RS Pondok Indah',
 				allFaqBtnLabel: 'Lihat Semua FAQ',
