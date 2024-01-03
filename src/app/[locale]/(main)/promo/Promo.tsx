@@ -58,8 +58,6 @@ const EventClassesPromo = ({
 	const hospitalIDParams = params.get('hospital_id') ?? '';
 	const pageParams = params.get('page') ?? 1;
 	
-	const [loading, setLoading] = useState(false);
-
 	const hospitalArr = Object.values(hospitalSelector || [])?.map(hospital => ({ key: hospital?.id?.toString(), value: hospital?.id?.toString(), label: hospital?.name }));
 
 	useEffect(() => {
@@ -142,11 +140,8 @@ const EventClassesPromo = ({
 				<div className='content mt-[0px] sm:mt-[17px]'>
 					<div className='hidden sm:grid sm:grid-cols-3 grid-cols-1 gap-x-8 w-full justify-center'>
 						{
-							loading && <Spinner size='m' className='sm:my-10 my-3' />
-						}
-						{
 
-							!loading && events?.map((data, index) => {
+							 events?.map((data, index) => {
 								return (
 									<Card
 										id={ data.id }
@@ -179,7 +174,7 @@ const EventClassesPromo = ({
 							})
 						}
 						{
-							!loading && events?.length === 0 ?
+							events?.length === 0 ?
 								<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
 									<EmptyData menu='Promo and Packages' />
 								</Text> : <></>

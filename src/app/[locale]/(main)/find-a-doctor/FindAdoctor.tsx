@@ -21,15 +21,16 @@ import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
-import { HospitalDetail } from '@/interface';
+import { HospitalDetail, I_MasterDoctor, ResponseType } from '@/interface';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 
 type Props ={
   hospital: HospitalDetail[]
   clinics: I_SpecialtyDropdownResponse[]
+	doctorFallback: ResponseType<I_MasterDoctor[]>
 }
 
-export default function FindADoctorComponent({ hospital, clinics }:Props) {
+export default function FindADoctorComponent({ hospital, clinics, doctorFallback }:Props) {
 
 	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
 	
@@ -110,12 +111,18 @@ export default function FindADoctorComponent({ hospital, clinics }:Props) {
 		if (doctorResponse) {
 			return doctorResponse.flatMap(res => res.data);
 		}
+		if (doctorFallback) {
+			return doctorFallback.data;
+		}
 		return [];
 	};
 
 	const doctorCount = () => {
 		if (doctorResponse) {
 			return doctorResponse[0].pagination.count || 0;
+		}
+		if (doctorFallback) {
+			return doctorFallback.pagination.count || 0;
 		}
 		return 0;
 	};

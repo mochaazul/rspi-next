@@ -16,8 +16,9 @@ import RelatedNewsMobile from '@/components/ui/PageComponents/CenterOfExcellence
 import { getScopedI18n } from '@/locales/server';
 
 import { CentreOfExcellenceStyle } from './style';
+import LangWrapper from '@/components/ui/LangWrapper';
 
-const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
+const CentreOfExcellencePage = async({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.centerOfExcellence');
 
 	const responseCenterOfExcellence = await getCoe({ limit: 1000 });
@@ -88,24 +89,28 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 		<CentreOfExcellenceStyle>
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px] md:pt-16'>
 				<div>
-					<Breadcrumbs datas={ breadcrumbsPath } />
+					<LangWrapper>
+						<Breadcrumbs datas={ breadcrumbsPath } />
+					</LangWrapper>
 					<div className='content-wrapper mt-[64px] max-sm:mt-[24px]'>
 						<div className='leftSide hidden sm:block w-[349px]'>
 							<CardMenu data={ responseCenterOfExcellence?.data } activeMenuIndex={ newParam } />
 						</div>
 						<div className='rightSide sm:ml-[32px]'>
 							<div>
-								{
-									responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length > 0
-										?
-										<ServiceLocation
-											content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
-											activeMenuIndex={ newParam }
-											centerOfExcellence={ responseCenterOfExcellence?.data }
-										/>
-										:
-										null
-								}
+								<LangWrapper>
+									{
+										responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length > 0
+											?
+											<ServiceLocation
+												content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
+												activeMenuIndex={ newParam }
+												centerOfExcellence={ responseCenterOfExcellence?.data }
+											/>
+											:
+											null
+									}
+								</LangWrapper>
 							</div>
 						</div>
 					</div>

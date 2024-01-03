@@ -5,8 +5,9 @@ import { PanelH1, PanelV1 } from '../../style';
 import { getAllEvents, getPromoById } from '@/lib/api/events';
 import PromoDetail from '@/components/ui/PageComponents/News/Promo/PromoDetail';
 import { redirect } from 'next/navigation';
+import LangWrapper from '@/components/ui/LangWrapper';
 
-const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; }) => {
+const DetailEventClassesPromo = async({ params }: { params: { slug: string; }; }) => {
 	
 	const t = await getScopedI18n('page.promoPage');
 	const newParam = decodeURIComponent(params?.slug);
@@ -16,7 +17,7 @@ const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; 
 	});
 
 	if (Object.values(selectedEvent)[0].slug !== params?.slug) {
-		redirect(`/promo`);
+		redirect('/promo');
 	};
 
 	const eventsData = await getAllEvents();
@@ -30,11 +31,13 @@ const DetailEventClassesPromo = async ({ params }: { params: { slug: string; }; 
 	return (
 		<PanelV1>
 			<PanelH1>
-				<PromoDetail
-					selectedEvent = { selectedEvent?.data }
-					breadcrumbsPath = { breadcrumbsPath }
-					eventsOther = { eventsOther }
-				/>
+				<LangWrapper>
+					<PromoDetail
+						selectedEvent = { selectedEvent?.data }
+						breadcrumbsPath = { breadcrumbsPath }
+						eventsOther = { eventsOther }
+					/>
+				</LangWrapper>
 			</PanelH1>
 		</PanelV1>
 	);

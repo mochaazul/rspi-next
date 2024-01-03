@@ -4,7 +4,7 @@ import { getScopedI18n } from '@/locales/server';
 import { getAllEvents } from '@/lib/api/events';
 import EventClassesPromo from './Promo';
 
-const Promo = async ({ searchParams }: any) => {
+const Promo = async({ searchParams }: any) => {
 	
 	const getEvent = await getAllEvents({
 		query: {

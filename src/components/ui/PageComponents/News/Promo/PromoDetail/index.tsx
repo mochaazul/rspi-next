@@ -1,51 +1,39 @@
-'use client';
+'use server';
 
-import { useEffect, useState } from 'react';
-
-import { colors, icons, sosmedLink } from '@/constant';
+import { colors } from '@/constant';
 
 import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
 
 import {
 	Breadcrumbs,
 	Text,
-	Tabs,
 } from '@/components/ui';
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useScopedI18n } from '@/locales/client';
 import TextHtml from '@/components/ui/TextHtml';
 
-import { useHostname } from '@/utils/useHostname';
+import SocialShare from './SocialShare';
+import { getScopedI18n } from '@/locales/server';
 
 type Props = {
 	selectedEvent: any;
-    eventsOther: any;
-    breadcrumbsPath: {
+	eventsOther: any;
+	breadcrumbsPath: {
 		name: string;
 		url: string;
 	}[],
 };
 
-const PromoDetail: React.FC<Props> = ({
+const PromoDetail: React.FC<Props> = async({
 	selectedEvent,
 	breadcrumbsPath,
 	eventsOther
 }) => {
-	const t = useScopedI18n('page.promoPage');
-	const [activeTabIdx, setActiveTabIdx] = useState(0);
-	const hostname = useHostname({ fullUrl: true });
-
-	const getLinkShareSocmed = (link: any) => {
-		return link + hostname;
-	};
+	const t = await getScopedI18n('page.promoPage');
 
 	return (
-    	<div>
+		<div>
 			<Breadcrumbs datas={ breadcrumbsPath } />
 			<div className='mt-[50px]'>
-				
 				<Text
 					fontType='h1'
 					fontWeight='900'
@@ -53,41 +41,13 @@ const PromoDetail: React.FC<Props> = ({
 					lineHeight='57px'>
 					{ selectedEvent?.title }
 				</Text>
-				<div className='flex items-center gap-[30px] mt-[10px]'>
-					<div className='flex gap-[15px] items-center'>
-						<Text
-							fontType='p'
-							lineHeight='24px'
-							fontSize='20px'
-							fontWeight='400'
-							text='Share now'
-						/>
-						<div className='flex gap-[15px]'>
-							<Link href={ getLinkShareSocmed(sosmedLink.facebook) ?? ''  } target='_blank' className='cursor-pointer' >
-								<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
-							</Link>
-							<Link href={ getLinkShareSocmed(sosmedLink.twitter) ?? ''  } target='_blank' className='cursor-pointer' >
-								<Image src='/images/ic/twitter.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
-							</Link>
-							<Link href={ getLinkShareSocmed(sosmedLink.linkedin) ?? ''  } target='_blank' className='cursor-pointer' >
-								<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
-							</Link>
-							<div className='cursor-pointer' onClick={ () => {
-								navigator?.clipboard?.writeText(window?.location?.href).then(() => {
-									alert('URL Link copied');
-								});
-							} }>
-								<Image src='/images/ic/Link.svg' alt='RSPI link' width={ 16 } height={ 16 } />
-							</div>
-						</div>
-					</div>
-				</div>
+				<SocialShare />
 				<div className='content-wrapper mt-[20px] mb-[100px]'>
 					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
 						<img src={ selectedEvent?.img_url_detail || '' } className='mx-auto object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
 						<div>
 							<TextHtml
-								htmlStr={  selectedEvent?.content || '' }
+								htmlStr={ selectedEvent?.content || '' }
 								className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 							/>
 							<div className='mt-[50px]'>
@@ -131,7 +91,7 @@ const PromoDetail: React.FC<Props> = ({
 												text='Informasi'
 											/>
 											<TextHtml
-												htmlStr={  selectedEvent?.information || '' }
+												htmlStr={ selectedEvent?.information || '' }
 												className='innerHTML mt-2 text-14'
 											/>
 										</div>
@@ -146,7 +106,7 @@ const PromoDetail: React.FC<Props> = ({
 											/>
 											<TextHtml
 												style={ { color: colors.grey.dark } }
-												htmlStr={  selectedEvent?.phone || '' }
+												htmlStr={ selectedEvent?.phone || '' }
 												className='mt-2 innerHTML text-14 leading-[18px] font-bold'
 											/>
 										</div>
@@ -160,7 +120,7 @@ const PromoDetail: React.FC<Props> = ({
 												text='Jam Operasional'
 											/>
 											<TextHtml
-												htmlStr={  selectedEvent?.operational_hour || '' }
+												htmlStr={ selectedEvent?.operational_hour || '' }
 												className='mt-2 innerHTML text-14 leading-[18px]'
 											/>
 										</div>
@@ -171,11 +131,15 @@ const PromoDetail: React.FC<Props> = ({
 					</div>
 					<div className=''>
 						<div className='mt-[40px]'>
-							<Tabs
-								activeTabIndex={ activeTabIdx }
-								setActiveTabIndex={ setActiveTabIdx }
-								tabsData={ ['More From Promo & Packages'] }
-							/>
+							<section
+								className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }
+							>
+								<Text
+									text={ t('morePromo') }
+									className=''
+									fontWeight='700'
+									color={ colors.paradiso.default } />
+							</section>
 							<div className='pt-[10px]' />
 							<PromoPackages showAsRelated={ true } events={ eventsOther } />
 						</div>

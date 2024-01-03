@@ -1,17 +1,14 @@
+'use client';
 import React, {
 	useState,
 	useEffect,
 	useRef
 } from 'react';
-import * as Icons from 'react-feather';
-import { useRouter } from 'next/navigation';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { FormikProps, useFormik } from 'formik';
 
 import { regExp, colors, icons } from '@/constant';
-import {
-	Button, Form, Modal, NotificationPanel, Text
-} from '@/components/ui';
+import { Button, Form, Modal, Text } from '@/components/ui';
 import { ContactUsState, ContactUsSubmitType, HospitalDetail } from '@/interface';
 import { PropsTypes as NotificationPanelTypes } from '@/components/ui/NotificationPanel';
 import { useScopedI18n } from '@/locales/client';
@@ -64,7 +61,7 @@ const ContactUsForm = ({
 			title: '',
 			content: ''
 		},
-		onSubmit: async (formContact: ContactUsSubmitType) => {
+		onSubmit: async(formContact: ContactUsSubmitType) => {
 			setNotifResponse({
 				loading: true,
 				error: {
@@ -238,7 +235,7 @@ const ContactUsForm = ({
 					isError={ !!formikContactUs.errors.content }
 					errorMessage={ getInputErrorMessage(formikContactUs.errors.content, t('contactForm.labels.notes')) }
 				/>
-				{/* {
+				{ /* {
 					notifVisible && errorUser.stat_msg &&
 				<div className='w-full mb-[32px]'>
 					<NotificationPanel
@@ -249,7 +246,7 @@ const ContactUsForm = ({
 						{ handleNotifError() }
 					</NotificationPanel>
 				</div>
-				} */}
+				} */ }
 				<div className='flex sm:flex-row flex-col justify-between items-center max-sm:gap-6'>
 					<ReCAPTCHA
 						ref={ recaptchaRef }

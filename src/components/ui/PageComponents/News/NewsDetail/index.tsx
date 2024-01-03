@@ -1,29 +1,19 @@
-'use client';
-import { useState } from 'react';
-
-import moment from 'moment';
 import Link from 'next/link';
-import Image from 'next/image';
 import TextHtml from '@/components/ui/TextHtml';
-import { ArticleDetail, ArticleState } from '@/interface';
-import { useScopedI18n } from '@/locales/client';
+import { ArticleState } from '@/interface';
 
 import {
-	Breadcrumbs,
 	Text,
-	Tabs,
-	Button
+	Button,
+	Breadcrumbs
 } from '@/components/ui';
 
-import {
-	colors,
-	sosmedLink
-} from '@/constant';
+import { colors, } from '@/constant';
 import dayjs from 'dayjs';
-import { useCurrentLocale } from '@/locales/client';
-import { useHostname } from '@/utils/useHostname';
+import SocialShare from './SocialShare';
+import { getCurrentLocale, getScopedI18n } from '@/locales/server';
 
-const NewsDetail = ({
+const NewsDetail = async({
 	filteredSelectedArticle,
 	specialty,
 	relatedNews,
@@ -38,17 +28,8 @@ const NewsDetail = ({
 	}[],
 }) => {
 	
-	const t = useScopedI18n('page.newsDetail');
-
-	const [activeTabIdx, setActiveTabIdx] = useState(0);
-	const currentLang = useCurrentLocale();
-
-	const hostname = useHostname({ fullUrl: true });
-
-	const getLinkShareSocmed = (link: any) => {
-		return link + hostname;
-	};
-
+	const t = await getScopedI18n('page.newsDetail');
+	const currentLang = getCurrentLocale();
 	const renderNews = () => {
 		return (
 			<div>
@@ -64,11 +45,15 @@ const NewsDetail = ({
 				/>
 				
 				<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' }>
-					<Tabs
-						activeTabIndex={ activeTabIdx }
-						setActiveTabIndex={ setActiveTabIdx }
-						tabsData={ ['Related News'] }
-					/>
+					<section
+						className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }>
+						<Text
+							text={ 'Related News' }
+							className=''
+							fontWeight='700'
+							color={ colors.paradiso.default } />
+					</section>
+					
 					<div className='divide-y divide-solid pt-[10px]'>
 						{ Object.values(relatedNews || []).map((a, index) => {
 							return (
@@ -168,45 +153,22 @@ const NewsDetail = ({
 									: <></>
 							}
 
-							<div className='flex items-center gap-[30px] mt-[20px]'>
-								<Text
-									text={ dayjs(filteredSelectedArticle?.posted_date).locale(currentLang)
-										.format('dddd, DD MMMM YYYY') }
-									fontWeight='400'
-									fontSize='18px'
-									lineHeight='22px'
-									fontType='p'
-									color={ colors.grey.dark }
-								/>
-								<div className='flex gap-[15px]'>
-									<Link href={ getLinkShareSocmed(sosmedLink.facebook) ?? ''  } target='_blank' className='cursor-pointer' >
-										<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
-									</Link>
-									<Link href={ getLinkShareSocmed(sosmedLink.twitter) ?? ''  } target='_blank' className='cursor-pointer' >
-										<Image src='/images/ic/twitter.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
-									</Link>
-									<Link href={ getLinkShareSocmed(sosmedLink.linkedin) ?? ''  } target='_blank' className='cursor-pointer' >
-										<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
-									</Link>
-									<div className='cursor-pointer' onClick={ () => {
-										navigator?.clipboard?.writeText(window?.location?.href).then(() => {
-											alert('URL Link copied');
-										});
-									} }>
-										<Image src='/images/ic/Link.svg' alt='RSPI link' width={ 16 } height={ 16 } />
-									</div>
-								</div>
-							</div>
+							<SocialShare date={ filteredSelectedArticle.posted_date } />
 						</div>
 						<div className='content-wrapper flex mt-[20px] mb-[100px]'>
 							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-[30px] ` }>
 								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' } >
-									<Tabs
-										activeTabIndex={ activeTabIdx }
-										setActiveTabIndex={ setActiveTabIdx }
-										tabsData={ ['Specialty'] }
-									/>
+									
+									<section
+										className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }
+									>
+										<Text
+											text={ 'Specialty' }
+											className=''
+											fontWeight='700'
+											color={ colors.paradiso.default } />
+									</section>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(specialty || [])?.map((specialty, index) => {
 											return (
@@ -237,11 +199,15 @@ const NewsDetail = ({
 							</div>
 							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] ' } ` }>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'w-[349px]' }>
-									<Tabs
-										activeTabIndex={ activeTabIdx }
-										setActiveTabIndex={ setActiveTabIdx }
-										tabsData={ ['Related News'] }
-									/>
+									<section
+										className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }
+									>
+										<Text
+											text={ 'Related News' }
+											className=''
+											fontWeight='700'
+											color={ colors.paradiso.default } />
+									</section>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(relatedNews || [])?.map((a, index) => {
 											return (
@@ -273,11 +239,15 @@ const NewsDetail = ({
 									</div>
 								</div>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'mt-[40px]' }>
-									<Tabs
-										activeTabIndex={ activeTabIdx }
-										setActiveTabIndex={ setActiveTabIdx }
-										tabsData={ ['Specialty'] }
-									/>
+									<section
+										className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }
+									>
+										<Text
+											text={ 'Specialty' }
+											className=''
+											fontWeight='700'
+											color={ colors.paradiso.default } />
+									</section>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(specialty || [])?.map((specialty, index) => {
 											return (

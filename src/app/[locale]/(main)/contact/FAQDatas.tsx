@@ -1,11 +1,12 @@
+'use server';
 import parse from 'html-react-parser';
 
 import { Text } from '@/components/ui';
 import { colors } from '@/constant';
-import { useScopedI18n } from '@/locales/client';
+import { getScopedI18n } from '@/locales/server';
 
-const FAQDatas = () => {
-	const t = useScopedI18n('page.contactUs');
+const FAQDatas = async() => {
+	const t = await getScopedI18n('page.contactUs');
 	return [
 		{
 			title: t('faq.questions.doctorSchedule'),

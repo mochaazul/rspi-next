@@ -509,7 +509,7 @@ export default {
 				heading: 'Promo dan Paket',
 				subHeading: 'Berbagai penawaran istimewa untuk anda.',
 				viewDetailsBtnLabel: 'Lihat Detail',
-				allItemBtnLabel: 'Lihat Semua Promo dan Paket'
+				allItemBtnLabel: 'Lihat Semua Promo dan Paket',
 			},
 			newsHealthArticle: {
 				heading: 'Berita, Artikel & Majalah Kesehatan',
@@ -543,7 +543,9 @@ export default {
 			promoItem: {
 				detailsBtnLabel: 'Lihat Detail'
 			},
-			schedule: 'Jadwal'
+			schedule: 'Jadwal',
+			morePromo: 'Promo dan Paket Lainnya'
+
 		},
 		facilities: {
 			heading: 'Fasilitas & Layanan',
