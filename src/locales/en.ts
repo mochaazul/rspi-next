@@ -912,7 +912,8 @@ export default {
 				doctorName: 'Doctor Name',
 				specialty: 'Specialty',
 				doctorFound: 'Doctors Found',
-				seeDetail: 'Book Appointment'
+				seeDetail: 'Book Appointment',
+				applyFilter: 'Apply'
 			},
 		},
 		doctorProfile: {
@@ -942,6 +943,7 @@ export default {
 			asuransiCard: 'Insurance Card Photo (Optional)',
 			asuransiCardBack: 'Upload a rear view photo',
 			asuransiCardFront: 'Upload a photo of the front view',
+			labelPhoneModal: 'Please contact the call center'
 		},
 		footer: {
 			visitorInfo: {
