@@ -20,6 +20,7 @@ const RelatedNewsMobile = (props: any) => {
 						key={ index }
 						id={ article?.news?.news_id }
 						slug={ article?.news?.slug }
+						language={ article?.news?.language }
 						image={ article?.news?.img_url }
 						imageHeight='200px'
 						header={

@@ -30,6 +30,7 @@ export interface EventClassesDetail {
 	title: string;
 	slug: string;
 	updated_date: string;
+	language: string;
 }
 
 export interface PayloadEventClasses {

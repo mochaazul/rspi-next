@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import moment from 'moment';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-import { ArticleState, NewsAuthorDetail, Pagination } from '@/interface';
+import { NewsAuthorDetail, Pagination } from '@/interface';
 import { colors } from '@/constant';
 import {
 	Breadcrumbs,
@@ -32,6 +32,7 @@ type ArticleProps = {
 	title: string;
 	news_author: NewsAuthorDetail;
 	short_description: string;
+	language: string;
 };
 
 const NewsHealthArticlesPage = ({
@@ -90,29 +91,29 @@ const NewsHealthArticlesPage = ({
 							subClassName='max-sm:text-[24px]'
 						/>
 						<div className='flex justify-between max-sm:flex-col'>
-							<div className='flex flex-row mt-[31px] gap-4 items-center xs:grid-cols-1 max-sm:justify-between max-sm:grid-cols-2 max-sm:grid'>
+							<div className='flex flex-row mt-[31px] max-sm:mt-[16px] gap-4 max-sm:gap-3 items-center xs:grid-cols-1 max-sm:justify-between max-sm:flex overflow-x-auto [&::-webkit-scrollbar]:hidden'>
 								{ tabData.map((tab, idx) => {
 									return (
-										<Link href={ idx > 0 ? `/news?category=${ tab.value }` : '/news' } key={ idx }>
+										<Link href={ idx > 0 ? `/news?category=${ tab.value }` : '/news' } key={ idx } className='flex-shrink-0'>
 											<Button
 												theme={ tab?.value === categoryParams ? 'primary' : 'secondary' }
-												$hoverTheme={ tab?.value === categoryParams ? 'secondary' : 'primary' }
 												label={ tab.label }
 												onClick={ () => clickTabs() }
-												className='rounded-[10px] py-[10px] px-[20px]'
+												className='rounded-[10px] max-sm:rounded-[8px] py-[10px] max-sm:py-[4px] max-sm:leading-[23px] max-sm:px-[18px] px-[20px] sm:hover:bg-green-secondary sm:hover:text-white max-sm:w-max max-sm:text-[14px]'
 											/>
 										</Link>
 									);
 								}) }
 							</div>
-							<div className='mt-[31px] w-[349px]'>
+							<div className='max-sm:mt-[24px] mt-[31px] w-[349px] max-sm:w-full'>
 								<Form.TextField
 									placeholder='Cari Artikel'
 									featherIcon='Search'
 									iconPosition='left'
 									$iconColor={ colors.grey.light }
 									value={ keywordSearch }
-									className='placeholder-gray-3'
+									className='placeholder-gray-3 max-sm:w-full'
+									wrapperClassName= 'max-sm:flex-row-reverse max-sm:px-5'
 									onChange={ e => {
 										setKeywordSearch(e.target.value);
 										params.set('keyword', e.target.value);
@@ -130,7 +131,7 @@ const NewsHealthArticlesPage = ({
 									className='w-[540px] mr-[32px] cursor-pointer magazine relative'
 								>
 									<div className='relative'>
-										<Share slug={ articles[0]?.slug } />
+										<Share slug={ `${articles[0].language === 'idn' ? 'id' : 'en'}/news/${articles[0]?.slug}` } />
 									</div>
 									<Link href={ `${ pathname }/${ articles[0]?.slug }` } >
 										<img
@@ -166,8 +167,8 @@ const NewsHealthArticlesPage = ({
 													className='relative'
 													key={ index }
 												>
-													<div className='relative z-1'>
-														<Share slug={ data.slug } />
+													<div className=''>
+														<Share slug={ `${data.language === 'idn' ? 'id' : 'en'}/news/${data.slug}` } />
 													</div>
 													<Link href={ `${ pathname }/${ data?.slug }` } style={ { zIndex: '-999 !important' } }>
 														<CardNews
@@ -192,6 +193,7 @@ const NewsHealthArticlesPage = ({
 											key={ index }
 											id={ data?.id }
 											slug={ data?.slug }
+											language={ data?.language }
 											image={ data?.img_url }
 											imageHeight='200px'
 											header={
@@ -229,7 +231,7 @@ const NewsHealthArticlesPage = ({
 					}
 
 					<div className='mobile-view w-full sm:hidden'>
-						<CardsScrollHorizontal >
+						<CardsScrollHorizontal className='max-sm:pl-0' >
 							{
 								Object.values(articles || []).map((data, index) => {
 									return (
@@ -237,6 +239,7 @@ const NewsHealthArticlesPage = ({
 											key={ index }
 											id={ data?.id }
 											slug={ data?.slug }
+											language={ data?.language }
 											image={ data?.img_url }
 											imageHeight='200px'
 											header={
@@ -245,7 +248,7 @@ const NewsHealthArticlesPage = ({
 														<Button
 															theme='primary'
 															label={ data?.category?.charAt(0).toUpperCase() + data.category.slice(1) }
-															className='btn-category px-[8px] py-[6px] rounded-[5px] text-[14px]'
+															className='btn-category px-[8px] py-[6px] rounded-[5px] text-[14px] max-sm:text-[12px] max-sm:font-normal'
 														/>
 													</div>
 													<div className='ml-[10px]'>
@@ -261,7 +264,7 @@ const NewsHealthArticlesPage = ({
 											}
 											content={ <CardContentWithInner title={ data.title } description={ data.short_description } author={ data?.news_author?.doctor_name } /> }
 											footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('viewDetails') } /> }
-											className='mb-0'
+											className='mb-0 max-sm:w-[90%]'
 											iconShare={ true }
 											to={ `/news/${ data?.slug }` }
 										/>
