@@ -59,7 +59,7 @@ const ContactUsPage = ({
 
 	const renderTooltip = (data: HospitalDetail[]) => {
 		return (
-			<div className='flex flex-col gap-y-4 absolute block max-w-sm p-4 m-2 bg-white rounded-lg shadow'>
+			<div className='max-sm:hidden flex flex-col gap-y-4 absolute block max-w-sm p-4 m-2 bg-white rounded-lg shadow'>
 				<div className='flex flex-row gap-x-5'>
 					<img src={ data?.[0]?.img_url?.[0] ?? '' } alt={ data?.[0]?.name ?? '' } className='w-[80px] h-[80px] rounded-md object-cover' />
 					<div className='flex flex-col'>
@@ -75,10 +75,10 @@ const ContactUsPage = ({
 				</div>
 				<div className='flex flex-row gap-x-2'>
 					<a target='_blank' href={ data?.[0]?.share_link } rel='noopener noreferrer'>
-						<Button theme='outline' $hoverTheme='primary' label={ 'See Direction' } />
+						<Button theme='outline' $hoverTheme='primary' label={ 'See Direction' } className='px-[40px] py-[12px] text-[16px]' />
 					</a>
 					<Link href={ `/find-a-doctor?hospital_code=${ data[0]?.hospital_code }` }>
-						<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } />
+						<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } className='px-[40px] py-[12px] text-[16px]' />
 					</Link>
 				</div>
 
@@ -96,110 +96,47 @@ const ContactUsPage = ({
 
 	return (
 		<ContactUsPanel>
-			<PanelV1>
-				<PanelH2>
-					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className='sm:mt-12 mt-4'>
-						<Text
-							fontType='h1'
-							fontSize='24px'
-							fontWeight='900'
-							lineHeight='29px'
-							color={ colors.grey.darker }
-							text={ t('heading') }
-							subClassName='text-[24px]'
-						/>
-						<Text
-							fontSize='16px'
-							fontWeight='400'
-							lineHeight='19px'
-							color={ colors.grey.dark }
-							text={ t('subHeading') }
-							className='mt-[10px]'
-						/>
-					</div>
-				</PanelH2>
-
-				<div className='mt-[25px]'>
-					<img src={ images.ContactUsBg.src }
-						alt='Contact Us hero image'
-						className='w-full' />
+			
+			<PanelH2>
+				<Breadcrumbs datas={ breadcrumbsPath } />
+				<div className='sm:mt-12 mt-4'>
+					<Text
+						fontType='h1'
+						fontSize='24px'
+						fontWeight='900'
+						lineHeight='29px'
+						color={ colors.grey.darker }
+						text={ t('heading') }
+						subClassName='text-[24px]'
+					/>
+					<Text
+						fontSize='16px'
+						fontWeight='400'
+						lineHeight='19px'
+						color={ colors.grey.dark }
+						text={ t('subHeading') }
+						className='mt-[10px]'
+					/>
 				</div>
+			</PanelH2>
 
-				<PanelH2>
-					<div className='flex sm:flex-row flex-col sm:gap-20 gap-8 sm:mt-[50px] mt-[44px]'>
-						<div className='flex-1'>
-							<Text
-								fontSize='24px'
-								fontWeight='900'
-								lineHeight='29px'
-								textAlign='center'
-								color={ colors.grey.darker }
-								text={ t('contactForm.heading') }
-								className='sm:block hidden'
-							/>
-							<Text
-								fontSize='16px'
-								fontWeight='400'
-								lineHeight='23px'
-								textAlign='center'
-								color={ colors.grey.dark }
-								text={ t('contactForm.subHeading') }
-								className='mt-3'
-								subClassName='max-sm:text-left'
-							/>
-							<ContactUsForm
-								hospitalSelector={ hospitalSelector }
-							/>
-						</div>
-						<div className='sm:border-r-[1px] border-b-[1px]' />
-						<div className='flex-1'>
-							<Text
-								fontSize='24px'
-								fontType='h3'
-								fontWeight='900'
-								lineHeight='29px'
-								textAlign='center'
-								color={ colors.grey.darker }
-								text={ t('faq.heading') }
-							/>
-							<Text
-								fontSize='16px'
-								fontWeight='400'
-								lineHeight='23px'
-								textAlign='center'
-								color={ colors.grey.dark }
-								text={ t('faq.subHeading') }
-								className='mt-3'
-							/>
-							<div className='mt-10'>
-								<Accordion
-									itemTheme={ props => <Accordion.ItemFAQ { ...props } readMore={ true } /> }
-									datas={ FAQDatas().filter((_faq, index) => index < 5) }
-								/>
-							</div>
-							<Button
-								className='mt-5 py-4'
-								theme='outline'
-								$hoverTheme='primary'
-								label={ t('faq.allFaqBtnLabel') }
-								onClick={ () => navigate.push('/contact/faq') }
-							/>
-						</div>
-					</div>
-				</PanelH2>
+			<div className='mt-[25px]'>
+				<img src={ images.ContactUsBg.src }
+					alt='Contact Us RSPI'
+					className='w-full max-sm:h-[180px] max-sm:object-cover' />
+			</div>
 
-				<PanelH2>
-					<div className='sm:mt-28 mt-12'>
+			<PanelH2>
+				<div className='flex sm:flex-row flex-col sm:gap-20 gap-8 sm:mt-[50px] mt-[44px]'>
+					<div className='flex-1'>
 						<Text
 							fontSize='24px'
-							fontType='h3'
 							fontWeight='900'
 							lineHeight='29px'
 							textAlign='center'
 							color={ colors.grey.darker }
-							text={ t('location.heading') }
-							className='text-center'
+							text={ t('contactForm.heading') }
+							className='sm:block hidden'
 						/>
 						<Text
 							fontSize='16px'
@@ -207,66 +144,104 @@ const ContactUsPage = ({
 							lineHeight='23px'
 							textAlign='center'
 							color={ colors.grey.dark }
-							text={ t('location.subHeading') }
-							className='mt-3 mx-auto text-center sm:w-[630px] w-full'
+							text={ t('contactForm.subHeading') }
+							className='mt-3'
+							subClassName='max-sm:text-left'
+						/>
+						<ContactUsForm
+							hospitalSelector={ hospitalSelector }
 						/>
 					</div>
-				</PanelH2>
-
-				<div className={ 'sm:mt-20 sm:pb-5 pb-10 mt-8 flex sm:flex-row flex-col' }>
-					<div className='max-sm:hidden'>
-						{
-							Object.values(hospitalSelector || [])?.map((data, index) => (
-								<SelectRSLocation
-									key={ index }
-									id={ data.id ?? 0 }
-									title={ data.name ?? '' }
-									mapString={ data.embed_link ?? '' }
-									imgThumb={ data.img_url?.[0] ?? '' }
-									address={ data.address ?? '' }
-									phone={ data.phone ?? '' }
-									isActive={ selectedMapIndex === data.id }
-									onClick={ handleRSLocationChange }
-								/>
-							))
-						}
-					</div>
-					<div className='flex-1 max-sm:mx-4 max-sm:rounded-[10px] max-sm:bg-white overflow-hidden min-h-[600px]'>
-						{
-							renderTooltip(Object.values(hospitalSelector || [])?.filter(data => data.id === selectedMapIndex))
-						}
-						<iframe
-							src={ getEmbedLink() }
-							className='border-0 w-full h-full max-sm:min-h-[500px]'
-							allowFullScreen={ false }
-							loading='lazy'
-							referrerPolicy='no-referrer-when-downgrade' />
-					</div>
-					<div className='sm:hidden relative mt-[-50px] mx-4'>
-						<div className='global-shadow relative'>
-							<CustomCarousel autoplay={ false } onChangeIndex={ handleRSCarouselChange }>
-								{
-									Object.values(hospitalSelector || [])?.map((data, index) => (
-										<div key={ index } className='rounded-[10px] bg-white overflow-hidden'>
-											<SelectRSLocation
-												id={ data.id ?? 0 }
-												title={ data.name ?? '' }
-												mapString={ data.embed_link ?? '' }
-												mapURL={ data.share_link ?? '' }
-												imgThumb={ data.img_url?.[0] ?? '' }
-												address={ data.address ?? '' }
-												phone={ data.phone ?? '' }
-												isActive={ selectedMapIndex === data.id }
-												onClick={ handleRSLocationChange }
-											/>
-										</div>
-									))
-								}
-							</CustomCarousel>
+					<div className='sm:border-r-[1px] border-b-[1px]' />
+					<div className='flex-1'>
+						<h3 className='max-sm:text-[22px] text-[24px] text-gray-1 font-black leading-[29px] text-center'>
+							{ t('faq.heading') }
+						</h3>
+						<p className='font-normal text-[16px] max-sm:text-[14px] leading-[23px] mt-3 mx-auto text-center sm:w-[630px] w-full text-gray-2'>
+							{ t('faq.subHeading') }
+						</p>
+						<div className='mt-10'>
+							<Accordion
+								itemTheme={ props => <Accordion.ItemFAQ { ...props } readMore={ true } /> }
+								datas={ FAQDatas().filter((_faq, index) => index < 5) }
+							/>
 						</div>
+						<Button
+							className='mt-5 py-4 max-sm:py-[10px] max-sm:px-[20px] max-sm:text-[14px]'
+							theme='outline'
+							$hoverTheme='primary'
+							label={ t('faq.allFaqBtnLabel') }
+							onClick={ () => navigate.push('/contact/faq') }
+						/>
 					</div>
 				</div>
-			</PanelV1>
+			</PanelH2>
+
+			<PanelH2>
+				<div className='sm:mt-28 mt-12'>
+					<h3 className='text-[24px] max-sm:text-[22px] font-black text-center text-gray-1'>
+						{ t('location.heading') }
+					</h3>
+					<p className='font-normal text-[16px] max-sm:text-[14px] leading-[23px] mt-3 mx-auto text-center sm:w-[630px] w-full text-gray-2'>
+						{ t('location.subHeading') }
+					</p>
+				</div>
+			</PanelH2>
+
+			<div className={ 'sm:mt-20 sm:pb-5 pb-10 mt-8 flex sm:flex-row flex-col' }>
+				<div className='max-sm:hidden'>
+					{
+						Object.values(hospitalSelector || [])?.map((data, index) => (
+							<SelectRSLocation
+								key={ index }
+								id={ data.id ?? 0 }
+								title={ data.name ?? '' }
+								mapString={ data.embed_link ?? '' }
+								imgThumb={ data.img_url?.[0] ?? '' }
+								address={ data.address ?? '' }
+								phone={ data.phone ?? '' }
+								isActive={ selectedMapIndex === data.id }
+								onClick={ handleRSLocationChange }
+							/>
+						))
+					}
+				</div>
+				<div className='flex-1 max-sm:mx-4 max-sm:rounded-[10px] max-sm:bg-white overflow-hidden min-h-[600px]'>
+					{
+						renderTooltip(Object.values(hospitalSelector || [])?.filter(data => data.id === selectedMapIndex))
+					}
+					<iframe
+						src={ getEmbedLink() }
+						className='border-0 w-full h-full max-sm:min-h-[500px]'
+						allowFullScreen={ false }
+						loading='lazy'
+						referrerPolicy='no-referrer-when-downgrade' />
+				</div>
+				<div className='sm:hidden relative mt-[-50px] mx-4'>
+					<div className='global-shadow relative'>
+						<CustomCarousel autoplay={ false } onChangeIndex={ handleRSCarouselChange }>
+							{
+								Object.values(hospitalSelector || [])?.map((data, index) => (
+									<div key={ index } className='rounded-[10px] bg-white overflow-hidden'>
+										<SelectRSLocation
+											id={ data.id ?? 0 }
+											title={ data.name ?? '' }
+											mapString={ data.embed_link ?? '' }
+											mapURL={ data.share_link ?? '' }
+											imgThumb={ data.img_url?.[0] ?? '' }
+											address={ data.address ?? '' }
+											phone={ data.phone ?? '' }
+											isActive={ selectedMapIndex === data.id }
+											onClick={ handleRSLocationChange }
+										/>
+									</div>
+								))
+							}
+						</CustomCarousel>
+					</div>
+				</div>
+			</div>
+			
 		</ContactUsPanel>
 	);
 };

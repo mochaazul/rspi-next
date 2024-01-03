@@ -28,6 +28,7 @@ export interface ArticleDetail {
 	hospitals?: (string | number)[] | null;
 	fullname_doctor: string;
 	speciality: string;
+	language: string;
 }
 
 export interface NewsSpeciality {

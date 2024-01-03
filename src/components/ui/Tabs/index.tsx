@@ -43,21 +43,21 @@ const Tabs: React.FC<Props> = ({
 		if (typeof window !== 'undefined') {
 			return window.removeEventListener('resize', setTabPosition);
 		}
-		
+
 		return;
 	}, [activeTabIndex]);
 
 	return (
 		<TabsDataStyle className={ className }>
 			<div className='relative border-solid border-b-[1px] border-b-white/20'>
-				<div className='flex space-x-3'>
+				<div className='flex space-x-4'>
 					{ tabsData.map((tab, idx) => {
 						return (
 							<button
 								key={ idx }
 								ref={ el => (tabsRef.current[idx] = el) }
 								style={ { backgroundColor: activeTabIndex === idx && isBackground ? colors.paradiso.light : '' } }
-								className={ `${ !isBackground ? 'py-[20px]' : 'py-[20px] px-[37px]' } transition-all duration-300` }
+								className={ `${ !isBackground ? 'py-4 sm:py-5' : 'py-4 sm:py-5 px-[37px]' } transition-all duration-300` }
 								onClick={ () => {
 									if (onClickItem) {
 										onClickItem(idx);

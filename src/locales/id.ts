@@ -29,7 +29,8 @@ export default {
 		callAmbulanceLabel: {
 			heading: 'Panggil Ambulans',
 			subHeading: 'Silahkan pilih Rumah sakit: '
-		}
+		},
+		share: 'Bagikan'
 	},
 	blacklist: {
 		contactUs: 'Hubungi kami',
@@ -256,7 +257,7 @@ export default {
 			faq: {
 				contactUsLabel: 'Hubungi Kami',
 				faqLongLabel: 'Pertanyaan Umum',
-				readMoreLabel: 'Baca selengkapnya',
+				readMoreLabel: 'Baca Selengkapnya',
 				heading: 'FAQ',
 				subHeading: 'Pertanyaan yang sering ditanyakan mengenai layanan di unit RS Pondok Indah',
 				allFaqBtnLabel: 'Lihat Semua FAQ',
@@ -543,7 +544,11 @@ export default {
 			promoItem: {
 				detailsBtnLabel: 'Lihat Detail'
 			},
-			schedule: 'Jadwal'
+			schedule: 'Jadwal',
+			more: 'Lihat Promo & Paket Lebih Banyak',
+			info: 'Informasi',
+			phone: 'Telepon (Whatsapp Only)',
+			operational: 'Jam Operasional',
 		},
 		facilities: {
 			heading: 'Fasilitas & Layanan',
@@ -776,7 +781,8 @@ export default {
 				patientGenderMaleLabel: 'Laki-laki',
 				patientGenderFemaleLabel: 'Perempuan',
 				patientPhotoProfile: 'Foto profil',
-				editLabel: 'Ubah'
+				editLabel: 'Ubah',
+				successUpdateProfile: 'Berhasil update profil',
 			},
 			securitySetting: {
 				heading: 'Pengaturan Keamanan',
@@ -786,7 +792,9 @@ export default {
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Simpan',
-				cancelBtnLabel: 'Batal'
+				cancelBtnLabel: 'Batal',
+				pinLabelInfo: 'PIN digunakan untuk mengakses fitur layanan portal pasien dan aktivitas keamanan pada akun Anda.',
+				lastUpdatedPasswordLabel: 'Terakhir diupdate pada tanggal {date}'
 			},
 			medicalRecordLabel: 'Informasi Rekam Medis',
 			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)',
@@ -852,9 +860,8 @@ export default {
 						notesInputPlaceholder: 'Masukkan deskripsi...',
 						optionalLabel: '(Opsional)',
 						smallNotes: 'Hal ini akan membantu kami untuk terus meningkatkan layanan kami.',
-						responReview: 'Review telah',
-						responReviewFailed: ' gagal',
-						responReviewSuccess: ' berhasil'
+						responReviewFailed: 'Review telah gagal',
+						responReviewSuccess: 'Review telah berhasil'
 					}
 				},
 				empty: 'Anda belum mempunyai data riwayat konsultasi saat ini.',
@@ -862,11 +869,14 @@ export default {
 			},
 			jadwalKunjungan: {
 				label: {
-					queueNo: 'Nomor Antrean',
+					queueNo: 'No. Antrian:',
 					activeSchedule: 'Jadwal Aktif',
-					cancelAppointment: 'Batalkan janji temu',
+					cancelAppointment: 'Batalkan Janji Temu',
 					empty: 'Anda belum mempunyai data kunjungan saat ini',
-					emptyBtnCta: 'Jadwalkan Kunjungan'
+					emptyBtnCta: 'Jadwalkan Kunjungan',
+					visitSchedule: 'Jadwal Konsultasi',
+					reschedule: 'Jadwalkan Ulang',
+					rescheduleAgain: 'Jadwalkan Lagi'
 				},
 				options: [
 					'Diri Sendiri',
@@ -880,8 +890,9 @@ export default {
 					T: 'Transferred',
 					A: 'Arrived',
 					P: 'Postponed',
-					S: 'Seen',
-					U: 'Arrived Not Seen'
+					S: 'Seen Doctor',
+					U: 'Arrived Not Seen',
+					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
 				offlineConsultation: 'Konsultasi Tatap Muka'
@@ -906,8 +917,10 @@ export default {
 				doctorName: 'Nama Dokter',
 				specialty: 'Spesialisasi',
 				doctorFound: 'Dokter Ditemukan',
-				seeDetail: 'Book Appointment'
+				seeDetail: 'Book Appointment',
+				applyFilter: 'Terapkan'
 			},
+
 		},
 		doctorProfile: {
 			bookAppointmentLabel: 'Buat Janji Temu',
@@ -936,6 +949,7 @@ export default {
 			asuransiCard: 'Foto Kartu Asuransi (Opsional)',
 			asuransiCardFront: 'Upload foto tampak depan',
 			asuransiCardBack: 'Upload foto tampak belakang',
+			labelPhoneModal: 'Silahkan hubungi call center'
 		},
 		footer: {
 			visitorInfo: {
@@ -990,7 +1004,8 @@ export default {
 				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru',
 				resetBtnLabel: 'Ubah Password'
 			},
-			forgotPasswordLabel: 'Lupa Password?'
+			forgotPasswordLabel: 'Lupa Password?',
+			lastUpdatedPasswordLabel: 'Terakhir diupdate pada tanggal {date}'
 		},
 	},
 } as const;

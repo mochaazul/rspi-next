@@ -25,6 +25,7 @@ const News = async ({ searchParams }: any) => {
 		title: art?.title,
 		news_author: art?.news_author,
 		short_description: art?.short_description,
+		language: art?.language,
 	}));
 
 	const t = await getScopedI18n('page.news');

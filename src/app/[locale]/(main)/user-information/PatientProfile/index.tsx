@@ -10,7 +10,6 @@ import { icons, colors } from '@/constant';
 import {
 	CheckPinType,
 	I_VisitHistory,
-	ResponseType,
 	UpdateEmailType,
 	UpdateProfileType,
 	UserDataDetail
@@ -25,12 +24,10 @@ import Form from '@/components/ui/Form';
 import Spinner from '@/components/ui/Spinner';
 import HorizontalInputWrapper from '@/components/ui/PageComponents/UserInformationSections/HorizontalInputWrapper';
 import CardUser from '@/components/ui/PageComponents/UserInformationSections/CardUser';
-import { useScopedI18n } from '@/locales/client';
-import {
-	useGeneralUploads,
-	useUpdateAvatar,
-	useUpdateEmail
-} from '@/lib/api/client/profile';
+import PinModal from '@/components/ui/PinModal';
+import { ModalStyle } from '@/components/ui/PageComponents/RegisterSections/InfoModal/style';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
+import { useGeneralUploads, useUpdateEmail } from '@/lib/api/client/profile';
 import {
 	CheckPinSchema,
 	UpdateEmailSchema,
@@ -44,9 +41,6 @@ import { updateAvatar, updateProfile } from '@/lib/api/profile';
 import { regexInputPhone } from '@/constant/regExp';
 
 import ProfilePageStyle, { Divider } from './style';
-import { PanelH2 } from '../../style';
-import PinModal from '@/components/ui/PinModal';
-import { ModalStyle } from '@/components/ui/PageComponents/RegisterSections/InfoModal/style';
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -84,6 +78,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 	const t = useScopedI18n('page.profilePage');
 	const tModalPin = useScopedI18n('modalDialog.pin');
 	const tValidation = useScopedI18n('validation.formValidation');
+	const currentLang = useCurrentLocale();
 	const breadcrumbsPath = [{ name: t('heading'), url: '#' }];
 
 	const [tempImageSrc, setTempImageSrc] = useState<string>('');
@@ -367,7 +362,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 
 	return (
 		<div>
-			<PanelH2>
+			<div className='lg:max-w-[1110px] w-full mx-auto max-xl:px-4'>
 				<Breadcrumbs datas={ breadcrumbsPath } />
 				<ProfilePageStyle className='mt-[25px] sm:mt-[50px]'>
 					<div className='flex'>
@@ -676,7 +671,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 									}
 								</Form>
 							</div>
-							<div className='flex flex-col gap-[10px]'>
+							<div className='flex flex-col'>
 								<HorizontalInputWrapper
 									label={ t('securitySetting.passwordLabel') }
 									editHref='/update-password'
@@ -684,19 +679,22 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 										placeholder: t('securitySetting.passwordLabel'),
 										disabled: true,
 										type: 'password',
+										infoMessage: patientProfile?.password_updated_date && patientProfile?.password_updated_date !== '0001-01-01 00:00:00'
+											? t('securitySetting.lastUpdatedPasswordLabel', { date: `${ dayjs(patientProfile?.password_updated_date).locale(currentLang).format('DD MMMM YYYY') }` })
+											: undefined
 									} }
 								/>
-								<div onClick={ () => { setPinModalVisibleForgotPin(true); } }>
-									<HorizontalInputWrapper
-										label={ t('securitySetting.pinLabel') }
-										editHref='#'
-										inputProps={ {
-											placeholder: t('securitySetting.pinLabel'),
-											disabled: true,
-											type: 'password',
-										} }
-									/>
-								</div>
+								<HorizontalInputWrapper
+									label={ t('securitySetting.pinLabel') }
+									labelInfo={ t('securitySetting.pinLabelInfo') }
+									editHref='#'
+									onClickEdit={ () => setPinModalVisibleForgotPin(true) }
+									inputProps={ {
+										placeholder: t('securitySetting.pinLabel'),
+										disabled: true,
+										type: 'password',
+									} }
+								/>
 							</div>
 						</SubMenuPage>
 					</div>
@@ -821,13 +819,15 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 					</div>
 				</Modal>
 				<Modal visible={ showModalSuccess } onClose={ () => { setShowModalSuccess(false); setError(''); } }>
-					<div>
+					<div className='flex flex-col items-center gap-y-2.5'>
+						<icons.Confirmed />
+
 						<Text
 							fontSize='16px'
 							lineHeight='19px'
 							fontWeight='900'
 							color={ colors.paradiso.default }
-							text={ 'Berhasil Update Profile' }
+							text={ t('profileDetail.successUpdateProfile') }
 						/>
 					</div>
 				</Modal>
@@ -843,7 +843,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 					</div>
 				</Modal>
 
-			</PanelH2 >
+			</div>
 		</div >
 	);
 };

@@ -16,6 +16,7 @@ import useFindDoctor from '../useFindDoctor';
 
 import Combobox, { ItemType } from '@/components/ui/Combobox';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
+import { isMobile } from 'react-device-detect';
 
 type Props = {
 	hospitals: HospitalDetail[],
@@ -41,7 +42,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 
 	const params = new URLSearchParams(searchParams);
 
-	const [speacialityValue, setSpecialityValue] = useState<ItemType|null>(null);
+	const [speacialityValue, setSpecialityValue] = useState<ItemType | null>(null);
 
 	const { hospitalFilter, clinicFilter, createQueryString, specialtyFilter } = useFindDoctor({
 		hospitals,
@@ -115,15 +116,18 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 				text={ t('heading') }
 			/>
 			{ /* Dropdown Hari */ }
-			<div className='mb-8'>
-				<Form.Dropdown
-					placeholder='Select Day'
-					multiple
-					menuItems={ Days }
-					onChangeValueDropdown={ onChangePreferedDay }
-					allOptionLabel={ d('all') }
-				/>
-			</div>
+			{
+				!isMobile &&
+				<div className='mb-8'>
+					<Form.Dropdown
+						placeholder='Select Day'
+						multiple
+						menuItems={ Days }
+						onChangeValueDropdown={ onChangePreferedDay }
+						allOptionLabel={ d('all') }
+					/>
+				</div>
+			}
 			{ /* Horizontal spacer */ }
 			<div className='x-spacer mb-8 max-sm:hidden' />
 			{ /* Hospital checkbox with accordion */ }
@@ -136,8 +140,8 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 			>
 				{ t('label.hospital') }
 			</Text>
-		
-			 <div className='flex flex-col gap-4'>
+
+			<div className='flex flex-col gap-4'>
 				<div>
 					<Form.Checkbox
 						label={ 'All Hospitals' }
@@ -159,7 +163,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 					))
 				}
 			</div>
-			
+
 			{ /* Horizontal spacer */ }
 			<div className='x-spacer mb-8 max-sm:hidden mt-8' />
 			{ /* Specialty search with accordion */ }
@@ -172,7 +176,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 			>
 				{ t('label.specialty') }
 			</Text>
-		
+
 			<>
 				<div className='mx-[1px]'>
 					<Combobox
@@ -186,21 +190,21 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 							}
 						} }
 					/>
-					
+
 				</div>
 				<div className='flex flex-row gap-2 flex-wrap mt-6'>
 					{
 						specialtyFilter?.getAll()?.map((speciality, index) => {
 							return (
 								speciality.label &&
-							<Pills key={ index } onRemove={ () => handleRemoveSpecialty(speciality) }>
-								<Text
-									fontSize='16px'
-									fontWeight='400'
-									lineHeight='19px'
-									text={ speciality.label }
-								/>
-							</Pills>
+								<Pills key={ index } onRemove={ () => handleRemoveSpecialty(speciality) }>
+									<Text
+										fontSize='16px'
+										fontWeight='400'
+										lineHeight='19px'
+										text={ speciality.label }
+									/>
+								</Pills>
 							);
 						})
 					}

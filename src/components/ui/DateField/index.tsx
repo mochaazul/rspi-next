@@ -7,8 +7,6 @@ import { useCurrentLocale } from '@/locales/client';
 
 import { IconWrapper, InputType, DateFieldWrapper } from './style';
 
-import 'moment/locale/id';
-
 import withInputLabel from '../withInputLabel';
 
 /**

@@ -29,7 +29,8 @@ export default {
 		callAmbulanceLabel: {
 			heading: 'Call an Ambulance',
 			subHeading: 'Please select hospital: '
-		}
+		},
+		share: 'Share now'
 	},
 	blacklist: {
 		contactUs: 'Contact Us',
@@ -538,7 +539,11 @@ export default {
 			promoItem: {
 				detailsBtnLabel: 'View Details'
 			},
-			schedule: 'Schedule'
+			schedule: 'Schedule',
+			more: 'More From Promo & Packages',
+			info: 'Information',
+			phone: 'Phone (Whatsapp Only)',
+			operational: 'Operational Hours',
 		},
 		facilities: {
 			heading: 'Facilities & Services',
@@ -772,7 +777,8 @@ export default {
 				patientGenderMaleLabel: 'Male',
 				patientGenderFemaleLabel: 'Female',
 				patientPhotoProfile: 'Photo profile',
-				editLabel: 'Change'
+				editLabel: 'Change',
+				successUpdateProfile: 'Successfully Update Profile',
 			},
 			securitySetting: {
 				emailLabel: 'Email',
@@ -781,7 +787,9 @@ export default {
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Save',
-				cancelBtnLabel: 'Cancel'
+				cancelBtnLabel: 'Cancel',
+				pinLabelInfo: 'The PIN is used to access patient portal service features and security activities on your account.',
+				lastUpdatedPasswordLabel: 'Last updated on {date}'
 			},
 			medicalRecordLabel: 'Medical Record Information',
 			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)',
@@ -846,9 +854,8 @@ export default {
 						notesInputPlaceholder: 'Enter a description...',
 						optionalLabel: '(Optional)',
 						smallNotes: 'This would help us to keep improving our service.',
-						responReview: 'Review has been',
-						responReviewFailed: ' Failed',
-						responReviewSuccess: ' Successfully'
+						responReviewFailed: 'Review has been failed',
+						responReviewSuccess: 'Review has been successfully'
 					}
 				},
 				empty: 'You do not have any visit histories yet.',
@@ -856,11 +863,14 @@ export default {
 			},
 			jadwalKunjungan: {
 				label: {
-					queueNo: 'Queue Number',
+					queueNo: 'Queue No.:',
 					activeSchedule: 'Active Appointment',
 					cancelAppointment: 'Cancel Appointment',
 					empty: 'You do not have visit data at this time',
-					emptyBtnCta: 'Schedule a Visit'
+					emptyBtnCta: 'Schedule a Visit',
+					visitSchedule: 'Visit Schedule',
+					reschedule: 'Reschedule',
+					rescheduleAgain: 'Reschedule Again',
 				},
 				options: [
 					'Myself',
@@ -868,14 +878,15 @@ export default {
 				],
 				statusLabel: {
 					C: 'Schedule Completed',
-					X: 'Schedule Canceled',
-					N: 'Absent',
+					X: 'Cancelled',
+					N: 'Not Attended',
 					H: 'Hold',
 					T: 'Transferred',
 					A: 'Arrived',
 					P: 'Postponed',
-					S: 'Seen',
-					U: 'Arrived Not Seen'
+					S: 'Seen Doctor',
+					U: 'Arrived Not Seen',
+					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
 				offlineConsultation: 'Face-to-face Consultation'
@@ -901,7 +912,8 @@ export default {
 				doctorName: 'Doctor Name',
 				specialty: 'Specialty',
 				doctorFound: 'Doctors Found',
-				seeDetail: 'Book Appointment'
+				seeDetail: 'Book Appointment',
+				applyFilter: 'Apply'
 			},
 		},
 		doctorProfile: {
@@ -931,6 +943,7 @@ export default {
 			asuransiCard: 'Insurance Card Photo (Optional)',
 			asuransiCardBack: 'Upload a rear view photo',
 			asuransiCardFront: 'Upload a photo of the front view',
+			labelPhoneModal: 'Please contact the call center'
 		},
 		footer: {
 			visitorInfo: {
@@ -985,7 +998,8 @@ export default {
 				newPasswordConfirmationPlaceholder: 'Confirm your new password',
 				resetBtnLabel: 'Change Password'
 			},
-			forgotPasswordLabel: 'Forgot Password?'
+			forgotPasswordLabel: 'Forgot Password?',
+			lastUpdatedPasswordLabel: 'Last updated on {date}'
 		}
 	}
 } as const;
