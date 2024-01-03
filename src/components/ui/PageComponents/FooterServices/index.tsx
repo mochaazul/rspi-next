@@ -9,6 +9,8 @@ import {
 	Text
 } from '@/components/ui';
 
+import TextHtml from '@/components/ui/TextHtml';
+
 import { FooterServiceStyle } from './style';
 
 type Props = PropsWithRef<PropsWithChildren<{
@@ -49,11 +51,11 @@ const FooterServices = ({
 				}
 			</div>
 			<div className={ isImgEmpty ? 'mt-[48px]' : 'mt-[10px]' }>
-				<div
-					style={ { lineHeight: '24px', fontSize: '16px' } }
-					className='innerHTML'
-					dangerouslySetInnerHTML={ { __html: detail?.[0]?.content || '' } }
+				<TextHtml
+					className='leading-[24px] text-[16px]'
+					htmlStr={ detail?.[0]?.content ?? '' }
 				/>
+				
 			</div>
 		</div>
 	);
