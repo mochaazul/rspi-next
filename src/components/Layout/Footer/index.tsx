@@ -204,7 +204,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			<Text
 				fontSize='14px'
 				color={ colors.paradiso.default }
-				className='mb-4 max-sm:text-xs font-bold sm:font-normal max-sm:uppercase'
+				className='mb-4 max-sm:text-xs font-bold sm:font-normal max-sm:uppercase leading-[24px]'
 			>{ text }</Text>
 		);
 	};
@@ -333,7 +333,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				</div>
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
-					<Text fontSize='14px' className='sub-text' subClassName='leading-[21px]'>{ t('subscribeDescription') }</Text>
+					<Text fontSize='14px' className='sub-text' subClassName='leading-[21px] max-sm:leading-[24px]'>{ t('subscribeDescription') }</Text>
 					<div className='flex items-center mt-4 lg:mt-6 w-full'>
 						<div className='-mr-2 flex-1'>
 							<TextField
@@ -359,8 +359,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					textAlign='center'
 					fontSize='16px'
 					fontWeight='400'
-					subClassName='leading-normal'
-					color={ colors.grey.dark }>
+					subClassName='leading-normal max-sm:text-[14px] text-gray-2' >
 						Copyright © { date.getFullYear() } RS Pondok Indah Group.
 					<span className='sm:hidden'><br /></span>All Rights Reserved.
 				</Text>
@@ -371,7 +370,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 							textAlign='center'
 							fontSize='16px'
 							fontWeight='400'
-							subClassName='leading-normal'
+							subClassName='leading-normal  max-sm:text-[14px] text-gray-2'
 							color={ colors.grey.dark }> Version { config?.version } </Text>
 					</div>
 				}

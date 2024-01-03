@@ -25,11 +25,11 @@ const HospitalServices = ({
 
 	const renderContent = (
 		<div>
-			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
+			<Text fontSize='24px' fontWeight='900' subClassName='max-sm:text-[20px] leading-normal' color={ colors.paradiso.default }>
 				{ detail?.name }
 			</Text>
 
-			<div className='mt-[32px]'>
+			<div className='mt-[32px] max-sm:mt-4'>
 				<CustomCarousel arrowButton>
 					{ (detail?.img_url ?? [])?.map((image: string, index: any) => {
 						return (
@@ -44,7 +44,7 @@ const HospitalServices = ({
 				</CustomCarousel>
 			</div>
 
-			<div className='mt-[48px]'>
+			<div className='mt-[48px] max-sm:mt-4'>
 				<TextHtml
 					className='innerHTML'
 					htmlStr={ detail?.description || '' }
@@ -58,7 +58,7 @@ const HospitalServices = ({
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>
 				<div>
 					<div className='content-wrapper flex flex-col'>
-						<div className='mb-[50px] sm:ml-[32px]'>
+						<div className='mb-[50px] max-sm:mb-[25px] sm:ml-[32px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
 						</div>
 						<div className='rightSide sm:ml-[32px]'>
