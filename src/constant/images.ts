@@ -15,6 +15,9 @@ import CentreExcellenceCard2 from '/public/images/samples/unsplash_7jjnJ-QA9fY.j
 import CentreExcellenceCard3 from '/public/images/samples/unsplash_hl6uG9cHW5A.jpg';
 import CentreExcellenceCard4 from '/public/images/samples/unsplash_PT70CT6mATQ.jpg';
 import UploadLogo from '/public/images/ic/upload-cloud.png';
+import LinkedinLogo from '/public/svg/linkedin.svg';
+import TelegramLogo from '/public/svg/telegram.svg';
+import WhatsappLogo from '/public/svg/whatsapp.svg';
 
 import Awards1 from '/public/images/samples/image_prev_ui_2.png';
 import Awards2 from '/public/images/samples/image_6.png';
@@ -98,5 +101,8 @@ export default {
 	EmptyStatePatientPortal,
 	ProfilePatient,
 	DoctorProfile,
-	UploadLogo
+	UploadLogo,
+	LinkedinLogo,
+	TelegramLogo,
+	WhatsappLogo,
 };

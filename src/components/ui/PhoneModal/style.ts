@@ -5,4 +5,5 @@ export const PinModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+	width: 538px;
 `;

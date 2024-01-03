@@ -24,22 +24,22 @@ export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
 				text={ 'Share This Doctor' }
 				className='related lg:mt-[30px]  '
 				fontWeight='900'
-				fontSize='12px'
+				fontSize='16px'
 				lineHeight='24px'
 			/>
 			<div className='flex gap-[10px] mt-[20px] '>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.facebook.com/RumahSakitPondokIndah') }>
-					<Icons.Facebook
+					<Images.FacebookLogo
 						width='16px'
 						height='16px' />
 				</div>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://twitter.com/rspondokindah') }>
-					<Icons.Twitter
+					<Images.TwitterLogo
 						width='16px'
 						height='16px' />
 				</div>
 				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.linkedin.com/company/rumah-sakit-pondok-indah/') }>
-					<Icons.Linkedin
+					<Images.LinkedinLogo
 						width='16px'
 						height='16px'
 					/>
@@ -47,6 +47,19 @@ export const ShareDoctor = (props: React.HTMLAttributes<HTMLDivElement>) => {
 				<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathName); } }>
 					<Icons.Link width='16px' height='16px' />
 				</div>
+				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://t.me/username') }>
+					<Images.TelegramLogo
+						width='16px'
+						height='16px'
+					/>
+				</div>
+				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://wa.me/081') }>
+					<Images.WhatsappLogo
+						width='16px'
+						height='16px'
+					/>
+				</div>
+
 			</div>
 		</div>
 	);

@@ -123,6 +123,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 										key={ index }
 										id={ data?.id }
 										slug={ data?.slug }
+										language={ data?.language }
 										image={ data.image_url }
 										imageHeight='200px'
 										header={
@@ -162,7 +163,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 												/>
 
 												<TextHtml
-													className='innerHTML text-xs max-sm:leading-[18px] sm:text-sm md:text-base md:leading-[23px] mt-2 sm:mt-3 line-clamp-3'
+													className='text-xs max-sm:leading-[18px] sm:text-sm md:text-base md:leading-[23px] mt-2 sm:mt-3 line-clamp-3'
 													style={ { color: colors.grey.dark } }
 													htmlStr={ data?.short_description ?? '' } />
 											</div>

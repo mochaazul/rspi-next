@@ -129,7 +129,7 @@ export default function Page({ params }: Props) {
 		return '';
 	};
 
-	const onBookHandler = async() => {
+	const onBookHandler = async () => {
 		try {
 			const token = await cookiesHelper.getToken();
 			const userData = await cookiesHelper.getUserData();
@@ -143,12 +143,12 @@ export default function Page({ params }: Props) {
 			});
 
 			if (res.data.is_blacklist) {
-				
+
 				const msg = lang === 'id' ? res.data.description_id : res.data.description_en;
 				setBlacklistMsg(msg);
 				return setBlacklistModalVisible(true);
 			}
-			
+
 			if (selectedTimeSlot?.slot_id) {
 				const bookAppointmentUrl = getBookAppointmentUrl();
 				router.push(bookAppointmentUrl);
@@ -204,7 +204,7 @@ export default function Page({ params }: Props) {
 						/>
 						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] pb-[120px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
-							<div className='content-wrapper sm:flex w-full'>
+							<div className='content-wrapper sm:flex w-full mt-[40px]'>
 								<DoctorAvatar className='max-sm:hidden' profile_url={ doctor?.data?.img_url } />
 								<div className='sm:ml-[63px] sm:w-[701px]'>
 									<div className='flex gap-[16px]'>
@@ -259,7 +259,7 @@ export default function Page({ params }: Props) {
 												} }
 												loading={ doctorCalendarLoading } />
 										</TimeSlotCard>
-										<TimeSlotCard className='px-[24px] py-[20px] md:w-[calc(100%/2)]'>
+										<TimeSlotCard className='px-[16px] py-[20px] md:w-[calc(100%/2)]'>
 											<VisitSchedule
 												isLoading={ doctorSlotLoading }
 												timeslot={ doctorSlot?.data || [] }
@@ -296,7 +296,7 @@ export default function Page({ params }: Props) {
 									onClick={ onBookHandler }
 									disabled={ !selectedTimeSlot }
 								>
-									{ blacklistLoading ? <span className='spinner-loader'/> : t('form.btnLabel.submit') }
+									{ blacklistLoading ? <span className='spinner-loader' /> : t('form.btnLabel.submit') }
 								</Button>
 							</div>
 						</div>

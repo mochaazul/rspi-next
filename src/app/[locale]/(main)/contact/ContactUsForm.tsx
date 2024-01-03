@@ -262,6 +262,7 @@ const ContactUsForm = ({
 							label={ t('contactForm.submitBtnLabel') }
 							type='submit'
 							disabled={ loadingUser || captchaStatus === false }
+							className='max-sm:px-[16px] max-sm:py-[10px] max-sm:text-[14px]'
 						/>
 					</div>
 				</div>

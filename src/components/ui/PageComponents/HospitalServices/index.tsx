@@ -1,8 +1,6 @@
 'use client';
 import { PropsWithChildren, PropsWithRef } from 'react';
 
-import Image from 'next/image';
-
 import { colors } from '@/constant';
 
 import {
@@ -12,7 +10,7 @@ import {
 } from '@/components/ui';
 
 import { BreadcrumbsType } from '../../Breadcrumbs';
-
+import TextHtml from '../../TextHtml';
 import { HospitalServiceStyle } from './style';
 
 type Props = PropsWithRef<PropsWithChildren<{
@@ -24,7 +22,7 @@ const HospitalServices = ({
 	detail,
 	breadcrumbsPath,
 }: Props) => {
-	
+
 	const renderContent = (
 		<div>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
@@ -47,10 +45,9 @@ const HospitalServices = ({
 			</div>
 
 			<div className='mt-[48px]'>
-				<div
-					style={ { lineHeight: '24px', fontSize: '16px' } }
+				<TextHtml
 					className='innerHTML'
-					dangerouslySetInnerHTML={ { __html: detail?.description || '' } }
+					htmlStr={ detail?.description || '' }
 				/>
 			</div>
 		</div>

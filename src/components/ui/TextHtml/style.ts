@@ -18,4 +18,18 @@ export const TextContainer = styled.div`
     font-size: 16px;
     line-height: 24px;
   }
+	h1,h2,h3,h4,h5,h6,p,span {
+		font-size: revert;
+    line-height: revert;
+		font-weight: revert;
+	}
+	a {
+		color: revert;
+		text-decoration: revert;
+	}
+	ul, ol {
+		list-style: revert;
+    margin: revert;
+    padding: revert;
+	}
 `;
