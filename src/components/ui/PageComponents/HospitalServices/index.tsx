@@ -58,7 +58,7 @@ const HospitalServices = ({
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>
 				<div>
 					<div className='content-wrapper flex flex-col'>
-						<div className='mb-[20px] sm:ml-[32px]'>
+						<div className='mb-[50px] sm:ml-[32px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
 						</div>
 						<div className='rightSide sm:ml-[32px]'>
