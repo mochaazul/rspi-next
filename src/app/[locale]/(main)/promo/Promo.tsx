@@ -29,6 +29,7 @@ type DataEventProps = {
 	slug?: string;
 	hospitals?: any;
 	category: string;
+	language: string;
 }
 
 type DataHospitalProps = {
@@ -153,6 +154,7 @@ const EventClassesPromo = ({
 									<Card
 										id={ data.id }
 										slug={ data.slug }
+										language={ data.language }
 										key={ index }
 										image={ data.img_url_card }
 										imageHeight='200px'

@@ -66,7 +66,7 @@ const ItemAccordion = ({ hospitals, props }: { props: ItemType; hospitals: I_Mas
 	return (
 		<AccordionItemStyle $isOpen={ isOpen }>
 			<Title hideIconChevron={ true } text={ props.title } open={ isOpen } clinics={ hospitals.find(hospital => hospital.hospital === props.title)?.clinics ?? [] } onClick={ handleToggleOpen } />
-			<div className='item-desc'>
+			<div className='item-desc mt-0'>
 				{ props.desc_jsx }
 			</div>
 		</AccordionItemStyle>
@@ -90,20 +90,10 @@ const ItemChildren = ({ clinics }: { clinics: I_MasterDoctorClinic[]; }) => {
 		<ItemChildrenStyle>
 			{ clinics?.map((clinic, index) => (
 				<div key={ index } className={ index < clinics.length - 1 ? 'border-bottom' : '' }>
-					<div>
-						<Text
-							fontWeight='700'
-							fontSize='14px'
-							lineHeight='17px'
-							color={ colors.grey.darker }
-							text={ clinic.clinic_name }
-							subClassName='max-sm:text-[12px]'
-						/>
-					</div>
-					<div className='flex flex-wrap mt-2 sm:mt-4 max-sm:gap-6' >
+					<div className='flex flex-wrap mt-2 gap-x-6 sm:mt-4 max-sm:gap-6' >
 						{
 							groupTimeFrame(clinic.schedules).map((date, index) => (
-								<div key={ index } className='jadwal min-w-[calc(100%/7)]'>
+								<div key={ index } className='jadwal'>
 									<div className='text-center mb-3'>
 										<Text
 											fontWeight='700'

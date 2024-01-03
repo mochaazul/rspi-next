@@ -2,7 +2,9 @@ import { colors } from '@/constant';
 import styled from 'styled-components';
 
 export const DoctorProfileStyle = styled.div`
-
+	background-color: #FAFAFA;
+	padding-top: 1px;
+	
   .content-wrapper {
     width: fit-content;
     padding: 30px 30px 58px 30px;

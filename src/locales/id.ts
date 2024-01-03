@@ -257,7 +257,7 @@ export default {
 			faq: {
 				contactUsLabel: 'Hubungi Kami',
 				faqLongLabel: 'Pertanyaan Umum',
-				readMoreLabel: 'Baca selengkapnya',
+				readMoreLabel: 'Baca Selengkapnya',
 				heading: 'FAQ',
 				subHeading: 'Pertanyaan yang sering ditanyakan mengenai layanan di unit RS Pondok Indah',
 				allFaqBtnLabel: 'Lihat Semua FAQ',
@@ -917,8 +917,10 @@ export default {
 				doctorName: 'Nama Dokter',
 				specialty: 'Spesialisasi',
 				doctorFound: 'Dokter Ditemukan',
-				seeDetail: 'Book Appointment'
+				seeDetail: 'Book Appointment',
+				applyFilter: 'Terapkan'
 			},
+
 		},
 		doctorProfile: {
 			bookAppointmentLabel: 'Buat Janji Temu',
@@ -947,6 +949,7 @@ export default {
 			asuransiCard: 'Foto Kartu Asuransi (Opsional)',
 			asuransiCardFront: 'Upload foto tampak depan',
 			asuransiCardBack: 'Upload foto tampak belakang',
+			labelPhoneModal: 'Silahkan hubungi call center'
 		},
 		footer: {
 			visitorInfo: {
