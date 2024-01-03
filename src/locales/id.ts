@@ -963,7 +963,7 @@ export default {
 			visitorPatientLabel: 'INFORMASI PENGUNJUNG DAN PASIEN',
 			followUsLabel: 'IKUTI KAMI',
 			getRSPIMobileLabel: 'DAPATKAN APLIKASI RSPI',
-			subscribeLabel: 'Ikuti Perkembangan Bersama Kami',
+			subscribeLabel: 'IKUTI PERKEMBANGAN BERSAMA KAMI',
 			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.',
 			subscribePlaceholder: 'Masukkan alamat email',
 			subscribeSubmit: 'Subscribe',
