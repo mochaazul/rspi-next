@@ -27,17 +27,17 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 		const Contents = [];
 		Contents.push(
 			<div className='mt-[30px] innerHTML text-16' >
-				<TextHtml htmlStr={ content?.conditions }/>
+				<TextHtml htmlStr={ content?.conditions } />
 			</div>
 		);
 		Contents.push(
 			<div className='mt-[30px] innerHTML text-16' >
-				<TextHtml htmlStr={ content?.treatments }/>
+				<TextHtml htmlStr={ content?.treatments } />
 			</div>
 		);
 		Contents.push(
 			<div className='mt-[30px] innerHTML text-16'>
-				<TextHtml htmlStr={ content?.technology }/>
+				<TextHtml htmlStr={ content?.technology } />
 			</div>
 		);
 		Contents.push(
@@ -54,6 +54,7 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 		);
 		return Contents[activeTabIdx] ?? null;
 	}, [activeTabIdx, activeMenuIndex]);
+
 	return (
 		<div>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h1' }>
@@ -79,7 +80,7 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 
 			<div className='mt-[48px]'>
 				<div className='innerHTML text-16' >
-					<TextHtml htmlStr={ content?.content }/>
+					<TextHtml htmlStr={ content?.content } />
 				</div>
 			</div>
 
@@ -105,17 +106,17 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 				</Text>
 
 				<div className='sm:flex gap-x-5'>
-					<div className='grid grid-cols-2 gap-x-20 mt-[24px]'>
+					<div className='grid grid-cols-2 gap-x-20'>
 						{
 							content.available_at?.map((data: any, index: number) => {
 								if (index !== 0)
 									return (
-										<div className='flex flex-col mt-[16px]' key={ index }>
+										<div className='flex flex-col' key={ index }>
 											<Text fontSize='18px' fontWeight='900' lineHeight='24px'>
 												{ data?.split(':+split+:')[0] }
 											</Text>
-											<div className='innerHTML text-16 mt-[10px]' >
-												<TextHtml htmlStr={ data?.split(':+split+:')[1] } />
+											<div className='mt-[10px]'>
+												<TextHtml className='innerHTML' htmlStr={ data?.split(':+split+:')[1] } />
 											</div>
 										</div>
 									);
