@@ -792,7 +792,9 @@ export default {
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Simpan',
-				cancelBtnLabel: 'Batal'
+				cancelBtnLabel: 'Batal',
+				pinLabelInfo: 'PIN digunakan untuk mengakses fitur layanan portal pasien dan aktivitas keamanan pada akun Anda.',
+				lastUpdatedPasswordLabel: 'Terakhir diupdate pada tanggal {date}'
 			},
 			medicalRecordLabel: 'Informasi Rekam Medis',
 			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)',
@@ -999,7 +1001,8 @@ export default {
 				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru',
 				resetBtnLabel: 'Ubah Password'
 			},
-			forgotPasswordLabel: 'Lupa Password?'
+			forgotPasswordLabel: 'Lupa Password?',
+			lastUpdatedPasswordLabel: 'Terakhir diupdate pada tanggal {date}'
 		},
 	},
 } as const;
