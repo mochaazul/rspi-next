@@ -34,6 +34,7 @@ const Combobox = ({
 	inputOnChange,
 	retainValue,
 	isLoading,
+	value,
 }: Props) => {
 	const t = useScopedI18n('page.landingPage.services.findDoctor.form');
 	const tCombobox = useScopedI18n('combobox');
@@ -77,7 +78,7 @@ const Combobox = ({
 				nullable
 			>
 
-				<div className='relative' onClick={ () => { setOpen(true); } } onBlur={ () => { setOpen(false); } }>
+				<div className='relative' onClick={ () => { setOpen(true); } } onBlur={ e => { if (!e.relatedTarget) { setOpen(false); } } }>
 					<ComboboxWrapper>
 						{
 							Icons && (
@@ -93,7 +94,7 @@ const Combobox = ({
 							{ ...(retainValue ? { displayValue: (item: ItemType) => `${ item?.label ?? '' }` } : {}) }
 						/>
 						{
-							(retainValue ? selected : query) && (
+							(retainValue ? selected : query) && value !== null && (
 								<ClearWrapper
 									onClick={ evt => {
 										evt.stopPropagation();
@@ -136,6 +137,10 @@ const Combobox = ({
 											`relative cursor-default select-none py-4 px-5 hover:bg-green-secondary/10 ${ selected ? 'bg-green-secondary/10' : '' }`
 										}
 										value={ item }
+										onClick={ event => {
+											event?.stopPropagation();
+											setOpen(false);
+										} }
 									>
 										{ ({ selected }) => (
 											<span className={ `text-base block truncate ${ selected ? 'font-bold text-green-secondary' : 'font-normal text-gray-1' }` }>
@@ -150,8 +155,8 @@ const Combobox = ({
 
 				</div>
 
-			</HeadlessCombobox>
-		</div>
+			</HeadlessCombobox >
+		</div >
 	);
 };
 
