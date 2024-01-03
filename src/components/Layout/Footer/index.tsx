@@ -309,7 +309,9 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				<div className='follow-section flex flex-col max-sm:flex-row-reverse gap-4 sm:gap-8'>
 					<div className='follow-icon-section'>
 						{ renderCategoryTitle(t('followUsLabel')) }
-						<Socmed />
+						<div className='max-sm:-mt-[10px]'>
+							<Socmed />
+						</div>
 					</div>
 					<div>
 						{ renderCategoryTitle(t('getRSPIMobileLabel')) }
