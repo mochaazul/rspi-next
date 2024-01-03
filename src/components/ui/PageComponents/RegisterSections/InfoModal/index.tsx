@@ -37,10 +37,11 @@ const InfoModal: React.FC<ModalProps> = ({
 					lineHeight='32px'
 				/>
 				<Text
-					text={ `${languages('subHeading')} ${emailUser} ${languages('subHeadingTail')}` }
+					text={ `${ languages('subHeading') } ${ emailUser } ${ languages('subHeadingTail') }` }
 					fontSize='16px'
 					fontWeight='400'
 					color={ colors.grey.pencil }
+					subClassName='text-xs leading-[18px] sm:text-base'
 					textAlign='center'
 				/>
 				<Button
