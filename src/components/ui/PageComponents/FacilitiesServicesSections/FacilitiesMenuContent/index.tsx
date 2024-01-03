@@ -69,7 +69,8 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 				/>
 			</div>
 
-			{ facilityDetail?.available_at?.filter(data => !!data)?.length ? (
+			{/* notes: dihide karena seharusnya pakai dari yg field facilities_hospitals saja */ }
+			{/* { facilityDetail?.available_at?.filter(data => !!data)?.length ? (
 				<div className='sm:flex gap-x-5'>
 					<div className='grid grid-cols-2 gap-4 sm:gap-10 mt-6 w-full'>
 						{
@@ -77,12 +78,18 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 								if (index !== 0)
 									return (
 										<div className='flex flex-col' key={ index }>
-											<Text fontSize='18px' fontWeight='900' lineHeight='24px' subClassName='max-md:text-base'>
+											<Text
+												fontSize='18px'
+												fontWeight='900'
+												lineHeight='24px'
+												subClassName='max-md:text-base'
+												className='mb-2.5'
+											>
 												{ data?.split(':+split+:')?.[0] }
 											</Text>
 											<TextHtml
 												htmlStr={ (data?.split(':+split+:')?.[1] || '')?.trim() }
-												className='text-sm md:text-base mt-2.5'
+												className='text-sm md:text-base'
 											/>
 										</div>
 									);
@@ -90,7 +97,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 						}
 					</div>
 				</div>
-			) : null }
+			) : null } */}
 			{ facilityDetail?.facilities_hospitals && facilityDetail?.facilities_hospitals?.length
 				? <AvailableAt hospital={ facilityDetail?.facilities_hospitals } />
 				: null }

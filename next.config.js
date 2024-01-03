@@ -35,18 +35,18 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'rebel-env.s3.us-west-2.amazonaws.com',
-				// hostname: '**',
+				// hostname: 'rebel-env.s3.us-west-2.amazonaws.com',
+				hostname: '**',
 			},
-			{
-				protocol: 'https',
-				hostname: 'rspi-assets.s3-ap-southeast-1.amazonaws.com',
-				// hostname: '**',
-			},
-			{
-				protocol: 'https',
-				hostname: 'storage.googleapis.com'
-			}
+			// {
+			// 	protocol: 'https',
+			// 	hostname: 'rspi-assets.s3-ap-southeast-1.amazonaws.com',
+			// 	// hostname: '**',
+			// },
+			// {
+			// 	protocol: 'https',
+			// 	hostname: 'storage.googleapis.com'
+			// }
 		],
 	},
 	output: 'standalone',
