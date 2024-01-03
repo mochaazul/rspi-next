@@ -9,10 +9,11 @@ export type TextHtmlProps = React.HTMLAttributes<HTMLDivElement> & {
 
 const TextHtml: React.FC<TextHtmlProps> = ({
 	htmlStr,
+	className = '',
 	...props
 }) => {
 	return (
-		<TextContainer className={ `ql-editor ${ props.className }` } { ...props }>{ parse(sanitize(htmlStr || '')) }</TextContainer>
+		<TextContainer className={ `ql-editor !p-0 ${ className }` } { ...props }>{ parse(sanitize(htmlStr || '')) }</TextContainer>
 	);
 };
 
