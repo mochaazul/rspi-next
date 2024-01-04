@@ -56,7 +56,7 @@ const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
 	};
 
 	return (
-		<>
+		<div>
 			{ /* Doctor found counter */ }
 			<Text
 				fontSize='20px'
@@ -86,7 +86,7 @@ const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
 							onChange={ ({ target }) => onSearchDoctorByName(target.value) }
 							$iconColor={ colors.grey.light }
 							value={ keywordValue }
-							className='w-[160px]'
+							className='w-[130px]'
 						/>
 						<Form.Dropdown
 							placeholder='Select Day'
@@ -94,7 +94,7 @@ const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
 							menuItems={ Days }
 							onChangeValueDropdown={ onChangePreferedDay }
 							allOptionLabel={ d('all') }
-							className='w-[160px]'
+							className='w-[150px]'
 						/>
 					</div> :
 					<Form.TextField
@@ -107,7 +107,7 @@ const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
 					/>
 			}
 
-		</>
+		</div>
 	);
 };
 

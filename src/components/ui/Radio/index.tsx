@@ -8,6 +8,7 @@ type RadioProps = {
 	value: string,
 	onChange: (value: string) => void;
 	groupContainerClassname?: string;
+	labelClassName?: string;
 };
 
 const Radio: React.FC<PropsWithChildren<RadioProps>> = ({
@@ -15,12 +16,13 @@ const Radio: React.FC<PropsWithChildren<RadioProps>> = ({
 	children,
 	onChange,
 	value,
-	groupContainerClassname
+	groupContainerClassname,
+	labelClassName = 'text-sm font-medium leading-5'
 }) => {
 
 	return (
 		<RadioGroup value={ value } onChange={ onChange }>
-			{ groupLabel && <RadioGroup.Label>{ groupLabel }</RadioGroup.Label> }
+			{ groupLabel && <RadioGroup.Label className={ labelClassName }>{ groupLabel }</RadioGroup.Label> }
 			<RadioGroupContainer className={ groupContainerClassname }>
 				{
 					children
