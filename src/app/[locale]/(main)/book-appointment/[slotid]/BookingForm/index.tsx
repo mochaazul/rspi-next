@@ -304,7 +304,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 						</NotificationPanel>
 					}
 					<Form className='w-full mt-[10px] flex flex-col gap-[12px]'>
-						<FormRow className='flex flex-col md:flex-row items-center'>
+						<FormRow className='flex flex-col md:flex-row md:items-center'>
 							<FormCol>
 								<Form.TextField
 									width='100%'
@@ -360,7 +360,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 									<div className='flex flex-col'>
 										<label className='text-base font-normal'>{ t('form.insuranceCard.label') }</label>
 										<div className='flex flex-row mt-2'>
-											<div className='w-[420px] h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
+											<div className='w-[150px] h-[100px] md:w-[420px] md:h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
 												{
 													tempImageAsuransiFront ?
 														<img
@@ -369,12 +369,9 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 															className='w-full h-full object-cover border border-dashed'
 														/> : <></>
 												}
-												<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiFrontFileRef.current?.click() }>
-													<Image
-														src={ icons.UploadCloud }
-														alt=''
-														color={ colors.grey.dark } />
-													<Text color={ colors.green.brandAccent } fontWeight='600'>{ t('form.insuranceCard.front') }</Text>
+												<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row px-3 gap-x-1 md:gap-x-2' onClick={ () => uploadAsuransiFrontFileRef.current?.click() }>
+													<icons.UploadCloud />
+													<label color={ colors.green.brandAccent } className='text-[#358888] font-bold text-xs leading-[18px] md:text-base md:leading-[16px]'>{ t('form.insuranceCard.front') }</label>
 												</div>
 												<input
 													type='file'
@@ -384,7 +381,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 													accept='image/*'
 												/>
 											</div>
-											<div className='w-[420px] h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
+											<div className='w-[150px] h-[100px] md:w-[420px] md:h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
 												{
 													tempImageAsuransiBack ?
 														<img
@@ -393,12 +390,9 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 															className='w-full h-full object-cover border border-dashed'
 														/> : <></>
 												}
-												<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row gap-x-2' onClick={ () => uploadAsuransiBackFileRef.current?.click() }>
-													<Image
-														src={ icons.UploadCloud }
-														alt=''
-														color={ colors.grey.dark } />
-													<Text color={ colors.green.brandAccent } fontWeight='600'>{ t('form.insuranceCard.back') }</Text>
+												<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row px-3 gap-x-1 md:gap-x-2' onClick={ () => uploadAsuransiBackFileRef.current?.click() }>
+													<icons.UploadCloud />
+													<label color={ colors.green.brandAccent } className='text-[#358888] font-bold text-xs leading-[18px] md:text-base md:leading-[16px]'>{ t('form.insuranceCard.back') }</label>
 												</div>
 												<input
 													type='file'
