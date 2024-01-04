@@ -37,7 +37,7 @@ export const LanguageSelector = () => {
 	};
 
 	return (
-		<div className='relative flex items-center'>
+		<div tabIndex={ 0 } className='relative flex items-center' onBlur={ () => setShowLanguagePicker(false) } >
 			<div className='flex items-center gap-2 lg:gap-3 cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
 				{ languageItem.find(item => currentLang === item.value)?.icon }
 				<div className='flex items-center gap-x-[5px]'>
