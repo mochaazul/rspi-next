@@ -54,7 +54,6 @@ const Card = (props: PropsType) => {
 		<CardWrapper className={ `shrink-0 ${ props.className } relative` }>
 			<Link href={ props.to || '#' } onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 				<CardStyle { ...props.cardStyle }>
-
 					{
 						props.image &&
 						<div className={ 'relative w-full' }
