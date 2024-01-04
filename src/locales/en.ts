@@ -718,8 +718,8 @@ export default {
 			}
 		},
 		registerOnboard: {
-			heading: 'Welcome to RS. Pondok Indah',
-			subHeading: 'Please enter your medical record to access all the services provided by RS. Pondok Indah. Your account information will be securely stored by us',
+			heading: 'Welcome to Pondok Indah Hospital',
+			subHeading: 'Please enter your medical record to access all the services provided by Pondok Indah Hospital',
 			form: {
 				mrlabel: 'Medical Record Number',
 				mrPlaceholder: 'Medical Record Number',
@@ -787,7 +787,9 @@ export default {
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Save',
-				cancelBtnLabel: 'Cancel'
+				cancelBtnLabel: 'Cancel',
+				pinLabelInfo: 'The PIN is used to access patient portal service features and security activities on your account.',
+				lastUpdatedPasswordLabel: 'Last updated on {date}'
 			},
 			medicalRecordLabel: 'Medical Record Information',
 			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)',
@@ -910,7 +912,8 @@ export default {
 				doctorName: 'Doctor Name',
 				specialty: 'Specialty',
 				doctorFound: 'Doctors Found',
-				seeDetail: 'Book Appointment'
+				seeDetail: 'Book Appointment',
+				applyFilter: 'Apply'
 			},
 		},
 		doctorProfile: {
@@ -940,6 +943,7 @@ export default {
 			asuransiCard: 'Insurance Card Photo (Optional)',
 			asuransiCardBack: 'Upload a rear view photo',
 			asuransiCardFront: 'Upload a photo of the front view',
+			labelPhoneModal: 'Please contact the call center'
 		},
 		footer: {
 			visitorInfo: {
@@ -994,7 +998,8 @@ export default {
 				newPasswordConfirmationPlaceholder: 'Confirm your new password',
 				resetBtnLabel: 'Change Password'
 			},
-			forgotPasswordLabel: 'Forgot Password?'
+			forgotPasswordLabel: 'Forgot Password?',
+			lastUpdatedPasswordLabel: 'Last updated on {date}'
 		}
 	}
 } as const;

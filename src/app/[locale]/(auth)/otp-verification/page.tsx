@@ -173,8 +173,8 @@ const OTPPage = () => {
 					fontSize={ '20px' }
 					lineHeight={ '24px' }
 					fontWeight={ '400' }
-					className='mt-4'
-					color={ colors.grey.pencil }
+					className='mt-2 md:mt-3'
+					color={ colors.grey.darkOpacity }
 					textAlign='center'
 				/>
 				<CountDownText

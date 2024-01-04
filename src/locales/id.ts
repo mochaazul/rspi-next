@@ -257,7 +257,7 @@ export default {
 			faq: {
 				contactUsLabel: 'Hubungi Kami',
 				faqLongLabel: 'Pertanyaan Umum',
-				readMoreLabel: 'Baca selengkapnya',
+				readMoreLabel: 'Baca Selengkapnya',
 				heading: 'FAQ',
 				subHeading: 'Pertanyaan yang sering ditanyakan mengenai layanan di unit RS Pondok Indah',
 				allFaqBtnLabel: 'Lihat Semua FAQ',
@@ -723,8 +723,8 @@ export default {
 			}
 		},
 		registerOnboard: {
-			heading: 'Selamat datang di RS. Pondok Indah',
-			subHeading: 'Silahkan masukan rekam medis anda untuk menggunakan seluruh fitur layanan dari RS. Pondok Indah. Informasi akun Anda tersimpan aman oleh kami',
+			heading: 'Selamat Datang di RS Pondok Indah',
+			subHeading: 'Masukkan nomor rekam medis Anda untuk mengakses seluruh fitur layanan RS Pondok Indah.',
 			form: {
 				mrlabel: 'Nomor rekam medis',
 				mrPlaceholder: 'Nomor rekam medis',
@@ -792,7 +792,9 @@ export default {
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Simpan',
-				cancelBtnLabel: 'Batal'
+				cancelBtnLabel: 'Batal',
+				pinLabelInfo: 'PIN digunakan untuk mengakses fitur layanan portal pasien dan aktivitas keamanan pada akun Anda.',
+				lastUpdatedPasswordLabel: 'Terakhir diupdate pada tanggal {date}'
 			},
 			medicalRecordLabel: 'Informasi Rekam Medis',
 			medicalRecordEmptyInfo: '(Anda belum memiliki nomor rekam medis)',
@@ -915,8 +917,10 @@ export default {
 				doctorName: 'Nama Dokter',
 				specialty: 'Spesialisasi',
 				doctorFound: 'Dokter Ditemukan',
-				seeDetail: 'Book Appointment'
+				seeDetail: 'Book Appointment',
+				applyFilter: 'Terapkan'
 			},
+
 		},
 		doctorProfile: {
 			bookAppointmentLabel: 'Buat Janji Temu',
@@ -945,6 +949,7 @@ export default {
 			asuransiCard: 'Foto Kartu Asuransi (Opsional)',
 			asuransiCardFront: 'Upload foto tampak depan',
 			asuransiCardBack: 'Upload foto tampak belakang',
+			labelPhoneModal: 'Silahkan hubungi call center'
 		},
 		footer: {
 			visitorInfo: {
@@ -999,7 +1004,8 @@ export default {
 				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru',
 				resetBtnLabel: 'Ubah Password'
 			},
-			forgotPasswordLabel: 'Lupa Password?'
+			forgotPasswordLabel: 'Lupa Password?',
+			lastUpdatedPasswordLabel: 'Terakhir diupdate pada tanggal {date}'
 		},
 	},
 } as const;

@@ -62,8 +62,7 @@ const ItemFAQ = (props: ItemType) => {
 												lineHeight='21px'
 												fontType={ null }
 												fontWeight='700'
-												color={ colors.paradiso.accent1 }
-												className='ml-1 inline-block'
+												className='ml-1 inline-block text-green-secondary'
 												subClassName='text-justify max-sm:leading-[18px]'
 												text={ t('readMoreLabel') }
 											/>
