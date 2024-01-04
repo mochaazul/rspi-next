@@ -50,6 +50,7 @@ export default {
 			serviceLocation: {
 				heading: 'Layanan ini tersedia di',
 				hospitalName: 'RS Pondok Indah - Pondok Indah Lantai 1',
+				floor: 'Lantai',
 				appointmentHeading: 'Perjanjian',
 				phoneNumberHeading: 'Telepon',
 				operationalHourHeading: 'Jam Operasional Patient Relations',
