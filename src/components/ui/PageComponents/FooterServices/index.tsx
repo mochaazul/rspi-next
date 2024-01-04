@@ -25,7 +25,7 @@ const FooterServices = ({
 	const isImgEmpty = detail?.[0]?.img_url !== null;
 	const renderContent = (
 		<div>
-			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
+			<Text fontSize='24px' fontWeight='900' subClassName='max-sm:text-[20px] font-black' color={ colors.paradiso.default }>
 				{ detail?.[0]?.title }
 			</Text>
 

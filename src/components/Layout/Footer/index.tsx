@@ -204,7 +204,8 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			<Text
 				fontSize='14px'
 				color={ colors.paradiso.default }
-				className='mb-4 max-sm:text-xs font-bold sm:font-normal max-sm:uppercase leading-[24px]'
+				className='mb-4 font-bold sm:font-normal max-sm:uppercase leading-[24px]'
+				subClassName='max-sm:text-xs'
 			>{ text }</Text>
 		);
 	};
@@ -335,7 +336,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				</div>
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
-					<Text fontSize='14px' className='sub-text' subClassName='leading-[21px] max-sm:leading-[24px]'>{ t('subscribeDescription') }</Text>
+					<Text fontSize='14px' className='sub-text' subClassName='leading-[21px] max-sm:text-[12px] max-sm:leading-[18px]'>{ t('subscribeDescription') }</Text>
 					<div className='flex items-center mt-4 lg:mt-6 w-full'>
 						<div className='-mr-2 flex-1'>
 							<TextField
