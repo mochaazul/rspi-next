@@ -14,6 +14,7 @@ import { useScopedI18n } from '@/locales/client';
 import { FAQStyle } from './style';
 import { PanelH1, PanelH4, PanelV1 } from '../style';
 import LangWrapper from '@/components/ui/LangWrapper';
+import BreadcrumbsClient from '@/components/ui/Breadcrumbs/client';
 
 type Props ={
   faqDatas: {
@@ -41,9 +42,9 @@ const FaqDetail = ({ faqDatas, breadCrumbPath, subHeading }:Props) => {
 		<FAQStyle>
 			<PanelV1>
 				<PanelH1>
-					{ /* <LangWrapper>
-					  <BreadcrumbsClient datas={ breadCrumbsPath } />
-					</LangWrapper> */ }
+					<LangWrapper>
+					  <BreadcrumbsClient datas={ breadCrumbPath } />
+					</LangWrapper>
 				</PanelH1>
 				<PanelH4>
 					<div className='sm:mt-[50px] mt-[25px]'>
