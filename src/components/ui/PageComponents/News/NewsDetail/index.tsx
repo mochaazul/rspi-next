@@ -247,7 +247,7 @@ const NewsDetail = ({
 							{ /* Dekstop View */ }
 							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] ' } ` }>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'w-[349px]' }>
-									<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
+									<span className={ ` ${relatedNews.length === 0 ? 'hidden' : ''} text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary`}>
 										Related News
 									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
@@ -281,7 +281,7 @@ const NewsDetail = ({
 									</div>
 								</div>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'mt-[40px]' }>
-									<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
+									<span className={ `${specialty.length === 0 ? 'hidden' : ''} text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary`}>
 										Specialty
 									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
