@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { slug: string; }; 
 		param: params?.slug,
 	});
    
-	const selectedEvent = Object.values(getArticle)[0];
+	const selectedEvent = Object.values(getArticle?.data)[0];
    
 	return {
 	  title: selectedEvent?.title,
