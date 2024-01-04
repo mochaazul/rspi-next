@@ -960,7 +960,7 @@ export default {
 			visitorPatientLabel: 'VISITOR & PATIENT INFORMATION',
 			followUsLabel: 'FOLLOW US',
 			getRSPIMobileLabel: 'GET RSPI MOBILE',
-			subscribeLabel: 'Stay Updated With Us',
+			subscribeLabel: 'STAY UPDATED WITH US',
 			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.',
 			subscribePlaceholder: 'Enter your email address',
 			subscribeSubmit: 'Subscribe',
