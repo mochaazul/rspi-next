@@ -1,9 +1,9 @@
 import { headers } from 'next/headers';
+import { notFound } from 'next/navigation';
 
 import FooterServices from '@/components/ui/PageComponents/FooterServices';
 
 import { getFooterPages } from '@/lib/api/footer';
-import { notFound } from 'next/navigation';
 
 const FooterPages = async ({ params }: { params: { slug: string; }; }) => {
 	const headersList = headers();
