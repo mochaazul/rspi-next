@@ -71,7 +71,7 @@ const Share = (props: PropsType) => {
 							>
 								{ item?.icon }
 								<div className='ml-[10px]'>
-									<Text text={ item?.label } fontSize='16px' fontWeight='400' />
+									<Text text={ item?.label } fontSize='16px' fontWeight='400' subClassName='hover:text-green-secondary' />
 								</div>
 							</Link>
 						)) }
