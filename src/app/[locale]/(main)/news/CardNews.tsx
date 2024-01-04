@@ -12,6 +12,7 @@ interface PropsType {
 	category: string;
 	isActive?: boolean;
 	onClick?: (id: number) => any;
+	classNames?: string;
 }
 
 const CardNews = (props: PropsType) => {
@@ -22,7 +23,7 @@ const CardNews = (props: PropsType) => {
 	return (
 		<CardNewsStyle>
 			<div
-				className={ `shrink-0 max-sm:px-3 max-sm:py-5 cursor-pointer flex relative justify-between ${ props?.isActive ? 'active' : '' }` }
+				className={ `shrink-0 max-sm:px-3 max-sm:py-5 cursor-pointer flex relative justify-between ${ props?.isActive ? 'active' : '' } ${ props?.classNames }` }
 				onClick={ handleOnClick(props?.id) }
 			>
 				<div className='flex flex-row gap-[30px]'>
