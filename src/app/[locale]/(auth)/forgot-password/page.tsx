@@ -85,7 +85,7 @@ const ForgotPassword = () => {
 						fontWeight={ '400' }
 						className='mt-2 md:mt-4 mb-8 md:mb-[62px]'
 						subClassName='max-md:text-base md:!leading-normal'
-						color={ colors.grey.pencil }
+						color={ colors.grey.darkOpacity }
 						textAlign='center'
 					/>
 					{
