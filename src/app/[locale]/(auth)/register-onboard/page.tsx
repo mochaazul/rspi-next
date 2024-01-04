@@ -216,7 +216,7 @@ const RegisterOnboard = () => {
 							name='medical_record'
 							placeholder={ t('form.mrPlaceholder') }
 							label={ t('form.mrlabel') }
-							labelWrapperClassName='!mb-2.5 md:!mb-1.5'
+							labelWrapperClassName='max-sm:!mb-2.5 md:!mb-1.5'
 							value={ formikRegister.values.medical_record }
 							onChange={ onChangeInput }
 							errorMessage={ getInputErrorMessage(formikRegister.errors?.medical_record, t('form.mrlabel')) }
@@ -240,7 +240,7 @@ const RegisterOnboard = () => {
 						className='input'
 						placeholder={ t('form.phonePlaceholder') }
 						label={ t('form.phoneLabel') }
-						labelWrapperClassName='!mb-2.5 md:!mb-1.5'
+						labelWrapperClassName='max-sm:!mb-2.5 md:!mb-1.5'
 						value={ formikRegister.values.phone }
 						onChange={ onChangeInput }
 						errorMessage={ getInputErrorMessage(formikRegister.errors?.phone, t('form.phoneLabel')) }
@@ -269,7 +269,7 @@ const RegisterOnboard = () => {
 							iconName='CalendarIcon'
 							iconPosition='right'
 							label={ t('form.birthDateLabel') }
-							labelWrapperClassName='!mb-2.5 md:!mb-1.5'
+							labelWrapperClassName='max-sm:!mb-2.5 md:!mb-1.5'
 							placeholder='yyyy-mm-dd'
 							value={ formikRegister.values.birth_date }
 							onChangeValue={ onChangeInputValue }
@@ -296,7 +296,7 @@ const RegisterOnboard = () => {
 							});
 							formikRegister.handleSubmit();
 						} }
-						className='max-md:text-sm'
+						className='max-md:text-sm mt-4 md:1.5'
 					>
 						{
 							loadingUser
