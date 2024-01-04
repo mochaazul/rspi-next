@@ -7,10 +7,6 @@ export const NewsHealthArticlesStyle = styled.div`
 
   .magazine {
     perspective: 1000px;
-    :hover{
-    transition: all .5s;
-    background-color: ${ colors.paradiso.accent1Opacity5 };
-    }
     .img-thumbnail-magazine {
       width: 540px;
       height: 318px;

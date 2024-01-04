@@ -217,7 +217,7 @@ const ContactUsPage = ({
 						loading='lazy'
 						referrerPolicy='no-referrer-when-downgrade' />
 				</div>
-				<div className='sm:hidden relative mt-[-50px] mx-4'>
+				<div className='sm:hidden relative max-sm:mt-[-250px] mx-4'>
 					<div className='global-shadow relative'>
 						<CustomCarousel autoplay={ false } onChangeIndex={ handleRSCarouselChange }>
 							{
