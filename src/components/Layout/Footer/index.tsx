@@ -204,7 +204,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			<Text
 				fontSize='14px'
 				color={ colors.paradiso.default }
-				className='mb-4 max-sm:text-xs font-bold sm:font-normal max-sm:uppercase'
+				className='mb-4 max-sm:text-xs font-bold sm:font-normal max-sm:uppercase leading-[24px]'
 			>{ text }</Text>
 		);
 	};
@@ -309,7 +309,9 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				<div className='follow-section flex flex-col max-sm:flex-row-reverse gap-4 sm:gap-8'>
 					<div className='follow-icon-section'>
 						{ renderCategoryTitle(t('followUsLabel')) }
-						<Socmed />
+						<div className='max-sm:-mt-[10px]'>
+							<Socmed />
+						</div>
 					</div>
 					<div>
 						{ renderCategoryTitle(t('getRSPIMobileLabel')) }
@@ -333,13 +335,13 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				</div>
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
-					<Text fontSize='14px' className='sub-text'>{ t('subscribeDescription') }</Text>
+					<Text fontSize='14px' className='sub-text' subClassName='leading-[21px] max-sm:leading-[24px]'>{ t('subscribeDescription') }</Text>
 					<div className='flex items-center mt-4 lg:mt-6 w-full'>
 						<div className='-mr-2 flex-1'>
 							<TextField
 								width='100%'
 								placeholder={ t('subscribePlaceholder') }
-								className='text-sm sm:text-base !h-11 !w-full'
+								className='text-sm sm:text-base font-normal text-[#BDBDBD] !h-11 !w-full'
 								value={ emailNewsletter }
 								onChange={ e => setEmailNewsletter(e.target.value) }
 							/>
@@ -355,11 +357,23 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				</div>
 			</FooterContainer>
 			<div className='flex flex-col items-center max-sm:pb-8 pt-8 sm:pt-16'>
-				<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group. <span className='sm:hidden'><br /></span>All Rights Reserved.</Text>
+				<Text
+					textAlign='center'
+					fontSize='16px'
+					fontWeight='400'
+					subClassName='leading-normal max-sm:text-[14px] text-gray-2' >
+						Copyright © { date.getFullYear() } RS Pondok Indah Group.
+					<span className='sm:hidden'><br /></span>All Rights Reserved.
+				</Text>
 				{
 					appStage !== 'prod' &&
 					<div className='flex justify-center'>
-						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version { config?.version } </Text>
+						<Text 
+							textAlign='center'
+							fontSize='16px'
+							fontWeight='400'
+							subClassName='leading-normal  max-sm:text-[14px] text-gray-2'
+							color={ colors.grey.dark }> Version { config?.version } </Text>
 					</div>
 				}
 			</div>

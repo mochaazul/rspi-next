@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: *?page=*
+Disallow: *?category=*
+Disallow: *?hospital=*
+
+Sitemap: https://www.rspondokindah.co.id/sitemap.xml

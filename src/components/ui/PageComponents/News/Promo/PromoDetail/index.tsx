@@ -82,7 +82,7 @@ const PromoDetail: React.FC<Props> = ({
 						<div className='mx-[16px] sm:mx-0 '>
 							<TextHtml
 								htmlStr={  selectedEvent?.content || '' }
-								className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
+								className='innerHTML !h-auto text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 							/>
 							<div className='mt-[50px]'>
 								<p className={ 'sm:leading-[30px] leading-[24px] sm:text-[20px] text-[16px] font-bold text-green-secondary mt-[50px]' }>

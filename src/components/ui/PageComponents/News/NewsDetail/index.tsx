@@ -57,7 +57,6 @@ const NewsDetail = ({
 				<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
 				
 				<TextHtml
-					style={ { color: colors.grey.dark } }
 					className='innerHTML mt-[10px] '
 					htmlStr={ filteredSelectedArticle?.content ?? '' }
 				/>
@@ -118,7 +117,6 @@ const NewsDetail = ({
 							{ filteredSelectedArticle?.short_description }
 						</Text>
 						<TextHtml
-							style={ { color: colors.grey.dark } }
 							className='innerHTML mt-[10px]'
 							htmlStr={ filteredSelectedArticle?.content ?? '' }
 						/>
@@ -145,6 +143,7 @@ const NewsDetail = ({
 								fontSize='32px'
 								lineHeight='48px'
 								className='my-[20px]'
+								subClassName='max-sm:text-[24px] max-sm:leading-[32px]'
 							>
 								{ filteredSelectedArticle?.title }
 							</Text>
@@ -197,8 +196,8 @@ const NewsDetail = ({
 								</div>
 							</div>
 						</div>
-						<div className='content-wrapper flex mt-[20px] mb-[100px] max-sm:mt-[47px]'>
-							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-[30px] ` }>
+						<div className='content-wrapper flex mt-[50px] mb-[100px] max-sm:mt-[25px]'>
+							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-0 ` }>
 								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' } >
 									<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>

@@ -718,8 +718,8 @@ export default {
 			}
 		},
 		registerOnboard: {
-			heading: 'Welcome to RS. Pondok Indah',
-			subHeading: 'Please enter your medical record to access all the services provided by RS. Pondok Indah. Your account information will be securely stored by us',
+			heading: 'Welcome to Pondok Indah Hospital',
+			subHeading: 'Please enter your medical record to access all the services provided by Pondok Indah Hospital',
 			form: {
 				mrlabel: 'Medical Record Number',
 				mrPlaceholder: 'Medical Record Number',
@@ -960,7 +960,7 @@ export default {
 			visitorPatientLabel: 'VISITOR & PATIENT INFORMATION',
 			followUsLabel: 'FOLLOW US',
 			getRSPIMobileLabel: 'GET RSPI MOBILE',
-			subscribeLabel: 'Stay Updated With Us',
+			subscribeLabel: 'STAY UPDATED WITH US',
 			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.',
 			subscribePlaceholder: 'Enter your email address',
 			subscribeSubmit: 'Subscribe',

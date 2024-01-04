@@ -48,6 +48,7 @@ const CardNews = (props: PropsType) => {
 								lineHeight='24px'
 								color={ colors.grey.darker }
 								text={ props?.title }
+								subClassName='hover:text-green-secondary'
 							/>
 							<Text
 								fontSize='14px'
