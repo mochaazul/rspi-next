@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const BookAppointmentContainer = styled.div`
 	background-color: #FAFAFA;
-
   .content-wrapper {
     width: fit-content;
     padding: 30px 120px 58px 120px;
