@@ -1,9 +1,9 @@
-'use server';
+'use client';
 
 import Link from 'next/link';
 
 import { colors, icons } from '@/constant';
-import { getScopedI18n } from '@/locales/server';
+import { useScopedI18n } from '@/locales/client';
 
 import Text from '../Text';
 import { ItemStyle } from './style';
@@ -16,8 +16,8 @@ export interface BreadcrumbsType {
 	removeHome?: boolean;
 }
 
-const Breadcrumbs = async (props: BreadcrumbsType) => {
-	const t = await getScopedI18n('navMenu');
+const BreadcrumbsClient = (props: BreadcrumbsType) => {
+	const t = useScopedI18n('navMenu');
 
 	const datas: BreadcrumbsType['datas'] = props.datas;
 
@@ -31,21 +31,21 @@ const Breadcrumbs = async (props: BreadcrumbsType) => {
 	}
 
 	return (
-		<div className='flex flex-row sm:ml-[-0.25rem]'>
+		<div className='flex flex-row sm:ml-[-0.25rem] mt-[25px] sm:mt-8'>
 			{
 				datas.map((data, index) => (
 					<div key={ index } className='flex flex-row items-center'>
 						<Link href={ data.url }>
 							<ItemStyle className='px-1 py-1 max-sm:px-0.5'>
-								{/* <Text
+								<Text
+									fontType='p'
 									className='item-text text-ellipsis'
 									fontSize='14px'
 									lineHeight='17px'
 									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }
 									color={ (index + 1) < props.datas.length ? colors.grey.dark : colors.paradiso.default }
 									text={ data.name }
-								/> */}
-								{ data.name }
+								/>
 							</ItemStyle>
 						</Link>
 						{
@@ -58,4 +58,4 @@ const Breadcrumbs = async (props: BreadcrumbsType) => {
 	);
 };
 
-export default Breadcrumbs;
+export default BreadcrumbsClient;
