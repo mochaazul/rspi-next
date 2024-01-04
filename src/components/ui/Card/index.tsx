@@ -57,7 +57,8 @@ const Card = (props: PropsType) => {
 
 					{
 						props.image &&
-						<div className={ `relative w-full ${ props.imageHeight ? `h-[${ props.imageHeight }]` : 'h-fit' }` } >
+						<div className={ 'relative w-full' }
+							style={ { height: props.imageHeight ?? 'h-fit' } } >
 							<Image src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
 						</div>
 					}
@@ -84,7 +85,7 @@ const Card = (props: PropsType) => {
 			{
 				props.iconShare &&
 				<div className={ 'block' }>
-					<Share slug={ `${props.language === 'idn' ? 'id' : 'en'}${props.to} ` } />
+					<Share slug={ `${ props.language === 'idn' ? 'id' : 'en' }${ props.to } ` } />
 				</div>
 			}
 		</CardWrapper>
