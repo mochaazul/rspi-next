@@ -54,10 +54,10 @@ const Card = (props: PropsType) => {
 		<CardWrapper className={ `shrink-0 ${ props.className } relative` }>
 			<Link href={ props.to || '#' } onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 				<CardStyle { ...props.cardStyle }>
-
 					{
 						props.image &&
-						<div className={ `relative w-full ${ props.imageHeight ? `h-[${ props.imageHeight }]` : 'h-fit' }` } >
+						<div className={ 'relative w-full' }
+							style={ { height: props.imageHeight ?? 'h-fit' } } >
 							<Image src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
 						</div>
 					}
@@ -84,7 +84,7 @@ const Card = (props: PropsType) => {
 			{
 				props.iconShare &&
 				<div className={ 'block' }>
-					<Share slug={ `${props.language === 'idn' ? 'id' : 'en'}${props.to} ` } />
+					<Share slug={ `${ props.language === 'idn' ? 'id' : 'en' }${ props.to } ` } />
 				</div>
 			}
 		</CardWrapper>

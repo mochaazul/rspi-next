@@ -40,7 +40,7 @@ type OptionProps = {
 export const Option: React.FC<OptionProps> = ({
 	label,
 	value,
-	className
+	className,
 }) => {
 
 	return <RadioGroup.Option value={ value }>
