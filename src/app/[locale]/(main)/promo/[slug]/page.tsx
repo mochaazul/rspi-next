@@ -13,11 +13,11 @@ export async function generateMetadata({ params }: { params: { slug: string; }; 
 		param: params?.slug,
 	});
    
-	const selectedEvent = Object.values(getArticle?.data)[0];
-   
+	const selectedEvent = Object.values(getArticle)[0];
+	
 	return {
 	  title: selectedEvent?.title,
-	  description: selectedEvent?.content,
+	  description: selectedEvent?.content.replace(/(<([^>]+)>)/ig, ''),
 	  openGraph: {
 			images: [selectedEvent?.img_url_detail],
 		},
