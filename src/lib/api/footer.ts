@@ -1,7 +1,7 @@
-import { FooterState } from '@/interface';
+import { FooterDetail } from '@/interface';
 
 import fetcher, { ApiOptions } from './utils/fetcher';
 
 export const getFooterPages = (options?: ApiOptions) => {
-	return fetcher<FooterState>('footerPages', options);
+	return fetcher<FooterDetail[]>('footerPages', options);
 };

@@ -30,7 +30,8 @@ export default {
 			heading: 'Call an Ambulance',
 			subHeading: 'Please select hospital: '
 		},
-		share: 'Share now'
+		share: 'Share now',
+		emptyData: 'Sorry! there is no {label} at the moment'
 	},
 	blacklist: {
 		contactUs: 'Contact Us',
@@ -201,6 +202,7 @@ export default {
 			serviceLocation: {
 				heading: 'Available at',
 				hospitalName: 'RS Pondok Indah - Pondok Indah 1st Floor',
+				floor: 'Floor',
 				appointmentHeading: 'Appointment',
 				phoneNumberHeading: 'Phone',
 				operationalHourHeading: 'Operational Hours',
@@ -572,7 +574,8 @@ export default {
 			heading: 'News and Health Articles',
 			detailsBtnLabel: 'View Details',
 			breadcrumbsLabel: 'News & Health Articles',
-			viewDetails: 'View Details'
+			viewDetails: 'View Details',
+			searchPlaceholder: 'Search Articles'
 		},
 		newsDetail: {
 			breadcrumbsLabel: 'News & Health Articles',
@@ -908,14 +911,15 @@ export default {
 		},
 		findDoctor: {
 			heading: 'Find a Doctor',
-
 			label: {
 				hospital: 'Rumah sakit',
 				doctorName: 'Doctor Name',
 				specialty: 'Specialty',
 				doctorFound: 'Doctors Found',
 				seeDetail: 'Book Appointment',
-				applyFilter: 'Apply'
+				applyFilter: 'Apply',
+				seeSchedule: 'See Schedule',
+				closeSchedule: 'Close Schedule'
 			},
 		},
 		doctorProfile: {
@@ -926,8 +930,8 @@ export default {
 				hospitalLabel: 'Hospital',
 				clinicLabel: 'Clinic',
 				btnLabel: {
-					back: 'Kembali',
-					submit: 'Lanjut'
+					back: 'Back',
+					submit: 'Next'
 				}
 			},
 			slotEmptyState: 'Please select a date to display available time information.',
@@ -945,7 +949,8 @@ export default {
 			asuransiCard: 'Insurance Card Photo (Optional)',
 			asuransiCardBack: 'Upload a rear view photo',
 			asuransiCardFront: 'Upload a photo of the front view',
-			labelPhoneModal: 'Please contact the call center'
+			labelPhoneModal: 'Please contact the call center',
+			visitAppOptionLabel: 'Visit in Person'
 		},
 		footer: {
 			visitorInfo: {
