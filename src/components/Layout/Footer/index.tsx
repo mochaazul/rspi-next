@@ -204,8 +204,8 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			<Text
 				fontSize='14px'
 				color={ colors.paradiso.default }
-				className='mb-4 font-bold sm:font-normal max-sm:uppercase leading-[24px]'
-				subClassName='max-sm:text-sm'
+				className='mb-4'
+				subClassName='max-sm:text-sm uppercase font-bold max-sm:font-normal leading-[24px]'
 			>{ text }</Text>
 		);
 	};
