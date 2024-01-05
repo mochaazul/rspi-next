@@ -205,6 +205,7 @@ export default {
 			serviceLocation: {
 				heading: 'Layanan ini tersedia di',
 				hospitalName: 'RS Pondok Indah - Pondok Indah Lantai 1',
+				floor: 'Lantai',
 				appointmentHeading: 'Perjanjian',
 				phoneNumberHeading: 'Telepon',
 				operationalHourHeading: 'Jam Operasional Patient Relations',
@@ -723,8 +724,8 @@ export default {
 			}
 		},
 		registerOnboard: {
-			heading: 'Selamat datang di RS. Pondok Indah',
-			subHeading: 'Silahkan masukan rekam medis anda untuk menggunakan seluruh fitur layanan dari RS. Pondok Indah. Informasi akun Anda tersimpan aman oleh kami',
+			heading: 'Selamat Datang di RS Pondok Indah',
+			subHeading: 'Masukkan nomor rekam medis Anda untuk mengakses seluruh fitur layanan RS Pondok Indah.',
 			form: {
 				mrlabel: 'Nomor rekam medis',
 				mrPlaceholder: 'Nomor rekam medis',
@@ -966,7 +967,7 @@ export default {
 			visitorPatientLabel: 'INFORMASI PENGUNJUNG DAN PASIEN',
 			followUsLabel: 'IKUTI KAMI',
 			getRSPIMobileLabel: 'DAPATKAN APLIKASI RSPI',
-			subscribeLabel: 'Ikuti Perkembangan Bersama Kami',
+			subscribeLabel: 'IKUTI PERKEMBANGAN BERSAMA KAMI',
 			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.',
 			subscribePlaceholder: 'Masukkan alamat email',
 			subscribeSubmit: 'Subscribe',

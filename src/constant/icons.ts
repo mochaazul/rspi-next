@@ -37,7 +37,7 @@ import Time from '/public/images/ic/time.svg';
 import Video from '/public/images/ic/video.svg';
 import WhiteInstagram from '/public/images/ic/whiteInstagram.svg';
 import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';
-import WhiteTwitter from '/public/images/ic/whiteTwitter.svg';
+import WhiteTwitter from '/public/images/ic/twitter_x_white.svg';
 import IDFlag from '/public/images/ic/flag.svg';
 import ENFlag from '/public/images/ic/eng-flag.svg';
 

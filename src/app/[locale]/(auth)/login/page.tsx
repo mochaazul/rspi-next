@@ -219,7 +219,7 @@ const LoginPage = () => {
 							<Text fontType='h1' fontSize='32px' fontWeight='900' color={ colors.grey.darker } lineHeight='48px' subClassName='max-md:leading-8 max-md:text-[20px]'>
 								{ t('heading') }
 							</Text>
-							<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-2 mb-4' subClassName='max-md:text-base max-md:leading-6 md:!leading-normal'>
+							<Text fontType='h4' fontSize='20px' color={ colors.grey.dark } className='mt-2 md:mt-3 mb-4' subClassName='max-md:text-base max-md:leading-6 md:!leading-normal'>
 								{ t('subHeading') }
 							</Text>
 						</div>

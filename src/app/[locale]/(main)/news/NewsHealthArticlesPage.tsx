@@ -110,10 +110,10 @@ const NewsHealthArticlesPage = ({
 									placeholder='Cari Artikel'
 									featherIcon='Search'
 									iconPosition='left'
-									$iconColor={ colors.grey.light }
+									$iconColor='#D4D2D8'
 									value={ keywordSearch }
-									className='placeholder-gray-3 max-sm:w-full'
-									wrapperClassName= 'max-sm:flex-row-reverse max-sm:px-5'
+									className='placeholder-gray-2 max-sm:w-full'
+									wrapperClassName= 'max-sm:flex-row-reverse max-sm:px-5 !outline-gray-3'
 									onChange={ e => {
 										setKeywordSearch(e.target.value);
 										params.set('keyword', e.target.value);
@@ -154,7 +154,7 @@ const NewsHealthArticlesPage = ({
 												/>
 											</div>
 										</div>
-										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ articles[0]?.title } lineHeight='28px' />
+										<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ articles[0]?.title } lineHeight='28px' subClassName='hover:text-green-secondary' />
 										<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ articles[0]?.news_author?.doctor_name } className='mt-[5px] mb-[2px]' lineHeight='24px' />
 										<div style={ { color: colors.grey.dark } } className='innerHTML mt-[10px] line-clamp-3' > { articles[0]?.short_description } </div>
 									</Link>
