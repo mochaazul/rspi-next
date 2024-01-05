@@ -1,12 +1,12 @@
-'use server';
+'use client';
 
 import Link from 'next/link';
 
 import { colors, icons } from '@/constant';
+import { useScopedI18n } from '@/locales/client';
 
 import Text from '../Text';
 import { ItemStyle } from './style';
-import { getScopedI18n } from '@/locales/server';
 
 export interface BreadcrumbsType {
 	datas: {
@@ -16,8 +16,8 @@ export interface BreadcrumbsType {
 	removeHome?: boolean;
 }
 
-const Breadcrumbs = async(props: BreadcrumbsType) => {
-	const t = await getScopedI18n('navMenu');
+const BreadCrumbs = (props: BreadcrumbsType) => {
+	const t = useScopedI18n('navMenu');
 
 	const datas: BreadcrumbsType['datas'] = props.datas;
 
@@ -58,4 +58,4 @@ const Breadcrumbs = async(props: BreadcrumbsType) => {
 	);
 };
 
-export default Breadcrumbs;
+export default BreadCrumbs;

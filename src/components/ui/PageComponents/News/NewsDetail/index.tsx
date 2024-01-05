@@ -116,7 +116,7 @@ const NewsDetail = async({
 			</div>
 		);
 	};
-
+	
 	return (
 		<div>
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>

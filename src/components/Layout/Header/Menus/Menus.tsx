@@ -1,9 +1,8 @@
 import { Text } from '@/components/ui';
 import { colors, icons } from '@/constant';
 import { HospitalDetail } from '@/interface';
-import React, { PropsWithChildren, PropsWithRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import React, { PropsWithChildren, PropsWithRef } from 'react';
 
 type Props<T> = {
   items?: T[]
@@ -14,11 +13,17 @@ type Props<T> = {
 	appendItem?: React.ReactNode
 }
 
-function Menus<T>({ items, itemKey, label, hrefKey, itemRender, appendItem }:Props<T>) {
+function Menus<T>({ items, label, itemRender, appendItem, hrefKey }:Props<T>) {
   
 	return (
 		<li className='flex flex-row gap-x-2 relative group cursor-pointer h-full align-middle justify-center items-center'>
-			<Text text={ label } subClassName='text-black group-hover:text-green-primary' fontSize='14px' fontWeight='900' />
+			{
+				items
+					? <Text text={ label } subClassName='text-black group-hover:text-green-primary' fontSize='14px' fontWeight='900' />
+					: <Link href={ hrefKey ?? '/' }>
+						<Text text={ label } subClassName='text-black group-hover:text-green-primary' fontSize='14px' fontWeight='900' />
+					</Link>
+			}
 			
 			{
 				items &&

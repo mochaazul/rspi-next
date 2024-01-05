@@ -3,12 +3,12 @@ import Image from 'next/image';
 import { AwardsDetail } from '@/interface';
 import { colors } from '@/constant';
 import { getAwards } from '@/lib/api/awards';
-import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import { getScopedI18n } from '@/locales/server';
 
 import { CentreOfExcellenceStyle } from './style';
 import { PanelH1, PanelH3, PanelV1 } from '../style';
+import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
 
 export default async function AwardsPage() {
 	const awardsRes = await getAwards({}, { page: 1, limit: 10 });
@@ -55,7 +55,7 @@ export default async function AwardsPage() {
 		<CentreOfExcellenceStyle>
 			<PanelV1>
 				<PanelH1>
-					<Breadcrumbs datas={ breadcrumbsPath } />
+					<BreadcrumbsServer datas={ breadcrumbsPath } />
 				</PanelH1>
 				<PanelH3>
 					<div className='mt-[25px] sm:mt-[50px]'>

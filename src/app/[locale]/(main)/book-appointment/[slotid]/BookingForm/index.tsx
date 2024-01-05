@@ -30,6 +30,8 @@ import { useBookAppointmentAPI, usePushNotifAPI } from '@/lib/api/client/booking
 import { useNotification } from '@/lib/api/client/header';
 import useSession from '@/session/client';
 import { useSWRConfig } from 'swr';
+import LangWrapper from '@/components/ui/LangWrapper';
+import BreadCrumbs from '@/components/ui/Breadcrumbs';
 
 type BookingFormState = {
 	keluhan: string;
@@ -191,7 +193,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		}
 	};
 
-	const uploadAsuransiPhotoFront = async () => {
+	const uploadAsuransiPhotoFront = async() => {
 		if (tempImageAsuransiFront !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiFront });
 			if (responseData.stat_msg === 'Success') {
@@ -201,7 +203,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		return '';
 	};
 
-	const uploadAsuransiPhotoBack = async () => {
+	const uploadAsuransiPhotoBack = async() => {
 		if (tempImageAsuransiBack !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiBack });
 			if (responseData.stat_msg === 'Success') {
@@ -222,7 +224,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		}
 	};
 
-	const onConfirmed = async () => {
+	const onConfirmed = async() => {
 		try {
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
@@ -283,7 +285,9 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 	return (
 		<BookAppointmentContainer>
 			<div className='lg:w-[1110px] mx-auto max-sm:px-[15px] pb-[120px]'>
-				<Breadcrumbs datas={ breadCrumbs } />
+				<LangWrapper>
+					<BreadCrumbs datas={ breadCrumbs } />
+				</LangWrapper>
 				<div className='content-wrapper sm:flex w-full items-center flex-col max-sm:p-[16px]'>
 					<ProfileSelector onSelected={ setSelectedProfile } selfProfile={ userProfile } familyProfiles={ familyProfiles } onAddNewProfileBtn={ onAddNewProfile } />
 					{

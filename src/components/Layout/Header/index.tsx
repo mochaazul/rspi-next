@@ -167,9 +167,9 @@ export default async function Header({
 							<HeaderBrand />
 						</div>
 						<DesktopMenu className='gap-x-2 hidden md:flex'>
-							<Menus label={ t('ourHospitals') } items={ hospitalData } hrefKey='hospital' itemRender={ renderHospitalMenuItem } />
-							<Menus label={ t('centreOfExcellence') } items={ centerOfExcellenceData } hrefKey='center-of-excellence' itemRender={ renderCoeMenuItem }/>
-							<Menus label={ t('facility') } items={ facilityServicesData } hrefKey='facilities' itemRender={ renderFacilitiesMenuItem } appendItem={ renderMedicalSpecialities }/>
+							<Menus label={ t('ourHospitals') } items={ hospitalData } itemRender={ renderHospitalMenuItem } />
+							<Menus label={ t('centreOfExcellence') } items={ centerOfExcellenceData } itemRender={ renderCoeMenuItem }/>
+							<Menus label={ t('facility') } items={ facilityServicesData } itemRender={ renderFacilitiesMenuItem } appendItem={ renderMedicalSpecialities }/>
 							<Menus label={ t('findDoctor') } hrefKey='find-a-doctor'/>
 						</DesktopMenu>
 
@@ -188,7 +188,7 @@ export default async function Header({
 
 						{ /* Right side Menus */ }
 						<div className='hidden lg:flex lg:items-center lg:gap-x-4 xl2:gap-x-5'>
-							<Link href='/find-a-doctor'>
+							<Link href='find-a-doctor'>
 								<Button className='h-11 px-5 flex items-center whitespace-nowrap text-base font-black'>
 									{ t('bookAppointment') }
 								</Button>

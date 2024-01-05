@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import { colors } from '@/constant';
-import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import TextHtml from '@/components/ui/TextHtml';
 import CustomCarousel from '@/components/ui/Carousel';
@@ -9,8 +8,9 @@ import { getMedicalSpecialityDetail } from '@/lib/api/facilities';
 import { getScopedI18n } from '@/locales/server';
 
 import { FooterServiceStyle } from './style';
+import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
 
-const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; }) => {
+const MedicalSpecialitiesPage = async({ params }: { params: { slug: string; }; }) => {
 	const footerSlugRes = await getMedicalSpecialityDetail({
 		param: decodeURIComponent(params?.slug)
 	});
@@ -84,7 +84,7 @@ const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; 
 		<FooterServiceStyle>
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-4 pb-[60px]'>
 				<div>
-					<Breadcrumbs datas={ breadcrumbsPath } />
+					<BreadcrumbsServer datas={ breadcrumbsPath } />
 					<div className='content-wrapper mt-[25px] md:mt-[50px] w-full'>
 						{ renderContent }
 					</div>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import Breadcrumbs, { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
+import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import {
 	Accordion,
 	Button,
@@ -19,6 +19,7 @@ import { PanelH2, PanelV1 } from '../style';
 import { getScopedI18n } from '@/locales/server';
 import LangWrapper from '@/components/ui/LangWrapper';
 import HospitalLocation from './HospitalLocation';
+import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
 
 const ContactUsPage = async({
 	hospitalSelector,
@@ -35,7 +36,7 @@ const ContactUsPage = async({
 		<ContactUsPanel>
 			<PanelV1>
 				<PanelH2>
-					<Breadcrumbs datas={ breadcrumbsPath } />
+					<BreadcrumbsServer datas={ breadcrumbsPath } />
 					<div className='sm:mt-12 mt-4'>
 						<Text
 							fontType='h1'

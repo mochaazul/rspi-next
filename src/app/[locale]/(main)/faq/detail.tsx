@@ -5,16 +5,15 @@ import { useParams } from 'next/navigation';
 
 import {
 	Accordion,
+	Breadcrumbs,
 	Form,
 	Text
 } from '@/components/ui';
 import { colors } from '@/constant';
-import { useScopedI18n } from '@/locales/client';
 
 import { FAQStyle } from './style';
 import { PanelH1, PanelH4, PanelV1 } from '../style';
 import LangWrapper from '@/components/ui/LangWrapper';
-import BreadcrumbsClient from '@/components/ui/Breadcrumbs/client';
 
 type Props ={
   faqDatas: {
@@ -43,7 +42,7 @@ const FaqDetail = ({ faqDatas, breadCrumbPath, subHeading }:Props) => {
 			<PanelV1>
 				<PanelH1>
 					<LangWrapper>
-					  <BreadcrumbsClient datas={ breadCrumbPath } />
+					  <Breadcrumbs datas={ breadCrumbPath } />
 					</LangWrapper>
 				</PanelH1>
 				<PanelH4>

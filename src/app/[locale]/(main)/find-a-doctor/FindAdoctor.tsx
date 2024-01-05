@@ -23,6 +23,7 @@ import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail, I_MasterDoctor, ResponseType } from '@/interface';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
+import BreadcrumbsClient from '@/components/ui/Breadcrumbs/client';
 
 type Props ={
   hospital: HospitalDetail[]
@@ -145,7 +146,9 @@ export default function FindADoctorComponent({ hospital, clinics, doctorFallback
 		<PanelV1>
 			<PanelH1>
 				<LangWrapper>
-					<Breadcrumbs datas={ breadCrumbs } />
+					<LangWrapper>
+						<Breadcrumbs datas={ breadCrumbs } />
+					</LangWrapper>
 					<FindADoctorStyle className='mt-[25px] sm:mt-[50px]'>
 						{ /* Filter Pane */ }
 						<div className='max-sm:hidden'>

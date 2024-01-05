@@ -13,10 +13,10 @@ import MedicalSpecialitiesComponent from '@/components/ui/PageComponents/Facilit
 import FacilitiesMenuContent from '@/components/ui/PageComponents/FacilitiesServicesSections/FacilitiesMenuContent';
 import CardMenu from '@/components/ui/PageComponents/FacilitiesServicesSections/CardMenu';
 import Card, { CardFooter } from '@/components/ui/Card';
-import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import TextHtml from '@/components/ui/TextHtml';
 import { getScopedI18n } from '@/locales/server';
+import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
 
 export default async function FacilitiesServicesPage({ params }: { params: { slug: string; }; }) {
 	const paramsSlug = decodeURIComponent(params?.slug ?? '');
@@ -97,7 +97,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 	return (
 		<div className='w-full lg:max-w-[1110px] mx-auto max-xl:px-4 pb-8 sm:pb-[60px]'>
 			<div>
-				<Breadcrumbs datas={ breadcrumbsPath } />
+				<BreadcrumbsServer datas={ breadcrumbsPath } />
 				<div className='mt-[25px] md:mt-16 flex md:gap-5 lg:gap-8'>
 					<div className='hidden md:block'>
 						<CardMenu paramsSlug={ paramsSlug } data={ facilitiesMenu } />

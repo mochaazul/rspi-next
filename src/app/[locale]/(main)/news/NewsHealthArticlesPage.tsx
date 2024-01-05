@@ -20,9 +20,8 @@ import Card, { CardContentWithInner, CardsScrollHorizontal } from '@/components/
 
 import CardNews from './CardNews';
 import { NewsHealthArticlesStyle } from './styles';
-import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
+import BreadCrumbs, { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import { useScopedI18n } from '@/locales/client';
-import BreadcrumbsClient from '@/components/ui/Breadcrumbs/client';
 import LangWrapper from '@/components/ui/LangWrapper';
 
 type ArticleProps = {
@@ -80,7 +79,7 @@ const NewsHealthArticlesPage = ({
 				<div>
 					<div className='header'>
 						<LangWrapper>
-						 <BreadcrumbsClient datas={ breadcrumbsPath } />
+						 <BreadCrumbs datas={ breadcrumbsPath } />
 						</LangWrapper>
 						<Text
 							fontSize='44px'
