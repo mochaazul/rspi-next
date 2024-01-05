@@ -70,7 +70,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 											imageHeight='200px'
 											key={ index }
 											to={ `/news/${ article?.slug }` }
-											className='!m-0'
+											className='max-sm:w-[92%] !m-0'
 											header={
 												<Text
 													text={ moment(splitDate(article?.posted_date)).locale(currLang)
