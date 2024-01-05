@@ -263,7 +263,7 @@ export default {
 				subHeading: 'Pertanyaan yang sering ditanyakan mengenai layanan di unit RS Pondok Indah',
 				allFaqBtnLabel: 'Lihat Semua FAQ',
 				questions: {
-					doctorSchedule: 'Dimana saya dapat mengetahui jadwal praktek dokter?',
+					doctorSchedule: 'Di mana saya dapat mengetahui jadwal praktik dokter?',
 					assurance: 'Apakah asuransi saya dapat digunakan di RS Pondok Indah?',
 					visitHours: 'Apakah ada jam besuk pasien di RS Pondok Indah?',
 					checkUp: 'Bagaimana saya membuat perjanjian untuk Health Check-Up?',
@@ -276,42 +276,42 @@ export default {
 					assurance: 'RS Pondok Indah Group telah bekerja sama dengan berbagai asuransi terpercaya, baik di dalam maupun luar negeri. Untuk melihat asuransi yang bermitra dengan kami, Anda dapat mengakses laman (link: perusahaan asuransi mitra).',
 					visitHours: `Waktu kunjungan setiap unit perawatan dapat berbeda. Untuk menjaga ketenangan dan kenyamanan seluruh pasien kami, kunjungan hanya dapat dilakukan pada jam tertentu dan dilakukan secara bergantian.
 					<div className='mt-[15px]' />
-					Waktu Berkunjung
+					<b>Waktu Berkunjung</b>
 					<div className='mt-[15px]' />
-					Umum & Melihat Bayi 
+					Kamar Rawat Inap Umum & Melihat Bayi
 					<div className='flex'>
-						<div className='grid grid-cols-2'>
+						<div className='flex flex-col'>
 							<div>Siang: 11.00 – 13.00 WIB </div>
 							<div>Sore: 18.00 – 20.00 WIB</div>
 						</div>
 					</div>
 					<div className='mt-[15px]' />
-					ICU, ICCU, & NICU
+					ICU, ICCU
 					<div className='flex'>
-						<div className='grid grid-cols-2'>
+						<div className='flex flex-col'>
 							<div>Siang: 11.00 – 12.00 WIB </div>
 							<div>Sore: 18.00 – 19.00 WIB </div>
 						</div>
 					</div>
-					Hanya diperbolehkan 1 orang pada satu waktu
+					Hanya diperbolehkan 1 orang pada satu waktu.
 					Anak-anak tidak diperbolehkan berada di unit ini 
 					<div className='mt-[15px]' />
-					Ruang Intermediate Bayi
+					Ruang NICU & Intermediate Bayi
 					<div className='flex'>
-						<div className='grid grid-cols-2'>
+						<div className='flex flex-col'>
 							<div>Siang: 11.00 – 13.00 WIB</div>
 							<div>Sore: 18.00 – 20.00 WIB </div>
 						</div>
 					</div>
-					Hanya orang tua yang diizinkan berkunjung 
-					Maksimum 2 orang untuk setiap pasien. Diizinkan untuk berkunjung di waktu yang sama. `,
+					Hanya orang tua yang diizinkan berkunjung.
+					Maksimum 2 orang untuk setiap pasien, diizinkan untuk berkunjung di waktu yang sama. `,
 					checkUp: `
 					Pemeriksaan kesehatan atau medical check up lengkap tersedia di ketiga cabang RS Pondok Indah Group. Kami menghadirkan berbagai paket medical check up, termasuk pemeriksaan kesehatan untuk anak. Silakan berkonsultasi dengan tim kami untuk mengetahui paket yang sesuai dengan kebutuhan Anda.
 					<div className='mt-[15px]' />
 					<p>Untuk informasi lebih lanjut atau membuat perjanjian, silakan menghubungi:</p>
 					Executive Health Check Up RS Pondok Indah - Pondok Indah
 					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
+						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full items-center'>
 							<div>Informasi & Perjanjian</div>
 							<div>:</div>
 							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
@@ -320,10 +320,10 @@ export default {
 							<div>0812-8311-2725</div>
 							<div>E-mail</div>
 							<div>:</div>
-							<div>hcupondok@rspondokindah.co.id</div>
+							<div><a href='mailto:hcupondok@rspondokindah.co.id' target='_blank'>hcupondok@rspondokindah.co.id</a></div>
+							<a href='https://www.rspondokindah.co.id/uploads/ngc_global_posts/F30021-20230307125551.pdf'>[Paket HCU - RSPI Pondok Indah]</a>
 						</div>
 					</div>
-					<a href='#'>[link paket EHCU]</a>
 					<div className='mt-[15px]' />
 					Executive Health Check Up RS Pondok Indah - Puri Indah
 					<div className='flex'>
