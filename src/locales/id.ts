@@ -268,7 +268,7 @@ export default {
 					visitHours: 'Apakah ada jam besuk pasien di RS Pondok Indah?',
 					checkUp: 'Bagaimana saya membuat perjanjian untuk Health Check-Up?',
 					travelVaccine: 'Apakah RS Pondok Indah memiliki layanan vaksinasi perjalanan?',
-					telemedicine: 'Apakah tersedia layanan telemedicine di RS Pondok Indah?',
+					telemedicine: 'Apakah tersedia layanan Telemedicine/konsultasi jarak jauh di RS Pondok Indah?',
 					maternity: 'Apakah ada informasi terkait persalinan di RS Pondok Indah?'
 				},
 				answers: {
@@ -306,106 +306,88 @@ export default {
 					Hanya orang tua yang diizinkan berkunjung.
 					Maksimum 2 orang untuk setiap pasien, diizinkan untuk berkunjung di waktu yang sama. `,
 					checkUp: `
-					Pemeriksaan kesehatan atau medical check up lengkap tersedia di ketiga cabang RS Pondok Indah Group. Kami menghadirkan berbagai paket medical check up, termasuk pemeriksaan kesehatan untuk anak. Silakan berkonsultasi dengan tim kami untuk mengetahui paket yang sesuai dengan kebutuhan Anda.
+					<p className='gap-1'>Pemeriksaan kesehatan atau medical check up lengkap tersedia di ketiga cabang RS Pondok Indah Group. Kami menghadirkan berbagai paket medical check up, termasuk pemeriksaan kesehatan untuk anak. Silakan berkonsultasi dengan tim kami untuk mengetahui paket yang sesuai dengan kebutuhan Anda.</p>
 					<div className='mt-[15px]' />
-					<p>Untuk informasi lebih lanjut atau membuat perjanjian, silakan menghubungi:</p>
-					Executive Health Check Up RS Pondok Indah - Pondok Indah
+					<p className='gap-1 mb-3'>Untuk informasi lebih lanjut atau membuat perjanjian, silakan menghubungi:</p>
+					<b>Executive Health Check Up RS Pondok Indah - Pondok Indah</b>
 					<div className='flex'>
-						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Informasi & Perjanjian</div>
-							<div>:</div>
+						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
+							<div>Informasi & Perjanjian:</div>
 							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0812-8311-2725</div>
-							<div>E-mail</div>
-							<div>:</div>
+							<div>WhatsApp:</div>
+							<div><a href='https://api.whatsapp.com/send?phone=6281283112725' target='_blank'>0812-8311-2725</a></div>
+							<div><i>E-mail:</i></div>
 							<div><a href='mailto:hcupondok@rspondokindah.co.id' target='_blank'>hcupondok@rspondokindah.co.id</a></div>
 							<a href='https://www.rspondokindah.co.id/uploads/ngc_global_posts/F30021-20230307125551.pdf'>[Paket HCU - RSPI Pondok Indah]</a>
 						</div>
 					</div>
-					<div className='mt-[15px]' />
-					Executive Health Check Up RS Pondok Indah - Puri Indah
+					<div className='mt-[15px] mb-3' />
+					<b>Executive Health Check Up RS Pondok Indah - Puri Indah</b>
 					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Informasi & Perjanjian</div>
-							<div>:</div>
+						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
+							<div>Informasi & Perjanjian:</div>
 							<div>(62-21) 2569 5252, 2569 5200 Ext. 2100</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0821-8088-7838</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcupuri@rspondokindah.co.id</div>
+							<div>WhatsApp:</div>
+							<div><a href='https://api.whatsapp.com/send?phone=6282180887838' target='_blank'>0821-8088-7838</a></div>
+							<div><i>E-mail:</i></div>
+							<div><a href='mailto:hcupondok@rspondokindah.co.id'>hcupuri@rspondokindah.co.id</a></div>
+							<a href='https://www.rspondokindah.co.id/uploads/ngc_global_posts/Z81201-20230307125040.pdf'>[Paket EHCU - RSPI Puri Indah]</a>
 						</div>
 					</div>
-					<a href='#'>[link paket EHCU]</a>
-					<div className='mt-[15px]' />
-					Executive Health Check Up RS Pondok Indah - Bintaro Jaya
+					<div className='mt-[15px] mb-3' />
+					<b>Executive Health Check Up RS Pondok Indah - Bintaro Jaya</b>
 					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Informasi & Perjanjian</div>
-							<div>:</div>
+						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
+							<div>Informasi & Perjanjian:</div>
 							<div>(62-21) 8082 8888 Ext. 2301/2302</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0811-9227-982</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcubintaro@rspondokindah.co.id</div>
-						</div>
-					</div>
-					<a href='#'>[link paket EHCU]</a>`,
-					travelVaccine: `RS Pondok Indah memiliki layanan vaksinasi perjalanan. Kami juga melayani penerbitan sertifikat vaksinasi internasional atau &quot;buku kuning&quot;.
-					<div className='mt-[15px]' />
-					<p>Untuk informasi lebih lanjut, silakan menghubungi:</p>
-					Executive Health Check Up RS Pondok Indah - Pondok Indah
-					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Informasi & Perjanjian</div>
-							<div>:</div>
-							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0812-8311-2725</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcupondok@rspondokindah.co.id</div>
-						</div>
-					</div>
-					<div className='mt-[15px]' />
-					Executive Health Check Up RS Pondok Indah - Puri Indah
-					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Informasi & Perjanjian</div>
-							<div>:</div>
-							<div>(62-21) 2569 5252, 2569 5200 Ext. 2100</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0821-8088-7838</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcupuri@rspondokindah.co.id</div>
-						</div>
-					</div>
-					<div className='mt-[15px]' />
-					Executive Health Check Up RS Pondok Indah - Bintaro Jaya
-					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Informasi & Perjanjian</div>
-							<div>:</div>
-							<div>(62-21) 8082 8888 Ext. 2301/2302</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0811-9227-982</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcubintaro@rspondokindah.co.id</div>
+							<div>WhatsApp:</div>
+							<div><a href='https://api.whatsapp.com/send?phone=628119227982' target='_blank'>0811-9227-982</a></div>
+							<div><i>E-mail:</i></div>
+							<div><a href='mailto:hcubintaro@rspondokindah.co.id'>hcubintaro@rspondokindah.co.id</a></div>
+							<a href='https://www.rspondokindah.co.id/uploads/ngc_global_posts/M37594-20220330105057.pdf'>[Paket EHCU - RSPI Puri Indah]</a>
 						</div>
 					</div>`,
-					telemedicine: `RS Pondok Indah Group memiliki layanan konsultasi jarak jauh, atau telemedicine. Kini, Anda dapat berkonsultasi dengan dokter kami melalui <a href='#'>video call</a> dengan lebih nyaman. Layanan ini menggunakan aplikasi Zoom, di perangkat <a href='#'>gadget</a> Anda, sehingga Anda tidak perlu ke luar rumah untuk berkonsultasi dengan dokter kami.
-					<div className='mt-[15px]' />
-					Mekanisme Telemedicine RS Pondok Indah Group
+					travelVaccine: `<p className='gap-1'>RS Pondok Indah memiliki layanan vaksinasi perjalanan. Kami juga melayani penerbitan sertifikat vaksinasi internasional atau &quot;buku kuning&quot;.</p>
+					<div className='mt-[15px] mb-3' />
+					<p className='mb-3'>Untuk informasi lebih lanjut, silakan menghubungi:</p>
+					<b>Executive Health Check Up RS Pondok Indah - Pondok Indah</b>
+					<div className='flex'>
+						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
+							<div>Informasi & Perjanjian:</div>
+							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
+							<div>WhatsApp:</div>
+							<div><a href='https://api.whatsapp.com/send?phone=6281283112725' target='_blank'>0812-8311-2725</a></div>
+							<div><i>E-mail:</i></div>
+							<div><a href='mailto:hcupondok@rspondokindah.co.id'>hcupondok@rspondokindah.co.id</a></div>
+						</div>
+					</div>
+					<div className='mt-[15px] mb-3' />
+					<b>Executive Health Check Up RS Pondok Indah - Puri Indah</b>
+					<div className='flex'>
+						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
+							<div>Informasi & Perjanjian:</div>
+							<div>(62-21) 2569 5252, 2569 5200 Ext. 2100</div>
+							<div>WhatsApp:</div>
+							<div><a href='https://api.whatsapp.com/send?phone=6282180887838' target='_blank'>0821-8088-7838</a></div>
+							<div><i>E-mail:</i></div>
+							<div><a href='mailto:hcupuri@rspondokindah.co.id'>hcupuri@rspondokindah.co.id</a></div>
+						</div>
+					</div>
+					<div className='mt-[15px] mb-3' />
+					<b>Executive Health Check Up RS Pondok Indah - Bintaro Jaya</b>
+					<div className='flex'>
+						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
+							<div>Informasi & Perjanjian:</div>
+							<div>(62-21) 8082 8888 Ext. 2301/2302</div>
+							<div>WhatsApp:</div>
+							<div><a href='https://api.whatsapp.com/send?phone=628119227982' target='_blank'>0811-9227-982</a></div>
+							<div><i>E-mail:</i></div>
+							<div><a href='mailto:hcubintaro@rspondokindah.co.id'>hcubintaro@rspondokindah.co.id</a></div>
+						</div>
+					</div>`,
+					telemedicine: `<p className='gap-1'>RS Pondok Indah Group memiliki layanan konsultasi jarak jauh, atau telemedicine. Kini, Anda dapat berkonsultasi dengan dokter kami melalui video call dengan lebih nyaman. Layanan ini menggunakan aplikasi Zoom, di perangkat gadget Anda, sehingga Anda tidak perlu keluar rumah untuk berkonsultasi dengan dokter kami.</p>
+					<div className='mt-[15px] mb-3' />
+					<h3 className='mb-3'>Mekanisme Telemedicine RS Pondok Indah Group</h3>
 					<ol className='list-decimal pl-4'>
 						<li>Pastikan Anda sudah menjadi pasien RS Pondok Indah Group dan memiliki nomor rekam medis</li>
 						<li>Hubungi Call Center RS Pondok Indah yang Anda tuju untuk mendaftar dan/atau mengecek jadwal praktik dokter kami yang menyediakan layanan telemedicine</li>
