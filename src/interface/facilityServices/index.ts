@@ -36,7 +36,7 @@ export interface FacilityServicesHospital {
 }
 
 export interface FacilityServicesDetail {
-	id: number;
+	id?: number;
 	name?: string;
 	short_description?: string;
 	image_url?: string[];

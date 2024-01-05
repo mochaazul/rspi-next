@@ -104,6 +104,7 @@ const MedicalSpecialitiesComponent = ({
 	paramsSlug,
 	medicalSpecialities
 }: Props) => {
+	
 	const t = useScopedI18n('page.facilities.medicalSpecialities');
 
 	return (

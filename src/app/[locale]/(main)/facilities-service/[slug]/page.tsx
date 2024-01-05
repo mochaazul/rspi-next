@@ -63,6 +63,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 		unit: 'Patient Relations RS Pondok Indah - Bintaro Jaya',
 		slug: 'medical-specialties'
 	}];
+	
 	const breadcrumbsPath = [
 		{ name: t('heading'), url: '#' },
 		{ url: '#', name: facilitiesServiceData?.find((facility: FacilityServicesDetail) => facility.slug === paramsSlug)?.name ?? '' }
@@ -78,7 +79,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 			return (
 				<MedicalSpecialitiesComponent
 					paramsSlug={ paramsSlug }
-					facilityData={ facilitiesMenu }
+					facilityData={ facilitiesServiceData }
 					medicalSpecialities={ medicalSpecialities?.map(medspec => ({
 						id: medspec.id,
 						title: medspec.title,
