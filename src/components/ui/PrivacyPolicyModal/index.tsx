@@ -129,15 +129,9 @@ const PrivacyPolicyModal = ({
 				</HeaderItem>
 			</HeaderSection>
 			<div className='px-[24px]'>
-				<Text
-					fontSize='14px'
-					fontWeight='400'
-					text='Updated 25 July 2019'
-					color={ '#6A6D81' }
-					className='mb-[16px]'
-				/>
 				<ScrollableContentContainer>
 					<div
+						className='p-5'
 						dangerouslySetInnerHTML={ { __html: step === 'pp' ? dataPrivacyPolicy : dataTermConditions } }
 					/>
 				</ScrollableContentContainer>
