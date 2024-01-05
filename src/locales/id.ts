@@ -586,7 +586,9 @@ export default {
 			breadcrumbsLabel: 'Berita & Artikel Kesehatan',
 			oleh: 'Oleh',
 			downloadFilePdf: 'Unduh majalah Health First di',
-			here: ' sini'
+			here: ' sini',
+			relatedNews: 'Artikel Terkait',
+			specialty: 'Dokter Terkait',
 		},
 		forgotPassword: {
 			heading: 'Lupa Password',

@@ -29,18 +29,18 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 	const renderContent = useMemo(() => {
 		const Contents = [];
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16' >
-				<TextHtml htmlStr={ content?.conditions } />
+			<div className='mt-[30px] text-16' >
+				<TextHtml className='innerHTML' htmlStr={ content?.conditions } />
 			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16' >
-				<TextHtml htmlStr={ content?.treatments } />
+			<div className='mt-[30px] text-16' >
+				<TextHtml className='innerHTML' htmlStr={ content?.treatments } />
 			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16'>
-				<TextHtml htmlStr={ content?.technology } />
+			<div className='mt-[30px] text-16'>
+				<TextHtml className='innerHTML' htmlStr={ content?.technology } />
 			</div>
 		);
 		Contents.push(
@@ -82,8 +82,8 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 			</div>
 
 			<div className='mt-[48px]'>
-				<div className='innerHTML text-16' >
-					<TextHtml htmlStr={ content?.content } />
+				<div className='text-16' >
+					<TextHtml className='innerHTML' htmlStr={ content?.content } />
 				</div>
 			</div>
 
