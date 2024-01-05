@@ -168,7 +168,7 @@ const NewsHealthArticlesPage = ({
 													key={ index }
 												>
 													<div className=''>
-														<Share slug={ `${data.language === 'idn' ? 'id' : 'en'}/news/${data.slug}` } />
+														<Share className={ `${index === 0 ? 'mt-[10px]' : 'mt-[40px]'}` } slug={ `${data.language === 'idn' ? 'id' : 'en'}/news/${data.slug}` } />
 													</div>
 													<Link href={ `${ pathname }/${ data?.slug }` } style={ { zIndex: '-999 !important' } }>
 														<CardNews
@@ -178,6 +178,7 @@ const NewsHealthArticlesPage = ({
 															imgThumb={ data.img_url }
 															date={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
 															author={ data?.news_author?.doctor_name }
+															classNames={ ` ${index === 0 ? 'mb-0' : 'pt-[30px] mb-0'} ` }
 														/>
 													</Link>
 												</div>
