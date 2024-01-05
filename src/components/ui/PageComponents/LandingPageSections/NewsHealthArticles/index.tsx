@@ -1,6 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import moment from 'moment';
+import 'moment/locale/id';
 
 import { WrapperNewsHealthArticles } from './style';
 
@@ -97,7 +98,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 				</div>
 				:
 				<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
-					<EmptyData menu='News and Health Articles' />
+					<EmptyData menu={ t('heading') } />
 				</Text>
 			}
 			<div className='w-full mt-6 flex justify-center sm:hidden'>

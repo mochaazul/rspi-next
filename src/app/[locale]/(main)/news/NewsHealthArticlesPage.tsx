@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import moment from 'moment';
+import 'moment/locale/id';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -21,7 +22,7 @@ import Card, { CardContentWithInner, CardsScrollHorizontal } from '@/components/
 import CardNews from './CardNews';
 import { NewsHealthArticlesStyle } from './styles';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
-import { useScopedI18n } from '@/locales/client';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 
 type ArticleProps = {
 	id: number;
@@ -46,13 +47,14 @@ const NewsHealthArticlesPage = ({
 }) => {
 	const [pageNumber, setPageNumber] = useState(pagination?.page || 1);
 	const [keywordSearch, setKeywordSearch] = useState<string>('');
-	
+
 	const totalPages = pagination?.total_page || 1;
 
 	const pathname = usePathname();
 	const navigate = useRouter();
 	const searchParam = useSearchParams()!;
 	const t = useScopedI18n('page.news');
+	const currentLang = useCurrentLocale();
 	const params = new URLSearchParams(searchParam);
 	const categoryParams = params.get('category') ?? '';
 
@@ -107,13 +109,13 @@ const NewsHealthArticlesPage = ({
 							</div>
 							<div className='max-sm:mt-[24px] mt-[31px] w-[349px] max-sm:w-full'>
 								<Form.TextField
-									placeholder='Cari Artikel'
+									placeholder={ t('searchPlaceholder') }
 									featherIcon='Search'
 									iconPosition='left'
 									$iconColor='#D4D2D8'
 									value={ keywordSearch }
 									className='placeholder-gray-2 max-sm:w-full'
-									wrapperClassName= 'max-sm:flex-row-reverse max-sm:px-5 !outline-gray-3'
+									wrapperClassName='max-sm:flex-row-reverse max-sm:px-5 !outline-gray-3'
 									onChange={ e => {
 										setKeywordSearch(e.target.value);
 										params.set('keyword', e.target.value);
@@ -131,7 +133,7 @@ const NewsHealthArticlesPage = ({
 									className='w-[540px] mr-[32px] cursor-pointer magazine relative'
 								>
 									<div className='relative'>
-										<Share slug={ `${articles[0].language === 'idn' ? 'id' : 'en'}/news/${articles[0]?.slug}` } />
+										<Share slug={ `${ articles[0].language === 'idn' ? 'id' : 'en' }/news/${ articles[0]?.slug }` } />
 									</div>
 									<Link href={ `${ pathname }/${ articles[0]?.slug }` } >
 										<img
@@ -150,7 +152,7 @@ const NewsHealthArticlesPage = ({
 													fontWeight='400'
 													lineHeight='17px'
 													color={ colors.grey.dark }
-													text={ moment(Object.values(articles || [])[0]?.posted_date).format('dddd, DD MMM YYYY') }
+													text={ moment(Object.values(articles || [])[0]?.posted_date)?.locale(currentLang).format('dddd, DD MMM YYYY') }
 												/>
 											</div>
 										</div>
@@ -168,7 +170,7 @@ const NewsHealthArticlesPage = ({
 													key={ index }
 												>
 													<div className=''>
-														<Share className={ `${index === 0 ? 'mt-[10px]' : 'mt-[40px]'}` } slug={ `${data.language === 'idn' ? 'id' : 'en'}/news/${data.slug}` } />
+														<Share className={ `${ index === 0 ? 'mt-[10px]' : 'mt-[40px]' }` } slug={ `${ data.language === 'idn' ? 'id' : 'en' }/news/${ data.slug }` } />
 													</div>
 													<Link href={ `${ pathname }/${ data?.slug }` } style={ { zIndex: '-999 !important' } }>
 														<CardNews
@@ -176,9 +178,9 @@ const NewsHealthArticlesPage = ({
 															title={ data.title }
 															category={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
 															imgThumb={ data.img_url }
-															date={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
+															date={ moment(data?.posted_date).locale(currentLang).format('dddd, DD MMM YYYY') }
 															author={ data?.news_author?.doctor_name }
-															classNames={ ` ${index === 0 ? 'mb-0' : 'pt-[30px] mb-0'} ` }
+															classNames={ ` ${ index === 0 ? 'mb-0' : 'pt-[30px] mb-0' } ` }
 														/>
 													</Link>
 												</div>
@@ -210,7 +212,7 @@ const NewsHealthArticlesPage = ({
 															fontWeight='400'
 															lineHeight='17px'
 															color={ colors.grey.dark }
-															text={ moment(data?.posted_date).format('dddd, DD MMM YYYY') }
+															text={ moment(data?.posted_date).locale(currentLang).format('dddd, DD MMM YYYY') }
 														/>
 													</div>
 												</div>
@@ -258,7 +260,7 @@ const NewsHealthArticlesPage = ({
 															fontWeight='400'
 															lineHeight='17px'
 															color={ colors.grey.dark }
-															text={ moment(Object.values(articles || [])[0]?.posted_date).format('dddd, DD MMM YYYY') }
+															text={ moment(Object.values(articles || [])[0]?.posted_date).locale(currentLang).format('dddd, DD MMM YYYY') }
 														/>
 													</div>
 												</div>
