@@ -578,7 +578,9 @@ export default {
 			breadcrumbsLabel: 'News & Health Articles',
 			oleh: 'By',
 			downloadFilePdf: 'Download Health First magazine ',
-			here: 'here'
+			here: ' here',
+			relatedNews: 'Related Articles',
+			specialty: 'Related Doctors',
 		},
 		forgotPassword: {
 			heading: 'Forgot Password',

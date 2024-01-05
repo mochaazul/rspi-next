@@ -67,7 +67,7 @@ const NewsDetail = ({
 						<div className='bg-[#FAFAFA] max-sm:px-[15px] max-sm:py-[24px] max-sm:mt-[12px]'>
 							<div className={ filteredSelectedArticle?.category === 'healthfirst' || relatedNews.length === 0 ? 'hidden' : 'sm:hidden' }>
 								<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
-								Related News
+									{ t('relatedNews') }
 								</span>
 								<div className='divide-y divide-solid pt-[10px] '>
 									{ Object.values(relatedNews || []).map((a, index) => {
@@ -103,7 +103,7 @@ const NewsDetail = ({
 
 							<div className={ filteredSelectedArticle?.category === 'healthfirst' || specialty.length === 0 ? 'hidden' : 'sm:hidden' } >
 								<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
-												Specialty
+									{ t('specialty') }
 								</span>
 								<div className='divide-y divide-solid pt-[10px]'>
 									{ Object.values(specialty || [])?.map((specialty, index) => {
@@ -247,8 +247,8 @@ const NewsDetail = ({
 							{ /* Dekstop View */ }
 							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] ' } ` }>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'w-[349px]' }>
-									<span className={ ` ${relatedNews.length === 0 ? 'hidden' : ''} text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary`}>
-										Related News
+									<span className={ ` ${relatedNews.length === 0 ? 'hidden' : ''} text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary` }>
+										{ t('relatedNews') }
 									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(relatedNews || [])?.map((a, index) => {
@@ -281,8 +281,8 @@ const NewsDetail = ({
 									</div>
 								</div>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'mt-[40px]' }>
-									<span className={ `${specialty.length === 0 ? 'hidden' : ''} text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary`}>
-										Specialty
+									<span className={ `${specialty.length === 0 ? 'hidden' : ''} text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary` }>
+										{ t('specialty') }
 									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(specialty || [])?.map((specialty, index) => {
