@@ -79,7 +79,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 					</CardsScrollHorizontal>
 					:
 					<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
-						<EmptyData menu='Promo and Packages' />
+						<EmptyData menu={ t('heading') } />
 					</Text>
 				}
 			</div>
@@ -126,7 +126,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 								language={ item?.language }
 								image={ item.img_url_card }
 								imageHeight='200px'
-								className='lg:!w-full !m-0'
+								className='max-sm:w-[92%] lg:!w-full !m-0'
 								header={
 									<Text
 										color={ colors.grey.dark }
@@ -152,7 +152,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 					</CardsScrollHorizontal>
 					:
 					<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
-						<EmptyData menu='Promo and Packages' />
+						<EmptyData menu={ t('heading') } />
 					</Text>
 				}
 			</div>

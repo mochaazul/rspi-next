@@ -240,7 +240,7 @@ export default function Page({ params }: Props) {
 											value={ radioValue }
 											groupContainerClassname='flex flex-col md:flex-row'
 										>
-											<Radio.Option label='Kunjungan Tatap Muka' value='APP' />
+											<Radio.Option label={ t('visitAppOptionLabel') } value='APP' />
 											{ /* TODO: TAKEN OUT SINCE TrackCare do not support it yet 24 nov 23 */ }
 											{ /* <Radio.Option label='Telekonsultasi' value='TEL' /> */ }
 										</Radio>
