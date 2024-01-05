@@ -444,9 +444,9 @@ export const Header = ({
 											{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
 												<Link href={ `/center-of-excellence/${ item.slug }` } key={ idx }>
 													<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
-														{ item?.img_url?.[0] && (
+														{/* { item?.img_url?.[0] && (
 															<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } alt='center-of-excellence-image' />
-														) }
+														) } */}
 														<div className='ml-[10px] w-[310px] hover:bg-transparent'>
 															<Text text={ item?.title } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
 														</div>
