@@ -20,13 +20,13 @@ const RootWrapper = ({ params: { locale }, children }: { params: { locale: strin
 				}
 			} }
 		>
-			<I18nProviderClient locale={ locale }>
-				{ children }
-				{ /* Blocking Component / Global Component
+			{ children }
+			{ /* Blocking Component / Global Component
 				Any component that will behave as a blocker should be mounted here
 				ex: Token expired modal , User-not logged in modal, toast (if any)
 			*/ }
 
+			<I18nProviderClient locale={ locale }>
 				<LogoutModal visible={ logoutModalVisible } toggler={ setLogoutModalVisible } />
 				<NeedLoginModal visible={ loginModalVisible } toggler={ setLoginModalVisible } onClose={ () => setLoginModalVisible(false) } />
 			</I18nProviderClient>
