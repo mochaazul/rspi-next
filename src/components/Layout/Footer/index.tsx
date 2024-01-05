@@ -97,7 +97,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 									fontSize='14px'
 									fontWeight='700'
 									className='flex'
-									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
+									subClassName='max-sm:text-sm hover:text-[#667085] cursor-pointer capitalize'
 								>{ item.title }</Text>
 							</Link>
 						);
@@ -118,7 +118,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 									fontSize='14px'
 									fontWeight='700'
 									className='flex'
-									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
+									subClassName='max-sm:text-sm hover:text-[#667085] cursor-pointer capitalize'
 								>{ item.name }</Text>
 							</Link>
 						);
@@ -139,7 +139,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 									fontSize='14px'
 									fontWeight='700'
 									className='flex'
-									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
+									subClassName='max-sm:text-sm hover:text-[#667085] cursor-pointer capitalize'
 								>{ item.title }</Text>
 							</Link>
 						);
@@ -204,7 +204,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			<Text
 				fontSize='14px'
 				color={ colors.paradiso.default }
-				className='mb-4 max-sm:text-xs font-bold sm:font-normal max-sm:uppercase leading-[24px]'
+				className='mb-4 max-sm:text-sm font-bold sm:font-normal max-sm:uppercase leading-[24px]'
 			>{ text }</Text>
 		);
 	};
