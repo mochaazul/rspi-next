@@ -50,6 +50,7 @@ export default {
 			serviceLocation: {
 				heading: 'Available at',
 				hospitalName: 'RS Pondok Indah - Pondok Indah 1st Floor',
+				floor: 'Floor',
 				appointmentHeading: 'Appointment',
 				phoneNumberHeading: 'Phone',
 				operationalHourHeading: 'Operational Hours',
