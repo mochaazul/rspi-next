@@ -31,7 +31,7 @@ const lato = Lato({
 export default async function RootLayout({ children }: Props) {
 	return (
 		<html lang='en'>
-			
+
 			<body className={ lato.variable } suppressHydrationWarning>
 				<StyledComponentsRegistry>
 					<div className='font-Lato'>
