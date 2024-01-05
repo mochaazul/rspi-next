@@ -31,7 +31,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 	}
 
 	return (
-		<div className='flex flex-row sm:ml-[-0.25rem] mt-[25px] sm:mt-8'>
+		<div className='flex flex-row sm:ml-[-0.25rem] pt-[25px] sm:pt-8'>
 			{
 				datas.map((data, index) => (
 					<div key={ index } className='flex flex-row items-center'>
@@ -44,7 +44,7 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 									lineHeight='17px'
 									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }
 									color={ (index + 1) < props.datas.length ? colors.grey.dark : colors.paradiso.default }
-									subClassName={ `max-sm:!text-[10px] ${index === (props.datas.length - 1) ? 'line-clamp-1' : 'whitespace-no-wrap w-max'} max-sm:!leading-normal` }
+									subClassName={ `max-sm:!text-[10px] ${ index === (props.datas.length - 1) ? 'line-clamp-1' : 'whitespace-no-wrap w-max' } max-sm:!leading-normal` }
 									text={ data.name }
 								/>
 							</ItemStyle>
