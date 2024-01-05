@@ -10,6 +10,7 @@ import { useHostname } from '@/utils/useHostname';
 
 interface PropsType {
 	slug?: string;
+	className?: string;
 }
 
 const buttonSocmed = [
@@ -52,7 +53,7 @@ const Share = (props: PropsType) => {
 		setIsHoverShare(prevHover => !prevHover);
 	};
 	return (
-		<div className='absolute right-0 mr-[10px] mt-[10px] top-0 cursor-pointer flex flex-col items-end group'>
+		<div className={ `absolute right-0 mr-[10px] ${props?.className} mt-[10px] top-0 cursor-pointer flex flex-col items-end group` }>
 			<div onClick={ handleClickSocialShare } className='pb-2 z-1'>
 				<icons.SocialShare />
 			</div>
@@ -70,7 +71,7 @@ const Share = (props: PropsType) => {
 							>
 								{ item?.icon }
 								<div className='ml-[10px]'>
-									<Text text={ item?.label } fontSize='16px' fontWeight='400' />
+									<Text text={ item?.label } fontSize='16px' fontWeight='400' subClassName='hover:text-green-secondary' />
 								</div>
 							</Link>
 						)) }

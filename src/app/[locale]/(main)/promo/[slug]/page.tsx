@@ -1,10 +1,28 @@
+import { Metadata } from 'next';
+
 import { getScopedI18n } from '@/locales/server';
 
-import { PanelH1, PanelV1 } from '../../style';
+import { PanelH1 } from '../../style';
 
 import { getAllEvents, getPromoById } from '@/lib/api/events';
 import PromoDetail from '@/components/ui/PageComponents/News/Promo/PromoDetail';
 import { redirect } from 'next/navigation';
+
+export async function generateMetadata({ params }: { params: { slug: string; }; }): Promise<Metadata> {
+	const getArticle = await getPromoById({
+		param: params?.slug,
+	});
+   
+	const selectedEvent = Object.values(getArticle)[0];
+	
+	return {
+	  title: selectedEvent?.title,
+	  description: selectedEvent?.content.replace(/(<([^>]+)>)/ig, ''),
+	  openGraph: {
+			images: [selectedEvent?.img_url_detail],
+		},
+	};
+}
 
 const DetailEventClassesPromo = async({ params }: { params: { slug: string; }; }) => {
 	
