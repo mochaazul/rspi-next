@@ -1,16 +1,19 @@
 'use client';
 
 import moment from 'moment';
+import 'moment/locale/id';
+
 import { useRef, Key } from 'react';
 
 import { colors } from '@/constant';
 import { Button, Text } from '@/components/ui';
 import Card, { CardContentWithInner, CardFooter, CardsScrollHorizontal } from '@/components/ui/Card';
-import { useScopedI18n } from '@/locales/client';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 
 const RelatedNewsMobile = (props: any) => {
 	const CardWrapperRef = useRef<HTMLDivElement>(null);
 	const t = useScopedI18n('page.centerOfExcellence');
+	const currentLang = useCurrentLocale();
 
 	return (
 		<CardsScrollHorizontal customRef={ CardWrapperRef }>
@@ -34,7 +37,7 @@ const RelatedNewsMobile = (props: any) => {
 										fontWeight='400'
 										lineHeight='17px'
 										color={ colors.grey.dark }
-										text={ moment(article?.news?.posted_date).format('dddd, DD MMM YYYY') }
+										text={ moment(article?.news?.posted_date).locale(currentLang).format('dddd, DD MMM YYYY') }
 									/>
 								</div>
 							</div>

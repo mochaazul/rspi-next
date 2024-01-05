@@ -30,7 +30,8 @@ export default {
 			heading: 'Panggil Ambulans',
 			subHeading: 'Silahkan pilih Rumah sakit: '
 		},
-		share: 'Bagikan'
+		share: 'Bagikan',
+		emptyData: 'Yah! Belum ada {label} saat ini'
 	},
 	blacklist: {
 		contactUs: 'Hubungi kami',
@@ -578,7 +579,8 @@ export default {
 			heading: 'Berita dan Artikel Kesehatan',
 			detailsBtnLabel: 'Lihat Detail',
 			breadcrumbsLabel: 'Berita & Artikel Kesehatan',
-			viewDetails: 'Lihat Detail'
+			viewDetails: 'Lihat Detail',
+			searchPlaceholder: 'Cari Artikel'
 		},
 		newsDetail: {
 			breadcrumbsLabel: 'Berita & Artikel Kesehatan',
@@ -919,7 +921,9 @@ export default {
 				specialty: 'Spesialisasi',
 				doctorFound: 'Dokter Ditemukan',
 				seeDetail: 'Book Appointment',
-				applyFilter: 'Terapkan'
+				applyFilter: 'Terapkan',
+				seeSchedule: 'Lihat Jadwal',
+				closeSchedule: 'Tutup Jadwal'
 			},
 
 		},
@@ -931,8 +935,8 @@ export default {
 				hospitalLabel: 'Rumah sakit',
 				clinicLabel: 'Klinik',
 				btnLabel: {
-					back: 'Back',
-					submit: 'Next'
+					back: 'Kembali',
+					submit: 'Lanjut'
 				}
 			},
 			slotEmptyState: 'Silahkan pilih tanggal untuk menampilkan informasi jam yang tersedia.',
@@ -950,7 +954,8 @@ export default {
 			asuransiCard: 'Foto Kartu Asuransi (Opsional)',
 			asuransiCardFront: 'Upload foto tampak depan',
 			asuransiCardBack: 'Upload foto tampak belakang',
-			labelPhoneModal: 'Silahkan hubungi call center'
+			labelPhoneModal: 'Silahkan hubungi call center',
+			visitAppOptionLabel: 'Kunjungan Tatap Muka'
 		},
 		footer: {
 			visitorInfo: {

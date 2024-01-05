@@ -79,7 +79,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 					</CardsScrollHorizontal>
 					:
 					<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
-						<EmptyData menu='Promo and Packages' />
+						<EmptyData menu={ t('heading') } />
 					</Text>
 				}
 			</div>
@@ -152,7 +152,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 					</CardsScrollHorizontal>
 					:
 					<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
-						<EmptyData menu='Promo and Packages' />
+						<EmptyData menu={ t('heading') } />
 					</Text>
 				}
 			</div>
