@@ -17,8 +17,8 @@ export default function ErrorPage() {
 					</p>
 				</div>
 				<div className='rounded-[10px] p-4 flex max-md:flex-col items-center justify-between gap-2 w-full bg-white shadow-[5px_5px_10px_0px_rgba(53,136,136,0.12)] text-base sm:text-xl sm:leading-[30px] text-gray-2'>
-					<span className="flex flex-wrap justify-center gap-1">RSPI - Pondok Indah <span className='text-green-secondary'>021-765 7525</span></span>
-					<span className="flex flex-wrap justify-center gap-1">RSPI - Puri Indah <span className='text-green-secondary'>021-2569 5200</span></span>
+					<span className='flex flex-wrap justify-center gap-1'>RSPI - Pondok Indah <span className='text-green-secondary'>021-765 7525</span></span>
+					<span className='flex flex-wrap justify-center gap-1'>RSPI - Puri Indah <span className='text-green-secondary'>021-2569 5200</span></span>
 					<span className='flex flex-wrap justify-center gap-1'>RSPI - Binatro Jaya <span className='text-green-secondary'>021-8082 8888</span></span>
 				</div>
 			</div>
