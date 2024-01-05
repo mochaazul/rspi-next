@@ -374,13 +374,13 @@ export const Header = ({
 					leaveTo='transform opacity-0 scale-95'
 				>
 					<Menu.Items className='absolute right-0 mt-5 w-[230px] origin-top-right shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] overflow-hidden bg-white rounded-b-[10px] font-Lato font-bold text-base'>
-						<Menu.Item as={ Link } href='/patient-portal' className='flex px-5 py-4 text-gray-1 hover:bg-[#3588881a]'>
-							{ t('user.patientPortal') }
+						<Menu.Item as={ Link } href='/patient-portal' className='group/dropDownProfileList flex px-5 py-4 hover:bg-[#35888814]'>
+							<Text subClassName='group-hover/dropDownProfileList:text-green-secondary'>{ t('user.patientPortal') }</Text>
 						</Menu.Item>
-						<Menu.Item as={ Link } href='/user-information' className='flex px-5 py-4 text-gray-1 hover:bg-[#3588881a]'>
-							{ t('user.patientInformation') }
+						<Menu.Item as={ Link } href='/user-information' className='group/dropDownProfileList flex px-5 py-4 hover:bg-[#35888814]'>
+							<Text subClassName='group-hover/dropDownProfileList:text-green-secondary'>{ t('user.patientInformation') }</Text>
 						</Menu.Item>
-						<Menu.Item as='div' className='px-5 py-4 text-[#D71F28] cursor-pointer hover:bg-[#3588881a]' onClick={ handleClickLogout }>
+						<Menu.Item as='div' className='px-5 py-4 text-[#D71F28] cursor-pointer hover:bg-[#35888814]' onClick={ handleClickLogout }>
 							{ t('user.logout') }
 						</Menu.Item>
 					</Menu.Items>
@@ -418,7 +418,7 @@ export const Header = ({
 									<div className={ `${ isHover === false ? 'hidden' : 'absolute' } dropdownPosition` }>
 										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
 											{ Object.values(hospitalData || [])?.map((item, idx) => (
-												<Link href={ `/hospital/${ item?.slug }` } key={ idx } className='hospital-list group/dropDownList border-b border-gray flex py-4 px-4 items-center hover:bg-[#3588881a] cursor-pointer'>
+												<Link href={ `/hospital/${ item?.slug }` } key={ idx } className='hospital-list group/dropDownList border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814] cursor-pointer'>
 													<Image
 														alt='hospital image'
 														src={ item?.img_url?.[0] || '' }
@@ -443,7 +443,7 @@ export const Header = ({
 										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
 											{ Object.values(centerOfExcellenceData || [])?.map((item, idx) => (
 												<Link href={ `/center-of-excellence/${ item.slug }` } key={ idx }>
-													<div className='hospital-list group/dropDownList border-b border-gray flex py-4 px-4 items-center hover:bg-[#3588881a]'>
+													<div className='hospital-list group/dropDownList border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814]'>
 														{ /* { item?.img_url?.[0] && (
 															<Image src={ item?.img_url?.[0] } width={ 60 } height={ 60 } alt='center-of-excellence-image' />
 														) } */ }
@@ -464,7 +464,7 @@ export const Header = ({
 										<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar' aria-labelledby='dropdownDefault'>
 											{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 												<Link href={ `/facilities-service/${ item.slug }` } key={ idx }>
-													<div className='hospital-list group/dropDownList border-b border-gray flex py-4 px-4 items-center hover:bg-[#3588881a]'>
+													<div className='hospital-list group/dropDownList border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814]'>
 														{ /* {
 															item?.image_url?.[0] && (
 																<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
@@ -479,7 +479,7 @@ export const Header = ({
 											)) }
 
 											<Link href={ '/facilities-service/medical-specialties' }>
-												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#3588881a]'>
+												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814]'>
 													<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
 													<div className='ml-[10px] w-[310px]'>
 														<Text text={ 'Medical Specialties' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
