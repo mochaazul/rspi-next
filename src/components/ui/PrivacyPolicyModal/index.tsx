@@ -11,14 +11,19 @@ import {
 	PrivacyPolicyContainer,
 	ScrollableContentContainer
 } from './style';
-import loremipsum from './loremipsum';
+
+import dataPrivacyPolicyId from './dataPrivacyPolicyId';
+import dataPrivacyPolicyEn from './dataPrivacyPolicyEn';
+import termConditionsEn from './termConditionsEn';
+import termConditionsId from './termConditionsId';
 
 import Text from '../Text';
+import TextHtml from '../TextHtml';
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 import Spinner from '../Spinner';
 import Modal from '../Modal';
-import { useScopedI18n } from '@/locales/client';
+import { useScopedI18n, useCurrentLocale } from '@/locales/client';
 
 type checkedValsType = {
 	pp: boolean,
@@ -38,7 +43,11 @@ const PrivacyPolicyModal = ({
 	onClose,
 	loading
 }: Props) => {
+
 	const languages = useScopedI18n('page.privacyPolicy');
+	const currentLang = useCurrentLocale();
+	const dataPrivacyPolicy = currentLang === 'id' ? dataPrivacyPolicyId : dataPrivacyPolicyEn;
+	const dataTermConditions = currentLang === 'id' ? termConditionsId : termConditionsEn;
 
 	const [step, setStep] = useState<'pp' | 'toc'>('pp');
 	const [checkVals, setCheckVals] = useState<checkedValsType>({
@@ -96,7 +105,7 @@ const PrivacyPolicyModal = ({
 
 	};
 
-	return <Modal visible={ isOpen } width='678px' noPadding onClose={ onClose }>
+	return <Modal visible={ isOpen } width='978px' noPadding onClose={ onClose }>
 		<PrivacyPolicyContainer>
 			<HeaderSection>
 				<HeaderItem>
@@ -128,7 +137,9 @@ const PrivacyPolicyModal = ({
 					className='mb-[16px]'
 				/>
 				<ScrollableContentContainer>
-					{ loremipsum }
+					<div
+						dangerouslySetInnerHTML={ { __html: step === 'pp' ? dataPrivacyPolicy : dataTermConditions } }
+					/>
 				</ScrollableContentContainer>
 			</div>
 			<FooterSection >
