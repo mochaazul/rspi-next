@@ -22,6 +22,8 @@ import CardNews from './CardNews';
 import { NewsHealthArticlesStyle } from './styles';
 import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import { useScopedI18n } from '@/locales/client';
+import BreadcrumbsClient from '@/components/ui/Breadcrumbs/client';
+import LangWrapper from '@/components/ui/LangWrapper';
 
 type ArticleProps = {
 	id: number;
@@ -77,7 +79,9 @@ const NewsHealthArticlesPage = ({
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px] animate-slideDownToUp '>
 				<div>
 					<div className='header'>
-						{ /* <Breadcrumbs datas={ breadcrumbsPath } /> */ }
+						<LangWrapper>
+						 <BreadcrumbsClient datas={ breadcrumbsPath } />
+						</LangWrapper>
 						<Text
 							fontSize='44px'
 							fontType='h1'

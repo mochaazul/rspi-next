@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
+import Breadcrumbs, { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
 import {
 	Accordion,
 	Button,
@@ -31,13 +31,11 @@ const ContactUsPage = async({
 
 	const faqDatas = await FAQDatas();
 
-	// const hospitalSelector = useTypedSelector<HospitalState>('hospital');
-
 	return (
 		<ContactUsPanel>
 			<PanelV1>
 				<PanelH2>
-					{ /* <Breadcrumbs datas={ breadcrumbsPath } /> */ }
+					<Breadcrumbs datas={ breadcrumbsPath } />
 					<div className='sm:mt-12 mt-4'>
 						<Text
 							fontType='h1'
