@@ -44,7 +44,7 @@ export const Panel = styled.div`
 export default LandingPageStyle;
 
 export interface OutletStyleType {
-  BGGrey?: boolean;
+	BGGrey?: boolean;
 }
 
 export const OutletStyle = styled.div<OutletStyleType>`
