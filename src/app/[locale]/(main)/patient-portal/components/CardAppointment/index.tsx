@@ -338,7 +338,7 @@ const CardAppointment = (props: PropsType) => {
 			<ModalCancelBook
 				visible={ showModalCancelBook }
 				onClose={ () => { setShowModalCancelBook(false); } }
-				nama={ props.patientName }
+				patientName={ props.patientName || '-' }
 				doctorImg={ props.doctorImgUrl }
 				doctorName={ props.doctorName || '-' }
 				doctorSpec={ props.doctorSpeciality || '-' }
@@ -346,8 +346,8 @@ const CardAppointment = (props: PropsType) => {
 				bookClinic={ props.clinic_name || '-' }
 				hospital={ props.hospital_name || '-' }
 				onClickButtonCancelAppointment={ () => setShowPinModal(true) }
-				birthDate={ props.patientBirthDate || '-' }
-				noHp={ props.patientPhone || '-' }
+				patientBirthDate={ props.patientBirthDate || '-' }
+				patientPhone={ props.patientPhone || '-' }
 				patientProfile={ props.patientProfile }
 			/>
 			<PinModal visible={ showPinModal } onSuccess={ () => userClickCancelBook(props.id) } isLoading={ isLoadingCancelBook } onClose={ () => setShowPinModal(false) } />

@@ -7,9 +7,6 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import { getScopedI18n } from '@/locales/server';
 
-import { CentreOfExcellenceStyle } from './style';
-import { PanelH1, PanelH3, PanelV1 } from '../style';
-
 export default async function AwardsPage() {
 	const awardsRes = await getAwards({}, { page: 1, limit: 10 });
 	const awards: AwardsDetail[] = awardsRes?.data;
@@ -20,13 +17,17 @@ export default async function AwardsPage() {
 
 	const AwardItem = (data: AwardsDetail) => (
 		<div>
-			<div className='image-cont relative overflow-hidden p-2 flex items-center justify-center'>
+			<div className='bg-white shadow-green-small w-full h-[191px] sm:h-[232px] rounded-lg sm:rounded-[10px] relative overflow-hidden p-2 flex items-center justify-center'>
 				{ data.img_url && (
-					<img
-						src={ data.img_url }
-						alt={ data.title ?? '' }
-						className='w-full h-[160px] object-contain'
-					/>
+					<div className='relative overflow-hidden w-full h-[110px] sm:h-[160px]'>
+						<Image
+							src={ data.img_url }
+							alt={ data.title ?? '' }
+							className='object-contain'
+							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+							fill
+						/>
+					</div>
 				) }
 			</div>
 			<Text
@@ -50,14 +51,10 @@ export default async function AwardsPage() {
 	);
 
 	return (
-		<CentreOfExcellenceStyle>
-			<PanelH1>
-				<div className='!-mt-8 pt-8'>
-					<Breadcrumbs datas={ breadcrumbsPath }/>
-				</div>
-			</PanelH1>
-			<PanelH3>
-				<div className='mt-[25px] sm:mt-[50px]'>
+		<div className='bg-[#FAFAFA]'>
+			<div className='lg:max-w-[1110px] w-full mx-auto max-xl:px-4'>
+				<Breadcrumbs datas={ breadcrumbsPath } />
+				<div className='mt-[25px] sm:mt-[50px] lg:px-[91px]'>
 					<Text
 						fontType='h1'
 						fontSize='44px'
@@ -77,19 +74,19 @@ export default async function AwardsPage() {
 						className='sm:mt-4 mt-1'
 						subClassName='max-sm:text-left text-gray-2'
 					/>
+					<div className='sm:pt-[50px] pt-7 pb-[84px] grid sm:grid-cols-2 grid-cols-1 sm:gap-[32px] gap-6'>
+						{
+							awards?.map((data, index) => ((index + 1) % 2 === 0 && (index + 1) < awards?.length) ?
+								[
+									<AwardItem key={ data.id } { ...data } />,
+									<div key={ `${ data.id }-${ index }` } className='col-span-2 border-t-[1px] my-[30px] max-sm:hidden' />
+								] :
+								<AwardItem key={ data.id } { ...data } />
+							)
+						}
+					</div>
 				</div>
-				<div className='sm:pt-[50px] pt-7 pb-[84px] grid sm:grid-cols-2 grid-cols-1 sm:gap-[32px] gap-6'>
-					{
-						awards?.map((data, index) => ((index + 1) % 2 === 0 && (index + 1) < awards?.length) ?
-							[
-								<AwardItem key={ data.id } { ...data } />,
-								<div key={ `${ data.id }-${ index }` } className='col-span-2 border-t-[1px] my-[30px] max-sm:hidden' />
-							] :
-							<AwardItem key={ data.id } { ...data } />
-						)
-					}
-				</div>
-			</PanelH3>
-		</CentreOfExcellenceStyle>
+			</div>
+		</div>
 	);
 };
