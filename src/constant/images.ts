@@ -31,6 +31,15 @@ import CustomerQuoteImg from '/public/images/quote.png';
 import CustomerReviewBg from '/public/images/customer_review_bg.jpg';
 import CustomerReviewCustAvatar from '/public/images/samples/customer_avatar.png';
 
+import purwantoReview from '/public/images/reviews/1Purwanto.png';
+import FajarReview from '/public/images/reviews/2Fajar.png';
+import TriyanawantiReview from '/public/images/reviews/3Triyanawanti.png';
+import AyudhiariniReview from '/public/images/reviews/4Ayudhiarini.png';
+import ApriyolaReview from '/public/images/reviews/5Apriyola.png';
+import CendrawatiReview from '/public/images/reviews/6FifiCendrawati.png';
+import SarwonoReview from '/public/images/reviews/7WenlySarwono.png';
+import AugustiniReview from '/public/images/reviews/8DiniAyuAugustini.png';
+
 import PhoneMockup1 from '/public/images/phone_mockup1.png';
 import PhoneMockup2 from '/public/images/phone_mockup2.png';
 import MobileGroup from '/public/images/mobileGroup.png';
@@ -105,4 +114,12 @@ export default {
 	LinkedinLogo,
 	TelegramLogo,
 	WhatsappLogo,
+	purwantoReview,
+	FajarReview,
+	TriyanawantiReview,
+	AyudhiariniReview,
+	ApriyolaReview,
+	CendrawatiReview,
+	SarwonoReview,
+	AugustiniReview,
 };
