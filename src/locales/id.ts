@@ -188,6 +188,9 @@ export default {
 					done: 'telah berhasil.'
 				},
 				btnLabel: 'Oke'
+			},
+			bookingForm: {
+				insuranceData: 'Data Penjamin Asuransi'
 			}
 		},
 		unsubscribe: {

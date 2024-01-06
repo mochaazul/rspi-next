@@ -183,7 +183,7 @@ export default {
 				btnLabel: 'Ok'
 			},
 			bookingForm: {
-
+				insuranceData: 'Insurance Underwriter Data'
 			}
 		},
 		unsubscribe: {
