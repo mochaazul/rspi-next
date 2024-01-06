@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import * as Icons from 'react-feather';
 import Link from 'next/link';
 import Image from 'next/image';
-import { isMobile } from 'react-device-detect';
 
 import { Images, colors } from '@/constant';
 import { Accordion, Button, Text } from '@/components/ui';
@@ -45,7 +44,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 							lineHeight='17px'
 							fontWeight='700'
 							color={ colors.green.brandAccent }
-							text={ isOpened ? 'Tutup Jadwal' : 'Lihat Jadwal' }
+							text={ isOpened ? t('label.closeSchedule') : t('label.seeSchedule') }
 							onClick={ () => setOpened(!isOpened) }
 							className='cursor-pointer'
 						/>

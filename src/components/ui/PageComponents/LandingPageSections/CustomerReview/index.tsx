@@ -16,54 +16,108 @@ const CustomerReview = () => {
 	const sampleDatasIdn = [
 		{
 			short_description: 'Saat itu kaki dan tangan saya tidak dapat digerakkan. Berkat penanganan yang sigap dan perawatan intensif di bawah pengawasan dokter spesialis saraf saya, yaitu dr. Rubiana, perlahan tangan saya sudah bisa kembali bergerak.',
-			customer_avatar: images.CustomerReviewCustAvatar,
+			customer_avatar: images.purwantoReview,
 			customer_name: 'Purwanto',
 			customer_illness: 'Pasien Stroke'
 		},
 		{
-			short_description: 'Menemukan dokter spesialis anak yang cocok itu bagaikan mencari jodoh. Makanya begitu klik, Darella tidak mau pindah ke dokter lain. Selalu pilih Prof. Hinky yang sangat ramah dengan anak-anak',
-			customer_avatar: images.CustomerReviewCustAvatar,
-			customer_name: 'Triyanawanti, ibu dari Darella',
-			customer_illness: 'Pasien DBD',
-		},
-		{
 			short_description: 'Siapa yang mengira saya akan mengalami serangan jantung di usia semuda ini. Bersyukur saya bertemu dengan dr. Sari, dokter spesialis jantung yang sangat komunikatif. Penanganan tim medis RS Pondok Indah juga sangat baik, perawatnya ramah, dan cepat tanggap.',
-			customer_avatar: images.CustomerReviewCustAvatar,
+			customer_avatar: images.FajarReview,
 			customer_name: 'Fajar',
 			customer_illness: 'Pasien Serangan Jantung'
 		},
 		{
+			short_description: 'Menemukan dokter spesialis anak yang cocok itu bagaikan mencari jodoh. Makanya begitu klik, Darella tidak mau pindah ke dokter lain. Selalu pilih Prof. Hinky yang sangat ramah dengan anak-anak',
+			customer_avatar: images.TriyanawantiReview,
+			customer_name: 'Triyanawanti, ibu dari Darella',
+			customer_illness: 'Pasien DBD',
+		},
+		{
+			short_description: 'Saya mengenal dr. Rochsismandoko sejak RS Pondok Indah - Bintaro Jaya pertama kali dibuka. Dengan arahan beliau, saya menjaga agar kadar gula darah saya tetap normal.',
+			customer_avatar: images.AyudhiariniReview,
+			customer_name: 'Ayudhiarini',
+			customer_illness: 'Pasien Diabetes'
+		},
+		{
+			short_description: 'Berat badan saya sempat turun drastis hingga tinggal 34 kilogram. Padahal waktu itu saya masih menyusui. Dari pemeriksaan MRI dan pengambilan sampel sumsum tulang belakang, ternyata saya meningitis.',
+			customer_avatar: images.ApriyolaReview,
+			customer_name: 'Apriyola',
+			customer_illness: 'Pasien Meningitis'
+		},
+		{
 			short_description: 'Kami awalnya berniat melahirkan normal. Namun, di usia kehamilan 32 minggu, ternyata baby Zane posisinya sungsang. Akhirnya, dr. Eric sebagai dokter obgyn kami sigap melakukan tindakan untuk memutar posisi bayi, dan ternyata berhasil!',
-			customer_avatar: images.CustomerReviewCustAvatar,
+			customer_avatar: images.CendrawatiReview,
 			customer_name: 'Fifi Cendrawati',
 			customer_illness: 'Pasien Persalinan'
-		}
+		},
+		{
+			short_description: 'Suami saya orang Perancis, dan di Perancis ada tradisi ayah sang bayi yang memotong tali pusat. Saya coba mengajukan ini ke dr. Calvin dan beliau setuju. Senang sekali rasanya!',
+			customer_avatar: images.SarwonoReview,
+			customer_name: 'Wenly Sarwono',
+			customer_illness: 'Pasien Persalinan'
+		},
+		{
+			short_description: 'Tadinya saya cukup khawatir karena harus melahirkan di tengah pandemi. Syukurlah prosedur dan protokol kesehatan selalu dijaga ketat di RS Pondok Indah sehingga saya merasa tenang dan nyaman.',
+			customer_avatar: images.AugustiniReview,
+			customer_name: 'Dini Ayu Augustini',
+			customer_illness: 'Pasien Persalinan'
+		},
 	];
 
 	const sampleDatasEn = [
 		{
 			short_description: 'At that time, I couldn`t move my legs and arms.Thanks to prompt handling and intensive care under the supervision of my neurology specialist, Dr.Rubiana, my hands have gradually regained movement.',
-			customer_avatar: images.CustomerReviewCustAvatar,
+			customer_avatar: images.purwantoReview,
 			customer_name: 'Purwanto',
 			customer_illness: 'Stroke Patient'
 		},
 		{
+			short_description: 'Who would have thought I would have a heart attack at such a young age. I am grateful to have met Dr. Sari, a very communicative cardiac specialist. The medical team at Pondok Indah Hospital provided excellent care, the nurses were friendly, and responsive.',
+			customer_avatar: images.FajarReview,
+			customer_name: 'Fajar',
+			customer_illness: 'Heart Attack Patient.'
+		},
+		{
 			short_description: 'Finding the right pediatric specialist is like finding a soulmate. That`s why once Darella found the right fit, she didn`t want to switch to another doctor. She always chose Prof. Hinky, who is very friendly with children.',
-			customer_avatar: images.CustomerReviewCustAvatar,
+			customer_avatar: images.TriyanawantiReview,
 			customer_name: 'Triyanawanti, Darella`s mother',
 			customer_illness: 'Patient with Dengue Fever (DBD)',
 		},
 		{
-			short_description: 'Who would have thought I would have a heart attack at such a young age. I am grateful to have met Dr. Sari, a very communicative cardiac specialist. The medical team at Pondok Indah Hospital provided excellent care, the nurses were friendly, and responsive.',
-			customer_avatar: images.CustomerReviewCustAvatar,
-			customer_name: 'Fajar',
-			customer_illness: 'Heart attack patient.'
+			short_description: 'Initially, we intended to have a normal delivery. However, at 32 weeks of pregnancy, it turned out that baby Zane was in a breech position. Eventually, Dr. Eric, our obstetrician, promptly performed a procedure to rotate the baby`s position, and it was successful!',
+			customer_avatar: images.CendrawatiReview,
+			customer_name: 'Fifi Cendrawati',
+			customer_illness: 'Maternity Patient'
 		},
 		{
-			short_description: 'Initially, we intended to have a normal delivery. However, at 32 weeks of pregnancy, it turned out that baby Zane was in a breech position. Eventually, Dr. Eric, our obstetrician, promptly performed a procedure to rotate the baby`s position, and it was successful!',
-			customer_avatar: images.CustomerReviewCustAvatar,
+			short_description: 'With medical direction from dr. Rochsismandoko, I keep my blood glucose level normal.',
+			customer_avatar: images.AyudhiariniReview,
+			customer_name: 'Ayudhiarini',
+			customer_illness: 'Diabetes Patient'
+		},
+		{
+			short_description: 'My weight dropped dramatically to just 34 kg. Even though I was still breastfeeding. From the MRI examination and spinal cord sampling, it turned out that I had meningitis.',
+			customer_avatar: images.ApriyolaReview,
+			customer_name: 'Apriyola',
+			customer_illness: 'Meningitis Patient'
+		},
+		{
+			short_description: 'On my 32 weeks of pregnancy, it turned out that my baby Zane was in a breech position. Fortunately, dr Eric took the action to turn the baby into a headfirst, and it worked!',
+			customer_avatar: images.CendrawatiReview,
 			customer_name: 'Fifi Cendrawati',
-			customer_illness: 'Maternity patient'
+			customer_illness: 'Maternity Patient'
+		},
+		{
+			short_description: 'My husband is French, and in France, there is a tradition that a father should cut the babys umbilical cord. I told dr. Calvin about this and he agreed to the idea. We were so happy!',
+			customer_avatar: images.SarwonoReview,
+			customer_name: 'Wenly Sarwono',
+			customer_illness: 'Maternity Patient'
+		},
+		{
+			short_description: 'At first, I was quite worried because I had to give birth amid the pandemic. Thankfully the health procedures and protocols are very strict at RS Pondok Indah, so that I feel calm and comfortable.',
+			customer_avatar: images.AugustiniReview,
+			customer_name: 'Dini Ayu Augustini',
+			customer_illness: 'Maternity Patient'
 		}
 	];
 

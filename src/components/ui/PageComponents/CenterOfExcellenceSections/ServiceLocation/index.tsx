@@ -29,18 +29,18 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 	const renderContent = useMemo(() => {
 		const Contents = [];
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16' >
-				<TextHtml htmlStr={ content?.conditions } />
+			<div className='mt-[30px] text-16' >
+				<TextHtml className='innerHTML' htmlStr={ content?.conditions } />
 			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16' >
-				<TextHtml htmlStr={ content?.treatments } />
+			<div className='mt-[30px] text-16' >
+				<TextHtml className='innerHTML' htmlStr={ content?.treatments } />
 			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16'>
-				<TextHtml htmlStr={ content?.technology } />
+			<div className='mt-[30px] text-16'>
+				<TextHtml className='innerHTML' htmlStr={ content?.technology } />
 			</div>
 		);
 		Contents.push(
@@ -82,8 +82,8 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 			</div>
 
 			<div className='mt-[48px]'>
-				<div className='innerHTML text-16' >
-					<TextHtml htmlStr={ content?.content } />
+				<div className='text-16' >
+					<TextHtml className='innerHTML' htmlStr={ content?.content } />
 				</div>
 			</div>
 
@@ -110,6 +110,9 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 							return (
 								<div className='mb-4 sm:mb-8' key={ `hospital-${ index }` }>
 									<Text className='mt-4 sm:mt-8' fontSize='20px' fontWeight='900' subClassName='!leading-normal'>
+										{ item?.unit }
+									</Text>
+									<Text className='mt-2 sm:mt-3' fontSize='16px' fontWeight='900' color={ colors.grey.dark } subClassName='max-sm:text-[#2A2536] max-sm:text-xs leading-[18px] sm:leading-normal max-sm:font-normal'>
 										{
 											currentLang === 'id'
 												? `${ item?.hospital_name } ${ t('serviceLocation.floor') } ${ item?.floor }`
