@@ -16,14 +16,13 @@ import DoctorFilter from './DoctorFilter';
 import ResultHeader from './ResultHeader';
 import LangWrapper from '@/components/ui/LangWrapper';
 import useFindDoctor from './useFindDoctor';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 import { HospitalDetail, I_MasterDoctor, ResponseType } from '@/interface';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
-import BreadcrumbsClient from '@/components/ui/Breadcrumbs/client';
 
 type Props ={
   hospital: HospitalDetail[]

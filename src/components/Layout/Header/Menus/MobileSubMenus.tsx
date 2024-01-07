@@ -6,7 +6,7 @@ import * as Icons from 'react-feather';
 import Link from 'next/link';
 
 export type MenuEntry = {
-  id: number
+  id?: number
   label: string
   slug: string
 }

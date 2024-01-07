@@ -20,10 +20,10 @@ const MobileMenus = async({ session, hospitals, coe, facilitiy }:Props) => {
 	const t = await getScopedI18n('navMenu');
 	const isLoggedIn = !!session?.token;
 
-	const mapHospital:MenuEntry[] = hospitals.map(item => ({ id: item.id, label: item.name ?? '', slug: item.slug }));
-	const mapCoe:MenuEntry[] = coe.map(item => ({ id: item.id, label: item.title ?? '', slug: item.slug }));
-	const mapFacility: MenuEntry[] = facilitiy.map(item => ({ id: item.id, label: item.name ?? '', slug: item.slug }));
-	const medSpec:MenuEntry = { id: 1, label: 'Medical Specialties', slug: '/medical-specialties' };
+	const mapHospital:MenuEntry[] = hospitals.map((item, index) => ({ id: item.id ?? index, label: item.name ?? '', slug: item.slug }));
+	const mapCoe:MenuEntry[] = coe.map((item, index) => ({ id: item.id ?? index, label: item.title ?? '', slug: item.slug }));
+	const mapFacility: MenuEntry[] = facilitiy.map((item, index) => ({ id: item.id ?? index,  label: item.name ?? '', slug: item.slug }));
+	const medSpec:MenuEntry = { id: 9999999, label: 'Medical Specialties', slug: '/medical-specialties' };
 	return (
 		<MobileMenuWrapper >
 			<input id='menu' type='checkbox' className='peer' defaultChecked={ false }/>
