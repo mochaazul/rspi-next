@@ -8,7 +8,6 @@ import { useScopedI18n } from '@/locales/client';
 
 import { ItemType } from '.';
 import { ItemStyle } from './style';
-import TextHtml from '../TextHtml';
 
 const ItemFAQ = (props: ItemType) => {
 	const t = useScopedI18n('page.contactUs.faq');
