@@ -110,7 +110,7 @@ export default {
 			validationError: 'Please fill all the data.',
 			profileSelector: {
 				deleteModal: {
-					heading: 'Are you sure you want to delete profile',
+					heading: 'Are you sure you want to delete other profile data',
 					yesLabel: 'Yes',
 					noLabel: 'No'
 				},
@@ -151,7 +151,7 @@ export default {
 				errorEmptyData: 'Make sure complaint and guarantor data are filled in',
 				btnLabel: {
 					back: 'Back',
-					submit: 'Book Appointment'
+					submit: 'Next'
 				}
 			},
 			confirmationModal: {
@@ -184,7 +184,7 @@ export default {
 				btnLabel: 'Ok'
 			},
 			bookingForm: {
-
+				insuranceData: 'Insurance Underwriter Data'
 			}
 		},
 		unsubscribe: {

@@ -202,7 +202,7 @@ export default function Page({ params }: Props) {
 							clickCloseContactHospital={ closeContactHospital }
 							onClose={ () => setShowModalTelp(false) }
 						/>
-						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] pb-[120px]'>
+						<div className='lg:w-[1110px] mx-auto max-sm:mx-[12px] pb-[120px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
 							<div className='content-wrapper sm:flex w-full mt-[40px]'>
 								<DoctorAvatar className='max-sm:hidden' profile_url={ doctor?.data?.img_url } />
@@ -283,7 +283,7 @@ export default function Page({ params }: Props) {
 									$hoverTheme='primary'
 									label={ t('form.btnLabel.back') }
 									noPadding={ true }
-									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
+									className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
 									theme='outline'
 									onClick={ () => {
 										router.back();
@@ -292,7 +292,7 @@ export default function Page({ params }: Props) {
 								<Button
 									label={ t('form.btnLabel.submit') }
 									noPadding={ true }
-									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
+									className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
 									onClick={ onBookHandler }
 									disabled={ !selectedTimeSlot }
 								>
