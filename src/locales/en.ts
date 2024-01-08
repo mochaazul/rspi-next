@@ -270,23 +270,8 @@ export default {
 					homeVisit: 'Do RS Pondok Indah Group Hospitals provide home visit service?'
 				},
 				answers: {
-					doctorSchedule: '<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">RS Pondok Indah Group has collaborated with various trusted insurance companies, both domestic and overseas. Click </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/pages/our-partner-insurance-company"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);"> to view our insurance partners.</span></p>',
-					assurance: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Visiting hours may vary for some wards. In order to maintain the safety and comfort of all our patients, visits can only be made during certain hours and are conducted on a rotating basis.</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><strong><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Visiting Hours</span></strong></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">General &amp; Newborn Wards</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">ICU, ICCU</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 12.00 PM&nbsp;&nbsp;</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Only 1 visitor is allowed at any one time. Children are not allowed in these units</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">NICU &amp; Intermediate Care</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
-						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Only parents are allowed to visit. A maximum of 2 people per patient are allowed to visit at any one time.</span></p>`,
+					doctorSchedule: `<p><span style="font-size: 14px; color: rgb(0, 0, 0);">You can find RS Pondok Indah Group doctor&rsquo;s schedules </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/find-a-doctor"><span style="font-size: 11pt; font-family: Arial, sans-serif; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 11pt; font-family: Arial, sans-serif; color: rgb(0, 0, 0);">. You can also view our doctor&rsquo;s schedule by downloading RSPI mobile app.</span></p>`,
+					assurance: `<p><span style="font-size: 14px; color: rgb(0, 0, 0);">RS Pondok Indah Group has collaborated with various trusted insurance companies, both domestic and overseas. Click </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/pages/our-partner-insurance-company"><span style="font-size: 14px; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 11pt; font-family: Arial, sans-serif; color: rgb(0, 0, 0);"> to view our insurance partners.</span></p>`,
 					visitHours: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Visiting hours may vary for some wards. In order to maintain the safety and comfort of all our patients, visits can only be made during certain hours and are conducted on a rotating basis.</span></p>
 						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
 						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><strong><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Visiting Hours</span></strong></p>
