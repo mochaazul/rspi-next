@@ -27,15 +27,9 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 	};
 
 	if (!doctor) return null;
-
-	const shareMsg = t('wateleMsg', { doctor_name: doctor.data.name ?? '', speciality: doctor.data.specialty[0] ?? '', link: hostname });
-
+	const shareMsg = encodeURIComponent(t('wateleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0], link: hostname }));
 	return (
 		<div className={ props.className }>
-			{
-				doctor.data.name
-			}
-      asfasf
 			<Text
 				text={ 'Share This Doctor' }
 				className='related lg:mt-[30px]  '
@@ -71,7 +65,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 						/>
 					</Link>
 				</div>
-				<div className='cursor-pointer' onClick={ handleOpenSocmed(`https://wa.me/send?text=${shareMsg}`) }>
+				<div className='cursor-pointer'>
 					<Link href={ `https://wa.me/send?text=${shareMsg}` } target='_blank'>
 						<Images.WhatsappLogo
 							width='16px'
