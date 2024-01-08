@@ -1,7 +1,7 @@
 import FacebookIcon from '/public/images/ic/facebook.svg';
 import YoutubeIcon from '/public/images/ic/youtube.svg';
 import InstagramIcon from '/public/images/ic/instagram.svg';
-import TwitterIcon from '/public/images/ic/twitter.svg';
+import TwitterIcon from '/public/images/ic/twitter_x.svg';
 import CalendarIcon from '/public/images/ic/Calendar.svg';
 import ArrowDown from '/public/images/ic/arrow_down.svg';
 import Confirmed from '/public/images/ic/confirmed.svg';
@@ -37,7 +37,7 @@ import Time from '/public/images/ic/time.svg';
 import Video from '/public/images/ic/video.svg';
 import WhiteInstagram from '/public/images/ic/whiteInstagram.svg';
 import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';
-import WhiteTwitter from '/public/images/ic/whiteTwitter.svg';
+import WhiteTwitter from '/public/images/ic/twitter_x_white.svg';
 import IDFlag from '/public/images/ic/flag.svg';
 import ENFlag from '/public/images/ic/eng-flag.svg';
 
@@ -84,6 +84,7 @@ import WarningIcon from '/public/svg/warning-icon.svg';
 import EmptyCalendar from '/public/svg/calendar_empty_state.svg';
 import AddButton from '/public/svg/btn_add.svg';
 import EmptyProfile from '/public/images/ic/empty_profile.svg';
+import Download from '/public/images/ic/download.svg';
 
 const icons = {
 	EmptyCalendar,
@@ -170,7 +171,8 @@ const icons = {
 	UploadCloud,
 	WarningIcon,
 	AddButton,
-	EmptyProfile
+	EmptyProfile,
+	Download
 };
 
 export default icons;

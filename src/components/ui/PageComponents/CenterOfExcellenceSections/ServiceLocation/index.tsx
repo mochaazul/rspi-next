@@ -4,11 +4,12 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 
 import { CustomCarousel, Text, Tabs } from '@/components/ui';
-import { useScopedI18n } from '@/locales/client';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { colors } from '@/constant';
+import TextHtml from '@/components/ui/TextHtml';
+import { numberHelper } from '@/helpers';
 
 import CardMenu from '../CardMenu';
-import TextHtml from '@/components/ui/TextHtml';
 
 interface NewsProps {
 	content?: any;
@@ -21,23 +22,25 @@ const tabsData = ['Conditions', 'Treatments We Offer', 'Medical Technology', 'Ou
 const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, centerOfExcellence }) => {
 	const t = useScopedI18n('page.centerOfExcellence');
 
+	const currentLang = useCurrentLocale();
+
 	const [activeTabIdx, setActiveTabIdx] = useState(0);
 
 	const renderContent = useMemo(() => {
 		const Contents = [];
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16' >
-				<TextHtml htmlStr={ content?.conditions }/>
+			<div className='mt-[30px] text-16' >
+				<TextHtml className='innerHTML' htmlStr={ content?.conditions } />
 			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16' >
-				<TextHtml htmlStr={ content?.treatments }/>
+			<div className='mt-[30px] text-16' >
+				<TextHtml className='innerHTML' htmlStr={ content?.treatments } />
 			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] innerHTML text-16'>
-				<TextHtml htmlStr={ content?.technology }/>
+			<div className='mt-[30px] text-16'>
+				<TextHtml className='innerHTML' htmlStr={ content?.technology } />
 			</div>
 		);
 		Contents.push(
@@ -54,6 +57,7 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 		);
 		return Contents[activeTabIdx] ?? null;
 	}, [activeTabIdx, activeMenuIndex]);
+
 	return (
 		<div>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h1' }>
@@ -78,8 +82,8 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 			</div>
 
 			<div className='mt-[48px]'>
-				<div className='innerHTML text-16' >
-					<TextHtml htmlStr={ content?.content }/>
+				<div className='text-16' >
+					<TextHtml className='innerHTML' htmlStr={ content?.content } />
 				</div>
 			</div>
 
@@ -95,33 +99,81 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 					{ renderContent }
 				</div>
 			</div>
-			<div className='mt-[92px]'>
+			<div className='mt-[62px]'>
 				<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h4' }>
 					{ t('serviceLocation.heading') }
 				</Text>
 
-				<Text className='mt-[32px]' fontSize='20px' fontWeight='900' lineHeight='24px' >
-					{ content.available_at[0] }
-				</Text>
+				<div className='divide-y divide-[#EAEAEA]'>
+					{
+						content?.coe_hospitals?.map((item: any, index: number) => {
+							return (
+								<div className='mb-4 sm:mb-8' key={ `hospital-${ index }` }>
+									<Text className='mt-4 sm:mt-8' fontSize='20px' fontWeight='900' subClassName='!leading-normal'>
+										{ item?.unit }
+									</Text>
+									<Text className='mt-2 sm:mt-3' fontSize='16px' fontWeight='900' color={ colors.grey.dark } subClassName='max-sm:text-[#2A2536] max-sm:text-xs leading-[18px] sm:leading-normal max-sm:font-normal'>
+										{
+											currentLang === 'id'
+												? `${ item?.hospital_name } ${ t('serviceLocation.floor') } ${ item?.floor }`
+												: `${ item?.hospital_name } ${ numberHelper(item?.floor) } ${ t('serviceLocation.floor') }`
+										}
+									</Text>
+									<div className='flex flex-col gap-y-3 sm:gap-y-4 mt-3 sm:mt-6'>
 
-				<div className='sm:flex gap-x-5'>
-					<div className='grid grid-cols-2 gap-x-20 mt-[24px]'>
-						{
-							content.available_at?.map((data: any, index: number) => {
-								if (index !== 0)
-									return (
-										<div className='flex flex-col mt-[16px]' key={ index }>
-											<Text fontSize='18px' fontWeight='900' lineHeight='24px'>
-												{ data?.split(':+split+:')[0] }
-											</Text>
-											<div className='innerHTML text-16 mt-[10px]' >
-												<TextHtml htmlStr={ data?.split(':+split+:')[1] } />
+										<div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
+											<div className='flex flex-col gap-y-2'>
+												<Text fontSize='14px' fontWeight='900' subClassName='max-sm:text-xs !leading-[18px]'>
+													{ t('serviceLocation.appointmentHeading') }
+												</Text>
+												<Text fontSize='14px' fontWeight='400' subClassName='max-sm:text-xs !leading-[18px]'>
+													<span style={ { color: colors.paradiso.default, fontWeight: '700' } }>{ item.appointment || '-' }</span>
+												</Text>
+											</div>
+
+											<div className='flex flex-col gap-y-2'>
+												<Text fontSize='14px' fontWeight='900' subClassName='max-sm:text-xs !leading-[18px]'>
+													{ t('serviceLocation.informationHeading') }
+												</Text>
+												<Text fontSize='14px' fontWeight='400' subClassName='max-sm:text-xs !leading-[18px]'>
+													{ item.information }
+												</Text>
+											</div>
+
+											<div className='flex flex-col gap-y-2'>
+												<Text fontSize='14px' fontWeight='900' subClassName='max-sm:text-xs !leading-[18px]'>
+													{ t('serviceLocation.phoneNumberHeading') }
+												</Text>
+												<Text fontSize='14px' fontWeight='400' subClassName='max-sm:text-xs !leading-[18px]'>
+													<span style={ { color: colors.paradiso.default, fontWeight: '700' } }>{ item.hospital_phone || '-' }</span>
+												</Text>
+											</div>
+
+											<div className='flex flex-col gap-y-2'>
+												<Text fontSize='14px' fontWeight='900' subClassName='max-sm:text-xs !leading-[18px]'>
+													{ t('serviceLocation.emailHeading') }
+												</Text>
+												<Text fontSize='14px' fontWeight='700' color={ colors.paradiso.default } subClassName='max-sm:text-xs !leading-[18px]'>
+													{ item.hospital_email || '-' }
+												</Text>
+											</div>
+
+											<div className='flex flex-col gap-y-2'>
+												<Text fontSize='14px' fontWeight='900' subClassName='max-sm:text-xs !leading-[18px]'>
+													{ t('serviceLocation.operationalHourHeading') }
+												</Text>
+												<Text fontSize='14px' fontWeight='400' subClassName='max-sm:text-xs !leading-[18px]'>
+													{
+														item.operational_hour?.map((operationalHour: string, index: number) => (<span key={ `op-hour-${ index }` }>{ operationalHour }</span>))
+													}
+												</Text>
 											</div>
 										</div>
-									);
-							})
-						}
-					</div>
+									</div>
+								</div>
+							);
+						})
+					}
 				</div>
 			</div>
 		</div>

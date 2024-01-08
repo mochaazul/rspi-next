@@ -6,8 +6,6 @@ import { getAwards } from '@/lib/api/awards';
 import Text from '@/components/ui/Text';
 import { getScopedI18n } from '@/locales/server';
 
-import { CentreOfExcellenceStyle } from './style';
-import { PanelH1, PanelH3, PanelV1 } from '../style';
 import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
 
 export default async function AwardsPage() {
@@ -20,15 +18,17 @@ export default async function AwardsPage() {
 
 	const AwardItem = (data: AwardsDetail) => (
 		<div>
-			<div className='image-cont relative overflow-hidden'>
+			<div className='bg-white shadow-green-small w-full h-[191px] sm:h-[232px] rounded-lg sm:rounded-[10px] relative overflow-hidden p-2 flex items-center justify-center'>
 				{ data.img_url && (
-					<Image
-						src={ data.img_url }
-						alt={ data.title ?? '' }
-						className='w-full h-full object-contain'
-						sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-						fill
-					/>
+					<div className='relative overflow-hidden w-full h-[110px] sm:h-[160px]'>
+						<Image
+							src={ data.img_url }
+							alt={ data.title ?? '' }
+							className='object-contain'
+							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+							fill
+						/>
+					</div>
 				) }
 			</div>
 			<Text
@@ -52,34 +52,29 @@ export default async function AwardsPage() {
 	);
 
 	return (
-		<CentreOfExcellenceStyle>
-			<PanelV1>
-				<PanelH1>
-					<BreadcrumbsServer datas={ breadcrumbsPath } />
-				</PanelH1>
-				<PanelH3>
-					<div className='mt-[25px] sm:mt-[50px]'>
-						<Text
-							fontType='h1'
-							fontSize='44px'
-							lineHeight='57px'
-							fontWeight='900'
-							textAlign='center'
-							color={ colors.grey.darker }
-							text={ t('heading') }
-							subClassName='max-sm:text-[24px] max-sm:text-left'
-						/>
-						<Text
-							fontSize='20px'
-							lineHeight='30px'
-							fontWeight='400'
-							textAlign='center'
-							color={ colors.grey.dark }
-							text={ t('subHeading') }
-							className='sm:mt-4 mt-1'
-							subClassName='max-sm:text-left'
-						/>
-					</div>
+		<div className='bg-[#FAFAFA]'>
+			<div className='lg:max-w-[1110px] w-full mx-auto max-xl:px-4'>
+				<BreadcrumbsServer datas={ breadcrumbsPath } />
+				<div className='mt-[25px] sm:mt-[50px] lg:px-[91px]'>
+					<Text
+						fontType='h1'
+						fontSize='44px'
+						lineHeight='57px'
+						fontWeight='900'
+						textAlign='center'
+						color={ colors.grey.darker }
+						text={ t('heading') }
+						subClassName='max-sm:text-[24px] max-sm:text-left'
+					/>
+					<Text
+						fontSize='20px'
+						lineHeight='30px'
+						fontWeight='400'
+						textAlign='center'
+						text={ t('subHeading') }
+						className='sm:mt-4 mt-1'
+						subClassName='max-sm:text-left text-gray-2'
+					/>
 					<div className='sm:pt-[50px] pt-7 pb-[84px] grid sm:grid-cols-2 grid-cols-1 sm:gap-[32px] gap-6'>
 						{
 							awards?.map((data, index) => ((index + 1) % 2 === 0 && (index + 1) < awards?.length) ?
@@ -91,8 +86,8 @@ export default async function AwardsPage() {
 							)
 						}
 					</div>
-				</PanelH3>
-			</PanelV1>
-		</CentreOfExcellenceStyle>
+				</div>
+			</div>
+		</div>
 	);
 };

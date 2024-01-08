@@ -46,7 +46,6 @@ const HeaderStyle = styled.div`
   }
 
   .dropdownNavbar {
-    border-radius: 10px;
     border: 1px solid ${ colors.grey.lightest };
     background: ${ colors.white.default };
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.05);

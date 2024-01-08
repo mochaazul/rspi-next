@@ -61,7 +61,7 @@ const ContactUsPage = async({
 				<div className='mt-[25px]'>
 					<img src={ images.ContactUsBg.src }
 						alt='Contact Us hero image'
-						className='w-full' />
+						className='w-full max-sm:h-[180px] max-sm:object-cover' />
 				</div>
 
 				<PanelH2>
@@ -94,24 +94,12 @@ const ContactUsPage = async({
 						</div>
 						<div className='sm:border-r-[1px] border-b-[1px]' />
 						<div className='flex-1'>
-							<Text
-								fontSize='24px'
-								fontType='h3'
-								fontWeight='900'
-								lineHeight='29px'
-								textAlign='center'
-								color={ colors.grey.darker }
-								text={ t('faq.heading') }
-							/>
-							<Text
-								fontSize='16px'
-								fontWeight='400'
-								lineHeight='23px'
-								textAlign='center'
-								color={ colors.grey.dark }
-								text={ t('faq.subHeading') }
-								className='mt-3'
-							/>
+							<h3 className='max-sm:text-[22px] text-[24px] text-gray-1 font-black leading-[29px] text-center'>
+								{ t('faq.heading') }
+							</h3>
+							<p className='font-normal text-[16px] max-sm:text-[14px] leading-[23px] mt-3 mx-auto text-center sm:w-[630px] w-full text-gray-2'>
+								{ t('faq.subHeading') }
+							</p>
 							<div className='mt-10'>
 								<Accordion
 									faq
@@ -120,7 +108,7 @@ const ContactUsPage = async({
 							</div>
 							<Link href={ '/contact/faq' }>
 								<Button
-									className='mt-5 py-4'
+									className='mt-5 py-4 max-sm:py-[10px] max-sm:px-[20px] max-sm:text-[14px]'
 									theme='outline'
 									$hoverTheme='primary'
 									label={ t('faq.allFaqBtnLabel') }

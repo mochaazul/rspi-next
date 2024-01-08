@@ -36,7 +36,7 @@ const TextField = ({
 			{
 				iconName ?
 					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
-						<Icons />
+						<Icons stroke={ $iconColor } />
 					</IconWrapper> :
 					null
 			}

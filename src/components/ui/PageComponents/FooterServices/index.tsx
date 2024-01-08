@@ -9,6 +9,8 @@ import {
 	Text
 } from '@/components/ui';
 
+import TextHtml from '@/components/ui/TextHtml';
+
 import { FooterServiceStyle } from './style';
 import LangWrapper from '../../LangWrapper';
 import BreadCrumbs from '../../Breadcrumbs';
@@ -25,7 +27,7 @@ const FooterServices = ({
 	const isImgEmpty = detail?.[0]?.img_url !== null;
 	const renderContent = (
 		<div>
-			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
+			<Text fontSize='24px' fontWeight='900' subClassName='max-sm:text-[20px] font-black' color={ colors.paradiso.default }>
 				{ detail?.[0]?.title }
 			</Text>
 
@@ -51,11 +53,11 @@ const FooterServices = ({
 				}
 			</div>
 			<div className={ isImgEmpty ? 'mt-[48px]' : 'mt-[10px]' }>
-				<div
-					style={ { lineHeight: '24px', fontSize: '16px' } }
-					className='innerHTML'
-					dangerouslySetInnerHTML={ { __html: detail?.[0]?.content || '' } }
+				<TextHtml
+					className='innerHTML leading-[24px] text-[16px]'
+					htmlStr={ detail?.[0]?.content ?? '' }
 				/>
+				
 			</div>
 		</div>
 	);

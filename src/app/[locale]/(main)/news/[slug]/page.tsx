@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { redirect } from 'next/navigation';
 
 import { getScopedI18n } from '@/locales/server';
@@ -9,6 +11,22 @@ import {
 } from '@/lib/api';
 
 import NewsDetail from '@/components/ui/PageComponents/News/NewsDetail';
+
+export async function generateMetadata({ params }: { params: { slug: string; }; }): Promise<Metadata> {
+	const getArticle = await getArticleBySlug({
+		param: params?.slug,
+	});
+   
+	const selectedArticle = Object.values(getArticle)[0];
+   
+	return {
+	  title: selectedArticle?.title,
+	  description: selectedArticle?.short_description,
+	  openGraph: {
+			images: [selectedArticle?.img_url],
+		},
+	};
+}
 
 const DetailNewsHealthPage = async({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.newsDetail');

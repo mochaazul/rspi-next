@@ -50,6 +50,7 @@ export default {
 			serviceLocation: {
 				heading: 'Layanan ini tersedia di',
 				hospitalName: 'RS Pondok Indah - Pondok Indah Lantai 1',
+				floor: 'Lantai',
 				appointmentHeading: 'Perjanjian',
 				phoneNumberHeading: 'Telepon',
 				operationalHourHeading: 'Jam Operasional Patient Relations',
@@ -683,7 +684,7 @@ export default {
 			visitorPatientLabel: 'VISITOR & PATIENT INFORMATION',
 			followUsLabel: 'FOLLOW US',
 			getRSPIMobileLabel: 'GET RSPI MOBILE',
-			subscribeLabel: 'Stay Updated With Us',
+			subscribeLabel: 'STAY UPDATED WITH US',
 			subscribeDescription: 'Daftarkan e-mail Anda untuk berlangganan newsletter dan mendapatkan informasi terbaru dari RS Pondok Indah Group.'
 		},
 		medicalRecordReminder: {

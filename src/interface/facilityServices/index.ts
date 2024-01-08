@@ -20,6 +20,7 @@ export interface I_RelatedNews {
 	image_url: string;
 	slug: string;
 	author_name: string;
+	language: string;
 }
 
 export interface FacilityServicesHospital {

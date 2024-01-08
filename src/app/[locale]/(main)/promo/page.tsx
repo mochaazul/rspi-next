@@ -23,7 +23,8 @@ const Promo = async({ searchParams }: any) => {
 		short_description: event?.short_description ?? '',
 		slug: event?.slug ?? '',
 		category: event?.category,
-		hospitals: event?.hospitals
+		hospitals: event?.hospitals,
+		language: event?.language,
 	}));
 
 	const getHospital = await getHospitals();

@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 
-import { icons } from '@/constant';
+import { colors, icons } from '@/constant';
 import Text from '@/components/ui/Text';
 import { I_VisitHistory, ResponseType, UserDataDetail } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
@@ -76,7 +76,9 @@ const CardUser: React.FC<CardUserProps> = ({
 								fontSize='14px'
 								lineHeight='17px'
 								className='capitalize'
+								color={ colors.grey.darkOpacity }
 								text={ patientProfile?.birthdate && patientProfile?.gender && `${ getAge(splitDate(patientProfile?.birthdate)) }, ${ setGender() }` }
+								subClassName='max-lg:text-xs max-lg:leading-normal'
 							/>
 						</div>
 					</div>
@@ -85,7 +87,8 @@ const CardUser: React.FC<CardUserProps> = ({
 							fontWeight='400'
 							fontSize='14px'
 							lineHeight='17px'
-							subClassName='max-lg:text-center'
+							subClassName='max-lg:text-center max-lg:text-xs max-lg:leading-normal'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.patientIdLabel') }
 						/>
 						<Text
@@ -101,6 +104,7 @@ const CardUser: React.FC<CardUserProps> = ({
 							fontWeight='400'
 							fontSize='14px'
 							lineHeight='17px'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.lastVisitedHospitalLabel') }
 						/>
 						<Text
@@ -115,6 +119,7 @@ const CardUser: React.FC<CardUserProps> = ({
 							fontWeight='400'
 							fontSize='14px'
 							lineHeight='17px'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.lastVisitedDateLabel') }
 						/>
 						<Text
@@ -129,10 +134,11 @@ const CardUser: React.FC<CardUserProps> = ({
 					<div className='flex flex-col gap-1'>
 						<Text
 							fontWeight='400'
-							fontSize='14px'
-							lineHeight='17px'
+							fontSize='12px'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.lastVisitedHospitalLabel') }
 							textAlign='center'
+							subClassName='max-lg:text-xs max-lg:leading-normal'
 						/>
 						<Text
 							fontWeight='700'
@@ -145,10 +151,11 @@ const CardUser: React.FC<CardUserProps> = ({
 					<div className='flex flex-col gap-1'>
 						<Text
 							fontWeight='400'
-							fontSize='14px'
-							lineHeight='17px'
+							fontSize='12px'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.lastVisitedDateLabel') }
 							textAlign='center'
+							subClassName='max-lg:text-xs max-lg:leading-normal'
 						/>
 						<Text
 							fontWeight='700'

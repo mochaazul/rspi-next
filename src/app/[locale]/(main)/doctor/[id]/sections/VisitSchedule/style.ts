@@ -16,5 +16,5 @@ export const TimeSlotPill = styled.button<PillProps>`
 export const EmptyWarningContainer = styled.div`
   color: rgba(220, 104, 3, 1);
   background-color: rgba(254, 240, 199, 1);
-  padding: 25px;
+  padding: 16px;
 `;

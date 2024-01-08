@@ -2,29 +2,32 @@
 import Form from '@/components/ui/Form';
 import Text from '@/components/ui/Text';
 import { colors } from '@/constant';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useScopedI18n } from '@/locales/client';
 import { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 type Props = {
-  doctorCount:number
+	doctorCount: number;
 	setter: (value: string) => void,
 	getter: () => string | null,
 	reset: boolean,
-}
-const ResultHeader = ({ doctorCount, setter, getter, reset }:Props) => {
+};
+const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
 
 	const [keywordValue, setKeywordValue] = useState<string>();
 
 	const t = useScopedI18n('page.findDoctor');
-	
+	const d = useScopedI18n('dayName.full');
+
 	useEffect(() => {
-		
+
 		if (reset) {
 			setKeywordValue('');
 		} else {
 			setKeywordValue(getter() ?? '');
 		}
-			
+
 	}, [reset]);
 
 	const onSearchDoctorByName = (value: string) => {
@@ -32,15 +35,35 @@ const ResultHeader = ({ doctorCount, setter, getter, reset }:Props) => {
 		setter(value);
 	};
 
+	const Days = [
+		{ key: '1', label: d('sunday'), value: 'Sunday' },
+		{ key: '2', label: d('monday'), value: 'Monday' },
+		{ key: '3', label: d('tuesday'), value: 'Tuesday' },
+		{ key: '4', label: d('wednesday'), value: 'Wednesday' },
+		{ key: '5', label: d('thursday'), value: 'Thursday' },
+		{ key: '6', label: d('friday'), value: 'Friday' },
+		{ key: '7', label: d('saturday'), value: 'Saturday' },
+	];
+
+	const searchParams = useSearchParams();
+	const router = useRouter();
+	const pathName = usePathname();
+
+	const onChangePreferedDay = (value: string) => {
+		const params = new URLSearchParams(searchParams);
+		params.set('day', value);
+		router.push(`${ pathName }?${ params.toString() }`, {});
+	};
+
 	return (
-		<>
+		<div>
 			{ /* Doctor found counter */ }
 			<Text
 				fontSize='20px'
 				fontWeight='700'
 				lineHeight='24px'
 				className='mb-6 max-sm:hidden'
-				text={ `${doctorCount} ${t('label.doctorFound')}` }
+				text={ `${ doctorCount } ${ t('label.doctorFound') }` }
 			/>
 			{ /* Cari Dokter - title - Mobile */ }
 			<Text
@@ -53,16 +76,38 @@ const ResultHeader = ({ doctorCount, setter, getter, reset }:Props) => {
 				text={ t('heading') }
 			/>
 			{ /* Input nama  dokter */ }
-			<Form.TextField
-				placeholder={ t('label.doctorName') }
-				featherIcon='Search'
-				iconPosition='right'
-				onChange={ ({ target }) => onSearchDoctorByName(target.value) }
-				$iconColor={ colors.grey.light }
-				value={ keywordValue }
-			/>
-      
-		</>
+			{
+				isMobile ?
+					<div className='flex flex-row gap-x-2'>
+						<Form.TextField
+							placeholder={ t('label.doctorName') }
+							featherIcon='Search'
+							iconPosition='right'
+							onChange={ ({ target }) => onSearchDoctorByName(target.value) }
+							$iconColor={ colors.grey.light }
+							value={ keywordValue }
+							className='w-[130px]'
+						/>
+						<Form.Dropdown
+							placeholder='Select Day'
+							multiple
+							menuItems={ Days }
+							onChangeValueDropdown={ onChangePreferedDay }
+							allOptionLabel={ d('all') }
+							className='w-[150px]'
+						/>
+					</div> :
+					<Form.TextField
+						placeholder={ t('label.doctorName') }
+						featherIcon='Search'
+						iconPosition='right'
+						onChange={ ({ target }) => onSearchDoctorByName(target.value) }
+						$iconColor={ colors.grey.light }
+						value={ keywordValue }
+					/>
+			}
+
+		</div>
 	);
 };
 

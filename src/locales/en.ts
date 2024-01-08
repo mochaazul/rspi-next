@@ -29,7 +29,9 @@ export default {
 		callAmbulanceLabel: {
 			heading: 'Call an Ambulance',
 			subHeading: 'Please select hospital: '
-		}
+		},
+		share: 'Share now',
+		emptyData: 'Sorry! there is no {label} at the moment'
 	},
 	blacklist: {
 		contactUs: 'Contact Us',
@@ -200,6 +202,7 @@ export default {
 			serviceLocation: {
 				heading: 'Available at',
 				hospitalName: 'RS Pondok Indah - Pondok Indah 1st Floor',
+				floor: 'Floor',
 				appointmentHeading: 'Appointment',
 				phoneNumberHeading: 'Phone',
 				operationalHourHeading: 'Operational Hours',
@@ -539,7 +542,10 @@ export default {
 				detailsBtnLabel: 'View Details'
 			},
 			schedule: 'Schedule',
-			morePromo: 'More From Promo & Packages'
+			more: 'More From Promo & Packages',
+			info: 'Information',
+			phone: 'Phone (Whatsapp Only)',
+			operational: 'Operational Hours',
 		},
 		facilities: {
 			heading: 'Facilities & Services',
@@ -568,13 +574,16 @@ export default {
 			heading: 'News and Health Articles',
 			detailsBtnLabel: 'View Details',
 			breadcrumbsLabel: 'News & Health Articles',
-			viewDetails: 'View Details'
+			viewDetails: 'View Details',
+			searchPlaceholder: 'Search Articles'
 		},
 		newsDetail: {
 			breadcrumbsLabel: 'News & Health Articles',
 			oleh: 'By',
 			downloadFilePdf: 'Download Health First magazine ',
-			here: 'here'
+			here: ' here',
+			relatedNews: 'Related Articles',
+			specialty: 'Related Doctors',
 		},
 		forgotPassword: {
 			heading: 'Forgot Password',
@@ -714,8 +723,8 @@ export default {
 			}
 		},
 		registerOnboard: {
-			heading: 'Welcome to RS. Pondok Indah',
-			subHeading: 'Please enter your medical record to access all the services provided by RS. Pondok Indah. Your account information will be securely stored by us',
+			heading: 'Welcome to Pondok Indah Hospital',
+			subHeading: 'Please enter your medical record to access all the services provided by Pondok Indah Hospital',
 			form: {
 				mrlabel: 'Medical Record Number',
 				mrPlaceholder: 'Medical Record Number',
@@ -773,7 +782,8 @@ export default {
 				patientGenderMaleLabel: 'Male',
 				patientGenderFemaleLabel: 'Female',
 				patientPhotoProfile: 'Photo profile',
-				editLabel: 'Change'
+				editLabel: 'Change',
+				successUpdateProfile: 'Successfully Update Profile',
 			},
 			securitySetting: {
 				emailLabel: 'Email',
@@ -782,7 +792,9 @@ export default {
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Save',
-				cancelBtnLabel: 'Cancel'
+				cancelBtnLabel: 'Cancel',
+				pinLabelInfo: 'The PIN is used to access patient portal service features and security activities on your account.',
+				lastUpdatedPasswordLabel: 'Last updated on {date}'
 			},
 			medicalRecordLabel: 'Medical Record Information',
 			medicalRecordEmptyInfo: '(You don\'t have a medical record number yet)',
@@ -847,9 +859,8 @@ export default {
 						notesInputPlaceholder: 'Enter a description...',
 						optionalLabel: '(Optional)',
 						smallNotes: 'This would help us to keep improving our service.',
-						responReview: 'Review has been',
-						responReviewFailed: ' Failed',
-						responReviewSuccess: ' Successfully'
+						responReviewFailed: 'Review has been failed',
+						responReviewSuccess: 'Review has been successfully'
 					}
 				},
 				empty: 'You do not have any visit histories yet.',
@@ -857,11 +868,14 @@ export default {
 			},
 			jadwalKunjungan: {
 				label: {
-					queueNo: 'Queue Number',
+					queueNo: 'Queue No.:',
 					activeSchedule: 'Active Appointment',
 					cancelAppointment: 'Cancel Appointment',
 					empty: 'You do not have visit data at this time',
-					emptyBtnCta: 'Schedule a Visit'
+					emptyBtnCta: 'Schedule a Visit',
+					visitSchedule: 'Visit Schedule',
+					reschedule: 'Reschedule',
+					rescheduleAgain: 'Reschedule Again',
 				},
 				options: [
 					'Myself',
@@ -869,14 +883,15 @@ export default {
 				],
 				statusLabel: {
 					C: 'Schedule Completed',
-					X: 'Schedule Canceled',
-					N: 'Absent',
+					X: 'Cancelled',
+					N: 'Not Attended',
 					H: 'Hold',
 					T: 'Transferred',
 					A: 'Arrived',
 					P: 'Postponed',
-					S: 'Seen',
-					U: 'Arrived Not Seen'
+					S: 'Seen Doctor',
+					U: 'Arrived Not Seen',
+					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
 				offlineConsultation: 'Face-to-face Consultation'
@@ -896,13 +911,15 @@ export default {
 		},
 		findDoctor: {
 			heading: 'Find a Doctor',
-
 			label: {
 				hospital: 'Rumah sakit',
 				doctorName: 'Doctor Name',
 				specialty: 'Specialty',
 				doctorFound: 'Doctors Found',
-				seeDetail: 'Book Appointment'
+				seeDetail: 'Book Appointment',
+				applyFilter: 'Apply',
+				seeSchedule: 'See Schedule',
+				closeSchedule: 'Close Schedule'
 			},
 		},
 		doctorProfile: {
@@ -913,8 +930,8 @@ export default {
 				hospitalLabel: 'Hospital',
 				clinicLabel: 'Clinic',
 				btnLabel: {
-					back: 'Kembali',
-					submit: 'Lanjut'
+					back: 'Back',
+					submit: 'Next'
 				}
 			},
 			slotEmptyState: 'Please select a date to display available time information.',
@@ -932,6 +949,8 @@ export default {
 			asuransiCard: 'Insurance Card Photo (Optional)',
 			asuransiCardBack: 'Upload a rear view photo',
 			asuransiCardFront: 'Upload a photo of the front view',
+			labelPhoneModal: 'Please contact the call center',
+			visitAppOptionLabel: 'Visit in Person'
 		},
 		footer: {
 			visitorInfo: {
@@ -948,7 +967,7 @@ export default {
 			visitorPatientLabel: 'VISITOR & PATIENT INFORMATION',
 			followUsLabel: 'FOLLOW US',
 			getRSPIMobileLabel: 'GET RSPI MOBILE',
-			subscribeLabel: 'Stay Updated With Us',
+			subscribeLabel: 'STAY UPDATED WITH US',
 			subscribeDescription: 'Register your e-mail to subscribe to the newsletter and get the latest information from RS Pondok Indah Group.',
 			subscribePlaceholder: 'Enter your email address',
 			subscribeSubmit: 'Subscribe',
@@ -986,7 +1005,8 @@ export default {
 				newPasswordConfirmationPlaceholder: 'Confirm your new password',
 				resetBtnLabel: 'Change Password'
 			},
-			forgotPasswordLabel: 'Forgot Password?'
+			forgotPasswordLabel: 'Forgot Password?',
+			lastUpdatedPasswordLabel: 'Last updated on {date}'
 		}
 	}
 } as const;

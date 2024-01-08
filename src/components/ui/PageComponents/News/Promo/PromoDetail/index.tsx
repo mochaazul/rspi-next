@@ -44,39 +44,28 @@ const PromoDetail: React.FC<Props> = async({
 				<SocialShare />
 				<div className='content-wrapper mt-[20px] mb-[100px]'>
 					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
-						<img src={ selectedEvent?.img_url_detail || '' } className='mx-auto object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
-						<div>
+						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
+						<div className='mx-[16px] sm:mx-0 '>
 							<TextHtml
 								htmlStr={ selectedEvent?.content || '' }
 								className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
 							/>
 							<div className='mt-[50px]'>
-								<Text
-									fontType='p'
-									lineHeight='30px'
-									fontSize='20px'
-									fontWeight='900'
-									color={ colors.paradiso.default }
-									className='mt-[50px]'
-									text={ t('schedule') }
-								/>
+								<p className={ 'sm:leading-[30px] leading-[24px] sm:text-[20px] text-[16px] font-bold text-green-secondary mt-[50px]' }>
+									{ t('schedule') }
+								</p>
+								
 								<div>
 									<TextHtml
-										className='innerHTML mt-5 leading-[30px] text-[20px] font-bold'
+										className='innerHTML mt-5 leading-[30px] sm:text-[20px] text-[16px] font-bold'
 										htmlStr={ selectedEvent?.title }
 									/>
 									<div className='flex flex-col gap-1 mt-3'>
 										{
 											(selectedEvent?.hospitals ?? []).map((hospital: any, index: number) =>
-												<Text
-													fontType='p'
-													key={ index }
-													lineHeight='20px'
-													fontSize='16px'
-													fontWeight='900'
-													color={ colors.grey.dark }
-													text={ hospital?.hospital_name }
-												/>
+												<p key={ index } className='leading-[20px] font-bold sm:text-[16px] text-[14px] text-gray-2'>
+													{ hospital?.hospital_name }
+												</p>
 											)
 										}
 									</div>
@@ -95,14 +84,15 @@ const PromoDetail: React.FC<Props> = async({
 												className='innerHTML mt-2 text-14'
 											/>
 										</div>
+
 										<div>
 											<Text
 												fontType='p'
 												lineHeight='18px'
 												fontSize='14px'
 												fontWeight='900'
-												color={ colors.grey.darker }
-												text='Telepon (WhatsApp Only)'
+												className='text-gray-1'
+												text={ t('phone') }
 											/>
 											<TextHtml
 												style={ { color: colors.grey.dark } }
@@ -124,18 +114,19 @@ const PromoDetail: React.FC<Props> = async({
 												className='mt-2 innerHTML text-14 leading-[18px]'
 											/>
 										</div>
+										
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div className=''>
+					<div className='sm:mt-[100px] mt-[40px] mx-[16px] sm:mx-0 '>
 						<div className='mt-[40px]'>
 							<section
 								className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }
 							>
 								<Text
-									text={ t('morePromo') }
+									text={ t('more') }
 									className=''
 									fontWeight='700'
 									color={ colors.paradiso.default } />

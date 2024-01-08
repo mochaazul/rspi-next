@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import moment from 'moment';
+import 'moment/locale/id';
 
 import { colors } from '@/constant';
 import { FacilityServicesDetail, I_RelatedNews } from '@/interface';
@@ -15,7 +16,7 @@ import CardMenu from '@/components/ui/PageComponents/FacilitiesServicesSections/
 import Card, { CardFooter } from '@/components/ui/Card';
 import Text from '@/components/ui/Text';
 import TextHtml from '@/components/ui/TextHtml';
-import { getScopedI18n } from '@/locales/server';
+import { getScopedI18n, getCurrentLocale } from '@/locales/server';
 import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
 
 export default async function FacilitiesServicesPage({ params }: { params: { slug: string; }; }) {
@@ -44,6 +45,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 	}
 
 	const t = await getScopedI18n('page.facilities');
+	const currentLang = getCurrentLocale();
 
 	const facilitiesServiceData: FacilityServicesDetail[] = [...facilityServices, {
 		id: 1234567890,
@@ -123,6 +125,8 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 									<Card
 										key={ index }
 										id={ data?.id }
+										slug={ data?.slug }
+										language={ data?.language }
 										image={ data.image_url }
 										imageHeight='200px'
 										header={
@@ -136,7 +140,8 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 													lineHeight='17px'
 													color={ colors.grey.dark }
 													subClassName='max-sm:text-xs'
-													text={ moment(data?.posted_date_news).format('dddd, DD MMM YYYY') }
+													text={ moment(data?.posted_date_news).locale(currentLang)
+														.format('dddd, DD MMM YYYY') }
 												/>
 											</div>
 										}
@@ -162,7 +167,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 												/>
 
 												<TextHtml
-													className='innerHTML text-xs max-sm:leading-[18px] sm:text-sm md:text-base md:leading-[23px] mt-2 sm:mt-3 line-clamp-3'
+													className='text-xs max-sm:leading-[18px] sm:text-sm md:text-base md:leading-[23px] mt-2 sm:mt-3 line-clamp-3'
 													style={ { color: colors.grey.dark } }
 													htmlStr={ data?.short_description ?? '' } />
 											</div>

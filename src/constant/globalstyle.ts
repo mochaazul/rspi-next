@@ -1,5 +1,6 @@
 'use client';
 import { createGlobalStyle, css } from 'styled-components';
+import 'react-quill/dist/quill.core.css';
 
 import colors from './colors';
 import Sizes from './sizes';

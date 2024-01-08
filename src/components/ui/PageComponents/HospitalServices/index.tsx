@@ -1,8 +1,6 @@
 'use client';
 import { PropsWithChildren, PropsWithRef } from 'react';
 
-import Image from 'next/image';
-
 import { colors } from '@/constant';
 
 import {
@@ -12,7 +10,7 @@ import {
 } from '@/components/ui';
 
 import { BreadcrumbsType } from '../../Breadcrumbs';
-
+import TextHtml from '../../TextHtml';
 import { HospitalServiceStyle } from './style';
 import LangWrapper from '../../LangWrapper';
 
@@ -25,14 +23,14 @@ const HospitalServices = ({
 	detail,
 	breadcrumbsPath,
 }: Props) => {
-	
+
 	const renderContent = (
 		<div>
-			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default }>
+			<Text fontSize='24px' fontWeight='900' subClassName='max-sm:text-[20px] leading-normal' color={ colors.paradiso.default }>
 				{ detail?.name }
 			</Text>
 
-			<div className='mt-[32px]'>
+			<div className='mt-[32px] max-sm:mt-4'>
 				<CustomCarousel arrowButton>
 					{ (detail?.img_url ?? [])?.map((image: string, index: any) => {
 						return (
@@ -47,11 +45,10 @@ const HospitalServices = ({
 				</CustomCarousel>
 			</div>
 
-			<div className='mt-[48px]'>
-				<div
-					style={ { lineHeight: '24px', fontSize: '16px' } }
+			<div className='mt-[48px] max-sm:mt-4'>
+				<TextHtml
 					className='innerHTML'
-					dangerouslySetInnerHTML={ { __html: detail?.description || '' } }
+					htmlStr={ detail?.description || '' }
 				/>
 			</div>
 		</div>

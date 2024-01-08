@@ -1,4 +1,5 @@
 import { headers } from 'next/headers';
+import { notFound } from 'next/navigation';
 
 import FooterServices from '@/components/ui/PageComponents/FooterServices';
 
@@ -17,6 +18,10 @@ const FooterPages = async({ params }: { params: { slug: string; }; }) => {
 	};
 
 	const dataDetail = await getFooterPages(param);
+
+	if (!dataDetail?.data?.length) {
+		notFound();
+	}
 
 	return (
 		<FooterServices
