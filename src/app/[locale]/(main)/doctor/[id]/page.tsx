@@ -6,7 +6,6 @@ import dayjs, { Dayjs } from 'dayjs';
 import Spinner from '@/components/ui/Spinner';
 import PhoneModal from '@/components/ui/PhoneModal';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
-import DoctorAvatar, { ShareDoctor } from './sections/DoctorAvatar';
 import Text from '@/components/ui/Text';
 import Radio from '@/components/ui/Radio';
 import Calendar from '@/components/ui/Calendar';
@@ -23,6 +22,8 @@ import { useCheckBlacklist, useGetDoctorCalendar, useGetDoctorDetail, useGetDoct
 import { cookiesHelper } from '@/helpers';
 import useSession from '@/session/client';
 import BlacklistModal from '@/components/ui/BlacklistModal';
+import DoctorAvatar from './sections/DoctorAvatar';
+import ShareDoctor from './sections/ShareDoctor';
 
 type FormAppointment = {
 	clinic: string,
@@ -64,6 +65,7 @@ export default function Page({ params }: Props) {
 	const { data: doctorCalendar, isLoading: doctorCalendarLoading } = useGetDoctorCalendar(
 		calendarMonth.format('YYYY-MM-DD'),
 		selectedHospital,
+		params.id,
 		{
 			query: {
 				start_date: calendarMonth.format('YYYY-MM-DD'),
@@ -129,7 +131,7 @@ export default function Page({ params }: Props) {
 		return '';
 	};
 
-	const onBookHandler = async () => {
+	const onBookHandler = async() => {
 		try {
 			const token = await cookiesHelper.getToken();
 			const userData = await cookiesHelper.getUserData();
@@ -154,7 +156,7 @@ export default function Page({ params }: Props) {
 				router.push(bookAppointmentUrl);
 			}
 		} catch (error) {
-			console.log('here', error);
+			// console.log('here', error);
 		}
 	};
 

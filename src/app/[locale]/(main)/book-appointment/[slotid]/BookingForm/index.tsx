@@ -191,7 +191,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		}
 	};
 
-	const uploadAsuransiPhotoFront = async () => {
+	const uploadAsuransiPhotoFront = async() => {
 		if (tempImageAsuransiFront !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiFront });
 			if (responseData.stat_msg === 'Success') {
@@ -201,7 +201,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		return '';
 	};
 
-	const uploadAsuransiPhotoBack = async () => {
+	const uploadAsuransiPhotoBack = async() => {
 		if (tempImageAsuransiBack !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiBack });
 			if (responseData.stat_msg === 'Success') {
@@ -221,8 +221,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				return 'APP';
 		}
 	};
-
-	const onConfirmed = async () => {
+	const onConfirmed = async() => {
 		try {
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
@@ -233,7 +232,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				'time_slot': formatTimeslot(timeSlot?.session_app_start ?? ''),
 				'date': timeSlot?.date,
 				'user_name': 'RSPI_WEB',	// terserah
-				'type': isEqual(selfProfile?.email, selectedProfile?.email) ? 'self' : 'other', 	// self or other
+				'type': isEqual(userProfile, selectedProfile) ? 'self' : 'other', 	// self or other
 				'doctor_code': timeSlot?.doctor_code,
 				'gender': selectedProfile?.gender === 'Female' ? 'F' : 'M',
 				'date_of_birth': (selectedProfile?.birthdate && splitDate(selectedProfile.birthdate)) ?? '',
@@ -252,7 +251,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 
 			await bookAppointment(payloadBook).then(res => {
 				const pushNotifPayload: PayloadPushNotification = {
-					category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
+					category: isEqual(userProfile, selectedProfile) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
 					source: 'Rebelworks',
 					title_idn: 'Permintaan booking Berhasil',
 					title_en: 'Booking Appointment Successful',

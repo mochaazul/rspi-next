@@ -989,7 +989,10 @@ export default {
 			asuransiCardFront: 'Upload foto tampak depan',
 			asuransiCardBack: 'Upload foto tampak belakang',
 			labelPhoneModal: 'Silahkan hubungi call center',
-			visitAppOptionLabel: 'Kunjungan Tatap Muka'
+			visitAppOptionLabel: 'Kunjungan Tatap Muka',
+			shareDoctor: {
+				wateleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}: {link}'
+			}
 		},
 		footer: {
 			visitorInfo: {
