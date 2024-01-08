@@ -442,7 +442,7 @@ export default {
 					</li>
 					</ul>
 					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-					<h3 style="line-height: 1.8; background-color: rgb(255, 255, 255); margin-top: 0pt; margin-bottom: 4pt; padding-top: 22pt;"><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">Mekanisme </span><em><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">Home Visit </span></em><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">RS Pondok Indah Group</span></h3>
+					<h3 style="line-height: 1.8; background-color: rgb(255, 255, 255); margin-top: 0pt; margin-bottom: 4pt;"><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">Mekanisme </span><em><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">Home Visit </span></em><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">RS Pondok Indah Group</span></h3>
 					<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
 					<li style="">
 					<p style="line-height: 1.8; margin-top: 22pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Layanan Home Visit berlaku untuk pasien yang berada di sekitar lokasi RS Pondok Indah Group dengan radius maksimal 10 km</span></p>
