@@ -362,7 +362,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					textAlign='center'
 					fontSize='16px'
 					fontWeight='400'
-					subClassName='leading-normal max-sm:text-[14px] text-gray-2'
+					subClassName='leading-normal max-sm:leading-[18px] max-sm:text-[14px] text-gray-2'
 				>Copyright © { date.getFullYear() } RS Pondok Indah Group.
 					<span className='sm:hidden'><br /></span> All Rights Reserved.
 				</Text>

@@ -4,6 +4,7 @@ import { colors } from '@/constant';
 import { CardNewsStyle } from './styles';
 
 interface PropsType {
+	lastIndex?: boolean;
 	id: number;
 	imgThumb: string;
 	title: string;
@@ -19,15 +20,14 @@ const CardNews = (props: PropsType) => {
 	const handleOnClick = (id: number) => () => {
 		props?.onClick?.(id);
 	};
-
 	return (
-		<CardNewsStyle>
+		<CardNewsStyle lastIdx = { props.lastIndex }>
 			<div
 				className={ `shrink-0 max-sm:px-3 max-sm:py-5 cursor-pointer flex relative justify-between ${ props?.isActive ? 'active' : '' } ${ props?.classNames }` }
 				onClick={ handleOnClick(props?.id) }
 			>
-				<div className='flex flex-row gap-[30px]'>
-					<div className='mr-[30px] lg:w-1/2 z-0'>
+				<div className='grid grid-cols-2 gap-[30px] w-full'>
+					<div className='w-full z-0'>
 						<div className='flex items-center'>
 							<div className='max-w-[160px]'>
 								<Button theme='primary' label={ props?.category } className='btn-category px-[8px] py-[6px] rounded-[5px] text-[14px]' />
@@ -61,7 +61,9 @@ const CardNews = (props: PropsType) => {
 							/>
 						</div>
 					</div>
-					<img src={ props?.imgThumb || '' } alt={ props?.title } className='w-[254px] h-[145px] rounded-md object-cover z-0' />
+					<div className='w-[254px]'>
+						<img src={ props?.imgThumb || '' } alt={ props?.title } className='w-full h-[145px] rounded-md object-cover z-0' />
+					</div>
 				</div>
 			</div>
 		</CardNewsStyle>

@@ -19,7 +19,11 @@ export const NewsHealthArticlesStyle = styled.div`
   }
 `;
 
-export const CardNewsStyle = styled.div`
+export interface CardNewsType {
+	lastIdx?: boolean;
+}
+
+export const CardNewsStyle = styled.div<CardNewsType>`
   z-index:-999;
   perspective: 1000px;
   background-color: ${ colors.white.default };
@@ -28,7 +32,7 @@ export const CardNewsStyle = styled.div`
     @media screen and (min-width: 640px) {
       transition: all .5s;
       border-top: 1px solid transparent;
-      border-bottom: 1px solid #EAEAEA;
+      border-bottom: ${props => props.lastIdx ? '1px solid transparent' : '1px solid #EAEAEA;'}
       margin-bottom:30px;
       padding-bottom:30px;
       

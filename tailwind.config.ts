@@ -215,7 +215,8 @@ module.exports = {
 				'.container-page': { '@apply w-full px-4 md:px-5 xl:px-10': {} },
 				'.container-content': { '@apply w-full px-4 md:px-10 lg:px-14 xl:px-20 xl2:px-28 2xl:px-40': {} },
 				'.heading-section': { '@apply !text-xl !leading-8 md:!text-[34px] md:!leading-normal lg:!text-[40px] xl2:!text-[44px] xl2:!leading-[41px] font-bold': {} },
-				'.subheading-section': { '@apply !text-sm !leading-5 md:!leading-normal md:!text-base xl2:!text-xl': {} }
+				'.subheading-section': { '@apply !text-sm !leading-5 md:!leading-normal md:!text-base xl2:!text-xl': {} },
+				'.innerHTML': { '@apply text-[14px] md:text-[16px]': {} }
 			});
 		}
 	]

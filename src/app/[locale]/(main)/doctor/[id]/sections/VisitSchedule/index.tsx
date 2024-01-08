@@ -94,16 +94,17 @@ const VisitSchedule: React.FC<Props> = ({
 			{
 				!isTelemedicine
 					? Object.keys(getTimeSlot()).map((clinic_code, index) => {
+						const clinicName = clinic?.find(item => item.clinic_code === clinic_code);
 						return (
-							<div key={ index }>
-								<Text text={ (clinic && clinic[0].clinic_name) ?? '' } fontSize='16px' fontWeight='700' />
+							<div key={ `clinic-name-${ index }` }>
+								<Text text={ (clinicName && clinicName.clinic_name) ?? '' } fontSize='16px' fontWeight='700' />
 								<div className='grid grid-cols-2 mt-[15px] mb-[30px] gap-[10px] ' >
 									{
 										removeDuplicate(getTimeSlot()[clinic_code]).map((slot, index) => {
 											if (slot?.available ?? false)
 												return (
 													<TimeSlotPill
-														key={ index }
+														key={ `slot-pill-${ index }` }
 														className='px-[10px] py-[8px] rounded-[5px] flex justify-center'
 														onClick={ () => selectTimeSlotHandler(slot.slot_id) }
 														active={ selectedTimeSlot === slot.slot_id }

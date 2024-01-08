@@ -23,6 +23,10 @@ type NumberContainerProps = {
 	isActive?: boolean;
 };
 
+type PrivacyProps = {
+  lang?: string;
+}
+
 export const NumberContainer = styled.div<NumberContainerProps>`
   background-color: #D4D2D8;
   ${ props => props.isActive && 'background-color: #2A2536;' }
@@ -43,7 +47,7 @@ export const Divider = styled.div`
   border-top: 2px dashed #D4D2D8;
 `;
 
-export const ScrollableContentContainer = styled.div`
+export const ScrollableContentContainer = styled.div<PrivacyProps>`
   line-height: 24px;
   font-size: 16px;
   max-height: 400px;
@@ -57,7 +61,7 @@ export const ScrollableContentContainer = styled.div`
   }
 
   li {
-    line-height:50px;
+    line-height:${ props => props.lang === 'id' ? '50px' : '25px' };
   }
   
   /* Track */

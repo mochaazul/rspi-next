@@ -117,11 +117,11 @@ export default {
 			validationError: 'Mohon isi semua data.',
 			profileSelector: {
 				deleteModal: {
-					heading: 'Apakah anda yakin ingin menghapus profil',
+					heading: 'Apakah anda yakin ingin menghapus data orang lain',
 					yesLabel: 'Ya',
 					noLabel: 'Tidak'
 				},
-				selfLabel: 'Diri sendiri :',
+				selfLabel: 'Profil Diri sendiri :',
 				other: 'Orang lain :',
 				form: {
 					selfHeading: 'Tambah profil diri sendiri',
@@ -158,7 +158,7 @@ export default {
 				errorEmptyData: 'Pastikan Data Keluhan dan Penjamin Terisi',
 				btnLabel: {
 					back: 'Kembali',
-					submit: 'Buat Janji Temu'
+					submit: 'Lanjutkan'
 				}
 			},
 			confirmationModal: {
@@ -189,6 +189,9 @@ export default {
 					done: 'telah berhasil.'
 				},
 				btnLabel: 'Oke'
+			},
+			bookingForm: {
+				insuranceData: 'Data Penjamin Asuransi'
 			}
 		},
 		unsubscribe: {
@@ -270,164 +273,211 @@ export default {
 					checkUp: 'Bagaimana saya membuat perjanjian untuk Health Check-Up?',
 					travelVaccine: 'Apakah RS Pondok Indah memiliki layanan vaksinasi perjalanan?',
 					telemedicine: 'Apakah tersedia layanan Telemedicine/konsultasi jarak jauh di RS Pondok Indah?',
-					maternity: 'Apakah ada informasi terkait persalinan di RS Pondok Indah?'
+					maternity: 'Apakah ada informasi terkait persalinan di RS Pondok Indah?',
+					homeVisit: 'Apakah RS Pondok Indah memiliki layanan Home Visit?',
 				},
 				answers: {
-					doctorSchedule: 'Anda dapat melihat jadwal praktik seluruh dokter RS Pondok Indah Group melalui laman (link) yang juga dapat diakses melalui RSPI Mobile (mobile apps) kami.',
-					assurance: 'RS Pondok Indah Group telah bekerja sama dengan berbagai asuransi terpercaya, baik di dalam maupun luar negeri. Untuk melihat asuransi yang bermitra dengan kami, Anda dapat mengakses laman (link: perusahaan asuransi mitra).',
-					visitHours: `Waktu kunjungan setiap unit perawatan dapat berbeda. Untuk menjaga ketenangan dan kenyamanan seluruh pasien kami, kunjungan hanya dapat dilakukan pada jam tertentu dan dilakukan secara bergantian.
-					<div className='mt-[15px]' />
-					<b>Waktu Berkunjung</b>
-					<div className='mt-[15px]' />
-					Kamar Rawat Inap Umum & Melihat Bayi
-					<div className='flex'>
-						<div className='flex flex-col'>
-							<div>Siang: 11.00 – 13.00 WIB </div>
-							<div>Sore: 18.00 – 20.00 WIB</div>
-						</div>
-					</div>
-					<div className='mt-[15px]' />
-					ICU, ICCU
-					<div className='flex'>
-						<div className='flex flex-col'>
-							<div>Siang: 11.00 – 12.00 WIB </div>
-							<div>Sore: 18.00 – 19.00 WIB </div>
-						</div>
-					</div>
-					Hanya diperbolehkan 1 orang pada satu waktu.
-					Anak-anak tidak diperbolehkan berada di unit ini 
-					<div className='mt-[15px]' />
-					Ruang NICU & Intermediate Bayi
-					<div className='flex'>
-						<div className='flex flex-col'>
-							<div>Siang: 11.00 – 13.00 WIB</div>
-							<div>Sore: 18.00 – 20.00 WIB </div>
-						</div>
-					</div>
-					Hanya orang tua yang diizinkan berkunjung.
-					Maksimum 2 orang untuk setiap pasien, diizinkan untuk berkunjung di waktu yang sama. `,
-					checkUp: `
-					<p className='gap-1'>Pemeriksaan kesehatan atau medical check up lengkap tersedia di ketiga cabang RS Pondok Indah Group. Kami menghadirkan berbagai paket medical check up, termasuk pemeriksaan kesehatan untuk anak. Silakan berkonsultasi dengan tim kami untuk mengetahui paket yang sesuai dengan kebutuhan Anda.</p>
-					<div className='mt-[15px]' />
-					<p className='gap-1 mb-3'>Untuk informasi lebih lanjut atau membuat perjanjian, silakan menghubungi:</p>
-					<b>Executive Health Check Up RS Pondok Indah - Pondok Indah</b>
-					<div className='flex'>
-						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
-							<div>Informasi & Perjanjian:</div>
-							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
-							<div>WhatsApp:</div>
-							<div><a href='https://api.whatsapp.com/send?phone=6281283112725' target='_blank'>0812-8311-2725</a></div>
-							<div><i>E-mail:</i></div>
-							<div><a href='mailto:hcupondok@rspondokindah.co.id' target='_blank'>hcupondok@rspondokindah.co.id</a></div>
-							<a href='https://www.rspondokindah.co.id/uploads/ngc_global_posts/F30021-20230307125551.pdf'>[Paket HCU - RSPI Pondok Indah]</a>
-						</div>
-					</div>
-					<div className='mt-[15px] mb-3' />
-					<b>Executive Health Check Up RS Pondok Indah - Puri Indah</b>
-					<div className='flex'>
-						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
-							<div>Informasi & Perjanjian:</div>
-							<div>(62-21) 2569 5252, 2569 5200 Ext. 2100</div>
-							<div>WhatsApp:</div>
-							<div><a href='https://api.whatsapp.com/send?phone=6282180887838' target='_blank'>0821-8088-7838</a></div>
-							<div><i>E-mail:</i></div>
-							<div><a href='mailto:hcupondok@rspondokindah.co.id'>hcupuri@rspondokindah.co.id</a></div>
-							<a href='https://www.rspondokindah.co.id/uploads/ngc_global_posts/Z81201-20230307125040.pdf'>[Paket EHCU - RSPI Puri Indah]</a>
-						</div>
-					</div>
-					<div className='mt-[15px] mb-3' />
-					<b>Executive Health Check Up RS Pondok Indah - Bintaro Jaya</b>
-					<div className='flex'>
-						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
-							<div>Informasi & Perjanjian:</div>
-							<div>(62-21) 8082 8888 Ext. 2301/2302</div>
-							<div>WhatsApp:</div>
-							<div><a href='https://api.whatsapp.com/send?phone=628119227982' target='_blank'>0811-9227-982</a></div>
-							<div><i>E-mail:</i></div>
-							<div><a href='mailto:hcubintaro@rspondokindah.co.id'>hcubintaro@rspondokindah.co.id</a></div>
-							<a href='https://www.rspondokindah.co.id/uploads/ngc_global_posts/M37594-20220330105057.pdf'>[Paket EHCU - RSPI Puri Indah]</a>
-						</div>
-					</div>`,
-					travelVaccine: `<p className='gap-1'>RS Pondok Indah memiliki layanan vaksinasi perjalanan. Kami juga melayani penerbitan sertifikat vaksinasi internasional atau &quot;buku kuning&quot;.</p>
-					<div className='mt-[15px] mb-3' />
-					<p className='mb-3'>Untuk informasi lebih lanjut, silakan menghubungi:</p>
-					<b>Executive Health Check Up RS Pondok Indah - Pondok Indah</b>
-					<div className='flex'>
-						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
-							<div>Informasi & Perjanjian:</div>
-							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
-							<div>WhatsApp:</div>
-							<div><a href='https://api.whatsapp.com/send?phone=6281283112725' target='_blank'>0812-8311-2725</a></div>
-							<div><i>E-mail:</i></div>
-							<div><a href='mailto:hcupondok@rspondokindah.co.id'>hcupondok@rspondokindah.co.id</a></div>
-						</div>
-					</div>
-					<div className='mt-[15px] mb-3' />
-					<b>Executive Health Check Up RS Pondok Indah - Puri Indah</b>
-					<div className='flex'>
-						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
-							<div>Informasi & Perjanjian:</div>
-							<div>(62-21) 2569 5252, 2569 5200 Ext. 2100</div>
-							<div>WhatsApp:</div>
-							<div><a href='https://api.whatsapp.com/send?phone=6282180887838' target='_blank'>0821-8088-7838</a></div>
-							<div><i>E-mail:</i></div>
-							<div><a href='mailto:hcupuri@rspondokindah.co.id'>hcupuri@rspondokindah.co.id</a></div>
-						</div>
-					</div>
-					<div className='mt-[15px] mb-3' />
-					<b>Executive Health Check Up RS Pondok Indah - Bintaro Jaya</b>
-					<div className='flex'>
-						<div className='flex flex-col xxl:w-[50%] md:w-[75%] w-full gap-1'>
-							<div>Informasi & Perjanjian:</div>
-							<div>(62-21) 8082 8888 Ext. 2301/2302</div>
-							<div>WhatsApp:</div>
-							<div><a href='https://api.whatsapp.com/send?phone=628119227982' target='_blank'>0811-9227-982</a></div>
-							<div><i>E-mail:</i></div>
-							<div><a href='mailto:hcubintaro@rspondokindah.co.id'>hcubintaro@rspondokindah.co.id</a></div>
-						</div>
-					</div>`,
-					telemedicine: `<p className='gap-1'>RS Pondok Indah Group memiliki layanan konsultasi jarak jauh, atau telemedicine. Kini, Anda dapat berkonsultasi dengan dokter kami melalui video call dengan lebih nyaman. Layanan ini menggunakan aplikasi Zoom, di perangkat gadget Anda, sehingga Anda tidak perlu keluar rumah untuk berkonsultasi dengan dokter kami.</p>
-					<div className='mt-[15px] mb-3' />
-					<h3 className='mb-3'>Mekanisme Telemedicine RS Pondok Indah Group</h3>
-					<ol className='list-decimal pl-4'>
-						<li>Pastikan Anda sudah menjadi pasien RS Pondok Indah Group dan memiliki nomor rekam medis</li>
-						<li>Hubungi Call Center RS Pondok Indah yang Anda tuju untuk mendaftar dan/atau mengecek jadwal praktik dokter kami yang menyediakan layanan telemedicine</li>
-						<li>Klik <a href='#'>link</a> yang kami kirimkan <a href='#'>melalui nomor WhatsApp Anda</a> untuk memulai sesi konsultasi pada waktu yang ditetapkan</li>
-						<li>Selesaikan langkah administrasi yang kami kirimkan ke <a href='#'>email</a> Anda</li>
-						<li>Layanan Telemedicine ini hanya dapat dilakukan dengan sistem pembayaran pribadi (<a href='#'>self-paid</a>) melalui transfer bank. Kami belum dapat menerima pembayaran dengan asuransi ataupun pembayaran dengan kartu kredit/debit</li>
-						<li>Apabila dokter meresepkan obat atau meminta pemeriksaan darah untuk Anda, Anda dapat mengambil obat dan melakukan pengambilan darah secara drive-thru pada waktu yang ditentukan setelah Anda menyelesaikan administrasi. Kami juga melayani pengantaran obat ke rumah pasien untuk wilayah tertentu</li>
+					doctorSchedule: `<p><span style="">Anda dapat melihat jadwal praktik seluruh dokter RS Pondok Indah Group melalui </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/id/find-a-doctor" target="_blank">laman berikut</a> yang juga dapat diakses melalui RSPI Mobile (mobile apps) kami. </p>`,
+					assurance: `<p><span style="">RS Pondok Indah Group telah bekerja sama dengan berbagai asuransi terpercaya, baik di dalam maupun luar negeri. Untuk melihat asuransi yang bermitra dengan kami, Anda dapat mengakses </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/id/pages/perusahaan-asuransi-mitra"><span style=" text-decoration: underline; text-decoration-skip-ink: none;">laman berikut</span></a></p>`,
+					visitHours: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Waktu kunjungan setiap unit perawatan dapat berbeda. Untuk menjaga ketenangan dan kenyamanan seluruh pasien kami, kunjungan hanya dapat dilakukan pada jam tertentu dan dilakukan secara bergantian.</span></p>
+					<p>&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><strong><span style="">Waktu Berkunjung</span></strong></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Kamar Rawat Inap Umum &amp; Melihat Bayi</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Siang: 11.00 &ndash; 13.00 WIB</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Sore: 18.00 &ndash; 20.00 WIB</span></p>
+					<p>&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">ICU, ICCU</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Siang: 11.00 &ndash; 12.00 WIB</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Sore: 18.00 &ndash; 19.00 WIB</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Hanya diperbolehkan 1 orang pada satu waktu. Anak-anak tidak diperbolehkan berada di unit ini</span></p>
+					<p>&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Ruang NICU &amp; </span><em><span style="">Intermediate </span></em><span style="">Bayi</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Siang: 11.00 &ndash; 13.00 WIB</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Sore: 18.00 &ndash; 20.00 WIB</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Hanya orang tua yang diizinkan berkunjung. Maksimum 2 orang untuk setiap pasien, diizinkan untuk berkunjung di waktu yang sama.</span></p>`,
+					checkUp: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Pemeriksaan kesehatan atau </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/id/facilities-services/executive-health-check-up"><em><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Executive Health Check Up</span></em></a><span style=""> lengkap tersedia di ketiga cabang RS Pondok Indah Group. Kami menghadirkan berbagai paket </span><em><span style="">medical check up</span></em><span style="">, termasuk pemeriksaan kesehatan untuk anak. Silakan berkonsultasi dengan tim kami untuk mengetahui paket yang sesuai dengan kebutuhan Anda.</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Untuk informasi lebih lanjut atau membuat perjanjian, silakan menghubungi:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Executive Health Check Up RS Pondok Indah - Pondok Indah</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Informasi &amp; Perjanjian:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">(62-21) 7507169, 765 7525 Ext. 2267/2318</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">WhatsApp:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281283112725"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0812-8311-2725</span></a></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="">E-mail:</span></em></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupondok@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">hcupondok@rspondokindah.co.id</span></a><span style="">&nbsp;</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">[</span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/uploads/ngc_global_posts/F30021-20230307125551.pdf"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Paket EHCU - RSPI Pondok Indah</span></a><span style="">]</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Executive Health Check Up RS Pondok Indah - Puri Indah</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Informasi &amp; Perjanjian:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">(62-21) 2569 5252, 2569 5200 Ext. 2100</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">WhatsApp:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6282180887838"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0821-8088-7838</span></a></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="">E-mail:</span></em></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupuri@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">hcupuri@rspondokindah.co.id</span></a><span style="">&nbsp;</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">[</span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/uploads/ngc_global_posts/Z81201-20230307125040.pdf"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Paket EHCU - RSPI Puri Indah</span></a><span style="">]</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Executive Health Check Up RS Pondok Indah - Bintaro Jaya</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Informasi &amp; Perjanjian:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">(62-21) 8082 8888 Ext. 2301/2302</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">WhatsApp:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=628119227982"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0811-9227-982</span></a></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="">E-mail:</span></em></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcubintaro@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">hcubintaro@rspondokindah.co.id</span></a></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">[</span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/uploads/ngc_global_posts/M37594-20220330105057.pdf"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Paket EHCU - RSPI Bintaro Jaya</span></a><span style="">]</span> </p>`,
+					travelVaccine: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">RS Pondok Indah memiliki layanan vaksinasi perjalanan. Kami juga melayani penerbitan sertifikat vaksinasi internasional atau "buku kuning".</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Untuk informasi lebih lanjut, silakan menghubungi:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Executive Health Check Up RS Pondok Indah - Pondok Indah</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Informasi &amp; Perjanjian:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">(62-21) 7507169, 765 7525 Ext. 2267/2318</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">WhatsApp:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281283112725"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0812-8311-2725</span></a></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="">E-mail:</span></em></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupondok@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">hcupondok@rspondokindah.co.id</span></a><span style="">&nbsp;</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Executive Health Check Up RS Pondok Indah - Puri Indah</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Informasi &amp; Perjanjian:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">(62-21) 2569 5252, 2569 5200 Ext. 2100</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">WhatsApp:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6282180887838"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0821-8088-7838</span></a></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="">E-mail:</span></em></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupuri@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">hcupuri@rspondokindah.co.id</span></a><span style="">&nbsp;</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Executive Health Check Up RS Pondok Indah - Bintaro Jaya</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Informasi &amp; Perjanjian:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">(62-21) 8082 8888 Ext. 2301/2302</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">WhatsApp:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=628119227982"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0811-9227-982</span></a></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="">E-mail:</span></em></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcubintaro@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">hcubintaro@rspondokindah.co.id</span></a><span style=""> </span> </p>`,
+					telemedicine: `<p style="line-height: 1.8; text-align: justify; background-color: rgb(255, 255, 255); margin-top: 11pt; margin-bottom: 0pt;"><span style="">RS Pondok Indah Group memiliki layanan konsultasi jarak jauh, atau telemedicine. Kini, Anda dapat berkonsultasi dengan dokter kami mela</span><span style="">lui </span><a style="text-decoration: none;" href="http://web.rspondokindah.co.id/id/faq"><span style="">video call</span></a><span style=""> dengan lebih nyaman. Layanan ini menggunakan aplikasi Zoom, di perangkat </span><em><span style="">gadget </span></em><span style="">Anda, sehin</span><span style="">gga Anda tidak perlu keluar rumah untuk berkonsultasi dengan dokter kami.</span></p>
+					<h3 style="line-height: 1.8; text-align: justify; background-color: rgb(255, 255, 255); margin-top: 0pt; margin-bottom: 4pt; padding-top: 22pt;"><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">Mekanisme Telemedicine RS Pondok Indah Group</span></h3>
+					<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 22pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pastikan Anda sudah menjadi pasien RS Pondok Indah Group dan memiliki nomor rekam medis</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Hubungi Call Center RS Pondok Indah yang Anda tuju untuk mendaftar dan/atau mengecek jadwal praktek dokter kami yang menyediakan layanan Telemedicine</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Kli</span><span style="font-size: 11pt; color: rgb(0, 0, 0);">k tautan yang kami kirimkan </span><a style="text-decoration: none;" href="http://web.rspondokindah.co.id/id/faq"><span style="font-size: 11pt; color: rgb(0, 0, 0);">melalui nomor WhatsApp Anda</span></a><span style="font-size: 11pt; color: rgb(0, 0, 0);"> u</span><span style="font-size: 11pt;">ntuk memulai sesi konsultasi pada waktu yang ditetapkan</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Selesaikan langkah administrasi yang kami kirimkan ke </span><a style="text-decoration: none;" href="http://web.rspondokindah.co.id/id/faq"><em><span style="font-size: 11pt; color: rgb(0, 0, 0);">e-mail</span></em></a><em><span style="font-size: 11pt;"> </span></em><span style="font-size: 11pt;">Anda</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Layanan Telemedicine ini hanya dapat dilakukan dengan sistem pembayaran pribadi (</span><a style="text-decoration: none;" href="http://web.rspondokindah.co.id/id/faq"><em><span style="font-size: 11pt; color: rgb(0, 0, 0);">self-paid</span></em></a><span style="font-size: 11pt;">) melalui transfer bank. Kami belum dapat menerima pembayaran dengan asuransi ataupun pembayaran dengan kartu kredit/debit</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 22pt; margin-bottom: 0pt;"><span style="font-size: 11pt; background-color: rgb(255, 255, 0);">Apabila dokter meresepkan obat atau meminta pemeriksaan darah untuk Anda, Anda dapat meminta obat untuk dikirim ke rumah Anda (untuk wilayah tertentu) dan melakukan pengambilan darah di rumah Anda pada waktu yang ditentukan setelah Anda menyelesaikan administrasi. </span></p>
+					</li>
 					</ol>`,
-					maternity: `Menanti kehadiran sang buah hati merupakan momen perjalanan hidup yang istimewa dan sangat berharga bagi Anda dan pasangan. Memahami hal tersebut, RS Pondok Indah Group menghadirkan Maternity First, yaitu layanan kehamilan yang lengkap dan terpadu, untuk menciptakan pengalaman terbaik menyambut sang buah hati sejak masa kehamilan, melahirkan, dan pasca persalinan, meliputi:
-					<div className='mt-[15px]' />
-
-					<ul className='list-disc pl-5'>
-						<li>Tenaga medis profesional, termasuk dokter spesialis kebidanan dan kandungan, dokter spesialis kebidanan dan kandungan konsultan fetomaternal, dokter spesialis anak, dan dokter konselor laktasi</li>
-						<li>Maternity Counselor yang dapat dihubungi via WhatsApp 24 jam untuk membantu menjawab pertanyaan ibu selama menjalani masa kehamilan</li>
-						<li>Fasilitas dan teknologi medis terkini, seperti USG 4D</li>
-						<li>Five-stars facilities di ruang perawatan, ruang bersalin, kamar operasi, ruang bayi termasuk fasilitas NICU</li>
-						<li>100% dukungan untuk IMD (Inisiasi Menyusu Dini) dan pemberian ASI eksklusif</li>
-						<li>Maternity Classes meliputi kelas senam hamil, prenatal Yoga, dan parenting class</li>
+					maternity: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Menanti kehadiran sang buah hati merupakan momen perjalanan hidup yang istimewa dan sangat berharga bagi Anda dan pasangan. Memahami hal tersebut, RS Pondok Indah Group menghadirkan </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/classes-detail/maternity-first"><strong><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Maternity First</span></strong></a><span style="">, yaitu pelayanan kehamilan yang lengkap dan terpadu, untuk menciptakan pengalaman terbaik menyambut sang buah hati sejak masa kehamilan, melahirkan, dan pasca persalinan, meliputi:</span></p>
+					<p style="line-height: 1.8; text-align: justify; background-color: rgb(255, 255, 255); margin-top: 11pt; margin-bottom: 0pt;">&nbsp;</p>
+					<ul style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Tenaga medis profesional, termasuk dokter spesialis obstetri dan ginekologi, dokter spesialis obstetri dan ginekologi subspesialis fetomaternal, dokter spesialis anak, dan dokter konselor laktasi</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="font-size: 11pt;">Maternity Counselor</span></em><span style="font-size: 11pt;"> yang dapat dihubungi via WhatsApp 24 jam untuk membantu menjawab pertanyaan ibu selama menjalani masa kehamilan</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Fasilitas dan teknologi medis terkini, seperti USG 4D</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="font-size: 11pt;">Five-stars facilities </span></em><span style="font-size: 11pt;">di ruang perawatan, ruang bersalin, kamar operasi, ruang bayi termasuk fasilitas NICU</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">100% dukungan untuk IMD (Inisiasi Menyusu Dini) dan pemberian ASI eksklusif</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="font-size: 11pt;">Maternity Classes </span></em><span style="font-size: 11pt;">meliputi kelas senam hamil, prenatal Yoga, dan parenting class</span></p>
+					</li>
 					</ul>
-
-					<div className='mt-[15px]' />
-					<p>Untuk informasi lebih lanjut, silakan menghubungi:</p>
-					<div className='mt-[15px]' />
-					<p>RS Pondok Indah – Pondok Indah</p>
-					<p>Klinik Kebidanan dan Kandungan Lantai 3</p>
-					<p>(021) 765 7525 Ext. 2</p>
-					<p>Maternity Counselor (WhatsApp chat only): 081388887273</p>
-
-					<div className='mt-[15px]' />
-					<p>RS Pondok Indah - Puri Indah</p>
-					<p>Klinik Kebidanan dan Kandungan Lantai 7</p>
-					<p>(021) 2569 5200 Ext. 2</p>
-					<p>Maternity Counselor (WhatsApp chat only): 081388889096</p>
-
-					<div className='mt-[15px]' />
-					<p>RS Pondok Indah – Bintaro Jaya</p>
-					<p>Klinik Kebidanan dan Kandungan Lantai 6</p>
-					<p>(021) 8082 8888 Ext. 2/6012</p>
-					<p>Maternity Counselor (WhatsApp chat only): 081295998870</p>`
+					<p style="line-height: 1.8; text-align: justify; background-color: rgb(255, 255, 255); margin-top: 11pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Untuk informasi lebih lanjut, silakan menghubungi:</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">RS Pondok Indah &ndash; Pondok Indah</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Klinik Kebidanan dan Kandungan Lantai 3</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">(021) 765 7525 Ext. 2</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="">Maternity Counselor</span></em><span style=""> (WhatsApp </span><em><span style="">chat only</span></em><span style="">): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281388887273"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">081388887273</span></a></p>
+					<p style="line-height: 1.8; text-align: justify; background-color: rgb(255, 255, 255); margin-top: 11pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">RS Pondok Indah - Puri Indah</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Klinik Kebidanan dan Kandungan Lantai 7</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">(021) 2569 5200 Ext. 2</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><em><span style="">Maternity Counselor</span></em><span style=""> (WhatsApp </span><em><span style="">chat only</span></em><span style="">): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281388889096"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">081388889096</span></a></p>
+					<p style="line-height: 1.8; text-align: justify; background-color: rgb(255, 255, 255); margin-top: 11pt; margin-bottom: 0pt;">&nbsp;</p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">RS Pondok Indah &ndash; Bintaro Jaya</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Klinik Kebidanan dan Kandungan Lantai 6</span></p>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="">(021) 8082 8888 Ext. 2/6012</span></p>
+					<p style="line-height: 1.8; text-align: justify; background-color: rgb(255, 255, 255); margin-top: 11pt; margin-bottom: 0pt;"><em><span style="">Maternity Counselor </span></em><span style="">(WhatsApp </span><em><span style="">chat only</span></em><span style="">): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281295998870"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">081295998870</span></a> </p>`,
+					homeVisit: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Kami memiliki layanan </span><em><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Home Visit </span></em><span style="font-size: 11pt;  color: rgb(0, 0, 0);">untuk wilayah tertentu. Beberapa layanan yang dapat kami lakukan antara lain:</span></p>
+					<ul style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
+					<li style="font-size: 11pt;  color: rgb(67, 67, 67);">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pemeriksaan dan konsultasi oleh dokter umum, dokter spesialis penyakit dalam, dokter spesialis gizi</span></p>
+					</li>
+					<li style="font-size: 11pt;  color: rgb(67, 67, 67);">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pemasangan/penggantian selang NGT</span></p>
+					</li>
+					<li style="font-size: 11pt;  color: rgb(67, 67, 67);">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pemasangan/penggantian kateter urine</span></p>
+					</li>
+					<li style="font-size: 11pt;  color: rgb(67, 67, 67);">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Perawatan stoma</span></p>
+					</li>
+					<li style="font-size: 11pt;  color: rgb(67, 67, 67);">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Perawatan luka</span></p>
+					</li>
+					<li style="font-size: 11pt;  color: rgb(67, 67, 67);">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pengambilan sampel laboratorium</span></p>
+					</li>
+					<li style="font-size: 11pt;  color: rgb(67, 67, 67);">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Memandikan bayi</span></p>
+					</li>
+					<li style="font-size: 11pt;  color: rgb(67, 67, 67);">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Vaksinasi</span></p>
+					</li>
+					<li style="font-size: 11pt;  color: rgb(67, 67, 67);">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">dan tindakan lainnya</span></p>
+					</li>
+					</ul>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+					<h3 style="line-height: 1.8; text-align: justify; background-color: rgb(255, 255, 255); margin-top: 0pt; margin-bottom: 4pt; padding-top: 22pt;"><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">Mekanisme </span><em><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">Home Visit </span></em><span style="font-size: 14pt;  color: rgb(67, 67, 67); font-weight: 400;">RS Pondok Indah Group</span></h3>
+					<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 22pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Layanan Home Visit berlaku untuk pasien yang berada di sekitar lokasi RS Pondok Indah Group dengan radius maksimal 10 km</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pastikan Anda sudah menjadi pasien RS Pondok Indah Group dan memiliki nomor rekam medis</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Kirim pesan WhatsApp untuk membuat perjanjian Layanan </span><em><span style="font-size: 11pt;">Home Visit </span></em><span style="font-size: 11pt;">H-1 (jam kerja 08.00 - 17.00) ke:</span></p>
+					<ol style="padding-inline-start: 48px;">
+					<li style="list-style-type: lower-alpha; ">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">RS Pondok Indah - Pondok Indah +62 821-1999-0881&nbsp;</span></p>
+					</li>
+					<li style="list-style-type: lower-alpha; ">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">RS Pondok Indah - Puri Indah +62 821-1999-0882</span></p>
+					</li>
+					<li style="list-style-type: lower-alpha; ">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">RS Pondok Indah - Bintaro Jaya +62 821-1999-0883</span></p>
+					</li>
+					</ol>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Tim </span><em><span style="font-size: 11pt;">Home Visit </span></em><span style="font-size: 11pt;">akan menghubungi Anda untuk mengkaji layanan atau tindakan yang dibutuhkan dan mempersiapkan sesuai kebutuhan pasien</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Tim </span><em><span style="font-size: 11pt;">Home Visit </span></em><span style="font-size: 11pt;">akan melakukan konfirmasi untuk kedatangan ke rumah pasien H-1 perihal jam kedatangan</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Tim </span><em><span style="font-size: 11pt;">Home Visit </span></em><span style="font-size: 11pt;">akan mendata tindakan, pemakaian alat dan obat yang digunakan di rumah Anda dan berkoordinasi dengan bagian unit operasional terkait</span></p>
+					</li>
+					<li style="">
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Setelah selesai dari rumah Anda, Kasir akan mengirimkan </span><em><span style="font-size: 11pt;">invoice </span></em><span style="font-size: 11pt;">melalui WhatsApp sesuai </span><em><span style="font-size: 11pt;">billing </span></em><span style="font-size: 11pt;">dan mengirimkan nomor rekening RS Pondok Indah agar Anda dapat melakukan pembayaran melalui transfer bank</span></p>
+					</li>
+					</ol>
+					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Layanan </span><em><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Home Visit</span></em><span style="font-size: 11pt;  color: rgb(0, 0, 0);"> ini hanya dapat dilakukan dengan sistem pembayaran pribadi (</span><a style="text-decoration: none;" href="http://web.rspondokindah.co.id/id/faq"><em><span style="font-size: 11pt;  color: rgb(0, 0, 0);">self-paid</span></em></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);">) melalui transfer bank. Kami belum dapat menerima pembayaran dengan asuransi ataupun pembayaran dengan kartu kredit/debit</span> </p>`
 				}
 			},
 			location: {
@@ -939,7 +989,10 @@ export default {
 			asuransiCardFront: 'Upload foto tampak depan',
 			asuransiCardBack: 'Upload foto tampak belakang',
 			labelPhoneModal: 'Silahkan hubungi call center',
-			visitAppOptionLabel: 'Kunjungan Tatap Muka'
+			visitAppOptionLabel: 'Kunjungan Tatap Muka',
+			shareDoctor: {
+				wateleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}: {link}'
+			}
 		},
 		footer: {
 			visitorInfo: {
