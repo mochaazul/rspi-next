@@ -14,9 +14,9 @@ interface PropsType {
 	visible?: boolean;
 	onClose?: () => void;
 	id?: string;
-	nama?: string;
-	birthDate?: string;
-	noHp?: string;
+	patientName?: string;
+	patientBirthDate?: string;
+	patientPhone?: string;
 	doctorImg?: string;
 	doctorName?: string;
 	doctorSpec?: string;
@@ -59,7 +59,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ props.patientProfile?.name }
+								text={ props.patientName }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
@@ -73,7 +73,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ props.birthDate ? dayjs(props.patientProfile?.birthdate).format('DD MMMM YYYY') : '-' }
+								text={ props.patientBirthDate ? dayjs(props?.patientBirthDate).format('DD MMMM YYYY') : '-' }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'
@@ -87,7 +87,7 @@ const ModalCancelBook = (props: PropsType) => {
 								lineHeight='20px'
 							/>
 							<Text
-								text={ props.patientProfile?.phone ?? '-' }
+								text={ props.patientPhone ?? '-' }
 								fontWeight='700'
 								fontSize='14px'
 								lineHeight='20px'

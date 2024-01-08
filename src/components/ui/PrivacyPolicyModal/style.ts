@@ -51,6 +51,14 @@ export const ScrollableContentContainer = styled.div`
   ::-webkit-scrollbar {
     width: 4px;
   }
+
+  ul, ol {
+    list-style: auto !important;
+  }
+
+  li {
+    line-height:50px;
+  }
   
   /* Track */
   ::-webkit-scrollbar-track {

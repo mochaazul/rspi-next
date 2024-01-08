@@ -67,7 +67,7 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 									status='appointment'
 									queueNo={ + data.q_number }
 									type={ data.type }
-									patientName={ data.patient_name }
+									patientName={ bookType === 'other' ? data.patient_name : patientProfile?.name }
 									isTelemedicine={ data.service === 'TEL' }
 									doctorName={ data.full_name_doctor }
 									doctorSpeciality={ data.specialty }
@@ -76,8 +76,8 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 									hospital_name={ data.hospital_name }
 									date={ data.book_date }
 									time={ data.book_time }
-									patientBirthDate={ data.patient_birthdate }
-									patientPhone={ data.patient_phone }
+									patientBirthDate={ bookType === 'other' ? data.patient_birthdate : patientProfile?.birthdate }
+									patientPhone={ bookType === 'other' ? data.phone : patientProfile?.phone }
 									visit_status={ data.app_status }
 									patientProfile={ patientProfile }
 								/>

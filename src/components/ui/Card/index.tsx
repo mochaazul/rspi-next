@@ -100,7 +100,15 @@ export const CardContent = ({ title, description }: { title: string, description
 
 export const CardContentWithInner = ({ title, description, author, RSLocation, index = 0 }: { title: string, description: string; author?: string; RSLocation?: string[]; index?: number; }) => (
 	<CardContentHTML>
-		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-1 sm:pt-2.5' subClassName='max-sm:text-base hover:text-green-secondary' />
+		<Text
+			fontSize='20px'
+			fontType='h3'
+			fontWeight='900'
+			color={ colors.grey.darker }
+			text={ title }
+			lineHeight='28px'
+			className='pt-1 sm:pt-2.5'
+			subClassName='max-sm:text-base hover:text-green-secondary' />
 		{
 			!!RSLocation &&
 			<div className='flex gap-2 sm:gap-2.5 mt-1 sm:mt-2.5 items-center'>

@@ -110,6 +110,9 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 							return (
 								<div className='mb-4 sm:mb-8' key={ `hospital-${ index }` }>
 									<Text className='mt-4 sm:mt-8' fontSize='20px' fontWeight='900' subClassName='!leading-normal'>
+										{ item?.unit }
+									</Text>
+									<Text className='mt-2 sm:mt-3' fontSize='16px' fontWeight='900' color={ colors.grey.dark } subClassName='max-sm:text-[#2A2536] max-sm:text-xs leading-[18px] sm:leading-normal max-sm:font-normal'>
 										{
 											currentLang === 'id'
 												? `${ item?.hospital_name } ${ t('serviceLocation.floor') } ${ item?.floor }`
