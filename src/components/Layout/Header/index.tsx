@@ -281,7 +281,7 @@ export const Header = ({
 						leaveFrom='transform opacity-100 scale-100'
 						leaveTo='transform opacity-0 scale-95'
 					>
-						<Popover.Panel className='absolute z-[999] right-0 mt-4 lg:mt-5 w-screen max-w-[calc(100vw-92px)] sm:max-w-[400px] origin-top-right shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] overflow-hidden bg-white rounded-[10px] font-Lato'>
+						<Popover.Panel className='absolute z-[999] right-0 mt-4 lg:mt-5 w-screen max-w-[calc(100vw-92px)] sm:max-w-[400px] origin-top-right shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] overflow-hidden bg-white rounded-b-[10px] font-Lato'>
 							<div className='flex flex-col gap-2'>
 								<div className='flex p-3'>
 									<Text
@@ -352,7 +352,6 @@ export const Header = ({
 											src={ session.user?.img_url }
 											alt=''
 											sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-
 											fill
 										/>
 									</div>
@@ -409,7 +408,7 @@ export const Header = ({
 							<div className='hidden lg:flex lg:gap-x-4 xl2:gap-x-5'>
 								<div id='home'>
 									<Link href='/'>
-										<Text text={ t('home') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+										<Text text={ t('home') } className='cursor-pointer' subClassName='hover:text-green-secondary' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 									</Link>
 								</div>
 
@@ -427,7 +426,7 @@ export const Header = ({
 													/>
 													<div className='ml-[10px] w-[310px] hover:bg-transparent'>
 														<Text subClassName={ 'group-hover/dropDownList:text-green-secondary' } text={ item?.name } fontSize='16px' fontWeight='900' />
-														<Text subClassName={ 'group-hover/dropDownList:text-green-secondary' } text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
+														<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
 													</div>
 													<icons.ArrowRight className='ml-[27px] mr-auto' />
 												</Link>
@@ -496,7 +495,7 @@ export const Header = ({
 								</div> */ }
 
 								<Link id='find-doctor' href='/find-a-doctor'>
-									<Text text={ t('findDoctor') } className='cursor-pointer' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
+									<Text text={ t('findDoctor') } className='cursor-pointer' subClassName='hover:text-green-secondary' color={ colors.grey.darker } fontSize='14px' fontWeight='900' />
 								</Link>
 							</div>
 						</div>
