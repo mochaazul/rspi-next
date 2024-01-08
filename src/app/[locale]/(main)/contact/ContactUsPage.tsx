@@ -162,7 +162,7 @@ const ContactUsPage = ({
 						</p>
 						<div className='mt-10'>
 							<Accordion
-								itemTheme={ props => <Accordion.ItemFAQ { ...props } readMore={ true } /> }
+								itemTheme={ props => <Accordion.ItemFAQ { ...props } readMore={ true } isJSXDesc={ true } /> }
 								datas={ FAQDatas().filter((_faq, index) => index < 5) }
 							/>
 						</div>

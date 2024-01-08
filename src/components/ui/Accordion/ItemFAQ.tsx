@@ -8,6 +8,7 @@ import { useScopedI18n } from '@/locales/client';
 
 import { ItemType } from '.';
 import { ItemStyle } from './style';
+import TextHtml from '../TextHtml';
 
 const ItemFAQ = (props: ItemType) => {
 	const t = useScopedI18n('page.contactUs.faq');
@@ -23,6 +24,43 @@ const ItemFAQ = (props: ItemType) => {
 			setIsOpen(props.isOpen);
 		}
 	}, [props.isOpen]);
+
+	const buttonReadMore = () => {
+		return (
+			<Link href='/contact/faq'>
+				<Text
+					fontSize='14px'
+					lineHeight='21px'
+					fontType={ null }
+					fontWeight='700'
+					className='inline-block text-green-secondary'
+					subClassName='text-justify max-sm:leading-[18px]'
+					text={ t('readMoreLabel') }
+				/>
+			</Link>
+		);
+	};
+
+	const itemRenderShortDesc = () => {
+		return (
+			<Text
+				fontSize='14px'
+				lineHeight='22px'
+				fontType={ props.readMore ? null : 'p' }
+				fontWeight='400'
+				color={ colors.grey.darker }
+				className={ `${ props.desc !== '' ? 'mt-[15px]' : '' }` }
+				subClassName='text-justify'
+			>
+				{ props.readMore ? props.desc.substring(0, 250) :  props.desc }
+				{
+					props.readMore ?
+						buttonReadMore() :
+						null
+				}
+			</Text>
+		);
+	};
 
 	return (
 		<ItemStyle $isOpen={ isOpen } className='flex flex-row'>
@@ -43,33 +81,18 @@ const ItemFAQ = (props: ItemType) => {
 				</div>
 				<div className='item-desc'>
 					{
-						props.isJSXDesc ? props.desc_jsx :
-							<Text
-								fontSize='14px'
-								lineHeight='22px'
-								fontType={ props.readMore ? null : 'p' }
-								fontWeight='400'
-								color={ colors.grey.darker }
-								className={ `${ props.desc !== '' ? 'mt-[15px]' : '' }` }
-								subClassName='text-justify'
-							>
-								{ props.readMore ? props.desc.substring(0, 250) : props.desc }
-								{
-									props.readMore ?
-										<Link href='/contact/faq'>
-											<Text
-												fontSize='14px'
-												lineHeight='21px'
-												fontType={ null }
-												fontWeight='700'
-												className='ml-1 inline-block text-green-secondary'
-												subClassName='text-justify max-sm:leading-[18px]'
-												text={ t('readMoreLabel') }
-											/>
-										</Link> :
-										null
-								}
-							</Text>
+						props.isJSXDesc ?
+							props.readMore ?
+								<div>
+									<p className='line-clamp-2'>
+										{ props.desc_jsx }
+									</p>
+									{ buttonReadMore() }
+								</div>
+								:
+								props.desc_jsx
+							:
+							itemRenderShortDesc()
 					}
 				</div>
 			</div>
