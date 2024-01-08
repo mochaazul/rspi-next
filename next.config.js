@@ -46,6 +46,10 @@ const nextConfig = {
 			{
 				protocol: 'https',
 				hostname: 'storage.googleapis.com'
+			},
+			{
+				protocol: 'https',
+				hostname: 'www.rspondokindah.co.id'
 			}
 		],
 	},

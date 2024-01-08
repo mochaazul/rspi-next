@@ -65,7 +65,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 			<div className='mt-[50px] md:mt-12'>
 				<TextHtml
 					htmlStr={ facilityDetail?.information || '' }
-					className='text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
+					className='innerHTML'
 				/>
 			</div>
 

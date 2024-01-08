@@ -29,12 +29,13 @@ type DataEventProps = {
 	slug?: string;
 	hospitals?: any;
 	category: string;
-}
+	language: string;
+};
 
 type DataHospitalProps = {
 	id: number;
 	name?: string;
-}
+};
 
 const EventClassesPromo = ({
 	hospitalSelector,
@@ -49,7 +50,7 @@ const EventClassesPromo = ({
 }) => {
 	const t = useScopedI18n('page.promoPage');
 	const searchParam = useSearchParams()!;
-	
+
 	const totalPages = pagination?.total_page || 1;
 
 	const pathname = usePathname();
@@ -59,7 +60,7 @@ const EventClassesPromo = ({
 	const categoryParams = params.get('category') ?? '';
 	const hospitalIDParams = params.get('hospital_id') ?? '';
 	const pageParams = params.get('page') ?? 1;
-	
+
 	const [loading, setLoading] = useState(false);
 
 	const hospitalArr = Object.values(hospitalSelector || [])?.map(hospital => ({ key: hospital?.id?.toString(), value: hospital?.id?.toString(), label: hospital?.name }));
@@ -85,7 +86,7 @@ const EventClassesPromo = ({
 		}
 		navigate.push(`${ pathname }?${ params.toString() }`);
 	};
-	
+
 	const filterPage = (pages: number) => {
 		params.set('page', pages.toString());
 		navigate.push(`${ pathname }?${ params.toString() }`);
@@ -138,7 +139,7 @@ const EventClassesPromo = ({
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
 				{ /* Sebenarnya tingginya mt-41, di kasih 17 karena di card sudah ada mt-24 */ }
 				<div className='content mt-[0px] sm:mt-[17px]'>
@@ -153,6 +154,7 @@ const EventClassesPromo = ({
 									<Card
 										id={ data.id }
 										slug={ data.slug }
+										language={ data.language }
 										key={ index }
 										image={ data.img_url_card }
 										imageHeight='200px'
@@ -184,7 +186,7 @@ const EventClassesPromo = ({
 						{
 							!loading && events?.length === 0 ?
 								<Text textAlign='center' fontSize='20px' color={ colors.grey.dark } className='mt-[20px]'>
-									<EmptyData menu='Promo and Packages' />
+									<EmptyData menu={ t('heading') } />
 								</Text> : <></>
 						}
 					</div>
@@ -217,14 +219,14 @@ const EventClassesPromo = ({
 												/>
 											}
 											footer={ ({ isHover }) => <Button theme={ isHover ? 'primary' : 'secondary' } label={ t('promoItem.detailsBtnLabel') } /> }
-											className={ `mb-0 ${events?.length > 1 ? '!w-[90%]' : '!w-[100%]'}` }
+											className={ `mb-0 ${ events?.length > 1 ? '!w-[90%]' : '!w-[100%]' }` }
 											to={ `/promo/${ data.slug }` }
 											iconShare={ true }
 										/>
 									);
 								})
 							}
-							
+
 						</CardsScrollHorizontal>
 					</div>
 				</div>

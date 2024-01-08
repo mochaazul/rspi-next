@@ -55,6 +55,7 @@ const CentreOfExcellence = ({ data }: { data: CenterOfExcellenceDetail[]; }) => 
 								content={ <CardContent title={ data.title ?? '' } description={ data.short_description ?? '' } /> }
 								footer={ <CardFooter content={ t('cardItem.readMoreLabel') } /> }
 								to={ `center-of-excellence/${ data.slug }` }
+								className='max-sm:w-full'
 							/>
 						))
 					}

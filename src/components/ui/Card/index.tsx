@@ -33,6 +33,7 @@ interface PropsType {
 	iconShare?: boolean;
 	id?: number;
 	slug?: string;
+	language?: string;
 }
 
 interface CardsScrollHorizontalType {
@@ -53,10 +54,10 @@ const Card = (props: PropsType) => {
 		<CardWrapper className={ `shrink-0 ${ props.className } relative` }>
 			<Link href={ props.to || '#' } onMouseEnter={ toggleMouseHover(true) } onMouseLeave={ toggleMouseHover(false) }>
 				<CardStyle { ...props.cardStyle }>
-
 					{
 						props.image &&
-						<div className={ `relative w-full ${ props.imageHeight ? `h-[${ props.imageHeight }]` : 'h-fit' }` } >
+						<div className={ 'relative w-full' }
+							style={ { height: props.imageHeight ?? 'h-fit' } } >
 							<Image src={ props.image } alt={ 'img-thumbnail' } className='object-cover' fill />
 						</div>
 					}
@@ -83,7 +84,7 @@ const Card = (props: PropsType) => {
 			{
 				props.iconShare &&
 				<div className={ 'block' }>
-					<Share slug={ props.slug } />
+					<Share slug={ `${ props.language === 'idn' ? 'id' : 'en' }${ props.to } ` } />
 				</div>
 			}
 		</CardWrapper>
@@ -99,7 +100,15 @@ export const CardContent = ({ title, description }: { title: string, description
 
 export const CardContentWithInner = ({ title, description, author, RSLocation, index = 0 }: { title: string, description: string; author?: string; RSLocation?: string[]; index?: number; }) => (
 	<CardContentHTML>
-		<Text fontSize='20px' fontType='h3' fontWeight='900' color={ colors.grey.darker } text={ title } lineHeight='28px' className='pt-1 sm:pt-2.5' subClassName='max-sm:text-base' />
+		<Text
+			fontSize='20px'
+			fontType='h3'
+			fontWeight='900'
+			color={ colors.grey.darker }
+			text={ title }
+			lineHeight='28px'
+			className='pt-1 sm:pt-2.5'
+			subClassName='max-sm:text-base hover:text-green-secondary' />
 		{
 			!!RSLocation &&
 			<div className='flex gap-2 sm:gap-2.5 mt-1 sm:mt-2.5 items-center'>
@@ -139,7 +148,7 @@ export const CardContentWithInner = ({ title, description, author, RSLocation, i
 		{ author && (
 			<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ author } className='mt-[5px] mb-[2px] max-sm:!text-xs' lineHeight='24px' />
 		) }
-		<TextHtml className='innerHTML text-xs max-sm:leading-[18px] sm:text-sm md:text-base mt-4 sm:mt-5 line-clamp-3' style={ { color: colors.grey.dark } } htmlStr={ description ?? '' } />
+		<TextHtml className='text-xs max-sm:leading-[18px] sm:text-sm md:text-base mt-4 sm:mt-5 line-clamp-3' style={ { color: colors.grey.dark } } htmlStr={ description ?? '' } />
 	</CardContentHTML>
 );
 

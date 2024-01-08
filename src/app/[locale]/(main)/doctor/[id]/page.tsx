@@ -6,7 +6,6 @@ import dayjs, { Dayjs } from 'dayjs';
 import Spinner from '@/components/ui/Spinner';
 import PhoneModal from '@/components/ui/PhoneModal';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
-import DoctorAvatar, { ShareDoctor } from './sections/DoctorAvatar';
 import Text from '@/components/ui/Text';
 import Radio from '@/components/ui/Radio';
 import Calendar from '@/components/ui/Calendar';
@@ -23,6 +22,8 @@ import { useCheckBlacklist, useGetDoctorCalendar, useGetDoctorDetail, useGetDoct
 import { cookiesHelper } from '@/helpers';
 import useSession from '@/session/client';
 import BlacklistModal from '@/components/ui/BlacklistModal';
+import DoctorAvatar from './sections/DoctorAvatar';
+import ShareDoctor from './sections/ShareDoctor';
 
 type FormAppointment = {
 	clinic: string,
@@ -64,6 +65,7 @@ export default function Page({ params }: Props) {
 	const { data: doctorCalendar, isLoading: doctorCalendarLoading } = useGetDoctorCalendar(
 		calendarMonth.format('YYYY-MM-DD'),
 		selectedHospital,
+		params.id,
 		{
 			query: {
 				start_date: calendarMonth.format('YYYY-MM-DD'),
@@ -143,18 +145,18 @@ export default function Page({ params }: Props) {
 			});
 
 			if (res.data.is_blacklist) {
-				
+
 				const msg = lang === 'id' ? res.data.description_id : res.data.description_en;
 				setBlacklistMsg(msg);
 				return setBlacklistModalVisible(true);
 			}
-			
+
 			if (selectedTimeSlot?.slot_id) {
 				const bookAppointmentUrl = getBookAppointmentUrl();
 				router.push(bookAppointmentUrl);
 			}
 		} catch (error) {
-			console.log('here', error);
+			// console.log('here', error);
 		}
 	};
 
@@ -202,9 +204,9 @@ export default function Page({ params }: Props) {
 							clickCloseContactHospital={ closeContactHospital }
 							onClose={ () => setShowModalTelp(false) }
 						/>
-						<div className='lg:w-[1110px] mx-auto max-sm:mx-[0px] pb-[120px]'>
+						<div className='lg:w-[1110px] mx-auto max-sm:mx-[12px] pb-[120px]'>
 							<Breadcrumbs datas={ breadcrumbsPath } />
-							<div className='content-wrapper sm:flex w-full'>
+							<div className='content-wrapper sm:flex w-full mt-[40px]'>
 								<DoctorAvatar className='max-sm:hidden' profile_url={ doctor?.data?.img_url } />
 								<div className='sm:ml-[63px] sm:w-[701px]'>
 									<div className='flex gap-[16px]'>
@@ -240,7 +242,7 @@ export default function Page({ params }: Props) {
 											value={ radioValue }
 											groupContainerClassname='flex flex-col md:flex-row'
 										>
-											<Radio.Option label='Kunjungan Tatap Muka' value='APP' />
+											<Radio.Option label={ t('visitAppOptionLabel') } value='APP' />
 											{ /* TODO: TAKEN OUT SINCE TrackCare do not support it yet 24 nov 23 */ }
 											{ /* <Radio.Option label='Telekonsultasi' value='TEL' /> */ }
 										</Radio>
@@ -259,7 +261,7 @@ export default function Page({ params }: Props) {
 												} }
 												loading={ doctorCalendarLoading } />
 										</TimeSlotCard>
-										<TimeSlotCard className='px-[24px] py-[20px] md:w-[calc(100%/2)]'>
+										<TimeSlotCard className='px-[16px] py-[20px] md:w-[calc(100%/2)]'>
 											<VisitSchedule
 												isLoading={ doctorSlotLoading }
 												timeslot={ doctorSlot?.data || [] }
@@ -283,7 +285,7 @@ export default function Page({ params }: Props) {
 									$hoverTheme='primary'
 									label={ t('form.btnLabel.back') }
 									noPadding={ true }
-									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
+									className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
 									theme='outline'
 									onClick={ () => {
 										router.back();
@@ -292,11 +294,11 @@ export default function Page({ params }: Props) {
 								<Button
 									label={ t('form.btnLabel.submit') }
 									noPadding={ true }
-									className='pt-[13px] px-[40px] pb-[12px] md:w-fit'
+									className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
 									onClick={ onBookHandler }
 									disabled={ !selectedTimeSlot }
 								>
-									{ blacklistLoading ? <span className='spinner-loader'/> : t('form.btnLabel.submit') }
+									{ blacklistLoading ? <span className='spinner-loader' /> : t('form.btnLabel.submit') }
 								</Button>
 							</div>
 						</div>

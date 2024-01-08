@@ -104,6 +104,7 @@ const CardUser: React.FC<CardUserProps> = ({
 							fontWeight='400'
 							fontSize='14px'
 							lineHeight='17px'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.lastVisitedHospitalLabel') }
 						/>
 						<Text
@@ -118,6 +119,7 @@ const CardUser: React.FC<CardUserProps> = ({
 							fontWeight='400'
 							fontSize='14px'
 							lineHeight='17px'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.lastVisitedDateLabel') }
 						/>
 						<Text
@@ -133,6 +135,7 @@ const CardUser: React.FC<CardUserProps> = ({
 						<Text
 							fontWeight='400'
 							fontSize='12px'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.lastVisitedHospitalLabel') }
 							textAlign='center'
 							subClassName='max-lg:text-xs max-lg:leading-normal'
@@ -149,6 +152,7 @@ const CardUser: React.FC<CardUserProps> = ({
 						<Text
 							fontWeight='400'
 							fontSize='12px'
+							color={ colors.grey.darkOpacity }
 							text={ t('profileDetail.lastVisitedDateLabel') }
 							textAlign='center'
 							subClassName='max-lg:text-xs max-lg:leading-normal'

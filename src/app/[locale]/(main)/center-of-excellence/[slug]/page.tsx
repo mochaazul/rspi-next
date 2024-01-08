@@ -1,5 +1,6 @@
 import { Key } from 'react';
 import moment from 'moment';
+import 'moment/locale/id';
 import _ from 'lodash';
 import { isMobile } from 'react-device-detect';
 import { redirect } from 'next/navigation';
@@ -13,12 +14,13 @@ import { getCoe, getCenterOfExcellenceNewsByID } from '@/lib/api';
 import CardMenu from '@/components/ui/PageComponents/CenterOfExcellenceSections/CardMenu';
 import ServiceLocation from '@/components/ui/PageComponents/CenterOfExcellenceSections/ServiceLocation';
 import RelatedNewsMobile from '@/components/ui/PageComponents/CenterOfExcellenceSections/RelatedNewsMobile';
-import { getScopedI18n } from '@/locales/server';
+import { getCurrentLocale, getScopedI18n } from '@/locales/server';
 
 import { CentreOfExcellenceStyle } from './style';
 
 const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.centerOfExcellence');
+	const currentLang = getCurrentLocale();
 
 	const responseCenterOfExcellence = await getCoe({ limit: 1000 });
 
@@ -54,6 +56,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 								key={ index }
 								id={ article?.news?.news_id }
 								slug={ article?.news?.slug }
+								language={ article?.news?.language }
 								image={ article?.news?.img_url }
 								imageHeight='200px'
 								header={
@@ -67,7 +70,7 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 												fontWeight='400'
 												lineHeight='17px'
 												color={ colors.grey.dark }
-												text={ moment(article?.news?.posted_date).format('dddd, DD MMM YYYY') }
+												text={ moment(article?.news?.posted_date).locale(currentLang).format('dddd, DD MMM YYYY') }
 											/>
 										</div>
 									</div>

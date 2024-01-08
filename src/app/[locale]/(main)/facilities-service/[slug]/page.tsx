@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import moment from 'moment';
+import 'moment/locale/id';
 
 import { colors } from '@/constant';
 import { FacilityServicesDetail, I_RelatedNews } from '@/interface';
@@ -16,7 +17,7 @@ import Card, { CardFooter } from '@/components/ui/Card';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import TextHtml from '@/components/ui/TextHtml';
-import { getScopedI18n } from '@/locales/server';
+import { getCurrentLocale, getScopedI18n } from '@/locales/server';
 
 export default async function FacilitiesServicesPage({ params }: { params: { slug: string; }; }) {
 	const paramsSlug = decodeURIComponent(params?.slug ?? '');
@@ -44,6 +45,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 	}
 
 	const t = await getScopedI18n('page.facilities');
+	const currentLang = getCurrentLocale();
 
 	const facilitiesServiceData: FacilityServicesDetail[] = [...facilityServices, {
 		id: 1234567890,
@@ -123,6 +125,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 										key={ index }
 										id={ data?.id }
 										slug={ data?.slug }
+										language={ data?.language }
 										image={ data.image_url }
 										imageHeight='200px'
 										header={
@@ -136,7 +139,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 													lineHeight='17px'
 													color={ colors.grey.dark }
 													subClassName='max-sm:text-xs'
-													text={ moment(data?.posted_date_news).format('dddd, DD MMM YYYY') }
+													text={ moment(data?.posted_date_news).locale(currentLang).format('dddd, DD MMM YYYY') }
 												/>
 											</div>
 										}

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import * as Icons from 'react-feather';
 import Link from 'next/link';
 import Image from 'next/image';
-import { isMobile } from 'react-device-detect';
 
 import { Images, colors } from '@/constant';
 import { Accordion, Button, Text } from '@/components/ui';
@@ -45,7 +44,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 							lineHeight='17px'
 							fontWeight='700'
 							color={ colors.green.brandAccent }
-							text={ isOpened ? 'Tutup Jadwal' : 'Lihat Jadwal' }
+							text={ isOpened ? t('label.closeSchedule') : t('label.seeSchedule') }
 							onClick={ () => setOpened(!isOpened) }
 							className='cursor-pointer'
 						/>
@@ -68,7 +67,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 				</div>
 			</div>
 			{ /* List accordion RS */ }
-			{ isOpened && <div className={ `${ isMobile ? 'mt-6' : 'mt-12' }` }>
+			{ isOpened && <div className='mt-6'>
 				<Accordion
 					onlyOpenOne={ false }
 					itemTheme={ itemProps => <ItemAccordion props={ itemProps } hospitals={ props?.doctor_schedule } /> }

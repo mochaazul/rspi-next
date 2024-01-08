@@ -204,7 +204,7 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 					/>
 				</div>
 				<div className='mt-[32px] flex flex-col md:flex-row'>
-					<div className='relative tabs border-solid border-b-[1px] border-b-white/20 max-sm:hidden'>
+					<div className='relative tabs border-solid border-b-[1px] border-b-white/20 max-md:hidden'>
 						<div className='tabs-menu'>
 							{ renderMenuItem() }
 						</div>

@@ -30,5 +30,5 @@ export const RadioOptionContainer = styled.div`
 export const RadioGroupContainer = styled.div`
   margin-top: 16px;
   display: flex;
-  gap: 8px;
+  gap: 24px;
 `;

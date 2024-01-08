@@ -199,9 +199,9 @@ const RegisterOnboard = () => {
 						text={ t('subHeading') }
 						fontSize={ '20px' }
 						fontWeight={ '400' }
-						className='mt-2 md:mt-4 mb-[42px] md:mb-[62px]'
+						className='mt-2 md:mt-3 mb-[42px] md:mb-[62px]'
 						subClassName='max-md:text-base md:!leading-normal'
-						color={ colors.grey.pencil }
+						color={ colors.grey.darkOpacity }
 						textAlign='center'
 					/>
 					{
@@ -210,12 +210,13 @@ const RegisterOnboard = () => {
 						&& handleNotifError(errorUser?.stat_msg?.toLowerCase())
 					}
 
-					<div className='mb-8 md:mb-4'>
+					<div className='mb-4 md:mb-[18px]'>
 						<Form.TextField
 							id='medical_record'
 							name='medical_record'
 							placeholder={ t('form.mrPlaceholder') }
 							label={ t('form.mrlabel') }
+							labelWrapperClassName='max-sm:!mb-2.5 md:!mb-1.5'
 							value={ formikRegister.values.medical_record }
 							onChange={ onChangeInput }
 							errorMessage={ getInputErrorMessage(formikRegister.errors?.medical_record, t('form.mrlabel')) }
@@ -239,6 +240,7 @@ const RegisterOnboard = () => {
 						className='input'
 						placeholder={ t('form.phonePlaceholder') }
 						label={ t('form.phoneLabel') }
+						labelWrapperClassName='max-sm:!mb-2.5 md:!mb-1.5'
 						value={ formikRegister.values.phone }
 						onChange={ onChangeInput }
 						errorMessage={ getInputErrorMessage(formikRegister.errors?.phone, t('form.phoneLabel')) }
@@ -246,7 +248,7 @@ const RegisterOnboard = () => {
 					/>
 					<Text
 						text={ t('form.phoneHint') }
-						className='mb-8 md:mb-4'
+						className='mb-4 md:mb-[18px]'
 						color={ colors.grey.dark }
 						fontSize='12px'
 						fontWeight='400'
@@ -259,7 +261,7 @@ const RegisterOnboard = () => {
 					{
 						isDuplicatePhoneNumber && handleNotifError('your phone number has been registered. please change with new phone number')
 					}
-					<div className='mb-8 md:mb-4'>
+					<div className='mb-4 md:mb-[18px]'>
 						<Form.DateField
 							id='birth_date'
 							name='birth_date'
@@ -267,6 +269,7 @@ const RegisterOnboard = () => {
 							iconName='CalendarIcon'
 							iconPosition='right'
 							label={ t('form.birthDateLabel') }
+							labelWrapperClassName='max-sm:!mb-2.5 md:!mb-1.5'
 							placeholder='yyyy-mm-dd'
 							value={ formikRegister.values.birth_date }
 							onChangeValue={ onChangeInputValue }
@@ -293,7 +296,7 @@ const RegisterOnboard = () => {
 							});
 							formikRegister.handleSubmit();
 						} }
-						className='max-md:text-sm'
+						className='max-md:text-sm mt-4 md:1.5'
 					>
 						{
 							loadingUser

@@ -97,7 +97,28 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 									fontSize='14px'
 									fontWeight='700'
 									className='flex'
-									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
+									subClassName='max-sm:text-sm hover:text-[#667085] cursor-pointer capitalize'
+								>{ item.title }</Text>
+							</Link>
+						);
+					})
+				}
+			</div>
+		);
+	};
+
+	const renderItemsVisitorAndPatientInfo = (items: FooterDetail[]) => {
+		return (
+			<div className='flex flex-col gap-y-3 sm:gap-y-4'>
+				{
+					items.map((item: any, index: number) => {
+						return (
+							<Link key={ index } href={ `/${ item.slug }` }>
+								<Text
+									fontSize='14px'
+									fontWeight='700'
+									className='flex'
+									subClassName='max-sm:text-sm hover:text-[#667085] cursor-pointer capitalize'
 								>{ item.title }</Text>
 							</Link>
 						);
@@ -118,29 +139,8 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 									fontSize='14px'
 									fontWeight='700'
 									className='flex'
-									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
+									subClassName='max-sm:text-sm hover:text-[#667085] cursor-pointer capitalize'
 								>{ item.name }</Text>
-							</Link>
-						);
-					})
-				}
-			</div>
-		);
-	};
-
-	const renderItemsVisitorAndPatientInfo = (items: any) => {
-		return (
-			<div className='flex flex-col gap-y-3 sm:gap-y-4'>
-				{
-					items.map((item: any, index: number) => {
-						return (
-							<Link key={ index } href={ `${ item.slug }` }>
-								<Text
-									fontSize='14px'
-									fontWeight='700'
-									className='flex'
-									subClassName='max-sm:text-xs hover:text-[#667085] cursor-pointer capitalize'
-								>{ item.title }</Text>
 							</Link>
 						);
 					})
@@ -167,7 +167,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 		return renderItems(items);
 	};
 
-	const renderVisitorAndPatientInfoItems = (items: any) => {
+	const renderVisitorAndPatientInfoItems = (items: FooterDetail[]) => {
 		if (items.length > 4) {
 			const leftItems = items.slice(0, Math.ceil(items.length / 2));
 			const rightItems = items.slice(Math.ceil(items.length / 2));
@@ -204,7 +204,8 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			<Text
 				fontSize='14px'
 				color={ colors.paradiso.default }
-				className='mb-4 max-sm:text-xs font-bold sm:font-normal max-sm:uppercase'
+				className='mb-4'
+				subClassName='max-sm:text-sm uppercase font-bold max-sm:font-normal leading-[24px]'
 			>{ text }</Text>
 		);
 	};
@@ -309,7 +310,9 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				<div className='follow-section flex flex-col max-sm:flex-row-reverse gap-4 sm:gap-8'>
 					<div className='follow-icon-section'>
 						{ renderCategoryTitle(t('followUsLabel')) }
-						<Socmed />
+						<div className='max-sm:-mt-[10px]'>
+							<Socmed />
+						</div>
 					</div>
 					<div>
 						{ renderCategoryTitle(t('getRSPIMobileLabel')) }
@@ -333,13 +336,13 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				</div>
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
-					<Text fontSize='14px' className='sub-text'>{ t('subscribeDescription') }</Text>
+					<Text fontSize='14px' className='sub-text' subClassName='leading-[21px] max-sm:text-[12px] max-sm:leading-[18px]'>{ t('subscribeDescription') }</Text>
 					<div className='flex items-center mt-4 lg:mt-6 w-full'>
 						<div className='-mr-2 flex-1'>
 							<TextField
 								width='100%'
 								placeholder={ t('subscribePlaceholder') }
-								className='text-sm sm:text-base !h-11 !w-full'
+								className='text-sm sm:text-base font-normal text-[#BDBDBD] !h-11 !w-full'
 								value={ emailNewsletter }
 								onChange={ e => setEmailNewsletter(e.target.value) }
 							/>
@@ -355,11 +358,23 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				</div>
 			</FooterContainer>
 			<div className='flex flex-col items-center max-sm:pb-8 pt-8 sm:pt-16'>
-				<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group. <span className='sm:hidden'><br /></span>All Rights Reserved.</Text>
+				<Text
+					textAlign='center'
+					fontSize='16px'
+					fontWeight='400'
+					subClassName='leading-normal max-sm:leading-[18px] max-sm:text-[14px] text-gray-2'
+				>Copyright © { date.getFullYear() } RS Pondok Indah Group.
+					<span className='sm:hidden'><br /></span> All Rights Reserved.
+				</Text>
 				{
 					appStage !== 'prod' &&
 					<div className='flex justify-center'>
-						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version { config?.version } </Text>
+						<Text
+							textAlign='center'
+							fontSize='16px'
+							fontWeight='400'
+							subClassName='leading-normal  max-sm:text-[14px] text-gray-2'
+							color={ colors.grey.dark }> Version { config?.version } </Text>
 					</div>
 				}
 			</div>

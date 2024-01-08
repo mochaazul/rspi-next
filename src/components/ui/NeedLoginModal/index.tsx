@@ -33,7 +33,7 @@ const NeedLoginModal = ({
 	};
 
 	return (
-		<Modal visible={ visible } onClose={ onClose } backdropClassname='backdrop-blur-md'>
+		<Modal visible={ visible } backdropClassname='backdrop-blur-md'>
 			<div className='flex flex-col items-center'>
 				<center>
 					<icons.WarningIcon />
@@ -49,7 +49,7 @@ const NeedLoginModal = ({
 					fontWeight='400'
 					fontSize='16px'
 					color='#6A6D81'
-					className='pt-4 pb-4'
+					className='py-[12px]'
 				/>
 				<Button className='max-w-full' theme='primary' onClick={ handleLogout }>{ t('btnLabel') }</Button>
 			</div>

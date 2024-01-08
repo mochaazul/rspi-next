@@ -7,15 +7,17 @@ type Props = {
 	onPrev: () => void;
 	nextIcon?: React.ReactNode,
 	prevIcon?: React.ReactNode;
+	wrapperClassName?: string;
 };
 
 const SliderNav = ({
 	onNext,
 	onPrev,
 	nextIcon,
-	prevIcon
+	prevIcon,
+	wrapperClassName
 }: Props) => {
-	return <SliderNavContainer>
+	return <SliderNavContainer className={ wrapperClassName }>
 		<div className='flex row justify-between items-center'>
 			<ArrowContainer className='arrow-left rounded-full w-[34px] h-[34px] md:w-[44px] md:h-[44px] flex items-center justify-center cursor-pointer' onClick={ onPrev }>
 				{ prevIcon ?? <icons.LongArrowRight className='svg-white rotate-180' /> }

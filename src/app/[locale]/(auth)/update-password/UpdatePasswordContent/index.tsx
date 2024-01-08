@@ -118,7 +118,7 @@ const UpdatePasswordContent = ({ patientProfile }: UpdatePasswordContentProps) =
 						fontType='h4'
 						fontSize='20px'
 						color={ colors.grey.dark }
-						className='mt-2 sm:mt-4'
+						className='mt-2 sm:mt-3'
 						subClassName='max-lg:text-base max-lg:leading-6'
 					>
 						{ t('subHeading') }

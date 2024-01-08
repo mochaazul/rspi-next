@@ -8,7 +8,7 @@ import { UserSessionData } from '@/interface';
 
 import WhiteInstagram from '/public/images/ic/whiteInstagram.svg';
 import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';
-import WhiteTwitter from '/public/images/ic/whiteTwitter.svg';
+import WhiteTwitter from '/public/images/ic/twitter_x_white.svg';
 
 type MainNavLanguageProps = {
 	session?: UserSessionData;
@@ -67,7 +67,7 @@ export const MainNavLanguage = ({ session }: MainNavLanguageProps) => {
 							rel='noopener noreferrer'
 							className='flex items-center cursor-pointer'
 						>
-							<WhiteTwitter className='mr-[5px]' />
+							<WhiteTwitter className='mr-[5px] w-3 mt-[1px]' />
 							<Text color='white' fontSize='12px' fontWeight='400'>
 								@rspondokindah
 							</Text>
