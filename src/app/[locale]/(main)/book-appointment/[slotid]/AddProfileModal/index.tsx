@@ -170,7 +170,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		overflow='none'
 		containerClassName='m-[10px]'
 	>
-		<ProfileModalContainer>
+		<ProfileModalContainer className='items-start md:items-center'>
 			<ModalHeader>
 				<Text
 					subClassName='max-sm:text-[16px]'
@@ -196,10 +196,11 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 			</NotificationPanel>
 			<Form onSubmit={ onSubmitHandler } className='mt-[8px]' action={ '' }>
 				<FormRow
-					className='grid grid-cols-2 gap-[16px] md:gap-[24px]'
+					className='flex flex-col md:grid md:grid-cols-2 gap-[16px] md:gap-[24px]'
 				>
 					<Form.TextField
 						labelClassName='font-normal'
+						className='w-[300px] md:w-full'
 						labelGap={ 8 }
 						id='name'
 						name='name'
@@ -212,10 +213,11 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					/>
 					<Form.DateField
 						labelClassName='font-normal'
+						iconName={ 'Calendar16' }
 						labelGap={ 8 }
 						id='dob'
 						name='dob'
-						value={ dayjs(formikProfile.values.dob).format('YYYY MMMM DD') ?? formikProfile.values.dob }
+						value={ dayjs(formikProfile.values.dob).format('DD MMMM YYYY') ?? formikProfile.values.dob }
 						onChangeValue={ onChangeInputValue }
 						dateFormat='DD MMMM YYYY'
 						label={ t('profileSelector.form.dob') }
@@ -225,7 +227,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						errorMessage={ getInputErrorMessage(formikProfile.errors.dob, t('profileSelector.form.dob')) }
 					/>
 				</FormRow>
-				<FormRow className='grid grid-cols-2 gap-[16px] md:gap-[24px]'>
+				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[16px] md:gap-[24px]'>
 					<Form.PhoneNumberInput
 						labelClassName='font-normal'
 						labelGap={ 8 }
@@ -253,7 +255,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						disabled={ disabledEmail } // Notes: jika disabledEmail, pastikan set formikProfile.values.email
 					/>
 				</FormRow>
-				<FormRow className='grid grid-cols-2 gap-[16px] md:gap-[24px]'>
+				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[16px] md:gap-[24px]'>
 					<Form.Dropdown
 						labelClassName='font-normal'
 						labelGap={ 8 }

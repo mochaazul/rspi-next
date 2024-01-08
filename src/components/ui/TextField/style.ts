@@ -7,25 +7,25 @@ import { colors, icons } from '@/constant';
 import { GlobalAllTransition5ms } from '@/constant/globalstyle';
 
 interface TextFieldType {
-  iconPosition?: 'left' | 'right';
-  iconName?: keyof typeof icons;
-  featherIcon?: keyof typeof FeatherIcons;
-  $iconColor?: string;
-  isNumber?: boolean,
-  mask?: string | (string | RegExp)[];
-  wrapperClassName?: string;
+	iconPosition?: 'left' | 'right';
+	iconName?: keyof typeof icons;
+	featherIcon?: keyof typeof FeatherIcons;
+	$iconColor?: string;
+	isNumber?: boolean,
+	mask?: string | (string | RegExp)[];
+	wrapperClassName?: string;
 }
 
 export interface InputType extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, TextFieldType {
-  ref?: React.RefObject<HTMLInputElement>;
-  onIconClick?: () => any;
+	ref?: React.RefObject<HTMLInputElement>;
+	onIconClick?: () => any;
 }
 
 export interface StyledTextFieldType extends Omit<TextFieldType, 'iconPosition' | 'iconName'> {
-  $iconPosition?: 'left' | 'right';
-  $iconName?: keyof typeof icons;
-  $isNumber?: boolean;
-  $featherIcon?: keyof typeof FeatherIcons;
+	$iconPosition?: 'left' | 'right';
+	$iconName?: keyof typeof icons;
+	$isNumber?: boolean;
+	$featherIcon?: keyof typeof FeatherIcons;
 }
 
 export const TextFieldWrapper = styled.div<StyledTextFieldType>`
