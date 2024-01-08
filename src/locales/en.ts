@@ -950,7 +950,10 @@ export default {
 			asuransiCardBack: 'Upload a rear view photo',
 			asuransiCardFront: 'Upload a photo of the front view',
 			labelPhoneModal: 'Please contact the call center',
-			visitAppOptionLabel: 'Visit in Person'
+			visitAppOptionLabel: 'Visit in Person',
+			shareDoctor: {
+				wateleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}: {link}'
+			}
 		},
 		footer: {
 			visitorInfo: {
