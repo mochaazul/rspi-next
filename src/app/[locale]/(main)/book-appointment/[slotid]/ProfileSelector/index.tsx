@@ -61,7 +61,7 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete, clas
 					<ProfileCardRow>
 						<icons.PhoneOutline
 						/>
-
+						<Text text={ `${ profile.phone }` } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 					</ProfileCardRow>
 				</>
 		}
