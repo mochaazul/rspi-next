@@ -39,7 +39,7 @@ const HospitalLocation = ({ hospitals }:Props) => {
 
 	const renderTooltip = (data: HospitalDetail[]) => {
 		return (
-			<div className='flex flex-col gap-y-4 absolute block max-w-sm p-4 m-2 bg-white rounded-lg shadow'>
+			<div className='max-sm:hidden flex flex-col gap-y-4 absolute block max-w-sm p-4 m-2 bg-white rounded-lg shadow'>
 				<div className='flex flex-row gap-x-5'>
 					<img src={ data?.[0]?.img_url?.[0] ?? '' } alt={ data?.[0]?.name ?? '' } className='w-[80px] h-[80px] rounded-md object-cover' />
 					<div className='flex flex-col'>
@@ -55,10 +55,10 @@ const HospitalLocation = ({ hospitals }:Props) => {
 				</div>
 				<div className='flex flex-row gap-x-2'>
 					<a target='_blank' href={ data?.[0]?.share_link } rel='noopener noreferrer'>
-						<Button theme='outline' $hoverTheme='primary' label={ 'See Direction' } />
+						<Button theme='outline' $hoverTheme='primary' label={ 'See Direction' } className='px-[40px] py-[12px] text-[16px]' />
 					</a>
 					<Link href={ `/find-a-doctor?hospital_code=${ data[0]?.hospital_code }` }>
-						<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } />
+						<Button theme='primary' $hoverTheme='primary' label={ 'Find Doctor' } className='px-[40px] py-[12px] text-[16px]' />
 					</Link>
 				</div>
 
@@ -77,25 +77,12 @@ const HospitalLocation = ({ hospitals }:Props) => {
 		<section>
 			<PanelH2>
 				<div className='sm:mt-28 mt-12'>
-					<Text
-						fontSize='24px'
-						fontType='h3'
-						fontWeight='900'
-						lineHeight='29px'
-						textAlign='center'
-						color={ colors.grey.darker }
-						text={ t('location.heading') }
-						className='text-center'
-					/>
-					<Text
-						fontSize='16px'
-						fontWeight='400'
-						lineHeight='23px'
-						textAlign='center'
-						color={ colors.grey.dark }
-						text={ t('location.subHeading') }
-						className='mt-3 mx-auto text-center sm:w-[630px] w-full'
-					/>
+					<h3 className='text-[24px] max-sm:text-[22px] font-black text-center text-gray-1'>
+						{ t('location.heading') }
+					</h3>
+					<p className='font-normal text-[16px] max-sm:text-[14px] leading-[23px] mt-3 mx-auto text-center sm:w-[630px] w-full text-gray-2'>
+						{ t('location.subHeading') }
+					</p>
 				</div>
 			</PanelH2>
 
