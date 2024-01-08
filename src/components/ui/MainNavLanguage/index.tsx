@@ -6,7 +6,7 @@ import Text from '@/components/ui/Text';
 import { useScopedI18n } from '@/locales/client';
 import { UserSessionData } from '@/interface';
 
-import WhiteInstagram from '/public/images/ic/whiteInstagram.svg';
+import WhiteInstagram from '/public/images/ic/ig_white.svg';
 import WhiteFacebook from '/public/images/ic/whiteFacebook.svg';
 import WhiteTwitter from '/public/images/ic/twitter_x_white.svg';
 

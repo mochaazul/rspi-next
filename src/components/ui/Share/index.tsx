@@ -79,7 +79,7 @@ const Share = (props: PropsType) => {
 							className='flex py-4 px-4 z-10 items-center'
 							onClick={ copy }
 						>
-							<icons.ShareNetwork className='w-4' />
+							<icons.Link className='w-4' />
 
 							<div className='ml-[10px]'>
 								<Text text={ 'Copy Link' } fontSize='16px' fontWeight='400' subClassName='hover:text-green-secondary' />
