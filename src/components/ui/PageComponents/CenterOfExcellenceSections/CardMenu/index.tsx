@@ -14,7 +14,7 @@ type Props = PropsWithRef<PropsWithChildren<{
 }>>;
 
 const CardMenu = ({ data, activeMenuIndex }: Props) => {
-	
+
 	return (
 		<div className='cardMenu px-[24px] pt-[24px] pb-[9px]'>
 			{ data.map((item, index) => {
@@ -26,7 +26,7 @@ const CardMenu = ({ data, activeMenuIndex }: Props) => {
 							fontSize='14px'
 							fontWeight='700'
 							lineHeight='21px'
-							subClassName={ 'hover:text-[#358888]' }
+							subClassName={ 'hover:text-[#358888] max-sm:text-xs' }
 							fontType={ 'p' }
 							color={ activeMenuIndex === `${ item.slug }` ? colors.paradiso.default : colors.grey.dark }
 						/>
