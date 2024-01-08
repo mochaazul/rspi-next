@@ -81,8 +81,8 @@ const PromoDetail: React.FC<Props> = ({
 						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
 						<div className='mx-[16px] sm:mx-0 '>
 							<TextHtml
-								htmlStr={  selectedEvent?.content || '' }
-								className='innerHTML !h-auto text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
+								htmlStr={ selectedEvent?.content || '' }
+								className='innerHTML !h-auto'
 							/>
 							<div className='mt-[50px]'>
 								<p className={ 'sm:leading-[30px] leading-[24px] sm:text-[20px] text-[16px] font-bold text-green-secondary mt-[50px]' }>
@@ -115,8 +115,8 @@ const PromoDetail: React.FC<Props> = ({
 													text={ t('info') }
 												/>
 												<TextHtml
-													htmlStr={  selectedEvent?.information || '' }
-													className='innerHTML mt-2 text-14'
+													htmlStr={ selectedEvent?.information || '' }
+													className='innerHTML mt-2'
 												/>
 											</div>
 											<div>
@@ -129,8 +129,8 @@ const PromoDetail: React.FC<Props> = ({
 													text={ t('operational') }
 												/>
 												<TextHtml
-													htmlStr={  selectedEvent?.operational_hour || '' }
-													className='mt-2 innerHTML text-14 leading-[18px]'
+													htmlStr={ selectedEvent?.operational_hour || '' }
+													className='mt-2 innerHTML'
 												/>
 											</div>
 										</div>
@@ -145,8 +145,8 @@ const PromoDetail: React.FC<Props> = ({
 												text={ t('phone') }
 											/>
 											<TextHtml
-												htmlStr={  selectedEvent?.phone || '' }
-												className='mt-2 innerHTML text-14 leading-[18px] font-bold text-green-secondary'
+												htmlStr={ selectedEvent?.phone || '' }
+												className='mt-2 innerHTML font-bold text-green-secondary'
 											/>
 										</div>
 										

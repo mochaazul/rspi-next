@@ -64,6 +64,7 @@ import EmptyStatePatientPortal from '/public/images/PatientPortal/radiology.svg'
 import ProfilePatient from '/public/images/PatientPortal/profilePatient.png';
 
 import DoctorProfile from '/public/images/samples/doctor-profile.png';
+import ClosePng from '/public/images/ic/close.svg';
 
 export default {
 	PokemonIllu: PokemonIllu,
@@ -122,4 +123,5 @@ export default {
 	CendrawatiReview,
 	SarwonoReview,
 	AugustiniReview,
+	ClosePng
 };

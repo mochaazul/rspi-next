@@ -148,7 +148,7 @@ export const CardContentWithInner = ({ title, description, author, RSLocation, i
 		{ author && (
 			<Text fontSize='14px' fontType='p' fontWeight='400' color={ colors.grey.dark } text={ author } className='mt-[5px] mb-[2px] max-sm:!text-xs' lineHeight='24px' />
 		) }
-		<TextHtml className='innerHTML text-xs max-sm:leading-[18px] sm:text-sm md:text-base mt-4 sm:mt-5 line-clamp-3' style={ { color: colors.grey.dark } } htmlStr={ description ?? '' } />
+		<TextHtml className='text-xs max-sm:leading-[18px] sm:text-sm md:text-base mt-4 sm:mt-5 line-clamp-3' style={ { color: colors.grey.dark } } htmlStr={ description ?? '' } />
 	</CardContentHTML>
 );
 
