@@ -270,273 +270,258 @@ export default {
 					homeVisit: 'Do RS Pondok Indah Group Hospitals provide home visit service?'
 				},
 				answers: {
-					doctorSchedule: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">RS Pondok Indah Group has collaborated with various trusted insurance companies, both domestic and overseas. Click </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/pages/our-partner-insurance-company"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);"> to view our insurance partners.</span></p>`,
-					assurance: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Visiting hours may vary for some wards. In order to maintain the safety and comfort of all our patients, visits can only be made during certain hours and are conducted on a rotating basis.</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><strong><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Visiting Hours</span></strong></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">General &amp; Newborn Wards</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">ICU, ICCU</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 12.00 PM&nbsp;&nbsp;</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Only 1 visitor is allowed at any one time. Children are not allowed in these units</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">NICU &amp; Intermediate Care</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Only parents are allowed to visit. A maximum of 2 people per patient are allowed to visit at any one time.</span></p>`,
-					visitHours: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Visiting hours may vary for some wards. In order to maintain the safety and comfort of all our patients, visits can only be made during certain hours and are conducted on a rotating basis.</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><strong><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Visiting Hours</span></strong></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">General &amp; Newborn Wards</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">ICU, ICCU</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 12.00 PM&nbsp;&nbsp;</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Only 1 visitor is allowed at any one time. Children are not allowed in these units</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">NICU &amp; Intermediate Care</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Only parents are allowed to visit. A maximum of 2 people per patient are allowed to visit at any one time.</span></p>`,
-					checkUp: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Our </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/pages/telemedicine-rs-pondok-indah-group"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Executive Health Check Up (EHCU)</span></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);"> Services are available at all RSPI Group Hospitals. We provide a variety of medical checkup options that are specific to your needs, including paediatric check-ups. Please consult with our team to find out which package suits your needs.</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">For more information or to make an appointment, please contact:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Pondok Indah</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">(62-21) 7507169, 765 7525 Ext. 2267/2318</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281283112725"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0812-8311-2725</span></a></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">E-mail:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupondok@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupondok@rspondokindah.co.id</span></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);">&nbsp;</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">[</span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/uploads/ngc_global_posts/F30021-20230307125551.pdf"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">EHCU Package - RSPI Pondok Indah</span></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);">]</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Puri Indah</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">(62-21) 2569 5252, 2569 5200 Ext. 2100</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6282180887838"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0821-8088-7838</span></a></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">E-mail:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupuri@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupuri@rspondokindah.co.id</span></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);">&nbsp;</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">[</span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/uploads/ngc_global_posts/Z81201-20230307125040.pdf"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">EHCU Package - RSPI Puri Indah</span></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);">]</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Bintaro Jaya</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">(62-21) 8082 8888 Ext. 2301/2302</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=628119227982"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0811-9227-982</span></a></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">E-mail:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcubintaro@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcubintaro@rspondokindah.co.id</span></a></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">[</span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/uploads/ngc_global_posts/M37594-20220330105057.pdf"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">EHCU Package - RSPI Bintaro Jaya</span></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);">]</span> </p>`,
-					travelVaccine: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">RS Pondok Indah Group Hospitals provide travel vaccination service and also issued international vaccination certificates or "Yellow Book".</span></p>
+					doctorSchedule: `<p><span style="font-size: 14px; color: rgb(0, 0, 0);">You can find RS Pondok Indah Group doctor&rsquo;s schedules </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/find-a-doctor"><span style="font-size: 14px; font-family: Arial, sans-serif; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 14px; font-family: Arial, sans-serif; color: rgb(0, 0, 0);">. You can also view our doctor&rsquo;s schedule by downloading RSPI mobile app.</span></p>`,
+					assurance: `<p><span style="font-size: 14px; color: rgb(0, 0, 0);">RS Pondok Indah Group has collaborated with various trusted insurance companies, both domestic and overseas. Click </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/pages/our-partner-insurance-company"><span style="font-size: 14px; font-family: Arial, sans-serif; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 14px; font-family: Arial, sans-serif; color: rgb(0, 0, 0);"> to view our insurance partners.</span></p>`,
+					visitHours: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Visiting hours may vary for some wards. In order to maintain the safety and comfort of all our patients, visits can only be made during certain hours and are conducted on a rotating basis.</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><strong><span style="font-size: 14px;  color: rgb(0, 0, 0);">Visiting Hours</span></strong></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">General &amp; Newborn Wards</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">ICU, ICCU</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 12.00 PM&nbsp;&nbsp;</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Only 1 visitor is allowed at any one time. Children are not allowed in these units</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">NICU &amp; Intermediate Care</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Only parents are allowed to visit. A maximum of 2 people per patient are allowed to visit at any one time.</span></p>`,
+					checkUp: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Our </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/pages/telemedicine-rs-pondok-indah-group"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Executive Health Check Up (EHCU)</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);"> Services are available at all RSPI Group Hospitals. We provide a variety of medical checkup options that are specific to your needs, including paediatric check-ups. Please consult with our team to find out which package suits your needs.</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">For more information or to make an appointment, please contact:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Pondok Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 7507169, 765 7525 Ext. 2267/2318</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281283112725"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0812-8311-2725</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupondok@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupondok@rspondokindah.co.id</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">&nbsp;</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">[</span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/uploads/ngc_global_posts/F30021-20230307125551.pdf"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">EHCU Package - RSPI Pondok Indah</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">]</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Puri Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 2569 5252, 2569 5200 Ext. 2100</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6282180887838"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0821-8088-7838</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupuri@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupuri@rspondokindah.co.id</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">&nbsp;</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">[</span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/uploads/ngc_global_posts/Z81201-20230307125040.pdf"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">EHCU Package - RSPI Puri Indah</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">]</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Bintaro Jaya</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 8082 8888 Ext. 2301/2302</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=628119227982"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0811-9227-982</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcubintaro@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcubintaro@rspondokindah.co.id</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">[</span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/uploads/ngc_global_posts/M37594-20220330105057.pdf"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">EHCU Package - RSPI Bintaro Jaya</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">]</span> </p>`,
+					travelVaccine: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">RS Pondok Indah Group Hospitals provide travel vaccination service and also issued international vaccination certificates or "Yellow Book".</span></p>
 						<p>&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">For more information, please contact:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Pondok Indah</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">(62-21) 7507169, 765 7525 Ext. 2267/2318</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281283112725"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0812-8311-2725</span></a></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">E-mail:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupondok@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupondok@rspondokindah.co.id&nbsp;</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">For more information, please contact:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Pondok Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 7507169, 765 7525 Ext. 2267/2318</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281283112725"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0812-8311-2725</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupondok@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupondok@rspondokindah.co.id&nbsp;</span></a></p>
 						<p>&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Puri Indah</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">(62-21) 2569 5252, 2569 5200 Ext. 2100</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6282180887838"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0821-8088-7838</span></a></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">E-mail:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupuri@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupuri@rspondokindah.co.id</span></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);">&nbsp;</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Puri Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 2569 5252, 2569 5200 Ext. 2100</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6282180887838"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0821-8088-7838</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupuri@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupuri@rspondokindah.co.id</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">&nbsp;</span></p>
 						<p>&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Bintaro Jaya</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">(62-21) 8082 8888 Ext. 2301/2302</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=628119227982"><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0811-9227-982</span></a></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">E-mail:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcubintaro@rspondokindah.co.id"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcubintaro@rspondokindah.co.id </span></a></p>`,
-					telemedicine: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Awaiting the birth of your baby is a special and precious life journey for you and your partner. Understanding this, RS Pondok Indah Group presents </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/classes-detail/maternity-first"><strong><span style="font-size: 11pt;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Maternity First</span></strong></a><span style="font-size: 11pt;  color: rgb(0, 0, 0);">, which is a complete and integrated pregnancy service, to create the best experience of welcoming the baby since pregnancy, childbirth, and postpartum, including:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Bintaro Jaya</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 8082 8888 Ext. 2301/2302</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=628119227982"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0811-9227-982</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcubintaro@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcubintaro@rspondokindah.co.id </span></a></p>`,
+					telemedicine: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Awaiting the birth of your baby is a special and precious life journey for you and your partner. Understanding this, RS Pondok Indah Group presents </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/classes-detail/maternity-first"><strong><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Maternity First</span></strong></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">, which is a complete and integrated pregnancy service, to create the best experience of welcoming the baby since pregnancy, childbirth, and postpartum, including:</span></p>
 						<p>&nbsp;</p>
 						<ul style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Medical professionals, including obstetricians and gynaecologists, obstetricians and gynaecologists with fetomaternal subspecialty, paediatricians, and lactation counsellors.</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Medical professionals, including obstetricians and gynaecologists, obstetricians and gynaecologists with fetomaternal subspecialty, paediatricians, and lactation counsellors.</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Maternity Counsellor who can be contacted through 24-hours WhatsApp to help answer mum's questions during pregnancy</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Maternity Counsellor who can be contacted through 24-hours WhatsApp to help answer mum's questions during pregnancy</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">The latest medical facilities and technology, such as 4D ultrasound</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">The latest medical facilities and technology, such as 4D ultrasound</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Five-stars facilities in treatment rooms, delivery rooms, operating theaters, baby rooms including NICU facilities</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Five-stars facilities in treatment rooms, delivery rooms, operating theaters, baby rooms including NICU facilities</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">100% support for IMD (Early Breastfeeding Initiation) and exclusive breastfeeding</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">100% support for IMD (Early Breastfeeding Initiation) and exclusive breastfeeding</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Maternity Classes including pregnancy exercise classes, prenatal Yoga, and parenting classes</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Maternity Classes including pregnancy exercise classes, prenatal Yoga, and parenting classes</span></p>
 						</li>
 						</ul>
 						<p>&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">For more information, please contact:</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">RS Pondok Indah - Pondok Indah</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Obstetrics and Gynaecology Clinic 3rd Floor</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">(021) 765 7525 Ext. 2</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Maternity Counsellor (WhatsApp chat only): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281388887273"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">081388887273</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">For more information, please contact:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">RS Pondok Indah - Pondok Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Obstetrics and Gynaecology Clinic 3rd Floor</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(021) 765 7525 Ext. 2</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Maternity Counsellor (WhatsApp chat only): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281388887273"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">081388887273</span></a></p>
 						<p>&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Pondok Indah Hospital - Puri Indah</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Obstetrics and Gynaecology Clinic 7th Floor</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">(021) 2569 5200 Ext. 2</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Maternity Counsellor (WhatsApp chat only): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281388889096"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">081388889096</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Pondok Indah Hospital - Puri Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Obstetrics and Gynaecology Clinic 7th Floor</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(021) 2569 5200 Ext. 2</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Maternity Counsellor (WhatsApp chat only): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281388889096"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">081388889096</span></a></p>
 						<p>&nbsp;</p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">RS Pondok Indah - Bintaro Jaya</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Obstetrics and Gynaecology Clinic 6th Floor</span></p>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">(021) 8082 8888 Ext. 2/6012</span></p>
-						<p><span style="font-size: 11pt;  color: rgb(0, 0, 0);">Maternity Counsellor (WhatsApp chat only): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281295998870"><span style="font-size: 11pt;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">081295998870</span></a></p>`,
-					maternity: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">RS Pondok Indah Group Hospitals provide Home Visit service covering certain areas. Some of the services provided are as follows:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">RS Pondok Indah - Bintaro Jaya</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Obstetrics and Gynaecology Clinic 6th Floor</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(021) 8082 8888 Ext. 2/6012</span></p>
+						<p><span style="font-size: 14px;  color: rgb(0, 0, 0);">Maternity Counsellor (WhatsApp chat only): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281295998870"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">081295998870</span></a></p>`,
+					maternity: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">RS Pondok Indah Group Hospitals provide Home Visit service covering certain areas. Some of the services provided are as follows:</span></p>
 						<ul style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Examination and consultation by general practitioner, internal medicine specialist, nutrition specialist.</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Examination and consultation by general practitioner, internal medicine specialist, nutrition specialist.</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">NGT tube insertion/replacement</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">NGT tube insertion/replacement</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Urine catheter insertion/replacement</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Urine catheter insertion/replacement</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Stoma care</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Stoma care</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Wound care</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Wound care</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Laboratory sampling</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Laboratory sampling</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Bathing newborn</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Bathing newborn</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Vaccination</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Vaccination</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Other services</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Other services</span></p>
 						</li>
 						</ul>
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-						<h3 style="line-height: 1.8; text-align: justify; margin-top: 16pt; margin-bottom: 4pt;"><span style="font-size: 14pt;  color: rgb(0, 0, 0); font-weight: 400;">Home Visit mechanism of Pondok Indah Hospital Group</span></h3>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<h3 style="line-height: 1.8; margin-top: 16pt; margin-bottom: 4pt;"><span style="font-size: 14pt;  color: rgb(0, 0, 0); font-weight: 400;">Home Visit mechanism of Pondok Indah Hospital Group</span></h3>
 						<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">The Home Visit service applies to patients who are located around the RS Pondok Indah Group Hospitals location, within 10 km radius.</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">The Home Visit service applies to patients who are located around the RS Pondok Indah Group Hospitals location, within 10 km radius.</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Patient is already registered as a previous patient of RS Pondok Indah Hospital Group, proven by medical record number.</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Patient is already registered as a previous patient of RS Pondok Indah Hospital Group, proven by medical record number.</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Send a WhatsApp message to inquire our Home Visit Service at least 1 day before your intended date during working hours (08.00 AM - 05.00 PM) to:</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Send a WhatsApp message to inquire our Home Visit Service at least 1 day before your intended date during working hours (08.00 AM - 05.00 PM) to:</span></p>
 						</li>
 						</ol>
 						<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
-						<li style="list-style-type: lower-alpha; font-size: 11pt;  color: rgb(0, 0, 0); margin-left: 36pt;">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pondok Indah Hospital - Pondok Indah +62 821-1999-0881&nbsp;</span></p>
+						<li style="list-style-type: lower-alpha; font-size: 14px;  color: rgb(0, 0, 0); margin-left: 36pt;">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Pondok Indah Hospital - Pondok Indah +62 821-1999-0881&nbsp;</span></p>
 						</li>
-						<li style="list-style-type: lower-alpha; font-size: 11pt;  color: rgb(0, 0, 0); margin-left: 36pt;">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pondok Indah Hospital - Puri Indah +62 821-1999-0882</span></p>
+						<li style="list-style-type: lower-alpha; font-size: 14px;  color: rgb(0, 0, 0); margin-left: 36pt;">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Pondok Indah Hospital - Puri Indah +62 821-1999-0882</span></p>
 						</li>
-						<li style="list-style-type: lower-alpha; font-size: 11pt;  color: rgb(0, 0, 0); margin-left: 36pt;">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pondok Indah Hospital - Bintaro Jaya +62 821-1999-0883</span></p>
+						<li style="list-style-type: lower-alpha; font-size: 14px;  color: rgb(0, 0, 0); margin-left: 36pt;">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Pondok Indah Hospital - Bintaro Jaya +62 821-1999-0883</span></p>
 						</li>
 						</ol>
 						<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;" start="4">
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Our Home Visit team will contact you to assess the services or procedures required in order to prepare accordingly.</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Home Visit team will contact you to assess the services or procedures required in order to prepare accordingly.</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Our Home Visit Team will confirm their arrival time to the patient's home 1 day before the scheduled date.</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Home Visit Team will confirm their arrival time to the patient's home 1 day before the scheduled date.</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Our Home Visit Team will record the assessment, procedures, equipment and drugs used in your home and relay the information to the relevant operational units.</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Home Visit Team will record the assessment, procedures, equipment and drugs used in your home and relay the information to the relevant operational units.</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Afterwards, our Cashier will send an invoice via WhatsApp according to the billing and send the Pondok Indah Hospital account number so that you can make payments via bank transfer.</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Afterwards, our Cashier will send an invoice via WhatsApp according to the billing and send the Pondok Indah Hospital account number so that you can make payments via bank transfer.</span></p>
 						</li>
-						<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-						<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Our Telemedicine service only accepts self-paid via bank transfer. Currently, we are unable to accept insurance or credit/debit card payments.</span></p>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Telemedicine service only accepts self-paid via bank transfer. Currently, we are unable to accept insurance or credit/debit card payments.</span></p>
 						</li>
 						</ol>`,
-					homeVisit: `<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;  color: rgb(0, 0, 0);">RS Pondok Indah Group Hospitals provide Home Visit service covering certain areas. Some of the services provided are as follows:</span></p>
+					homeVisit: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">RS Pondok Indah Group Hospitals provide Home Visit service covering certain areas. Some of the services provided are as follows:</span></p>
 					<ul style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Examination and consultation by general practitioner, internal medicine specialist, nutrition specialist.</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Examination and consultation by general practitioner, internal medicine specialist, nutrition specialist.</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">NGT tube insertion/replacement</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">NGT tube insertion/replacement</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Urine catheter insertion/replacement</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Urine catheter insertion/replacement</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Stoma care</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Stoma care</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Wound care</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Wound care</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Laboratory sampling</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Laboratory sampling</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Bathing newborn</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Bathing newborn</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Vaccination</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Vaccination</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Other services</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Other services</span></p>
 					</li>
 					</ul>
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
-					<h3 style="line-height: 1.8; text-align: justify; margin-top: 16pt; margin-bottom: 4pt;"><span style="font-size: 14pt;  color: rgb(0, 0, 0); font-weight: 400;">Home Visit mechanism of Pondok Indah Hospital Group</span></h3>
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+					<h3 style="line-height: 1.8; margin-top: 16pt; margin-bottom: 4pt;"><span style="font-size: 14pt;  color: rgb(0, 0, 0); font-weight: 400;">Home Visit mechanism of Pondok Indah Hospital Group</span></h3>
 					<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">The Home Visit service applies to patients who are located around the RS Pondok Indah Group Hospitals location, within 10 km radius.</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">The Home Visit service applies to patients who are located around the RS Pondok Indah Group Hospitals location, within 10 km radius.</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Patient is already registered as a previous patient of RS Pondok Indah Hospital Group, proven by medical record number.</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Patient is already registered as a previous patient of RS Pondok Indah Hospital Group, proven by medical record number.</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Send a WhatsApp message to inquire our Home Visit Service at least 1 day before your intended date during working hours (08.00 AM - 05.00 PM) to:</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Send a WhatsApp message to inquire our Home Visit Service at least 1 day before your intended date during working hours (08.00 AM - 05.00 PM) to:</span></p>
 					</li>
 					</ol>
 					<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
-					<li style="list-style-type: lower-alpha; font-size: 11pt;  color: rgb(0, 0, 0); margin-left: 36pt;">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pondok Indah Hospital - Pondok Indah +62 821-1999-0881&nbsp;</span></p>
+					<li style="list-style-type: lower-alpha; font-size: 14px;  color: rgb(0, 0, 0); margin-left: 36pt;">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Pondok Indah Hospital - Pondok Indah +62 821-1999-0881&nbsp;</span></p>
 					</li>
-					<li style="list-style-type: lower-alpha; font-size: 11pt;  color: rgb(0, 0, 0); margin-left: 36pt;">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pondok Indah Hospital - Puri Indah +62 821-1999-0882</span></p>
+					<li style="list-style-type: lower-alpha; font-size: 14px;  color: rgb(0, 0, 0); margin-left: 36pt;">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Pondok Indah Hospital - Puri Indah +62 821-1999-0882</span></p>
 					</li>
-					<li style="list-style-type: lower-alpha; font-size: 11pt;  color: rgb(0, 0, 0); margin-left: 36pt;">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Pondok Indah Hospital - Bintaro Jaya +62 821-1999-0883</span></p>
+					<li style="list-style-type: lower-alpha; font-size: 14px;  color: rgb(0, 0, 0); margin-left: 36pt;">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Pondok Indah Hospital - Bintaro Jaya +62 821-1999-0883</span></p>
 					</li>
 					</ol>
 					<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;" start="4">
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Our Home Visit team will contact you to assess the services or procedures required in order to prepare accordingly.</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Home Visit team will contact you to assess the services or procedures required in order to prepare accordingly.</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Our Home Visit Team will confirm their arrival time to the patient's home 1 day before the scheduled date.</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Home Visit Team will confirm their arrival time to the patient's home 1 day before the scheduled date.</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Our Home Visit Team will record the assessment, procedures, equipment and drugs used in your home and relay the information to the relevant operational units.</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Home Visit Team will record the assessment, procedures, equipment and drugs used in your home and relay the information to the relevant operational units.</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Afterwards, our Cashier will send an invoice via WhatsApp according to the billing and send the Pondok Indah Hospital account number so that you can make payments via bank transfer.</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Afterwards, our Cashier will send an invoice via WhatsApp according to the billing and send the Pondok Indah Hospital account number so that you can make payments via bank transfer.</span></p>
 					</li>
-					<li style="font-size: 11pt;  color: rgb(0, 0, 0);">
-					<p style="line-height: 1.8; text-align: justify; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 11pt;">Our Telemedicine service only accepts self-paid via bank transfer. Currently, we are unable to accept insurance or credit/debit card payments.</span></p>
+					<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Telemedicine service only accepts self-paid via bank transfer. Currently, we are unable to accept insurance or credit/debit card payments.</span></p>
 					</li>
 					</ol>`,
 				}
