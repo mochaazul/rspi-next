@@ -1,6 +1,6 @@
 import FacebookIcon from '/public/images/ic/facebook.svg';
 import YoutubeIcon from '/public/images/ic/youtube.svg';
-import InstagramIcon from '/public/images/ic/instagram.svg';
+import InstagramIcon from '/public/images/ic/ig_dark.svg';
 import TwitterIcon from '/public/images/ic/twitter_x_dark.svg';
 import CalendarIcon from '/public/images/ic/Calendar.svg';
 import ArrowDown from '/public/images/ic/arrow_down.svg';

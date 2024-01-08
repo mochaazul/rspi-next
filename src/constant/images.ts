@@ -8,7 +8,7 @@ import AppStore from '/public/images/app-store.png';
 import FacebookLogo from '/public/svg/facebook.svg';
 import TwitterLogo from '/public/svg/twitter_x_dark.svg';
 import YoutubeLogo from '/public/svg/youtube.svg';
-import InstagramLogo from '/public/svg/instagram.svg';
+import InstagramLogo from '/public/svg/ig_dark.svg';
 import AmbulanceIcon from '/public/svg/ambulance.svg';
 import CentreExcellenceCard1 from '/public/images/samples/Rectangle_73.jpg';
 import CentreExcellenceCard2 from '/public/images/samples/unsplash_7jjnJ-QA9fY.jpg';
