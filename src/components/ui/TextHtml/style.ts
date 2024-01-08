@@ -3,7 +3,6 @@ import { colors } from '@/constant';
 import styled from 'styled-components';
 
 export const TextContainer = styled.div`
-  line-height: 30px;
   color: ${ colors.grey.darker };
   ol, ul {
     list-style: initial;
