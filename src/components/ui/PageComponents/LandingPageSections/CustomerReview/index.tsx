@@ -27,7 +27,7 @@ const CustomerReview = () => {
 			customer_illness: 'Pasien Serangan Jantung'
 		},
 		{
-			short_description: 'Menemukan dokter spesialis anak yang cocok itu bagaikan mencari jodoh. Makanya begitu klik, Darella tidak mau pindah ke dokter lain. Selalu pilih Prof. Hinky yang sangat ramah dengan anak-anak',
+			short_description: 'Mencari dokter spesialis anak yang cocok itu susahnya bagaikan mencari jodoh. Makanya begitu klik, Darella tidak mau pindah ke dokter lainnya. Selalu pilih dr. Hinky yang sangat ramah pada anak-anak.',
 			customer_avatar: images.TriyanawantiReview,
 			customer_name: 'Triyanawanti, ibu dari Darella',
 			customer_illness: 'Pasien DBD',
@@ -78,16 +78,10 @@ const CustomerReview = () => {
 			customer_illness: 'Heart Attack Patient.'
 		},
 		{
-			short_description: 'Finding the right pediatric specialist is like finding a soulmate. That`s why once Darella found the right fit, she didn`t want to switch to another doctor. She always chose Prof. Hinky, who is very friendly with children.',
+			short_description: 'Since she was handled by Prof. Hindra Irawan Satari due to dengue fever, my daughter, Darella, does not want to turn to another doctor. She always chooses dr. Hinky, who is very child-friendly.',
 			customer_avatar: images.TriyanawantiReview,
 			customer_name: 'Triyanawanti, Darella`s mother',
 			customer_illness: 'Patient with Dengue Fever (DBD)',
-		},
-		{
-			short_description: 'Initially, we intended to have a normal delivery. However, at 32 weeks of pregnancy, it turned out that baby Zane was in a breech position. Eventually, Dr. Eric, our obstetrician, promptly performed a procedure to rotate the baby`s position, and it was successful!',
-			customer_avatar: images.CendrawatiReview,
-			customer_name: 'Fifi Cendrawati',
-			customer_illness: 'Maternity Patient'
 		},
 		{
 			short_description: 'With medical direction from dr. Rochsismandoko, I keep my blood glucose level normal.',
