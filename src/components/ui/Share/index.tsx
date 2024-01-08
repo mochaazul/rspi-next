@@ -18,7 +18,7 @@ const buttonSocmed = [
 		action: 'link',
 		url: sosmedLink.twitter,
 		label: 'Twitter',
-		icon: <Image src='/images/ic/twitter_x.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
+		icon: <Image src='/images/ic/twitter_x_dark.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
 	},
 	{
 		action: 'link',
