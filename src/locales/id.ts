@@ -117,11 +117,11 @@ export default {
 			validationError: 'Mohon isi semua data.',
 			profileSelector: {
 				deleteModal: {
-					heading: 'Apakah anda yakin ingin menghapus profil',
+					heading: 'Apakah anda yakin ingin menghapus data orang lain',
 					yesLabel: 'Ya',
 					noLabel: 'Tidak'
 				},
-				selfLabel: 'Diri sendiri :',
+				selfLabel: 'Profil Diri sendiri :',
 				other: 'Orang lain :',
 				form: {
 					selfHeading: 'Tambah profil diri sendiri',
@@ -158,7 +158,7 @@ export default {
 				errorEmptyData: 'Pastikan Data Keluhan dan Penjamin Terisi',
 				btnLabel: {
 					back: 'Kembali',
-					submit: 'Buat Janji Temu'
+					submit: 'Lanjutkan'
 				}
 			},
 			confirmationModal: {
@@ -189,6 +189,9 @@ export default {
 					done: 'telah berhasil.'
 				},
 				btnLabel: 'Oke'
+			},
+			bookingForm: {
+				insuranceData: 'Data Penjamin Asuransi'
 			}
 		},
 		unsubscribe: {
@@ -986,7 +989,10 @@ export default {
 			asuransiCardFront: 'Upload foto tampak depan',
 			asuransiCardBack: 'Upload foto tampak belakang',
 			labelPhoneModal: 'Silahkan hubungi call center',
-			visitAppOptionLabel: 'Kunjungan Tatap Muka'
+			visitAppOptionLabel: 'Kunjungan Tatap Muka',
+			shareDoctor: {
+				wateleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}: {link}'
+			}
 		},
 		footer: {
 			visitorInfo: {

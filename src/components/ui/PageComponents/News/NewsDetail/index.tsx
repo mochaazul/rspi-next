@@ -75,7 +75,8 @@ const NewsDetail = ({
 											<div key={ index }>
 												<Link href={ `/news/${ a.slug }` }>
 													<Text
-														text={ a.posted_date }
+														text={ dayjs(a?.posted_date).locale(currentLang)
+															.format('dddd, DD MMMM YYYY') }
 														className='py-[10px]'
 														fontSize='12px'
 														fontWeight='400'

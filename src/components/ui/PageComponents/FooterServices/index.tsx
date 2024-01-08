@@ -52,10 +52,9 @@ const FooterServices = ({
 			</div>
 			<div className={ isImgEmpty ? 'mt-[48px]' : 'mt-[10px]' }>
 				<TextHtml
-					className='innerHTML leading-[24px] text-[16px]'
+					className='innerHTML'
 					htmlStr={ detail?.[0]?.content ?? '' }
 				/>
-				
 			</div>
 		</div>
 	);

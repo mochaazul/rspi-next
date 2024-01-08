@@ -61,7 +61,7 @@ const SubMenuPage = ({ menuList, children }: PropsTypes) => {
 							menuList?.map((menu, index) => (
 								<MenuItemStyle
 									key={ index }
-									className={ `cursor-pointer p-5 w-[286px] ${ activeIndex === index ? 'active' : '' }` }
+									className={ ` group/menuItemPatient cursor-pointer p-5 w-[286px] ${ activeIndex === index ? 'active' : '' }` }
 									onClick={ () => setActiveIndex(index) }
 								>
 									<Text
@@ -70,6 +70,7 @@ const SubMenuPage = ({ menuList, children }: PropsTypes) => {
 										fontSize='16px'
 										color={ activeIndex === index ? colors.paradiso.default : colors.grey.darker }
 										text={ menu }
+										subClassName='group-hover/menuItemPatient:text-green-secondary '
 									/>
 								</MenuItemStyle>
 							))
