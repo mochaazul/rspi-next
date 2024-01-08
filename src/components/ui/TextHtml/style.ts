@@ -7,7 +7,6 @@ export const TextContainer = styled.div`
   color: ${ colors.grey.darker };
   ol, ul {
     list-style: initial;
-    margin: revert;
     padding: revert;
   }
   &.text-14 {
@@ -22,14 +21,11 @@ export const TextContainer = styled.div`
 		font-size: revert;
     line-height: revert;
 		font-weight: revert;
+		margin: revert;
+		padding: revert;
 	}
 	a {
 		color: revert;
 		text-decoration: revert;
-	}
-	ul, ol {
-		list-style: revert;
-    margin: revert;
-    padding: revert;
 	}
 `;
