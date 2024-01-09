@@ -199,9 +199,7 @@ export const Header = ({
 				const title = activeSubMenuIdMobile === 'center-of-excellence'
 					? item.title
 					: item.name;
-				const dataIdentifier = activeSubMenuIdMobile === 'our-hospital'
-					? item.id
-					: item.slug;
+				const dataIdentifier = item.slug;
 
 				return (
 					<div

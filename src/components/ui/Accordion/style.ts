@@ -17,6 +17,10 @@ export const ItemStyle = styled.div<{ $isOpen: boolean; }>`
   align-items: center;
   gap: 2rem;
 
+  li {
+    list-style: auto;
+  }
+
   & .item-desc {
     position: relative;
     display: ${ props => props.$isOpen ? 'block' : 'none' };
