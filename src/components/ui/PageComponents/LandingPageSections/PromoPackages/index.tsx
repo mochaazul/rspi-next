@@ -29,7 +29,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 
 	const handleArrowClick = (direction: 'left' | 'right') => () => {
 		CardNewsWrapperRef.current?.scrollBy({
-			left: direction === 'left' ? -382 : 382,
+			left: direction === 'left' ? -398 : 398,
 			behavior: 'smooth'
 		});
 	};
@@ -64,7 +64,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 									language={ item?.language }
 									image={ item.img_url_card }
 									imageHeight='200px'
-									className='max-sm:!w-[90%] !w-[350px]'
+									className='max-sm:!w-[90%] !w-[366px]'
 									header={
 										<Text
 											fontType='p'
