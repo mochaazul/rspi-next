@@ -54,9 +54,10 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 									fontWeight='700'
 									lineHeight='28px'
 									textAlign='center'
+									subClassName='max-sm:text-sm max-sm:leading-normal'
 								/>
 							</div>
-							<Button className='w-auto whitespace-nowrap py-3 sm:py-[15px] px-10 max-sm:text-sm' onClick={ () => navigate.push('/find-a-doctor') }>
+							<Button className='max-sm:mt-2 w-auto whitespace-nowrap py-3 sm:py-[15px] px-10 max-sm:text-sm' onClick={ () => navigate.push('/find-a-doctor') }>
 								{ t('jadwalKunjungan.label.emptyBtnCta') }
 							</Button>
 						</EmptyResultContainer>
