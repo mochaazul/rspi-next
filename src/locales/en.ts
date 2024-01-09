@@ -1050,7 +1050,8 @@ export default {
 			labelPhoneModal: 'Please contact the call center',
 			visitAppOptionLabel: 'Visit in Person',
 			shareDoctor: {
-				wateleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}: {link}'
+				wateleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}: {link}',
+				teleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}'
 			}
 		},
 		footer: {

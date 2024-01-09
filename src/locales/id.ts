@@ -277,8 +277,8 @@ export default {
 					homeVisit: 'Apakah RS Pondok Indah memiliki layanan Home Visit?',
 				},
 				answers: {
-					doctorSchedule: `<p><span style="">Anda dapat melihat jadwal praktik seluruh dokter RS Pondok Indah Group melalui </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/id/find-a-doctor" target="_blank">laman berikut</a> yang juga dapat diakses melalui RSPI Mobile (mobile apps) kami. </p>`,
-					assurance: `<p><span style="">RS Pondok Indah Group telah bekerja sama dengan berbagai asuransi terpercaya, baik di dalam maupun luar negeri. Untuk melihat asuransi yang bermitra dengan kami, Anda dapat mengakses </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/id/pages/perusahaan-asuransi-mitra"><span style=" text-decoration: underline; text-decoration-skip-ink: none;">laman berikut</span></a></p>`,
+					doctorSchedule: '<p><span style="">Anda dapat melihat jadwal praktik seluruh dokter RS Pondok Indah Group melalui </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/id/find-a-doctor" target="_blank">laman berikut</a> yang juga dapat diakses melalui RSPI Mobile (mobile apps) kami. </p>',
+					assurance: '<p><span style="">RS Pondok Indah Group telah bekerja sama dengan berbagai asuransi terpercaya, baik di dalam maupun luar negeri. Untuk melihat asuransi yang bermitra dengan kami, Anda dapat mengakses </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/id/pages/perusahaan-asuransi-mitra"><span style=" text-decoration: underline; text-decoration-skip-ink: none;">laman berikut</span></a></p>',
 					visitHours: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="">Waktu kunjungan setiap unit perawatan dapat berbeda. Untuk menjaga ketenangan dan kenyamanan seluruh pasien kami, kunjungan hanya dapat dilakukan pada jam tertentu dan dilakukan secara bergantian.</span></p>
 					<p>&nbsp;</p>
 					<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><strong><span style="">Waktu Berkunjung</span></strong></p>
@@ -991,7 +991,8 @@ export default {
 			labelPhoneModal: 'Silahkan hubungi call center',
 			visitAppOptionLabel: 'Kunjungan Tatap Muka',
 			shareDoctor: {
-				wateleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}: {link}'
+				wateleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}: {link}',
+				teleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}'
 			}
 		},
 		footer: {

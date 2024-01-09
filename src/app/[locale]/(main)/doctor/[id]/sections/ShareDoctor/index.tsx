@@ -27,7 +27,9 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 	};
 
 	if (!doctor) return null;
-	const shareMsg = encodeURIComponent(t('wateleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0], link: hostname }));
+	const waMsg = encodeURIComponent(t('wateleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0], link: hostname }));
+	const teleMsg = encodeURIComponent(t('teleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0] }));
+
 	return (
 		<div className={ props.className }>
 			<Text
@@ -58,7 +60,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 					<Icons.Link width='16px' height='16px' />
 				</div>
 				<div className='cursor-pointer' >
-					<Link href={ `https://t.me/share/url?url=${hostname}&text=${shareMsg}` } target='_blank'>
+					<Link href={ `https://t.me/share/url?url=${hostname}&text=${teleMsg}` } target='_blank'>
 						<Images.TelegramLogo
 							width='16px'
 							height='16px'
@@ -66,7 +68,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 					</Link>
 				</div>
 				<div className='cursor-pointer'>
-					<Link href={ `https://wa.me/send?text=${shareMsg}` } target='_blank'>
+					<Link href={ `https://wa.me/send?text=${waMsg}` } target='_blank'>
 						<Images.WhatsappLogo
 							width='16px'
 							height='16px'
