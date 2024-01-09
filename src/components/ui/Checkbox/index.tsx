@@ -23,7 +23,7 @@ const Checkbox = (props: InputType) => {
 	}, [props.ref]);
 
 	return (
-		<CheckboxStyle isslider={ props.isslider }>
+		<CheckboxStyle $isslider={ props.$isslider }>
 			<input
 				type='checkbox'
 				{ ...props }
