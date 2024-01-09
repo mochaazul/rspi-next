@@ -160,9 +160,9 @@ const ContactUsPage = ({
 						<p className='font-normal text-[16px] max-sm:text-[14px] leading-[23px] mt-3 mx-auto text-center sm:w-[630px] w-full text-gray-2'>
 							{ t('faq.subHeading') }
 						</p>
-						<div className='mt-10'>
+						<div className='mt-10 faq-sections'>
 							<Accordion
-								itemTheme={ props => <Accordion.ItemFAQ { ...props } readMore={ true } /> }
+								itemTheme={ props => <Accordion.ItemFAQ { ...props } readMore={ true } isJSXDesc={ true } /> }
 								datas={ FAQDatas().filter((_faq, index) => index < 5) }
 							/>
 						</div>
