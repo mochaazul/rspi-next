@@ -149,4 +149,8 @@ export const EmptyResultContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 32px;
+
+  @media screen and (max-width: 640px) {
+    gap: 24px;
+  }
 `;

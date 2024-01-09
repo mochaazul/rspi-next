@@ -82,7 +82,7 @@ const Modal: React.FC<ModalProps> = ({
 							{ children }
 							{
 								onClose && <div className='cursor-pointer absolute top-5 right-5' onClick={ onClose }>
-									<icons.Close alt='' />
+									<icons.Close alt='' className='w-[18px] h-[18px] sm:w-6 sm:h-6' />
 								</div>
 							}
 						</div>

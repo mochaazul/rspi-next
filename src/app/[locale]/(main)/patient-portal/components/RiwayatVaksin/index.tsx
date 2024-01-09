@@ -34,6 +34,8 @@ const RiwayatVaksin = () => {
 				fontSize='20px'
 				fontWeight='700'
 				lineHeight='28px'
+				textAlign='center'
+				subClassName='max-sm:text-sm max-sm:leading-normal'
 			/>
 		</EmptyResultContainer>);
 	}
