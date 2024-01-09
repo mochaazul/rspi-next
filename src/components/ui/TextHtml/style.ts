@@ -20,8 +20,6 @@ export const TextContainer = styled.div`
 		font-size: revert;
     line-height: revert;
 		font-weight: revert;
-		margin: revert;
-		padding: revert;
 	}
 	a {
 		color: revert;
