@@ -36,7 +36,6 @@ const Combobox = ({
 	isLoading,
 	value,
 }: Props) => {
-	const t = useScopedI18n('page.landingPage.services.findDoctor.form');
 	const tCombobox = useScopedI18n('combobox');
 	const [selected, setSelected] = useState<ItemType | null>(null);
 
@@ -73,6 +72,9 @@ const Combobox = ({
 					if (onSelectValue) {
 						setOpen(false);
 						onSelectValue(item);
+					}
+					if (!item) {
+						setOpen(true);
 					}
 				} }
 				nullable
