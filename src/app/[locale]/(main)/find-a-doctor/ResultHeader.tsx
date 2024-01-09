@@ -6,14 +6,16 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useScopedI18n } from '@/locales/client';
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import LoadingSkeleton from '@/components/Layout/LoadingSkeleton';
 
 type Props = {
 	doctorCount: number;
 	setter: (value: string) => void,
 	getter: () => string | null,
 	reset: boolean,
+	loading: boolean
 };
-const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
+const ResultHeader = ({ doctorCount, setter, getter, reset, loading }: Props) => {
 
 	const [keywordValue, setKeywordValue] = useState<string>();
 
@@ -54,6 +56,8 @@ const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
 		params.set('day', value);
 		router.push(`${ pathName }?${ params.toString() }`, {});
 	};
+		 
+	if (loading) return <LoadingSkeleton type='line'/>;
 
 	return (
 		<div>
