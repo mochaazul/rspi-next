@@ -65,10 +65,12 @@ const AvailableAt: React.FC<Props> = ({ hospital }) => {
 										<Text fontSize='14px' fontWeight='900' subClassName='leading-normal'>
 											{ t('operationalHourHeading') }
 										</Text>
-										<Text fontSize='14px' fontWeight='400' subClassName='leading-normal'>
-											{
-												item.operational_hour?.map((operationalHour: string, index: number) => (<span key={ `op-hour-${ index }` }>{ operationalHour }</span>))
-											}
+										<Text fontSize='14px' fontWeight='400' className='leading-normal' fontType={ null }>
+											<ul className='list-disc list-outside pl-5'>
+												{
+													item.operational_hour?.filter(operationalHour => !!operationalHour)?.map((operationalHour: string, index: number) => (<li key={ `op-hour-${ index }` }>{ operationalHour }</li>))
+												}
+											</ul>
 										</Text>
 									</div>
 								</div>

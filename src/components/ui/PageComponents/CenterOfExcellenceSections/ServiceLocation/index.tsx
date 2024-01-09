@@ -100,9 +100,11 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 				</div>
 			</div>
 			<div className='mt-[62px]'>
-				<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h4' }>
-					{ t('serviceLocation.heading') }
-				</Text>
+				{ content?.coe_hospitals?.length && (
+					<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h4' }>
+						{ t('serviceLocation.heading') }
+					</Text>
+				) }
 
 				<div className='divide-y divide-[#EAEAEA]'>
 					{
@@ -162,10 +164,12 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 												<Text fontSize='14px' fontWeight='900' subClassName='leading-normal'>
 													{ t('serviceLocation.operationalHourHeading') }
 												</Text>
-												<Text fontSize='14px' fontWeight='400' subClassName='leading-normal'>
-													{
-														item.operational_hour?.map((operationalHour: string, index: number) => (<span key={ `op-hour-${ index }` }>{ operationalHour }</span>))
-													}
+												<Text fontSize='14px' fontWeight='400' className='leading-normal' fontType={ null }>
+													<ul className='list-disc list-outside pl-5'>
+														{
+															item.operational_hour?.filter((operationalHour: string) => !!operationalHour)?.map((operationalHour: string, index: number) => (<li key={ `op-hour-${ index }` }>{ operationalHour }</li>))
+														}
+													</ul>
 												</Text>
 											</div>
 										</div>

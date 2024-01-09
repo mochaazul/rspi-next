@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import { FormikProps, useFormik } from 'formik';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 
 import { icons, colors } from '@/constant';
 import {
@@ -127,7 +128,11 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 
 				if (res?.stat_code !== 'APP:SUCCESS') throw new Error(res?.stat_msg);
 
-				setShowModalSuccess(true);
+				// setShowModalSuccess(true);
+				toast.success(t('profileDetail.successUpdateProfile'), {
+					hideProgressBar: true,
+					pauseOnHover: false,
+				});
 			} catch (error: any) {
 				setError(error?.message ?? '');
 			} finally {

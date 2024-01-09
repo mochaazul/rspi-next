@@ -4,6 +4,7 @@ import { FindDoctorDetail, ResponseType } from '@/interface';
 import { useGetDoctorDetail } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 import { useHostname } from '@/utils/useHostname';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import * as Icons from 'react-feather';
@@ -32,7 +33,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 				fontSize='16px'
 				lineHeight='24px'
 			/>
-			<div className='flex gap-[10px] mt-[20px] '>
+			<div className='flex items-center gap-[10px] mt-[20px] '>
 				<div className='cursor-pointer'>
 					<Link href={ `https://www.facebook.com/sharer/sharer.php?u=${ hostname }` } target='_blank'>
 						<Images.FacebookLogo
@@ -42,9 +43,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 				</div>
 				<div className='cursor-pointer'>
 					<Link href={ `https://twitter.com/intent/tweet?url=&text=${ shareMsg }` } target='_blank'>
-						<Images.TwitterLogo
-							width='16px'
-							height='16px' />
+						<Image src='/images/ic/twitter_x_dark.svg' width={ 16 } height={ 16 } alt='' />
 					</Link>
 				</div>
 				<div className='cursor-pointer'>
@@ -59,7 +58,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 					<Icons.Link width='16px' height='16px' />
 				</div>
 				<div className='cursor-pointer' >
-					<Link href={ `https://t.me/share/url?url=${hostname}&text=${teleMsg}` } target='_blank'>
+					<Link href={ `https://t.me/share/url?url=${ hostname }&text=${ teleMsg }` } target='_blank'>
 						<Images.TelegramLogo
 							width='16px'
 							height='16px'
