@@ -16,7 +16,7 @@ import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { useRouter } from 'next/navigation';
 import VisitSchedule from './sections/VisitSchedule';
-import { TimeSlot } from '@/interface';
+import { FindDoctorDetail, HospitalDetail, ResponseType, TimeSlot } from '@/interface';
 import { useGetHospital } from '@/lib/api/client/hospital';
 import { useCheckBlacklist, useGetDoctorCalendar, useGetDoctorDetail, useGetDoctorSlot } from '@/lib/api/client/doctors';
 import { cookiesHelper } from '@/helpers';
@@ -35,9 +35,12 @@ type Props = {
 	params: {
 		id: string;
 	};
+	doctor: FindDoctorDetail
+	hospitals: HospitalDetail[]
+	doctorResponse: ResponseType<FindDoctorDetail>
 };
 
-export default function Page({ params }: Props) {
+export default function Page({ params, doctor, hospitals, doctorResponse }: Props) {
 
 	const t = useScopedI18n('page.doctorProfile');
 	const lang = useCurrentLocale();
@@ -53,10 +56,6 @@ export default function Page({ params }: Props) {
 	const [calendarMonth, setCalendarMonth] = useState<Dayjs>(dayjs());
 	const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
 	const [blacklistModalVisible, setBlacklistModalVisible] = useState<boolean>(false);
-
-	const { data: hospital, isLoading: hospitalLoading } = useGetHospital();
-
-	const { data: doctor, isLoading, error: doctorError } = useGetDoctorDetail({ param: params.id });
 
 	const { data: blacklistResponse, isMutating: blacklistLoading, trigger: checkBlacklist, error: blacklistError } = useCheckBlacklist();
 
@@ -84,7 +83,7 @@ export default function Page({ params }: Props) {
 		}
 	});
 
-	const hospitalArr = doctor?.data.hospital.map(hospital => ({ key: hospital?.hospital_code, value: hospital?.hospital_code, label: hospital?.hospital_name }));
+	const hospitalArr = doctor.hospital.map(hospital => ({ key: hospital?.hospital_code, value: hospital?.hospital_code, label: hospital?.hospital_name }));
 
 	const selectFirstHospital = () => {
 		if (hospitalArr) {
@@ -100,7 +99,7 @@ export default function Page({ params }: Props) {
 
 	const breadcrumbsPath = [
 		{ name: t('bookAppointmentLabel'), url: '/find-a-doctor' },
-		{ name: doctor?.data.name || '', url: '#' }
+		{ name: doctor.name || '', url: '#' }
 	];
 
 	const getCalendar = (month: number, year: number) => {
@@ -131,7 +130,7 @@ export default function Page({ params }: Props) {
 		return '';
 	};
 
-	const onBookHandler = async () => {
+	const onBookHandler = async() => {
 		try {
 			const token = await cookiesHelper.getToken();
 			const userData = await cookiesHelper.getUserData();
@@ -183,126 +182,124 @@ export default function Page({ params }: Props) {
 	};
 
 	const selectedHospitalDetails = () => {
-		return hospital?.data.find(hospital => hospital.hospital_code === selectedHospital);
+		return hospitals.find(hospital => hospital.hospital_code === selectedHospital);
 	};
 	const notFoundDoctor = () => {
-		if (doctorError && doctorError.message.toLowerCase() === 'error on get detail doctor detail on schedule') {
+		if (doctorResponse.stat_msg && doctorResponse.stat_msg.toLowerCase() === 'error on get detail doctor detail on schedule') {
 			return 'Doctor not found';
 		}
-		return doctor?.data?.name;
+		return doctor.name;
 	};
 
 	return (
 		<DoctorProfileStyle>
 			{
-				isLoading
-					? <Spinner />
-					: <>
-						<PhoneModal
-							visible={ showModalTelp }
-							hospitalDetail={ selectedHospitalDetails() }
-							clickCloseContactHospital={ closeContactHospital }
-							onClose={ () => setShowModalTelp(false) }
-						/>
-						<div className='lg:w-[1110px] mx-auto max-sm:mx-[12px] pb-[120px]'>
-							<Breadcrumbs datas={ breadcrumbsPath } />
-							<div className='content-wrapper sm:flex w-full mt-[40px]'>
-								<DoctorAvatar className='max-sm:hidden' profile_url={ doctor?.data?.img_url } />
-								<div className='sm:ml-[63px] sm:w-[701px]'>
-									<div className='flex gap-[16px]'>
-										<DoctorAvatar className='lg:hidden md:hidden' profile_url={ doctor?.data?.img_url ?? Images.DoctorProfile.src } />
-										<div className='flex flex-col'>
-											<Text text={ notFoundDoctor() } fontSize='24px' fontWeight='900' lineHeight='24px' />
-											<Text text={ doctor?.data?.specialty[0] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' />
-											<hr className='my-[8px] md:hidden' />
-											<ShareDoctor className=' md:hidden' />
-										</div>
+			 <>
+					<PhoneModal
+						visible={ showModalTelp }
+						hospitalDetail={ selectedHospitalDetails() }
+						clickCloseContactHospital={ closeContactHospital }
+						onClose={ () => setShowModalTelp(false) }
+					/>
+					<div className='lg:w-[1110px] mx-auto max-sm:mx-[12px] pb-[120px]'>
+						<Breadcrumbs datas={ breadcrumbsPath } />
+						<div className='content-wrapper sm:flex w-full mt-[40px]'>
+							<DoctorAvatar className='max-sm:hidden' profile_url={ doctor.img_url } />
+							<div className='sm:ml-[63px] sm:w-[701px]'>
+								<div className='flex gap-[16px]'>
+									<DoctorAvatar className='lg:hidden md:hidden' profile_url={ doctor.img_url ?? Images.DoctorProfile.src } />
+									<div className='flex flex-col'>
+										<Text text={ notFoundDoctor() } fontSize='24px' fontWeight='900' lineHeight='24px' />
+										<Text text={ doctor.specialty[0] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' />
+										<hr className='my-[8px] md:hidden' />
+										<ShareDoctor className=' md:hidden' />
 									</div>
-									<hr className='mt-[24px] max-sm:hidden' />
-									<div className='mt-[30px]'>
-										<Radio groupLabel={ t('chooseRs') } onChange={ setSelectedHospital } value={ selectedHospital }
-											groupContainerClassname='flex flex-col md:flex-row'
-										>
-											{
-												hospitalArr && hospitalArr.map(hospital => {
-													return (
-														<>
-															<Radio.Option label={ hospital.label ?? '' } value={ hospital.value } key={ hospital.key } />
-														</>
-													);
-												})
-											}
-										</Radio>
-									</div>
-									{ /* APP : mean appointment */ }
-									{ /* TEL : mean telemedicine */ }
-									<div className='mt-[30px]'>
-										<Radio groupLabel='Appointment Type'
-											onChange={ setRadioValue }
-											value={ radioValue }
-											groupContainerClassname='flex flex-col md:flex-row'
-										>
-											<Radio.Option label={ t('visitAppOptionLabel') } value='APP' />
-											{ /* TODO: TAKEN OUT SINCE TrackCare do not support it yet 24 nov 23 */ }
-											{ /* <Radio.Option label='Telekonsultasi' value='TEL' /> */ }
-										</Radio>
-									</div>
-
-									<TimeSlotContainer
-										className='flex flex-col md:flex-row'
-									>
-										<TimeSlotCard className='md:w-[calc(100%/2)]'>
-											<Calendar
-												calendarData={ doctorCalendar?.data || [] }
-												value={ selectedDate }
-												onChange={ onChangeDate }
-												onChangeMonth={ (month, year) => {
-													getCalendar(month, year);
-												} }
-												loading={ doctorCalendarLoading } />
-										</TimeSlotCard>
-										<TimeSlotCard className='px-[16px] py-[20px] md:w-[calc(100%/2)]'>
-											<VisitSchedule
-												isLoading={ doctorSlotLoading }
-												timeslot={ doctorSlot?.data || [] }
-												hospital={ selectedHospital }
-												onSelect={ timeSlot => {
-													setSelectedTimeSlot(timeSlot);
-												} }
-												selectedDate={ selectedDate }
-												clinic={ doctor?.data?.clinic }
-												onClickContactHospital={ clickContactHospital }
-												dateStatus={ selectedDateStatus }
-											/>
-										</TimeSlotCard>
-									</TimeSlotContainer>
 								</div>
-							</div>
-						</div>
-						<div className='bg-white pt-[26px] pb-[30px] footer'>
-							<div className='lg:w-[1110px] w-full mx-auto max-sm:mx-[15px] md:flex md:justify-end gap-[12px] flex justify-between'>
-								<Button
-									$hoverTheme='primary'
-									label={ t('form.btnLabel.back') }
-									noPadding={ true }
-									className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
-									theme='outline'
-									onClick={ () => {
-										router.back();
-									} }
-								/>
-								<Button
-									label={ t('form.btnLabel.submit') }
-									noPadding={ true }
-									className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
-									onClick={ onBookHandler }
-									disabled={ !selectedTimeSlot }
+								<hr className='mt-[24px] max-sm:hidden' />
+								<div className='mt-[30px]'>
+									<Radio groupLabel={ t('chooseRs') } onChange={ setSelectedHospital } value={ selectedHospital }
+										groupContainerClassname='flex flex-col md:flex-row'
+									>
+										{
+											hospitalArr && hospitalArr.map(hospital => {
+												return (
+													<>
+														<Radio.Option label={ hospital.label ?? '' } value={ hospital.value } key={ hospital.key } />
+													</>
+												);
+											})
+										}
+									</Radio>
+								</div>
+								{ /* APP : mean appointment */ }
+								{ /* TEL : mean telemedicine */ }
+								<div className='mt-[30px]'>
+									<Radio groupLabel='Appointment Type'
+										onChange={ setRadioValue }
+										value={ radioValue }
+										groupContainerClassname='flex flex-col md:flex-row'
+									>
+										<Radio.Option label={ t('visitAppOptionLabel') } value='APP' />
+										{ /* TODO: TAKEN OUT SINCE TrackCare do not support it yet 24 nov 23 */ }
+										{ /* <Radio.Option label='Telekonsultasi' value='TEL' /> */ }
+									</Radio>
+								</div>
+
+								<TimeSlotContainer
+									className='flex flex-col md:flex-row'
 								>
-									{ blacklistLoading ? <span className='spinner-loader' /> : t('form.btnLabel.submit') }
-								</Button>
+									<TimeSlotCard className='md:w-[calc(100%/2)]'>
+										<Calendar
+											calendarData={ doctorCalendar?.data || [] }
+											value={ selectedDate }
+											onChange={ onChangeDate }
+											onChangeMonth={ (month, year) => {
+												getCalendar(month, year);
+											} }
+											loading={ doctorCalendarLoading } />
+									</TimeSlotCard>
+									<TimeSlotCard className='px-[16px] py-[20px] md:w-[calc(100%/2)]'>
+										<VisitSchedule
+											isLoading={ doctorSlotLoading }
+											timeslot={ doctorSlot?.data || [] }
+											hospital={ selectedHospital }
+											onSelect={ timeSlot => {
+												setSelectedTimeSlot(timeSlot);
+											} }
+											selectedDate={ selectedDate }
+											clinic={ doctor.clinic }
+											onClickContactHospital={ clickContactHospital }
+											dateStatus={ selectedDateStatus }
+										/>
+									</TimeSlotCard>
+								</TimeSlotContainer>
 							</div>
 						</div>
-					</>
+					</div>
+					<div className='bg-white pt-[26px] pb-[30px] footer'>
+						<div className='lg:w-[1110px] w-full mx-auto max-sm:mx-[15px] md:flex md:justify-end gap-[12px] flex justify-between'>
+							<Button
+								$hoverTheme='primary'
+								label={ t('form.btnLabel.back') }
+								noPadding={ true }
+								className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
+								theme='outline'
+								onClick={ () => {
+									router.back();
+								} }
+							/>
+							<Button
+								label={ t('form.btnLabel.submit') }
+								noPadding={ true }
+								className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
+								onClick={ onBookHandler }
+								disabled={ !selectedTimeSlot }
+							>
+								{ blacklistLoading ? <span className='spinner-loader' /> : t('form.btnLabel.submit') }
+							</Button>
+						</div>
+					</div>
+				</>
 			}
 			<NeedLoginModal
 				visible={ loginModalVisible }
