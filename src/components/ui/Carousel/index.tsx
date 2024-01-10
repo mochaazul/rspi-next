@@ -73,7 +73,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
 	return (
 		<CarouselWrapper>
 			<div
-				className='container__slider relative max-sm:rounded-[10px]'
+				className='container__slider relative'
 				onMouseEnter={ AutoPlayStop }
 				onMouseLeave={ AutoPlayStart }
 			>
