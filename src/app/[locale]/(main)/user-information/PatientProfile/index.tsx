@@ -41,6 +41,7 @@ import { updateAvatar, updateProfile } from '@/lib/api/profile';
 import { regexInputPhone } from '@/constant/regExp';
 
 import ProfilePageStyle, { Divider } from './style';
+import { toast } from 'react-toastify';
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
@@ -127,7 +128,11 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 
 				if (res?.stat_code !== 'APP:SUCCESS') throw new Error(res?.stat_msg);
 
-				setShowModalSuccess(true);
+				// setShowModalSuccess(true);
+				toast.success(t('profileDetail.successUpdateProfile'), {
+					hideProgressBar: true,
+					pauseOnHover: false,
+				});
 			} catch (error: any) {
 				setError(error?.message ?? '');
 			} finally {

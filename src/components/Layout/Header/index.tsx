@@ -10,6 +10,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, Popover, Transition } from '@headlessui/react';
+import { toast } from 'react-toastify';
 
 import {
 	CenterOfExcellenceDetail,
@@ -93,9 +94,13 @@ export const Header = ({
 				return router.replace('/login');
 			}
 
-			if (!protectedRoutes?.some(path => pathname.includes(path))) {
-				setShowSuccessLogout(true);
-			}
+			// if (!protectedRoutes?.some(path => pathname.includes(path))) {
+			// 	setShowSuccessLogout(true);
+			// }
+			toast.success(t('logoutSuccess'), {
+				hideProgressBar: true,
+				pauseOnHover: false,
+			});
 
 			router.refresh();
 		}
