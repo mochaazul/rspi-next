@@ -14,8 +14,6 @@ import ServiceLocation from '@/components/ui/PageComponents/CenterOfExcellenceSe
 import TextHtml from '@/components/ui/TextHtml';
 import { getCurrentLocale, getScopedI18n } from '@/locales/server';
 
-import { CentreOfExcellenceStyle } from './style';
-
 const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.centerOfExcellence');
 	const currentLang = getCurrentLocale();
@@ -114,45 +112,43 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 	};
 
 	return (
-		<CentreOfExcellenceStyle>
-			<div className='w-full lg:max-w-[1110px] mx-auto max-xl:px-4 pb-8 sm:pb-[60px]'>
-				<div>
-					<Breadcrumbs datas={ breadcrumbsPath } />
-					<div className='flex md:gap-5 lg:gap-8 md:mt-[64px] mt-[25px]'>
-						<div className='hidden md:block'>
-							<CardMenu data={ responseCenterOfExcellence?.data } activeMenuIndex={ newParam } />
-						</div>
-						<div className='w-full'>
-							{
-								responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length > 0
-									?
-									<ServiceLocation
-										content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
-										activeMenuIndex={ newParam }
-										centerOfExcellence={ responseCenterOfExcellence?.data }
-									/>
-									:
-									null
-							}
-						</div>
+		<div className='w-full lg:max-w-[1110px] mx-auto max-xl:px-4 pb-8 sm:pb-[60px]'>
+			<div>
+				<Breadcrumbs datas={ breadcrumbsPath } />
+				<div className='flex md:gap-5 lg:gap-8 md:mt-[64px] mt-[25px]'>
+					<div className='hidden md:block'>
+						<CardMenu data={ responseCenterOfExcellence?.data } activeMenuIndex={ newParam } />
 					</div>
-					{
-						!_.isEmpty(responseCenterOfExcellenceNewsByID?.data) &&
-						<div className='mt-8 md:mt-[82px]'>
-							<Text
-								text={ t('serviceLocation.relatedArticle') }
-								className='border-b-2 md:border-b-4 border-green-secondary w-fit pb-1'
-								fontWeight='700'
-								fontSize='24px'
-								lineHeight='29px'
-								subClassName='max-sm:!text-base'
-							/>
-							{ renderRelatedNews() }
-						</div>
-					}
+					<div className='w-full'>
+						{
+							responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length > 0
+								?
+								<ServiceLocation
+									content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
+									activeMenuIndex={ newParam }
+									centerOfExcellence={ responseCenterOfExcellence?.data }
+								/>
+								:
+								null
+						}
+					</div>
 				</div>
+				{
+					!_.isEmpty(responseCenterOfExcellenceNewsByID?.data) &&
+					<div className='mt-8 md:mt-[82px]'>
+						<Text
+							text={ t('serviceLocation.relatedArticle') }
+							className='border-b-2 md:border-b-4 border-green-secondary w-fit pb-1'
+							fontWeight='700'
+							fontSize='24px'
+							lineHeight='29px'
+							subClassName='max-sm:!text-base'
+						/>
+						{ renderRelatedNews() }
+					</div>
+				}
 			</div>
-		</CentreOfExcellenceStyle>
+		</div>
 	);
 };
 

@@ -170,7 +170,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 													htmlStr={ data?.short_description ?? '' } />
 											</div>
 										}
-										footer={ <CardFooter content={ t('readMoreLabel') } /> }
+										footer={ <CardFooter content={ t('readMoreLabel') } textClassName='max-sm:text-xs' /> }
 										className='!m-0 w-[92%] md:w-full'
 										iconShare={ true }
 										to={ `/news/${ data?.slug }` }
