@@ -191,7 +191,7 @@ export default function Page({ params }: Props) {
 		}
 		return doctor?.data?.name;
 	};
-	console.log(selectedHospital);
+
 	return (
 		<DoctorProfileStyle>
 			{
