@@ -36,11 +36,13 @@ type OptionProps = {
 	label: string;
 	value: string;
 	className?: string;
+	textClassName?: string;
 };
 export const Option: React.FC<OptionProps> = ({
 	label,
 	value,
 	className,
+	textClassName
 }) => {
 
 	return <RadioGroup.Option value={ value }>
@@ -49,7 +51,7 @@ export const Option: React.FC<OptionProps> = ({
 				<RadioOptionContainer className={ className }>
 					<RadioPill checked={ checked } />
 					{ /* <span className={ checked ? 'bg-blue-200' : '' }>{ label }</span> */ }
-					<Text text={ label } fontSize='14px' lineHeight='20px' fontWeight='500' />
+					<Text text={ label } fontSize='14px' lineHeight='20px' fontWeight='500' subClassName={ textClassName } />
 				</RadioOptionContainer>
 			</div>
 		) }

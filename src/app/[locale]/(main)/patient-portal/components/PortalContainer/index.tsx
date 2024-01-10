@@ -238,7 +238,9 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 										<Text
 											text={ child.label }
 											fontWeight={ activeTabIndex === child.id ? '700' : '400' }
-											color={ activeTabIndex === child.id ? colors.paradiso.default : colors.grey.darker } />
+											color={ activeTabIndex === child.id ? colors.paradiso.default : colors.grey.darker }
+											subClassName='!text-xs !leading-5'
+										/>
 									</button>
 								)) }
 							</div>
