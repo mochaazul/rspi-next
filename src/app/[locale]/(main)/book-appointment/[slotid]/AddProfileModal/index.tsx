@@ -177,7 +177,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					fontSize='24px'
 					fontWeight='700'
 					lineHeight='28px'
-					text={ selfProfile ? t('profileSelector.selfLabel') : t('profileSelector.other') }
+					text={ type === 'self' ? t('profileSelector.addSelfProfile') : t('profileSelector.addOtherProfile') }
 				/>
 			</ModalHeader>
 			<NotificationPanel

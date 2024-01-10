@@ -123,6 +123,8 @@ export default {
 				},
 				selfLabel: 'Profil Diri sendiri :',
 				other: 'Orang lain :',
+				addSelfProfile: 'Tambah Profil Diri Sendiri :',
+				addOtherProfile: 'Tambah Profil Orang Lain :',
 				form: {
 					selfHeading: 'Tambah profil diri sendiri',
 					otherHeading: 'Tambah profil orang lain',

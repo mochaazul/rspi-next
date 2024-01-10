@@ -131,7 +131,7 @@ export default function Page({ params }: Props) {
 		return '';
 	};
 
-	const onBookHandler = async() => {
+	const onBookHandler = async () => {
 		try {
 			const token = await cookiesHelper.getToken();
 			const userData = await cookiesHelper.getUserData();

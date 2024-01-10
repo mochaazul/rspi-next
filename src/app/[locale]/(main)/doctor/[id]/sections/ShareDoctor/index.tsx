@@ -42,7 +42,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 				</div>
 				<div className='cursor-pointer'>
 					<Link href={ `https://twitter.com/intent/tweet?url=&text=${ shareMsg }` } target='_blank'>
-						<Images.TwitterLogo
+						<Images.XLogo
 							width='16px'
 							height='16px' />
 					</Link>
@@ -59,7 +59,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 					<Icons.Link width='16px' height='16px' />
 				</div>
 				<div className='cursor-pointer' >
-					<Link href={ `https://t.me/share/url?url=${hostname}&text=${teleMsg}` } target='_blank'>
+					<Link href={ `https://t.me/share/url?url=${ hostname }&text=${ teleMsg }` } target='_blank'>
 						<Images.TelegramLogo
 							width='16px'
 							height='16px'

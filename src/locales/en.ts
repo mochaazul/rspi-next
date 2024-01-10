@@ -116,6 +116,8 @@ export default {
 				},
 				selfLabel: 'Your Profile :',
 				other: 'Other\'s Profile:',
+				addSelfProfile: 'Add Your Profile :',
+				addOtherProfile: 'Add Other Profile :',
 				form: {
 					selfHeading: 'Add "Self" profile',
 					otherHeading: 'Add other\'s profile',

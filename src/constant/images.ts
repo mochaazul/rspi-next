@@ -7,6 +7,7 @@ import GooglePlay from '/public/images/google-play.png';
 import AppStore from '/public/images/app-store.png';
 import FacebookLogo from '/public/svg/facebook.svg';
 import TwitterLogo from '/public/svg/twitter_x_dark.svg';
+import XLogo from '/public/svg/x.svg';
 import YoutubeLogo from '/public/svg/youtube.svg';
 import InstagramLogo from '/public/svg/ig_dark.svg';
 import AmbulanceIcon from '/public/svg/ambulance.svg';
@@ -65,6 +66,9 @@ import ProfilePatient from '/public/images/PatientPortal/profilePatient.png';
 
 import DoctorProfile from '/public/images/samples/doctor-profile.png';
 import ClosePng from '/public/images/ic/close.svg';
+import PlusCircle from '/public/svg/plus-circle.svg';
+
+import SlotEmptyIc from '/public/images/slot_empty_state.png';
 
 export default {
 	PokemonIllu: PokemonIllu,
@@ -123,5 +127,8 @@ export default {
 	CendrawatiReview,
 	SarwonoReview,
 	AugustiniReview,
-	ClosePng
+	ClosePng,
+	PlusCircle,
+	XLogo,
+	SlotEmptyIc,
 };
