@@ -4,7 +4,7 @@ import { EmptyWarningContainer, TimeSlotPill } from './style';
 import { FindDoctorDetail, TimeSlot } from '@/interface';
 import { formatTimeslot } from '@/helpers/datetime';
 import { VisitScheduleStyle } from '../../style';
-import { colors, icons } from '@/constant';
+import { Images, colors, icons } from '@/constant';
 import Text from '@/components/ui/Text';
 import Spinner from '@/components/ui/Spinner';
 import Button from '@/components/ui/Button';
@@ -56,8 +56,7 @@ const VisitSchedule: React.FC<Props> = ({
 
 	const renderEmptyState = (
 		<div className='flex flex-col items-center justify-center h-full'>
-
-			<icons.EmptyCalendar />
+			<img src={ Images.SlotEmptyIc.src } className='w-[40px] h-[40px] mb-2 md:w-[62px] h-[62px] md:mb-4' />
 			<Text
 				fontSize='16px'
 				fontWeight='400'

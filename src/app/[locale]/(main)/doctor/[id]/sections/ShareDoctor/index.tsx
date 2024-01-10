@@ -43,7 +43,9 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 				</div>
 				<div className='cursor-pointer'>
 					<Link href={ `https://twitter.com/intent/tweet?url=&text=${ shareMsg }` } target='_blank'>
-						<Image src='/images/ic/twitter_x_dark.svg' width={ 16 } height={ 16 } alt='' />
+						<Images.XLogo
+							width='16px'
+							height='16px' />
 					</Link>
 				</div>
 				<div className='cursor-pointer'>

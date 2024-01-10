@@ -159,10 +159,10 @@ export const ConfirmationModal = ({
 							lineHeight='20px'
 						/>
 					</div>
-					<hr />
 					{
 						penjamin === 'asuransi'
 						&& <>
+							<hr />
 							<Text
 								text={ t('insuranceDataLabel') }
 								fontWeight='700'

@@ -10,12 +10,10 @@ import { isEmpty } from 'lodash';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { splitDate } from '@/helpers/datetime';
-import Image from 'next/image';
 import Text from '@/components/ui/Text';
 import Modal from '@/components/ui/Modal';
 import { ProfileModalContainer } from '../AddProfileModal/style';
 import Button from '@/components/ui/Button';
-import { useDeleteFamilyProfileMutation } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
 import { deleteFamilyProfile } from '@/lib/api/profile';
 import { isMobile } from 'react-device-detect';
@@ -48,8 +46,9 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete, clas
 		</ProfileCardHeader>
 		{
 			isMobile ?
-				<ProfileCardRow className='gap-x-[2px]'>
-					<Text text={ `${ profile.phone }  |  ` } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+				<ProfileCardRow className='gap-x-[4px]'>
+					<Text text={ `${ profile.phone } ` } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+					<Text text={ `|` } fontSize='12px' fontWeight='900' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 					<Text text={ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 				</ProfileCardRow> :
 				<>
@@ -197,10 +196,10 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 				className='flex justify-between'
 			>
 				<Text text={ t('other') } fontWeight='900' />
-				<span className='flex flex-row gap-[4px] items-center cursor:pointer md:hidden' onClick={ () => { () => onAddNewProfileBtn('other'); } }>
-					<Image
-						src={ icons.PlusCircle }
-						alt='' />
+				<span className='flex flex-row gap-[4px] items-center cursor:pointer' onClick={ () => onAddNewProfileBtn('other') }>
+					<Images.PlusCircle
+						width='13px'
+						height='13px' />
 					<Text text={ t('addNewProfile') } color={ colors.green.brandAccent } fontWeight='900' />
 				</span>
 			</section>
@@ -217,7 +216,6 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 							setSelectedProfileOnDelete(profile);
 							setShowDeleteModal(true);
 						} } key={ profile.id } profile={ profile } onClick={ id => { onSelectProfile(id, false); } } isActive={ selectedProfile === profile.id } isSelf={ false } />)) }
-						{ renderAddProfileFamily() }
 					</>
 				}
 			</CardListsContainer>

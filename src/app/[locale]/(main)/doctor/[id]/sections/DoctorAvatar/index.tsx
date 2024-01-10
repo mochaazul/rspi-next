@@ -11,8 +11,8 @@ const DoctorAvatar: React.FC<Props> = ({ profile_url, className }) => {
 
 	return <>
 		<div className={ `mb-[30px] max-sm:flex max-sm:justify-center ${ className }` }>
-			<div className='object-cover rounded lg:w-[254px] lg:h-[304px] w-[118px] h-[118px] relative'>
-				<Image src={ imgUrl } objectFit='cover' fill alt='doctor image' />
+			<div className='object-cover lg:w-[254px] lg:h-[304px] w-[118px] h-[118px] relative'>
+				<Image src={ imgUrl } className='rounded-[5px]' objectFit='cover' fill alt='doctor image' />
 			</div>
 			<ShareDoctor className='max-sm:hidden' />
 		</div>

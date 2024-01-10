@@ -33,24 +33,18 @@ const NeedLoginModal = ({
 	};
 
 	return (
-		<Modal visible={ visible } backdropClassname='backdrop-blur-md'>
+		<Modal visible={ visible } backdropClassname='backdrop-blur-md' width='526px'
+			containerClassName='mx-[10px]'>
 			<div className='flex flex-col items-center'>
 				<center>
 					<icons.WarningIcon />
 				</center>
-				<Text
-					text={ t('heading') }
-					fontWeight='700'
-					fontSize='24px'
-					className='pt-6'
-				/>
-				<Text
-					text={ t('subHeading') }
-					fontWeight='400'
-					fontSize='16px'
-					color='#6A6D81'
-					className='py-[12px]'
-				/>
+				<p className='text-xl font-black md:text-2xl pt-6 font-lato'>
+					{ t('heading') }
+				</p>
+				<p className='text-[16px] text-[#6A6D81] text-center pb-[18px] md:pt-[12px] md:pb-[24px] font-lato'>
+					{ t('subHeading') }
+				</p>
 				<Button className='max-w-full' theme='primary' onClick={ handleLogout }>{ t('btnLabel') }</Button>
 			</div>
 		</Modal>
