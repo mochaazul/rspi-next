@@ -85,12 +85,9 @@ import EmptyCalendar from '/public/svg/calendar_empty_state.svg';
 import AddButton from '/public/svg/btn_add.svg';
 import EmptyProfile from '/public/images/ic/empty_profile.svg';
 import Download from '/public/images/ic/download.svg';
-import SlotEmptyIc from '/public/svg/slot_empty_state.svg';
-
 
 const icons = {
 	EmptyCalendar,
-	SlotEmptyIc,
 	EmptyVisitHistories,
 	ExclamationGreen,
 	PlusCircle,
