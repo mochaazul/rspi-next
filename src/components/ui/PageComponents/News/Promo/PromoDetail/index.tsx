@@ -13,6 +13,8 @@ import TextHtml from '@/components/ui/TextHtml';
 
 import SocialShare from './SocialShare';
 import { getScopedI18n } from '@/locales/server';
+import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
+import LangWrapper from '@/components/ui/LangWrapper';
 
 type Props = {
 	selectedEvent: any;
@@ -32,7 +34,7 @@ const PromoDetail: React.FC<Props> = async({
 
 	return (
 		<div>
-			<Breadcrumbs datas={ breadcrumbsPath } />
+			<BreadcrumbsServer datas={ breadcrumbsPath } />
 			<div className='mt-[50px]'>
 				<Text
 					fontType='h1'
@@ -132,7 +134,9 @@ const PromoDetail: React.FC<Props> = async({
 									color={ colors.paradiso.default } />
 							</section>
 							<div className='pt-[10px]' />
-							<PromoPackages showAsRelated={ true } events={ eventsOther } />
+							<LangWrapper>
+								<PromoPackages showAsRelated={ true } events={ eventsOther } />
+							</LangWrapper>
 						</div>
 					</div>
 				</div>
