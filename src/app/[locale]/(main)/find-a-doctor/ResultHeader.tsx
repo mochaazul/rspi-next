@@ -57,28 +57,33 @@ const ResultHeader = ({ doctorCount, setter, getter, reset, loading }: Props) =>
 		router.push(`${ pathName }?${ params.toString() }`, {});
 	};
 		 
-	if (loading) return <LoadingSkeleton type='line'/>;
-
 	return (
 		<div>
 			{ /* Doctor found counter */ }
-			<Text
-				fontSize='20px'
-				fontWeight='700'
-				lineHeight='24px'
-				className='mb-6 max-sm:hidden'
-				text={ `${ doctorCount } ${ t('label.doctorFound') }` }
-			/>
-			{ /* Cari Dokter - title - Mobile */ }
-			<Text
-				fontType='h2'
-				fontSize='20px'
-				lineHeight='24px'
-				fontWeight='700'
-				className='mb-6 sm:hidden'
-				color={ colors.grey.darker }
-				text={ t('heading') }
-			/>
+			{
+				loading
+					? <LoadingSkeleton type='line'/>
+					: <>
+						<Text
+							fontSize='20px'
+							fontWeight='700'
+							lineHeight='24px'
+							className='mb-6 max-sm:hidden'
+							text={ `${ doctorCount } ${ t('label.doctorFound') }` }
+						/>
+						{ /* Cari Dokter - title - Mobile */ }
+						<Text
+							fontType='h2'
+							fontSize='20px'
+							lineHeight='24px'
+							fontWeight='700'
+							className='mb-6 sm:hidden'
+							color={ colors.grey.darker }
+							text={ t('heading') }
+						/>
+					</>
+			}
+			
 			{ /* Input nama  dokter */ }
 			{
 				isMobile ?
