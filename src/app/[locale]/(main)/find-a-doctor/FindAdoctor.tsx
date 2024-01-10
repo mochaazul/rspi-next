@@ -135,8 +135,8 @@ export default function FindADoctorComponent({ hospital, clinics }: Props) {
 	};
 
 	return (
-		<div className='bg-[#FAFAFA] pt-[1px]'>
-			<PanelV1 className='pt-[0px] md:pt-[60px]'>
+		<div className='bg-[#FAFAFA]'>
+			<PanelV1 className='pt-[0px]'>
 				<PanelH1>
 					<LangWrapper>
 						<Breadcrumbs datas={ breadCrumbs } />
