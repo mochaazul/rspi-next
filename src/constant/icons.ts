@@ -81,13 +81,11 @@ import NoAppointmentSchedule from '/public/svg/no-appointment-schedule.svg';
 import Trash from '/public/svg/trash.svg';
 import UploadCloud from '/public/svg/upload-cloud.svg';
 import WarningIcon from '/public/svg/warning-icon.svg';
-import EmptyCalendar from '/public/svg/calendar_empty_state.svg';
 import AddButton from '/public/svg/btn_add.svg';
 import EmptyProfile from '/public/images/ic/empty_profile.svg';
 import Download from '/public/images/ic/download.svg';
 
 const icons = {
-	EmptyCalendar,
 	EmptyVisitHistories,
 	ExclamationGreen,
 	PlusCircle,
