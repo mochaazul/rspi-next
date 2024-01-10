@@ -152,9 +152,9 @@ export const CardContentWithInner = ({ title, description, author, RSLocation, i
 	</CardContentHTML>
 );
 
-export const CardFooter = ({ content, to }: { content: string; to?: string; }) => (
+export const CardFooter = ({ content, to, textClassName }: { content: string; to?: string; textClassName?: string; }) => (
 	<div className='flex flex-row gap-x-2 items-center'> { /* TODO: if use a Link it will cause an error <a> cannot appear as a descendant of <a> because CardWrapper = styled(Link) */ }
-		<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ content } />
+		<Text fontSize='16px' fontType='p' fontWeight='900' color={ colors.paradiso.default } text={ content } subClassName={ textClassName } />
 		<icons.LongArrowRight className='[&>path]:stroke-[#358888]' style={ { width: '20px' } } />
 	</div>
 );

@@ -29,22 +29,22 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 	const renderContent = useMemo(() => {
 		const Contents = [];
 		Contents.push(
-			<div className='mt-[30px] text-16' >
+			<div className='mt-8' >
 				<TextHtml className='innerHTML' htmlStr={ content?.conditions } />
 			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] text-16' >
+			<div className='mt-8' >
 				<TextHtml className='innerHTML' htmlStr={ content?.treatments } />
 			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px] text-16'>
+			<div className='mt-8'>
 				<TextHtml className='innerHTML' htmlStr={ content?.technology } />
 			</div>
 		);
 		Contents.push(
-			<div className='mt-[30px]'>
+			<div className='mt-8'>
 				{ content?.doctors?.map((doctor: any, index: number) => {
 					return <div key={ index } className='mb-[20px]'>
 						<Link href={ `/doctor/${ doctor?.doctor_code }` } className='hover:underline'>
@@ -59,12 +59,12 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 	}, [activeTabIdx, activeMenuIndex]);
 
 	return (
-		<div>
+		<div className='flex flex-col w-full'>
 			<Text fontSize='24px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h1' }>
 				{ content?.title }
 			</Text>
 
-			<div className='mt-[32px]'>
+			<div className='mt-4 md:mt-8'>
 				<CustomCarousel arrowButton={ true }>
 					{ content?.img_url?.map((image: any, index: any) => {
 						return <img
@@ -77,32 +77,41 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 				</CustomCarousel>
 			</div>
 
-			<div className='mt-[16px] md:hidden'>
+			<div className='mt-4 md:hidden'>
 				<CardMenu data={ centerOfExcellence } activeMenuIndex={ activeMenuIndex ?? '' } />
 			</div>
 
-			<div className='mt-[48px]'>
-				<div className='text-16' >
-					<TextHtml className='innerHTML' htmlStr={ content?.content } />
-				</div>
+			<div className='mt-8 md:mt-12'>
+				<TextHtml className='innerHTML' htmlStr={ content?.content } />
 			</div>
 
-			<div className='mt-[50px]'>
-				<div className='w-full overflow-auto'>
+			<div className='mt-8 md:mt-[50px] flex flex-col w-full'>
+				<div className='w-full'>
 					<Tabs
 						activeTabIndex={ activeTabIdx }
 						setActiveTabIndex={ setActiveTabIdx }
 						tabsData={ tabsData }
+						className='whitespace-nowrap overflow-y-hidden select-none flex flex-nowrap overflow-x-auto scrolling-touch scroll-smooth'
+						renderText={ (text: string, isActive?: boolean) => (
+							<Text
+								text={ text }
+								fontWeight={ isActive ? '900' : '400' }
+								color={ isActive ? colors.grey.darker : colors.grey.darkOpacity }
+								subClassName='max-sm:!font-bold'
+							/>
+						) }
 					/>
 				</div>
 				<div style={ { color: colors.grey.darker, lineHeight: '24px' } }>
 					{ renderContent }
 				</div>
 			</div>
-			<div className='mt-[62px]'>
-				<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h4' }>
-					{ t('serviceLocation.heading') }
-				</Text>
+			<div className='mt-8 md:mt-[62px]'>
+				{ content?.coe_hospitals?.length && (
+					<Text fontSize='20px' fontWeight='900' color={ colors.paradiso.default } fontType={ 'h4' }>
+						{ t('serviceLocation.heading') }
+					</Text>
+				) }
 
 				<div className='divide-y divide-[#EAEAEA]'>
 					{
@@ -162,10 +171,12 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 												<Text fontSize='14px' fontWeight='900' subClassName='leading-normal'>
 													{ t('serviceLocation.operationalHourHeading') }
 												</Text>
-												<Text fontSize='14px' fontWeight='400' subClassName='leading-normal'>
-													{
-														item.operational_hour?.map((operationalHour: string, index: number) => (<span key={ `op-hour-${ index }` }>{ operationalHour }</span>))
-													}
+												<Text fontSize='14px' fontWeight='400' className='leading-normal' fontType={ null }>
+													<ul className='list-disc list-outside pl-5'>
+														{
+															item.operational_hour?.filter((operationalHour: string) => !!operationalHour)?.map((operationalHour: string, index: number) => (<li key={ `op-hour-${ index }` }>{ operationalHour }</li>))
+														}
+													</ul>
 												</Text>
 											</div>
 										</div>

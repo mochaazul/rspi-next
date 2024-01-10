@@ -94,7 +94,7 @@ export default function Page({ params }: Props) {
 
 	useEffect(() => {
 		selectFirstHospital();
-	}, [hospitalArr]);
+	}, []);
 
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot>();
 

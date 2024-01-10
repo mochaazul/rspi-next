@@ -34,7 +34,9 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 	let relatedNews: I_RelatedNews[] = [];
 
 	if (paramsSlug === 'medical-specialties') {
-		const medicalSpecialitiesRes = await getMedicalSpecialities({ query: { footer_category: 'medical-specialities', is_publish: true } });
+		const medicalSpecialitiesRes = await getMedicalSpecialities({ query: { footer_category: 'medical-specialities', is_publish: true }, pagination: {
+			limit: 999
+		} });
 		medicalSpecialities = medicalSpecialitiesRes?.data;
 	} else {
 		const relatedNewsRes = await getFacilityRelatedNews({
@@ -112,15 +114,15 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 					<div className='mt-8 sm:mt-20'>
 						<Text
 							text={ t('relatedNewsHeading') }
-							className='border-b-2 md:border-b-4 border-[#358888] w-fit pb-1'
+							className='border-b-2 md:border-b-4 border-green-secondary w-fit pb-1'
 							fontWeight='700'
 							fontSize='24px'
 							lineHeight='29px'
 							subClassName='max-sm:!text-base'
 						/>
-						<div className='flex max-md:flex-no-wrap max-md:overflow-x-auto scrolling-touch scroll-smooth md:grid md:grid-cols-3 gap-4 xl2:gap-[30px]'>
+						<div className='flex max-md:flex-nowrap max-md:overflow-x-auto scrolling-touch scroll-smooth md:grid md:grid-cols-3 gap-4 xl2:gap-[30px] mt-4 md:mt-[30px]'>
 							{
-								relatedNews.map((data, index) => (
+								relatedNews?.slice(0, 3)?.map((data, index) => (
 									<Card
 										key={ index }
 										id={ data?.id }
@@ -139,7 +141,8 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 													lineHeight='17px'
 													color={ colors.grey.dark }
 													subClassName='max-sm:text-xs'
-													text={ moment(data?.posted_date_news).locale(currentLang).format('dddd, DD MMM YYYY') }
+													text={ moment(data?.posted_date_news).locale(currentLang)
+														.format('dddd, DD MMM YYYY') }
 												/>
 											</div>
 										}
@@ -160,7 +163,7 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 													color={ colors.grey.dark }
 													text={ data?.author_name }
 													className='mt-1 sm:mt-[5px]'
-													subClassName='max-sm:!text-xs'
+													subClassName='max-sm:!text-xs max-sm:leading-[18px]'
 													lineHeight='24px'
 												/>
 
@@ -170,8 +173,8 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 													htmlStr={ data?.short_description ?? '' } />
 											</div>
 										}
-										footer={ <CardFooter content={ t('readMoreLabel') } /> }
-										className='mb-0 w-[304px] md:w-full'
+										footer={ <CardFooter content={ t('readMoreLabel') } textClassName='max-sm:text-xs' /> }
+										className='!m-0 w-[92%] md:w-full'
 										iconShare={ true }
 										to={ `/news/${ data?.slug }` }
 									/>
