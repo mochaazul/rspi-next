@@ -6,14 +6,16 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useScopedI18n } from '@/locales/client';
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import LoadingSkeleton from '@/components/Layout/LoadingSkeleton';
 
 type Props = {
 	doctorCount: number;
 	setter: (value: string) => void,
 	getter: () => string | null,
 	reset: boolean,
+	loading: boolean
 };
-const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
+const ResultHeader = ({ doctorCount, setter, getter, reset, loading }: Props) => {
 
 	const [keywordValue, setKeywordValue] = useState<string>();
 
@@ -54,27 +56,34 @@ const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
 		params.set('day', value);
 		router.push(`${ pathName }?${ params.toString() }`, {});
 	};
-
+		 
 	return (
 		<div>
 			{ /* Doctor found counter */ }
-			<Text
-				fontSize='20px'
-				fontWeight='700'
-				lineHeight='24px'
-				className='mb-6 max-sm:hidden'
-				text={ `${ doctorCount } ${ t('label.doctorFound') }` }
-			/>
-			{ /* Cari Dokter - title - Mobile */ }
-			<Text
-				fontType='h2'
-				fontSize='20px'
-				lineHeight='24px'
-				fontWeight='700'
-				className='mb-6 sm:hidden'
-				color={ colors.grey.darker }
-				text={ t('heading') }
-			/>
+			{
+				loading
+					? <LoadingSkeleton type='line'/>
+					: <>
+						<Text
+							fontSize='20px'
+							fontWeight='700'
+							lineHeight='24px'
+							className='mb-6 max-sm:hidden'
+							text={ `${ doctorCount } ${ t('label.doctorFound') }` }
+						/>
+						{ /* Cari Dokter - title - Mobile */ }
+						<Text
+							fontType='h2'
+							fontSize='20px'
+							lineHeight='24px'
+							fontWeight='700'
+							className='mb-6 sm:hidden'
+							color={ colors.grey.darker }
+							text={ t('heading') }
+						/>
+					</>
+			}
+			
 			{ /* Input nama  dokter */ }
 			{
 				isMobile ?

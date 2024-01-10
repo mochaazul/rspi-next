@@ -83,7 +83,7 @@ export const Header = ({
 
 	const notificationResponseData = getNotification?.data;
 
-	const handleClickLogout = async () => {
+	const handleClickLogout = async() => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			await clearSWRCache(cache);
@@ -462,11 +462,7 @@ export const Header = ({
 											{ Object.values(facilityServicesData || [])?.map((item, idx) => (
 												<Link href={ `/facilities-service/${ item.slug }` } key={ idx }>
 													<div className='hospital-list group/dropDownList border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814]'>
-														{ /* {
-															item?.image_url?.[0] && (
-																<Image src={ item?.image_url?.[0] } width={ 60 } height={ 60 } alt={ 'facilities-image' } />
-															)
-														} */ }
+														
 														<div className='ml-[10px] w-[380px]'>
 															<Text subClassName={ 'group-hover/dropDownList:text-green-secondary' } text={ item?.name } fontSize='16px' fontWeight='900' />
 														</div>
@@ -474,12 +470,10 @@ export const Header = ({
 													</div>
 												</Link>
 											)) }
-
 											<Link href={ '/facilities-service/medical-specialties' }>
-												<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814]'>
-													<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
-													<div className='ml-[10px] w-[310px]'>
-														<Text text={ 'Medical Specialties' } fontSize='16px' fontWeight='900' color={ colors.paradiso.default } />
+												<div className='hospital-list group/dropDownList border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814]'>
+													<div className='ml-[10px] w-[380px]'>
+														<Text subClassName={ 'group-hover/dropDownList:text-green-secondary' } text={ 'Medical Specialties' } fontSize='16px' fontWeight='900' />
 													</div>
 													<icons.ArrowRight className='ml-[27px] mr-auto' />
 												</div>

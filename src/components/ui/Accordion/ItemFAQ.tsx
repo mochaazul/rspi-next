@@ -79,20 +79,7 @@ const ItemFAQ = (props: ItemType) => {
 					</div>
 				</div>
 				<div className='item-desc'>
-					{
-						props.isJSXDesc ?
-							props.readMore ?
-								<div>
-									<p className='line-clamp-2'>
-										{ props.desc_jsx }
-									</p>
-									{ buttonReadMore() }
-								</div>
-								:
-								props.desc_jsx
-							:
-							itemRenderShortDesc()
-					}
+					{ props.isJSXDesc ? props.desc_jsx : itemRenderShortDesc() }
 				</div>
 			</div>
 			<div className='grow-0 cursor-pointer' onClick={ handleToggleOpen }>

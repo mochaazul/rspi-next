@@ -426,7 +426,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 			<BottomBar>
 				<div className='lg:w-[1110px] w-full mx-auto max-sm:mx-[15px] md:flex md:justify-end gap-[12px] flex justify-between'>
 					<Button label={ t('form.btnLabel.back') } theme='outline' $hoverTheme='primary' className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] w-full md:w-auto' onClick={ () => { navigate.back(); } } />
-					<Button label={ t('form.btnLabel.submit') } className='h-[37px] py-[0px] md:pt-[13px] px-[40px] md:pb-[12px] w-full md:w-auto' disabled={ bookingLoading } onClick={ () => { onBookVisit(); } } />
+					<Button label={ t('form.btnLabel.submit') } className='py-[0px] md:pt-[13px] px-[40px] md:pb-[12px] w-full md:w-auto' disabled={ bookingLoading } onClick={ () => { onBookVisit(); } } />
 				</div>
 			</BottomBar>
 			<AddProfileModal

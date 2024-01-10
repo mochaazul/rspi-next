@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { colors } from '@/constant';
 
 interface CheckboxType {
-	isslider?: boolean;
+	$isslider?: boolean;
 	checkposition?: 'left' | 'right';
 }
 
@@ -18,7 +18,7 @@ export const CheckboxStyle = styled.div<CheckboxType>`
 	input[type='checkbox'] {
 		display: none;
 
-		${ props => !props.isslider && `
+		${ props => !props.$isslider && `
 			& + label .check-box {
 				display: inline-block;
 				border: 1px solid ${ colors.paradiso.default };
@@ -42,7 +42,7 @@ export const CheckboxStyle = styled.div<CheckboxType>`
 		`}
 	}
 
-	${ props => props.isslider && `
+	${ props => props.$isslider && `
 		label {
 			.check-box-cont {
 				height: 32px;

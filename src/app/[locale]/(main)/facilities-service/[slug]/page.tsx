@@ -34,7 +34,9 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 	let relatedNews: I_RelatedNews[] = [];
 
 	if (paramsSlug === 'medical-specialties') {
-		const medicalSpecialitiesRes = await getMedicalSpecialities({ query: { footer_category: 'medical-specialities', is_publish: true } });
+		const medicalSpecialitiesRes = await getMedicalSpecialities({ query: { footer_category: 'medical-specialities', is_publish: true }, pagination: {
+			limit: 999
+		} });
 		medicalSpecialities = medicalSpecialitiesRes?.data;
 	} else {
 		const relatedNewsRes = await getFacilityRelatedNews({
@@ -139,7 +141,8 @@ export default async function FacilitiesServicesPage({ params }: { params: { slu
 													lineHeight='17px'
 													color={ colors.grey.dark }
 													subClassName='max-sm:text-xs'
-													text={ moment(data?.posted_date_news).locale(currentLang).format('dddd, DD MMM YYYY') }
+													text={ moment(data?.posted_date_news).locale(currentLang)
+														.format('dddd, DD MMM YYYY') }
 												/>
 											</div>
 										}

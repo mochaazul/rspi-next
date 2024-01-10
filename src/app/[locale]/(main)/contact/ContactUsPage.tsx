@@ -21,7 +21,7 @@ import { ContactUsPanel } from './style';
 import SelectRSLocation from './SelectRSLocation';
 import FAQDatas from './FAQDatas';
 import ContactUsForm from './ContactUsForm';
-import { PanelH2, PanelV1 } from '../style';
+import { PanelH2 } from '../style';
 
 const ContactUsPage = ({
 	hospitalSelector,
@@ -162,8 +162,8 @@ const ContactUsPage = ({
 						</p>
 						<div className='mt-10 faq-sections'>
 							<Accordion
-								itemTheme={ props => <Accordion.ItemFAQ { ...props } readMore={ true } isJSXDesc={ true } /> }
-								datas={ FAQDatas().filter((_faq, index) => index < 5) }
+								itemTheme={ props => <Accordion.ItemFAQ { ...props } isJSXDesc={ true } /> }
+								datas={ FAQDatas().filter((_faq, index) => index < 3) }
 							/>
 						</div>
 						<Button

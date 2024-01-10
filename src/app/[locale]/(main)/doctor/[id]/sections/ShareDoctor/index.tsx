@@ -4,30 +4,26 @@ import { FindDoctorDetail, ResponseType } from '@/interface';
 import { useGetDoctorDetail } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 import { useHostname } from '@/utils/useHostname';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import * as Icons from 'react-feather';
 
 type ShareDoctorProps = {
-	doctorDetail?: ResponseType<FindDoctorDetail>
-} & React.HTMLAttributes<HTMLDivElement>
+	doctorDetail?: ResponseType<FindDoctorDetail>;
+} & React.HTMLAttributes<HTMLDivElement>;
 
 const ShareDoctor = (props: ShareDoctorProps) => {
 	const t = useScopedI18n('page.doctorProfile.shareDoctor');
-	const pathName = usePathname();
 	const params = useParams();
 	const hostname = useHostname({ fullUrl: true });
 
 	const { data: doctor, isLoading, error: doctorError } = useGetDoctorDetail({ param: params.id as string });
 
-	const handleOpenSocmed = (link: string) => () => {
-		if (typeof window !== 'undefined') {
-			window.open(link, '_blank');
-		}
-	};
-
 	if (!doctor) return null;
 	const shareMsg = encodeURIComponent(t('wateleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0], link: hostname }));
+	const teleMsg = encodeURIComponent(t('teleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0] }));
+
 	return (
 		<div className={ props.className }>
 			<Text
@@ -37,28 +33,32 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 				fontSize='16px'
 				lineHeight='24px'
 			/>
-			<div className='flex gap-[10px] mt-[20px] '>
-				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.facebook.com/RumahSakitPondokIndah') }>
-					<Images.FacebookLogo
-						width='16px'
-						height='16px' />
+			<div className='flex items-center gap-[10px] mt-[20px] '>
+				<div className='cursor-pointer'>
+					<Link href={ `https://www.facebook.com/sharer/sharer.php?u=${ hostname }` } target='_blank'>
+						<Images.FacebookLogo
+							width='16px'
+							height='16px' />
+					</Link>
 				</div>
-				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://twitter.com/rspondokindah') }>
-					<Images.TwitterLogo
-						width='16px'
-						height='16px' />
+				<div className='cursor-pointer'>
+					<Link href={ `https://twitter.com/intent/tweet?url=&text=${ shareMsg }` } target='_blank'>
+						<Image src='/images/ic/twitter_x_dark.svg' width={ 16 } height={ 16 } alt='' />
+					</Link>
 				</div>
-				<div className='cursor-pointer' onClick={ handleOpenSocmed('https://www.linkedin.com/company/rumah-sakit-pondok-indah/') }>
-					<Images.LinkedinLogo
-						width='16px'
-						height='16px'
-					/>
+				<div className='cursor-pointer'>
+					<Link href={ `https://www.linkedin.com/feed/?shareActive=true&text=${ shareMsg }` } target='_blank'>
+						<Images.LinkedinLogo
+							width='16px'
+							height='16px'
+						/>
+					</Link>
 				</div>
-				<div className='cursor-pointer' onClick={ () => { navigator.clipboard.writeText(pathName); } }>
+				<div className='cursor-pointer' onClick={ () => navigator.clipboard.writeText(decodeURIComponent(shareMsg)).then(() => alert('Successfully copied')) }>
 					<Icons.Link width='16px' height='16px' />
 				</div>
 				<div className='cursor-pointer' >
-					<Link href={ `https://t.me/share/url?url=${hostname}&text=${shareMsg}` } target='_blank'>
+					<Link href={ `https://t.me/share/url?url=${ hostname }&text=${ teleMsg }` } target='_blank'>
 						<Images.TelegramLogo
 							width='16px'
 							height='16px'
@@ -66,7 +66,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 					</Link>
 				</div>
 				<div className='cursor-pointer'>
-					<Link href={ `https://wa.me/send?text=${shareMsg}` } target='_blank'>
+					<Link href={ `https://wa.me/send?text=${ shareMsg }` } target='_blank'>
 						<Images.WhatsappLogo
 							width='16px'
 							height='16px'
