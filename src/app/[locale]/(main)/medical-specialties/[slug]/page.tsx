@@ -10,7 +10,7 @@ import { getScopedI18n } from '@/locales/server';
 
 import { FooterServiceStyle } from './style';
 
-const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; }) => {
+const MedicalSpecialitiesPage = async({ params }: { params: { slug: string; }; }) => {
 	const footerSlugRes = await getMedicalSpecialityDetail({
 		param: decodeURIComponent(params?.slug)
 	});
