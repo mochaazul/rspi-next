@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import { FormikProps, useFormik } from 'formik';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 
 import { icons, colors } from '@/constant';
 import {
@@ -41,7 +42,6 @@ import { updateAvatar, updateProfile } from '@/lib/api/profile';
 import { regexInputPhone } from '@/constant/regExp';
 
 import ProfilePageStyle, { Divider } from './style';
-import { toast } from 'react-toastify';
 
 // NOTE: COULD BE SEPARATED ON TO HELPER FILE IF NEEDED
 const getBase64 = (file: File | null) => {
