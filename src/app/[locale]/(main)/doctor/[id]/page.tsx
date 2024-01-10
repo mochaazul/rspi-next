@@ -94,7 +94,7 @@ export default function Page({ params }: Props) {
 
 	useEffect(() => {
 		selectFirstHospital();
-	}, [hospitalArr]);
+	}, []);
 
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot>();
 
@@ -191,7 +191,7 @@ export default function Page({ params }: Props) {
 		}
 		return doctor?.data?.name;
 	};
-
+	console.log(selectedHospital);
 	return (
 		<DoctorProfileStyle>
 			{
