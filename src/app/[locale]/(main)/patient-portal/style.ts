@@ -132,7 +132,13 @@ export const VisitHistoryStyle = styled.div`
     width: 100%;
     padding: 25px;
     border-radius: 5px;
-    background: ${ colors.paradiso.opacity10 }
+    background: ${ colors.paradiso.opacity10 };
+    margin-top: 20px;
+
+    @media screen and (max-width: 640px) {
+      padding: 16px;
+      margin-top: 16px;
+    }
   }
 
   @media screen and (max-width: 1150px) {

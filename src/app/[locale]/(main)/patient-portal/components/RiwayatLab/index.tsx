@@ -97,12 +97,13 @@ const RiwayatLab = () => {
 					</table>
 				</div>
 			</CardPatientPortalStyle>
-			<div className='warning-text mt-[20px]'>
+			<div className='warning-text'>
 				<Text
 					text={ t('warning') }
 					fontSize='16px'
 					fontWeight='400'
 					color={ colors.paradiso.default }
+					subClassName='max-sm:text-xs max-sm:leading-[18px]'
 				/>
 			</div>
 		</>
