@@ -157,6 +157,7 @@ const NewsHealthArticlesPage = ({
 													color={ colors.grey.dark }
 													text={ moment(Object.values(articles || [])[0]?.posted_date)?.locale(currentLang)
 														.format('dddd, DD MMM YYYY') }
+													subClassName='max-sm:text-[12px]'
 												/>
 											</div>
 										</div>
