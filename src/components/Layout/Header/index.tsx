@@ -49,13 +49,14 @@ export default async function Header({
 		return (
 			<Link href={ `/hospital/${ item?.slug }` } key={ item.id } className='group/dropDownList hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814] cursor-pointer'>
 				<Image
-					alt={ `thumbnail-${item.name}` }
+					className='rounded-[5px]'
+					alt={ `thumbnail-${ item.name }` }
 					src={ item?.img_url?.[0] || '' }
 					width={ 80 }
 					height={ 80 }
 				/>
 				<div className='ml-[10px] w-[310px] hover:bg-transparent flex-1 '>
-					<Text text={ item?.name } fontSize='16px' fontWeight='900' subClassName={ 'group-hover/dropDownList:text-green-secondary' }/>
+					<Text text={ item?.name } fontSize='16px' fontWeight='900' subClassName={ 'group-hover/dropDownList:text-green-secondary' } />
 					<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
 				</div>
 				<icons.ArrowRight className='ml-[27px] mr-auto' />
@@ -68,7 +69,7 @@ export default async function Header({
 			<Link href={ `/center-of-excellence/${ item.slug }` }>
 				<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814] group/dropDownList'>
 					<div className='ml-[10px] w-[310px] hover:bg-transparent flex-1'>
-						<Text text={ item?.title } fontSize='16px' fontWeight='900' subClassName={ 'group-hover/dropDownList:text-green-secondary' }/>
+						<Text text={ item?.title } fontSize='16px' fontWeight='900' subClassName={ 'group-hover/dropDownList:text-green-secondary' } />
 					</div>
 					<icons.ArrowRight className='ml-[27px] ' />
 				</div>
@@ -81,7 +82,7 @@ export default async function Header({
 			<Link href={ `/facilities-service/${ item.slug }` }>
 				<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814] group/dropDownList'>
 					<div className='ml-[10px] w-[310px] flex-1'>
-						<Text text={ item?.name } fontSize='16px' fontWeight='900' subClassName={ 'group-hover/dropDownList:text-green-secondary' }/>
+						<Text text={ item?.name } fontSize='16px' fontWeight='900' subClassName={ 'group-hover/dropDownList:text-green-secondary' } />
 					</div>
 					<icons.ArrowRight className='ml-[27px]' />
 				</div>
@@ -92,12 +93,12 @@ export default async function Header({
 	const renderMedicalSpecialities = (<Link href={ '/facilities-service/medical-specialties' }>
 		<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814]'>
 			<div className='ml-[10px] w-[310px] flex-1'>
-				<Text text={ 'Medical Specialties' } fontSize='16px' fontWeight='900'/>
+				<Text text={ 'Medical Specialties' } fontSize='16px' fontWeight='900' />
 			</div>
 			<icons.ArrowRight className='ml-[27px]' />
 		</div>
 	</Link>);
-	
+
 	return (
 		<HeaderStyle className={ className }>
 			<div className='w-full'>
@@ -113,28 +114,28 @@ export default async function Header({
 							<HeaderBrand />
 						</div>
 						<DesktopMenu className='gap-x-6 hidden lg:flex'>
-							<Menus label={ t('home') } hrefKey='/'/>
+							<Menus label={ t('home') } hrefKey='/' />
 							<Menus label={ t('ourHospitals') } items={ hospitalData } itemRender={ renderHospitalMenuItem } />
-							<Menus label={ t('centreOfExcellence') } items={ centerOfExcellenceData } itemRender={ renderCoeMenuItem }/>
-							<Menus label={ t('facility') } items={ facilityServicesData } itemRender={ renderFacilitiesMenuItem } appendItem={ renderMedicalSpecialities }/>
-							<Menus label={ t('findDoctor') } hrefKey='/find-a-doctor'/>
+							<Menus label={ t('centreOfExcellence') } items={ centerOfExcellenceData } itemRender={ renderCoeMenuItem } />
+							<Menus label={ t('facility') } items={ facilityServicesData } itemRender={ renderFacilitiesMenuItem } appendItem={ renderMedicalSpecialities } />
+							<Menus label={ t('findDoctor') } hrefKey='/find-a-doctor' />
 						</DesktopMenu>
 
 						<section id='nav-separator' className='flex-1' />
 
 						{ /* Mobile View Notif ETC */ }
-						 <div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
+						<div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
 							{
 								isLoggedIn && (
 									<LangWrapper>
-										<NotificationBell session={ session }/>
+										<NotificationBell session={ session } />
 									</LangWrapper>
 								)
 							}
 							<MobileMenus
 								session={ session }
-							 	hospitals={ hospitalData }
-							 	coe={ centerOfExcellenceData }
+								hospitals={ hospitalData }
+								coe={ centerOfExcellenceData }
 								facilitiy={ facilityServicesData }
 							/>
 						</div>
@@ -150,8 +151,8 @@ export default async function Header({
 							{ isLoggedIn
 								? (
 									<LangWrapper>
-										<NotificationBell session={ session }/>
-										<ProfileMenus session={ session }/>
+										<NotificationBell session={ session } />
+										<ProfileMenus session={ session } />
 									</LangWrapper>
 								)
 								: (
