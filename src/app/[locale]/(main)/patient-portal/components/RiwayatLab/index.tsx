@@ -43,10 +43,10 @@ const RiwayatLab = () => {
 	const { data: labHistoryResponse, error: labHistoryError, isLoading: labHistoryLoading } = useGetLabHistory();
 
 	useEffect(() => {
-		if (labHistoryError) {
+		if (labHistoryError?.message?.toLowerCase() !== 'no medical record') {
 			toast.error(labHistoryError?.message);
 		}
-	}, [labHistoryError]);
+	}, [labHistoryError?.message]);
 
 	if (labHistoryLoading) return (
 		<Spinner />

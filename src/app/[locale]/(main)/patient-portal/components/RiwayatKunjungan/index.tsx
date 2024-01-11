@@ -27,10 +27,10 @@ const RiwayatKunjungan = ({ patientProfile }: RiwayatKunjunganProps) => {
 	const { data: visitHistoryResponse, error: visitHistoryError, isLoading: visitHistoryLoading } = useGetVisitHistory(session?.token);
 
 	useEffect(() => {
-		if (visitHistoryError) {
+		if (visitHistoryError?.message?.toLowerCase() !== 'no medical record') {
 			toast.error(visitHistoryError?.message);
 		}
-	}, [visitHistoryError]);
+	}, [visitHistoryError?.message]);
 
 	const sortVisitHistories = () => {
 		return visitHistoryResponse?.data.slice().sort((a, b) => {

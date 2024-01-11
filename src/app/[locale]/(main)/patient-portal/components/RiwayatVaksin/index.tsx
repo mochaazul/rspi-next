@@ -18,10 +18,10 @@ const RiwayatVaksin = () => {
 	const { data: vaccineHistoryResponse, error: vaccineHistoryError, isLoading: vaccineHistoryLoading } = useGetVaccineHistory();
 
 	useEffect(() => {
-		if (vaccineHistoryError) {
+		if (vaccineHistoryError?.message?.toLowerCase() !== 'no medical record') {
 			toast.error(vaccineHistoryError?.message);
 		}
-	}, [vaccineHistoryError]);
+	}, [vaccineHistoryError?.message]);
 
 	if (vaccineHistoryLoading) return (
 		<Spinner />
