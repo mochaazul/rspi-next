@@ -31,7 +31,7 @@ const NewsDetail = async({
 				<Text fontType='p' fontWeight='700' fontSize='20px' lineHeight='30px'>
 					{ filteredSelectedArticle?.short_description }
 				</Text>
-				<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
+				<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover rounded-[5px]' />
 
 				<TextHtml
 					style={ { color: colors.grey.dark } }
@@ -40,14 +40,10 @@ const NewsDetail = async({
 				/>
 
 				<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' }>
-					<section
-						className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }>
-						<Text
-							text={ 'Related News' }
-							className=''
-							fontWeight='700'
-							color={ colors.paradiso.default } />
-					</section>
+					
+					<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
+						{ t('relatedNews') }
+					</span>
 
 					<div className='divide-y divide-solid pt-[10px]'>
 						{ Object.values(relatedNews || []).map((a, index) => {
@@ -224,24 +220,17 @@ const NewsDetail = async({
 										</Link>
 									</Text>
 									: <></>
-							};
-
+							}
 							<SocialShare date={ filteredSelectedArticle.posted_date } />
 						</div >
 						<div className='content-wrapper flex mt-[50px] mb-[100px] max-sm:mt-[25px]'>
 							<div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]'} leftSide mt-0 ` }>
-								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() };
+								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' } >
 
-									<section
-										className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }
-									>
-										<Text
-											text={ 'Specialty' }
-											className=''
-											fontWeight='700'
-											color={ colors.paradiso.default } />
-									</section>
+									<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
+										{ t('specialty') }
+									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(specialty || [])?.map((specialty, index) => {
 											return (
@@ -273,15 +262,9 @@ const NewsDetail = async({
 							{ /* Dekstop View */ }
 							< div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] '} ` }>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'w-[349px]' }>
-									<section
-										className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }
-									>
-										<Text
-											text={ 'Related News' }
-											className=''
-											fontWeight='700'
-											color={ colors.paradiso.default } />
-									</section>
+									<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
+										{ t('relatedNews') }
+									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(relatedNews || [])?.map((a, index) => {
 											return (
@@ -313,15 +296,9 @@ const NewsDetail = async({
 									</div>
 								</div >
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'mt-[40px]' }>
-									<section
-										className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }
-									>
-										<Text
-											text={ 'Specialty' }
-											className=''
-											fontWeight='700'
-											color={ colors.paradiso.default } />
-									</section>
+									<span className={ `${specialty.length === 0 ? 'hidden' : ''} text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary` }>
+										{ t('specialty') }
+									</span>
 									<div className='divide-y divide-solid pt-[10px]'>
 										{ Object.values(specialty || [])?.map((specialty, index) => {
 											return (

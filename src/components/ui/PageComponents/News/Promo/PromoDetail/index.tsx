@@ -43,10 +43,12 @@ const PromoDetail: React.FC<Props> = async({
 					lineHeight='57px'>
 					{ selectedEvent?.title }
 				</Text>
-				<SocialShare />
+				<LangWrapper>
+					<SocialShare />
+				</LangWrapper>
 				<div className='content-wrapper mt-[20px] mb-[100px]'>
 					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
-						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
+						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full rounded-[5px]' alt='' />
 						<div className='mx-[16px] sm:mx-0 '>
 							<TextHtml
 								htmlStr={ selectedEvent?.content || '' }
@@ -125,15 +127,9 @@ const PromoDetail: React.FC<Props> = async({
 					</div>
 					<div className='sm:mt-[100px] mt-[40px] mx-[16px] sm:mx-0 '>
 						<div className='mt-[40px]'>
-							<section
-								className={ 'py-[20px] border-solid border-b-4 border-green-primary w-fit ' }
-							>
-								<Text
-									text={ t('more') }
-									className=''
-									fontWeight='700'
-									color={ colors.paradiso.default } />
-							</section>
+							<span className={ 'text-gray-1 font-bold w-auto sm:text-2xl text-[16px] py-[5px] sm:border-b-[4px] border-b-[2px] border-green-secondary' }>
+								{ t('more') }
+							</span>
 							<div className='pt-[10px]' />
 							<LangWrapper>
 								<PromoPackages showAsRelated={ true } events={ eventsOther } />
