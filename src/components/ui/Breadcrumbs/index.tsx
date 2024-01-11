@@ -31,7 +31,7 @@ const BreadCrumbs = (props: BreadcrumbsType) => {
 	}
 
 	return (
-		<div className='flex flex-row sm:ml-[-0.25rem] sm:pt-8'>
+		<div className='flex flex-row sm:ml-[-0.25rem] mt-[25px] sm:pt-8'>
 			{
 				datas.map((data, index) => (
 					<div key={ index } className='flex flex-row items-center'>
