@@ -72,10 +72,6 @@ export default async function PageWrapper({
 				<MedicalRecordReminder session={ session } />
 
 			</LangWrapper>
-			{
-				appStage !== 'prod' &&
-				<DevTools />
-			}
 		</>
 	);
 }
