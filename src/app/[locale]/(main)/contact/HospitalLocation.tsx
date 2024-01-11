@@ -115,7 +115,7 @@ const HospitalLocation = ({ hospitals }:Props) => {
 						loading='lazy'
 						referrerPolicy='no-referrer-when-downgrade' />
 				</div>
-				<div className='sm:hidden relative mt-[-50px] mx-4'>
+				<div className='sm:hidden relative mt-[-250px] mx-4 card-hospital-swap'>
 					<div className='global-shadow relative'>
 						<CustomCarousel autoplay={ false } onChangeIndex={ handleRSCarouselChange }>
 							{

@@ -8,6 +8,9 @@ export const ContactUsPanel = styled.div`
   .global-shadow {
     ${ GlobalBoxShadow }
   }
+  .card-hospital-swap .container__slider {
+    border-radius:10px !important;
+  }
   .container__slider {
     background-color: ${ colors.white.default };
     z-index: 100;
