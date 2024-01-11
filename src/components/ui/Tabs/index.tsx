@@ -13,6 +13,7 @@ type Props = {
 	isBackground?: boolean;
 	className?: HTMLDivElement['className'];
 	onClickItem?: (i: number) => void;
+	renderText?: (text: string, isActive?: boolean) => React.ReactNode;
 };
 
 const Tabs: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const Tabs: React.FC<Props> = ({
 	isBackground,
 	className,
 	onClickItem,
+	renderText
 }) => {
 	const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
 	const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
@@ -64,10 +66,14 @@ const Tabs: React.FC<Props> = ({
 									}
 									setActiveTabIndex(idx);
 								} }>
-								<Text
-									text={ tab }
-									fontWeight='700'
-									color={ activeTabIndex === idx ? colors.paradiso.default : colors.grey.dark } />
+								{ renderText
+									? renderText(tab, activeTabIndex === idx)
+									: (
+										<Text
+											text={ tab }
+											fontWeight='700'
+											color={ activeTabIndex === idx ? colors.paradiso.default : colors.grey.dark } />
+									) }
 							</button>
 						);
 					}) }

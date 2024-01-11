@@ -178,6 +178,7 @@ const NewsHealthArticlesPage = ({
 													</div>
 													<Link href={ `${ pathname }/${ data?.slug }` } style={ { zIndex: '-999 !important' } }>
 														<CardNews
+															lastIndex={ index  === 2 }
 															id={ data.id }
 															title={ data.title }
 															category={ data.category.charAt(0).toUpperCase() + data.category.slice(1) }
@@ -196,7 +197,7 @@ const NewsHealthArticlesPage = ({
 
 							<div className='mt-[60px] grid grid-cols-3 gap-3'>
 								{
-									articles.map((data, index) => (
+									articles?.slice(4, articles?.length).map((data, index) => (
 										<Card
 											key={ index }
 											id={ data?.id }

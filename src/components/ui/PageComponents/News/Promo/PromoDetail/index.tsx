@@ -50,7 +50,7 @@ const PromoDetail: React.FC<Props> = async({
 						<div className='mx-[16px] sm:mx-0 '>
 							<TextHtml
 								htmlStr={ selectedEvent?.content || '' }
-								className='innerHTML text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
+								className='innerHTML !h-auto'
 							/>
 							<div className='mt-[50px]'>
 								<p className={ 'sm:leading-[30px] leading-[24px] sm:text-[20px] text-[16px] font-bold text-green-secondary mt-[50px]' }>
@@ -71,20 +71,36 @@ const PromoDetail: React.FC<Props> = async({
 											)
 										}
 									</div>
-									<div className='grid grid-cols-2 gap-4 mt-6'>
-										<div>
-											<Text
-												fontType='p'
-												lineHeight='18px'
-												fontSize='14px'
-												fontWeight='900'
-												color={ colors.grey.darker }
-												text='Informasi'
-											/>
-											<TextHtml
-												htmlStr={ selectedEvent?.information || '' }
-												className='innerHTML mt-2 text-14'
-											/>
+									<div className='grid sm:grid-cols-2 grid-cols-1 gap-4 mt-6'>
+										<div className='flex flex-col gap-4'>
+											<div>
+												<Text
+													fontType='p'
+													lineHeight='18px'
+													fontSize='14px'
+													fontWeight='900'
+													color={ colors.grey.darker }
+													text={ t('info') }
+												/>
+												<TextHtml
+													htmlStr={ selectedEvent?.information || '' }
+													className='innerHTML mt-2'
+												/>
+											</div>
+											<div>
+												<Text
+													fontType='p'
+													lineHeight='18px'
+													fontSize='14px'
+													fontWeight='900'
+													color={ colors.grey.darker }
+													text={ t('operational') }
+												/>
+												<TextHtml
+													htmlStr={ selectedEvent?.operational_hour || '' }
+													className='mt-2 innerHTML'
+												/>
+											</div>
 										</div>
 
 										<div>
@@ -97,23 +113,8 @@ const PromoDetail: React.FC<Props> = async({
 												text={ t('phone') }
 											/>
 											<TextHtml
-												style={ { color: colors.grey.dark } }
 												htmlStr={ selectedEvent?.phone || '' }
-												className='mt-2 innerHTML text-14 leading-[18px] font-bold'
-											/>
-										</div>
-										<div>
-											<Text
-												fontType='p'
-												lineHeight='18px'
-												fontSize='14px'
-												fontWeight='900'
-												color={ colors.grey.darker }
-												text='Jam Operasional'
-											/>
-											<TextHtml
-												htmlStr={ selectedEvent?.operational_hour || '' }
-												className='mt-2 innerHTML text-14 leading-[18px]'
+												className='mt-2 innerHTML font-bold text-green-secondary'
 											/>
 										</div>
 										

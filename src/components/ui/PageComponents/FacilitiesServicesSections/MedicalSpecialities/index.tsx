@@ -125,7 +125,7 @@ const MedicalSpecialitiesComponent = ({
 						<Image
 							src='/images/specialities/background.png'
 							alt='medicalSpecialties'
-							className='object-cover object-top w-full'
+							className='object-cover object-top w-full rounded-[5px] '
 							width={ 1600 }
 							height={ 350 }
 						/>

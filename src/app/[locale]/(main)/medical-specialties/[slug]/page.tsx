@@ -73,7 +73,7 @@ const MedicalSpecialitiesPage = async({ params }: { params: { slug: string; }; }
 			</div>
 			<div className='mt-8 md:mt-12'>
 				<TextHtml
-					className='text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
+					className='innerHTML'
 					htmlStr={ detail?.content || '' }
 				/>
 			</div>

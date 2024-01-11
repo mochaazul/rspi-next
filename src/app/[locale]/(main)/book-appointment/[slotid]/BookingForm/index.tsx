@@ -223,7 +223,6 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				return 'APP';
 		}
 	};
-
 	const onConfirmed = async() => {
 		try {
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
@@ -235,7 +234,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				'time_slot': formatTimeslot(timeSlot?.session_app_start ?? ''),
 				'date': timeSlot?.date,
 				'user_name': 'RSPI_WEB',	// terserah
-				'type': isEqual(selfProfile?.email, selectedProfile?.email) ? 'self' : 'other', 	// self or other
+				'type': isEqual(userProfile, selectedProfile) ? 'self' : 'other', 	// self or other
 				'doctor_code': timeSlot?.doctor_code,
 				'gender': selectedProfile?.gender === 'Female' ? 'F' : 'M',
 				'date_of_birth': (selectedProfile?.birthdate && splitDate(selectedProfile.birthdate)) ?? '',
@@ -254,7 +253,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 
 			await bookAppointment(payloadBook).then(res => {
 				const pushNotifPayload: PayloadPushNotification = {
-					category: isEqual(selfProfile?.email, selectedProfile?.email) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
+					category: isEqual(userProfile, selectedProfile) ? 'konfirmasi_booking_self' : 'konfirmasi_booking_other',
 					source: 'Rebelworks',
 					title_idn: 'Permintaan booking Berhasil',
 					title_en: 'Booking Appointment Successful',
@@ -323,7 +322,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 								/>
 							</FormCol>
 							<FormCol>
-								<Radio groupLabel={ t('form.guarantor') } onChange={ setPenjamin } value={ penjamin } labelClassName='text-base font-normal leading-5' >
+								<Radio groupContainerClassname='gap-x-[32px]' groupLabel={ t('form.guarantor') } onChange={ setPenjamin } value={ penjamin } labelClassName='text-base font-normal leading-5' >
 									<Radio.Option label={ t('form.selfInsurance') } value={ 'pribadi' } />
 									<Radio.Option label={ t('form.thirdPartyInsurance') } value={ 'asuransi' } />
 								</Radio>
@@ -333,11 +332,19 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 							penjamin === 'asuransi'
 							&&
 							<div className='flex flex-col'>
+								<div className='flex items-start'>
+									<Text
+										text={ t('bookingForm.insuranceData') }
+										className='text-base font-black pb-[12px]'
+										color={ '#2A2536' }
+										textAlign='center'
+									/>
+								</div>
 								<FormRow className='flex flex-col md:flex-row'>
 									<FormCol >
 										<Form.TextField
 											label={ t('form.insuranceName') }
-											labelClassName='font-normal text-base'
+											labelClassName='font-normal text-sm'
 											placeholder={ t('form.insuranceName') }
 											width='100%'
 											id='asuransi'
@@ -350,7 +357,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 										<Form.TextField
 											isNumber
 											label={ t('form.insuranceNumber') }
-											labelClassName='font-normal text-base'
+											labelClassName='font-normal text-sm'
 											placeholder={ t('form.insuranceNumber') }
 											width='100%'
 											id='noAsuransi'
@@ -362,21 +369,21 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 								</FormRow>
 								<FormRow>
 									<div className='flex flex-col'>
-										<label className='text-base font-normal'>{ t('form.insuranceCard.label') }</label>
+										<label className='text-sm font-normal'>{ t('form.insuranceCard.label') }</label>
 										<div className='flex flex-row mt-2'>
-											<div className='w-[150px] h-[100px] md:w-[420px] md:h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
+											<div className='w-[150px] h-[100px] md:w-[420px] md:h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg' onClick={ () => uploadAsuransiFrontFileRef.current?.click() }>
 												{
 													tempImageAsuransiFront ?
 														<img
 															src={ URL.createObjectURL(tempImageAsuransiFront) }
 															alt={ 'Temp Image' }
 															className='w-full h-full object-cover border border-dashed'
-														/> : <></>
+														/> : <div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row px-3 gap-x-1 md:gap-x-2'>
+															<icons.UploadCloud />
+															<label color={ colors.green.brandAccent } className='text-[#358888] font-bold text-xs leading-[18px] md:text-base md:leading-[16px]'>{ t('form.insuranceCard.front') }</label>
+														</div>
 												}
-												<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row px-3 gap-x-1 md:gap-x-2' onClick={ () => uploadAsuransiFrontFileRef.current?.click() }>
-													<icons.UploadCloud />
-													<label color={ colors.green.brandAccent } className='text-[#358888] font-bold text-xs leading-[18px] md:text-base md:leading-[16px]'>{ t('form.insuranceCard.front') }</label>
-												</div>
+
 												<input
 													type='file'
 													ref={ uploadAsuransiFrontFileRef }
@@ -385,19 +392,20 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 													accept='image/*'
 												/>
 											</div>
-											<div className='w-[150px] h-[100px] md:w-[420px] md:h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg'>
+											<div className='w-[150px] h-[100px] md:w-[420px] md:h-[200px] mr-3 relative overflow-hidden cursor-pointer pt-2 border border-dashed rounded-lg' onClick={ () => uploadAsuransiBackFileRef.current?.click() }>
 												{
 													tempImageAsuransiBack ?
 														<img
 															src={ URL.createObjectURL(tempImageAsuransiBack) }
 															alt={ 'Temp Image' }
 															className='w-full h-full object-cover border border-dashed'
-														/> : <></>
+														/> :
+														<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row px-3 gap-x-1 md:gap-x-2'>
+															<icons.UploadCloud />
+															<label color={ colors.green.brandAccent } className='text-[#358888] font-bold text-xs leading-[18px] md:text-base md:leading-[16px]'>{ t('form.insuranceCard.back') }</label>
+														</div>
 												}
-												<div className='w-full h-full absolute items-center justify-center upload-mask top-0 flex flex-row px-3 gap-x-1 md:gap-x-2' onClick={ () => uploadAsuransiBackFileRef.current?.click() }>
-													<icons.UploadCloud />
-													<label color={ colors.green.brandAccent } className='text-[#358888] font-bold text-xs leading-[18px] md:text-base md:leading-[16px]'>{ t('form.insuranceCard.back') }</label>
-												</div>
+
 												<input
 													type='file'
 													ref={ uploadAsuransiBackFileRef }
@@ -414,15 +422,15 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 
 						}
 					</Form>
-					<DisclaimerAlert>
+					<DisclaimerAlert className='mt-[40px]'>
 						<Text color={ colors.green.brandAccent }>{ t('form.disclaimer') }</Text>
 					</DisclaimerAlert>
 				</div>
 			</div>
 			<BottomBar>
 				<div className='lg:w-[1110px] w-full mx-auto max-sm:mx-[15px] md:flex md:justify-end gap-[12px] flex justify-between'>
-					<Button label={ t('form.btnLabel.back') } theme='outline' $hoverTheme='primary' className='pt-[13px] px-[40px] pb-[12px] w-full md:w-auto' onClick={ () => { navigate.back(); } } />
-					<Button label={ t('form.btnLabel.submit') } className='pt-[13px] px-[40px] pb-[12px] w-full md:w-auto' disabled={ bookingLoading } onClick={ () => { onBookVisit(); } } />
+					<Button label={ t('form.btnLabel.back') } theme='outline' $hoverTheme='primary' className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] w-full md:w-auto' onClick={ () => { navigate.back(); } } />
+					<Button label={ t('form.btnLabel.submit') } className='py-[0px] md:pt-[13px] px-[40px] md:pb-[12px] w-full md:w-auto' disabled={ bookingLoading } onClick={ () => { onBookVisit(); } } />
 				</div>
 			</BottomBar>
 			<AddProfileModal

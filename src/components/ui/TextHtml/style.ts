@@ -3,11 +3,9 @@ import { colors } from '@/constant';
 import styled from 'styled-components';
 
 export const TextContainer = styled.div`
-  line-height: 30px;
   color: ${ colors.grey.darker };
   ol, ul {
     list-style: initial;
-    margin: revert;
     padding: revert;
   }
   &.text-14 {
@@ -26,10 +24,5 @@ export const TextContainer = styled.div`
 	a {
 		color: revert;
 		text-decoration: revert;
-	}
-	ul, ol {
-		list-style: revert;
-    margin: revert;
-    padding: revert;
 	}
 `;

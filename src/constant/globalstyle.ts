@@ -48,25 +48,6 @@ export default createGlobalStyle`
     stroke: ${ colors.white.default };
   }
 
-  .innerHTML {
-    line-height: 30px;
-    font-size: 20px;
-    color: ${ colors.grey.darker };
-    ol, ul {
-      list-style: initial;
-      margin: revert;
-      padding: revert;
-    }
-    &.text-14 {
-      font-size: 14px;
-      line-height: 18px;
-    }
-    &.text-16 {
-      font-size: 16px;
-      line-height: 24px;
-    }
-  }
-
   .btn-category {
     padding: 5px 10px;
     border-radius: 5px;

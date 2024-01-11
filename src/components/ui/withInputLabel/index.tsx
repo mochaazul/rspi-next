@@ -54,7 +54,7 @@ const withInputLabel = (WrappedComponent: WrappedComponentType['WrappedComponent
 			<div className={ `flex ${ labelHorizontal ? 'items-center' : '' } ${ labelHorizontal ? 'flex-row' : 'flex-col' } ${ props.labelGap && `gap-[${ props.labelGap }px]` }` }>
 				{
 					label ?
-						<div className={ `${ labelHorizontal ? 'mr-10' : 'mb-2' } ${ labelWrapperClassName }` }>
+						<div className={ `${ labelHorizontal ? 'mr-10' : 'mb-0.5' } ${ labelWrapperClassName }` }>
 							<LabelText htmlFor={ props.name } className={ props.labelClassName }>{ label }</LabelText>
 						</div> :
 						null

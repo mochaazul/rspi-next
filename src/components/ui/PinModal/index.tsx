@@ -81,13 +81,13 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 
 	return (
 		<>
-			<Modal visible={ visible } onClose={ handleOnClose }>
-				<PinModalContainer>
-					<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' />
-					<Text text={ t('subHeader') } fontWeight='400' fontSize='16px' lineHeight='normal' color={ colors.grey.default } />
+			<Modal visible={ visible } onClose={ handleOnClose } noPadding>
+				<PinModalContainer className='px-4 py-8 sm:px-8'>
+					<Text text={ t('header') } fontWeight='900' fontSize='28px' lineHeight='48px' subClassName='max-sm:text-xl' />
+					<Text text={ t('subHeader') } fontWeight='400' fontSize='20px' color={ colors.grey.default } subClassName='max-sm:text-sm leading-normal sm:leading-[30px]' />
 					{
 						error &&
-						<div className='mt-5 w-full'>
+						<div className='sm:mt-5 w-full'>
 							<NotificationPanel
 								showIconLeft={ false }
 								showIconRight={ false }
@@ -110,7 +110,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 							setEnableValidation(true);
 							formikPin.handleSubmit();
 						} }>
-						<div className='mt-12 mb-5'>
+						<div className='mt-8 sm:mt-12 mb-6'>
 							<Form.TextFieldPin
 								className='input'
 								digitLength={ 6 }
@@ -124,6 +124,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 								label={ t('pinLabel') }
 								errorMessage={ getValidationTranslation(tValidation, formikPin.errors.pin, { label: t('pinLabel') }) }
 								isError={ !!formikPin.errors.pin }
+								inputClassName='max-sm:text-lg'
 							/>
 						</div>
 						<div className='mb-10 flex justify-center'>
@@ -133,8 +134,8 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 								fontType={ null }
 								fontWeight='700'
 								color={ colors.paradiso.default }
-								className='ml-1 inline-block cursor-pointer'
-								subClassName='text-justify max-sm:leading-[18px]'
+								className='inline-block cursor-pointer max-sm:text-xs leading-normal'
+								subClassName='text-justify'
 								text={ t('forgotPin') }
 								onClick={ async () => {
 									try {
@@ -149,7 +150,7 @@ const PinModal = ({ visible, onSuccess, isLoading, onClose }: Props) => {
 								} }
 							/>
 						</div>
-						<Button type='submit' disabled={ checkPinLoading || isLoading } >
+						<Button type='submit' disabled={ checkPinLoading || isLoading } className='max-sm:text-sm'>
 							{ checkPinLoading || isLoading ? <Spinner /> : t('submitBtnLabel') }
 						</Button>
 					</Form>

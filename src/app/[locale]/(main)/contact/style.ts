@@ -18,6 +18,10 @@ export const ContactUsPanel = styled.div`
     position: absolute;
     z-index: 100;
   }
+  .faq-sections .item-desc a {
+    color: #1155CC;
+    text-decoration: underline !important;
+  }
 `;
 
 export const SelectRSLocationStyle = styled.div`

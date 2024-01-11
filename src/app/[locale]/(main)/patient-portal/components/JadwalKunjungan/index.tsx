@@ -39,8 +39,18 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 	return (
 		<>
 			<Radio onChange={ setBookType } value={ bookType } groupContainerClassname='md:divide-x md:divide-[#D0D5DD] gap-4 md:gap-0 mt-0 mb-4 md:mb-6'>
-				<Radio.Option label={ t('jadwalKunjungan.options.0') } value={ 'self' } className='md:px-4 md:py-2.5' />
-				<Radio.Option label={ t('jadwalKunjungan.options.1') } value={ 'other' } className='md:px-4 md:py-2.5' />
+				<Radio.Option
+					label={ t('jadwalKunjungan.options.0') }
+					value={ 'self' }
+					className='md:px-4 md:py-2.5'
+					textClassName='max-sm:text-xs max-sm:leading-5'
+				/>
+				<Radio.Option
+					label={ t('jadwalKunjungan.options.1') }
+					value={ 'other' }
+					className='md:px-4 md:py-2.5'
+					textClassName='max-sm:text-xs max-sm:leading-5'
+				/>
 			</Radio>
 			{
 				!appointmentLoading || !isValidating
@@ -54,9 +64,10 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 									fontWeight='700'
 									lineHeight='28px'
 									textAlign='center'
+									subClassName='max-sm:text-sm max-sm:leading-normal'
 								/>
 							</div>
-							<Button className='w-auto whitespace-nowrap py-3 sm:py-[15px] px-10 max-sm:text-sm' onClick={ () => navigate.push('/find-a-doctor') }>
+							<Button className='max-sm:mt-2 w-auto whitespace-nowrap py-3 sm:py-[15px] px-10 max-sm:text-sm' onClick={ () => navigate.push('/find-a-doctor') }>
 								{ t('jadwalKunjungan.label.emptyBtnCta') }
 							</Button>
 						</EmptyResultContainer>

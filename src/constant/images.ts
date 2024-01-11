@@ -6,9 +6,10 @@ import Profile from '/public/images/profile.svg';
 import GooglePlay from '/public/images/google-play.png';
 import AppStore from '/public/images/app-store.png';
 import FacebookLogo from '/public/svg/facebook.svg';
-import TwitterLogo from '/public/svg/twitter_x.svg';
+import TwitterLogo from '/public/svg/twitter_x_dark.svg';
+import XLogo from '/public/svg/x.svg';
 import YoutubeLogo from '/public/svg/youtube.svg';
-import InstagramLogo from '/public/svg/instagram.svg';
+import InstagramLogo from '/public/svg/ig_dark.svg';
 import AmbulanceIcon from '/public/svg/ambulance.svg';
 import CentreExcellenceCard1 from '/public/images/samples/Rectangle_73.jpg';
 import CentreExcellenceCard2 from '/public/images/samples/unsplash_7jjnJ-QA9fY.jpg';
@@ -64,6 +65,10 @@ import EmptyStatePatientPortal from '/public/images/PatientPortal/radiology.svg'
 import ProfilePatient from '/public/images/PatientPortal/profilePatient.png';
 
 import DoctorProfile from '/public/images/samples/doctor-profile.png';
+import ClosePng from '/public/images/ic/close.svg';
+import PlusCircle from '/public/svg/plus-circle.svg';
+
+import SlotEmptyIc from '/public/images/slot_empty_state.png';
 
 export default {
 	PokemonIllu: PokemonIllu,
@@ -122,4 +127,8 @@ export default {
 	CendrawatiReview,
 	SarwonoReview,
 	AugustiniReview,
+	ClosePng,
+	PlusCircle,
+	XLogo,
+	SlotEmptyIc,
 };

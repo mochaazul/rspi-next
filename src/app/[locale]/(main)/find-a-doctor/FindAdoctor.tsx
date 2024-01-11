@@ -142,8 +142,8 @@ export default function FindADoctorComponent({ hospital, clinics, doctorFallback
 	};
 
 	return (
-		<div className='bg-[#FAFAFA] pt-[1px]'>
-			<PanelV1 className='pt-[0px] md:pt-[60px]'>
+		<div className='bg-[#FAFAFA]'>
+			<PanelV1 className='pt-[0px]'>
 				<PanelH1>
 					<LangWrapper>
 						<Breadcrumbs datas={ breadCrumbs } />
@@ -157,9 +157,7 @@ export default function FindADoctorComponent({ hospital, clinics, doctorFallback
 
 						{ /* Doctors Pane */ }
 						<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
-
-							<ResultHeader doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } reset={ resetSearchDoctor } />
-
+							<ResultHeader loading={ doctorLoading } doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } reset={ resetSearchDoctor } />
 							<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
 								{ /* Applied dilter pills */ }
 								<div className='flex gap-2 sm:flex-wrap max-sm:flex-nowrap max-sm:pb-2'>

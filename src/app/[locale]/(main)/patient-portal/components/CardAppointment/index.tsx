@@ -227,7 +227,7 @@ const CardAppointment = (props: PropsType) => {
 								text={ mappingStatus(props.visit_status ?? '') }
 								fontWeight='700'
 								fontSize='14px'
-								subClassName='leading-normal text-center'
+								subClassName='max-sm:text-xs !leading-normal text-center'
 								color={ mappingStatusColor(props.visit_status ?? '') } />
 						</button>
 					</div>
@@ -241,9 +241,9 @@ const CardAppointment = (props: PropsType) => {
 							<div className='flex items-center justify-center'>
 								<Text
 									text={ t('jadwalKunjungan.offlineConsultation') }
-									fontWeight='700'
+									fontWeight='900'
 									fontSize='14px'
-									subClassName='text-center'
+									subClassName='max-sm:text-xs !leading-normal text-center'
 									color={ colors.white.default } />
 							</div>
 						</button>
@@ -261,6 +261,7 @@ const CardAppointment = (props: PropsType) => {
 									text={ t('jadwalKunjungan.teleconsultationLabel') }
 									fontWeight='700'
 									fontSize='14px'
+									subClassName='max-sm:text-xs !leading-normal text-center'
 									color={ colors.white.body } />
 							</div>
 						</button>

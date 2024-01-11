@@ -28,47 +28,49 @@ const AvailableAt: React.FC<Props> = async({ hospital }) => {
 							<Text className='mt-4 sm:mt-8' fontSize='20px' fontWeight='900' subClassName='!leading-normal'>
 								{ item?.unit }
 							</Text>
-							<Text className='mt-2 sm:mt-3' fontSize='16px' fontWeight='900' color={ colors.grey.dark } subClassName='max-sm:text-[#2A2536] max-sm:text-xs leading-[18px] sm:leading-normal max-sm:font-normal'>
+							<Text className='mt-2 sm:mt-3' fontSize='16px' fontWeight='900' color={ colors.grey.dark } subClassName='max-sm:text-sm !leading-normal'>
 								{ item?.floor }
 							</Text>
 							<div className='flex flex-col gap-y-3 sm:gap-y-4 mt-3 sm:mt-6'>
 								<div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
 									<div className='flex flex-col gap-y-2'>
-										<Text fontSize='14px' fontWeight='900' subClassName='max-sm:text-xs !leading-[18px]'>
+										<Text fontSize='14px' fontWeight='900' subClassName='leading-normal'>
 											{ t('phoneHeading') }
 										</Text>
-										<Text fontSize='14px' fontWeight='400' subClassName='max-sm:text-xs !leading-[18px]'>
+										<Text fontSize='14px' fontWeight='400' subClassName='leading-normal'>
 											<span style={ { color: colors.paradiso.default, fontWeight: '700' } }>{ item.hospital_phone || '-' }</span>
 										</Text>
 									</div>
 
 									<div className='flex flex-col gap-y-2'>
-										<Text fontSize='14px' fontWeight='900' subClassName='max-sm:text-xs !leading-[18px]'>
+										<Text fontSize='14px' fontWeight='900' subClassName='leading-normal'>
 											{ t('emailHeading') }
 										</Text>
-										<Text fontSize='14px' fontWeight='700' color={ colors.paradiso.default } subClassName='max-sm:text-xs !leading-[18px]'>
+										<Text fontSize='14px' fontWeight='700' color={ colors.paradiso.default } subClassName='leading-normal'>
 											{ item.hospital_email || '-' }
 										</Text>
 									</div>
 								</div>
 								<div className='grid sm:grid-cols-2 gap-3 sm:gap-4'>
 									<div className='flex flex-col gap-y-2'>
-										<Text fontSize='14px' fontWeight='900' subClassName='max-sm:text-xs !leading-[18px]'>
+										<Text fontSize='14px' fontWeight='900' subClassName='leading-normal'>
 											{ t('informationHeading') }
 										</Text>
-										<Text fontSize='14px' fontWeight='400' subClassName='max-sm:text-xs !leading-[18px]'>
+										<Text fontSize='14px' fontWeight='400' subClassName='leading-normal'>
 											{ item.information }
 										</Text>
 									</div>
 
 									<div className='flex flex-col gap-y-2'>
-										<Text fontSize='14px' fontWeight='900' subClassName='max-sm:text-xs !leading-[18px]'>
+										<Text fontSize='14px' fontWeight='900' subClassName='leading-normal'>
 											{ t('operationalHourHeading') }
 										</Text>
-										<Text fontSize='14px' fontWeight='400' subClassName='max-sm:text-xs !leading-[18px]'>
-											{
-												item.operational_hour?.map((operationalHour: string, index: number) => (<span key={ `op-hour-${ index }` }>{ operationalHour }</span>))
-											}
+										<Text fontSize='14px' fontWeight='400' className='leading-normal' fontType={ null }>
+											<ul className='list-disc list-outside pl-5'>
+												{
+													item.operational_hour?.filter(operationalHour => !!operationalHour)?.map((operationalHour: string, index: number) => (<li key={ `op-hour-${ index }` }>{ operationalHour }</li>))
+												}
+											</ul>
 										</Text>
 									</div>
 								</div>

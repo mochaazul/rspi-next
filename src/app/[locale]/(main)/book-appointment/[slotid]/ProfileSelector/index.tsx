@@ -4,20 +4,19 @@ import {
 	OtherProfileSection,
 	ProfileCardHeader, ProfileCardRow, ProfilePills, ProfileSelectorCard, ProfileSelectorContainer, SelfProfileSection
 } from './style';
-import { colors, icons } from '@/constant';
+import { Images, colors, icons } from '@/constant';
 import { UserDataDetail } from '@/interface';
 import { isEmpty } from 'lodash';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { splitDate } from '@/helpers/datetime';
-import Image from 'next/image';
 import Text from '@/components/ui/Text';
 import Modal from '@/components/ui/Modal';
 import { ProfileModalContainer } from '../AddProfileModal/style';
 import Button from '@/components/ui/Button';
-import { useDeleteFamilyProfileMutation } from '@/lib/api/client/profile';
 import { useScopedI18n } from '@/locales/client';
 import { deleteFamilyProfile } from '@/lib/api/profile';
+import { isMobile } from 'react-device-detect';
 
 type ProfileCardProps = {
 	profile: UserDataDetail,
@@ -25,33 +24,47 @@ type ProfileCardProps = {
 	isActive: boolean;
 	isSelf: boolean;
 	showModalDelete: (id: number, visible: boolean) => void;
+	className?: string;
 };
-const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete }: ProfileCardProps) => {
+const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete, className = 'max-sm:min-w-full max-sm:max-w-full' }: ProfileCardProps) => {
 	return (<ProfileSelectorCard isActive={ isActive } onClick={ () => { onClick(profile.id); } }
-		className='max-sm:min-w-full max-sm:max-w-full'
+		className={ className }
 	>
 		<ProfileCardHeader>
-			<ProfilePills />
+			<ProfilePills color={ isActive ? colors.green.light : colors.grey.light } />
 			<Text text={ profile.name } fontWeight='700' />
 			{
 				!isSelf &&
 				<div onClick={ async () => {
 					showModalDelete(profile?.id, true);
 				} }>
-					<icons.Trash />
+					<Images.ClosePng
+						width='13px'
+						height='13px' />
 				</div>
 			}
 		</ProfileCardHeader>
-		<ProfileCardRow>
-			<icons.Calendar16
-			/>
-			<Text text={ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } fontSize='14px' color={ colors.grey.darkOpacity } />
-		</ProfileCardRow>
-		<ProfileCardRow>
-			<icons.PhoneOutline
-			/>
-			<Text text={ profile.phone } fontSize='14px' color={ colors.grey.darkOpacity } />
-		</ProfileCardRow>
+		{
+			isMobile ?
+				<ProfileCardRow className='gap-x-[4px]'>
+					<Text text={ `${ profile.phone } ` } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+					<Text text={ `|` } fontSize='12px' fontWeight='900' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+					<Text text={ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+				</ProfileCardRow> :
+				<>
+					<ProfileCardRow>
+						<icons.Calendar16
+						/>
+						<Text text={ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } fontSize='14px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+					</ProfileCardRow>
+					<ProfileCardRow>
+						<icons.PhoneOutline
+						/>
+						<Text text={ `${ profile.phone }` } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+					</ProfileCardRow>
+				</>
+		}
+
 	</ProfileSelectorCard>);
 };
 
@@ -183,27 +196,26 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 				className='flex justify-between'
 			>
 				<Text text={ t('other') } fontWeight='900' />
-				<span className='flex flex-row gap-[4px] items-center cursor:pointer md:hidden' onClick={ () => { () => onAddNewProfileBtn('other'); } }>
-					<Image
-						src={ icons.PlusCircle }
-						alt='' />
+				<span className='flex flex-row gap-[4px] items-center cursor:pointer' onClick={ () => onAddNewProfileBtn('other') }>
+					<Images.PlusCircle
+						width='13px'
+						height='13px' />
 					<Text text={ t('addNewProfile') } color={ colors.green.brandAccent } fontWeight='900' />
 				</span>
 			</section>
 			<CardListsContainer
-				className='flex flex-col md:flex-row gap-[12px] md:gap-[30px] md:overflow-x-auto'
+				className='flex flex-row gap-[8px] md:gap-[16px] overflow-x-scroll scrollbar'
 			>
 				{ /* <ProfileCard /> */ }
 				{ isEmpty(familyProfiles) || selfProfile === null
 					? renderNoProfile()
 					:
 					<>
-						{ familyProfiles && familyProfiles?.map(profile => (<ProfileCard showModalDelete={ (id, visible) => {
+						{ familyProfiles && familyProfiles?.map(profile => (<ProfileCard className='w-40 p-[10px]' showModalDelete={ (id, visible) => {
 							setSelectedIdFamilyProfile(id);
 							setSelectedProfileOnDelete(profile);
 							setShowDeleteModal(true);
 						} } key={ profile.id } profile={ profile } onClick={ id => { onSelectProfile(id, false); } } isActive={ selectedProfile === profile.id } isSelf={ false } />)) }
-						{ renderAddProfileFamily() }
 					</>
 				}
 			</CardListsContainer>

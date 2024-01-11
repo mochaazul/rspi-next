@@ -53,11 +53,12 @@ const SuccessConfirmationModal = ({
 				lineHeight='28px'
 				text={ t('heading') } />
 			<Text
-				className='mt-[8px] mb-[32px]'
-				fontSize='14px'
+				className='mt-[8px] mb-[24px] px-4'
+				fontSize='16px'
 				fontWeight='400'
-				lineHeight='20px'
+				lineHeight='24px'
 				textAlign='center'
+				color='#667085'
 				text={ subHeadingText() } />
 
 			<Button label={ t('btnLabel') } onClick={ onclickButton } />

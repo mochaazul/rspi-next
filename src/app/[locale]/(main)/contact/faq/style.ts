@@ -18,8 +18,13 @@ export const FAQStyle = styled.div`
     }
   }
 
-  .item-desc a {
-    color: ${ colors.blue.default };
-    font-weight: 900;
+  .item-desc {
+    max-height: none !important;
   }
+
+  .item-desc a {
+    color: #1155CC;
+    text-decoration: underline !important;
+  }
+  
 `;
