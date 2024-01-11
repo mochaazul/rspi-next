@@ -31,7 +31,7 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 	});
 
 	useEffect(() => {
-		if (appointmentError?.message) {
+		if (appointmentError?.message?.toLowerCase() !== 'no medical record') {
 			toast.error(appointmentError?.message);
 		}
 	}, [appointmentError?.message]);
