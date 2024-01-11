@@ -66,7 +66,7 @@ const Combobox = ({
 		<div className='my-[5px]'>
 			<HeadlessCombobox
 				by='id'
-				value={ selected }
+				value={ value  }
 				onChange={ item => {
 					setSelected(item);
 					if (onSelectValue) {
