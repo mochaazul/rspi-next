@@ -93,6 +93,7 @@ const NotificationBell = ({ children, session }: Props) => {
 												fontWeight='400'
 												color={ colors.grey.pencil }
 												text={ moment(item.create_datetime)?.locale(currentLang)?.format('DD MMM, hh:mm A') }
+												subClassName='!text-xs'
 											/>
 											<Text
 												fontSize='14px'
@@ -103,10 +104,10 @@ const NotificationBell = ({ children, session }: Props) => {
 											/>
 											<Text
 												fontSize='12px'
-												lineHeight='20px'
 												fontWeight='400'
 												color={ colors.black.ink }
 												text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
+												subClassName='!text-xs'
 											/>
 										</div>
 									))
