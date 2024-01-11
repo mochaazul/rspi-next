@@ -47,13 +47,9 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete, clas
 		{
 			isMobile ?
 				<ProfileCardRow className='gap-x-[4px]'>
-					<p className={ `text-xs ${ isActive ? 'text-[#2A2536]' : 'text-[#6A6D81]' } font-lato` }>
-						{ profile.phone }
-					</p>
+					<Text text={ `${ profile.phone } ` } fontSize='12px' subClassName='text-xs' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 					<Text text={ `|` } fontSize={ '12px' } fontWeight='900' />
-					<p className={ `text-xs ${ isActive ? 'text-[#2A2536]' : 'text-[#6A6D81]' } font-lato` }>
-						{ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') }
-					</p>
+					<Text text={ `${ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } ` } fontSize='12px' subClassName='text-xs' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 				</ProfileCardRow> :
 				<>
 					<ProfileCardRow>
