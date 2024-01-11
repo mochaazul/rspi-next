@@ -8,14 +8,14 @@ import { useState } from 'react';
 
 const NewsLetter = () => {
 	const { trigger: subscribe } = useSubscribe();
-  
+
 	const [loadingSubs, setLoadingSubs] = useState<boolean>(false);
 	const [modalNewsletter, setModalNewsletter] = useState<boolean>(false);
 	const [emailNewsletter, setEmailNewsletter] = useState<string>('');
 	const [msgNewsletter, setMsgNewsletter] = useState<string>('');
 
 	const t = useScopedI18n('page.footer');
-  
+
 	const subscribeNewsletter = () => {
 		if (emailNewsletter !== '') {
 			setLoadingSubs(true);
@@ -41,7 +41,7 @@ const NewsLetter = () => {
 				<TextField
 					width='100%'
 					placeholder={ t('subscribePlaceholder') }
-					className='text-sm sm:text-base text-[#BDBDBD] !h-11 !w-full'
+					className='text-sm sm:text-base placeholder:text-[#BDBDBD] text-grey-1 font-normal !h-11 !w-full'
 					value={ emailNewsletter }
 					onChange={ e => setEmailNewsletter(e.target.value) }
 				/>
