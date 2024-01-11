@@ -71,7 +71,7 @@ const HospitalLocation = ({ hospitals }:Props) => {
 		if (!embedLink) {
 			return Object.values(hospitals || [])[0]?.embed_link ?? '';
 		}
-		return embedLink;
+		return embedLink.replace(/['"]+/g, '');
 	};
 	return (
 		<section>
@@ -115,7 +115,7 @@ const HospitalLocation = ({ hospitals }:Props) => {
 						loading='lazy'
 						referrerPolicy='no-referrer-when-downgrade' />
 				</div>
-				<div className='sm:hidden relative mt-[-50px] mx-4'>
+				<div className='sm:hidden relative mt-[-250px] mx-4 card-hospital-swap'>
 					<div className='global-shadow relative'>
 						<CustomCarousel autoplay={ false } onChangeIndex={ handleRSCarouselChange }>
 							{

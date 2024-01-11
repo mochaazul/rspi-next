@@ -27,21 +27,22 @@ const NewsDetail = async({
 	const currentLang = getCurrentLocale();
 	const renderNews = () => {
 		return (
-			<div className='max-sm:mx-[15px] '>
-				<Text fontType='p' fontWeight='700' fontSize='20px' lineHeight='30px'>
-					{ filteredSelectedArticle?.short_description }
-				</Text>
-				<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover rounded-[5px]' />
+			<div>
+				<div className='max-sm:mx-[15px] '>
+					<Text fontType='p' fontWeight='700' fontSize='20px' lineHeight='30px'>
+						{ filteredSelectedArticle?.short_description }
+					</Text>
+					<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover rounded-[5px]' />
 
-				<TextHtml
-					style={ { color: colors.grey.dark } }
-					className='innerHTML mt-[10px]'
-					htmlStr={ filteredSelectedArticle?.content ?? '' }
-				/>
+					<TextHtml
+						style={ { color: colors.grey.dark } }
+						className='innerHTML mt-[10px]'
+						htmlStr={ filteredSelectedArticle?.content ?? '' }
+					/>
+				</div>
 
 				{
-					relatedNews.length > 0 || specialty.length > 0
-						?
+					relatedNews.length > 0 || specialty.length > 0 ?
 						<div className='bg-[#FAFAFA] max-sm:px-[15px] max-sm:py-[24px] max-sm:mt-[12px]'>
 							<div className={ filteredSelectedArticle?.category === 'healthfirst' || relatedNews.length === 0 ? 'hidden' : 'sm:hidden' }>
 								<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
@@ -51,7 +52,7 @@ const NewsDetail = async({
 									{ Object.values(relatedNews || []).map((a, index) => {
 										return (
 											<div key={ index }>
-												<Link href={ `/news/${a.slug}` }>
+												<Link href={ `/news/${ a.slug }` }>
 													<Text
 														text={ dayjs(a?.posted_date).locale(currentLang)
 															.format('dddd, DD MMMM YYYY') }
@@ -125,7 +126,7 @@ const NewsDetail = async({
 					<img
 						alt={ filteredSelectedArticle?.title }
 						src={ filteredSelectedArticle?.img_url }
-						className='mx-auto lg:w-[729px] object-cover' />
+						className='mx-auto lg:w-[729px] object-cover rounded-[5px]' />
 				</div>
 				<div className='lg:w-3/4 md:w-3/4 xl:w-3/4'>
 					<div className='w-full'>
@@ -189,7 +190,7 @@ const NewsDetail = async({
 							<SocialShare date={ filteredSelectedArticle.posted_date } />
 						</div >
 						<div className='content-wrapper flex mt-[50px] mb-[100px] max-sm:mt-[25px]'>
-							<div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]'} leftSide mt-0 ` }>
+							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-0 ` }>
 								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
 							</div >
 							{ /* Dekstop View */ }
