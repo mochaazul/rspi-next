@@ -27,18 +27,18 @@ const NewsDetail = async({
 	const currentLang = getCurrentLocale();
 	const renderNews = () => {
 		return (
-			<div>
-				<div className='max-sm:mx-[15px] '>
-					<Text fontType='p' fontWeight='700' fontSize='20px' lineHeight='30px'>
-						{ filteredSelectedArticle?.short_description }
-					</Text>
-					<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover' />
-				
-					<TextHtml
-						className='innerHTML mt-[10px] '
-						htmlStr={ filteredSelectedArticle?.content ?? '' }
-					/>
-				</div>
+			<div className='max-sm:mx-[15px] '>
+				<Text fontType='p' fontWeight='700' fontSize='20px' lineHeight='30px'>
+					{ filteredSelectedArticle?.short_description }
+				</Text>
+				<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover rounded-[5px]' />
+
+				<TextHtml
+					style={ { color: colors.grey.dark } }
+					className='innerHTML mt-[10px]'
+					htmlStr={ filteredSelectedArticle?.content ?? '' }
+				/>
+
 				{
 					relatedNews.length > 0 || specialty.length > 0 ?
 						<div className='bg-[#FAFAFA] max-sm:px-[15px] max-sm:py-[24px] max-sm:mt-[12px]'>
@@ -79,7 +79,7 @@ const NewsDetail = async({
 								</div>
 							</div>
 
-							<div className={ filteredSelectedArticle?.category === 'healthfirst' || specialty.length === 0 ? 'hidden' : 'sm:hidden' } >
+							<div className={ filteredSelectedArticle?.category === 'healthfirst' || specialty.length === 0 ? 'hidden' : 'sm:hidden max-sm:mt-6' } >
 								<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
 									{ t('specialty') }
 								</span>
@@ -190,7 +190,7 @@ const NewsDetail = async({
 						<div className='content-wrapper flex mt-[50px] mb-[100px] max-sm:mt-[25px]'>
 							<div className={ ` ${ filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]' } leftSide mt-0 ` }>
 								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
-							</div>
+							</div >
 							{ /* Dekstop View */ }
 							< div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] '} ` }>
 								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'w-[349px]' }>

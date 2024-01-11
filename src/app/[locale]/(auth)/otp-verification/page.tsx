@@ -59,7 +59,8 @@ const CountDownText = ({
 				fontSize={ '20px' }
 				lineHeight={ '24px' }
 				fontWeight={ '400' }
-				className='mt-[16px] mb-[16px] cursor-pointer'
+				className='my-3 sm:my-4 cursor-pointer'
+				subClassName='max-sm:text-base'
 				color={ colors.paradiso.default }
 				textAlign='center'
 			/>
@@ -68,10 +69,8 @@ const CountDownText = ({
 				<Text
 					text={ resendWarnText }
 					fontSize={ '14px' }
-					lineHeight={ '24px' }
-					fontWeight={ '600' }
-					color={ colors.paradiso.default }
-					textAlign='center'
+					subClassName='leading-normal font-semibold sm:font-normal max-sm:text-xs max-sm:leading-[18px]'
+					color={ colors.black.ink }
 				/>
 			</WarningNote>
 		</>
@@ -166,14 +165,20 @@ const OTPPage = () => {
 						height={ 60 }
 					/>
 				</div>
-				<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
-				{ /* TODO : INI NOMOR HANDPHONE NYa masih hardcode ?? */ }
+				<Text
+					text={ t('heading') }
+					fontSize={ '32px' }
+					lineHeight={ '48px' }
+					fontWeight={ '900' }
+					subClassName='max-md:leading-8 max-md:text-[20px]'
+					textAlign='center'
+				/>
 				<Text
 					text={ t('subHeading') }
 					fontSize={ '20px' }
-					lineHeight={ '24px' }
 					fontWeight={ '400' }
-					className='mt-2 md:mt-3'
+					className='mt-3'
+					subClassName='max-md:text-base md:!leading-normal'
 					color={ colors.grey.darkOpacity }
 					textAlign='center'
 				/>

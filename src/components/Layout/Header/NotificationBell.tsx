@@ -12,10 +12,10 @@ import { Fragment, PropsWithChildren, PropsWithRef, useState } from 'react';
 import { useSWRConfig } from 'swr';
 
 type Props = PropsWithRef<PropsWithChildren<{
-  session: UserSessionData
-}>>
+	session: UserSessionData;
+}>>;
 
-const NotificationBell = ({ children, session }:Props) => {
+const NotificationBell = ({ children, session }: Props) => {
 	const router = useRouter();
 	const currentLang = useCurrentLocale();
 	const { mutate } = useSWRConfig();
@@ -28,16 +28,18 @@ const NotificationBell = ({ children, session }:Props) => {
 			email: session?.user?.email,
 		},
 	});
-	const markAllAsRead = async() => {
+	const markAllAsRead = async () => {
 		await markAllAsReadClient({
-			query: { medical_record: session.user?.medical_record ?? '',
-				email: session.user?.email, }
+			query: {
+				medical_record: session.user?.medical_record ?? '',
+				email: session.user?.email,
+			}
 		});
 		mutate('getNotification');
 	};
 
 	const notificationResponseData = getNotification?.data;
-	
+
 	return (
 		<>
 			<Popover className='relative'>
@@ -90,7 +92,8 @@ const NotificationBell = ({ children, session }:Props) => {
 												fontSize='12px'
 												fontWeight='400'
 												color={ colors.grey.pencil }
-												text={ moment(item.create_datetime)?.format('DD MMM, hh:mm A') }
+												text={ moment(item.create_datetime)?.locale(currentLang)?.format('DD MMM, hh:mm A') }
+												subClassName='!text-xs'
 											/>
 											<Text
 												fontSize='14px'
@@ -101,10 +104,10 @@ const NotificationBell = ({ children, session }:Props) => {
 											/>
 											<Text
 												fontSize='12px'
-												lineHeight='20px'
 												fontWeight='400'
 												color={ colors.black.ink }
 												text={ currentLang === 'id' ? item?.isi_idn : item?.isi_en }
+												subClassName='!text-xs'
 											/>
 										</div>
 									))
