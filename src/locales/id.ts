@@ -697,7 +697,7 @@ export default {
 			resendWarn: 'Anda punya kesempatan 3 kali untuk kirim ulang kode OTP.',
 			form: {
 				otpFieldLabel: 'OTP',
-				submitBtnLabel: 'Submit OTP',
+				submitBtnLabel: 'Kirim OTP',
 				backBtnlabel: 'Back to Home'
 			}
 

@@ -45,7 +45,7 @@ const InfoModal: React.FC<ModalProps> = ({
 					textAlign='center'
 				/>
 				<Button
-					className='mt-4'
+					className='mt-4 max-sm:text-sm'
 					theme='primary'
 					onClick={ onOK }
 				>{ languages('buttonLabel') }</Button>

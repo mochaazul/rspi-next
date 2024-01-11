@@ -693,7 +693,7 @@ export default {
 			resendWarn: 'You have 3 request OTP attempt.',
 			form: {
 				otpFieldLabel: 'OTP',
-				submitBtnLabel: 'Submit OTP',
+				submitBtnLabel: 'Send OTP',
 				backBtnlabel: 'Back to Home'
 			}
 
