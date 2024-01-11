@@ -31,7 +31,6 @@ export default async function Header({
 	hospitalData,
 	centerOfExcellenceData,
 	facilityServicesData,
-	marAllReadNotifFunc,
 	className
 }: {
 	session?: UserSessionData,
@@ -83,14 +82,14 @@ export default async function Header({
 
 	const renderHospitalMenuItem = (item: HospitalDetail) => {
 		return (
-			<Link href={ `/hospital/${ item?.slug }` } key={ item.id } className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] cursor-pointer'>
+			<Link href={ `/hospital/${ item?.slug }` } key={ item.id } className='group/dropDownList hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814] cursor-pointer'>
 				<Image
 					alt={ `thumbnail-${item.name}` }
 					src={ item?.img_url?.[0] || '' }
 					width={ 80 }
 					height={ 80 }
 				/>
-				<div className='ml-[10px] w-[310px] hover:bg-transparent flex-1 group/dropDownList'>
+				<div className='ml-[10px] w-[310px] hover:bg-transparent flex-1 '>
 					<Text text={ item?.name } fontSize='16px' fontWeight='900' subClassName={ 'group-hover/dropDownList:text-green-secondary' }/>
 					<Text text={ item?.address } fontSize='14px' fontWeight='400' className='mt-[5px]' />
 				</div>
@@ -102,7 +101,7 @@ export default async function Header({
 	const renderCoeMenuItem = (item: CenterOfExcellenceDetail) => {
 		return (
 			<Link href={ `/center-of-excellence/${ item.slug }` }>
-				<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] group/dropDownList'>
+				<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814] group/dropDownList'>
 					<div className='ml-[10px] w-[310px] hover:bg-transparent flex-1'>
 						<Text text={ item?.title } fontSize='16px' fontWeight='900' subClassName={ 'group-hover/dropDownList:text-green-secondary' }/>
 					</div>
@@ -115,7 +114,7 @@ export default async function Header({
 	const renderFacilitiesMenuItem = (item: FacilityServicesDetail) => {
 		return (
 			<Link href={ `/facilities-service/${ item.slug }` }>
-				<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9] group/dropDownList'>
+				<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814] group/dropDownList'>
 					<div className='ml-[10px] w-[310px] flex-1'>
 						<Text text={ item?.name } fontSize='16px' fontWeight='900' subClassName={ 'group-hover/dropDownList:text-green-secondary' }/>
 					</div>
@@ -126,8 +125,7 @@ export default async function Header({
 	};
 
 	const renderMedicalSpecialities = (<Link href={ '/facilities-service/medical-specialties' }>
-		<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#F0F2F9]'>
-			<Image src={ images.AestheticClinic } alt='' width={ 60 } height={ 60 } />
+		<div className='hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814]'>
 			<div className='ml-[10px] w-[310px] flex-1'>
 				<Text text={ 'Medical Specialties' } fontSize='16px' fontWeight='900'/>
 			</div>

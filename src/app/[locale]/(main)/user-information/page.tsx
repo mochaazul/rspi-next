@@ -12,9 +12,11 @@ export default async function Page() {
 
 	if (profile?.stat_code !== 'APP:SUCCESS') {
 		return (
-			<AuthError errorMessage={ profile?.stat_msg }>
-				<PatientProfile patientProfile={ null } visitHospitalHistory={ [] } />
-			</AuthError>
+			<LangWrapper>
+				<AuthError errorMessage={ profile?.stat_msg }>
+					<PatientProfile patientProfile={ null } visitHospitalHistory={ [] } />
+				</AuthError>
+			</LangWrapper>
 		);
 	}
 

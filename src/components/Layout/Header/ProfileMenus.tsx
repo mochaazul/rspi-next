@@ -6,10 +6,12 @@ import { cookiesHelper } from '@/helpers';
 import clearSWRCache from '@/helpers/clearSwrCache';
 import { UserSessionData } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
+import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { PropsWithChildren, PropsWithRef, useState } from 'react';
+import { Fragment, PropsWithChildren, PropsWithRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
 
 type Props = PropsWithRef<PropsWithChildren<{
@@ -37,9 +39,13 @@ const ProfileMenus = ({ children, session }:Props) => {
 				return router.replace('/login');
 			}
 
-			if (!protectedRoutes?.some(path => pathname.includes(path))) {
-				setShowSuccessLogout(true);
-			}
+			// if (!protectedRoutes?.some(path => pathname.includes(path))) {
+			// 	setShowSuccessLogout(true);
+			// }
+			toast.success(t('logoutSuccess'), {
+				hideProgressBar: true,
+				pauseOnHover: false,
+			});
 
 			router.refresh();
 		}
@@ -47,64 +53,50 @@ const ProfileMenus = ({ children, session }:Props) => {
 
 	return (
 		<>
-    
-			<div className='relative flex'>
-				<div className='flex text-white items-center relative z-[2]'>
-					<div>
-						{ session?.user?.img_url
-							? (
-								<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
-									<Image
-										src={ session.user?.img_url }
-										alt=''
-										sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-										fill
-									/>
-								</div>
-							)
-							: <icons.EmptyProfile className='w-[50px] h-[50px]' /> }
-					</div>
-					<div className='ml-4 cursor-pointer'>
-						<icons.ArrowDown className={ '[&>path]:stroke-[#6A6D81]' } onClick={ () => setDropdownHide(!dropdownHide) } />
-					</div>
+			<Menu as='div' className='relative inline-block text-left'>
+				<div>
+					<Menu.Button className='flex items-center relative w-full focus:ring-0 focus:outline-none'>
+						<div>
+							{ session?.user?.img_url
+								? (
+									<div className='relative overflow-hidden w-[50px] h-[50px] rounded-full'>
+										<Image
+											src={ session.user?.img_url }
+											alt=''
+											sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+											fill
+										/>
+									</div>
+								)
+								: <icons.EmptyProfile className='w-[50px] h-[50px]' /> }
+						</div>
+						<div className='ml-4 cursor-pointer'>
+							<icons.ArrowDown className={ '[&>path]:stroke-[#6A6D81]' } onClick={ () => setDropdownHide(!dropdownHide) } />
+						</div>
+					</Menu.Button>
 				</div>
-
-				<div className={ `${ dropdownHide ? 'hidden' : 'absolute' } top-0 right-0 pt-[70px] z-[1]` }>
-					<ul className='dropdownNavbar divide-y divide-gray-100 custom-scrollbar !w-[230px]' aria-labelledby='dropdownDefault'>
-						<li>
-							<Link href='/patient-portal' className='border-b border-gray block py-4 px-4 hover:bg-[#F0F2F9]' onClick={ () => setDropdownHide(true) }>
-								{ t('user.patientPortal') }
-							</Link>
-						</li>
-						<li>
-							<Link href='/user-information' className='border-b border-gray block py-4 px-4 hover:bg-[#F0F2F9]' onClick={ () => setDropdownHide(true) }>
-								{ t('user.patientInformation') }
-							</Link>
-						</li>
-						<li className='block py-4 px-4 text-red-600 cursor-pointer hover:bg-[#F0F2F9]' onClick={ logOutHandler }>
+				<Transition
+					as={ Fragment }
+					enter='transition ease-out duration-100'
+					enterFrom='transform opacity-0 scale-95'
+					enterTo='transform opacity-100 scale-100'
+					leave='transition ease-in duration-75'
+					leaveFrom='transform opacity-100 scale-100'
+					leaveTo='transform opacity-0 scale-95'
+				>
+					<Menu.Items className='absolute right-0 mt-5 w-[230px] origin-top-right shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] overflow-hidden bg-white rounded-b-[10px] font-Lato font-bold text-base'>
+						<Menu.Item as={ Link } href='/patient-portal' className='group/dropDownProfileList flex px-5 py-4 hover:bg-[#35888814]'>
+							<Text subClassName='group-hover/dropDownProfileList:text-green-secondary'>{ t('user.patientPortal') }</Text>
+						</Menu.Item>
+						<Menu.Item as={ Link } href='/user-information' className='group/dropDownProfileList flex px-5 py-4 hover:bg-[#35888814]'>
+							<Text subClassName='group-hover/dropDownProfileList:text-green-secondary'>{ t('user.patientInformation') }</Text>
+						</Menu.Item>
+						<Menu.Item as='div' className='px-5 py-4 text-[#D71F28] cursor-pointer hover:bg-[#35888814]' onClick={ logOutHandler }>
 							{ t('user.logout') }
-						</li>
-					</ul>
-				</div>
-			</div>
-			<Modal
-				visible={ showSuccessLogout }
-				noPadding
-			>
-				<div className='py-3 sm:py-4 px-6 sm:px-10 flex flex-col items-center gap-y-3'>
-					<div className='flex-shrink-0'>
-						<icons.Confirmed className='w-10 h-10 sm:w-12 sm:h-12' />
-					</div>
-
-					<Text
-						fontSize='16px'
-						lineHeight='24px'
-						fontWeight='700'
-					>
-						{ t('logoutSuccess') }
-					</Text>
-				</div>
-			</Modal>
+						</Menu.Item>
+					</Menu.Items>
+				</Transition>
+			</Menu>
 		</>
 	);
 };

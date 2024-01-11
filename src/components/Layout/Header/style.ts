@@ -138,6 +138,7 @@ export const DesktopMenu = styled.ul`
     z-index: 20;
     top: 100%;
     left: 0;
+    border-radius: 0px 0px 10px 10px;
    }
    
   

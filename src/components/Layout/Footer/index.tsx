@@ -140,7 +140,7 @@ const FooterLayout = async({ footerData, hospitalData }: { footerData: FooterDet
 			.map(key => {
 				const label = mapLabel(key);
 				return  (
-					<div key={ key } className='w-2/5 sm:w-[200px] lg:w-1/6'>
+					<div key={ key }>
 						{ renderCategoryTitle(label) }
 						{ renderCategoryItems(footers[key]) }
 					</div>
