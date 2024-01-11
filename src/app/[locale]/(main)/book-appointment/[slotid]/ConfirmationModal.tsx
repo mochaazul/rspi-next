@@ -66,13 +66,14 @@ export const ConfirmationModal = ({
 	};
 
 	if (selectedProfile && selectedProfile.phone && timeSlot) {
-		return <Modal borderRadius='12px' visible={ visible } onClose={ onClose } width='w-full' containerClassName='m-4 max-w-lg'>
-			<ConfirmationModalContainer >
+		return <Modal borderRadius='12px' paddingSm='24px 16px 24px 16px' visible={ visible } onClose={ onClose } width='w-full' containerClassName='m-0 mt-20 md:m-4 max-w-lg h-full md:h-max'>
+			<ConfirmationModalContainer>
 				<Text
 					text={ t('heading') }
 					fontWeight='700'
 					fontSize='24px'
 					lineHeight='28px'
+					subClassName='text-base md:text-[24px]'
 				/>
 				<Text
 					text={ t('subHeading') }
@@ -80,8 +81,9 @@ export const ConfirmationModal = ({
 					fontSize='14px'
 					lineHeight='20px'
 					color={ colors.grey.dark }
+					subClassName='text-xs md:text-sm'
 				/>
-				<div className='mt-[24px] px-[16px] flex flex-col gap-[12px]' >
+				<div className='mt-[24px] px-[12px] flex flex-col gap-[12px]' >
 					<Text
 						text={ t('patientDetail.heading') }
 						fontWeight='700'
@@ -94,12 +96,14 @@ export const ConfirmationModal = ({
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 						<Text
 							text={ selectedProfile.name }
 							fontWeight='700'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 					</div>
 					<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
@@ -108,12 +112,14 @@ export const ConfirmationModal = ({
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 						<Text
 							text={ dayjs(splitDate(selectedProfile.birthdate)).format('DD MMMM YYYY') }
 							fontWeight='700'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 					</div>
 					<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
@@ -122,12 +128,14 @@ export const ConfirmationModal = ({
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 						<Text
 							text={ selectedProfile.phone }
 							fontWeight='700'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 					</div>
 					<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
@@ -136,12 +144,14 @@ export const ConfirmationModal = ({
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 						<Text
 							text={ selectedProfile.email }
 							fontWeight='700'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 					</div>
 					<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
@@ -150,6 +160,7 @@ export const ConfirmationModal = ({
 							fontWeight='500'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 						<Text
 							text={ penjamin ? guarantorOptions[currentLang][penjamin] : '-' }
@@ -157,6 +168,7 @@ export const ConfirmationModal = ({
 							fontWeight='700'
 							fontSize='14px'
 							lineHeight='20px'
+							subClassName='text-xs md:text-sm'
 						/>
 					</div>
 					{
@@ -175,12 +187,14 @@ export const ConfirmationModal = ({
 									fontWeight='500'
 									fontSize='14px'
 									lineHeight='20px'
+									subClassName='text-xs md:text-sm'
 								/>
 								<Text
 									text={ namaAsuransi ?? '-' }
 									fontWeight='700'
 									fontSize='14px'
 									lineHeight='20px'
+									subClassName='text-xs md:text-sm'
 								/>
 							</div>
 							<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
@@ -189,12 +203,14 @@ export const ConfirmationModal = ({
 									fontWeight='500'
 									fontSize='14px'
 									lineHeight='20px'
+									subClassName='text-xs md:text-sm'
 								/>
 								<Text
 									text={ noAsuransi ?? '-' }
 									fontWeight='700'
 									fontSize='14px'
 									lineHeight='20px'
+									subClassName='text-xs md:text-sm'
 								/>
 							</div>
 						</>

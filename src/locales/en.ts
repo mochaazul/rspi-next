@@ -162,12 +162,12 @@ export default {
 				insuranceDataLabel: 'Insurance Data',
 				insuranceNumber: 'Insurance Number',
 				patientDetail: {
-					heading: 'Patient Data',
-					name: 'Name',
-					birthDate: 'Date of birth',
-					phone: 'Phone Number',
-					email: 'E-Mail',
-					guarantor: 'Guarantor'
+					heading: 'Patient Data:',
+					name: 'Name:',
+					birthDate: 'Date of birth:',
+					phone: 'Phone Number:',
+					email: 'E-Mail:',
+					guarantor: 'Guarantor:'
 				},
 				toc: 'I confirm that all the above data is correct.',
 				confirmBtnLabel: 'Confirm',
@@ -975,6 +975,8 @@ export default {
 			notAvailableSchedule: 'The doctor\'s schedule is not available on the date you selected because it has reached the maximum online reservations. Please choose another available date and time below or contact our call center for further information.',
 			callCenter: 'Contact Call Center',
 			chooseRs: 'Choose Hospital',
+			appointmentType: 'Apointment Type',
+			setSchedule: 'Set Schedule',
 			available: 'Available',
 			limitedSlot: 'Limited Slot',
 			noSchedule: 'Not Available',

@@ -193,7 +193,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		}
 	};
 
-	const uploadAsuransiPhotoFront = async() => {
+	const uploadAsuransiPhotoFront = async () => {
 		if (tempImageAsuransiFront !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiFront });
 			if (responseData.stat_msg === 'Success') {
@@ -203,7 +203,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 		return '';
 	};
 
-	const uploadAsuransiPhotoBack = async() => {
+	const uploadAsuransiPhotoBack = async () => {
 		if (tempImageAsuransiBack !== null) {
 			const responseData = await uploadPhotoPatient({ payload: tempImageAsuransiBack });
 			if (responseData.stat_msg === 'Success') {
@@ -223,7 +223,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				return 'APP';
 		}
 	};
-	const onConfirmed = async() => {
+	const onConfirmed = async () => {
 		try {
 			const { keluhan, tindakan, asuransi, noAsuransi } = formikBooking.values;
 			const payloadBook: BookingPayload = {
@@ -312,17 +312,19 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 								<Form.TextField
 									width='100%'
 									label={ t('form.complaintLabel') }
-									labelClassName='font-normal text-base'
+									labelClassName='font-normal font-sm md:text-base'
+									labelWrapperClassName='mb-[10px] md:mb-[16px]'
 									placeholder={ t('form.complaintLabel') }
 									required={ true }
 									id='keluhan'
 									name='keluhan'
 									value={ formikBooking.values.keluhan }
 									onChange={ formikBooking.handleChange }
+									wrapperClassName={ 'text-sm md:text-base' }
 								/>
 							</FormCol>
 							<FormCol>
-								<Radio groupContainerClassname='gap-x-[32px]' groupLabel={ t('form.guarantor') } onChange={ setPenjamin } value={ penjamin } labelClassName='text-base font-normal leading-5' >
+								<Radio groupContainerClassname='gap-x-[32px] mt-[10px] md:mt-[16px]' groupLabel={ t('form.guarantor') } onChange={ setPenjamin } value={ penjamin } labelClassName='text-sm md:text-base font-normal leading-5' >
 									<Radio.Option label={ t('form.selfInsurance') } value={ 'pribadi' } />
 									<Radio.Option label={ t('form.thirdPartyInsurance') } value={ 'asuransi' } />
 								</Radio>
@@ -351,6 +353,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 											name='asuransi'
 											value={ formikBooking.values.asuransi }
 											onChange={ formikBooking.handleChange }
+											wrapperClassName={ 'text-sm md:text-base' }
 										/>
 									</FormCol>
 									<FormCol >
@@ -364,6 +367,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 											name='noAsuransi'
 											value={ formikBooking.values.noAsuransi }
 											onChange={ formikBooking.handleChange }
+											wrapperClassName={ 'text-sm md:text-base' }
 										/>
 									</FormCol>
 								</FormRow>
@@ -422,15 +426,15 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 
 						}
 					</Form>
-					<DisclaimerAlert className='mt-[40px]'>
-						<Text color={ colors.green.brandAccent }>{ t('form.disclaimer') }</Text>
+					<DisclaimerAlert className='mt-[40px] p-[16px] sm:p-[24px]'>
+						<Text color={ colors.green.brandAccent } subClassName='text-xs leading-[18px] sm:text-base sm:leading-5'>{ t('form.disclaimer') }</Text>
 					</DisclaimerAlert>
 				</div>
 			</div>
 			<BottomBar>
 				<div className='lg:w-[1110px] w-full mx-auto max-sm:mx-[15px] md:flex md:justify-end gap-[12px] flex justify-between'>
-					<Button label={ t('form.btnLabel.back') } theme='outline' $hoverTheme='primary' className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] w-full md:w-auto' onClick={ () => { navigate.back(); } } />
-					<Button label={ t('form.btnLabel.submit') } className='py-[0px] md:pt-[13px] px-[40px] md:pb-[12px] w-full md:w-auto' disabled={ bookingLoading } onClick={ () => { onBookVisit(); } } />
+					<Button label={ t('form.btnLabel.back') } theme='outline' $hoverTheme='primary' className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] w-full md:w-auto text-sm md:text-base' onClick={ () => { navigate.back(); } } />
+					<Button label={ t('form.btnLabel.submit') } className='py-[0px] md:pt-[13px] px-[40px] md:pb-[12px] w-full md:w-auto text-sm md:text-base' disabled={ bookingLoading } onClick={ () => { onBookVisit(); } } />
 				</div>
 			</BottomBar>
 			<AddProfileModal

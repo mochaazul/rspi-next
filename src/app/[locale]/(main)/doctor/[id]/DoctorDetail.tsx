@@ -33,14 +33,14 @@ type FormAppointment = {
 
 const DoctorDetail = (
 	{ params, doctor, hospitals, doctorResponse }
-	:{
-		params: {
-			id: string;
-		};
-		doctor: FindDoctorDetail
-		hospitals: HospitalDetail[]
-		doctorResponse: ResponseType<FindDoctorDetail>
-	}
+		: {
+			params: {
+				id: string;
+			};
+			doctor: FindDoctorDetail;
+			hospitals: HospitalDetail[];
+			doctorResponse: ResponseType<FindDoctorDetail>;
+		}
 ) => {
 
 	const t = useScopedI18n('page.doctorProfile');
@@ -131,7 +131,7 @@ const DoctorDetail = (
 		return '';
 	};
 
-	const onBookHandler = async() => {
+	const onBookHandler = async () => {
 		try {
 			const token = await cookiesHelper.getToken();
 			const userData = await cookiesHelper.getUserData();
@@ -195,7 +195,7 @@ const DoctorDetail = (
 	return (
 		<DoctorProfileStyle>
 			{
-			 <>
+				<>
 					<PhoneModal
 						visible={ showModalTelp }
 						hospitalDetail={ selectedHospitalDetails() }
@@ -210,7 +210,7 @@ const DoctorDetail = (
 								<div className='flex gap-[16px]'>
 									<DoctorAvatar className='lg:hidden md:hidden' profile_url={ doctor.img_url ?? Images.DoctorProfile.src } />
 									<div className='flex flex-col'>
-										<Text text={ notFoundDoctor() } fontSize='24px' fontWeight='900' lineHeight='24px' />
+										<Text text={ notFoundDoctor() } fontWeight='900' lineHeight='24px' subClassName='text-base sm:text-[24px]' />
 										<Text text={ doctor.specialty[0] ?? '' } color={ colors.grey.default } fontSize='16px' fontWeight='400' lineHeight='24px' className='max-sm:hidden mt-[8px]' />
 										<hr className='my-[8px] md:hidden' />
 										<ShareDoctor className=' md:hidden' />
@@ -219,7 +219,8 @@ const DoctorDetail = (
 								<hr className='mt-[24px] max-sm:hidden' />
 								<div className='mt-[30px]'>
 									<Radio groupLabel={ t('chooseRs') } onChange={ setSelectedHospital } value={ selectedHospital }
-										groupContainerClassname='flex flex-col md:flex-row'
+										groupContainerClassname='flex flex-col md:flex-row mt-[10px] md:mt-[16px]'
+										labelClassName={ 'font-bold text-sm md:text-base' }
 									>
 										{
 											hospitalArr && hospitalArr.map(hospital => {
@@ -235,10 +236,11 @@ const DoctorDetail = (
 								{ /* APP : mean appointment */ }
 								{ /* TEL : mean telemedicine */ }
 								<div className='mt-[30px]'>
-									<Radio groupLabel='Appointment Type'
+									<Radio groupLabel={ t('appointmentType') }
 										onChange={ setRadioValue }
 										value={ radioValue }
-										groupContainerClassname='flex flex-col md:flex-row'
+										labelClassName={ 'font-bold text-sm md:text-base' }
+										groupContainerClassname='flex flex-col md:flex-row mt-[10px] md:mt-[16px]'
 									>
 										<Radio.Option label={ t('visitAppOptionLabel') } value='APP' />
 										{ /* TODO: TAKEN OUT SINCE TrackCare do not support it yet 24 nov 23 */ }
@@ -247,8 +249,9 @@ const DoctorDetail = (
 								</div>
 
 								<TimeSlotContainer
-									className='flex flex-col md:flex-row'
+									className='flex flex-col md:flex-row gap-[10px] md:gap-[30px]'
 								>
+									<Text text={ t('setSchedule') } subClassName={ 'font-bold text-sm md:text-base' } />
 									<TimeSlotCard className='md:w-[calc(100%/2)]'>
 										<Calendar
 											calendarData={ doctorCalendar?.data || [] }

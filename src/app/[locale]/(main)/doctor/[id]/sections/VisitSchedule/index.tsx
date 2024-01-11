@@ -56,7 +56,7 @@ const VisitSchedule: React.FC<Props> = ({
 
 	const renderEmptyState = (
 		<div className='flex flex-col items-center justify-center h-full'>
-			<img src={ Images.SlotEmptyIc.src } className='w-[40px] h-[40px] mb-2 md:w-[62px] h-[62px] md:mb-4' />
+			<img src={ Images.SlotEmptyIc.src } className='w-[42px] h-[42px] mb-2 md:w-[62px] h-[62px] md:mb-4' />
 			<Text
 				fontSize='16px'
 				fontWeight='400'

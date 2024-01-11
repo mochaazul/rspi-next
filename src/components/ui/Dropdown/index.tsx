@@ -16,6 +16,7 @@ export interface DropdownProps extends React.DetailedHTMLProps<React.InputHTMLAt
 	arrowClassName?: string;
 	onChangeValueDropdown?: (value: string) => any;
 	allOptionLabel?: string;
+	subClassName?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -24,6 +25,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 	arrowClassName,
 	className,
 	allOptionLabel = 'All',
+	subClassName = '!text-base',
 	...props
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -184,14 +186,14 @@ const Dropdown: React.FC<DropdownProps> = ({
 						<Text
 							text={ props.placeholder }
 							color={ colors.grey.placeholderColor }
-							subClassName='!text-base'
+							subClassName={ subClassName }
 						/>
 					</div> :
 					<div className='placeholder'>
 						<Text
 							text={ Array.from(SelectInputRef.current.selectedOptions, option => option.label).join(', ') }
 							color={ props.disabled ? colors.grey.darkOpacity : colors.grey.darker }
-							subClassName='!text-base'
+							subClassName={ subClassName }
 						/>
 					</div>
 			}
