@@ -39,41 +39,6 @@ const NewsDetail = async({
 					htmlStr={ filteredSelectedArticle?.content ?? '' }
 				/>
 
-				<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' }>
-					
-					<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
-						{ t('relatedNews') }
-					</span>
-
-					<div className='divide-y divide-solid pt-[10px]'>
-						{ Object.values(relatedNews || []).map((a, index) => {
-							return (
-								<div key={ index }>
-									<Link href={ `/news/${a.slug}` }>
-										<Text
-											text={ a.posted_date }
-											className='py-[10px]'
-											fontSize='12px'
-											fontWeight='400'
-											lineHeight='14px'
-											color={ colors.grey.dark }
-											fontType='p'
-										/>
-										<Text
-											fontType='h3'
-											text={ a.title }
-											className='pb-[10px]'
-											fontSize='14px'
-											fontWeight='900'
-											lineHeight='24px'
-											color={ colors.grey.darker }
-										/>
-									</Link>
-								</div>
-							);
-						}) }
-					</div>
-				</div>
 				{
 					relatedNews.length > 0 || specialty.length > 0
 						?
@@ -115,7 +80,7 @@ const NewsDetail = async({
 								</div>
 							</div>
 
-							<div className={ filteredSelectedArticle?.category === 'healthfirst' || specialty.length === 0 ? 'hidden' : 'sm:hidden' } >
+							<div className={ filteredSelectedArticle?.category === 'healthfirst' || specialty.length === 0 ? 'hidden' : 'sm:hidden max-sm:mt-6' } >
 								<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
 									{ t('specialty') }
 								</span>
@@ -226,38 +191,6 @@ const NewsDetail = async({
 						<div className='content-wrapper flex mt-[50px] mb-[100px] max-sm:mt-[25px]'>
 							<div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'w-full' : 'w-[729px]'} leftSide mt-0 ` }>
 								{ filteredSelectedArticle?.category === 'healthfirst' ? renderHealthFirst() : renderNews() }
-								<div className={ filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'sm:hidden' } >
-
-									<span className='text-gray-1 font-black w-auto text-[16px] py-[5px] sm:border-b-[4px] border-b-[3px] border-green-secondary'>
-										{ t('specialty') }
-									</span>
-									<div className='divide-y divide-solid pt-[10px]'>
-										{ Object.values(specialty || [])?.map((specialty, index) => {
-											return (
-												<div key={ index }>
-													<Text
-														fontType='p'
-														text={ specialty.fullname_doctor }
-														className='py-[10px]'
-														fontSize='14px'
-														fontWeight='900'
-														lineHeight='24px'
-														color={ colors.grey.darker }
-													/>
-													<Text
-														fontType='p'
-														text={ specialty.speciality }
-														className='pb-[10px]'
-														fontSize='12px'
-														fontWeight='400'
-														lineHeight='14px'
-														color={ colors.grey.dark }
-													/>
-												</div>
-											);
-										}) }
-									</div>
-								</div>
 							</div >
 							{ /* Dekstop View */ }
 							< div className={ ` ${filteredSelectedArticle?.category === 'healthfirst' ? 'hidden' : 'rightSide sm:ml-[32px] max-sm:hidden mr-auto w-[349px] '} ` }>
