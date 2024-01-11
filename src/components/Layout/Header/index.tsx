@@ -45,41 +45,6 @@ export default async function Header({
 
 	const isLoggedIn = !!session?.token;
 
-	// const paramGetNotif = {
-	// 	query: {
-	// 		medical_record: session?.user?.medical_record ?? '',
-	// 		email: session?.user?.email,
-	// 	},
-	// };
-	// const {
-	// 	data: getNotification,
-	// } = useNotification(paramGetNotif);
-
-	// const notificationResponseData = getNotification?.data;
-
-	// const renderNotifIcon = () => {
-	// 	if (isLoggedIn) {
-	// 		return (
-	// 			<div className='relative inline-block text-white my-auto' onClick={ () => setShowNotification(true) }>
-	// 				<icons.Notif onClick={ () => {
-
-	// 					// if (marAllReadNotifFunc) {
-	// 					// 	marAllReadNotifFunc()
-	// 					// 		.then(() => {
-	// 					// 			mutate('getNotification');
-	// 					// 		});
-	// 					// }
-	// 				} }
-	// 				className='cursor-pointer w-8 h-8 sm:w-11 sm:h-11'
-	// 				/>
-	// 				<span className='absolute -top-2 -right-1 w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center text-center flex-shrink-0 bg-[#EB5757] border-2 border-white rounded-full text-[10px] sm:text-xs text-white'>
-	// 					{ notificationResponseData?.total_unread ?? 0 }
-	// 				</span>
-	// 			</div>
-	// 		);
-	// 	}
-	// };
-
 	const renderHospitalMenuItem = (item: HospitalDetail) => {
 		return (
 			<Link href={ `/hospital/${ item?.slug }` } key={ item.id } className='group/dropDownList hospital-list border-b border-gray flex py-4 px-4 items-center hover:bg-[#35888814] cursor-pointer'>
@@ -147,7 +112,7 @@ export default async function Header({
 						<div className='flex items-center gap-x-5 xl2:gap-x-10'>
 							<HeaderBrand />
 						</div>
-						<DesktopMenu className='gap-x-6 hidden md:flex'>
+						<DesktopMenu className='gap-x-6 hidden lg:flex'>
 							<Menus label={ t('home') } hrefKey='/'/>
 							<Menus label={ t('ourHospitals') } items={ hospitalData } itemRender={ renderHospitalMenuItem } />
 							<Menus label={ t('centreOfExcellence') } items={ centerOfExcellenceData } itemRender={ renderCoeMenuItem }/>
@@ -159,7 +124,13 @@ export default async function Header({
 
 						{ /* Mobile View Notif ETC */ }
 						 <div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
-							{ /* { renderNotifIcon() } */ }
+							{
+								isLoggedIn && (
+									<LangWrapper>
+										<NotificationBell session={ session }/>
+									</LangWrapper>
+								)
+							}
 							<MobileMenus
 								session={ session }
 							 	hospitals={ hospitalData }

@@ -50,7 +50,7 @@ const LoginPage = () => {
 			email: '',
 			password: ''
 		},
-		onSubmit: async (formLogin: LoginType) => {
+		onSubmit: async(formLogin: LoginType) => {
 			try {
 				setLoadingSubmit(true);
 
@@ -133,7 +133,7 @@ const LoginPage = () => {
 		setNotifVisible(false);
 	};
 
-	const handleResendEmailVerification = async () => {
+	const handleResendEmailVerification = async() => {
 		try {
 			initErrorNotif();
 			await requestVerifyEmail({ email: formik.values.email });
@@ -158,7 +158,7 @@ const LoginPage = () => {
 						? errorUser?.stat_msg
 						: successMessage;
 
-		if (text === 'email is not verified') {
+		if (text?.toLowerCase() === 'email belum di verifikasi' || text?.toLowerCase() === 'you haven\'t verified your email') {
 			return (
 				<Text fontType={ null } fontSize='14px' fontWeight='500' color={ colors.red.default }>
 					{ t('notificationMessage.emailNotVerified.heading') }&nbsp;
@@ -197,13 +197,13 @@ const LoginPage = () => {
 					max-md:py-6 max-md:container-page
 					md:p-8 flex flex-col md:items-center md:justify-center max-md:w-full max-lg:w-[90%] max-2xl:w-5/6 w-3/5 md:m-auto
 					` }
-						onSubmit={ (e: React.SyntheticEvent) => {
-							e.preventDefault();
-							initErrorNotif();
-							setEnableValidation(true);
-							formik.handleSubmit();
-						} }
-						autoComplete='off'
+					onSubmit={ (e: React.SyntheticEvent) => {
+						e.preventDefault();
+						initErrorNotif();
+						setEnableValidation(true);
+						formik.handleSubmit();
+					} }
+					autoComplete='off'
 					>
 						<div className='w-full'>
 							<div className='hidden md:flex mb-2 xl:mb-8'>

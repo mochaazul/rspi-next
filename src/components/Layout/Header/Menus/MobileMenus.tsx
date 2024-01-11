@@ -24,6 +24,7 @@ const MobileMenus = async({ session, hospitals, coe, facilitiy }:Props) => {
 	const mapCoe:MenuEntry[] = coe.map((item, index) => ({ id: item.id ?? index, label: item.title ?? '', slug: item.slug }));
 	const mapFacility: MenuEntry[] = facilitiy.map((item, index) => ({ id: item.id ?? index,  label: item.name ?? '', slug: item.slug }));
 	const medSpec:MenuEntry = { id: 9999999, label: 'Medical Specialties', slug: '/medical-specialties' };
+	
 	return (
 		<MobileMenuWrapper >
 			<input id='menu' type='checkbox' className='peer' defaultChecked={ false }/>
