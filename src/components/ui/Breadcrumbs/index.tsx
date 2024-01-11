@@ -16,7 +16,7 @@ export interface BreadcrumbsType {
 	removeHome?: boolean;
 }
 
-const Breadcrumbs = (props: BreadcrumbsType) => {
+const BreadCrumbs = (props: BreadcrumbsType) => {
 	const t = useScopedI18n('navMenu');
 
 	const datas: BreadcrumbsType['datas'] = props.datas;
@@ -59,4 +59,4 @@ const Breadcrumbs = (props: BreadcrumbsType) => {
 	);
 };
 
-export default Breadcrumbs;
+export default BreadCrumbs;

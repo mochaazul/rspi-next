@@ -9,7 +9,7 @@ import { useScopedI18n } from '@/locales/client';
 import { ItemType } from '.';
 import { ItemStyle } from './style';
 
-const ItemFAQ = (props: ItemType) => {
+const ItemFAQ = ({ readMore = true, ...props }: ItemType) => {
 	const t = useScopedI18n('page.contactUs.faq');
 
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -45,15 +45,15 @@ const ItemFAQ = (props: ItemType) => {
 			<Text
 				fontSize='14px'
 				lineHeight='22px'
-				fontType={ props.readMore ? null : 'p' }
+				fontType={ readMore ? null : 'p' }
 				fontWeight='400'
 				color={ colors.grey.darker }
 				className={ `${ props.desc !== '' ? 'mt-[15px]' : '' }` }
 				subClassName='text-justify'
 			>
-				{ props.readMore ? props.desc.substring(0, 250) :  props.desc }
+				{ readMore ? props.desc.substring(0, 250) :  props.desc }
 				{
-					props.readMore ?
+					readMore ?
 						buttonReadMore() :
 						null
 				}

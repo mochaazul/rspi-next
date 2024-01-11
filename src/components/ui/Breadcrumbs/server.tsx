@@ -3,10 +3,10 @@
 import Link from 'next/link';
 
 import { colors, icons } from '@/constant';
-import { getScopedI18n } from '@/locales/server';
 
 import Text from '../Text';
 import { ItemStyle } from './style';
+import { getScopedI18n } from '@/locales/server';
 
 export interface BreadcrumbsType {
 	datas: {
@@ -16,7 +16,7 @@ export interface BreadcrumbsType {
 	removeHome?: boolean;
 }
 
-const Breadcrumbs = async (props: BreadcrumbsType) => {
+const BreadcrumbsServer = async(props: BreadcrumbsType) => {
 	const t = await getScopedI18n('navMenu');
 
 	const datas: BreadcrumbsType['datas'] = props.datas;
@@ -31,25 +31,26 @@ const Breadcrumbs = async (props: BreadcrumbsType) => {
 	}
 
 	return (
-		<div className='flex flex-row sm:ml-[-0.25rem]'>
+		<div className='flex flex-row sm:ml-[-0.25rem] pt-[25px] sm:pt-8'>
 			{
 				datas.map((data, index) => (
 					<div key={ index } className='flex flex-row items-center'>
 						<Link href={ data.url }>
 							<ItemStyle className='px-1 py-1 max-sm:px-0.5'>
-								{/* <Text
-									className='item-text text-ellipsis'
+								<Text
+									fontType='p'
+									className='item-text'
 									fontSize='14px'
 									lineHeight='17px'
 									fontWeight={ (index + 1) < props.datas.length ? '400' : '900' }
 									color={ (index + 1) < props.datas.length ? colors.grey.dark : colors.paradiso.default }
+									subClassName={ `max-sm:!text-[10px] ${ index === (props.datas.length - 1) ? 'line-clamp-1' : 'whitespace-no-wrap w-max' } max-sm:!leading-normal` }
 									text={ data.name }
-								/> */}
-								{ data.name }
+								/>
 							</ItemStyle>
 						</Link>
 						{
-							(index + 1) < props.datas.length ? <icons.ArrowRight className='w-[15px] h-[15px]' /> : null
+							(index + 1) < props.datas.length ? <icons.ArrowRight className='w-3 h-3 sm:w-4 sm:h-4' /> : null
 						}
 					</div>
 				))
@@ -58,4 +59,4 @@ const Breadcrumbs = async (props: BreadcrumbsType) => {
 	);
 };
 
-export default Breadcrumbs;
+export default BreadcrumbsServer;

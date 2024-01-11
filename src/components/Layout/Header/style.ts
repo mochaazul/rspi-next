@@ -1,3 +1,4 @@
+'use client';
 import styled from 'styled-components';
 import colors from '../../../constant/colors';
 
@@ -110,6 +111,53 @@ const HeaderStyle = styled.div`
         width: 100px;
       }
     }
+  }
+`;
+
+export const DesktopMenu = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  display: flex;
+
+  li {
+    display: block;
+    transition-duration: 0.5s;
+   }
+   
+   li:hover {
+     cursor: pointer;
+   }
+   .dropdown-wrapper{
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    display: none;
+    background-color: white;
+    width: 480px;
+    z-index: 20;
+    top: 100%;
+    left: 0;
+    border-radius: 0px 0px 10px 10px;
+   }
+   
+  
+   li ul {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  
+   li:hover > .dropdown-wrapper,
+   li .dropdown-wrapper:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    transition: all 0.5s ease;
+  }
+  
+  li ul li {
+    clear: both;
+
   }
 `;
 

@@ -5,7 +5,7 @@ import FooterServices from '@/components/ui/PageComponents/FooterServices';
 
 import { getFooterPages } from '@/lib/api/footer';
 
-const FooterPages = async ({ params }: { params: { slug: string; }; }) => {
+const FooterPages = async({ params }: { params: { slug: string; }; }) => {
 	const headersList = headers();
 
 	const pathname = headersList.get('x-invoke-path') || '';

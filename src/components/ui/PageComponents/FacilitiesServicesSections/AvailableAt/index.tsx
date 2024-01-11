@@ -1,17 +1,17 @@
-'use client';
+'use server';
 
 import { colors } from '@/constant';
 import { FacilityServicesHospital } from '@/interface';
-import { useScopedI18n } from '@/locales/client';
 
 import Text from '../../../Text';
+import { getScopedI18n } from '@/locales/server';
 
 type Props = {
 	hospital: FacilityServicesHospital[];
 };
 
-const AvailableAt: React.FC<Props> = ({ hospital }) => {
-	const t = useScopedI18n('page.facilities.facilitiesMenu');
+const AvailableAt: React.FC<Props> = async({ hospital }) => {
+	const t = await getScopedI18n('page.facilities.facilitiesMenu');
 
 	return (
 		<div className='mt-8 md:mt-[62px]'>

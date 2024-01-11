@@ -28,6 +28,7 @@ export interface AccordionType {
 	hideItemBorderBottom?: boolean;
 	itemWrapperClassname?: string;
 	hideTogler?: boolean;
+	faq?: boolean
 }
 
 /**
@@ -56,13 +57,23 @@ const Accordion = (props: AccordionType) => {
 			{
 				props?.datas?.map((data, key) =>
 					<div key={ key } className={ `item-wrapper ${ (key + 1) !== props.datas.length && !(!!props.hideItemBorderBottom) ? 'border-bottom' : '' } ${ props.itemWrapperClassname }` }>
-						<ItemTheme
-							index={ key }
-							isOpen={ openIndex === key }
-							onlyOpenOne={ props.onlyOpenOne }
-							onOpen={ handleOnOpen(key) }
-							{ ...data }
-						/>
+						{ props.faq
+							? <ItemFAQ index={ key }
+								isOpen={ openIndex === key }
+								onlyOpenOne={ props.onlyOpenOne }
+								onOpen={ handleOnOpen(key) }
+								isJSXDesc={ true }
+								{ ...data } />
+							: <ItemTheme
+								index={ key }
+								isOpen={ openIndex === key }
+								onlyOpenOne={ props.onlyOpenOne }
+								onOpen={ handleOnOpen(key) }
+								{ ...data }
+							/>
+						
+						}
+						
 					</div>
 				)
 			}

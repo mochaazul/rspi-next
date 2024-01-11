@@ -21,8 +21,9 @@ import Card, { CardContentWithInner, CardsScrollHorizontal } from '@/components/
 
 import CardNews from './CardNews';
 import { NewsHealthArticlesStyle } from './styles';
-import { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
-import { useCurrentLocale, useScopedI18n } from '@/locales/client';
+import BreadCrumbs, { BreadcrumbsType } from '@/components/ui/Breadcrumbs';
+import { useScopedI18n, useCurrentLocale } from '@/locales/client';
+import LangWrapper from '@/components/ui/LangWrapper';
 
 type ArticleProps = {
 	id: number;
@@ -82,7 +83,9 @@ const NewsHealthArticlesPage = ({
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px] animate-slideDownToUp '>
 				<div>
 					<div className='header'>
-						<Breadcrumbs datas={ breadcrumbsPath } />
+						<LangWrapper>
+						 <BreadCrumbs datas={ breadcrumbsPath } />
+						</LangWrapper>
 						<Text
 							fontSize='44px'
 							fontType='h1'
@@ -154,6 +157,7 @@ const NewsHealthArticlesPage = ({
 													color={ colors.grey.dark }
 													text={ moment(Object.values(articles || [])[0]?.posted_date)?.locale(currentLang)
 														.format('dddd, DD MMM YYYY') }
+													subClassName='max-sm:text-[12px]'
 												/>
 											</div>
 										</div>

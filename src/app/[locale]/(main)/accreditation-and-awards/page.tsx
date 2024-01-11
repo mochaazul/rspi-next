@@ -3,9 +3,10 @@ import Image from 'next/image';
 import { AwardsDetail } from '@/interface';
 import { colors } from '@/constant';
 import { getAwards } from '@/lib/api/awards';
-import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Text from '@/components/ui/Text';
 import { getScopedI18n } from '@/locales/server';
+
+import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
 
 export default async function AwardsPage() {
 	const awardsRes = await getAwards({}, { page: 1, limit: 10 });
@@ -53,7 +54,7 @@ export default async function AwardsPage() {
 	return (
 		<div className='bg-[#FAFAFA]'>
 			<div className='lg:max-w-[1110px] w-full mx-auto max-xl:px-4'>
-				<Breadcrumbs datas={ breadcrumbsPath } />
+				<BreadcrumbsServer datas={ breadcrumbsPath } />
 				<div className='mt-[25px] sm:mt-[50px] lg:px-[91px]'>
 					<Text
 						fontType='h1'

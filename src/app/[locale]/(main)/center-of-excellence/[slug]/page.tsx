@@ -14,7 +14,9 @@ import ServiceLocation from '@/components/ui/PageComponents/CenterOfExcellenceSe
 import TextHtml from '@/components/ui/TextHtml';
 import { getCurrentLocale, getScopedI18n } from '@/locales/server';
 
-const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }) => {
+import LangWrapper from '@/components/ui/LangWrapper';
+
+const CentreOfExcellencePage = async({ params }: { params: { slug: string; }; }) => {
 	const t = await getScopedI18n('page.centerOfExcellence');
 	const currentLang = getCurrentLocale();
 
@@ -68,7 +70,8 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 											lineHeight='17px'
 											color={ colors.grey.dark }
 											subClassName='max-sm:text-xs'
-											text={ moment(article?.news?.posted_date).locale(currentLang).format('dddd, DD MMM YYYY') }
+											text={ moment(article?.news?.posted_date).locale(currentLang)
+												.format('dddd, DD MMM YYYY') }
 										/>
 									</div>
 								}
@@ -114,7 +117,9 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 	return (
 		<div className='w-full lg:max-w-[1110px] mx-auto max-xl:px-4 pb-8 sm:pb-[60px]'>
 			<div>
-				<Breadcrumbs datas={ breadcrumbsPath } />
+				<LangWrapper>
+					<Breadcrumbs datas={ breadcrumbsPath } />
+				</LangWrapper>
 				<div className='flex md:gap-5 lg:gap-8 md:mt-[64px] mt-[25px]'>
 					<div className='hidden md:block'>
 						<CardMenu data={ responseCenterOfExcellence?.data } activeMenuIndex={ newParam } />
@@ -123,11 +128,13 @@ const CentreOfExcellencePage = async ({ params }: { params: { slug: string; }; }
 						{
 							responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length > 0
 								?
-								<ServiceLocation
-									content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
-									activeMenuIndex={ newParam }
-									centerOfExcellence={ responseCenterOfExcellence?.data }
-								/>
+								<LangWrapper>
+									<ServiceLocation
+										content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
+										activeMenuIndex={ newParam }
+										centerOfExcellence={ responseCenterOfExcellence?.data }
+									/>
+								</LangWrapper>
 								:
 								null
 						}

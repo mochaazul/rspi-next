@@ -1,117 +1,34 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 import { appStage, config } from '@/config';
-import { Images, colors, icons } from '@/constant';
+import { Images, colors } from '@/constant';
 import {
-	TextField,
-	Button,
 	Text,
 	Socmed,
-	Modal
 } from '@/components/ui';
 
 import { FooterDetail } from '@/interface/footer';
 import { HospitalDetail } from '@/interface/Hospital';
-import { useScopedI18n } from '@/locales/client';
 import { appStoreMobileUrl, playStoreMobileUrl } from '@/constant/config';
 
-import { useSubscribe } from '@/lib/api/client/newsletter';
-import { NewsletterPayload } from '@/interface';
-
 import FooterStyled, { FooterContainer } from './style';
+import _ from 'lodash';
+import NewsLetter from './Newsletter';
+import LangWrapper from '@/components/ui/LangWrapper';
+import { getScopedI18n } from '@/locales/server';
 
-const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalDetail[]; }) => {
-	const { trigger: subscribe } = useSubscribe();
+const FooterLayout = async({ footerData, hospitalData }: { footerData: FooterDetail[]; hospitalData: HospitalDetail[]; }) => {
+	const footers = _.groupBy(footerData, 'footer_category');
 
-	const t = useScopedI18n('page.footer');
-
-	const [loading, setLoading] = useState<boolean>(false);
-	const [loadingSubs, setLoadingSubs] = useState<boolean>(false);
-	const [modalNewsletter, setModalNewsletter] = useState<boolean>(false);
-	const [emailNewsletter, setEmailNewsletter] = useState<string>('');
-	const [msgNewsletter, setMsgNewsletter] = useState<string>('');
-	const [ourHospital, setOurHospital] = useState<HospitalDetail[]>([]);
-	const [ourCompany, setOurCompany] = useState<FooterDetail[]>([]);
-	const [pages, setPages] = useState<FooterDetail[]>([]);
-	const [visitorAndPatientInfo, setVisitorAndPatientInfo] = useState<FooterDetail[]>([]);
-
-	useEffect(() => {
-		setOurHospital([]);
-		setOurCompany([]);
-		setPages([]);
-		setVisitorAndPatientInfo([]);
-		setLoading(true);
-		Object.values(footerData || [])?.forEach(item => {
-			switch (item?.footer_category) {
-				case 'our-company':
-					setOurCompany(ourCompany => [...ourCompany, item]);
-					setLoading(false);
-					break;
-				case 'pages':
-					setPages(pages => [...pages, item]);
-					setLoading(false);
-					break;
-				case 'visitor-and-patient-info':
-					setVisitorAndPatientInfo(visitorAndPatientInfo => [...visitorAndPatientInfo, item]);
-					setLoading(false);
-					break;
-				default:
-					setLoading(false);
-					break;
-			}
-		});
-		setOurHospital(Object.values(hospitalData || []));
-	}, []);
-
-	const subscribeNewsletter = () => {
-		if (emailNewsletter !== '') {
-			setLoadingSubs(true);
-			const subscribePayload: NewsletterPayload = {
-				email: decodeURIComponent(emailNewsletter),
-			};
-			subscribe(subscribePayload).then(res => {
-				setModalNewsletter(true);
-				setMsgNewsletter(res?.stat_msg ?? '');
-				setEmailNewsletter('');
-				setLoadingSubs(false);
-			});
-		} else {
-			setModalNewsletter(true);
-			setMsgNewsletter('error');
-		}
-
-	};
+	const t = await getScopedI18n('page.footer');
 
 	const renderItems = (items: FooterDetail[]) => {
 		return (
 			<div className='flex flex-col gap-y-3 sm:gap-y-4'>
 				{
 					items.map((item, index) => {
-						return (
-							<Link key={ index } href={ `/${ item.slug }` }>
-								<Text
-									fontSize='14px'
-									fontWeight='700'
-									className='flex'
-									subClassName='max-sm:text-sm hover:text-[#667085] cursor-pointer capitalize'
-								>{ item.title }</Text>
-							</Link>
-						);
-					})
-				}
-			</div>
-		);
-	};
-
-	const renderItemsVisitorAndPatientInfo = (items: FooterDetail[]) => {
-		return (
-			<div className='flex flex-col gap-y-3 sm:gap-y-4'>
-				{
-					items.map((item: any, index: number) => {
 						return (
 							<Link key={ index } href={ `/${ item.slug }` }>
 								<Text
@@ -167,22 +84,6 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 		return renderItems(items);
 	};
 
-	const renderVisitorAndPatientInfoItems = (items: FooterDetail[]) => {
-		if (items.length > 4) {
-			const leftItems = items.slice(0, Math.ceil(items.length / 2));
-			const rightItems = items.slice(Math.ceil(items.length / 2));
-
-			return (
-				<div className='grid md:grid-cols-2 md:gap-x-4 gap-y-3 sm:gap-y-4'>
-					{ renderItemsVisitorAndPatientInfo(leftItems) }
-					{ renderItemsVisitorAndPatientInfo(rightItems) }
-				</div>
-			);
-		}
-
-		return renderItemsVisitorAndPatientInfo(items);
-	};
-
 	const renderHospitalItems = (items: HospitalDetail[]) => {
 		if (items.length > 4) {
 			const leftItems = items.slice(0, Math.ceil(items.length / 2));
@@ -211,23 +112,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 	};
 
 	const renderFooterHospital = (data: HospitalDetail[], title: string) => {
-		if (loading && !data?.length) {
-			return (
-				<div className='w-2/5 sm:w-[200px] lg:w-1/6'>
-					<div className='animate-pulse flex w-full'>
-						<div className='flex-1 space-y-6 py-1'>
-							<div className='h-2 bg-slate-200 rounded' />
-							<div className='space-y-3'>
-								{ Array.from(Array(4).keys()).map(idx => (
-									<div key={ idx } className='h-2 bg-slate-200 rounded' />
-								)) }
-							</div>
-						</div>
-					</div>
-				</div>
-			);
-		}
-
+	
 		if (data?.length) {
 			return (
 				<div>
@@ -240,72 +125,35 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 		return null;
 	};
 
-	const renderFooterCategory = (data: FooterDetail[], title: string) => {
-		if (loading && !data?.length) {
-			return (
-				<div className='w-2/5 sm:w-[200px] lg:w-1/6'>
-					<div className='animate-pulse flex w-full'>
-						<div className='flex-1 space-y-6 py-1'>
-							<div className='h-2 bg-slate-200 rounded' />
-							<div className='space-y-3'>
-								{ Array.from(Array(4).keys()).map(idx => (
-									<div key={ idx } className='h-2 bg-slate-200 rounded' />
-								)) }
-							</div>
-						</div>
-					</div>
-				</div>
-			);
+	const mapLabel = (key: string) => {
+		if (key === 'visitor-and-patient-info') {
+			return t('visitorPatientLabel');
 		}
-
-		if (data?.length) {
-			return (
-				<div>
-					{ renderCategoryTitle(title) }
-					{ renderCategoryItems(data) }
-				</div>
-			);
+		if (key === 'our-company') {
+			return t('ourCompanyLabel');
 		}
-
-		return null;
+		return '';
 	};
 
-	const renderFooterVisitorAndPatientInfo = (data: any, title: string) => {
-		if (loading && !data?.length) {
-			return (
-				<div className='w-2/5 sm:w-[200px] lg:w-1/6'>
-					<div className='animate-pulse flex w-full'>
-						<div className='flex-1 space-y-6 py-1'>
-							<div className='h-2 bg-slate-200 rounded' />
-							<div className='space-y-3'>
-								{ Array.from(Array(4).keys()).map(idx => (
-									<div key={ idx } className='h-2 bg-slate-200 rounded' />
-								)) }
-							</div>
-						</div>
+	const renderFooterCategories = () => {
+		return Object.keys(footers).reverse()
+			.map(key => {
+				const label = mapLabel(key);
+				return  (
+					<div key={ key }>
+						{ renderCategoryTitle(label) }
+						{ renderCategoryItems(footers[key]) }
 					</div>
-				</div>
-			);
-		}
-
-		if (data?.length) {
-			return (
-				<div>
-					{ renderCategoryTitle(title) }
-					{ renderVisitorAndPatientInfoItems(data) }
-				</div>
-			);
-		}
-
-		return null;
+				);
+			});
 	};
 
 	return (
 		<FooterStyled className='container-page py-8 sm:py-16'>
 			<FooterContainer>
-				{ renderFooterHospital(ourHospital ?? [], t('ourHospitalsLabel')) }
-				{ renderFooterCategory(ourCompany ?? [], t('ourCompanyLabel')) }
-				{ renderFooterVisitorAndPatientInfo(visitorAndPatientInfo ?? [], t('visitorPatientLabel')) }
+				{ renderFooterHospital(hospitalData ?? [], t('ourHospitalsLabel')) }
+				
+				{ renderFooterCategories() }
 
 				<div className='follow-section flex flex-col max-sm:flex-row-reverse gap-4 sm:gap-8'>
 					<div className='follow-icon-section'>
@@ -337,24 +185,9 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
 					<Text fontSize='14px' className='sub-text' subClassName='leading-[21px] max-sm:text-[12px] max-sm:leading-[18px] font-normal'>{ t('subscribeDescription') }</Text>
-					<div className='flex items-center mt-4 lg:mt-6 w-full'>
-						<div className='-mr-2 flex-1'>
-							<TextField
-								width='100%'
-								placeholder={ t('subscribePlaceholder') }
-								className='text-sm sm:text-base font-normal text-[#BDBDBD] !h-11 !w-full'
-								value={ emailNewsletter }
-								onChange={ e => setEmailNewsletter(e.target.value) }
-							/>
-						</div>
-						<Button
-							className={ ` ${ loadingSubs ? '!bg-gray-50 !text-gray-300 cursor-not-allowed' : '' } sub-button !text-base !font-bold !h-[48px]` }
-							theme='secondary'
-							label={ t('subscribeSubmit') }
-							onClick={ subscribeNewsletter }
-							disabled={ loadingSubs }
-						/>
-					</div>
+					<LangWrapper>
+						<NewsLetter/>
+					</LangWrapper>
 				</div>
 			</FooterContainer>
 			<div className='flex flex-col items-center max-sm:pb-8 pt-8 sm:pt-16'>
@@ -378,25 +211,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 					</div>
 				}
 			</div>
-			<Modal
-				visible={ modalNewsletter }
-				onClose={ () => setModalNewsletter(false) }
-				width='560px'
-			>
-				<div className='relative flex flex-col items-center'>
-					{ msgNewsletter === 'Success' ? <icons.Confirmed /> : <div className='p-4 bg-gray-200 rounded-full'><icons.Close /></div> }
-					<Text
-						fontSize='23px'
-						lineHeight='19px'
-						fontType='h4'
-						fontWeight='900'
-						color={ colors.grey.darker }
-						text={ msgNewsletter === 'Success' ? t('successSubs') : t('errorSubs') }
-						className='mt-5'
-					/>
-					<Button type='submit' label={ t('handleButtonModalSubmit') } className='mt-[32px]' onClick={ () => setModalNewsletter(false) } />
-				</div>
-			</Modal>
+			
 		</FooterStyled>
 	);
 

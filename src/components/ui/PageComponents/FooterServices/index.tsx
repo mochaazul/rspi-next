@@ -12,6 +12,8 @@ import {
 import TextHtml from '@/components/ui/TextHtml';
 
 import { FooterServiceStyle } from './style';
+import LangWrapper from '../../LangWrapper';
+import BreadCrumbs from '../../Breadcrumbs';
 
 type Props = PropsWithRef<PropsWithChildren<{
 	detail: any,
@@ -69,7 +71,9 @@ const FooterServices = ({
 				<div>
 					<div className='content-wrapper flex flex-col'>
 						<div className='mb-[20px] sm:ml-[32px]'>
-							<Breadcrumbs datas={ breadcrumbsPath } />
+							<LangWrapper>
+								<BreadCrumbs datas={ breadcrumbsPath } />
+							</LangWrapper>
 						</div>
 						<div className='rightSide sm:ml-[32px]'>
 							{ renderContent }

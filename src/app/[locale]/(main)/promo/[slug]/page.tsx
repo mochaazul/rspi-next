@@ -7,6 +7,7 @@ import { PanelH1 } from '../../style';
 import { getAllEvents, getPromoById } from '@/lib/api/events';
 import PromoDetail from '@/components/ui/PageComponents/News/Promo/PromoDetail';
 import { redirect } from 'next/navigation';
+import LangWrapper from '@/components/ui/LangWrapper';
 
 export async function generateMetadata({ params }: { params: { slug: string; }; }): Promise<Metadata> {
 	const getArticle = await getPromoById({

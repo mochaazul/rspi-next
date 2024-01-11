@@ -1,3 +1,4 @@
+'use client';
 import InputMask from 'react-input-mask';
 
 import withInputLabel from '@/components/ui/withInputLabel';

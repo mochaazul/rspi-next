@@ -12,6 +12,7 @@ import {
 import { BreadcrumbsType } from '../../Breadcrumbs';
 import TextHtml from '../../TextHtml';
 import { HospitalServiceStyle } from './style';
+import LangWrapper from '../../LangWrapper';
 
 type Props = PropsWithRef<PropsWithChildren<{
 	detail: any,
@@ -58,8 +59,10 @@ const HospitalServices = ({
 			<div className='lg:w-[1110px] mx-auto max-sm:mx-[15px] pb-[60px]'>
 				<div>
 					<div className='content-wrapper flex flex-col'>
-						<div className='mb-[50px] max-sm:mb-[25px] sm:ml-[32px]'>
-							<Breadcrumbs datas={ breadcrumbsPath } />
+						<div className='mb-[20px] sm:ml-[32px]'>
+							<LangWrapper>
+								<Breadcrumbs datas={ breadcrumbsPath } />
+							</LangWrapper>
 						</div>
 						<div className='rightSide sm:ml-[32px]'>
 							{ renderContent }

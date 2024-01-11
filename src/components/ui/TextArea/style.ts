@@ -1,3 +1,4 @@
+'use client';
 import { colors } from '@/constant';
 import { GlobalAllTransition5ms } from '@/constant/globalstyle';
 import React from 'react';

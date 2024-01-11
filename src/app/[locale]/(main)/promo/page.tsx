@@ -3,8 +3,9 @@ import { getHospitals, } from '@/lib/api';
 import { getScopedI18n } from '@/locales/server';
 import { getAllEvents } from '@/lib/api/events';
 import EventClassesPromo from './Promo';
+import LangWrapper from '@/components/ui/LangWrapper';
 
-const Promo = async ({ searchParams }: any) => {
+const Promo = async({ searchParams }: any) => {
 	
 	const getEvent = await getAllEvents({
 		query: {
@@ -36,12 +37,14 @@ const Promo = async ({ searchParams }: any) => {
 	const t = await getScopedI18n('page.promoPage');
 
 	return (
-		<EventClassesPromo
-			hospitalSelector={ hospitals }
-			breadcrumbsPath={ [{ name: t('heading'), url: '/promo' }] }
-			events={ dataEvent }
-			pagination={ getEvent?.pagination }
-		/>
+		<LangWrapper>
+			<EventClassesPromo
+				hospitalSelector={ hospitals }
+				breadcrumbsPath={ [{ name: t('heading'), url: '/promo' }] }
+				events={ dataEvent }
+				pagination={ getEvent?.pagination }
+			/>
+		</LangWrapper>
 	);
 };
 

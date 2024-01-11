@@ -16,20 +16,21 @@ import DoctorFilter from './DoctorFilter';
 import ResultHeader from './ResultHeader';
 import LangWrapper from '@/components/ui/LangWrapper';
 import useFindDoctor from './useFindDoctor';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import { useGetDoctors } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
-import { HospitalDetail } from '@/interface';
+import { HospitalDetail, I_MasterDoctor, ResponseType } from '@/interface';
 import { I_SpecialtyDropdownResponse } from '@/interface/specialities';
 
-type Props = {
-	hospital: HospitalDetail[];
-	clinics: I_SpecialtyDropdownResponse[];
-};
+type Props ={
+  hospital: HospitalDetail[]
+  clinics: I_SpecialtyDropdownResponse[]
+	doctorFallback: ResponseType<I_MasterDoctor[]>
+}
 
-export default function FindADoctorComponent({ hospital, clinics }: Props) {
+export default function FindADoctorComponent({ hospital, clinics, doctorFallback }:Props) {
 
 	const { onDeletePills, clearSearchParams, doctorNameFilter } = useFindDoctor({ clinics: clinics, hospitals: hospital });
 
@@ -110,12 +111,18 @@ export default function FindADoctorComponent({ hospital, clinics }: Props) {
 		if (doctorResponse) {
 			return doctorResponse.flatMap(res => res.data);
 		}
+		if (doctorFallback) {
+			return doctorFallback.data;
+		}
 		return [];
 	};
 
 	const doctorCount = () => {
 		if (doctorResponse) {
 			return doctorResponse[0].pagination.count || 0;
+		}
+		if (doctorFallback) {
+			return doctorFallback.pagination.count || 0;
 		}
 		return 0;
 	};
@@ -140,50 +147,50 @@ export default function FindADoctorComponent({ hospital, clinics }: Props) {
 				<PanelH1>
 					<LangWrapper>
 						<Breadcrumbs datas={ breadCrumbs } />
-						<FindADoctorStyle className='mt-[25px] sm:mt-[50px]'>
-							{ /* Filter Pane */ }
-							<div className='max-sm:hidden'>
-								{ RenderFilterPane }
-							</div>
+					</LangWrapper>
 
-							{ /* Doctors Pane */ }
-							<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
+					<FindADoctorStyle className='mt-[25px] sm:mt-[50px]'>
+						{ /* Filter Pane */ }
+						<div className='max-sm:hidden'>
+							{ RenderFilterPane }
+						</div>
 
-								<ResultHeader loading={ doctorLoading } doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } reset={ resetSearchDoctor } />
-
-								<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
-									{ /* Applied dilter pills */ }
-									<div className='flex gap-2 sm:flex-wrap max-sm:flex-nowrap max-sm:pb-2'>
-										<div className='filter-pill min-w-fit sm:hidden'>
-											<div onClick={ () => setFilterModalVisible(true) }>
-												<Icons.Filter size={ 18 } color={ colors.paradiso.default } />
-												<Text
-													fontSize='16px'
-													fontWeight='400'
-													lineHeight='19px'
-													color={ colors.paradiso.default }
-													text='Filter'
-												/>
-											</div>
+						{ /* Doctors Pane */ }
+						<div className='doctors-pane max-sm:pl-0 max-sm:border-0'>
+							<ResultHeader loading={ doctorLoading } doctorCount={ doctorCount() } setter={ doctorNameFilter.set } getter={ doctorNameFilter.get } reset={ resetSearchDoctor } />
+							<div className='flex justify-between mt-4 w-full items-center max-sm:overflow-x-auto'>
+								{ /* Applied dilter pills */ }
+								<div className='flex gap-2 sm:flex-wrap max-sm:flex-nowrap max-sm:pb-2'>
+									<div className='filter-pill min-w-fit sm:hidden'>
+										<div onClick={ () => setFilterModalVisible(true) }>
+											<Icons.Filter size={ 18 } color={ colors.paradiso.default } />
+											<Text
+												fontSize='16px'
+												fontWeight='400'
+												lineHeight='19px'
+												color={ colors.paradiso.default }
+												text='Filter'
+											/>
 										</div>
-										{
-											getFilterValues().map((filter, index) => (
-												<div className='min-w-fit' key={ `filter-pills-${ index }` }>
-													<Pills onRemove={ () => onDeletePills(filter) }>
-														<Text
-															fontSize='16px'
-															fontWeight='400'
-															lineHeight='19px'
-															text={ filter.text }
-														/>
-													</Pills>
-												</div>
-											))
-										}
 									</div>
-									<div className='cursor-pointer max-sm:hidden min-w-fit'>
-										{
-											hasSearchParams() &&
+									{
+										getFilterValues().map((filter, index) => (
+											<div className='min-w-fit' key={ `filter-pills-${ index }` }>
+												<Pills onRemove={ () => onDeletePills(filter) }>
+													<Text
+														fontSize='16px'
+														fontWeight='400'
+														lineHeight='19px'
+														text={ filter.text }
+													/>
+												</Pills>
+											</div>
+										))
+									}
+								</div>
+								<div className='cursor-pointer max-sm:hidden min-w-fit'>
+									{
+										hasSearchParams() &&
 											<Text
 												fontSize='16px'
 												fontWeight='400'
@@ -192,77 +199,76 @@ export default function FindADoctorComponent({ hospital, clinics }: Props) {
 												text='Clear All'
 												onClick={ clearParams }
 											/>
-										}
-									</div>
-								</div>
-
-								{ /* Search used filters - pills with remove icon */ }
-								{ /* Doctor found counter - Mobile */ }
-								<div>
-									<Text
-										fontSize='14px'
-										fontWeight='700'
-										lineHeight='17px'
-										className='mb-2 mt-6 sm:hidden'
-										text={ `${ doctorCount() } Doctor Found` }
-									/>
-								</div>
-
-								<InfiniteScroll
-									style={ { overflow: 'unset' } }
-									className='flex flex-col gap-6 sm:mt-[47px]'
-									dataLength={ doctorData().length || 0 }
-									next={ loadMore }
-									hasMore={ hasMore() }
-									loader={ <div className='loader' key={ 0 }>Loading ...</div> }
-									scrollThreshold={ '100px' }
-								>
-									{
-										doctorData().map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
 									}
-								</InfiniteScroll>
-								{ /* Doctors result card */ }
+								</div>
 							</div>
 
-							{ /* Popup Filter - Mobile only */ }
-							<Modal
-								visible={ filterModalVisible }
-								onClose={ () => setFilterModalVisible(false) }
-								width='90%'
-								borderRadius='16px'
-								backdropColor={ colors.black.opacity64 }
+							{ /* Search used filters - pills with remove icon */ }
+							{ /* Doctor found counter - Mobile */ }
+							<div>
+								<Text
+									fontSize='14px'
+									fontWeight='700'
+									lineHeight='17px'
+									className='mb-2 mt-6 sm:hidden'
+									text={ `${ doctorCount() } Doctor Found` }
+								/>
+							</div>
+
+							<InfiniteScroll
+								style={ { overflow: 'unset' } }
+								className='flex flex-col gap-6 sm:mt-[47px]'
+								dataLength={ doctorData().length || 0 }
+								next={ loadMore }
+								hasMore={ hasMore() }
+								loader={ <div className='loader' key={ 0 }>Loading ...</div> }
+								scrollThreshold={ '100px' }
 							>
-								<div className='relative flex flex-col'>
-									<div className='flex justify-between items-center'>
-										<Text
-											fontSize='16px'
-											lineHeight='19px'
-											fontType='h4'
-											fontWeight='900'
-											color={ colors.grey.darker }
-											text='Filter'
-											className=''
-										/>
-									</div>
-									<div className='x-spacer my-4' />
+								{
+									doctorData().map((doctorData, index) => <DoctorCard key={ index } { ...doctorData } />)
+								}
+							</InfiniteScroll>
+							{ /* Doctors result card */ }
+						</div>
 
-									{ /* Filter form */ }
-									<div>
-										{ RenderFilterPane }
-									</div>
-
-									<div className='mt-4'>
-										<Button
-											theme='primary'
-											themeColor={ colors.green.brandAccent }
-											label={ t('label.applyFilter') }
-											onClick={ () => setFilterModalVisible(false) }
-										/>
-									</div>
+						{ /* Popup Filter - Mobile only */ }
+						<Modal
+							visible={ filterModalVisible }
+							onClose={ () => setFilterModalVisible(false) }
+							width='90%'
+							borderRadius='16px'
+							backdropColor={ colors.black.opacity64 }
+						>
+							<div className='relative flex flex-col'>
+								<div className='flex justify-between items-center'>
+									<Text
+										fontSize='16px'
+										lineHeight='19px'
+										fontType='h4'
+										fontWeight='900'
+										color={ colors.grey.darker }
+										text='Filter'
+										className=''
+									/>
 								</div>
-							</Modal>
-						</FindADoctorStyle>
-					</LangWrapper>
+								<div className='x-spacer my-4' />
+
+								{ /* Filter form */ }
+								<div>
+									{ RenderFilterPane }
+								</div>
+
+								<div className='mt-4'>
+									<Button
+										theme='primary'
+										themeColor={ colors.green.brandAccent }
+										label={ t('label.applyFilter') }
+										onClick={ () => setFilterModalVisible(false) }
+									/>
+								</div>
+							</div>
+						</Modal>
+					</FindADoctorStyle>
 				</PanelH1>
 			</PanelV1>
 		</div>

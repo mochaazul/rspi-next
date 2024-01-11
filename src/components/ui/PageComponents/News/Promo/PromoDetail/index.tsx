@@ -1,84 +1,54 @@
-'use client';
+'use server';
 
-import { useEffect, useState } from 'react';
-
-import { colors, icons, sosmedLink } from '@/constant';
+import { colors } from '@/constant';
 
 import PromoPackages from '@/components/ui/PageComponents/LandingPageSections/PromoPackages';
 
 import {
 	Breadcrumbs,
 	Text,
-	Tabs,
 } from '@/components/ui';
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useScopedI18n } from '@/locales/client';
 import TextHtml from '@/components/ui/TextHtml';
 
-import { useHostname } from '@/utils/useHostname';
+import SocialShare from './SocialShare';
+import { getScopedI18n } from '@/locales/server';
+import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
+import LangWrapper from '@/components/ui/LangWrapper';
 
 type Props = {
 	selectedEvent: any;
-    eventsOther: any;
-    breadcrumbsPath: {
+	eventsOther: any;
+	breadcrumbsPath: {
 		name: string;
 		url: string;
 	}[],
 };
 
-const PromoDetail: React.FC<Props> = ({
+const PromoDetail: React.FC<Props> = async({
 	selectedEvent,
 	breadcrumbsPath,
 	eventsOther
 }) => {
-	const t = useScopedI18n('page.promoPage');
-	const tGlobal = useScopedI18n('global');
-	const [activeTabIdx, setActiveTabIdx] = useState(0);
-	const hostname = useHostname({ fullUrl: true });
-
-	const getLinkShareSocmed = (link: any) => {
-		return link + hostname;
-	};
+	const t = await getScopedI18n('page.promoPage');
 
 	return (
-    	<div>
-			<div className='sm:mx-0 mx-[16px]'>
-				<Breadcrumbs datas={ breadcrumbsPath } />
-			</div>
-			<div className='mt-[25px] sm:mt-[50px]'>
-				<h1 className='leading-[32px] sm:leading-[57px] font-black text-gray-1 sm:text-[44px] text-[24px] mx-[16px] sm:mx-0 '>
+		<div>
+			<BreadcrumbsServer datas={ breadcrumbsPath } />
+			<div className='mt-[50px]'>
+				<Text
+					fontType='h1'
+					fontWeight='900'
+					fontSize='44px'
+					lineHeight='57px'>
 					{ selectedEvent?.title }
-				</h1>
-				<div className='flex items-center gap-[30px] mt-[10px] sm:mx-0 mx-[16px]'>
-					<div className='flex gap-[15px] items-center'>
-						<p className='leading-[24px] text-[14px] font-normal text-gray-1 sm:text-[20px]'>
-							{ tGlobal('share') }
-						</p>
-						<div className='flex gap-[15px]'>
-							<Link href={ getLinkShareSocmed(sosmedLink.facebook) ?? ''  } target='_blank' className='cursor-pointer' >
-								<Image src='/images/ic/facebook.svg' alt='RSPI Facebook link' width={ 16 } height={ 16 } />
-							</Link>
-							<Link href={ getLinkShareSocmed(sosmedLink.twitter) ?? ''  } target='_blank' className='cursor-pointer' >
-								<Image src='/images/ic/twitter_x_dark.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
-							</Link>
-							<Link href={ getLinkShareSocmed(sosmedLink.linkedin) ?? ''  } target='_blank' className='cursor-pointer' >
-								<Image src='/images/ic/LinkedIn/Negative.svg' alt='RSPI Linkedin link' width={ 16 } height={ 16 } />
-							</Link>
-							<div className='cursor-pointer' onClick={ () => {
-								navigator?.clipboard?.writeText(hostname).then(() => {
-									alert('URL Link copied');
-								});
-							} }>
-								<Image src='/images/ic/Link.svg' alt='RSPI link' width={ 16 } height={ 16 } />
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className='content-wrapper mt-[20px] mb-[32px] sm:mb-[100px]'>
+				</Text>
+				<LangWrapper>
+					<SocialShare />
+				</LangWrapper>
+				<div className='content-wrapper mt-[20px] mb-[100px]'>
 					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
-						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full' alt='' />
+						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full rounded-[5px]' alt='' />
 						<div className='mx-[16px] sm:mx-0 '>
 							<TextHtml
 								htmlStr={ selectedEvent?.content || '' }
@@ -161,7 +131,9 @@ const PromoDetail: React.FC<Props> = ({
 								{ t('more') }
 							</span>
 							<div className='pt-[10px]' />
-							<PromoPackages showAsRelated={ true } events={ eventsOther } />
+							<LangWrapper>
+								<PromoPackages showAsRelated={ true } events={ eventsOther } />
+							</LangWrapper>
 						</div>
 					</div>
 				</div>
