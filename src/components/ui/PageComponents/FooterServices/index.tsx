@@ -40,7 +40,7 @@ const FooterServices = ({
 							alt='slider'
 							className='bg-white h-[220px] sm:h-[420px] sm:w-full rounded-[5px] object-cover w-full'
 						/> :
-						<CustomCarousel arrowButton={ true }>
+						<CustomCarousel arrowButton={ true } containerClassName='rounded-[5px]'>
 							{ detail?.[0]?.img_url?.map((image: string, index: any) => {
 								return <img
 									key={ `carousel-nav-${ index }` }
