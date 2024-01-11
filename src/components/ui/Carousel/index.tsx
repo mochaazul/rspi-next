@@ -12,6 +12,7 @@ interface CarouselProps {
 	autoplay?: boolean;
 	arrowButton?: boolean;
 	dotsContainerClassName?: string;
+	containerClassName?: string;
 }
 
 const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
@@ -73,7 +74,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
 	return (
 		<CarouselWrapper>
 			<div
-				className='container__slider relative'
+				className={ `container__slider relative ${ props.containerClassName ?? '' }` }
 				onMouseEnter={ AutoPlayStop }
 				onMouseLeave={ AutoPlayStart }
 			>

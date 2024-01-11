@@ -65,7 +65,7 @@ const ServiceLocation: React.FC<NewsProps> = ({ content, activeMenuIndex, center
 			</Text>
 
 			<div className='mt-4 md:mt-8'>
-				<CustomCarousel arrowButton={ true }>
+				<CustomCarousel arrowButton={ true } containerClassName='rounded-[5px]'>
 					{ content?.img_url?.map((image: any, index: any) => {
 						return <img
 							key={ index }
