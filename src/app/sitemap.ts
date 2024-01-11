@@ -65,7 +65,7 @@ const getIdn = async():Promise<MetadataRoute.Sitemap> => {
 		return {
 			url: `${ URL }/id/news/${ item.slug }`,
 			changeFrequency: 'weekly',
-			lastModified: item.created_at,
+			lastModified: item.created_date,
 			priority: 1
 		};
 	});
@@ -158,7 +158,7 @@ const getEn = async() => {
 		return {
 			url: `${ URL }/en/news/${ item.slug }`,
 			changeFrequency: 'weekly',
-			lastModified: item.created_at,
+			lastModified: item.created_date,
 			priority: 1
 		};
 	});
