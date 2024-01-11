@@ -41,7 +41,7 @@ const NewsLetter = () => {
 				<TextField
 					width='100%'
 					placeholder={ t('subscribePlaceholder') }
-					className='text-sm sm:text-base !h-11 !w-full'
+					className='text-sm sm:text-base text-[#BDBDBD] !h-11 !w-full'
 					value={ emailNewsletter }
 					onChange={ e => setEmailNewsletter(e.target.value) }
 				/>
