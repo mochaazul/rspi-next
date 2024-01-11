@@ -1029,7 +1029,7 @@ export default {
 			agreementStatement: {
 				preText: 'I',
 				boldText: 'agree',
-				tailText: 'to the terms and conditions.'
+				tailText: 'to the ',
 			},
 			buttonPrivacy: 'Next',
 			buttonTnC: 'Send',

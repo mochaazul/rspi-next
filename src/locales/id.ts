@@ -1035,7 +1035,7 @@ export default {
 			agreementStatement: {
 				preText: 'Saya',
 				boldText: 'menyetujui',
-				tailText: 'ketentuan Terms and Conditions'
+				tailText: 'ketentuan ',
 			},
 			buttonPrivacy: 'Lanjut',
 			buttonTnC: 'Kirim',
