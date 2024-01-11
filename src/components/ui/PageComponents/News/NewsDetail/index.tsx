@@ -124,7 +124,7 @@ const NewsDetail = async({
 					<img
 						alt={ filteredSelectedArticle?.title }
 						src={ filteredSelectedArticle?.img_url }
-						className='mx-auto lg:w-[729px] object-cover' />
+						className='mx-auto lg:w-[729px] object-cover rounded-[5px]' />
 				</div>
 				<div className='lg:w-3/4 md:w-3/4 xl:w-3/4'>
 					<div className='w-full'>
