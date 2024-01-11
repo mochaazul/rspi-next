@@ -6,7 +6,6 @@ export const TextContainer = styled.div`
   color: ${ colors.grey.darker };
   ol, ul {
     list-style: initial;
-    padding: revert;
   }
   &.text-14 {
     font-size: 14px;
