@@ -27,17 +27,19 @@ const NewsDetail = async({
 	const currentLang = getCurrentLocale();
 	const renderNews = () => {
 		return (
-			<div className='max-sm:mx-[15px] '>
-				<Text fontType='p' fontWeight='700' fontSize='20px' lineHeight='30px'>
-					{ filteredSelectedArticle?.short_description }
-				</Text>
-				<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover rounded-[5px]' />
+			<div>
+				<div className='max-sm:mx-[15px] '>
+					<Text fontType='p' fontWeight='700' fontSize='20px' lineHeight='30px'>
+						{ filteredSelectedArticle?.short_description }
+					</Text>
+					<img alt={ filteredSelectedArticle?.title } src={ filteredSelectedArticle?.img_url } className='mx-auto my-[50px] lg:w-[729px] lg:h-[502px] object-cover rounded-[5px]' />
 
-				<TextHtml
-					style={ { color: colors.grey.dark } }
-					className='innerHTML mt-[10px]'
-					htmlStr={ filteredSelectedArticle?.content ?? '' }
-				/>
+					<TextHtml
+						style={ { color: colors.grey.dark } }
+						className='innerHTML mt-[10px]'
+						htmlStr={ filteredSelectedArticle?.content ?? '' }
+					/>
+				</div>
 
 				{
 					relatedNews.length > 0 || specialty.length > 0 ?
