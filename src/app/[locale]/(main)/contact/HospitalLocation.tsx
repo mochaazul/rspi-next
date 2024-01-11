@@ -71,7 +71,7 @@ const HospitalLocation = ({ hospitals }:Props) => {
 		if (!embedLink) {
 			return Object.values(hospitals || [])[0]?.embed_link ?? '';
 		}
-		return embedLink;
+		return embedLink.replace(/['"]+/g, '');
 	};
 	return (
 		<section>
