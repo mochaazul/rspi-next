@@ -125,7 +125,7 @@ const PrivacyPolicyModal = ({
 						subClassName='max-sm:text-[16px]'
 					/>
 				</HeaderItem>
-				<Divider />
+				<Divider className='max-sm:w-[10px]' />
 				<HeaderItem className='max-sm:truncate'>
 					<NumberContainer className='max-sm:text-[16px]' isActive={ step === 'toc' }>2</NumberContainer>
 					<Text
