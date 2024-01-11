@@ -31,10 +31,10 @@ const JadwalKunjungan = ({ patientProfile }: JadwalKunjunganProps) => {
 	});
 
 	useEffect(() => {
-		if (appointmentError) {
+		if (appointmentError?.message) {
 			toast.error(appointmentError?.message);
 		}
-	}, [appointmentError]);
+	}, [appointmentError?.message]);
 
 	return (
 		<>
