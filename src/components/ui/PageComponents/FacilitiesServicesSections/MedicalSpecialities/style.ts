@@ -1,3 +1,4 @@
+'use client';
 import { colors } from '@/constant';
 import { GlobalAllTransition200ms } from '@/constant/globalstyle';
 import styled from 'styled-components';

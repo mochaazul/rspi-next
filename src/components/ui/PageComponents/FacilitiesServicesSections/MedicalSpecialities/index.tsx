@@ -1,111 +1,32 @@
-'use client';
+'use server';
 
-import React, { PropsWithChildren, PropsWithRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { colors, icons } from '@/constant';
 import { MedicalSpecialities } from '@/interface/MedicalSpecialities';
 import { FacilityServicesDetail } from '@/interface';
-import { useScopedI18n } from '@/locales/client';
 
 import { MedicalSpecialitiesItemContainer } from './style';
 
 import CardMenu from '../CardMenu';
 import Text from '../../../Text';
+import { getScopedI18n } from '@/locales/server';
 
-type Specialities = {
-	title: string,
-	icon: React.ReactElement;
-};
-const specialities: Specialities[] = [
-	{
-		title: 'Akupuntur',
-		icon: <icons.Specialities.Akupuntur />
-	},
-	{
-		title: 'Anak',
-		icon: <icons.Specialities.Anak />
-	},
-	{
-		title: 'Gizi Klinik',
-		icon: <icons.Specialities.Gizi />
-	},
-	{
-		title: 'Jantung & Pembuluh Darah',
-		icon: <icons.Specialities.Jantung />
-	},
-	{
-		title: 'Rehabilitasi Medik & Fisioterapi',
-		icon: <icons.Specialities.Rehabilitiasi />
-	},
-	{
-		title: 'THT',
-		icon: <icons.Specialities.Tht />
-	},
-	{
-		title: 'Alergi & Imunologi',
-		icon: <icons.Specialities.Alergi />
-	},
-	{
-		title: 'Bedah',
-		icon: <icons.Specialities.Bedah />
-	},
-	{
-		title: 'Paru & Pernapasan',
-		icon: <icons.Specialities.Paru />
-	},
-	{
-		title: 'Psikiatri/Kesehatan Jiwa',
-		icon: <icons.Specialities.Psikiatri />
-	},
-	{
-		title: 'Kesehatan Mata',
-		icon: <icons.Specialities.Mata />
-	},
-	{
-		title: 'Tumbuh Kembang & Edukasi Terpadu',
-		icon: <icons.Specialities.TumbuhKembang />
-	},
-	{
-		title: 'Anestesi',
-		icon: <icons.Specialities.Anestesi />
-	},
-	{
-		title: 'Kulit & Kelamin',
-		icon: <icons.Specialities.Kelamin />
-	},
-	{
-		title: 'Penyakit Dalam',
-		icon: <icons.Specialities.PenyakitDalam />
-	},
-	{
-		title: 'Psikologi',
-		icon: <icons.Specialities.Psikologi />
-	},
-	{
-		title: 'Klinik Laktasi',
-		icon: <icons.Specialities.Laktasi />
-	},
-	{
-		title: 'Klinik Saraf & Bedah Saraf',
-		icon: <icons.Specialities.Saraf />
-	}
-];
-
-type Props = PropsWithRef<PropsWithChildren<{
+type Props ={
 	facilityData: FacilityServicesDetail[],
 	paramsSlug: string;
 	medicalSpecialities?: MedicalSpecialities[];
-}>>;
+}
 
-const MedicalSpecialitiesComponent = ({
+const MedicalSpecialitiesComponent = async({
 	facilityData,
 	paramsSlug,
 	medicalSpecialities
 }: Props) => {
 	
-	const t = useScopedI18n('page.facilities.medicalSpecialities');
+	const t = await getScopedI18n('page.facilities.medicalSpecialities');
 
 	return (
 		<div>
