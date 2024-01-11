@@ -115,8 +115,8 @@ const PrivacyPolicyModal = ({
 		onClose={ onClose }>
 		<PrivacyPolicyContainer>
 			<HeaderSection className='max-sm:px-[16px] rounded-[8px] max-sm:rounded-[16px] '>
-				<HeaderItem>
-					<NumberContainer className='max-sm:text-[16px] max-sm:truncate' isActive={ step === 'pp' }>1</NumberContainer>
+				<HeaderItem className='max-sm:truncate'>
+					<NumberContainer className='max-sm:text-[16px]' isActive={ step === 'pp' }>1</NumberContainer>
 					<Text
 						fontSize='20px'
 						fontWeight='900'
@@ -126,8 +126,8 @@ const PrivacyPolicyModal = ({
 					/>
 				</HeaderItem>
 				<Divider />
-				<HeaderItem>
-					<NumberContainer className='max-sm:text-[16px] max-sm:truncate' isActive={ step === 'toc' }>2</NumberContainer>
+				<HeaderItem className='max-sm:truncate'>
+					<NumberContainer className='max-sm:text-[16px]' isActive={ step === 'toc' }>2</NumberContainer>
 					<Text
 						fontSize='20px'
 						fontWeight='900'
