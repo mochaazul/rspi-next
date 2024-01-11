@@ -4,6 +4,7 @@ import { I_VisitHistory } from '@/interface';
 import AuthError from '@/components/Layout/AuthError';
 
 import PatientProfile from './PatientProfile';
+import LangWrapper from '@/components/ui/LangWrapper';
 
 export default async function Page() {
 	const profile = await getProfile();
@@ -23,6 +24,8 @@ export default async function Page() {
 	}
 
 	return (
-		<PatientProfile patientProfile={ profile?.data } visitHospitalHistory={ visitHistory } />
+		<LangWrapper>
+			<PatientProfile patientProfile={ profile?.data } visitHospitalHistory={ visitHistory } />
+		</LangWrapper>
 	);
 }

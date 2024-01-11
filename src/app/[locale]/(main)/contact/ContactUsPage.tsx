@@ -100,8 +100,13 @@ const ContactUsPage = async({
 							{ t('faq.subHeading') }
 						</p>
 						<div className='mt-10 faq-sections'>
-							<Accordion
+							{ /* <Accordion
 								itemTheme={ props => <Accordion.ItemFAQ { ...props } isJSXDesc={ true } /> }
+								datas={ faqDatas.filter((_faq, index) => index < 3) }
+							/>
+							 */ }
+							<Accordion
+								faq
 								datas={ faqDatas.filter((_faq, index) => index < 3) }
 							/>
 						</div>

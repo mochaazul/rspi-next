@@ -128,11 +128,13 @@ const CentreOfExcellencePage = async({ params }: { params: { slug: string; }; })
 						{
 							responseCenterOfExcellence?.data?.filter(coe => `${ coe.slug }` === newParam).length > 0
 								?
-								<ServiceLocation
-									content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
-									activeMenuIndex={ newParam }
-									centerOfExcellence={ responseCenterOfExcellence?.data }
-								/>
+								<LangWrapper>
+									<ServiceLocation
+										content={ responseCenterOfExcellence?.data?.find(coe => `${ coe.slug }` === newParam) }
+										activeMenuIndex={ newParam }
+										centerOfExcellence={ responseCenterOfExcellence?.data }
+									/>
+								</LangWrapper>
 								:
 								null
 						}
