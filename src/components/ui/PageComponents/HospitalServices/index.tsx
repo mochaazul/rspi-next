@@ -31,7 +31,7 @@ const HospitalServices = ({
 			</Text>
 
 			<div className='mt-[32px] max-sm:mt-4'>
-				<CustomCarousel arrowButton>
+				<CustomCarousel arrowButton containerClassName='rounded-[5px]'>
 					{ (detail?.img_url ?? [])?.map((image: string, index: any) => {
 						return (
 							<img

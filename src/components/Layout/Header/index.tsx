@@ -125,19 +125,21 @@ export default async function Header({
 
 						{ /* Mobile View Notif ETC */ }
 						<div className='flex lg:hidden items-center gap-x-5 xl2:gap-x-6'>
-							{
-								isLoggedIn && (
-									<LangWrapper>
+							<LangWrapper>
+
+								{
+									isLoggedIn && (
 										<NotificationBell session={ session } />
-									</LangWrapper>
-								)
-							}
-							<MobileMenus
-								session={ session }
-								hospitals={ hospitalData }
-								coe={ centerOfExcellenceData }
-								facilitiy={ facilityServicesData }
-							/>
+									)
+								}
+								<MobileMenus
+									session={ session }
+									hospitals={ hospitalData }
+									coe={ centerOfExcellenceData }
+									facilitiy={ facilityServicesData }
+								/>
+							</LangWrapper>
+
 						</div>
 
 						{ /* Right side Menus */ }

@@ -9,12 +9,12 @@ import SelectRSLocation from './SelectRSLocation';
 import { useScopedI18n } from '@/locales/client';
 
 type Props = PropsWithRef<PropsWithChildren<{
-  hospitals: HospitalDetail[]
-}>>
+	hospitals: HospitalDetail[];
+}>>;
 
-const HospitalLocation = ({ hospitals }:Props) => {
+const HospitalLocation = ({ hospitals }: Props) => {
 	const t = useScopedI18n('page.contactUs');
-  
+
 	const handleRSLocationChange = (id: number) => {
 		setSelectedMapIndex(id);
 	};
@@ -117,9 +117,10 @@ const HospitalLocation = ({ hospitals }:Props) => {
 				</div>
 				<div className='sm:hidden relative mt-[-250px] mx-4 card-hospital-swap'>
 					<div className='global-shadow relative'>
-						<CustomCarousel 
-							autoplay={ false } 
-							arrowButton={ true } 
+						<CustomCarousel
+							containerClassName='rounded-[10px]'
+							autoplay={ false }
+							arrowButton={ true }
 							onChangeIndex={ handleRSCarouselChange }>
 							{
 								Object.values(hospitals || [])?.map((data, index) => (

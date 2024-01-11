@@ -10,7 +10,7 @@ import { getScopedI18n } from '@/locales/server';
 import { FooterServiceStyle } from './style';
 import BreadcrumbsServer from '@/components/ui/Breadcrumbs/server';
 
-const MedicalSpecialitiesPage = async({ params }: { params: { slug: string; }; }) => {
+const MedicalSpecialitiesPage = async ({ params }: { params: { slug: string; }; }) => {
 	const footerSlugRes = await getMedicalSpecialityDetail({
 		param: decodeURIComponent(params?.slug)
 	});
@@ -55,7 +55,7 @@ const MedicalSpecialitiesPage = async({ params }: { params: { slug: string; }; }
 			<div className='mt-4 md:mt-8 w-full'>
 				{ detail?.img_url && detail?.img_url?.length > 1
 					? (
-						<CustomCarousel arrowButton>
+						<CustomCarousel arrowButton containerClassName='rounded-[5px]'>
 							{ detail?.img_url?.map((image, index) => {
 								return (
 									<div key={ index }>

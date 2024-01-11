@@ -19,9 +19,7 @@ type Props = PropsWithRef<PropsWithChildren<{
 }>>
 
 const ProfileMenus = ({ children, session }:Props) => {
-	const [showSuccessLogout, setShowSuccessLogout] = useState<boolean>(false);
 	const [dropdownHide, setDropdownHide] = useState<boolean>(true);
-	const [showSideBar, setShowSideBar] = useState<boolean>(false);
 	const t = useScopedI18n('navMenu');
 	const isLoggedIn = !!session?.token;
 	const { mutate, cache } = useSWRConfig();
@@ -32,7 +30,6 @@ const ProfileMenus = ({ children, session }:Props) => {
 		if (isLoggedIn) {
 			await cookiesHelper.clearStorage();
 			await clearSWRCache(cache);
-			setShowSideBar(false);
 			// Notes: protectedRoutes sudah dihandle oleh middleware. shg cukup dgn refresh page akan redirect ke halaman login
 			// Khusus halaman disini tidak dihandle di middleware karna perlu show NeedLoginModal dari response error swr
 			if (['/book-appointment'].some(path => pathname.includes(path))) {
