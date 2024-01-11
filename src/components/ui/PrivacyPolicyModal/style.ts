@@ -33,8 +33,8 @@ export const NumberContainer = styled.div<NumberContainerProps>`
   color: white;
   font-size: 20px;
   font-weight: 900;
-  height: 32px;
-  width: 32px;
+  height: 33px;
+  width: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,8 +82,6 @@ export const ScrollableContentContainer = styled.div<PrivacyProps>`
 `;
 
 export const FooterSection = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
   align-items: center;
   background-color: #FAFAFA;
   padding: 24px;
