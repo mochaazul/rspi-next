@@ -1,3 +1,4 @@
+'use client';
 import { colors } from '@/constant';
 import { GlobalCardShadow2 } from '@/constant/globalstyle';
 import styled from 'styled-components';

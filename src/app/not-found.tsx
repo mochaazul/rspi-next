@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 	description: 'Something went wrong',
 };
 
-export default function NotFound() {
+export default async function NotFound() {
 	return (
 		<main>
 			<section className='bg-[#F8FCFC]'>
