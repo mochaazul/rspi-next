@@ -117,7 +117,10 @@ const HospitalLocation = ({ hospitals }:Props) => {
 				</div>
 				<div className='sm:hidden relative mt-[-250px] mx-4 card-hospital-swap'>
 					<div className='global-shadow relative'>
-						<CustomCarousel autoplay={ false } onChangeIndex={ handleRSCarouselChange }>
+						<CustomCarousel 
+							autoplay={ false } 
+							arrowButton={ true } 
+							onChangeIndex={ handleRSCarouselChange }>
 							{
 								Object.values(hospitals || [])?.map((data, index) => (
 									<div key={ index } className='rounded-[10px] bg-white overflow-hidden'>
