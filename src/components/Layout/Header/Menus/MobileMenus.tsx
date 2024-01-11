@@ -75,7 +75,7 @@ const MobileMenus = ({ session, hospitals, coe, facilitiy }:Props) => {
 				
 			<div className={ `absolute left-0 top-[100%] w-full ${ isOpen ? 'block' : 'hidden'}` }>
 				<MainNavLanguage session={ session } />
-				<section className='bg-white h-screen divide-y divide-solid relative'  >
+				<section className='bg-white divide-y divide-solid relative  h-[calc(100vh-104px)]'  >
 					<div className='nav-menu' >
 						<Link href={ `/${currentLocale}/` } >
 							<Text text={ t('home') } fontSize='16px' fontWeight='700' />
