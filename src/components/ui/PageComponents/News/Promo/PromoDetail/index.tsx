@@ -34,9 +34,12 @@ const PromoDetail: React.FC<Props> = async({
 
 	return (
 		<div>
-			<BreadcrumbsServer datas={ breadcrumbsPath } />
+			<div className='max-sm:mx-[16px]'>
+				<BreadcrumbsServer datas={ breadcrumbsPath } />
+			</div>
 			<div className='mt-[50px]'>
 				<Text
+					className='max-sm:mx-[16px]'
 					fontType='h1'
 					fontWeight='900'
 					fontSize='44px'
@@ -48,7 +51,7 @@ const PromoDetail: React.FC<Props> = async({
 				</LangWrapper>
 				<div className='content-wrapper mt-[20px] mb-[100px]'>
 					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
-						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full rounded-[5px]' alt='' />
+						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full rounded-[5px] max-sm:rounded-none' alt='' />
 						<div className='mx-[16px] sm:mx-0 '>
 							<TextHtml
 								htmlStr={ selectedEvent?.content || '' }
