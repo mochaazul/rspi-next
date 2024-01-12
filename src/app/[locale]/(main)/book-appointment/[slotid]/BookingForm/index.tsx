@@ -312,7 +312,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 								<Form.TextField
 									width='100%'
 									label={ t('form.complaintLabel') }
-									labelClassName='font-normal font-sm md:text-base'
+									labelClassName='font-normal text-sm md:text-base'
 									labelWrapperClassName='mb-[10px] md:mb-[16px]'
 									placeholder={ t('form.complaintLabel') }
 									required={ true }
