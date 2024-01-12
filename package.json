@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@sentry/nextjs": "^7.93.0",
     "dayjs": "^1.11.10",
     "formik": "^2.4.5",
     "html-react-parser": "^5.0.6",

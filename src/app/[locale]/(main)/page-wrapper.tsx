@@ -63,15 +63,13 @@ export default async function PageWrapper({
 				marAllReadNotifFunc={ marAllReadNotif }
 			/>
 			{ children }
-			<LangWrapper>
-				<Footer
-					footerData={ footerData }
-					hospitalData={ hospitalData }
-				/>
-				<CallForAmbulance hospitalData={ hospitalData } session={ session } />
-				<MedicalRecordReminder session={ session } />
+			<Footer
+				footerData={ footerData }
+				hospitalData={ hospitalData }
+			/>
+			<CallForAmbulance hospitalData={ hospitalData } session={ session } />
+			<MedicalRecordReminder session={ session } />
 
-			</LangWrapper>
 		</>
 	);
 }
