@@ -10,7 +10,10 @@ export default function GlobalError({
 }) {
 	useEffect(() => {
 		if (error) {
+			
 			Sentry.captureException(error);
+			Sentry.captureMessage('WOW INI ERROR NIH');
+
 		}
 	}, [error]);
 
