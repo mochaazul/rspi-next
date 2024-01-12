@@ -37,8 +37,9 @@ const PromoDetail: React.FC<Props> = async({
 			<div className='max-sm:mx-[16px]'>
 				<BreadcrumbsServer datas={ breadcrumbsPath } />
 			</div>
-			<div className='mt-[50px]'>
+			<div className='mt-[50px] max-sm:mt-[25px]'>
 				<Text
+					subClassName='max-sm:text-[24px]'
 					className='max-sm:mx-[16px]'
 					fontType='h1'
 					fontWeight='900'
@@ -49,7 +50,7 @@ const PromoDetail: React.FC<Props> = async({
 				<LangWrapper>
 					<SocialShare />
 				</LangWrapper>
-				<div className='content-wrapper mt-[20px] mb-[100px]'>
+				<div className='content-wrapper mt-[20px] max-sm:mt-[24px] mb-[100px]'>
 					<div className='mt-[30px] w-full flex lg:flex-row md:flex-row xl:flex-row gap-8 flex-col'>
 						<img src={ selectedEvent?.img_url_detail || '' } className='mx-0 object-cover max-w-[450px] max-h-[624px] w-full rounded-[5px] max-sm:rounded-none' alt='' />
 						<div className='mx-[16px] sm:mx-0 '>
@@ -87,10 +88,13 @@ const PromoDetail: React.FC<Props> = async({
 													color={ colors.grey.darker }
 													text={ t('info') }
 												/>
-												<TextHtml
-													htmlStr={ selectedEvent?.information || '' }
-													className='innerHTML mt-2'
-												/>
+												{
+													selectedEvent?.information ?
+														<TextHtml
+															htmlStr={ selectedEvent?.information || '' }
+															className='innerHTML mt-2'
+														/> : <></>
+												}
 											</div>
 											<div>
 												<Text
@@ -101,10 +105,14 @@ const PromoDetail: React.FC<Props> = async({
 													color={ colors.grey.darker }
 													text={ t('operational') }
 												/>
-												<TextHtml
-													htmlStr={ selectedEvent?.operational_hour || '' }
-													className='mt-2 innerHTML'
-												/>
+												{
+													selectedEvent?.operational_hour ?
+														<TextHtml
+															htmlStr={ selectedEvent?.operational_hour || '' }
+															className='mt-2 innerHTML'
+														/> : <></>
+												}
+												
 											</div>
 										</div>
 
@@ -117,10 +125,14 @@ const PromoDetail: React.FC<Props> = async({
 												className='text-gray-1'
 												text={ t('phone') }
 											/>
-											<TextHtml
-												htmlStr={ selectedEvent?.phone || '' }
-												className='mt-2 innerHTML font-bold text-green-secondary'
-											/>
+											{
+												selectedEvent?.phone ?
+													<TextHtml
+														htmlStr={ selectedEvent?.phone || '' }
+														className='mt-2 innerHTML font-bold text-green-secondary'
+													/> : <></>
+											}
+											
 										</div>
 										
 									</div>
