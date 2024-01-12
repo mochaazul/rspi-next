@@ -40,9 +40,7 @@ export const CardNewsStyle = styled.div<CardNewsType>`
         transition: all .5s;
         border-top: 1px solid ${ colors.paradiso.accent1Opacity5 };
         border-bottom: 1px solid ${ colors.paradiso.accent1Opacity5 };
-        background-color: ${ colors.paradiso.accent1Opacity5 };
         
-  
         .map-title p {
           transition: all .5s;
           color: ${ colors.paradiso.default };
