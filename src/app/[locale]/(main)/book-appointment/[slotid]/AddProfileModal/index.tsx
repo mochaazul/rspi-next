@@ -171,7 +171,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		containerClassName='m-[10px]'
 	>
 		<ProfileModalContainer className='items-start md:items-center'>
-			<ModalHeader>
+			<ModalHeader className='mb-[12px] md:mb-[24px]'>
 				<Text
 					subClassName='max-sm:text-[16px]'
 					fontSize='24px'
@@ -195,9 +195,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 				/>
 			</NotificationPanel>
 			<Form onSubmit={ onSubmitHandler } className='mt-[8px]' action={ '' }>
-				<FormRow
-					className='flex flex-col md:grid md:grid-cols-2 gap-[16px] md:gap-[24px]'
-				>
+				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[12px] md:gap-[24px]'>
 					<Form.TextField
 						labelClassName='font-normal'
 						className='w-[300px] md:w-full'
@@ -229,7 +227,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						wrapperClassName={ 'text-sm md:text-base' }
 					/>
 				</FormRow>
-				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[16px] md:gap-[24px]'>
+				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[12px] md:gap-[24px]'>
 					<Form.PhoneNumberInput
 						labelClassName='font-normal'
 						labelGap={ 8 }
@@ -259,7 +257,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						wrapperClassName={ 'text-sm md:text-base' }
 					/>
 				</FormRow>
-				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[16px] md:gap-[24px]'>
+				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[12px] md:gap-[24px]'>
 					<Form.Dropdown
 						labelClassName='font-normal'
 						labelGap={ 8 }

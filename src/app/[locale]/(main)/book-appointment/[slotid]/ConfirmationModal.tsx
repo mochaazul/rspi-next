@@ -66,7 +66,7 @@ export const ConfirmationModal = ({
 	};
 
 	if (selectedProfile && selectedProfile.phone && timeSlot) {
-		return <Modal borderRadius='12px' paddingSm='24px 16px 24px 16px' visible={ visible } onClose={ onClose } width='w-full' containerClassName='m-0 mt-20 md:m-4 max-w-lg h-full md:h-max'>
+		return <Modal paddingSm='24px 16px 24px 16px' visible={ visible } onClose={ onClose } width='w-full' containerClassName={ `m-0 mt-20 md:m-4 max-w-lg h-max md:h-max ${ isMobile && 'absolute bottom-0' } rounded-t-[12px] md:rounded-b-[12px]` }>
 			<ConfirmationModalContainer>
 				<Text
 					text={ t('heading') }
@@ -81,7 +81,7 @@ export const ConfirmationModal = ({
 					fontSize='14px'
 					lineHeight='20px'
 					color={ colors.grey.dark }
-					subClassName='text-xs md:text-sm'
+					subClassName='text-xs md:text-sm pt-[8px]'
 				/>
 				<div className='mt-[24px] px-[12px] flex flex-col gap-[12px]' >
 					<Text
@@ -90,7 +90,7 @@ export const ConfirmationModal = ({
 						fontSize='14px'
 						lineHeight='20px'
 					/>
-					<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
+					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
 						<Text
 							text={ t('patientDetail.name') }
 							fontWeight='500'
@@ -106,7 +106,7 @@ export const ConfirmationModal = ({
 							subClassName='text-xs md:text-sm'
 						/>
 					</div>
-					<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
+					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
 						<Text
 							text={ t('patientDetail.birthDate') }
 							fontWeight='500'
@@ -122,7 +122,7 @@ export const ConfirmationModal = ({
 							subClassName='text-xs md:text-sm'
 						/>
 					</div>
-					<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
+					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
 						<Text
 							text={ t('patientDetail.phone') }
 							fontWeight='500'
@@ -138,7 +138,7 @@ export const ConfirmationModal = ({
 							subClassName='text-xs md:text-sm'
 						/>
 					</div>
-					<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
+					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
 						<Text
 							text={ t('patientDetail.email') }
 							fontWeight='500'
@@ -154,7 +154,7 @@ export const ConfirmationModal = ({
 							subClassName='text-xs md:text-sm'
 						/>
 					</div>
-					<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
+					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
 						<Text
 							text={ t('patientDetail.guarantor') }
 							fontWeight='500'
@@ -181,7 +181,7 @@ export const ConfirmationModal = ({
 								fontSize='14px'
 								lineHeight='20px'
 							/>
-							<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
+							<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
 								<Text
 									text={ t('patientDetail.name') }
 									fontWeight='500'
@@ -197,7 +197,7 @@ export const ConfirmationModal = ({
 									subClassName='text-xs md:text-sm'
 								/>
 							</div>
-							<div className={ `grid grid-cols-2 sm:grid-cols-[150px_auto]` }>
+							<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
 								<Text
 									text={ t('insuranceNumber') }
 									fontWeight='500'
@@ -218,12 +218,12 @@ export const ConfirmationModal = ({
 				</div>
 				<DoctorProfileWidget doctorData={ doctorResponse?.data } timeSlot={ timeSlot } />
 
-				<div className='my-[32px] flex items-center'>
+				<div className='my-[24px] flex items-center'>
 					<Checkbox label={ t('toc') } onChange={ evt => {
 						setChecked(evt.target.checked);
 					} } />
 				</div>
-				<Button onClick={ onConfirmed } disabled={ !checked || loading } >
+				<Button onClick={ onConfirmed } disabled={ !checked || loading } className='text-sm md:text-base' >
 					{ loading || loadingUploadPhoto ? <Spinner /> : t('confirmBtnLabel') }
 				</Button>
 			</ConfirmationModalContainer>
@@ -246,7 +246,7 @@ export const ConfirmationModal = ({
 					color={ colors.grey.dark }
 					className='pb-4'
 				/>
-				<Button label={ t('redirectBtnLabel') } onClick={ toProfilPage } />
+				<Button label={ t('redirectBtnLabel') } onClick={ toProfilPage } className='text-sm md:text-base' />
 			</ConfirmationModalContainer>
 		</Modal>;
 	}

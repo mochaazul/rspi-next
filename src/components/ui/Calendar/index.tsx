@@ -90,7 +90,7 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calenda
 	};
 
 	return <CalendarContainer>
-		<div className='px-[12px] py-[4px] md:py[20px] relative'>
+		<div className='px-[12px] mt-[10px] py-[4px] md:py[20px] relative'>
 			<ReactCalendar
 				className='r-calendar'
 				nextLabel={ <icons.ArrowRight /> }
