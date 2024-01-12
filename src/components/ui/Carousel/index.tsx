@@ -92,7 +92,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ children, ...props }) => {
 				</div>
 				<div className='shadow-custom' />
 
-				<div className={ `container__slider__links ${ props.dotsContainerClassName ?? '' } md:mb-14` }>
+				<div className={ `container__slider__links ${ props.dotsContainerClassName ?? '' } md:mb-16` }>
 					{
 						children.length <= 1
 							? null

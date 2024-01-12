@@ -44,11 +44,14 @@ const CarouselWrapper = styled.div`
     bottom: 0px;
     text-align: center;
     transform: translateY(-50%);
+    align-items: center;
+    display: flex;
+    justify-content: center;
   }
   
   .container__slider__links-small {
-    width: 9px;
-    height: 9px;
+    width: 10px;
+    height: 10px;
     padding: 0;
     border-radius: 50%;
     outline: none;
@@ -56,13 +59,13 @@ const CarouselWrapper = styled.div`
     text-align: center;
     background-color: #60C3BD;
     transition: background-color 1s ease;
-    margin: 0 0px 0 13px;
+    margin: 0 0px 0 7px;
   }
   
   .container__slider__links-small-active {
     background-color: ${ colors.paradiso.default };
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
   }
   
   .slider__item {

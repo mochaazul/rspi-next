@@ -108,15 +108,15 @@ const PrivacyPolicyModal = ({
 	return <Modal
 		wrapperClassName='max-sm:items-end'
 		containerClassName='max-sm:rounded-[16px]'
-		modalClassName='max-sm:w-full'
+		modalClassName='max-sm:w-full max-sm:bottom-0 max-sm:!top-auto'
 		visible={ isOpen }
 		width='726px'
 		noPadding
 		onClose={ onClose }>
-		<PrivacyPolicyContainer>
-			<HeaderSection className='max-sm:px-[16px] rounded-[8px] max-sm:rounded-[16px] '>
+		<PrivacyPolicyContainer className=''>
+			<HeaderSection className='max-sm:px-[16px] rounded-[8px] max-sm:rounded-t-[16px] max-sm:pt-[35px]'>
 				<HeaderItem className='max-sm:truncate'>
-					<NumberContainer className='max-sm:text-[16px]' isActive={ step === 'pp' }>1</NumberContainer>
+					<NumberContainer className='max-sm:text-[16px] sm:pb-[2px] max-sm:w-[24px] max-sm:h-[24px] max-sm:pb-[2.5px]' isActive={ step === 'pp' }>1</NumberContainer>
 					<Text
 						fontSize='20px'
 						fontWeight='900'
@@ -127,7 +127,7 @@ const PrivacyPolicyModal = ({
 				</HeaderItem>
 				<Divider className='max-sm:w-[10px]' />
 				<HeaderItem className='max-sm:truncate'>
-					<NumberContainer className='max-sm:text-[16px]' isActive={ step === 'toc' }>2</NumberContainer>
+					<NumberContainer className='max-sm:text-[16px] sm:pb-[2px] max-sm:w-[24px] max-sm:h-[24px] max-sm:pb-[2.5px]' isActive={ step === 'toc' }>2</NumberContainer>
 					<Text
 						fontSize='20px'
 						fontWeight='900'
@@ -137,7 +137,7 @@ const PrivacyPolicyModal = ({
 					/>
 				</HeaderItem>
 			</HeaderSection>
-			<div className='px-[24px] max-sm:px-[16px] max-sm:h-[55vh] max-sm:!max-h-[55vh]'>
+			<div className='px-[24px] max-sm:px-[16px] max-sm:h-[50vh] max-sm:!max-h-[50vh]'>
 				<ScrollableContentContainer className='max-sm:h-full max-sm:max-h-full' lang = { currentLang }>
 					<div
 						className='p-5 max-sm:p-0 max-sm:h-full'
@@ -145,7 +145,7 @@ const PrivacyPolicyModal = ({
 					/>
 				</ScrollableContentContainer>
 			</div>
-			<FooterSection className='rounded-[8px]'>
+			<FooterSection className='rounded-[8px] max-sm:rounded-none	'>
 				{ renderFooterSection() }
 			</FooterSection>
 		</PrivacyPolicyContainer>

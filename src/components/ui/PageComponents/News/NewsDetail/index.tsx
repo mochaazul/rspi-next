@@ -36,7 +36,7 @@ const NewsDetail = async({
 
 					<TextHtml
 						style={ { color: colors.grey.dark } }
-						className='innerHTML mt-[10px]'
+						className='innerHTML mt-[10px] text-black'
 						htmlStr={ filteredSelectedArticle?.content ?? '' }
 					/>
 				</div>
@@ -138,7 +138,7 @@ const NewsDetail = async({
 							{ filteredSelectedArticle?.short_description }
 						</Text>
 						<TextHtml
-							className='innerHTML mt-[10px]'
+							className='innerHTML mt-[10px] text-black'
 							htmlStr={ filteredSelectedArticle?.content ?? '' }
 						/>
 						<Link href={ filteredSelectedArticle?.pdf_url } className='text-gray-500 font-bold cursor-pointer' >{ t('downloadFilePdf') } <span className='text-orange-700'>{ t('here') }</span> </Link>

@@ -17,7 +17,7 @@ const PageUnSubscribe: React.FC<PageUnSubscribeProps> = ({ success, message }) =
 			<div className='mb-[32px]'>
 				<Images.LogoRSPI />
 			</div>
-			<div className='flex flex-col items-center justify-center gap-3 w-[500px] shadow-2xl p-5 rounded-xl'>
+			<div className='flex flex-col items-center justify-center gap-3 w-[500px] max-sm:w-[90%] shadow-2xl p-5 rounded-xl'>
 				<div className='pt-5'>
 					{ success === '' ? <LoadingSkeleton type='block'/> :
 						success === 'Success' ? <icons.Confirmed /> : <div className='p-4 bg-gray-200 rounded-full'><icons.Close /></div>
@@ -28,14 +28,14 @@ const PageUnSubscribe: React.FC<PageUnSubscribeProps> = ({ success, message }) =
 						<Text
 							fontType='h2'
 							fontSize='20px'
-							color={ colors.grey.dark }
+							color='#000000'
 							subClassName='max-lg:text-base max-lg:leading-6'
 						>
 							{ success ? t('headingSuccess') : t('headingFailed') }
 						</Text>
 						<Text
 							fontType='h4'
-							fontSize='18px'
+							fontSize='14px'
 							color={ colors.grey.dark }
 							className='sm:mt-2'
 							subClassName='max-lg:text-base max-lg:leading-6 text-center'
