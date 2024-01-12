@@ -936,7 +936,7 @@ export default {
 					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
-				offlineConsultation: 'Konsultasi Tatap Muka'
+				offlineConsultation: 'Konsultasi'
 			},
 			cancelBooking: {
 				heading: 'Konfirmasi Pembatalan',

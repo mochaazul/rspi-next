@@ -272,8 +272,8 @@ export default {
 					homeVisit: 'Do RS Pondok Indah Group Hospitals provide home visit service?'
 				},
 				answers: {
-					doctorSchedule: `<p><span style="font-size: 14px; color: rgb(0, 0, 0);">You can find RS Pondok Indah Group doctor&rsquo;s schedules </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/find-a-doctor"><span style="font-size: 14px; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 14px; color: rgb(0, 0, 0);">. You can also view our doctor&rsquo;s schedule by downloading RSPI mobile app.</span></p>`,
-					assurance: `<p><span style="font-size: 14px; color: rgb(0, 0, 0);">RS Pondok Indah Group has collaborated with various trusted insurance companies, both domestic and overseas. Click </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/perusahaan-asuransi-mitra"><span style="font-size: 14px; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 14px; color: rgb(0, 0, 0);"> to view our insurance partners.</span></p>`,
+					doctorSchedule: '<p><span style="font-size: 14px; color: rgb(0, 0, 0);">You can find RS Pondok Indah Group doctor&rsquo;s schedules </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/find-a-doctor"><span style="font-size: 14px; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 14px; color: rgb(0, 0, 0);">. You can also view our doctor&rsquo;s schedule by downloading RSPI mobile app.</span></p>',
+					assurance: '<p><span style="font-size: 14px; color: rgb(0, 0, 0);">RS Pondok Indah Group has collaborated with various trusted insurance companies, both domestic and overseas. Click </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/perusahaan-asuransi-mitra"><span style="font-size: 14px; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 14px; color: rgb(0, 0, 0);"> to view our insurance partners.</span></p>',
 					visitHours: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Visiting hours may vary for some wards. In order to maintain the safety and comfort of all our patients, visits can only be made during certain hours and are conducted on a rotating basis.</span></p>
 						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
 						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><strong><span style="font-size: 14px;  color: rgb(0, 0, 0);">Visiting Hours</span></strong></p>
@@ -931,7 +931,7 @@ export default {
 					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
-				offlineConsultation: 'Face-to-face Consultation'
+				offlineConsultation: 'Consultation'
 			},
 			cancelBooking: {
 				heading: 'Confirmation of Cancellation',
