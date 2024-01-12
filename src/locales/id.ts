@@ -169,12 +169,12 @@ export default {
 				insuranceDataLabel: 'Data Asuransi',
 				insuranceNumber: 'Nomor Asuransi',
 				patientDetail: {
-					heading: 'Data Pasien',
-					name: 'Nama',
-					birthDate: 'Tanggal lahir',
-					phone: 'Nomor HP',
-					email: 'E-Mail',
-					guarantor: 'Penjamin'
+					heading: 'Data Pasien:',
+					name: 'Nama:',
+					birthDate: 'Tanggal lahir:',
+					phone: 'Nomor HP:',
+					email: 'E-Mail:',
+					guarantor: 'Penjamin:'
 				},
 				toc: 'Saya menyatakan bahwa seluruh data diatas sudah benar.',
 				confirmBtnLabel: 'Konfirmasi',
@@ -981,6 +981,8 @@ export default {
 			notAvailableSchedule: 'Jadwal dokter tidak tersedia di tanggal yang Anda pilih karena sudah mencapai maksimal reservasi online. Silakan pilih tanggal dan waktu lain yang tersedia di bawah ini atau hubungi call center kami untuk informasi lebih lanjut',
 			callCenter: 'Hubungi Call Center',
 			chooseRs: 'Pilih Rumah Sakit',
+			appointmentType: 'Tipe Pertemuan',
+			setSchedule: 'Atur Jadwal',
 			available: 'Tersedia',
 			limitedSlot: 'Slot Terbatas',
 			noSchedule: 'Jadwal Tidak Tersedia',
