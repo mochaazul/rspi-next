@@ -66,7 +66,7 @@ export const ConfirmationModal = ({
 	};
 
 	if (selectedProfile && selectedProfile.phone && timeSlot) {
-		return <Modal paddingSm='24px 16px 24px 16px' visible={ visible } onClose={ onClose } width='w-full' containerClassName={ `m-0 mt-20 md:m-4 max-w-lg h-max md:h-max ${ isMobile && 'absolute bottom-0' } rounded-t-[12px] md:rounded-b-[12px]` }>
+		return <Modal paddingSm='24px 16px 24px 16px' visible={ visible } onClose={ onClose } width='w-full' containerClassName={ 'm-0 md:mt-20 md:m-4 max-w-lg h-max md:h-max rounded-t-[12px] md:rounded-b-[12px]' }>
 			<ConfirmationModalContainer>
 				<Text
 					text={ t('heading') }
@@ -90,7 +90,7 @@ export const ConfirmationModal = ({
 						fontSize='14px'
 						lineHeight='20px'
 					/>
-					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
+					<div className={ 'grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]' }>
 						<Text
 							text={ t('patientDetail.name') }
 							fontWeight='500'
@@ -106,7 +106,7 @@ export const ConfirmationModal = ({
 							subClassName='text-xs md:text-sm'
 						/>
 					</div>
-					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
+					<div className={ 'grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]' }>
 						<Text
 							text={ t('patientDetail.birthDate') }
 							fontWeight='500'
@@ -122,7 +122,7 @@ export const ConfirmationModal = ({
 							subClassName='text-xs md:text-sm'
 						/>
 					</div>
-					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
+					<div className={ 'grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]' }>
 						<Text
 							text={ t('patientDetail.phone') }
 							fontWeight='500'
@@ -138,7 +138,7 @@ export const ConfirmationModal = ({
 							subClassName='text-xs md:text-sm'
 						/>
 					</div>
-					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
+					<div className={ 'grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]' }>
 						<Text
 							text={ t('patientDetail.email') }
 							fontWeight='500'
@@ -154,7 +154,7 @@ export const ConfirmationModal = ({
 							subClassName='text-xs md:text-sm'
 						/>
 					</div>
-					<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
+					<div className={ 'grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]' }>
 						<Text
 							text={ t('patientDetail.guarantor') }
 							fontWeight='500'
@@ -181,7 +181,7 @@ export const ConfirmationModal = ({
 								fontSize='14px'
 								lineHeight='20px'
 							/>
-							<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
+							<div className={ 'grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]' }>
 								<Text
 									text={ t('patientDetail.name') }
 									fontWeight='500'
@@ -197,7 +197,7 @@ export const ConfirmationModal = ({
 									subClassName='text-xs md:text-sm'
 								/>
 							</div>
-							<div className={ `grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]` }>
+							<div className={ 'grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]' }>
 								<Text
 									text={ t('insuranceNumber') }
 									fontWeight='500'
