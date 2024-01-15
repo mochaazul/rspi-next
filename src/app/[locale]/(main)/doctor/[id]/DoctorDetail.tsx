@@ -171,7 +171,7 @@ const DoctorDetail = (
 	const clickContactHospital = () => {
 		if (isMobile) {
 			if (typeof window !== 'undefined') {
-				window?.open(`tel:${ selectedHospitalPhoneNumber }`);
+				window?.open(`tel:${ selectedHospitalDetails()?.phone }`);
 			}
 		} else {
 			setShowModalTelp(true);
@@ -185,6 +185,7 @@ const DoctorDetail = (
 	const selectedHospitalDetails = () => {
 		return hospitals.find(hospital => hospital.hospital_code === selectedHospital);
 	};
+
 	const notFoundDoctor = () => {
 		if (doctorResponse.stat_msg && doctorResponse.stat_msg.toLowerCase() === 'error on get detail doctor detail on schedule') {
 			return 'Doctor not found';
