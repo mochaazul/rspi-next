@@ -7,6 +7,7 @@ import { Modal, Text, Button } from '@/components/ui';
 import { colors, icons } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
 import { UserDataDetail } from '@/interface';
+import { isMobile } from 'react-device-detect';
 
 interface PropsType {
 	visible?: boolean;
@@ -31,9 +32,9 @@ const ModalCancelBook = (props: PropsType) => {
 	return (
 		<Modal
 			visible={ props.visible }
-			width='558px'
 			noPadding={ true }
 			onClose={ props.onClose }
+			containerClassName={ `w-full md:w-[558px] ${ isMobile && 'absolute bottom-0' } rounded-t-[12px] md:rounded-b-[12px]` }
 		>
 			<div className='p-4 lg:p-6'>
 				<div>

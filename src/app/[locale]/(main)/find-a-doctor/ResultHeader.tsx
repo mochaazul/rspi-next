@@ -13,7 +13,7 @@ type Props = {
 	setter: (value: string) => void,
 	getter: () => string | null,
 	reset: boolean,
-	loading: boolean
+	loading: boolean;
 };
 const ResultHeader = ({ doctorCount, setter, getter, reset, loading }: Props) => {
 
@@ -56,13 +56,13 @@ const ResultHeader = ({ doctorCount, setter, getter, reset, loading }: Props) =>
 		params.set('day', value);
 		router.push(`${ pathName }?${ params.toString() }`, {});
 	};
-		 
+
 	return (
 		<div>
 			{ /* Doctor found counter */ }
 			{
 				loading
-					? <LoadingSkeleton type='line'/>
+					? <LoadingSkeleton type='line' />
 					: <>
 						<Text
 							fontSize='20px'
@@ -83,37 +83,17 @@ const ResultHeader = ({ doctorCount, setter, getter, reset, loading }: Props) =>
 						/>
 					</>
 			}
-			
+
 			{ /* Input nama  dokter */ }
 			{
-				isMobile ?
-					<div className='flex flex-row gap-x-2'>
-						<Form.TextField
-							placeholder={ t('label.doctorName') }
-							featherIcon='Search'
-							iconPosition='right'
-							onChange={ ({ target }) => onSearchDoctorByName(target.value) }
-							$iconColor={ colors.grey.light }
-							value={ keywordValue }
-							className='w-[130px]'
-						/>
-						<Form.Dropdown
-							placeholder='Select Day'
-							multiple
-							menuItems={ Days }
-							onChangeValueDropdown={ onChangePreferedDay }
-							allOptionLabel={ d('all') }
-							className='w-[150px]'
-						/>
-					</div> :
-					<Form.TextField
-						placeholder={ t('label.doctorName') }
-						featherIcon='Search'
-						iconPosition='right'
-						onChange={ ({ target }) => onSearchDoctorByName(target.value) }
-						$iconColor={ colors.grey.light }
-						value={ keywordValue }
-					/>
+				<Form.TextField
+					placeholder={ t('label.doctorName') }
+					featherIcon='Search'
+					iconPosition='right'
+					onChange={ ({ target }) => onSearchDoctorByName(target.value) }
+					$iconColor={ colors.grey.light }
+					value={ keywordValue }
+				/>
 			}
 
 		</div>

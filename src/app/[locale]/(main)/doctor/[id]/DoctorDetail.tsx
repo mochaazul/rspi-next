@@ -248,34 +248,34 @@ const DoctorDetail = (
 									</Radio>
 								</div>
 
-								<TimeSlotContainer
-									className='flex flex-col md:flex-row gap-[10px] md:gap-[30px]'
-								>
-									<Text text={ t('setSchedule') } subClassName={ 'font-bold text-sm md:text-base' } />
-									<TimeSlotCard className='md:w-[calc(100%/2)]'>
-										<Calendar
-											calendarData={ doctorCalendar?.data || [] }
-											value={ selectedDate }
-											onChange={ onChangeDate }
-											onChangeMonth={ (month, year) => {
-												getCalendar(month, year);
-											} }
-											loading={ doctorCalendarLoading } />
-									</TimeSlotCard>
-									<TimeSlotCard className='px-[16px] py-[20px] md:w-[calc(100%/2)]'>
-										<VisitSchedule
-											isLoading={ doctorSlotLoading }
-											timeslot={ doctorSlot?.data || [] }
-											hospital={ selectedHospital }
-											onSelect={ timeSlot => {
-												setSelectedTimeSlot(timeSlot);
-											} }
-											selectedDate={ selectedDate }
-											clinic={ doctor.clinic }
-											onClickContactHospital={ clickContactHospital }
-											dateStatus={ selectedDateStatus }
-										/>
-									</TimeSlotCard>
+								<TimeSlotContainer>
+									<Text text={ t('setSchedule') } subClassName={ 'font-bold text-sm md:text-base mb-[10px] md:mb-[16px]' } />
+									<div className='flex flex-col md:flex-row gap-[10px] md:gap-[30px]'>
+										<TimeSlotCard className='md:w-[calc(100%/2)]'>
+											<Calendar
+												calendarData={ doctorCalendar?.data || [] }
+												value={ selectedDate }
+												onChange={ onChangeDate }
+												onChangeMonth={ (month, year) => {
+													getCalendar(month, year);
+												} }
+												loading={ doctorCalendarLoading } />
+										</TimeSlotCard>
+										<TimeSlotCard className='px-[16px] py-[20px] md:w-[calc(100%/2)]'>
+											<VisitSchedule
+												isLoading={ doctorSlotLoading }
+												timeslot={ doctorSlot?.data || [] }
+												hospital={ selectedHospital }
+												onSelect={ timeSlot => {
+													setSelectedTimeSlot(timeSlot);
+												} }
+												selectedDate={ selectedDate }
+												clinic={ doctor.clinic }
+												onClickContactHospital={ clickContactHospital }
+												dateStatus={ selectedDateStatus }
+											/>
+										</TimeSlotCard>
+									</div>
 								</TimeSlotContainer>
 							</div>
 						</div>
@@ -286,7 +286,7 @@ const DoctorDetail = (
 								$hoverTheme='primary'
 								label={ t('form.btnLabel.back') }
 								noPadding={ true }
-								className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
+								className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit text-sm md:text-base'
 								theme='outline'
 								onClick={ () => {
 									router.back();
@@ -295,7 +295,7 @@ const DoctorDetail = (
 							<Button
 								label={ t('form.btnLabel.submit') }
 								noPadding={ true }
-								className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit'
+								className='h-[37px] py-[0px] md:h-[50px] md:pt-[13px] px-[40px] md:pb-[12px] md:w-fit text-sm md:text-base'
 								onClick={ onBookHandler }
 								disabled={ !selectedTimeSlot }
 							>
