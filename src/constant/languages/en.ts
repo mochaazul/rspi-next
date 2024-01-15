@@ -37,9 +37,9 @@ export default {
 	},
 	page: {
 		unsubscribe: {
-			headingSuccess: 'Unsubscribe was successful',
-			subHeadingSuccess: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again',
-			headingFailed: 'Unsubscribe was failed',
+			headingSuccess: 'Unsubscribe Successful',
+			subHeadingSuccess: 'Youre now unsubscribed. Your preferences matter to us, and we appreciate your decision. If you ever change your mind, feel free to join us again. Thank you.',
+			headingFailed: 'Unsubscribe Failed',
 			subHeadingFailed: 'Unsubscribing from the latest news about RSPI was failed, try again',
 		},
 		awards: {
