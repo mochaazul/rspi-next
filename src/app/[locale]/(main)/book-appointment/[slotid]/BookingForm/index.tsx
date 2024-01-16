@@ -91,6 +91,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 
 	const [confirmationModal, setConfirmationModalVisible] = useState<boolean>(false);
 	const [addProfileModal, setAddProfileModal] = useState<boolean>(false);
+	const [isAddProfile, setIsAddProfile] = useState<boolean>(false);
 	const [successModal, setSuccessModal] = useState<boolean>(false);
 	const [tempImageAsuransiFront, setTempImageAsuransiFront] = useState<File | null>(null);
 	const [tempImageAsuransiBack, setTempImageAsuransiBack] = useState<File | null>(null);
@@ -288,7 +289,7 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 					<BreadCrumbs datas={ breadCrumbs } />
 				</LangWrapper>
 				<div className='content-wrapper sm:flex w-full items-center flex-col max-sm:p-[16px]'>
-					<ProfileSelector onSelected={ setSelectedProfile } selfProfile={ userProfile } familyProfiles={ familyProfiles } onAddNewProfileBtn={ onAddNewProfile } />
+					<ProfileSelector onSelected={ setSelectedProfile } selfProfile={ userProfile } familyProfiles={ familyProfiles } onAddNewProfileBtn={ onAddNewProfile } onSetAsAddProfile={ setIsAddProfile } />
 					{
 						bookingError &&
 						<NotificationPanel
@@ -443,6 +444,8 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 				onClose={ () => { setAddProfileModal(false); } }
 				selfProfile={ userProfile }
 				type={ selectedType }
+				isAddProfile={ isAddProfile }
+				selectedProfile={ selectedProfile }
 			/>
 			<ConfirmationModal
 				timeSlot={ timeSlot }

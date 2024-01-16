@@ -17,6 +17,7 @@ import Button from '@/components/ui/Button';
 import { useScopedI18n } from '@/locales/client';
 import { deleteFamilyProfile } from '@/lib/api/profile';
 import { isMobile } from 'react-device-detect';
+import Picker from '@/components/ui/Picker';
 
 type ProfileCardProps = {
 	profile: UserDataDetail,
@@ -24,9 +25,52 @@ type ProfileCardProps = {
 	isActive: boolean;
 	isSelf: boolean;
 	showModalDelete: (id: number, visible: boolean) => void;
+	showModalEdit: (data: UserDataDetail) => void;
 	className?: string;
 };
-const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete, className = 'max-sm:min-w-full max-sm:max-w-full' }: ProfileCardProps) => {
+
+type ObjectShowModal = {
+	id: boolean;
+};
+
+const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete, className = 'max-sm:min-w-full max-sm:max-w-full', showModalEdit }: ProfileCardProps) => {
+	const [showModalMoreMenu, setShowModalMoreMenu] = useState<boolean>(false);
+	const t = useScopedI18n('page.profilePage.profileDetail');
+
+	const moreMenu = (value: boolean) => {
+		return <div>
+			<Picker show={ showModalMoreMenu }
+				isFromProfileSelector={ true }
+				minWidth='min-w-[158px] ml-[40px]'
+				className='w-[100px] !mt-0 !shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] z-30 !rounded-[10px] '>
+				<div
+					key={ 'aa' }
+					className={ `flex cursor-pointer py-[12px] px-[16px] border-t border-[#F0F2F9]` }
+					onClick={ () => { showModalEdit(profile); setShowModalMoreMenu(false); } }
+				>
+					<Text
+						lineHeight='19px'
+						subClassName='text-xs'
+						color={ colors.black.general }
+						text={ t('editProfileLabel') }
+					/>
+				</div>
+				<div
+					key={ 'bb' }
+					className={ `flex cursor-pointer py-[12px] px-[16px] border-t border-[#F0F2F9]` }
+					onClick={ () => { showModalDelete(profile?.id, true); setShowModalMoreMenu(false); } }
+				>
+					<Text
+						lineHeight='19px'
+						subClassName='text-xs'
+						color={ colors.black.general }
+						text={ t('deleteLabel') }
+					/>
+				</div>
+			</Picker>
+		</div>;
+	};
+
 	return (<ProfileSelectorCard isActive={ isActive } onClick={ () => { onClick(profile.id); } }
 		className={ className }
 	>
@@ -36,28 +80,33 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete, clas
 			{
 				!isSelf &&
 				<div onClick={ async () => {
-					showModalDelete(profile?.id, true);
+					setShowModalMoreMenu(!showModalMoreMenu);
+					// setShowModalMoreMenu(true);
 				} }>
-					<Images.ClosePng
+					<Images.MoreMenu
 						width='13px'
 						height='13px' />
 				</div>
 			}
+
 		</ProfileCardHeader>
 		{
 			isMobile ?
 				<ProfileCardRow className='gap-x-[4px]'>
+					{ moreMenu(showModalMoreMenu) }
 					<Text text={ `${ profile.phone } ` } fontSize='12px' subClassName='text-xs' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 					<Text text={ `|` } fontSize={ '12px' } fontWeight='400' color={ colors.grey.default } />
 					<Text text={ `${ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } ` } fontSize='12px' subClassName='text-xs' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 				</ProfileCardRow> :
 				<>
+					{ moreMenu(showModalMoreMenu) }
 					<ProfileCardRow>
 						<Text text={ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } fontSize='14px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 					</ProfileCardRow>
 					<ProfileCardRow>
 						<Text text={ `${ profile.phone }` } fontSize='14px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 					</ProfileCardRow>
+
 				</>
 		}
 
@@ -69,9 +118,10 @@ type ProfileSelectorProps = {
 	selfProfile?: UserDataDetail;
 	onAddNewProfileBtn: (type: string) => void;
 	familyProfiles?: UserDataDetail[];
+	onSetAsAddProfile: (value: boolean) => void;
 };
 
-const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyProfiles }: ProfileSelectorProps) => {
+const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyProfiles, onSetAsAddProfile }: ProfileSelectorProps) => {
 	const t = useScopedI18n('page.bookingAppointment.profileSelector');
 
 	const [selectedProfile, setSelectedProfile] = useState<number>();
@@ -98,17 +148,6 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 		);
 	};
 
-	const renderAddProfileFamily = () => {
-		return (
-			<NoProfileContainer>
-				<div className='flex flex-row mb-2 cursor-pointer items-center' onClick={ () => onAddNewProfileBtn('other') }>
-					<icons.AddButton />
-					<Text className='ml-2' fontWeight='600' color={ colors.green.brandAccent } text={ t('addNewProfile') } />
-				</div>
-			</NoProfileContainer>
-		);
-	};
-
 	const onSelectProfile = (id: number, self: boolean) => {
 		setSelectedProfile(id);
 		const selectedProf = familyProfiles?.find(prof => prof.id === id);
@@ -126,7 +165,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 				<icons.UserCircle />
 				<div className='flex flex-row mb-2'>
 					<Text text={ t('emptySelf') } />
-					<Text text={ t('addProfileLabelOnEmpty') } className='ml-2 cursor-pointer' fontWeight='600' color={ colors.green.brandAccent } onClick={ () => onAddNewProfileBtn('self') } />
+					<Text text={ t('addProfileLabelOnEmpty') } className='ml-2 cursor-pointer' fontWeight='600' color={ colors.green.brandAccent } onClick={ () => { onAddNewProfileBtn('self'); onSetAsAddProfile(true); } } />
 				</div>
 			</NoProfileContainer>
 		);
@@ -178,6 +217,9 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 							setSelectedIdFamilyProfile(id);
 							setShowDeleteModal(true);
 						} }
+						showModalEdit={ (data) => {
+							onSelected(data);
+						} }
 						isActive={ selectedProfile === selfProfile?.id }
 						isSelf={ true }
 						onClick={ id => { onSelectProfile(id, true); } }
@@ -194,7 +236,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 				<Text text={ t('other') } fontWeight='900' />
 				{
 					familyProfiles?.length ?
-						<span className='flex flex-row gap-[4px] items-center cursor:pointer' onClick={ () => onAddNewProfileBtn('other') }>
+						<span className='flex flex-row gap-[4px] items-center cursor:pointer' onClick={ () => { onAddNewProfileBtn('other'); onSetAsAddProfile(true); } }>
 							<Images.PlusCircle
 								width='13px'
 								height='13px' />
@@ -210,11 +252,16 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 					? renderNoProfile()
 					:
 					<>
-						{ familyProfiles && familyProfiles?.map(profile => (<ProfileCard className='w-50 p-[10px] p-[20px]' showModalDelete={ (id, visible) => {
+						{ familyProfiles && familyProfiles?.map(profile => (<ProfileCard className='w-50 p-[10px] p-[16px] md:p-[20px]' showModalDelete={ (id, visible) => {
 							setSelectedIdFamilyProfile(id);
 							setSelectedProfileOnDelete(profile);
 							setShowDeleteModal(true);
-						} } key={ profile.id } profile={ profile } onClick={ id => { onSelectProfile(id, false); } } isActive={ selectedProfile === profile.id } isSelf={ false } />)) }
+						} }
+							showModalEdit={ (data) => {
+								onSelected(data);
+								onSetAsAddProfile(false);
+								onAddNewProfileBtn('other');
+							} } key={ profile.id } profile={ profile } onClick={ id => { onSelectProfile(id, false); } } isActive={ selectedProfile === profile.id } isSelf={ false } />)) }
 					</>
 				}
 			</CardListsContainer>

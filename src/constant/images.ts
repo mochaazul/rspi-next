@@ -69,6 +69,7 @@ import ClosePng from '/public/images/ic/close.svg';
 import PlusCircle from '/public/svg/plus-circle.svg';
 
 import SlotEmptyIc from '/public/images/slot_empty_state.png';
+import MoreMenu from '/public/images/ic/more-menu.svg';
 
 export default {
 	PokemonIllu: PokemonIllu,
@@ -131,4 +132,5 @@ export default {
 	PlusCircle,
 	XLogo,
 	SlotEmptyIc,
+	MoreMenu,
 };

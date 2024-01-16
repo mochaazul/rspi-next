@@ -36,6 +36,14 @@ export interface FamilyProfilePayload {
 	name: string;
 }
 
+export interface EditFamilyProfilePayload {
+	email: string;
+	phone: string;
+	birthdate: string;
+	gender: string;
+	name: string;
+}
+
 export interface UserData {
 	token?: string;
 	patient_code?: string;

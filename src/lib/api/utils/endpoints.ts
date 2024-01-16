@@ -38,6 +38,7 @@ const endpointData = {
 	updateEmail: { path: '/patients/update-email', method: 'PUT' },
 	createPin: { path: '/patients/pin', method: 'PUT' },
 	updateAvatar: { path: '/patients/update-avatar', method: 'PUT' },
+	editFamilyProfile: { path: '/patients/family', method: 'PUT' },
 
 	// GET
 	patients: { path: '/patients', method: 'GET' },

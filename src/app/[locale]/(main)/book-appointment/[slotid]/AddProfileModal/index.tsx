@@ -13,7 +13,7 @@ import Button from '@/components/ui/Button';
 import { useScopedI18n } from '@/locales/client';
 import { AddProfileSchema } from '@/validator/booking';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
-import { addFamilyProfile, updateProfile } from '@/lib/api/profile';
+import { addFamilyProfile, editFamilyProfile, updateProfile } from '@/lib/api/profile';
 import { useFormStatus } from 'react-dom';
 import dayjs from 'dayjs';
 
@@ -23,6 +23,8 @@ type Props = {
 	isMain?: boolean,
 	selfProfile?: UserDataDetail;
 	type: string;
+	isAddProfile: boolean;
+	selectedProfile?: UserDataDetail;
 };
 
 export type ProfilePayload = {
@@ -33,7 +35,7 @@ export type ProfilePayload = {
 	phone: string;
 };
 
-const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props) => {
+const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddProfile = true, selectedProfile }: Props) => {
 	const { pending } = useFormStatus();
 
 	const t = useScopedI18n('page.bookingAppointment');
@@ -57,27 +59,48 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		onSubmit: async (values: ProfilePayload) => {
 			try {
 				const { dob, email, gender, name, phone } = values;
-				if (type === 'other') {
-					const res = await addFamilyProfile({
-						birthdate: dob,
-						parent_email: selfProfile?.email ?? '',
-						email: email,
-						name: name,
-						phone: `62${ cleanUpMask(phone) }`,
-						gender: gender
-					});
+				if (isAddProfile) {
+					if (type === 'other') {
+						const res = await addFamilyProfile({
+							birthdate: dob,
+							parent_email: selfProfile?.email ?? '',
+							email: email,
+							name: name,
+							phone: `62${ cleanUpMask(phone) }`,
+							gender: gender
+						});
 
-					if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
+						if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
 
+					} else {
+						const res = await updateProfile({
+							name: name,
+							birthdate: dob,
+							gender: gender,
+							phone: `62${ cleanUpMask(phone) }`
+						});
+
+						if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
+					}
 				} else {
-					const res = await updateProfile({
-						name: name,
-						birthdate: dob,
-						gender: gender,
-						phone: `62${ cleanUpMask(phone) }`
-					});
-
-					if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
+					/// todo edit profile
+					if (selectedProfile?.id) {
+						console.log({
+							birthdate: dob,
+							email: email,
+							name: name,
+							phone: `62${ cleanUpMask(phone) }`,
+							gender: gender,
+						}, selectedProfile.id);
+						const res = await editFamilyProfile({
+							birthdate: dob,
+							email: email,
+							name: name,
+							phone: `62${ cleanUpMask(phone) }`,
+							gender: gender,
+						}, selectedProfile.patient_code);
+						if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
+					}
 				}
 
 				closeHandler();
@@ -121,9 +144,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	};
 
 	useEffect(() => {
-
 		if (type === 'self') {
-
 			formikProfile.setFieldValue('email', selfProfile?.email);
 			formikProfile.setFieldValue('phone', selfProfile?.phone);
 			formikProfile.setFieldValue('name', selfProfile?.name);
@@ -133,12 +154,25 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 				&& selfProfile?.birthdate !== '0001-01-01 00:00:00 +0000 UTC') {
 				formikProfile.setFieldValue('dob', selfProfile?.birthdate);
 			}
-
 			setDisabledEmail(true);
 		} else {
 			setDisabledEmail(false);
 		}
 	}, [type]);
+
+	useEffect(() => {
+		if (!isAddProfile) {
+			formikProfile.setFieldValue('email', selectedProfile?.email);
+			formikProfile.setFieldValue('phone', selectedProfile?.phone);
+			formikProfile.setFieldValue('name', selectedProfile?.name);
+			formikProfile.setFieldValue('gender', selectedProfile?.gender);
+			if (selectedProfile?.birthdate
+				&& selectedProfile?.birthdate !== '0001-01-01'
+				&& selectedProfile?.birthdate !== '0001-01-01 00:00:00 +0000 UTC') {
+				formikProfile.setFieldValue('dob', selectedProfile?.birthdate);
+			}
+		}
+	}, [selectedProfile, visible]);
 
 	const regexPhone = (phone: string) => {
 		const phoneNumber =
@@ -160,7 +194,9 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 	const getInputErrorMessage = (key?: string, label?: string) => {
 		return getValidationTranslation(tValidation, key, { label });
 	};
-
+	const modalTitle = (isAddProfile) ?
+		type === 'self' ? t('profileSelector.addSelfProfile') : t('profileSelector.addOtherProfile')
+		: `${ t('profileSelector.editOtherProfile') }  "${ selectedProfile?.name }" :`;
 	return <Modal
 		visible={ visible }
 		noPadding
@@ -177,7 +213,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					fontSize='24px'
 					fontWeight='700'
 					lineHeight='28px'
-					text={ type === 'self' ? t('profileSelector.addSelfProfile') : t('profileSelector.addOtherProfile') }
+					text={ modalTitle }
 				/>
 			</ModalHeader>
 			<NotificationPanel
@@ -277,7 +313,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 					// className='w-[174px] block'
 					/>
 				</FormRow>
-				<Button type='submit' label={ t('profileSelector.form.submit') } className='mt-[8px] md:mt-[32px] text-sm md:text-base' />
+				<Button type='submit' label={ isAddProfile ? t('profileSelector.form.submit') : t('profileSelector.form.edit') } className='mt-[8px] md:mt-[32px] text-sm md:text-base' />
 			</Form>
 		</ProfileModalContainer>
 	</Modal>;

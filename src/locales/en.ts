@@ -117,6 +117,7 @@ export default {
 				selfLabel: 'Your Profile :',
 				other: 'Other\'s Profile:',
 				addSelfProfile: 'Add Your Profile :',
+				editOtherProfile: 'Edit Profile ',
 				addOtherProfile: 'Add Other Profile :',
 				form: {
 					selfHeading: 'Add "Self" profile',
@@ -126,6 +127,7 @@ export default {
 					phone: 'Phone',
 					gender: 'Gender',
 					submit: 'Submit',
+					edit: 'Edit',
 					dob: 'Birth Date',
 					genderLabel: {
 						male: 'Male',
@@ -820,6 +822,8 @@ export default {
 				patientGenderFemaleLabel: 'Female',
 				patientPhotoProfile: 'Photo profile',
 				editLabel: 'Change',
+				editProfileLabel: 'Edit',
+				deleteLabel: 'Delete',
 				successUpdateProfile: 'Successfully Update Profile',
 			},
 			securitySetting: {
