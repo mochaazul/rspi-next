@@ -85,13 +85,6 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 				} else {
 					/// todo edit profile
 					if (selectedProfile?.id) {
-						console.log({
-							birthdate: dob,
-							email: email,
-							name: name,
-							phone: `62${ cleanUpMask(phone) }`,
-							gender: gender,
-						}, selectedProfile.id);
 						const res = await editFamilyProfile({
 							birthdate: dob,
 							email: email,
@@ -161,6 +154,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 	}, [type]);
 
 	useEffect(() => {
+		formikProfile.resetForm();
 		if (!isAddProfile) {
 			formikProfile.setFieldValue('email', selectedProfile?.email);
 			formikProfile.setFieldValue('phone', selectedProfile?.phone);
@@ -172,7 +166,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 				formikProfile.setFieldValue('dob', selectedProfile?.birthdate);
 			}
 		}
-	}, [selectedProfile, visible]);
+	}, [selectedProfile, visible, isAddProfile]);
 
 	const regexPhone = (phone: string) => {
 		const phoneNumber =
@@ -194,9 +188,15 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 	const getInputErrorMessage = (key?: string, label?: string) => {
 		return getValidationTranslation(tValidation, key, { label });
 	};
-	const modalTitle = (isAddProfile) ?
-		type === 'self' ? t('profileSelector.addSelfProfile') : t('profileSelector.addOtherProfile')
-		: `${ t('profileSelector.editOtherProfile') }  "${ selectedProfile?.name }" :`;
+	const modalTitle = () => {
+		if (isAddProfile) {
+			return type === 'self' ? t('profileSelector.addSelfProfile') : t('profileSelector.addOtherProfile');
+		} else {
+			return `${ t('profileSelector.editOtherProfile') } "${ selectedProfile?.name }" :`;
+		}
+	};
+
+
 	return <Modal
 		visible={ visible }
 		noPadding
@@ -213,7 +213,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 					fontSize='24px'
 					fontWeight='700'
 					lineHeight='28px'
-					text={ modalTitle }
+					text={ modalTitle() }
 				/>
 			</ModalHeader>
 			<NotificationPanel

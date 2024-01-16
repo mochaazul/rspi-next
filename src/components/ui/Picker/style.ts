@@ -5,7 +5,9 @@ import { colors } from '@/constant';
 
 export const PickerStyle = styled.div`
 	position: absolute;
+	right: 0;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 0 0 10px 10px !important;
 	overflow-y: auto;
 	max-height: 400px;
 
