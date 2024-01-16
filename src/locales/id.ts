@@ -721,7 +721,7 @@ export default {
 			},
 			notificationMessage: {
 				emailNotVerified: {
-					heading: 'Email Anda belum diverifikasi. SIlahkan',
+					heading: 'Email Anda belum diverifikasi. Silahkan',
 					cta: 'Klik disini',
 					tail: 'untuk melakukan verifikasi email',
 					successMessage: 'Berhasil mengirim ulang verifikasi email'
