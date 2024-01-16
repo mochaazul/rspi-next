@@ -11,10 +11,10 @@ import Radio from '@/components/ui/Radio';
 import Calendar from '@/components/ui/Calendar';
 import Button from '@/components/ui/Button';
 import NeedLoginModal from '@/components/ui/NeedLoginModal';
-import { Images, colors } from '@/constant';
+import { Images, colors, icons } from '@/constant';
 import { DoctorProfileStyle, TimeSlotCard, TimeSlotContainer } from './style';
 import { useCurrentLocale, useScopedI18n } from '@/locales/client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import VisitSchedule from './sections/VisitSchedule';
 import { FindDoctorDetail, HospitalDetail, ResponseType, TimeSlot } from '@/interface';
 import { useGetHospital } from '@/lib/api/client/hospital';
@@ -46,6 +46,7 @@ const DoctorDetail = (
 	const t = useScopedI18n('page.doctorProfile');
 	const lang = useCurrentLocale();
 	const router = useRouter();
+	const searchParams = useSearchParams();
 
 	const [selectedHospital, setSelectedHospital] = useState<string>('');
 	const [selectedHospitalPhoneNumber, setSelectedHospitalPhoneNumber] = useState<string>('');
@@ -58,7 +59,7 @@ const DoctorDetail = (
 	const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
 	const [blacklistModalVisible, setBlacklistModalVisible] = useState<boolean>(false);
 
-	const { data: blacklistResponse, isMutating: blacklistLoading, trigger: checkBlacklist, error: blacklistError } = useCheckBlacklist();
+	const { isMutating: blacklistLoading, trigger: checkBlacklist } = useCheckBlacklist();
 
 	const [blacklistMsg, setBlacklistMsg] = useState<string>('');
 
@@ -86,15 +87,22 @@ const DoctorDetail = (
 
 	const hospitalArr = doctor.hospital.map(hospital => ({ key: hospital?.hospital_code, value: hospital?.hospital_code, label: hospital?.hospital_name }));
 
+	const hasMultipleHospitals = hospitalArr.length > 1;
+
 	const selectFirstHospital = () => {
-		if (hospitalArr) {
+		const hospitalParams = searchParams.get('hospital_code');
+		// check if there is pre-filtered hospital and doctor have multiple hospitals then select first selected hospital
+		if (hospitalParams && hasMultipleHospitals) {
+			setSelectedHospital(hospitalParams.split(',')[0] ?? '');
+		}
+		if (!hasMultipleHospitals) {
 			setSelectedHospital(hospitalArr[0].value ?? '');
 		}
 	};
 
 	useEffect(() => {
 		selectFirstHospital();
-	}, []);
+	}, [searchParams]);
 
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<TimeSlot>();
 
@@ -131,7 +139,7 @@ const DoctorDetail = (
 		return '';
 	};
 
-	const onBookHandler = async () => {
+	const onBookHandler = async() => {
 		try {
 			const token = await cookiesHelper.getToken();
 			const userData = await cookiesHelper.getUserData();
@@ -218,7 +226,7 @@ const DoctorDetail = (
 									</div>
 								</div>
 								<hr className='mt-[24px] max-sm:hidden' />
-								<div className='mt-[30px]'>
+								<div className='mt-[30px] flex gap-3 flex-col'>
 									<Radio groupLabel={ t('chooseRs') } onChange={ setSelectedHospital } value={ selectedHospital }
 										groupContainerClassname='flex flex-col md:flex-row mt-[10px] md:mt-[16px]'
 										labelClassName={ 'font-bold text-sm md:text-base' }
@@ -233,6 +241,14 @@ const DoctorDetail = (
 											})
 										}
 									</Radio>
+									{
+										!selectedHospital && (
+											<div className='flex gap-1 items-center'>
+												<icons.WarningCircleDanger />
+												<Text color={ colors.red.accent } fontSize='12px' fontWeight='700' lineHeight='normal' text={ t('notSelectedHospital') }/>
+											</div>
+										)
+									}
 								</div>
 								{ /* APP : mean appointment */ }
 								{ /* TEL : mean telemedicine */ }
@@ -247,6 +263,7 @@ const DoctorDetail = (
 										{ /* TODO: TAKEN OUT SINCE TrackCare do not support it yet 24 nov 23 */ }
 										{ /* <Radio.Option label='Telekonsultasi' value='TEL' /> */ }
 									</Radio>
+									
 								</div>
 
 								<TimeSlotContainer>
@@ -260,7 +277,9 @@ const DoctorDetail = (
 												onChangeMonth={ (month, year) => {
 													getCalendar(month, year);
 												} }
-												loading={ doctorCalendarLoading } />
+												loading={ doctorCalendarLoading }
+												disable={ !selectedHospital }
+											/>
 										</TimeSlotCard>
 										<TimeSlotCard className='px-[16px] py-[20px] md:w-[calc(100%/2)]'>
 											<VisitSchedule

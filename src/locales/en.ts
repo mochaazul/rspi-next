@@ -962,6 +962,7 @@ export default {
 		doctorProfile: {
 			bookAppointmentLabel: 'Book Appointment',
 			scheduleHeading: 'Doctor&apos;s Schedule',
+			notSelectedHospital: 'Please select your hospital preference.',
 			form: {
 				visitDateLabel: 'Visit Date',
 				hospitalLabel: 'Hospital',

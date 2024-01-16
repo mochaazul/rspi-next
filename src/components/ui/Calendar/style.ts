@@ -15,6 +15,14 @@ export const CalendarContainer = styled.div`
   .react-calendar__tile abbr {
     display: none;
   }
+  .react-calendar__navigation__label{
+    span{
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      color: #344054;
+    }
+  }
  
 .react-calendar__tile--active{
     .calendar-item-label{
@@ -38,6 +46,7 @@ export const CalendarContainer = styled.div`
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
+      color: #344054;
     }
   }
   .react-calendar__month-view__days__day--neighboringMonth{
@@ -57,7 +66,7 @@ export const CalendarContainer = styled.div`
       align-items: center;
       justify-content: center;
       abbr{
-        font-weight: 700;
+        font-weight: 500;
         text-decoration: none;
       }
     }

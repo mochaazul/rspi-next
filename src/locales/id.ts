@@ -968,6 +968,7 @@ export default {
 		doctorProfile: {
 			bookAppointmentLabel: 'Buat Janji Temu',
 			scheduleHeading: 'Jadwal Dokter',
+			notSelectedHospital: 'Silahkan pilih preferensi rumah sakit Anda',
 			form: {
 				visitDateLabel: 'Tanggal Kunjungan',
 				hospitalLabel: 'Rumah sakit',
