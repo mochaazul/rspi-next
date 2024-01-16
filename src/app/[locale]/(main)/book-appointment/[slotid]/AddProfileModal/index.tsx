@@ -196,7 +196,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 	};
 	const modalTitle = (isAddProfile) ?
 		type === 'self' ? t('profileSelector.addSelfProfile') : t('profileSelector.addOtherProfile')
-		: `${ t('profileSelector.editOtherProfile') }  "${ selectedProfile?.name }" :`;
+		: `${ t('profileSelector.editOtherProfile') } "${ selectedProfile?.name }" :`;
 	return <Modal
 		visible={ visible }
 		noPadding

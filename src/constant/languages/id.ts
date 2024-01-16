@@ -38,7 +38,7 @@ export default {
 	page: {
 		unsubscribe: {
 			headingSuccess: 'Berhasil Berhenti Belangganan',
-			subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+			subHeadingSuccess: 'Anda sekarang berhenti berlangganan. Preferensi Anda penting bagi kami, dan kami menghargai keputusan Anda. Jika Anda berubah pikiran, silakan bergabung dengan kami lagi. Terima kasih.',
 			headingFailed: 'Gagal Berhenti Belangganan',
 			subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 		},

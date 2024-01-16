@@ -1,6 +1,19 @@
 'use client';
+import * as Sentry from '@sentry/nextjs';
+import { useEffect } from 'react';
 
-export default function ErrorPage() {
+export default function GlobalError({
+	error
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+	useEffect(() => {
+		if (error) {
+			Sentry.captureException(error);
+		}
+	}, [error]);
+
 	return (
 		<div className='bg-[#FAFAFA] min-h-screen py-6 sm:py-5 flex justify-center items-center'>
 			<div className='text-center max-w-[1110px] w-full mx-auto px-4 flex flex-col gap-y-5 sm:gap-y-[42px]'>

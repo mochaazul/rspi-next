@@ -70,7 +70,6 @@ export default async function PageWrapper({
 				/>
 				<CallForAmbulance hospitalData={ hospitalData } session={ session } />
 				<MedicalRecordReminder session={ session } />
-
 			</LangWrapper>
 		</>
 	);
