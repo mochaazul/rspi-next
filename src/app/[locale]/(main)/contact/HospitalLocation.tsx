@@ -119,6 +119,7 @@ const HospitalLocation = ({ hospitals }: Props) => {
 					<div className='global-shadow relative'>
 						<CustomCarousel
 							containerClassName='rounded-[10px]'
+							dotsContainerClassName='mb-2'
 							autoplay={ false }
 							arrowButton={ true }
 							onChangeIndex={ handleRSCarouselChange }>

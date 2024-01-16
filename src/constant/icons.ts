@@ -16,6 +16,7 @@ import Link from '/public/images/ic/Link.svg';
 import LinkedIn from '/public/images/ic/LinkedIn/Negative.svg';
 import ShareNetwork from '/public/images/ic/ShareNetwork.svg';
 import WarningCircle from '/public/images/ic/WarningCircle.svg';
+import WarningCircleDanger from '/public/svg/warning_circle_danger.svg';
 import Close from '/public/images/ic/X.svg';
 import Check from '/public/images/ic/check.svg';
 import CheckUp from '/public/images/ic/check_up.svg';
@@ -135,6 +136,7 @@ const icons = {
 	LinkedIn,
 	ShareNetwork,
 	WarningCircle,
+	WarningCircleDanger,
 	Close,
 	Check,
 	CheckUp,

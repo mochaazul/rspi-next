@@ -10,9 +10,11 @@ import { useScopedI18n } from '@/locales/client';
 
 import { DoctorCardStyle } from './style';
 import ItemAccordion from './ItemAccordion';
+import { useSearchParams } from 'next/navigation';
 
 const DoctorCard = (props: I_MasterDoctor) => {
 	const t = useScopedI18n('page.findDoctor');
+	const searchParams = useSearchParams();
 
 	const [isOpened, setOpened] = useState<boolean>(false);
 
@@ -85,7 +87,7 @@ const DoctorCard = (props: I_MasterDoctor) => {
 			}
 			{ /* Button lihat detail */ }
 			<div className='mt-4 text-right sm:mt-6'>
-				<Link href={ `/doctor/${ props.doctor_code }` }>
+				<Link href={ `/doctor/${ props.doctor_code }?${searchParams.toString()}` }>
 					<div className='md:inline-block'>
 						<Button theme='outline' $hoverTheme='primary' className='h-[36px] py-0 grow-0 group'>
 							<div className='flex gap-3 items-center justify-center'>
