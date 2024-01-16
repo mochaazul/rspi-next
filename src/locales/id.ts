@@ -43,7 +43,7 @@ export default {
 
 	unsubscribe: {
 		headingSuccess: 'Berhasil Berhenti Belangganan',
-		subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+		subHeadingSuccess: 'Anda sekarang berhenti berlangganan. Preferensi Anda penting bagi kami, dan kami menghargai keputusan Anda. Jika Anda berubah pikiran, silakan bergabung dengan kami lagi. Terima kasih.',
 		headingFailed: 'Gagal Berhenti Belangganan',
 		subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 	},
@@ -200,7 +200,7 @@ export default {
 		},
 		unsubscribe: {
 			headingSuccess: 'Berhasil Berhenti Belangganan',
-			subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+			subHeadingSuccess: 'Anda sekarang berhenti berlangganan. Preferensi Anda penting bagi kami, dan kami menghargai keputusan Anda. Jika Anda berubah pikiran, silakan bergabung dengan kami lagi. Terima kasih.',
 			headingFailed: 'Gagal Berhenti Belangganan',
 			subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 		},
@@ -723,7 +723,7 @@ export default {
 			},
 			notificationMessage: {
 				emailNotVerified: {
-					heading: 'Email Anda belum diverifikasi. SIlahkan',
+					heading: 'Email Anda belum diverifikasi. Silahkan',
 					cta: 'Klik disini',
 					tail: 'untuk melakukan verifikasi email',
 					successMessage: 'Berhasil mengirim ulang verifikasi email'
@@ -972,6 +972,7 @@ export default {
 		doctorProfile: {
 			bookAppointmentLabel: 'Buat Janji Temu',
 			scheduleHeading: 'Jadwal Dokter',
+			notSelectedHospital: 'Silahkan pilih preferensi rumah sakit Anda',
 			form: {
 				visitDateLabel: 'Tanggal Kunjungan',
 				hospitalLabel: 'Rumah sakit',
@@ -1002,7 +1003,8 @@ export default {
 			visitAppOptionLabel: 'Kunjungan Tatap Muka',
 			shareDoctor: {
 				wateleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}: {link}',
-				teleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}'
+				teleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}',
+				metaDesc: 'Klik disini untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda'
 			}
 		},
 		footer: {

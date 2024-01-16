@@ -192,9 +192,9 @@ export default {
 			}
 		},
 		unsubscribe: {
-			headingSuccess: 'Unsubscribe was successful',
-			subHeadingSuccess: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again',
-			headingFailed: 'Unsubscribe was failed',
+			headingSuccess: 'Unsubscribe Successful',
+			subHeadingSuccess: 'Youre now unsubscribed. Your preferences matter to us, and we appreciate your decision. If you ever change your mind, feel free to join us again. Thank you.',
+			headingFailed: 'Unsubscribe Failed',
 			subHeadingFailed: 'Unsubscribing from the latest news about RSPI was failed, try again',
 		},
 		awards: {
@@ -966,6 +966,7 @@ export default {
 		doctorProfile: {
 			bookAppointmentLabel: 'Book Appointment',
 			scheduleHeading: 'Doctor&apos;s Schedule',
+			notSelectedHospital: 'Please select your hospital preference.',
 			form: {
 				visitDateLabel: 'Visit Date',
 				hospitalLabel: 'Hospital',
@@ -996,7 +997,8 @@ export default {
 			visitAppOptionLabel: 'Visit in Person',
 			shareDoctor: {
 				wateleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}: {link}',
-				teleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}'
+				teleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}',
+				metaDesc: 'Click here to create appointment with your best {speciality}',
 			}
 		},
 		footer: {

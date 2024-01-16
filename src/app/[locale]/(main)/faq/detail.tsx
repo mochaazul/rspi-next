@@ -12,7 +12,7 @@ import {
 import { colors } from '@/constant';
 
 import { FAQStyle } from './style';
-import { PanelH1, PanelH4, PanelV1 } from '../style';
+import { PanelH1, PanelH4 } from '../style';
 import LangWrapper from '@/components/ui/LangWrapper';
 
 type Props ={

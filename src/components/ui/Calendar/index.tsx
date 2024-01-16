@@ -17,9 +17,10 @@ type Props = {
 	loading?: boolean;
 	value?: Date;
 	calendarData: DoctorCalendar[];
+	disable: boolean;
 };
 
-const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calendarData }: Props) => {
+const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calendarData, disable = false }: Props) => {
 	const t = useScopedI18n('page.doctorProfile');
 
 	const renderTile = ({ activeStartDate, date, view }: TileArgs) => {
@@ -65,7 +66,7 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calenda
 	const isBeforeDate = (date: Date, unit: UnitType = 'D') => dayjs(date).isBefore(dayjs(), unit);
 	const isFoundOnCalendar = (date: Date) => calendarData?.find((calendar: any) => calendar.date_schedule === dayjs(date).format('YYYY-MM-DD'));
 
-	const disabledTile = ({ activeStartDate, date, view }: TileArgs) => isBeforeDate(date);
+	const disabledTile = ({ activeStartDate, date, view }: TileArgs) => isBeforeDate(date) || disable;
 	// max-sm:w-[44px] max-sm:h-[46px]
 	const mapTileClassName: TileClassNameFunc = ({ activeStartDate, date, view }) => {
 		const shouldDisbled = !isFoundOnCalendar(date);

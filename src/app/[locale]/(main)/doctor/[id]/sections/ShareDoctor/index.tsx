@@ -1,13 +1,20 @@
-import { Text } from '@/components/ui';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import * as Icons from 'react-feather';
+
+import Text from '@/components/ui/Text';
 import Images from '@/constant/images';
+import {
+	facebookLink,
+	linkedinLink,
+	telegramLink,
+	twitterLink,
+	whatsappLink
+} from '@/helpers/sharedLink';
 import { FindDoctorDetail, ResponseType } from '@/interface';
 import { useGetDoctorDetail } from '@/lib/api/client/doctors';
 import { useScopedI18n } from '@/locales/client';
 import { useHostname } from '@/utils/useHostname';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import * as Icons from 'react-feather';
 
 type ShareDoctorProps = {
 	doctorDetail?: ResponseType<FindDoctorDetail>;
@@ -21,8 +28,8 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 	const { data: doctor, isLoading, error: doctorError } = useGetDoctorDetail({ param: params.id as string });
 
 	if (!doctor) return null;
-	const shareMsg = encodeURIComponent(t('wateleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0], link: hostname }));
-	const teleMsg = encodeURIComponent(t('teleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0] }));
+	const shareMsg = t('wateleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0], link: hostname });
+	const teleMsg = t('teleMsg', { doctor_name: doctor.data.name, speciality: doctor.data.specialty[0] });
 
 	return (
 		<div className={ props.className }>
@@ -35,21 +42,21 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 			/>
 			<div className='flex items-center gap-[10px] mt-[20px] '>
 				<div className='cursor-pointer'>
-					<Link href={ `https://www.facebook.com/sharer/sharer.php?u=${ hostname }` } target='_blank'>
+					<Link href={ facebookLink({ url: hostname }) } target='_blank'>
 						<Images.FacebookLogo
 							width='16px'
 							height='16px' />
 					</Link>
 				</div>
 				<div className='cursor-pointer'>
-					<Link href={ `https://twitter.com/intent/tweet?url=&text=${ shareMsg }` } target='_blank'>
+					<Link href={ twitterLink({ text: shareMsg }) } target='_blank'>
 						<Images.XLogo
 							width='16px'
 							height='16px' />
 					</Link>
 				</div>
 				<div className='cursor-pointer'>
-					<Link href={ `https://www.linkedin.com/feed/?shareActive=true&text=${ shareMsg }` } target='_blank'>
+					<Link href={ linkedinLink({ url: hostname, text: shareMsg }) } target='_blank'>
 						<Images.LinkedinLogo
 							width='16px'
 							height='16px'
@@ -60,7 +67,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 					<Icons.Link width='16px' height='16px' />
 				</div>
 				<div className='cursor-pointer' >
-					<Link href={ `https://t.me/share/url?url=${ hostname }&text=${ teleMsg }` } target='_blank'>
+					<Link href={ telegramLink({ text: teleMsg, url: hostname }) } target='_blank'>
 						<Images.TelegramLogo
 							width='16px'
 							height='16px'
@@ -68,7 +75,7 @@ const ShareDoctor = (props: ShareDoctorProps) => {
 					</Link>
 				</div>
 				<div className='cursor-pointer'>
-					<Link href={ `https://wa.me/send?text=${ shareMsg }` } target='_blank'>
+					<Link href={ whatsappLink({ text: shareMsg, url: hostname }) } target='_blank'>
 						<Images.WhatsappLogo
 							width='16px'
 							height='16px'

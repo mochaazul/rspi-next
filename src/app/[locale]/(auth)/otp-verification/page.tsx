@@ -156,7 +156,7 @@ const OTPPage = () => {
 
 	return (
 		<ContainerStyle>
-			<Box>
+			<Box className='md:w-auto md:max-w-[618px]'>
 				<div className='hidden md:flex justify-center mb-8'>
 					<Image
 						src='/images/logo_rspi.svg'
