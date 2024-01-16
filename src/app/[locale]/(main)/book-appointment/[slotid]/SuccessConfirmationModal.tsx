@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 
-import { useScopedI18n } from '@/locales/client';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { Button, Modal, Text } from '@/components/ui';
 import { icons } from '@/constant';
 
@@ -24,6 +24,7 @@ const SuccessConfirmationModal = ({
 	onClose
 }: Props) => {
 	const t = useScopedI18n('page.bookingAppointment.success');
+	const currentLang = useCurrentLocale();
 	const router = useRouter();
 	const { mutate } = useSWRConfig();
 
@@ -33,7 +34,7 @@ const SuccessConfirmationModal = ({
 	};
 
 	const subHeadingText = () => {
-		return `${ t('subHeading.main') } ${ doctorName } ${ t('subHeading.at') } ${ hospitalName } ${ t('subHeading.on') } ${ dayjs(date).format('dddd, DD MMMM YYYY') } ${ t('subHeading.done') }`;
+		return `${ t('subHeading.main') } ${ doctorName } ${ t('subHeading.at') } ${ hospitalName } ${ t('subHeading.on') } ${ dayjs(date)?.locale(currentLang)?.format('dddd, DD MMMM YYYY') } ${ t('subHeading.done') }`;
 	};
 
 	return <Modal

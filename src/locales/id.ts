@@ -998,7 +998,8 @@ export default {
 			visitAppOptionLabel: 'Kunjungan Tatap Muka',
 			shareDoctor: {
 				wateleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}: {link}',
-				teleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}'
+				teleMsg: 'Klik link berikut untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda, {doctor_name}',
+				metaDesc: 'Klik disini untuk membuat janji konsultasi dengan Dokter {speciality} terbaik untuk Anda'
 			}
 		},
 		footer: {
