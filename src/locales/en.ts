@@ -992,7 +992,8 @@ export default {
 			visitAppOptionLabel: 'Visit in Person',
 			shareDoctor: {
 				wateleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}: {link}',
-				teleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}'
+				teleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}',
+				metaDesc: 'Click here to create appointment with your best {speciality}',
 			}
 		},
 		footer: {
