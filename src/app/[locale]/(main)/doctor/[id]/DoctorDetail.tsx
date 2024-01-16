@@ -245,7 +245,7 @@ const DoctorDetail = (
 										!selectedHospital && (
 											<div className='flex gap-1 items-center'>
 												<icons.WarningCircleDanger />
-												<Text color={ colors.red.accent } fontSize='12px' fontWeight='700' subClassName='lato' lineHeight='normal' text='Silahkan pilih preferensi rumah sakit Anda'/>
+												<Text color={ colors.red.accent } fontSize='12px' fontWeight='700' lineHeight='normal' text={ t('notSelectedHospital') }/>
 											</div>
 										)
 									}
