@@ -43,7 +43,7 @@ export default {
 
 	unsubscribe: {
 		headingSuccess: 'Berhasil Berhenti Belangganan',
-		subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+		subHeadingSuccess: 'Anda sekarang berhenti berlangganan. Preferensi Anda penting bagi kami, dan kami menghargai keputusan Anda. Jika Anda berubah pikiran, silakan bergabung dengan kami lagi. Terima kasih.',
 		headingFailed: 'Gagal Berhenti Belangganan',
 		subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 	},
@@ -169,12 +169,12 @@ export default {
 				insuranceDataLabel: 'Data Asuransi',
 				insuranceNumber: 'Nomor Asuransi',
 				patientDetail: {
-					heading: 'Data Pasien',
-					name: 'Nama',
-					birthDate: 'Tanggal lahir',
-					phone: 'Nomor HP',
-					email: 'E-Mail',
-					guarantor: 'Penjamin'
+					heading: 'Data Pasien:',
+					name: 'Nama:',
+					birthDate: 'Tanggal lahir:',
+					phone: 'Nomor HP:',
+					email: 'E-Mail:',
+					guarantor: 'Penjamin:'
 				},
 				toc: 'Saya menyatakan bahwa seluruh data diatas sudah benar.',
 				confirmBtnLabel: 'Konfirmasi',
@@ -198,7 +198,7 @@ export default {
 		},
 		unsubscribe: {
 			headingSuccess: 'Berhasil Berhenti Belangganan',
-			subHeadingSuccess: 'Berhenti berlangganan berita terbaru tentang RSPI berhasil, semoga kita bisa bertemu kembali',
+			subHeadingSuccess: 'Anda sekarang berhenti berlangganan. Preferensi Anda penting bagi kami, dan kami menghargai keputusan Anda. Jika Anda berubah pikiran, silakan bergabung dengan kami lagi. Terima kasih.',
 			headingFailed: 'Gagal Berhenti Belangganan',
 			subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
 		},
@@ -936,7 +936,7 @@ export default {
 					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
-				offlineConsultation: 'Konsultasi Tatap Muka'
+				offlineConsultation: 'Konsultasi'
 			},
 			cancelBooking: {
 				heading: 'Konfirmasi Pembatalan',
@@ -981,6 +981,8 @@ export default {
 			notAvailableSchedule: 'Jadwal dokter tidak tersedia di tanggal yang Anda pilih karena sudah mencapai maksimal reservasi online. Silakan pilih tanggal dan waktu lain yang tersedia di bawah ini atau hubungi call center kami untuk informasi lebih lanjut',
 			callCenter: 'Hubungi Call Center',
 			chooseRs: 'Pilih Rumah Sakit',
+			appointmentType: 'Tipe Pertemuan',
+			setSchedule: 'Atur Jadwal',
 			available: 'Tersedia',
 			limitedSlot: 'Slot Terbatas',
 			noSchedule: 'Jadwal Tidak Tersedia',

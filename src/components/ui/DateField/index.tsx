@@ -34,7 +34,7 @@ const DateField = ({ onIconClick, iconClassName, className, ...props }: InputTyp
 			}
 			<Datepicker
 				{ ...props }
-				inputClassName={ `rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[16px] ${ className }` }
+				inputClassName={ `rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[14px] md:text-[16px] ${ className }` }
 				asSingle={ true }
 				useRange={ false }
 				i18n={ currentLang }

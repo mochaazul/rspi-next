@@ -47,20 +47,16 @@ const ProfileCard = ({ profile, onClick, isActive, isSelf, showModalDelete, clas
 		{
 			isMobile ?
 				<ProfileCardRow className='gap-x-[4px]'>
-					<Text text={ `${ profile.phone } ` } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
-					<Text text={ `|` } fontSize='12px' fontWeight='900' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
-					<Text text={ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+					<Text text={ `${ profile.phone } ` } fontSize='12px' subClassName='text-xs' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+					<Text text={ `|` } fontSize={ '12px' } fontWeight='400' color={ colors.grey.default } />
+					<Text text={ `${ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } ` } fontSize='12px' subClassName='text-xs' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 				</ProfileCardRow> :
 				<>
 					<ProfileCardRow>
-						<icons.Calendar16
-						/>
 						<Text text={ dayjs(splitDate(profile.birthdate)).format('DD MMMM YYYY') } fontSize='14px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 					</ProfileCardRow>
 					<ProfileCardRow>
-						<icons.PhoneOutline
-						/>
-						<Text text={ `${ profile.phone }` } fontSize='12px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
+						<Text text={ `${ profile.phone }` } fontSize='14px' color={ isActive ? colors.black.default : colors.grey.darkOpacity } />
 					</ProfileCardRow>
 				</>
 		}
@@ -196,12 +192,15 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 				className='flex justify-between'
 			>
 				<Text text={ t('other') } fontWeight='900' />
-				<span className='flex flex-row gap-[4px] items-center cursor:pointer' onClick={ () => onAddNewProfileBtn('other') }>
-					<Images.PlusCircle
-						width='13px'
-						height='13px' />
-					<Text text={ t('addNewProfile') } color={ colors.green.brandAccent } fontWeight='900' />
-				</span>
+				{
+					familyProfiles?.length ?
+						<span className='flex flex-row gap-[4px] items-center cursor:pointer' onClick={ () => onAddNewProfileBtn('other') }>
+							<Images.PlusCircle
+								width='13px'
+								height='13px' />
+							<Text text={ t('addNewProfile') } color={ colors.green.brandAccent } fontWeight='900' className='cursor-pointer' />
+						</span> : <></>
+				}
 			</section>
 			<CardListsContainer
 				className='flex flex-row gap-[8px] md:gap-[16px] overflow-x-scroll scrollbar'
@@ -211,7 +210,7 @@ const ProfileSelector = ({ onSelected, selfProfile, onAddNewProfileBtn, familyPr
 					? renderNoProfile()
 					:
 					<>
-						{ familyProfiles && familyProfiles?.map(profile => (<ProfileCard className='w-40 p-[10px]' showModalDelete={ (id, visible) => {
+						{ familyProfiles && familyProfiles?.map(profile => (<ProfileCard className='w-50 p-[10px] p-[20px]' showModalDelete={ (id, visible) => {
 							setSelectedIdFamilyProfile(id);
 							setSelectedProfileOnDelete(profile);
 							setShowDeleteModal(true);

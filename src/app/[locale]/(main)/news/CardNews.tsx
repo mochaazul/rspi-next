@@ -39,6 +39,7 @@ const CardNews = (props: PropsType) => {
 									lineHeight='17px'
 									color={ colors.grey.dark }
 									text={ props?.date }
+									subClassName='max-sm:text-[12px]'
 								/>
 							</div>
 						</div>

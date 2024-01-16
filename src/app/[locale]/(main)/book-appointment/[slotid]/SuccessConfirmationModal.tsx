@@ -61,7 +61,7 @@ const SuccessConfirmationModal = ({
 				color='#667085'
 				text={ subHeadingText() } />
 
-			<Button label={ t('btnLabel') } onClick={ onclickButton } />
+			<Button label={ t('btnLabel') } onClick={ onclickButton } className='text-sm md:text-base' />
 
 		</SuccessConfModalContainer>
 	</Modal>;

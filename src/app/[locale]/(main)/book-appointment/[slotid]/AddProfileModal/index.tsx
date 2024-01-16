@@ -171,7 +171,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 		containerClassName='m-[10px]'
 	>
 		<ProfileModalContainer className='items-start md:items-center'>
-			<ModalHeader>
+			<ModalHeader className='mb-[12px] md:mb-[24px]'>
 				<Text
 					subClassName='max-sm:text-[16px]'
 					fontSize='24px'
@@ -195,9 +195,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 				/>
 			</NotificationPanel>
 			<Form onSubmit={ onSubmitHandler } className='mt-[8px]' action={ '' }>
-				<FormRow
-					className='flex flex-col md:grid md:grid-cols-2 gap-[16px] md:gap-[24px]'
-				>
+				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[12px] md:gap-[24px]'>
 					<Form.TextField
 						labelClassName='font-normal'
 						className='w-[300px] md:w-full'
@@ -210,6 +208,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						placeholder={ t('profileSelector.form.name') }
 						isError={ !!formikProfile.errors.name }
 						errorMessage={ getInputErrorMessage(formikProfile.errors.name, t('profileSelector.form.name')) }
+						wrapperClassName={ 'text-sm md:text-base' }
 					/>
 					<Form.DateField
 						labelClassName='font-normal'
@@ -225,9 +224,10 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						isError={ !!formikProfile.errors.dob }
 						applyMaxDateForDoB={ true }
 						errorMessage={ getInputErrorMessage(formikProfile.errors.dob, t('profileSelector.form.dob')) }
+						wrapperClassName={ 'text-sm md:text-base' }
 					/>
 				</FormRow>
-				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[16px] md:gap-[24px]'>
+				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[12px] md:gap-[24px]'>
 					<Form.PhoneNumberInput
 						labelClassName='font-normal'
 						labelGap={ 8 }
@@ -240,6 +240,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						isError={ !!formikProfile.errors.phone }
 						errorMessage={ getInputErrorMessage(formikProfile.errors.phone, t('profileSelector.form.phone')) }
 						isNumber
+						wrapperClassName={ 'text-sm md:text-base' }
 					/>
 					<Form.TextField
 						labelClassName='font-normal'
@@ -253,9 +254,10 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						isError={ !!formikProfile.errors.email }
 						errorMessage={ getInputErrorMessage(formikProfile.errors.email, t('profileSelector.form.email')) }
 						disabled={ disabledEmail } // Notes: jika disabledEmail, pastikan set formikProfile.values.email
+						wrapperClassName={ 'text-sm md:text-base' }
 					/>
 				</FormRow>
-				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[16px] md:gap-[24px]'>
+				<FormRow className='flex flex-col md:grid md:grid-cols-2 gap-[12px] md:gap-[24px]'>
 					<Form.Dropdown
 						labelClassName='font-normal'
 						labelGap={ 8 }
@@ -271,10 +273,11 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type }: Props)
 						placeholder={ t('profileSelector.form.gender') }
 						isError={ !!formikProfile.errors.gender }
 						errorMessage={ getInputErrorMessage(formikProfile.errors.gender, t('profileSelector.form.gender')) }
+						subClassName={ '!text-sm md:!text-base' }
 					// className='w-[174px] block'
 					/>
 				</FormRow>
-				<Button type='submit' label={ t('profileSelector.form.submit') } className='mt-[32px]' />
+				<Button type='submit' label={ t('profileSelector.form.submit') } className='mt-[8px] md:mt-[32px] text-sm md:text-base' />
 			</Form>
 		</ProfileModalContainer>
 	</Modal>;
