@@ -530,11 +530,11 @@ export default {
 
 			},
 			errors: {
-				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukan sudah terdaftar',
+				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukkan sudah terdaftar',
 				mrNotFound: 'Nomor rekam medis yang Anda masukkan belum terdaftar',
 				phoneNotMatch: 'No yang Anda masukkan tidak sesuai dengan yang terdaftar di RS Pondok Indah Group',
 				dobNotMatch: 'Data yang Anda masukkan tidak sesuai dengan yang terdaftar di database RS Pondok Indah',
-				fieldIsEmpty: 'Harap masukan seluruh data'
+				fieldIsEmpty: 'Harap masukkan seluruh data'
 			},
 			submitBtnLabel: 'Save and Continue',
 			mrNotAvailableBtnLabel: 'Skip'

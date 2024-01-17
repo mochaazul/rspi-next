@@ -4,7 +4,7 @@ const NoMainProfileModal = () => {
 
 	return <Modal visible={ true }>
 		<>
-			Oops anda belum membuat profil utama, silahkan klik lanjutkan
+			Oops anda belum membuat profil utama, Silakan klik lanjutkan
 		</>
 	</Modal>;
 

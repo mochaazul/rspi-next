@@ -845,7 +845,7 @@ export default function PatientProfile({ patientProfile, visitHospitalHistory }:
 							lineHeight='19px'
 							fontWeight='900'
 							color={ colors.paradiso.default }
-							text={ 'Berhasil Mengirim Link Verifikasi Email, Silahkan Cek Kotak Masuk Email Anda' }
+							text={ 'Berhasil Mengirim Tautan Verifikasi E-mail, Silakan Cek Kotak Masuk Email Anda' }
 						/>
 					</div>
 				</Modal>

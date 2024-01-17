@@ -32,6 +32,7 @@ import useSession from '@/session/client';
 import { useSWRConfig } from 'swr';
 import LangWrapper from '@/components/ui/LangWrapper';
 import BreadCrumbs from '@/components/ui/Breadcrumbs';
+import Link from 'next/link';
 
 type BookingFormState = {
 	keluhan: string;
@@ -428,7 +429,10 @@ const BookAppointment = ({ doctorResponse, familyProfiles, userProfile }: BookAp
 						}
 					</Form>
 					<DisclaimerAlert className='mt-[40px] p-[16px] sm:p-[24px]'>
-						<Text color={ colors.green.brandAccent } subClassName='text-xs leading-[18px] sm:text-base sm:leading-5'>{ t('form.disclaimer') }</Text>
+						<Text color={ colors.green.brandAccent } subClassName='text-xs leading-[18px] sm:text-base sm:leading-5'>
+							<span className='text-xs leading-[18px] sm:text-base sm:leading-5 italic'>{ 'Disclaimer' }:</span>&nbsp;
+							{ t('form.disclaimer') }
+						</Text>
 					</DisclaimerAlert>
 				</div>
 			</div>
