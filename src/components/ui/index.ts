@@ -26,6 +26,7 @@ import Picker from './Picker';
 import DropdownSearch from './DropdownSearch';
 import MedicalRecordReminder from './MedicalRecordReminder';
 import LoadingScreen from './LoadingScreen';
+import PortalSelect from './PortalSelection';
 
 export {
 	Button,
@@ -55,5 +56,6 @@ export {
 	Picker,
 	DropdownSearch,
 	MedicalRecordReminder,
-	LoadingScreen
+	LoadingScreen,
+	PortalSelect
 };

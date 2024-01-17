@@ -124,6 +124,7 @@ export default {
 				selfLabel: 'Profil Diri sendiri :',
 				other: 'Orang lain :',
 				addSelfProfile: 'Tambah Profil Diri Sendiri :',
+				editOtherProfile: 'Edit Profil ',
 				addOtherProfile: 'Tambah Profil Orang Lain :',
 				form: {
 					selfHeading: 'Tambah profil diri sendiri',
@@ -133,6 +134,7 @@ export default {
 					phone: 'No Hp',
 					gender: 'Jenis Kelamin',
 					submit: 'Simpan',
+					edit: 'Ubah',
 					dob: 'Tanggal Lahir',
 					genderLabel: {
 						male: 'Laki-laki',
@@ -823,6 +825,8 @@ export default {
 				patientGenderFemaleLabel: 'Perempuan',
 				patientPhotoProfile: 'Foto profil',
 				editLabel: 'Ubah',
+				editProfileLabel: 'Ubah',
+				deleteLabel: 'Hapus',
 				successUpdateProfile: 'Berhasil update profil',
 			},
 			securitySetting: {
