@@ -22,7 +22,7 @@ export default {
 	modalDialog: {
 		pin: {
 			header: 'Masukkan PIN',
-			subHeader: 'Silahkan masukan PIN Untuk melanjutkan.',
+			subHeader: 'Silakan masukkan PIN Untuk melanjutkan.',
 			submitBtnLabel: 'Konfirmasi',
 			forgotPin: 'Lupa Pin'
 		}
@@ -40,7 +40,7 @@ export default {
 			headingSuccess: 'Berhasil Berhenti Belangganan',
 			subHeadingSuccess: 'Anda sekarang berhenti berlangganan. Preferensi Anda penting bagi kami, dan kami menghargai keputusan Anda. Jika Anda berubah pikiran, silakan bergabung dengan kami lagi. Terima kasih.',
 			headingFailed: 'Gagal Berhenti Belangganan',
-			subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, silahkan coba lagi',
+			subHeadingFailed: 'Berhenti berlangganan berita terbaru tentang RSPI gagal, Silakan coba lagi',
 		},
 		awards: {
 			heading: 'Accreditations & Awards',
@@ -81,7 +81,7 @@ export default {
 					email: 'E-mail',
 					phone: 'No. Handphone',
 					subject: 'Subject',
-					notes: 'Masukan pesan disini...'
+					notes: 'Masukkan pesan di sini...'
 				},
 				submitBtnLabel: 'Kirim Pesan',
 				form: {
@@ -408,17 +408,17 @@ export default {
 		},
 		forgotPassword: {
 			heading: 'Lupa Password',
-			subHeading: 'Silahkan masukan email terdaftar Anda, kami akan kirimkan tautan melalui email terdaftar untuk me-reset password Anda',
+			subHeading: 'Silakan masukkan email terdaftar Anda, kami akan kirimkan tautan melalui email terdaftar untuk me-reset password Anda',
 			resetBtnlabel: 'Kirim Permintaan'
 		},
 		resetPassword: {
 			heading: 'Ubah Kata Sandi',
-			subHeading: 'Silahkan masukan Kata Sandi baru anda',
+			subHeading: 'Silakan masukkan Kata Sandi baru anda',
 			resetForm: {
 				oldPasswordLabel: 'Kata Sandi Lama',
-				oldPasswordPlaceHolder: 'Silahkan masukan kata sandi lama anda',
+				oldPasswordPlaceHolder: 'Silakan masukkan kata sandi lama anda',
 				newPasswordLabel: 'Kata sandi baru',
-				newPasswordPlaceHolder: 'Silahkan masukan kata sandi baru anda',
+				newPasswordPlaceHolder: 'Silakan masukkan kata sandi baru anda',
 				newPasswordConfirmationLabel: 'Konfirmasi kata sandi',
 				newPasswordConfirmationPlaceholder: 'Konfirmasi kata sandi baru anda',
 				resetBtnLabel: 'Reset Kata Sandi'
@@ -426,12 +426,12 @@ export default {
 		},
 		resetEmail: {
 			heading: 'Ubah Email',
-			subHeading: 'Silahkan masukan email baru anda',
+			subHeading: 'Silakan masukkan email baru anda',
 			resetForm: {
 				oldEmailLabel: 'Email lama',
-				oldEmailPlaceHolder: 'Silahkan masukan email lama anda',
+				oldEmailPlaceHolder: 'Silakan masukkan email lama anda',
 				newEmailLabel: 'Email baru',
-				newEmailPlaceHolder: 'Silahkan masukan email baru anda',
+				newEmailPlaceHolder: 'Silakan masukkan email baru anda',
 				newEmailConfirmationLabel: 'Konfirmasi email',
 				newEmailConfirmationPlaceholder: 'Konfirmasi email baru anda',
 				resetBtnLabel: 'Reset email'
@@ -440,7 +440,7 @@ export default {
 		pinPage: {
 			heading: 'Buat PIN Baru',
 			headingReset: 'Ubah PIN',
-			subHeading: 'Silahkan buat 6 digit PIN Anda',
+			subHeading: 'Silakan buat 6 digit PIN Anda',
 			notification: {
 				onSuccessMsg: 'Berhasil membuat PIN',
 				onErrorMsg: 'Terdapat Error',
@@ -473,12 +473,12 @@ export default {
 		},
 		loginPage: {
 			heading: 'Selamat Datang',
-			subHeading: 'Silahkan masukan data akun yang terdaftar di sistem kami',
+			subHeading: 'Silakan masukkan data akun yang terdaftar di sistem kami',
 			forgotPasswordLabel: 'Lupa Password?',
 			loginBtnLabel: 'Masuk',
 			footer: {
-				notRegisteredLabel: 'Belum mempunyai akun? Silahkan mendaftar',
-				cta: 'disini'
+				notRegisteredLabel: 'Belum mempunyai akun? Silakan mendaftar',
+				cta: 'di sini'
 			},
 			form: {
 				emailLabel: 'Email',
@@ -488,15 +488,15 @@ export default {
 			},
 			notificationMessage: {
 				emailNotVerified: {
-					heading: 'Email Anda belum diverifikasi. SIlahkan',
-					cta: 'Klik disini',
+					heading: 'Email Anda belum diverifikasi. Silakan',
+					cta: 'Klik di sini',
 					tail: 'untuk melakukan verifikasi email'
 				}
 			}
 		},
 		registerPage: {
 			heading: 'Selamat Datang',
-			subHeading: 'Silahkan masukan data akun untuk melakukan pendaftaran',
+			subHeading: 'Silakan masukkan data akun untuk melakukan pendaftaran',
 			notificationMessage: {
 				onSuccess: 'Berhasil',
 				onError: 'Terdapat Error'
@@ -505,22 +505,22 @@ export default {
 				emailLabel: 'Email',
 				emailPlaceholder: 'Email',
 				passwordLabel: 'Password',
-				pasaswordPlaceholder: 'Masukan Password',
-				passwordConfirmationLabel: 'Masukan ulang password',
-				passwordConfirmationPlaceholder: 'Masukan ulang password',
+				pasaswordPlaceholder: 'Masukkan Password',
+				passwordConfirmationLabel: 'Masukkan ulang password',
+				passwordConfirmationPlaceholder: 'Masukkan ulang password',
 				passwordHint: 'Panjang password minimal 8 karakter dan terdapat minimal 1 huruf kapital'
 			},
 			registerBtnLabel: 'Daftar',
 			footer: {
-				hasAccountLabel: 'Sudah mempunyai akun? Silahkan masuk',
-				cta: 'disini'
+				hasAccountLabel: 'Sudah mempunyai akun? Silakan masuk',
+				cta: 'di sini'
 			},
 			buttonPrivacy: 'Lanjut',
 			buttonTnC: 'Kirim',
 		},
 		registerOnboard: {
 			heading: 'Selamat datang di RS. Pondok Indah',
-			subHeading: 'Silahkan masukan rekam medis anda untuk menggunakan seluruh fitur layanan dari RS. Pondok Indah. Informasi akun Anda tersimpan aman oleh kami',
+			subHeading: 'Silakan masukkan rekam medis anda untuk menggunakan seluruh fitur layanan dari RS. Pondok Indah. Informasi akun Anda tersimpan aman oleh kami',
 			form: {
 				mrlabel: 'Nomor rekam medis',
 				mrPlaceholder: 'Nomor rekam medis',
@@ -530,11 +530,11 @@ export default {
 				birthDateLabel: 'Tanggal lahir',
 			},
 			errors: {
-				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukan sudah terdaftar',
+				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukkan sudah terdaftar',
 				mrNotFound: 'Nomor rekam medis yang Anda masukkan belum terdaftar',
 				phoneNotMatch: 'No yang Anda masukkan tidak sesuai dengan yang terdaftar di RS Pondok Indah Group',
 				dobNotMatch: 'Data yang Anda masukkan tidak sesuai dengan yang terdaftar di database RS Pondok Indah',
-				fieldIsEmpty: 'Harap masukan seluruh data'
+				fieldIsEmpty: 'Harap masukkan seluruh data'
 			},
 			submitBtnLabel: 'Simpan dan Lanjutkan',
 			mrNotAvailableBtnLabel: 'Lewati'
@@ -564,7 +564,7 @@ export default {
 				patientMedicalNumberPlaceholder: 'Nomor Rekam Medis',
 				patientPhoneNumber: 'No. Telepon',
 				patientPhoneNumberPlaceholder: 'No. Telepon',
-				patientPhoneNumberLabelInfo: 'Jika ingin melakukan penggantian data terkait, silahkan mengunjungi RS Pondok Indah terdekat',
+				patientPhoneNumberLabelInfo: 'Jika ingin melakukan penggantian data terkait, Silakan mengunjungi RS Pondok Indah terdekat',
 				patientEmail: 'Email',
 				patientEmailPlaceholder: 'Email',
 				patientOldEmail: 'Email Lama',
@@ -577,7 +577,7 @@ export default {
 				heading: 'Pengaturan Keamanan',
 				emailLabel: 'Email',
 				phoneNumberLabel: 'Nomor Telepon',
-				phoneNumberHint: 'Jika ingin melakukan penggantian data terkait, silahkan mengunjungi RS Pondok Indah terdekat',
+				phoneNumberHint: 'Jika ingin melakukan penggantian data terkait, Silakan mengunjungi RS Pondok Indah terdekat',
 				passwordLabel: 'Password',
 				pinLabel: 'PIN',
 				saveBtnLabel: 'Simpan',
@@ -653,7 +653,7 @@ export default {
 				hospitalLabel: 'Rumah sakit',
 				clinicLabel: 'Klinik'
 			},
-			slotEmptyState: 'Silahkan pilih tanggal untuk menampilkan informasi jam yang tersedia.',
+			slotEmptyState: 'Silakan pilih tanggal untuk menampilkan informasi jam yang tersedia.',
 			notAvailableSchedule: 'Jadwal dokter tidak tersedia di tanggal yang Anda pilih karena sudah mencapai maksimal reservasi online. Silakan pilih tanggal dan waktu lain yang tersedia di bawah ini atau hubungi call center kami untuk informasi lebih lanjut',
 			callCenter: 'Hubungi Call Center',
 			chooseRs: 'Pilih Rumah Sakit',

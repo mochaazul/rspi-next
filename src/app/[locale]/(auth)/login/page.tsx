@@ -151,9 +151,9 @@ const LoginPage = () => {
 		const ref = searchParam.get('ref');
 		const text =
 			ref === 'invalid-token'
-				? 'Keluar, karena sesi anda telah berakhir, Silahkan login kembali'
+				? 'Keluar, karena sesi anda telah berakhir, Silakan login kembali'
 				: ref === 'sso'
-					? 'Akun anda terdeteksi telah masuk pada device lain. Silahkan login kembali'
+					? 'Akun anda terdeteksi telah masuk pada device lain. Silakan login kembali'
 					: errorUser?.stat_msg
 						? errorUser?.stat_msg
 						: successMessage;

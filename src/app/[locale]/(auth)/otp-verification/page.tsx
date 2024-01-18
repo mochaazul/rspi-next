@@ -173,15 +173,13 @@ const OTPPage = () => {
 					subClassName='max-md:leading-8 max-md:text-[20px]'
 					textAlign='center'
 				/>
-				<Text
-					text={ t('subHeading') }
-					fontSize={ '20px' }
-					fontWeight={ '400' }
-					className='mt-3'
-					subClassName='max-md:text-base md:!leading-normal'
-					color={ colors.grey.darkOpacity }
-					textAlign='center'
-				/>
+				<Text fontSize={ '20px' } fontWeight={ '400' } textAlign='center' color={ colors.grey.darkOpacity } subClassName='mt-3 max-md:text-base md:!leading-normal'>
+					{ t('subHeading') }
+					<span className='text-base md:text-xl italic'>&nbsp;{ t('handphone') } &nbsp;</span>
+					{
+						t('yourlabel') !== 'yourlabel' && <span className='text-base md:text-xl'>{ t('yourlabel') }</span>
+					}
+				</Text>
 				<CountDownText
 					onResend={ resendOtpHandler }
 					count={ count }

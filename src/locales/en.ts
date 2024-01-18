@@ -46,7 +46,7 @@ export default {
 			labelSuccess1: 'Please check your email',
 			labelSuccess2: 'to verify the PIN change request',
 			modalPinTitle: 'PIN Change Verification Link Sent',
-			modalPinBtn: 'Okay'
+			modalPinBtn: 'OK'
 		},
 		needLogin: {
 			heading: 'Please Login',
@@ -632,7 +632,7 @@ export default {
 				heading: 'Change Password Link Has Been Sent',
 				subHeading: 'Check your email again',
 				subHeadingTail: 'to continue the password change process',
-				buttonLabel: 'Okay'
+				buttonLabel: 'OK'
 			},
 			form: {
 				emailLabel: 'Email',
@@ -690,7 +690,9 @@ export default {
 		},
 		otpVerification: {
 			heading: 'Enter Verification Code',
-			subHeading: 'Enter the code sent via SMS to your mobile number',
+			subHeading: 'Enter the code sent via SMS to your',
+			handphone: 'mobile number',
+			yourlabel: '',
 			resendOtp: 'Resend OTP',
 			resendWarn: 'You have 3 request OTP attempt.',
 			form: {
@@ -758,7 +760,7 @@ export default {
 				heading: 'Email Verification Link Has Been Sent',
 				subHeading: 'Please check email',
 				subHeadingTail: 'to verify your email',
-				buttonLabel: 'Okay'
+				buttonLabel: 'OK'
 			}
 		},
 		registerOnboard: {
@@ -825,6 +827,7 @@ export default {
 				editProfileLabel: 'Edit',
 				deleteLabel: 'Delete',
 				successUpdateProfile: 'Successfully Update Profile',
+				successSentEmailVerif: 'Successfully Sending E-mail Verification Link, Please Check Your Email Inbox',
 			},
 			securitySetting: {
 				emailLabel: 'Email',
