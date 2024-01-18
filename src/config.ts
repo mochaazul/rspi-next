@@ -21,7 +21,7 @@ const environment = {
 	}
 };
 
-export const appStage = process.env.STAGE as keyof typeof environment;
+export const appStage = process.env.NEXT_PUBLIC_STAGE as keyof typeof environment;
 
 export const config = environment[appStage];
 

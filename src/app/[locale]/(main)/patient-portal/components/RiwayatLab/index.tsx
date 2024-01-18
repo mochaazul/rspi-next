@@ -7,13 +7,13 @@ import styled from 'styled-components';
 import { isEmpty } from 'lodash';
 
 import { Spinner, Text } from '@/components/ui';
-import { baseUrl } from '@/config';
 import { colors, fonts, icons } from '@/constant';
 import { useGetLabHistory } from '@/lib/api/client/hospital';
 import { useScopedI18n } from '@/locales/client';
 import useSession from '@/session/client';
 
 import { CardPatientPortalStyle, EmptyResultContainer } from '../../style';
+import { baseUrl } from '@/config';
 
 const LaporanBtn = styled.a`
 	background-color: ${ colors.green.brandAccent };
