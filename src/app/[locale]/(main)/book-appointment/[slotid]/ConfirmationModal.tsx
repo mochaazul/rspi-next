@@ -66,7 +66,13 @@ export const ConfirmationModal = ({
 	};
 
 	if (selectedProfile && selectedProfile.phone && timeSlot) {
-		return <Modal paddingSm='24px 16px 24px 16px' visible={ visible } onClose={ onClose } width='w-full' containerClassName={ 'm-0 md:mt-10 md:m-4 max-w-lg h-max md:h-max rounded-t-[12px] md:rounded-b-[12px]' }>
+		return <Modal
+			paddingSm='24px 16px 24px 16px'
+			visible={ visible }
+			onClose={ onClose }
+			width='w-full'
+			containerClassName={ 'm-0 md:m-4 max-w-lg h-max md:h-max rounded-t-[12px] md:rounded-b-[12px]' }
+		>
 			<ConfirmationModalContainer>
 				<Text
 					text={ t('heading') }

@@ -83,7 +83,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 						if (res.stat_code === 'ERR:BAD_REQUEST') throw res.stat_msg;
 					}
 				} else {
-					/// todo edit profile
+					// / todo edit profile
 					if (selectedProfile?.id) {
 						const res = await editFamilyProfile({
 							birthdate: dob,
@@ -196,14 +196,13 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 		}
 	};
 
-
 	return <Modal
 		visible={ visible }
 		noPadding
 		width='526px'
 		onClose={ closeHandler }
 		borderRadius='12px'
-		overflow='none'
+		overflow='auto'
 		containerClassName='m-[10px]'
 	>
 		<ProfileModalContainer className='items-start md:items-center'>
