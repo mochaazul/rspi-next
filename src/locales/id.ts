@@ -748,7 +748,7 @@ export default {
 				passwordLabel: 'Password',
 				passwordPlaceholder: 'Masukkan Password',
 				passwordConfirmationLabel: 'Konfirmasi Password',
-				passwordConfirmationPlaceholder: 'masukkan ulang password',
+				passwordConfirmationPlaceholder: 'Masukkan ulang password',
 				passwordHint: 'Panjang password minimal 8 karakter dan terdapat minimal 1 huruf kapital'
 			},
 			registerBtnLabel: 'Daftar',
