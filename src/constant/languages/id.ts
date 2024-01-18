@@ -81,7 +81,7 @@ export default {
 					email: 'E-mail',
 					phone: 'No. Handphone',
 					subject: 'Subject',
-					notes: 'masukkan pesan di sini...'
+					notes: 'Masukkan pesan di sini...'
 				},
 				submitBtnLabel: 'Kirim Pesan',
 				form: {
@@ -505,7 +505,7 @@ export default {
 				emailLabel: 'Email',
 				emailPlaceholder: 'Email',
 				passwordLabel: 'Password',
-				pasaswordPlaceholder: 'masukkan Password',
+				pasaswordPlaceholder: 'Masukkan Password',
 				passwordConfirmationLabel: 'masukkan ulang password',
 				passwordConfirmationPlaceholder: 'masukkan ulang password',
 				passwordHint: 'Panjang password minimal 8 karakter dan terdapat minimal 1 huruf kapital'

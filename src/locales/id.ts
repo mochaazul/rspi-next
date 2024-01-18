@@ -245,7 +245,7 @@ export default {
 					email: 'E-mail',
 					phone: 'No. Handphone',
 					subject: 'Subject',
-					notes: 'masukkan pesan di sini...'
+					notes: 'Masukkan pesan di sini...'
 				},
 				submitBtnLabel: 'Kirim Pesan',
 				form: {
@@ -746,7 +746,7 @@ export default {
 				emailLabel: 'Email',
 				emailPlaceholder: 'Email',
 				passwordLabel: 'Password',
-				passwordPlaceholder: 'masukkan Password',
+				passwordPlaceholder: 'Masukkan Password',
 				passwordConfirmationLabel: 'Konfirmasi Password',
 				passwordConfirmationPlaceholder: 'masukkan ulang password',
 				passwordHint: 'Panjang password minimal 8 karakter dan terdapat minimal 1 huruf kapital'
@@ -830,6 +830,7 @@ export default {
 				editProfileLabel: 'Ubah',
 				deleteLabel: 'Hapus',
 				successUpdateProfile: 'Berhasil update profil',
+				successSentEmailVerif: 'Berhasil Mengirim Tautan Verifikasi E-mail, Silakan Cek Kotak Masuk E-mail Anda',
 			},
 			securitySetting: {
 				heading: 'Pengaturan Keamanan',

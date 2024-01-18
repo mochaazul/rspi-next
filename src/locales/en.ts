@@ -827,6 +827,7 @@ export default {
 				editProfileLabel: 'Edit',
 				deleteLabel: 'Delete',
 				successUpdateProfile: 'Successfully Update Profile',
+				successSentEmailVerif: 'Successfully Sending E-mail Verification Link, Please Check Your Email Inbox',
 			},
 			securitySetting: {
 				emailLabel: 'Email',
