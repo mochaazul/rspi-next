@@ -200,7 +200,7 @@ const FooterLayout = async({ footerData, hospitalData }: { footerData: FooterDet
 					<span className='sm:hidden'><br /></span> All Rights Reserved.
 				</Text>
 				{
-					appStage !== 'prod' &&
+					appStage !== 'production' &&
 					<div className='flex justify-center'>
 						<Text
 							textAlign='center'

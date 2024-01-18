@@ -93,7 +93,10 @@ const DoctorDetail = (
 		const hospitalParams = searchParams.get('hospital_code');
 		// check if there is pre-filtered hospital and doctor have multiple hospitals then select first selected hospital
 		if (hospitalParams && hasMultipleHospitals) {
-			setSelectedHospital(hospitalParams.split(',')[0] ?? '');
+			// check if pre-filtered hospital is only one, if not then do nothing
+			if (hospitalParams.split(',').length === 1) {
+				setSelectedHospital(hospitalParams ?? '');
+			}
 		}
 		if (!hasMultipleHospitals) {
 			setSelectedHospital(hospitalArr[0].value ?? '');
