@@ -124,6 +124,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 						menuItems={ Days }
 						onChangeValueDropdown={ onChangePreferedDay }
 						allOptionLabel={ d('all') }
+						initialValue={ decodeURIComponent(params.get('day') ?? '').split(',') }
 					/>
 				</div>
 			}

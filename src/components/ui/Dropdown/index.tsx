@@ -17,6 +17,7 @@ export interface DropdownProps extends React.DetailedHTMLProps<React.InputHTMLAt
 	onChangeValueDropdown?: (value: string) => any;
 	allOptionLabel?: string;
 	subClassName?: string;
+	initialValue?: string[];
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -26,12 +27,28 @@ const Dropdown: React.FC<DropdownProps> = ({
 	className,
 	allOptionLabel = 'All',
 	subClassName = '!text-base',
+	initialValue = [],
 	...props
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const SelectWrapperRef = useRef<HTMLDivElement>(null);
 	const SelectInputRef = useRef<HTMLSelectElement>(null);
 	const SelectOptionsRef = useRef<HTMLOptionElement[]>([]);
+
+	useEffect(() => {
+		if (SelectInputRef.current && initialValue) {
+			initialValue = initialValue.filter(item => item);
+			const selectedOptionsString = initialValue.join(',');
+			SelectInputRef.current.value = selectedOptionsString;
+			props.onChangeValueDropdown?.(selectedOptionsString);
+
+			// Update the selected options
+			const options = Array.from(SelectInputRef.current.options);
+			options.forEach(option => {
+				option.selected = initialValue.includes(option.value);
+			});
+		}
+	}, [initialValue]);
 
 	useEffect(() => {
 		if (SelectInputRef.current && props.defaultValue) {
