@@ -138,8 +138,12 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 
 	useEffect(() => {
 		if (type === 'self') {
+			let phoneNumber = selfProfile?.phone;
+			if (phoneNumber?.substring(0, 2) === '62') {
+				phoneNumber = phoneNumber.slice(2);
+			}
 			formikProfile.setFieldValue('email', selfProfile?.email);
-			formikProfile.setFieldValue('phone', selfProfile?.phone);
+			formikProfile.setFieldValue('phone', phoneNumber);
 			formikProfile.setFieldValue('name', selfProfile?.name);
 			formikProfile.setFieldValue('gender', selfProfile?.gender);
 			if (selfProfile?.birthdate
@@ -156,8 +160,12 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 	useEffect(() => {
 		formikProfile.resetForm();
 		if (!isAddProfile) {
+			let phoneNumber = selectedProfile?.phone;
+			if (phoneNumber?.substring(0, 2) === '62') {
+				phoneNumber = phoneNumber.slice(2);
+			}
 			formikProfile.setFieldValue('email', selectedProfile?.email);
-			formikProfile.setFieldValue('phone', selectedProfile?.phone);
+			formikProfile.setFieldValue('phone', phoneNumber);
 			formikProfile.setFieldValue('name', selectedProfile?.name);
 			formikProfile.setFieldValue('gender', selectedProfile?.gender);
 			if (selectedProfile?.birthdate
@@ -277,6 +285,7 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 						errorMessage={ getInputErrorMessage(formikProfile.errors.phone, t('profileSelector.form.phone')) }
 						isNumber
 						wrapperClassName={ 'text-sm md:text-base' }
+						max={ 13 }
 					/>
 					<Form.TextField
 						labelClassName='font-normal'

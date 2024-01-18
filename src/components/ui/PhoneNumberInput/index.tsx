@@ -18,7 +18,7 @@ const PhoneNumberInput = ({ onIconClick, ...props }: PhoneInputType) => {
 			<CountrySelector>
 				+62
 			</CountrySelector>
-			<InputMask mask={ '999999999999999' } value={ props.value } onChange={ props.onChange } className={ `${ className } focus:outline-none pl-3` } { ...restProps } maskChar={ '' } />
+			<InputMask mask={ '999999999999999' } value={ props.value } onChange={ props.onChange } className={ `${ className } focus:outline-none pl-3` } { ...restProps } maskChar={ '' } maxLength={ 13 } />
 		</PhoneNumberInputWrapper>
 	);
 };
