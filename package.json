@@ -3,12 +3,16 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "cross-env NODE_OPTIONS='--inspect' next dev ",
-		"build": "next build",
-		"start": "next start",
-		"serve": "node ./.next/standalone/server.js",
-		"start:service": "pm2 start yarn --interpreter bash --name web_rspi_next -- start -p 3001",
-		"lint": "next lint"
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev ",
+    "dev:staging": "cross-env STAGE=staging NODE_OPTIONS='--inspect' next dev ",
+    "dev:prod": "cross-env STAGE=production NODE_OPTIONS='--inspect' next dev ",
+    "build:dev": "cross-env STAGE=dev next build",
+    "build:staging": "cross-env STAGE=staging next build",
+    "build:prod": "cross-env STAGE=production next build",   
+    "start": "next start",
+    "serve": "node ./.next/standalone/server.js",
+    "start:service": "pm2 start yarn --interpreter bash --name web_rspi_next -- start -p 3001",
+    "lint": "next lint"
 	},
 	"moduleDirectories": [
 		"node_modules",

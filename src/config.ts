@@ -15,13 +15,13 @@ const environment = {
 		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_STAGING,
 		version: '1.1.166-next'
 	},
-	prod: {
-		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_PROD,
+	production: {
+		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_PRODUCTION,
 		version: 'n'
 	}
 };
 
-export const appStage = process.env.NEXT_PUBLIC_STAGE as keyof typeof environment;
+export const appStage = process.env.STAGE as keyof typeof environment;
 
 export const config = environment[appStage];
 
