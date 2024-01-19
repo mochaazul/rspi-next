@@ -1,15 +1,18 @@
 import _ from 'lodash';
 import { useState } from 'react';
-import { EmptyWarningContainer, TimeSlotPill } from './style';
+import Link from 'next/link';
+import dayjs from 'dayjs';
+
 import { FindDoctorDetail, TimeSlot } from '@/interface';
 import { formatTimeslot } from '@/helpers/datetime';
-import { VisitScheduleStyle } from '../../style';
 import { Images, colors, icons } from '@/constant';
 import Text from '@/components/ui/Text';
 import Spinner from '@/components/ui/Spinner';
 import Button from '@/components/ui/Button';
 import { useScopedI18n } from '@/locales/client';
-import dayjs from 'dayjs';
+
+import { EmptyWarningContainer, TimeSlotPill } from './style';
+import { VisitScheduleStyle } from '../../style';
 
 type Props = {
 	hospital?: string;
@@ -21,6 +24,7 @@ type Props = {
 	dateStatus?: string;
 	timeslot: TimeSlot[],
 	isLoading: boolean;
+	hospital_phone?: string;
 };
 
 const VisitSchedule: React.FC<Props> = ({
@@ -32,7 +36,8 @@ const VisitSchedule: React.FC<Props> = ({
 	onClickContactHospital,
 	dateStatus,
 	timeslot,
-	isLoading
+	isLoading,
+	hospital_phone
 }) => {
 	const t = useScopedI18n('page.doctorProfile');
 	const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('');
@@ -86,7 +91,14 @@ const VisitSchedule: React.FC<Props> = ({
 				color='#DC6803'
 				text={ t('notAvailableSchedule') } />
 		</EmptyWarningContainer>
-		<Button onClick={ onClickContactHospital } className='mt-[16px]' label={ t('callCenter') } theme='outline' $hoverTheme='primary' />
+		<div className='hidden max-sm:block'>
+			<Link href={ `tel:${ hospital_phone }` }>
+				<Button className='mt-[16px]' label={ t('callCenter') } theme='outline' $hoverTheme='primary' />
+			</Link>
+		</div>
+		<div className='block max-sm:hidden'>
+			<Button onClick={ onClickContactHospital } className='mt-[16px]' label={ t('callCenter') } theme='outline' $hoverTheme='primary' />
+		</div>
 	</>;
 	return (
 		<VisitScheduleStyle>

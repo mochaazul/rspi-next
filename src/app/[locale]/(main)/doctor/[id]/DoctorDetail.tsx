@@ -142,7 +142,7 @@ const DoctorDetail = (
 		return '';
 	};
 
-	const onBookHandler = async() => {
+	const onBookHandler = async () => {
 		try {
 			const token = await cookiesHelper.getToken();
 			const userData = await cookiesHelper.getUserData();
@@ -180,13 +180,7 @@ const DoctorDetail = (
 	};
 
 	const clickContactHospital = () => {
-		if (isMobile) {
-			if (typeof window !== 'undefined') {
-				window?.open(`tel:${ selectedHospitalDetails()?.phone }`);
-			}
-		} else {
-			setShowModalTelp(true);
-		}
+		setShowModalTelp(true);
 	};
 
 	const closeContactHospital = () => {
@@ -248,7 +242,7 @@ const DoctorDetail = (
 										!selectedHospital && (
 											<div className='flex gap-1 items-center'>
 												<icons.WarningCircleDanger />
-												<Text color={ colors.red.accent } fontSize='12px' fontWeight='700' lineHeight='normal' text={ t('notSelectedHospital') }/>
+												<Text color={ colors.red.accent } fontSize='12px' fontWeight='700' lineHeight='normal' text={ t('notSelectedHospital') } />
 											</div>
 										)
 									}
@@ -266,7 +260,7 @@ const DoctorDetail = (
 										{ /* TODO: TAKEN OUT SINCE TrackCare do not support it yet 24 nov 23 */ }
 										{ /* <Radio.Option label='Telekonsultasi' value='TEL' /> */ }
 									</Radio>
-									
+
 								</div>
 
 								<TimeSlotContainer>
@@ -294,6 +288,7 @@ const DoctorDetail = (
 												} }
 												selectedDate={ selectedDate }
 												clinic={ doctor.clinic }
+												hospital_phone={ `tel:${ selectedHospitalDetails()?.phone }` }
 												onClickContactHospital={ clickContactHospital }
 												dateStatus={ selectedDateStatus }
 											/>
