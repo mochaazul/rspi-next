@@ -288,7 +288,7 @@ const FooterLayout = ({ footerData, hospitalData }: { footerData: FooterDetail[]
 			<div className='flex flex-col items-center max-sm:pb-8 pt-8 sm:pt-16'>
 				<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }>Copyright © { date.getFullYear() } RS Pondok Indah Group. <span className='sm:hidden'><br /></span>All Rights Reserved.</Text>
 				{
-					appStage !== 'prod' &&
+					appStage !== 'production' &&
 					<div className='flex justify-center'>
 						<Text textAlign='center' fontSize='14px' color={ colors.grey.dark }> Version { config?.version } </Text>
 					</div>

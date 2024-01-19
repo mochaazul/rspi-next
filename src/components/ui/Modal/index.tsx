@@ -23,8 +23,11 @@ interface ModalProps {
 	overflow?: string;
 	containerClassName?: string;
 	bottomSheet?: boolean,
+	wrapperClassName?: string,
+	modalClassName?: string,
 	header?: JSX.Element;
 	backdropClassname?: string;
+	paddingSm?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -40,8 +43,11 @@ const Modal: React.FC<ModalProps> = ({
 	overflow,
 	containerClassName,
 	bottomSheet = false,
+	wrapperClassName = '',
+	modalClassName = '',
 	header,
-	backdropClassname
+	backdropClassname,
+	paddingSm = ' 20px',
 }) => {
 	const [modalOpen, setModalOpen] = useState(visible);
 
@@ -64,6 +70,7 @@ const Modal: React.FC<ModalProps> = ({
 	if (modalOpen) {
 		return (
 			<ModalStyle
+				className={ modalClassName }
 				width={ width }
 				$noPadding={ noPadding }
 				$bgColor={ bgColor }
@@ -71,8 +78,9 @@ const Modal: React.FC<ModalProps> = ({
 				backdropColor={ backdropColor }
 				$padding={ padding }
 				overflow={ overflow }
+				$paddingSm={ paddingSm }
 			>
-				<div className={ `modal-wrapper ${ bottomSheet && 'bottom-sheet' } ` }>
+				<div className={ `modal-wrapper ${ bottomSheet && 'bottom-sheet' } ${ wrapperClassName } ` }>
 					<div className={ `modal-backdrop ${ visible ? 'backdrop-open-animation' : 'backdrop-close-animation' } ${ backdropClassname }` } onClick={ onClose } />
 					<div id='modal-content' className={ ` ${ bottomSheet && 'bottom-sheet' } modal-content-container ${ visible ? 'open-animation' : 'close-animation' } ${ containerClassName }` }>
 						{
@@ -82,7 +90,7 @@ const Modal: React.FC<ModalProps> = ({
 							{ children }
 							{
 								onClose && <div className='cursor-pointer absolute top-5 right-5' onClick={ onClose }>
-									<icons.Close alt='' />
+									<icons.Close alt='' className='w-[18px] h-[18px] sm:w-6 sm:h-6' />
 								</div>
 							}
 						</div>

@@ -34,7 +34,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 			</Text>
 
 			<div className='mt-4 md:mt-8 w-full'>
-				<CustomCarousel arrowButton>
+				<CustomCarousel arrowButton containerClassName='rounded-[5px]'>
 					{ (facilityDetail?.image_url ?? [])?.map((image, index) => {
 						return (
 							<div key={ index } className='relative overflow-hidden bg-white rounded-[5px] h-[220px] sm:h-[420px] sm:w-full'>
@@ -65,7 +65,7 @@ const FacilitiesMenuContent: React.FC<Props> = ({
 			<div className='mt-[50px] md:mt-12'>
 				<TextHtml
 					htmlStr={ facilityDetail?.information || '' }
-					className='text-xs max-md:!leading-[18px] sm:text-sm md:text-base'
+					className='innerHTML'
 				/>
 			</div>
 

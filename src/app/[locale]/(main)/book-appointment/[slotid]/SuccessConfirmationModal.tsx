@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 
-import { useScopedI18n } from '@/locales/client';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
 import { Button, Modal, Text } from '@/components/ui';
 import { icons } from '@/constant';
 
@@ -24,6 +24,7 @@ const SuccessConfirmationModal = ({
 	onClose
 }: Props) => {
 	const t = useScopedI18n('page.bookingAppointment.success');
+	const currentLang = useCurrentLocale();
 	const router = useRouter();
 	const { mutate } = useSWRConfig();
 
@@ -33,7 +34,7 @@ const SuccessConfirmationModal = ({
 	};
 
 	const subHeadingText = () => {
-		return `${ t('subHeading.main') } ${ doctorName } ${ t('subHeading.at') } ${ hospitalName } ${ t('subHeading.on') } ${ dayjs(date).format('dddd, DD MMMM YYYY') } ${ t('subHeading.done') }`;
+		return `${ t('subHeading.main') } ${ doctorName } ${ t('subHeading.at') } ${ hospitalName } ${ t('subHeading.on') } ${ dayjs(date)?.locale(currentLang)?.format('dddd, DD MMMM YYYY') } ${ t('subHeading.done') }`;
 	};
 
 	return <Modal
@@ -51,16 +52,19 @@ const SuccessConfirmationModal = ({
 				fontSize='24px'
 				fontWeight='700'
 				lineHeight='28px'
+				subClassName='text-[20px] md:text-[24px]'
 				text={ t('heading') } />
 			<Text
-				className='mt-[8px] mb-[32px]'
-				fontSize='14px'
+				className='mt-[8px] mb-[24px] px-4'
+				fontSize='16px'
 				fontWeight='400'
-				lineHeight='20px'
+				lineHeight='24px'
 				textAlign='center'
+				color='#667085'
+				subClassName='text-[14px] md:text-[16px]'
 				text={ subHeadingText() } />
 
-			<Button label={ t('btnLabel') } onClick={ onclickButton } />
+			<Button label={ t('btnLabel') } onClick={ onclickButton } className='text-sm md:text-base' />
 
 		</SuccessConfModalContainer>
 	</Modal>;

@@ -11,6 +11,7 @@ import {
 	hospitalsFetch,
 	marAllReadNotif,
 } from '../../(main)/helpers';
+import LangWrapper from '@/components/ui/LangWrapper';
 
 export default async function AuthLayout({ children }: PropsWithChildren) {
 	const session = await getSession();
@@ -29,7 +30,9 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
 				className='md:hidden'
 			/>
 
-			{ children }
+			<LangWrapper>
+				{ children }
+			</LangWrapper>
 		</>
 	);
 }

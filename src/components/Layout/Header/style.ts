@@ -46,6 +46,7 @@ const HeaderStyle = styled.div`
   }
 
   .dropdownNavbar {
+		border-radius: 0 0 10px 10px;
     border: 1px solid ${ colors.grey.lightest };
     background: ${ colors.white.default };
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.05);
@@ -137,7 +138,7 @@ export const DesktopMenu = styled.ul`
     z-index: 20;
     top: 100%;
     left: 0;
-    transition: all 0.5s ease;
+    border-radius: 0px 0px 10px 10px;
    }
    
   

@@ -6,14 +6,16 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useScopedI18n } from '@/locales/client';
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import LoadingSkeleton from '@/components/Layout/LoadingSkeleton';
 
 type Props = {
 	doctorCount: number;
 	setter: (value: string) => void,
 	getter: () => string | null,
 	reset: boolean,
+	loading: boolean;
 };
-const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
+const ResultHeader = ({ doctorCount, setter, getter, reset, loading }: Props) => {
 
 	const [keywordValue, setKeywordValue] = useState<string>();
 
@@ -58,53 +60,40 @@ const ResultHeader = ({ doctorCount, setter, getter, reset }: Props) => {
 	return (
 		<div>
 			{ /* Doctor found counter */ }
-			<Text
-				fontSize='20px'
-				fontWeight='700'
-				lineHeight='24px'
-				className='mb-6 max-sm:hidden'
-				text={ `${ doctorCount } ${ t('label.doctorFound') }` }
-			/>
-			{ /* Cari Dokter - title - Mobile */ }
-			<Text
-				fontType='h2'
-				fontSize='20px'
-				lineHeight='24px'
-				fontWeight='700'
-				className='mb-6 sm:hidden'
-				color={ colors.grey.darker }
-				text={ t('heading') }
-			/>
+			{
+				loading
+					? <LoadingSkeleton type='line' />
+					: <>
+						<Text
+							fontSize='20px'
+							fontWeight='700'
+							lineHeight='24px'
+							className='mb-6 max-sm:hidden'
+							text={ `${ doctorCount } ${ t('label.doctorFound') }` }
+						/>
+						{ /* Cari Dokter - title - Mobile */ }
+						<Text
+							fontType='h2'
+							fontSize='20px'
+							lineHeight='24px'
+							fontWeight='700'
+							className='mb-6 sm:hidden'
+							color={ colors.grey.darker }
+							text={ t('heading') }
+						/>
+					</>
+			}
+
 			{ /* Input nama  dokter */ }
 			{
-				isMobile ?
-					<div className='flex flex-row gap-x-2'>
-						<Form.TextField
-							placeholder={ t('label.doctorName') }
-							featherIcon='Search'
-							iconPosition='right'
-							onChange={ ({ target }) => onSearchDoctorByName(target.value) }
-							$iconColor={ colors.grey.light }
-							value={ keywordValue }
-							className='w-[130px]'
-						/>
-						<Form.Dropdown
-							placeholder='Select Day'
-							multiple
-							menuItems={ Days }
-							onChangeValueDropdown={ onChangePreferedDay }
-							allOptionLabel={ d('all') }
-							className='w-[150px]'
-						/>
-					</div> :
-					<Form.TextField
-						placeholder={ t('label.doctorName') }
-						featherIcon='Search'
-						iconPosition='right'
-						onChange={ ({ target }) => onSearchDoctorByName(target.value) }
-						$iconColor={ colors.grey.light }
-						value={ keywordValue }
-					/>
+				<Form.TextField
+					placeholder={ t('label.doctorName') }
+					featherIcon='Search'
+					iconPosition='right'
+					onChange={ ({ target }) => onSearchDoctorByName(target.value) }
+					$iconColor={ colors.grey.light }
+					value={ keywordValue }
+				/>
 			}
 
 		</div>

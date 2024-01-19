@@ -59,7 +59,8 @@ const CountDownText = ({
 				fontSize={ '20px' }
 				lineHeight={ '24px' }
 				fontWeight={ '400' }
-				className='mt-[16px] mb-[16px] cursor-pointer'
+				className='my-3 sm:my-4 cursor-pointer'
+				subClassName='max-sm:text-base'
 				color={ colors.paradiso.default }
 				textAlign='center'
 			/>
@@ -68,10 +69,8 @@ const CountDownText = ({
 				<Text
 					text={ resendWarnText }
 					fontSize={ '14px' }
-					lineHeight={ '24px' }
-					fontWeight={ '600' }
-					color={ colors.paradiso.default }
-					textAlign='center'
+					subClassName='leading-normal font-semibold sm:font-normal max-sm:text-xs max-sm:leading-[18px]'
+					color={ colors.black.ink }
 				/>
 			</WarningNote>
 		</>
@@ -157,7 +156,7 @@ const OTPPage = () => {
 
 	return (
 		<ContainerStyle>
-			<Box>
+			<Box className='md:w-auto md:max-w-[618px]'>
 				<div className='hidden md:flex justify-center mb-8'>
 					<Image
 						src='/images/logo_rspi.svg'
@@ -166,17 +165,21 @@ const OTPPage = () => {
 						height={ 60 }
 					/>
 				</div>
-				<Text text={ t('heading') } fontSize={ '32px' } lineHeight={ '48px' } fontWeight={ '900' } />
-				{ /* TODO : INI NOMOR HANDPHONE NYa masih hardcode ?? */ }
 				<Text
-					text={ t('subHeading') }
-					fontSize={ '20px' }
-					lineHeight={ '24px' }
-					fontWeight={ '400' }
-					className='mt-2 md:mt-3'
-					color={ colors.grey.darkOpacity }
+					text={ t('heading') }
+					fontSize={ '32px' }
+					lineHeight={ '48px' }
+					fontWeight={ '900' }
+					subClassName='max-md:leading-8 max-md:text-[20px]'
 					textAlign='center'
 				/>
+				<Text fontSize={ '20px' } fontWeight={ '400' } textAlign='center' color={ colors.grey.darkOpacity } subClassName='mt-3 max-md:text-base md:!leading-normal'>
+					{ t('subHeading') }
+					<span className='text-base md:text-xl italic'>&nbsp;{ t('handphone') } &nbsp;</span>
+					{
+						t('yourlabel') !== 'yourlabel' && <span className='text-base md:text-xl'>{ t('yourlabel') }</span>
+					}
+				</Text>
 				<CountDownText
 					onResend={ resendOtpHandler }
 					count={ count }

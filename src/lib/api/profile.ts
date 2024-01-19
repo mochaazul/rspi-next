@@ -2,6 +2,7 @@
 
 import { revalidateTag } from 'next/cache';
 import {
+	EditFamilyProfilePayload,
 	FamilyProfilePayload,
 	PatientUploadPhoto,
 	UpdateAvatarType,
@@ -12,7 +13,7 @@ import { cookiesHelper } from '@/helpers';
 
 import fetcher from './utils/fetcher';
 
-export const getProfile = async(setCookies?: boolean) => {
+export const getProfile = async (setCookies?: boolean) => {
 	const response = await fetcher<UserDataDetail>('profile', {
 		requestOpt: {
 			next: {
@@ -33,7 +34,7 @@ export const getProfile = async(setCookies?: boolean) => {
 	return response;
 };
 
-export const getFamilyProfiles = async() => {
+export const getFamilyProfiles = async () => {
 	return fetcher<UserDataDetail[]>('familyProfile', {
 		requestOpt: {
 			next: {
@@ -44,7 +45,7 @@ export const getFamilyProfiles = async() => {
 	});
 };
 
-export const addFamilyProfile = async(payload: FamilyProfilePayload) => {
+export const addFamilyProfile = async (payload: FamilyProfilePayload) => {
 	const res = await fetcher<UserDataDetail>('createFamilyProfile', {
 		body: payload
 	});
@@ -53,7 +54,17 @@ export const addFamilyProfile = async(payload: FamilyProfilePayload) => {
 	return res;
 };
 
-export const updateProfile = async(palyoad: UpdateProfileType) => {
+export const editFamilyProfile = async (payload: EditFamilyProfilePayload, id: string) => {
+
+	const res = await fetcher<UserDataDetail>('editFamilyProfile', {
+		body: payload,
+		param: `${ id }`
+	});
+	revalidateTag('familyProfiles');
+	return res;
+};
+
+export const updateProfile = async (palyoad: UpdateProfileType) => {
 	const res = await fetcher<UserDataDetail>('updateProfile', {
 		body: palyoad
 	});
@@ -61,7 +72,7 @@ export const updateProfile = async(palyoad: UpdateProfileType) => {
 	return res;
 };
 
-export const deleteFamilyProfile = async(id: number) => {
+export const deleteFamilyProfile = async (id: number) => {
 	const res = await fetcher('deleteFamilyProfile', {
 		param: `${ id }`
 	});
@@ -70,7 +81,7 @@ export const deleteFamilyProfile = async(id: number) => {
 	return res;
 };
 
-export const updateAvatar = async(payload: UpdateAvatarType) => {
+export const updateAvatar = async (payload: UpdateAvatarType) => {
 	const res = await fetcher<PatientUploadPhoto>('updateAvatar', { body: payload });
 
 	if (res?.stat_code === 'APP:SUCCESS') {

@@ -55,6 +55,7 @@ export interface FacilityServicesDetail {
 	available_at?: string[];
 	slug: string;
 	facilities_hospitals?: FacilityServicesHospital[];
+	updated_date?: string
 }
 
 export interface PayloadFacilityServices {

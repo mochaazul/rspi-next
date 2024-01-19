@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
 interface ModalStyleProps {
-  width?: string;
-  $noPadding: boolean;
-  $bgColor: string;
-  $borderRadius?: string;
-  backdropColor?: string;
-  $padding: string;
-  overflow?: string;
-  bottomSheet?: boolean;
+	width?: string;
+	$noPadding: boolean;
+	$bgColor: string;
+	$borderRadius?: string;
+	backdropColor?: string;
+	$padding: string;
+	overflow?: string;
+	bottomSheet?: boolean;
+	$paddingSm: string;
 }
 
 const ModalStyle = styled.div<ModalStyleProps>`
@@ -74,7 +75,7 @@ const ModalStyle = styled.div<ModalStyleProps>`
 
     @media screen and (max-width: 500px) {
       overflow: auto;
-      padding: ${ props => props.$noPadding ? '0px' : '20px' };
+      padding: ${ props => props.$noPadding ? '0px' : props => props.$paddingSm };
     }
   }
   @media screen and (max-width: 500px) {

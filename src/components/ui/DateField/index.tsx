@@ -27,14 +27,14 @@ const DateField = ({ onIconClick, iconClassName, className, ...props }: InputTyp
 		<DateFieldWrapper $iconPosition={ props.iconPosition } $iconName={ props.iconName } className='w-full'>
 			{
 				props.iconName ?
-					<IconWrapper className={ `iconWrapper ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
+					<IconWrapper className={ `iconWrapper mt-0 ${ onIconClick && 'cursor-pointer' }` } onClick={ onIconClick }>
 						<Icons className={ `${ iconClassName } svg-darkgrey` } />
 					</IconWrapper> :
 					null
 			}
 			<Datepicker
 				{ ...props }
-				inputClassName={ `rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[16px] ${ className }` }
+				inputClassName={ `rounded-[5px] w-full tracking-normal focus:ring-0 focus:border-0 text-[14px] md:text-[16px] ${ className }` }
 				asSingle={ true }
 				useRange={ false }
 				i18n={ currentLang }

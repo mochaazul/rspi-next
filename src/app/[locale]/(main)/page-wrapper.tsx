@@ -1,7 +1,5 @@
 'use server';
 
-import { ToastContainer } from 'react-toastify';
-
 import { appStage } from '@/config';
 import { Footer, Header } from '@/components';
 import MedicalRecordReminder from '@/components/ui/MedicalRecordReminder';
@@ -72,13 +70,7 @@ export default async function PageWrapper({
 				/>
 				<CallForAmbulance hospitalData={ hospitalData } session={ session } />
 				<MedicalRecordReminder session={ session } />
-
 			</LangWrapper>
-			{
-				appStage !== 'prod' &&
-				<DevTools />
-			}
-			<ToastContainer />
 		</>
 	);
 }

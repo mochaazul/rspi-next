@@ -15,7 +15,7 @@ export interface ArticleDetail {
 	title: string;
 	content: string;
 	created_by: string;
-	created_at: string;
+	created_date: string;
 	is_publish: boolean;
 	thubmnail: string;
 	img_url: string;

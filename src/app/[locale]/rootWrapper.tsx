@@ -9,6 +9,7 @@ import NeedLoginModal from '@/components/ui/NeedLoginModal';
 const RootWrapper = ({ params: { locale }, children }: { params: { locale: string; }, children: ReactElement; }) => {
 	const [logoutModalVisible, setLogoutModalVisible] = useState<boolean>(false);
 	const [loginModalVisible, setLoginModalVisible] = useState<boolean>(false);
+	
 	return (
 		<SWRConfig
 			value={ {

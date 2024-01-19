@@ -7,8 +7,7 @@ import { Modal, Text, Button } from '@/components/ui';
 import { colors, icons } from '@/constant';
 import { useScopedI18n } from '@/locales/client';
 import { UserDataDetail } from '@/interface';
-
-import { ModalStyle } from '../../style';
+import { isMobile } from 'react-device-detect';
 
 interface PropsType {
 	visible?: boolean;
@@ -32,71 +31,90 @@ const ModalCancelBook = (props: PropsType) => {
 
 	return (
 		<Modal
-			visible={ props.visible }
-			width='558px'
 			noPadding={ true }
+			visible={ props.visible }
 			onClose={ props.onClose }
+			width='w-full'
+			borderRadius={ '0px' }
+			containerClassName={ `m-0 ${ isMobile && 'absolute bottom-0' } max-w-lg h-max md:h-max rounded-t-[12px] md:rounded-b-[12px]` }
 		>
-			<ModalStyle>
+			<div className='p-4 lg:p-6'>
 				<div>
 					<div className='flex flex-row'>
-						<Text text={ t('heading') } fontSize='24px' fontWeight='700' className='flex-1' />
+						<Text
+							text={ t('heading') }
+							fontSize='24px'
+							fontWeight='700'
+							className='flex-1'
+							subClassName='max-sm:text-base leading-normal sm:leading-7 max-sm:font-black'
+						/>
 					</div>
-					<Text text={ t('warningText') } fontSize='14px' fontWeight='400' lineHeight='20px' className='mt-2' color={ colors.grey.darkOpacity } />
+					<Text
+						text={ t('warningText') }
+						fontSize='14px'
+						fontWeight='400'
+						className='mt-2'
+						color={ colors.grey.darkOpacity }
+						subClassName='max-sm:text-xs leading-[18px] sm:leading-[21px]'
+					/>
 
-					<div className='mt-8 px-[16px] flex flex-col gap-[12px]' >
+					<div className='mt-6 sm:mt-8 px-4 flex flex-col gap-2 sm:gap-3' >
 						<Text
 							text={ t('patientData.heading') }
 							fontWeight='700'
 							fontSize='14px'
-							lineHeight='20px'
+							subClassName='leading-normal'
+							className='max-sm:mb-1'
 						/>
-						<div className='grid grid-cols-[150px_auto]'>
+						<div className='grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]'>
 							<Text
 								text={ t('patientData.nameLabel') }
 								fontWeight='500'
 								fontSize='14px'
-								lineHeight='20px'
+								subClassName='max-sm:text-xs leading-normal'
+								color={ colors.grey.dark }
 							/>
 							<Text
 								text={ props.patientName }
 								fontWeight='700'
 								fontSize='14px'
-								lineHeight='20px'
+								subClassName='max-sm:text-xs leading-normal'
 							/>
 						</div>
-						<div className='grid grid-cols-[150px_auto]'>
+						<div className='grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]'>
 							<Text
 								text={ t('patientData.dobLabel') }
 								fontWeight='500'
 								fontSize='14px'
-								lineHeight='20px'
+								subClassName='max-sm:text-xs leading-normal'
+								color={ colors.grey.dark }
 							/>
 							<Text
 								text={ props.patientBirthDate ? dayjs(props?.patientBirthDate).format('DD MMMM YYYY') : '-' }
 								fontWeight='700'
 								fontSize='14px'
-								lineHeight='20px'
+								subClassName='max-sm:text-xs leading-normal'
 							/>
 						</div>
-						<div className='grid grid-cols-[150px_auto]'>
+						<div className='grid grid-cols-[110px_auto] sm:grid-cols-[150px_auto]'>
 							<Text
 								text={ t('patientData.phoneLabel') }
 								fontWeight='500'
 								fontSize='14px'
-								lineHeight='20px'
+								subClassName='max-sm:text-xs leading-normal'
+								color={ colors.grey.dark }
 							/>
 							<Text
 								text={ props.patientPhone ?? '-' }
 								fontWeight='700'
 								fontSize='14px'
-								lineHeight='20px'
+								subClassName='max-sm:text-xs leading-normal'
 							/>
 						</div>
 					</div>
 
-					<div className='flex my-8 bg-[#FAFAFA] p-4 rounded-[10px]'>
-						<div className='relative overflow-hidden w-[60px] h-[60px] rounded-full flex-shrink-0'>
+					<div className='flex gap-3 mt-6 mb-4 sm:my-8 bg-[#FAFAFA] p-4 rounded-[10px]'>
+						<div className='relative overflow-hidden w-8 h-8 sm:w-12 sm:h-12 rounded-full flex-shrink-0'>
 							<Image
 								className='object-cover object-top'
 								sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
@@ -105,17 +123,53 @@ const ModalCancelBook = (props: PropsType) => {
 								fill
 							/>
 						</div>
-						<div className='ml-[15px]'>
-							<Text text={ props.doctorName } fontSize='16px' fontWeight='700' />
-							<Text text={ props.doctorSpec } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
-							<div className='flex justify-between mt-[20px] gap-x-2'>
+						<div className='flex flex-col w-full'>
+							<Text
+								text={ props.doctorName }
+								fontSize='14px'
+								fontWeight='700'
+								lineHeight='21px'
+							/>
+							<Text
+								text={ props.doctorSpec }
+								className='mt-2'
+								fontSize='14px'
+								fontWeight='400'
+								color={ colors.grey.darkOpacity }
+								subClassName='max-sm:text-xs leading-normal'
+							/>
+							<div className='flex max-sm:flex-col sm:justify-between mt-3 pt-3 gap-4 sm:gap-2 border-t border-[#F0F2F9]'>
 								<div>
-									<Text text={ props.bookDate } fontSize='14px' fontWeight='700' />
-									<Text text={ t('patientData.consultationScheduleLabel') } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
+									<Text
+										text={ props.bookDate }
+										fontSize='14px'
+										fontWeight='700'
+										subClassName='max-sm:text-xs leading-normal'
+									/>
+									<Text
+										text={ t('patientData.consultationScheduleLabel') }
+										className='mt-[10px]'
+										fontSize='12px'
+										fontWeight='400'
+										color={ colors.grey.darkOpacity }
+										subClassName='!text-xs !leading-normal'
+									/>
 								</div>
 								<div>
-									<Text text={ props.bookClinic } fontSize='14px' fontWeight='700' />
-									<Text text={ props.hospital } className='mt-[10px]' fontSize='14px' fontWeight='400' color={ colors.grey.darkOpacity } />
+									<Text
+										text={ props.bookClinic }
+										fontSize='14px'
+										fontWeight='700'
+										subClassName='max-sm:text-xs leading-normal'
+									/>
+									<Text
+										text={ props.hospital }
+										className='mt-[10px]'
+										fontSize='12px'
+										fontWeight='400'
+										color={ colors.grey.darkOpacity }
+										subClassName='!text-xs !leading-normal'
+									/>
 								</div>
 							</div>
 						</div>
@@ -126,10 +180,10 @@ const ModalCancelBook = (props: PropsType) => {
 						themeColor={ colors.red.default }
 						label={ t('patientData.btnSubmitLabel') }
 						onClick={ props.onClickButtonCancelAppointment }
-						className='!rounded-lg !py-2.5 !text-base !font-medium'
+						className='!rounded-[5px] sm:!rounded-lg !py-2.5 !text-sm sm:!text-base sm:!font-medium'
 					/>
 				</div>
-			</ModalStyle>
+			</div>
 		</Modal>
 	);
 };

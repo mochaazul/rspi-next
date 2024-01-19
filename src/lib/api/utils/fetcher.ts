@@ -12,20 +12,23 @@ export type ApiOptions = {
 	isUpload?: boolean;
 	requestOpt?: RequestInit;
 	limit?: number;
+	language?: string
+	overideLang?: 'en' | 'idn';
 };
 
 const baseUrl = config.baseUrl ?? 'localhost:3000/v1';
 
 export default async <Response>(endpointKey: EndpointKey, options?: ApiOptions): Promise<SuccessResponse<Response>> => {
+
 	const endpoint = endpoints[endpointKey];
 	const fetchOpt: Record<string, any> = {};
 	const safeQueryParam = options?.query ?? {};
 	const safePagination = options?.pagination ?? {};
 	const Authorization = await cookiesHelper.getToken();
 	const language = await cookiesHelper.getCurrentLocale();
-
+	const lang = options?.overideLang ? options.overideLang : language === 'id' ? 'idn' : language;
 	const headers: Record<string, any> = {
-		'content-language': language === 'id' ? 'idn' : language,
+		'content-language': lang,
 		...Authorization ? { Authorization } : {},
 		'X-Channel': 'website'
 		// 'Content-Type': options?.isUpload ? 'multipart/form-data' : 'application/json'

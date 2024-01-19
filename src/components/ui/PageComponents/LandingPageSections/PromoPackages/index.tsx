@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { EmptyData } from '@/components/ui';
 import Button from '@/components/ui/Button';
 import Card, { CardContentWithInner, CardsScrollHorizontal } from '@/components/ui/Card';
@@ -7,7 +8,6 @@ import { colors, icons } from '@/constant';
 import { EventClassesDetail } from '@/interface';
 import { useScopedI18n } from '@/locales/client';
 import Link from 'next/link';
-import { useState } from 'react';
 
 interface PromoPackagesProps {
 	events: any;
@@ -44,8 +44,10 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 		return (
 			<div className='w-full'>
 				{ promo?.length !== 0 ?
-					<CardsScrollHorizontal noHorizontalPadding={ true }>
-						{ promo?.map((item: EventClassesDetail, index: number) => (
+					<CardsScrollHorizontal
+						className='lg:overflow-hidden lg:grid lg:grid-cols-3'
+						noHorizontalPadding={ true } >
+						{ promo?.slice(0, 3)?.map((item: EventClassesDetail, index: number) => (
 							<Card
 								key={ index }
 								id={ item?.id }
@@ -53,7 +55,7 @@ const PromoPackages: React.FC<PromoPackagesProps> = ({ events, showAsRelated }) 
 								language={ item?.language }
 								image={ item.img_url_card }
 								imageHeight='200px'
-								className='!w-[90%] sm:!w-[350px]'
+								className='max-sm:!w-[90%] !w-full'
 								header={
 									<Text
 										fontType='p'

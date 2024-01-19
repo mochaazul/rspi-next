@@ -15,19 +15,19 @@ const CustomerReview = () => {
 
 	const sampleDatasIdn = [
 		{
-			short_description: 'Saat itu kaki dan tangan saya tidak dapat digerakkan. Berkat penanganan yang sigap dan perawatan intensif di bawah pengawasan dokter spesialis saraf saya, yaitu dr. Rubiana, perlahan tangan saya sudah bisa kembali bergerak.',
+			short_description: 'Saat itu kaki dan tangan kanan saya tidak bisa digerakkan. Berkat penanganan yang sigap dan perawatan intensif di bawah pengawasan dr. Rubiana, kini sedikit-sedikit tangan saya sudah bisa digerakkan.',
 			customer_avatar: images.purwantoReview,
 			customer_name: 'Purwanto',
 			customer_illness: 'Pasien Stroke'
 		},
 		{
-			short_description: 'Siapa yang mengira saya akan mengalami serangan jantung di usia semuda ini. Bersyukur saya bertemu dengan dr. Sari, dokter spesialis jantung yang sangat komunikatif. Penanganan tim medis RS Pondok Indah juga sangat baik, perawatnya ramah, dan cepat tanggap.',
+			short_description: 'Siapa sangka, saya mengalami serangan jantung di usia semuda ini. Untunglah bertemu dr. Sari yang sangat komunikatif. Penanganan tim medis RSPI juga sangat baik, perawatnya ramah dan cepat tanggap.',
 			customer_avatar: images.FajarReview,
 			customer_name: 'Fajar',
 			customer_illness: 'Pasien Serangan Jantung'
 		},
 		{
-			short_description: 'Menemukan dokter spesialis anak yang cocok itu bagaikan mencari jodoh. Makanya begitu klik, Darella tidak mau pindah ke dokter lain. Selalu pilih Prof. Hinky yang sangat ramah dengan anak-anak',
+			short_description: 'Mencari dokter spesialis anak yang cocok itu susahnya bagaikan mencari jodoh. Makanya begitu klik, Darella tidak mau pindah ke dokter lainnya. Selalu pilih dr. Hinky yang sangat ramah pada anak-anak.',
 			customer_avatar: images.TriyanawantiReview,
 			customer_name: 'Triyanawanti, ibu dari Darella',
 			customer_illness: 'Pasien DBD',
@@ -45,7 +45,7 @@ const CustomerReview = () => {
 			customer_illness: 'Pasien Meningitis'
 		},
 		{
-			short_description: 'Kami awalnya berniat melahirkan normal. Namun, di usia kehamilan 32 minggu, ternyata baby Zane posisinya sungsang. Akhirnya, dr. Eric sebagai dokter obgyn kami sigap melakukan tindakan untuk memutar posisi bayi, dan ternyata berhasil!',
+			short_description: 'Di usia kehamilan 32 minggu, ternyata baby Zane posisinya sungsang, padahal dari awal saya berniat melahirkan normal. Akhirnya, dr. Eric melakukan tindakan untuk memutar posisi bayi, dan berhasil!',
 			customer_avatar: images.CendrawatiReview,
 			customer_name: 'Fifi Cendrawati',
 			customer_illness: 'Pasien Persalinan'
@@ -66,28 +66,22 @@ const CustomerReview = () => {
 
 	const sampleDatasEn = [
 		{
-			short_description: 'At that time, I couldn`t move my legs and arms.Thanks to prompt handling and intensive care under the supervision of my neurology specialist, Dr.Rubiana, my hands have gradually regained movement.',
+			short_description: 'At that time, I could not move my leg and my right hand. Thanked to the quick handling and intensive treatment under the supervision of dr. Rubiana, now I can move my hand gradually.',
 			customer_avatar: images.purwantoReview,
 			customer_name: 'Purwanto',
 			customer_illness: 'Stroke Patient'
 		},
 		{
-			short_description: 'Who would have thought I would have a heart attack at such a young age. I am grateful to have met Dr. Sari, a very communicative cardiac specialist. The medical team at Pondok Indah Hospital provided excellent care, the nurses were friendly, and responsive.',
+			short_description: 'I never imagined suffering from a heart attack at a young age. Thanks to proper handling by dr. Sari Sri Mumpuni, discipline in medication, and tight eating pattern, a heart valve ring is unnecessary.',
 			customer_avatar: images.FajarReview,
 			customer_name: 'Fajar',
 			customer_illness: 'Heart Attack Patient.'
 		},
 		{
-			short_description: 'Finding the right pediatric specialist is like finding a soulmate. That`s why once Darella found the right fit, she didn`t want to switch to another doctor. She always chose Prof. Hinky, who is very friendly with children.',
+			short_description: 'Since she was handled by Prof. Hindra Irawan Satari due to dengue fever, my daughter, Darella, does not want to turn to another doctor. She always chooses dr. Hinky, who is very child-friendly.',
 			customer_avatar: images.TriyanawantiReview,
 			customer_name: 'Triyanawanti, Darella`s mother',
 			customer_illness: 'Patient with Dengue Fever (DBD)',
-		},
-		{
-			short_description: 'Initially, we intended to have a normal delivery. However, at 32 weeks of pregnancy, it turned out that baby Zane was in a breech position. Eventually, Dr. Eric, our obstetrician, promptly performed a procedure to rotate the baby`s position, and it was successful!',
-			customer_avatar: images.CendrawatiReview,
-			customer_name: 'Fifi Cendrawati',
-			customer_illness: 'Maternity Patient'
 		},
 		{
 			short_description: 'With medical direction from dr. Rochsismandoko, I keep my blood glucose level normal.',

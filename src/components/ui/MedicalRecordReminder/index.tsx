@@ -56,7 +56,7 @@ const MedicalRecordReminder = ({ isFloating = true, session }: PropsType) => {
 							fontType={ null }
 							fontWeight='700'
 							className={ isFloating
-								? 'max-sm:leading-[18px] !text-xs sm:text-sm md:text-base text-gray-1'
+								? 'max-sm:leading-[18px] !text-sm sm:text-sm md:text-base text-gray-1'
 								: 'text-sm md:text-base text-gray-1' }
 						>
 							{ languages('heading') }
