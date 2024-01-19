@@ -117,7 +117,6 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 			/>
 			{ /* Dropdown Hari */ }
 			{
-				!isMobile &&
 				<div className='mb-8'>
 					<Form.Dropdown
 						placeholder='Select Day'
@@ -125,6 +124,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 						menuItems={ Days }
 						onChangeValueDropdown={ onChangePreferedDay }
 						allOptionLabel={ d('all') }
+						initialValue={ decodeURIComponent(params.get('day') ?? '').split(',') }
 					/>
 				</div>
 			}
@@ -212,7 +212,7 @@ const DoctorFilter = ({ hospitals, clinics }: Props) => {
 			</>
 
 			{ /* Horizontal spacer */ }
-			<div className='x-spacer my-8' />
+			{/* <div className='x-spacer my-8' /> */ }
 			{ /* Others with accordion */ }
 			{ /* Telemedicine is taken out since RSPI didnt provide this feature yet as per 20 Oct 23 */ }
 			{ /* {

@@ -18,7 +18,7 @@ const buttonSocmed = [
 		action: 'link',
 		url: sosmedLink.twitter,
 		label: 'Twitter',
-		icon: <Image src='/images/ic/twitter_x.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
+		icon: <Image src='/images/ic/twitter_x_dark.svg' alt='RSPI twitter link' width={ 16 } height={ 16 } />
 	},
 	{
 		action: 'link',
@@ -79,10 +79,10 @@ const Share = (props: PropsType) => {
 							className='flex py-4 px-4 z-10 items-center'
 							onClick={ copy }
 						>
-							<icons.ShareNetwork className='w-4' />
+							<icons.Link className='w-4' />
 
 							<div className='ml-[10px]'>
-								<Text text={ 'Share Link' } fontSize='16px' fontWeight='400' subClassName='hover:text-green-secondary' />
+								<Text text={ 'Copy Link' } fontSize='16px' fontWeight='400' subClassName='hover:text-green-secondary' />
 							</div>
 						</div>
 					</ul>

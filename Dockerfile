@@ -1,10 +1,12 @@
 FROM node:18-alpine as build_stage
 
+ARG stage=dev
+
 WORKDIR /app
 
 COPY package*.json ./
 COPY . .
-RUN yarn build
+RUN yarn build:${stage}
 
 # PACKAGING STAGE
 

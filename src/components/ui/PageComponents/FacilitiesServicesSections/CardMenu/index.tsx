@@ -24,7 +24,7 @@ const CardMenu = ({ data, paramsSlug }: Props) => {
 								fontSize='14px'
 								fontWeight='700'
 								lineHeight='21px'
-								subClassName='max-sm:text-xs hover:!text-[#358888]'
+								subClassName='max-sm:text-xs hover:!text-[#358888] max-sm:leading-[18px]'
 								color={ paramsSlug === item.slug ? colors.paradiso.default : colors.grey.dark }
 							/>
 						</div>

@@ -7,13 +7,13 @@ import styled from 'styled-components';
 import { isEmpty } from 'lodash';
 
 import { Spinner, Text } from '@/components/ui';
-import { baseUrl } from '@/config';
 import { colors, fonts, icons } from '@/constant';
 import { useGetLabHistory } from '@/lib/api/client/hospital';
 import { useScopedI18n } from '@/locales/client';
 import useSession from '@/session/client';
 
 import { CardPatientPortalStyle, EmptyResultContainer } from '../../style';
+import { baseUrl } from '@/config';
 
 const LaporanBtn = styled.a`
 	background-color: ${ colors.green.brandAccent };
@@ -43,10 +43,10 @@ const RiwayatLab = () => {
 	const { data: labHistoryResponse, error: labHistoryError, isLoading: labHistoryLoading } = useGetLabHistory();
 
 	useEffect(() => {
-		if (labHistoryError) {
+		if (labHistoryError?.message?.toLowerCase() !== 'no medical record') {
 			toast.error(labHistoryError?.message);
 		}
-	}, [labHistoryError]);
+	}, [labHistoryError?.message]);
 
 	if (labHistoryLoading) return (
 		<Spinner />
@@ -58,6 +58,8 @@ const RiwayatLab = () => {
 				fontSize='20px'
 				fontWeight='700'
 				lineHeight='28px'
+				textAlign='center'
+				subClassName='max-sm:text-sm max-sm:leading-normal'
 			/>
 		</EmptyResultContainer>);
 	}
@@ -95,12 +97,13 @@ const RiwayatLab = () => {
 					</table>
 				</div>
 			</CardPatientPortalStyle>
-			<div className='warning-text mt-[20px]'>
+			<div className='warning-text'>
 				<Text
 					text={ t('warning') }
 					fontSize='16px'
 					fontWeight='400'
 					color={ colors.paradiso.default }
+					subClassName='max-sm:text-xs max-sm:leading-[18px]'
 				/>
 			</div>
 		</>

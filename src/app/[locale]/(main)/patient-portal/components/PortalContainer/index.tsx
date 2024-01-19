@@ -3,7 +3,6 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { colors } from '@/constant';
 import { Tabs, Text } from '@/components/ui';
@@ -239,7 +238,9 @@ const PortalContainer = ({ patientProfile, visitHistoryResponse }: PortalContain
 										<Text
 											text={ child.label }
 											fontWeight={ activeTabIndex === child.id ? '700' : '400' }
-											color={ activeTabIndex === child.id ? colors.paradiso.default : colors.grey.darker } />
+											color={ activeTabIndex === child.id ? colors.paradiso.default : colors.grey.darker }
+											subClassName='!text-xs !leading-5'
+										/>
 									</button>
 								)) }
 							</div>

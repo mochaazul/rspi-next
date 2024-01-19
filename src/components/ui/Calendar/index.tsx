@@ -17,9 +17,10 @@ type Props = {
 	loading?: boolean;
 	value?: Date;
 	calendarData: DoctorCalendar[];
+	disable: boolean;
 };
 
-const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calendarData }: Props) => {
+const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calendarData, disable = false }: Props) => {
 	const t = useScopedI18n('page.doctorProfile');
 
 	const renderTile = ({ activeStartDate, date, view }: TileArgs) => {
@@ -65,14 +66,10 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calenda
 	const isBeforeDate = (date: Date, unit: UnitType = 'D') => dayjs(date).isBefore(dayjs(), unit);
 	const isFoundOnCalendar = (date: Date) => calendarData?.find((calendar: any) => calendar.date_schedule === dayjs(date).format('YYYY-MM-DD'));
 
-	const disabledTile = ({ activeStartDate, date, view }: TileArgs) => isBeforeDate(date);
+	const disabledTile = ({ activeStartDate, date, view }: TileArgs) => isBeforeDate(date) || disable;
 	// max-sm:w-[44px] max-sm:h-[46px]
 	const mapTileClassName: TileClassNameFunc = ({ activeStartDate, date, view }) => {
 		const shouldDisbled = !isFoundOnCalendar(date);
-		// max-[320px]:h-[34px] max-[320px]:w-[41px]
-		// max-[375px]:h-[42px] max-[375px]:w-[40px]
-		// max-sm:h-[48px] max-sm:w-[44px]
-		// max-h-[40px] max-w-[40px]
 		const defaultClass = `
 		max-[320px]:h-[34px] max-[320px]:w-[41px]
 		max-[360px]:h-[40px] max-[360px]:w-[40px]
@@ -80,6 +77,7 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calenda
 		max-[393px]:h-[42px] max-[393px]:w-[42px]
 		max-[414px]:h-[46px] max-[414px]:w-[46px]
 		max-sm:h-[48px] max-sm:w-[44px]`;
+
 		return shouldDisbled ?
 			`
 			${ defaultClass }
@@ -90,7 +88,7 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calenda
 	};
 
 	return <CalendarContainer>
-		<div className='px-[12px] py-[20px] relative'>
+		<div className='px-[12px] mt-[10px] py-[4px] md:py[20px] relative'>
 			<ReactCalendar
 				className='r-calendar'
 				nextLabel={ <icons.ArrowRight /> }

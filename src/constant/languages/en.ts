@@ -37,9 +37,9 @@ export default {
 	},
 	page: {
 		unsubscribe: {
-			headingSuccess: 'Unsubscribe was successful',
-			subHeadingSuccess: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again',
-			headingFailed: 'Unsubscribe was failed',
+			headingSuccess: 'Unsubscribe Successful',
+			subHeadingSuccess: 'Youre now unsubscribed. Your preferences matter to us, and we appreciate your decision. If you ever change your mind, feel free to join us again. Thank you.',
+			headingFailed: 'Unsubscribe Failed',
 			subHeadingFailed: 'Unsubscribing from the latest news about RSPI was failed, try again',
 		},
 		awards: {
@@ -530,11 +530,11 @@ export default {
 
 			},
 			errors: {
-				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukan sudah terdaftar',
+				mrHasBeenRegistered: 'Nomor rekam medis yang Anda masukkan sudah terdaftar',
 				mrNotFound: 'Nomor rekam medis yang Anda masukkan belum terdaftar',
 				phoneNotMatch: 'No yang Anda masukkan tidak sesuai dengan yang terdaftar di RS Pondok Indah Group',
 				dobNotMatch: 'Data yang Anda masukkan tidak sesuai dengan yang terdaftar di database RS Pondok Indah',
-				fieldIsEmpty: 'Harap masukan seluruh data'
+				fieldIsEmpty: 'Harap masukkan seluruh data'
 			},
 			submitBtnLabel: 'Save and Continue',
 			mrNotAvailableBtnLabel: 'Skip'

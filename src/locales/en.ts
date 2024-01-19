@@ -46,7 +46,7 @@ export default {
 			labelSuccess1: 'Please check your email',
 			labelSuccess2: 'to verify the PIN change request',
 			modalPinTitle: 'PIN Change Verification Link Sent',
-			modalPinBtn: 'Okay'
+			modalPinBtn: 'OK'
 		},
 		needLogin: {
 			heading: 'Please Login',
@@ -110,12 +110,15 @@ export default {
 			validationError: 'Please fill all the data.',
 			profileSelector: {
 				deleteModal: {
-					heading: 'Are you sure you want to delete profile',
+					heading: 'Are you sure you want to delete other profile data',
 					yesLabel: 'Yes',
 					noLabel: 'No'
 				},
 				selfLabel: 'Your Profile :',
 				other: 'Other\'s Profile:',
+				addSelfProfile: 'Add Your Profile :',
+				editOtherProfile: 'Edit Profile ',
+				addOtherProfile: 'Add Other Profile :',
 				form: {
 					selfHeading: 'Add "Self" profile',
 					otherHeading: 'Add other\'s profile',
@@ -124,6 +127,7 @@ export default {
 					phone: 'Phone',
 					gender: 'Gender',
 					submit: 'Submit',
+					edit: 'Edit',
 					dob: 'Birth Date',
 					genderLabel: {
 						male: 'Male',
@@ -151,7 +155,7 @@ export default {
 				errorEmptyData: 'Make sure complaint and guarantor data are filled in',
 				btnLabel: {
 					back: 'Back',
-					submit: 'Book Appointment'
+					submit: 'Next'
 				}
 			},
 			confirmationModal: {
@@ -160,12 +164,12 @@ export default {
 				insuranceDataLabel: 'Insurance Data',
 				insuranceNumber: 'Insurance Number',
 				patientDetail: {
-					heading: 'Patient Data',
-					name: 'Name',
-					birthDate: 'Date of birth',
-					phone: 'Phone Number',
-					email: 'E-Mail',
-					guarantor: 'Guarantor'
+					heading: 'Patient Data:',
+					name: 'Name:',
+					birthDate: 'Date of birth:',
+					phone: 'Phone Number:',
+					email: 'E-Mail:',
+					guarantor: 'Guarantor:'
 				},
 				toc: 'I confirm that all the above data is correct.',
 				confirmBtnLabel: 'Confirm',
@@ -184,13 +188,13 @@ export default {
 				btnLabel: 'Ok'
 			},
 			bookingForm: {
-
+				insuranceData: 'Insurance Underwriter Data'
 			}
 		},
 		unsubscribe: {
-			headingSuccess: 'Unsubscribe was successful',
-			subHeadingSuccess: 'Unsubscribing from the latest news about RSPI was successful, hopefully we can meet again',
-			headingFailed: 'Unsubscribe was failed',
+			headingSuccess: 'Unsubscribe Successful',
+			subHeadingSuccess: 'Youre now unsubscribed. Your preferences matter to us, and we appreciate your decision. If you ever change your mind, feel free to join us again. Thank you.',
+			headingFailed: 'Unsubscribe Failed',
 			subHeadingFailed: 'Unsubscribing from the latest news about RSPI was failed, try again',
 		},
 		awards: {
@@ -256,191 +260,226 @@ export default {
 				contactUsLabel: 'Contact Us',
 				faqLongLabel: 'Frequently Asked Questions',
 				heading: 'FAQ',
-				subHeading: 'Frequently Asked Questions about our services',
+				subHeading: 'Frequently asked questions about services at RS Pondok Indah Group Hospitals',
 				allFaqBtnLabel: 'View All FAQs',
 				readMoreLabel: 'Read more',
 				questions: {
-					doctorSchedule: 'Where do I find out the doctors schedule in Pondok Indah Hospital?',
-					assurance: 'Can my insurance be used in Pondok Indah Hospital?',
-					visitHours: 'Is there any visiting hours for patients in Pondok Indah Hospital?',
-					checkUp: 'How can I make an appointment for Health Check Up?',
-					travelVaccine: 'Does Pondok Indah Hospital have travel vaccination service?',
-					telemedicine: 'Does Pondok Indah Hospital provide telemedicine?',
-					maternity: 'Is there any information in regard to maternity or delivery in Pondok Indah Hospital?'
+					doctorSchedule: 'Where can I find RS Pondok Indah Group doctor\'s schedule?',
+					assurance: 'Will RS Pondok Indah accept my insurance?',
+					visitHours: 'What are the visiting hours at RS Pondok Indah Group Hospitals?',
+					checkUp: 'How do I book an appointment for Executive Health Check-Up?',
+					travelVaccine: 'Do RS Pondok Indah Group Hospitals  provide travel vaccination service?',
+					telemedicine: 'Do Group Hospitals provide Telemedicine services?',
+					maternity: 'Do RS Pondok Indah Group provide any particular maternity service?',
+					homeVisit: 'Do RS Pondok Indah Group Hospitals provide home visit service?'
 				},
 				answers: {
-					doctorSchedule: 'You can find all the RS Pondok Indah doctors schedule through (link) or you can also access the schedule through RSPI Mobile (our mobile apps).',
-					assurance: 'RS Pondok Indah Group is in cooperation with various leading national and international insurance companies to ensure the ease accessing our health services. Find out the partner insurance companies we collaborate with through this link (link: perusahaan asuransi mitra).',
-					visitHours: `Every unit has its own visiting hour policy. To ensure the quiet and comfort of patients and other patients, visits are permissible only during the visiting hours and conducted by turns.
-					<div className='mt-[15px]' />
-					Visiting Hours
-					<div className='mt-[15px]' />
-					General Ward & Baby Room
-					<div className='flex'>
-						<div className='grid grid-cols-2'>
-							<div>Noon: 11 AM - 1 PM</div>
-							<div>Afternoon: 6 PM - 8 PM</div>
-						</div>
-					</div>
-					<div className='mt-[15px]' />
-					ICU, ICCU, & NICU
-					<div className='flex'>
-						<div className='grid grid-cols-2'>
-							<div>Noon: 11 AM - 12 PM</div>
-							<div>Afternoon: 6 PM - 7 PM</div>
-						</div>
-					</div>
-					Only one visitor is permitted at a time
-					Children are not allowed to be in this unit
-					<div className='mt-[15px]' />
-					Baby Intermediate Room
-					<div className='flex'>
-						<div className='grid grid-cols-2'>
-							<div>Noon: 11 AM - 1 PM</div>
-							<div>Afternoon: 6 PM - 8 PM</div>
-						</div>
-					</div>
-					Only parents are allowed to visit
-					Maximum of 2 visitors for each patient are allowed to visit at the same time`,
-					checkUp: `A comprehensive medical check-up package is available at the three branches Executive Health Check-Up of Pondok Indah Hospital Group. Variety of medical check up packages are available including those for children. Please consult with our team for a package that suits your needs. 
-					<div className='mt-[15px]' />
-					<p>For more information and make an appointment, please contact: </p>
-					Executive Health Check Up RS Pondok Indah - Pondok Indah
-					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Information & Appointment</div>
-							<div>:</div>
-							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0812-8311-2725</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcupondok@rspondokindah.co.id</div>
-						</div>
-					</div>
-					<a href='#'>[link paket EHCU]</a>
-					<div className='mt-[15px]' />
-					Executive Health Check Up RS Pondok Indah - Puri Indah
-					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Information & Appointment</div>
-							<div>:</div>
-							<div>(62-21) 2569 5252, 2569 5200 Ext. 2100</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0821-8088-7838</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcupuri@rspondokindah.co.id</div>
-						</div>
-					</div>
-					<a href='#'>[link paket EHCU]</a>
-					<div className='mt-[15px]' />
-					Executive Health Check Up RS Pondok Indah - Bintaro Jaya
-					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Information & Appointment</div>
-							<div>:</div>
-							<div>(62-21) 8082 8888 Ext. 2301/2302</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0811-9227-982</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcubintaro@rspondokindah.co.id</div>
-						</div>
-					</div>
-					<a href='#'>[link paket EHCU]</a>`,
-					travelVaccine: `Pondok Indah Hospital Group has travel vaccination service. We also provide the issue of International Vaccine Certification (ICV) or popularly known as yellow card.
-					<div className='mt-[15px]' />
-					<p>For more information, please contact:</p>
-					Executive Health Check Up RS Pondok Indah - Pondok Indah
-					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Information & Appointment:</div>
-							<div>:</div>
-							<div>(62-21) 7507169, 765 7525 Ext. 2267/2318</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0812-8311-2725</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcupondok@rspondokindah.co.id</div>
-						</div>
-					</div>
-					<div className='mt-[15px]' />
-					Executive Health Check Up RS Pondok Indah - Puri Indah
-					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Information & Appointment:</div>
-							<div>:</div>
-							<div>(62-21) 2569 5252, 2569 5200 Ext. 2100</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0821-8088-7838</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcupuri@rspondokindah.co.id</div>
-						</div>
-					</div>
-					<div className='mt-[15px]' />
-					Executive Health Check Up RS Pondok Indah - Bintaro Jaya
-					<div className='flex'>
-						<div className='grid grid-cols-[1fr_10px_1fr] xxl:w-[50%] md:w-[75%] w-full items-center'>
-							<div>Information & Appointment:</div>
-							<div>:</div>
-							<div>(62-21) 8082 8888 Ext. 2301/2302</div>
-							<div>WhatsApp</div>
-							<div>:</div>
-							<div>0811-9227-982</div>
-							<div>E-mail</div>
-							<div>:</div>
-							<div>hcubintaro@rspondokindah.co.id</div>
-						</div>
-					</div>`,
-					telemedicine: `RS Pondok Indah Group has Telemedicine or teleconsultation service. Now, you can consult with our doctors through video call anywhere you are. This service uses Zoom application in your gadget, so there is no longer a need to go outside to consult with our doctors.
-					<div className='mt-[15px]' />
-					Telemedicine Pondok Indah Hospital Group Mechanism
-					<ol className='list-decimal pl-4'>
-						<li>Please ensure that you are already Pondok Indah Hospital Group&apos;s patient with medical record number</li>
-						<li>Contact Pondok Indah Hospital Group Call Center to make a Telemedicine appointment or to check our  doctors’ schedule that provides telemedicine services</li>
-						<li>Click the <a href='#'>link</a> we send to your WhatsApp number to start the consultation session at the agreed time</li>
-						<li>Finish the administration processes that we send to your <a href='#'>email</a></li>
-						<li>This telemedicine service can only be done with self-paid system through bank transfer. We have yet to accept payment through insurance or debit/credit card</li>
-						<li style={ { color: 'red' } }>In the case of doctors prescribing medicines or requesting blood check for you, you can retrieve the medicine and conduct blood sample extraction by taking advantage of our drive-thru service at the agreed time after you finish the administration processes.We also provide medicine delivery service to specific locations</li>
-					</ol>`,
-					maternity: `Expecting the birth of your bundle of joy is a precious and special moment in every couple’s life. Cherishing this life event, Pondok Indah Hospital Group presents Maternity First, a complete and integrated maternity service, to create the best experience for welcoming your bundle of joy, start from pregnancy, during the labor, and after birth, which includes:
-					<div className='mt-[15px]' />
-
-					<ul className='list-disc pl-5'>
-						<li>Professional medical services, including obstetrics and gynecology doctor, fetomaternal consultant obgyn doctor, pediatrician, and lactation consultant</li>
-						<li>Maternity Counselor that can be contacted 24 hours via WhatsApp to answer every expecting mother’s questions during the pregnancy</li>
-						<li>The latest medical technology and facilities, such as 4D USG</li>
-						<li>Five-stars facilities in the ward, delivery room, operating room, baby room that includes NICU facilities</li>
-						<li>100% support for exclusive breastfeeding and early initiation of breastfeeding (EIB)</li>
-						<li>Maternity Classes, including pregnancy exercise class, prenatal Yoga class, and parenting class</li>
-					</ul>
-
-					<div className='mt-[15px]' />
-					<p>For more information, please contact:</p>
-					<div className='mt-[15px]' />
-					<p>RS Pondok Indah – Pondok Indah</p>
-					<p>Obstetrics and Gynecology Clinic, 3rd Floor</p>
-					<p>(021) 765 7525 Ext. 2</p>
-					<p>Maternity Counselor (WhatsApp chat only): 081388887273</p>
-
-					<div className='mt-[15px]' />
-					<p>RS Pondok Indah - Puri Indah</p>
-					<p>Obstetrics and Gynecology Clinic, 7th Floor</p>
-					<p>(021) 2569 5200 Ext. 2</p>
-					<p>Maternity Counselor (WhatsApp chat only): 081388889096</p>
-
-					<div className='mt-[15px]' />
-					<p>RS Pondok Indah – Bintaro Jaya</p>
-					<p>Obstetrics and Gynecology Clinic, 6th Floor</p>
-					<p>(021) 8082 8888 Ext. 2/6012</p>
-					<p>Maternity Counselor (WhatsApp chat only): 081295998870</p>`
+					doctorSchedule: '<p><span style="font-size: 14px; color: rgb(0, 0, 0);">You can find RS Pondok Indah Group doctor&rsquo;s schedules </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/find-a-doctor"><span style="font-size: 14px; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 14px; color: rgb(0, 0, 0);">. You can also view our doctor&rsquo;s schedule by downloading RSPI mobile app.</span></p>',
+					assurance: '<p><span style="font-size: 14px; color: rgb(0, 0, 0);">RS Pondok Indah Group has collaborated with various trusted insurance companies, both domestic and overseas. Click </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/perusahaan-asuransi-mitra"><span style="font-size: 14px; color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">here</span></a><span style="font-size: 14px; color: rgb(0, 0, 0);"> to view our insurance partners.</span></p>',
+					visitHours: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Visiting hours may vary for some wards. In order to maintain the safety and comfort of all our patients, visits can only be made during certain hours and are conducted on a rotating basis.</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><strong><span style="font-size: 14px;  color: rgb(0, 0, 0);">Visiting Hours</span></strong></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">General &amp; Newborn Wards</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">ICU, ICCU</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 12.00 PM&nbsp;&nbsp;</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Only 1 visitor is allowed at any one time. Children are not allowed in these units</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">NICU &amp; Intermediate Care</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Morning: 11.00 AM - 1.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Evening: 6.00 PM - 8.00 PM</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Only parents are allowed to visit. A maximum of 2 people per patient are allowed to visit at any one time.</span></p>`,
+					checkUp: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Our </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/facilities-services/executive-health-check-up"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Executive Health Check Up (EHCU)</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);"> Services are available at all RSPI Group Hospitals. We provide a variety of medical checkup options that are specific to your needs, including paediatric check-ups. Please consult with our team to find out which package suits your needs.</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">For more information or to make an appointment, please contact:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Pondok Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 7507169, 765 7525 Ext. 2267/2318</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281283112725"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0812-8311-2725</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupondok@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupondok@rspondokindah.co.id</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">&nbsp;</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">[</span><a style="text-decoration: none;" href="https://storage.googleapis.com/rspi-assets-production/rspi-api/uploads/F30021-20230307125551.pdf"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">EHCU Package - RSPI Pondok Indah</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">]</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Puri Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 2569 5252, 2569 5200 Ext. 2100</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6282180887838"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0821-8088-7838</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupuri@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupuri@rspondokindah.co.id</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">&nbsp;</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">[</span><a style="text-decoration: none;" href="https://storage.googleapis.com/rspi-assets-production/rspi-api/uploads/Z81201-20230307125040.pdf"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">EHCU Package - RSPI Puri Indah</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">]</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Bintaro Jaya</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 8082 8888 Ext. 2301/2302</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=628119227982"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0811-9227-982</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcubintaro@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcubintaro@rspondokindah.co.id</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">[</span><a style="text-decoration: none;" href="https://storage.googleapis.com/rspi-assets-production/rspi-api/uploads/M37594-20220330105057.pdf"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">EHCU Package - RSPI Bintaro Jaya</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">]</span> </p>`,
+					travelVaccine: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">RS Pondok Indah Group Hospitals provide travel vaccination service and also issued international vaccination certificates or "Yellow Book".</span></p>
+						<p>&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">For more information, please contact:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Pondok Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 7507169, 765 7525 Ext. 2267/2318</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281283112725"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0812-8311-2725</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupondok@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupondok@rspondokindah.co.id&nbsp;</span></a></p>
+						<p>&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Puri Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 2569 5252, 2569 5200 Ext. 2100</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6282180887838"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0821-8088-7838</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcupuri@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcupuri@rspondokindah.co.id</span></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">&nbsp;</span></p>
+						<p>&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Executive Health Check Up RS Pondok Indah - Bintaro Jaya</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Information &amp; Appointment:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(62-21) 8082 8888 Ext. 2301/2302</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">WhatsApp:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=628119227982"><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">0811-9227-982</span></a></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">E-mail:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><a style="text-decoration: none;" href="mailto:hcubintaro@rspondokindah.co.id"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">hcubintaro@rspondokindah.co.id </span></a></p>`,
+					telemedicine: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px; color: rgb(0, 0, 0);">RS Pondok Indah Group provides telemedicine service. Now, you can consult with our doctors via video call more conveniently. This service uses the Zoom application on your device, so you can consult with our doctor from the comfort of your home.</span></p>
+						<p>&nbsp;</p>
+						<h3 style="line-height: 1.8; margin-top: 16pt; margin-bottom: 4pt;"><span style="font-size: 14pt; color: rgb(0, 0, 0); font-weight: 400;">RS Pondok Indah Group Telemedicine Mechanism</span></h3>
+						<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
+						<li style="font-size: 14px; color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Make sure you are already a patient of RS Pondok Indah Group and have a medical record number</span></p>
+						</li>
+						<li style="font-size: 14px; color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Contact the Call Centre of your intended RS Pondok Indah to register and/or check our doctors Telemedicine session schedule. services</span></p>
+						</li>
+						<li style="font-size: 14px; color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Click on the link, which we will send via WhatsApp, to start the consultation session at the scheduled time.</span></p>
+						</li>
+						<li style="font-size: 14px; color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Complete the administrative steps that we send to your email</span></p>
+						</li>
+						<li style="font-size: 14px; color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Telemedicine service only accepts self-paid via bank transfer. Currently, we are unable to accept insurance or credit/debit card payments.</span></p>
+						</li>
+						<li style="font-size: 14px; color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px; color: rgb(0, 0, 0);">If the doctor prescribes medication or requests a blood test, you can request for the medication to be sent to your home (for certain areas) and have the blood drawn at your home at a specified time. Please make sure you have completed the administrative process in order to receive this service.</span><span style="font-size: 14px; color: rgb(0, 0, 0); text-decoration: line-through; text-decoration-skip-ink: none;"> </span></p>
+						</li>
+						</ol>`,
+					maternity: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Awaiting the birth of your baby is a special and precious life journey for you and your partner. Understanding this, RS Pondok Indah Group presents </span><a style="text-decoration: none;" href="https://www.rspondokindah.co.id/en/promo/maternity-first"><strong><span style="font-size: 14px;  color: rgb(17, 85, 204); text-decoration: underline; text-decoration-skip-ink: none;">Maternity First</span></strong></a><span style="font-size: 14px;  color: rgb(0, 0, 0);">, which is a complete and integrated pregnancy service, to create the best experience of welcoming the baby since pregnancy, childbirth, and postpartum, including:</span></p>
+						<p>&nbsp;</p>
+						<ul style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Medical professionals, including obstetricians and gynaecologists, obstetricians and gynaecologists with fetomaternal subspecialty, paediatricians, and lactation counsellors.</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Maternity Counsellor who can be contacted through 24-hours WhatsApp to help answer mum's questions during pregnancy</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">The latest medical facilities and technology, such as 4D ultrasound</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Five-stars facilities in treatment rooms, delivery rooms, operating theaters, baby rooms including NICU facilities</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">100% support for IMD (Early Breastfeeding Initiation) and exclusive breastfeeding</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Maternity Classes including pregnancy exercise classes, prenatal Yoga, and parenting classes</span></p>
+						</li>
+						</ul>
+						<p>&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">For more information, please contact:</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">RS Pondok Indah - Pondok Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Obstetrics and Gynaecology Clinic 3rd Floor</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(021) 765 7525 Ext. 2</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Maternity Counsellor (WhatsApp chat only): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281388887273"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">081388887273</span></a></p>
+						<p>&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Pondok Indah Hospital - Puri Indah</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Obstetrics and Gynaecology Clinic 7th Floor</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(021) 2569 5200 Ext. 2</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Maternity Counsellor (WhatsApp chat only): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281388889096"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">081388889096</span></a></p>
+						<p>&nbsp;</p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">RS Pondok Indah - Bintaro Jaya</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">Obstetrics and Gynaecology Clinic 6th Floor</span></p>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">(021) 8082 8888 Ext. 2/6012</span></p>
+						<p><span style="font-size: 14px;  color: rgb(0, 0, 0);">Maternity Counsellor (WhatsApp chat only): </span><a style="text-decoration: none;" href="https://api.whatsapp.com/send?phone=6281295998870"><span style="font-size: 14px;  color: rgb(0, 0, 0); text-decoration: underline; text-decoration-skip-ink: none;">081295998870</span></a></p>`,
+					homeVisit: `<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;  color: rgb(0, 0, 0);">RS Pondok Indah Group Hospitals provide Home Visit service covering certain areas. Some of the services provided are as follows:</span></p>
+						<ul style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Examination and consultation by general practitioner, internal medicine specialist, nutrition specialist.</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">NGT tube insertion/replacement</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Urine catheter insertion/replacement</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Stoma care</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Wound care</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Laboratory sampling</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Bathing newborn</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Vaccination</span></p>
+						</li>
+						<li style="list-style-type: initial; font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Other services</span></p>
+						</li>
+						</ul>
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;">&nbsp;</p>
+						<h3 style="line-height: 1.8; margin-top: 16pt; margin-bottom: 4pt;"><span style="font-size: 14pt;  color: rgb(0, 0, 0); font-weight: 400;">Home Visit mechanism of Pondok Indah Hospital Group</span></h3>
+						<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">The Home Visit service applies to patients who are located around the RS Pondok Indah Group Hospitals location, within 10 km radius.</span></p>
+						</li>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Patient is already registered as a previous patient of RS Pondok Indah Hospital Group, proven by medical record number.</span></p>
+						</li>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Send a WhatsApp message to inquire our Home Visit Service at least 1 day before your intended date during working hours (08.00 AM - 05.00 PM) to:</span></p>
+						</li>
+						</ol>
+						<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;">
+						<li style="list-style-type: lower-alpha; font-size: 14px;  color: rgb(0, 0, 0); margin-left: 36pt;">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Pondok Indah Hospital - Pondok Indah +62 821-1999-0881&nbsp;</span></p>
+						</li>
+						<li style="list-style-type: lower-alpha; font-size: 14px;  color: rgb(0, 0, 0); margin-left: 36pt;">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Pondok Indah Hospital - Puri Indah +62 821-1999-0882</span></p>
+						</li>
+						<li style="list-style-type: lower-alpha; font-size: 14px;  color: rgb(0, 0, 0); margin-left: 36pt;">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Pondok Indah Hospital - Bintaro Jaya +62 821-1999-0883</span></p>
+						</li>
+						</ol>
+						<ol style="margin-top: 0px; margin-bottom: 0px; padding-inline-start: 48px;" start="4">
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Home Visit team will contact you to assess the services or procedures required in order to prepare accordingly.</span></p>
+						</li>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Home Visit Team will confirm their arrival time to the patient's home 1 day before the scheduled date.</span></p>
+						</li>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Home Visit Team will record the assessment, procedures, equipment and drugs used in your home and relay the information to the relevant operational units.</span></p>
+						</li>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Afterwards, our Cashier will send an invoice via WhatsApp according to the billing and send the Pondok Indah Hospital account number so that you can make payments via bank transfer.</span></p>
+						</li>
+						<li style="font-size: 14px;  color: rgb(0, 0, 0);">
+						<p style="line-height: 1.8; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 14px;">Our Telemedicine service only accepts self-paid via bank transfer. Currently, we are unable to accept insurance or credit/debit card payments.</span></p>
+						</li>
+						</ol>`,
 				}
 			},
 			location: {
@@ -593,7 +632,7 @@ export default {
 				heading: 'Change Password Link Has Been Sent',
 				subHeading: 'Check your email again',
 				subHeadingTail: 'to continue the password change process',
-				buttonLabel: 'Okay'
+				buttonLabel: 'OK'
 			},
 			form: {
 				emailLabel: 'Email',
@@ -651,12 +690,14 @@ export default {
 		},
 		otpVerification: {
 			heading: 'Enter Verification Code',
-			subHeading: 'Enter the code sent via SMS to your mobile number',
+			subHeading: 'Enter the code sent via SMS to your',
+			handphone: 'mobile number',
+			yourlabel: '',
 			resendOtp: 'Resend OTP',
 			resendWarn: 'You have 3 request OTP attempt.',
 			form: {
 				otpFieldLabel: 'OTP',
-				submitBtnLabel: 'Submit OTP',
+				submitBtnLabel: 'Send OTP',
 				backBtnlabel: 'Back to Home'
 			}
 
@@ -719,7 +760,7 @@ export default {
 				heading: 'Email Verification Link Has Been Sent',
 				subHeading: 'Please check email',
 				subHeadingTail: 'to verify your email',
-				buttonLabel: 'Okay'
+				buttonLabel: 'OK'
 			}
 		},
 		registerOnboard: {
@@ -783,7 +824,10 @@ export default {
 				patientGenderFemaleLabel: 'Female',
 				patientPhotoProfile: 'Photo profile',
 				editLabel: 'Change',
+				editProfileLabel: 'Edit',
+				deleteLabel: 'Delete',
 				successUpdateProfile: 'Successfully Update Profile',
+				successSentEmailVerif: 'Successfully Sending E-mail Verification Link, Please Check Your Email Inbox',
 			},
 			securitySetting: {
 				emailLabel: 'Email',
@@ -894,7 +938,7 @@ export default {
 					D: 'Departed'
 				},
 				teleconsultationLabel: 'Telekonsultasi',
-				offlineConsultation: 'Face-to-face Consultation'
+				offlineConsultation: 'Consultation'
 			},
 			cancelBooking: {
 				heading: 'Confirmation of Cancellation',
@@ -925,6 +969,7 @@ export default {
 		doctorProfile: {
 			bookAppointmentLabel: 'Book Appointment',
 			scheduleHeading: 'Doctor&apos;s Schedule',
+			notSelectedHospital: 'Please select your hospital preference.',
 			form: {
 				visitDateLabel: 'Visit Date',
 				hospitalLabel: 'Hospital',
@@ -938,6 +983,8 @@ export default {
 			notAvailableSchedule: 'The doctor\'s schedule is not available on the date you selected because it has reached the maximum online reservations. Please choose another available date and time below or contact our call center for further information.',
 			callCenter: 'Contact Call Center',
 			chooseRs: 'Choose Hospital',
+			appointmentType: 'Apointment Type',
+			setSchedule: 'Set Schedule',
 			available: 'Available',
 			limitedSlot: 'Limited Slot',
 			noSchedule: 'Not Available',
@@ -950,7 +997,12 @@ export default {
 			asuransiCardBack: 'Upload a rear view photo',
 			asuransiCardFront: 'Upload a photo of the front view',
 			labelPhoneModal: 'Please contact the call center',
-			visitAppOptionLabel: 'Visit in Person'
+			visitAppOptionLabel: 'Visit in Person',
+			shareDoctor: {
+				wateleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}: {link}',
+				teleMsg: 'Click this link to create appointment with your best {speciality}, {doctor_name}',
+				metaDesc: 'Click here to create appointment with your best {speciality}',
+			}
 		},
 		footer: {
 			visitorInfo: {
@@ -988,7 +1040,7 @@ export default {
 			agreementStatement: {
 				preText: 'I',
 				boldText: 'agree',
-				tailText: 'to the terms and conditions.'
+				tailText: 'to the ',
 			},
 			buttonPrivacy: 'Next',
 			buttonTnC: 'Send',

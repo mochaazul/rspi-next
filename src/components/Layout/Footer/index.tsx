@@ -106,7 +106,7 @@ const FooterLayout = async({ footerData, hospitalData }: { footerData: FooterDet
 				fontSize='14px'
 				color={ colors.paradiso.default }
 				className='mb-4'
-				subClassName='max-sm:text-sm uppercase font-bold max-sm:font-normal leading-[24px]'
+				subClassName='max-sm:text-sm text-[14px] uppercase font-normal leading-normal'
 			>{ text }</Text>
 		);
 	};
@@ -140,7 +140,7 @@ const FooterLayout = async({ footerData, hospitalData }: { footerData: FooterDet
 			.map(key => {
 				const label = mapLabel(key);
 				return  (
-					<div key={ key } className='w-2/5 sm:w-[200px] lg:w-1/6'>
+					<div key={ key }>
 						{ renderCategoryTitle(label) }
 						{ renderCategoryItems(footers[key]) }
 					</div>
@@ -184,7 +184,7 @@ const FooterLayout = async({ footerData, hospitalData }: { footerData: FooterDet
 				</div>
 				<div className='email-sub-container'>
 					{ renderCategoryTitle(t('subscribeLabel')) }
-					<Text fontSize='14px' className='sub-text'>{ t('subscribeDescription') }</Text>
+					<Text fontSize='14px' className='sub-text' subClassName='leading-[21px] max-sm:text-[12px] max-sm:leading-[18px] font-normal'>{ t('subscribeDescription') }</Text>
 					<LangWrapper>
 						<NewsLetter/>
 					</LangWrapper>
@@ -195,12 +195,12 @@ const FooterLayout = async({ footerData, hospitalData }: { footerData: FooterDet
 					textAlign='center'
 					fontSize='16px'
 					fontWeight='400'
-					subClassName='leading-normal max-sm:text-[14px] text-gray-2'
+					subClassName='leading-normal max-sm:leading-[18px] max-sm:text-[14px] text-gray-2'
 				>Copyright © { date.getFullYear() } RS Pondok Indah Group.
 					<span className='sm:hidden'><br /></span> All Rights Reserved.
 				</Text>
 				{
-					appStage !== 'prod' &&
+					appStage !== 'production' &&
 					<div className='flex justify-center'>
 						<Text
 							textAlign='center'

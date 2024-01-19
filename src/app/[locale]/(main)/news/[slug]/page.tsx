@@ -44,14 +44,14 @@ const DetailNewsHealthPage = async({ params }: { params: { slug: string; }; }) =
 	const specialty = await getNewsSpecialtyByID({
 		param: `${ selectedArticle?.id }`,
 		query: {
-			limit: '2'
+			limit: '3'
 		}
 	});
 
 	const relatedNews = await getRelatedNews({
 		param: `${ selectedArticle?.id }`,
 		query: {
-			limit: '2'
+			limit: '3'
 		}
 	});
 

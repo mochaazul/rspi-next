@@ -14,8 +14,12 @@ export const AccordionStyle = styled.div`
 `;
 
 export const ItemStyle = styled.div<{ $isOpen: boolean; }>`
-  align-items: center;
+  align-items: start;
   gap: 2rem;
+
+  li {
+    list-style: auto;
+  }
 
   & .item-desc {
     position: relative;

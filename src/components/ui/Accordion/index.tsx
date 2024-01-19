@@ -62,6 +62,7 @@ const Accordion = (props: AccordionType) => {
 								isOpen={ openIndex === key }
 								onlyOpenOne={ props.onlyOpenOne }
 								onOpen={ handleOnOpen(key) }
+								isJSXDesc={ true }
 								{ ...data } />
 							: <ItemTheme
 								index={ key }

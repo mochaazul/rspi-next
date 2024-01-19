@@ -9,14 +9,14 @@
 const environment = {
 	dev: {
 		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_DEV,
-		version: '1.1.182-next'
+		version: '1.1.197-next'
 	},
 	staging: {
 		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_STAGING,
 		version: '1.1.166-next'
 	},
-	prod: {
-		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_PROD,
+	production: {
+		baseUrl: process.env.NEXT_PUBLIC_BASE_URL_PRODUCTION,
 		version: 'n'
 	}
 };

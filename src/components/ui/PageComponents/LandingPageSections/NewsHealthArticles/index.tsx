@@ -80,6 +80,7 @@ const NewsHealthArticles: React.FC<NewsProps> = ({ articles }) => {
 													fontSize='14px'
 													lineHeight='17px'
 													color={ colors.grey.dark }
+													subClassName='max-sm:text-[12px]'
 												/>
 											}
 											content={ <CardContentWithInner title={ article.title } description={ article.short_description } /> }

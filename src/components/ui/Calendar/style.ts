@@ -15,6 +15,14 @@ export const CalendarContainer = styled.div`
   .react-calendar__tile abbr {
     display: none;
   }
+  .react-calendar__navigation__label{
+    span{
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      color: #344054;
+    }
+  }
  
 .react-calendar__tile--active{
     .calendar-item-label{
@@ -26,6 +34,23 @@ export const CalendarContainer = styled.div`
       align-items: center;
       justify-content: center;
       color: white;
+
+      @media screen and (max-width: 320px) {
+        width:  32px;
+        height: 32px;
+      }
+      @media screen and (max-width: 360px) {
+        width:  36px;
+        height: 36px;
+      }
+      @media screen and (max-width: 375px) {
+        width:  38px;
+        height: 38px;
+      }
+      @media screen and (max-width: 768px) {
+        width:  32px;
+        height: 32px;
+      }
     }
     p{
       color: white;
@@ -38,6 +63,7 @@ export const CalendarContainer = styled.div`
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
+      color: #344054;
     }
   }
   .react-calendar__month-view__days__day--neighboringMonth{
@@ -57,7 +83,7 @@ export const CalendarContainer = styled.div`
       align-items: center;
       justify-content: center;
       abbr{
-        font-weight: 700;
+        font-weight: 500;
         text-decoration: none;
       }
     }

@@ -8,6 +8,20 @@ export const ContactUsPanel = styled.div`
   .global-shadow {
     ${ GlobalBoxShadow }
   }
+  .card-hospital-swap {
+    margin-bottom: 50px;
+  }
+  .card-hospital-swap .container__slider {
+    border-radius:10px !important;
+  }
+  .card-hospital-swap .slider__btn {
+    bottom: -50px;
+    z-index: 10;
+  }
+  .card-hospital-swap .container__slider__links {
+    bottom: -55px;
+    z-index: 0;
+  }
   .container__slider {
     background-color: ${ colors.white.default };
     z-index: 100;
@@ -17,6 +31,10 @@ export const ContactUsPanel = styled.div`
     bottom: -40px;
     position: absolute;
     z-index: 100;
+  }
+  .faq-sections .item-desc a {
+    color: #1155CC;
+    text-decoration: underline !important;
   }
 `;
 

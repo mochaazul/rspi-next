@@ -9,6 +9,7 @@ import {
 	facilityServicesFetch,
 	hospitalsFetch,
 } from '../../(main)/helpers';
+import LangWrapper from '@/components/ui/LangWrapper';
 
 export default async function AuthLayout({ children }: PropsWithChildren) {
 	const hospitals = await hospitalsFetch();
@@ -23,8 +24,9 @@ export default async function AuthLayout({ children }: PropsWithChildren) {
 				facilityServicesData={ facilityServices.data }
 				className='md:hidden'
 			/>
-
-			{ children }
+			<LangWrapper>
+				{ children }
+			</LangWrapper>
 		</>
 	);
 }

@@ -1,4 +1,5 @@
-import { PropsWithChildren, PropsWithRef } from 'react';
+'use client';
+import { PropsWithChildren, PropsWithRef, useEffect, useState } from 'react';
 import { MobileMenuWrapper } from './style';
 import * as Icons from 'react-feather';
 import { colors, icons } from '@/constant';
@@ -6,8 +7,12 @@ import { MainNavLanguage, Text } from '@/components/ui';
 import { CenterOfExcellenceDetail, FacilityServicesDetail, HospitalDetail, UserSessionData } from '@/interface';
 import Link from 'next/link';
 import MobileSubMenus, { MenuEntry } from './MobileSubMenus';
-import { getScopedI18n } from '@/locales/server';
-import LangWrapper from '@/components/ui/LangWrapper';
+import { useCurrentLocale, useScopedI18n } from '@/locales/client';
+import { usePathname, useRouter } from 'next/navigation';
+import { cookiesHelper } from '@/helpers';
+import clearSWRCache from '@/helpers/clearSwrCache';
+import { useSWRConfig } from 'swr';
+import { toast } from 'react-toastify';
 
 type Props = PropsWithRef<PropsWithChildren<{
   session?: UserSessionData
@@ -16,42 +21,70 @@ type Props = PropsWithRef<PropsWithChildren<{
   facilitiy: FacilityServicesDetail[]
 }>>
 
-const MobileMenus = async({ session, hospitals, coe, facilitiy }:Props) => {
-	const t = await getScopedI18n('navMenu');
+const MobileMenus = ({ session, hospitals, coe, facilitiy }:Props) => {
+	const [isOpen, setOpen] = useState(false);
+	const t = useScopedI18n('navMenu');
+	const pathname = usePathname();
+	const currentLocale = useCurrentLocale();
+	const router = useRouter();
+	const { mutate, cache } = useSWRConfig();
+
+	useEffect(() => {
+		setOpen(false);
+	}, [pathname]);
+
 	const isLoggedIn = !!session?.token;
 
 	const mapHospital:MenuEntry[] = hospitals.map((item, index) => ({ id: item.id ?? index, label: item.name ?? '', slug: item.slug }));
 	const mapCoe:MenuEntry[] = coe.map((item, index) => ({ id: item.id ?? index, label: item.title ?? '', slug: item.slug }));
 	const mapFacility: MenuEntry[] = facilitiy.map((item, index) => ({ id: item.id ?? index,  label: item.name ?? '', slug: item.slug }));
 	const medSpec:MenuEntry = { id: 9999999, label: 'Medical Specialties', slug: '/medical-specialties' };
+
+	const logOutHandler = async() => {
+		if (isLoggedIn) {
+			await cookiesHelper.clearStorage();
+			await clearSWRCache(cache);
+			setOpen(false);
+			// Notes: protectedRoutes sudah dihandle oleh middleware. shg cukup dgn refresh page akan redirect ke halaman login
+			// Khusus halaman disini tidak dihandle di middleware karna perlu show NeedLoginModal dari response error swr
+			if (['/book-appointment'].some(path => pathname.includes(path))) {
+				return router.replace('/login');
+			}
+
+			// if (!protectedRoutes?.some(path => pathname.includes(path))) {
+			// 	setShowSuccessLogout(true);
+			// }
+			toast.success(t('logoutSuccess'), {
+				hideProgressBar: true,
+				pauseOnHover: false,
+			});
+
+			router.refresh();
+		}
+	};
+
 	return (
 		<MobileMenuWrapper >
-			<input id='menu' type='checkbox' className='peer' defaultChecked={ false }/>
-			<label htmlFor='menu' className='peer-checked:hidden ' >
-				<Icons.AlignLeft color={ colors.grey.darkOpacity } size={ 24 } />
-			</label>
-			<label htmlFor='menu' className='hidden peer-checked:block ' >
-				<Icons.X color={ colors.grey.darkOpacity } size={ 24 } />
-			</label>
-			<div className='hidden absolute left-0 top-[100%] w-full peer-checked:block'>
-				<LangWrapper>
-					<MainNavLanguage session={ session } />
-				</LangWrapper>
-				<section className='bg-white h-screen divide-y divide-solid relative'  >
-					<div className='nav-menu ' >
-						<Link href='/' >
-							<Text text={ 'Beranda' } fontSize='16px' fontWeight='700' />
+			<div onClick={ () => { setOpen(!isOpen); } }>
+				{
+					isOpen
+						? <Icons.X color={ colors.grey.darkOpacity } size={ 24 } />
+						: <Icons.AlignLeft color={ colors.grey.darkOpacity } size={ 24 } />
+				}
+			</div>
+				
+			<div className={ `absolute left-0 top-[100%] w-full ${ isOpen ? 'block' : 'hidden'}` }>
+				<MainNavLanguage session={ session } />
+				<section className='bg-white divide-y divide-solid relative  h-[calc(100vh-104px)]'  >
+					<div className='nav-menu' >
+						<Link href={ `/${currentLocale}/` } >
+							<Text text={ t('home') } fontSize='16px' fontWeight='700' />
 						</Link>
 					</div>
 					{ /* Logged in menu */ }
 					{
 						isLoggedIn && (
 							<>
-								<div className='nav-menu' >
-									<Link href='/find-a-doctor'>
-									  <Text text={ t('bookAppointment') } fontSize='16px' fontWeight='700' />
-									</Link>
-								</div>
 								<div className='nav-menu' >
 									<Link href='/patient-portal'>
 										<Text text={ t('user.patientPortal') } fontSize='16px' fontWeight='700' />
@@ -73,11 +106,6 @@ const MobileMenus = async({ session, hospitals, coe, facilitiy }:Props) => {
 								<div className='nav-menu ' >
 									<Link href='/login'>
 									  <Text text={ t('loginRegister') } fontSize='16px' fontWeight='700' />
-									</Link>
-								</div>
-								<div className='nav-menu ' >
-									<Link href='/find-a-doctor'>
-									  <Text text={ t('bookAppointment') } fontSize='16px' fontWeight='700' />
 									</Link>
 								</div>
 							</>
@@ -121,7 +149,7 @@ const MobileMenus = async({ session, hospitals, coe, facilitiy }:Props) => {
 						</label>
 						<MobileSubMenus
 							className='peer-checked/facility:block hidden'
-							label={ t('centreOfExcellence') }
+							label={ t('facility') }
 							data={ [...mapFacility, medSpec] }
 							triggerId='facility-menu'
 							urlPrefix='facilities-service'
@@ -142,26 +170,11 @@ const MobileMenus = async({ session, hospitals, coe, facilitiy }:Props) => {
 					{ /* Log out menu */ }
 					{ isLoggedIn && (
 						<div className='nav-menu'>
-							<Text text={ t('user.logout') } fontSize='16px' fontWeight='700' color={ colors.red.default } />
+							<Text text={ t('user.logout') } fontSize='16px' fontWeight='700' color={ colors.red.default } onClick={ logOutHandler }/>
 						</div>
 					)
 					}
 				</section>
-				{ /* { activeSubMenuIdMobile && (
-					<div className='p-4 bg-[#F0F2F9] flex items-center gap-2'>
-						<button
-							type='button'
-							className='flex-shrink-0 focus:outline-none focus:ring-0'
-							onClick={ () => setActiveSubMenuIdMobile('') }
-						>
-							<Icons.ArrowLeft size={ 20 } color={ colors.grey.darkOpacity } />
-						</button>
-						<Text fontSize='16px' fontWeight='700'>{ getDataSubMenu().title }</Text>
-					</div>
-				) } */ }
-				<div className='sider-nav-menu divide-y divide-solid overflow-y-auto'>
-					{ /* { renderListMenuMobile() } */ }
-				</div>
 			</div>
 		</MobileMenuWrapper>
 	);

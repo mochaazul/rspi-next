@@ -151,14 +151,14 @@ const LoginPage = () => {
 		const ref = searchParam.get('ref');
 		const text =
 			ref === 'invalid-token'
-				? 'Keluar, karena sesi anda telah berakhir, Silahkan login kembali'
+				? 'Keluar, karena sesi anda telah berakhir, Silakan login kembali'
 				: ref === 'sso'
-					? 'Akun anda terdeteksi telah masuk pada device lain. Silahkan login kembali'
+					? 'Akun anda terdeteksi telah masuk pada device lain. Silakan login kembali'
 					: errorUser?.stat_msg
 						? errorUser?.stat_msg
 						: successMessage;
 
-		if (text === 'email is not verified') {
+		if (text?.toLowerCase() === 'email belum diverifikasi' || text?.toLowerCase() === 'you haven\'t verified your email') {
 			return (
 				<Text fontType={ null } fontSize='14px' fontWeight='500' color={ colors.red.default }>
 					{ t('notificationMessage.emailNotVerified.heading') }&nbsp;

@@ -38,7 +38,11 @@ export const LanguageSelector = () => {
 
 	return (
 		<div tabIndex={ 0 } className='relative flex items-center' onBlur={ () => setShowLanguagePicker(false) } >
-			<div className='flex items-center gap-2 lg:gap-3 cursor-pointer' onClick={ () => setShowLanguagePicker(!showLanguagePicker) }>
+			<div className='flex items-center gap-2 lg:gap-3 cursor-pointer' onClick={ () => {
+				setShowLanguagePicker(!showLanguagePicker);
+			}
+
+			}>
 				{ languageItem.find(item => currentLang === item.value)?.icon }
 				<div className='flex items-center gap-x-[5px]'>
 					<Text fontSize='16px' fontWeight='900' color='white'>
@@ -47,7 +51,8 @@ export const LanguageSelector = () => {
 					<icons.LightArrowDown />
 				</div>
 			</div>
-			<Picker show={ showLanguagePicker } className='max-lg:min-w-[165px] !mt-0 !mr-0 !shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] left-0 lg:left-auto lg:!right-0 top-7 w-full'>
+			<Picker show={ showLanguagePicker }
+				className='max-lg:min-w-[165px] !mt-0 !mr-0 !shadow-[0px_4px_10px_0px_rgba(0,0,0,0.15)] left-0 lg:left-auto lg:!right-0 top-7 w-full z-30'>
 				{
 					languageItem.map((item, index) => (
 						<div

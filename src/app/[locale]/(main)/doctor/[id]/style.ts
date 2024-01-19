@@ -51,7 +51,6 @@ export const VisitScheduleStyle = styled.div`
 
 export const TimeSlotContainer = styled.div`
   margin-top: 30px;
-  gap: 30px;
   `;
 
 export const TimeSlotCard = styled.div`

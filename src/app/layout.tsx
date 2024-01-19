@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { Lato } from 'next/font/google';
+import { ToastContainer } from 'react-toastify';
 
 import StyledComponentsRegistry from '@/lib/registry';
 import FacebookPixel from '@/components/ui/FacebookPixel';
 import ProgressBar from '@/components/ui/ProgressBar';
 
 import '@/styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
 	children: ReactNode;
@@ -38,6 +40,7 @@ export default async function RootLayout({ children }: Props) {
 						{ children }
 					</div>
 					<ProgressBar />
+					<ToastContainer />
 				</StyledComponentsRegistry>
 
 				<FacebookPixel />

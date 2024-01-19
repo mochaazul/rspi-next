@@ -9,12 +9,12 @@ import SelectRSLocation from './SelectRSLocation';
 import { useScopedI18n } from '@/locales/client';
 
 type Props = PropsWithRef<PropsWithChildren<{
-  hospitals: HospitalDetail[]
-}>>
+	hospitals: HospitalDetail[];
+}>>;
 
-const HospitalLocation = ({ hospitals }:Props) => {
+const HospitalLocation = ({ hospitals }: Props) => {
 	const t = useScopedI18n('page.contactUs');
-  
+
 	const handleRSLocationChange = (id: number) => {
 		setSelectedMapIndex(id);
 	};
@@ -71,7 +71,7 @@ const HospitalLocation = ({ hospitals }:Props) => {
 		if (!embedLink) {
 			return Object.values(hospitals || [])[0]?.embed_link ?? '';
 		}
-		return embedLink;
+		return embedLink.replace(/['"]+/g, '');
 	};
 	return (
 		<section>
@@ -115,9 +115,14 @@ const HospitalLocation = ({ hospitals }:Props) => {
 						loading='lazy'
 						referrerPolicy='no-referrer-when-downgrade' />
 				</div>
-				<div className='sm:hidden relative mt-[-50px] mx-4'>
+				<div className='sm:hidden relative mt-[-250px] mx-4 card-hospital-swap'>
 					<div className='global-shadow relative'>
-						<CustomCarousel autoplay={ false } onChangeIndex={ handleRSCarouselChange }>
+						<CustomCarousel
+							containerClassName='rounded-[10px]'
+							dotsContainerClassName='mb-2'
+							autoplay={ false }
+							arrowButton={ true }
+							onChangeIndex={ handleRSCarouselChange }>
 							{
 								Object.values(hospitals || [])?.map((data, index) => (
 									<div key={ index } className='rounded-[10px] bg-white overflow-hidden'>

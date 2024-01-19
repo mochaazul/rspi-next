@@ -36,7 +36,6 @@ const Combobox = ({
 	isLoading,
 	value,
 }: Props) => {
-	const t = useScopedI18n('page.landingPage.services.findDoctor.form');
 	const tCombobox = useScopedI18n('combobox');
 	const [selected, setSelected] = useState<ItemType | null>(null);
 
@@ -67,12 +66,15 @@ const Combobox = ({
 		<div className='my-[5px]'>
 			<HeadlessCombobox
 				by='id'
-				value={ selected }
+				value={ value  }
 				onChange={ item => {
 					setSelected(item);
 					if (onSelectValue) {
 						setOpen(false);
 						onSelectValue(item);
+					}
+					if (!item) {
+						setOpen(true);
 					}
 				} }
 				nullable

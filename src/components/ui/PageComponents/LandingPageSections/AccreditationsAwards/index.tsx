@@ -5,13 +5,11 @@ import Text from '@/components/ui/Text';
 import { colors } from '@/constant';
 import Button from '@/components/ui/Button';
 import { useScopedI18n } from '@/locales/client';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const AccreditationAwards = ({ datas }: { datas: AwardsDetail[]; }) => {
 	const t = useScopedI18n('page.landingPage.accreditationsAndAwards');
-	const router = useRouter();
 
 	return (
 		<AccreditationsAwardsWrapper className='container-page w-full'>

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: { slug: string; }; 
 	
 	return {
 	  title: selectedEvent?.title,
-	  description: selectedEvent?.content.replace(/(<([^>]+)>)/ig, ''),
+	  description: selectedEvent?.content?.replace(/(<([^>]+)>)/ig, ''),
 	  openGraph: {
 			images: [selectedEvent?.img_url_detail],
 		},
