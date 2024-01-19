@@ -10,6 +10,7 @@ type Props = {
 	timeSlot: TimeSlot;
 };
 const DoctorProfileWidget = ({ doctorData, timeSlot }: Props) => {
+	console.log(doctorData);
 
 	return <DoctorProfileWidgetContainer>
 		<DoctorProfileImage src={ doctorData?.img_url } />

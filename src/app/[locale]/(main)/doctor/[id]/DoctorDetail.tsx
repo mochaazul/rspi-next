@@ -49,7 +49,6 @@ const DoctorDetail = (
 	const searchParams = useSearchParams();
 
 	const [selectedHospital, setSelectedHospital] = useState<string>('');
-	const [selectedHospitalPhoneNumber, setSelectedHospitalPhoneNumber] = useState<string>('');
 	const [showModalTelp, setShowModalTelp] = useState<boolean>(false);
 	const [radioValue, setRadioValue] = useState('APP');
 	const [selectedDate, setSelectedDate] = useState<Date>();

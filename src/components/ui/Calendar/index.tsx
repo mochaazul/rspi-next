@@ -70,10 +70,6 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calenda
 	// max-sm:w-[44px] max-sm:h-[46px]
 	const mapTileClassName: TileClassNameFunc = ({ activeStartDate, date, view }) => {
 		const shouldDisbled = !isFoundOnCalendar(date);
-		// max-[320px]:h-[34px] max-[320px]:w-[41px]
-		// max-[375px]:h-[42px] max-[375px]:w-[40px]
-		// max-sm:h-[48px] max-sm:w-[44px]
-		// max-h-[40px] max-w-[40px]
 		const defaultClass = `
 		max-[320px]:h-[34px] max-[320px]:w-[41px]
 		max-[360px]:h-[40px] max-[360px]:w-[40px]
@@ -81,6 +77,7 @@ const Calendar = ({ onChange: onClickDay, value, onChangeMonth, loading, calenda
 		max-[393px]:h-[42px] max-[393px]:w-[42px]
 		max-[414px]:h-[46px] max-[414px]:w-[46px]
 		max-sm:h-[48px] max-sm:w-[44px]`;
+
 		return shouldDisbled ?
 			`
 			${ defaultClass }

@@ -34,6 +34,23 @@ export const CalendarContainer = styled.div`
       align-items: center;
       justify-content: center;
       color: white;
+
+      @media screen and (max-width: 320px) {
+        width:  32px;
+        height: 32px;
+      }
+      @media screen and (max-width: 360px) {
+        width:  36px;
+        height: 36px;
+      }
+      @media screen and (max-width: 375px) {
+        width:  38px;
+        height: 38px;
+      }
+      @media screen and (max-width: 768px) {
+        width:  32px;
+        height: 32px;
+      }
     }
     p{
       color: white;
