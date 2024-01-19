@@ -1,11 +1,13 @@
+import { useEffect, useState } from 'react';
 import { FormikProps, useFormik } from 'formik';
-import { ModalHeader, ProfileModalContainer } from './style';
+import { isMobile } from 'react-device-detect';
+import { useFormStatus } from 'react-dom';
+import dayjs from 'dayjs';
+
 import { colors, icons } from '@/constant';
 import { FormRow } from '@/app/[locale]/(main)/book-appointment/style';
 import { UserDataDetail } from '@/interface';
-
 import NotificationPanel from '@/components/ui/NotificationPanel';
-import { useEffect, useState } from 'react';
 import Form from '@/components/ui/Form';
 import Modal from '@/components/ui/Modal';
 import Text from '@/components/ui/Text';
@@ -14,8 +16,8 @@ import { useScopedI18n } from '@/locales/client';
 import { AddProfileSchema } from '@/validator/booking';
 import { getValidationTranslation } from '@/helpers/getValidationTranslation';
 import { addFamilyProfile, editFamilyProfile, updateProfile } from '@/lib/api/profile';
-import { useFormStatus } from 'react-dom';
-import dayjs from 'dayjs';
+
+import { ModalHeader, ProfileModalContainer } from './style';
 
 type Props = {
 	onClose: (profile: ProfilePayload, isMain?: boolean) => void;
@@ -197,13 +199,13 @@ const AddProfileModal = ({ onClose, visible, isMain, selfProfile, type, isAddPro
 	};
 
 	return <Modal
-		visible={ visible }
 		noPadding
-		width='526px'
+		visible={ visible }
 		onClose={ closeHandler }
-		borderRadius='12px'
+		borderRadius='0px'
 		overflow='auto'
-		containerClassName='m-[10px]'
+		width='w-full'
+		containerClassName={ `m-0 ${ isMobile && ' absolute bottom-0' } max-w-lg  h-max md:h-max rounded-t-[12px] md:rounded-b-[12px]` }
 	>
 		<ProfileModalContainer className='items-start md:items-center'>
 			<ModalHeader className='mb-[12px] md:mb-[24px]'>

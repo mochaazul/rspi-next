@@ -31,10 +31,12 @@ const ModalCancelBook = (props: PropsType) => {
 
 	return (
 		<Modal
-			visible={ props.visible }
 			noPadding={ true }
+			visible={ props.visible }
 			onClose={ props.onClose }
-			containerClassName={ 'm-0 md:m-4 max-w-lg h-max md:h-max rounded-t-[12px] md:rounded-b-[12px]' }
+			width='w-full'
+			borderRadius={ '0px' }
+			containerClassName={ `m-0 ${ isMobile && 'absolute bottom-0' } max-w-lg h-max md:h-max rounded-t-[12px] md:rounded-b-[12px]` }
 		>
 			<div className='p-4 lg:p-6'>
 				<div>
